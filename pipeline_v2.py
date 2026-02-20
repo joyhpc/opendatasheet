@@ -235,6 +235,102 @@ def validate_extraction(data: dict) -> list[ValidationResult]:
 
 
 # ============================================
+# L5: 物理规则引擎 (领域知识驱动)
+# ============================================
+
+def validate_physics(data: dict) -> list[ValidationResult]:
+    """L5: 领域知识驱动的物理规则验证"""
+    results = []
+    ec = data.get("electrical_characteristics", [])
+
+    # --- Rule 1: 温度包络定律 ---
+    # 对于同一参数+同一变体，full temp 的 max >= 25C 的 max，full temp 的 min <= 25C 的 min
+    param_groups = {}  # key = (parameter, device/applies_to) -> {temp_range: {min, typ, max}}
+    for p in ec:
+        param_name = p.get("parameter", "")
+        device = p.get("device") or str(p.get("applies_to", ""))
+        temp = p.get("temp_range", "")
+        if not temp or not param_name:
+            continue
+        key = (param_name, device)
+        if key not in param_groups:
+            param_groups[key] = {}
+        param_groups[key][temp] = {
+            "min": p.get("min"),
+            "typ": p.get("typ"),
+            "max": p.get("max"),
+        }
+
+    for (param_name, device), temps in param_groups.items():
+        if "25C" in temps and "full" in temps:
+            t25 = temps["25C"]
+            tfull = temps["full"]
+
+            # max_full >= max_25C (full temp range should be wider)
+            if t25["max"] is not None and tfull["max"] is not None:
+                if tfull["max"] < t25["max"]:
+                    results.append(ValidationResult(
+                        param=f"{param_name} ({device})",
+                        rule="temp_envelope_max",
+                        passed=False,
+                        message=f"full max ({tfull['max']}) < 25C max ({t25['max']}) — temp envelope violation"
+                    ))
+                else:
+                    results.append(ValidationResult(
+                        param=f"{param_name} ({device})",
+                        rule="temp_envelope_max",
+                        passed=True,
+                        message="OK"
+                    ))
+
+            # min_full <= min_25C (full temp range should be wider)
+            if t25["min"] is not None and tfull["min"] is not None:
+                if tfull["min"] > t25["min"]:
+                    results.append(ValidationResult(
+                        param=f"{param_name} ({device})",
+                        rule="temp_envelope_min",
+                        passed=False,
+                        message=f"full min ({tfull['min']}) > 25C min ({t25['min']}) — temp envelope violation"
+                    ))
+                else:
+                    results.append(ValidationResult(
+                        param=f"{param_name} ({device})",
+                        rule="temp_envelope_min",
+                        passed=True,
+                        message="OK"
+                    ))
+
+    # --- Rule 2: LDO 特定约束 ---
+    category = data.get("component", {}).get("category", "").upper()
+    if category == "LDO":
+        for p in ec:
+            name = p.get("parameter", "").lower()
+            # Iq 通常 < 50mA for LDO
+            if "quiescent" in name or name in ("iq",):
+                unit = p.get("unit", "").lower()
+                typ_v = p.get("typ")
+                if typ_v is not None:
+                    # 归一化到 mA
+                    if "ua" in unit or "µa" in unit or "μa" in unit:
+                        typ_ma = typ_v / 1000
+                    elif "ma" in unit:
+                        typ_ma = typ_v
+                    elif "a" in unit and "m" not in unit and "µ" not in unit:
+                        typ_ma = typ_v * 1000
+                    else:
+                        typ_ma = typ_v  # assume mA
+                    if typ_ma > 50:
+                        results.append(ValidationResult(
+                            param=p.get("parameter", "Iq"),
+                            rule="ldo_iq_range",
+                            passed=False,
+                            message=f"Iq typ={typ_v}{unit} ({typ_ma:.1f}mA) seems too high for LDO"
+                        ))
+
+    return results
+
+
+# ============================================
 # L3: 自动化交叉验证
 # ============================================
 
@@ -423,6 +519,19 @@ def process_single_pdf(pdf_path: str, verbose: bool = True) -> dict:
                 for sp in cross_val['suspicious_params'][:5]:
                     print(f"    - {sp['parameter']} ({sp['device']}): {sp['values']}")
 
+    # L5: 物理规则引擎
+    physics_val = []
+    if "error" not in extraction:
+        physics_val = validate_physics(extraction)
+        physics_failures = [v for v in physics_val if not v.passed]
+        if verbose:
+            print(f"\nL5 Physics Validation:")
+            print(f"  Total checks: {len(physics_val)}")
+            print(f"  Passed: {len(physics_val) - len(physics_failures)}")
+            print(f"  Failed: {len(physics_failures)}")
+            for f in physics_failures:
+                print(f"  ❌ {f.param}: {f.message}")
+
     result = {
         "pdf_name": pdf_name,
         "model": GEMINI_MODEL,
@@ -433,6 +542,7 @@ def process_single_pdf(pdf_path: str, verbose: bool = True) -> dict:
         "page_classification": [asdict(p) for p in pages],
         "extraction": extraction,
         "validation": [asdict(v) for v in validations],
+        "physics_validation": [asdict(v) for v in physics_val],
         "cross_validation": cross_val,
         "timing": {
             "l0_classify_s": round(l0_time, 3),
