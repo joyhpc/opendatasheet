@@ -14,14 +14,163 @@ import re
 import os
 import sys
 import time
+import math
 import hashlib
 import fcntl
 from pathlib import Path
 from dataclasses import dataclass, field, asdict
-from typing import Optional
+from typing import Optional, List, Union
 
 from google import genai
 from google.genai import types
+
+
+# ============================================
+# Q1: 双轨推断模型 — 负压/负电流单调性验证
+# ============================================
+
+def get_supported_modes(min_val, typ_val, max_val):
+    """推断单行数据支持的排版模式：ALGEBRAIC (代数) 或 MAGNITUDE (幅值)"""
+    vals = [v for v in [min_val, typ_val, max_val] if v is not None]
+    if len(vals) <= 1:
+        modes = ['ALGEBRAIC']
+        if not vals or vals[0] <= 0:
+            modes.append('MAGNITUDE')
+        return modes
+    modes = []
+    if all(vals[i] <= vals[i+1] for i in range(len(vals)-1)):
+        modes.append('ALGEBRAIC')
+    if all(vals[i] >= vals[i+1] for i in range(len(vals)-1)) and all(v <= 0 for v in vals):
+        modes.append('MAGNITUDE')
+    return modes
+
+
+def get_physical_interval(min_val, max_val, mode):
+    """将字面 min/max 映射为物理数轴上真实的代数区间 [L, U]"""
+    if mode == 'ALGEBRAIC':
+        L = min_val if min_val is not None else -math.inf
+        U = max_val if max_val is not None else math.inf
+        return L, U
+    elif mode == 'MAGNITUDE':
+        L = max_val if max_val is not None else -math.inf
+        U = min_val if min_val is not None else 0.0
+        return L, U
+
+
+# ============================================
+# Q2: DatasheetValueValidator — 负数文本匹配
+# ============================================
+
+class DatasheetValueValidator:
+    """从 PDF 原始文本中提取所有数值（含负号变体处理），用于交叉验证"""
+
+    def __init__(self, rel_tol: float = 1e-5, abs_tol: float = 1e-8):
+        self.rel_tol = rel_tol
+        self.abs_tol = abs_tol
+        self.minus_chars = '-\u2010\u2011\u2012\u2013\u2014\u2212'
+        self.base_num_pattern = r'(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d+)?|\.\d+'
+        mc_escaped = self.minus_chars.replace('-', r'\-')
+        self.exp_pattern = fr'(?:[eE]\s*[+{mc_escaped}]?\s*\d+)?'
+        self.regex = re.compile(fr'({self.base_num_pattern}{self.exp_pattern})')
+
+    def extract_floats_from_text(self, raw_text: str) -> List[float]:
+        """将 PDF 原始文本中的所有数值转化为浮点数，智能推断极性"""
+        parsed_numbers = []
+        mc_escaped = self.minus_chars.replace('-', r'\-')
+
+        for match in self.regex.finditer(raw_text):
+            num_str = match.group(1)
+            clean_num = num_str.replace(',', '').replace(' ', '')
+            for mc in self.minus_chars:
+                clean_num = clean_num.replace(mc, '-')
+            try:
+                val = float(clean_num)
+            except ValueError:
+                continue
+
+            start_idx = match.start()
+            preceding = raw_text[:start_idx]
+            preceding_stripped = preceding.rstrip()
+            signs = [1.0]
+
+            if preceding_stripped:
+                last_char = preceding_stripped[-1]
+                if last_char == '±':
+                    signs = [1.0, -1.0]
+                elif last_char in self.minus_chars:
+                    if re.search(fr'\+/?\s*[{mc_escaped}]$', preceding_stripped):
+                        signs = [1.0, -1.0]
+                    else:
+                        before_minus_exact = preceding_stripped[:-1]
+                        before_minus_stripped = before_minus_exact.rstrip()
+                        whitespace_before = before_minus_exact[len(before_minus_stripped):]
+                        whitespace_after = preceding[len(preceding_stripped):]
+                        space_before = len(whitespace_before)
+                        space_after = len(whitespace_after)
+
+                        # Datasheet heuristic: if the minus is on a different line
+                        # (separated by \n) and appears standalone, it's a "no data"
+                        # placeholder, not a negative sign
+                        if '\n' in whitespace_after:
+                            # Check if the minus sign is standalone on its line
+                            last_line = preceding_stripped.split('\n')[-1].strip()
+                            if last_line in set(self.minus_chars) or re.match(fr'^[{mc_escaped}]$', last_line):
+                                signs = [1.0]  # standalone dash = no data marker
+                                for s in signs:
+                                    final_val = val * s
+                                    if final_val == -0.0:
+                                        final_val = 0.0
+                                    parsed_numbers.append(final_val)
+                                continue
+
+                        has_digit = False
+                        words = before_minus_stripped.split()
+                        if words:
+                            last_word = words[-1]
+                            if any(c.isdigit() for c in last_word):
+                                has_digit = True
+                            elif len(words) >= 2 and any(c.isdigit() for c in words[-2]):
+                                if last_word.isalpha() and len(last_word) <= 3 and last_word.lower() not in ["to", "and", "or"]:
+                                    has_digit = True
+                            if last_word.endswith(':') or last_word.endswith('=') or last_word.endswith(','):
+                                has_digit = False
+                        if has_digit:
+                            if space_before >= 2 or '\n' in whitespace_before or '\t' in whitespace_before:
+                                is_range = False
+                            elif space_before == space_after:
+                                is_range = True
+                            elif space_before > space_after:
+                                is_range = False
+                            else:
+                                is_range = True
+                        else:
+                            is_range = False
+                        if not is_range:
+                            signs = [-1.0]
+                elif last_char == '+':
+                    signs = [1.0]
+
+            for s in signs:
+                final_val = val * s
+                if final_val == -0.0:
+                    final_val = 0.0
+                parsed_numbers.append(final_val)
+
+        return parsed_numbers
+
+    def is_value_in_text(self, target_value: Union[float, int, str], raw_text: str) -> bool:
+        """验证目标数值是否存在于原文中（语义级浮点比对）"""
+        try:
+            if isinstance(target_value, str):
+                target_value = target_value.replace(',', '')
+            target_float = float(target_value)
+        except (ValueError, TypeError):
+            return False
+        extracted_numbers = self.extract_floats_from_text(raw_text)
+        for num in extracted_numbers:
+            if math.isclose(target_float, num, rel_tol=self.rel_tol, abs_tol=self.abs_tol):
+                return True
+        return False
 
 # ============================================
 # Config
@@ -218,14 +367,17 @@ def validate_extraction(data: dict) -> list[ValidationResult]:
             max_v = p.get("max")
             vals = [v for v in [min_v, typ_v, max_v] if v is not None]
             if len(vals) >= 2:
-                if vals != sorted(vals):
+                # Q1: 双轨推断 — ALGEBRAIC 或 MAGNITUDE 任一通过即合法
+                modes = get_supported_modes(min_v, typ_v, max_v)
+                if modes:
                     results.append(ValidationResult(
-                        param=name, rule="monotonicity", passed=False,
-                        message=f"min/typ/max not monotonic: {min_v}/{typ_v}/{max_v}"
+                        param=name, rule="monotonicity", passed=True,
+                        message=f"OK (modes: {','.join(modes)})"
                     ))
                 else:
                     results.append(ValidationResult(
-                        param=name, rule="monotonicity", passed=True, message="OK"
+                        param=name, rule="monotonicity", passed=False,
+                        message=f"min/typ/max not monotonic: {min_v}/{typ_v}/{max_v}"
                     ))
             unit = p.get("unit", "")
             if unit and not re.match(r'^[µμunmpkMGT]?[AVWΩHzFsS°C%dB/()RMS]+$', unit):
@@ -268,39 +420,52 @@ def validate_physics(data: dict) -> list[ValidationResult]:
             t25 = temps["25C"]
             tfull = temps["full"]
 
-            # max_full >= max_25C (full temp range should be wider)
-            if t25["max"] is not None and tfull["max"] is not None:
-                if tfull["max"] < t25["max"]:
-                    results.append(ValidationResult(
-                        param=f"{param_name} ({device})",
-                        rule="temp_envelope_max",
-                        passed=False,
-                        message=f"full max ({tfull['max']}) < 25C max ({t25['max']}) — temp envelope violation"
-                    ))
-                else:
-                    results.append(ValidationResult(
-                        param=f"{param_name} ({device})",
-                        rule="temp_envelope_max",
-                        passed=True,
-                        message="OK"
-                    ))
+            # Q1: 双轨推断 — 先确定模式，再映射到物理区间做包容性判断
+            modes_25 = get_supported_modes(t25["min"], t25["typ"], t25["max"])
+            modes_full = get_supported_modes(tfull["min"], tfull["typ"], tfull["max"])
+            common_modes = set(modes_25) & set(modes_full)
 
-            # min_full <= min_25C (full temp range should be wider)
-            if t25["min"] is not None and tfull["min"] is not None:
-                if tfull["min"] > t25["min"]:
-                    results.append(ValidationResult(
-                        param=f"{param_name} ({device})",
-                        rule="temp_envelope_min",
-                        passed=False,
-                        message=f"full min ({tfull['min']}) > 25C min ({t25['min']}) — temp envelope violation"
-                    ))
-                else:
-                    results.append(ValidationResult(
-                        param=f"{param_name} ({device})",
-                        rule="temp_envelope_min",
-                        passed=True,
-                        message="OK"
-                    ))
+            if not common_modes:
+                results.append(ValidationResult(
+                    param=f"{param_name} ({device})",
+                    rule="temp_envelope",
+                    passed=False,
+                    message=f"25C and full temp data have conflicting conventions (modes_25={modes_25}, modes_full={modes_full})"
+                ))
+                continue
+
+            eps = 1e-9
+            envelope_ok = False
+            for mode in common_modes:
+                L_25, U_25 = get_physical_interval(t25["min"], t25["max"], mode)
+                L_ft, U_ft = get_physical_interval(tfull["min"], tfull["max"], mode)
+
+                # Only compare bounds where both sides have actual data
+                lower_ok = True
+                upper_ok = True
+                if math.isfinite(L_25) and math.isfinite(L_ft):
+                    lower_ok = L_ft <= L_25 + eps
+                if math.isfinite(U_25) and math.isfinite(U_ft):
+                    upper_ok = U_ft >= U_25 - eps
+
+                if lower_ok and upper_ok:
+                    envelope_ok = True
+                    break
+
+            if envelope_ok:
+                results.append(ValidationResult(
+                    param=f"{param_name} ({device})",
+                    rule="temp_envelope",
+                    passed=True,
+                    message=f"OK (mode: {mode})"
+                ))
+            else:
+                results.append(ValidationResult(
+                    param=f"{param_name} ({device})",
+                    rule="temp_envelope",
+                    passed=False,
+                    message=f"full temp physical interval does not contain 25C interval"
+                ))
 
     # --- Rule 2: LDO 特定约束 ---
     category = data.get("component", {}).get("category", "").upper()
@@ -337,29 +502,29 @@ def validate_physics(data: dict) -> list[ValidationResult]:
 # ============================================
 
 def cross_validate(pdf_path: str, extraction: dict, pages: list[PageInfo]) -> dict:
-    """用 PDF 原始文本交叉验证提取结果"""
+    """用 PDF 原始文本交叉验证提取结果 (Q2: 使用 DatasheetValueValidator)"""
     doc = fitz.open(pdf_path)
+    validator = DatasheetValueValidator()
 
-    # 收集电气特性页面的所有数字 (支持千分位逗号)
+    # 收集电气特性页面的原始文本和数值池
     target_cats = {"electrical", "pin", "cover"}
-    pdf_numbers = set()
     pdf_lines = []
+    all_raw_text = ""
     for p in pages:
         if p.category in target_cats:
             text = doc[p.page_num].get_text()
+            all_raw_text += text + "\n"
             for line in text.split('\n'):
                 line = line.strip()
                 if line:
                     pdf_lines.append(line)
-            nums = re.findall(r'-?\d[\d,]*\.?\d*', text)
-            for n in nums:
-                try:
-                    pdf_numbers.add(float(n.replace(',', '')))
-                except:
-                    pass
     doc.close()
 
-    # 检查每个提取的数值是否在 PDF 中存在
+    # Q2: 用 DatasheetValueValidator 构建全量数值池（处理负号变体）
+    pdf_numbers_list = validator.extract_floats_from_text(all_raw_text)
+    pdf_numbers = set(pdf_numbers_list)
+
+    # 检查每个提取的数值是否在 PDF 数值池中存在
     extracted_numbers = set()
     for section in ['electrical_characteristics', 'absolute_maximum_ratings']:
         for p in extraction.get(section, []):
@@ -368,8 +533,20 @@ def cross_validate(pdf_path: str, extraction: dict, pages: list[PageInfo]) -> di
                 if v is not None:
                     extracted_numbers.add(float(v))
 
-    values_in_pdf = extracted_numbers & pdf_numbers
-    values_not_in_pdf = extracted_numbers - pdf_numbers
+    # Q2: 使用 math.isclose 进行语义级比对
+    values_in_pdf = set()
+    values_not_in_pdf = set()
+    for ev in extracted_numbers:
+        found = False
+        for pv in pdf_numbers:
+            if math.isclose(ev, pv, rel_tol=1e-5, abs_tol=1e-8):
+                found = True
+                break
+        if found:
+            values_in_pdf.add(ev)
+        else:
+            values_not_in_pdf.add(ev)
+
     value_coverage = len(values_in_pdf) / len(extracted_numbers) * 100 if extracted_numbers else 0
 
     # 行邻近验证: 每个参数的 min/typ/max 是否在 PDF 相邻行中共现
@@ -377,6 +554,11 @@ def cross_validate(pdf_path: str, extraction: dict, pages: list[PageInfo]) -> di
     params_suspicious = 0
     suspicious_params = []
     total_params = 0
+
+    # 为每行也构建数值池（用 validator 处理负号）
+    line_number_cache = {}
+    for i, line in enumerate(pdf_lines):
+        line_number_cache[i] = validator.extract_floats_from_text(line)
 
     for section in ['electrical_characteristics', 'absolute_maximum_ratings']:
         for p in extraction.get(section, []):
@@ -391,16 +573,17 @@ def cross_validate(pdf_path: str, extraction: dict, pages: list[PageInfo]) -> di
                 continue
 
             found = False
-            for i, line in enumerate(pdf_lines):
-                line_nums = set()
+            for i in range(len(pdf_lines)):
+                # 收集相邻行的数值池
+                line_nums = []
                 for j in range(max(0, i-3), min(len(pdf_lines), i+4)):
-                    nums = re.findall(r'-?\d[\d,]*\.?\d*', pdf_lines[j])
-                    for n in nums:
-                        try:
-                            line_nums.add(float(n.replace(',', '')))
-                        except:
-                            pass
-                if all(v in line_nums for v in vals):
+                    line_nums.extend(line_number_cache.get(j, []))
+
+                # Q2: 用 math.isclose 比对每个值
+                if all(
+                    any(math.isclose(v, ln, rel_tol=1e-5, abs_tol=1e-8) for ln in line_nums)
+                    for v in vals
+                ):
                     found = True
                     break
 
