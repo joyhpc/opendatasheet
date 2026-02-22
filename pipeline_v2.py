@@ -468,6 +468,51 @@ def extract_pins_with_vision(images: list[bytes], pdf_name: str, max_retries: in
             return {"error": str(e)}
 
 
+def transform_pins_to_package_indexed(logical_pins: list) -> dict:
+    """将 logical_pins 列表转换为按封装拆分、pin number 做 key 的索引结构。
+
+    输入: logical_pins 列表 (Gemini 原始输出)
+    输出: {"packages": {"封装名": {"pin_number_str": {name, direction, signal_type, description, unused_treatment}}}}
+
+    冲突处理: 同一物理 pin 被多个逻辑 pin 占用时，保留第一个，description 追加注明。
+    """
+    packages = {}  # {pkg_name: {pin_str: {attrs}}}
+
+    for lp in logical_pins:
+        name = lp.get("name", "")
+        direction = lp.get("direction", "")
+        signal_type = lp.get("signal_type", "")
+        description = lp.get("description", "")
+        unused_treatment = lp.get("unused_treatment")
+        pkg_map = lp.get("packages", {})
+
+        if not isinstance(pkg_map, dict):
+            continue
+
+        for pkg_name, pin_nums in pkg_map.items():
+            if pkg_name not in packages:
+                packages[pkg_name] = {}
+            if not isinstance(pin_nums, list):
+                continue
+            for pn in pin_nums:
+                pn_str = str(pn)
+                entry = {
+                    "name": name,
+                    "direction": direction,
+                    "signal_type": signal_type,
+                    "description": description,
+                    "unused_treatment": unused_treatment,
+                }
+                if pn_str in packages[pkg_name]:
+                    # 冲突：追加注明到已有 entry 的 description
+                    existing = packages[pkg_name][pn_str]
+                    existing["description"] += f" (also: {name} — {description})"
+                else:
+                    packages[pkg_name][pn_str] = entry
+
+    return {"packages": packages}
+
+
 def validate_pins(pin_data: dict) -> list[dict]:
     """验证 pin 提取结果的合法性，返回 issues 列表"""
     issues = []
@@ -932,6 +977,17 @@ def process_single_pdf(pdf_path: str, verbose: bool = True) -> dict:
             print(f"\nL1b Pin Extraction: SKIPPED (no pin/cover pages)")
     l1b_time = time.time() - t1b
 
+    # Transform pin_extraction → pin_index (按封装拆分、pin number 做 key)
+    pin_index = {}
+    if pin_extraction and "error" not in pin_extraction:
+        logical_pins_list = pin_extraction.get("logical_pins", [])
+        if logical_pins_list:
+            pin_index = transform_pins_to_package_indexed(logical_pins_list)
+            if verbose:
+                print(f"\n  Pin Index (package-indexed):")
+                for pkg_name, pins_map in pin_index.get("packages", {}).items():
+                    print(f"    {pkg_name}: {len(pins_map)} pins")
+
     # L2: 校验
     validations = []
     if "error" not in extraction:
@@ -981,6 +1037,7 @@ def process_single_pdf(pdf_path: str, verbose: bool = True) -> dict:
         "page_classification": [asdict(p) for p in pages],
         "extraction": extraction,
         "pin_extraction": pin_extraction,
+        "pin_index": pin_index,
         "pin_validation": pin_validation_issues,
         "validation": [asdict(v) for v in validations],
         "physics_validation": [asdict(v) for v in physics_val],
