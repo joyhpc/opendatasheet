@@ -47,7 +47,9 @@ ELECTRICAL_PATTERNS = [
 ]
 
 PIN_PATTERNS = [
-    re.compile(r'(?i)pin\s+(description|configuration|function|assignment|definition)'),
+    re.compile(r'(?i)pin\s+(description|configuration|function|assignment|definition|connection|diagram)'),
+    re.compile(r'(?i)pin\s+connections?'),
+    re.compile(r'(?i)pin[-\s]?out'),
     re.compile(r'(?i)pin\s+name'),
     re.compile(r'(?i)terminal\s+function'),
 ]
