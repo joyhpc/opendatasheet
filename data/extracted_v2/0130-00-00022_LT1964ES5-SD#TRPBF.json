@@ -1243,5 +1243,135 @@
   "timing": {
     "l0_classify_s": 0.04,
     "l1_extract_s": 56.374
-  }
+  },
+  "pin_extraction": {
+    "logical_pins": [
+      {
+        "name": "IN",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Power is Supplied to the Device Through the Input Pin. A bypass capacitor is required on this pin if the device is more than six inches away from the main input filter capacitor.",
+        "packages": {
+          "ThinSOT": [
+            3
+          ],
+          "8-Pin DFN": [
+            7,
+            8
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "OUT",
+        "direction": "POWER_OUT",
+        "signal_type": "POWER",
+        "description": "The Output Supplies Power to the Load. A minimum output capacitor of 1µF is required to prevent oscillations.",
+        "packages": {
+          "ThinSOT": [
+            1
+          ],
+          "8-Pin DFN": [
+            1,
+            2
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "GND",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Ground.",
+        "packages": {
+          "ThinSOT": [
+            2
+          ],
+          "8-Pin DFN": [
+            4
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "SHDN",
+        "direction": "INPUT",
+        "signal_type": "DIGITAL",
+        "description": "The SHDN Pin is used to put the LT1964 into a Low Power Shutdown State. The SHDN pin is referenced to the GND pin for regulator control, allowing the LT1964 to be driven by either positive or negative logic.",
+        "packages": {
+          "ThinSOT": [
+            4
+          ],
+          "8-Pin DFN": [
+            5
+          ]
+        },
+        "unused_treatment": "VCC"
+      },
+      {
+        "name": "BYP",
+        "direction": "PASSIVE",
+        "signal_type": "ANALOG",
+        "description": "The BYP Pin is used to Bypass the Reference of the LT1964 to Achieve Low Noise Performance from the Regulator. A small capacitor from the output to this pin will bypass the reference to lower the output voltage noise.",
+        "packages": {
+          "ThinSOT": [
+            5
+          ],
+          "8-Pin DFN": [
+            3
+          ]
+        },
+        "unused_treatment": "FLOAT"
+      },
+      {
+        "name": "ADJ",
+        "direction": "INPUT",
+        "signal_type": "ANALOG",
+        "description": "For the Adjustable LT1964, this is the Input to the Error Amplifier. The ADJ pin has a bias current of 30nA that flows out of the pin.",
+        "packages": {
+          "ThinSOT": [
+            5
+          ],
+          "8-Pin DFN": [
+            3
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "NC",
+        "direction": "NC",
+        "signal_type": "NONE",
+        "description": "No internal connection.",
+        "packages": {
+          "8-Pin DFN": [
+            6
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "Exposed Pad",
+        "direction": "PASSIVE",
+        "signal_type": "POWER",
+        "description": "Exposed Pad (DFN Package Only): IN. Connect to IN (Pins 7, 8) at the PCB.",
+        "packages": {
+          "8-Pin DFN": [
+            "EP"
+          ]
+        },
+        "unused_treatment": null
+      }
+    ]
+  },
+  "pin_validation": [
+    {
+      "level": "warning",
+      "message": "package 'ThinSOT' pin 5 claimed by multiple logical pins: ['BYP', 'ADJ']"
+    },
+    {
+      "level": "warning",
+      "message": "package '8-Pin DFN' pin 3 claimed by multiple logical pins: ['BYP', 'ADJ']"
+    }
+  ]
 }

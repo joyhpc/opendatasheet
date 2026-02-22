@@ -645,5 +645,129 @@
   "timing": {
     "l0_classify_s": 0.046,
     "l1_extract_s": 34.547
-  }
+  },
+  "pin_extraction": {
+    "logical_pins": [
+      {
+        "name": "VIN",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Power Input Voltage.",
+        "packages": {
+          "SC-70-5/SOT-23-5/TSOT-23-5": [
+            1
+          ],
+          "WDFN-6L 2x2": [
+            3
+          ],
+          "MSOP-8": [
+            2
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "GND",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Ground.",
+        "packages": {
+          "SC-70-5/SOT-23-5/TSOT-23-5": [
+            2
+          ],
+          "WDFN-6L 2x2": [
+            2
+          ],
+          "MSOP-8": [
+            5
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "EN",
+        "direction": "INPUT",
+        "signal_type": "DIGITAL",
+        "description": "Chip Enable (Active High). Note that this pin is high impedance. There should be a pull low 100kΩ resistor connected to GND when the control signal is floating.",
+        "packages": {
+          "SC-70-5/SOT-23-5/TSOT-23-5": [
+            3
+          ],
+          "WDFN-6L 2x2": [
+            1
+          ],
+          "MSOP-8": [
+            7
+          ]
+        },
+        "unused_treatment": "PULL_DOWN"
+      },
+      {
+        "name": "BP",
+        "direction": "PASSIVE",
+        "signal_type": "ANALOG",
+        "description": "Reference Noise Bypass. This pin can be floating. For lowest noise performance, connect a 22nF capacitor between the BP and GND pins.",
+        "packages": {
+          "SC-70-5/SOT-23-5/TSOT-23-5": [
+            4
+          ],
+          "WDFN-6L 2x2": [
+            6
+          ],
+          "MSOP-8": [
+            6
+          ]
+        },
+        "unused_treatment": "FLOAT"
+      },
+      {
+        "name": "VOUT",
+        "direction": "POWER_OUT",
+        "signal_type": "POWER",
+        "description": "Output Voltage.",
+        "packages": {
+          "SC-70-5/SOT-23-5/TSOT-23-5": [
+            5
+          ],
+          "WDFN-6L 2x2": [
+            4
+          ],
+          "MSOP-8": [
+            4
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "NC",
+        "direction": "NC",
+        "signal_type": "NONE",
+        "description": "No internal connection.",
+        "packages": {
+          "WDFN-6L 2x2": [
+            5
+          ],
+          "MSOP-8": [
+            1,
+            3,
+            8
+          ]
+        },
+        "unused_treatment": "FLOAT"
+      },
+      {
+        "name": "EP",
+        "direction": "PASSIVE",
+        "signal_type": "NONE",
+        "description": "Exposed pad for thermal dissipation.",
+        "packages": {
+          "WDFN-6L 2x2": [
+            7
+          ]
+        },
+        "unused_treatment": null
+      }
+    ]
+  },
+  "pin_validation": []
 }

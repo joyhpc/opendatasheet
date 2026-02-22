@@ -345,6 +345,203 @@ def extract_with_vision(images: list[bytes], pdf_name: str, max_retries: int = 2
 
 
 # ============================================
+# L1b: Pin Extraction (独立阶段)
+# ============================================
+
+PIN_EXTRACTION_PROMPT = """You are an expert electronic component datasheet parser specializing in pin definitions.
+Analyze the provided datasheet page images and extract ALL pin information into a structured JSON format.
+
+CRITICAL RULES:
+1. Extract every unique logical pin (by function name, not physical number)
+2. For each logical pin, map it to ALL packages shown in the datasheet
+3. If a logical pin appears on multiple physical pins in one package (e.g., multiple GND pads), list ALL pin numbers in the array
+4. Use ONLY the allowed enum values listed below — no variations, no abbreviations
+
+ALLOWED VALUES:
+
+direction (REQUIRED, exactly one of):
+  INPUT          — signal flows into the device
+  OUTPUT         — signal flows out of the device
+  BIDIRECTIONAL  — signal flows both ways (e.g., I2C SDA, GPIO)
+  POWER_IN       — power supply input (VCC, VDD, VIN)
+  POWER_OUT      — regulated/buffered power output (VOUT, LDO output)
+  PASSIVE        — passive connection (e.g., bypass cap pin, crystal, EP/thermal pad)
+  NC             — no internal connection
+
+signal_type (REQUIRED, exactly one of):
+  DIGITAL  — digital logic signal
+  ANALOG   — analog signal (feedback, sense, reference)
+  POWER    — power rail or ground
+  NONE     — no signal (NC pins, thermal pads with no electrical function)
+
+unused_treatment (one of, or null if datasheet does not specify):
+  FLOAT     — leave unconnected / floating is OK
+  GND       — connect to ground when unused
+  VCC       — connect to power supply when unused
+  PULL_UP   — connect through pull-up resistor when unused
+  PULL_DOWN — connect through pull-down resistor when unused
+  CUSTOM    — special handling described in description
+  null      — datasheet does not specify
+
+OUTPUT FORMAT — output ONLY valid JSON, no markdown, no code fences:
+{
+  "logical_pins": [
+    {
+      "name": "VIN",
+      "direction": "POWER_IN",
+      "signal_type": "POWER",
+      "description": "Power supply input",
+      "packages": {
+        "SOT-23-5": [1],
+        "WDFN-6L": [3]
+      },
+      "unused_treatment": null
+    }
+  ]
+}
+
+IMPORTANT:
+- Pin numbers should be integers when possible, strings only for special cases like "EP" (exposed pad)
+- "packages" must be a dict where keys are package names and values are arrays of pin numbers
+- If only one package is shown, still use the dict format
+- Include ALL pins: power, ground, signal, NC, exposed pad
+- For NC pins: direction="NC", signal_type="NONE"
+- For GND pins: direction="POWER_IN", signal_type="POWER"
+- For exposed/thermal pads: direction="PASSIVE", signal_type="POWER" (if connected to GND) or "NONE"
+- description should be concise but informative (from the pin description table or diagram labels)
+"""
+
+# Enum sets for validation
+VALID_DIRECTIONS = {"INPUT", "OUTPUT", "BIDIRECTIONAL", "POWER_IN", "POWER_OUT", "PASSIVE", "NC"}
+VALID_SIGNAL_TYPES = {"DIGITAL", "ANALOG", "POWER", "NONE"}
+VALID_UNUSED_TREATMENTS = {"FLOAT", "GND", "VCC", "PULL_UP", "PULL_DOWN", "CUSTOM", None}
+
+
+def extract_pins_with_vision(images: list[bytes], pdf_name: str, max_retries: int = 2) -> dict:
+    """L1b: 用 Gemini Vision 从 pin/cover 页面提取结构化 pin 定义"""
+    contents = [PIN_EXTRACTION_PROMPT]
+    for img in images:
+        contents.append(types.Part.from_bytes(data=img, mime_type='image/png'))
+
+    for attempt in range(max_retries + 1):
+        try:
+            response = gemini_client.models.generate_content(
+                model=GEMINI_MODEL,
+                contents=contents,
+                config={"temperature": 0.1},
+            )
+            raw = response.text
+            # 清理 markdown 包裹
+            if "```json" in raw:
+                raw = raw.split("```json")[1].split("```")[0]
+            elif "```" in raw:
+                raw = raw.split("```")[1].split("```")[0]
+            # 找 JSON 边界
+            start = raw.find('{')
+            end = raw.rfind('}')
+            if start >= 0 and end > start:
+                raw = raw[start:end+1]
+            result = json.loads(raw.strip())
+            if isinstance(result, list):
+                result = result[0] if result else {"error": "Empty list"}
+            if not isinstance(result, dict):
+                return {"error": f"Unexpected type: {type(result).__name__}"}
+            # 确保有 logical_pins key
+            if "logical_pins" not in result:
+                # 尝试从其他可能的 key 中恢复
+                for key in ["pins", "pin_definitions", "logicalPins"]:
+                    if key in result:
+                        result["logical_pins"] = result.pop(key)
+                        break
+                else:
+                    return {"error": "No logical_pins key in response", "raw": raw[:500]}
+            return result
+        except json.JSONDecodeError as e:
+            if attempt < max_retries:
+                time.sleep(3)
+                continue
+            return {"error": f"JSON parse failed: {str(e)}", "raw": raw[:500] if 'raw' in dir() else ""}
+        except Exception as e:
+            if attempt < max_retries and ("503" in str(e) or "429" in str(e) or "504" in str(e)):
+                time.sleep(10)
+                continue
+            return {"error": str(e)}
+
+
+def validate_pins(pin_data: dict) -> list[dict]:
+    """验证 pin 提取结果的合法性，返回 issues 列表"""
+    issues = []
+    pins = pin_data.get("logical_pins", [])
+
+    if not pins:
+        issues.append({"level": "error", "message": "No logical_pins found"})
+        return issues
+
+    seen_names = set()
+    # 收集每个 package 内的 pin number 映射，用于检测重复
+    package_pin_map = {}  # {package_name: {pin_number: [pin_names]}}
+
+    for i, pin in enumerate(pins):
+        prefix = f"pin[{i}]"
+
+        # name 不能为空
+        name = pin.get("name", "")
+        if not name or not str(name).strip():
+            issues.append({"level": "error", "message": f"{prefix}: empty name"})
+            continue
+
+        name = str(name).strip()
+
+        # 检查重复 pin name
+        if name in seen_names:
+            issues.append({"level": "warning", "message": f"{prefix}: duplicate pin name '{name}'"})
+        seen_names.add(name)
+
+        # direction 枚举检查
+        direction = pin.get("direction", "")
+        if direction not in VALID_DIRECTIONS:
+            issues.append({"level": "error", "message": f"{prefix} '{name}': invalid direction '{direction}', must be one of {sorted(VALID_DIRECTIONS)}"})
+
+        # signal_type 枚举检查
+        signal_type = pin.get("signal_type", "")
+        if signal_type not in VALID_SIGNAL_TYPES:
+            issues.append({"level": "error", "message": f"{prefix} '{name}': invalid signal_type '{signal_type}', must be one of {sorted(VALID_SIGNAL_TYPES)}"})
+
+        # unused_treatment 枚举检查
+        unused = pin.get("unused_treatment")
+        if unused not in VALID_UNUSED_TREATMENTS:
+            issues.append({"level": "error", "message": f"{prefix} '{name}': invalid unused_treatment '{unused}', must be one of {sorted(str(v) for v in VALID_UNUSED_TREATMENTS)}"})
+
+        # packages 结构检查
+        packages = pin.get("packages")
+        if not isinstance(packages, dict):
+            issues.append({"level": "error", "message": f"{prefix} '{name}': packages must be a dict, got {type(packages).__name__}"})
+        elif not packages:
+            issues.append({"level": "error", "message": f"{prefix} '{name}': packages dict is empty"})
+        else:
+            for pkg_name, pin_nums in packages.items():
+                if not isinstance(pin_nums, list):
+                    issues.append({"level": "error", "message": f"{prefix} '{name}': packages['{pkg_name}'] must be a list, got {type(pin_nums).__name__}"})
+                else:
+                    # 检查同一 package 内是否有 pin number 冲突
+                    if pkg_name not in package_pin_map:
+                        package_pin_map[pkg_name] = {}
+                    for pn in pin_nums:
+                        pn_key = str(pn)
+                        if pn_key not in package_pin_map[pkg_name]:
+                            package_pin_map[pkg_name][pn_key] = []
+                        package_pin_map[pkg_name][pn_key].append(name)
+
+    # 检查同一 package 内同一 pin number 被多个逻辑 pin 占用
+    for pkg_name, pn_map in package_pin_map.items():
+        for pn, names in pn_map.items():
+            if len(names) > 1:
+                issues.append({"level": "warning", "message": f"package '{pkg_name}' pin {pn} claimed by multiple logical pins: {names}"})
+
+    return issues
+
+
+# ============================================
 # L2: 物理规则校验 (复用 v0.1)
 # ============================================
 
@@ -678,6 +875,63 @@ def process_single_pdf(pdf_path: str, verbose: bool = True) -> dict:
             if temps:
                 print(f"  Temp ranges: {sorted(temps)}")
 
+    # L1b: Pin Extraction (独立阶段)
+    pin_extraction = {}
+    pin_validation_issues = []
+    pin_page_nums = sorted(set(
+        [p.page_num for p in pin_pages] +
+        [p.page_num for p in cover_pages]
+    ))
+    t1b = time.time()
+    if pin_page_nums:
+        pin_images = render_pages_to_images(pdf_path, pin_page_nums)
+        if verbose:
+            pin_img_size = sum(len(img) for img in pin_images)
+            print(f"\nL1b Pin Extraction:")
+            print(f"  Pages: {pin_page_nums} ({len(pin_images)} images, {pin_img_size/1024:.0f} KB)")
+
+        pin_extraction = extract_pins_with_vision(pin_images, pdf_name)
+
+        if "error" in pin_extraction:
+            if verbose:
+                print(f"  ❌ FAILED: {pin_extraction['error']}")
+        else:
+            logical_pins = pin_extraction.get("logical_pins", [])
+            pin_validation_issues = validate_pins(pin_extraction)
+            errors = [i for i in pin_validation_issues if i["level"] == "error"]
+            warnings = [i for i in pin_validation_issues if i["level"] == "warning"]
+
+            if verbose:
+                print(f"  Logical pins: {len(logical_pins)}")
+                # direction 分布
+                dir_dist = {}
+                for p in logical_pins:
+                    d = p.get("direction", "?")
+                    dir_dist[d] = dir_dist.get(d, 0) + 1
+                print(f"  Direction distribution: {dir_dist}")
+                # signal_type 分布
+                sig_dist = {}
+                for p in logical_pins:
+                    s = p.get("signal_type", "?")
+                    sig_dist[s] = sig_dist.get(s, 0) + 1
+                print(f"  Signal type distribution: {sig_dist}")
+                # packages 结构
+                all_pkgs = set()
+                for p in logical_pins:
+                    pkgs = p.get("packages", {})
+                    if isinstance(pkgs, dict):
+                        all_pkgs.update(pkgs.keys())
+                print(f"  Packages found: {sorted(all_pkgs)}")
+                # 验证结果
+                print(f"  Validation: {len(errors)} errors, {len(warnings)} warnings")
+                for issue in pin_validation_issues:
+                    icon = "❌" if issue["level"] == "error" else "⚠️"
+                    print(f"    {icon} {issue['message']}")
+    else:
+        if verbose:
+            print(f"\nL1b Pin Extraction: SKIPPED (no pin/cover pages)")
+    l1b_time = time.time() - t1b
+
     # L2: 校验
     validations = []
     if "error" not in extraction:
@@ -726,12 +980,15 @@ def process_single_pdf(pdf_path: str, verbose: bool = True) -> dict:
         "vision_pages": vision_page_nums,
         "page_classification": [asdict(p) for p in pages],
         "extraction": extraction,
+        "pin_extraction": pin_extraction,
+        "pin_validation": pin_validation_issues,
         "validation": [asdict(v) for v in validations],
         "physics_validation": [asdict(v) for v in physics_val],
         "cross_validation": cross_val,
         "timing": {
             "l0_classify_s": round(l0_time, 3),
-            "l1_extract_s": round(l1_time, 3),
+            "l1a_extract_s": round(l1_time, 3),
+            "l1b_pin_s": round(l1b_time, 3),
         }
     }
     return result

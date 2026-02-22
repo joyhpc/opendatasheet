@@ -1395,5 +1395,81 @@
   "timing": {
     "l0_classify_s": 0.029,
     "l1_extract_s": 53.936
-  }
+  },
+  "pin_extraction": {
+    "logical_pins": [
+      {
+        "name": "GND/ADJ",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Ground or Adjust pin. Ground for fixed voltage versions; reference voltage input for adjustable version.",
+        "packages": {
+          "SOT-223": [
+            1
+          ],
+          "TO-252": [
+            1
+          ],
+          "8L SOIC": [
+            1
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "VOUT",
+        "direction": "POWER_OUT",
+        "signal_type": "POWER",
+        "description": "Regulated output voltage.",
+        "packages": {
+          "SOT-223": [
+            2
+          ],
+          "TO-252": [
+            2,
+            "TAB"
+          ],
+          "8L SOIC": [
+            2,
+            3,
+            6,
+            7
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "VIN",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Input voltage supply.",
+        "packages": {
+          "SOT-223": [
+            3
+          ],
+          "TO-252": [
+            3
+          ],
+          "8L SOIC": [
+            4
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "N/C",
+        "direction": "NC",
+        "signal_type": "NONE",
+        "description": "No internal connection.",
+        "packages": {
+          "8L SOIC": [
+            5,
+            8
+          ]
+        },
+        "unused_treatment": "FLOAT"
+      }
+    ]
+  },
+  "pin_validation": []
 }
