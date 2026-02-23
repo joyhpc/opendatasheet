@@ -772,35 +772,33 @@
   "pin_extraction": {
     "logical_pins": [
       {
-        "name": "ADJ",
-        "direction": "INPUT",
-        "signal_type": "ANALOG",
-        "description": "Input to the error amplifier for adjustable devices. Referenced to ground, output voltage range is -1.22V to -20V.",
+        "name": "IN",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Power is supplied to the device through the input pin. For the DFN package, the exposed pad is also an IN connection and must be connected to IN (Pins 7, 8) at the PCB.",
         "packages": {
-          "ThinSOT": [],
-          "DFN-8": []
+          "ThinSOT-23-5": [
+            3
+          ],
+          "DFN-8": [
+            7,
+            8,
+            "EP"
+          ]
         },
         "unused_treatment": null
       },
       {
-        "name": "BYP",
-        "direction": "PASSIVE",
-        "signal_type": "ANALOG",
-        "description": "Bypass pin used to achieve low noise performance. A small capacitor from the output to this pin will bypass the reference.",
-        "packages": {
-          "ThinSOT": [],
-          "DFN-8": []
-        },
-        "unused_treatment": "FLOAT"
-      },
-      {
-        "name": "Exposed Pad",
-        "direction": "PASSIVE",
+        "name": "OUT",
+        "direction": "POWER_OUT",
         "signal_type": "POWER",
-        "description": "Exposed pad (DFN package only). Connect to IN (Pins 7, 8) at the PCB.",
+        "description": "The output supplies power to the load. A minimum output capacitor of 1μF is required to prevent oscillations.",
         "packages": {
+          "ThinSOT-23-5": [
+            1
+          ],
           "DFN-8": [
-            "EP"
+            1
           ]
         },
         "unused_treatment": null
@@ -811,33 +809,13 @@
         "signal_type": "POWER",
         "description": "Ground.",
         "packages": {
-          "ThinSOT": [],
-          "DFN-8": []
-        },
-        "unused_treatment": null
-      },
-      {
-        "name": "IN",
-        "direction": "POWER_IN",
-        "signal_type": "POWER",
-        "description": "Power supply input. A bypass capacitor is required on this pin.",
-        "packages": {
-          "ThinSOT": [],
+          "ThinSOT-23-5": [
+            2
+          ],
           "DFN-8": [
-            7,
-            8
+            2,
+            3
           ]
-        },
-        "unused_treatment": null
-      },
-      {
-        "name": "OUT",
-        "direction": "POWER_OUT",
-        "signal_type": "POWER",
-        "description": "The output supplies power to the load. A minimum output capacitor of 1µF is required to prevent oscillations.",
-        "packages": {
-          "ThinSOT": [],
-          "DFN-8": []
         },
         "unused_treatment": null
       },
@@ -845,38 +823,162 @@
         "name": "SHDN",
         "direction": "INPUT",
         "signal_type": "DIGITAL",
-        "description": "Shutdown control pin. Referenced to GND. Pulling more than -1.9V or +1.6V will turn the device on. If unused, must be connected to VIN.",
+        "description": "Shutdown pin. Referenced to GND, allowing the device to be driven by either positive or negative logic. Pulling SHDN within ±0.8V of GND turns the device off.",
         "packages": {
-          "ThinSOT": [],
-          "DFN-8": []
+          "ThinSOT-23-5": [
+            4
+          ],
+          "DFN-8": [
+            5
+          ]
         },
         "unused_treatment": "VCC"
+      },
+      {
+        "name": "BYP",
+        "direction": "PASSIVE",
+        "signal_type": "ANALOG",
+        "description": "Bypass pin used to bypass the reference to achieve low noise performance. A small capacitor from the output to this pin bypasses the reference to lower output voltage noise.",
+        "packages": {
+          "ThinSOT-23-5": [
+            5
+          ],
+          "DFN-8": [
+            4
+          ]
+        },
+        "unused_treatment": "FLOAT"
+      },
+      {
+        "name": "ADJ",
+        "direction": "INPUT",
+        "signal_type": "ANALOG",
+        "description": "Input to the error amplifier for adjustable devices. The ADJ pin voltage is -1.22V referenced to ground.",
+        "packages": {
+          "ThinSOT-23-5": [
+            5
+          ],
+          "DFN-8": [
+            4
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "NC",
+        "direction": "NC",
+        "signal_type": "NONE",
+        "description": "No internal connection.",
+        "packages": {
+          "DFN-8": [
+            6
+          ]
+        },
+        "unused_treatment": null
       }
     ]
   },
   "pin_index": {
     "packages": {
-      "ThinSOT": {},
-      "DFN-8": {
-        "EP": {
-          "name": "Exposed Pad",
-          "direction": "PASSIVE",
+      "ThinSOT-23-5": {
+        "3": {
+          "name": "IN",
+          "direction": "POWER_IN",
           "signal_type": "POWER",
-          "description": "Exposed pad (DFN package only). Connect to IN (Pins 7, 8) at the PCB.",
+          "description": "Power is supplied to the device through the input pin. For the DFN package, the exposed pad is also an IN connection and must be connected to IN (Pins 7, 8) at the PCB.",
           "unused_treatment": null
         },
+        "1": {
+          "name": "OUT",
+          "direction": "POWER_OUT",
+          "signal_type": "POWER",
+          "description": "The output supplies power to the load. A minimum output capacitor of 1μF is required to prevent oscillations.",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground.",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "SHDN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Shutdown pin. Referenced to GND, allowing the device to be driven by either positive or negative logic. Pulling SHDN within ±0.8V of GND turns the device off.",
+          "unused_treatment": "VCC"
+        },
+        "5": {
+          "name": "BYP",
+          "direction": "PASSIVE",
+          "signal_type": "ANALOG",
+          "description": "Bypass pin used to bypass the reference to achieve low noise performance. A small capacitor from the output to this pin bypasses the reference to lower output voltage noise. (also: ADJ — Input to the error amplifier for adjustable devices. The ADJ pin voltage is -1.22V referenced to ground.)",
+          "unused_treatment": "FLOAT"
+        }
+      },
+      "DFN-8": {
         "7": {
           "name": "IN",
           "direction": "POWER_IN",
           "signal_type": "POWER",
-          "description": "Power supply input. A bypass capacitor is required on this pin.",
+          "description": "Power is supplied to the device through the input pin. For the DFN package, the exposed pad is also an IN connection and must be connected to IN (Pins 7, 8) at the PCB.",
           "unused_treatment": null
         },
         "8": {
           "name": "IN",
           "direction": "POWER_IN",
           "signal_type": "POWER",
-          "description": "Power supply input. A bypass capacitor is required on this pin.",
+          "description": "Power is supplied to the device through the input pin. For the DFN package, the exposed pad is also an IN connection and must be connected to IN (Pins 7, 8) at the PCB.",
+          "unused_treatment": null
+        },
+        "EP": {
+          "name": "IN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power is supplied to the device through the input pin. For the DFN package, the exposed pad is also an IN connection and must be connected to IN (Pins 7, 8) at the PCB.",
+          "unused_treatment": null
+        },
+        "1": {
+          "name": "OUT",
+          "direction": "POWER_OUT",
+          "signal_type": "POWER",
+          "description": "The output supplies power to the load. A minimum output capacitor of 1μF is required to prevent oscillations.",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground.",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground.",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "SHDN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Shutdown pin. Referenced to GND, allowing the device to be driven by either positive or negative logic. Pulling SHDN within ±0.8V of GND turns the device off.",
+          "unused_treatment": "VCC"
+        },
+        "4": {
+          "name": "BYP",
+          "direction": "PASSIVE",
+          "signal_type": "ANALOG",
+          "description": "Bypass pin used to bypass the reference to achieve low noise performance. A small capacitor from the output to this pin bypasses the reference to lower output voltage noise. (also: ADJ — Input to the error amplifier for adjustable devices. The ADJ pin voltage is -1.22V referenced to ground.)",
+          "unused_treatment": "FLOAT"
+        },
+        "6": {
+          "name": "NC",
+          "direction": "NC",
+          "signal_type": "NONE",
+          "description": "No internal connection.",
           "unused_treatment": null
         }
       }
