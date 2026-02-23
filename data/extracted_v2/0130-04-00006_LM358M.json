@@ -5,6 +5,7 @@
   "checksum": "58de1e56e4be57a3ab2bcad4f1cbef81",
   "total_pages": 17,
   "vision_pages": [
+    0,
     3,
     4
   ],
@@ -12,8 +13,10 @@
     {
       "page_num": 0,
       "text_length": 2040,
-      "category": "ordering",
+      "category": "pin",
       "matched_patterns": [
+        "(?i)pin\\s+(description|configuration|function|assignment|definition|connection|diagram)",
+        "(?i)pin\\s+connections?",
         "(?i)ordering\\s+information",
         "(?i)marking\\s+information"
       ],
@@ -142,10 +145,10 @@
   ],
   "extraction": {
     "component": {
-      "mpn": "LM258, LM358, LM358A, LM358E, LM2904, LM2904A, LM2904E, LM2904V, NCV2904",
+      "mpn": "LM358",
       "manufacturer": "onsemi",
       "category": "OpAmp",
-      "description": "Low Power Dual Operational Amplifiers"
+      "description": "Single Supply Dual Operational Amplifiers"
     },
     "absolute_maximum_ratings": [],
     "electrical_characteristics": [
@@ -157,7 +160,7 @@
         "typ": 2.0,
         "max": 5.0,
         "unit": "mV",
-        "conditions": "VCC = 5.0 V to 30 V, VIC = 0 V to VCC -1.7 V, VO ≈ 1.4 V, RS = 0 Ω, TA = 25°C",
+        "conditions": "VCC = 5.0 V to 30 V, VIC = 0 V to VCC -1.7 V, VO = 1.4 V, RS = 0 Ω",
         "device": "LM258",
         "temp_range": "25C"
       },
@@ -169,7 +172,7 @@
         "typ": null,
         "max": 7.0,
         "unit": "mV",
-        "conditions": "VCC = 5.0 V to 30 V, VIC = 0 V to VCC -1.7 V, VO ≈ 1.4 V, RS = 0 Ω, TA = Thigh",
+        "conditions": "VCC = 5.0 V to 30 V, VIC = 0 V to VCC -1.7 V, VO = 1.4 V, RS = 0 Ω",
         "device": "LM258",
         "temp_range": "full"
       },
@@ -178,11 +181,47 @@
         "raw_name": "Input Offset Voltage",
         "symbol": "VIO",
         "min": null,
-        "typ": null,
+        "typ": 2.0,
         "max": 7.0,
         "unit": "mV",
-        "conditions": "VCC = 5.0 V to 30 V, VIC = 0 V to VCC -1.7 V, VO ≈ 1.4 V, RS = 0 Ω, TA = Tlow",
-        "device": "LM258",
+        "conditions": "VCC = 5.0 V to 30 V, VIC = 0 V to VCC -1.7 V, VO = 1.4 V, RS = 0 Ω",
+        "device": "LM358, LM358E",
+        "temp_range": "25C"
+      },
+      {
+        "parameter": "Input Offset Voltage",
+        "raw_name": "Input Offset Voltage",
+        "symbol": "VIO",
+        "min": null,
+        "typ": null,
+        "max": 9.0,
+        "unit": "mV",
+        "conditions": "VCC = 5.0 V to 30 V, VIC = 0 V to VCC -1.7 V, VO = 1.4 V, RS = 0 Ω",
+        "device": "LM358, LM358E",
+        "temp_range": "full"
+      },
+      {
+        "parameter": "Input Offset Voltage",
+        "raw_name": "Input Offset Voltage",
+        "symbol": "VIO",
+        "min": null,
+        "typ": 2.0,
+        "max": 3.0,
+        "unit": "mV",
+        "conditions": "VCC = 5.0 V to 30 V, VIC = 0 V to VCC -1.7 V, VO = 1.4 V, RS = 0 Ω",
+        "device": "LM358A",
+        "temp_range": "25C"
+      },
+      {
+        "parameter": "Input Offset Voltage",
+        "raw_name": "Input Offset Voltage",
+        "symbol": "VIO",
+        "min": null,
+        "typ": null,
+        "max": 5.0,
+        "unit": "mV",
+        "conditions": "VCC = 5.0 V to 30 V, VIC = 0 V to VCC -1.7 V, VO = 1.4 V, RS = 0 Ω",
+        "device": "LM358A",
         "temp_range": "full"
       },
       {
@@ -194,7 +233,7 @@
         "max": null,
         "unit": "μV/°C",
         "conditions": "TA = Thigh to Tlow",
-        "device": "LM258",
+        "device": "LM258, LM358, LM358E, LM358A",
         "temp_range": "full"
       },
       {
@@ -238,21 +277,9 @@
         "raw_name": "Input Bias Current",
         "symbol": "IIB",
         "min": null,
-        "typ": -50,
+        "typ": null,
         "max": -300,
         "unit": "nA",
-        "conditions": "TA = Thigh to Tlow",
-        "device": "LM258",
-        "temp_range": "full"
-      },
-      {
-        "parameter": "Average Temperature Coefficient of Input Offset Current",
-        "raw_name": "Average Temperature Coefficient of Input Offset Current",
-        "symbol": "ΔIIO/ΔT",
-        "min": null,
-        "typ": 10,
-        "max": null,
-        "unit": "pA/°C",
         "conditions": "TA = Thigh to Tlow",
         "device": "LM258",
         "temp_range": "full"
@@ -266,7 +293,7 @@
         "max": 28.3,
         "unit": "V",
         "conditions": "VCC = 30 V, TA = 25°C",
-        "device": "LM258",
+        "device": "LM258, LM358, LM358E",
         "temp_range": "25C"
       },
       {
@@ -278,20 +305,8 @@
         "max": 28,
         "unit": "V",
         "conditions": "VCC = 30 V, TA = Thigh to Tlow",
-        "device": "LM258",
+        "device": "LM258, LM358, LM358E, LM358A",
         "temp_range": "full"
-      },
-      {
-        "parameter": "Differential Input Voltage Range",
-        "raw_name": "Differential Input Voltage Range",
-        "symbol": "VIDR",
-        "min": null,
-        "typ": null,
-        "max": null,
-        "unit": "V",
-        "conditions": "VCC",
-        "device": "LM258",
-        "temp_range": null
       },
       {
         "parameter": "Large Signal Open Loop Voltage Gain",
@@ -318,18 +333,6 @@
         "temp_range": "full"
       },
       {
-        "parameter": "Channel Separation",
-        "raw_name": "Channel Separation",
-        "symbol": "CS",
-        "min": null,
-        "typ": -120,
-        "max": null,
-        "unit": "dB",
-        "conditions": "1.0 kHz ≤ f ≤ 20 kHz, Input Referenced",
-        "device": "LM258",
-        "temp_range": null
-      },
-      {
         "parameter": "Common Mode Rejection",
         "raw_name": "Common Mode Rejection",
         "symbol": "CMR",
@@ -339,7 +342,7 @@
         "unit": "dB",
         "conditions": "RS ≤ 10 kΩ",
         "device": "LM258",
-        "temp_range": null
+        "temp_range": "full"
       },
       {
         "parameter": "Power Supply Rejection",
@@ -350,8 +353,8 @@
         "max": null,
         "unit": "dB",
         "conditions": null,
-        "device": "LM258",
-        "temp_range": null
+        "device": "LM258, LM358, LM358E, LM358A",
+        "temp_range": "full"
       },
       {
         "parameter": "Output Voltage-High Limit",
@@ -362,32 +365,8 @@
         "max": null,
         "unit": "V",
         "conditions": "VCC = 5.0 V, RL = 2.0 kΩ, TA = 25°C",
-        "device": "LM258",
+        "device": "LM258, LM358, LM358E, LM358A",
         "temp_range": "25C"
-      },
-      {
-        "parameter": "Output Voltage-High Limit",
-        "raw_name": "Output Voltage-High Limit",
-        "symbol": "VOH",
-        "min": 26,
-        "typ": null,
-        "max": null,
-        "unit": "V",
-        "conditions": "VCC = 30 V, RL = 2.0 kΩ",
-        "device": "LM258",
-        "temp_range": null
-      },
-      {
-        "parameter": "Output Voltage-High Limit",
-        "raw_name": "Output Voltage-High Limit",
-        "symbol": "VOH",
-        "min": 27,
-        "typ": 28,
-        "max": null,
-        "unit": "V",
-        "conditions": "VCC = 30 V, RL = 10 kΩ",
-        "device": "LM258",
-        "temp_range": null
       },
       {
         "parameter": "Output Voltage-Low Limit",
@@ -397,9 +376,9 @@
         "typ": 5.0,
         "max": 20,
         "unit": "mV",
-        "conditions": "VCC = 5.0 V, RL = 10 kΩ, TA = Thigh to Tlow",
-        "device": "LM258",
-        "temp_range": "full"
+        "conditions": "VCC = 5.0 V, RL = 10 kΩ, TA = 25°C",
+        "device": "LM258, LM358, LM358E, LM358A",
+        "temp_range": "25C"
       },
       {
         "parameter": "Output Source Current",
@@ -409,9 +388,9 @@
         "typ": 40,
         "max": null,
         "unit": "mA",
-        "conditions": "VID = +1.0 V, VCC = 15 V",
-        "device": "LM258",
-        "temp_range": null
+        "conditions": "VID = +1.0 V, VCC = 15 V, TA = 25°C",
+        "device": "LM258, LM358, LM358E, LM358A",
+        "temp_range": "25C"
       },
       {
         "parameter": "Output Sink Current",
@@ -421,21 +400,9 @@
         "typ": 20,
         "max": null,
         "unit": "mA",
-        "conditions": "VID = -1.0 V, VCC = 15 V",
-        "device": "LM258",
-        "temp_range": null
-      },
-      {
-        "parameter": "Output Sink Current",
-        "raw_name": "Output Sink Current",
-        "symbol": "IO-",
-        "min": 12,
-        "typ": 50,
-        "max": null,
-        "unit": "μA",
-        "conditions": "VID = -1.0 V, VO = 200 mV",
-        "device": "LM258",
-        "temp_range": null
+        "conditions": "VID = -1.0 V, VCC = 15 V, TA = 25°C",
+        "device": "LM258, LM358, LM358E, LM358A",
+        "temp_range": "25C"
       },
       {
         "parameter": "Output Short Circuit to Ground",
@@ -446,8 +413,8 @@
         "max": 60,
         "unit": "mA",
         "conditions": null,
-        "device": "LM258",
-        "temp_range": null
+        "device": "LM258, LM358, LM358E, LM358A",
+        "temp_range": "25C"
       },
       {
         "parameter": "Power Supply Current (Total Device)",
@@ -457,21 +424,9 @@
         "typ": 1.5,
         "max": 3.0,
         "unit": "mA",
-        "conditions": "VCC = 30 V, VO = 0 V, RL = ∞",
-        "device": "LM258",
-        "temp_range": null
-      },
-      {
-        "parameter": "Power Supply Current (Total Device)",
-        "raw_name": "Power Supply Current (Total Device)",
-        "symbol": "ICC",
-        "min": null,
-        "typ": 0.7,
-        "max": 1.2,
-        "unit": "mA",
-        "conditions": "VCC = 5 V, VO = 0 V, RL = ∞",
-        "device": "LM258",
-        "temp_range": null
+        "conditions": "VCC = 30 V, VO = 0 V, RL = ∞, TA = 25°C",
+        "device": "LM258, LM358, LM358E",
+        "temp_range": "25C"
       },
       {
         "parameter": "Input Offset Voltage",
@@ -481,80 +436,8 @@
         "typ": 2.0,
         "max": 7.0,
         "unit": "mV",
-        "conditions": "VCC = 5.0 V to 30 V, VIC = 0 V to VCC -1.7 V, VO ≈ 1.4 V, RS = 0 Ω, TA = 25°C",
-        "device": "LM358, LM358E",
-        "temp_range": "25C"
-      },
-      {
-        "parameter": "Input Offset Voltage",
-        "raw_name": "Input Offset Voltage",
-        "symbol": "VIO",
-        "min": null,
-        "typ": null,
-        "max": 9.0,
-        "unit": "mV",
-        "conditions": "VCC = 5.0 V to 30 V, VIC = 0 V to VCC -1.7 V, VO ≈ 1.4 V, RS = 0 Ω, TA = Thigh",
-        "device": "LM358, LM358E",
-        "temp_range": "full"
-      },
-      {
-        "parameter": "Input Offset Voltage",
-        "raw_name": "Input Offset Voltage",
-        "symbol": "VIO",
-        "min": null,
-        "typ": null,
-        "max": 9.0,
-        "unit": "mV",
-        "conditions": "VCC = 5.0 V to 30 V, VIC = 0 V to VCC -1.7 V, VO ≈ 1.4 V, RS = 0 Ω, TA = Tlow",
-        "device": "LM358, LM358E",
-        "temp_range": "full"
-      },
-      {
-        "parameter": "Input Offset Voltage",
-        "raw_name": "Input Offset Voltage",
-        "symbol": "VIO",
-        "min": null,
-        "typ": 2.0,
-        "max": 3.0,
-        "unit": "mV",
-        "conditions": "VCC = 5.0 V to 30 V, VIC = 0 V to VCC -1.7 V, VO ≈ 1.4 V, RS = 0 Ω, TA = 25°C",
-        "device": "LM358A",
-        "temp_range": "25C"
-      },
-      {
-        "parameter": "Input Offset Voltage",
-        "raw_name": "Input Offset Voltage",
-        "symbol": "VIO",
-        "min": null,
-        "typ": null,
-        "max": 5.0,
-        "unit": "mV",
-        "conditions": "VCC = 5.0 V to 30 V, VIC = 0 V to VCC -1.7 V, VO ≈ 1.4 V, RS = 0 Ω, TA = Thigh",
-        "device": "LM358A",
-        "temp_range": "full"
-      },
-      {
-        "parameter": "Input Offset Voltage",
-        "raw_name": "Input Offset Voltage",
-        "symbol": "VIO",
-        "min": null,
-        "typ": null,
-        "max": 5.0,
-        "unit": "mV",
-        "conditions": "VCC = 5.0 V to 30 V, VIC = 0 V to VCC -1.7 V, VO ≈ 1.4 V, RS = 0 Ω, TA = Tlow",
-        "device": "LM358A",
-        "temp_range": "full"
-      },
-      {
-        "parameter": "Input Offset Voltage",
-        "raw_name": "Input Offset Voltage",
-        "symbol": "VIO",
-        "min": null,
-        "typ": 2.0,
-        "max": 7.0,
-        "unit": "mV",
-        "conditions": "VCC = 5.0 V to 30 V, VIC = 0 V to VCC -1.7 V, VO ≈ 1.4 V, RS = 0 Ω, TA = 25°C",
-        "device": "LM2904/LM2904E",
+        "conditions": "VCC = 5.0 V to 30 V, VIC = 0 V to VCC -1.7 V, VO = 1.4 V, RS = 0 Ω, TA = 25°C",
+        "device": "LM2904, LM2904E, LM2904A, LM2904V, NCV2904",
         "temp_range": "25C"
       },
       {
@@ -565,33 +448,9 @@
         "typ": null,
         "max": 10,
         "unit": "mV",
-        "conditions": "VCC = 5.0 V to 30 V, VIC = 0 V to VCC -1.7 V, VO ≈ 1.4 V, RS = 0 Ω, TA = Thigh",
-        "device": "LM2904/LM2904E",
+        "conditions": "VCC = 5.0 V to 30 V, VIC = 0 V to VCC -1.7 V, VO = 1.4 V, RS = 0 Ω, TA = Thigh or Tlow",
+        "device": "LM2904, LM2904E, LM2904A",
         "temp_range": "full"
-      },
-      {
-        "parameter": "Input Offset Voltage",
-        "raw_name": "Input Offset Voltage",
-        "symbol": "VIO",
-        "min": null,
-        "typ": null,
-        "max": 10,
-        "unit": "mV",
-        "conditions": "VCC = 5.0 V to 30 V, VIC = 0 V to VCC -1.7 V, VO ≈ 1.4 V, RS = 0 Ω, TA = Tlow",
-        "device": "LM2904/LM2904E",
-        "temp_range": "full"
-      },
-      {
-        "parameter": "Input Offset Voltage",
-        "raw_name": "Input Offset Voltage",
-        "symbol": "VIO",
-        "min": null,
-        "typ": 2.0,
-        "max": 7.0,
-        "unit": "mV",
-        "conditions": "VCC = 5.0 V to 30 V, VIC = 0 V to VCC -1.7 V, VO ≈ 1.4 V, RS = 0 Ω, TA = 25°C",
-        "device": "LM2904V, NCV2904",
-        "temp_range": "25C"
       },
       {
         "parameter": "Input Offset Voltage",
@@ -601,115 +460,437 @@
         "typ": null,
         "max": 13,
         "unit": "mV",
-        "conditions": "VCC = 5.0 V to 30 V, VIC = 0 V to VCC -1.7 V, VO ≈ 1.4 V, RS = 0 Ω, TA = Thigh",
+        "conditions": "VCC = 5.0 V to 30 V, VIC = 0 V to VCC -1.7 V, VO = 1.4 V, RS = 0 Ω, TA = Thigh or Tlow",
         "device": "LM2904V, NCV2904",
-        "temp_range": "full"
-      },
-      {
-        "parameter": "Input Offset Voltage",
-        "raw_name": "Input Offset Voltage",
-        "symbol": "VIO",
-        "min": null,
-        "typ": null,
-        "max": 10,
-        "unit": "mV",
-        "conditions": "VCC = 5.0 V to 30 V, VIC = 0 V to VCC -1.7 V, VO ≈ 1.4 V, RS = 0 Ω, TA = Tlow",
-        "device": "LM2904V, NCV2904",
-        "temp_range": "full"
-      },
-      {
-        "parameter": "Common Mode Rejection",
-        "raw_name": "Common Mode Rejection",
-        "symbol": "CMR",
-        "min": 50,
-        "typ": 70,
-        "max": null,
-        "unit": "dB",
-        "conditions": "RS ≤ 10 kΩ",
-        "device": "LM2904/LM2904E",
-        "temp_range": null
-      },
-      {
-        "parameter": "Power Supply Rejection",
-        "raw_name": "Power Supply Rejection",
-        "symbol": "PSR",
-        "min": 50,
-        "typ": 100,
-        "max": null,
-        "unit": "dB",
-        "conditions": null,
-        "device": "LM2904/LM2904E",
-        "temp_range": null
-      },
-      {
-        "parameter": "Output Source Current",
-        "raw_name": "Output Source Current",
-        "symbol": "IO+",
-        "min": 10,
-        "typ": null,
-        "max": null,
-        "unit": "mA",
-        "conditions": "VID = +1.0 V, VCC = 15 V, TA = Thigh to Tlow",
-        "device": "LM358A",
-        "temp_range": "full"
-      },
-      {
-        "parameter": "Output Sink Current",
-        "raw_name": "Output Sink Current",
-        "symbol": "IO-",
-        "min": 5.0,
-        "typ": null,
-        "max": null,
-        "unit": "mA",
-        "conditions": "VID = -1.0 V, VCC = 15 V, TA = Thigh to Tlow",
-        "device": "LM358A",
         "temp_range": "full"
       }
     ],
-    "pin_definitions": []
+    "pin_definitions": [
+      {
+        "pin_number": "1",
+        "pin_name": "Output A",
+        "type": "Output",
+        "description": "Output of amplifier A"
+      },
+      {
+        "pin_number": "2",
+        "pin_name": "Inputs A (-)",
+        "type": "Input",
+        "description": "Inverting input of amplifier A"
+      },
+      {
+        "pin_number": "3",
+        "pin_name": "Inputs A (+)",
+        "type": "Input",
+        "description": "Non-inverting input of amplifier A"
+      },
+      {
+        "pin_number": "4",
+        "pin_name": "VEE/Gnd",
+        "type": "Power",
+        "description": "Negative supply or ground"
+      },
+      {
+        "pin_number": "5",
+        "pin_name": "Inputs B (+)",
+        "type": "Input",
+        "description": "Non-inverting input of amplifier B"
+      },
+      {
+        "pin_number": "6",
+        "pin_name": "Inputs B (-)",
+        "type": "Input",
+        "description": "Inverting input of amplifier B"
+      },
+      {
+        "pin_number": "7",
+        "pin_name": "Output B",
+        "type": "Output",
+        "description": "Output of amplifier B"
+      },
+      {
+        "pin_number": "8",
+        "pin_name": "VCC",
+        "type": "Power",
+        "description": "Positive supply"
+      }
+    ]
   },
+  "pin_extraction": {
+    "logical_pins": [
+      {
+        "name": "Output A",
+        "direction": "OUTPUT",
+        "signal_type": "ANALOG",
+        "description": "Amplifier A output",
+        "packages": {
+          "PDIP-8": [
+            1
+          ],
+          "SOIC-8": [
+            1
+          ],
+          "Micro8": [
+            1
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "Inverting Input A",
+        "direction": "INPUT",
+        "signal_type": "ANALOG",
+        "description": "Amplifier A inverting input",
+        "packages": {
+          "PDIP-8": [
+            2
+          ],
+          "SOIC-8": [
+            2
+          ],
+          "Micro8": [
+            2
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "Non-inverting Input A",
+        "direction": "INPUT",
+        "signal_type": "ANALOG",
+        "description": "Amplifier A non-inverting input",
+        "packages": {
+          "PDIP-8": [
+            3
+          ],
+          "SOIC-8": [
+            3
+          ],
+          "Micro8": [
+            3
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "VEE/Gnd",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Negative power supply or ground",
+        "packages": {
+          "PDIP-8": [
+            4
+          ],
+          "SOIC-8": [
+            4
+          ],
+          "Micro8": [
+            4
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "Non-inverting Input B",
+        "direction": "INPUT",
+        "signal_type": "ANALOG",
+        "description": "Amplifier B non-inverting input",
+        "packages": {
+          "PDIP-8": [
+            5
+          ],
+          "SOIC-8": [
+            5
+          ],
+          "Micro8": [
+            5
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "Inverting Input B",
+        "direction": "INPUT",
+        "signal_type": "ANALOG",
+        "description": "Amplifier B inverting input",
+        "packages": {
+          "PDIP-8": [
+            6
+          ],
+          "SOIC-8": [
+            6
+          ],
+          "Micro8": [
+            6
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "Output B",
+        "direction": "OUTPUT",
+        "signal_type": "ANALOG",
+        "description": "Amplifier B output",
+        "packages": {
+          "PDIP-8": [
+            7
+          ],
+          "SOIC-8": [
+            7
+          ],
+          "Micro8": [
+            7
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "VCC",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Positive power supply",
+        "packages": {
+          "PDIP-8": [
+            8
+          ],
+          "SOIC-8": [
+            8
+          ],
+          "Micro8": [
+            8
+          ]
+        },
+        "unused_treatment": null
+      }
+    ]
+  },
+  "pin_index": {
+    "packages": {
+      "PDIP-8": {
+        "1": {
+          "name": "Output A",
+          "direction": "OUTPUT",
+          "signal_type": "ANALOG",
+          "description": "Amplifier A output",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "Inverting Input A",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Amplifier A inverting input",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "Non-inverting Input A",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Amplifier A non-inverting input",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "VEE/Gnd",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Negative power supply or ground",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "Non-inverting Input B",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Amplifier B non-inverting input",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "Inverting Input B",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Amplifier B inverting input",
+          "unused_treatment": null
+        },
+        "7": {
+          "name": "Output B",
+          "direction": "OUTPUT",
+          "signal_type": "ANALOG",
+          "description": "Amplifier B output",
+          "unused_treatment": null
+        },
+        "8": {
+          "name": "VCC",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Positive power supply",
+          "unused_treatment": null
+        }
+      },
+      "SOIC-8": {
+        "1": {
+          "name": "Output A",
+          "direction": "OUTPUT",
+          "signal_type": "ANALOG",
+          "description": "Amplifier A output",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "Inverting Input A",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Amplifier A inverting input",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "Non-inverting Input A",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Amplifier A non-inverting input",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "VEE/Gnd",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Negative power supply or ground",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "Non-inverting Input B",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Amplifier B non-inverting input",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "Inverting Input B",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Amplifier B inverting input",
+          "unused_treatment": null
+        },
+        "7": {
+          "name": "Output B",
+          "direction": "OUTPUT",
+          "signal_type": "ANALOG",
+          "description": "Amplifier B output",
+          "unused_treatment": null
+        },
+        "8": {
+          "name": "VCC",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Positive power supply",
+          "unused_treatment": null
+        }
+      },
+      "Micro8": {
+        "1": {
+          "name": "Output A",
+          "direction": "OUTPUT",
+          "signal_type": "ANALOG",
+          "description": "Amplifier A output",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "Inverting Input A",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Amplifier A inverting input",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "Non-inverting Input A",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Amplifier A non-inverting input",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "VEE/Gnd",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Negative power supply or ground",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "Non-inverting Input B",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Amplifier B non-inverting input",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "Inverting Input B",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Amplifier B inverting input",
+          "unused_treatment": null
+        },
+        "7": {
+          "name": "Output B",
+          "direction": "OUTPUT",
+          "signal_type": "ANALOG",
+          "description": "Amplifier B output",
+          "unused_treatment": null
+        },
+        "8": {
+          "name": "VCC",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Positive power supply",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "pin_validation": [],
   "validation": [
     {
       "param": "Input Offset Voltage",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Input Offset Voltage",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Input Offset Voltage",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Input Offset Current",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Input Bias Current",
       "rule": "monotonicity",
-      "passed": false,
-      "message": "min/typ/max not monotonic: None/-45/-150"
-    },
-    {
-      "param": "Input Bias Current",
-      "rule": "monotonicity",
-      "passed": false,
-      "message": "min/typ/max not monotonic: None/-50/-300"
+      "passed": true,
+      "message": "OK (modes: MAGNITUDE)"
     },
     {
       "param": "Input Common Mode Voltage Range",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Input Common Mode Voltage Range",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Large Signal Open Loop Voltage Gain",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Large Signal Open Loop Voltage Gain",
@@ -727,209 +908,108 @@
       "param": "Common Mode Rejection",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Power Supply Rejection",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Output Voltage-High Limit",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Output Voltage-High Limit",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Output Voltage-Low Limit",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Output Source Current",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Output Sink Current",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Output Sink Current",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Output Short Circuit to Ground",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Power Supply Current (Total Device)",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Power Supply Current (Total Device)",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Input Offset Voltage",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Input Offset Voltage",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Input Offset Voltage",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Input Offset Voltage",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Common Mode Rejection",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Power Supply Rejection",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     }
   ],
   "physics_validation": [
     {
       "param": "Input Offset Voltage (LM258)",
-      "rule": "temp_envelope_max",
+      "rule": "temp_envelope",
       "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Input Offset Current (LM258)",
-      "rule": "temp_envelope_max",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Input Bias Current (LM258)",
-      "rule": "temp_envelope_max",
-      "passed": false,
-      "message": "full max (-300) < 25C max (-150) — temp envelope violation"
-    },
-    {
-      "param": "Input Common Mode Voltage Range (LM258)",
-      "rule": "temp_envelope_max",
-      "passed": false,
-      "message": "full max (28) < 25C max (28.3) — temp envelope violation"
-    },
-    {
-      "param": "Input Common Mode Voltage Range (LM258)",
-      "rule": "temp_envelope_min",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Large Signal Open Loop Voltage Gain (LM258)",
-      "rule": "temp_envelope_min",
-      "passed": true,
-      "message": "OK"
+      "message": "OK (mode: ALGEBRAIC)"
     },
     {
       "param": "Input Offset Voltage (LM358, LM358E)",
-      "rule": "temp_envelope_max",
+      "rule": "temp_envelope",
       "passed": true,
-      "message": "OK"
+      "message": "OK (mode: ALGEBRAIC)"
     },
     {
       "param": "Input Offset Voltage (LM358A)",
-      "rule": "temp_envelope_max",
+      "rule": "temp_envelope",
       "passed": true,
-      "message": "OK"
+      "message": "OK (mode: ALGEBRAIC)"
     },
     {
-      "param": "Input Offset Voltage (LM2904/LM2904E)",
-      "rule": "temp_envelope_max",
+      "param": "Input Offset Current (LM258)",
+      "rule": "temp_envelope",
       "passed": true,
-      "message": "OK"
+      "message": "OK (mode: ALGEBRAIC)"
     },
     {
-      "param": "Input Offset Voltage (LM2904V, NCV2904)",
-      "rule": "temp_envelope_max",
+      "param": "Input Bias Current (LM258)",
+      "rule": "temp_envelope",
       "passed": true,
-      "message": "OK"
+      "message": "OK (mode: MAGNITUDE)"
+    },
+    {
+      "param": "Large Signal Open Loop Voltage Gain (LM258)",
+      "rule": "temp_envelope",
+      "passed": true,
+      "message": "OK (mode: ALGEBRAIC)"
     }
   ],
   "cross_validation": {
-    "total_extracted_values": 33,
-    "values_found_in_pdf": 28,
-    "values_not_in_pdf": [
-      -300.0,
-      -150.0,
-      -120.0,
-      -50.0,
-      -45.0
-    ],
-    "value_coverage_pct": 84.8,
-    "total_params": 43,
-    "params_verified": 40,
-    "params_suspicious": 3,
-    "suspicious_params": [
-      {
-        "parameter": "Input Bias Current",
-        "device": "LM258",
-        "values": [
-          -45.0,
-          -150.0
-        ]
-      },
-      {
-        "parameter": "Input Bias Current",
-        "device": "LM258",
-        "values": [
-          -50.0,
-          -300.0
-        ]
-      },
-      {
-        "parameter": "Channel Separation",
-        "device": "LM258",
-        "values": [
-          -120.0
-        ]
-      }
-    ]
+    "total_extracted_values": 26,
+    "values_found_in_pdf": 26,
+    "values_not_in_pdf": [],
+    "value_coverage_pct": 100.0,
+    "total_params": 26,
+    "params_verified": 26,
+    "params_suspicious": 0,
+    "suspicious_params": []
   },
   "timing": {
-    "l0_classify_s": 0.058,
-    "l1_extract_s": 59.965
+    "l0_classify_s": 0.057,
+    "l1a_extract_s": 47.698,
+    "l1b_pin_s": 23.063
   }
 }

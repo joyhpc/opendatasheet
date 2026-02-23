@@ -5,6 +5,7 @@
   "checksum": "a91d304026e9f04d99b268ad06401b8e",
   "total_pages": 13,
   "vision_pages": [
+    0,
     2,
     3,
     9
@@ -13,8 +14,10 @@
     {
       "page_num": 0,
       "text_length": 1938,
-      "category": "ordering",
+      "category": "pin",
       "matched_patterns": [
+        "(?i)pin\\s+(description|configuration|function|assignment|definition|connection|diagram)",
+        "(?i)pin\\s+connections?",
         "(?i)ordering\\s+information"
       ],
       "text_preview": "©  Semiconductor Components Industries, LLC, 2012 September, 2012 − Rev. 3 1 Publication Order Number: NCP349/D NCP349 Positive Overvoltage Protection Controller with Internal Low RON NMOS FET The NCP"
@@ -32,7 +35,7 @@
       "category": "electrical",
       "matched_patterns": [
         "(?i)recommended\\s+operating\\s+conditions?",
-        "(?i)pin\\s+(description|configuration|function|assignment|definition)"
+        "(?i)pin\\s+(description|configuration|function|assignment|definition|connection|diagram)"
       ],
       "text_preview": "NCP349 http://onsemi.com 3 PIN FUNCTION DESCRIPTION Pin No. Symbol Function Description 1, 7 IN INPUT Input Voltage Pins. These pins are connected to the Wall Adapoter (AC−DC, Vbus ..). A 1 \u0003F low ESR"
     },
@@ -119,14 +122,14 @@
     "component": {
       "mpn": "NCP349",
       "manufacturer": "ON Semiconductor",
-      "category": "Switch",
-      "description": "Positive Overvoltage Protection Controller with Internal Low RDS(on) NMOS FET"
+      "category": "Other",
+      "description": "Positive Overvoltage Protection Controller with Internal Low RON NMOS FET"
     },
     "absolute_maximum_ratings": [
       {
         "parameter": "Minimum Voltage (IN to GND)",
         "raw_name": "Minimum Voltage (IN to GND)",
-        "symbol": "Vmin_in",
+        "symbol": "Vminin",
         "min": -0.3,
         "typ": null,
         "max": null,
@@ -146,7 +149,7 @@
       {
         "parameter": "Maximum Voltage (IN to GND)",
         "raw_name": "Maximum Voltage (IN to GND)",
-        "symbol": "Vmax_in",
+        "symbol": "Vmaxin",
         "min": null,
         "typ": null,
         "max": 30,
@@ -164,19 +167,19 @@
         "conditions": null
       },
       {
-        "parameter": "Maximum Current (UVLO < VIN < OVLO)",
-        "raw_name": "Maximum Current (UVLO < VIN < OVLO)",
+        "parameter": "Maximum Current",
+        "raw_name": "Maximum Current (UVLO<VIN<OVLO)",
         "symbol": "Imax",
         "min": null,
         "typ": null,
         "max": 2.0,
         "unit": "A",
-        "conditions": null
+        "conditions": "UVLO < VIN < OVLO"
       },
       {
         "parameter": "Maximum Peak Current",
         "raw_name": "Maximum Peak Current (t ≤ 1 ms, TA = 85°C)",
-        "symbol": "Imax_peak",
+        "symbol": "Imaxpeak",
         "min": null,
         "typ": null,
         "max": 4.0,
@@ -225,52 +228,42 @@
       },
       {
         "parameter": "ESD Withstand Voltage (IEC 61000-4-2) Air",
-        "raw_name": "ESD Withstand Voltage (IEC 61000-4-2) (input only) when bypassed with 1.0 µF capacitor",
+        "raw_name": "ESD Withstand Voltage (IEC 61000-4-2) (input only) when bypassed with 1.0 μF capacitor",
         "symbol": "Vesd",
         "min": null,
-        "typ": null,
-        "max": 15,
+        "typ": 15,
+        "max": null,
         "unit": "kV",
-        "conditions": "Air condition, input only, bypassed with 1.0 µF capacitor"
+        "conditions": "Air"
       },
       {
         "parameter": "ESD Withstand Voltage (IEC 61000-4-2) Contact",
-        "raw_name": "ESD Withstand Voltage (IEC 61000-4-2) (input only) when bypassed with 1.0 µF capacitor",
+        "raw_name": "ESD Withstand Voltage (IEC 61000-4-2) (input only) when bypassed with 1.0 μF capacitor",
         "symbol": "Vesd",
         "min": null,
-        "typ": null,
-        "max": 8.0,
+        "typ": 8.0,
+        "max": null,
         "unit": "kV",
-        "conditions": "Contact condition, input only, bypassed with 1.0 µF capacitor"
+        "conditions": "Contact"
       },
       {
-        "parameter": "ESD Human Body Model (HBM)",
+        "parameter": "ESD Human Body Model",
         "raw_name": "Human Body Model (HBM), Model = 2 (Note 2)",
         "symbol": "Vesd",
         "min": null,
-        "typ": null,
-        "max": 2000,
+        "typ": 2000,
+        "max": null,
         "unit": "V",
         "conditions": null
       },
       {
-        "parameter": "ESD Machine Model (MM)",
+        "parameter": "ESD Machine Model",
         "raw_name": "Machine Model (MM) Model = B (Note 3)",
         "symbol": "Vesd",
         "min": null,
-        "typ": null,
-        "max": 200,
+        "typ": 200,
+        "max": null,
         "unit": "V",
-        "conditions": null
-      },
-      {
-        "parameter": "Moisture Sensitivity",
-        "raw_name": "Moisture Sensitivity",
-        "symbol": "MSL",
-        "min": null,
-        "typ": null,
-        "max": 1,
-        "unit": "Level",
         "conditions": null
       }
     ],
@@ -438,7 +431,7 @@
         "min": null,
         "typ": 70,
         "max": 150,
-        "unit": "µA",
+        "unit": "μA",
         "conditions": "No load. EN = 5.0 V",
         "device": "All",
         "temp_range": "full"
@@ -450,7 +443,7 @@
         "min": null,
         "typ": 140,
         "max": 250,
-        "unit": "µA",
+        "unit": "μA",
         "conditions": "No load. EN = Gnd",
         "device": "All",
         "temp_range": "full"
@@ -462,7 +455,7 @@
         "min": null,
         "typ": 60,
         "max": null,
-        "unit": "µA",
+        "unit": "μA",
         "conditions": "VIN = 2.7 V",
         "device": "All",
         "temp_range": "full"
@@ -475,7 +468,7 @@
         "typ": 20,
         "max": 400,
         "unit": "mV",
-        "conditions": "1.2 V < VIN < UVLO, Sink 50 µA on FLAG pin",
+        "conditions": "1.2 V < VIN < UVLO, Sink 50 μA on FLAG pin",
         "device": "All",
         "temp_range": "full"
       },
@@ -618,8 +611,8 @@
         "min": null,
         "typ": 1.5,
         "max": 5.0,
-        "unit": "µs",
-        "conditions": "From Vin > OVLO to Vout ≤ 0.3 V, Vin increasing from 5.0 V to 8.0 V at 3.0 V/µs, Rload connected on Vout",
+        "unit": "μs",
+        "conditions": "From Vin > OVLO to Vout <= 0.3 V, Vin increasing from 5.0 V to 8.0 V at 3.0 V/μs, Rload connected on Vout",
         "device": "All",
         "temp_range": "full"
       },
@@ -630,8 +623,8 @@
         "min": null,
         "typ": 1.0,
         "max": null,
-        "unit": "µs",
-        "conditions": "From Vin > OVLO to FLAG ≤ 0.4 V, Vin increasing from 5.0 V to 8.0 V at 3.0 V/µs, Rload connected on Vout",
+        "unit": "μs",
+        "conditions": "From Vin > OVLO to FLAG <= 0.4 V, Vin increasing from 5.0 V to 8.0 V at 3.0 V/μs, Rload connected on Vout",
         "device": "All",
         "temp_range": "full"
       },
@@ -642,8 +635,8 @@
         "min": null,
         "typ": 1.0,
         "max": 5.0,
-        "unit": "µs",
-        "conditions": "From EN ≥ 1.2 V to Vout < 0.3 V, Rload = 5.0 Ω",
+        "unit": "μs",
+        "conditions": "From EN >= 1.2 V to Vout < 0.3 V, Rload = 5.0 Ω",
         "device": "All",
         "temp_range": "full"
       }
@@ -653,7 +646,7 @@
         "pin_number": "1, 7",
         "pin_name": "IN",
         "type": "INPUT",
-        "description": "Input Voltage Pins. These pins are connected to the Wall Adapter (AC-DC, Vbus ..). A 1 µF low ESR ceramic capacitor, or larger, must be connected between these pins and GND, as close as possible to the DUT. The two IN pins must be connected together to power supply. (See PCB recommendation for the pin7)."
+        "description": "Input Voltage Pins. These pins are connected to the Wall Adapter (AC-DC, Vbus ..). A 1 μF low ESR ceramic capacitor, or larger, must be connected between these pins and GND, as close as possible to the DUT. The two IN pins must be connected together to power supply. (See PCB recommendation for the pin7)."
       },
       {
         "pin_number": "2",
@@ -678,186 +671,304 @@
         "pin_name": "EN",
         "type": "INPUT",
         "description": "Enable Pin. The device enters in shutdown mode when this pin is tied to a high level. In this case the output is disconnected from the input. To allow normal functionality, the EN pin shall be connected to GND to a pull down or to a I/O pin. This pin does not have an impact on the fault detection."
+      },
+      {
+        "pin_number": "PAD1",
+        "pin_name": "IN",
+        "type": "INPUT",
+        "description": "Exposed pad, internally connected to Pin 1. Must be used to increase heat transfer and must be connected to Pin 1."
       }
     ]
   },
+  "pin_extraction": {
+    "logical_pins": [
+      {
+        "name": "IN",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Positive overvoltage protection input and device power supply",
+        "packages": {
+          "DFN6": [
+            1,
+            "EP"
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "GND",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Ground connection",
+        "packages": {
+          "DFN6": [
+            2
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "FLAG",
+        "direction": "OUTPUT",
+        "signal_type": "DIGITAL",
+        "description": "Fault alert output, active low (open-drain)",
+        "packages": {
+          "DFN6": [
+            3
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "OUT",
+        "direction": "POWER_OUT",
+        "signal_type": "POWER",
+        "description": "Protected output voltage to the system",
+        "packages": {
+          "DFN6": [
+            4,
+            5
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "EN",
+        "direction": "INPUT",
+        "signal_type": "DIGITAL",
+        "description": "Enable input, active low. Device is enabled when EN is pulled low.",
+        "packages": {
+          "DFN6": [
+            6
+          ]
+        },
+        "unused_treatment": null
+      }
+    ]
+  },
+  "pin_index": {
+    "packages": {
+      "DFN6": {
+        "1": {
+          "name": "IN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Positive overvoltage protection input and device power supply",
+          "unused_treatment": null
+        },
+        "EP": {
+          "name": "IN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Positive overvoltage protection input and device power supply",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground connection",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "FLAG",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "Fault alert output, active low (open-drain)",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "OUT",
+          "direction": "POWER_OUT",
+          "signal_type": "POWER",
+          "description": "Protected output voltage to the system",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "OUT",
+          "direction": "POWER_OUT",
+          "signal_type": "POWER",
+          "description": "Protected output voltage to the system",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "EN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Enable input, active low. Device is enabled when EN is pulled low.",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "pin_validation": [],
   "validation": [
     {
       "param": "Operating Ambient Temperature Range",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Storage Temperature Range",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Moisture Sensitivity",
-      "rule": "unit_valid",
-      "passed": false,
-      "message": "Suspicious unit: Level"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Input Voltage Range",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Undervoltage Lockout Threshold",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Undervoltage Lockout Threshold",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Undervoltage Lockout Hysteresis",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Overvoltage Lockout Threshold",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Overvoltage Lockout Threshold",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Overvoltage Lockout Threshold",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Overvoltage Lockout Threshold",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Overvoltage Lockout Threshold",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Overvoltage Lockout Hysteresis",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Overvoltage Lockout Hysteresis",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Overvoltage Lockout Hysteresis",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Vin versus Vout Resistance",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Supply Quiescent Current",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Supply Quiescent Current",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "FLAG Output Low Voltage",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Startup Delay",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Startup Delay",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Startup Delay",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "FLAG Going Up Delay",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "FLAG Going Up Delay",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "FLAG Going Up Delay",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Output Turn Off Time",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Disable Time",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     }
   ],
   "physics_validation": [],
   "cross_validation": {
     "total_extracted_values": 56,
-    "values_found_in_pdf": 53,
-    "values_not_in_pdf": [
-      -65.0,
-      -40.0,
-      -0.3
-    ],
-    "value_coverage_pct": 94.6,
-    "total_params": 46,
-    "params_verified": 40,
-    "params_suspicious": 6,
+    "values_found_in_pdf": 56,
+    "values_not_in_pdf": [],
+    "value_coverage_pct": 100.0,
+    "total_params": 45,
+    "params_verified": 43,
+    "params_suspicious": 2,
     "suspicious_params": [
       {
         "parameter": "Overvoltage Lockout Threshold",
@@ -876,41 +987,12 @@
           6.85,
           7.05
         ]
-      },
-      {
-        "parameter": "Minimum Voltage (IN to GND)",
-        "device": "",
-        "values": [
-          -0.3
-        ]
-      },
-      {
-        "parameter": "Minimum Voltage (All others to GND)",
-        "device": "",
-        "values": [
-          -0.3
-        ]
-      },
-      {
-        "parameter": "Operating Ambient Temperature Range",
-        "device": "",
-        "values": [
-          -40.0,
-          85.0
-        ]
-      },
-      {
-        "parameter": "Storage Temperature Range",
-        "device": "",
-        "values": [
-          -65.0,
-          150.0
-        ]
       }
     ]
   },
   "timing": {
     "l0_classify_s": 0.03,
-    "l1_extract_s": 81.461
+    "l1a_extract_s": 39.291,
+    "l1b_pin_s": 15.495
   }
 }

@@ -16,8 +16,10 @@
     {
       "page_num": 0,
       "text_length": 3200,
-      "category": "cover",
-      "matched_patterns": [],
+      "category": "pin",
+      "matched_patterns": [
+        "(?i)pin[-\\s]?out"
+      ],
       "text_preview": "    2.5 V to 5.5 V Octal Voltage Output 8-/10-/12-Bit DACs in 16-Lead TSSOP    AD5308/AD5318/AD5328     Rev. F  Information furnished by Analog Devices is believed to be accurate and reliable. However"
     },
     {
@@ -26,7 +28,7 @@
       "category": "electrical",
       "matched_patterns": [
         "(?i)absolute\\s+maximum\\s+ratings?",
-        "(?i)pin\\s+(description|configuration|function|assignment|definition)"
+        "(?i)pin\\s+(description|configuration|function|assignment|definition|connection|diagram)"
       ],
       "text_preview": "AD5308/AD5318/AD5328      Rev. F | Page 2 of 28  TABLE OF CONTENTS  Features .............................................................................................. 1  Applications............."
     },
@@ -74,7 +76,7 @@
       "text_length": 3293,
       "category": "pin",
       "matched_patterns": [
-        "(?i)pin\\s+(description|configuration|function|assignment|definition)"
+        "(?i)pin\\s+(description|configuration|function|assignment|definition|connection|diagram)"
       ],
       "text_preview": "AD5308/AD5318/AD5328      Rev. F | Page 8 of 28  PIN CONFIGURATION AND FUNCTION DESCRIPTIONS   1 2 3 4 5 6 7 8 16 15 14 13 12 11 10 9 SYNC VDD VOUTA VOUTD VOUTC VOUTB LDAC DIN GND VOUTH VOUTE VREFABCD"
     },
@@ -181,7 +183,7 @@
       "text_length": 2488,
       "category": "pin",
       "matched_patterns": [
-        "(?i)pin\\s+(description|configuration|function|assignment|definition)"
+        "(?i)pin\\s+(description|configuration|function|assignment|definition|connection|diagram)"
       ],
       "text_preview": "   AD5308/AD5318/AD5328   Rev. F | Page 23 of 28  Table 10. Overview of AD53xx Serial Devices  Part No.   Resolution   DNL   VREF Pins   Settling Time (μs)   Interface   Package   Pins   SINGLES      "
     },
@@ -249,7 +251,7 @@
         "typ": null,
         "max": null,
         "unit": "V",
-        "conditions": "max is VDD + 0.3 V"
+        "conditions": "Max is VDD + 0.3 V"
       },
       {
         "parameter": "Reference Input Voltage",
@@ -259,7 +261,7 @@
         "typ": null,
         "max": null,
         "unit": "V",
-        "conditions": "max is VDD + 0.3 V"
+        "conditions": "Max is VDD + 0.3 V"
       },
       {
         "parameter": "Output Voltage",
@@ -269,7 +271,7 @@
         "typ": null,
         "max": null,
         "unit": "V",
-        "conditions": "max is VDD + 0.3 V"
+        "conditions": "Max is VDD + 0.3 V"
       },
       {
         "parameter": "Operating Temperature Range",
@@ -322,20 +324,8 @@
         "max": null,
         "unit": "mA",
         "conditions": "VDD = 5 V",
-        "device": "A Version",
-        "temp_range": "25C"
-      },
-      {
-        "parameter": "Short Circuit Current",
-        "raw_name": "Short Circuit Current",
-        "symbol": null,
-        "min": null,
-        "typ": 25.0,
-        "max": null,
-        "unit": "mA",
-        "conditions": "VDD = 5 V",
-        "device": "B Version",
-        "temp_range": "25C"
+        "device": "A, B Version",
+        "temp_range": "full"
       },
       {
         "parameter": "Short Circuit Current",
@@ -346,20 +336,8 @@
         "max": null,
         "unit": "mA",
         "conditions": "VDD = 3 V",
-        "device": "A Version",
-        "temp_range": "25C"
-      },
-      {
-        "parameter": "Short Circuit Current",
-        "raw_name": "Short Circuit Current",
-        "symbol": null,
-        "min": null,
-        "typ": 16.0,
-        "max": null,
-        "unit": "mA",
-        "conditions": "VDD = 3 V",
-        "device": "B Version",
-        "temp_range": "25C"
+        "device": "A, B Version",
+        "temp_range": "full"
       },
       {
         "parameter": "Power-Up Time",
@@ -370,20 +348,8 @@
         "max": null,
         "unit": "µs",
         "conditions": "Coming out of power-down mode, VDD = 5 V",
-        "device": "A Version",
-        "temp_range": "25C"
-      },
-      {
-        "parameter": "Power-Up Time",
-        "raw_name": "Power-Up Time",
-        "symbol": null,
-        "min": null,
-        "typ": 2.5,
-        "max": null,
-        "unit": "µs",
-        "conditions": "Coming out of power-down mode, VDD = 5 V",
-        "device": "B Version",
-        "temp_range": "25C"
+        "device": "A, B Version",
+        "temp_range": "full"
       },
       {
         "parameter": "Power-Up Time",
@@ -394,55 +360,19 @@
         "max": null,
         "unit": "µs",
         "conditions": "Coming out of power-down mode, VDD = 3 V",
-        "device": "A Version",
-        "temp_range": "25C"
-      },
-      {
-        "parameter": "Power-Up Time",
-        "raw_name": "Power-Up Time",
-        "symbol": null,
-        "min": null,
-        "typ": 5.0,
-        "max": null,
-        "unit": "µs",
-        "conditions": "Coming out of power-down mode, VDD = 3 V",
-        "device": "B Version",
-        "temp_range": "25C"
+        "device": "A, B Version",
+        "temp_range": "full"
       },
       {
         "parameter": "Input Current",
         "raw_name": "Input Current",
         "symbol": null,
-        "min": null,
-        "typ": 1.0,
-        "max": null,
-        "unit": "µA",
-        "conditions": null,
-        "device": "A Version",
-        "temp_range": "25C"
-      },
-      {
-        "parameter": "Input Current",
-        "raw_name": "Input Current",
-        "symbol": null,
-        "min": null,
-        "typ": 1.0,
-        "max": null,
-        "unit": "µA",
-        "conditions": null,
-        "device": "B Version",
-        "temp_range": "25C"
-      },
-      {
-        "parameter": "Input Low Voltage",
-        "raw_name": "VIL, Input Low Voltage",
-        "symbol": "VIL",
-        "min": null,
+        "min": -1.0,
         "typ": null,
-        "max": 0.8,
-        "unit": "V",
-        "conditions": "VDD = 5 V ± 10%",
-        "device": "A Version",
+        "max": 1.0,
+        "unit": "µA",
+        "conditions": null,
+        "device": "A, B Version",
         "temp_range": "full"
       },
       {
@@ -454,7 +384,7 @@
         "max": 0.8,
         "unit": "V",
         "conditions": "VDD = 5 V ± 10%",
-        "device": "B Version",
+        "device": "A, B Version",
         "temp_range": "full"
       },
       {
@@ -466,19 +396,7 @@
         "max": 0.8,
         "unit": "V",
         "conditions": "VDD = 3 V ± 10%",
-        "device": "A Version",
-        "temp_range": "full"
-      },
-      {
-        "parameter": "Input Low Voltage",
-        "raw_name": "VIL, Input Low Voltage",
-        "symbol": "VIL",
-        "min": null,
-        "typ": null,
-        "max": 0.8,
-        "unit": "V",
-        "conditions": "VDD = 3 V ± 10%",
-        "device": "B Version",
+        "device": "A, B Version",
         "temp_range": "full"
       },
       {
@@ -490,19 +408,7 @@
         "max": 0.7,
         "unit": "V",
         "conditions": "VDD = 2.5 V",
-        "device": "A Version",
-        "temp_range": "full"
-      },
-      {
-        "parameter": "Input Low Voltage",
-        "raw_name": "VIL, Input Low Voltage",
-        "symbol": "VIL",
-        "min": null,
-        "typ": null,
-        "max": 0.7,
-        "unit": "V",
-        "conditions": "VDD = 2.5 V",
-        "device": "B Version",
+        "device": "A, B Version",
         "temp_range": "full"
       },
       {
@@ -514,19 +420,7 @@
         "max": null,
         "unit": "V",
         "conditions": "VDD = 2.5 V to 5.5 V, TTL and CMOS compatible",
-        "device": "A Version",
-        "temp_range": "full"
-      },
-      {
-        "parameter": "Input High Voltage",
-        "raw_name": "VIH, Input High Voltage",
-        "symbol": "VIH",
-        "min": 1.7,
-        "typ": null,
-        "max": null,
-        "unit": "V",
-        "conditions": "VDD = 2.5 V to 5.5 V, TTL and CMOS compatible",
-        "device": "B Version",
+        "device": "A, B Version",
         "temp_range": "full"
       },
       {
@@ -538,31 +432,7 @@
         "max": null,
         "unit": "pF",
         "conditions": null,
-        "device": "A Version",
-        "temp_range": "25C"
-      },
-      {
-        "parameter": "Pin Capacitance",
-        "raw_name": "Pin Capacitance",
-        "symbol": null,
-        "min": null,
-        "typ": 3.0,
-        "max": null,
-        "unit": "pF",
-        "conditions": null,
-        "device": "B Version",
-        "temp_range": "25C"
-      },
-      {
-        "parameter": "Supply Voltage",
-        "raw_name": "VDD",
-        "symbol": "VDD",
-        "min": 2.5,
-        "typ": null,
-        "max": 5.5,
-        "unit": "V",
-        "conditions": null,
-        "device": "A Version",
+        "device": "A, B Version",
         "temp_range": "full"
       },
       {
@@ -574,7 +444,7 @@
         "max": 5.5,
         "unit": "V",
         "conditions": null,
-        "device": "B Version",
+        "device": "A, B Version",
         "temp_range": "full"
       },
       {
@@ -586,19 +456,7 @@
         "max": 1.8,
         "unit": "mA",
         "conditions": "VDD = 4.5 V to 5.5 V, VIH = VDD and VIL = GND, All DACs in unbuffered mode",
-        "device": "A Version",
-        "temp_range": "full"
-      },
-      {
-        "parameter": "Supply Current (Normal Mode)",
-        "raw_name": "IDD (Normal Mode)",
-        "symbol": "IDD",
-        "min": null,
-        "typ": 1.0,
-        "max": 1.8,
-        "unit": "mA",
-        "conditions": "VDD = 4.5 V to 5.5 V, VIH = VDD and VIL = GND, All DACs in unbuffered mode",
-        "device": "B Version",
+        "device": "A, B Version",
         "temp_range": "full"
       },
       {
@@ -610,19 +468,7 @@
         "max": 1.5,
         "unit": "mA",
         "conditions": "VDD = 2.5 V to 3.6 V, VIH = VDD and VIL = GND, All DACs in unbuffered mode",
-        "device": "A Version",
-        "temp_range": "full"
-      },
-      {
-        "parameter": "Supply Current (Normal Mode)",
-        "raw_name": "IDD (Normal Mode)",
-        "symbol": "IDD",
-        "min": null,
-        "typ": 0.7,
-        "max": 1.5,
-        "unit": "mA",
-        "conditions": "VDD = 2.5 V to 3.6 V, VIH = VDD and VIL = GND, All DACs in unbuffered mode",
-        "device": "B Version",
+        "device": "A, B Version",
         "temp_range": "full"
       },
       {
@@ -634,19 +480,7 @@
         "max": 1.0,
         "unit": "µA",
         "conditions": "VDD = 4.5 V to 5.5 V, VIH = VDD and VIL = GND",
-        "device": "A Version",
-        "temp_range": "full"
-      },
-      {
-        "parameter": "Supply Current (Power-Down Mode)",
-        "raw_name": "IDD (Power-Down Mode)",
-        "symbol": "IDD",
-        "min": null,
-        "typ": 0.4,
-        "max": 1.0,
-        "unit": "µA",
-        "conditions": "VDD = 4.5 V to 5.5 V, VIH = VDD and VIL = GND",
-        "device": "B Version",
+        "device": "A, B Version",
         "temp_range": "full"
       },
       {
@@ -658,56 +492,44 @@
         "max": 1.0,
         "unit": "µA",
         "conditions": "VDD = 2.5 V to 3.6 V, VIH = VDD and VIL = GND",
-        "device": "A Version",
-        "temp_range": "full"
-      },
-      {
-        "parameter": "Supply Current (Power-Down Mode)",
-        "raw_name": "IDD (Power-Down Mode)",
-        "symbol": "IDD",
-        "min": null,
-        "typ": 0.12,
-        "max": 1.0,
-        "unit": "µA",
-        "conditions": "VDD = 2.5 V to 3.6 V, VIH = VDD and VIL = GND",
-        "device": "B Version",
+        "device": "A, B Version",
         "temp_range": "full"
       },
       {
         "parameter": "Output Voltage Settling Time",
-        "raw_name": "AD5308",
+        "raw_name": "Output Voltage Settling Time",
         "symbol": null,
         "min": null,
-        "typ": 6,
-        "max": 8,
+        "typ": 6.0,
+        "max": 8.0,
         "unit": "µs",
         "conditions": "VREF = VDD = 5 V, 1/4 scale to 3/4 scale change (0x40 to 0xC0)",
         "device": "AD5308",
-        "temp_range": "25C"
+        "temp_range": "full"
       },
       {
         "parameter": "Output Voltage Settling Time",
-        "raw_name": "AD5318",
+        "raw_name": "Output Voltage Settling Time",
         "symbol": null,
         "min": null,
-        "typ": 7,
-        "max": 9,
+        "typ": 7.0,
+        "max": 9.0,
         "unit": "µs",
-        "conditions": "VREF = VDD = 5 V, 1/4 scale to 3/4 scale change (0x100 To 0x300)",
+        "conditions": "VREF = VDD = 5 V, 1/4 scale to 3/4 scale change (0x100 to 0x300)",
         "device": "AD5318",
-        "temp_range": "25C"
+        "temp_range": "full"
       },
       {
         "parameter": "Output Voltage Settling Time",
-        "raw_name": "AD5328",
+        "raw_name": "Output Voltage Settling Time",
         "symbol": null,
         "min": null,
-        "typ": 8,
-        "max": 10,
+        "typ": 8.0,
+        "max": 10.0,
         "unit": "µs",
         "conditions": "VREF = VDD = 5 V, 1/4 scale to 3/4 scale change (0x400 to 0xC00)",
         "device": "AD5328",
-        "temp_range": "25C"
+        "temp_range": "full"
       },
       {
         "parameter": "Slew Rate",
@@ -719,19 +541,19 @@
         "unit": "V/µs",
         "conditions": null,
         "device": "A, B Version",
-        "temp_range": "25C"
+        "temp_range": "full"
       },
       {
         "parameter": "Major-Code Change Glitch Energy",
         "raw_name": "Major-Code Change Glitch Energy",
         "symbol": null,
         "min": null,
-        "typ": 12,
+        "typ": 12.0,
         "max": null,
         "unit": "nV-sec",
         "conditions": "1 LSB change around major carry",
         "device": "A, B Version",
-        "temp_range": "25C"
+        "temp_range": "full"
       },
       {
         "parameter": "Digital Feedthrough",
@@ -743,7 +565,7 @@
         "unit": "nV-sec",
         "conditions": null,
         "device": "A, B Version",
-        "temp_range": "25C"
+        "temp_range": "full"
       },
       {
         "parameter": "Digital Crosstalk",
@@ -755,55 +577,55 @@
         "unit": "nV-sec",
         "conditions": null,
         "device": "A, B Version",
-        "temp_range": "25C"
+        "temp_range": "full"
       },
       {
         "parameter": "Analog Crosstalk",
         "raw_name": "Analog Crosstalk",
         "symbol": null,
         "min": null,
-        "typ": 1,
+        "typ": 1.0,
         "max": null,
         "unit": "nV-sec",
         "conditions": null,
         "device": "A, B Version",
-        "temp_range": "25C"
+        "temp_range": "full"
       },
       {
         "parameter": "DAC-to-DAC Crosstalk",
         "raw_name": "DAC-to-DAC Crosstalk",
         "symbol": null,
         "min": null,
-        "typ": 3,
+        "typ": 3.0,
         "max": null,
         "unit": "nV-sec",
         "conditions": null,
         "device": "A, B Version",
-        "temp_range": "25C"
+        "temp_range": "full"
       },
       {
         "parameter": "Multiplying Bandwidth",
         "raw_name": "Multiplying Bandwidth",
         "symbol": null,
         "min": null,
-        "typ": 200,
+        "typ": 200.0,
         "max": null,
         "unit": "kHz",
         "conditions": "VREF = 2 V ± 0.1 V p-p, unbuffered mode",
         "device": "A, B Version",
-        "temp_range": "25C"
+        "temp_range": "full"
       },
       {
         "parameter": "Total Harmonic Distortion",
         "raw_name": "Total Harmonic Distortion",
-        "symbol": null,
+        "symbol": "THD",
         "min": null,
-        "typ": -70,
+        "typ": -70.0,
         "max": null,
         "unit": "dB",
         "conditions": "VREF = 2.5 V ± 0.1 V p-p, frequency = 10 kHz",
         "device": "A, B Version",
-        "temp_range": "25C"
+        "temp_range": "full"
       }
     ],
     "pin_definitions": [
@@ -817,13 +639,13 @@
         "pin_number": "2",
         "pin_name": "SYNC",
         "type": "Input",
-        "description": "Active Low Control Input. This is the frame synchronization signal for the input data."
+        "description": "Active Low Control Input. Frame synchronization signal for the input data."
       },
       {
         "pin_number": "3",
         "pin_name": "VDD",
         "type": "Power",
-        "description": "Power Supply Input. These parts can be operated from 2.5 V to 5.5 V."
+        "description": "Power Supply Input. 2.5 V to 5.5 V."
       },
       {
         "pin_number": "4",
@@ -895,112 +717,403 @@
         "pin_number": "15",
         "pin_name": "DIN",
         "type": "Input",
-        "description": "Serial Data Input. This device has a 16-bit shift register."
+        "description": "Serial Data Input. 16-bit shift register."
       },
       {
         "pin_number": "16",
         "pin_name": "SCLK",
         "type": "Input",
-        "description": "Serial Clock Input. Data is clocked into the input shift register on the falling edge of the serial clock input."
+        "description": "Serial Clock Input. Data is clocked in on the falling edge."
       }
     ]
   },
+  "pin_extraction": {
+    "logical_pins": [
+      {
+        "name": "LDAC",
+        "direction": "INPUT",
+        "signal_type": "DIGITAL",
+        "description": "Active low control input. Transfers the contents of the input registers to their respective DAC registers. Can be tied permanently low.",
+        "packages": {
+          "16-lead TSSOP": [
+            1
+          ]
+        },
+        "unused_treatment": "GND"
+      },
+      {
+        "name": "SYNC",
+        "direction": "INPUT",
+        "signal_type": "DIGITAL",
+        "description": "Active Low Control Input. Frame synchronization signal for the input data.",
+        "packages": {
+          "16-lead TSSOP": [
+            2
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "VDD",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Power Supply Input. 2.5 V to 5.5 V.",
+        "packages": {
+          "16-lead TSSOP": [
+            3
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "VOUTA",
+        "direction": "OUTPUT",
+        "signal_type": "ANALOG",
+        "description": "Buffered Analog Output Voltage from DAC A.",
+        "packages": {
+          "16-lead TSSOP": [
+            4
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "VOUTB",
+        "direction": "OUTPUT",
+        "signal_type": "ANALOG",
+        "description": "Buffered Analog Output Voltage from DAC B.",
+        "packages": {
+          "16-lead TSSOP": [
+            5
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "VOUTC",
+        "direction": "OUTPUT",
+        "signal_type": "ANALOG",
+        "description": "Buffered Analog Output Voltage from DAC C.",
+        "packages": {
+          "16-lead TSSOP": [
+            6
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "VOUTD",
+        "direction": "OUTPUT",
+        "signal_type": "ANALOG",
+        "description": "Buffered Analog Output Voltage from DAC D.",
+        "packages": {
+          "16-lead TSSOP": [
+            7
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "VREFABCD",
+        "direction": "INPUT",
+        "signal_type": "ANALOG",
+        "description": "Reference Input Pin for DACs A, B, C, and D.",
+        "packages": {
+          "16-lead TSSOP": [
+            8
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "VREFEFGH",
+        "direction": "INPUT",
+        "signal_type": "ANALOG",
+        "description": "Reference Input Pin for DACs E, F, G, and H.",
+        "packages": {
+          "16-lead TSSOP": [
+            9
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "VOUTE",
+        "direction": "OUTPUT",
+        "signal_type": "ANALOG",
+        "description": "Buffered Analog Output Voltage from DAC E.",
+        "packages": {
+          "16-lead TSSOP": [
+            10
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "VOUTF",
+        "direction": "OUTPUT",
+        "signal_type": "ANALOG",
+        "description": "Buffered Analog Output Voltage from DAC F.",
+        "packages": {
+          "16-lead TSSOP": [
+            11
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "VOUTG",
+        "direction": "OUTPUT",
+        "signal_type": "ANALOG",
+        "description": "Buffered Analog Output Voltage from DAC G.",
+        "packages": {
+          "16-lead TSSOP": [
+            12
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "VOUTH",
+        "direction": "OUTPUT",
+        "signal_type": "ANALOG",
+        "description": "Buffered Analog Output Voltage from DAC H.",
+        "packages": {
+          "16-lead TSSOP": [
+            13
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "GND",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Ground Reference Point for All Circuitry on the Part.",
+        "packages": {
+          "16-lead TSSOP": [
+            14
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "DIN",
+        "direction": "INPUT",
+        "signal_type": "DIGITAL",
+        "description": "Serial Data Input. 16-bit shift register.",
+        "packages": {
+          "16-lead TSSOP": [
+            15
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "SCLK",
+        "direction": "INPUT",
+        "signal_type": "DIGITAL",
+        "description": "Serial Clock Input. Data is clocked into the input shift register on the falling edge.",
+        "packages": {
+          "16-lead TSSOP": [
+            16
+          ]
+        },
+        "unused_treatment": null
+      }
+    ]
+  },
+  "pin_index": {
+    "packages": {
+      "16-lead TSSOP": {
+        "1": {
+          "name": "LDAC",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Active low control input. Transfers the contents of the input registers to their respective DAC registers. Can be tied permanently low.",
+          "unused_treatment": "GND"
+        },
+        "2": {
+          "name": "SYNC",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Active Low Control Input. Frame synchronization signal for the input data.",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "VDD",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power Supply Input. 2.5 V to 5.5 V.",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "VOUTA",
+          "direction": "OUTPUT",
+          "signal_type": "ANALOG",
+          "description": "Buffered Analog Output Voltage from DAC A.",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "VOUTB",
+          "direction": "OUTPUT",
+          "signal_type": "ANALOG",
+          "description": "Buffered Analog Output Voltage from DAC B.",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "VOUTC",
+          "direction": "OUTPUT",
+          "signal_type": "ANALOG",
+          "description": "Buffered Analog Output Voltage from DAC C.",
+          "unused_treatment": null
+        },
+        "7": {
+          "name": "VOUTD",
+          "direction": "OUTPUT",
+          "signal_type": "ANALOG",
+          "description": "Buffered Analog Output Voltage from DAC D.",
+          "unused_treatment": null
+        },
+        "8": {
+          "name": "VREFABCD",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Reference Input Pin for DACs A, B, C, and D.",
+          "unused_treatment": null
+        },
+        "9": {
+          "name": "VREFEFGH",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Reference Input Pin for DACs E, F, G, and H.",
+          "unused_treatment": null
+        },
+        "10": {
+          "name": "VOUTE",
+          "direction": "OUTPUT",
+          "signal_type": "ANALOG",
+          "description": "Buffered Analog Output Voltage from DAC E.",
+          "unused_treatment": null
+        },
+        "11": {
+          "name": "VOUTF",
+          "direction": "OUTPUT",
+          "signal_type": "ANALOG",
+          "description": "Buffered Analog Output Voltage from DAC F.",
+          "unused_treatment": null
+        },
+        "12": {
+          "name": "VOUTG",
+          "direction": "OUTPUT",
+          "signal_type": "ANALOG",
+          "description": "Buffered Analog Output Voltage from DAC G.",
+          "unused_treatment": null
+        },
+        "13": {
+          "name": "VOUTH",
+          "direction": "OUTPUT",
+          "signal_type": "ANALOG",
+          "description": "Buffered Analog Output Voltage from DAC H.",
+          "unused_treatment": null
+        },
+        "14": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground Reference Point for All Circuitry on the Part.",
+          "unused_treatment": null
+        },
+        "15": {
+          "name": "DIN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Serial Data Input. 16-bit shift register.",
+          "unused_treatment": null
+        },
+        "16": {
+          "name": "SCLK",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Serial Clock Input. Data is clocked into the input shift register on the falling edge.",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "pin_validation": [],
   "validation": [
     {
       "param": "Supply Voltage",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Operating Temperature Range",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Storage Temperature Range",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Input Current",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Supply Voltage",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Supply Voltage",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Supply Current (Normal Mode)",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Supply Current (Normal Mode)",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Supply Current (Normal Mode)",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Supply Current (Normal Mode)",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Supply Current (Power-Down Mode)",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Supply Current (Power-Down Mode)",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Supply Current (Power-Down Mode)",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Supply Current (Power-Down Mode)",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Output Voltage Settling Time",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Output Voltage Settling Time",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Output Voltage Settling Time",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Slew Rate",
@@ -1041,75 +1154,18 @@
   ],
   "physics_validation": [],
   "cross_validation": {
-    "total_extracted_values": 29,
-    "values_found_in_pdf": 25,
-    "values_not_in_pdf": [
-      -70.0,
-      -65.0,
-      -40.0,
-      -0.3
-    ],
-    "value_coverage_pct": 86.2,
-    "total_params": 49,
-    "params_verified": 42,
-    "params_suspicious": 7,
-    "suspicious_params": [
-      {
-        "parameter": "Total Harmonic Distortion",
-        "device": "A, B Version",
-        "values": [
-          -70.0
-        ]
-      },
-      {
-        "parameter": "Supply Voltage",
-        "device": "",
-        "values": [
-          -0.3,
-          7.0
-        ]
-      },
-      {
-        "parameter": "Digital Input Voltage",
-        "device": "",
-        "values": [
-          -0.3
-        ]
-      },
-      {
-        "parameter": "Reference Input Voltage",
-        "device": "",
-        "values": [
-          -0.3
-        ]
-      },
-      {
-        "parameter": "Output Voltage",
-        "device": "",
-        "values": [
-          -0.3
-        ]
-      },
-      {
-        "parameter": "Operating Temperature Range",
-        "device": "",
-        "values": [
-          -40.0,
-          125.0
-        ]
-      },
-      {
-        "parameter": "Storage Temperature Range",
-        "device": "",
-        "values": [
-          -65.0,
-          150.0
-        ]
-      }
-    ]
+    "total_extracted_values": 30,
+    "values_found_in_pdf": 30,
+    "values_not_in_pdf": [],
+    "value_coverage_pct": 100.0,
+    "total_params": 34,
+    "params_verified": 34,
+    "params_suspicious": 0,
+    "suspicious_params": []
   },
   "timing": {
-    "l0_classify_s": 0.188,
-    "l1_extract_s": 58.848
+    "l0_classify_s": 0.096,
+    "l1a_extract_s": 54.235,
+    "l1b_pin_s": 20.906
   }
 }

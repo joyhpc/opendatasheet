@@ -15,7 +15,7 @@
       "text_length": 1710,
       "category": "pin",
       "matched_patterns": [
-        "(?i)pin\\s+(description|configuration|function|assignment|definition)",
+        "(?i)pin\\s+(description|configuration|function|assignment|definition|connection|diagram)",
         "(?i)pin\\s+name",
         "(?i)ordering\\s+information"
       ],
@@ -192,7 +192,7 @@
         "conditions": null
       },
       {
-        "parameter": "Lead Temperature, 1 mm from Case for 10 Seconds",
+        "parameter": "Lead Temperature",
         "raw_name": "Lead Temperature, 1 mm from Case for 10 Seconds",
         "symbol": "TL",
         "min": null,
@@ -212,28 +212,28 @@
         "conditions": null
       },
       {
-        "parameter": "Thermal Resistance",
-        "raw_name": "Thermal Resistance (Note 1)",
+        "parameter": "Thermal Resistance (SOIC)",
+        "raw_name": "Thermal Resistance (Note 1) SOIC",
         "symbol": "θJA",
         "min": null,
         "typ": null,
         "max": 125,
         "unit": "°C/W",
-        "conditions": "SOIC"
+        "conditions": null
       },
       {
-        "parameter": "Thermal Resistance",
-        "raw_name": "Thermal Resistance (Note 1)",
+        "parameter": "Thermal Resistance (TSSOP)",
+        "raw_name": "Thermal Resistance (Note 1) TSSOP",
         "symbol": "θJA",
         "min": null,
         "typ": null,
         "max": 170,
         "unit": "°C/W",
-        "conditions": "TSSOP"
+        "conditions": null
       },
       {
         "parameter": "ESD Withstand Voltage (HBM)",
-        "raw_name": "ESD Withstand Voltage - Human Body Model",
+        "raw_name": "ESD Withstand Voltage Human Body Model (Note 2)",
         "symbol": "VESD",
         "min": 4000,
         "typ": null,
@@ -243,7 +243,7 @@
       },
       {
         "parameter": "ESD Withstand Voltage (MM)",
-        "raw_name": "ESD Withstand Voltage - Machine Model",
+        "raw_name": "ESD Withstand Voltage Machine Model (Note 3)",
         "symbol": "VESD",
         "min": 400,
         "typ": null,
@@ -253,7 +253,7 @@
       },
       {
         "parameter": "ESD Withstand Voltage (CDM)",
-        "raw_name": "ESD Withstand Voltage - Charged Device Model",
+        "raw_name": "ESD Withstand Voltage Charged Device Model",
         "symbol": "VESD",
         "min": 2000,
         "typ": null,
@@ -269,7 +269,7 @@
         "typ": null,
         "max": 100,
         "unit": "mA",
-        "conditions": "Above VCC and Below GND at 85°C"
+        "conditions": "Above VCC and Below GND at 85°C (Note 4)"
       }
     ],
     "electrical_characteristics": [
@@ -282,7 +282,7 @@
         "max": -1.2,
         "unit": "V",
         "conditions": "IIN = -18mA, VCC = 4.5V",
-        "device": "FST3125",
+        "device": null,
         "temp_range": "full"
       },
       {
@@ -294,7 +294,7 @@
         "max": null,
         "unit": "V",
         "conditions": "VCC = 4.0 to 5.5V",
-        "device": "FST3125",
+        "device": null,
         "temp_range": "full"
       },
       {
@@ -306,7 +306,7 @@
         "max": 0.8,
         "unit": "V",
         "conditions": "VCC = 4.0 to 5.5V",
-        "device": "FST3125",
+        "device": null,
         "temp_range": "full"
       },
       {
@@ -316,9 +316,9 @@
         "min": null,
         "typ": null,
         "max": 1.0,
-        "unit": "μA",
-        "conditions": "0 <= VIN <= 5.5V, VCC = 5.5V",
-        "device": "FST3125",
+        "unit": "µA",
+        "conditions": "0 <= VIN <= 5.5 V, VCC = 5.5V",
+        "device": null,
         "temp_range": "full"
       },
       {
@@ -328,57 +328,105 @@
         "min": null,
         "typ": null,
         "max": 1.0,
-        "unit": "μA",
+        "unit": "µA",
         "conditions": "0 <= A, B <= VCC, VCC = 5.5V",
-        "device": "FST3125",
+        "device": null,
         "temp_range": "full"
       },
       {
         "parameter": "Switch On Resistance",
-        "raw_name": "Switch On Resistance",
+        "raw_name": "Switch On Resistance (Note 6)",
         "symbol": "RON",
         "min": null,
         "typ": 4,
+        "max": null,
+        "unit": "Ω",
+        "conditions": "VIN = 0 V, IIN = 64 mA, VCC = 4.5 V",
+        "device": null,
+        "temp_range": "25C"
+      },
+      {
+        "parameter": "Switch On Resistance",
+        "raw_name": "Switch On Resistance (Note 6)",
+        "symbol": "RON",
+        "min": null,
+        "typ": null,
         "max": 7,
         "unit": "Ω",
-        "conditions": "VIN = 0V, IIN = 64mA, VCC = 4.5V",
-        "device": "FST3125",
+        "conditions": "VIN = 0 V, IIN = 64 mA, VCC = 4.5 V",
+        "device": null,
         "temp_range": "full"
       },
       {
         "parameter": "Switch On Resistance",
-        "raw_name": "Switch On Resistance",
+        "raw_name": "Switch On Resistance (Note 6)",
         "symbol": "RON",
         "min": null,
         "typ": 4,
+        "max": null,
+        "unit": "Ω",
+        "conditions": "VIN = 0 V, IIN = 30 mA, VCC = 4.5 V",
+        "device": null,
+        "temp_range": "25C"
+      },
+      {
+        "parameter": "Switch On Resistance",
+        "raw_name": "Switch On Resistance (Note 6)",
+        "symbol": "RON",
+        "min": null,
+        "typ": null,
         "max": 7,
         "unit": "Ω",
-        "conditions": "VIN = 0V, IIN = 30mA, VCC = 4.5V",
-        "device": "FST3125",
+        "conditions": "VIN = 0 V, IIN = 30 mA, VCC = 4.5 V",
+        "device": null,
         "temp_range": "full"
       },
       {
         "parameter": "Switch On Resistance",
-        "raw_name": "Switch On Resistance",
+        "raw_name": "Switch On Resistance (Note 6)",
         "symbol": "RON",
         "min": null,
         "typ": 8,
+        "max": null,
+        "unit": "Ω",
+        "conditions": "VIN = 2.4 V, IIN = 15 mA, VCC = 4.5 V",
+        "device": null,
+        "temp_range": "25C"
+      },
+      {
+        "parameter": "Switch On Resistance",
+        "raw_name": "Switch On Resistance (Note 6)",
+        "symbol": "RON",
+        "min": null,
+        "typ": null,
         "max": 15,
         "unit": "Ω",
-        "conditions": "VIN = 2.4V, IIN = 15mA, VCC = 4.5V",
-        "device": "FST3125",
+        "conditions": "VIN = 2.4 V, IIN = 15 mA, VCC = 4.5 V",
+        "device": null,
         "temp_range": "full"
       },
       {
         "parameter": "Switch On Resistance",
-        "raw_name": "Switch On Resistance",
+        "raw_name": "Switch On Resistance (Note 6)",
         "symbol": "RON",
         "min": null,
         "typ": 11,
+        "max": null,
+        "unit": "Ω",
+        "conditions": "VIN = 2.4 V, IIN = 15 mA, VCC = 4.0 V",
+        "device": null,
+        "temp_range": "25C"
+      },
+      {
+        "parameter": "Switch On Resistance",
+        "raw_name": "Switch On Resistance (Note 6)",
+        "symbol": "RON",
+        "min": null,
+        "typ": null,
         "max": 20,
         "unit": "Ω",
-        "conditions": "VIN = 2.4V, IIN = 15mA, VCC = 4.0V",
-        "device": "FST3125",
+        "conditions": "VIN = 2.4 V, IIN = 15 mA, VCC = 4.0 V",
+        "device": null,
         "temp_range": "full"
       },
       {
@@ -388,9 +436,9 @@
         "min": null,
         "typ": null,
         "max": 3,
-        "unit": "μA",
+        "unit": "µA",
         "conditions": "VIN = VCC or GND, IOUT = 0, VCC = 5.5V",
-        "device": "FST3125",
+        "device": null,
         "temp_range": "full"
       },
       {
@@ -401,32 +449,32 @@
         "typ": null,
         "max": 2.5,
         "unit": "mA",
-        "conditions": "One input at 3.4V, Other inputs at VCC or GND, VCC = 5.5V",
-        "device": "FST3125",
+        "conditions": "One input at 3.4 V, Other inputs at VCC or GND, VCC = 5.5V",
+        "device": null,
         "temp_range": "full"
       },
       {
         "parameter": "Prop Delay Bus to Bus",
-        "raw_name": "Prop Delay Bus to Bus",
+        "raw_name": "Prop Delay Bus to Bus (Note 7)",
         "symbol": "tPHL, tPLH",
         "min": null,
         "typ": null,
         "max": 0.25,
         "unit": "ns",
-        "conditions": "VI = OPEN, VCC = 4.5 to 5.5V",
-        "device": "FST3125",
+        "conditions": "VI = OPEN, VCC = 4.5 to 5.5 V",
+        "device": null,
         "temp_range": "full"
       },
       {
         "parameter": "Prop Delay Bus to Bus",
-        "raw_name": "Prop Delay Bus to Bus",
+        "raw_name": "Prop Delay Bus to Bus (Note 7)",
         "symbol": "tPHL, tPLH",
         "min": null,
         "typ": null,
         "max": 0.25,
         "unit": "ns",
-        "conditions": "VI = OPEN, VCC = 4.0V",
-        "device": "FST3125",
+        "conditions": "VI = OPEN, VCC = 4.0 V",
+        "device": null,
         "temp_range": "full"
       },
       {
@@ -437,8 +485,8 @@
         "typ": null,
         "max": 5.0,
         "unit": "ns",
-        "conditions": "VI = 7V for tPZL, VI = OPEN for tPZH, VCC = 4.5 to 5.5V",
-        "device": "FST3125",
+        "conditions": "VI = 7 V for tPZL, VI = OPEN for tPZH, VCC = 4.5 to 5.5 V",
+        "device": null,
         "temp_range": "full"
       },
       {
@@ -449,8 +497,8 @@
         "typ": null,
         "max": 5.5,
         "unit": "ns",
-        "conditions": "VI = 7V for tPZL, VI = OPEN for tPZH, VCC = 4.0V",
-        "device": "FST3125",
+        "conditions": "VI = 7 V for tPZL, VI = OPEN for tPZH, VCC = 4.0 V",
+        "device": null,
         "temp_range": "full"
       },
       {
@@ -461,8 +509,8 @@
         "typ": null,
         "max": 5.3,
         "unit": "ns",
-        "conditions": "VI = 7V for tPLZ, VI = OPEN for tPHZ, VCC = 4.5 to 5.5V",
-        "device": "FST3125",
+        "conditions": "VI = 7 V for tPLZ, VI = OPEN for tPHZ, VCC = 4.5 to 5.5 V",
+        "device": null,
         "temp_range": "full"
       },
       {
@@ -473,8 +521,8 @@
         "typ": null,
         "max": 5.6,
         "unit": "ns",
-        "conditions": "VI = 7V for tPLZ, VI = OPEN for tPHZ, VCC = 4.0V",
-        "device": "FST3125",
+        "conditions": "VI = 7 V for tPLZ, VI = OPEN for tPHZ, VCC = 4.0 V",
+        "device": null,
         "temp_range": "full"
       },
       {
@@ -485,8 +533,8 @@
         "typ": 3,
         "max": null,
         "unit": "pF",
-        "conditions": "VCC = 5.0V",
-        "device": "FST3125",
+        "conditions": "VCC = 5.0 V",
+        "device": null,
         "temp_range": "25C"
       },
       {
@@ -497,15 +545,15 @@
         "typ": 5,
         "max": null,
         "unit": "pF",
-        "conditions": "VCC, /OE = 5.0V",
-        "device": "FST3125",
+        "conditions": "VCC, OE_bar = 5.0 V",
+        "device": null,
         "temp_range": "25C"
       }
     ],
     "pin_definitions": [
       {
         "pin_number": "1",
-        "pin_name": "OE1",
+        "pin_name": "OE1_bar",
         "type": "Input",
         "description": "Bus Switch Enable 1"
       },
@@ -523,7 +571,7 @@
       },
       {
         "pin_number": "4",
-        "pin_name": "OE2",
+        "pin_name": "OE2_bar",
         "type": "Input",
         "description": "Bus Switch Enable 2"
       },
@@ -559,7 +607,7 @@
       },
       {
         "pin_number": "10",
-        "pin_name": "OE3",
+        "pin_name": "OE3_bar",
         "type": "Input",
         "description": "Bus Switch Enable 3"
       },
@@ -577,7 +625,7 @@
       },
       {
         "pin_number": "13",
-        "pin_name": "OE4",
+        "pin_name": "OE4_bar",
         "type": "Input",
         "description": "Bus Switch Enable 4"
       },
@@ -585,73 +633,475 @@
         "pin_number": "14",
         "pin_name": "VCC",
         "type": "Power",
-        "description": "Supply Voltage"
+        "description": "DC Supply Voltage"
       }
     ]
   },
+  "pin_extraction": {
+    "logical_pins": [
+      {
+        "name": "OE1",
+        "direction": "INPUT",
+        "signal_type": "DIGITAL",
+        "description": "Bus Switch Enable 1",
+        "packages": {
+          "SOIC-14": [
+            1
+          ],
+          "TSSOP-14": [
+            1
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "1A",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "DIGITAL",
+        "description": "Bus A channel 1",
+        "packages": {
+          "SOIC-14": [
+            2
+          ],
+          "TSSOP-14": [
+            2
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "1B",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "DIGITAL",
+        "description": "Bus B channel 1",
+        "packages": {
+          "SOIC-14": [
+            3
+          ],
+          "TSSOP-14": [
+            3
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "OE2",
+        "direction": "INPUT",
+        "signal_type": "DIGITAL",
+        "description": "Bus Switch Enable 2",
+        "packages": {
+          "SOIC-14": [
+            4
+          ],
+          "TSSOP-14": [
+            4
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "2A",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "DIGITAL",
+        "description": "Bus A channel 2",
+        "packages": {
+          "SOIC-14": [
+            5
+          ],
+          "TSSOP-14": [
+            5
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "2B",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "DIGITAL",
+        "description": "Bus B channel 2",
+        "packages": {
+          "SOIC-14": [
+            6
+          ],
+          "TSSOP-14": [
+            6
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "GND",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Ground",
+        "packages": {
+          "SOIC-14": [
+            7
+          ],
+          "TSSOP-14": [
+            7
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "3B",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "DIGITAL",
+        "description": "Bus B channel 3",
+        "packages": {
+          "SOIC-14": [
+            8
+          ],
+          "TSSOP-14": [
+            8
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "3A",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "DIGITAL",
+        "description": "Bus A channel 3",
+        "packages": {
+          "SOIC-14": [
+            9
+          ],
+          "TSSOP-14": [
+            9
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "OE3",
+        "direction": "INPUT",
+        "signal_type": "DIGITAL",
+        "description": "Bus Switch Enable 3",
+        "packages": {
+          "SOIC-14": [
+            10
+          ],
+          "TSSOP-14": [
+            10
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "4B",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "DIGITAL",
+        "description": "Bus B channel 4",
+        "packages": {
+          "SOIC-14": [
+            11
+          ],
+          "TSSOP-14": [
+            11
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "4A",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "DIGITAL",
+        "description": "Bus A channel 4",
+        "packages": {
+          "SOIC-14": [
+            12
+          ],
+          "TSSOP-14": [
+            12
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "OE4",
+        "direction": "INPUT",
+        "signal_type": "DIGITAL",
+        "description": "Bus Switch Enable 4",
+        "packages": {
+          "SOIC-14": [
+            13
+          ],
+          "TSSOP-14": [
+            13
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "VCC",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Power supply input",
+        "packages": {
+          "SOIC-14": [
+            14
+          ],
+          "TSSOP-14": [
+            14
+          ]
+        },
+        "unused_treatment": null
+      }
+    ]
+  },
+  "pin_index": {
+    "packages": {
+      "SOIC-14": {
+        "1": {
+          "name": "OE1",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Bus Switch Enable 1",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "1A",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "DIGITAL",
+          "description": "Bus A channel 1",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "1B",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "DIGITAL",
+          "description": "Bus B channel 1",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "OE2",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Bus Switch Enable 2",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "2A",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "DIGITAL",
+          "description": "Bus A channel 2",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "2B",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "DIGITAL",
+          "description": "Bus B channel 2",
+          "unused_treatment": null
+        },
+        "7": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground",
+          "unused_treatment": null
+        },
+        "8": {
+          "name": "3B",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "DIGITAL",
+          "description": "Bus B channel 3",
+          "unused_treatment": null
+        },
+        "9": {
+          "name": "3A",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "DIGITAL",
+          "description": "Bus A channel 3",
+          "unused_treatment": null
+        },
+        "10": {
+          "name": "OE3",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Bus Switch Enable 3",
+          "unused_treatment": null
+        },
+        "11": {
+          "name": "4B",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "DIGITAL",
+          "description": "Bus B channel 4",
+          "unused_treatment": null
+        },
+        "12": {
+          "name": "4A",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "DIGITAL",
+          "description": "Bus A channel 4",
+          "unused_treatment": null
+        },
+        "13": {
+          "name": "OE4",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Bus Switch Enable 4",
+          "unused_treatment": null
+        },
+        "14": {
+          "name": "VCC",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power supply input",
+          "unused_treatment": null
+        }
+      },
+      "TSSOP-14": {
+        "1": {
+          "name": "OE1",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Bus Switch Enable 1",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "1A",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "DIGITAL",
+          "description": "Bus A channel 1",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "1B",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "DIGITAL",
+          "description": "Bus B channel 1",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "OE2",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Bus Switch Enable 2",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "2A",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "DIGITAL",
+          "description": "Bus A channel 2",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "2B",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "DIGITAL",
+          "description": "Bus B channel 2",
+          "unused_treatment": null
+        },
+        "7": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground",
+          "unused_treatment": null
+        },
+        "8": {
+          "name": "3B",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "DIGITAL",
+          "description": "Bus B channel 3",
+          "unused_treatment": null
+        },
+        "9": {
+          "name": "3A",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "DIGITAL",
+          "description": "Bus A channel 3",
+          "unused_treatment": null
+        },
+        "10": {
+          "name": "OE3",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Bus Switch Enable 3",
+          "unused_treatment": null
+        },
+        "11": {
+          "name": "4B",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "DIGITAL",
+          "description": "Bus B channel 4",
+          "unused_treatment": null
+        },
+        "12": {
+          "name": "4A",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "DIGITAL",
+          "description": "Bus A channel 4",
+          "unused_treatment": null
+        },
+        "13": {
+          "name": "OE4",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Bus Switch Enable 4",
+          "unused_treatment": null
+        },
+        "14": {
+          "name": "VCC",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power supply input",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "pin_validation": [],
   "validation": [
     {
       "param": "DC Supply Voltage",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "DC Input Voltage",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "DC Output Voltage",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Storage Temperature Range",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Switch On Resistance",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Switch On Resistance",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Switch On Resistance",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Switch On Resistance",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Output Enable Time",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Output Disable Time",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     }
   ],
-  "physics_validation": [],
+  "physics_validation": [
+    {
+      "param": "Switch On Resistance ()",
+      "rule": "temp_envelope",
+      "passed": true,
+      "message": "OK (mode: ALGEBRAIC)"
+    }
+  ],
   "cross_validation": {
     "total_extracted_values": 30,
     "values_found_in_pdf": 26,
@@ -662,13 +1112,13 @@
       -0.5
     ],
     "value_coverage_pct": 86.7,
-    "total_params": 36,
-    "params_verified": 29,
+    "total_params": 40,
+    "params_verified": 33,
     "params_suspicious": 7,
     "suspicious_params": [
       {
         "parameter": "Clamp Diode Resistance",
-        "device": "FST3125",
+        "device": null,
         "values": [
           -1.2
         ]
@@ -722,7 +1172,8 @@
     ]
   },
   "timing": {
-    "l0_classify_s": 0.032,
-    "l1_extract_s": 160.32
+    "l0_classify_s": 0.066,
+    "l1a_extract_s": 83.741,
+    "l1b_pin_s": 36.605
   }
 }

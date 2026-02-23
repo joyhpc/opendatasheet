@@ -25,7 +25,8 @@
       "text_length": 1340,
       "category": "pin",
       "matched_patterns": [
-        "(?i)pin\\s+(description|configuration|function|assignment|definition)",
+        "(?i)pin\\s+(description|configuration|function|assignment|definition|connection|diagram)",
+        "(?i)pin[-\\s]?out",
         "(?i)ordering\\s+information"
       ],
       "text_preview": "©  Semiconductor Components Industries, LLC, 1996 February, 2021 − Rev. 3 1 Publication Order Number: NC7SV126/D TinyLogic ULP-A Buffer with Three-State Output NC7SV126 The NC7SV126 is a single 3−Stat"
@@ -85,7 +86,8 @@
       "text_length": 1884,
       "category": "pin",
       "matched_patterns": [
-        "(?i)pin\\s+(description|configuration|function|assignment|definition)"
+        "(?i)pin\\s+(description|configuration|function|assignment|definition|connection|diagram)",
+        "(?i)pin[-\\s]?out"
       ],
       "text_preview": "NC7SV126 www.onsemi.com 8 PACKAGE DIMENSIONS NOTES: 1. DIMENSIONING AND TOLERANCING PER ANSI Y14.5M, 1982. 2. CONTROLLING DIMENSION: INCH. 3. 419A−01 OBSOLETE. NEW STANDARD 419A−02. 4. DIMENSIONS A AN"
     },
@@ -208,14 +210,14 @@
         "conditions": null
       },
       {
-        "parameter": "Lead Temperature, 1 mm from Case for 10 Seconds",
+        "parameter": "Lead Temperature",
         "raw_name": "TL",
         "symbol": "TL",
         "min": null,
         "typ": null,
         "max": 260,
         "unit": "°C",
-        "conditions": null
+        "conditions": "1 mm from Case for 10 Seconds"
       },
       {
         "parameter": "Junction Temperature Under Bias",
@@ -232,8 +234,8 @@
         "raw_name": "θJA",
         "symbol": "θJA",
         "min": null,
-        "typ": null,
-        "max": 377,
+        "typ": 377,
+        "max": null,
         "unit": "°C/W",
         "conditions": "SC-88A"
       },
@@ -242,8 +244,8 @@
         "raw_name": "θJA",
         "symbol": "θJA",
         "min": null,
-        "typ": null,
-        "max": 154,
+        "typ": 154,
+        "max": null,
         "unit": "°C/W",
         "conditions": "MicroPak"
       },
@@ -252,8 +254,8 @@
         "raw_name": "PD",
         "symbol": "PD",
         "min": null,
-        "typ": null,
-        "max": 332,
+        "typ": 332,
+        "max": null,
         "unit": "mW",
         "conditions": "SC-88A"
       },
@@ -262,8 +264,8 @@
         "raw_name": "PD",
         "symbol": "PD",
         "min": null,
-        "typ": null,
-        "max": 812,
+        "typ": 812,
+        "max": null,
         "unit": "mW",
         "conditions": "MicroPak"
       },
@@ -315,30 +317,6 @@
         "parameter": "High-Level Input Voltage",
         "raw_name": "VIH",
         "symbol": "VIH",
-        "min": null,
-        "typ": null,
-        "max": null,
-        "unit": "V",
-        "conditions": "VCC = 1.1V to 1.3V, min is 0.65 x VCC",
-        "device": "NC7SV126",
-        "temp_range": "25C"
-      },
-      {
-        "parameter": "High-Level Input Voltage",
-        "raw_name": "VIH",
-        "symbol": "VIH",
-        "min": null,
-        "typ": null,
-        "max": null,
-        "unit": "V",
-        "conditions": "VCC = 1.1V to 1.3V, min is 0.65 x VCC",
-        "device": "NC7SV126",
-        "temp_range": "full"
-      },
-      {
-        "parameter": "High-Level Input Voltage",
-        "raw_name": "VIH",
-        "symbol": "VIH",
         "min": 1.6,
         "typ": null,
         "max": null,
@@ -401,30 +379,6 @@
         "symbol": "VIL",
         "min": null,
         "typ": null,
-        "max": null,
-        "unit": "V",
-        "conditions": "VCC = 1.1V to 1.3V, max is 0.35 x VCC",
-        "device": "NC7SV126",
-        "temp_range": "25C"
-      },
-      {
-        "parameter": "Low-Level Input Voltage",
-        "raw_name": "VIL",
-        "symbol": "VIL",
-        "min": null,
-        "typ": null,
-        "max": null,
-        "unit": "V",
-        "conditions": "VCC = 1.1V to 1.3V, max is 0.35 x VCC",
-        "device": "NC7SV126",
-        "temp_range": "full"
-      },
-      {
-        "parameter": "Low-Level Input Voltage",
-        "raw_name": "VIL",
-        "symbol": "VIL",
-        "min": null,
-        "typ": null,
         "max": 0.7,
         "unit": "V",
         "conditions": "VCC = 2.3V to 2.7V",
@@ -464,42 +418,6 @@
         "max": 0.8,
         "unit": "V",
         "conditions": "VCC = 2.7V to 3.6V",
-        "device": "NC7SV126",
-        "temp_range": "full"
-      },
-      {
-        "parameter": "High-Level Output Voltage",
-        "raw_name": "VOH",
-        "symbol": "VOH",
-        "min": null,
-        "typ": null,
-        "max": null,
-        "unit": "V",
-        "conditions": "VIN = VIH or VIL, IOH = -100 uA, VCC = 0.9V, typ is VCC - 0.1",
-        "device": "NC7SV126",
-        "temp_range": "25C"
-      },
-      {
-        "parameter": "High-Level Output Voltage",
-        "raw_name": "VOH",
-        "symbol": "VOH",
-        "min": null,
-        "typ": null,
-        "max": null,
-        "unit": "V",
-        "conditions": "VIN = VIH or VIL, IOH = -100 uA, VCC = 1.1V to 3.6V, min is VCC - 0.1",
-        "device": "NC7SV126",
-        "temp_range": "25C"
-      },
-      {
-        "parameter": "High-Level Output Voltage",
-        "raw_name": "VOH",
-        "symbol": "VOH",
-        "min": null,
-        "typ": null,
-        "max": null,
-        "unit": "V",
-        "conditions": "VIN = VIH or VIL, IOH = -100 uA, VCC = 1.1V to 3.6V, min is VCC - 0.1",
         "device": "NC7SV126",
         "temp_range": "full"
       },
@@ -569,9 +487,9 @@
         "symbol": "VOL",
         "min": null,
         "typ": null,
-        "max": 0.1,
+        "max": 0.3,
         "unit": "V",
-        "conditions": "VIN = VIH or VIL, IOL = 100 uA, VCC = 1.1V to 3.6V",
+        "conditions": "VIN = VIH or VIL, IOL = 6 mA, VCC = 1.65V to 1.95V",
         "device": "NC7SV126",
         "temp_range": "25C"
       },
@@ -581,9 +499,9 @@
         "symbol": "VOL",
         "min": null,
         "typ": null,
-        "max": 0.1,
+        "max": 0.3,
         "unit": "V",
-        "conditions": "VIN = VIH or VIL, IOL = 100 uA, VCC = 1.1V to 3.6V",
+        "conditions": "VIN = VIH or VIL, IOL = 6 mA, VCC = 1.65V to 1.95V",
         "device": "NC7SV126",
         "temp_range": "full"
       },
@@ -618,8 +536,8 @@
         "min": null,
         "typ": null,
         "max": 0.1,
-        "unit": "µA",
-        "conditions": "VIN = 3.6 V or GND, VCC = 0.9 to 3.6V",
+        "unit": "uA",
+        "conditions": "VIN = 3.6 V or GND, VCC = 0.9 to 3.6",
         "device": "NC7SV126",
         "temp_range": "25C"
       },
@@ -630,8 +548,8 @@
         "min": null,
         "typ": null,
         "max": 0.5,
-        "unit": "µA",
-        "conditions": "VIN = 3.6 V or GND, VCC = 0.9 to 3.6V",
+        "unit": "uA",
+        "conditions": "VIN = 3.6 V or GND, VCC = 0.9 to 3.6",
         "device": "NC7SV126",
         "temp_range": "full"
       },
@@ -642,8 +560,8 @@
         "min": null,
         "typ": null,
         "max": 0.5,
-        "unit": "µA",
-        "conditions": "VOUT = 0 V to 3.6 V, VCC = 0.9 to 3.6V",
+        "unit": "uA",
+        "conditions": "VOUT = 0 V to 3.6 V, VCC = 0.9 to 3.6",
         "device": "NC7SV126",
         "temp_range": "25C"
       },
@@ -654,8 +572,8 @@
         "min": null,
         "typ": null,
         "max": 0.5,
-        "unit": "µA",
-        "conditions": "VOUT = 0 V to 3.6 V, VCC = 0.9 to 3.6V",
+        "unit": "uA",
+        "conditions": "VOUT = 0 V to 3.6 V, VCC = 0.9 to 3.6",
         "device": "NC7SV126",
         "temp_range": "full"
       },
@@ -666,8 +584,8 @@
         "min": null,
         "typ": null,
         "max": 0.5,
-        "unit": "µA",
-        "conditions": "VIN = 3.6 V or VOUT = 3.6 V, VCC = 0V",
+        "unit": "uA",
+        "conditions": "VIN = 3.6 V or VOUT = 3.6 V, VCC = 0",
         "device": "NC7SV126",
         "temp_range": "25C"
       },
@@ -678,8 +596,8 @@
         "min": null,
         "typ": null,
         "max": 0.5,
-        "unit": "µA",
-        "conditions": "VIN = 3.6 V or VOUT = 3.6 V, VCC = 0V",
+        "unit": "uA",
+        "conditions": "VIN = 3.6 V or VOUT = 3.6 V, VCC = 0",
         "device": "NC7SV126",
         "temp_range": "full"
       },
@@ -690,8 +608,8 @@
         "min": null,
         "typ": null,
         "max": 0.9,
-        "unit": "µA",
-        "conditions": "VIN = VCC or GND, VCC = 0.9 to 3.6V",
+        "unit": "uA",
+        "conditions": "VIN = VCC or GND, VCC = 0.9 to 3.6",
         "device": "NC7SV126",
         "temp_range": "25C"
       },
@@ -702,8 +620,44 @@
         "min": null,
         "typ": null,
         "max": 0.9,
-        "unit": "µA",
-        "conditions": "VIN = VCC or GND, VCC = 0.9 to 3.6V",
+        "unit": "uA",
+        "conditions": "VIN = VCC or GND, VCC = 0.9 to 3.6",
+        "device": "NC7SV126",
+        "temp_range": "full"
+      },
+      {
+        "parameter": "Propagation Delay, A to Y",
+        "raw_name": "tPLH, tPHL",
+        "symbol": "tPD",
+        "min": null,
+        "typ": 17.6,
+        "max": null,
+        "unit": "ns",
+        "conditions": "RL = 1 MOhm, CL = 15 pF, VCC = 0.9V",
+        "device": "NC7SV126",
+        "temp_range": "25C"
+      },
+      {
+        "parameter": "Propagation Delay, A to Y",
+        "raw_name": "tPLH, tPHL",
+        "symbol": "tPD",
+        "min": null,
+        "typ": 6.3,
+        "max": 12.6,
+        "unit": "ns",
+        "conditions": "RL = 2 kOhm, CL = 15 pF, VCC = 1.10V to 1.30V",
+        "device": "NC7SV126",
+        "temp_range": "25C"
+      },
+      {
+        "parameter": "Propagation Delay, A to Y",
+        "raw_name": "tPLH, tPHL",
+        "symbol": "tPD",
+        "min": null,
+        "typ": null,
+        "max": 14.9,
+        "unit": "ns",
+        "conditions": "RL = 2 kOhm, CL = 15 pF, VCC = 1.10V to 1.30V",
         "device": "NC7SV126",
         "temp_range": "full"
       },
@@ -715,7 +669,7 @@
         "typ": 1.8,
         "max": 2.6,
         "unit": "ns",
-        "conditions": "RL = 500 Ω, CL = 30 pF, VCC = 2.7 to 3.6V",
+        "conditions": "RL = 500 Ohm, CL = 30 pF, VCC = 2.7V to 3.6V",
         "device": "NC7SV126",
         "temp_range": "25C"
       },
@@ -727,9 +681,45 @@
         "typ": null,
         "max": 2.8,
         "unit": "ns",
-        "conditions": "RL = 500 Ω, CL = 30 pF, VCC = 2.7 to 3.6V",
+        "conditions": "RL = 500 Ohm, CL = 30 pF, VCC = 2.7V to 3.6V",
         "device": "NC7SV126",
         "temp_range": "full"
+      },
+      {
+        "parameter": "Input Capacitance",
+        "raw_name": "CIN",
+        "symbol": "CIN",
+        "min": null,
+        "typ": 2.0,
+        "max": null,
+        "unit": "pF",
+        "conditions": "VCC = 0 V",
+        "device": "NC7SV126",
+        "temp_range": "25C"
+      },
+      {
+        "parameter": "Output Capacitance",
+        "raw_name": "COUT",
+        "symbol": "COUT",
+        "min": null,
+        "typ": 4.5,
+        "max": null,
+        "unit": "pF",
+        "conditions": "VCC = 0 V",
+        "device": "NC7SV126",
+        "temp_range": "25C"
+      },
+      {
+        "parameter": "Power Dissipation Capacitance",
+        "raw_name": "CPD",
+        "symbol": "CPD",
+        "min": null,
+        "typ": 20,
+        "max": null,
+        "unit": "pF",
+        "conditions": "10 MHz, VCC = 0.9 to 3.6 V, VIN = 0 V or VCC",
+        "device": "NC7SV126",
+        "temp_range": "25C"
       }
     ],
     "pin_definitions": [
@@ -743,7 +733,7 @@
         "pin_number": "2",
         "pin_name": "A",
         "type": "Input",
-        "description": "Input"
+        "description": "Data Input"
       },
       {
         "pin_number": "3",
@@ -755,7 +745,7 @@
         "pin_number": "4",
         "pin_name": "Y",
         "type": "Output",
-        "description": "Output"
+        "description": "Data Output"
       },
       {
         "pin_number": "5",
@@ -766,7 +756,7 @@
       {
         "pin_number": "5",
         "pin_name": "NC",
-        "type": "No Connect",
+        "type": "NC",
         "description": "No Connect (MicroPak)"
       },
       {
@@ -777,221 +767,314 @@
       }
     ]
   },
+  "pin_extraction": {
+    "logical_pins": [
+      {
+        "name": "OE",
+        "direction": "INPUT",
+        "signal_type": "DIGITAL",
+        "description": "Output Enable Input",
+        "packages": {
+          "SC-88A": [
+            1
+          ],
+          "MicroPak": [
+            1
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "A",
+        "direction": "INPUT",
+        "signal_type": "DIGITAL",
+        "description": "Data Input",
+        "packages": {
+          "SC-88A": [
+            2
+          ],
+          "MicroPak": [
+            2
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "GND",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Ground",
+        "packages": {
+          "SC-88A": [
+            3
+          ],
+          "MicroPak": [
+            3
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "Y",
+        "direction": "OUTPUT",
+        "signal_type": "DIGITAL",
+        "description": "Data Output",
+        "packages": {
+          "SC-88A": [
+            4
+          ],
+          "MicroPak": [
+            4
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "VCC",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Supply Voltage",
+        "packages": {
+          "SC-88A": [
+            5
+          ],
+          "MicroPak": [
+            6
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "NC",
+        "direction": "NC",
+        "signal_type": "NONE",
+        "description": "No internal connection",
+        "packages": {
+          "MicroPak": [
+            5
+          ]
+        },
+        "unused_treatment": null
+      }
+    ]
+  },
+  "pin_index": {
+    "packages": {
+      "SC-88A": {
+        "1": {
+          "name": "OE",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Output Enable Input",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "A",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Data Input",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "Y",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "Data Output",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "VCC",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Supply Voltage",
+          "unused_treatment": null
+        }
+      },
+      "MicroPak": {
+        "1": {
+          "name": "OE",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Output Enable Input",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "A",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Data Input",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "Y",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "Data Output",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "VCC",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Supply Voltage",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "NC",
+          "direction": "NC",
+          "signal_type": "NONE",
+          "description": "No internal connection",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "pin_validation": [],
   "validation": [
     {
       "param": "DC Supply Voltage",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "DC Input Voltage",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "DC Output Voltage (Tri-State Mode)",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "DC Output Voltage (Power-Down Mode)",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "DC Output Source/Sink Current",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "DC Supply Current per Supply Pin or Ground Pin",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Storage Temperature Range",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Latchup Performance",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Propagation Delay, A to Y",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Propagation Delay, A to Y",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
     }
   ],
   "physics_validation": [
     {
       "param": "High-Level Input Voltage (NC7SV126)",
-      "rule": "temp_envelope_min",
+      "rule": "temp_envelope",
       "passed": true,
-      "message": "OK"
+      "message": "OK (mode: ALGEBRAIC)"
     },
     {
       "param": "Low-Level Input Voltage (NC7SV126)",
-      "rule": "temp_envelope_max",
+      "rule": "temp_envelope",
       "passed": true,
-      "message": "OK"
+      "message": "OK (mode: ALGEBRAIC)"
     },
     {
       "param": "High-Level Output Voltage (NC7SV126)",
-      "rule": "temp_envelope_min",
+      "rule": "temp_envelope",
       "passed": true,
-      "message": "OK"
+      "message": "OK (mode: ALGEBRAIC)"
     },
     {
       "param": "Low-Level Output Voltage (NC7SV126)",
-      "rule": "temp_envelope_max",
+      "rule": "temp_envelope",
       "passed": true,
-      "message": "OK"
+      "message": "OK (mode: ALGEBRAIC)"
     },
     {
       "param": "Input Leakage Current (NC7SV126)",
-      "rule": "temp_envelope_max",
+      "rule": "temp_envelope",
       "passed": true,
-      "message": "OK"
+      "message": "OK (mode: ALGEBRAIC)"
     },
     {
       "param": "3-State Output Leakage Current (NC7SV126)",
-      "rule": "temp_envelope_max",
+      "rule": "temp_envelope",
       "passed": true,
-      "message": "OK"
+      "message": "OK (mode: ALGEBRAIC)"
     },
     {
       "param": "Power Off Leakage Current (NC7SV126)",
-      "rule": "temp_envelope_max",
+      "rule": "temp_envelope",
       "passed": true,
-      "message": "OK"
+      "message": "OK (mode: ALGEBRAIC)"
     },
     {
       "param": "Quiescent Supply Current (NC7SV126)",
-      "rule": "temp_envelope_max",
+      "rule": "temp_envelope",
       "passed": true,
-      "message": "OK"
+      "message": "OK (mode: ALGEBRAIC)"
     },
     {
       "param": "Propagation Delay, A to Y (NC7SV126)",
-      "rule": "temp_envelope_max",
+      "rule": "temp_envelope",
       "passed": true,
-      "message": "OK"
+      "message": "OK (mode: ALGEBRAIC)"
     }
   ],
   "cross_validation": {
-    "total_extracted_values": 28,
-    "values_found_in_pdf": 24,
-    "values_not_in_pdf": [
-      -100.0,
-      -65.0,
-      -50.0,
-      -0.5
-    ],
-    "value_coverage_pct": 85.7,
-    "total_params": 55,
-    "params_verified": 44,
-    "params_suspicious": 11,
-    "suspicious_params": [
-      {
-        "parameter": "DC Supply Voltage",
-        "device": "",
-        "values": [
-          -0.5,
-          4.3
-        ]
-      },
-      {
-        "parameter": "DC Input Voltage",
-        "device": "",
-        "values": [
-          -0.5,
-          4.3
-        ]
-      },
-      {
-        "parameter": "DC Output Voltage (Active-Mode)",
-        "device": "",
-        "values": [
-          -0.5
-        ]
-      },
-      {
-        "parameter": "DC Output Voltage (Tri-State Mode)",
-        "device": "",
-        "values": [
-          -0.5,
-          4.3
-        ]
-      },
-      {
-        "parameter": "DC Output Voltage (Power-Down Mode)",
-        "device": "",
-        "values": [
-          -0.5,
-          4.3
-        ]
-      },
-      {
-        "parameter": "DC Input Diode Current",
-        "device": "",
-        "values": [
-          -50.0
-        ]
-      },
-      {
-        "parameter": "DC Output Diode Current",
-        "device": "",
-        "values": [
-          -50.0
-        ]
-      },
-      {
-        "parameter": "DC Output Source/Sink Current",
-        "device": "",
-        "values": [
-          -50.0,
-          50.0
-        ]
-      },
-      {
-        "parameter": "DC Supply Current per Supply Pin or Ground Pin",
-        "device": "",
-        "values": [
-          -50.0,
-          50.0
-        ]
-      },
-      {
-        "parameter": "Storage Temperature Range",
-        "device": "",
-        "values": [
-          -65.0,
-          150.0
-        ]
-      },
-      {
-        "parameter": "Latchup Performance",
-        "device": "",
-        "values": [
-          -100.0,
-          100.0
-        ]
-      }
-    ]
+    "total_extracted_values": 35,
+    "values_found_in_pdf": 35,
+    "values_not_in_pdf": [],
+    "value_coverage_pct": 100.0,
+    "total_params": 54,
+    "params_verified": 54,
+    "params_suspicious": 0,
+    "suspicious_params": []
   },
   "timing": {
-    "l0_classify_s": 0.066,
-    "l1_extract_s": 56.622
+    "l0_classify_s": 0.067,
+    "l1a_extract_s": 83.401,
+    "l1b_pin_s": 15.694
   }
 }

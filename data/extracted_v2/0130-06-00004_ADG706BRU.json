@@ -44,7 +44,7 @@
       "category": "electrical",
       "matched_patterns": [
         "(?i)absolute\\s+maximum\\s+ratings?",
-        "(?i)pin\\s+(description|configuration|function|assignment|definition)"
+        "(?i)pin\\s+(description|configuration|function|assignment|definition|connection|diagram)"
       ],
       "text_preview": "–5– REV. B ADG706/ADG707 ABSOLUTE MAXIMUM RATINGS1 (TA = 25°C unless otherwise noted.) VDD to VSS  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  7 V VDD to GND  . . . . . "
     },
@@ -104,7 +104,7 @@
     "component": {
       "mpn": "ADG706/ADG707",
       "manufacturer": "Analog Devices",
-      "category": "Multiplexer",
+      "category": "Switch",
       "description": "CMOS, +1.8 V to +5.5 V/±2.5 V, 2.5 Ω Low-Voltage, 8-/16-Channel Multiplexers"
     },
     "absolute_maximum_ratings": [
@@ -119,7 +119,7 @@
         "conditions": null
       },
       {
-        "parameter": "Positive Supply Voltage to Ground",
+        "parameter": "Positive Supply Voltage to GND",
         "raw_name": "VDD to GND",
         "symbol": "VDD",
         "min": -0.3,
@@ -129,7 +129,7 @@
         "conditions": null
       },
       {
-        "parameter": "Negative Supply Voltage to Ground",
+        "parameter": "Negative Supply Voltage to GND",
         "raw_name": "VSS to GND",
         "symbol": "VSS",
         "min": -3.5,
@@ -251,30 +251,6 @@
     ],
     "electrical_characteristics": [
       {
-        "parameter": "Single Supply Voltage Range",
-        "raw_name": "Single Supply",
-        "symbol": "VDD",
-        "min": 1.8,
-        "typ": null,
-        "max": 5.5,
-        "unit": "V",
-        "conditions": "VSS = 0 V",
-        "device": "ADG706/ADG707",
-        "temp_range": "full"
-      },
-      {
-        "parameter": "Dual Supply Voltage Range",
-        "raw_name": "Dual Supply",
-        "symbol": "VDD, VSS",
-        "min": -2.5,
-        "typ": null,
-        "max": 2.5,
-        "unit": "V",
-        "conditions": null,
-        "device": "ADG706/ADG707",
-        "temp_range": "full"
-      },
-      {
         "parameter": "ON Resistance",
         "raw_name": "ON Resistance",
         "symbol": "RON",
@@ -289,7 +265,7 @@
       {
         "parameter": "ON Resistance Flatness",
         "raw_name": "ON Resistance Flatness",
-        "symbol": "RFLAT(ON)",
+        "symbol": null,
         "min": null,
         "typ": 0.5,
         "max": null,
@@ -301,7 +277,7 @@
       {
         "parameter": "Leakage Currents",
         "raw_name": "Leakage Currents",
-        "symbol": "ID, IS",
+        "symbol": null,
         "min": null,
         "typ": 100,
         "max": null,
@@ -313,7 +289,7 @@
       {
         "parameter": "Switching Times",
         "raw_name": "Switching Times",
-        "symbol": "tTRANS",
+        "symbol": null,
         "min": null,
         "typ": 40,
         "max": null,
@@ -324,408 +300,187 @@
       },
       {
         "parameter": "Power Consumption",
-        "raw_name": "Low-Power Consumption",
-        "symbol": "PD",
+        "raw_name": "Low-power consumption",
+        "symbol": null,
         "min": null,
         "typ": null,
         "max": 0.01,
         "unit": "µW",
         "conditions": null,
         "device": "ADG706/ADG707",
-        "temp_range": "full"
+        "temp_range": null
       }
     ],
     "pin_definitions": [
       {
-        "pin_number": 1,
+        "pin_number": "1",
         "pin_name": "VDD",
         "type": "Power",
-        "description": "Most positive power supply potential."
+        "description": "Positive Power Supply"
       },
       {
-        "pin_number": 2,
-        "pin_name": "NC",
-        "type": "NC",
-        "description": "No Connect (ADG706)"
+        "pin_number": "2",
+        "pin_name": "NC / DB",
+        "type": "NC / Output",
+        "description": "No Connect (ADG706) / Drain Terminal B (ADG707)"
       },
       {
-        "pin_number": 2,
-        "pin_name": "DB",
-        "type": "Output",
-        "description": "Drain Terminal B (ADG707)"
-      },
-      {
-        "pin_number": 3,
+        "pin_number": "3",
         "pin_name": "NC",
         "type": "NC",
         "description": "No Connect"
       },
       {
-        "pin_number": 4,
-        "pin_name": "S16",
-        "type": "Input/Output",
-        "description": "Source Terminal 16 (ADG706)"
+        "pin_number": "4",
+        "pin_name": "S16 / S8B",
+        "type": "Input",
+        "description": "Source Terminal 16 (ADG706) / Source Terminal 8B (ADG707)"
       },
       {
-        "pin_number": 4,
-        "pin_name": "S8B",
-        "type": "Input/Output",
-        "description": "Source Terminal 8B (ADG707)"
+        "pin_number": "5",
+        "pin_name": "S15 / S7B",
+        "type": "Input",
+        "description": "Source Terminal 15 (ADG706) / Source Terminal 7B (ADG707)"
       },
       {
-        "pin_number": 5,
-        "pin_name": "S15",
-        "type": "Input/Output",
-        "description": "Source Terminal 15 (ADG706)"
+        "pin_number": "6",
+        "pin_name": "S14 / S6B",
+        "type": "Input",
+        "description": "Source Terminal 14 (ADG706) / Source Terminal 6B (ADG707)"
       },
       {
-        "pin_number": 5,
-        "pin_name": "S7B",
-        "type": "Input/Output",
-        "description": "Source Terminal 7B (ADG707)"
+        "pin_number": "7",
+        "pin_name": "S13 / S5B",
+        "type": "Input",
+        "description": "Source Terminal 13 (ADG706) / Source Terminal 5B (ADG707)"
       },
       {
-        "pin_number": 6,
-        "pin_name": "S14",
-        "type": "Input/Output",
-        "description": "Source Terminal 14 (ADG706)"
+        "pin_number": "8",
+        "pin_name": "S12 / S4B",
+        "type": "Input",
+        "description": "Source Terminal 12 (ADG706) / Source Terminal 4B (ADG707)"
       },
       {
-        "pin_number": 6,
-        "pin_name": "S6B",
-        "type": "Input/Output",
-        "description": "Source Terminal 6B (ADG707)"
+        "pin_number": "9",
+        "pin_name": "S11 / S3B",
+        "type": "Input",
+        "description": "Source Terminal 11 (ADG706) / Source Terminal 3B (ADG707)"
       },
       {
-        "pin_number": 7,
-        "pin_name": "S13",
-        "type": "Input/Output",
-        "description": "Source Terminal 13 (ADG706)"
+        "pin_number": "10",
+        "pin_name": "S10 / S2B",
+        "type": "Input",
+        "description": "Source Terminal 10 (ADG706) / Source Terminal 2B (ADG707)"
       },
       {
-        "pin_number": 7,
-        "pin_name": "S5B",
-        "type": "Input/Output",
-        "description": "Source Terminal 5B (ADG707)"
+        "pin_number": "11",
+        "pin_name": "S9 / S1B",
+        "type": "Input",
+        "description": "Source Terminal 9 (ADG706) / Source Terminal 1B (ADG707)"
       },
       {
-        "pin_number": 8,
-        "pin_name": "S12",
-        "type": "Input/Output",
-        "description": "Source Terminal 12 (ADG706)"
-      },
-      {
-        "pin_number": 8,
-        "pin_name": "S4B",
-        "type": "Input/Output",
-        "description": "Source Terminal 4B (ADG707)"
-      },
-      {
-        "pin_number": 9,
-        "pin_name": "S11",
-        "type": "Input/Output",
-        "description": "Source Terminal 11 (ADG706)"
-      },
-      {
-        "pin_number": 9,
-        "pin_name": "S3B",
-        "type": "Input/Output",
-        "description": "Source Terminal 3B (ADG707)"
-      },
-      {
-        "pin_number": 10,
-        "pin_name": "S10",
-        "type": "Input/Output",
-        "description": "Source Terminal 10 (ADG706)"
-      },
-      {
-        "pin_number": 10,
-        "pin_name": "S2B",
-        "type": "Input/Output",
-        "description": "Source Terminal 2B (ADG707)"
-      },
-      {
-        "pin_number": 11,
-        "pin_name": "S9",
-        "type": "Input/Output",
-        "description": "Source Terminal 9 (ADG706)"
-      },
-      {
-        "pin_number": 11,
-        "pin_name": "S1B",
-        "type": "Input/Output",
-        "description": "Source Terminal 1B (ADG707)"
-      },
-      {
-        "pin_number": 12,
+        "pin_number": "12",
         "pin_name": "GND",
         "type": "Ground",
-        "description": "Ground (0 V) reference."
+        "description": "Ground (0 V) Reference"
       },
       {
-        "pin_number": 13,
+        "pin_number": "13",
         "pin_name": "NC",
         "type": "NC",
         "description": "No Connect"
       },
       {
-        "pin_number": 14,
-        "pin_name": "A3",
-        "type": "Input",
-        "description": "Logic Control Input (ADG706)"
+        "pin_number": "14",
+        "pin_name": "A3 / NC",
+        "type": "Input / NC",
+        "description": "Logic Control Input (ADG706) / No Connect (ADG707)"
       },
       {
-        "pin_number": 14,
-        "pin_name": "NC",
-        "type": "NC",
-        "description": "No Connect (ADG707)"
-      },
-      {
-        "pin_number": 15,
+        "pin_number": "15",
         "pin_name": "A2",
         "type": "Input",
         "description": "Logic Control Input"
       },
       {
-        "pin_number": 16,
+        "pin_number": "16",
         "pin_name": "A1",
         "type": "Input",
         "description": "Logic Control Input"
       },
       {
-        "pin_number": 17,
+        "pin_number": "17",
         "pin_name": "A0",
         "type": "Input",
         "description": "Logic Control Input"
       },
       {
-        "pin_number": 18,
+        "pin_number": "18",
         "pin_name": "EN",
         "type": "Input",
-        "description": "Active High Digital Input. When low, all channels are switched off."
+        "description": "Active High Enable"
       },
       {
-        "pin_number": 19,
-        "pin_name": "S1",
-        "type": "Input/Output",
-        "description": "Source Terminal 1 (ADG706)"
+        "pin_number": "19",
+        "pin_name": "S1 / S1A",
+        "type": "Input",
+        "description": "Source Terminal 1 (ADG706) / Source Terminal 1A (ADG707)"
       },
       {
-        "pin_number": 19,
-        "pin_name": "S1A",
-        "type": "Input/Output",
-        "description": "Source Terminal 1A (ADG707)"
+        "pin_number": "20",
+        "pin_name": "S2 / S2A",
+        "type": "Input",
+        "description": "Source Terminal 2 (ADG706) / Source Terminal 2A (ADG707)"
       },
       {
-        "pin_number": 20,
-        "pin_name": "S2",
-        "type": "Input/Output",
-        "description": "Source Terminal 2 (ADG706)"
+        "pin_number": "21",
+        "pin_name": "S3 / S3A",
+        "type": "Input",
+        "description": "Source Terminal 3 (ADG706) / Source Terminal 3A (ADG707)"
       },
       {
-        "pin_number": 20,
-        "pin_name": "S2A",
-        "type": "Input/Output",
-        "description": "Source Terminal 2A (ADG707)"
+        "pin_number": "22",
+        "pin_name": "S4 / S4A",
+        "type": "Input",
+        "description": "Source Terminal 4 (ADG706) / Source Terminal 4A (ADG707)"
       },
       {
-        "pin_number": 21,
-        "pin_name": "S3",
-        "type": "Input/Output",
-        "description": "Source Terminal 3 (ADG706)"
+        "pin_number": "23",
+        "pin_name": "S5 / S5A",
+        "type": "Input",
+        "description": "Source Terminal 5 (ADG706) / Source Terminal 5A (ADG707)"
       },
       {
-        "pin_number": 21,
-        "pin_name": "S3A",
-        "type": "Input/Output",
-        "description": "Source Terminal 3A (ADG707)"
+        "pin_number": "24",
+        "pin_name": "S6 / S6A",
+        "type": "Input",
+        "description": "Source Terminal 6 (ADG706) / Source Terminal 6A (ADG707)"
       },
       {
-        "pin_number": 22,
-        "pin_name": "S4",
-        "type": "Input/Output",
-        "description": "Source Terminal 4 (ADG706)"
+        "pin_number": "25",
+        "pin_name": "S7 / S7A",
+        "type": "Input",
+        "description": "Source Terminal 7 (ADG706) / Source Terminal 7A (ADG707)"
       },
       {
-        "pin_number": 22,
-        "pin_name": "S4A",
-        "type": "Input/Output",
-        "description": "Source Terminal 4A (ADG707)"
+        "pin_number": "26",
+        "pin_name": "S8 / S8A",
+        "type": "Input",
+        "description": "Source Terminal 8 (ADG706) / Source Terminal 8A (ADG707)"
       },
       {
-        "pin_number": 23,
-        "pin_name": "S5",
-        "type": "Input/Output",
-        "description": "Source Terminal 5 (ADG706)"
-      },
-      {
-        "pin_number": 23,
-        "pin_name": "S5A",
-        "type": "Input/Output",
-        "description": "Source Terminal 5A (ADG707)"
-      },
-      {
-        "pin_number": 24,
-        "pin_name": "S6",
-        "type": "Input/Output",
-        "description": "Source Terminal 6 (ADG706)"
-      },
-      {
-        "pin_number": 24,
-        "pin_name": "S6A",
-        "type": "Input/Output",
-        "description": "Source Terminal 6A (ADG707)"
-      },
-      {
-        "pin_number": 25,
-        "pin_name": "S7",
-        "type": "Input/Output",
-        "description": "Source Terminal 7 (ADG706)"
-      },
-      {
-        "pin_number": 25,
-        "pin_name": "S7A",
-        "type": "Input/Output",
-        "description": "Source Terminal 7A (ADG707)"
-      },
-      {
-        "pin_number": 26,
-        "pin_name": "S8",
-        "type": "Input/Output",
-        "description": "Source Terminal 8 (ADG706)"
-      },
-      {
-        "pin_number": 26,
-        "pin_name": "S8A",
-        "type": "Input/Output",
-        "description": "Source Terminal 8A (ADG707)"
-      },
-      {
-        "pin_number": 27,
+        "pin_number": "27",
         "pin_name": "VSS",
         "type": "Power",
-        "description": "Most negative power supply potential. In single-supply applications, it can be connected to GND."
+        "description": "Negative Power Supply"
       },
       {
-        "pin_number": 28,
-        "pin_name": "D",
+        "pin_number": "28",
+        "pin_name": "D / DA",
         "type": "Output",
-        "description": "Drain Terminal (ADG706)"
-      },
-      {
-        "pin_number": 28,
-        "pin_name": "DA",
-        "type": "Output",
-        "description": "Drain Terminal A (ADG707)"
+        "description": "Drain Terminal (ADG706) / Drain Terminal A (ADG707)"
       }
     ]
-  },
-  "validation": [
-    {
-      "param": "Positive Supply Voltage to Ground",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Negative Supply Voltage to Ground",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Operating Temperature Range",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Storage Temperature Range",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Single Supply Voltage Range",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Dual Supply Voltage Range",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    }
-  ],
-  "physics_validation": [],
-  "cross_validation": {
-    "total_extracted_values": 21,
-    "values_found_in_pdf": 16,
-    "values_not_in_pdf": [
-      -65.0,
-      -40.0,
-      -3.5,
-      -2.5,
-      -0.3
-    ],
-    "value_coverage_pct": 76.2,
-    "total_params": 21,
-    "params_verified": 15,
-    "params_suspicious": 6,
-    "suspicious_params": [
-      {
-        "parameter": "Dual Supply Voltage Range",
-        "device": "ADG706/ADG707",
-        "values": [
-          -2.5,
-          2.5
-        ]
-      },
-      {
-        "parameter": "Positive Supply Voltage to Ground",
-        "device": "",
-        "values": [
-          -0.3,
-          7.0
-        ]
-      },
-      {
-        "parameter": "Negative Supply Voltage to Ground",
-        "device": "",
-        "values": [
-          -3.5,
-          0.3
-        ]
-      },
-      {
-        "parameter": "Digital Inputs",
-        "device": "",
-        "values": [
-          -0.3
-        ]
-      },
-      {
-        "parameter": "Operating Temperature Range",
-        "device": "",
-        "values": [
-          -40.0,
-          85.0
-        ]
-      },
-      {
-        "parameter": "Storage Temperature Range",
-        "device": "",
-        "values": [
-          -65.0,
-          150.0
-        ]
-      }
-    ]
-  },
-  "timing": {
-    "l0_classify_s": 0.048,
-    "l1_extract_s": 58.633
   },
   "pin_extraction": {
     "logical_pins": [
@@ -733,9 +488,9 @@
         "name": "VDD",
         "direction": "POWER_IN",
         "signal_type": "POWER",
-        "description": "Positive Power Supply Voltage",
+        "description": "Positive power supply voltage",
         "packages": {
-          "28-Lead TSSOP": [
+          "TSSOP-28": [
             1
           ]
         },
@@ -745,10 +500,10 @@
         "name": "VSS",
         "direction": "POWER_IN",
         "signal_type": "POWER",
-        "description": "Negative Power Supply Voltage. For single-supply operation, this pin should be connected to GND.",
+        "description": "Negative power supply voltage. For single-supply operation, connect to GND.",
         "packages": {
-          "28-Lead TSSOP": [
-            12
+          "TSSOP-28": [
+            13
           ]
         },
         "unused_treatment": null
@@ -757,10 +512,10 @@
         "name": "GND",
         "direction": "POWER_IN",
         "signal_type": "POWER",
-        "description": "Ground (0 V) Reference",
+        "description": "Ground (0 V) reference",
         "packages": {
-          "28-Lead TSSOP": [
-            10
+          "TSSOP-28": [
+            12
           ]
         },
         "unused_treatment": null
@@ -769,10 +524,10 @@
         "name": "A0",
         "direction": "INPUT",
         "signal_type": "DIGITAL",
-        "description": "Logic Control Input",
+        "description": "Logic control input",
         "packages": {
-          "28-Lead TSSOP": [
-            16
+          "TSSOP-28": [
+            17
           ]
         },
         "unused_treatment": null
@@ -781,10 +536,10 @@
         "name": "A1",
         "direction": "INPUT",
         "signal_type": "DIGITAL",
-        "description": "Logic Control Input",
+        "description": "Logic control input",
         "packages": {
-          "28-Lead TSSOP": [
-            15
+          "TSSOP-28": [
+            16
           ]
         },
         "unused_treatment": null
@@ -793,10 +548,10 @@
         "name": "A2",
         "direction": "INPUT",
         "signal_type": "DIGITAL",
-        "description": "Logic Control Input",
+        "description": "Logic control input",
         "packages": {
-          "28-Lead TSSOP": [
-            14
+          "TSSOP-28": [
+            15
           ]
         },
         "unused_treatment": null
@@ -805,10 +560,10 @@
         "name": "A3",
         "direction": "INPUT",
         "signal_type": "DIGITAL",
-        "description": "Logic Control Input (ADG706 only)",
+        "description": "Logic control input (ADG706 only)",
         "packages": {
-          "28-Lead TSSOP": [
-            13
+          "TSSOP-28": [
+            14
           ]
         },
         "unused_treatment": null
@@ -817,202 +572,10 @@
         "name": "EN",
         "direction": "INPUT",
         "signal_type": "DIGITAL",
-        "description": "Active High Digital Input. When low, the device is disabled and all switches are off.",
+        "description": "Active high enable input",
         "packages": {
-          "28-Lead TSSOP": [
-            17
-          ]
-        },
-        "unused_treatment": null
-      },
-      {
-        "name": "S1",
-        "direction": "BIDIRECTIONAL",
-        "signal_type": "ANALOG",
-        "description": "Source Terminal 1 (ADG706)",
-        "packages": {
-          "28-Lead TSSOP": [
-            20
-          ]
-        },
-        "unused_treatment": null
-      },
-      {
-        "name": "S2",
-        "direction": "BIDIRECTIONAL",
-        "signal_type": "ANALOG",
-        "description": "Source Terminal 2 (ADG706)",
-        "packages": {
-          "28-Lead TSSOP": [
-            21
-          ]
-        },
-        "unused_treatment": null
-      },
-      {
-        "name": "S3",
-        "direction": "BIDIRECTIONAL",
-        "signal_type": "ANALOG",
-        "description": "Source Terminal 3 (ADG706)",
-        "packages": {
-          "28-Lead TSSOP": [
-            22
-          ]
-        },
-        "unused_treatment": null
-      },
-      {
-        "name": "S4",
-        "direction": "BIDIRECTIONAL",
-        "signal_type": "ANALOG",
-        "description": "Source Terminal 4 (ADG706)",
-        "packages": {
-          "28-Lead TSSOP": [
-            23
-          ]
-        },
-        "unused_treatment": null
-      },
-      {
-        "name": "S5",
-        "direction": "BIDIRECTIONAL",
-        "signal_type": "ANALOG",
-        "description": "Source Terminal 5 (ADG706)",
-        "packages": {
-          "28-Lead TSSOP": [
-            24
-          ]
-        },
-        "unused_treatment": null
-      },
-      {
-        "name": "S6",
-        "direction": "BIDIRECTIONAL",
-        "signal_type": "ANALOG",
-        "description": "Source Terminal 6 (ADG706)",
-        "packages": {
-          "28-Lead TSSOP": [
-            25
-          ]
-        },
-        "unused_treatment": null
-      },
-      {
-        "name": "S7",
-        "direction": "BIDIRECTIONAL",
-        "signal_type": "ANALOG",
-        "description": "Source Terminal 7 (ADG706)",
-        "packages": {
-          "28-Lead TSSOP": [
-            26
-          ]
-        },
-        "unused_treatment": null
-      },
-      {
-        "name": "S8",
-        "direction": "BIDIRECTIONAL",
-        "signal_type": "ANALOG",
-        "description": "Source Terminal 8 (ADG706)",
-        "packages": {
-          "28-Lead TSSOP": [
-            27
-          ]
-        },
-        "unused_treatment": null
-      },
-      {
-        "name": "S9",
-        "direction": "BIDIRECTIONAL",
-        "signal_type": "ANALOG",
-        "description": "Source Terminal 9 (ADG706)",
-        "packages": {
-          "28-Lead TSSOP": [
-            9
-          ]
-        },
-        "unused_treatment": null
-      },
-      {
-        "name": "S10",
-        "direction": "BIDIRECTIONAL",
-        "signal_type": "ANALOG",
-        "description": "Source Terminal 10 (ADG706)",
-        "packages": {
-          "28-Lead TSSOP": [
-            8
-          ]
-        },
-        "unused_treatment": null
-      },
-      {
-        "name": "S11",
-        "direction": "BIDIRECTIONAL",
-        "signal_type": "ANALOG",
-        "description": "Source Terminal 11 (ADG706)",
-        "packages": {
-          "28-Lead TSSOP": [
-            7
-          ]
-        },
-        "unused_treatment": null
-      },
-      {
-        "name": "S12",
-        "direction": "BIDIRECTIONAL",
-        "signal_type": "ANALOG",
-        "description": "Source Terminal 12 (ADG706)",
-        "packages": {
-          "28-Lead TSSOP": [
-            6
-          ]
-        },
-        "unused_treatment": null
-      },
-      {
-        "name": "S13",
-        "direction": "BIDIRECTIONAL",
-        "signal_type": "ANALOG",
-        "description": "Source Terminal 13 (ADG706)",
-        "packages": {
-          "28-Lead TSSOP": [
-            5
-          ]
-        },
-        "unused_treatment": null
-      },
-      {
-        "name": "S14",
-        "direction": "BIDIRECTIONAL",
-        "signal_type": "ANALOG",
-        "description": "Source Terminal 14 (ADG706)",
-        "packages": {
-          "28-Lead TSSOP": [
-            4
-          ]
-        },
-        "unused_treatment": null
-      },
-      {
-        "name": "S15",
-        "direction": "BIDIRECTIONAL",
-        "signal_type": "ANALOG",
-        "description": "Source Terminal 15 (ADG706)",
-        "packages": {
-          "28-Lead TSSOP": [
-            3
-          ]
-        },
-        "unused_treatment": null
-      },
-      {
-        "name": "S16",
-        "direction": "BIDIRECTIONAL",
-        "signal_type": "ANALOG",
-        "description": "Source Terminal 16 (ADG706)",
-        "packages": {
-          "28-Lead TSSOP": [
-            2
+          "TSSOP-28": [
+            18
           ]
         },
         "unused_treatment": null
@@ -1021,202 +584,10 @@
         "name": "D",
         "direction": "BIDIRECTIONAL",
         "signal_type": "ANALOG",
-        "description": "Drain Terminal (ADG706)",
+        "description": "Drain terminal (ADG706 only)",
         "packages": {
-          "28-Lead TSSOP": [
-            19
-          ]
-        },
-        "unused_treatment": null
-      },
-      {
-        "name": "S1A",
-        "direction": "BIDIRECTIONAL",
-        "signal_type": "ANALOG",
-        "description": "Source Terminal 1A (ADG707)",
-        "packages": {
-          "28-Lead TSSOP": [
-            20
-          ]
-        },
-        "unused_treatment": null
-      },
-      {
-        "name": "S2A",
-        "direction": "BIDIRECTIONAL",
-        "signal_type": "ANALOG",
-        "description": "Source Terminal 2A (ADG707)",
-        "packages": {
-          "28-Lead TSSOP": [
-            21
-          ]
-        },
-        "unused_treatment": null
-      },
-      {
-        "name": "S3A",
-        "direction": "BIDIRECTIONAL",
-        "signal_type": "ANALOG",
-        "description": "Source Terminal 3A (ADG707)",
-        "packages": {
-          "28-Lead TSSOP": [
-            22
-          ]
-        },
-        "unused_treatment": null
-      },
-      {
-        "name": "S4A",
-        "direction": "BIDIRECTIONAL",
-        "signal_type": "ANALOG",
-        "description": "Source Terminal 4A (ADG707)",
-        "packages": {
-          "28-Lead TSSOP": [
-            23
-          ]
-        },
-        "unused_treatment": null
-      },
-      {
-        "name": "S5A",
-        "direction": "BIDIRECTIONAL",
-        "signal_type": "ANALOG",
-        "description": "Source Terminal 5A (ADG707)",
-        "packages": {
-          "28-Lead TSSOP": [
-            24
-          ]
-        },
-        "unused_treatment": null
-      },
-      {
-        "name": "S6A",
-        "direction": "BIDIRECTIONAL",
-        "signal_type": "ANALOG",
-        "description": "Source Terminal 6A (ADG707)",
-        "packages": {
-          "28-Lead TSSOP": [
-            25
-          ]
-        },
-        "unused_treatment": null
-      },
-      {
-        "name": "S7A",
-        "direction": "BIDIRECTIONAL",
-        "signal_type": "ANALOG",
-        "description": "Source Terminal 7A (ADG707)",
-        "packages": {
-          "28-Lead TSSOP": [
-            26
-          ]
-        },
-        "unused_treatment": null
-      },
-      {
-        "name": "S8A",
-        "direction": "BIDIRECTIONAL",
-        "signal_type": "ANALOG",
-        "description": "Source Terminal 8A (ADG707)",
-        "packages": {
-          "28-Lead TSSOP": [
+          "TSSOP-28": [
             27
-          ]
-        },
-        "unused_treatment": null
-      },
-      {
-        "name": "S1B",
-        "direction": "BIDIRECTIONAL",
-        "signal_type": "ANALOG",
-        "description": "Source Terminal 1B (ADG707)",
-        "packages": {
-          "28-Lead TSSOP": [
-            9
-          ]
-        },
-        "unused_treatment": null
-      },
-      {
-        "name": "S2B",
-        "direction": "BIDIRECTIONAL",
-        "signal_type": "ANALOG",
-        "description": "Source Terminal 2B (ADG707)",
-        "packages": {
-          "28-Lead TSSOP": [
-            8
-          ]
-        },
-        "unused_treatment": null
-      },
-      {
-        "name": "S3B",
-        "direction": "BIDIRECTIONAL",
-        "signal_type": "ANALOG",
-        "description": "Source Terminal 3B (ADG707)",
-        "packages": {
-          "28-Lead TSSOP": [
-            7
-          ]
-        },
-        "unused_treatment": null
-      },
-      {
-        "name": "S4B",
-        "direction": "BIDIRECTIONAL",
-        "signal_type": "ANALOG",
-        "description": "Source Terminal 4B (ADG707)",
-        "packages": {
-          "28-Lead TSSOP": [
-            6
-          ]
-        },
-        "unused_treatment": null
-      },
-      {
-        "name": "S5B",
-        "direction": "BIDIRECTIONAL",
-        "signal_type": "ANALOG",
-        "description": "Source Terminal 5B (ADG707)",
-        "packages": {
-          "28-Lead TSSOP": [
-            5
-          ]
-        },
-        "unused_treatment": null
-      },
-      {
-        "name": "S6B",
-        "direction": "BIDIRECTIONAL",
-        "signal_type": "ANALOG",
-        "description": "Source Terminal 6B (ADG707)",
-        "packages": {
-          "28-Lead TSSOP": [
-            4
-          ]
-        },
-        "unused_treatment": null
-      },
-      {
-        "name": "S7B",
-        "direction": "BIDIRECTIONAL",
-        "signal_type": "ANALOG",
-        "description": "Source Terminal 7B (ADG707)",
-        "packages": {
-          "28-Lead TSSOP": [
-            3
-          ]
-        },
-        "unused_treatment": null
-      },
-      {
-        "name": "S8B",
-        "direction": "BIDIRECTIONAL",
-        "signal_type": "ANALOG",
-        "description": "Source Terminal 8B (ADG707)",
-        "packages": {
-          "28-Lead TSSOP": [
-            2
           ]
         },
         "unused_treatment": null
@@ -1225,9 +596,9 @@
         "name": "DA",
         "direction": "BIDIRECTIONAL",
         "signal_type": "ANALOG",
-        "description": "Drain Terminal A (ADG707)",
+        "description": "Drain terminal A (ADG707 only)",
         "packages": {
-          "28-Lead TSSOP": [
+          "TSSOP-28": [
             19
           ]
         },
@@ -1237,10 +608,394 @@
         "name": "DB",
         "direction": "BIDIRECTIONAL",
         "signal_type": "ANALOG",
-        "description": "Drain Terminal B (ADG707)",
+        "description": "Drain terminal B (ADG707 only)",
         "packages": {
-          "28-Lead TSSOP": [
-            18
+          "TSSOP-28": [
+            11
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "S1",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Source terminal 1 (ADG706 only)",
+        "packages": {
+          "TSSOP-28": [
+            19
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "S2",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Source terminal 2 (ADG706 only)",
+        "packages": {
+          "TSSOP-28": [
+            20
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "S3",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Source terminal 3 (ADG706 only)",
+        "packages": {
+          "TSSOP-28": [
+            21
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "S4",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Source terminal 4 (ADG706 only)",
+        "packages": {
+          "TSSOP-28": [
+            22
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "S5",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Source terminal 5 (ADG706 only)",
+        "packages": {
+          "TSSOP-28": [
+            23
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "S6",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Source terminal 6 (ADG706 only)",
+        "packages": {
+          "TSSOP-28": [
+            24
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "S7",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Source terminal 7 (ADG706 only)",
+        "packages": {
+          "TSSOP-28": [
+            25
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "S8",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Source terminal 8 (ADG706 only)",
+        "packages": {
+          "TSSOP-28": [
+            26
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "S9",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Source terminal 9 (ADG706 only)",
+        "packages": {
+          "TSSOP-28": [
+            11
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "S10",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Source terminal 10 (ADG706 only)",
+        "packages": {
+          "TSSOP-28": [
+            10
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "S11",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Source terminal 11 (ADG706 only)",
+        "packages": {
+          "TSSOP-28": [
+            9
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "S12",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Source terminal 12 (ADG706 only)",
+        "packages": {
+          "TSSOP-28": [
+            8
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "S13",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Source terminal 13 (ADG706 only)",
+        "packages": {
+          "TSSOP-28": [
+            7
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "S14",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Source terminal 14 (ADG706 only)",
+        "packages": {
+          "TSSOP-28": [
+            6
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "S15",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Source terminal 15 (ADG706 only)",
+        "packages": {
+          "TSSOP-28": [
+            5
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "S16",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Source terminal 16 (ADG706 only)",
+        "packages": {
+          "TSSOP-28": [
+            4
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "S1A",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Source terminal 1A (ADG707 only)",
+        "packages": {
+          "TSSOP-28": [
+            20
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "S2A",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Source terminal 2A (ADG707 only)",
+        "packages": {
+          "TSSOP-28": [
+            21
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "S3A",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Source terminal 3A (ADG707 only)",
+        "packages": {
+          "TSSOP-28": [
+            22
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "S4A",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Source terminal 4A (ADG707 only)",
+        "packages": {
+          "TSSOP-28": [
+            23
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "S5A",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Source terminal 5A (ADG707 only)",
+        "packages": {
+          "TSSOP-28": [
+            24
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "S6A",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Source terminal 6A (ADG707 only)",
+        "packages": {
+          "TSSOP-28": [
+            25
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "S7A",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Source terminal 7A (ADG707 only)",
+        "packages": {
+          "TSSOP-28": [
+            26
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "S8A",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Source terminal 8A (ADG707 only)",
+        "packages": {
+          "TSSOP-28": [
+            27
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "S1B",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Source terminal 1B (ADG707 only)",
+        "packages": {
+          "TSSOP-28": [
+            10
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "S2B",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Source terminal 2B (ADG707 only)",
+        "packages": {
+          "TSSOP-28": [
+            9
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "S3B",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Source terminal 3B (ADG707 only)",
+        "packages": {
+          "TSSOP-28": [
+            8
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "S4B",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Source terminal 4B (ADG707 only)",
+        "packages": {
+          "TSSOP-28": [
+            7
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "S5B",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Source terminal 5B (ADG707 only)",
+        "packages": {
+          "TSSOP-28": [
+            6
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "S6B",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Source terminal 6B (ADG707 only)",
+        "packages": {
+          "TSSOP-28": [
+            5
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "S7B",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Source terminal 7B (ADG707 only)",
+        "packages": {
+          "TSSOP-28": [
+            4
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "S8B",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Source terminal 8B (ADG707 only)",
+        "packages": {
+          "TSSOP-28": [
+            3
           ]
         },
         "unused_treatment": null
@@ -1249,12 +1004,12 @@
         "name": "NC",
         "direction": "NC",
         "signal_type": "NONE",
-        "description": "No Internal Connection",
+        "description": "No internal connection",
         "packages": {
-          "28-Lead TSSOP": [
-            11,
-            13,
-            18,
+          "TSSOP-28": [
+            2,
+            3,
+            14,
             28
           ]
         },
@@ -1262,284 +1017,326 @@
       }
     ]
   },
-  "pin_validation": [
-    {
-      "level": "warning",
-      "message": "package '28-Lead TSSOP' pin 13 claimed by multiple logical pins: ['A3', 'NC']"
-    },
-    {
-      "level": "warning",
-      "message": "package '28-Lead TSSOP' pin 20 claimed by multiple logical pins: ['S1', 'S1A']"
-    },
-    {
-      "level": "warning",
-      "message": "package '28-Lead TSSOP' pin 21 claimed by multiple logical pins: ['S2', 'S2A']"
-    },
-    {
-      "level": "warning",
-      "message": "package '28-Lead TSSOP' pin 22 claimed by multiple logical pins: ['S3', 'S3A']"
-    },
-    {
-      "level": "warning",
-      "message": "package '28-Lead TSSOP' pin 23 claimed by multiple logical pins: ['S4', 'S4A']"
-    },
-    {
-      "level": "warning",
-      "message": "package '28-Lead TSSOP' pin 24 claimed by multiple logical pins: ['S5', 'S5A']"
-    },
-    {
-      "level": "warning",
-      "message": "package '28-Lead TSSOP' pin 25 claimed by multiple logical pins: ['S6', 'S6A']"
-    },
-    {
-      "level": "warning",
-      "message": "package '28-Lead TSSOP' pin 26 claimed by multiple logical pins: ['S7', 'S7A']"
-    },
-    {
-      "level": "warning",
-      "message": "package '28-Lead TSSOP' pin 27 claimed by multiple logical pins: ['S8', 'S8A']"
-    },
-    {
-      "level": "warning",
-      "message": "package '28-Lead TSSOP' pin 9 claimed by multiple logical pins: ['S9', 'S1B']"
-    },
-    {
-      "level": "warning",
-      "message": "package '28-Lead TSSOP' pin 8 claimed by multiple logical pins: ['S10', 'S2B']"
-    },
-    {
-      "level": "warning",
-      "message": "package '28-Lead TSSOP' pin 7 claimed by multiple logical pins: ['S11', 'S3B']"
-    },
-    {
-      "level": "warning",
-      "message": "package '28-Lead TSSOP' pin 6 claimed by multiple logical pins: ['S12', 'S4B']"
-    },
-    {
-      "level": "warning",
-      "message": "package '28-Lead TSSOP' pin 5 claimed by multiple logical pins: ['S13', 'S5B']"
-    },
-    {
-      "level": "warning",
-      "message": "package '28-Lead TSSOP' pin 4 claimed by multiple logical pins: ['S14', 'S6B']"
-    },
-    {
-      "level": "warning",
-      "message": "package '28-Lead TSSOP' pin 3 claimed by multiple logical pins: ['S15', 'S7B']"
-    },
-    {
-      "level": "warning",
-      "message": "package '28-Lead TSSOP' pin 2 claimed by multiple logical pins: ['S16', 'S8B']"
-    },
-    {
-      "level": "warning",
-      "message": "package '28-Lead TSSOP' pin 19 claimed by multiple logical pins: ['D', 'DA']"
-    },
-    {
-      "level": "warning",
-      "message": "package '28-Lead TSSOP' pin 18 claimed by multiple logical pins: ['DB', 'NC']"
-    }
-  ],
   "pin_index": {
     "packages": {
-      "28-Lead TSSOP": {
+      "TSSOP-28": {
         "1": {
           "name": "VDD",
           "direction": "POWER_IN",
           "signal_type": "POWER",
-          "description": "Positive Power Supply Voltage",
-          "unused_treatment": null
-        },
-        "12": {
-          "name": "VSS",
-          "direction": "POWER_IN",
-          "signal_type": "POWER",
-          "description": "Negative Power Supply Voltage. For single-supply operation, this pin should be connected to GND.",
-          "unused_treatment": null
-        },
-        "10": {
-          "name": "GND",
-          "direction": "POWER_IN",
-          "signal_type": "POWER",
-          "description": "Ground (0 V) Reference",
-          "unused_treatment": null
-        },
-        "16": {
-          "name": "A0",
-          "direction": "INPUT",
-          "signal_type": "DIGITAL",
-          "description": "Logic Control Input",
-          "unused_treatment": null
-        },
-        "15": {
-          "name": "A1",
-          "direction": "INPUT",
-          "signal_type": "DIGITAL",
-          "description": "Logic Control Input",
-          "unused_treatment": null
-        },
-        "14": {
-          "name": "A2",
-          "direction": "INPUT",
-          "signal_type": "DIGITAL",
-          "description": "Logic Control Input",
+          "description": "Positive power supply voltage",
           "unused_treatment": null
         },
         "13": {
-          "name": "A3",
-          "direction": "INPUT",
-          "signal_type": "DIGITAL",
-          "description": "Logic Control Input (ADG706 only) (also: NC — No Internal Connection)",
+          "name": "VSS",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Negative power supply voltage. For single-supply operation, connect to GND.",
+          "unused_treatment": null
+        },
+        "12": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground (0 V) reference",
           "unused_treatment": null
         },
         "17": {
-          "name": "EN",
+          "name": "A0",
           "direction": "INPUT",
           "signal_type": "DIGITAL",
-          "description": "Active High Digital Input. When low, the device is disabled and all switches are off.",
+          "description": "Logic control input",
           "unused_treatment": null
         },
-        "20": {
-          "name": "S1",
-          "direction": "BIDIRECTIONAL",
-          "signal_type": "ANALOG",
-          "description": "Source Terminal 1 (ADG706) (also: S1A — Source Terminal 1A (ADG707))",
+        "16": {
+          "name": "A1",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Logic control input",
           "unused_treatment": null
         },
-        "21": {
-          "name": "S2",
-          "direction": "BIDIRECTIONAL",
-          "signal_type": "ANALOG",
-          "description": "Source Terminal 2 (ADG706) (also: S2A — Source Terminal 2A (ADG707))",
+        "15": {
+          "name": "A2",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Logic control input",
           "unused_treatment": null
         },
-        "22": {
-          "name": "S3",
-          "direction": "BIDIRECTIONAL",
-          "signal_type": "ANALOG",
-          "description": "Source Terminal 3 (ADG706) (also: S3A — Source Terminal 3A (ADG707))",
-          "unused_treatment": null
-        },
-        "23": {
-          "name": "S4",
-          "direction": "BIDIRECTIONAL",
-          "signal_type": "ANALOG",
-          "description": "Source Terminal 4 (ADG706) (also: S4A — Source Terminal 4A (ADG707))",
-          "unused_treatment": null
-        },
-        "24": {
-          "name": "S5",
-          "direction": "BIDIRECTIONAL",
-          "signal_type": "ANALOG",
-          "description": "Source Terminal 5 (ADG706) (also: S5A — Source Terminal 5A (ADG707))",
-          "unused_treatment": null
-        },
-        "25": {
-          "name": "S6",
-          "direction": "BIDIRECTIONAL",
-          "signal_type": "ANALOG",
-          "description": "Source Terminal 6 (ADG706) (also: S6A — Source Terminal 6A (ADG707))",
-          "unused_treatment": null
-        },
-        "26": {
-          "name": "S7",
-          "direction": "BIDIRECTIONAL",
-          "signal_type": "ANALOG",
-          "description": "Source Terminal 7 (ADG706) (also: S7A — Source Terminal 7A (ADG707))",
-          "unused_treatment": null
-        },
-        "27": {
-          "name": "S8",
-          "direction": "BIDIRECTIONAL",
-          "signal_type": "ANALOG",
-          "description": "Source Terminal 8 (ADG706) (also: S8A — Source Terminal 8A (ADG707))",
-          "unused_treatment": null
-        },
-        "9": {
-          "name": "S9",
-          "direction": "BIDIRECTIONAL",
-          "signal_type": "ANALOG",
-          "description": "Source Terminal 9 (ADG706) (also: S1B — Source Terminal 1B (ADG707))",
-          "unused_treatment": null
-        },
-        "8": {
-          "name": "S10",
-          "direction": "BIDIRECTIONAL",
-          "signal_type": "ANALOG",
-          "description": "Source Terminal 10 (ADG706) (also: S2B — Source Terminal 2B (ADG707))",
-          "unused_treatment": null
-        },
-        "7": {
-          "name": "S11",
-          "direction": "BIDIRECTIONAL",
-          "signal_type": "ANALOG",
-          "description": "Source Terminal 11 (ADG706) (also: S3B — Source Terminal 3B (ADG707))",
-          "unused_treatment": null
-        },
-        "6": {
-          "name": "S12",
-          "direction": "BIDIRECTIONAL",
-          "signal_type": "ANALOG",
-          "description": "Source Terminal 12 (ADG706) (also: S4B — Source Terminal 4B (ADG707))",
-          "unused_treatment": null
-        },
-        "5": {
-          "name": "S13",
-          "direction": "BIDIRECTIONAL",
-          "signal_type": "ANALOG",
-          "description": "Source Terminal 13 (ADG706) (also: S5B — Source Terminal 5B (ADG707))",
-          "unused_treatment": null
-        },
-        "4": {
-          "name": "S14",
-          "direction": "BIDIRECTIONAL",
-          "signal_type": "ANALOG",
-          "description": "Source Terminal 14 (ADG706) (also: S6B — Source Terminal 6B (ADG707))",
-          "unused_treatment": null
-        },
-        "3": {
-          "name": "S15",
-          "direction": "BIDIRECTIONAL",
-          "signal_type": "ANALOG",
-          "description": "Source Terminal 15 (ADG706) (also: S7B — Source Terminal 7B (ADG707))",
-          "unused_treatment": null
-        },
-        "2": {
-          "name": "S16",
-          "direction": "BIDIRECTIONAL",
-          "signal_type": "ANALOG",
-          "description": "Source Terminal 16 (ADG706) (also: S8B — Source Terminal 8B (ADG707))",
-          "unused_treatment": null
-        },
-        "19": {
-          "name": "D",
-          "direction": "BIDIRECTIONAL",
-          "signal_type": "ANALOG",
-          "description": "Drain Terminal (ADG706) (also: DA — Drain Terminal A (ADG707))",
+        "14": {
+          "name": "A3",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Logic control input (ADG706 only) (also: NC — No internal connection)",
           "unused_treatment": null
         },
         "18": {
-          "name": "DB",
+          "name": "EN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Active high enable input",
+          "unused_treatment": null
+        },
+        "27": {
+          "name": "D",
           "direction": "BIDIRECTIONAL",
           "signal_type": "ANALOG",
-          "description": "Drain Terminal B (ADG707) (also: NC — No Internal Connection)",
+          "description": "Drain terminal (ADG706 only) (also: S8A — Source terminal 8A (ADG707 only))",
+          "unused_treatment": null
+        },
+        "19": {
+          "name": "DA",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Drain terminal A (ADG707 only) (also: S1 — Source terminal 1 (ADG706 only))",
           "unused_treatment": null
         },
         "11": {
+          "name": "DB",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Drain terminal B (ADG707 only) (also: S9 — Source terminal 9 (ADG706 only))",
+          "unused_treatment": null
+        },
+        "20": {
+          "name": "S2",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Source terminal 2 (ADG706 only) (also: S1A — Source terminal 1A (ADG707 only))",
+          "unused_treatment": null
+        },
+        "21": {
+          "name": "S3",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Source terminal 3 (ADG706 only) (also: S2A — Source terminal 2A (ADG707 only))",
+          "unused_treatment": null
+        },
+        "22": {
+          "name": "S4",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Source terminal 4 (ADG706 only) (also: S3A — Source terminal 3A (ADG707 only))",
+          "unused_treatment": null
+        },
+        "23": {
+          "name": "S5",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Source terminal 5 (ADG706 only) (also: S4A — Source terminal 4A (ADG707 only))",
+          "unused_treatment": null
+        },
+        "24": {
+          "name": "S6",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Source terminal 6 (ADG706 only) (also: S5A — Source terminal 5A (ADG707 only))",
+          "unused_treatment": null
+        },
+        "25": {
+          "name": "S7",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Source terminal 7 (ADG706 only) (also: S6A — Source terminal 6A (ADG707 only))",
+          "unused_treatment": null
+        },
+        "26": {
+          "name": "S8",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Source terminal 8 (ADG706 only) (also: S7A — Source terminal 7A (ADG707 only))",
+          "unused_treatment": null
+        },
+        "10": {
+          "name": "S10",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Source terminal 10 (ADG706 only) (also: S1B — Source terminal 1B (ADG707 only))",
+          "unused_treatment": null
+        },
+        "9": {
+          "name": "S11",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Source terminal 11 (ADG706 only) (also: S2B — Source terminal 2B (ADG707 only))",
+          "unused_treatment": null
+        },
+        "8": {
+          "name": "S12",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Source terminal 12 (ADG706 only) (also: S3B — Source terminal 3B (ADG707 only))",
+          "unused_treatment": null
+        },
+        "7": {
+          "name": "S13",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Source terminal 13 (ADG706 only) (also: S4B — Source terminal 4B (ADG707 only))",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "S14",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Source terminal 14 (ADG706 only) (also: S5B — Source terminal 5B (ADG707 only))",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "S15",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Source terminal 15 (ADG706 only) (also: S6B — Source terminal 6B (ADG707 only))",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "S16",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Source terminal 16 (ADG706 only) (also: S7B — Source terminal 7B (ADG707 only))",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "S8B",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Source terminal 8B (ADG707 only) (also: NC — No internal connection)",
+          "unused_treatment": null
+        },
+        "2": {
           "name": "NC",
           "direction": "NC",
           "signal_type": "NONE",
-          "description": "No Internal Connection",
+          "description": "No internal connection",
           "unused_treatment": null
         },
         "28": {
           "name": "NC",
           "direction": "NC",
           "signal_type": "NONE",
-          "description": "No Internal Connection",
+          "description": "No internal connection",
           "unused_treatment": null
         }
       }
     }
+  },
+  "pin_validation": [
+    {
+      "level": "warning",
+      "message": "package 'TSSOP-28' pin 14 claimed by multiple logical pins: ['A3', 'NC']"
+    },
+    {
+      "level": "warning",
+      "message": "package 'TSSOP-28' pin 27 claimed by multiple logical pins: ['D', 'S8A']"
+    },
+    {
+      "level": "warning",
+      "message": "package 'TSSOP-28' pin 19 claimed by multiple logical pins: ['DA', 'S1']"
+    },
+    {
+      "level": "warning",
+      "message": "package 'TSSOP-28' pin 11 claimed by multiple logical pins: ['DB', 'S9']"
+    },
+    {
+      "level": "warning",
+      "message": "package 'TSSOP-28' pin 20 claimed by multiple logical pins: ['S2', 'S1A']"
+    },
+    {
+      "level": "warning",
+      "message": "package 'TSSOP-28' pin 21 claimed by multiple logical pins: ['S3', 'S2A']"
+    },
+    {
+      "level": "warning",
+      "message": "package 'TSSOP-28' pin 22 claimed by multiple logical pins: ['S4', 'S3A']"
+    },
+    {
+      "level": "warning",
+      "message": "package 'TSSOP-28' pin 23 claimed by multiple logical pins: ['S5', 'S4A']"
+    },
+    {
+      "level": "warning",
+      "message": "package 'TSSOP-28' pin 24 claimed by multiple logical pins: ['S6', 'S5A']"
+    },
+    {
+      "level": "warning",
+      "message": "package 'TSSOP-28' pin 25 claimed by multiple logical pins: ['S7', 'S6A']"
+    },
+    {
+      "level": "warning",
+      "message": "package 'TSSOP-28' pin 26 claimed by multiple logical pins: ['S8', 'S7A']"
+    },
+    {
+      "level": "warning",
+      "message": "package 'TSSOP-28' pin 10 claimed by multiple logical pins: ['S10', 'S1B']"
+    },
+    {
+      "level": "warning",
+      "message": "package 'TSSOP-28' pin 9 claimed by multiple logical pins: ['S11', 'S2B']"
+    },
+    {
+      "level": "warning",
+      "message": "package 'TSSOP-28' pin 8 claimed by multiple logical pins: ['S12', 'S3B']"
+    },
+    {
+      "level": "warning",
+      "message": "package 'TSSOP-28' pin 7 claimed by multiple logical pins: ['S13', 'S4B']"
+    },
+    {
+      "level": "warning",
+      "message": "package 'TSSOP-28' pin 6 claimed by multiple logical pins: ['S14', 'S5B']"
+    },
+    {
+      "level": "warning",
+      "message": "package 'TSSOP-28' pin 5 claimed by multiple logical pins: ['S15', 'S6B']"
+    },
+    {
+      "level": "warning",
+      "message": "package 'TSSOP-28' pin 4 claimed by multiple logical pins: ['S16', 'S7B']"
+    },
+    {
+      "level": "warning",
+      "message": "package 'TSSOP-28' pin 3 claimed by multiple logical pins: ['S8B', 'NC']"
+    }
+  ],
+  "validation": [
+    {
+      "param": "Positive Supply Voltage to GND",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Negative Supply Voltage to GND",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Operating Temperature Range",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Storage Temperature Range",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    }
+  ],
+  "physics_validation": [],
+  "cross_validation": {
+    "total_extracted_values": 18,
+    "values_found_in_pdf": 18,
+    "values_not_in_pdf": [],
+    "value_coverage_pct": 100.0,
+    "total_params": 19,
+    "params_verified": 19,
+    "params_suspicious": 0,
+    "suspicious_params": []
+  },
+  "timing": {
+    "l0_classify_s": 0.045,
+    "l1a_extract_s": 53.025,
+    "l1b_pin_s": 404.183
   }
 }

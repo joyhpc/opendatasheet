@@ -15,7 +15,7 @@
       "text_length": 2012,
       "category": "pin",
       "matched_patterns": [
-        "(?i)pin\\s+(description|configuration|function|assignment|definition)",
+        "(?i)pin\\s+(description|configuration|function|assignment|definition|connection|diagram)",
         "(?i)marking\\s+information"
       ],
       "text_preview": "RT9173/A ® DS9173/A-22   June  2019 www.richtek.com 1 © Copyright   2019 Richtek Technology Corporation. All rights reserved.                          is a registered trademark of Richtek Technology C"
@@ -48,7 +48,7 @@
       "text_length": 492,
       "category": "pin",
       "matched_patterns": [
-        "(?i)pin\\s+(description|configuration|function|assignment|definition)",
+        "(?i)pin\\s+(description|configuration|function|assignment|definition|connection|diagram)",
         "(?i)pin\\s+name"
       ],
       "text_preview": "RT9173/A 5 DS9173/A-22   June  2019 www.richtek.com © Copyright   2019 Richtek Technology Corporation. All rights reserved.                          is a registered trademark of Richtek Technology Cor"
@@ -159,7 +159,7 @@
       {
         "parameter": "Storage Temperature Range",
         "raw_name": "Storage Temperature Range",
-        "symbol": null,
+        "symbol": "Tstg",
         "min": -65,
         "typ": null,
         "max": 150,
@@ -177,94 +177,94 @@
         "conditions": null
       },
       {
-        "parameter": "Power Dissipation, TO-263-5",
-        "raw_name": "Power Dissipation, PD @ TA = 25°C TO-263-5",
+        "parameter": "Power Dissipation",
+        "raw_name": "Power Dissipation, PD @ TA = 25°C",
         "symbol": "PD",
         "min": null,
         "typ": null,
         "max": 1.923,
         "unit": "W",
-        "conditions": "TA = 25°C"
+        "conditions": "TO-263-5"
       },
       {
-        "parameter": "Power Dissipation, TO-252-5",
-        "raw_name": "Power Dissipation, PD @ TA = 25°C TO-252-5",
+        "parameter": "Power Dissipation",
+        "raw_name": "Power Dissipation, PD @ TA = 25°C",
         "symbol": "PD",
         "min": null,
         "typ": null,
         "max": 1.471,
         "unit": "W",
-        "conditions": "TA = 25°C"
+        "conditions": "TO-252-5"
       },
       {
-        "parameter": "Power Dissipation, SOP-8",
-        "raw_name": "Power Dissipation, PD @ TA = 25°C SOP-8",
+        "parameter": "Power Dissipation",
+        "raw_name": "Power Dissipation, PD @ TA = 25°C",
         "symbol": "PD",
         "min": null,
         "typ": null,
         "max": 0.625,
         "unit": "W",
-        "conditions": "TA = 25°C"
+        "conditions": "SOP-8"
       },
       {
-        "parameter": "Package Thermal Resistance, TO-263-5, θJC",
+        "parameter": "Package Thermal Resistance",
         "raw_name": "TO-263-5, θJC",
         "symbol": "θJC",
         "min": null,
         "typ": 7.7,
         "max": null,
         "unit": "°C/W",
-        "conditions": null
+        "conditions": "TO-263-5"
       },
       {
-        "parameter": "Package Thermal Resistance, TO-252-5, θJC",
+        "parameter": "Package Thermal Resistance",
         "raw_name": "TO-252-5, θJC",
         "symbol": "θJC",
         "min": null,
         "typ": 8,
         "max": null,
         "unit": "°C/W",
-        "conditions": null
+        "conditions": "TO-252-5"
       },
       {
-        "parameter": "Package Thermal Resistance, SOP-8, θJC",
+        "parameter": "Package Thermal Resistance",
         "raw_name": "SOP-8, θJC",
         "symbol": "θJC",
         "min": null,
         "typ": 23.2,
         "max": null,
         "unit": "°C/W",
-        "conditions": null
+        "conditions": "SOP-8"
       },
       {
-        "parameter": "Package Thermal Resistance, TO-263-5, θJA",
+        "parameter": "Package Thermal Resistance",
         "raw_name": "TO-263-5, θJA",
         "symbol": "θJA",
         "min": null,
         "typ": 52,
         "max": null,
         "unit": "°C/W",
-        "conditions": null
+        "conditions": "TO-263-5"
       },
       {
-        "parameter": "Package Thermal Resistance, TO-252-5, θJA",
+        "parameter": "Package Thermal Resistance",
         "raw_name": "TO-252-5, θJA",
         "symbol": "θJA",
         "min": null,
         "typ": 68,
         "max": null,
         "unit": "°C/W",
-        "conditions": null
+        "conditions": "TO-252-5"
       },
       {
-        "parameter": "Package Thermal Resistance, SOP-8, θJA",
+        "parameter": "Package Thermal Resistance",
         "raw_name": "SOP-8, θJA",
         "symbol": "θJA",
         "min": null,
         "typ": 160,
         "max": null,
         "unit": "°C/W",
-        "conditions": null
+        "conditions": "SOP-8"
       }
     ],
     "electrical_characteristics": [
@@ -276,12 +276,12 @@
         "typ": 0,
         "max": 20,
         "unit": "mV",
-        "conditions": "IOUT = 0A, Figure 1 (Note 2)",
+        "conditions": "IOUT = 0A, Figure 1",
         "device": "RT9173/A",
-        "temp_range": "25C"
+        "temp_range": "full"
       },
       {
-        "parameter": "Load Regulation (DDR 1)",
+        "parameter": "Load Regulation (Sourcing)",
         "raw_name": "Load Regulation (DDR 1/2)",
         "symbol": "ΔVLOAD",
         "min": null,
@@ -290,10 +290,10 @@
         "unit": "%",
         "conditions": "IL : 0A -> 1.5A, Figure 1",
         "device": "DDR 1",
-        "temp_range": "25C"
+        "temp_range": "full"
       },
       {
-        "parameter": "Load Regulation (DDR 2)",
+        "parameter": "Load Regulation (Sourcing)",
         "raw_name": "Load Regulation (DDR 1/2)",
         "symbol": "ΔVLOAD",
         "min": null,
@@ -302,10 +302,10 @@
         "unit": "%",
         "conditions": "IL : 0A -> 1.5A, Figure 1",
         "device": "DDR 2",
-        "temp_range": "25C"
+        "temp_range": "full"
       },
       {
-        "parameter": "Load Regulation (DDR 1)",
+        "parameter": "Load Regulation (Sinking)",
         "raw_name": "Load Regulation (DDR 1/2)",
         "symbol": "ΔVLOAD",
         "min": null,
@@ -314,10 +314,10 @@
         "unit": "%",
         "conditions": "IL : 0A -> -1.5A",
         "device": "DDR 1",
-        "temp_range": "25C"
+        "temp_range": "full"
       },
       {
-        "parameter": "Load Regulation (DDR 2)",
+        "parameter": "Load Regulation (Sinking)",
         "raw_name": "Load Regulation (DDR 1/2)",
         "symbol": "ΔVLOAD",
         "min": null,
@@ -326,10 +326,10 @@
         "unit": "%",
         "conditions": "IL : 0A -> -1.5A",
         "device": "DDR 2",
-        "temp_range": "25C"
+        "temp_range": "full"
       },
       {
-        "parameter": "Input Voltage Range (DDR 1)",
+        "parameter": "Input Voltage Range",
         "raw_name": "Input Voltage Range (DDR 1/2)",
         "symbol": "VIN",
         "min": 1.6,
@@ -338,10 +338,10 @@
         "unit": "V",
         "conditions": "Keep VCNTL >= VIN on operation power on and power off sequences",
         "device": "DDR 1",
-        "temp_range": "25C"
+        "temp_range": "full"
       },
       {
-        "parameter": "Input Voltage Range (DDR 2)",
+        "parameter": "Input Voltage Range",
         "raw_name": "Input Voltage Range (DDR 1/2)",
         "symbol": "VIN",
         "min": 1.6,
@@ -350,11 +350,11 @@
         "unit": "V",
         "conditions": "Keep VCNTL >= VIN on operation power on and power off sequences",
         "device": "DDR 2",
-        "temp_range": "25C"
+        "temp_range": "full"
       },
       {
         "parameter": "Control Voltage Range",
-        "raw_name": "Input Voltage Range",
+        "raw_name": "Input Voltage Range (DDR 1/2)",
         "symbol": "VCNTL",
         "min": null,
         "typ": 3.3,
@@ -362,7 +362,7 @@
         "unit": "V",
         "conditions": "Keep VCNTL >= VIN on operation power on and power off sequences",
         "device": "RT9173/A",
-        "temp_range": "25C"
+        "temp_range": "full"
       },
       {
         "parameter": "Operating Current of VCNTL",
@@ -374,7 +374,7 @@
         "unit": "mA",
         "conditions": "No Load",
         "device": "RT9173/A",
-        "temp_range": "25C"
+        "temp_range": "full"
       },
       {
         "parameter": "Current In Shutdown Mode",
@@ -383,10 +383,10 @@
         "min": null,
         "typ": 50,
         "max": 90,
-        "unit": "μA",
+        "unit": "µA",
         "conditions": "VREFEN < 0.2V, RL = 180Ω, Figure 2",
         "device": "RT9173/A",
-        "temp_range": "25C"
+        "temp_range": "full"
       },
       {
         "parameter": "Current limit",
@@ -398,7 +398,7 @@
         "unit": "A",
         "conditions": "Figure 3, 4",
         "device": "RT9173/A",
-        "temp_range": "25C"
+        "temp_range": "full"
       },
       {
         "parameter": "Thermal Shutdown Temperature",
@@ -410,7 +410,7 @@
         "unit": "°C",
         "conditions": "3.3V <= VCNTL <= 5V",
         "device": "RT9173/A",
-        "temp_range": "25C"
+        "temp_range": "full"
       },
       {
         "parameter": "Thermal Shutdown Hysteresis",
@@ -422,7 +422,7 @@
         "unit": "°C",
         "conditions": "Guaranteed by design",
         "device": "RT9173/A",
-        "temp_range": "25C"
+        "temp_range": "full"
       },
       {
         "parameter": "Shutdown Threshold Trigger (High)",
@@ -434,7 +434,7 @@
         "unit": "V",
         "conditions": "Output = High, Figure 5",
         "device": "RT9173/A",
-        "temp_range": "25C"
+        "temp_range": "full"
       },
       {
         "parameter": "Shutdown Threshold Trigger (Low)",
@@ -446,7 +446,7 @@
         "unit": "V",
         "conditions": "Output = Low, Figure 5",
         "device": "RT9173/A",
-        "temp_range": "25C"
+        "temp_range": "full"
       }
     ],
     "pin_definitions": [
@@ -484,111 +484,354 @@
         "pin_number": "5, 6, 7, 8",
         "pin_name": "VCNTL",
         "type": "Power",
-        "description": "Gate drive voltage (for SOP-8 package)."
+        "description": "Gate drive voltage (SOP-8 package)."
       }
     ]
   },
+  "pin_extraction": {
+    "logical_pins": [
+      {
+        "name": "VIN",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Power input voltage.",
+        "packages": {
+          "TO-263-5": [
+            1
+          ],
+          "TO-252-5": [
+            1
+          ],
+          "SOP-8": [
+            1
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "GND",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Ground.",
+        "packages": {
+          "TO-263-5": [
+            2
+          ],
+          "TO-252-5": [
+            2
+          ],
+          "SOP-8": [
+            2
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "VCNTL",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Gate drive voltage.",
+        "packages": {
+          "TO-263-5": [
+            3,
+            "TAB"
+          ],
+          "TO-252-5": [
+            3,
+            "TAB"
+          ],
+          "SOP-8": [
+            5,
+            6,
+            7,
+            8
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "REFEN",
+        "direction": "INPUT",
+        "signal_type": "ANALOG",
+        "description": "Reference voltage input and chip enable.",
+        "packages": {
+          "TO-263-5": [
+            4
+          ],
+          "TO-252-5": [
+            4
+          ],
+          "SOP-8": [
+            3
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "VOUT",
+        "direction": "POWER_OUT",
+        "signal_type": "POWER",
+        "description": "Output voltage.",
+        "packages": {
+          "TO-263-5": [
+            5
+          ],
+          "TO-252-5": [
+            5
+          ],
+          "SOP-8": [
+            4
+          ]
+        },
+        "unused_treatment": null
+      }
+    ]
+  },
+  "pin_index": {
+    "packages": {
+      "TO-263-5": {
+        "1": {
+          "name": "VIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power input voltage.",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground.",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "VCNTL",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Gate drive voltage.",
+          "unused_treatment": null
+        },
+        "TAB": {
+          "name": "VCNTL",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Gate drive voltage.",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "REFEN",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Reference voltage input and chip enable.",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "VOUT",
+          "direction": "POWER_OUT",
+          "signal_type": "POWER",
+          "description": "Output voltage.",
+          "unused_treatment": null
+        }
+      },
+      "TO-252-5": {
+        "1": {
+          "name": "VIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power input voltage.",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground.",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "VCNTL",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Gate drive voltage.",
+          "unused_treatment": null
+        },
+        "TAB": {
+          "name": "VCNTL",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Gate drive voltage.",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "REFEN",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Reference voltage input and chip enable.",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "VOUT",
+          "direction": "POWER_OUT",
+          "signal_type": "POWER",
+          "description": "Output voltage.",
+          "unused_treatment": null
+        }
+      },
+      "SOP-8": {
+        "1": {
+          "name": "VIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power input voltage.",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground.",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "VCNTL",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Gate drive voltage.",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "VCNTL",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Gate drive voltage.",
+          "unused_treatment": null
+        },
+        "7": {
+          "name": "VCNTL",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Gate drive voltage.",
+          "unused_treatment": null
+        },
+        "8": {
+          "name": "VCNTL",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Gate drive voltage.",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "REFEN",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Reference voltage input and chip enable.",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "VOUT",
+          "direction": "POWER_OUT",
+          "signal_type": "POWER",
+          "description": "Output voltage.",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "pin_validation": [],
   "validation": [
     {
       "param": "Storage Temperature Range",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Output Offset Voltage",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
-      "param": "Load Regulation (DDR 1)",
+      "param": "Load Regulation (Sourcing)",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
-      "param": "Load Regulation (DDR 2)",
+      "param": "Load Regulation (Sourcing)",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
-      "param": "Load Regulation (DDR 1)",
+      "param": "Load Regulation (Sinking)",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
-      "param": "Load Regulation (DDR 2)",
+      "param": "Load Regulation (Sinking)",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
-      "param": "Input Voltage Range (DDR 1)",
+      "param": "Input Voltage Range",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
-      "param": "Input Voltage Range (DDR 2)",
+      "param": "Input Voltage Range",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Control Voltage Range",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Operating Current of VCNTL",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Current In Shutdown Mode",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Thermal Shutdown Temperature",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     }
   ],
   "physics_validation": [],
   "cross_validation": {
     "total_extracted_values": 31,
-    "values_found_in_pdf": 23,
+    "values_found_in_pdf": 22,
     "values_not_in_pdf": [
-      -65.0,
-      1.471,
-      1.923,
+      0.625,
+      6.5,
+      7.7,
       23.2,
+      50.0,
       52.0,
       68.0,
       160.0,
       260.0
     ],
-    "value_coverage_pct": 74.2,
+    "value_coverage_pct": 71.0,
     "total_params": 28,
-    "params_verified": 20,
-    "params_suspicious": 8,
+    "params_verified": 21,
+    "params_suspicious": 7,
     "suspicious_params": [
-      {
-        "parameter": "Storage Temperature Range",
-        "device": "",
-        "values": [
-          -65.0,
-          150.0
-        ]
-      },
       {
         "parameter": "Lead Temperature (Soldering, 10 sec.)",
         "device": "",
@@ -597,42 +840,42 @@
         ]
       },
       {
-        "parameter": "Power Dissipation, TO-263-5",
+        "parameter": "Power Dissipation",
         "device": "",
         "values": [
-          1.923
+          0.625
         ]
       },
       {
-        "parameter": "Power Dissipation, TO-252-5",
+        "parameter": "Package Thermal Resistance",
         "device": "",
         "values": [
-          1.471
+          7.7
         ]
       },
       {
-        "parameter": "Package Thermal Resistance, SOP-8, θJC",
+        "parameter": "Package Thermal Resistance",
         "device": "",
         "values": [
           23.2
         ]
       },
       {
-        "parameter": "Package Thermal Resistance, TO-263-5, θJA",
+        "parameter": "Package Thermal Resistance",
         "device": "",
         "values": [
           52.0
         ]
       },
       {
-        "parameter": "Package Thermal Resistance, TO-252-5, θJA",
+        "parameter": "Package Thermal Resistance",
         "device": "",
         "values": [
           68.0
         ]
       },
       {
-        "parameter": "Package Thermal Resistance, SOP-8, θJA",
+        "parameter": "Package Thermal Resistance",
         "device": "",
         "values": [
           160.0
@@ -641,7 +884,8 @@
     ]
   },
   "timing": {
-    "l0_classify_s": 0.051,
-    "l1_extract_s": 25.839
+    "l0_classify_s": 0.076,
+    "l1a_extract_s": 36.585,
+    "l1b_pin_s": 14.112
   }
 }

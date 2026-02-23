@@ -44,7 +44,7 @@
       "text_length": 1472,
       "category": "pin",
       "matched_patterns": [
-        "(?i)pin\\s+(description|configuration|function|assignment|definition)"
+        "(?i)pin\\s+(description|configuration|function|assignment|definition|connection|diagram)"
       ],
       "text_preview": "ADG728/ADG729 –5– PIN FUNCTION DESCRIPTIONS ADG728 ADG729 Mnemonic Function 1 1 SCL Serial Clock Line. This is used in conjunction with the SDA line to clock data into the 8-bit input shift register. "
     },
@@ -129,17 +129,17 @@
         "conditions": null
       },
       {
-        "parameter": "Analog, Digital Inputs",
+        "parameter": "Analog, Digital Inputs Voltage",
         "raw_name": "Analog, Digital Inputs",
         "symbol": null,
         "min": -0.3,
         "typ": null,
         "max": null,
         "unit": "V",
-        "conditions": "Max is VDD + 0.3 V or 30 mA, whichever occurs first"
+        "conditions": "to VDD + 0.3 V or 30 mA, whichever occurs first"
       },
       {
-        "parameter": "Peak Current, S or D",
+        "parameter": "Peak Current",
         "raw_name": "Peak Current, S or D",
         "symbol": null,
         "min": null,
@@ -159,28 +159,28 @@
         "conditions": null
       },
       {
-        "parameter": "Continuous Current D, ADG729",
+        "parameter": "Continuous Current D",
         "raw_name": "Continuous Current D, ADG729",
         "symbol": null,
         "min": null,
         "typ": null,
         "max": 80,
         "unit": "mA",
-        "conditions": null
+        "conditions": "ADG729"
       },
       {
-        "parameter": "Continuous Current D, ADG728",
+        "parameter": "Continuous Current D",
         "raw_name": "Continuous Current D, ADG728",
         "symbol": null,
         "min": null,
         "typ": null,
         "max": 120,
         "unit": "mA",
-        "conditions": null
+        "conditions": "ADG728"
       },
       {
         "parameter": "Operating Temperature Range",
-        "raw_name": "Operating Temperature Range",
+        "raw_name": "Operating Temperature Range Industrial (B Version)",
         "symbol": "TA",
         "min": -40,
         "typ": null,
@@ -227,21 +227,11 @@
         "max": null,
         "unit": "°C/W",
         "conditions": "TSSOP Package"
-      },
-      {
-        "parameter": "ESD Tolerance",
-        "raw_name": "ESD (electrostatic discharge)",
-        "symbol": null,
-        "min": null,
-        "typ": null,
-        "max": 4000,
-        "unit": "V",
-        "conditions": "Human body model"
       }
     ],
     "electrical_characteristics": [
       {
-        "parameter": "Single Supply Voltage",
+        "parameter": "Supply Voltage",
         "raw_name": "Single Supply",
         "symbol": "VDD",
         "min": 2.7,
@@ -249,7 +239,7 @@
         "max": 5.5,
         "unit": "V",
         "conditions": null,
-        "device": "ADG728/ADG729",
+        "device": null,
         "temp_range": null
       },
       {
@@ -261,7 +251,7 @@
         "max": null,
         "unit": "Ω",
         "conditions": null,
-        "device": "ADG728/ADG729",
+        "device": null,
         "temp_range": "25C"
       },
       {
@@ -273,8 +263,8 @@
         "max": null,
         "unit": "Ω",
         "conditions": null,
-        "device": "ADG728/ADG729",
-        "temp_range": null
+        "device": null,
+        "temp_range": "25C"
       },
       {
         "parameter": "Leakage Currents",
@@ -285,20 +275,8 @@
         "max": null,
         "unit": "pA",
         "conditions": null,
-        "device": "ADG728/ADG729",
+        "device": null,
         "temp_range": "25C"
-      },
-      {
-        "parameter": "I2C Clock Rate",
-        "raw_name": "Clock rates",
-        "symbol": "fSCL",
-        "min": null,
-        "typ": null,
-        "max": 400,
-        "unit": "kbit/s",
-        "conditions": null,
-        "device": "ADG728/ADG729",
-        "temp_range": null
       }
     ],
     "pin_definitions": [
@@ -306,52 +284,88 @@
         "pin_number": "1",
         "pin_name": "SCL",
         "type": "Input",
-        "description": "Serial Clock Line. Used in conjunction with the SDA line to clock data into the 8-bit input shift register. Clock rates of up to 400 kbit/s can be accommodated."
+        "description": "Serial Clock Line. Used in conjunction with the SDA line to clock data into the 8-bit input shift register."
       },
       {
-        "pin_number": "2 (ADG728)",
+        "pin_number": "2",
         "pin_name": "RESET",
         "type": "Input",
-        "description": "Active low control input that clears the input register and turns all switches to the OFF condition."
+        "description": "Active low control input that clears the input register and turns all switches to the OFF condition (ADG728 only)."
       },
       {
         "pin_number": "3",
         "pin_name": "SDA",
         "type": "I/O",
-        "description": "Serial Data Line. Used in conjunction with the SCL line to clock data into the 8-bit input shift register during the write cycle and used to read back 1 byte of data during the read cycle. Bidirectional open-drain data line."
+        "description": "Serial Data Line. Bidirectional open-drain data line used to write and read back data."
       },
       {
-        "pin_number": "4, 5, 6, 7",
-        "pin_name": "Sxx",
+        "pin_number": "4",
+        "pin_name": "S1",
         "type": "I/O",
-        "description": "Source. May be an input or output."
+        "description": "Source Terminal. May be an input or output."
       },
       {
-        "pin_number": "8 (ADG728), 8, 9 (ADG729)",
-        "pin_name": "Dx",
+        "pin_number": "5",
+        "pin_name": "S2",
         "type": "I/O",
-        "description": "Drain. May be an input or output."
+        "description": "Source Terminal. May be an input or output."
       },
       {
-        "pin_number": "9, 10, 11, 12 (ADG728), 10, 11, 12, 13 (ADG729)",
-        "pin_name": "Sxx",
+        "pin_number": "6",
+        "pin_name": "S3",
         "type": "I/O",
-        "description": "Source. May be an input or output."
+        "description": "Source Terminal. May be an input or output."
       },
       {
-        "pin_number": "13 (ADG728), 14 (ADG729)",
+        "pin_number": "7",
+        "pin_name": "S4",
+        "type": "I/O",
+        "description": "Source Terminal. May be an input or output."
+      },
+      {
+        "pin_number": "8",
+        "pin_name": "D",
+        "type": "I/O",
+        "description": "Drain Terminal. May be an input or output."
+      },
+      {
+        "pin_number": "9",
+        "pin_name": "S8",
+        "type": "I/O",
+        "description": "Source Terminal. May be an input or output."
+      },
+      {
+        "pin_number": "10",
+        "pin_name": "S7",
+        "type": "I/O",
+        "description": "Source Terminal. May be an input or output."
+      },
+      {
+        "pin_number": "11",
+        "pin_name": "S6",
+        "type": "I/O",
+        "description": "Source Terminal. May be an input or output."
+      },
+      {
+        "pin_number": "12",
+        "pin_name": "S5",
+        "type": "I/O",
+        "description": "Source Terminal. May be an input or output."
+      },
+      {
+        "pin_number": "13",
         "pin_name": "VDD",
         "type": "Power",
-        "description": "Power Supply Input. These parts can be operated from a supply of 2.7 V to 5.5 V."
+        "description": "Power Supply Input. 2.7 V to 5.5 V."
       },
       {
-        "pin_number": "14 (ADG728), 15 (ADG729)",
+        "pin_number": "14",
         "pin_name": "GND",
         "type": "Power",
         "description": "Ground Reference."
       },
       {
-        "pin_number": "15 (ADG728), 2 (ADG729)",
+        "pin_number": "15",
         "pin_name": "A1",
         "type": "Input",
         "description": "Address Input. Sets the second least significant bit of the 7-bit slave address."
@@ -364,87 +378,613 @@
       }
     ]
   },
+  "pin_extraction": {
+    "logical_pins": [
+      {
+        "name": "SCL",
+        "direction": "INPUT",
+        "signal_type": "DIGITAL",
+        "description": "Serial Clock Line. Used in conjunction with the SDA line to clock data into the 8-bit input shift register.",
+        "packages": {
+          "TSSOP-16 (ADG728)": [
+            1
+          ],
+          "TSSOP-16 (ADG729)": [
+            1
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "RESET",
+        "direction": "INPUT",
+        "signal_type": "DIGITAL",
+        "description": "Active low control input that clears the input register and turns all switches to the OFF condition.",
+        "packages": {
+          "TSSOP-16 (ADG728)": [
+            2
+          ]
+        },
+        "unused_treatment": "VCC"
+      },
+      {
+        "name": "SDA",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "DIGITAL",
+        "description": "Serial Data Line. Bidirectional open-drain data line used to clock data into the 8-bit input shift register and read back data.",
+        "packages": {
+          "TSSOP-16 (ADG728)": [
+            3
+          ],
+          "TSSOP-16 (ADG729)": [
+            3
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "S1",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Source. May be an input or output.",
+        "packages": {
+          "TSSOP-16 (ADG728)": [
+            4
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "S2",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Source. May be an input or output.",
+        "packages": {
+          "TSSOP-16 (ADG728)": [
+            5
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "S3",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Source. May be an input or output.",
+        "packages": {
+          "TSSOP-16 (ADG728)": [
+            6
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "S4",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Source. May be an input or output.",
+        "packages": {
+          "TSSOP-16 (ADG728)": [
+            7
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "D",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Drain. May be an input or output.",
+        "packages": {
+          "TSSOP-16 (ADG728)": [
+            8
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "S8",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Source. May be an input or output.",
+        "packages": {
+          "TSSOP-16 (ADG728)": [
+            9
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "S7",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Source. May be an input or output.",
+        "packages": {
+          "TSSOP-16 (ADG728)": [
+            10
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "S6",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Source. May be an input or output.",
+        "packages": {
+          "TSSOP-16 (ADG728)": [
+            11
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "S5",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Source. May be an input or output.",
+        "packages": {
+          "TSSOP-16 (ADG728)": [
+            12
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "VDD",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Power Supply Input. These parts can be operated from a supply of 2.7 V to 5.5 V.",
+        "packages": {
+          "TSSOP-16 (ADG728)": [
+            13
+          ],
+          "TSSOP-16 (ADG729)": [
+            14
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "GND",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Ground Reference.",
+        "packages": {
+          "TSSOP-16 (ADG728)": [
+            14
+          ],
+          "TSSOP-16 (ADG729)": [
+            15
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "A1",
+        "direction": "INPUT",
+        "signal_type": "DIGITAL",
+        "description": "Address Input. Sets the second least significant bit of the 7-bit slave address.",
+        "packages": {
+          "TSSOP-16 (ADG728)": [
+            15
+          ],
+          "TSSOP-16 (ADG729)": [
+            2
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "A0",
+        "direction": "INPUT",
+        "signal_type": "DIGITAL",
+        "description": "Address Input. Sets the least significant bit of the 7-bit slave address.",
+        "packages": {
+          "TSSOP-16 (ADG728)": [
+            16
+          ],
+          "TSSOP-16 (ADG729)": [
+            16
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "S1A",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Source. May be an input or output.",
+        "packages": {
+          "TSSOP-16 (ADG729)": [
+            4
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "S2A",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Source. May be an input or output.",
+        "packages": {
+          "TSSOP-16 (ADG729)": [
+            5
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "S3A",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Source. May be an input or output.",
+        "packages": {
+          "TSSOP-16 (ADG729)": [
+            6
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "S4A",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Source. May be an input or output.",
+        "packages": {
+          "TSSOP-16 (ADG729)": [
+            7
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "DA",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Drain. May be an input or output.",
+        "packages": {
+          "TSSOP-16 (ADG729)": [
+            8
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "DB",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Drain. May be an input or output.",
+        "packages": {
+          "TSSOP-16 (ADG729)": [
+            9
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "S4B",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Source. May be an input or output.",
+        "packages": {
+          "TSSOP-16 (ADG729)": [
+            10
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "S3B",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Source. May be an input or output.",
+        "packages": {
+          "TSSOP-16 (ADG729)": [
+            11
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "S2B",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Source. May be an input or output.",
+        "packages": {
+          "TSSOP-16 (ADG729)": [
+            12
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "S1B",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Source. May be an input or output.",
+        "packages": {
+          "TSSOP-16 (ADG729)": [
+            13
+          ]
+        },
+        "unused_treatment": null
+      }
+    ]
+  },
+  "pin_index": {
+    "packages": {
+      "TSSOP-16 (ADG728)": {
+        "1": {
+          "name": "SCL",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Serial Clock Line. Used in conjunction with the SDA line to clock data into the 8-bit input shift register.",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "RESET",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Active low control input that clears the input register and turns all switches to the OFF condition.",
+          "unused_treatment": "VCC"
+        },
+        "3": {
+          "name": "SDA",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "DIGITAL",
+          "description": "Serial Data Line. Bidirectional open-drain data line used to clock data into the 8-bit input shift register and read back data.",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "S1",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Source. May be an input or output.",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "S2",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Source. May be an input or output.",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "S3",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Source. May be an input or output.",
+          "unused_treatment": null
+        },
+        "7": {
+          "name": "S4",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Source. May be an input or output.",
+          "unused_treatment": null
+        },
+        "8": {
+          "name": "D",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Drain. May be an input or output.",
+          "unused_treatment": null
+        },
+        "9": {
+          "name": "S8",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Source. May be an input or output.",
+          "unused_treatment": null
+        },
+        "10": {
+          "name": "S7",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Source. May be an input or output.",
+          "unused_treatment": null
+        },
+        "11": {
+          "name": "S6",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Source. May be an input or output.",
+          "unused_treatment": null
+        },
+        "12": {
+          "name": "S5",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Source. May be an input or output.",
+          "unused_treatment": null
+        },
+        "13": {
+          "name": "VDD",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power Supply Input. These parts can be operated from a supply of 2.7 V to 5.5 V.",
+          "unused_treatment": null
+        },
+        "14": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground Reference.",
+          "unused_treatment": null
+        },
+        "15": {
+          "name": "A1",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Address Input. Sets the second least significant bit of the 7-bit slave address.",
+          "unused_treatment": null
+        },
+        "16": {
+          "name": "A0",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Address Input. Sets the least significant bit of the 7-bit slave address.",
+          "unused_treatment": null
+        }
+      },
+      "TSSOP-16 (ADG729)": {
+        "1": {
+          "name": "SCL",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Serial Clock Line. Used in conjunction with the SDA line to clock data into the 8-bit input shift register.",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "SDA",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "DIGITAL",
+          "description": "Serial Data Line. Bidirectional open-drain data line used to clock data into the 8-bit input shift register and read back data.",
+          "unused_treatment": null
+        },
+        "14": {
+          "name": "VDD",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power Supply Input. These parts can be operated from a supply of 2.7 V to 5.5 V.",
+          "unused_treatment": null
+        },
+        "15": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground Reference.",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "A1",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Address Input. Sets the second least significant bit of the 7-bit slave address.",
+          "unused_treatment": null
+        },
+        "16": {
+          "name": "A0",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Address Input. Sets the least significant bit of the 7-bit slave address.",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "S1A",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Source. May be an input or output.",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "S2A",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Source. May be an input or output.",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "S3A",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Source. May be an input or output.",
+          "unused_treatment": null
+        },
+        "7": {
+          "name": "S4A",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Source. May be an input or output.",
+          "unused_treatment": null
+        },
+        "8": {
+          "name": "DA",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Drain. May be an input or output.",
+          "unused_treatment": null
+        },
+        "9": {
+          "name": "DB",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Drain. May be an input or output.",
+          "unused_treatment": null
+        },
+        "10": {
+          "name": "S4B",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Source. May be an input or output.",
+          "unused_treatment": null
+        },
+        "11": {
+          "name": "S3B",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Source. May be an input or output.",
+          "unused_treatment": null
+        },
+        "12": {
+          "name": "S2B",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Source. May be an input or output.",
+          "unused_treatment": null
+        },
+        "13": {
+          "name": "S1B",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Source. May be an input or output.",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "pin_validation": [],
   "validation": [
     {
       "param": "Supply Voltage",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Operating Temperature Range",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Storage Temperature Range",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
-      "param": "Single Supply Voltage",
+      "param": "Supply Voltage",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "I2C Clock Rate",
-      "rule": "unit_valid",
-      "passed": false,
-      "message": "Suspicious unit: kbit/s"
+      "message": "OK (modes: ALGEBRAIC)"
     }
   ],
   "physics_validation": [],
   "cross_validation": {
-    "total_extracted_values": 18,
-    "values_found_in_pdf": 15,
-    "values_not_in_pdf": [
-      -65.0,
-      -40.0,
-      -0.3
-    ],
-    "value_coverage_pct": 83.3,
-    "total_params": 17,
-    "params_verified": 13,
-    "params_suspicious": 4,
-    "suspicious_params": [
-      {
-        "parameter": "Supply Voltage",
-        "device": "",
-        "values": [
-          -0.3,
-          7.0
-        ]
-      },
-      {
-        "parameter": "Analog, Digital Inputs",
-        "device": "",
-        "values": [
-          -0.3
-        ]
-      },
-      {
-        "parameter": "Operating Temperature Range",
-        "device": "",
-        "values": [
-          -40.0,
-          85.0
-        ]
-      },
-      {
-        "parameter": "Storage Temperature Range",
-        "device": "",
-        "values": [
-          -65.0,
-          150.0
-        ]
-      }
-    ]
+    "total_extracted_values": 16,
+    "values_found_in_pdf": 16,
+    "values_not_in_pdf": [],
+    "value_coverage_pct": 100.0,
+    "total_params": 15,
+    "params_verified": 15,
+    "params_suspicious": 0,
+    "suspicious_params": []
   },
   "timing": {
-    "l0_classify_s": 0.053,
-    "l1_extract_s": 51.06
+    "l0_classify_s": 0.055,
+    "l1a_extract_s": 37.2,
+    "l1b_pin_s": 50.157
   }
 }

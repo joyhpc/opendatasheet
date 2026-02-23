@@ -28,7 +28,7 @@
       "category": "electrical",
       "matched_patterns": [
         "(?i)absolute\\s+maximum\\s+ratings?",
-        "(?i)pin\\s+(description|configuration|function|assignment|definition)"
+        "(?i)pin\\s+(description|configuration|function|assignment|definition|connection|diagram)"
       ],
       "text_preview": "ADG714/ADG715  Data Sheet    Rev. E | Page 2 of 21  TABLE OF CONTENTS  Features .............................................................................................. 1  Applications ........."
     },
@@ -88,7 +88,7 @@
       "text_length": 1754,
       "category": "pin",
       "matched_patterns": [
-        "(?i)pin\\s+(description|configuration|function|assignment|definition)"
+        "(?i)pin\\s+(description|configuration|function|assignment|definition|connection|diagram)"
       ],
       "text_preview": "ADG714/ADG715  Data Sheet    Rev. E | Page 10 of 21  PIN CONFIGURATIONS AND FUNCTION DESCRIPTIONS  1 2 3 4 5 6 7 8 9 10 20 21 22 23 24 19 18 17 16 15 14 13 12 11 ADG714 (Not to Scale) TOP VIEW RESET D"
     },
@@ -97,7 +97,7 @@
       "text_length": 2208,
       "category": "pin",
       "matched_patterns": [
-        "(?i)pin\\s+(description|configuration|function|assignment|definition)"
+        "(?i)pin\\s+(description|configuration|function|assignment|definition|connection|diagram)"
       ],
       "text_preview": "Data Sheet  ADG714/ADG715    Rev. E | Page 11 of 21  GND S1 D1 S2 D2 S3 S7 D8 S8 VSS D7 S6 D3 S4 D4 S5 D6 D5 SYNC SCLK VDD DIN RESET DOUT 2 1 3 4 5 6 18 17 16 15 14 13 8 9 10 11 7 12 20 19 21 22 23 24"
     },
@@ -106,7 +106,7 @@
       "text_length": 1491,
       "category": "pin",
       "matched_patterns": [
-        "(?i)pin\\s+(description|configuration|function|assignment|definition)"
+        "(?i)pin\\s+(description|configuration|function|assignment|definition|connection|diagram)"
       ],
       "text_preview": "ADG714/ADG715  Data Sheet    Rev. E | Page 12 of 21  1 2 3 4 5 6 7 8 9 10 20 21 22 23 24 19 18 17 16 15 14 13 12 11 ADG715 (Not to Scale) TOP VIEW A0 RESET A1 VSS S8 D8 S7 D7 S6 D6 S5 D5 SCL VDD SDA G"
     },
@@ -173,7 +173,7 @@
       "text_length": 2040,
       "category": "pin",
       "matched_patterns": [
-        "(?i)pin\\s+(description|configuration|function|assignment|definition)"
+        "(?i)pin\\s+(description|configuration|function|assignment|definition|connection|diagram)"
       ],
       "text_preview": "Data Sheet  ADG714/ADG715    Rev. E | Page 21 of 21  OUTLINE DIMENSIONS  24 13 12 1 6.40 BSC 4.50 4.40 4.30 PIN 1 7.90 7.80 7.70 0.15 0.05 0.30 0.19 0.65 BSC 1.20 MAX 0.20 0.09 0.75 0.60 0.45 8° 0° SE"
     }
@@ -187,9 +187,9 @@
     },
     "absolute_maximum_ratings": [
       {
-        "parameter": "Supply Voltage VDD to VSS",
+        "parameter": "Supply Voltage (VDD to VSS)",
         "raw_name": "VDD to VSS",
-        "symbol": "VDD - VSS",
+        "symbol": "VDD-VSS",
         "min": null,
         "typ": null,
         "max": 7,
@@ -197,7 +197,7 @@
         "conditions": null
       },
       {
-        "parameter": "Supply Voltage VDD to GND",
+        "parameter": "Supply Voltage (VDD to GND)",
         "raw_name": "VDD to GND",
         "symbol": "VDD",
         "min": -0.3,
@@ -207,7 +207,7 @@
         "conditions": null
       },
       {
-        "parameter": "Supply Voltage VSS to GND",
+        "parameter": "Supply Voltage (VSS to GND)",
         "raw_name": "VSS to GND",
         "symbol": "VSS",
         "min": -3.5,
@@ -222,19 +222,19 @@
         "symbol": null,
         "min": null,
         "typ": null,
-        "max": 30,
-        "unit": "mA",
-        "conditions": "whichever occurs first: VSS - 0.3 V to VDD + 0.3 V or 30 mA"
+        "max": null,
+        "unit": "V or mA",
+        "conditions": "VSS - 0.3 V to VDD + 0.3 V or 30 mA, whichever occurs first"
       },
       {
         "parameter": "Digital Inputs",
         "raw_name": "Digital Inputs",
         "symbol": null,
-        "min": null,
+        "min": -0.3,
         "typ": null,
-        "max": 30,
-        "unit": "mA",
-        "conditions": "whichever occurs first: -0.3 V to VDD + 0.3 V or 30 mA"
+        "max": null,
+        "unit": "V or mA",
+        "conditions": "to VDD + 0.3 V or 30 mA, whichever occurs first"
       },
       {
         "parameter": "Peak Current, Sx or Dx",
@@ -269,7 +269,7 @@
       {
         "parameter": "Storage Temperature Range",
         "raw_name": "Storage Temperature Range",
-        "symbol": "Tstg",
+        "symbol": null,
         "min": -65,
         "typ": null,
         "max": 150,
@@ -305,46 +305,6 @@
         "max": 235,
         "unit": "°C",
         "conditions": null
-      },
-      {
-        "parameter": "Thermal Resistance (Junction-to-Ambient)",
-        "raw_name": "θJA",
-        "symbol": "θJA",
-        "min": null,
-        "typ": 128,
-        "max": null,
-        "unit": "°C/W",
-        "conditions": "Package RU-24"
-      },
-      {
-        "parameter": "Thermal Resistance (Junction-to-Case)",
-        "raw_name": "θJC",
-        "symbol": "θJC",
-        "min": null,
-        "typ": 42,
-        "max": null,
-        "unit": "°C/W",
-        "conditions": "Package RU-24"
-      },
-      {
-        "parameter": "Thermal Resistance (Junction-to-Ambient)",
-        "raw_name": "θJA",
-        "symbol": "θJA",
-        "min": null,
-        "typ": 127.99,
-        "max": null,
-        "unit": "°C/W",
-        "conditions": "Package CP-24-10"
-      },
-      {
-        "parameter": "Thermal Resistance (Junction-to-Case)",
-        "raw_name": "θJC",
-        "symbol": "θJC",
-        "min": null,
-        "typ": 15.38,
-        "max": null,
-        "unit": "°C/W",
-        "conditions": "Package CP-24-10"
       }
     ],
     "electrical_characteristics": [
@@ -363,7 +323,7 @@
       {
         "parameter": "On Resistance Flatness",
         "raw_name": "on resistance flatness",
-        "symbol": "RFLAT(ON)",
+        "symbol": null,
         "min": null,
         "typ": 0.6,
         "max": null,
@@ -373,7 +333,7 @@
         "temp_range": "25C"
       },
       {
-        "parameter": "Leakage Current",
+        "parameter": "Leakage Currents",
         "raw_name": "leakage currents",
         "symbol": "IS(OFF), ID(OFF), ID(ON)",
         "min": null,
@@ -385,27 +345,87 @@
         "temp_range": "25C"
       },
       {
-        "parameter": "Single Supply Voltage",
-        "raw_name": "single supply",
-        "symbol": "VDD",
-        "min": 2.7,
-        "typ": null,
-        "max": 5.5,
-        "unit": "V",
-        "conditions": null,
+        "parameter": "Thermal Resistance Junction-to-Ambient",
+        "raw_name": "θJA",
+        "symbol": "θJA",
+        "min": null,
+        "typ": 128,
+        "max": null,
+        "unit": "°C/W",
+        "conditions": "RU-24 package",
         "device": "ADG714/ADG715",
         "temp_range": null
       },
       {
-        "parameter": "Dual Supply Voltage",
-        "raw_name": "dual supply",
-        "symbol": "VDD, VSS",
+        "parameter": "Thermal Resistance Junction-to-Case",
+        "raw_name": "θJC",
+        "symbol": "θJC",
         "min": null,
-        "typ": 2.5,
+        "typ": 42,
         "max": null,
-        "unit": "V",
-        "conditions": "±2.5 V",
+        "unit": "°C/W",
+        "conditions": "RU-24 package",
         "device": "ADG714/ADG715",
+        "temp_range": null
+      },
+      {
+        "parameter": "Thermal Resistance Junction-to-Ambient",
+        "raw_name": "θJA",
+        "symbol": "θJA",
+        "min": null,
+        "typ": 127.99,
+        "max": null,
+        "unit": "°C/W",
+        "conditions": "CP-24-10 package",
+        "device": "ADG714",
+        "temp_range": null
+      },
+      {
+        "parameter": "Thermal Resistance Junction-to-Case",
+        "raw_name": "θJC",
+        "symbol": "θJC",
+        "min": null,
+        "typ": 15.38,
+        "max": null,
+        "unit": "°C/W",
+        "conditions": "CP-24-10 package",
+        "device": "ADG714",
+        "temp_range": null
+      },
+      {
+        "parameter": "Serial Clock Rate",
+        "raw_name": "SCLK",
+        "symbol": "fSCLK",
+        "min": null,
+        "typ": null,
+        "max": 30,
+        "unit": "MHz",
+        "conditions": "ADG714 TSSOP",
+        "device": "ADG714",
+        "temp_range": null
+      },
+      {
+        "parameter": "Serial Clock Rate",
+        "raw_name": "SCLK",
+        "symbol": "fSCLK",
+        "min": null,
+        "typ": null,
+        "max": 50,
+        "unit": "MHz",
+        "conditions": "ADG714 LFCSP",
+        "device": "ADG714",
+        "temp_range": null
+      },
+      {
+        "parameter": "Serial Clock Rate",
+        "raw_name": "SCL",
+        "symbol": "fSCL",
+        "min": null,
+        "typ": null,
+        "max": 400,
+        "unit": "kbps",
+        "conditions": "ADG715",
+        "device": "ADG715",
         "temp_range": null
       }
     ],
@@ -414,7 +434,7 @@
         "pin_number": "1",
         "pin_name": "SCLK",
         "type": "Input",
-        "description": "Serial Clock Input (ADG714 TSSOP). Data is clocked into the input shift register on the falling edge of the serial clock input. Rates up to 30 MHz."
+        "description": "Serial Clock Input. Data is clocked into the input shift register on the falling edge of the serial clock input. These devices accommodate serial input rates of up to 30 MHz."
       },
       {
         "pin_number": "2",
@@ -426,24 +446,24 @@
         "pin_number": "3",
         "pin_name": "DIN",
         "type": "Input",
-        "description": "Serial Data Input (ADG714 TSSOP). Data is clocked into the 8-bit input register on the falling edge of the serial clock input."
+        "description": "Serial Data Input. Data is clocked into the 8-bit input register on the falling edge of the serial clock input."
       },
       {
         "pin_number": "4",
         "pin_name": "GND",
-        "type": "Ground",
+        "type": "Power",
         "description": "Ground Reference."
       },
       {
         "pin_number": "5, 7, 9, 11, 14, 16, 18, 20",
-        "pin_name": "S1 to S8",
-        "type": "I/O",
+        "pin_name": "Sx",
+        "type": "Input/Output",
         "description": "Source. These pins may be an input or an output."
       },
       {
         "pin_number": "6, 8, 10, 12, 13, 15, 17, 19",
-        "pin_name": "D1 to D8",
-        "type": "I/O",
+        "pin_name": "Dx",
+        "type": "Input/Output",
         "description": "Drain. These pins may be an input or an output."
       },
       {
@@ -456,137 +476,874 @@
         "pin_number": "22",
         "pin_name": "DOUT",
         "type": "Output",
-        "description": "Serial Data Output (ADG714). Allows daisy-chaining. Data is clocked out on the rising edge of SCLK. Open-drain output."
+        "description": "Serial Data Output. This pin allows a number of devices to be daisy-chained. Data is clocked out of the input shift register on the rising edge of SCLK. DOUT is an open-drain output that is pulled to the supply with an external pull-up resistor."
       },
       {
         "pin_number": "23",
         "pin_name": "RESET",
         "type": "Input",
-        "description": "Active Low Control Input. Clears the input register and turns all switches to the off condition."
+        "description": "Active Low Control Input. This pin clears the input register and turns all switches to the off condition."
       },
       {
         "pin_number": "24",
         "pin_name": "SYNC",
         "type": "Input",
-        "description": "Active Low Control Input (ADG714). Frame synchronization signal for input data."
-      },
-      {
-        "pin_number": "1",
-        "pin_name": "SCL",
-        "type": "Input",
-        "description": "Serial Clock Line (ADG715 TSSOP). Used with SDA to clock data into the 8-bit input shift register. Rates up to 400 kbps."
-      },
-      {
-        "pin_number": "3",
-        "pin_name": "SDA",
-        "type": "I/O",
-        "description": "Serial Data Line (ADG715 TSSOP). Bidirectional open-drain data line."
-      },
-      {
-        "pin_number": "22",
-        "pin_name": "A1",
-        "type": "Input",
-        "description": "Address Input (ADG715). Sets the second LSB of the 7-bit slave address."
-      },
-      {
-        "pin_number": "24",
-        "pin_name": "A0",
-        "type": "Input",
-        "description": "Address Input (ADG715). Sets the LSB of the 7-bit slave address."
+        "description": "Active Low Control Input. This pin is the frame synchronization signal for the input data. When SYNC goes low, this pin powers on the SCLK and DIN buffers and the input shift register is enabled. Data is transferred on the falling edges of the following clock cycle. Taking SYNC high updates the switches."
       }
     ]
   },
-  "validation": [
+  "pin_extraction": {
+    "logical_pins": [
+      {
+        "name": "SCLK",
+        "direction": "INPUT",
+        "signal_type": "DIGITAL",
+        "description": "Serial Clock Input (ADG714)",
+        "packages": {
+          "24-lead TSSOP": [
+            1
+          ],
+          "24-lead LFCSP": [
+            22
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "SCL",
+        "direction": "INPUT",
+        "signal_type": "DIGITAL",
+        "description": "Serial Clock Line (ADG715)",
+        "packages": {
+          "24-lead TSSOP": [
+            1
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "VDD",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Positive Analog Supply Voltage",
+        "packages": {
+          "24-lead TSSOP": [
+            2
+          ],
+          "24-lead LFCSP": [
+            23
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "DIN",
+        "direction": "INPUT",
+        "signal_type": "DIGITAL",
+        "description": "Serial Data Input (ADG714)",
+        "packages": {
+          "24-lead TSSOP": [
+            3
+          ],
+          "24-lead LFCSP": [
+            24
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "SDA",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "DIGITAL",
+        "description": "Serial Data Line, bidirectional open-drain (ADG715)",
+        "packages": {
+          "24-lead TSSOP": [
+            3
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "GND",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Ground (0 V) Reference",
+        "packages": {
+          "24-lead TSSOP": [
+            4
+          ],
+          "24-lead LFCSP": [
+            1
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "S1",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Source terminal of switch 1",
+        "packages": {
+          "24-lead TSSOP": [
+            5
+          ],
+          "24-lead LFCSP": [
+            2
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "D1",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Drain terminal of switch 1",
+        "packages": {
+          "24-lead TSSOP": [
+            6
+          ],
+          "24-lead LFCSP": [
+            3
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "S2",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Source terminal of switch 2",
+        "packages": {
+          "24-lead TSSOP": [
+            7
+          ],
+          "24-lead LFCSP": [
+            4
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "D2",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Drain terminal of switch 2",
+        "packages": {
+          "24-lead TSSOP": [
+            8
+          ],
+          "24-lead LFCSP": [
+            5
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "S3",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Source terminal of switch 3",
+        "packages": {
+          "24-lead TSSOP": [
+            9
+          ],
+          "24-lead LFCSP": [
+            6
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "D3",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Drain terminal of switch 3",
+        "packages": {
+          "24-lead TSSOP": [
+            10
+          ],
+          "24-lead LFCSP": [
+            7
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "S4",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Source terminal of switch 4",
+        "packages": {
+          "24-lead TSSOP": [
+            11
+          ],
+          "24-lead LFCSP": [
+            8
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "D4",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Drain terminal of switch 4",
+        "packages": {
+          "24-lead TSSOP": [
+            12
+          ],
+          "24-lead LFCSP": [
+            9
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "D5",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Drain terminal of switch 5",
+        "packages": {
+          "24-lead TSSOP": [
+            13
+          ],
+          "24-lead LFCSP": [
+            10
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "S5",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Source terminal of switch 5",
+        "packages": {
+          "24-lead TSSOP": [
+            14
+          ],
+          "24-lead LFCSP": [
+            11
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "D6",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Drain terminal of switch 6",
+        "packages": {
+          "24-lead TSSOP": [
+            15
+          ],
+          "24-lead LFCSP": [
+            12
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "S6",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Source terminal of switch 6",
+        "packages": {
+          "24-lead TSSOP": [
+            16
+          ],
+          "24-lead LFCSP": [
+            13
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "D7",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Drain terminal of switch 7",
+        "packages": {
+          "24-lead TSSOP": [
+            17
+          ],
+          "24-lead LFCSP": [
+            14
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "S7",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Source terminal of switch 7",
+        "packages": {
+          "24-lead TSSOP": [
+            18
+          ],
+          "24-lead LFCSP": [
+            15
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "D8",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Drain terminal of switch 8",
+        "packages": {
+          "24-lead TSSOP": [
+            19
+          ],
+          "24-lead LFCSP": [
+            16
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "S8",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Source terminal of switch 8",
+        "packages": {
+          "24-lead TSSOP": [
+            20
+          ],
+          "24-lead LFCSP": [
+            17
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "VSS",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Negative Analog Supply Voltage. Tie to GND for single-supply operation.",
+        "packages": {
+          "24-lead TSSOP": [
+            21
+          ],
+          "24-lead LFCSP": [
+            18
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "DOUT",
+        "direction": "OUTPUT",
+        "signal_type": "DIGITAL",
+        "description": "Serial Data Output, open-drain (ADG714)",
+        "packages": {
+          "24-lead TSSOP": [
+            22
+          ],
+          "24-lead LFCSP": [
+            19
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "A1",
+        "direction": "INPUT",
+        "signal_type": "DIGITAL",
+        "description": "Address Input 1 (ADG715)",
+        "packages": {
+          "24-lead TSSOP": [
+            22
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "RESET",
+        "direction": "INPUT",
+        "signal_type": "DIGITAL",
+        "description": "Active Low Control Input. Clears input register and turns all switches off.",
+        "packages": {
+          "24-lead TSSOP": [
+            23
+          ],
+          "24-lead LFCSP": [
+            20
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "SYNC",
+        "direction": "INPUT",
+        "signal_type": "DIGITAL",
+        "description": "Active Low Control Input. Frame synchronization signal (ADG714)",
+        "packages": {
+          "24-lead TSSOP": [
+            24
+          ],
+          "24-lead LFCSP": [
+            21
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "A0",
+        "direction": "INPUT",
+        "signal_type": "DIGITAL",
+        "description": "Address Input 0 (ADG715)",
+        "packages": {
+          "24-lead TSSOP": [
+            24
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "EP",
+        "direction": "PASSIVE",
+        "signal_type": "POWER",
+        "description": "Exposed Pad tied to VSS",
+        "packages": {
+          "24-lead LFCSP": [
+            "EP"
+          ]
+        },
+        "unused_treatment": null
+      }
+    ]
+  },
+  "pin_index": {
+    "packages": {
+      "24-lead TSSOP": {
+        "1": {
+          "name": "SCLK",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Serial Clock Input (ADG714) (also: SCL — Serial Clock Line (ADG715))",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "VDD",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Positive Analog Supply Voltage",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "DIN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Serial Data Input (ADG714) (also: SDA — Serial Data Line, bidirectional open-drain (ADG715))",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground (0 V) Reference",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "S1",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Source terminal of switch 1",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "D1",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Drain terminal of switch 1",
+          "unused_treatment": null
+        },
+        "7": {
+          "name": "S2",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Source terminal of switch 2",
+          "unused_treatment": null
+        },
+        "8": {
+          "name": "D2",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Drain terminal of switch 2",
+          "unused_treatment": null
+        },
+        "9": {
+          "name": "S3",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Source terminal of switch 3",
+          "unused_treatment": null
+        },
+        "10": {
+          "name": "D3",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Drain terminal of switch 3",
+          "unused_treatment": null
+        },
+        "11": {
+          "name": "S4",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Source terminal of switch 4",
+          "unused_treatment": null
+        },
+        "12": {
+          "name": "D4",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Drain terminal of switch 4",
+          "unused_treatment": null
+        },
+        "13": {
+          "name": "D5",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Drain terminal of switch 5",
+          "unused_treatment": null
+        },
+        "14": {
+          "name": "S5",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Source terminal of switch 5",
+          "unused_treatment": null
+        },
+        "15": {
+          "name": "D6",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Drain terminal of switch 6",
+          "unused_treatment": null
+        },
+        "16": {
+          "name": "S6",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Source terminal of switch 6",
+          "unused_treatment": null
+        },
+        "17": {
+          "name": "D7",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Drain terminal of switch 7",
+          "unused_treatment": null
+        },
+        "18": {
+          "name": "S7",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Source terminal of switch 7",
+          "unused_treatment": null
+        },
+        "19": {
+          "name": "D8",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Drain terminal of switch 8",
+          "unused_treatment": null
+        },
+        "20": {
+          "name": "S8",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Source terminal of switch 8",
+          "unused_treatment": null
+        },
+        "21": {
+          "name": "VSS",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Negative Analog Supply Voltage. Tie to GND for single-supply operation.",
+          "unused_treatment": null
+        },
+        "22": {
+          "name": "DOUT",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "Serial Data Output, open-drain (ADG714) (also: A1 — Address Input 1 (ADG715))",
+          "unused_treatment": null
+        },
+        "23": {
+          "name": "RESET",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Active Low Control Input. Clears input register and turns all switches off.",
+          "unused_treatment": null
+        },
+        "24": {
+          "name": "SYNC",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Active Low Control Input. Frame synchronization signal (ADG714) (also: A0 — Address Input 0 (ADG715))",
+          "unused_treatment": null
+        }
+      },
+      "24-lead LFCSP": {
+        "22": {
+          "name": "SCLK",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Serial Clock Input (ADG714)",
+          "unused_treatment": null
+        },
+        "23": {
+          "name": "VDD",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Positive Analog Supply Voltage",
+          "unused_treatment": null
+        },
+        "24": {
+          "name": "DIN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Serial Data Input (ADG714)",
+          "unused_treatment": null
+        },
+        "1": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground (0 V) Reference",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "S1",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Source terminal of switch 1",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "D1",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Drain terminal of switch 1",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "S2",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Source terminal of switch 2",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "D2",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Drain terminal of switch 2",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "S3",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Source terminal of switch 3",
+          "unused_treatment": null
+        },
+        "7": {
+          "name": "D3",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Drain terminal of switch 3",
+          "unused_treatment": null
+        },
+        "8": {
+          "name": "S4",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Source terminal of switch 4",
+          "unused_treatment": null
+        },
+        "9": {
+          "name": "D4",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Drain terminal of switch 4",
+          "unused_treatment": null
+        },
+        "10": {
+          "name": "D5",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Drain terminal of switch 5",
+          "unused_treatment": null
+        },
+        "11": {
+          "name": "S5",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Source terminal of switch 5",
+          "unused_treatment": null
+        },
+        "12": {
+          "name": "D6",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Drain terminal of switch 6",
+          "unused_treatment": null
+        },
+        "13": {
+          "name": "S6",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Source terminal of switch 6",
+          "unused_treatment": null
+        },
+        "14": {
+          "name": "D7",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Drain terminal of switch 7",
+          "unused_treatment": null
+        },
+        "15": {
+          "name": "S7",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Source terminal of switch 7",
+          "unused_treatment": null
+        },
+        "16": {
+          "name": "D8",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Drain terminal of switch 8",
+          "unused_treatment": null
+        },
+        "17": {
+          "name": "S8",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Source terminal of switch 8",
+          "unused_treatment": null
+        },
+        "18": {
+          "name": "VSS",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Negative Analog Supply Voltage. Tie to GND for single-supply operation.",
+          "unused_treatment": null
+        },
+        "19": {
+          "name": "DOUT",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "Serial Data Output, open-drain (ADG714)",
+          "unused_treatment": null
+        },
+        "20": {
+          "name": "RESET",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Active Low Control Input. Clears input register and turns all switches off.",
+          "unused_treatment": null
+        },
+        "21": {
+          "name": "SYNC",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Active Low Control Input. Frame synchronization signal (ADG714)",
+          "unused_treatment": null
+        },
+        "EP": {
+          "name": "EP",
+          "direction": "PASSIVE",
+          "signal_type": "POWER",
+          "description": "Exposed Pad tied to VSS",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "pin_validation": [
     {
-      "param": "Supply Voltage VDD to GND",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
+      "level": "warning",
+      "message": "package '24-lead TSSOP' pin 1 claimed by multiple logical pins: ['SCLK', 'SCL']"
     },
     {
-      "param": "Supply Voltage VSS to GND",
+      "level": "warning",
+      "message": "package '24-lead TSSOP' pin 3 claimed by multiple logical pins: ['DIN', 'SDA']"
+    },
+    {
+      "level": "warning",
+      "message": "package '24-lead TSSOP' pin 22 claimed by multiple logical pins: ['DOUT', 'A1']"
+    },
+    {
+      "level": "warning",
+      "message": "package '24-lead TSSOP' pin 24 claimed by multiple logical pins: ['SYNC', 'A0']"
+    }
+  ],
+  "validation": [
+    {
+      "param": "Supply Voltage (VDD to GND)",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Supply Voltage (VSS to GND)",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Analog Inputs",
+      "rule": "unit_valid",
+      "passed": false,
+      "message": "Suspicious unit: V or mA"
+    },
+    {
+      "param": "Digital Inputs",
+      "rule": "unit_valid",
+      "passed": false,
+      "message": "Suspicious unit: V or mA"
     },
     {
       "param": "Operating Temperature Range",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Storage Temperature Range",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
-      "param": "Single Supply Voltage",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
+      "param": "Serial Clock Rate",
+      "rule": "unit_valid",
+      "passed": false,
+      "message": "Suspicious unit: kbps"
     }
   ],
   "physics_validation": [],
   "cross_validation": {
     "total_extracted_values": 21,
-    "values_found_in_pdf": 15,
+    "values_found_in_pdf": 20,
     "values_not_in_pdf": [
-      -65.0,
-      -40.0,
-      -3.5,
-      -0.3,
-      15.38,
-      127.99
+      15.38
     ],
-    "value_coverage_pct": 71.4,
-    "total_params": 21,
-    "params_verified": 15,
-    "params_suspicious": 6,
+    "value_coverage_pct": 95.2,
+    "total_params": 22,
+    "params_verified": 21,
+    "params_suspicious": 1,
     "suspicious_params": [
       {
-        "parameter": "Supply Voltage VDD to GND",
-        "device": "",
-        "values": [
-          -0.3,
-          7.0
-        ]
-      },
-      {
-        "parameter": "Supply Voltage VSS to GND",
-        "device": "",
-        "values": [
-          -3.5,
-          0.3
-        ]
-      },
-      {
-        "parameter": "Operating Temperature Range",
-        "device": "",
-        "values": [
-          -40.0,
-          85.0
-        ]
-      },
-      {
-        "parameter": "Storage Temperature Range",
-        "device": "",
-        "values": [
-          -65.0,
-          150.0
-        ]
-      },
-      {
-        "parameter": "Thermal Resistance (Junction-to-Ambient)",
-        "device": "",
-        "values": [
-          127.99
-        ]
-      },
-      {
-        "parameter": "Thermal Resistance (Junction-to-Case)",
-        "device": "",
+        "parameter": "Thermal Resistance Junction-to-Case",
+        "device": "ADG714",
         "values": [
           15.38
         ]
@@ -594,7 +1351,8 @@
     ]
   },
   "timing": {
-    "l0_classify_s": 0.084,
-    "l1_extract_s": 53.573
+    "l0_classify_s": 0.085,
+    "l1a_extract_s": 63.917,
+    "l1b_pin_s": 68.788
   }
 }

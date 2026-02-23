@@ -53,7 +53,7 @@
       "text_length": 2027,
       "category": "pin",
       "matched_patterns": [
-        "(?i)pin\\s+(description|configuration|function|assignment|definition)"
+        "(?i)pin\\s+(description|configuration|function|assignment|definition|connection|diagram)"
       ],
       "text_preview": "REV. B –6– AD9845B PIN CONFIGURATION 36 35 34 33 32 31 30 29 28 27 26 25 13 14 15 16 17 18 19 20 21 22 23 24 1 2 3 4 5 6 7 8 9 10 11 12 48 47 46 45 44 39 38 37 43 42 41 40 PIN 1 IDENTIFIER TOP VIEW (N"
     },
@@ -193,111 +193,100 @@
     },
     "absolute_maximum_ratings": [
       {
-        "parameter": "AVDD1, AVDD2 Supply Voltage",
+        "parameter": "Analog Supply Voltage",
         "raw_name": "AVDD1, AVDD2",
         "symbol": null,
         "min": -0.3,
-        "typ": null,
         "max": 3.9,
         "unit": "V",
         "conditions": "With Respect To AVSS"
       },
       {
-        "parameter": "DVDD1, DVDD2 Supply Voltage",
+        "parameter": "Digital Supply Voltage",
         "raw_name": "DVDD1, DVDD2",
         "symbol": null,
         "min": -0.3,
-        "typ": null,
         "max": 3.9,
         "unit": "V",
         "conditions": "With Respect To DVSS"
       },
       {
-        "parameter": "DRVDD Supply Voltage",
+        "parameter": "Digital Output Driver Supply Voltage",
         "raw_name": "DRVDD",
         "symbol": null,
         "min": -0.3,
-        "typ": null,
         "max": 3.9,
         "unit": "V",
         "conditions": "With Respect To DRVSS"
       },
       {
-        "parameter": "Digital Outputs Voltage",
+        "parameter": "Digital Output Voltage",
         "raw_name": "Digital Outputs",
         "symbol": null,
         "min": -0.3,
-        "typ": null,
         "max": null,
         "unit": "V",
-        "conditions": "With Respect To DRVSS, Max = DRVDD + 0.3"
+        "conditions": "With Respect To DRVSS, max is DRVDD + 0.3"
       },
       {
-        "parameter": "SHP, SHD, DATACLK Input Voltage",
+        "parameter": "Clock Input Voltage",
         "raw_name": "SHP, SHD, DATACLK",
         "symbol": null,
         "min": -0.3,
-        "typ": null,
         "max": null,
         "unit": "V",
-        "conditions": "With Respect To DVSS, Max = DVDD + 0.3"
+        "conditions": "With Respect To DVSS, max is DVDD + 0.3"
       },
       {
-        "parameter": "CLPOB, CLPDM, PBLK Input Voltage",
+        "parameter": "Control Input Voltage",
         "raw_name": "CLPOB, CLPDM, PBLK",
         "symbol": null,
         "min": -0.3,
-        "typ": null,
         "max": null,
         "unit": "V",
-        "conditions": "With Respect To DVSS, Max = DVDD + 0.3"
+        "conditions": "With Respect To DVSS, max is DVDD + 0.3"
       },
       {
-        "parameter": "SCK, SL, SDATA Input Voltage",
+        "parameter": "Serial Interface Input Voltage",
         "raw_name": "SCK, SL, SDATA",
         "symbol": null,
         "min": -0.3,
-        "typ": null,
         "max": null,
         "unit": "V",
-        "conditions": "With Respect To DVSS, Max = DVDD + 0.3"
+        "conditions": "With Respect To DVSS, max is DVDD + 0.3"
       },
       {
-        "parameter": "VRT, VRB Voltage",
+        "parameter": "Reference Voltage",
         "raw_name": "VRT, VRB",
         "symbol": null,
         "min": -0.3,
-        "typ": null,
         "max": null,
         "unit": "V",
-        "conditions": "With Respect To AVSS, Max = AVDD + 0.3"
+        "conditions": "With Respect To AVSS, max is AVDD + 0.3"
       },
       {
-        "parameter": "BYP1-3, CCDIN Voltage",
+        "parameter": "Analog Input Voltage",
         "raw_name": "BYP1-3, CCDIN",
         "symbol": null,
         "min": -0.3,
-        "typ": null,
         "max": null,
         "unit": "V",
-        "conditions": "With Respect To AVSS, Max = AVDD + 0.3"
+        "conditions": "With Respect To AVSS, max is AVDD + 0.3"
       },
       {
         "parameter": "Junction Temperature",
         "raw_name": "Junction Temperature",
         "symbol": null,
         "min": null,
-        "typ": null,
         "max": 150,
         "unit": "°C",
         "conditions": null
       },
       {
-        "parameter": "Lead Temperature (10 sec)",
+        "parameter": "Lead Temperature",
         "raw_name": "Lead Temperature (10 sec)",
         "symbol": null,
         "min": null,
-        "typ": null,
         "max": 300,
         "unit": "°C",
         "conditions": null
@@ -305,7 +294,7 @@
     ],
     "electrical_characteristics": [
       {
-        "parameter": "DATACLK, SHP, SHD Clock Period",
+        "parameter": "Clock Period",
         "raw_name": "DATACLK, SHP, SHD Clock Period",
         "symbol": "tCP",
         "min": 33,
@@ -372,7 +361,7 @@
         "typ": 20,
         "max": null,
         "unit": "Pixels",
-        "conditions": "CL = 20 pF, fSAMP = 30 MHz. *Minimum CLPOB pulsewidth is for functional operation only.",
+        "conditions": "Minimum for functional operation only. Wider typical pulses recommended for low noise.",
         "device": "AD9845B",
         "temp_range": null
       },
@@ -468,7 +457,7 @@
         "typ": null,
         "max": null,
         "unit": "MHz",
-        "conditions": "Serial Timing",
+        "conditions": "Serial Interface Timing",
         "device": "AD9845B",
         "temp_range": null
       },
@@ -480,7 +469,7 @@
         "typ": null,
         "max": null,
         "unit": "ns",
-        "conditions": "Serial Timing",
+        "conditions": "Serial Interface Timing",
         "device": "AD9845B",
         "temp_range": null
       },
@@ -492,7 +481,7 @@
         "typ": null,
         "max": null,
         "unit": "ns",
-        "conditions": "Serial Timing",
+        "conditions": "Serial Interface Timing",
         "device": "AD9845B",
         "temp_range": null
       },
@@ -504,7 +493,7 @@
         "typ": null,
         "max": null,
         "unit": "ns",
-        "conditions": "Serial Timing",
+        "conditions": "Serial Interface Timing",
         "device": "AD9845B",
         "temp_range": null
       },
@@ -516,7 +505,7 @@
         "typ": null,
         "max": null,
         "unit": "ns",
-        "conditions": "Serial Timing",
+        "conditions": "Serial Interface Timing",
         "device": "AD9845B",
         "temp_range": null
       },
@@ -528,21 +517,33 @@
         "typ": null,
         "max": null,
         "unit": "ns",
-        "conditions": "Serial Timing",
+        "conditions": "Serial Interface Timing",
         "device": "AD9845B",
         "temp_range": null
       },
       {
         "parameter": "Thermal Resistance",
-        "raw_name": "θJA",
+        "raw_name": "Thermal Resistance 48-Lead LQFP Package",
         "symbol": "θJA",
         "min": null,
         "typ": 56,
         "max": null,
         "unit": "°C/W",
-        "conditions": "48-Lead LQFP Package, measured using a 4-layer PCB",
+        "conditions": "Measured using a 4-layer PCB",
         "device": "AD9845B",
         "temp_range": null
+      },
+      {
+        "parameter": "Power Dissipation",
+        "raw_name": "Low Power",
+        "symbol": null,
+        "min": null,
+        "typ": 153,
+        "max": null,
+        "unit": "mW",
+        "conditions": "@ 3 V Supply",
+        "device": "AD9845B",
+        "temp_range": "25C"
       }
     ],
     "pin_definitions": [
@@ -752,54 +753,900 @@
       }
     ]
   },
+  "pin_extraction": {
+    "logical_pins": [
+      {
+        "name": "D0",
+        "direction": "OUTPUT",
+        "signal_type": "DIGITAL",
+        "description": "Digital Data Output",
+        "packages": {
+          "48-Lead LQFP": [
+            1
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "D1",
+        "direction": "OUTPUT",
+        "signal_type": "DIGITAL",
+        "description": "Digital Data Output",
+        "packages": {
+          "48-Lead LQFP": [
+            2
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "D2",
+        "direction": "OUTPUT",
+        "signal_type": "DIGITAL",
+        "description": "Digital Data Output",
+        "packages": {
+          "48-Lead LQFP": [
+            3
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "D3",
+        "direction": "OUTPUT",
+        "signal_type": "DIGITAL",
+        "description": "Digital Data Output",
+        "packages": {
+          "48-Lead LQFP": [
+            4
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "D4",
+        "direction": "OUTPUT",
+        "signal_type": "DIGITAL",
+        "description": "Digital Data Output",
+        "packages": {
+          "48-Lead LQFP": [
+            5
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "D5",
+        "direction": "OUTPUT",
+        "signal_type": "DIGITAL",
+        "description": "Digital Data Output",
+        "packages": {
+          "48-Lead LQFP": [
+            6
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "D6",
+        "direction": "OUTPUT",
+        "signal_type": "DIGITAL",
+        "description": "Digital Data Output",
+        "packages": {
+          "48-Lead LQFP": [
+            7
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "D7",
+        "direction": "OUTPUT",
+        "signal_type": "DIGITAL",
+        "description": "Digital Data Output",
+        "packages": {
+          "48-Lead LQFP": [
+            8
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "D8",
+        "direction": "OUTPUT",
+        "signal_type": "DIGITAL",
+        "description": "Digital Data Output",
+        "packages": {
+          "48-Lead LQFP": [
+            9
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "D9",
+        "direction": "OUTPUT",
+        "signal_type": "DIGITAL",
+        "description": "Digital Data Output",
+        "packages": {
+          "48-Lead LQFP": [
+            10
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "D10",
+        "direction": "OUTPUT",
+        "signal_type": "DIGITAL",
+        "description": "Digital Data Output",
+        "packages": {
+          "48-Lead LQFP": [
+            11
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "D11",
+        "direction": "OUTPUT",
+        "signal_type": "DIGITAL",
+        "description": "Digital Data Output (MSB)",
+        "packages": {
+          "48-Lead LQFP": [
+            12
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "DRVDD",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Digital Output Driver Supply",
+        "packages": {
+          "48-Lead LQFP": [
+            13
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "DRVSS",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Digital Output Driver Ground",
+        "packages": {
+          "48-Lead LQFP": [
+            14
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "DVSS",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Digital Ground",
+        "packages": {
+          "48-Lead LQFP": [
+            15,
+            41
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "DATACLK",
+        "direction": "INPUT",
+        "signal_type": "DIGITAL",
+        "description": "Digital Data Output Latch Clock",
+        "packages": {
+          "48-Lead LQFP": [
+            16
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "DVDD1",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Digital Supply 1",
+        "packages": {
+          "48-Lead LQFP": [
+            17
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "HD",
+        "direction": "INPUT",
+        "signal_type": "DIGITAL",
+        "description": "Horizontal Drive. Used with VD for color steering control.",
+        "packages": {
+          "48-Lead LQFP": [
+            18
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "PBLK",
+        "direction": "INPUT",
+        "signal_type": "DIGITAL",
+        "description": "Preblanking Clock Input",
+        "packages": {
+          "48-Lead LQFP": [
+            19
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "CLPOB",
+        "direction": "INPUT",
+        "signal_type": "DIGITAL",
+        "description": "Black Level Clamp Clock Input",
+        "packages": {
+          "48-Lead LQFP": [
+            20
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "SHP",
+        "direction": "INPUT",
+        "signal_type": "DIGITAL",
+        "description": "CDS Sampling Clock for CCD's Reference Level",
+        "packages": {
+          "48-Lead LQFP": [
+            21
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "SHD",
+        "direction": "INPUT",
+        "signal_type": "DIGITAL",
+        "description": "CDS Sampling Clock for CCD's Data Level",
+        "packages": {
+          "48-Lead LQFP": [
+            22
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "CLPDM",
+        "direction": "INPUT",
+        "signal_type": "DIGITAL",
+        "description": "Input Clamp Clock Input",
+        "packages": {
+          "48-Lead LQFP": [
+            23
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "VD",
+        "direction": "INPUT",
+        "signal_type": "DIGITAL",
+        "description": "Vertical Drive. Used with HD for color steering control.",
+        "packages": {
+          "48-Lead LQFP": [
+            24
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "AVSS",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Analog Ground",
+        "packages": {
+          "48-Lead LQFP": [
+            25,
+            26,
+            35
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "AVDD1",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Analog Supply 1",
+        "packages": {
+          "48-Lead LQFP": [
+            27
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "BYP1",
+        "direction": "PASSIVE",
+        "signal_type": "ANALOG",
+        "description": "Internal Bias Level Decoupling",
+        "packages": {
+          "48-Lead LQFP": [
+            28
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "BYP2",
+        "direction": "PASSIVE",
+        "signal_type": "ANALOG",
+        "description": "Internal Bias Level Decoupling",
+        "packages": {
+          "48-Lead LQFP": [
+            29
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "CCDIN",
+        "direction": "INPUT",
+        "signal_type": "ANALOG",
+        "description": "Analog Input for CCD Signal",
+        "packages": {
+          "48-Lead LQFP": [
+            30
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "NC",
+        "direction": "NC",
+        "signal_type": "NONE",
+        "description": "Internally Not Connected",
+        "packages": {
+          "48-Lead LQFP": [
+            31,
+            37,
+            42,
+            43,
+            45
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "BYP3",
+        "direction": "PASSIVE",
+        "signal_type": "ANALOG",
+        "description": "Internal Bias Level Decoupling",
+        "packages": {
+          "48-Lead LQFP": [
+            32
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "AVDD2",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Analog Supply 2",
+        "packages": {
+          "48-Lead LQFP": [
+            33
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "AUX2IN",
+        "direction": "INPUT",
+        "signal_type": "ANALOG",
+        "description": "Analog Input",
+        "packages": {
+          "48-Lead LQFP": [
+            34
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "AUX1IN",
+        "direction": "INPUT",
+        "signal_type": "ANALOG",
+        "description": "Analog Input",
+        "packages": {
+          "48-Lead LQFP": [
+            36
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "VRT",
+        "direction": "PASSIVE",
+        "signal_type": "ANALOG",
+        "description": "A/D Converter Top Reference Voltage Decoupling",
+        "packages": {
+          "48-Lead LQFP": [
+            38
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "VRB",
+        "direction": "PASSIVE",
+        "signal_type": "ANALOG",
+        "description": "A/D Converter Bottom Reference Voltage Decoupling",
+        "packages": {
+          "48-Lead LQFP": [
+            39
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "DVDD2",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Digital Supply 2",
+        "packages": {
+          "48-Lead LQFP": [
+            40
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "STBY",
+        "direction": "INPUT",
+        "signal_type": "DIGITAL",
+        "description": "Standby Mode, Active High. Same as total power-down mode.",
+        "packages": {
+          "48-Lead LQFP": [
+            44
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "SL",
+        "direction": "INPUT",
+        "signal_type": "DIGITAL",
+        "description": "Serial Digital Interface Load Pulse",
+        "packages": {
+          "48-Lead LQFP": [
+            46
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "SDATA",
+        "direction": "INPUT",
+        "signal_type": "DIGITAL",
+        "description": "Serial Digital Interface Data",
+        "packages": {
+          "48-Lead LQFP": [
+            47
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "SCK",
+        "direction": "INPUT",
+        "signal_type": "DIGITAL",
+        "description": "Serial Digital Interface Clock",
+        "packages": {
+          "48-Lead LQFP": [
+            48
+          ]
+        },
+        "unused_treatment": null
+      }
+    ]
+  },
+  "pin_index": {
+    "packages": {
+      "48-Lead LQFP": {
+        "1": {
+          "name": "D0",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "Digital Data Output",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "D1",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "Digital Data Output",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "D2",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "Digital Data Output",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "D3",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "Digital Data Output",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "D4",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "Digital Data Output",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "D5",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "Digital Data Output",
+          "unused_treatment": null
+        },
+        "7": {
+          "name": "D6",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "Digital Data Output",
+          "unused_treatment": null
+        },
+        "8": {
+          "name": "D7",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "Digital Data Output",
+          "unused_treatment": null
+        },
+        "9": {
+          "name": "D8",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "Digital Data Output",
+          "unused_treatment": null
+        },
+        "10": {
+          "name": "D9",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "Digital Data Output",
+          "unused_treatment": null
+        },
+        "11": {
+          "name": "D10",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "Digital Data Output",
+          "unused_treatment": null
+        },
+        "12": {
+          "name": "D11",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "Digital Data Output (MSB)",
+          "unused_treatment": null
+        },
+        "13": {
+          "name": "DRVDD",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Digital Output Driver Supply",
+          "unused_treatment": null
+        },
+        "14": {
+          "name": "DRVSS",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Digital Output Driver Ground",
+          "unused_treatment": null
+        },
+        "15": {
+          "name": "DVSS",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Digital Ground",
+          "unused_treatment": null
+        },
+        "41": {
+          "name": "DVSS",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Digital Ground",
+          "unused_treatment": null
+        },
+        "16": {
+          "name": "DATACLK",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Digital Data Output Latch Clock",
+          "unused_treatment": null
+        },
+        "17": {
+          "name": "DVDD1",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Digital Supply 1",
+          "unused_treatment": null
+        },
+        "18": {
+          "name": "HD",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Horizontal Drive. Used with VD for color steering control.",
+          "unused_treatment": null
+        },
+        "19": {
+          "name": "PBLK",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Preblanking Clock Input",
+          "unused_treatment": null
+        },
+        "20": {
+          "name": "CLPOB",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Black Level Clamp Clock Input",
+          "unused_treatment": null
+        },
+        "21": {
+          "name": "SHP",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "CDS Sampling Clock for CCD's Reference Level",
+          "unused_treatment": null
+        },
+        "22": {
+          "name": "SHD",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "CDS Sampling Clock for CCD's Data Level",
+          "unused_treatment": null
+        },
+        "23": {
+          "name": "CLPDM",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Input Clamp Clock Input",
+          "unused_treatment": null
+        },
+        "24": {
+          "name": "VD",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Vertical Drive. Used with HD for color steering control.",
+          "unused_treatment": null
+        },
+        "25": {
+          "name": "AVSS",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Analog Ground",
+          "unused_treatment": null
+        },
+        "26": {
+          "name": "AVSS",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Analog Ground",
+          "unused_treatment": null
+        },
+        "35": {
+          "name": "AVSS",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Analog Ground",
+          "unused_treatment": null
+        },
+        "27": {
+          "name": "AVDD1",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Analog Supply 1",
+          "unused_treatment": null
+        },
+        "28": {
+          "name": "BYP1",
+          "direction": "PASSIVE",
+          "signal_type": "ANALOG",
+          "description": "Internal Bias Level Decoupling",
+          "unused_treatment": null
+        },
+        "29": {
+          "name": "BYP2",
+          "direction": "PASSIVE",
+          "signal_type": "ANALOG",
+          "description": "Internal Bias Level Decoupling",
+          "unused_treatment": null
+        },
+        "30": {
+          "name": "CCDIN",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Analog Input for CCD Signal",
+          "unused_treatment": null
+        },
+        "31": {
+          "name": "NC",
+          "direction": "NC",
+          "signal_type": "NONE",
+          "description": "Internally Not Connected",
+          "unused_treatment": null
+        },
+        "37": {
+          "name": "NC",
+          "direction": "NC",
+          "signal_type": "NONE",
+          "description": "Internally Not Connected",
+          "unused_treatment": null
+        },
+        "42": {
+          "name": "NC",
+          "direction": "NC",
+          "signal_type": "NONE",
+          "description": "Internally Not Connected",
+          "unused_treatment": null
+        },
+        "43": {
+          "name": "NC",
+          "direction": "NC",
+          "signal_type": "NONE",
+          "description": "Internally Not Connected",
+          "unused_treatment": null
+        },
+        "45": {
+          "name": "NC",
+          "direction": "NC",
+          "signal_type": "NONE",
+          "description": "Internally Not Connected",
+          "unused_treatment": null
+        },
+        "32": {
+          "name": "BYP3",
+          "direction": "PASSIVE",
+          "signal_type": "ANALOG",
+          "description": "Internal Bias Level Decoupling",
+          "unused_treatment": null
+        },
+        "33": {
+          "name": "AVDD2",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Analog Supply 2",
+          "unused_treatment": null
+        },
+        "34": {
+          "name": "AUX2IN",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Analog Input",
+          "unused_treatment": null
+        },
+        "36": {
+          "name": "AUX1IN",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Analog Input",
+          "unused_treatment": null
+        },
+        "38": {
+          "name": "VRT",
+          "direction": "PASSIVE",
+          "signal_type": "ANALOG",
+          "description": "A/D Converter Top Reference Voltage Decoupling",
+          "unused_treatment": null
+        },
+        "39": {
+          "name": "VRB",
+          "direction": "PASSIVE",
+          "signal_type": "ANALOG",
+          "description": "A/D Converter Bottom Reference Voltage Decoupling",
+          "unused_treatment": null
+        },
+        "40": {
+          "name": "DVDD2",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Digital Supply 2",
+          "unused_treatment": null
+        },
+        "44": {
+          "name": "STBY",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Standby Mode, Active High. Same as total power-down mode.",
+          "unused_treatment": null
+        },
+        "46": {
+          "name": "SL",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Serial Digital Interface Load Pulse",
+          "unused_treatment": null
+        },
+        "47": {
+          "name": "SDATA",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Serial Digital Interface Data",
+          "unused_treatment": null
+        },
+        "48": {
+          "name": "SCK",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Serial Digital Interface Clock",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "pin_validation": [],
   "validation": [
     {
-      "param": "AVDD1, AVDD2 Supply Voltage",
+      "param": "Analog Supply Voltage",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
-      "param": "DVDD1, DVDD2 Supply Voltage",
+      "param": "Digital Supply Voltage",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
-      "param": "DRVDD Supply Voltage",
+      "param": "Digital Output Driver Supply Voltage",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
-      "param": "DATACLK, SHP, SHD Clock Period",
+      "param": "Clock Period",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "DATACLK High/Low Pulsewidth",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "SHP Pulsewidth",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "SHD Pulsewidth",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "CLPDM Pulsewidth",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "CLPDM Pulsewidth",
@@ -811,7 +1658,7 @@
       "param": "CLPOB Pulsewidth",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "CLPOB Pulsewidth",
@@ -823,25 +1670,25 @@
       "param": "SHP Rising Edge to SHD Falling Edge",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "SHP Rising Edge to SHD Rising Edge",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Output Delay",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Output Hold Time",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Pipeline Delay",
@@ -852,86 +1699,18 @@
   ],
   "physics_validation": [],
   "cross_validation": {
-    "total_extracted_values": 21,
-    "values_found_in_pdf": 20,
-    "values_not_in_pdf": [
-      -0.3
-    ],
-    "value_coverage_pct": 95.2,
-    "total_params": 31,
-    "params_verified": 22,
-    "params_suspicious": 9,
-    "suspicious_params": [
-      {
-        "parameter": "AVDD1, AVDD2 Supply Voltage",
-        "device": "",
-        "values": [
-          -0.3,
-          3.9
-        ]
-      },
-      {
-        "parameter": "DVDD1, DVDD2 Supply Voltage",
-        "device": "",
-        "values": [
-          -0.3,
-          3.9
-        ]
-      },
-      {
-        "parameter": "DRVDD Supply Voltage",
-        "device": "",
-        "values": [
-          -0.3,
-          3.9
-        ]
-      },
-      {
-        "parameter": "Digital Outputs Voltage",
-        "device": "",
-        "values": [
-          -0.3
-        ]
-      },
-      {
-        "parameter": "SHP, SHD, DATACLK Input Voltage",
-        "device": "",
-        "values": [
-          -0.3
-        ]
-      },
-      {
-        "parameter": "CLPOB, CLPDM, PBLK Input Voltage",
-        "device": "",
-        "values": [
-          -0.3
-        ]
-      },
-      {
-        "parameter": "SCK, SL, SDATA Input Voltage",
-        "device": "",
-        "values": [
-          -0.3
-        ]
-      },
-      {
-        "parameter": "VRT, VRB Voltage",
-        "device": "",
-        "values": [
-          -0.3
-        ]
-      },
-      {
-        "parameter": "BYP1-3, CCDIN Voltage",
-        "device": "",
-        "values": [
-          -0.3
-        ]
-      }
-    ]
+    "total_extracted_values": 22,
+    "values_found_in_pdf": 22,
+    "values_not_in_pdf": [],
+    "value_coverage_pct": 100.0,
+    "total_params": 32,
+    "params_verified": 32,
+    "params_suspicious": 0,
+    "suspicious_params": []
   },
   "timing": {
-    "l0_classify_s": 0.054,
-    "l1_extract_s": 47.68
+    "l0_classify_s": 0.056,
+    "l1a_extract_s": 51.295,
+    "l1b_pin_s": 47.711
   }
 }

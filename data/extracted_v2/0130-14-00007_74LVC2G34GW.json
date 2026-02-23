@@ -34,7 +34,7 @@
       "text_length": 1036,
       "category": "pin",
       "matched_patterns": [
-        "(?i)pin\\s+(description|configuration|function|assignment|definition)"
+        "(?i)pin\\s+(description|configuration|function|assignment|definition|connection|diagram)"
       ],
       "text_preview": "Nexperia 74LVC2G34 Dual buffer gate 6.  Pinning information 6.1.  Pinning 74LVC2G34 1A 1Y GND 2A 2Y 001aab676 1 2 3 6 VCC 5 4 Fig. 4. Pin configuration SOT363-2 (TSSOP6) and SOT457 (SC-74; TSOP6) 74LV"
     },
@@ -136,7 +136,7 @@
       "category": "electrical",
       "matched_patterns": [
         "(?i)recommended\\s+operating\\s+conditions?",
-        "(?i)pin\\s+(description|configuration|function|assignment|definition)",
+        "(?i)pin\\s+(description|configuration|function|assignment|definition|connection|diagram)",
         "(?i)ordering\\s+information"
       ],
       "text_preview": "Nexperia 74LVC2G34 Dual buffer gate Contents 1.  General description......................................................1 2.  Features and benefits.................................................. "
@@ -147,7 +147,7 @@
       "mpn": "74LVC2G34",
       "manufacturer": "Nexperia",
       "category": "Logic",
-      "description": "Dual buffer gate with Schmitt-trigger action at all inputs"
+      "description": "Dual buffer gate"
     },
     "absolute_maximum_ratings": [
       {
@@ -184,14 +184,14 @@
         "parameter": "output clamping current",
         "raw_name": "IOK",
         "symbol": "IOK",
-        "min": -50,
+        "min": null,
         "typ": null,
         "max": 50,
         "unit": "mA",
         "conditions": "VO > VCC or VO < 0 V"
       },
       {
-        "parameter": "output voltage (Active mode)",
+        "parameter": "output voltage (active mode)",
         "raw_name": "VO",
         "symbol": "VO",
         "min": -0.5,
@@ -201,7 +201,7 @@
         "conditions": "Active mode; max is VCC + 0.5 V"
       },
       {
-        "parameter": "output voltage (Power-down mode)",
+        "parameter": "output voltage (power-down mode)",
         "raw_name": "VO",
         "symbol": "VO",
         "min": -0.5,
@@ -214,7 +214,7 @@
         "parameter": "output current",
         "raw_name": "IO",
         "symbol": "IO",
-        "min": -50,
+        "min": null,
         "typ": null,
         "max": 50,
         "unit": "mA",
@@ -270,7 +270,7 @@
         "typ": null,
         "max": null,
         "unit": "V",
-        "conditions": "VCC = 1.65 V to 1.95 V; min = 0.65 * VCC",
+        "conditions": "VCC = 1.65 V to 1.95 V; VIH = 0.65 * VCC",
         "device": "74LVC2G34",
         "temp_range": "full"
       },
@@ -306,7 +306,7 @@
         "typ": null,
         "max": null,
         "unit": "V",
-        "conditions": "VCC = 4.5 V to 5.5 V; min = 0.7 * VCC",
+        "conditions": "VCC = 4.5 V to 5.5 V; VIH = 0.7 * VCC",
         "device": "74LVC2G34",
         "temp_range": "full"
       },
@@ -318,7 +318,7 @@
         "typ": null,
         "max": null,
         "unit": "V",
-        "conditions": "VCC = 1.65 V to 1.95 V; max = 0.35 * VCC",
+        "conditions": "VCC = 1.65 V to 1.95 V; VIL = 0.35 * VCC",
         "device": "74LVC2G34",
         "temp_range": "full"
       },
@@ -354,7 +354,7 @@
         "typ": null,
         "max": null,
         "unit": "V",
-        "conditions": "VCC = 4.5 V to 5.5 V; max = 0.3 * VCC",
+        "conditions": "VCC = 4.5 V to 5.5 V; VIL = 0.3 * VCC",
         "device": "74LVC2G34",
         "temp_range": "full"
       },
@@ -366,7 +366,7 @@
         "typ": null,
         "max": null,
         "unit": "V",
-        "conditions": "IO = -100 uA; VCC = 1.65 V to 5.5 V; min = VCC - 0.1",
+        "conditions": "VI = VIH or VIL; IO = -100 uA; VCC = 1.65 V to 5.5 V; VOH = VCC - 0.1",
         "device": "74LVC2G34",
         "temp_range": "full"
       },
@@ -378,9 +378,9 @@
         "typ": null,
         "max": null,
         "unit": "V",
-        "conditions": "IO = -4 mA; VCC = 1.65 V",
+        "conditions": "VI = VIH or VIL; IO = -4 mA; VCC = 1.65 V",
         "device": "74LVC2G34",
-        "temp_range": "25C or full"
+        "temp_range": "full"
       },
       {
         "parameter": "HIGH-level output voltage",
@@ -390,7 +390,7 @@
         "typ": null,
         "max": null,
         "unit": "V",
-        "conditions": "IO = -4 mA; VCC = 1.65 V",
+        "conditions": "VI = VIH or VIL; IO = -4 mA; VCC = 1.65 V",
         "device": "74LVC2G34",
         "temp_range": "full"
       },
@@ -402,9 +402,9 @@
         "typ": null,
         "max": null,
         "unit": "V",
-        "conditions": "IO = -8 mA; VCC = 2.3 V",
+        "conditions": "VI = VIH or VIL; IO = -8 mA; VCC = 2.3 V",
         "device": "74LVC2G34",
-        "temp_range": "25C or full"
+        "temp_range": "full"
       },
       {
         "parameter": "HIGH-level output voltage",
@@ -414,7 +414,7 @@
         "typ": null,
         "max": null,
         "unit": "V",
-        "conditions": "IO = -8 mA; VCC = 2.3 V",
+        "conditions": "VI = VIH or VIL; IO = -8 mA; VCC = 2.3 V",
         "device": "74LVC2G34",
         "temp_range": "full"
       },
@@ -426,9 +426,9 @@
         "typ": null,
         "max": null,
         "unit": "V",
-        "conditions": "IO = -12 mA; VCC = 2.7 V",
+        "conditions": "VI = VIH or VIL; IO = -12 mA; VCC = 2.7 V",
         "device": "74LVC2G34",
-        "temp_range": "25C or full"
+        "temp_range": "full"
       },
       {
         "parameter": "HIGH-level output voltage",
@@ -438,7 +438,7 @@
         "typ": null,
         "max": null,
         "unit": "V",
-        "conditions": "IO = -12 mA; VCC = 2.7 V",
+        "conditions": "VI = VIH or VIL; IO = -12 mA; VCC = 2.7 V",
         "device": "74LVC2G34",
         "temp_range": "full"
       },
@@ -450,9 +450,9 @@
         "typ": null,
         "max": null,
         "unit": "V",
-        "conditions": "IO = -24 mA; VCC = 3.0 V",
+        "conditions": "VI = VIH or VIL; IO = -24 mA; VCC = 3.0 V",
         "device": "74LVC2G34",
-        "temp_range": "25C or full"
+        "temp_range": "full"
       },
       {
         "parameter": "HIGH-level output voltage",
@@ -462,7 +462,7 @@
         "typ": null,
         "max": null,
         "unit": "V",
-        "conditions": "IO = -24 mA; VCC = 3.0 V",
+        "conditions": "VI = VIH or VIL; IO = -24 mA; VCC = 3.0 V",
         "device": "74LVC2G34",
         "temp_range": "full"
       },
@@ -474,9 +474,9 @@
         "typ": null,
         "max": null,
         "unit": "V",
-        "conditions": "IO = -32 mA; VCC = 4.5 V",
+        "conditions": "VI = VIH or VIL; IO = -32 mA; VCC = 4.5 V",
         "device": "74LVC2G34",
-        "temp_range": "25C or full"
+        "temp_range": "full"
       },
       {
         "parameter": "HIGH-level output voltage",
@@ -486,7 +486,7 @@
         "typ": null,
         "max": null,
         "unit": "V",
-        "conditions": "IO = -32 mA; VCC = 4.5 V",
+        "conditions": "VI = VIH or VIL; IO = -32 mA; VCC = 4.5 V",
         "device": "74LVC2G34",
         "temp_range": "full"
       },
@@ -498,7 +498,7 @@
         "typ": null,
         "max": 0.1,
         "unit": "V",
-        "conditions": "IO = 100 uA; VCC = 1.65 V to 5.5 V",
+        "conditions": "VI = VIH or VIL; IO = 100 uA; VCC = 1.65 V to 5.5 V",
         "device": "74LVC2G34",
         "temp_range": "full"
       },
@@ -510,9 +510,9 @@
         "typ": null,
         "max": 0.45,
         "unit": "V",
-        "conditions": "IO = 4 mA; VCC = 1.65 V",
+        "conditions": "VI = VIH or VIL; IO = 4 mA; VCC = 1.65 V",
         "device": "74LVC2G34",
-        "temp_range": "25C or full"
+        "temp_range": "full"
       },
       {
         "parameter": "LOW-level output voltage",
@@ -522,7 +522,7 @@
         "typ": null,
         "max": 0.7,
         "unit": "V",
-        "conditions": "IO = 4 mA; VCC = 1.65 V",
+        "conditions": "VI = VIH or VIL; IO = 4 mA; VCC = 1.65 V",
         "device": "74LVC2G34",
         "temp_range": "full"
       },
@@ -534,9 +534,9 @@
         "typ": null,
         "max": 0.3,
         "unit": "V",
-        "conditions": "IO = 8 mA; VCC = 2.3 V",
+        "conditions": "VI = VIH or VIL; IO = 8 mA; VCC = 2.3 V",
         "device": "74LVC2G34",
-        "temp_range": "25C or full"
+        "temp_range": "full"
       },
       {
         "parameter": "LOW-level output voltage",
@@ -546,7 +546,7 @@
         "typ": null,
         "max": 0.45,
         "unit": "V",
-        "conditions": "IO = 8 mA; VCC = 2.3 V",
+        "conditions": "VI = VIH or VIL; IO = 8 mA; VCC = 2.3 V",
         "device": "74LVC2G34",
         "temp_range": "full"
       },
@@ -558,9 +558,9 @@
         "typ": null,
         "max": 0.4,
         "unit": "V",
-        "conditions": "IO = 12 mA; VCC = 2.7 V",
+        "conditions": "VI = VIH or VIL; IO = 12 mA; VCC = 2.7 V",
         "device": "74LVC2G34",
-        "temp_range": "25C or full"
+        "temp_range": "full"
       },
       {
         "parameter": "LOW-level output voltage",
@@ -570,7 +570,7 @@
         "typ": null,
         "max": 0.6,
         "unit": "V",
-        "conditions": "IO = 12 mA; VCC = 2.7 V",
+        "conditions": "VI = VIH or VIL; IO = 12 mA; VCC = 2.7 V",
         "device": "74LVC2G34",
         "temp_range": "full"
       },
@@ -582,9 +582,9 @@
         "typ": null,
         "max": 0.55,
         "unit": "V",
-        "conditions": "IO = 24 mA; VCC = 3.0 V",
+        "conditions": "VI = VIH or VIL; IO = 24 mA; VCC = 3.0 V",
         "device": "74LVC2G34",
-        "temp_range": "25C or full"
+        "temp_range": "full"
       },
       {
         "parameter": "LOW-level output voltage",
@@ -594,7 +594,7 @@
         "typ": null,
         "max": 0.8,
         "unit": "V",
-        "conditions": "IO = 24 mA; VCC = 3.0 V",
+        "conditions": "VI = VIH or VIL; IO = 24 mA; VCC = 3.0 V",
         "device": "74LVC2G34",
         "temp_range": "full"
       },
@@ -606,9 +606,9 @@
         "typ": null,
         "max": 0.55,
         "unit": "V",
-        "conditions": "IO = 32 mA; VCC = 4.5 V",
+        "conditions": "VI = VIH or VIL; IO = 32 mA; VCC = 4.5 V",
         "device": "74LVC2G34",
-        "temp_range": "25C or full"
+        "temp_range": "full"
       },
       {
         "parameter": "LOW-level output voltage",
@@ -618,7 +618,7 @@
         "typ": null,
         "max": 0.8,
         "unit": "V",
-        "conditions": "IO = 32 mA; VCC = 4.5 V",
+        "conditions": "VI = VIH or VIL; IO = 32 mA; VCC = 4.5 V",
         "device": "74LVC2G34",
         "temp_range": "full"
       },
@@ -628,11 +628,11 @@
         "symbol": "II",
         "min": null,
         "typ": 0.1,
-        "max": 1,
+        "max": 1.0,
         "unit": "uA",
         "conditions": "VI = 5.5 V or GND; VCC = 0 V to 5.5 V",
         "device": "74LVC2G34",
-        "temp_range": "25C or full"
+        "temp_range": "25C"
       },
       {
         "parameter": "input leakage current",
@@ -640,7 +640,7 @@
         "symbol": "II",
         "min": null,
         "typ": null,
-        "max": 1,
+        "max": 1.0,
         "unit": "uA",
         "conditions": "VI = 5.5 V or GND; VCC = 0 V to 5.5 V",
         "device": "74LVC2G34",
@@ -652,11 +652,11 @@
         "symbol": "IOFF",
         "min": null,
         "typ": 0.1,
-        "max": 2,
+        "max": 2.0,
         "unit": "uA",
         "conditions": "VCC = 0 V; VI or VO = 5.5 V",
         "device": "74LVC2G34",
-        "temp_range": "25C or full"
+        "temp_range": "25C"
       },
       {
         "parameter": "power-off leakage current",
@@ -664,7 +664,7 @@
         "symbol": "IOFF",
         "min": null,
         "typ": null,
-        "max": 2,
+        "max": 2.0,
         "unit": "uA",
         "conditions": "VCC = 0 V; VI or VO = 5.5 V",
         "device": "74LVC2G34",
@@ -676,11 +676,11 @@
         "symbol": "ICC",
         "min": null,
         "typ": 0.1,
-        "max": 4,
+        "max": 4.0,
         "unit": "uA",
         "conditions": "VI = 5.5 V or GND; IO = 0 A; VCC = 1.65 V to 5.5 V",
         "device": "74LVC2G34",
-        "temp_range": "25C or full"
+        "temp_range": "25C"
       },
       {
         "parameter": "supply current",
@@ -688,7 +688,7 @@
         "symbol": "ICC",
         "min": null,
         "typ": null,
-        "max": 4,
+        "max": 4.0,
         "unit": "uA",
         "conditions": "VI = 5.5 V or GND; IO = 0 A; VCC = 1.65 V to 5.5 V",
         "device": "74LVC2G34",
@@ -696,23 +696,23 @@
       },
       {
         "parameter": "additional supply current",
-        "raw_name": "deltaICC",
-        "symbol": "deltaICC",
+        "raw_name": "dICC",
+        "symbol": "dICC",
         "min": null,
-        "typ": 5,
-        "max": 500,
+        "typ": 5.0,
+        "max": 500.0,
         "unit": "uA",
         "conditions": "per pin; VCC = 2.3 V to 5.5 V; VI = VCC - 0.6 V; IO = 0 A",
         "device": "74LVC2G34",
-        "temp_range": "25C or full"
+        "temp_range": "25C"
       },
       {
         "parameter": "additional supply current",
-        "raw_name": "deltaICC",
-        "symbol": "deltaICC",
+        "raw_name": "dICC",
+        "symbol": "dICC",
         "min": null,
         "typ": null,
-        "max": 500,
+        "max": 500.0,
         "unit": "uA",
         "conditions": "per pin; VCC = 2.3 V to 5.5 V; VI = VCC - 0.6 V; IO = 0 A",
         "device": "74LVC2G34",
@@ -770,98 +770,530 @@
       }
     ]
   },
+  "pin_extraction": {
+    "logical_pins": [
+      {
+        "name": "1A",
+        "direction": "INPUT",
+        "signal_type": "DIGITAL",
+        "description": "data input",
+        "packages": {
+          "SOT363-2": [
+            1
+          ],
+          "SOT457": [
+            1
+          ],
+          "SOT886": [
+            1
+          ],
+          "SOT1115": [
+            1
+          ],
+          "SOT1202": [
+            1
+          ],
+          "SOT1255-2": [
+            1
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "GND",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "ground (0 V)",
+        "packages": {
+          "SOT363-2": [
+            2
+          ],
+          "SOT457": [
+            2
+          ],
+          "SOT886": [
+            2
+          ],
+          "SOT1115": [
+            2
+          ],
+          "SOT1202": [
+            2
+          ],
+          "SOT1255-2": [
+            2
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "2A",
+        "direction": "INPUT",
+        "signal_type": "DIGITAL",
+        "description": "data input",
+        "packages": {
+          "SOT363-2": [
+            3
+          ],
+          "SOT457": [
+            3
+          ],
+          "SOT886": [
+            3
+          ],
+          "SOT1115": [
+            3
+          ],
+          "SOT1202": [
+            3
+          ],
+          "SOT1255-2": [
+            3
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "2Y",
+        "direction": "OUTPUT",
+        "signal_type": "DIGITAL",
+        "description": "data output",
+        "packages": {
+          "SOT363-2": [
+            4
+          ],
+          "SOT457": [
+            4
+          ],
+          "SOT886": [
+            4
+          ],
+          "SOT1115": [
+            4
+          ],
+          "SOT1202": [
+            4
+          ],
+          "SOT1255-2": [
+            4
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "VCC",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "supply voltage",
+        "packages": {
+          "SOT363-2": [
+            5
+          ],
+          "SOT457": [
+            5
+          ],
+          "SOT886": [
+            5
+          ],
+          "SOT1115": [
+            5
+          ],
+          "SOT1202": [
+            5
+          ],
+          "SOT1255-2": [
+            5
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "1Y",
+        "direction": "OUTPUT",
+        "signal_type": "DIGITAL",
+        "description": "data output",
+        "packages": {
+          "SOT363-2": [
+            6
+          ],
+          "SOT457": [
+            6
+          ],
+          "SOT886": [
+            6
+          ],
+          "SOT1115": [
+            6
+          ],
+          "SOT1202": [
+            6
+          ],
+          "SOT1255-2": [
+            6
+          ]
+        },
+        "unused_treatment": null
+      }
+    ]
+  },
+  "pin_index": {
+    "packages": {
+      "SOT363-2": {
+        "1": {
+          "name": "1A",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "data input",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "ground (0 V)",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "2A",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "data input",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "2Y",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "data output",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "VCC",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "supply voltage",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "1Y",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "data output",
+          "unused_treatment": null
+        }
+      },
+      "SOT457": {
+        "1": {
+          "name": "1A",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "data input",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "ground (0 V)",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "2A",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "data input",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "2Y",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "data output",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "VCC",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "supply voltage",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "1Y",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "data output",
+          "unused_treatment": null
+        }
+      },
+      "SOT886": {
+        "1": {
+          "name": "1A",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "data input",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "ground (0 V)",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "2A",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "data input",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "2Y",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "data output",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "VCC",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "supply voltage",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "1Y",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "data output",
+          "unused_treatment": null
+        }
+      },
+      "SOT1115": {
+        "1": {
+          "name": "1A",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "data input",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "ground (0 V)",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "2A",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "data input",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "2Y",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "data output",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "VCC",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "supply voltage",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "1Y",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "data output",
+          "unused_treatment": null
+        }
+      },
+      "SOT1202": {
+        "1": {
+          "name": "1A",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "data input",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "ground (0 V)",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "2A",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "data input",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "2Y",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "data output",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "VCC",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "supply voltage",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "1Y",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "data output",
+          "unused_treatment": null
+        }
+      },
+      "SOT1255-2": {
+        "1": {
+          "name": "1A",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "data input",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "ground (0 V)",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "2A",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "data input",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "2Y",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "data output",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "VCC",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "supply voltage",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "1Y",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "data output",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "pin_validation": [],
   "validation": [
     {
       "param": "supply voltage",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "input voltage",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
-      "param": "output clamping current",
+      "param": "output voltage (power-down mode)",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "output voltage (Power-down mode)",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "output current",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "storage temperature",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "input leakage current",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "power-off leakage current",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "supply current",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "additional supply current",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     }
   ],
-  "physics_validation": [],
+  "physics_validation": [
+    {
+      "param": "input leakage current (74LVC2G34)",
+      "rule": "temp_envelope",
+      "passed": true,
+      "message": "OK (mode: ALGEBRAIC)"
+    },
+    {
+      "param": "power-off leakage current (74LVC2G34)",
+      "rule": "temp_envelope",
+      "passed": true,
+      "message": "OK (mode: ALGEBRAIC)"
+    },
+    {
+      "param": "supply current (74LVC2G34)",
+      "rule": "temp_envelope",
+      "passed": true,
+      "message": "OK (mode: ALGEBRAIC)"
+    },
+    {
+      "param": "additional supply current (74LVC2G34)",
+      "rule": "temp_envelope",
+      "passed": true,
+      "message": "OK (mode: ALGEBRAIC)"
+    }
+  ],
   "cross_validation": {
     "total_extracted_values": 31,
     "values_found_in_pdf": 31,
     "values_not_in_pdf": [],
     "value_coverage_pct": 100.0,
     "total_params": 50,
-    "params_verified": 48,
-    "params_suspicious": 2,
-    "suspicious_params": [
-      {
-        "parameter": "output clamping current",
-        "device": "",
-        "values": [
-          -50.0,
-          50.0
-        ]
-      },
-      {
-        "parameter": "output current",
-        "device": "",
-        "values": [
-          -50.0,
-          50.0
-        ]
-      }
-    ]
+    "params_verified": 50,
+    "params_suspicious": 0,
+    "suspicious_params": []
   },
   "timing": {
-    "l0_classify_s": 0.063,
-    "l1_extract_s": 55.415
+    "l0_classify_s": 0.062,
+    "l1a_extract_s": 595.623,
+    "l1b_pin_s": 16.253
   }
 }

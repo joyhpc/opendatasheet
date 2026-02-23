@@ -23,7 +23,7 @@
       "text_length": 1125,
       "category": "pin",
       "matched_patterns": [
-        "(?i)pin\\s+(description|configuration|function|assignment|definition)",
+        "(?i)pin\\s+(description|configuration|function|assignment|definition|connection|diagram)",
         "(?i)pin\\s+name"
       ],
       "text_preview": "                                         Datasheet             4A 300KHz 32V Buck DC to DC Converter                               XL4003      Rev 2.3                                                  "
@@ -144,12 +144,12 @@
         "conditions": "Internally limited"
       },
       {
-        "parameter": "Thermal Resistance",
+        "parameter": "Thermal Resistance (TO252)",
         "raw_name": "Thermal Resistance (TO252) (Junction to Ambient, No Heatsink, Free Air)",
         "symbol": "RJA",
         "min": null,
-        "typ": null,
-        "max": 50.0,
+        "typ": 50.0,
+        "max": null,
         "unit": "°C/W",
         "conditions": "No Heatsink, Free Air"
       },
@@ -174,22 +174,22 @@
         "conditions": null
       },
       {
-        "parameter": "Lead Temperature",
+        "parameter": "Lead Temperature (Soldering, 10 sec)",
         "raw_name": "Lead Temperature (Soldering, 10 sec)",
         "symbol": "TLEAD",
         "min": null,
-        "typ": null,
-        "max": 260.0,
+        "typ": 260.0,
+        "max": null,
         "unit": "°C",
-        "conditions": "10 sec"
+        "conditions": null
       },
       {
         "parameter": "ESD (HBM)",
         "raw_name": "ESD (HBM)",
         "symbol": null,
         "min": null,
-        "typ": null,
-        "max": 2000.0,
+        "typ": 2000.0,
+        "max": null,
         "unit": "V",
         "conditions": null
       }
@@ -227,7 +227,7 @@
         "typ": null,
         "max": 32.0,
         "unit": "V",
-        "conditions": "Iout=500mA",
+        "conditions": null,
         "device": "XL4003",
         "temp_range": "25C"
       },
@@ -263,7 +263,7 @@
         "typ": 300.0,
         "max": 360.0,
         "unit": "Khz",
-        "conditions": "Iout=500mA",
+        "conditions": null,
         "device": "XL4003",
         "temp_range": "25C"
       },
@@ -281,25 +281,25 @@
       },
       {
         "parameter": "EN Pin Threshold High",
-        "raw_name": "EN Pin Threshold (High)",
+        "raw_name": "EN Pin Threshold",
         "symbol": "VEN",
         "min": null,
         "typ": 1.4,
         "max": null,
         "unit": "V",
-        "conditions": "Regulator ON",
+        "conditions": "High (Regulator ON)",
         "device": "XL4003",
         "temp_range": "25C"
       },
       {
         "parameter": "EN Pin Threshold Low",
-        "raw_name": "EN Pin Threshold (Low)",
+        "raw_name": "EN Pin Threshold",
         "symbol": "VEN",
         "min": null,
         "typ": 0.8,
         "max": null,
         "unit": "V",
-        "conditions": "Regulator OFF",
+        "conditions": "Low (Regulator OFF)",
         "device": "XL4003",
         "temp_range": "25C"
       },
@@ -375,58 +375,172 @@
         "pin_number": "Tab",
         "pin_name": "SW",
         "type": "Output",
-        "description": "Metal Tab is connected to SW pin."
+        "description": "Metal Tab SW"
       }
     ]
   },
+  "pin_extraction": {
+    "logical_pins": [
+      {
+        "name": "GND",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Ground Pin. Should be placed outside of the Schottky Diode to output capacitor ground path to prevent noise induction.",
+        "packages": {
+          "TO252-5L": [
+            1
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "FB",
+        "direction": "INPUT",
+        "signal_type": "ANALOG",
+        "description": "Feedback Pin (FB). Senses the output voltage through an external resistor divider for regulation. Threshold is 0.8V.",
+        "packages": {
+          "TO252-5L": [
+            2
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "SW",
+        "direction": "OUTPUT",
+        "signal_type": "POWER",
+        "description": "Power Switch Output Pin (SW). The switch node that supplies power to the output.",
+        "packages": {
+          "TO252-5L": [
+            3,
+            "TAB"
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "EN",
+        "direction": "INPUT",
+        "signal_type": "DIGITAL",
+        "description": "Enable Pin. Drive high to turn on the device, drive low to turn it off.",
+        "packages": {
+          "TO252-5L": [
+            4
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "VIN",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Supply Voltage Input Pin. Operates from 5V to 32V. Requires bypass capacitor to GND.",
+        "packages": {
+          "TO252-5L": [
+            5
+          ]
+        },
+        "unused_treatment": null
+      }
+    ]
+  },
+  "pin_index": {
+    "packages": {
+      "TO252-5L": {
+        "1": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground Pin. Should be placed outside of the Schottky Diode to output capacitor ground path to prevent noise induction.",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "FB",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Feedback Pin (FB). Senses the output voltage through an external resistor divider for regulation. Threshold is 0.8V.",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "SW",
+          "direction": "OUTPUT",
+          "signal_type": "POWER",
+          "description": "Power Switch Output Pin (SW). The switch node that supplies power to the output.",
+          "unused_treatment": null
+        },
+        "TAB": {
+          "name": "SW",
+          "direction": "OUTPUT",
+          "signal_type": "POWER",
+          "description": "Power Switch Output Pin (SW). The switch node that supplies power to the output.",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "EN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Enable Pin. Drive high to turn on the device, drive low to turn it off.",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "VIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Supply Voltage Input Pin. Operates from 5V to 32V. Requires bypass capacitor to GND.",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "pin_validation": [],
   "validation": [
     {
       "param": "Input Voltage",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Operating Junction Temperature",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Storage Temperature",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Feedback Voltage",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Input operation voltage",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Shutdown Supply Current",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Quiescent Supply Current",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Oscillator Frequency",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Oscillator Frequency",
@@ -438,13 +552,13 @@
       "param": "EN Pin Input Leakage Current (High)",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "EN Pin Input Leakage Current (Low)",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     }
   ],
   "physics_validation": [],
@@ -459,7 +573,8 @@
     "suspicious_params": []
   },
   "timing": {
-    "l0_classify_s": 0.019,
-    "l1_extract_s": 23.807
+    "l0_classify_s": 0.02,
+    "l1a_extract_s": 32.293,
+    "l1b_pin_s": 19.741
   }
 }

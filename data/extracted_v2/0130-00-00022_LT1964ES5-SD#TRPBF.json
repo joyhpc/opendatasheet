@@ -25,7 +25,7 @@
       "category": "electrical",
       "matched_patterns": [
         "(?i)absolute\\s+maximum\\s+ratings?",
-        "(?i)pin\\s+(description|configuration|function|assignment|definition)"
+        "(?i)pin\\s+(description|configuration|function|assignment|definition|connection|diagram)"
       ],
       "text_preview": "LT1964 2 1964fb  ABSOLUTE MAXIMUM RATINGS IN Pin Voltage ........................................................ ±20V OUT Pin Voltage (Note 11) ......................................±20V OUT to IN Di"
     },
@@ -88,7 +88,7 @@
       "text_length": 3106,
       "category": "pin",
       "matched_patterns": [
-        "(?i)pin\\s+(description|configuration|function|assignment|definition)"
+        "(?i)pin\\s+(description|configuration|function|assignment|definition|connection|diagram)"
       ],
       "text_preview": "LT1964 10 1964fb  PIN FUNCTIONS ADJ (Adjustable Devices only): For the Adjustable LT1964,  this is the Input to the Error Ampliﬁ er. The ADJ pin has a  bias current of 30nA that ﬂ ows out of the pin. "
     },
@@ -306,31 +306,31 @@
       {
         "parameter": "Line Regulation",
         "raw_name": "Line Regulation",
-        "symbol": null,
+        "symbol": "ΔVOUT/ΔVIN",
         "min": null,
         "typ": 15,
         "max": 50,
         "unit": "mV",
         "conditions": "ΔVIN = -5.5V to -20V, ILOAD = -1mA",
         "device": "LT1964-5",
-        "temp_range": "full"
+        "temp_range": "25C"
       },
       {
         "parameter": "Line Regulation",
         "raw_name": "Line Regulation",
-        "symbol": null,
+        "symbol": "ΔVOUT/ΔVIN",
         "min": null,
         "typ": 1,
         "max": 12,
         "unit": "mV",
         "conditions": "ΔVIN = -2.8V to -20V, ILOAD = -1mA",
         "device": "LT1964",
-        "temp_range": "full"
+        "temp_range": "25C"
       },
       {
         "parameter": "Load Regulation",
         "raw_name": "Load Regulation",
-        "symbol": null,
+        "symbol": "ΔVOUT/ΔILOAD",
         "min": null,
         "typ": 15,
         "max": 35,
@@ -342,7 +342,7 @@
       {
         "parameter": "Load Regulation",
         "raw_name": "Load Regulation",
-        "symbol": null,
+        "symbol": "ΔVOUT/ΔILOAD",
         "min": null,
         "typ": null,
         "max": 50,
@@ -354,7 +354,7 @@
       {
         "parameter": "Load Regulation",
         "raw_name": "Load Regulation",
-        "symbol": null,
+        "symbol": "ΔVOUT/ΔILOAD",
         "min": null,
         "typ": 2,
         "max": 7,
@@ -366,7 +366,7 @@
       {
         "parameter": "Load Regulation",
         "raw_name": "Load Regulation",
-        "symbol": null,
+        "symbol": "ΔVOUT/ΔILOAD",
         "min": null,
         "typ": null,
         "max": 15,
@@ -378,97 +378,97 @@
       {
         "parameter": "Dropout Voltage",
         "raw_name": "Dropout Voltage",
-        "symbol": "VDO",
+        "symbol": "VDROPOUT",
         "min": null,
         "typ": 0.1,
         "max": 0.15,
         "unit": "V",
         "conditions": "ILOAD = -1mA",
-        "device": "all",
+        "device": null,
         "temp_range": "25C"
       },
       {
         "parameter": "Dropout Voltage",
         "raw_name": "Dropout Voltage",
-        "symbol": "VDO",
+        "symbol": "VDROPOUT",
         "min": null,
         "typ": null,
         "max": 0.19,
         "unit": "V",
         "conditions": "ILOAD = -1mA",
-        "device": "all",
+        "device": null,
         "temp_range": "full"
       },
       {
         "parameter": "Dropout Voltage",
         "raw_name": "Dropout Voltage",
-        "symbol": "VDO",
+        "symbol": "VDROPOUT",
         "min": null,
         "typ": 0.15,
         "max": 0.2,
         "unit": "V",
         "conditions": "ILOAD = -10mA",
-        "device": "all",
+        "device": null,
         "temp_range": "25C"
       },
       {
         "parameter": "Dropout Voltage",
         "raw_name": "Dropout Voltage",
-        "symbol": "VDO",
+        "symbol": "VDROPOUT",
         "min": null,
         "typ": null,
         "max": 0.25,
         "unit": "V",
         "conditions": "ILOAD = -10mA",
-        "device": "all",
+        "device": null,
         "temp_range": "full"
       },
       {
         "parameter": "Dropout Voltage",
         "raw_name": "Dropout Voltage",
-        "symbol": "VDO",
+        "symbol": "VDROPOUT",
         "min": null,
         "typ": 0.26,
         "max": 0.33,
         "unit": "V",
         "conditions": "ILOAD = -100mA",
-        "device": "all",
+        "device": null,
         "temp_range": "25C"
       },
       {
         "parameter": "Dropout Voltage",
         "raw_name": "Dropout Voltage",
-        "symbol": "VDO",
+        "symbol": "VDROPOUT",
         "min": null,
         "typ": null,
         "max": 0.39,
         "unit": "V",
         "conditions": "ILOAD = -100mA",
-        "device": "all",
+        "device": null,
         "temp_range": "full"
       },
       {
         "parameter": "Dropout Voltage",
         "raw_name": "Dropout Voltage",
-        "symbol": "VDO",
+        "symbol": "VDROPOUT",
         "min": null,
         "typ": 0.34,
         "max": 0.42,
         "unit": "V",
         "conditions": "ILOAD = -200mA",
-        "device": "all",
+        "device": null,
         "temp_range": "25C"
       },
       {
         "parameter": "Dropout Voltage",
         "raw_name": "Dropout Voltage",
-        "symbol": "VDO",
+        "symbol": "VDROPOUT",
         "min": null,
         "typ": null,
         "max": 0.49,
         "unit": "V",
         "conditions": "ILOAD = -200mA",
-        "device": "all",
+        "device": null,
         "temp_range": "full"
       },
       {
@@ -480,8 +480,8 @@
         "max": 70,
         "unit": "µA",
         "conditions": "ILOAD = 0mA",
-        "device": "all",
-        "temp_range": "full"
+        "device": null,
+        "temp_range": "25C"
       },
       {
         "parameter": "GND Pin Current",
@@ -492,8 +492,8 @@
         "max": 180,
         "unit": "µA",
         "conditions": "ILOAD = -1mA",
-        "device": "all",
-        "temp_range": "full"
+        "device": null,
+        "temp_range": "25C"
       },
       {
         "parameter": "GND Pin Current",
@@ -504,8 +504,8 @@
         "max": 600,
         "unit": "µA",
         "conditions": "ILOAD = -10mA",
-        "device": "all",
-        "temp_range": "full"
+        "device": null,
+        "temp_range": "25C"
       },
       {
         "parameter": "GND Pin Current",
@@ -516,8 +516,8 @@
         "max": 3,
         "unit": "mA",
         "conditions": "ILOAD = -100mA",
-        "device": "all",
-        "temp_range": "full"
+        "device": null,
+        "temp_range": "25C"
       },
       {
         "parameter": "GND Pin Current",
@@ -528,19 +528,19 @@
         "max": 6,
         "unit": "mA",
         "conditions": "ILOAD = -200mA",
-        "device": "all",
-        "temp_range": "full"
+        "device": null,
+        "temp_range": "25C"
       },
       {
         "parameter": "Output Voltage Noise",
         "raw_name": "Output Voltage Noise",
-        "symbol": "eN",
+        "symbol": "en",
         "min": null,
         "typ": 30,
         "max": null,
         "unit": "µVRMS",
         "conditions": "COUT = 10µF, CBYP = 0.01µF, ILOAD = -200mA, BW = 10Hz to 100kHz",
-        "device": "all",
+        "device": null,
         "temp_range": "25C"
       },
       {
@@ -552,7 +552,7 @@
         "max": 100,
         "unit": "nA",
         "conditions": "Notes 2, 7",
-        "device": "LT1964",
+        "device": null,
         "temp_range": "25C"
       },
       {
@@ -582,49 +582,49 @@
       {
         "parameter": "Shutdown Threshold",
         "raw_name": "Shutdown Threshold",
-        "symbol": "VSHDN",
+        "symbol": null,
         "min": null,
         "typ": 1.6,
         "max": 2.1,
         "unit": "V",
         "conditions": "VOUT = Off to On (Positive)",
-        "device": "all",
+        "device": null,
         "temp_range": "full"
       },
       {
         "parameter": "Shutdown Threshold",
         "raw_name": "Shutdown Threshold",
-        "symbol": "VSHDN",
+        "symbol": null,
         "min": null,
         "typ": -1.9,
         "max": -2.8,
         "unit": "V",
         "conditions": "VOUT = Off to On (Negative)",
-        "device": "all",
+        "device": null,
         "temp_range": "full"
       },
       {
         "parameter": "Shutdown Threshold",
         "raw_name": "Shutdown Threshold",
-        "symbol": "VSHDN",
+        "symbol": null,
         "min": 0.25,
         "typ": 0.8,
         "max": null,
         "unit": "V",
         "conditions": "VOUT = On to Off (Positive)",
-        "device": "all",
+        "device": null,
         "temp_range": "full"
       },
       {
         "parameter": "Shutdown Threshold",
         "raw_name": "Shutdown Threshold",
-        "symbol": "VSHDN",
+        "symbol": null,
         "min": -0.25,
         "typ": -0.8,
         "max": null,
         "unit": "V",
         "conditions": "VOUT = On to Off (Negative)",
-        "device": "all",
+        "device": null,
         "temp_range": "full"
       },
       {
@@ -636,7 +636,7 @@
         "max": 1,
         "unit": "µA",
         "conditions": "VSHDN = 0V",
-        "device": "all",
+        "device": null,
         "temp_range": "25C"
       },
       {
@@ -648,7 +648,7 @@
         "max": 15,
         "unit": "µA",
         "conditions": "VSHDN = 15V",
-        "device": "all",
+        "device": null,
         "temp_range": "25C"
       },
       {
@@ -660,7 +660,7 @@
         "max": -9,
         "unit": "µA",
         "conditions": "VSHDN = -15V",
-        "device": "all",
+        "device": null,
         "temp_range": "25C"
       },
       {
@@ -672,7 +672,7 @@
         "max": 10,
         "unit": "µA",
         "conditions": "VIN = -6V, VSHDN = 0V",
-        "device": "all",
+        "device": null,
         "temp_range": "full"
       },
       {
@@ -684,7 +684,7 @@
         "max": null,
         "unit": "dB",
         "conditions": "VIN - VOUT = -1.5V(Avg), VRIPPLE = 0.5VP-P, fRIPPLE = 120Hz, ILOAD = -200mA",
-        "device": "all",
+        "device": null,
         "temp_range": "25C"
       },
       {
@@ -696,7 +696,7 @@
         "max": null,
         "unit": "mA",
         "conditions": "VIN = -6V, VOUT = 0V",
-        "device": "all",
+        "device": null,
         "temp_range": "25C"
       },
       {
@@ -708,7 +708,7 @@
         "max": null,
         "unit": "mA",
         "conditions": "VIN = VOUT(NOMINAL) - 1.5V, ΔVOUT = 0.1V",
-        "device": "all",
+        "device": null,
         "temp_range": "full"
       },
       {
@@ -720,7 +720,7 @@
         "max": 1,
         "unit": "mA",
         "conditions": "VIN = 20V, VOUT, VADJ, VSHDN = Open Circuit",
-        "device": "all",
+        "device": null,
         "temp_range": "full"
       }
     ],
@@ -735,24 +735,24 @@
         "pin_number": "3",
         "pin_name": "ADJ",
         "type": "Input",
-        "description": "Input to the Error Amplifier. The ADJ pin has a bias current of 30nA that flows out of the pin. The ADJ pin voltage is -1.22V referenced to ground."
+        "description": "Input to the Error Amplifier. The ADJ pin has a bias current of 30nA that flows out of the pin. ADJ pin voltage is -1.22V referenced to ground."
       },
       {
         "pin_number": "4",
         "pin_name": "SHDN",
         "type": "Input",
-        "description": "The SHDN Pin is used to put the LT1964 into a Low Power Shutdown State. The SHDN pin is referenced to the GND pin for regulator control, allowing the LT1964 to be driven by either positive or negative logic."
+        "description": "Shutdown Control. Referenced to GND pin. Allows device to be driven by either positive or negative logic."
       },
       {
         "pin_number": "5",
         "pin_name": "BYP",
         "type": "Input",
-        "description": "The BYP Pin is used to Bypass the Reference of the LT1964 to Achieve Low Noise Performance from the Regulator. A small capacitor from the output to this pin will bypass the reference to lower the output voltage noise."
+        "description": "Bypass pin for the reference to achieve low noise performance. A small capacitor from output to this pin will bypass the reference."
       },
       {
         "pin_number": "6",
         "pin_name": "GND",
-        "type": "Ground",
+        "type": "Power",
         "description": "Ground."
       },
       {
@@ -765,52 +765,166 @@
         "pin_number": "9",
         "pin_name": "Exposed Pad",
         "type": "Power",
-        "description": "IN. Connect to IN (Pins 7, 8) at the PCB."
+        "description": "IN. Connect to IN (Pins 7, 8) at the PCB. (DFN Package Only)"
       }
     ]
   },
+  "pin_extraction": {
+    "logical_pins": [
+      {
+        "name": "ADJ",
+        "direction": "INPUT",
+        "signal_type": "ANALOG",
+        "description": "Input to the error amplifier for adjustable devices. Referenced to ground, output voltage range is -1.22V to -20V.",
+        "packages": {
+          "ThinSOT": [],
+          "DFN-8": []
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "BYP",
+        "direction": "PASSIVE",
+        "signal_type": "ANALOG",
+        "description": "Bypass pin used to achieve low noise performance. A small capacitor from the output to this pin will bypass the reference.",
+        "packages": {
+          "ThinSOT": [],
+          "DFN-8": []
+        },
+        "unused_treatment": "FLOAT"
+      },
+      {
+        "name": "Exposed Pad",
+        "direction": "PASSIVE",
+        "signal_type": "POWER",
+        "description": "Exposed pad (DFN package only). Connect to IN (Pins 7, 8) at the PCB.",
+        "packages": {
+          "DFN-8": [
+            "EP"
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "GND",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Ground.",
+        "packages": {
+          "ThinSOT": [],
+          "DFN-8": []
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "IN",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Power supply input. A bypass capacitor is required on this pin.",
+        "packages": {
+          "ThinSOT": [],
+          "DFN-8": [
+            7,
+            8
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "OUT",
+        "direction": "POWER_OUT",
+        "signal_type": "POWER",
+        "description": "The output supplies power to the load. A minimum output capacitor of 1µF is required to prevent oscillations.",
+        "packages": {
+          "ThinSOT": [],
+          "DFN-8": []
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "SHDN",
+        "direction": "INPUT",
+        "signal_type": "DIGITAL",
+        "description": "Shutdown control pin. Referenced to GND. Pulling more than -1.9V or +1.6V will turn the device on. If unused, must be connected to VIN.",
+        "packages": {
+          "ThinSOT": [],
+          "DFN-8": []
+        },
+        "unused_treatment": "VCC"
+      }
+    ]
+  },
+  "pin_index": {
+    "packages": {
+      "ThinSOT": {},
+      "DFN-8": {
+        "EP": {
+          "name": "Exposed Pad",
+          "direction": "PASSIVE",
+          "signal_type": "POWER",
+          "description": "Exposed pad (DFN package only). Connect to IN (Pins 7, 8) at the PCB.",
+          "unused_treatment": null
+        },
+        "7": {
+          "name": "IN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power supply input. A bypass capacitor is required on this pin.",
+          "unused_treatment": null
+        },
+        "8": {
+          "name": "IN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power supply input. A bypass capacitor is required on this pin.",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "pin_validation": [],
   "validation": [
     {
       "param": "IN Pin Voltage",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "OUT Pin Voltage",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "OUT to IN Differential Voltage",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "ADJ Pin Voltage (with Respect to IN Pin)",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "BYP Pin Voltage (with Respect to IN Pin)",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "SHDN Pin Voltage (with Respect to IN Pin)",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "SHDN Pin Voltage (with Respect to GND Pin)",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Output Short-Circuit Duration",
@@ -822,662 +936,240 @@
       "param": "Operating Junction Temperature Range",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Storage Temperature Range",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Regulated Output Voltage",
       "rule": "monotonicity",
-      "passed": false,
-      "message": "min/typ/max not monotonic: -4.925/-5/-5.075"
+      "passed": true,
+      "message": "OK (modes: MAGNITUDE)"
     },
     {
       "param": "Regulated Output Voltage",
       "rule": "monotonicity",
-      "passed": false,
-      "message": "min/typ/max not monotonic: -4.85/-5/-5.15"
+      "passed": true,
+      "message": "OK (modes: MAGNITUDE)"
     },
     {
       "param": "ADJ Pin Voltage",
       "rule": "monotonicity",
-      "passed": false,
-      "message": "min/typ/max not monotonic: -1.202/-1.22/-1.238"
+      "passed": true,
+      "message": "OK (modes: MAGNITUDE)"
     },
     {
       "param": "ADJ Pin Voltage",
       "rule": "monotonicity",
-      "passed": false,
-      "message": "min/typ/max not monotonic: -1.184/-1.22/-1.256"
+      "passed": true,
+      "message": "OK (modes: MAGNITUDE)"
     },
     {
       "param": "Line Regulation",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Line Regulation",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Load Regulation",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Load Regulation",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Dropout Voltage",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Dropout Voltage",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Dropout Voltage",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Dropout Voltage",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "GND Pin Current",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "GND Pin Current",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "GND Pin Current",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "GND Pin Current",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "GND Pin Current",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "ADJ Pin Bias Current",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Minimum Input Voltage",
       "rule": "monotonicity",
-      "passed": false,
-      "message": "min/typ/max not monotonic: None/-1.9/-2.8"
+      "passed": true,
+      "message": "OK (modes: MAGNITUDE)"
     },
     {
       "param": "Minimum Input Voltage",
       "rule": "monotonicity",
-      "passed": false,
-      "message": "min/typ/max not monotonic: None/-1.6/-2.2"
+      "passed": true,
+      "message": "OK (modes: MAGNITUDE)"
     },
     {
       "param": "Shutdown Threshold",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Shutdown Threshold",
-      "rule": "monotonicity",
-      "passed": false,
-      "message": "min/typ/max not monotonic: None/-1.9/-2.8"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Shutdown Threshold",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: MAGNITUDE)"
     },
     {
       "param": "Shutdown Threshold",
       "rule": "monotonicity",
-      "passed": false,
-      "message": "min/typ/max not monotonic: -0.25/-0.8/None"
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Shutdown Threshold",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: MAGNITUDE)"
     },
     {
       "param": "SHDN Pin Current",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "SHDN Pin Current",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "SHDN Pin Current",
       "rule": "monotonicity",
-      "passed": false,
-      "message": "min/typ/max not monotonic: None/-3/-9"
+      "passed": true,
+      "message": "OK (modes: MAGNITUDE)"
     },
     {
       "param": "Quiescent Current in Shutdown",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Ripple Rejection",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     }
   ],
   "physics_validation": [
     {
       "param": "Regulated Output Voltage (LT1964-5)",
-      "rule": "temp_envelope_max",
-      "passed": false,
-      "message": "full max (-5.15) < 25C max (-5.075) — temp envelope violation"
-    },
-    {
-      "param": "Regulated Output Voltage (LT1964-5)",
-      "rule": "temp_envelope_min",
-      "passed": false,
-      "message": "full min (-4.85) > 25C min (-4.925) — temp envelope violation"
+      "rule": "temp_envelope",
+      "passed": true,
+      "message": "OK (mode: MAGNITUDE)"
     },
     {
       "param": "ADJ Pin Voltage (LT1964)",
-      "rule": "temp_envelope_max",
-      "passed": false,
-      "message": "full max (-1.256) < 25C max (-1.238) — temp envelope violation"
-    },
-    {
-      "param": "ADJ Pin Voltage (LT1964)",
-      "rule": "temp_envelope_min",
-      "passed": false,
-      "message": "full min (-1.184) > 25C min (-1.202) — temp envelope violation"
+      "rule": "temp_envelope",
+      "passed": true,
+      "message": "OK (mode: MAGNITUDE)"
     },
     {
       "param": "Load Regulation (LT1964-5)",
-      "rule": "temp_envelope_max",
+      "rule": "temp_envelope",
       "passed": true,
-      "message": "OK"
+      "message": "OK (mode: ALGEBRAIC)"
     },
     {
       "param": "Load Regulation (LT1964)",
-      "rule": "temp_envelope_max",
+      "rule": "temp_envelope",
       "passed": true,
-      "message": "OK"
+      "message": "OK (mode: ALGEBRAIC)"
     },
     {
-      "param": "Dropout Voltage (all)",
-      "rule": "temp_envelope_max",
+      "param": "Dropout Voltage ()",
+      "rule": "temp_envelope",
       "passed": true,
-      "message": "OK"
+      "message": "OK (mode: ALGEBRAIC)"
+    },
+    {
+      "param": "Current Limit ()",
+      "rule": "temp_envelope",
+      "passed": true,
+      "message": "OK (mode: ALGEBRAIC)"
     }
   ],
   "cross_validation": {
     "total_extracted_values": 63,
-    "values_found_in_pdf": 41,
-    "values_not_in_pdf": [
-      -65.0,
-      -40.0,
-      -20.0,
-      -9.0,
-      -5.15,
-      -5.075,
-      -4.925,
-      -4.85,
-      -3.0,
-      -2.8,
-      -2.2,
-      -1.9,
-      -1.6,
-      -1.256,
-      -1.238,
-      -1.22,
-      -1.202,
-      -1.184,
-      -1.0,
-      -0.8,
-      -0.5,
-      -0.25
-    ],
-    "value_coverage_pct": 65.1,
+    "values_found_in_pdf": 63,
+    "values_not_in_pdf": [],
+    "value_coverage_pct": 100.0,
     "total_params": 50,
-    "params_verified": 31,
-    "params_suspicious": 19,
-    "suspicious_params": [
-      {
-        "parameter": "Regulated Output Voltage",
-        "device": "LT1964-5",
-        "values": [
-          -4.925,
-          -5.0,
-          -5.075
-        ]
-      },
-      {
-        "parameter": "Regulated Output Voltage",
-        "device": "LT1964-5",
-        "values": [
-          -4.85,
-          -5.0,
-          -5.15
-        ]
-      },
-      {
-        "parameter": "ADJ Pin Voltage",
-        "device": "LT1964",
-        "values": [
-          -1.202,
-          -1.22,
-          -1.238
-        ]
-      },
-      {
-        "parameter": "ADJ Pin Voltage",
-        "device": "LT1964",
-        "values": [
-          -1.184,
-          -1.22,
-          -1.256
-        ]
-      },
-      {
-        "parameter": "Minimum Input Voltage",
-        "device": "LT1964-BYP",
-        "values": [
-          -1.9,
-          -2.8
-        ]
-      },
-      {
-        "parameter": "Minimum Input Voltage",
-        "device": "LT1964-SD",
-        "values": [
-          -1.6,
-          -2.2
-        ]
-      },
-      {
-        "parameter": "Shutdown Threshold",
-        "device": "all",
-        "values": [
-          -1.9,
-          -2.8
-        ]
-      },
-      {
-        "parameter": "Shutdown Threshold",
-        "device": "all",
-        "values": [
-          -0.25,
-          -0.8
-        ]
-      },
-      {
-        "parameter": "SHDN Pin Current",
-        "device": "all",
-        "values": [
-          -1.0,
-          0.1,
-          1.0
-        ]
-      },
-      {
-        "parameter": "SHDN Pin Current",
-        "device": "all",
-        "values": [
-          -3.0,
-          -9.0
-        ]
-      },
-      {
-        "parameter": "IN Pin Voltage",
-        "device": "",
-        "values": [
-          -20.0,
-          20.0
-        ]
-      },
-      {
-        "parameter": "OUT Pin Voltage",
-        "device": "",
-        "values": [
-          -20.0,
-          20.0
-        ]
-      },
-      {
-        "parameter": "OUT to IN Differential Voltage",
-        "device": "",
-        "values": [
-          -0.5,
-          20.0
-        ]
-      },
-      {
-        "parameter": "ADJ Pin Voltage (with Respect to IN Pin)",
-        "device": "",
-        "values": [
-          -0.5,
-          20.0
-        ]
-      },
-      {
-        "parameter": "BYP Pin Voltage (with Respect to IN Pin)",
-        "device": "",
-        "values": [
-          -20.0,
-          20.0
-        ]
-      },
-      {
-        "parameter": "SHDN Pin Voltage (with Respect to IN Pin)",
-        "device": "",
-        "values": [
-          -0.5,
-          35.0
-        ]
-      },
-      {
-        "parameter": "SHDN Pin Voltage (with Respect to GND Pin)",
-        "device": "",
-        "values": [
-          -20.0,
-          15.0
-        ]
-      },
-      {
-        "parameter": "Operating Junction Temperature Range",
-        "device": "",
-        "values": [
-          -40.0,
-          125.0
-        ]
-      },
-      {
-        "parameter": "Storage Temperature Range",
-        "device": "",
-        "values": [
-          -65.0,
-          150.0
-        ]
-      }
-    ]
+    "params_verified": 50,
+    "params_suspicious": 0,
+    "suspicious_params": []
   },
   "timing": {
-    "l0_classify_s": 0.04,
-    "l1_extract_s": 56.374
-  },
-  "pin_extraction": {
-    "logical_pins": [
-      {
-        "name": "IN",
-        "direction": "POWER_IN",
-        "signal_type": "POWER",
-        "description": "Power is Supplied to the Device Through the Input Pin. A bypass capacitor is required on this pin if the device is more than six inches away from the main input filter capacitor.",
-        "packages": {
-          "ThinSOT": [
-            3
-          ],
-          "8-Pin DFN": [
-            7,
-            8
-          ]
-        },
-        "unused_treatment": null
-      },
-      {
-        "name": "OUT",
-        "direction": "POWER_OUT",
-        "signal_type": "POWER",
-        "description": "The Output Supplies Power to the Load. A minimum output capacitor of 1µF is required to prevent oscillations.",
-        "packages": {
-          "ThinSOT": [
-            1
-          ],
-          "8-Pin DFN": [
-            1,
-            2
-          ]
-        },
-        "unused_treatment": null
-      },
-      {
-        "name": "GND",
-        "direction": "POWER_IN",
-        "signal_type": "POWER",
-        "description": "Ground.",
-        "packages": {
-          "ThinSOT": [
-            2
-          ],
-          "8-Pin DFN": [
-            4
-          ]
-        },
-        "unused_treatment": null
-      },
-      {
-        "name": "SHDN",
-        "direction": "INPUT",
-        "signal_type": "DIGITAL",
-        "description": "The SHDN Pin is used to put the LT1964 into a Low Power Shutdown State. The SHDN pin is referenced to the GND pin for regulator control, allowing the LT1964 to be driven by either positive or negative logic.",
-        "packages": {
-          "ThinSOT": [
-            4
-          ],
-          "8-Pin DFN": [
-            5
-          ]
-        },
-        "unused_treatment": "VCC"
-      },
-      {
-        "name": "BYP",
-        "direction": "PASSIVE",
-        "signal_type": "ANALOG",
-        "description": "The BYP Pin is used to Bypass the Reference of the LT1964 to Achieve Low Noise Performance from the Regulator. A small capacitor from the output to this pin will bypass the reference to lower the output voltage noise.",
-        "packages": {
-          "ThinSOT": [
-            5
-          ],
-          "8-Pin DFN": [
-            3
-          ]
-        },
-        "unused_treatment": "FLOAT"
-      },
-      {
-        "name": "ADJ",
-        "direction": "INPUT",
-        "signal_type": "ANALOG",
-        "description": "For the Adjustable LT1964, this is the Input to the Error Amplifier. The ADJ pin has a bias current of 30nA that flows out of the pin.",
-        "packages": {
-          "ThinSOT": [
-            5
-          ],
-          "8-Pin DFN": [
-            3
-          ]
-        },
-        "unused_treatment": null
-      },
-      {
-        "name": "NC",
-        "direction": "NC",
-        "signal_type": "NONE",
-        "description": "No internal connection.",
-        "packages": {
-          "8-Pin DFN": [
-            6
-          ]
-        },
-        "unused_treatment": null
-      },
-      {
-        "name": "Exposed Pad",
-        "direction": "PASSIVE",
-        "signal_type": "POWER",
-        "description": "Exposed Pad (DFN Package Only): IN. Connect to IN (Pins 7, 8) at the PCB.",
-        "packages": {
-          "8-Pin DFN": [
-            "EP"
-          ]
-        },
-        "unused_treatment": null
-      }
-    ]
-  },
-  "pin_validation": [
-    {
-      "level": "warning",
-      "message": "package 'ThinSOT' pin 5 claimed by multiple logical pins: ['BYP', 'ADJ']"
-    },
-    {
-      "level": "warning",
-      "message": "package '8-Pin DFN' pin 3 claimed by multiple logical pins: ['BYP', 'ADJ']"
-    }
-  ],
-  "pin_index": {
-    "packages": {
-      "ThinSOT": {
-        "3": {
-          "name": "IN",
-          "direction": "POWER_IN",
-          "signal_type": "POWER",
-          "description": "Power is Supplied to the Device Through the Input Pin. A bypass capacitor is required on this pin if the device is more than six inches away from the main input filter capacitor.",
-          "unused_treatment": null
-        },
-        "1": {
-          "name": "OUT",
-          "direction": "POWER_OUT",
-          "signal_type": "POWER",
-          "description": "The Output Supplies Power to the Load. A minimum output capacitor of 1µF is required to prevent oscillations.",
-          "unused_treatment": null
-        },
-        "2": {
-          "name": "GND",
-          "direction": "POWER_IN",
-          "signal_type": "POWER",
-          "description": "Ground.",
-          "unused_treatment": null
-        },
-        "4": {
-          "name": "SHDN",
-          "direction": "INPUT",
-          "signal_type": "DIGITAL",
-          "description": "The SHDN Pin is used to put the LT1964 into a Low Power Shutdown State. The SHDN pin is referenced to the GND pin for regulator control, allowing the LT1964 to be driven by either positive or negative logic.",
-          "unused_treatment": "VCC"
-        },
-        "5": {
-          "name": "BYP",
-          "direction": "PASSIVE",
-          "signal_type": "ANALOG",
-          "description": "The BYP Pin is used to Bypass the Reference of the LT1964 to Achieve Low Noise Performance from the Regulator. A small capacitor from the output to this pin will bypass the reference to lower the output voltage noise. (also: ADJ — For the Adjustable LT1964, this is the Input to the Error Amplifier. The ADJ pin has a bias current of 30nA that flows out of the pin.)",
-          "unused_treatment": "FLOAT"
-        }
-      },
-      "8-Pin DFN": {
-        "7": {
-          "name": "IN",
-          "direction": "POWER_IN",
-          "signal_type": "POWER",
-          "description": "Power is Supplied to the Device Through the Input Pin. A bypass capacitor is required on this pin if the device is more than six inches away from the main input filter capacitor.",
-          "unused_treatment": null
-        },
-        "8": {
-          "name": "IN",
-          "direction": "POWER_IN",
-          "signal_type": "POWER",
-          "description": "Power is Supplied to the Device Through the Input Pin. A bypass capacitor is required on this pin if the device is more than six inches away from the main input filter capacitor.",
-          "unused_treatment": null
-        },
-        "1": {
-          "name": "OUT",
-          "direction": "POWER_OUT",
-          "signal_type": "POWER",
-          "description": "The Output Supplies Power to the Load. A minimum output capacitor of 1µF is required to prevent oscillations.",
-          "unused_treatment": null
-        },
-        "2": {
-          "name": "OUT",
-          "direction": "POWER_OUT",
-          "signal_type": "POWER",
-          "description": "The Output Supplies Power to the Load. A minimum output capacitor of 1µF is required to prevent oscillations.",
-          "unused_treatment": null
-        },
-        "4": {
-          "name": "GND",
-          "direction": "POWER_IN",
-          "signal_type": "POWER",
-          "description": "Ground.",
-          "unused_treatment": null
-        },
-        "5": {
-          "name": "SHDN",
-          "direction": "INPUT",
-          "signal_type": "DIGITAL",
-          "description": "The SHDN Pin is used to put the LT1964 into a Low Power Shutdown State. The SHDN pin is referenced to the GND pin for regulator control, allowing the LT1964 to be driven by either positive or negative logic.",
-          "unused_treatment": "VCC"
-        },
-        "3": {
-          "name": "BYP",
-          "direction": "PASSIVE",
-          "signal_type": "ANALOG",
-          "description": "The BYP Pin is used to Bypass the Reference of the LT1964 to Achieve Low Noise Performance from the Regulator. A small capacitor from the output to this pin will bypass the reference to lower the output voltage noise. (also: ADJ — For the Adjustable LT1964, this is the Input to the Error Amplifier. The ADJ pin has a bias current of 30nA that flows out of the pin.)",
-          "unused_treatment": "FLOAT"
-        },
-        "6": {
-          "name": "NC",
-          "direction": "NC",
-          "signal_type": "NONE",
-          "description": "No internal connection.",
-          "unused_treatment": null
-        },
-        "EP": {
-          "name": "Exposed Pad",
-          "direction": "PASSIVE",
-          "signal_type": "POWER",
-          "description": "Exposed Pad (DFN Package Only): IN. Connect to IN (Pins 7, 8) at the PCB.",
-          "unused_treatment": null
-        }
-      }
-    }
+    "l0_classify_s": 0.041,
+    "l1a_extract_s": 60.559,
+    "l1b_pin_s": 38.433
   }
 }

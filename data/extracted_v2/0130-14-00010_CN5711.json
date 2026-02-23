@@ -70,12 +70,12 @@
       "mpn": "CN5711",
       "manufacturer": "CONSONANCE",
       "category": "LED Driver",
-      "description": "A current regulation IC for driving LEDs with constant output current up to 1.5A"
+      "description": "High-brightness LED driver IC with constant output current up to 1.5A and thermal regulation."
     },
     "absolute_maximum_ratings": [],
     "electrical_characteristics": [
       {
-        "parameter": "Operating Voltage Range",
+        "parameter": "Operating Voltage",
         "raw_name": "工作电压范围",
         "symbol": "VCC",
         "min": 2.8,
@@ -99,14 +99,14 @@
         "temp_range": null
       },
       {
-        "parameter": "LED Output Current",
+        "parameter": "LED Pin Output Current",
         "raw_name": "LED 管脚输出电流",
         "symbol": "ILED",
-        "min": 0.03,
+        "min": null,
         "typ": null,
         "max": 1.5,
         "unit": "A",
-        "conditions": "Set by external resistor",
+        "conditions": null,
         "device": "CN5711",
         "temp_range": null
       },
@@ -132,6 +132,18 @@
         "unit": "°C",
         "conditions": null,
         "device": "CN5711",
+        "temp_range": "full"
+      },
+      {
+        "parameter": "Current Regulation Range",
+        "raw_name": "电流范围",
+        "symbol": "ILED",
+        "min": 0.03,
+        "typ": null,
+        "max": 1.5,
+        "unit": "A",
+        "conditions": "Set by external resistor",
+        "device": "CN5711",
         "temp_range": null
       }
     ],
@@ -140,108 +152,232 @@
         "pin_number": "1",
         "pin_name": "ISET",
         "type": "Input",
-        "description": "Current setting pin via an external resistor"
+        "description": "Current setting pin; connect an external resistor to ground to set the LED current."
       },
       {
         "pin_number": "2",
         "pin_name": "GND",
         "type": "Power",
-        "description": "Ground"
+        "description": "Ground."
       },
       {
         "pin_number": "3",
         "pin_name": "VCC",
         "type": "Power",
-        "description": "Supply voltage"
+        "description": "Power supply."
       },
       {
         "pin_number": "4",
         "pin_name": "VCC",
         "type": "Power",
-        "description": "Supply voltage"
+        "description": "Power supply."
       },
       {
         "pin_number": "5",
         "pin_name": "LED",
         "type": "Output",
-        "description": "LED current output terminal"
+        "description": "LED current output pin."
       },
       {
         "pin_number": "6",
         "pin_name": "LED",
         "type": "Output",
-        "description": "LED current output terminal"
+        "description": "LED current output pin."
       },
       {
         "pin_number": "7",
         "pin_name": "NC",
         "type": "NC",
-        "description": "No connection"
+        "description": "No connection."
       },
       {
         "pin_number": "8",
         "pin_name": "CE",
         "type": "Input",
-        "description": "Chip enable input"
+        "description": "Chip enable input."
       }
     ]
   },
+  "pin_extraction": {
+    "logical_pins": [
+      {
+        "name": "ISET",
+        "direction": "INPUT",
+        "signal_type": "ANALOG",
+        "description": "LED current setting pin; connect an external resistor to GND to set the current",
+        "packages": {
+          "SOP8": [
+            1
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "GND",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Ground",
+        "packages": {
+          "SOP8": [
+            2
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "VCC",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Power supply input",
+        "packages": {
+          "SOP8": [
+            3,
+            4
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "LED",
+        "direction": "OUTPUT",
+        "signal_type": "POWER",
+        "description": "LED current sink output terminal",
+        "packages": {
+          "SOP8": [
+            5,
+            6
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "NC",
+        "direction": "NC",
+        "signal_type": "NONE",
+        "description": "No internal connection",
+        "packages": {
+          "SOP8": [
+            7
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "CE",
+        "direction": "INPUT",
+        "signal_type": "DIGITAL",
+        "description": "Chip enable input",
+        "packages": {
+          "SOP8": [
+            8
+          ]
+        },
+        "unused_treatment": null
+      }
+    ]
+  },
+  "pin_index": {
+    "packages": {
+      "SOP8": {
+        "1": {
+          "name": "ISET",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "LED current setting pin; connect an external resistor to GND to set the current",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "VCC",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power supply input",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "VCC",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power supply input",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "LED",
+          "direction": "OUTPUT",
+          "signal_type": "POWER",
+          "description": "LED current sink output terminal",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "LED",
+          "direction": "OUTPUT",
+          "signal_type": "POWER",
+          "description": "LED current sink output terminal",
+          "unused_treatment": null
+        },
+        "7": {
+          "name": "NC",
+          "direction": "NC",
+          "signal_type": "NONE",
+          "description": "No internal connection",
+          "unused_treatment": null
+        },
+        "8": {
+          "name": "CE",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Chip enable input",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "pin_validation": [],
   "validation": [
     {
-      "param": "Operating Voltage Range",
+      "param": "Operating Voltage",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "LED Output Current",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Output Current Accuracy",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Operating Ambient Temperature Range",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Current Regulation Range",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
     }
   ],
   "physics_validation": [],
   "cross_validation": {
     "total_extracted_values": 9,
-    "values_found_in_pdf": 6,
+    "values_found_in_pdf": 7,
     "values_not_in_pdf": [
       -40.0,
-      -5.0,
       0.03
     ],
-    "value_coverage_pct": 66.7,
-    "total_params": 5,
-    "params_verified": 2,
-    "params_suspicious": 3,
+    "value_coverage_pct": 77.8,
+    "total_params": 6,
+    "params_verified": 4,
+    "params_suspicious": 2,
     "suspicious_params": [
-      {
-        "parameter": "LED Output Current",
-        "device": "CN5711",
-        "values": [
-          0.03,
-          1.5
-        ]
-      },
-      {
-        "parameter": "Output Current Accuracy",
-        "device": "CN5711",
-        "values": [
-          -5.0,
-          5.0
-        ]
-      },
       {
         "parameter": "Operating Ambient Temperature Range",
         "device": "CN5711",
@@ -249,11 +385,20 @@
           -40.0,
           85.0
         ]
+      },
+      {
+        "parameter": "Current Regulation Range",
+        "device": "CN5711",
+        "values": [
+          0.03,
+          1.5
+        ]
       }
     ]
   },
   "timing": {
     "l0_classify_s": 0.018,
-    "l1_extract_s": 34.255
+    "l1a_extract_s": 25.176,
+    "l1b_pin_s": 14.142
   }
 }

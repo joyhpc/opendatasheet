@@ -5,6 +5,7 @@
   "checksum": "1416e9d3b71be30fe1d7ac2776b55619",
   "total_pages": 8,
   "vision_pages": [
+    0,
     1,
     2
   ],
@@ -12,8 +13,10 @@
     {
       "page_num": 0,
       "text_length": 2388,
-      "category": "ordering",
+      "category": "pin",
       "matched_patterns": [
+        "(?i)pin\\s+(description|configuration|function|assignment|definition|connection|diagram)",
+        "(?i)pin\\s+connections?",
         "(?i)ordering\\s+information"
       ],
       "text_preview": "Advanced Monolithic Systems, Inc.    www.advanced-monolithic.com      Phone (925) 443-0722    Fax (925) 443-0723      Advanced                                                           AMS1117    Mono"
@@ -77,9 +80,9 @@
   "extraction": {
     "component": {
       "mpn": "AMS1117",
-      "manufacturer": "Advanced Monolithic Systems, Inc.",
+      "manufacturer": "Advanced Monolithic Systems",
       "category": "LDO",
-      "description": "1A Low Dropout Voltage Regulator"
+      "description": "1A LOW DROPOUT VOLTAGE REGULATOR"
     },
     "absolute_maximum_ratings": [
       {
@@ -88,7 +91,7 @@
         "symbol": "VIN",
         "min": null,
         "typ": null,
-        "max": 15.0,
+        "max": 15,
         "unit": "V",
         "conditions": null
       },
@@ -96,9 +99,9 @@
         "parameter": "Operating Junction Temperature (Control Section)",
         "raw_name": "Operating Junction Temperature Control Section",
         "symbol": "TJ",
-        "min": -40.0,
+        "min": -40,
         "typ": null,
-        "max": 125.0,
+        "max": 125,
         "unit": "°C",
         "conditions": null
       },
@@ -106,9 +109,9 @@
         "parameter": "Operating Junction Temperature (Power Transistor)",
         "raw_name": "Operating Junction Temperature Power Transistor",
         "symbol": "TJ",
-        "min": -40.0,
+        "min": -40,
         "typ": null,
-        "max": 125.0,
+        "max": 125,
         "unit": "°C",
         "conditions": null
       },
@@ -116,9 +119,9 @@
         "parameter": "Storage temperature",
         "raw_name": "Storage temperature",
         "symbol": "TSTG",
-        "min": -65.0,
+        "min": -65,
         "typ": null,
-        "max": 150.0,
+        "max": 150,
         "unit": "°C",
         "conditions": null
       },
@@ -128,7 +131,7 @@
         "symbol": null,
         "min": null,
         "typ": null,
-        "max": 265.0,
+        "max": 265,
         "unit": "°C",
         "conditions": "25 sec"
       },
@@ -137,7 +140,7 @@
         "raw_name": "Thermal Resistance SO-8 package",
         "symbol": "φJA",
         "min": null,
-        "typ": 160.0,
+        "typ": 160,
         "max": null,
         "unit": "°C/W",
         "conditions": null
@@ -147,7 +150,7 @@
         "raw_name": "Thermal Resistance TO-252 package",
         "symbol": "φJA",
         "min": null,
-        "typ": 80.0,
+        "typ": 80,
         "max": null,
         "unit": "°C/W",
         "conditions": null
@@ -157,7 +160,7 @@
         "raw_name": "Thermal Resistance SOT-223 package",
         "symbol": "φJA",
         "min": null,
-        "typ": 90.0,
+        "typ": 90,
         "max": null,
         "unit": "°C/W",
         "conditions": null
@@ -362,7 +365,7 @@
         "symbol": null,
         "min": null,
         "typ": 0.3,
-        "max": 5.0,
+        "max": 5,
         "unit": "mV",
         "conditions": "1.5V ≤ (VIN - VOUT) ≤ 12V",
         "device": "AMS1117-1.5",
@@ -374,7 +377,7 @@
         "symbol": null,
         "min": null,
         "typ": 0.6,
-        "max": 6.0,
+        "max": 6,
         "unit": "mV",
         "conditions": "1.5V ≤ (VIN - VOUT) ≤ 12V",
         "device": "AMS1117-1.5",
@@ -386,7 +389,7 @@
         "symbol": null,
         "min": null,
         "typ": 0.3,
-        "max": 5.0,
+        "max": 5,
         "unit": "mV",
         "conditions": "1.5V ≤ (VIN - VOUT) ≤ 12V",
         "device": "AMS1117-1.8",
@@ -398,7 +401,7 @@
         "symbol": null,
         "min": null,
         "typ": 0.6,
-        "max": 6.0,
+        "max": 6,
         "unit": "mV",
         "conditions": "1.5V ≤ (VIN - VOUT) ≤ 12V",
         "device": "AMS1117-1.8",
@@ -410,7 +413,7 @@
         "symbol": null,
         "min": null,
         "typ": 0.3,
-        "max": 6.0,
+        "max": 6,
         "unit": "mV",
         "conditions": "1.5V ≤ (VIN - VOUT) ≤ 12V",
         "device": "AMS1117-2.5",
@@ -422,7 +425,7 @@
         "symbol": null,
         "min": null,
         "typ": 0.6,
-        "max": 6.0,
+        "max": 6,
         "unit": "mV",
         "conditions": "1.5V ≤ (VIN - VOUT) ≤ 12V",
         "device": "AMS1117-2.5",
@@ -434,7 +437,7 @@
         "symbol": null,
         "min": null,
         "typ": 0.3,
-        "max": 6.0,
+        "max": 6,
         "unit": "mV",
         "conditions": "1.5V ≤ (VIN - VOUT) ≤ 12V",
         "device": "AMS1117-2.85",
@@ -446,7 +449,7 @@
         "symbol": null,
         "min": null,
         "typ": 0.6,
-        "max": 6.0,
+        "max": 6,
         "unit": "mV",
         "conditions": "1.5V ≤ (VIN - VOUT) ≤ 12V",
         "device": "AMS1117-2.85",
@@ -458,7 +461,7 @@
         "symbol": null,
         "min": null,
         "typ": 0.5,
-        "max": 10.0,
+        "max": 10,
         "unit": "mV",
         "conditions": "1.5V ≤ (VIN - VOUT) ≤ 12V",
         "device": "AMS1117-3.3",
@@ -470,7 +473,7 @@
         "symbol": null,
         "min": null,
         "typ": 1.0,
-        "max": 10.0,
+        "max": 10,
         "unit": "mV",
         "conditions": "1.5V ≤ (VIN - VOUT) ≤ 12V",
         "device": "AMS1117-3.3",
@@ -482,7 +485,7 @@
         "symbol": null,
         "min": null,
         "typ": 0.5,
-        "max": 10.0,
+        "max": 10,
         "unit": "mV",
         "conditions": "1.5V ≤ (VIN - VOUT) ≤ 12V",
         "device": "AMS1117-5.0",
@@ -494,7 +497,7 @@
         "symbol": null,
         "min": null,
         "typ": 1.0,
-        "max": 10.0,
+        "max": 10,
         "unit": "mV",
         "conditions": "1.5V ≤ (VIN - VOUT) ≤ 12V",
         "device": "AMS1117-5.0",
@@ -529,8 +532,8 @@
         "raw_name": "Load Regulation",
         "symbol": null,
         "min": null,
-        "typ": 3.0,
-        "max": 10.0,
+        "typ": 3,
+        "max": 10,
         "unit": "mV",
         "conditions": "VIN = 3V, 0 ≤ IOUT ≤ 0.8A",
         "device": "AMS1117-1.5",
@@ -541,8 +544,8 @@
         "raw_name": "Load Regulation",
         "symbol": null,
         "min": null,
-        "typ": 6.0,
-        "max": 20.0,
+        "typ": 6,
+        "max": 20,
         "unit": "mV",
         "conditions": "VIN = 3V, 0 ≤ IOUT ≤ 0.8A",
         "device": "AMS1117-1.5",
@@ -553,8 +556,8 @@
         "raw_name": "Load Regulation",
         "symbol": null,
         "min": null,
-        "typ": 3.0,
-        "max": 10.0,
+        "typ": 3,
+        "max": 10,
         "unit": "mV",
         "conditions": "VIN = 3.3V, 0 ≤ IOUT ≤ 0.8A",
         "device": "AMS1117-1.8",
@@ -565,8 +568,8 @@
         "raw_name": "Load Regulation",
         "symbol": null,
         "min": null,
-        "typ": 6.0,
-        "max": 20.0,
+        "typ": 6,
+        "max": 20,
         "unit": "mV",
         "conditions": "VIN = 3.3V, 0 ≤ IOUT ≤ 0.8A",
         "device": "AMS1117-1.8",
@@ -577,8 +580,8 @@
         "raw_name": "Load Regulation",
         "symbol": null,
         "min": null,
-        "typ": 3.0,
-        "max": 12.0,
+        "typ": 3,
+        "max": 12,
         "unit": "mV",
         "conditions": "VIN = 5V, 0 ≤ IOUT ≤ 0.8A",
         "device": "AMS1117-2.5",
@@ -589,8 +592,8 @@
         "raw_name": "Load Regulation",
         "symbol": null,
         "min": null,
-        "typ": 6.0,
-        "max": 20.0,
+        "typ": 6,
+        "max": 20,
         "unit": "mV",
         "conditions": "VIN = 5V, 0 ≤ IOUT ≤ 0.8A",
         "device": "AMS1117-2.5",
@@ -601,8 +604,8 @@
         "raw_name": "Load Regulation",
         "symbol": null,
         "min": null,
-        "typ": 3.0,
-        "max": 12.0,
+        "typ": 3,
+        "max": 12,
         "unit": "mV",
         "conditions": "VIN = 4.35V, 0 ≤ IOUT ≤ 0.8A",
         "device": "AMS1117-2.85",
@@ -613,8 +616,8 @@
         "raw_name": "Load Regulation",
         "symbol": null,
         "min": null,
-        "typ": 6.0,
-        "max": 20.0,
+        "typ": 6,
+        "max": 20,
         "unit": "mV",
         "conditions": "VIN = 4.35V, 0 ≤ IOUT ≤ 0.8A",
         "device": "AMS1117-2.85",
@@ -625,8 +628,8 @@
         "raw_name": "Load Regulation",
         "symbol": null,
         "min": null,
-        "typ": 3.0,
-        "max": 15.0,
+        "typ": 3,
+        "max": 15,
         "unit": "mV",
         "conditions": "VIN = 4.75V, 0 ≤ IOUT ≤ 0.8A",
         "device": "AMS1117-3.3",
@@ -637,8 +640,8 @@
         "raw_name": "Load Regulation",
         "symbol": null,
         "min": null,
-        "typ": 7.0,
-        "max": 25.0,
+        "typ": 7,
+        "max": 25,
         "unit": "mV",
         "conditions": "VIN = 4.75V, 0 ≤ IOUT ≤ 0.8A",
         "device": "AMS1117-3.3",
@@ -649,8 +652,8 @@
         "raw_name": "Load Regulation",
         "symbol": null,
         "min": null,
-        "typ": 5.0,
-        "max": 20.0,
+        "typ": 5,
+        "max": 20,
         "unit": "mV",
         "conditions": "VIN = 6.5V, 0 ≤ IOUT ≤ 0.8A",
         "device": "AMS1117-5.0",
@@ -661,8 +664,8 @@
         "raw_name": "Load Regulation",
         "symbol": null,
         "min": null,
-        "typ": 10.0,
-        "max": 35.0,
+        "typ": 10,
+        "max": 35,
         "unit": "mV",
         "conditions": "VIN = 6.5V, 0 ≤ IOUT ≤ 0.8A",
         "device": "AMS1117-5.0",
@@ -671,60 +674,60 @@
       {
         "parameter": "Dropout Voltage",
         "raw_name": "Dropout Voltage (VIN - VOUT)",
-        "symbol": null,
+        "symbol": "VIN - VOUT",
         "min": null,
         "typ": 1.1,
         "max": 1.3,
         "unit": "V",
         "conditions": "ΔVOUT, ΔVREF = 1%, IOUT = 0.8A",
         "device": "AMS1117-1.5/-1.8/-2.5/-2.85/-3.3/-5.0",
-        "temp_range": "25C"
+        "temp_range": "full"
       },
       {
         "parameter": "Current Limit",
         "raw_name": "Current Limit",
         "symbol": null,
-        "min": 900.0,
-        "typ": 1100.0,
-        "max": 1500.0,
+        "min": 900,
+        "typ": 1100,
+        "max": 1500,
         "unit": "mA",
         "conditions": "(VIN - VOUT) = 1.5V",
         "device": "AMS1117-1.5/-1.8/-2.5/-2.85/-3.3/-5.0",
-        "temp_range": "25C"
+        "temp_range": "full"
       },
       {
         "parameter": "Minimum Load Current",
         "raw_name": "Minimum Load Current",
         "symbol": null,
         "min": null,
-        "typ": 5.0,
-        "max": 10.0,
+        "typ": 5,
+        "max": 10,
         "unit": "mA",
         "conditions": "(VIN - VOUT) = 1.5V",
         "device": "AMS1117",
-        "temp_range": "25C"
+        "temp_range": "full"
       },
       {
         "parameter": "Quiescent Current",
         "raw_name": "Quiescent Current",
         "symbol": null,
         "min": null,
-        "typ": 5.0,
-        "max": 11.0,
+        "typ": 5,
+        "max": 11,
         "unit": "mA",
         "conditions": "(VIN - VOUT) = 1.5V",
         "device": "AMS1117-1.5/-1.8/-2.5/-2.85/-3.3/-5.0",
-        "temp_range": "25C"
+        "temp_range": "full"
       },
       {
         "parameter": "Ripple Rejection",
         "raw_name": "Ripple Rejection",
         "symbol": null,
-        "min": 60.0,
-        "typ": 75.0,
+        "min": 60,
+        "typ": 75,
         "max": null,
         "unit": "dB",
-        "conditions": "f = 120Hz, COUT = 22µF Tantalum, IOUT = 1A, (VIN - VOUT) = 3V, CADJ = 10µF",
+        "conditions": "f=120Hz, COUT = 22μF Tantalum, IOUT = 1A, (VIN-VOUT) = 3V, CADJ =10μF",
         "device": "AMS1117",
         "temp_range": "full"
       },
@@ -732,11 +735,11 @@
         "parameter": "Ripple Rejection",
         "raw_name": "Ripple Rejection",
         "symbol": null,
-        "min": 60.0,
-        "typ": 72.0,
+        "min": 60,
+        "typ": 72,
         "max": null,
         "unit": "dB",
-        "conditions": "f = 120Hz, COUT = 22µF Tantalum, IOUT = 1A, VIN = 4.35V",
+        "conditions": "f=120Hz, COUT = 22μF Tantalum, IOUT = 1A, VIN = 4.35V",
         "device": "AMS1117-1.5/-1.8/-2.5/-2.85",
         "temp_range": "full"
       },
@@ -744,11 +747,11 @@
         "parameter": "Ripple Rejection",
         "raw_name": "Ripple Rejection",
         "symbol": null,
-        "min": 60.0,
-        "typ": 72.0,
+        "min": 60,
+        "typ": 72,
         "max": null,
         "unit": "dB",
-        "conditions": "f = 120Hz, COUT = 22µF Tantalum, IOUT = 1A, VIN = 4.75V",
+        "conditions": "f=120Hz, COUT = 22μF Tantalum, IOUT = 1A, VIN = 4.75V",
         "device": "AMS1117-3.3",
         "temp_range": "full"
       },
@@ -756,11 +759,11 @@
         "parameter": "Ripple Rejection",
         "raw_name": "Ripple Rejection",
         "symbol": null,
-        "min": 60.0,
-        "typ": 68.0,
+        "min": 60,
+        "typ": 68,
         "max": null,
         "unit": "dB",
-        "conditions": "f = 120Hz, COUT = 22µF Tantalum, IOUT = 1A, VIN = 6.5V",
+        "conditions": "f=120Hz, COUT = 22μF Tantalum, IOUT = 1A, VIN = 6.5V",
         "device": "AMS1117-5.0",
         "temp_range": "full"
       },
@@ -781,10 +784,10 @@
         "raw_name": "Adjust Pin Current",
         "symbol": "IADJ",
         "min": null,
-        "typ": 55.0,
+        "typ": 55,
         "max": null,
-        "unit": "µA",
-        "conditions": "IOUT = 10mA, 1.5V ≤ (VIN - VOUT) ≤ 12V",
+        "unit": "μA",
+        "conditions": "IOUT =10mA , 1.5V≤ (VIN - VOUT) ≤ 12V",
         "device": "AMS1117",
         "temp_range": "25C"
       },
@@ -794,9 +797,9 @@
         "symbol": "IADJ",
         "min": null,
         "typ": null,
-        "max": 120.0,
-        "unit": "µA",
-        "conditions": "IOUT = 10mA, 1.5V ≤ (VIN - VOUT) ≤ 12V",
+        "max": 120,
+        "unit": "μA",
+        "conditions": "IOUT =10mA , 1.5V≤ (VIN - VOUT) ≤ 12V",
         "device": "AMS1117",
         "temp_range": "full"
       },
@@ -806,9 +809,9 @@
         "symbol": "ΔIADJ",
         "min": null,
         "typ": 0.2,
-        "max": 5.0,
-        "unit": "µA",
-        "conditions": "IOUT = 10mA, 1.5V ≤ (VIN - VOUT) ≤ 12V",
+        "max": 5,
+        "unit": "μA",
+        "conditions": "IOUT =10mA, 1.5V≤ (VIN - VOUT) ≤ 12V",
         "device": "AMS1117",
         "temp_range": "full"
       },
@@ -830,21 +833,21 @@
         "symbol": null,
         "min": null,
         "typ": 0.3,
-        "max": 1.0,
+        "max": 1,
         "unit": "%",
-        "conditions": "TA = 125°C, 1000Hrs",
+        "conditions": "TA =125°C, 1000Hrs",
         "device": null,
         "temp_range": "full"
       },
       {
         "parameter": "RMS Output Noise",
-        "raw_name": "RMS Output Noise (% of VOUT)",
+        "raw_name": "RMS Output Noise (% of VOUT )",
         "symbol": null,
         "min": null,
         "typ": 0.003,
         "max": null,
         "unit": "%",
-        "conditions": "TA = 25°C, 10Hz ≤ f ≤ 10kHz",
+        "conditions": "TA = 25°C , 10Hz ≤ f ≤ 10kHz",
         "device": null,
         "temp_range": "25C"
       },
@@ -854,547 +857,87 @@
         "symbol": null,
         "min": null,
         "typ": null,
-        "max": 15.0,
+        "max": 15,
         "unit": "°C/W",
         "conditions": "All packages",
-        "device": "AMS1117",
+        "device": null,
         "temp_range": "full"
       }
     ],
-    "pin_definitions": []
-  },
-  "validation": [
-    {
-      "param": "Operating Junction Temperature (Control Section)",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Operating Junction Temperature (Power Transistor)",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Storage temperature",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Reference Voltage",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Reference Voltage",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Output Voltage",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Output Voltage",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Output Voltage",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Output Voltage",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Output Voltage",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Output Voltage",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Output Voltage",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Output Voltage",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Output Voltage",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Output Voltage",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Output Voltage",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Output Voltage",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Line Regulation",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Line Regulation",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Line Regulation",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Line Regulation",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Line Regulation",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Line Regulation",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Line Regulation",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Line Regulation",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Line Regulation",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Line Regulation",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Line Regulation",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Line Regulation",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Line Regulation",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Line Regulation",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Load Regulation",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Load Regulation",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Load Regulation",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Load Regulation",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Load Regulation",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Load Regulation",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Load Regulation",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Load Regulation",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Load Regulation",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Load Regulation",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Load Regulation",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Load Regulation",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Load Regulation",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Load Regulation",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Dropout Voltage",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Current Limit",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Minimum Load Current",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Quiescent Current",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Ripple Rejection",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Ripple Rejection",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Ripple Rejection",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Ripple Rejection",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Thermal Regulation",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Adjust Pin Current Change",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Long Term Stability",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    }
-  ],
-  "physics_validation": [
-    {
-      "param": "Reference Voltage (AMS1117)",
-      "rule": "temp_envelope_max",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Reference Voltage (AMS1117)",
-      "rule": "temp_envelope_min",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Output Voltage (AMS1117-1.5)",
-      "rule": "temp_envelope_max",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Output Voltage (AMS1117-1.5)",
-      "rule": "temp_envelope_min",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Output Voltage (AMS1117-1.8)",
-      "rule": "temp_envelope_max",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Output Voltage (AMS1117-1.8)",
-      "rule": "temp_envelope_min",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Output Voltage (AMS1117-2.5)",
-      "rule": "temp_envelope_max",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Output Voltage (AMS1117-2.5)",
-      "rule": "temp_envelope_min",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Output Voltage (AMS1117-2.85)",
-      "rule": "temp_envelope_max",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Output Voltage (AMS1117-2.85)",
-      "rule": "temp_envelope_min",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Output Voltage (AMS1117-3.3)",
-      "rule": "temp_envelope_max",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Output Voltage (AMS1117-3.3)",
-      "rule": "temp_envelope_min",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Output Voltage (AMS1117-5.0)",
-      "rule": "temp_envelope_max",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Output Voltage (AMS1117-5.0)",
-      "rule": "temp_envelope_min",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Line Regulation (AMS1117)",
-      "rule": "temp_envelope_max",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Line Regulation (AMS1117-1.5)",
-      "rule": "temp_envelope_max",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Line Regulation (AMS1117-1.8)",
-      "rule": "temp_envelope_max",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Line Regulation (AMS1117-2.5)",
-      "rule": "temp_envelope_max",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Line Regulation (AMS1117-2.85)",
-      "rule": "temp_envelope_max",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Line Regulation (AMS1117-3.3)",
-      "rule": "temp_envelope_max",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Line Regulation (AMS1117-5.0)",
-      "rule": "temp_envelope_max",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Load Regulation (AMS1117)",
-      "rule": "temp_envelope_max",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Load Regulation (AMS1117-1.5)",
-      "rule": "temp_envelope_max",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Load Regulation (AMS1117-1.8)",
-      "rule": "temp_envelope_max",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Load Regulation (AMS1117-2.5)",
-      "rule": "temp_envelope_max",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Load Regulation (AMS1117-2.85)",
-      "rule": "temp_envelope_max",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Load Regulation (AMS1117-3.3)",
-      "rule": "temp_envelope_max",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Load Regulation (AMS1117-5.0)",
-      "rule": "temp_envelope_max",
-      "passed": true,
-      "message": "OK"
-    }
-  ],
-  "cross_validation": {
-    "total_extracted_values": 76,
-    "values_found_in_pdf": 75,
-    "values_not_in_pdf": [
-      -65.0
-    ],
-    "value_coverage_pct": 98.7,
-    "total_params": 66,
-    "params_verified": 65,
-    "params_suspicious": 1,
-    "suspicious_params": [
+    "pin_definitions": [
       {
-        "parameter": "Storage temperature",
-        "device": "",
-        "values": [
-          -65.0,
-          150.0
-        ]
+        "pin_number": "1",
+        "pin_name": "Ground/Adjust",
+        "type": "Power/Input",
+        "description": "Ground for fixed voltage versions, Adjust for adjustable version"
+      },
+      {
+        "pin_number": "2",
+        "pin_name": "VOUT",
+        "type": "Output",
+        "description": "Output Voltage"
+      },
+      {
+        "pin_number": "3",
+        "pin_name": "VIN",
+        "type": "Power",
+        "description": "Input Voltage"
+      },
+      {
+        "pin_number": "TAB",
+        "pin_name": "OUTPUT",
+        "type": "Output",
+        "description": "Tab is connected to Output"
+      },
+      {
+        "pin_number": "1",
+        "pin_name": "GND/ADJ",
+        "type": "Power/Input",
+        "description": "Ground/Adjust (8L SOIC)"
+      },
+      {
+        "pin_number": "2",
+        "pin_name": "VOUT",
+        "type": "Output",
+        "description": "Output (8L SOIC)"
+      },
+      {
+        "pin_number": "3",
+        "pin_name": "VOUT",
+        "type": "Output",
+        "description": "Output (8L SOIC)"
+      },
+      {
+        "pin_number": "4",
+        "pin_name": "VIN",
+        "type": "Power",
+        "description": "Input (8L SOIC)"
+      },
+      {
+        "pin_number": "5",
+        "pin_name": "N/C",
+        "type": "NC",
+        "description": "No Connection (8L SOIC)"
+      },
+      {
+        "pin_number": "6",
+        "pin_name": "VOUT",
+        "type": "Output",
+        "description": "Output (8L SOIC)"
+      },
+      {
+        "pin_number": "7",
+        "pin_name": "VOUT",
+        "type": "Output",
+        "description": "Output (8L SOIC)"
+      },
+      {
+        "pin_number": "8",
+        "pin_name": "N/C",
+        "type": "NC",
+        "description": "No Connection (8L SOIC)"
       }
     ]
-  },
-  "timing": {
-    "l0_classify_s": 0.029,
-    "l1_extract_s": 53.936
   },
   "pin_extraction": {
     "logical_pins": [
@@ -1402,7 +945,7 @@
         "name": "GND/ADJ",
         "direction": "POWER_IN",
         "signal_type": "POWER",
-        "description": "Ground or Adjust pin. Ground for fixed voltage versions; reference voltage input for adjustable version.",
+        "description": "Ground or adjust pin. Ground for fixed voltage versions, adjust for adjustable versions.",
         "packages": {
           "SOT-223": [
             1
@@ -1457,7 +1000,7 @@
         "unused_treatment": null
       },
       {
-        "name": "N/C",
+        "name": "NC",
         "direction": "NC",
         "signal_type": "NONE",
         "description": "No internal connection.",
@@ -1467,11 +1010,10 @@
             8
           ]
         },
-        "unused_treatment": "FLOAT"
+        "unused_treatment": null
       }
     ]
   },
-  "pin_validation": [],
   "pin_index": {
     "packages": {
       "SOT-223": {
@@ -1479,7 +1021,7 @@
           "name": "GND/ADJ",
           "direction": "POWER_IN",
           "signal_type": "POWER",
-          "description": "Ground or Adjust pin. Ground for fixed voltage versions; reference voltage input for adjustable version.",
+          "description": "Ground or adjust pin. Ground for fixed voltage versions, adjust for adjustable versions.",
           "unused_treatment": null
         },
         "2": {
@@ -1502,7 +1044,7 @@
           "name": "GND/ADJ",
           "direction": "POWER_IN",
           "signal_type": "POWER",
-          "description": "Ground or Adjust pin. Ground for fixed voltage versions; reference voltage input for adjustable version.",
+          "description": "Ground or adjust pin. Ground for fixed voltage versions, adjust for adjustable versions.",
           "unused_treatment": null
         },
         "2": {
@@ -1532,7 +1074,7 @@
           "name": "GND/ADJ",
           "direction": "POWER_IN",
           "signal_type": "POWER",
-          "description": "Ground or Adjust pin. Ground for fixed voltage versions; reference voltage input for adjustable version.",
+          "description": "Ground or adjust pin. Ground for fixed voltage versions, adjust for adjustable versions.",
           "unused_treatment": null
         },
         "2": {
@@ -1571,20 +1113,508 @@
           "unused_treatment": null
         },
         "5": {
-          "name": "N/C",
+          "name": "NC",
           "direction": "NC",
           "signal_type": "NONE",
           "description": "No internal connection.",
-          "unused_treatment": "FLOAT"
+          "unused_treatment": null
         },
         "8": {
-          "name": "N/C",
+          "name": "NC",
           "direction": "NC",
           "signal_type": "NONE",
           "description": "No internal connection.",
-          "unused_treatment": "FLOAT"
+          "unused_treatment": null
         }
       }
     }
+  },
+  "pin_validation": [],
+  "validation": [
+    {
+      "param": "Operating Junction Temperature (Control Section)",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Operating Junction Temperature (Power Transistor)",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Storage temperature",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Reference Voltage",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Reference Voltage",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Output Voltage",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Output Voltage",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Output Voltage",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Output Voltage",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Output Voltage",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Output Voltage",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Output Voltage",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Output Voltage",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Output Voltage",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Output Voltage",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Output Voltage",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Output Voltage",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Line Regulation",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Line Regulation",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Line Regulation",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Line Regulation",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Line Regulation",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Line Regulation",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Line Regulation",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Line Regulation",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Line Regulation",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Line Regulation",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Line Regulation",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Line Regulation",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Line Regulation",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Line Regulation",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Load Regulation",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Load Regulation",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Load Regulation",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Load Regulation",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Load Regulation",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Load Regulation",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Load Regulation",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Load Regulation",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Load Regulation",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Load Regulation",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Load Regulation",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Load Regulation",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Load Regulation",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Load Regulation",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Dropout Voltage",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Current Limit",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Minimum Load Current",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Quiescent Current",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Ripple Rejection",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Ripple Rejection",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Ripple Rejection",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Ripple Rejection",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Thermal Regulation",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Adjust Pin Current Change",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Long Term Stability",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    }
+  ],
+  "physics_validation": [
+    {
+      "param": "Reference Voltage (AMS1117)",
+      "rule": "temp_envelope",
+      "passed": true,
+      "message": "OK (mode: ALGEBRAIC)"
+    },
+    {
+      "param": "Output Voltage (AMS1117-1.5)",
+      "rule": "temp_envelope",
+      "passed": true,
+      "message": "OK (mode: ALGEBRAIC)"
+    },
+    {
+      "param": "Output Voltage (AMS1117-1.8)",
+      "rule": "temp_envelope",
+      "passed": true,
+      "message": "OK (mode: ALGEBRAIC)"
+    },
+    {
+      "param": "Output Voltage (AMS1117-2.5)",
+      "rule": "temp_envelope",
+      "passed": true,
+      "message": "OK (mode: ALGEBRAIC)"
+    },
+    {
+      "param": "Output Voltage (AMS1117-2.85)",
+      "rule": "temp_envelope",
+      "passed": true,
+      "message": "OK (mode: ALGEBRAIC)"
+    },
+    {
+      "param": "Output Voltage (AMS1117-3.3)",
+      "rule": "temp_envelope",
+      "passed": true,
+      "message": "OK (mode: ALGEBRAIC)"
+    },
+    {
+      "param": "Output Voltage (AMS1117-5.0)",
+      "rule": "temp_envelope",
+      "passed": true,
+      "message": "OK (mode: ALGEBRAIC)"
+    },
+    {
+      "param": "Line Regulation (AMS1117)",
+      "rule": "temp_envelope",
+      "passed": true,
+      "message": "OK (mode: ALGEBRAIC)"
+    },
+    {
+      "param": "Line Regulation (AMS1117-1.5)",
+      "rule": "temp_envelope",
+      "passed": true,
+      "message": "OK (mode: ALGEBRAIC)"
+    },
+    {
+      "param": "Line Regulation (AMS1117-1.8)",
+      "rule": "temp_envelope",
+      "passed": true,
+      "message": "OK (mode: ALGEBRAIC)"
+    },
+    {
+      "param": "Line Regulation (AMS1117-2.5)",
+      "rule": "temp_envelope",
+      "passed": true,
+      "message": "OK (mode: ALGEBRAIC)"
+    },
+    {
+      "param": "Line Regulation (AMS1117-2.85)",
+      "rule": "temp_envelope",
+      "passed": true,
+      "message": "OK (mode: ALGEBRAIC)"
+    },
+    {
+      "param": "Line Regulation (AMS1117-3.3)",
+      "rule": "temp_envelope",
+      "passed": true,
+      "message": "OK (mode: ALGEBRAIC)"
+    },
+    {
+      "param": "Line Regulation (AMS1117-5.0)",
+      "rule": "temp_envelope",
+      "passed": true,
+      "message": "OK (mode: ALGEBRAIC)"
+    },
+    {
+      "param": "Load Regulation (AMS1117)",
+      "rule": "temp_envelope",
+      "passed": true,
+      "message": "OK (mode: ALGEBRAIC)"
+    },
+    {
+      "param": "Load Regulation (AMS1117-1.5)",
+      "rule": "temp_envelope",
+      "passed": true,
+      "message": "OK (mode: ALGEBRAIC)"
+    },
+    {
+      "param": "Load Regulation (AMS1117-1.8)",
+      "rule": "temp_envelope",
+      "passed": true,
+      "message": "OK (mode: ALGEBRAIC)"
+    },
+    {
+      "param": "Load Regulation (AMS1117-2.5)",
+      "rule": "temp_envelope",
+      "passed": true,
+      "message": "OK (mode: ALGEBRAIC)"
+    },
+    {
+      "param": "Load Regulation (AMS1117-2.85)",
+      "rule": "temp_envelope",
+      "passed": true,
+      "message": "OK (mode: ALGEBRAIC)"
+    },
+    {
+      "param": "Load Regulation (AMS1117-3.3)",
+      "rule": "temp_envelope",
+      "passed": true,
+      "message": "OK (mode: ALGEBRAIC)"
+    },
+    {
+      "param": "Load Regulation (AMS1117-5.0)",
+      "rule": "temp_envelope",
+      "passed": true,
+      "message": "OK (mode: ALGEBRAIC)"
+    },
+    {
+      "param": "Adjust Pin Current (AMS1117)",
+      "rule": "temp_envelope",
+      "passed": true,
+      "message": "OK (mode: ALGEBRAIC)"
+    }
+  ],
+  "cross_validation": {
+    "total_extracted_values": 76,
+    "values_found_in_pdf": 76,
+    "values_not_in_pdf": [],
+    "value_coverage_pct": 100.0,
+    "total_params": 66,
+    "params_verified": 66,
+    "params_suspicious": 0,
+    "suspicious_params": []
+  },
+  "timing": {
+    "l0_classify_s": 0.029,
+    "l1a_extract_s": 164.913,
+    "l1b_pin_s": 24.833
   }
 }

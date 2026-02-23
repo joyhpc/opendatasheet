@@ -23,7 +23,7 @@
       "text_length": 596,
       "category": "pin",
       "matched_patterns": [
-        "(?i)pin\\s+(description|configuration|function|assignment|definition)"
+        "(?i)pin\\s+(description|configuration|function|assignment|definition|connection|diagram)"
       ],
       "text_preview": "TC7PCI3212MT,TC7PCI3215MT 2 6.  6.  6.  6. Pin Assignment Pin Assignment Pin Assignment Pin Assignment TC7PCI3212MT TC7PCI3215MT 7.  7.  7.  7. Block Diagram Block Diagram Block Diagram Block Diagram "
     },
@@ -100,7 +100,7 @@
   "extraction": {
     "component": {
       "mpn": "TC7PCI3212MT, TC7PCI3215MT",
-      "manufacturer": "TOSHIBA",
+      "manufacturer": "Toshiba",
       "category": "Switch",
       "description": "2 Differential Channel, 2:1 multiplexer/demultiplexer switch for PCI Express Gen3"
     },
@@ -133,7 +133,7 @@
         "typ": null,
         "max": null,
         "unit": "V",
-        "conditions": "Max is VCC + 0.5"
+        "conditions": "max is VCC + 0.5"
       },
       {
         "parameter": "Switch I/O current",
@@ -185,7 +185,7 @@
         "typ": null,
         "max": null,
         "unit": "V",
-        "conditions": "VCC = 3.0 to 3.6 V, Min = 0.65 x VCC",
+        "conditions": "VCC = 3.0 to 3.6 V, min is 0.65 x VCC",
         "device": "TC7PCI3212MT, TC7PCI3215MT",
         "temp_range": "full"
       },
@@ -197,7 +197,7 @@
         "typ": null,
         "max": null,
         "unit": "V",
-        "conditions": "VCC = 3.0 to 3.6 V, Max = 0.35 x VCC",
+        "conditions": "VCC = 3.0 to 3.6 V, max is 0.35 x VCC",
         "device": "TC7PCI3212MT, TC7PCI3215MT",
         "temp_range": "full"
       },
@@ -250,7 +250,7 @@
         "temp_range": "full"
       },
       {
-        "parameter": "Difference of ON-resistance between switches (bit to bit)",
+        "parameter": "Difference of ON-resistance between switches",
         "raw_name": "Difference of ON-resistance between switches (bit to bit)",
         "symbol": "ΔRON",
         "min": null,
@@ -504,332 +504,900 @@
     ],
     "pin_definitions": [
       {
-        "pin_number": 1,
+        "pin_number": "1",
         "pin_name": "VCC",
         "type": "Power",
         "description": "Supply voltage (TC7PCI3212MT)"
       },
       {
-        "pin_number": 2,
+        "pin_number": "2",
         "pin_name": "OE",
         "type": "Input",
         "description": "Output enable (TC7PCI3212MT)"
       },
       {
-        "pin_number": 3,
+        "pin_number": "3",
         "pin_name": "A0+",
         "type": "I/O",
         "description": "Differential I/O (TC7PCI3212MT)"
       },
       {
-        "pin_number": 4,
+        "pin_number": "4",
         "pin_name": "A0-",
         "type": "I/O",
         "description": "Differential I/O (TC7PCI3212MT)"
       },
       {
-        "pin_number": 5,
+        "pin_number": "5",
         "pin_name": "GND",
         "type": "Power",
         "description": "Ground (TC7PCI3212MT)"
       },
       {
-        "pin_number": 6,
+        "pin_number": "6",
         "pin_name": "VCC",
         "type": "Power",
         "description": "Supply voltage (TC7PCI3212MT)"
       },
       {
-        "pin_number": 7,
+        "pin_number": "7",
         "pin_name": "A1+",
         "type": "I/O",
         "description": "Differential I/O (TC7PCI3212MT)"
       },
       {
-        "pin_number": 8,
+        "pin_number": "8",
         "pin_name": "A1-",
         "type": "I/O",
         "description": "Differential I/O (TC7PCI3212MT)"
       },
       {
-        "pin_number": 9,
+        "pin_number": "9",
         "pin_name": "SEL",
         "type": "Input",
         "description": "Select input (TC7PCI3212MT)"
       },
       {
-        "pin_number": 10,
+        "pin_number": "10",
         "pin_name": "VCC",
         "type": "Power",
         "description": "Supply voltage (TC7PCI3212MT)"
       },
       {
-        "pin_number": 11,
+        "pin_number": "11",
         "pin_name": "GND",
         "type": "Power",
         "description": "Ground (TC7PCI3212MT)"
       },
       {
-        "pin_number": 12,
+        "pin_number": "12",
         "pin_name": "C1-",
         "type": "I/O",
         "description": "Differential I/O (TC7PCI3212MT)"
       },
       {
-        "pin_number": 13,
+        "pin_number": "13",
         "pin_name": "C1+",
         "type": "I/O",
         "description": "Differential I/O (TC7PCI3212MT)"
       },
       {
-        "pin_number": 14,
+        "pin_number": "14",
         "pin_name": "C0-",
         "type": "I/O",
         "description": "Differential I/O (TC7PCI3212MT)"
       },
       {
-        "pin_number": 15,
+        "pin_number": "15",
         "pin_name": "C0+",
         "type": "I/O",
         "description": "Differential I/O (TC7PCI3212MT)"
       },
       {
-        "pin_number": 16,
+        "pin_number": "16",
         "pin_name": "B1-",
         "type": "I/O",
         "description": "Differential I/O (TC7PCI3212MT)"
       },
       {
-        "pin_number": 17,
+        "pin_number": "17",
         "pin_name": "B1+",
         "type": "I/O",
         "description": "Differential I/O (TC7PCI3212MT)"
       },
       {
-        "pin_number": 18,
+        "pin_number": "18",
         "pin_name": "B0-",
         "type": "I/O",
         "description": "Differential I/O (TC7PCI3212MT)"
       },
       {
-        "pin_number": 19,
+        "pin_number": "19",
         "pin_name": "B0+",
         "type": "I/O",
         "description": "Differential I/O (TC7PCI3212MT)"
       },
       {
-        "pin_number": 20,
+        "pin_number": "20",
         "pin_name": "GND",
         "type": "Power",
         "description": "Ground (TC7PCI3212MT)"
       },
       {
-        "pin_number": 1,
+        "pin_number": "1",
         "pin_name": "GND",
         "type": "Power",
         "description": "Ground (TC7PCI3215MT)"
       },
       {
-        "pin_number": 2,
+        "pin_number": "2",
         "pin_name": "A0+",
         "type": "I/O",
         "description": "Differential I/O (TC7PCI3215MT)"
       },
       {
-        "pin_number": 3,
+        "pin_number": "3",
         "pin_name": "A0-",
         "type": "I/O",
         "description": "Differential I/O (TC7PCI3215MT)"
       },
       {
-        "pin_number": 4,
+        "pin_number": "4",
         "pin_name": "C0+",
         "type": "I/O",
         "description": "Differential I/O (TC7PCI3215MT)"
       },
       {
-        "pin_number": 5,
+        "pin_number": "5",
         "pin_name": "C0-",
         "type": "I/O",
         "description": "Differential I/O (TC7PCI3215MT)"
       },
       {
-        "pin_number": 6,
+        "pin_number": "6",
         "pin_name": "A1+",
         "type": "I/O",
         "description": "Differential I/O (TC7PCI3215MT)"
       },
       {
-        "pin_number": 7,
+        "pin_number": "7",
         "pin_name": "A1-",
         "type": "I/O",
         "description": "Differential I/O (TC7PCI3215MT)"
       },
       {
-        "pin_number": 8,
+        "pin_number": "8",
         "pin_name": "C1+",
         "type": "I/O",
         "description": "Differential I/O (TC7PCI3215MT)"
       },
       {
-        "pin_number": 9,
+        "pin_number": "9",
         "pin_name": "C1-",
         "type": "I/O",
         "description": "Differential I/O (TC7PCI3215MT)"
       },
       {
-        "pin_number": 10,
+        "pin_number": "10",
         "pin_name": "GND",
         "type": "Power",
         "description": "Ground (TC7PCI3215MT)"
       },
       {
-        "pin_number": 11,
+        "pin_number": "11",
         "pin_name": "VCC",
         "type": "Power",
         "description": "Supply voltage (TC7PCI3215MT)"
       },
       {
-        "pin_number": 12,
+        "pin_number": "12",
         "pin_name": "SEL",
         "type": "Input",
         "description": "Select input (TC7PCI3215MT)"
       },
       {
-        "pin_number": 13,
+        "pin_number": "13",
         "pin_name": "B1-",
         "type": "I/O",
         "description": "Differential I/O (TC7PCI3215MT)"
       },
       {
-        "pin_number": 14,
+        "pin_number": "14",
         "pin_name": "B1+",
         "type": "I/O",
         "description": "Differential I/O (TC7PCI3215MT)"
       },
       {
-        "pin_number": 15,
+        "pin_number": "15",
         "pin_name": "GND",
         "type": "Power",
         "description": "Ground (TC7PCI3215MT)"
       },
       {
-        "pin_number": 16,
+        "pin_number": "16",
         "pin_name": "VCC",
         "type": "Power",
         "description": "Supply voltage (TC7PCI3215MT)"
       },
       {
-        "pin_number": 17,
+        "pin_number": "17",
         "pin_name": "B0-",
         "type": "I/O",
         "description": "Differential I/O (TC7PCI3215MT)"
       },
       {
-        "pin_number": 18,
+        "pin_number": "18",
         "pin_name": "B0+",
         "type": "I/O",
         "description": "Differential I/O (TC7PCI3215MT)"
       },
       {
-        "pin_number": 19,
+        "pin_number": "19",
         "pin_name": "OE",
         "type": "Input",
         "description": "Output enable (TC7PCI3215MT)"
       },
       {
-        "pin_number": 20,
+        "pin_number": "20",
         "pin_name": "VCC",
         "type": "Power",
         "description": "Supply voltage (TC7PCI3215MT)"
       }
     ]
   },
+  "pin_extraction": {
+    "logical_pins": [
+      {
+        "name": "VCC",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Power supply input",
+        "packages": {
+          "TC7PCI3212MT": [
+            1,
+            6,
+            10
+          ],
+          "TC7PCI3215MT": [
+            11,
+            16,
+            20
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "GND",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Ground",
+        "packages": {
+          "TC7PCI3212MT": [
+            5,
+            11,
+            20
+          ],
+          "TC7PCI3215MT": [
+            1,
+            10,
+            15
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "/OE",
+        "direction": "INPUT",
+        "signal_type": "DIGITAL",
+        "description": "Output enable input (active low)",
+        "packages": {
+          "TC7PCI3212MT": [
+            2
+          ],
+          "TC7PCI3215MT": [
+            19
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "SEL",
+        "direction": "INPUT",
+        "signal_type": "DIGITAL",
+        "description": "Select input",
+        "packages": {
+          "TC7PCI3212MT": [
+            9
+          ],
+          "TC7PCI3215MT": [
+            12
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "A0+",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Differential signal port A0+",
+        "packages": {
+          "TC7PCI3212MT": [
+            3
+          ],
+          "TC7PCI3215MT": [
+            2
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "A0-",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Differential signal port A0-",
+        "packages": {
+          "TC7PCI3212MT": [
+            4
+          ],
+          "TC7PCI3215MT": [
+            3
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "A1+",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Differential signal port A1+",
+        "packages": {
+          "TC7PCI3212MT": [
+            7
+          ],
+          "TC7PCI3215MT": [
+            6
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "A1-",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Differential signal port A1-",
+        "packages": {
+          "TC7PCI3212MT": [
+            8
+          ],
+          "TC7PCI3215MT": [
+            7
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "B0+",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Differential signal port B0+",
+        "packages": {
+          "TC7PCI3212MT": [
+            19
+          ],
+          "TC7PCI3215MT": [
+            18
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "B0-",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Differential signal port B0-",
+        "packages": {
+          "TC7PCI3212MT": [
+            18
+          ],
+          "TC7PCI3215MT": [
+            17
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "B1+",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Differential signal port B1+",
+        "packages": {
+          "TC7PCI3212MT": [
+            17
+          ],
+          "TC7PCI3215MT": [
+            14
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "B1-",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Differential signal port B1-",
+        "packages": {
+          "TC7PCI3212MT": [
+            16
+          ],
+          "TC7PCI3215MT": [
+            13
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "C0+",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Differential signal port C0+",
+        "packages": {
+          "TC7PCI3212MT": [
+            15
+          ],
+          "TC7PCI3215MT": [
+            4
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "C0-",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Differential signal port C0-",
+        "packages": {
+          "TC7PCI3212MT": [
+            14
+          ],
+          "TC7PCI3215MT": [
+            5
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "C1+",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Differential signal port C1+",
+        "packages": {
+          "TC7PCI3212MT": [
+            13
+          ],
+          "TC7PCI3215MT": [
+            8
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "C1-",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Differential signal port C1-",
+        "packages": {
+          "TC7PCI3212MT": [
+            12
+          ],
+          "TC7PCI3215MT": [
+            9
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "EP",
+        "direction": "PASSIVE",
+        "signal_type": "POWER",
+        "description": "Exposed thermal pad, connect to GND",
+        "packages": {
+          "TC7PCI3212MT": [
+            "EP"
+          ],
+          "TC7PCI3215MT": [
+            "EP"
+          ]
+        },
+        "unused_treatment": null
+      }
+    ]
+  },
+  "pin_index": {
+    "packages": {
+      "TC7PCI3212MT": {
+        "1": {
+          "name": "VCC",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power supply input",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "VCC",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power supply input",
+          "unused_treatment": null
+        },
+        "10": {
+          "name": "VCC",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power supply input",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground",
+          "unused_treatment": null
+        },
+        "11": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground",
+          "unused_treatment": null
+        },
+        "20": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "/OE",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Output enable input (active low)",
+          "unused_treatment": null
+        },
+        "9": {
+          "name": "SEL",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Select input",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "A0+",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Differential signal port A0+",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "A0-",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Differential signal port A0-",
+          "unused_treatment": null
+        },
+        "7": {
+          "name": "A1+",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Differential signal port A1+",
+          "unused_treatment": null
+        },
+        "8": {
+          "name": "A1-",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Differential signal port A1-",
+          "unused_treatment": null
+        },
+        "19": {
+          "name": "B0+",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Differential signal port B0+",
+          "unused_treatment": null
+        },
+        "18": {
+          "name": "B0-",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Differential signal port B0-",
+          "unused_treatment": null
+        },
+        "17": {
+          "name": "B1+",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Differential signal port B1+",
+          "unused_treatment": null
+        },
+        "16": {
+          "name": "B1-",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Differential signal port B1-",
+          "unused_treatment": null
+        },
+        "15": {
+          "name": "C0+",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Differential signal port C0+",
+          "unused_treatment": null
+        },
+        "14": {
+          "name": "C0-",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Differential signal port C0-",
+          "unused_treatment": null
+        },
+        "13": {
+          "name": "C1+",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Differential signal port C1+",
+          "unused_treatment": null
+        },
+        "12": {
+          "name": "C1-",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Differential signal port C1-",
+          "unused_treatment": null
+        },
+        "EP": {
+          "name": "EP",
+          "direction": "PASSIVE",
+          "signal_type": "POWER",
+          "description": "Exposed thermal pad, connect to GND",
+          "unused_treatment": null
+        }
+      },
+      "TC7PCI3215MT": {
+        "11": {
+          "name": "VCC",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power supply input",
+          "unused_treatment": null
+        },
+        "16": {
+          "name": "VCC",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power supply input",
+          "unused_treatment": null
+        },
+        "20": {
+          "name": "VCC",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power supply input",
+          "unused_treatment": null
+        },
+        "1": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground",
+          "unused_treatment": null
+        },
+        "10": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground",
+          "unused_treatment": null
+        },
+        "15": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground",
+          "unused_treatment": null
+        },
+        "19": {
+          "name": "/OE",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Output enable input (active low)",
+          "unused_treatment": null
+        },
+        "12": {
+          "name": "SEL",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Select input",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "A0+",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Differential signal port A0+",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "A0-",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Differential signal port A0-",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "A1+",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Differential signal port A1+",
+          "unused_treatment": null
+        },
+        "7": {
+          "name": "A1-",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Differential signal port A1-",
+          "unused_treatment": null
+        },
+        "18": {
+          "name": "B0+",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Differential signal port B0+",
+          "unused_treatment": null
+        },
+        "17": {
+          "name": "B0-",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Differential signal port B0-",
+          "unused_treatment": null
+        },
+        "14": {
+          "name": "B1+",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Differential signal port B1+",
+          "unused_treatment": null
+        },
+        "13": {
+          "name": "B1-",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Differential signal port B1-",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "C0+",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Differential signal port C0+",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "C0-",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Differential signal port C0-",
+          "unused_treatment": null
+        },
+        "8": {
+          "name": "C1+",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Differential signal port C1+",
+          "unused_treatment": null
+        },
+        "9": {
+          "name": "C1-",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Differential signal port C1-",
+          "unused_treatment": null
+        },
+        "EP": {
+          "name": "EP",
+          "direction": "PASSIVE",
+          "signal_type": "POWER",
+          "description": "Exposed thermal pad, connect to GND",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "pin_validation": [],
   "validation": [
     {
       "param": "Supply voltage",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Input voltage",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "VCC/ground current",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Storage temperature",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "ON-resistance",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "ON-resistance",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Quiescent supply current",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Turn-ON time (SEL to Output)",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Turn-ON time (OE to Output)",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Turn-OFF time (SEL to Output)",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Turn-OFF time (OE to Output)",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Break before make",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     }
   ],
   "physics_validation": [],
   "cross_validation": {
     "total_extracted_values": 28,
-    "values_found_in_pdf": 27,
-    "values_not_in_pdf": [
-      -50.0
-    ],
-    "value_coverage_pct": 96.4,
+    "values_found_in_pdf": 28,
+    "values_not_in_pdf": [],
+    "value_coverage_pct": 100.0,
     "total_params": 34,
-    "params_verified": 29,
-    "params_suspicious": 5,
+    "params_verified": 30,
+    "params_suspicious": 4,
     "suspicious_params": [
       {
         "parameter": "ON-resistance",
@@ -862,19 +1430,12 @@
           37.0,
           50.0
         ]
-      },
-      {
-        "parameter": "VCC/ground current",
-        "device": "",
-        "values": [
-          -50.0,
-          50.0
-        ]
       }
     ]
   },
   "timing": {
-    "l0_classify_s": 0.071,
-    "l1_extract_s": 96.292
+    "l0_classify_s": 0.022,
+    "l1a_extract_s": 92.67,
+    "l1b_pin_s": 46.468
   }
 }

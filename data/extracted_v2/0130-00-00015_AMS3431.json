@@ -5,6 +5,7 @@
   "checksum": "07aa5577d8c0ced8a9e0ba43e50ee6e7",
   "total_pages": 6,
   "vision_pages": [
+    0,
     1,
     4
   ],
@@ -12,8 +13,10 @@
     {
       "page_num": 0,
       "text_length": 1649,
-      "category": "ordering",
+      "category": "pin",
       "matched_patterns": [
+        "(?i)pin\\s+(description|configuration|function|assignment|definition|connection|diagram)",
+        "(?i)pin\\s+connections?",
         "(?i)ordering\\s+information"
       ],
       "text_preview": "Advanced Monolithic Systems, Inc.    www.advanced-monolithic.com      Phone (925) 443-0722    Fax (925) 443-0723      Advanced                                                               AMS3431    "
@@ -63,15 +66,15 @@
   "extraction": {
     "component": {
       "mpn": "AMS3431",
-      "manufacturer": "Advanced Monolithic Systems, Inc.",
+      "manufacturer": "Advanced Monolithic Systems",
       "category": "Other",
-      "description": "Precision Adjustable Shunt Regulator"
+      "description": "PRECISION ADJUSTABLE SHUNT REGULATOR"
     },
     "absolute_maximum_ratings": [
       {
         "parameter": "Cathode Voltage",
-        "raw_name": "Cathode Voltage (Vz)",
-        "symbol": "Vz",
+        "raw_name": "Cathode Voltage (VZ)",
+        "symbol": "VZ",
         "min": null,
         "typ": null,
         "max": 37,
@@ -80,8 +83,8 @@
       },
       {
         "parameter": "Continuous Cathode Current",
-        "raw_name": "Continuous Cathode Current (Iz)",
-        "symbol": "Iz",
+        "raw_name": "Continuous Cathode Current (IZ)",
+        "symbol": "IZ",
         "min": -10,
         "typ": null,
         "max": 150,
@@ -90,8 +93,8 @@
       },
       {
         "parameter": "Reference Input Current",
-        "raw_name": "Reference Input Current (Iref)",
-        "symbol": "Iref",
+        "raw_name": "Reference Input Current (IREF)",
+        "symbol": "IREF",
         "min": null,
         "typ": null,
         "max": 10,
@@ -100,8 +103,8 @@
       },
       {
         "parameter": "Junction Temperature",
-        "raw_name": "Junction Temperature (Tj)",
-        "symbol": "Tj",
+        "raw_name": "Junction Temperature (TJ)",
+        "symbol": "TJ",
         "min": -40,
         "typ": null,
         "max": 125,
@@ -129,296 +132,80 @@
         "conditions": "Soldering, 25sec."
       },
       {
-        "parameter": "Internal Power Dissipation (TO-92)",
-        "raw_name": "Internal Power Dissipation (Pd) TO-92 Package",
-        "symbol": "Pd",
+        "parameter": "Internal Power Dissipation",
+        "raw_name": "Internal Power Dissipation (PD)",
+        "symbol": "PD",
         "min": null,
         "typ": null,
         "max": 0.78,
         "unit": "W",
-        "conditions": null
+        "conditions": "TO-92 Package"
       },
       {
-        "parameter": "Internal Power Dissipation (SOT-23)",
-        "raw_name": "Internal Power Dissipation (Pd) SOT-23 Package",
-        "symbol": "Pd",
+        "parameter": "Internal Power Dissipation",
+        "raw_name": "Internal Power Dissipation (PD)",
+        "symbol": "PD",
         "min": null,
         "typ": null,
         "max": 0.28,
         "unit": "W",
-        "conditions": null
+        "conditions": "SOT-23 Package"
       },
       {
-        "parameter": "Thermal Resistance (TO-92)",
-        "raw_name": "Thermal Resistance (θja) TO-92 Package",
-        "symbol": "θja",
+        "parameter": "Thermal Resistance",
+        "raw_name": "Thermal Resistance (θJA)",
+        "symbol": "θJA",
         "min": null,
         "typ": null,
         "max": 160,
         "unit": "°C/W",
-        "conditions": null
+        "conditions": "TO-92 Package"
       },
       {
-        "parameter": "Thermal Resistance (SOT-23)",
-        "raw_name": "Thermal Resistance (θja) SOT-23 Package",
-        "symbol": "θja",
+        "parameter": "Thermal Resistance",
+        "raw_name": "Thermal Resistance (θJA)",
+        "symbol": "θJA",
         "min": null,
         "typ": null,
         "max": 410,
         "unit": "°C/W",
-        "conditions": null
+        "conditions": "SOT-23 Package"
       }
     ],
     "electrical_characteristics": [
       {
         "parameter": "Reference Voltage",
         "raw_name": "Reference Voltage",
-        "symbol": "Vref",
+        "symbol": "VREF",
         "min": 2.489,
         "typ": 2.495,
         "max": 2.501,
         "unit": "V",
-        "conditions": "Iz=10 mA, Ta = +25°C",
-        "device": "AMS3431A",
-        "temp_range": "25C"
-      },
-      {
-        "parameter": "Deviation of Reference Input Voltage over Temperature",
-        "raw_name": "Deviation of Reference Input Voltage over Temperature",
-        "symbol": null,
-        "min": null,
-        "typ": 8.0,
-        "max": 15,
-        "unit": "mV",
-        "conditions": "Vz = Vref (circuit 1), Ta = +25°C to +85°C",
-        "device": "AMS3431A",
-        "temp_range": "full"
-      },
-      {
-        "parameter": "Deviation of Reference Input Voltage over Temperature",
-        "raw_name": "Deviation of Reference Input Voltage over Temperature",
-        "symbol": null,
-        "min": null,
-        "typ": 8.0,
-        "max": 15,
-        "unit": "mV",
-        "conditions": "Vz = Vref (circuit 1), Ta = -40°C to +25°C",
-        "device": "AMS3431A",
-        "temp_range": "full"
-      },
-      {
-        "parameter": "Ratio of Change in Reference Voltage to Cathode Voltage",
-        "raw_name": "Ratio of Change in Reference Voltage to Cathode Voltage",
-        "symbol": "ΔVref/ΔVz",
-        "min": null,
-        "typ": -0.5,
-        "max": -2.7,
-        "unit": "mV/V",
-        "conditions": "Vz from Vref to 10V",
-        "device": "AMS3431A",
-        "temp_range": "25C"
-      },
-      {
-        "parameter": "Ratio of Change in Reference Voltage to Cathode Voltage",
-        "raw_name": "Ratio of Change in Reference Voltage to Cathode Voltage",
-        "symbol": "ΔVref/ΔVz",
-        "min": null,
-        "typ": -1.0,
-        "max": -2.0,
-        "unit": "mV/V",
-        "conditions": "Vz from Vref to 36V",
-        "device": "AMS3431A",
-        "temp_range": "25C"
-      },
-      {
-        "parameter": "Reference Input Current",
-        "raw_name": "Reference Input Current",
-        "symbol": "Iref",
-        "min": null,
-        "typ": 0.5,
-        "max": 4.0,
-        "unit": "µA",
-        "conditions": "R1 = 10kΩ, R2 = ∞Ω (test circuit 2)",
-        "device": "AMS3431A",
-        "temp_range": "25C"
-      },
-      {
-        "parameter": "Reference Input Current Deviation over Temperature",
-        "raw_name": "Reference Input Current Deviation over Temperature",
-        "symbol": "ΔIref",
-        "min": null,
-        "typ": 0.4,
-        "max": 1.2,
-        "unit": "µA",
-        "conditions": "R1 = 10kΩ, R2 = ∞Ω, Ta = Full Range (test circuit 2)",
-        "device": "AMS3431A",
-        "temp_range": "full"
-      },
-      {
-        "parameter": "Off State Cathode Current",
-        "raw_name": "Off State Cathode Current",
-        "symbol": "Iz(off)",
-        "min": null,
-        "typ": 0.04,
-        "max": 0.5,
-        "unit": "µA",
-        "conditions": "Vz = 36V, Vref = 0V (test circuit 3)",
-        "device": "AMS3431A",
-        "temp_range": "25C"
-      },
-      {
-        "parameter": "Dynamic Output Impedance",
-        "raw_name": "Dynamic Output Impedance",
-        "symbol": "|Zka|",
-        "min": null,
-        "typ": 0.25,
-        "max": 0.5,
-        "unit": "Ω",
-        "conditions": "f < 1kHz, Vz = Vref, Iz = 100µA to 100mA (test circuit 1)",
-        "device": "AMS3431A",
-        "temp_range": "25C"
-      },
-      {
-        "parameter": "Minimum Operating Current",
-        "raw_name": "Minimum Operating Current",
-        "symbol": "Iz(min)",
-        "min": null,
-        "typ": 100,
-        "max": 250,
-        "unit": "µA",
-        "conditions": "Vz = Vref (test circuit 1)",
+        "conditions": "IZ=10 mA, TA = +25°C",
         "device": "AMS3431A",
         "temp_range": "25C"
       },
       {
         "parameter": "Reference Voltage",
         "raw_name": "Reference Voltage",
-        "symbol": "Vref",
+        "symbol": "VREF",
         "min": 2.483,
         "typ": 2.495,
         "max": 2.507,
         "unit": "V",
-        "conditions": "Iz=10 mA, Ta = +25°C",
-        "device": "AMS3431B",
-        "temp_range": "25C"
-      },
-      {
-        "parameter": "Deviation of Reference Input Voltage over Temperature",
-        "raw_name": "Deviation of Reference Input Voltage over Temperature",
-        "symbol": null,
-        "min": null,
-        "typ": 8.0,
-        "max": 15,
-        "unit": "mV",
-        "conditions": "Vz = Vref (circuit 1), Ta = +25°C to +85°C",
-        "device": "AMS3431B",
-        "temp_range": "full"
-      },
-      {
-        "parameter": "Deviation of Reference Input Voltage over Temperature",
-        "raw_name": "Deviation of Reference Input Voltage over Temperature",
-        "symbol": null,
-        "min": null,
-        "typ": 8.0,
-        "max": 15,
-        "unit": "mV",
-        "conditions": "Vz = Vref (circuit 1), Ta = -40°C to +25°C",
-        "device": "AMS3431B",
-        "temp_range": "full"
-      },
-      {
-        "parameter": "Ratio of Change in Reference Voltage to Cathode Voltage",
-        "raw_name": "Ratio of Change in Reference Voltage to Cathode Voltage",
-        "symbol": "ΔVref/ΔVz",
-        "min": null,
-        "typ": -0.5,
-        "max": -2.7,
-        "unit": "mV/V",
-        "conditions": "Vz from Vref to 10V",
-        "device": "AMS3431B",
-        "temp_range": "25C"
-      },
-      {
-        "parameter": "Ratio of Change in Reference Voltage to Cathode Voltage",
-        "raw_name": "Ratio of Change in Reference Voltage to Cathode Voltage",
-        "symbol": "ΔVref/ΔVz",
-        "min": null,
-        "typ": -1.0,
-        "max": -2.0,
-        "unit": "mV/V",
-        "conditions": "Vz from Vref to 36V",
-        "device": "AMS3431B",
-        "temp_range": "25C"
-      },
-      {
-        "parameter": "Reference Input Current",
-        "raw_name": "Reference Input Current",
-        "symbol": "Iref",
-        "min": null,
-        "typ": 0.5,
-        "max": 4.0,
-        "unit": "µA",
-        "conditions": "R1 = 10kΩ, R2 = ∞Ω (test circuit 2)",
-        "device": "AMS3431B",
-        "temp_range": "25C"
-      },
-      {
-        "parameter": "Reference Input Current Deviation over Temperature",
-        "raw_name": "Reference Input Current Deviation over Temperature",
-        "symbol": "ΔIref",
-        "min": null,
-        "typ": 0.4,
-        "max": 1.2,
-        "unit": "µA",
-        "conditions": "R1 = 10kΩ, R2 = ∞Ω, Ta = Full Range (test circuit 2)",
-        "device": "AMS3431B",
-        "temp_range": "full"
-      },
-      {
-        "parameter": "Off State Cathode Current",
-        "raw_name": "Off State Cathode Current",
-        "symbol": "Iz(off)",
-        "min": null,
-        "typ": 0.04,
-        "max": 0.5,
-        "unit": "µA",
-        "conditions": "Vz = 36V, Vref = 0V (test circuit 3)",
-        "device": "AMS3431B",
-        "temp_range": "25C"
-      },
-      {
-        "parameter": "Dynamic Output Impedance",
-        "raw_name": "Dynamic Output Impedance",
-        "symbol": "|Zka|",
-        "min": null,
-        "typ": 0.25,
-        "max": 0.5,
-        "unit": "Ω",
-        "conditions": "f < 1kHz, Vz = Vref, Iz = 100µA to 100mA (test circuit 1)",
-        "device": "AMS3431B",
-        "temp_range": "25C"
-      },
-      {
-        "parameter": "Minimum Operating Current",
-        "raw_name": "Minimum Operating Current",
-        "symbol": "Iz(min)",
-        "min": null,
-        "typ": 100,
-        "max": 250,
-        "unit": "µA",
-        "conditions": "Vz = Vref (test circuit 1)",
+        "conditions": "IZ=10 mA, TA = +25°C",
         "device": "AMS3431B",
         "temp_range": "25C"
       },
       {
         "parameter": "Reference Voltage",
         "raw_name": "Reference Voltage",
-        "symbol": "Vref",
+        "symbol": "VREF",
         "min": 2.47,
         "typ": 2.495,
         "max": 2.52,
         "unit": "V",
-        "conditions": "Iz=10 mA, Ta = +25°C",
+        "conditions": "IZ=10 mA, TA = +25°C",
         "device": "AMS3431C",
         "temp_range": "25C"
       },
@@ -430,7 +217,55 @@
         "typ": 8.0,
         "max": 15,
         "unit": "mV",
-        "conditions": "Vz = Vref (circuit 1), Ta = +25°C to +85°C",
+        "conditions": "VZ = VREF (circuit 1), TA = +25°C to +85°C",
+        "device": "AMS3431A",
+        "temp_range": "full"
+      },
+      {
+        "parameter": "Deviation of Reference Input Voltage over Temperature",
+        "raw_name": "Deviation of Reference Input Voltage over Temperature",
+        "symbol": null,
+        "min": null,
+        "typ": 8.0,
+        "max": 15,
+        "unit": "mV",
+        "conditions": "VZ = VREF (circuit 1), TA = -40°C to +25°C",
+        "device": "AMS3431A",
+        "temp_range": "full"
+      },
+      {
+        "parameter": "Deviation of Reference Input Voltage over Temperature",
+        "raw_name": "Deviation of Reference Input Voltage over Temperature",
+        "symbol": null,
+        "min": null,
+        "typ": 8.0,
+        "max": 15,
+        "unit": "mV",
+        "conditions": "VZ = VREF (circuit 1), TA = +25°C to +85°C",
+        "device": "AMS3431B",
+        "temp_range": "full"
+      },
+      {
+        "parameter": "Deviation of Reference Input Voltage over Temperature",
+        "raw_name": "Deviation of Reference Input Voltage over Temperature",
+        "symbol": null,
+        "min": null,
+        "typ": 8.0,
+        "max": 15,
+        "unit": "mV",
+        "conditions": "VZ = VREF (circuit 1), TA = -40°C to +25°C",
+        "device": "AMS3431B",
+        "temp_range": "full"
+      },
+      {
+        "parameter": "Deviation of Reference Input Voltage over Temperature",
+        "raw_name": "Deviation of Reference Input Voltage over Temperature",
+        "symbol": null,
+        "min": null,
+        "typ": 8.0,
+        "max": 15,
+        "unit": "mV",
+        "conditions": "VZ = VREF (circuit 1), TA = +25°C to +85°C",
         "device": "AMS3431C",
         "temp_range": "full"
       },
@@ -442,355 +277,610 @@
         "typ": 8.0,
         "max": 15,
         "unit": "mV",
-        "conditions": "Vz = Vref (circuit 1), Ta = -40°C to +25°C",
+        "conditions": "VZ = VREF (circuit 1), TA = -40°C to +25°C",
         "device": "AMS3431C",
         "temp_range": "full"
       },
       {
         "parameter": "Ratio of Change in Reference Voltage to Cathode Voltage",
         "raw_name": "Ratio of Change in Reference Voltage to Cathode Voltage",
-        "symbol": "ΔVref/ΔVz",
+        "symbol": null,
         "min": null,
         "typ": -0.5,
         "max": -2.7,
         "unit": "mV/V",
-        "conditions": "Vz from Vref to 10V",
+        "conditions": "VZ from VREF to 10V",
+        "device": "AMS3431A",
+        "temp_range": "25C"
+      },
+      {
+        "parameter": "Ratio of Change in Reference Voltage to Cathode Voltage",
+        "raw_name": "Ratio of Change in Reference Voltage to Cathode Voltage",
+        "symbol": null,
+        "min": null,
+        "typ": -1.0,
+        "max": -2.0,
+        "unit": "mV/V",
+        "conditions": "VZ from VREF to 36V",
+        "device": "AMS3431A",
+        "temp_range": "25C"
+      },
+      {
+        "parameter": "Ratio of Change in Reference Voltage to Cathode Voltage",
+        "raw_name": "Ratio of Change in Reference Voltage to Cathode Voltage",
+        "symbol": null,
+        "min": null,
+        "typ": -0.5,
+        "max": -2.7,
+        "unit": "mV/V",
+        "conditions": "VZ from VREF to 10V",
+        "device": "AMS3431B",
+        "temp_range": "25C"
+      },
+      {
+        "parameter": "Ratio of Change in Reference Voltage to Cathode Voltage",
+        "raw_name": "Ratio of Change in Reference Voltage to Cathode Voltage",
+        "symbol": null,
+        "min": null,
+        "typ": -1.0,
+        "max": -2.0,
+        "unit": "mV/V",
+        "conditions": "VZ from VREF to 36V",
+        "device": "AMS3431B",
+        "temp_range": "25C"
+      },
+      {
+        "parameter": "Ratio of Change in Reference Voltage to Cathode Voltage",
+        "raw_name": "Ratio of Change in Reference Voltage to Cathode Voltage",
+        "symbol": null,
+        "min": null,
+        "typ": -0.5,
+        "max": -2.7,
+        "unit": "mV/V",
+        "conditions": "VZ from VREF to 10V",
         "device": "AMS3431C",
         "temp_range": "25C"
       },
       {
         "parameter": "Ratio of Change in Reference Voltage to Cathode Voltage",
         "raw_name": "Ratio of Change in Reference Voltage to Cathode Voltage",
-        "symbol": "ΔVref/ΔVz",
+        "symbol": null,
         "min": null,
         "typ": -1.0,
         "max": -2.0,
         "unit": "mV/V",
-        "conditions": "Vz from Vref to 36V",
+        "conditions": "VZ from VREF to 36V",
         "device": "AMS3431C",
         "temp_range": "25C"
       },
       {
         "parameter": "Reference Input Current",
         "raw_name": "Reference Input Current",
-        "symbol": "Iref",
+        "symbol": "IREF",
         "min": null,
         "typ": 0.5,
         "max": 4.0,
         "unit": "µA",
-        "conditions": "R1 = 10kΩ, R2 = ∞Ω (test circuit 2)",
+        "conditions": "R1 = 10kΩ, R2 = ∞ (test circuit 2)",
+        "device": "AMS3431A",
+        "temp_range": "25C"
+      },
+      {
+        "parameter": "Reference Input Current",
+        "raw_name": "Reference Input Current",
+        "symbol": "IREF",
+        "min": null,
+        "typ": 0.5,
+        "max": 4.0,
+        "unit": "µA",
+        "conditions": "R1 = 10kΩ, R2 = ∞ (test circuit 2)",
+        "device": "AMS3431B",
+        "temp_range": "25C"
+      },
+      {
+        "parameter": "Reference Input Current",
+        "raw_name": "Reference Input Current",
+        "symbol": "IREF",
+        "min": null,
+        "typ": 0.5,
+        "max": 4.0,
+        "unit": "µA",
+        "conditions": "R1 = 10kΩ, R2 = ∞ (test circuit 2)",
         "device": "AMS3431C",
         "temp_range": "25C"
       },
       {
         "parameter": "Reference Input Current Deviation over Temperature",
         "raw_name": "Reference Input Current Deviation over Temperature",
-        "symbol": "ΔIref",
+        "symbol": null,
         "min": null,
         "typ": 0.4,
         "max": 1.2,
         "unit": "µA",
-        "conditions": "R1 = 10kΩ, R2 = ∞Ω, Ta = Full Range (test circuit 2)",
+        "conditions": "R1 = 10kΩ, R2 = ∞, TA = Full Range (test circuit 2)",
+        "device": "AMS3431A",
+        "temp_range": "full"
+      },
+      {
+        "parameter": "Reference Input Current Deviation over Temperature",
+        "raw_name": "Reference Input Current Deviation over Temperature",
+        "symbol": null,
+        "min": null,
+        "typ": 0.4,
+        "max": 1.2,
+        "unit": "µA",
+        "conditions": "R1 = 10kΩ, R2 = ∞, TA = Full Range (test circuit 2)",
+        "device": "AMS3431B",
+        "temp_range": "full"
+      },
+      {
+        "parameter": "Reference Input Current Deviation over Temperature",
+        "raw_name": "Reference Input Current Deviation over Temperature",
+        "symbol": null,
+        "min": null,
+        "typ": 0.4,
+        "max": 1.2,
+        "unit": "µA",
+        "conditions": "R1 = 10kΩ, R2 = ∞, TA = Full Range (test circuit 2)",
         "device": "AMS3431C",
         "temp_range": "full"
       },
       {
         "parameter": "Off State Cathode Current",
         "raw_name": "Off State Cathode Current",
-        "symbol": "Iz(off)",
+        "symbol": "IZ(off)",
         "min": null,
         "typ": 0.04,
         "max": 0.5,
         "unit": "µA",
-        "conditions": "Vz = 36V, Vref = 0V (test circuit 3)",
+        "conditions": "VZ = 36V, VREF = 0V (test circuit 3)",
+        "device": "AMS3431A",
+        "temp_range": "25C"
+      },
+      {
+        "parameter": "Off State Cathode Current",
+        "raw_name": "Off State Cathode Current",
+        "symbol": "IZ(off)",
+        "min": null,
+        "typ": 0.04,
+        "max": 0.5,
+        "unit": "µA",
+        "conditions": "VZ = 36V, VREF = 0V (test circuit 3)",
+        "device": "AMS3431B",
+        "temp_range": "25C"
+      },
+      {
+        "parameter": "Off State Cathode Current",
+        "raw_name": "Off State Cathode Current",
+        "symbol": "IZ(off)",
+        "min": null,
+        "typ": 0.04,
+        "max": 0.5,
+        "unit": "µA",
+        "conditions": "VZ = 36V, VREF = 0V (test circuit 3)",
         "device": "AMS3431C",
         "temp_range": "25C"
       },
       {
         "parameter": "Dynamic Output Impedance",
         "raw_name": "Dynamic Output Impedance",
-        "symbol": "|Zka|",
+        "symbol": "|ZKA|",
         "min": null,
         "typ": 0.25,
         "max": 0.5,
         "unit": "Ω",
-        "conditions": "f < 1kHz, Vz = Vref, Iz = 100µA to 100mA (test circuit 1)",
+        "conditions": "f < 1KHz, VZ = VREF, IZ = 100µA to 100mA (test circuit 1)",
+        "device": "AMS3431A",
+        "temp_range": "25C"
+      },
+      {
+        "parameter": "Dynamic Output Impedance",
+        "raw_name": "Dynamic Output Impedance",
+        "symbol": "|ZKA|",
+        "min": null,
+        "typ": 0.25,
+        "max": 0.5,
+        "unit": "Ω",
+        "conditions": "f < 1KHz, VZ = VREF, IZ = 100µA to 100mA (test circuit 1)",
+        "device": "AMS3431B",
+        "temp_range": "25C"
+      },
+      {
+        "parameter": "Dynamic Output Impedance",
+        "raw_name": "Dynamic Output Impedance",
+        "symbol": "|ZKA|",
+        "min": null,
+        "typ": 0.25,
+        "max": 0.5,
+        "unit": "Ω",
+        "conditions": "f < 1KHz, VZ = VREF, IZ = 100µA to 100mA (test circuit 1)",
         "device": "AMS3431C",
         "temp_range": "25C"
       },
       {
         "parameter": "Minimum Operating Current",
         "raw_name": "Minimum Operating Current",
-        "symbol": "Iz(min)",
+        "symbol": "IZ(min)",
         "min": null,
         "typ": 100,
         "max": 250,
         "unit": "µA",
-        "conditions": "Vz = Vref (test circuit 1)",
-        "device": "AMS3431C",
+        "conditions": "VZ = VREF (test circuit 1)",
+        "device": "AMS3431A",
         "temp_range": "25C"
       },
       {
-        "parameter": "Cathode Voltage",
-        "raw_name": "Cathode Voltage (Vz)",
-        "symbol": "Vz",
-        "min": 2.495,
-        "typ": null,
-        "max": 36,
-        "unit": "V",
-        "conditions": "Recommended Operating Conditions",
-        "device": null,
-        "temp_range": null
+        "parameter": "Minimum Operating Current",
+        "raw_name": "Minimum Operating Current",
+        "symbol": "IZ(min)",
+        "min": null,
+        "typ": 100,
+        "max": 250,
+        "unit": "µA",
+        "conditions": "VZ = VREF (test circuit 1)",
+        "device": "AMS3431B",
+        "temp_range": "25C"
       },
       {
-        "parameter": "Cathode Current",
-        "raw_name": "Cathode Current (Iz)",
-        "symbol": "Iz",
-        "min": 0.25,
-        "typ": null,
-        "max": 120,
-        "unit": "mA",
-        "conditions": "Recommended Operating Conditions",
-        "device": null,
-        "temp_range": null
+        "parameter": "Minimum Operating Current",
+        "raw_name": "Minimum Operating Current",
+        "symbol": "IZ(min)",
+        "min": null,
+        "typ": 100,
+        "max": 250,
+        "unit": "µA",
+        "conditions": "VZ = VREF (test circuit 1)",
+        "device": "AMS3431C",
+        "temp_range": "25C"
       }
     ],
-    "pin_definitions": []
+    "pin_definitions": [
+      {
+        "pin_number": "1",
+        "pin_name": "CATHODE",
+        "type": "Input/Output",
+        "description": "Shunt Cathode (TO-92 and SOT-23)"
+      },
+      {
+        "pin_number": "2",
+        "pin_name": "ANODE",
+        "type": "Ground",
+        "description": "Shunt Anode (TO-92)"
+      },
+      {
+        "pin_number": "3",
+        "pin_name": "REF",
+        "type": "Input",
+        "description": "Reference Input (TO-92)"
+      },
+      {
+        "pin_number": "2",
+        "pin_name": "REF",
+        "type": "Input",
+        "description": "Reference Input (SOT-23)"
+      },
+      {
+        "pin_number": "3",
+        "pin_name": "ANODE",
+        "type": "Ground",
+        "description": "Shunt Anode (SOT-23)"
+      }
+    ]
   },
+  "pin_extraction": {
+    "logical_pins": [
+      {
+        "name": "CATHODE",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "ANALOG",
+        "description": "Shunt regulator cathode and regulated output terminal",
+        "packages": {
+          "TO-92": [
+            1
+          ],
+          "3L SOT-23": [
+            1
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "ANODE",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Shunt regulator anode and ground reference",
+        "packages": {
+          "TO-92": [
+            2
+          ],
+          "3L SOT-23": [
+            3
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "REF",
+        "direction": "INPUT",
+        "signal_type": "ANALOG",
+        "description": "Reference input for setting the output voltage",
+        "packages": {
+          "TO-92": [
+            3
+          ],
+          "3L SOT-23": [
+            2
+          ]
+        },
+        "unused_treatment": null
+      }
+    ]
+  },
+  "pin_index": {
+    "packages": {
+      "TO-92": {
+        "1": {
+          "name": "CATHODE",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Shunt regulator cathode and regulated output terminal",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "ANODE",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Shunt regulator anode and ground reference",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "REF",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Reference input for setting the output voltage",
+          "unused_treatment": null
+        }
+      },
+      "3L SOT-23": {
+        "1": {
+          "name": "CATHODE",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Shunt regulator cathode and regulated output terminal",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "ANODE",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Shunt regulator anode and ground reference",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "REF",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Reference input for setting the output voltage",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "pin_validation": [],
   "validation": [
     {
       "param": "Continuous Cathode Current",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Junction Temperature",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Storage Temperature",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Reference Voltage",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Deviation of Reference Input Voltage over Temperature",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Deviation of Reference Input Voltage over Temperature",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Ratio of Change in Reference Voltage to Cathode Voltage",
-      "rule": "monotonicity",
-      "passed": false,
-      "message": "min/typ/max not monotonic: None/-0.5/-2.7"
-    },
-    {
-      "param": "Ratio of Change in Reference Voltage to Cathode Voltage",
-      "rule": "monotonicity",
-      "passed": false,
-      "message": "min/typ/max not monotonic: None/-1.0/-2.0"
-    },
-    {
-      "param": "Reference Input Current",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Reference Input Current Deviation over Temperature",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Off State Cathode Current",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Dynamic Output Impedance",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Minimum Operating Current",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Reference Voltage",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Deviation of Reference Input Voltage over Temperature",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Deviation of Reference Input Voltage over Temperature",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Ratio of Change in Reference Voltage to Cathode Voltage",
-      "rule": "monotonicity",
-      "passed": false,
-      "message": "min/typ/max not monotonic: None/-0.5/-2.7"
-    },
-    {
-      "param": "Ratio of Change in Reference Voltage to Cathode Voltage",
-      "rule": "monotonicity",
-      "passed": false,
-      "message": "min/typ/max not monotonic: None/-1.0/-2.0"
-    },
-    {
-      "param": "Reference Input Current",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Reference Input Current Deviation over Temperature",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Off State Cathode Current",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Dynamic Output Impedance",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Minimum Operating Current",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Reference Voltage",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Deviation of Reference Input Voltage over Temperature",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Deviation of Reference Input Voltage over Temperature",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Deviation of Reference Input Voltage over Temperature",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Deviation of Reference Input Voltage over Temperature",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Deviation of Reference Input Voltage over Temperature",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Deviation of Reference Input Voltage over Temperature",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Ratio of Change in Reference Voltage to Cathode Voltage",
       "rule": "monotonicity",
-      "passed": false,
-      "message": "min/typ/max not monotonic: None/-0.5/-2.7"
+      "passed": true,
+      "message": "OK (modes: MAGNITUDE)"
     },
     {
       "param": "Ratio of Change in Reference Voltage to Cathode Voltage",
       "rule": "monotonicity",
-      "passed": false,
-      "message": "min/typ/max not monotonic: None/-1.0/-2.0"
+      "passed": true,
+      "message": "OK (modes: MAGNITUDE)"
+    },
+    {
+      "param": "Ratio of Change in Reference Voltage to Cathode Voltage",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: MAGNITUDE)"
+    },
+    {
+      "param": "Ratio of Change in Reference Voltage to Cathode Voltage",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: MAGNITUDE)"
+    },
+    {
+      "param": "Ratio of Change in Reference Voltage to Cathode Voltage",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: MAGNITUDE)"
+    },
+    {
+      "param": "Ratio of Change in Reference Voltage to Cathode Voltage",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: MAGNITUDE)"
     },
     {
       "param": "Reference Input Current",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Reference Input Current",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Reference Input Current",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Reference Input Current Deviation over Temperature",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Reference Input Current Deviation over Temperature",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Reference Input Current Deviation over Temperature",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Off State Cathode Current",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Off State Cathode Current",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Off State Cathode Current",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Dynamic Output Impedance",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Dynamic Output Impedance",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Dynamic Output Impedance",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Minimum Operating Current",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
-      "param": "Cathode Voltage",
+      "param": "Minimum Operating Current",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
-      "param": "Cathode Current",
+      "param": "Minimum Operating Current",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     }
   ],
   "physics_validation": [],
   "cross_validation": {
-    "total_extracted_values": 35,
-    "values_found_in_pdf": 35,
+    "total_extracted_values": 33,
+    "values_found_in_pdf": 33,
     "values_not_in_pdf": [],
     "value_coverage_pct": 100.0,
-    "total_params": 42,
-    "params_verified": 41,
-    "params_suspicious": 1,
-    "suspicious_params": [
-      {
-        "parameter": "Cathode Voltage",
-        "device": null,
-        "values": [
-          2.495,
-          36.0
-        ]
-      }
-    ]
+    "total_params": 40,
+    "params_verified": 40,
+    "params_suspicious": 0,
+    "suspicious_params": []
   },
   "timing": {
     "l0_classify_s": 0.014,
-    "l1_extract_s": 63.842
+    "l1a_extract_s": 36.418,
+    "l1b_pin_s": 15.313
   }
 }

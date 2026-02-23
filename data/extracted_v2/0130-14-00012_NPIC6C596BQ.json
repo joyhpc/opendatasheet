@@ -41,7 +41,7 @@
       "text_length": 1244,
       "category": "pin",
       "matched_patterns": [
-        "(?i)pin\\s+(description|configuration|function|assignment|definition)"
+        "(?i)pin\\s+(description|configuration|function|assignment|definition|connection|diagram)"
       ],
       "text_preview": "Nexperia NPIC6C596 Power logic 8-bit shift register; open-drain outputs 6.  Pinning information 6.1.  Pinning NPIC6C596 VCC GND DS SHCP Q0 Q7 Q1 Q6 Q2 Q5 Q3 Q4 MR STCP OE Q7S aaa-003484 1 2 3 4 5 6 7 "
     },
@@ -149,7 +149,7 @@
       "category": "electrical",
       "matched_patterns": [
         "(?i)recommended\\s+operating\\s+conditions?",
-        "(?i)pin\\s+(description|configuration|function|assignment|definition)",
+        "(?i)pin\\s+(description|configuration|function|assignment|definition|connection|diagram)",
         "(?i)ordering\\s+information"
       ],
       "text_preview": "Nexperia NPIC6C596 Power logic 8-bit shift register; open-drain outputs Contents 1.  General description......................................................1 2.  Features and benefits..............."
@@ -159,7 +159,7 @@
     "component": {
       "mpn": "NPIC6C596",
       "manufacturer": "Nexperia",
-      "category": "Other",
+      "category": "Logic",
       "description": "Power logic 8-bit shift register; open-drain outputs"
     },
     "absolute_maximum_ratings": [
@@ -261,7 +261,7 @@
         "typ": null,
         "max": 200,
         "unit": "mA",
-        "conditions": "VDS = 15 V; starting junction temperature (Tj) = 25 °C; L = 1.5 H; avalanche current (IAL) = 200 mA"
+        "conditions": "see Fig. 9"
       },
       {
         "parameter": "storage temperature",
@@ -391,7 +391,7 @@
         "typ": null,
         "max": null,
         "unit": "V",
-        "conditions": "VCC = 4.5 V to 5.5 V; min = 0.85 * VCC",
+        "conditions": "VCC = 4.5 V to 5.5 V; min value is 0.85*VCC",
         "device": "NPIC6C596",
         "temp_range": "25C"
       },
@@ -403,7 +403,7 @@
         "typ": null,
         "max": null,
         "unit": "V",
-        "conditions": "VCC = 4.5 V to 5.5 V; max = 0.15 * VCC",
+        "conditions": "VCC = 4.5 V to 5.5 V; max value is 0.15*VCC",
         "device": "NPIC6C596",
         "temp_range": "25C"
       },
@@ -549,7 +549,7 @@
         "unit": "mA",
         "conditions": "VDS = 0.5 V; Tamb = 85 °C; Iout = ID",
         "device": "NPIC6C596",
-        "temp_range": null
+        "temp_range": "25C"
       },
       {
         "parameter": "drain cut-off current",
@@ -675,18 +675,676 @@
       }
     ]
   },
+  "pin_extraction": {
+    "logical_pins": [
+      {
+        "name": "VCC",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "supply voltage",
+        "packages": {
+          "SO16": [
+            1
+          ],
+          "TSSOP16": [
+            1
+          ],
+          "DHVQFN16": [
+            1
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "DS",
+        "direction": "INPUT",
+        "signal_type": "DIGITAL",
+        "description": "serial data input",
+        "packages": {
+          "SO16": [
+            2
+          ],
+          "TSSOP16": [
+            2
+          ],
+          "DHVQFN16": [
+            2
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "Q0",
+        "direction": "OUTPUT",
+        "signal_type": "DIGITAL",
+        "description": "parallel data output (open-drain)",
+        "packages": {
+          "SO16": [
+            3
+          ],
+          "TSSOP16": [
+            3
+          ],
+          "DHVQFN16": [
+            3
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "Q1",
+        "direction": "OUTPUT",
+        "signal_type": "DIGITAL",
+        "description": "parallel data output (open-drain)",
+        "packages": {
+          "SO16": [
+            4
+          ],
+          "TSSOP16": [
+            4
+          ],
+          "DHVQFN16": [
+            4
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "Q2",
+        "direction": "OUTPUT",
+        "signal_type": "DIGITAL",
+        "description": "parallel data output (open-drain)",
+        "packages": {
+          "SO16": [
+            5
+          ],
+          "TSSOP16": [
+            5
+          ],
+          "DHVQFN16": [
+            5
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "Q3",
+        "direction": "OUTPUT",
+        "signal_type": "DIGITAL",
+        "description": "parallel data output (open-drain)",
+        "packages": {
+          "SO16": [
+            6
+          ],
+          "TSSOP16": [
+            6
+          ],
+          "DHVQFN16": [
+            6
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "MR",
+        "direction": "INPUT",
+        "signal_type": "DIGITAL",
+        "description": "master reset (active LOW)",
+        "packages": {
+          "SO16": [
+            7
+          ],
+          "TSSOP16": [
+            7
+          ],
+          "DHVQFN16": [
+            7
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "OE",
+        "direction": "INPUT",
+        "signal_type": "DIGITAL",
+        "description": "output enable input (active LOW)",
+        "packages": {
+          "SO16": [
+            8
+          ],
+          "TSSOP16": [
+            8
+          ],
+          "DHVQFN16": [
+            8
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "Q7S",
+        "direction": "OUTPUT",
+        "signal_type": "DIGITAL",
+        "description": "serial data output",
+        "packages": {
+          "SO16": [
+            9
+          ],
+          "TSSOP16": [
+            9
+          ],
+          "DHVQFN16": [
+            9
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "STCP",
+        "direction": "INPUT",
+        "signal_type": "DIGITAL",
+        "description": "storage register clock input",
+        "packages": {
+          "SO16": [
+            10
+          ],
+          "TSSOP16": [
+            10
+          ],
+          "DHVQFN16": [
+            10
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "Q4",
+        "direction": "OUTPUT",
+        "signal_type": "DIGITAL",
+        "description": "parallel data output (open-drain)",
+        "packages": {
+          "SO16": [
+            11
+          ],
+          "TSSOP16": [
+            11
+          ],
+          "DHVQFN16": [
+            11
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "Q5",
+        "direction": "OUTPUT",
+        "signal_type": "DIGITAL",
+        "description": "parallel data output (open-drain)",
+        "packages": {
+          "SO16": [
+            12
+          ],
+          "TSSOP16": [
+            12
+          ],
+          "DHVQFN16": [
+            12
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "Q6",
+        "direction": "OUTPUT",
+        "signal_type": "DIGITAL",
+        "description": "parallel data output (open-drain)",
+        "packages": {
+          "SO16": [
+            13
+          ],
+          "TSSOP16": [
+            13
+          ],
+          "DHVQFN16": [
+            13
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "Q7",
+        "direction": "OUTPUT",
+        "signal_type": "DIGITAL",
+        "description": "parallel data output (open-drain)",
+        "packages": {
+          "SO16": [
+            14
+          ],
+          "TSSOP16": [
+            14
+          ],
+          "DHVQFN16": [
+            14
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "SHCP",
+        "direction": "INPUT",
+        "signal_type": "DIGITAL",
+        "description": "shift register clock input",
+        "packages": {
+          "SO16": [
+            15
+          ],
+          "TSSOP16": [
+            15
+          ],
+          "DHVQFN16": [
+            15
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "GND",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "ground (0 V)",
+        "packages": {
+          "SO16": [
+            16
+          ],
+          "TSSOP16": [
+            16
+          ],
+          "DHVQFN16": [
+            16
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "EP",
+        "direction": "PASSIVE",
+        "signal_type": "POWER",
+        "description": "Exposed die pad; can be connected to GND or left floating",
+        "packages": {
+          "DHVQFN16": [
+            "EP"
+          ]
+        },
+        "unused_treatment": "FLOAT"
+      }
+    ]
+  },
+  "pin_index": {
+    "packages": {
+      "SO16": {
+        "1": {
+          "name": "VCC",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "supply voltage",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "DS",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "serial data input",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "Q0",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "parallel data output (open-drain)",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "Q1",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "parallel data output (open-drain)",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "Q2",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "parallel data output (open-drain)",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "Q3",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "parallel data output (open-drain)",
+          "unused_treatment": null
+        },
+        "7": {
+          "name": "MR",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "master reset (active LOW)",
+          "unused_treatment": null
+        },
+        "8": {
+          "name": "OE",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "output enable input (active LOW)",
+          "unused_treatment": null
+        },
+        "9": {
+          "name": "Q7S",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "serial data output",
+          "unused_treatment": null
+        },
+        "10": {
+          "name": "STCP",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "storage register clock input",
+          "unused_treatment": null
+        },
+        "11": {
+          "name": "Q4",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "parallel data output (open-drain)",
+          "unused_treatment": null
+        },
+        "12": {
+          "name": "Q5",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "parallel data output (open-drain)",
+          "unused_treatment": null
+        },
+        "13": {
+          "name": "Q6",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "parallel data output (open-drain)",
+          "unused_treatment": null
+        },
+        "14": {
+          "name": "Q7",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "parallel data output (open-drain)",
+          "unused_treatment": null
+        },
+        "15": {
+          "name": "SHCP",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "shift register clock input",
+          "unused_treatment": null
+        },
+        "16": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "ground (0 V)",
+          "unused_treatment": null
+        }
+      },
+      "TSSOP16": {
+        "1": {
+          "name": "VCC",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "supply voltage",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "DS",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "serial data input",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "Q0",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "parallel data output (open-drain)",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "Q1",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "parallel data output (open-drain)",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "Q2",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "parallel data output (open-drain)",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "Q3",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "parallel data output (open-drain)",
+          "unused_treatment": null
+        },
+        "7": {
+          "name": "MR",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "master reset (active LOW)",
+          "unused_treatment": null
+        },
+        "8": {
+          "name": "OE",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "output enable input (active LOW)",
+          "unused_treatment": null
+        },
+        "9": {
+          "name": "Q7S",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "serial data output",
+          "unused_treatment": null
+        },
+        "10": {
+          "name": "STCP",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "storage register clock input",
+          "unused_treatment": null
+        },
+        "11": {
+          "name": "Q4",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "parallel data output (open-drain)",
+          "unused_treatment": null
+        },
+        "12": {
+          "name": "Q5",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "parallel data output (open-drain)",
+          "unused_treatment": null
+        },
+        "13": {
+          "name": "Q6",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "parallel data output (open-drain)",
+          "unused_treatment": null
+        },
+        "14": {
+          "name": "Q7",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "parallel data output (open-drain)",
+          "unused_treatment": null
+        },
+        "15": {
+          "name": "SHCP",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "shift register clock input",
+          "unused_treatment": null
+        },
+        "16": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "ground (0 V)",
+          "unused_treatment": null
+        }
+      },
+      "DHVQFN16": {
+        "1": {
+          "name": "VCC",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "supply voltage",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "DS",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "serial data input",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "Q0",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "parallel data output (open-drain)",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "Q1",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "parallel data output (open-drain)",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "Q2",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "parallel data output (open-drain)",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "Q3",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "parallel data output (open-drain)",
+          "unused_treatment": null
+        },
+        "7": {
+          "name": "MR",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "master reset (active LOW)",
+          "unused_treatment": null
+        },
+        "8": {
+          "name": "OE",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "output enable input (active LOW)",
+          "unused_treatment": null
+        },
+        "9": {
+          "name": "Q7S",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "serial data output",
+          "unused_treatment": null
+        },
+        "10": {
+          "name": "STCP",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "storage register clock input",
+          "unused_treatment": null
+        },
+        "11": {
+          "name": "Q4",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "parallel data output (open-drain)",
+          "unused_treatment": null
+        },
+        "12": {
+          "name": "Q5",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "parallel data output (open-drain)",
+          "unused_treatment": null
+        },
+        "13": {
+          "name": "Q6",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "parallel data output (open-drain)",
+          "unused_treatment": null
+        },
+        "14": {
+          "name": "Q7",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "parallel data output (open-drain)",
+          "unused_treatment": null
+        },
+        "15": {
+          "name": "SHCP",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "shift register clock input",
+          "unused_treatment": null
+        },
+        "16": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "ground (0 V)",
+          "unused_treatment": null
+        },
+        "EP": {
+          "name": "EP",
+          "direction": "PASSIVE",
+          "signal_type": "POWER",
+          "description": "Exposed die pad; can be connected to GND or left floating",
+          "unused_treatment": "FLOAT"
+        }
+      }
+    }
+  },
+  "pin_validation": [],
   "validation": [
     {
       "param": "supply voltage",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "input voltage",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "avalanche energy",
@@ -698,99 +1356,99 @@
       "param": "storage temperature",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "supply voltage",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "input voltage",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "ambient temperature",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "HIGH-level output voltage",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "HIGH-level output voltage",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "LOW-level output voltage",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "LOW-level output voltage",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "drain-source breakdown voltage",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "source-drain voltage",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "supply current",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "supply current",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "supply current",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "drain cut-off current",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "drain cut-off current",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     }
   ],
   "physics_validation": [
     {
       "param": "drain cut-off current (NPIC6C596)",
-      "rule": "temp_envelope_max",
+      "rule": "temp_envelope",
       "passed": true,
-      "message": "OK"
+      "message": "OK (mode: ALGEBRAIC)"
     }
   ],
   "cross_validation": {
@@ -804,7 +1462,8 @@
     "suspicious_params": []
   },
   "timing": {
-    "l0_classify_s": 0.066,
-    "l1_extract_s": 54.509
+    "l0_classify_s": 0.069,
+    "l1a_extract_s": 47.369,
+    "l1b_pin_s": 43.507
   }
 }

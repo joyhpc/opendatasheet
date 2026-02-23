@@ -18,7 +18,7 @@
       "text_length": 2341,
       "category": "pin",
       "matched_patterns": [
-        "(?i)pin\\s+(description|configuration|function|assignment|definition)",
+        "(?i)pin\\s+(description|configuration|function|assignment|definition|connection|diagram)",
         "(?i)ordering\\s+information",
         "(?i)marking\\s+information"
       ],
@@ -29,7 +29,7 @@
       "text_length": 1049,
       "category": "pin",
       "matched_patterns": [
-        "(?i)pin\\s+(description|configuration|function|assignment|definition)",
+        "(?i)pin\\s+(description|configuration|function|assignment|definition|connection|diagram)",
         "(?i)pin\\s+name"
       ],
       "text_preview": "RT9166/A 2 DS9166/A-24   January  2016 www.richtek.com © Copyright   2016 Richtek Technology Corporation. All rights reserved.                          is a registered trademark of Richtek Technology "
@@ -146,7 +146,7 @@
   "extraction": {
     "component": {
       "mpn": "RT9166/A",
-      "manufacturer": "Richtek",
+      "manufacturer": "RICHTEK",
       "category": "LDO",
       "description": "300/600mA, Ultra-Fast Transient Response LDO Regulator"
     },
@@ -154,7 +154,7 @@
       {
         "parameter": "Supply Input Voltage",
         "raw_name": "Supply Input Voltage",
-        "symbol": null,
+        "symbol": "VIN",
         "min": null,
         "typ": null,
         "max": 6.5,
@@ -216,8 +216,8 @@
         "raw_name": "Package Thermal Resistance, SOT-23-3, θJA",
         "symbol": "θJA",
         "min": null,
-        "typ": 250,
-        "max": null,
+        "typ": null,
+        "max": 250,
         "unit": "°C/W",
         "conditions": null
       },
@@ -226,8 +226,8 @@
         "raw_name": "Package Thermal Resistance, SOT-89, θJA",
         "symbol": "θJA",
         "min": null,
-        "typ": 175,
-        "max": null,
+        "typ": null,
+        "max": 175,
         "unit": "°C/W",
         "conditions": null
       },
@@ -236,8 +236,8 @@
         "raw_name": "Package Thermal Resistance, SOT-89, θJC",
         "symbol": "θJC",
         "min": null,
-        "typ": 58,
-        "max": null,
+        "typ": null,
+        "max": 58,
         "unit": "°C/W",
         "conditions": null
       },
@@ -246,8 +246,8 @@
         "raw_name": "Package Thermal Resistance, SOT-223, θJA",
         "symbol": "θJA",
         "min": null,
-        "typ": 135,
-        "max": null,
+        "typ": null,
+        "max": 135,
         "unit": "°C/W",
         "conditions": null
       },
@@ -256,8 +256,8 @@
         "raw_name": "Package Thermal Resistance, SOT-223, θJC",
         "symbol": "θJC",
         "min": null,
-        "typ": 15,
-        "max": null,
+        "typ": null,
+        "max": 15,
         "unit": "°C/W",
         "conditions": null
       },
@@ -266,8 +266,8 @@
         "raw_name": "Package Thermal Resistance, TO-92, θJA",
         "symbol": "θJA",
         "min": null,
-        "typ": 160,
-        "max": null,
+        "typ": null,
+        "max": 160,
         "unit": "°C/W",
         "conditions": null
       },
@@ -276,8 +276,8 @@
         "raw_name": "Package Thermal Resistance, TO-92, θJC",
         "symbol": "θJC",
         "min": null,
-        "typ": 40,
-        "max": null,
+        "typ": null,
+        "max": 40,
         "unit": "°C/W",
         "conditions": null
       },
@@ -286,8 +286,8 @@
         "raw_name": "Package Thermal Resistance, TO-252, θJA",
         "symbol": "θJA",
         "min": null,
-        "typ": 68,
-        "max": null,
+        "typ": null,
+        "max": 68,
         "unit": "°C/W",
         "conditions": null
       },
@@ -296,8 +296,8 @@
         "raw_name": "Package Thermal Resistance, TO-252, θJC",
         "symbol": "θJC",
         "min": null,
-        "typ": 7,
-        "max": null,
+        "typ": null,
+        "max": 7,
         "unit": "°C/W",
         "conditions": null
       },
@@ -314,7 +314,7 @@
       {
         "parameter": "Junction Temperature",
         "raw_name": "Junction Temperature",
-        "symbol": null,
+        "symbol": "TJ",
         "min": null,
         "typ": null,
         "max": 150,
@@ -324,7 +324,7 @@
       {
         "parameter": "Storage Temperature Range",
         "raw_name": "Storage Temperature Range",
-        "symbol": null,
+        "symbol": "Tstg",
         "min": -65,
         "typ": null,
         "max": 150,
@@ -336,49 +336,13 @@
         "raw_name": "ESD Susceptibility (Note 3) HBM (Human Body Model)",
         "symbol": null,
         "min": null,
-        "typ": 2000,
-        "max": null,
+        "typ": null,
+        "max": 2000,
         "unit": "V",
         "conditions": null
       }
     ],
     "electrical_characteristics": [
-      {
-        "parameter": "Supply Input Voltage",
-        "raw_name": "Supply Input Voltage",
-        "symbol": null,
-        "min": 2.8,
-        "typ": null,
-        "max": 5.5,
-        "unit": "V",
-        "conditions": null,
-        "device": null,
-        "temp_range": "full"
-      },
-      {
-        "parameter": "Junction Temperature Range",
-        "raw_name": "Junction Temperature Range",
-        "symbol": null,
-        "min": -40,
-        "typ": null,
-        "max": 125,
-        "unit": "°C",
-        "conditions": null,
-        "device": null,
-        "temp_range": "full"
-      },
-      {
-        "parameter": "Ambient Temperature Range",
-        "raw_name": "Ambient Temperature Range",
-        "symbol": null,
-        "min": -40,
-        "typ": null,
-        "max": 85,
-        "unit": "°C",
-        "conditions": null,
-        "device": null,
-        "temp_range": "full"
-      },
       {
         "parameter": "Output Voltage Accuracy",
         "raw_name": "Output Voltage Accuracy",
@@ -388,7 +352,7 @@
         "max": 3,
         "unit": "%",
         "conditions": "IOUT = 1mA",
-        "device": null,
+        "device": "RT9166/A",
         "temp_range": "25C"
       },
       {
@@ -424,7 +388,7 @@
         "max": 300,
         "unit": "µA",
         "conditions": "IOUT = 0mA",
-        "device": null,
+        "device": "RT9166/A",
         "temp_range": "25C"
       },
       {
@@ -460,7 +424,7 @@
         "max": null,
         "unit": "%/V",
         "conditions": "VIN = (VOUT + 0.3V) to 5.5V, IOUT = 1mA",
-        "device": null,
+        "device": "RT9166/A",
         "temp_range": "25C"
       },
       {
@@ -496,7 +460,7 @@
         "max": null,
         "unit": "dB",
         "conditions": "f = 1kHz, COUT = 1µF",
-        "device": null,
+        "device": "RT9166/A",
         "temp_range": "25C"
       },
       {
@@ -508,7 +472,7 @@
         "max": null,
         "unit": "°C",
         "conditions": null,
-        "device": null,
+        "device": "RT9166/A",
         "temp_range": "25C"
       },
       {
@@ -520,115 +484,387 @@
         "max": null,
         "unit": "°C",
         "conditions": null,
-        "device": null,
+        "device": "RT9166/A",
         "temp_range": "25C"
       }
     ],
     "pin_definitions": [
       {
-        "pin_number": "1",
+        "pin_number": "Multiple",
         "pin_name": "VIN",
-        "type": "Input",
+        "type": "Power",
         "description": "Supply Input."
       },
       {
-        "pin_number": "2",
+        "pin_number": "Multiple",
+        "pin_name": "VOUT",
+        "type": "Power",
+        "description": "Regulator Output."
+      },
+      {
+        "pin_number": "Multiple",
         "pin_name": "GND",
         "type": "Ground",
         "description": "Common Ground."
-      },
-      {
-        "pin_number": "3",
-        "pin_name": "VOUT",
-        "type": "Output",
-        "description": "Regulator Output."
       }
     ]
   },
+  "pin_extraction": {
+    "logical_pins": [
+      {
+        "name": "VIN",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Supply Input.",
+        "packages": {
+          "SOT-23-3 (L-Type)": [
+            3
+          ],
+          "TO-92": [
+            1
+          ],
+          "SOT-89": [
+            3
+          ],
+          "SOT-89 (L-Type)": [
+            2
+          ],
+          "SOT-223": [
+            3
+          ],
+          "SOT-223 (L-Type)": [
+            2
+          ],
+          "TO-252": [
+            3
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "VOUT",
+        "direction": "POWER_OUT",
+        "signal_type": "POWER",
+        "description": "Regulator Output.",
+        "packages": {
+          "SOT-23-3 (L-Type)": [
+            2
+          ],
+          "TO-92": [
+            3
+          ],
+          "SOT-89": [
+            1
+          ],
+          "SOT-89 (L-Type)": [
+            3
+          ],
+          "SOT-223": [
+            1
+          ],
+          "SOT-223 (L-Type)": [
+            3
+          ],
+          "TO-252": [
+            1
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "GND",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Common Ground.",
+        "packages": {
+          "SOT-23-3 (L-Type)": [
+            1
+          ],
+          "TO-92": [
+            2
+          ],
+          "SOT-89": [
+            2,
+            "TAB"
+          ],
+          "SOT-89 (L-Type)": [
+            1,
+            "TAB"
+          ],
+          "SOT-223": [
+            2,
+            "TAB"
+          ],
+          "SOT-223 (L-Type)": [
+            1,
+            "TAB"
+          ],
+          "TO-252": [
+            2,
+            "TAB"
+          ]
+        },
+        "unused_treatment": null
+      }
+    ]
+  },
+  "pin_index": {
+    "packages": {
+      "SOT-23-3 (L-Type)": {
+        "3": {
+          "name": "VIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Supply Input.",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "VOUT",
+          "direction": "POWER_OUT",
+          "signal_type": "POWER",
+          "description": "Regulator Output.",
+          "unused_treatment": null
+        },
+        "1": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Common Ground.",
+          "unused_treatment": null
+        }
+      },
+      "TO-92": {
+        "1": {
+          "name": "VIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Supply Input.",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "VOUT",
+          "direction": "POWER_OUT",
+          "signal_type": "POWER",
+          "description": "Regulator Output.",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Common Ground.",
+          "unused_treatment": null
+        }
+      },
+      "SOT-89": {
+        "3": {
+          "name": "VIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Supply Input.",
+          "unused_treatment": null
+        },
+        "1": {
+          "name": "VOUT",
+          "direction": "POWER_OUT",
+          "signal_type": "POWER",
+          "description": "Regulator Output.",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Common Ground.",
+          "unused_treatment": null
+        },
+        "TAB": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Common Ground.",
+          "unused_treatment": null
+        }
+      },
+      "SOT-89 (L-Type)": {
+        "2": {
+          "name": "VIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Supply Input.",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "VOUT",
+          "direction": "POWER_OUT",
+          "signal_type": "POWER",
+          "description": "Regulator Output.",
+          "unused_treatment": null
+        },
+        "1": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Common Ground.",
+          "unused_treatment": null
+        },
+        "TAB": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Common Ground.",
+          "unused_treatment": null
+        }
+      },
+      "SOT-223": {
+        "3": {
+          "name": "VIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Supply Input.",
+          "unused_treatment": null
+        },
+        "1": {
+          "name": "VOUT",
+          "direction": "POWER_OUT",
+          "signal_type": "POWER",
+          "description": "Regulator Output.",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Common Ground.",
+          "unused_treatment": null
+        },
+        "TAB": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Common Ground.",
+          "unused_treatment": null
+        }
+      },
+      "SOT-223 (L-Type)": {
+        "2": {
+          "name": "VIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Supply Input.",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "VOUT",
+          "direction": "POWER_OUT",
+          "signal_type": "POWER",
+          "description": "Regulator Output.",
+          "unused_treatment": null
+        },
+        "1": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Common Ground.",
+          "unused_treatment": null
+        },
+        "TAB": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Common Ground.",
+          "unused_treatment": null
+        }
+      },
+      "TO-252": {
+        "3": {
+          "name": "VIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Supply Input.",
+          "unused_treatment": null
+        },
+        "1": {
+          "name": "VOUT",
+          "direction": "POWER_OUT",
+          "signal_type": "POWER",
+          "description": "Regulator Output.",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Common Ground.",
+          "unused_treatment": null
+        },
+        "TAB": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Common Ground.",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "pin_validation": [],
   "validation": [
     {
       "param": "Storage Temperature Range",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Supply Input Voltage",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Junction Temperature Range",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Ambient Temperature Range",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Output Voltage Accuracy",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Quiescent Current",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Load Regulation",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Load Regulation",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     }
   ],
+  "physics_validation": [],
   "cross_validation": {
-    "total_extracted_values": 37,
-    "values_found_in_pdf": 32,
+    "total_extracted_values": 32,
+    "values_found_in_pdf": 22,
     "values_not_in_pdf": [
-      -65.0,
       -55.0,
-      -40.0,
       -1.0,
+      6.5,
+      15.0,
+      30.0,
+      40.0,
+      58.0,
+      170.0,
+      260.0,
       2000.0
     ],
-    "value_coverage_pct": 86.5,
-    "total_params": 34,
-    "params_verified": 28,
+    "value_coverage_pct": 68.8,
+    "total_params": 31,
+    "params_verified": 25,
     "params_suspicious": 6,
     "suspicious_params": [
       {
-        "parameter": "Junction Temperature Range",
-        "device": null,
-        "values": [
-          -40.0,
-          125.0
-        ]
-      },
-      {
-        "parameter": "Ambient Temperature Range",
-        "device": null,
-        "values": [
-          -40.0,
-          85.0
-        ]
-      },
-      {
         "parameter": "Output Voltage Accuracy",
-        "device": null,
+        "device": "RT9166/A",
         "values": [
           -1.0,
           3.0
@@ -636,17 +872,30 @@
       },
       {
         "parameter": "Power Supply Rejection Rate",
-        "device": null,
+        "device": "RT9166/A",
         "values": [
           -55.0
         ]
       },
       {
-        "parameter": "Storage Temperature Range",
+        "parameter": "Supply Input Voltage",
         "device": "",
         "values": [
-          -65.0,
-          150.0
+          6.5
+        ]
+      },
+      {
+        "parameter": "Package Thermal Resistance (SOT-89, θJC)",
+        "device": "",
+        "values": [
+          58.0
+        ]
+      },
+      {
+        "parameter": "Lead Temperature (Soldering, 10 sec.)",
+        "device": "",
+        "values": [
+          260.0
         ]
       },
       {
@@ -659,7 +908,8 @@
     ]
   },
   "timing": {
-    "l0_classify_s": 0.04,
-    "l1_extract_s": 44.637
+    "l0_classify_s": 0.042,
+    "l1a_extract_s": 27.944,
+    "l1b_pin_s": 20.761
   }
 }

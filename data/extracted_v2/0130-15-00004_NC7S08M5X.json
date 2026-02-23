@@ -26,7 +26,7 @@
       "category": "electrical",
       "matched_patterns": [
         "(?i)absolute\\s+maximum\\s+ratings?",
-        "(?i)pin\\s+(description|configuration|function|assignment|definition)",
+        "(?i)pin\\s+(description|configuration|function|assignment|definition|connection|diagram)",
         "(?i)pin\\s+name"
       ],
       "text_preview": "NC7S08 www.onsemi.com 2 Pin Configurations A B VCC GND Y 1 2 3 5 4 Figure 2. SC−88A and SC−74A (Top View) A  1 6  VCC B  2 5  NC GND  3 4  Y Figure 3. MicroPak (Top Through View) PIN DESCRIPTION Pin N"
@@ -77,7 +77,8 @@
       "text_length": 2975,
       "category": "pin",
       "matched_patterns": [
-        "(?i)pin\\s+(description|configuration|function|assignment|definition)"
+        "(?i)pin\\s+(description|configuration|function|assignment|definition|connection|diagram)",
+        "(?i)pin[-\\s]?out"
       ],
       "text_preview": "NOTES: 1. DIMENSIONING AND TOLERANCING PER ANSI Y14.5M, 1982. 2. CONTROLLING DIMENSION: INCH. 3. 419A−01 OBSOLETE. NEW STANDARD 419A−02. 4. DIMENSIONS A AND B DO NOT INCLUDE MOLD FLASH, PROTRUSIONS, O"
     },
@@ -108,7 +109,7 @@
     "absolute_maximum_ratings": [
       {
         "parameter": "Supply Voltage",
-        "raw_name": "VCC",
+        "raw_name": "Supply Voltage",
         "symbol": "VCC",
         "min": -0.5,
         "typ": null,
@@ -118,7 +119,7 @@
       },
       {
         "parameter": "DC Input Diode Current",
-        "raw_name": "IIK",
+        "raw_name": "DC Input Diode Current",
         "symbol": "IIK",
         "min": null,
         "typ": null,
@@ -128,7 +129,7 @@
       },
       {
         "parameter": "DC Input Diode Current",
-        "raw_name": "IIK",
+        "raw_name": "DC Input Diode Current",
         "symbol": "IIK",
         "min": null,
         "typ": null,
@@ -138,17 +139,17 @@
       },
       {
         "parameter": "DC Input Voltage",
-        "raw_name": "VIN",
+        "raw_name": "DC Input Voltage",
         "symbol": "VIN",
         "min": -0.5,
         "typ": null,
         "max": null,
         "unit": "V",
-        "conditions": "Max is VCC + 0.5 V"
+        "conditions": "Max is VCC + 0.5V"
       },
       {
         "parameter": "DC Output Diode Current",
-        "raw_name": "IOK",
+        "raw_name": "DC Output Diode Current",
         "symbol": "IOK",
         "min": null,
         "typ": null,
@@ -158,7 +159,7 @@
       },
       {
         "parameter": "DC Output Diode Current",
-        "raw_name": "IOK",
+        "raw_name": "DC Output Diode Current",
         "symbol": "IOK",
         "min": null,
         "typ": null,
@@ -168,37 +169,37 @@
       },
       {
         "parameter": "DC Output Voltage",
-        "raw_name": "VOUT",
+        "raw_name": "DC Output Voltage",
         "symbol": "VOUT",
         "min": -0.5,
         "typ": null,
         "max": null,
         "unit": "V",
-        "conditions": "Max is VCC + 0.5 V"
+        "conditions": "Max is VCC + 0.5V"
       },
       {
         "parameter": "DC Output Source or Sink Current",
-        "raw_name": "IOUT",
+        "raw_name": "DC Output Source or Sink Current",
         "symbol": "IOUT",
-        "min": null,
+        "min": -12.5,
         "typ": null,
         "max": 12.5,
         "unit": "mA",
-        "conditions": "+/- 12.5 mA"
+        "conditions": null
       },
       {
         "parameter": "DC VCC or Ground Current per Output Pin",
-        "raw_name": "ICC or IGND",
+        "raw_name": "DC VCC or Ground Current per Output Pin",
         "symbol": "ICC or IGND",
-        "min": null,
+        "min": -25,
         "typ": null,
         "max": 25,
         "unit": "mA",
-        "conditions": "+/- 25 mA"
+        "conditions": null
       },
       {
         "parameter": "Storage Temperature",
-        "raw_name": "TSTG",
+        "raw_name": "Storage Temperature",
         "symbol": "TSTG",
         "min": -65,
         "typ": null,
@@ -208,7 +209,7 @@
       },
       {
         "parameter": "Junction Temperature",
-        "raw_name": "TJ",
+        "raw_name": "Junction Temperature",
         "symbol": "TJ",
         "min": null,
         "typ": null,
@@ -218,7 +219,7 @@
       },
       {
         "parameter": "Lead Temperature",
-        "raw_name": "TL",
+        "raw_name": "Lead Temperature",
         "symbol": "TL",
         "min": null,
         "typ": null,
@@ -228,7 +229,7 @@
       },
       {
         "parameter": "Power Dissipation in Still Air",
-        "raw_name": "PD",
+        "raw_name": "Power Dissipation in Still Air",
         "symbol": "PD",
         "min": null,
         "typ": null,
@@ -238,7 +239,7 @@
       },
       {
         "parameter": "Power Dissipation in Still Air",
-        "raw_name": "PD",
+        "raw_name": "Power Dissipation in Still Air",
         "symbol": "PD",
         "min": null,
         "typ": null,
@@ -248,7 +249,7 @@
       },
       {
         "parameter": "Power Dissipation in Still Air",
-        "raw_name": "PD",
+        "raw_name": "Power Dissipation in Still Air",
         "symbol": "PD",
         "min": null,
         "typ": null,
@@ -260,7 +261,7 @@
     "electrical_characteristics": [
       {
         "parameter": "HIGH Level Input Voltage",
-        "raw_name": "VIH",
+        "raw_name": "HIGH Level Input Voltage",
         "symbol": "VIH",
         "min": 1.5,
         "typ": null,
@@ -272,7 +273,7 @@
       },
       {
         "parameter": "HIGH Level Input Voltage",
-        "raw_name": "VIH",
+        "raw_name": "HIGH Level Input Voltage",
         "symbol": "VIH",
         "min": 1.5,
         "typ": null,
@@ -284,7 +285,7 @@
       },
       {
         "parameter": "HIGH Level Input Voltage",
-        "raw_name": "VIH",
+        "raw_name": "HIGH Level Input Voltage",
         "symbol": "VIH",
         "min": null,
         "typ": null,
@@ -296,7 +297,7 @@
       },
       {
         "parameter": "HIGH Level Input Voltage",
-        "raw_name": "VIH",
+        "raw_name": "HIGH Level Input Voltage",
         "symbol": "VIH",
         "min": null,
         "typ": null,
@@ -308,7 +309,7 @@
       },
       {
         "parameter": "LOW Level Input Voltage",
-        "raw_name": "VIL",
+        "raw_name": "LOW Level Input Voltage",
         "symbol": "VIL",
         "min": null,
         "typ": null,
@@ -320,7 +321,7 @@
       },
       {
         "parameter": "LOW Level Input Voltage",
-        "raw_name": "VIL",
+        "raw_name": "LOW Level Input Voltage",
         "symbol": "VIL",
         "min": null,
         "typ": null,
@@ -332,7 +333,7 @@
       },
       {
         "parameter": "LOW Level Input Voltage",
-        "raw_name": "VIL",
+        "raw_name": "LOW Level Input Voltage",
         "symbol": "VIL",
         "min": null,
         "typ": null,
@@ -344,7 +345,7 @@
       },
       {
         "parameter": "LOW Level Input Voltage",
-        "raw_name": "VIL",
+        "raw_name": "LOW Level Input Voltage",
         "symbol": "VIL",
         "min": null,
         "typ": null,
@@ -356,7 +357,7 @@
       },
       {
         "parameter": "HIGH Level Output Voltage",
-        "raw_name": "VOH",
+        "raw_name": "HIGH Level Output Voltage",
         "symbol": "VOH",
         "min": 1.9,
         "typ": 2.0,
@@ -368,7 +369,7 @@
       },
       {
         "parameter": "HIGH Level Output Voltage",
-        "raw_name": "VOH",
+        "raw_name": "HIGH Level Output Voltage",
         "symbol": "VOH",
         "min": 1.9,
         "typ": null,
@@ -380,79 +381,7 @@
       },
       {
         "parameter": "HIGH Level Output Voltage",
-        "raw_name": "VOH",
-        "symbol": "VOH",
-        "min": 2.9,
-        "typ": 3.0,
-        "max": null,
-        "unit": "V",
-        "conditions": "VCC = 3.0V, IOH = -20 uA, VIN = VIH or VIL",
-        "device": "NC7S08",
-        "temp_range": "25C"
-      },
-      {
-        "parameter": "HIGH Level Output Voltage",
-        "raw_name": "VOH",
-        "symbol": "VOH",
-        "min": 2.9,
-        "typ": null,
-        "max": null,
-        "unit": "V",
-        "conditions": "VCC = 3.0V, IOH = -20 uA, VIN = VIH or VIL",
-        "device": "NC7S08",
-        "temp_range": "full"
-      },
-      {
-        "parameter": "HIGH Level Output Voltage",
-        "raw_name": "VOH",
-        "symbol": "VOH",
-        "min": 4.4,
-        "typ": 4.5,
-        "max": null,
-        "unit": "V",
-        "conditions": "VCC = 4.5V, IOH = -20 uA, VIN = VIH or VIL",
-        "device": "NC7S08",
-        "temp_range": "25C"
-      },
-      {
-        "parameter": "HIGH Level Output Voltage",
-        "raw_name": "VOH",
-        "symbol": "VOH",
-        "min": 4.4,
-        "typ": null,
-        "max": null,
-        "unit": "V",
-        "conditions": "VCC = 4.5V, IOH = -20 uA, VIN = VIH or VIL",
-        "device": "NC7S08",
-        "temp_range": "full"
-      },
-      {
-        "parameter": "HIGH Level Output Voltage",
-        "raw_name": "VOH",
-        "symbol": "VOH",
-        "min": 5.9,
-        "typ": 6.0,
-        "max": null,
-        "unit": "V",
-        "conditions": "VCC = 6.0V, IOH = -20 uA, VIN = VIH or VIL",
-        "device": "NC7S08",
-        "temp_range": "25C"
-      },
-      {
-        "parameter": "HIGH Level Output Voltage",
-        "raw_name": "VOH",
-        "symbol": "VOH",
-        "min": 5.9,
-        "typ": null,
-        "max": null,
-        "unit": "V",
-        "conditions": "VCC = 6.0V, IOH = -20 uA, VIN = VIH or VIL",
-        "device": "NC7S08",
-        "temp_range": "full"
-      },
-      {
-        "parameter": "HIGH Level Output Voltage",
-        "raw_name": "VOH",
+        "raw_name": "HIGH Level Output Voltage",
         "symbol": "VOH",
         "min": 2.68,
         "typ": 2.85,
@@ -464,7 +393,7 @@
       },
       {
         "parameter": "HIGH Level Output Voltage",
-        "raw_name": "VOH",
+        "raw_name": "HIGH Level Output Voltage",
         "symbol": "VOH",
         "min": 2.63,
         "typ": null,
@@ -475,56 +404,8 @@
         "temp_range": "full"
       },
       {
-        "parameter": "HIGH Level Output Voltage",
-        "raw_name": "VOH",
-        "symbol": "VOH",
-        "min": 4.18,
-        "typ": 4.35,
-        "max": null,
-        "unit": "V",
-        "conditions": "VCC = 4.5V, IOH = -2 mA, VIN = VIH or VIL",
-        "device": "NC7S08",
-        "temp_range": "25C"
-      },
-      {
-        "parameter": "HIGH Level Output Voltage",
-        "raw_name": "VOH",
-        "symbol": "VOH",
-        "min": 4.13,
-        "typ": null,
-        "max": null,
-        "unit": "V",
-        "conditions": "VCC = 4.5V, IOH = -2 mA, VIN = VIH or VIL",
-        "device": "NC7S08",
-        "temp_range": "full"
-      },
-      {
-        "parameter": "HIGH Level Output Voltage",
-        "raw_name": "VOH",
-        "symbol": "VOH",
-        "min": 5.68,
-        "typ": 5.85,
-        "max": null,
-        "unit": "V",
-        "conditions": "VCC = 6.0V, IOH = -2.6 mA, VIN = VIH or VIL",
-        "device": "NC7S08",
-        "temp_range": "25C"
-      },
-      {
-        "parameter": "HIGH Level Output Voltage",
-        "raw_name": "VOH",
-        "symbol": "VOH",
-        "min": 5.63,
-        "typ": null,
-        "max": null,
-        "unit": "V",
-        "conditions": "VCC = 6.0V, IOH = -2.6 mA, VIN = VIH or VIL",
-        "device": "NC7S08",
-        "temp_range": "full"
-      },
-      {
         "parameter": "LOW Level Output Voltage",
-        "raw_name": "VOL",
+        "raw_name": "LOW Level Output Voltage",
         "symbol": "VOL",
         "min": null,
         "typ": 0.0,
@@ -536,7 +417,7 @@
       },
       {
         "parameter": "LOW Level Output Voltage",
-        "raw_name": "VOL",
+        "raw_name": "LOW Level Output Voltage",
         "symbol": "VOL",
         "min": null,
         "typ": null,
@@ -548,79 +429,7 @@
       },
       {
         "parameter": "LOW Level Output Voltage",
-        "raw_name": "VOL",
-        "symbol": "VOL",
-        "min": null,
-        "typ": 0.0,
-        "max": 0.1,
-        "unit": "V",
-        "conditions": "VCC = 3.0V, IOL = 20 uA, VIN = VIH or VIL",
-        "device": "NC7S08",
-        "temp_range": "25C"
-      },
-      {
-        "parameter": "LOW Level Output Voltage",
-        "raw_name": "VOL",
-        "symbol": "VOL",
-        "min": null,
-        "typ": null,
-        "max": 0.1,
-        "unit": "V",
-        "conditions": "VCC = 3.0V, IOL = 20 uA, VIN = VIH or VIL",
-        "device": "NC7S08",
-        "temp_range": "full"
-      },
-      {
-        "parameter": "LOW Level Output Voltage",
-        "raw_name": "VOL",
-        "symbol": "VOL",
-        "min": null,
-        "typ": 0.0,
-        "max": 0.1,
-        "unit": "V",
-        "conditions": "VCC = 4.5V, IOL = 20 uA, VIN = VIH or VIL",
-        "device": "NC7S08",
-        "temp_range": "25C"
-      },
-      {
-        "parameter": "LOW Level Output Voltage",
-        "raw_name": "VOL",
-        "symbol": "VOL",
-        "min": null,
-        "typ": null,
-        "max": 0.1,
-        "unit": "V",
-        "conditions": "VCC = 4.5V, IOL = 20 uA, VIN = VIH or VIL",
-        "device": "NC7S08",
-        "temp_range": "full"
-      },
-      {
-        "parameter": "LOW Level Output Voltage",
-        "raw_name": "VOL",
-        "symbol": "VOL",
-        "min": null,
-        "typ": 0.0,
-        "max": 0.1,
-        "unit": "V",
-        "conditions": "VCC = 6.0V, IOL = 20 uA, VIN = VIH or VIL",
-        "device": "NC7S08",
-        "temp_range": "25C"
-      },
-      {
-        "parameter": "LOW Level Output Voltage",
-        "raw_name": "VOL",
-        "symbol": "VOL",
-        "min": null,
-        "typ": null,
-        "max": 0.1,
-        "unit": "V",
-        "conditions": "VCC = 6.0V, IOL = 20 uA, VIN = VIH or VIL",
-        "device": "NC7S08",
-        "temp_range": "full"
-      },
-      {
-        "parameter": "LOW Level Output Voltage",
-        "raw_name": "VOL",
+        "raw_name": "LOW Level Output Voltage",
         "symbol": "VOL",
         "min": null,
         "typ": 0.1,
@@ -632,115 +441,67 @@
       },
       {
         "parameter": "LOW Level Output Voltage",
-        "raw_name": "VOL",
+        "raw_name": "LOW Level Output Voltage",
         "symbol": "VOL",
         "min": null,
         "typ": null,
         "max": 0.33,
         "unit": "V",
         "conditions": "VCC = 3.0V, IOL = 1.3 mA, VIN = VIH or VIL",
-        "device": "NC7S08",
-        "temp_range": "full"
-      },
-      {
-        "parameter": "LOW Level Output Voltage",
-        "raw_name": "VOL",
-        "symbol": "VOL",
-        "min": null,
-        "typ": 0.1,
-        "max": 0.26,
-        "unit": "V",
-        "conditions": "VCC = 4.5V, IOL = 2 mA, VIN = VIH or VIL",
-        "device": "NC7S08",
-        "temp_range": "25C"
-      },
-      {
-        "parameter": "LOW Level Output Voltage",
-        "raw_name": "VOL",
-        "symbol": "VOL",
-        "min": null,
-        "typ": null,
-        "max": 0.33,
-        "unit": "V",
-        "conditions": "VCC = 4.5V, IOL = 2 mA, VIN = VIH or VIL",
-        "device": "NC7S08",
-        "temp_range": "full"
-      },
-      {
-        "parameter": "LOW Level Output Voltage",
-        "raw_name": "VOL",
-        "symbol": "VOL",
-        "min": null,
-        "typ": 0.1,
-        "max": 0.26,
-        "unit": "V",
-        "conditions": "VCC = 6.0V, IOL = 2.6 mA, VIN = VIH or VIL",
-        "device": "NC7S08",
-        "temp_range": "25C"
-      },
-      {
-        "parameter": "LOW Level Output Voltage",
-        "raw_name": "VOL",
-        "symbol": "VOL",
-        "min": null,
-        "typ": null,
-        "max": 0.33,
-        "unit": "V",
-        "conditions": "VCC = 6.0V, IOL = 2.6 mA, VIN = VIH or VIL",
         "device": "NC7S08",
         "temp_range": "full"
       },
       {
         "parameter": "Input Leakage Current",
-        "raw_name": "IIN",
+        "raw_name": "Input Leakage Current",
         "symbol": "IIN",
         "min": null,
         "typ": null,
         "max": 0.1,
         "unit": "uA",
-        "conditions": "VCC = 6.0V, VIN = VCC, GND",
+        "conditions": "VCC = 6.0V, VIN = VCC or GND",
         "device": "NC7S08",
         "temp_range": "25C"
       },
       {
         "parameter": "Input Leakage Current",
-        "raw_name": "IIN",
+        "raw_name": "Input Leakage Current",
         "symbol": "IIN",
         "min": null,
         "typ": null,
         "max": 1.0,
         "unit": "uA",
-        "conditions": "VCC = 6.0V, VIN = VCC, GND",
+        "conditions": "VCC = 6.0V, VIN = VCC or GND",
         "device": "NC7S08",
         "temp_range": "full"
       },
       {
         "parameter": "Quiescent Supply Current",
-        "raw_name": "ICC",
+        "raw_name": "Quiescent Supply Current",
         "symbol": "ICC",
         "min": null,
         "typ": null,
         "max": 1.0,
         "unit": "uA",
-        "conditions": "VCC = 6.0V, VIN = VCC, GND",
+        "conditions": "VCC = 6.0V, VIN = VCC or GND",
         "device": "NC7S08",
         "temp_range": "25C"
       },
       {
         "parameter": "Quiescent Supply Current",
-        "raw_name": "ICC",
+        "raw_name": "Quiescent Supply Current",
         "symbol": "ICC",
         "min": null,
         "typ": null,
         "max": 10.0,
         "unit": "uA",
-        "conditions": "VCC = 6.0V, VIN = VCC, GND",
+        "conditions": "VCC = 6.0V, VIN = VCC or GND",
         "device": "NC7S08",
         "temp_range": "full"
       },
       {
         "parameter": "Propagation Delay",
-        "raw_name": "tPLH, tPHL",
+        "raw_name": "Propagation Delay",
         "symbol": "tPLH, tPHL",
         "min": null,
         "typ": 3.5,
@@ -752,7 +513,7 @@
       },
       {
         "parameter": "Propagation Delay",
-        "raw_name": "tPLH, tPHL",
+        "raw_name": "Propagation Delay",
         "symbol": "tPLH, tPHL",
         "min": null,
         "typ": null,
@@ -764,55 +525,7 @@
       },
       {
         "parameter": "Propagation Delay",
-        "raw_name": "tPLH, tPHL",
-        "symbol": "tPLH, tPHL",
-        "min": null,
-        "typ": 20,
-        "max": 100,
-        "unit": "ns",
-        "conditions": "VCC = 2.0V, CL = 50 pF",
-        "device": "NC7S08",
-        "temp_range": "25C"
-      },
-      {
-        "parameter": "Propagation Delay",
-        "raw_name": "tPLH, tPHL",
-        "symbol": "tPLH, tPHL",
-        "min": null,
-        "typ": null,
-        "max": 125,
-        "unit": "ns",
-        "conditions": "VCC = 2.0V, CL = 50 pF",
-        "device": "NC7S08",
-        "temp_range": "full"
-      },
-      {
-        "parameter": "Propagation Delay",
-        "raw_name": "tPLH, tPHL",
-        "symbol": "tPLH, tPHL",
-        "min": null,
-        "typ": 11,
-        "max": 27,
-        "unit": "ns",
-        "conditions": "VCC = 3.0V, CL = 50 pF",
-        "device": "NC7S08",
-        "temp_range": "25C"
-      },
-      {
-        "parameter": "Propagation Delay",
-        "raw_name": "tPLH, tPHL",
-        "symbol": "tPLH, tPHL",
-        "min": null,
-        "typ": null,
-        "max": 35,
-        "unit": "ns",
-        "conditions": "VCC = 3.0V, CL = 50 pF",
-        "device": "NC7S08",
-        "temp_range": "full"
-      },
-      {
-        "parameter": "Propagation Delay",
-        "raw_name": "tPLH, tPHL",
+        "raw_name": "Propagation Delay",
         "symbol": "tPLH, tPHL",
         "min": null,
         "typ": 8,
@@ -824,7 +537,7 @@
       },
       {
         "parameter": "Propagation Delay",
-        "raw_name": "tPLH, tPHL",
+        "raw_name": "Propagation Delay",
         "symbol": "tPLH, tPHL",
         "min": null,
         "typ": null,
@@ -835,32 +548,8 @@
         "temp_range": "full"
       },
       {
-        "parameter": "Propagation Delay",
-        "raw_name": "tPLH, tPHL",
-        "symbol": "tPLH, tPHL",
-        "min": null,
-        "typ": 7,
-        "max": 17,
-        "unit": "ns",
-        "conditions": "VCC = 6.0V, CL = 50 pF",
-        "device": "NC7S08",
-        "temp_range": "25C"
-      },
-      {
-        "parameter": "Propagation Delay",
-        "raw_name": "tPLH, tPHL",
-        "symbol": "tPLH, tPHL",
-        "min": null,
-        "typ": null,
-        "max": 21,
-        "unit": "ns",
-        "conditions": "VCC = 6.0V, CL = 50 pF",
-        "device": "NC7S08",
-        "temp_range": "full"
-      },
-      {
         "parameter": "Output Transition Time",
-        "raw_name": "tTLH, tTHL",
+        "raw_name": "Output Transition Time",
         "symbol": "tTLH, tTHL",
         "min": null,
         "typ": 3.0,
@@ -872,55 +561,7 @@
       },
       {
         "parameter": "Output Transition Time",
-        "raw_name": "tTLH, tTHL",
-        "symbol": "tTLH, tTHL",
-        "min": null,
-        "typ": 25,
-        "max": 125,
-        "unit": "ns",
-        "conditions": "VCC = 2.0V, CL = 50 pF",
-        "device": "NC7S08",
-        "temp_range": "25C"
-      },
-      {
-        "parameter": "Output Transition Time",
-        "raw_name": "tTLH, tTHL",
-        "symbol": "tTLH, tTHL",
-        "min": null,
-        "typ": null,
-        "max": 155,
-        "unit": "ns",
-        "conditions": "VCC = 2.0V, CL = 50 pF",
-        "device": "NC7S08",
-        "temp_range": "full"
-      },
-      {
-        "parameter": "Output Transition Time",
-        "raw_name": "tTLH, tTHL",
-        "symbol": "tTLH, tTHL",
-        "min": null,
-        "typ": 16,
-        "max": 35,
-        "unit": "ns",
-        "conditions": "VCC = 3.0V, CL = 50 pF",
-        "device": "NC7S08",
-        "temp_range": "25C"
-      },
-      {
-        "parameter": "Output Transition Time",
-        "raw_name": "tTLH, tTHL",
-        "symbol": "tTLH, tTHL",
-        "min": null,
-        "typ": null,
-        "max": 45,
-        "unit": "ns",
-        "conditions": "VCC = 3.0V, CL = 50 pF",
-        "device": "NC7S08",
-        "temp_range": "full"
-      },
-      {
-        "parameter": "Output Transition Time",
-        "raw_name": "tTLH, tTHL",
+        "raw_name": "Output Transition Time",
         "symbol": "tTLH, tTHL",
         "min": null,
         "typ": 11,
@@ -932,7 +573,7 @@
       },
       {
         "parameter": "Output Transition Time",
-        "raw_name": "tTLH, tTHL",
+        "raw_name": "Output Transition Time",
         "symbol": "tTLH, tTHL",
         "min": null,
         "typ": null,
@@ -943,56 +584,20 @@
         "temp_range": "full"
       },
       {
-        "parameter": "Output Transition Time",
-        "raw_name": "tTLH, tTHL",
-        "symbol": "tTLH, tTHL",
-        "min": null,
-        "typ": 9,
-        "max": 21,
-        "unit": "ns",
-        "conditions": "VCC = 6.0V, CL = 50 pF",
-        "device": "NC7S08",
-        "temp_range": "25C"
-      },
-      {
-        "parameter": "Output Transition Time",
-        "raw_name": "tTLH, tTHL",
-        "symbol": "tTLH, tTHL",
-        "min": null,
-        "typ": null,
-        "max": 26,
-        "unit": "ns",
-        "conditions": "VCC = 6.0V, CL = 50 pF",
-        "device": "NC7S08",
-        "temp_range": "full"
-      },
-      {
         "parameter": "Input Capacitance",
-        "raw_name": "CIN",
+        "raw_name": "Input Capacitance",
         "symbol": "CIN",
         "min": null,
         "typ": 2,
         "max": 10,
         "unit": "pF",
-        "conditions": "Open",
+        "conditions": "VCC = Open",
         "device": "NC7S08",
         "temp_range": "25C"
       },
       {
-        "parameter": "Input Capacitance",
-        "raw_name": "CIN",
-        "symbol": "CIN",
-        "min": null,
-        "typ": null,
-        "max": 10,
-        "unit": "pF",
-        "conditions": "Open",
-        "device": "NC7S08",
-        "temp_range": "full"
-      },
-      {
         "parameter": "Power Dissipation Capacitance",
-        "raw_name": "CPD",
+        "raw_name": "Power Dissipation Capacitance",
         "symbol": "CPD",
         "min": null,
         "typ": 6,
@@ -1037,286 +642,492 @@
       {
         "pin_number": "5",
         "pin_name": "NC",
-        "type": "No Connect",
-        "description": "No Connect (MicroPak)"
+        "type": "NC",
+        "description": "No Connect (MicroPak-6)"
       },
       {
         "pin_number": "6",
         "pin_name": "VCC",
         "type": "Power",
-        "description": "Supply Voltage (MicroPak)"
+        "description": "Supply Voltage (MicroPak-6)"
       }
     ]
   },
+  "pin_extraction": {
+    "logical_pins": [
+      {
+        "name": "BASE",
+        "direction": "INPUT",
+        "signal_type": "ANALOG",
+        "description": "Base terminal of a transistor",
+        "packages": {
+          "SC-88A": [
+            1,
+            3,
+            4
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "EMITTER",
+        "direction": "PASSIVE",
+        "signal_type": "ANALOG",
+        "description": "Emitter terminal of a transistor",
+        "packages": {
+          "SC-88A": [
+            2,
+            5
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "COLLECTOR",
+        "direction": "PASSIVE",
+        "signal_type": "ANALOG",
+        "description": "Collector terminal of a transistor",
+        "packages": {
+          "SC-88A": [
+            2,
+            4,
+            5
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "ANODE",
+        "direction": "PASSIVE",
+        "signal_type": "ANALOG",
+        "description": "Anode terminal of a diode",
+        "packages": {
+          "SC-88A": [
+            1,
+            3,
+            4,
+            5
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "CATHODE",
+        "direction": "PASSIVE",
+        "signal_type": "ANALOG",
+        "description": "Cathode terminal of a diode",
+        "packages": {
+          "SC-88A": [
+            1,
+            2,
+            5
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "ANODE 1",
+        "direction": "PASSIVE",
+        "signal_type": "ANALOG",
+        "description": "Anode terminal 1",
+        "packages": {
+          "SC-88A": [
+            1
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "ANODE 2",
+        "direction": "PASSIVE",
+        "signal_type": "ANALOG",
+        "description": "Anode terminal 2",
+        "packages": {
+          "SC-88A": [
+            3
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "CATHODE 1",
+        "direction": "PASSIVE",
+        "signal_type": "ANALOG",
+        "description": "Cathode terminal 1",
+        "packages": {
+          "SC-88A": [
+            5
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "CATHODE 2",
+        "direction": "PASSIVE",
+        "signal_type": "ANALOG",
+        "description": "Cathode terminal 2",
+        "packages": {
+          "SC-88A": [
+            3,
+            4
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "CATHODE 3",
+        "direction": "PASSIVE",
+        "signal_type": "ANALOG",
+        "description": "Cathode terminal 3",
+        "packages": {
+          "SC-88A": [
+            4
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "CATHODE 4",
+        "direction": "PASSIVE",
+        "signal_type": "ANALOG",
+        "description": "Cathode terminal 4",
+        "packages": {
+          "SC-88A": [
+            5
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "COMMON ANODE",
+        "direction": "PASSIVE",
+        "signal_type": "ANALOG",
+        "description": "Common anode terminal",
+        "packages": {
+          "SC-88A": [
+            2
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "SOURCE 1",
+        "direction": "PASSIVE",
+        "signal_type": "ANALOG",
+        "description": "Source terminal 1",
+        "packages": {
+          "SC-88A": [
+            1,
+            3
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "DRAIN 1/2",
+        "direction": "PASSIVE",
+        "signal_type": "ANALOG",
+        "description": "Common drain terminal 1 and 2",
+        "packages": {
+          "SC-88A": [
+            2
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "GATE 1",
+        "direction": "INPUT",
+        "signal_type": "ANALOG",
+        "description": "Gate terminal 1",
+        "packages": {
+          "SC-88A": [
+            4
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "GATE 2",
+        "direction": "INPUT",
+        "signal_type": "ANALOG",
+        "description": "Gate terminal 2",
+        "packages": {
+          "SC-88A": [
+            5
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "EMITTER 1",
+        "direction": "PASSIVE",
+        "signal_type": "ANALOG",
+        "description": "Emitter terminal 1",
+        "packages": {
+          "SC-88A": [
+            3
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "EMITTER 2",
+        "direction": "PASSIVE",
+        "signal_type": "ANALOG",
+        "description": "Emitter terminal 2",
+        "packages": {
+          "SC-88A": [
+            1
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "BASE 2",
+        "direction": "INPUT",
+        "signal_type": "ANALOG",
+        "description": "Base terminal 2",
+        "packages": {
+          "SC-88A": [
+            2
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "COLLECTOR 2/BASE 1",
+        "direction": "PASSIVE",
+        "signal_type": "ANALOG",
+        "description": "Common collector terminal 2 and base terminal 1",
+        "packages": {
+          "SC-88A": [
+            5
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "N/C",
+        "direction": "NC",
+        "signal_type": "NONE",
+        "description": "No internal connection",
+        "packages": {
+          "SC-88A": [
+            2,
+            3
+          ]
+        },
+        "unused_treatment": null
+      }
+    ]
+  },
+  "pin_index": {
+    "packages": {
+      "SC-88A": {
+        "1": {
+          "name": "BASE",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Base terminal of a transistor (also: ANODE — Anode terminal of a diode) (also: CATHODE — Cathode terminal of a diode) (also: ANODE 1 — Anode terminal 1) (also: SOURCE 1 — Source terminal 1) (also: EMITTER 2 — Emitter terminal 2)",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "BASE",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Base terminal of a transistor (also: ANODE — Anode terminal of a diode) (also: ANODE 2 — Anode terminal 2) (also: CATHODE 2 — Cathode terminal 2) (also: SOURCE 1 — Source terminal 1) (also: EMITTER 1 — Emitter terminal 1) (also: N/C — No internal connection)",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "BASE",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Base terminal of a transistor (also: COLLECTOR — Collector terminal of a transistor) (also: ANODE — Anode terminal of a diode) (also: CATHODE 2 — Cathode terminal 2) (also: CATHODE 3 — Cathode terminal 3) (also: GATE 1 — Gate terminal 1)",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "EMITTER",
+          "direction": "PASSIVE",
+          "signal_type": "ANALOG",
+          "description": "Emitter terminal of a transistor (also: COLLECTOR — Collector terminal of a transistor) (also: CATHODE — Cathode terminal of a diode) (also: COMMON ANODE — Common anode terminal) (also: DRAIN 1/2 — Common drain terminal 1 and 2) (also: BASE 2 — Base terminal 2) (also: N/C — No internal connection)",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "EMITTER",
+          "direction": "PASSIVE",
+          "signal_type": "ANALOG",
+          "description": "Emitter terminal of a transistor (also: COLLECTOR — Collector terminal of a transistor) (also: ANODE — Anode terminal of a diode) (also: CATHODE — Cathode terminal of a diode) (also: CATHODE 1 — Cathode terminal 1) (also: CATHODE 4 — Cathode terminal 4) (also: GATE 2 — Gate terminal 2) (also: COLLECTOR 2/BASE 1 — Common collector terminal 2 and base terminal 1)",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "pin_validation": [
+    {
+      "level": "warning",
+      "message": "package 'SC-88A' pin 1 claimed by multiple logical pins: ['BASE', 'ANODE', 'CATHODE', 'ANODE 1', 'SOURCE 1', 'EMITTER 2']"
+    },
+    {
+      "level": "warning",
+      "message": "package 'SC-88A' pin 3 claimed by multiple logical pins: ['BASE', 'ANODE', 'ANODE 2', 'CATHODE 2', 'SOURCE 1', 'EMITTER 1', 'N/C']"
+    },
+    {
+      "level": "warning",
+      "message": "package 'SC-88A' pin 4 claimed by multiple logical pins: ['BASE', 'COLLECTOR', 'ANODE', 'CATHODE 2', 'CATHODE 3', 'GATE 1']"
+    },
+    {
+      "level": "warning",
+      "message": "package 'SC-88A' pin 2 claimed by multiple logical pins: ['EMITTER', 'COLLECTOR', 'CATHODE', 'COMMON ANODE', 'DRAIN 1/2', 'BASE 2', 'N/C']"
+    },
+    {
+      "level": "warning",
+      "message": "package 'SC-88A' pin 5 claimed by multiple logical pins: ['EMITTER', 'COLLECTOR', 'ANODE', 'CATHODE', 'CATHODE 1', 'CATHODE 4', 'GATE 2', 'COLLECTOR 2/BASE 1']"
+    }
+  ],
   "validation": [
     {
       "param": "Supply Voltage",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "DC Output Source or Sink Current",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "DC VCC or Ground Current per Output Pin",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Storage Temperature",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "HIGH Level Output Voltage",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "HIGH Level Output Voltage",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "HIGH Level Output Voltage",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "HIGH Level Output Voltage",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "HIGH Level Output Voltage",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "HIGH Level Output Voltage",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "HIGH Level Output Voltage",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "LOW Level Output Voltage",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "LOW Level Output Voltage",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "LOW Level Output Voltage",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "LOW Level Output Voltage",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "LOW Level Output Voltage",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "LOW Level Output Voltage",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "LOW Level Output Voltage",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Propagation Delay",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Propagation Delay",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Propagation Delay",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Propagation Delay",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Propagation Delay",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Output Transition Time",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Output Transition Time",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Output Transition Time",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Output Transition Time",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Output Transition Time",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Input Capacitance",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     }
   ],
   "physics_validation": [
     {
-      "param": "HIGH Level Output Voltage (NC7S08)",
-      "rule": "temp_envelope_min",
+      "param": "HIGH Level Input Voltage (NC7S08)",
+      "rule": "temp_envelope",
       "passed": true,
-      "message": "OK"
+      "message": "OK (mode: MAGNITUDE)"
+    },
+    {
+      "param": "LOW Level Input Voltage (NC7S08)",
+      "rule": "temp_envelope",
+      "passed": true,
+      "message": "OK (mode: MAGNITUDE)"
+    },
+    {
+      "param": "HIGH Level Output Voltage (NC7S08)",
+      "rule": "temp_envelope",
+      "passed": true,
+      "message": "OK (mode: ALGEBRAIC)"
     },
     {
       "param": "LOW Level Output Voltage (NC7S08)",
-      "rule": "temp_envelope_max",
+      "rule": "temp_envelope",
       "passed": true,
-      "message": "OK"
+      "message": "OK (mode: ALGEBRAIC)"
     },
     {
       "param": "Input Leakage Current (NC7S08)",
-      "rule": "temp_envelope_max",
+      "rule": "temp_envelope",
       "passed": true,
-      "message": "OK"
+      "message": "OK (mode: ALGEBRAIC)"
     },
     {
       "param": "Quiescent Supply Current (NC7S08)",
-      "rule": "temp_envelope_max",
+      "rule": "temp_envelope",
       "passed": true,
-      "message": "OK"
+      "message": "OK (mode: ALGEBRAIC)"
     },
     {
       "param": "Propagation Delay (NC7S08)",
-      "rule": "temp_envelope_max",
+      "rule": "temp_envelope",
       "passed": true,
-      "message": "OK"
+      "message": "OK (mode: ALGEBRAIC)"
     },
     {
       "param": "Output Transition Time (NC7S08)",
-      "rule": "temp_envelope_max",
+      "rule": "temp_envelope",
       "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Input Capacitance (NC7S08)",
-      "rule": "temp_envelope_max",
-      "passed": true,
-      "message": "OK"
+      "message": "OK (mode: ALGEBRAIC)"
     }
   ],
   "cross_validation": {
-    "total_extracted_values": 54,
-    "values_found_in_pdf": 51,
-    "values_not_in_pdf": [
-      -65.0,
-      -20.0,
-      -0.5
-    ],
-    "value_coverage_pct": 94.4,
-    "total_params": 77,
-    "params_verified": 71,
-    "params_suspicious": 6,
-    "suspicious_params": [
-      {
-        "parameter": "Supply Voltage",
-        "device": "",
-        "values": [
-          -0.5,
-          6.5
-        ]
-      },
-      {
-        "parameter": "DC Input Diode Current",
-        "device": "",
-        "values": [
-          -20.0
-        ]
-      },
-      {
-        "parameter": "DC Input Voltage",
-        "device": "",
-        "values": [
-          -0.5
-        ]
-      },
-      {
-        "parameter": "DC Output Diode Current",
-        "device": "",
-        "values": [
-          -20.0
-        ]
-      },
-      {
-        "parameter": "DC Output Voltage",
-        "device": "",
-        "values": [
-          -0.5
-        ]
-      },
-      {
-        "parameter": "Storage Temperature",
-        "device": "",
-        "values": [
-          -65.0,
-          150.0
-        ]
-      }
-    ]
+    "total_extracted_values": 34,
+    "values_found_in_pdf": 34,
+    "values_not_in_pdf": [],
+    "value_coverage_pct": 100.0,
+    "total_params": 44,
+    "params_verified": 44,
+    "params_suspicious": 0,
+    "suspicious_params": []
   },
   "timing": {
     "l0_classify_s": 0.042,
-    "l1_extract_s": 63.851
+    "l1a_extract_s": 51.452,
+    "l1b_pin_s": 60.941
   }
 }

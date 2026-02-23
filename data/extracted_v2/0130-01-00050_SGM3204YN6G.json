@@ -34,7 +34,7 @@
       "text_length": 768,
       "category": "pin",
       "matched_patterns": [
-        "(?i)pin\\s+(description|configuration|function|assignment|definition)"
+        "(?i)pin\\s+(description|configuration|function|assignment|definition|connection|diagram)"
       ],
       "text_preview": "Unregulated 200mA   SGM3204                                Charge Pump Voltage Inverter    3 SG Micro Corp  www.sg-micro.com    PIN CONFIGURATION (TOP VIEW)    3 4 6 1 2 CFLY+ OUT SOT-23-6 IN CFLY- GN"
     },
@@ -113,7 +113,7 @@
     },
     "absolute_maximum_ratings": [
       {
-        "parameter": "Input Voltage Range",
+        "parameter": "Input Voltage",
         "raw_name": "IN to GND",
         "symbol": "VIN",
         "min": -0.3,
@@ -123,7 +123,7 @@
         "conditions": null
       },
       {
-        "parameter": "Output Voltage Range",
+        "parameter": "Output Voltage",
         "raw_name": "OUT to GND",
         "symbol": "VOUT",
         "min": -6.0,
@@ -133,17 +133,17 @@
         "conditions": null
       },
       {
-        "parameter": "CFLY- Voltage Range",
+        "parameter": "CFLY- Voltage",
         "raw_name": "CFLY- to GND",
         "symbol": null,
-        "min": null,
+        "min": 0.3,
         "typ": null,
         "max": null,
         "unit": "V",
-        "conditions": "0.3V to VOUT - 0.3V"
+        "conditions": "to VOUT - 0.3V"
       },
       {
-        "parameter": "CFLY+ Voltage Range",
+        "parameter": "CFLY+ Voltage",
         "raw_name": "CFLY+ to GND",
         "symbol": null,
         "min": -0.3,
@@ -158,37 +158,37 @@
         "symbol": null,
         "min": null,
         "typ": null,
-        "max": 250,
+        "max": 250.0,
         "unit": "mA",
         "conditions": null
       },
       {
         "parameter": "Operating Temperature Range",
         "raw_name": "Operating Temperature Range",
-        "symbol": "TA",
-        "min": -40,
+        "symbol": null,
+        "min": -40.0,
         "typ": null,
-        "max": 85,
+        "max": 85.0,
         "unit": "°C",
         "conditions": null
       },
       {
         "parameter": "Junction Temperature",
         "raw_name": "Junction Temperature",
-        "symbol": "TJ",
+        "symbol": null,
         "min": null,
         "typ": null,
-        "max": 150,
+        "max": 150.0,
         "unit": "°C",
         "conditions": null
       },
       {
         "parameter": "Storage Temperature Range",
         "raw_name": "Storage Temperature Range",
-        "symbol": "TSTG",
-        "min": -65,
+        "symbol": null,
+        "min": -65.0,
         "typ": null,
-        "max": 150,
+        "max": 150.0,
         "unit": "°C",
         "conditions": null
       },
@@ -198,7 +198,7 @@
         "symbol": null,
         "min": null,
         "typ": null,
-        "max": 260,
+        "max": 260.0,
         "unit": "°C",
         "conditions": null
       },
@@ -208,7 +208,7 @@
         "symbol": null,
         "min": null,
         "typ": null,
-        "max": 7000,
+        "max": 7000.0,
         "unit": "V",
         "conditions": null
       },
@@ -218,7 +218,7 @@
         "symbol": null,
         "min": null,
         "typ": null,
-        "max": 400,
+        "max": 400.0,
         "unit": "V",
         "conditions": null
       }
@@ -240,7 +240,7 @@
         "parameter": "Maximum Output Current at OUT",
         "raw_name": "Maximum Output Current at OUT",
         "symbol": "IOUT",
-        "min": 200,
+        "min": 200.0,
         "typ": null,
         "max": null,
         "unit": "mA",
@@ -256,7 +256,7 @@
         "typ": null,
         "max": null,
         "unit": "V",
-        "conditions": "VOUT = -VIN",
+        "conditions": "typ = -VIN",
         "device": "SGM3204",
         "temp_range": "25C"
       },
@@ -265,7 +265,7 @@
         "raw_name": "Output Voltage Ripple",
         "symbol": "VPP",
         "min": null,
-        "typ": 30,
+        "typ": 30.0,
         "max": null,
         "unit": "mVP-P",
         "conditions": "IOUT = 100mA, CFLY = COUT = 3.3µF",
@@ -280,7 +280,7 @@
         "typ": 1.5,
         "max": 1.75,
         "unit": "mA",
-        "conditions": "No load",
+        "conditions": "No Load Input Current",
         "device": "SGM3204",
         "temp_range": "25C"
       },
@@ -292,17 +292,17 @@
         "typ": null,
         "max": 1.84,
         "unit": "mA",
-        "conditions": "No load",
+        "conditions": "No Load Input Current",
         "device": "SGM3204",
         "temp_range": "full"
       },
       {
         "parameter": "Quiescent Current (Shutdown)",
-        "raw_name": "Quiescent Current (No Load Input Current)",
+        "raw_name": "Quiescent Current (Shutdown mode)",
         "symbol": "IQ",
         "min": null,
         "typ": 0.7,
-        "max": 1,
+        "max": 1.0,
         "unit": "µA",
         "conditions": "Shutdown mode",
         "device": "SGM3204",
@@ -310,11 +310,11 @@
       },
       {
         "parameter": "Quiescent Current (Shutdown)",
-        "raw_name": "Quiescent Current (No Load Input Current)",
+        "raw_name": "Quiescent Current (Shutdown mode)",
         "symbol": "IQ",
         "min": null,
         "typ": null,
-        "max": 3,
+        "max": 3.0,
         "unit": "µA",
         "conditions": "Shutdown mode",
         "device": "SGM3204",
@@ -324,9 +324,9 @@
         "parameter": "Internal Switching Frequency",
         "raw_name": "Internal Switching Frequency",
         "symbol": "fOSC",
-        "min": 800,
-        "typ": 950,
-        "max": 1100,
+        "min": 800.0,
+        "typ": 950.0,
+        "max": 1100.0,
         "unit": "kHz",
         "conditions": null,
         "device": "SGM3204",
@@ -336,9 +336,9 @@
         "parameter": "Internal Switching Frequency",
         "raw_name": "Internal Switching Frequency",
         "symbol": "fOSC",
-        "min": 750,
+        "min": 750.0,
         "typ": null,
-        "max": 1150,
+        "max": 1150.0,
         "unit": "kHz",
         "conditions": null,
         "device": "SGM3204",
@@ -432,36 +432,161 @@
       }
     ]
   },
+  "pin_extraction": {
+    "logical_pins": [
+      {
+        "name": "OUT",
+        "direction": "POWER_OUT",
+        "signal_type": "POWER",
+        "description": "Power Output with VOUT = -VIN. Bypass OUT to GND with the output filter capacitor COUT.",
+        "packages": {
+          "SOT-23-6": [
+            1
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "IN",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Supply Input. Connect to an input supply in the 1.4V to 5.5V range. Bypass IN to GND with a capacitor that has the same value as the flying capacitor.",
+        "packages": {
+          "SOT-23-6": [
+            2
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "CFLY-",
+        "direction": "PASSIVE",
+        "signal_type": "ANALOG",
+        "description": "Negative Terminal of the Flying Capacitor CFLY.",
+        "packages": {
+          "SOT-23-6": [
+            3
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "GND",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Ground.",
+        "packages": {
+          "SOT-23-6": [
+            4
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "EN",
+        "direction": "INPUT",
+        "signal_type": "DIGITAL",
+        "description": "Enable Control. When EN = “High”, chip is in active mode. When EN = “Low”, chip is in shutdown mode.",
+        "packages": {
+          "SOT-23-6": [
+            5
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "CFLY+",
+        "direction": "PASSIVE",
+        "signal_type": "ANALOG",
+        "description": "Positive Terminal of the Flying Capacitor CFLY.",
+        "packages": {
+          "SOT-23-6": [
+            6
+          ]
+        },
+        "unused_treatment": null
+      }
+    ]
+  },
+  "pin_index": {
+    "packages": {
+      "SOT-23-6": {
+        "1": {
+          "name": "OUT",
+          "direction": "POWER_OUT",
+          "signal_type": "POWER",
+          "description": "Power Output with VOUT = -VIN. Bypass OUT to GND with the output filter capacitor COUT.",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "IN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Supply Input. Connect to an input supply in the 1.4V to 5.5V range. Bypass IN to GND with a capacitor that has the same value as the flying capacitor.",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "CFLY-",
+          "direction": "PASSIVE",
+          "signal_type": "ANALOG",
+          "description": "Negative Terminal of the Flying Capacitor CFLY.",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground.",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "EN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Enable Control. When EN = “High”, chip is in active mode. When EN = “Low”, chip is in shutdown mode.",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "CFLY+",
+          "direction": "PASSIVE",
+          "signal_type": "ANALOG",
+          "description": "Positive Terminal of the Flying Capacitor CFLY.",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "pin_validation": [],
   "validation": [
     {
-      "param": "Input Voltage Range",
+      "param": "Input Voltage",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
-      "param": "Output Voltage Range",
+      "param": "Output Voltage",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Operating Temperature Range",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Storage Temperature Range",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Input Voltage Range",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Output Voltage Ripple",
@@ -473,77 +598,98 @@
       "param": "Quiescent Current",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Quiescent Current (Shutdown)",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Internal Switching Frequency",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Internal Switching Frequency",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     },
     {
       "param": "Impedance",
       "rule": "monotonicity",
       "passed": true,
-      "message": "OK"
+      "message": "OK (modes: ALGEBRAIC)"
     }
   ],
   "physics_validation": [
     {
       "param": "Quiescent Current (SGM3204)",
-      "rule": "temp_envelope_max",
+      "rule": "temp_envelope",
       "passed": true,
-      "message": "OK"
+      "message": "OK (mode: ALGEBRAIC)"
     },
     {
       "param": "Quiescent Current (Shutdown) (SGM3204)",
-      "rule": "temp_envelope_max",
+      "rule": "temp_envelope",
       "passed": true,
-      "message": "OK"
+      "message": "OK (mode: ALGEBRAIC)"
     },
     {
       "param": "Internal Switching Frequency (SGM3204)",
-      "rule": "temp_envelope_max",
+      "rule": "temp_envelope",
       "passed": true,
-      "message": "OK"
-    },
-    {
-      "param": "Internal Switching Frequency (SGM3204)",
-      "rule": "temp_envelope_min",
-      "passed": true,
-      "message": "OK"
+      "message": "OK (mode: ALGEBRAIC)"
     },
     {
       "param": "Impedance (SGM3204)",
-      "rule": "temp_envelope_max",
+      "rule": "temp_envelope",
       "passed": true,
-      "message": "OK"
+      "message": "OK (mode: ALGEBRAIC)"
     }
   ],
   "cross_validation": {
     "total_extracted_values": 31,
-    "values_found_in_pdf": 31,
-    "values_not_in_pdf": [],
-    "value_coverage_pct": 100.0,
+    "values_found_in_pdf": 28,
+    "values_not_in_pdf": [
+      250.0,
+      260.0,
+      7000.0
+    ],
+    "value_coverage_pct": 90.3,
     "total_params": 25,
-    "params_verified": 25,
-    "params_suspicious": 0,
-    "suspicious_params": []
+    "params_verified": 22,
+    "params_suspicious": 3,
+    "suspicious_params": [
+      {
+        "parameter": "Continuous Output Current",
+        "device": "",
+        "values": [
+          250.0
+        ]
+      },
+      {
+        "parameter": "Lead Temperature (Soldering, 10s)",
+        "device": "",
+        "values": [
+          260.0
+        ]
+      },
+      {
+        "parameter": "ESD Susceptibility HBM",
+        "device": "",
+        "values": [
+          7000.0
+        ]
+      }
+    ]
   },
   "timing": {
-    "l0_classify_s": 0.026,
-    "l1_extract_s": 26.638
+    "l0_classify_s": 0.027,
+    "l1a_extract_s": 29.667,
+    "l1b_pin_s": 12.275
   }
 }
