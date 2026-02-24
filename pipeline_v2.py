@@ -212,6 +212,30 @@ ORDERING_PATTERNS = [
     re.compile(r'(?i)marking\s+information'),
 ]
 
+# FPGA-specific: pages that mention pin names but are NOT pin definition pages
+FPGA_PIN_FALSE_POSITIVE_PATTERNS = [
+    re.compile(r'(?i)pin[-\s]?to[-\s]?pin\s+(output|input|delay|parameter)'),
+    re.compile(r'(?i)configuration\s+switching\s+characteristics'),
+    re.compile(r'(?i)revision\s+(history|summary)'),
+    re.compile(r'(?i)boundary[-\s]?scan\s+port'),
+]
+
+# FPGA-specific: power supply pin group pages (useful for FPGA "pin" extraction)
+FPGA_SUPPLY_PIN_PATTERNS = [
+    re.compile(r'(?i)power\s+supply\s+(requirements?|pins?|rails?)'),
+    re.compile(r'(?i)supply\s+voltage\s+(summary|table)'),
+    re.compile(r'(?i)quiescent\s+supply\s+current'),
+]
+
+# Detect FPGA datasheet from cover/early pages
+FPGA_DETECT_PATTERNS = [
+    re.compile(r'(?i)\b(FPGA|CPLD|SoC|MPSoC|RFSoC|ACAP)\b'),
+    re.compile(r'(?i)\b(UltraScale|Versal|Spartan|Artix|Kintex|Virtex|Zynq)\b'),
+    re.compile(r'(?i)\bXC[A-Z]{1,2}\d+[A-Z]*\b'),  # Xilinx part numbers like XCKU3P, XCAU15P
+    re.compile(r'(?i)\b(Cyclone|Stratix|Arria|MAX\s*10|Agilex)\b'),  # Intel/Altera
+    re.compile(r'(?i)\b(ECP5|MachXO|CrossLink|Certus)\b'),  # Lattice
+]
+
 
 @dataclass
 class PageInfo:
@@ -222,7 +246,22 @@ class PageInfo:
     text_preview: str = ""
 
 
-def classify_pages(pdf_path: str) -> list[PageInfo]:
+def detect_fpga_datasheet(pdf_path: str) -> bool:
+    """Detect if this is an FPGA datasheet by scanning first 3 pages."""
+    doc = fitz.open(pdf_path)
+    is_fpga = False
+    fpga_hits = 0
+    for i in range(min(3, len(doc))):
+        text = doc[i].get_text()
+        for pat in FPGA_DETECT_PATTERNS:
+            if pat.search(text):
+                fpga_hits += 1
+    doc.close()
+    # Need at least 2 hits to confirm (avoid false positives from random mentions)
+    return fpga_hits >= 2
+
+
+def classify_pages(pdf_path: str, is_fpga: bool = False) -> list[PageInfo]:
     doc = fitz.open(pdf_path)
     pages = []
     for i in range(len(doc)):
@@ -239,11 +278,29 @@ def classify_pages(pdf_path: str) -> list[PageInfo]:
         for pat in PIN_PATTERNS:
             if pat.search(text):
                 if category != "electrical":
-                    category = "pin"
+                    # FPGA: check for false positive pin pages
+                    if is_fpga:
+                        is_false_positive = any(fp.search(text) for fp in FPGA_PIN_FALSE_POSITIVE_PATTERNS)
+                        if is_false_positive:
+                            # Reclassify as electrical (these are switching characteristics)
+                            if category != "electrical":
+                                category = "electrical"
+                            matched.append("FPGA_PIN_FALSE_POSITIVE")
+                        else:
+                            category = "pin"
+                    else:
+                        category = "pin"
                 matched.append(pat.pattern)
+        # FPGA: detect power supply pin group pages
+        if is_fpga:
+            for pat in FPGA_SUPPLY_PIN_PATTERNS:
+                if pat.search(text):
+                    if category not in ("electrical",):
+                        category = "fpga_supply"
+                    matched.append(pat.pattern)
         for pat in ORDERING_PATTERNS:
             if pat.search(text):
-                if category not in ("electrical", "pin"):
+                if category not in ("electrical", "pin", "fpga_supply"):
                     category = "ordering"
                 matched.append(pat.pattern)
         if text_len < 100:
@@ -279,7 +336,7 @@ OUTPUT JSON SCHEMA:
   "component": {
     "mpn": "string (main part number)",
     "manufacturer": "string",
-    "category": "string (LDO/Buck/OpAmp/Switch/Logic/ADC/DAC/Interface/Other)",
+    "category": "string (LDO/Buck/OpAmp/Switch/Logic/ADC/DAC/Interface/FPGA/CPLD/SoC/Other)",
     "description": "string (one line)"
   },
   "absolute_maximum_ratings": [
@@ -418,6 +475,94 @@ IMPORTANT:
 VALID_DIRECTIONS = {"INPUT", "OUTPUT", "BIDIRECTIONAL", "POWER_IN", "POWER_OUT", "PASSIVE", "NC"}
 VALID_SIGNAL_TYPES = {"DIGITAL", "ANALOG", "POWER", "NONE"}
 VALID_UNUSED_TREATMENTS = {"FLOAT", "GND", "VCC", "PULL_UP", "PULL_DOWN", "CUSTOM", None}
+
+
+FPGA_PIN_EXTRACTION_PROMPT = """You are an expert FPGA datasheet parser. These images show pages from an FPGA DC/AC switching characteristics datasheet.
+
+FPGA datasheets do NOT have traditional pin definition tables like simple ICs. Instead, extract:
+
+1. POWER SUPPLY PINS — all supply rails with their voltage ranges and descriptions
+2. CONFIGURATION INTERFACE PINS — pins mentioned in configuration switching tables (CCLK, DONE, INIT_B, PROGRAM_B, M[2:0], D[31:00], etc.)
+3. TRANSCEIVER PINS — RXP/RXN, TXP/TXN and reference clock pins
+4. SYSTEM MONITOR PINS — VP/VN, VREFP/VREFN, DXP/DXN analog input pins
+
+For each pin/pin group, extract:
+- name: pin or bus name (e.g., "VCCINT", "D[31:00]", "RXP/RXN")
+- direction: INPUT/OUTPUT/BIDIRECTIONAL/POWER_IN/PASSIVE
+- signal_type: DIGITAL/ANALOG/POWER/NONE
+- description: what this pin does, include voltage range if it's a power pin
+- pin_group: one of "POWER_SUPPLY", "CONFIGURATION", "TRANSCEIVER", "SYSTEM_MONITOR", "CLOCK", "OTHER"
+- packages: {} (leave empty — FPGA pin mapping is in separate pinout documents)
+- unused_treatment: null (unless explicitly stated)
+
+CRITICAL RULES:
+- Do NOT invent pin numbers — FPGA pin numbers vary by package and are NOT in DC/AC datasheets
+- Extract ALL power supply rails mentioned (VCCINT, VCCBRAM, VCCAUX, VCCO, VMGTAVCC, VMGTAVTT, etc.)
+- For bus pins like D[31:00], keep the bus notation, don't expand individual bits
+- Include voltage specifications in the description (e.g., "Internal supply voltage, 0.85V typical")
+
+OUTPUT FORMAT — output ONLY valid JSON, no markdown, no code fences:
+{
+  "logical_pins": [
+    {
+      "name": "VCCINT",
+      "direction": "POWER_IN",
+      "signal_type": "POWER",
+      "description": "Internal supply voltage, 0.825-0.876V typical",
+      "pin_group": "POWER_SUPPLY",
+      "packages": {},
+      "unused_treatment": null
+    }
+  ]
+}
+"""
+
+
+def extract_fpga_pins_with_vision(images: list[bytes], pdf_name: str, max_retries: int = 2) -> dict:
+    """L1b-FPGA: Extract FPGA power/config/transceiver pin groups from DC/AC datasheet."""
+    contents = [FPGA_PIN_EXTRACTION_PROMPT]
+    for img in images:
+        contents.append(types.Part.from_bytes(data=img, mime_type='image/png'))
+
+    for attempt in range(max_retries + 1):
+        try:
+            response = gemini_client.models.generate_content(
+                model=GEMINI_MODEL,
+                contents=contents,
+                config={"temperature": 0.1},
+            )
+            raw = response.text
+            if "```json" in raw:
+                raw = raw.split("```json")[1].split("```")[0]
+            elif "```" in raw:
+                raw = raw.split("```")[1].split("```")[0]
+            start = raw.find('{')
+            end = raw.rfind('}')
+            if start >= 0 and end > start:
+                raw = raw[start:end+1]
+            result = json.loads(raw.strip())
+            if isinstance(result, list):
+                result = result[0] if result else {"error": "Empty list"}
+            if not isinstance(result, dict):
+                return {"error": f"Unexpected type: {type(result).__name__}"}
+            if "logical_pins" not in result:
+                for key in ["pins", "pin_definitions", "logicalPins"]:
+                    if key in result:
+                        result["logical_pins"] = result.pop(key)
+                        break
+                else:
+                    return {"error": "No logical_pins key in response", "raw": raw[:500]}
+            return result
+        except json.JSONDecodeError as e:
+            if attempt < max_retries:
+                time.sleep(3)
+                continue
+            return {"error": f"JSON parse failed: {str(e)}", "raw": raw[:500] if 'raw' in dir() else ""}
+        except Exception as e:
+            if attempt < max_retries and ("503" in str(e) or "429" in str(e) or "504" in str(e)):
+                time.sleep(10)
+                continue
+            return {"error": str(e)}
 
 
 def extract_pins_with_vision(images: list[bytes], pdf_name: str, max_retries: int = 2) -> dict:
@@ -585,6 +730,58 @@ def validate_pins(pin_data: dict) -> list[dict]:
         for pn, names in pn_map.items():
             if len(names) > 1:
                 issues.append({"level": "warning", "message": f"package '{pkg_name}' pin {pn} claimed by multiple logical pins: {names}"})
+
+    return issues
+
+
+VALID_FPGA_PIN_GROUPS = {"POWER_SUPPLY", "CONFIGURATION", "TRANSCEIVER", "SYSTEM_MONITOR", "CLOCK", "OTHER"}
+
+
+def validate_fpga_pins(pin_data: dict) -> list[dict]:
+    """Validate FPGA pin extraction results. Packages are expected to be empty."""
+    issues = []
+    pins = pin_data.get("logical_pins", [])
+
+    if not pins:
+        issues.append({"level": "warning", "message": "No logical_pins found (may be normal for some FPGA datasheets)"})
+        return issues
+
+    seen_names = set()
+    for i, pin in enumerate(pins):
+        prefix = f"pin[{i}]"
+        name = pin.get("name", "")
+        if not name or not str(name).strip():
+            issues.append({"level": "error", "message": f"{prefix}: empty name"})
+            continue
+        name = str(name).strip()
+
+        if name in seen_names:
+            issues.append({"level": "warning", "message": f"{prefix}: duplicate pin name '{name}'"})
+        seen_names.add(name)
+
+        direction = pin.get("direction", "")
+        if direction not in VALID_DIRECTIONS:
+            issues.append({"level": "error", "message": f"{prefix} '{name}': invalid direction '{direction}'"})
+
+        signal_type = pin.get("signal_type", "")
+        if signal_type not in VALID_SIGNAL_TYPES:
+            issues.append({"level": "error", "message": f"{prefix} '{name}': invalid signal_type '{signal_type}'"})
+
+        pin_group = pin.get("pin_group", "")
+        if pin_group not in VALID_FPGA_PIN_GROUPS:
+            issues.append({"level": "warning", "message": f"{prefix} '{name}': unknown pin_group '{pin_group}'"})
+
+        # FPGA: packages should be empty dict — that's expected, not an error
+        packages = pin.get("packages", {})
+        if packages and isinstance(packages, dict) and any(v for v in packages.values()):
+            issues.append({"level": "warning", "message": f"{prefix} '{name}': unexpected non-empty packages (FPGA DC/AC datasheets don't have pin mapping)"})
+
+    # Check minimum expected pin groups for FPGA
+    found_groups = set(p.get("pin_group", "") for p in pins)
+    if "POWER_SUPPLY" not in found_groups:
+        issues.append({"level": "warning", "message": "No POWER_SUPPLY pins found — expected for FPGA datasheets"})
+    if "CONFIGURATION" not in found_groups:
+        issues.append({"level": "warning", "message": "No CONFIGURATION pins found — expected for FPGA datasheets"})
 
     return issues
 
@@ -865,14 +1062,20 @@ def process_single_pdf(pdf_path: str, verbose: bool = True) -> dict:
         print(f"Processing: {pdf_name}")
         print(f"{'='*60}")
 
+    # L0: FPGA 检测
+    is_fpga = detect_fpga_datasheet(pdf_path)
+    if verbose and is_fpga:
+        print(f"\n  🔧 FPGA datasheet detected — using FPGA-optimized pipeline")
+
     # L0: 页面分类
     t0 = time.time()
-    pages = classify_pages(pdf_path)
+    pages = classify_pages(pdf_path, is_fpga=is_fpga)
     l0_time = time.time() - t0
 
     electrical_pages = [p for p in pages if p.category == "electrical"]
     pin_pages = [p for p in pages if p.category == "pin"]
     cover_pages = [p for p in pages if p.category == "cover"]
+    fpga_supply_pages = [p for p in pages if p.category == "fpga_supply"]
 
     # Vision 目标页面: electrical + pin + cover
     vision_page_nums = sorted(set(
@@ -926,12 +1129,70 @@ def process_single_pdf(pdf_path: str, verbose: bool = True) -> dict:
     # L1b: Pin Extraction (独立阶段)
     pin_extraction = {}
     pin_validation_issues = []
+
+    if is_fpga:
+        # FPGA mode: use electrical + supply pages for power/config pin extraction
+        # Send ALL electrical pages (they contain supply specs, config switching, transceiver specs)
+        fpga_pin_page_nums = sorted(set(
+            [p.page_num for p in electrical_pages] +
+            [p.page_num for p in fpga_supply_pages] +
+            [p.page_num for p in cover_pages]
+        ))
+    else:
+        fpga_pin_page_nums = []
+
     pin_page_nums = sorted(set(
         [p.page_num for p in pin_pages] +
         [p.page_num for p in cover_pages]
     ))
     t1b = time.time()
-    if pin_page_nums:
+
+    if is_fpga and fpga_pin_page_nums:
+        # FPGA: use specialized FPGA pin extraction
+        pin_images = render_pages_to_images(pdf_path, fpga_pin_page_nums)
+        if verbose:
+            pin_img_size = sum(len(img) for img in pin_images)
+            print(f"\nL1b FPGA Pin Extraction:")
+            print(f"  Pages: {fpga_pin_page_nums} ({len(pin_images)} images, {pin_img_size/1024:.0f} KB)")
+
+        pin_extraction = extract_fpga_pins_with_vision(pin_images, pdf_name)
+
+        if "error" in pin_extraction:
+            if verbose:
+                print(f"  ❌ FAILED: {pin_extraction['error']}")
+        else:
+            logical_pins = pin_extraction.get("logical_pins", [])
+            # FPGA pins don't need package validation (packages are empty by design)
+            pin_validation_issues = validate_fpga_pins(pin_extraction)
+            errors = [i for i in pin_validation_issues if i["level"] == "error"]
+            warnings = [i for i in pin_validation_issues if i["level"] == "warning"]
+
+            if verbose:
+                print(f"  Logical pins: {len(logical_pins)}")
+                # pin_group 分布
+                group_dist = {}
+                for p in logical_pins:
+                    g = p.get("pin_group", "?")
+                    group_dist[g] = group_dist.get(g, 0) + 1
+                print(f"  Pin group distribution: {group_dist}")
+                # direction 分布
+                dir_dist = {}
+                for p in logical_pins:
+                    d = p.get("direction", "?")
+                    dir_dist[d] = dir_dist.get(d, 0) + 1
+                print(f"  Direction distribution: {dir_dist}")
+                # signal_type 分布
+                sig_dist = {}
+                for p in logical_pins:
+                    s = p.get("signal_type", "?")
+                    sig_dist[s] = sig_dist.get(s, 0) + 1
+                print(f"  Signal type distribution: {sig_dist}")
+                print(f"  Validation: {len(errors)} errors, {len(warnings)} warnings")
+                for issue in pin_validation_issues:
+                    icon = "❌" if issue["level"] == "error" else "⚠️"
+                    print(f"    {icon} {issue['message']}")
+
+    elif pin_page_nums:
         pin_images = render_pages_to_images(pdf_path, pin_page_nums)
         if verbose:
             pin_img_size = sum(len(img) for img in pin_images)
@@ -1034,6 +1295,7 @@ def process_single_pdf(pdf_path: str, verbose: bool = True) -> dict:
         "pdf_name": pdf_name,
         "model": GEMINI_MODEL,
         "mode": "vision",
+        "is_fpga": is_fpga,
         "checksum": hashlib.md5(open(pdf_path, 'rb').read()).hexdigest(),
         "total_pages": len(pages),
         "vision_pages": vision_page_nums,

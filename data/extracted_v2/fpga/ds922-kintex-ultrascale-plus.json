@@ -2,6 +2,7 @@
   "pdf_name": "ds922-kintex-ultrascale-plus.pdf",
   "model": "gemini-3-flash-preview",
   "mode": "vision",
+  "is_fpga": true,
   "checksum": "7a255b23df7a1975e9c36f9c0a82c2ec",
   "total_pages": 74,
   "vision_pages": [
@@ -90,15 +91,20 @@
     {
       "page_num": 7,
       "text_length": 1637,
-      "category": "other",
-      "matched_patterns": [],
+      "category": "fpga_supply",
+      "matched_patterns": [
+        "(?i)quiescent\\s+supply\\s+current"
+      ],
       "text_preview": "Quiescent Supply Current Table 6: Typical Quiescent Supply Current Symbol Description1, 2, 3 Device Speed Grade and VCCINT Operating Voltages Units 0.90V 0.85V 0.72V -3 -2 -1 -2 -1 ICCINTQ Quiescent V"
     },
     {
       "page_num": 8,
       "text_length": 2931,
-      "category": "other",
-      "matched_patterns": [],
+      "category": "fpga_supply",
+      "matched_patterns": [
+        "(?i)power\\s+supply\\s+(requirements?|pins?|rails?)",
+        "(?i)quiescent\\s+supply\\s+current"
+      ],
       "text_preview": "Table 6: Typical Quiescent Supply Current (cont'd) Symbol Description1, 2, 3 Device Speed Grade and VCCINT Operating Voltages Units 0.90V 0.85V 0.72V -3 -2 -1 -2 -1 ICCBRAMQ Quiescent VCCBRAM supply c"
     },
     {
@@ -304,8 +310,9 @@
     {
       "page_num": 37,
       "text_length": 2266,
-      "category": "pin",
+      "category": "electrical",
       "matched_patterns": [
+        "FPGA_PIN_FALSE_POSITIVE",
         "(?i)pin[-\\s]?out"
       ],
       "text_preview": "Device Pin-to-Pin Output Parameter Guidelines The pin-to-pin numbers in the following tables are based on the clock root placement in the center of the device. The actual pin-to-pin values will vary i"
@@ -530,8 +537,9 @@
     {
       "page_num": 69,
       "text_length": 2394,
-      "category": "pin",
+      "category": "electrical",
       "matched_patterns": [
+        "FPGA_PIN_FALSE_POSITIVE",
         "(?i)pin[-\\s]?out"
       ],
       "text_preview": "Table 82: Configuration Switching Characteristics (cont'd) Symbol Description Speed Grade and VCCINT Operating Voltages Units 0.90V 0.85V 0.72V -3 -2 -1 -2 -1 FTCK TCK frequency XCKU15P, XQKU15P, XCKU"
@@ -571,7 +579,7 @@
     "component": {
       "mpn": "Kintex UltraScale+ FPGAs",
       "manufacturer": "AMD",
-      "category": "Other",
+      "category": "FPGA",
       "description": "Kintex UltraScale+ FPGAs Data Sheet: DC and AC Switching Characteristics"
     },
     "absolute_maximum_ratings": [
@@ -603,7 +611,7 @@
         "typ": null,
         "max": 2.0,
         "unit": "V",
-        "conditions": "FPGA Logic"
+        "conditions": null
       },
       {
         "parameter": "Supply voltage for the block RAM and UltraRAM",
@@ -613,7 +621,7 @@
         "typ": null,
         "max": 1.0,
         "unit": "V",
-        "conditions": "FPGA Logic"
+        "conditions": null
       },
       {
         "parameter": "Output drivers supply voltage for HD I/O banks",
@@ -623,7 +631,7 @@
         "typ": null,
         "max": 3.4,
         "unit": "V",
-        "conditions": "FPGA Logic"
+        "conditions": null
       },
       {
         "parameter": "Output drivers supply voltage for HP I/O banks and configuration bank 0",
@@ -633,7 +641,7 @@
         "typ": null,
         "max": 2.0,
         "unit": "V",
-        "conditions": "FPGA Logic"
+        "conditions": null
       },
       {
         "parameter": "Auxiliary supply voltage for the I/O banks",
@@ -643,7 +651,7 @@
         "typ": null,
         "max": 2.0,
         "unit": "V",
-        "conditions": "FPGA Logic"
+        "conditions": null
       },
       {
         "parameter": "Input reference voltage for HP I/O banks",
@@ -653,7 +661,7 @@
         "typ": null,
         "max": 2.0,
         "unit": "V",
-        "conditions": "FPGA Logic"
+        "conditions": null
       },
       {
         "parameter": "I/O input voltage for HD I/O banks",
@@ -683,7 +691,7 @@
         "typ": null,
         "max": 2.0,
         "unit": "V",
-        "conditions": "FPGA Logic"
+        "conditions": null
       },
       {
         "parameter": "Available output current at the pad",
@@ -693,7 +701,7 @@
         "typ": null,
         "max": 20,
         "unit": "mA",
-        "conditions": "FPGA Logic"
+        "conditions": null
       },
       {
         "parameter": "Available RMS output current at the pad",
@@ -703,7 +711,7 @@
         "typ": null,
         "max": 20,
         "unit": "mA",
-        "conditions": "FPGA Logic"
+        "conditions": null
       },
       {
         "parameter": "Analog supply voltage for transceiver circuits",
@@ -766,66 +774,6 @@
         "conditions": "GTH or GTY Transceiver"
       },
       {
-        "parameter": "DC input current for receiver input pins DC coupled RX termination = floating",
-        "raw_name": "IDCIN-FLOAT",
-        "symbol": "IDCIN-FLOAT",
-        "min": null,
-        "typ": null,
-        "max": 10,
-        "unit": "mA",
-        "conditions": "GTH or GTY Transceiver"
-      },
-      {
-        "parameter": "DC input current for receiver input pins DC coupled RX termination = VMGTAVTT",
-        "raw_name": "IDCIN-MGTAVTT",
-        "symbol": "IDCIN-MGTAVTT",
-        "min": null,
-        "typ": null,
-        "max": 10,
-        "unit": "mA",
-        "conditions": "GTH or GTY Transceiver"
-      },
-      {
-        "parameter": "DC input current for receiver input pins DC coupled RX termination = GND",
-        "raw_name": "IDCIN-GND",
-        "symbol": "IDCIN-GND",
-        "min": null,
-        "typ": null,
-        "max": 0,
-        "unit": "mA",
-        "conditions": "GTH or GTY Transceiver"
-      },
-      {
-        "parameter": "DC input current for receiver input pins DC coupled RX termination = programmable",
-        "raw_name": "IDCIN-PROG",
-        "symbol": "IDCIN-PROG",
-        "min": null,
-        "typ": null,
-        "max": 0,
-        "unit": "mA",
-        "conditions": "GTH or GTY Transceiver"
-      },
-      {
-        "parameter": "DC output current for transmitter pins DC coupled RX termination = floating",
-        "raw_name": "IDCOUT-FLOAT",
-        "symbol": "IDCOUT-FLOAT",
-        "min": null,
-        "typ": null,
-        "max": 6,
-        "unit": "mA",
-        "conditions": "GTH or GTY Transceiver"
-      },
-      {
-        "parameter": "DC output current for transmitter pins DC coupled RX termination = VMGTAVTT",
-        "raw_name": "IDCOUT-MGTAVTT",
-        "symbol": "IDCOUT-MGTAVTT",
-        "min": null,
-        "typ": null,
-        "max": 6,
-        "unit": "mA",
-        "conditions": "GTH or GTY Transceiver"
-      },
-      {
         "parameter": "System Monitor supply relative to GNDADC",
         "raw_name": "VCCADC",
         "symbol": "VCCADC",
@@ -853,7 +801,7 @@
         "typ": null,
         "max": 150,
         "unit": "°C",
-        "conditions": "Temperature"
+        "conditions": null
       },
       {
         "parameter": "Maximum junction temperature",
@@ -863,7 +811,7 @@
         "typ": null,
         "max": 125,
         "unit": "°C",
-        "conditions": "Temperature"
+        "conditions": null
       }
     ],
     "electrical_characteristics": [
@@ -872,7 +820,7 @@
         "raw_name": "VCCINT",
         "symbol": "VCCINT",
         "min": 0.825,
-        "typ": 0.85,
+        "typ": null,
         "max": 0.876,
         "unit": "V",
         "conditions": "Standard",
@@ -883,8 +831,20 @@
         "parameter": "Internal supply voltage",
         "raw_name": "VCCINT",
         "symbol": "VCCINT",
+        "min": null,
+        "typ": 0.85,
+        "max": null,
+        "unit": "V",
+        "conditions": "Standard",
+        "device": "All",
+        "temp_range": "25C"
+      },
+      {
+        "parameter": "Internal supply voltage",
+        "raw_name": "VCCINT",
+        "symbol": "VCCINT",
         "min": 0.698,
-        "typ": 0.72,
+        "typ": null,
         "max": 0.742,
         "unit": "V",
         "conditions": "For -1LI and -2LE (VCCINT = 0.72V) devices",
@@ -895,8 +855,20 @@
         "parameter": "Internal supply voltage",
         "raw_name": "VCCINT",
         "symbol": "VCCINT",
+        "min": null,
+        "typ": 0.72,
+        "max": null,
+        "unit": "V",
+        "conditions": "For -1LI and -2LE (VCCINT = 0.72V) devices",
+        "device": "-1LI, -2LE",
+        "temp_range": "25C"
+      },
+      {
+        "parameter": "Internal supply voltage",
+        "raw_name": "VCCINT",
+        "symbol": "VCCINT",
         "min": 0.873,
-        "typ": 0.9,
+        "typ": null,
         "max": 0.927,
         "unit": "V",
         "conditions": "For -3E devices",
@@ -904,11 +876,23 @@
         "temp_range": "full"
       },
       {
+        "parameter": "Internal supply voltage",
+        "raw_name": "VCCINT",
+        "symbol": "VCCINT",
+        "min": null,
+        "typ": 0.9,
+        "max": null,
+        "unit": "V",
+        "conditions": "For -3E devices",
+        "device": "-3E",
+        "temp_range": "25C"
+      },
+      {
         "parameter": "Internal supply voltage for the I/O banks",
         "raw_name": "VCCINT_IO",
         "symbol": "VCCINT_IO",
         "min": 0.825,
-        "typ": 0.85,
+        "typ": null,
         "max": 0.876,
         "unit": "V",
         "conditions": "Standard",
@@ -919,20 +903,20 @@
         "parameter": "Internal supply voltage for the I/O banks",
         "raw_name": "VCCINT_IO",
         "symbol": "VCCINT_IO",
-        "min": 0.873,
-        "typ": 0.9,
-        "max": 0.927,
+        "min": null,
+        "typ": 0.85,
+        "max": null,
         "unit": "V",
-        "conditions": "For -3E devices",
-        "device": "-3E",
-        "temp_range": "full"
+        "conditions": "Standard",
+        "device": "All",
+        "temp_range": "25C"
       },
       {
         "parameter": "Block RAM and UltraRAM supply voltage",
         "raw_name": "VCCBRAM",
         "symbol": "VCCBRAM",
         "min": 0.825,
-        "typ": 0.85,
+        "typ": null,
         "max": 0.876,
         "unit": "V",
         "conditions": "Standard",
@@ -943,13 +927,13 @@
         "parameter": "Block RAM and UltraRAM supply voltage",
         "raw_name": "VCCBRAM",
         "symbol": "VCCBRAM",
-        "min": 0.873,
-        "typ": 0.9,
-        "max": 0.927,
+        "min": null,
+        "typ": 0.85,
+        "max": null,
         "unit": "V",
-        "conditions": "For -3E devices",
-        "device": "-3E",
-        "temp_range": "full"
+        "conditions": "Standard",
+        "device": "All",
+        "temp_range": "25C"
       },
       {
         "parameter": "Auxiliary supply voltage",
@@ -1012,96 +996,12 @@
         "temp_range": "full"
       },
       {
-        "parameter": "Maximum current through any pin in a powered or unpowered bank when forward biasing the clamp diode",
-        "raw_name": "IIN",
-        "symbol": "IIN",
-        "min": null,
-        "typ": null,
-        "max": 10,
-        "unit": "mA",
-        "conditions": null,
-        "device": "All",
-        "temp_range": "full"
-      },
-      {
         "parameter": "Battery voltage",
         "raw_name": "VBATT",
         "symbol": "VBATT",
         "min": 1.0,
         "typ": null,
         "max": 1.89,
-        "unit": "V",
-        "conditions": null,
-        "device": "All",
-        "temp_range": "full"
-      },
-      {
-        "parameter": "Analog supply voltage for the GTH or GTY transceiver",
-        "raw_name": "VMGTAVCC",
-        "symbol": "VMGTAVCC",
-        "min": 0.873,
-        "typ": 0.9,
-        "max": 0.927,
-        "unit": "V",
-        "conditions": null,
-        "device": "All",
-        "temp_range": "full"
-      },
-      {
-        "parameter": "Analog supply voltage for the GTH or GTY transmitter and receiver termination circuits",
-        "raw_name": "VMGTAVTT",
-        "symbol": "VMGTAVTT",
-        "min": 1.164,
-        "typ": 1.2,
-        "max": 1.236,
-        "unit": "V",
-        "conditions": null,
-        "device": "All",
-        "temp_range": "full"
-      },
-      {
-        "parameter": "Auxiliary analog QPLL voltage supply for the transceivers",
-        "raw_name": "VMGTVCCAUX",
-        "symbol": "VMGTVCCAUX",
-        "min": 1.746,
-        "typ": 1.8,
-        "max": 1.854,
-        "unit": "V",
-        "conditions": null,
-        "device": "All",
-        "temp_range": "full"
-      },
-      {
-        "parameter": "Analog supply voltage for the resistor calibration circuit of the GTH or GTY transceiver column",
-        "raw_name": "VMGTAVTTRCAL",
-        "symbol": "VMGTAVTTRCAL",
-        "min": 1.164,
-        "typ": 1.2,
-        "max": 1.236,
-        "unit": "V",
-        "conditions": null,
-        "device": "All",
-        "temp_range": "full"
-      },
-      {
-        "parameter": "System Monitor supply relative to GNDADC",
-        "raw_name": "VCCADC",
-        "symbol": "VCCADC",
-        "min": 1.746,
-        "typ": 1.8,
-        "max": 1.854,
-        "unit": "V",
-        "conditions": null,
-        "device": "All",
-        "temp_range": "full"
-      },
-      {
-        "parameter": "System Monitor externally supplied reference voltage relative to GNDADC",
-        "raw_name": "VREFP",
-        "symbol": "VREFP",
-        "min": 1.2,
-        "typ": 1.25,
-        "max": 1.3,
         "unit": "V",
         "conditions": null,
         "device": "All",
@@ -1180,14 +1080,14 @@
         "temp_range": "full"
       },
       {
-        "parameter": "Input or output leakage current per pin (HD I/O and HP I/O)",
+        "parameter": "Input or output leakage current per pin",
         "raw_name": "IL",
         "symbol": "IL",
         "min": null,
         "typ": null,
         "max": 15,
         "unit": "µA",
-        "conditions": "sample-tested",
+        "conditions": "HD I/O and HP I/O",
         "device": "All",
         "temp_range": "full"
       },
@@ -1216,63 +1116,195 @@
         "temp_range": "full"
       },
       {
-        "parameter": "Pad pull-up (when selected) at VIN = 0V, VCCO = 3.3V",
+        "parameter": "Pad pull-up current",
         "raw_name": "IRPU",
         "symbol": "IRPU",
         "min": 75,
         "typ": null,
         "max": 190,
         "unit": "µA",
-        "conditions": null,
+        "conditions": "VIN = 0V, VCCO = 3.3V",
         "device": "All",
         "temp_range": "full"
       },
       {
-        "parameter": "Pad pull-down (when selected) at VIN = 3.3V",
+        "parameter": "Pad pull-up current",
+        "raw_name": "IRPU",
+        "symbol": "IRPU",
+        "min": 50,
+        "typ": null,
+        "max": 169,
+        "unit": "µA",
+        "conditions": "VIN = 0V, VCCO = 2.5V",
+        "device": "All",
+        "temp_range": "full"
+      },
+      {
+        "parameter": "Pad pull-up current",
+        "raw_name": "IRPU",
+        "symbol": "IRPU",
+        "min": 60,
+        "typ": null,
+        "max": 120,
+        "unit": "µA",
+        "conditions": "VIN = 0V, VCCO = 1.8V",
+        "device": "All",
+        "temp_range": "full"
+      },
+      {
+        "parameter": "Pad pull-up current",
+        "raw_name": "IRPU",
+        "symbol": "IRPU",
+        "min": 30,
+        "typ": null,
+        "max": 120,
+        "unit": "µA",
+        "conditions": "VIN = 0V, VCCO = 1.5V",
+        "device": "All",
+        "temp_range": "full"
+      },
+      {
+        "parameter": "Pad pull-up current",
+        "raw_name": "IRPU",
+        "symbol": "IRPU",
+        "min": 10,
+        "typ": null,
+        "max": 100,
+        "unit": "µA",
+        "conditions": "VIN = 0V, VCCO = 1.2V",
+        "device": "All",
+        "temp_range": "full"
+      },
+      {
+        "parameter": "Pad pull-down current",
         "raw_name": "IRPD",
         "symbol": "IRPD",
         "min": 60,
         "typ": null,
         "max": 200,
         "unit": "µA",
-        "conditions": null,
+        "conditions": "VIN = 3.3V",
         "device": "All",
         "temp_range": "full"
       },
       {
-        "parameter": "Battery supply current at VBATT = 1.89V",
+        "parameter": "Pad pull-down current",
+        "raw_name": "IRPD",
+        "symbol": "IRPD",
+        "min": 29,
+        "typ": null,
+        "max": 120,
+        "unit": "µA",
+        "conditions": "VIN = 1.8V",
+        "device": "All",
+        "temp_range": "full"
+      },
+      {
+        "parameter": "Battery supply current",
         "raw_name": "IBATT",
         "symbol": "IBATT",
         "min": null,
         "typ": null,
         "max": 650,
         "unit": "nA",
-        "conditions": null,
+        "conditions": "VBATT = 1.89V",
         "device": "All",
         "temp_range": "full"
       },
       {
-        "parameter": "Battery supply current at VBATT = 1.20V",
+        "parameter": "Battery supply current",
         "raw_name": "IBATT",
         "symbol": "IBATT",
         "min": null,
         "typ": null,
         "max": 150,
         "unit": "nA",
-        "conditions": null,
+        "conditions": "VBATT = 1.20V",
         "device": "All",
         "temp_range": "full"
       },
       {
-        "parameter": "Ramp time from GND to 95% of VCCINT",
-        "raw_name": "TVCCINT",
-        "symbol": "TVCCINT",
-        "min": 0.2,
+        "parameter": "Internal VREF (50% VCCO)",
+        "raw_name": "Internal VREF",
+        "symbol": null,
+        "min": null,
         "typ": null,
-        "max": 40,
-        "unit": "ms",
+        "max": null,
+        "unit": "V",
+        "conditions": "50% VCCO",
+        "device": "All",
+        "temp_range": "full"
+      },
+      {
+        "parameter": "Internal VREF (50% VCCO)",
+        "raw_name": "Internal VREF",
+        "symbol": null,
+        "min": null,
+        "typ": 0.5,
+        "max": null,
+        "unit": "V",
+        "conditions": "50% VCCO, Typ is VCCO * 0.50",
+        "device": "All",
+        "temp_range": "25C"
+      },
+      {
+        "parameter": "Internal VREF (70% VCCO)",
+        "raw_name": "Internal VREF",
+        "symbol": null,
+        "min": null,
+        "typ": null,
+        "max": null,
+        "unit": "V",
+        "conditions": "70% VCCO",
+        "device": "All",
+        "temp_range": "full"
+      },
+      {
+        "parameter": "Internal VREF (70% VCCO)",
+        "raw_name": "Internal VREF",
+        "symbol": null,
+        "min": null,
+        "typ": 0.7,
+        "max": null,
+        "unit": "V",
+        "conditions": "70% VCCO, Typ is VCCO * 0.70",
+        "device": "All",
+        "temp_range": "25C"
+      },
+      {
+        "parameter": "Temperature diode ideality factor",
+        "raw_name": "n",
+        "symbol": "n",
+        "min": null,
+        "typ": 1.026,
+        "max": null,
+        "unit": null,
         "conditions": null,
         "device": "All",
+        "temp_range": "25C"
+      },
+      {
+        "parameter": "Temperature diode series resistance",
+        "raw_name": "r",
+        "symbol": "r",
+        "min": null,
+        "typ": 2,
+        "max": null,
+        "unit": "Ω",
+        "conditions": null,
+        "device": "All",
+        "temp_range": "25C"
+      },
+      {
+        "parameter": "Supply voltage (LVDS_25)",
+        "raw_name": "VCCO",
+        "symbol": "VCCO",
+        "min": 2.375,
+        "typ": 2.5,
+        "max": 2.625,
+        "unit": "V",
+        "conditions": "LVDS_25 DC Specifications",
+        "device": "HD I/O banks",
         "temp_range": "full"
       },
       {
@@ -1283,7 +1315,7 @@
         "typ": 350,
         "max": 600,
         "unit": "mV",
-        "conditions": null,
+        "conditions": "LVDS_25 DC Specifications",
         "device": "HD I/O banks",
         "temp_range": "full"
       },
@@ -1295,8 +1327,80 @@
         "typ": 1.2,
         "max": 1.425,
         "unit": "V",
-        "conditions": null,
+        "conditions": "LVDS_25 DC Specifications",
         "device": "HD I/O banks",
+        "temp_range": "full"
+      },
+      {
+        "parameter": "Supply voltage (LVDS)",
+        "raw_name": "VCCO",
+        "symbol": "VCCO",
+        "min": 1.71,
+        "typ": 1.8,
+        "max": 1.89,
+        "unit": "V",
+        "conditions": "LVDS DC Specifications",
+        "device": "HP I/O banks",
+        "temp_range": "full"
+      },
+      {
+        "parameter": "Differential output voltage (LVDS)",
+        "raw_name": "VODIFF",
+        "symbol": "VODIFF",
+        "min": 247,
+        "typ": 350,
+        "max": 454,
+        "unit": "mV",
+        "conditions": "RT = 100Ω across Q and Q_bar signals",
+        "device": "HP I/O banks",
+        "temp_range": "full"
+      },
+      {
+        "parameter": "Output common-mode voltage (LVDS)",
+        "raw_name": "VOCM",
+        "symbol": "VOCM",
+        "min": 1.0,
+        "typ": 1.25,
+        "max": 1.425,
+        "unit": "V",
+        "conditions": "RT = 100Ω across Q and Q_bar signals",
+        "device": "HP I/O banks",
+        "temp_range": "full"
+      },
+      {
+        "parameter": "Differential input voltage (LVDS)",
+        "raw_name": "VIDIFF",
+        "symbol": "VIDIFF",
+        "min": 100,
+        "typ": 350,
+        "max": 600,
+        "unit": "mV",
+        "conditions": "LVDS DC Specifications",
+        "device": "HP I/O banks",
+        "temp_range": "full"
+      },
+      {
+        "parameter": "Input common-mode voltage (DC coupling) (LVDS)",
+        "raw_name": "VICM_DC",
+        "symbol": "VICM_DC",
+        "min": 0.3,
+        "typ": 1.2,
+        "max": 1.425,
+        "unit": "V",
+        "conditions": "LVDS DC Specifications",
+        "device": "HP I/O banks",
+        "temp_range": "full"
+      },
+      {
+        "parameter": "Input common-mode voltage (AC coupling) (LVDS)",
+        "raw_name": "VICM_AC",
+        "symbol": "VICM_AC",
+        "min": 0.6,
+        "typ": null,
+        "max": 1.1,
+        "unit": "V",
+        "conditions": "LVDS DC Specifications",
+        "device": "HP I/O banks",
         "temp_range": "full"
       }
     ],
@@ -1305,10 +1409,128 @@
   "pin_extraction": {
     "logical_pins": [
       {
-        "name": "Global Clock Input",
+        "name": "VCCINT",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Internal supply voltage. Typical values: 0.720V, 0.850V, or 0.900V depending on speed grade and device type.",
+        "pin_group": "POWER_SUPPLY",
+        "packages": {},
+        "unused_treatment": null
+      },
+      {
+        "name": "VCCINT_IO",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Internal supply voltage for the I/O banks. Must be connected to VCCBRAM. Typical values: 0.720V, 0.850V, or 0.900V.",
+        "pin_group": "POWER_SUPPLY",
+        "packages": {},
+        "unused_treatment": null
+      },
+      {
+        "name": "VCCAUX",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Auxiliary supply voltage. Typical value: 1.800V (1.746V - 1.854V).",
+        "pin_group": "POWER_SUPPLY",
+        "packages": {},
+        "unused_treatment": null
+      },
+      {
+        "name": "VCCBRAM",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Supply voltage for the block RAM and UltraRAM. Typical values: 0.850V or 0.900V.",
+        "pin_group": "POWER_SUPPLY",
+        "packages": {},
+        "unused_treatment": null
+      },
+      {
+        "name": "VCCO",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Output drivers supply voltage. 1.140V - 3.400V for HD I/O banks, 0.950V - 1.900V for HP I/O banks and configuration bank 0.",
+        "pin_group": "POWER_SUPPLY",
+        "packages": {},
+        "unused_treatment": null
+      },
+      {
+        "name": "VCCAUX_IO",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Auxiliary supply voltage for the I/O banks. Must be connected to VCCAUX. Typical value: 1.800V (1.746V - 1.854V).",
+        "pin_group": "POWER_SUPPLY",
+        "packages": {},
+        "unused_treatment": null
+      },
+      {
+        "name": "VBATT",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Key memory battery backup supply. Range: 1.000V - 1.890V.",
+        "pin_group": "POWER_SUPPLY",
+        "packages": {},
+        "unused_treatment": null
+      },
+      {
+        "name": "VMGTAVCC",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Analog supply voltage for transceiver circuits. Typical value: 0.900V (0.873V - 0.927V).",
+        "pin_group": "POWER_SUPPLY",
+        "packages": {},
+        "unused_treatment": null
+      },
+      {
+        "name": "VMGTAVTT",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Analog supply voltage for transceiver termination circuits. Typical value: 1.200V (1.164V - 1.236V).",
+        "pin_group": "POWER_SUPPLY",
+        "packages": {},
+        "unused_treatment": null
+      },
+      {
+        "name": "VMGTVCCAUX",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Auxiliary analog QPLL voltage supply for transceivers. Typical value: 1.800V (1.746V - 1.854V).",
+        "pin_group": "POWER_SUPPLY",
+        "packages": {},
+        "unused_treatment": null
+      },
+      {
+        "name": "VMGTAVTTRCAL",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Analog supply voltage for the resistor calibration circuit of the transceiver column. Typical value: 1.200V (1.164V - 1.236V).",
+        "pin_group": "POWER_SUPPLY",
+        "packages": {},
+        "unused_treatment": null
+      },
+      {
+        "name": "VCCADC",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "System Monitor supply relative to GNDADC. Typical value: 1.800V (1.746V - 1.854V).",
+        "pin_group": "POWER_SUPPLY",
+        "packages": {},
+        "unused_treatment": null
+      },
+      {
+        "name": "VREF",
+        "direction": "INPUT",
+        "signal_type": "ANALOG",
+        "description": "Input reference voltage for HP I/O banks.",
+        "pin_group": "OTHER",
+        "packages": {},
+        "unused_treatment": null
+      },
+      {
+        "name": "TCK",
         "direction": "INPUT",
         "signal_type": "DIGITAL",
-        "description": "Global clock input for near and far clock regions",
+        "description": "JTAG test clock pin.",
+        "pin_group": "CONFIGURATION",
         "packages": {},
         "unused_treatment": null
       },
@@ -1316,7 +1538,8 @@
         "name": "A[28:00]",
         "direction": "OUTPUT",
         "signal_type": "DIGITAL",
-        "description": "BPI Master Flash Mode Address pins",
+        "description": "BPI master flash mode address bus.",
+        "pin_group": "CONFIGURATION",
         "packages": {},
         "unused_treatment": null
       },
@@ -1324,7 +1547,8 @@
         "name": "RS[1:0]",
         "direction": "OUTPUT",
         "signal_type": "DIGITAL",
-        "description": "BPI Master Flash Mode Revision Select pins",
+        "description": "BPI master flash mode revision select pins.",
+        "pin_group": "CONFIGURATION",
         "packages": {},
         "unused_treatment": null
       },
@@ -1332,7 +1556,8 @@
         "name": "FCS_B",
         "direction": "OUTPUT",
         "signal_type": "DIGITAL",
-        "description": "Flash Chip Select",
+        "description": "Flash chip select pin for BPI and SPI modes.",
+        "pin_group": "CONFIGURATION",
         "packages": {},
         "unused_treatment": null
       },
@@ -1340,7 +1565,8 @@
         "name": "FOE_B",
         "direction": "OUTPUT",
         "signal_type": "DIGITAL",
-        "description": "Flash Output Enable",
+        "description": "BPI master flash mode output enable pin.",
+        "pin_group": "CONFIGURATION",
         "packages": {},
         "unused_treatment": null
       },
@@ -1348,7 +1574,8 @@
         "name": "FWE_B",
         "direction": "OUTPUT",
         "signal_type": "DIGITAL",
-        "description": "Flash Write Enable",
+        "description": "BPI master flash mode write enable pin.",
+        "pin_group": "CONFIGURATION",
         "packages": {},
         "unused_treatment": null
       },
@@ -1356,15 +1583,17 @@
         "name": "ADV_B",
         "direction": "OUTPUT",
         "signal_type": "DIGITAL",
-        "description": "Address Valid",
+        "description": "BPI master flash mode address valid pin.",
+        "pin_group": "CONFIGURATION",
         "packages": {},
         "unused_treatment": null
       },
       {
-        "name": "D[15:00]",
+        "name": "D[31:00]",
         "direction": "BIDIRECTIONAL",
         "signal_type": "DIGITAL",
-        "description": "Data pins for BPI/SPI Master Flash Mode",
+        "description": "Configuration data bus pins.",
+        "pin_group": "CONFIGURATION",
         "packages": {},
         "unused_treatment": null
       },
@@ -1372,7 +1601,8 @@
         "name": "MOSI",
         "direction": "OUTPUT",
         "signal_type": "DIGITAL",
-        "description": "SPI Master Out Slave In",
+        "description": "SPI master flash mode master-out slave-in data pin.",
+        "pin_group": "CONFIGURATION",
         "packages": {},
         "unused_treatment": null
       },
@@ -1380,15 +1610,8 @@
         "name": "FCS2_B",
         "direction": "OUTPUT",
         "signal_type": "DIGITAL",
-        "description": "SPI Master Flash Mode Second Chip Select",
-        "packages": {},
-        "unused_treatment": null
-      },
-      {
-        "name": "CCLK",
-        "direction": "OUTPUT",
-        "signal_type": "DIGITAL",
-        "description": "Configuration Clock",
+        "description": "Secondary flash chip select pin for SPI mode.",
+        "pin_group": "CONFIGURATION",
         "packages": {},
         "unused_treatment": null
       },
@@ -1396,7 +1619,71 @@
         "name": "DONE",
         "direction": "BIDIRECTIONAL",
         "signal_type": "DIGITAL",
-        "description": "Configuration Done",
+        "description": "Configuration status pin, indicates completion of the configuration process.",
+        "pin_group": "CONFIGURATION",
+        "packages": {},
+        "unused_treatment": null
+      },
+      {
+        "name": "POR_OVERRIDE",
+        "direction": "INPUT",
+        "signal_type": "DIGITAL",
+        "description": "Power-on reset override pin. Must be connected to either GND (default) or VCCINT.",
+        "pin_group": "CONFIGURATION",
+        "packages": {},
+        "unused_treatment": null
+      },
+      {
+        "name": "CCLK",
+        "direction": "BIDIRECTIONAL",
+        "signal_type": "DIGITAL",
+        "description": "Configuration clock pin.",
+        "pin_group": "CONFIGURATION",
+        "packages": {},
+        "unused_treatment": null
+      },
+      {
+        "name": "EMCCLK",
+        "direction": "INPUT",
+        "signal_type": "DIGITAL",
+        "description": "External master configuration clock pin.",
+        "pin_group": "CONFIGURATION",
+        "packages": {},
+        "unused_treatment": null
+      },
+      {
+        "name": "RXP/RXN",
+        "direction": "INPUT",
+        "signal_type": "ANALOG",
+        "description": "Transceiver receiver differential input pair. Absolute input voltage range: -0.500V to 1.200V.",
+        "pin_group": "TRANSCEIVER",
+        "packages": {},
+        "unused_treatment": null
+      },
+      {
+        "name": "TXP/TXN",
+        "direction": "OUTPUT",
+        "signal_type": "ANALOG",
+        "description": "Transceiver transmitter differential output pair. Absolute input voltage range: -0.500V to 1.200V.",
+        "pin_group": "TRANSCEIVER",
+        "packages": {},
+        "unused_treatment": null
+      },
+      {
+        "name": "VMGTREFCLK",
+        "direction": "INPUT",
+        "signal_type": "ANALOG",
+        "description": "Transceiver reference clock absolute input voltage. Range: -0.500V to 1.300V.",
+        "pin_group": "TRANSCEIVER",
+        "packages": {},
+        "unused_treatment": null
+      },
+      {
+        "name": "VREFP",
+        "direction": "INPUT",
+        "signal_type": "ANALOG",
+        "description": "System Monitor externally supplied reference voltage relative to GNDADC. Typical value: 1.250V (1.200V - 1.300V).",
+        "pin_group": "SYSTEM_MONITOR",
         "packages": {},
         "unused_treatment": null
       }
@@ -1405,56 +1692,7 @@
   "pin_index": {
     "packages": {}
   },
-  "pin_validation": [
-    {
-      "level": "error",
-      "message": "pin[0] 'Global Clock Input': packages dict is empty"
-    },
-    {
-      "level": "error",
-      "message": "pin[1] 'A[28:00]': packages dict is empty"
-    },
-    {
-      "level": "error",
-      "message": "pin[2] 'RS[1:0]': packages dict is empty"
-    },
-    {
-      "level": "error",
-      "message": "pin[3] 'FCS_B': packages dict is empty"
-    },
-    {
-      "level": "error",
-      "message": "pin[4] 'FOE_B': packages dict is empty"
-    },
-    {
-      "level": "error",
-      "message": "pin[5] 'FWE_B': packages dict is empty"
-    },
-    {
-      "level": "error",
-      "message": "pin[6] 'ADV_B': packages dict is empty"
-    },
-    {
-      "level": "error",
-      "message": "pin[7] 'D[15:00]': packages dict is empty"
-    },
-    {
-      "level": "error",
-      "message": "pin[8] 'MOSI': packages dict is empty"
-    },
-    {
-      "level": "error",
-      "message": "pin[9] 'FCS2_B': packages dict is empty"
-    },
-    {
-      "level": "error",
-      "message": "pin[10] 'CCLK': packages dict is empty"
-    },
-    {
-      "level": "error",
-      "message": "pin[11] 'DONE': packages dict is empty"
-    }
-  ],
+  "pin_validation": [],
   "validation": [
     {
       "param": "Internal supply voltage",
@@ -1601,18 +1839,6 @@
       "message": "OK (modes: ALGEBRAIC)"
     },
     {
-      "param": "Internal supply voltage for the I/O banks",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK (modes: ALGEBRAIC)"
-    },
-    {
-      "param": "Block RAM and UltraRAM supply voltage",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK (modes: ALGEBRAIC)"
-    },
-    {
       "param": "Block RAM and UltraRAM supply voltage",
       "rule": "monotonicity",
       "passed": true,
@@ -1649,42 +1875,6 @@
       "message": "OK (modes: ALGEBRAIC)"
     },
     {
-      "param": "Analog supply voltage for the GTH or GTY transceiver",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK (modes: ALGEBRAIC)"
-    },
-    {
-      "param": "Analog supply voltage for the GTH or GTY transmitter and receiver termination circuits",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK (modes: ALGEBRAIC)"
-    },
-    {
-      "param": "Auxiliary analog QPLL voltage supply for the transceivers",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK (modes: ALGEBRAIC)"
-    },
-    {
-      "param": "Analog supply voltage for the resistor calibration circuit of the GTH or GTY transceiver column",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK (modes: ALGEBRAIC)"
-    },
-    {
-      "param": "System Monitor supply relative to GNDADC",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK (modes: ALGEBRAIC)"
-    },
-    {
-      "param": "System Monitor externally supplied reference voltage relative to GNDADC",
-      "rule": "monotonicity",
-      "passed": true,
-      "message": "OK (modes: ALGEBRAIC)"
-    },
-    {
       "param": "Junction temperature operating range for extended (E) temperature devices",
       "rule": "monotonicity",
       "passed": true,
@@ -1703,19 +1893,49 @@
       "message": "OK (modes: ALGEBRAIC)"
     },
     {
-      "param": "Pad pull-up (when selected) at VIN = 0V, VCCO = 3.3V",
+      "param": "Pad pull-up current",
       "rule": "monotonicity",
       "passed": true,
       "message": "OK (modes: ALGEBRAIC)"
     },
     {
-      "param": "Pad pull-down (when selected) at VIN = 3.3V",
+      "param": "Pad pull-up current",
       "rule": "monotonicity",
       "passed": true,
       "message": "OK (modes: ALGEBRAIC)"
     },
     {
-      "param": "Ramp time from GND to 95% of VCCINT",
+      "param": "Pad pull-up current",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Pad pull-up current",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Pad pull-up current",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Pad pull-down current",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Pad pull-down current",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Supply voltage (LVDS_25)",
       "rule": "monotonicity",
       "passed": true,
       "message": "OK (modes: ALGEBRAIC)"
@@ -1731,22 +1951,101 @@
       "rule": "monotonicity",
       "passed": true,
       "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Supply voltage (LVDS)",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Differential output voltage (LVDS)",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Output common-mode voltage (LVDS)",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Differential input voltage (LVDS)",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Input common-mode voltage (DC coupling) (LVDS)",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Input common-mode voltage (AC coupling) (LVDS)",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
     }
   ],
-  "physics_validation": [],
+  "physics_validation": [
+    {
+      "param": "Internal supply voltage (All)",
+      "rule": "temp_envelope",
+      "passed": true,
+      "message": "OK (mode: ALGEBRAIC)"
+    },
+    {
+      "param": "Internal supply voltage (-1LI, -2LE)",
+      "rule": "temp_envelope",
+      "passed": true,
+      "message": "OK (mode: ALGEBRAIC)"
+    },
+    {
+      "param": "Internal supply voltage (-3E)",
+      "rule": "temp_envelope",
+      "passed": true,
+      "message": "OK (mode: ALGEBRAIC)"
+    },
+    {
+      "param": "Internal supply voltage for the I/O banks (All)",
+      "rule": "temp_envelope",
+      "passed": true,
+      "message": "OK (mode: ALGEBRAIC)"
+    },
+    {
+      "param": "Block RAM and UltraRAM supply voltage (All)",
+      "rule": "temp_envelope",
+      "passed": true,
+      "message": "OK (mode: ALGEBRAIC)"
+    },
+    {
+      "param": "Internal VREF (50% VCCO) (All)",
+      "rule": "temp_envelope",
+      "passed": true,
+      "message": "OK (mode: ALGEBRAIC)"
+    },
+    {
+      "param": "Internal VREF (70% VCCO) (All)",
+      "rule": "temp_envelope",
+      "passed": true,
+      "message": "OK (mode: ALGEBRAIC)"
+    }
+  ],
   "cross_validation": {
-    "total_extracted_values": 54,
-    "values_found_in_pdf": 54,
+    "total_extracted_values": 65,
+    "values_found_in_pdf": 65,
     "values_not_in_pdf": [],
     "value_coverage_pct": 100.0,
-    "total_params": 65,
-    "params_verified": 65,
+    "total_params": 72,
+    "params_verified": 72,
     "params_suspicious": 0,
     "suspicious_params": []
   },
   "timing": {
-    "l0_classify_s": 0.338,
-    "l1a_extract_s": 56.388,
-    "l1b_pin_s": 37.636
+    "l0_classify_s": 0.315,
+    "l1a_extract_s": 68.714,
+    "l1b_pin_s": 59.519
   }
 }
