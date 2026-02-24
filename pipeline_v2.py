@@ -100,6 +100,9 @@ class DatasheetValueValidator:
                 elif last_char in self.minus_chars:
                     if re.search(fr'\+/?\s*[{mc_escaped}]$', preceding_stripped):
                         signs = [1.0, -1.0]
+                    # Multi-dash (2+) = table separator / "no data" marker, not negative sign
+                    elif len(preceding_stripped) >= 2 and preceding_stripped[-2] in self.minus_chars:
+                        signs = [1.0]
                     else:
                         before_minus_exact = preceding_stripped[:-1]
                         before_minus_stripped = before_minus_exact.rstrip()
