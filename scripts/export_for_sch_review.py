@@ -334,24 +334,22 @@ def main():
             package = pinout_data["package"]
 
             # Find matching DC datasheet
-            # XCKU3P → ds922-kintex-ultrascale-plus
             dc_data = None
-            for dc_file in fpga_dc_files:
-                with open(dc_file) as fp:
-                    candidate = json.load(fp)
-                # Match by family
-                if "kintex" in dc_file.name.lower() and "KU" in device:
-                    dc_data = candidate
-                    break
-                elif "artix" in dc_file.name.lower() and "AU" in device:
-                    dc_data = candidate
-                    break
+            vendor = pinout_data.get("_vendor", "")
 
-            if dc_data is None and fpga_dc_files:
-                # Fallback: use first available
-                with open(fpga_dc_files[0]) as fp:
-                    dc_data = json.load(fp)
+            if vendor != "Gowin":
+                # AMD: match by family
+                for dc_file in fpga_dc_files:
+                    with open(dc_file) as fp:
+                        candidate = json.load(fp)
+                    if "kintex" in dc_file.name.lower() and "KU" in device:
+                        dc_data = candidate
+                        break
+                    elif "artix" in dc_file.name.lower() and "AU" in device:
+                        dc_data = candidate
+                        break
 
+            # No fallback — if no matching DC datasheet, use empty
             if dc_data is None:
                 dc_data = {"extraction": {"component": {}}}
 
