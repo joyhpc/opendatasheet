@@ -246,12 +246,19 @@ def export_fpga(dc_data: dict, pinout_data: dict) -> dict:
     # Pinout already has: pins, banks, diff_pairs, power_rails, drc_rules, lookup
     device = pinout_data["device"]
     package = pinout_data["package"]
+    vendor = pinout_data.get("_vendor", "AMD")  # Gowin sets _vendor
+
+    # Determine manufacturer
+    if vendor == "Gowin":
+        manufacturer = "Gowin"
+    else:
+        manufacturer = comp.get("manufacturer", "AMD")
 
     result = {
         "_schema": "sch-review-device/1.0",
         "_type": "fpga",
         "mpn": device,
-        "manufacturer": comp.get("manufacturer", "AMD"),
+        "manufacturer": manufacturer,
         "category": "FPGA",
         "description": comp.get("description"),
         "package": package,
