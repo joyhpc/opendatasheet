@@ -1,0 +1,248 @@
+{
+  "_schema": "sch-review-device/1.0",
+  "_type": "normal_ic",
+  "mpn": "XL4003",
+  "manufacturer": "XLSEMI",
+  "category": "Buck",
+  "description": "4A 300KHz 32V Buck DC to DC Converter",
+  "packages": {
+    "TO252-5L": {
+      "pin_count": 6,
+      "pins": {
+        "1": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground Pin. Should be placed outside of the Schottky Diode to output capacitor ground path to prevent noise induction.",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "FB",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Feedback Pin (FB). Senses the output voltage through an external resistor divider for regulation. Threshold is 0.8V.",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "SW",
+          "direction": "OUTPUT",
+          "signal_type": "POWER",
+          "description": "Power Switch Output Pin (SW). The switch node that supplies power to the output.",
+          "unused_treatment": null
+        },
+        "TAB": {
+          "name": "SW",
+          "direction": "OUTPUT",
+          "signal_type": "POWER",
+          "description": "Power Switch Output Pin (SW). The switch node that supplies power to the output.",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "EN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Enable Pin. Drive high to turn on the device, drive low to turn it off.",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "VIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Supply Voltage Input Pin. Operates from 5V to 32V. Requires bypass capacitor to GND.",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "absolute_maximum_ratings": {
+    "Vin": {
+      "parameter": "Input Voltage",
+      "min": -0.3,
+      "max": 35.0,
+      "unit": "V",
+      "conditions": null
+    },
+    "VFB": {
+      "parameter": "Feedback Pin Voltage",
+      "min": -0.3,
+      "max": null,
+      "unit": "V",
+      "conditions": "Max is Vin"
+    },
+    "VEN": {
+      "parameter": "EN Pin Voltage",
+      "min": -0.3,
+      "max": null,
+      "unit": "V",
+      "conditions": "Max is Vin"
+    },
+    "VOutput": {
+      "parameter": "Output Switch Pin Voltage",
+      "min": -0.3,
+      "max": null,
+      "unit": "V",
+      "conditions": "Max is Vin"
+    },
+    "PD": {
+      "parameter": "Power Dissipation",
+      "min": null,
+      "max": null,
+      "unit": "mW",
+      "conditions": "Internally limited"
+    },
+    "RJA": {
+      "parameter": "Thermal Resistance (TO252)",
+      "min": null,
+      "max": null,
+      "unit": "°C/W",
+      "conditions": "No Heatsink, Free Air"
+    },
+    "TJ": {
+      "parameter": "Operating Junction Temperature",
+      "min": -40.0,
+      "max": 125.0,
+      "unit": "°C",
+      "conditions": null
+    },
+    "TSTG": {
+      "parameter": "Storage Temperature",
+      "min": -65.0,
+      "max": 150.0,
+      "unit": "°C",
+      "conditions": null
+    },
+    "TLEAD": {
+      "parameter": "Lead Temperature (Soldering, 10 sec)",
+      "min": null,
+      "max": null,
+      "unit": "°C",
+      "conditions": null
+    }
+  },
+  "electrical_parameters": {
+    "VFB": {
+      "parameter": "Feedback Voltage",
+      "min": 0.776,
+      "typ": 0.8,
+      "max": 0.824,
+      "unit": "V",
+      "conditions": "Vin = 7V to 32V, Vout=5V, Iload=0.3A to 4A"
+    },
+    "η": {
+      "parameter": "Efficiency",
+      "min": null,
+      "typ": 90.0,
+      "max": null,
+      "unit": "%",
+      "conditions": "Vin=12V, Vout=5V, Iout=4A"
+    },
+    "Vin": {
+      "parameter": "Input operation voltage",
+      "min": 5.0,
+      "typ": null,
+      "max": 32.0,
+      "unit": "V",
+      "conditions": null
+    },
+    "ISTBY": {
+      "parameter": "Shutdown Supply Current",
+      "min": null,
+      "typ": 60.0,
+      "max": 200.0,
+      "unit": "uA",
+      "conditions": "VEN=0V"
+    },
+    "Iq": {
+      "parameter": "Quiescent Supply Current",
+      "min": null,
+      "typ": 3.0,
+      "max": 5.0,
+      "unit": "mA",
+      "conditions": "VEN=2V, VFB=Vin"
+    },
+    "Fosc": {
+      "parameter": "Oscillator Frequency",
+      "min": 240.0,
+      "typ": 300.0,
+      "max": 360.0,
+      "unit": "Khz",
+      "conditions": null
+    },
+    "IL": {
+      "parameter": "Switch Current Limit",
+      "min": null,
+      "typ": 6.0,
+      "max": null,
+      "unit": "A",
+      "conditions": "VFB=0"
+    },
+    "VEN": {
+      "parameter": "EN Pin Threshold High",
+      "min": null,
+      "typ": 1.4,
+      "max": null,
+      "unit": "V",
+      "conditions": "High (Regulator ON)"
+    },
+    "VEN_Low__Regulator_OFF": {
+      "parameter": "EN Pin Threshold Low",
+      "min": null,
+      "typ": 0.8,
+      "max": null,
+      "unit": "V",
+      "conditions": "Low (Regulator OFF)"
+    },
+    "IH": {
+      "parameter": "EN Pin Input Leakage Current (High)",
+      "min": null,
+      "typ": 1.0,
+      "max": 15.0,
+      "unit": "uA",
+      "conditions": "VEN=2V (ON)"
+    },
+    "IL_VEN_0V__OFF": {
+      "parameter": "EN Pin Input Leakage Current (Low)",
+      "min": null,
+      "typ": 1.0,
+      "max": 15.0,
+      "unit": "uA",
+      "conditions": "VEN=0V (OFF)"
+    },
+    "DMAX": {
+      "parameter": "Max. Duty Cycle",
+      "min": null,
+      "typ": 100.0,
+      "max": null,
+      "unit": "%",
+      "conditions": "VFB=0V"
+    }
+  },
+  "drc_hints": {
+    "vin_abs_max": {
+      "value": 35.0,
+      "unit": "V"
+    },
+    "vin_operating": {
+      "min": 5.0,
+      "max": 32.0,
+      "unit": "V"
+    },
+    "vref": {
+      "min": 0.776,
+      "typ": 0.8,
+      "max": 0.824,
+      "unit": "V"
+    },
+    "iq": {
+      "typ": 3.0,
+      "max": 5.0,
+      "unit": "mA"
+    },
+    "enable_threshold": {
+      "min": null,
+      "typ": 1.4,
+      "max": null,
+      "unit": "V"
+    }
+  }
+}

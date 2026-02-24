@@ -1,0 +1,107 @@
+{
+  "_schema": "sch-review-device/1.0",
+  "_type": "normal_ic",
+  "mpn": "CN5711",
+  "manufacturer": "CONSONANCE",
+  "category": "LED Driver",
+  "description": "High-brightness LED driver IC with constant output current up to 1.5A and thermal regulation.",
+  "packages": {
+    "SOP8": {
+      "pin_count": 8,
+      "pins": {
+        "1": {
+          "name": "ISET",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "LED current setting pin; connect an external resistor to GND to set the current",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "VCC",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power supply input",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "VCC",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power supply input",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "LED",
+          "direction": "OUTPUT",
+          "signal_type": "POWER",
+          "description": "LED current sink output terminal",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "LED",
+          "direction": "OUTPUT",
+          "signal_type": "POWER",
+          "description": "LED current sink output terminal",
+          "unused_treatment": null
+        },
+        "7": {
+          "name": "NC",
+          "direction": "NC",
+          "signal_type": "NONE",
+          "description": "No internal connection",
+          "unused_treatment": null
+        },
+        "8": {
+          "name": "CE",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Chip enable input",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "absolute_maximum_ratings": {},
+  "electrical_parameters": {
+    "VCC": {
+      "parameter": "Operating Voltage",
+      "min": 2.8,
+      "typ": null,
+      "max": 6.0,
+      "unit": "V",
+      "conditions": null
+    },
+    "ILED": {
+      "parameter": "LED Pin Output Current",
+      "min": null,
+      "typ": null,
+      "max": 1.5,
+      "unit": "A",
+      "conditions": null
+    },
+    "Ta": {
+      "parameter": "Operating Ambient Temperature Range",
+      "min": -40,
+      "typ": null,
+      "max": 85,
+      "unit": "°C",
+      "conditions": null
+    },
+    "ILED_Set_by_external_resistor": {
+      "parameter": "Current Regulation Range",
+      "min": 0.03,
+      "typ": null,
+      "max": 1.5,
+      "unit": "A",
+      "conditions": "Set by external resistor"
+    }
+  },
+  "drc_hints": {}
+}

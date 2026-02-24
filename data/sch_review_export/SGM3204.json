@@ -1,0 +1,177 @@
+{
+  "_schema": "sch-review-device/1.0",
+  "_type": "normal_ic",
+  "mpn": "SGM3204",
+  "manufacturer": "SGMICRO",
+  "category": "Other",
+  "description": "Unregulated 200mA Charge Pump Voltage Inverter",
+  "packages": {
+    "SOT-23-6": {
+      "pin_count": 6,
+      "pins": {
+        "1": {
+          "name": "OUT",
+          "direction": "POWER_OUT",
+          "signal_type": "POWER",
+          "description": "Power Output with VOUT = -VIN. Bypass OUT to GND with the output filter capacitor COUT.",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "IN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Supply Input. Connect to an input supply in the 1.4V to 5.5V range. Bypass IN to GND with a capacitor that has the same value as the flying capacitor.",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "CFLY-",
+          "direction": "PASSIVE",
+          "signal_type": "ANALOG",
+          "description": "Negative Terminal of the Flying Capacitor CFLY.",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground.",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "EN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Enable Control. When EN = “High”, chip is in active mode. When EN = “Low”, chip is in shutdown mode.",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "CFLY+",
+          "direction": "PASSIVE",
+          "signal_type": "ANALOG",
+          "description": "Positive Terminal of the Flying Capacitor CFLY.",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "absolute_maximum_ratings": {
+    "VIN": {
+      "parameter": "Input Voltage",
+      "min": -0.3,
+      "max": 6.0,
+      "unit": "V",
+      "conditions": null
+    },
+    "VOUT": {
+      "parameter": "Output Voltage",
+      "min": -6.0,
+      "max": 0.3,
+      "unit": "V",
+      "conditions": null
+    }
+  },
+  "electrical_parameters": {
+    "VIN": {
+      "parameter": "Input Voltage Range",
+      "min": 1.4,
+      "typ": null,
+      "max": 5.5,
+      "unit": "V",
+      "conditions": "RL = 5kΩ"
+    },
+    "IOUT": {
+      "parameter": "Maximum Output Current at OUT",
+      "min": 200.0,
+      "typ": null,
+      "max": null,
+      "unit": "mA",
+      "conditions": null
+    },
+    "VOUT": {
+      "parameter": "Output Voltage",
+      "min": null,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": "typ = -VIN"
+    },
+    "VPP": {
+      "parameter": "Output Voltage Ripple",
+      "min": null,
+      "typ": 30.0,
+      "max": null,
+      "unit": "mVP-P",
+      "conditions": "IOUT = 100mA, CFLY = COUT = 3.3µF"
+    },
+    "IQ": {
+      "parameter": "Quiescent Current",
+      "min": null,
+      "typ": 1.5,
+      "max": 1.75,
+      "unit": "mA",
+      "conditions": "No Load Input Current"
+    },
+    "IQ_No_Load_Input_Current": {
+      "parameter": "Quiescent Current",
+      "min": null,
+      "typ": null,
+      "max": 1.84,
+      "unit": "mA",
+      "conditions": "No Load Input Current"
+    },
+    "IQ_Shutdown_mode": {
+      "parameter": "Quiescent Current (Shutdown)",
+      "min": null,
+      "typ": null,
+      "max": 3.0,
+      "unit": "µA",
+      "conditions": "Shutdown mode"
+    },
+    "fOSC": {
+      "parameter": "Internal Switching Frequency",
+      "min": 750.0,
+      "typ": null,
+      "max": 1150.0,
+      "unit": "kHz",
+      "conditions": null
+    },
+    "VINH": {
+      "parameter": "Input High Voltage",
+      "min": 1.5,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": null
+    },
+    "VINL": {
+      "parameter": "Input Low Voltage",
+      "min": null,
+      "typ": null,
+      "max": 0.4,
+      "unit": "V",
+      "conditions": null
+    }
+  },
+  "drc_hints": {
+    "vin_abs_max": {
+      "value": 6.0,
+      "unit": "V"
+    },
+    "vin_operating": {
+      "min": 1.4,
+      "max": 5.5,
+      "unit": "V"
+    },
+    "vout": {
+      "min": null,
+      "typ": null,
+      "max": null,
+      "unit": "V"
+    },
+    "iq": {
+      "typ": 1.5,
+      "max": 1.75,
+      "unit": "mA"
+    }
+  }
+}

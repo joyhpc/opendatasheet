@@ -1,0 +1,549 @@
+{
+  "_schema": "sch-review-device/1.0",
+  "_type": "normal_ic",
+  "mpn": "MAX9377/MAX9378",
+  "manufacturer": "Maxim",
+  "category": "Interface",
+  "description": "Anything-to-LVPECL/LVDS Translators with Pin-Selectable Divide-by-Four",
+  "packages": {
+    "8-pin μMAX": {
+      "pin_count": 8,
+      "pins": {
+        "1": {
+          "name": "SEL",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Frequency Divider Select Input. High = divide by four, low = no division. Internal 75kΩ pulldown to GND.",
+          "unused_treatment": "FLOAT"
+        },
+        "2": {
+          "name": "IN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Differential LVDS/Any Noninverting Input",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "IN_B",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Differential LVDS/Any Inverting Input",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "RST",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Frequency Divider Reset Input. Active high, asynchronous, reset. Internal 75kΩ pulldown to GND.",
+          "unused_treatment": "FLOAT"
+        },
+        "6": {
+          "name": "OUT_B",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "Differential LVPECL (MAX9377) or LVDS (MAX9378) Inverting Output",
+          "unused_treatment": null
+        },
+        "7": {
+          "name": "OUT",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "Differential LVPECL (MAX9377) or LVDS (MAX9378) Noninverting Output",
+          "unused_treatment": null
+        },
+        "8": {
+          "name": "VCC",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Positive Supply. Bypass from VCC to GND with 0.1μF and 0.01μF ceramic capacitors.",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "absolute_maximum_ratings": {
+    "VCC": {
+      "parameter": "Supply Voltage",
+      "min": -0.3,
+      "max": 4.1,
+      "unit": "V",
+      "conditions": null
+    },
+    "VIN": {
+      "parameter": "Input Voltage",
+      "min": -0.3,
+      "max": null,
+      "unit": "V",
+      "conditions": "to (VCC + 0.3V)"
+    },
+    "VID": {
+      "parameter": "Differential Input Voltage",
+      "min": -3.0,
+      "max": 3.0,
+      "unit": "V",
+      "conditions": null
+    },
+    "PD": {
+      "parameter": "Continuous Power Dissipation",
+      "min": null,
+      "max": 470.6,
+      "unit": "mW",
+      "conditions": "8-µMAX (derate 5.9mW/°C above +70°C)"
+    },
+    "θJA": {
+      "parameter": "Junction-to-Ambient Thermal Resistance",
+      "min": null,
+      "max": null,
+      "unit": "°C/W",
+      "conditions": null
+    },
+    "TJ": {
+      "parameter": "Junction Temperature",
+      "min": null,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    },
+    "TSTG": {
+      "parameter": "Storage Temperature Range",
+      "min": -65,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    }
+  },
+  "electrical_parameters": {
+    "VIH": {
+      "parameter": "Input High Voltage",
+      "min": 2.0,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": "LVCMOS/LVTTL INPUTS (RST, SEL), max is VCC"
+    },
+    "VIH_LVCMOS_LVTTL_INPUTS__RST__SEL": {
+      "parameter": "Input High Voltage",
+      "min": 2.0,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": "LVCMOS/LVTTL INPUTS (RST, SEL), max is VCC"
+    },
+    "VIL": {
+      "parameter": "Input Low Voltage",
+      "min": null,
+      "typ": null,
+      "max": 0.8,
+      "unit": "V",
+      "conditions": "LVCMOS/LVTTL INPUTS (RST, SEL), min is GND"
+    },
+    "VIL_LVCMOS_LVTTL_INPUTS__RST__SEL": {
+      "parameter": "Input Low Voltage",
+      "min": null,
+      "typ": null,
+      "max": 0.8,
+      "unit": "V",
+      "conditions": "LVCMOS/LVTTL INPUTS (RST, SEL), min is GND"
+    },
+    "IIH": {
+      "parameter": "Input High Current",
+      "min": 0,
+      "typ": null,
+      "max": 150,
+      "unit": "µA",
+      "conditions": "VIN = VCC or 2V"
+    },
+    "IIH_VIN___VCC_or_2V": {
+      "parameter": "Input High Current",
+      "min": 0,
+      "typ": null,
+      "max": 150,
+      "unit": "µA",
+      "conditions": "VIN = VCC or 2V"
+    },
+    "IIL": {
+      "parameter": "Input Low Current",
+      "min": -20,
+      "typ": null,
+      "max": 20,
+      "unit": "µA",
+      "conditions": "VIL = 0 or 0.8V"
+    },
+    "IIL_VIL___0_or_0_8V": {
+      "parameter": "Input Low Current",
+      "min": -20,
+      "typ": null,
+      "max": 20,
+      "unit": "µA",
+      "conditions": "VIL = 0 or 0.8V"
+    },
+    "VTHD": {
+      "parameter": "Differential Input Threshold",
+      "min": -100,
+      "typ": 6,
+      "max": 100,
+      "unit": "mV",
+      "conditions": "DIFFERENTIAL INPUTS (IN, /IN)"
+    },
+    "VTHD_DIFFERENTIAL_INPUTS__IN___IN": {
+      "parameter": "Differential Input Threshold",
+      "min": -100,
+      "typ": 6,
+      "max": 100,
+      "unit": "mV",
+      "conditions": "DIFFERENTIAL INPUTS (IN, /IN)"
+    },
+    "IIN, /IIN": {
+      "parameter": "Input Current",
+      "min": -20,
+      "typ": null,
+      "max": 20,
+      "unit": "µA",
+      "conditions": "VIN, /VIN = VCC or 0V"
+    },
+    "IIN, /IIN_VIN___VIN___VCC_or_0V": {
+      "parameter": "Input Current",
+      "min": -20,
+      "typ": null,
+      "max": 20,
+      "unit": "µA",
+      "conditions": "VIN, /VIN = VCC or 0V"
+    },
+    "VCM": {
+      "parameter": "Input Common-Mode Voltage",
+      "min": 0.05,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": "Figure 1, max is VCC - 0.05V"
+    },
+    "VCM_Figure_1__max_is_VCC___0_05V": {
+      "parameter": "Input Common-Mode Voltage",
+      "min": 0.05,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": "Figure 1, max is VCC - 0.05V"
+    },
+    "VOH": {
+      "parameter": "Single-Ended Output High Voltage",
+      "min": null,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": "Figure 3, 25C: VCC-1.025 to VCC-0.880"
+    },
+    "VOH_Figure_3__Full__VCC_1_085_to_V": {
+      "parameter": "Single-Ended Output High Voltage",
+      "min": null,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": "Figure 3, Full: VCC-1.085 to VCC-0.880"
+    },
+    "VOL": {
+      "parameter": "Single-Ended Output Low Voltage",
+      "min": null,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": "Figure 3, 25C: VCC-1.810 to VCC-1.620"
+    },
+    "VOL_Figure_3__Full__VCC_1_830_to_V": {
+      "parameter": "Single-Ended Output Low Voltage",
+      "min": null,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": "Figure 3, Full: VCC-1.830 to VCC-1.620"
+    },
+    "VOH - VOL": {
+      "parameter": "Differential Output Voltage",
+      "min": 595,
+      "typ": 725,
+      "max": null,
+      "unit": "mV",
+      "conditions": "Figure 3"
+    },
+    "VOH - VOL_Figure_3": {
+      "parameter": "Differential Output Voltage",
+      "min": 595,
+      "typ": 725,
+      "max": null,
+      "unit": "mV",
+      "conditions": "Figure 3"
+    },
+    "VOD": {
+      "parameter": "Differential Output Voltage",
+      "min": 250,
+      "typ": 363,
+      "max": 450,
+      "unit": "mV",
+      "conditions": "Figure 2"
+    },
+    "VOD_Figure_2": {
+      "parameter": "Differential Output Voltage",
+      "min": 250,
+      "typ": null,
+      "max": 450,
+      "unit": "mV",
+      "conditions": "Figure 2"
+    },
+    "|ΔVOD|": {
+      "parameter": "Change in Magnitude of VOD",
+      "min": null,
+      "typ": 1.0,
+      "max": 20,
+      "unit": "mV",
+      "conditions": "Figure 2"
+    },
+    "|ΔVOD|_Figure_2": {
+      "parameter": "Change in Magnitude of VOD",
+      "min": null,
+      "typ": 1.0,
+      "max": 20,
+      "unit": "mV",
+      "conditions": "Figure 2"
+    },
+    "|VOS|": {
+      "parameter": "Offset Common-Mode Voltage",
+      "min": 1.125,
+      "typ": 1.25,
+      "max": 1.375,
+      "unit": "V",
+      "conditions": "Figure 2"
+    },
+    "|VOS|_Figure_2": {
+      "parameter": "Offset Common-Mode Voltage",
+      "min": 1.125,
+      "typ": null,
+      "max": 1.375,
+      "unit": "V",
+      "conditions": "Figure 2"
+    },
+    "|ΔVOS|": {
+      "parameter": "Change in Magnitude of VOS",
+      "min": null,
+      "typ": 0.1,
+      "max": 20,
+      "unit": "mV",
+      "conditions": "Figure 2"
+    },
+    "|ΔVOS|_Figure_2": {
+      "parameter": "Change in Magnitude of VOS",
+      "min": null,
+      "typ": 0.1,
+      "max": 20,
+      "unit": "mV",
+      "conditions": "Figure 2"
+    },
+    "|IOS|": {
+      "parameter": "Output Short-Circuit Current",
+      "min": null,
+      "typ": 19.0,
+      "max": 24,
+      "unit": "mA",
+      "conditions": "VID = ±100mV, one output GND, other output open or shorted to GND"
+    },
+    "|IOS|_VID____100mV__one_output_GND": {
+      "parameter": "Output Short-Circuit Current",
+      "min": null,
+      "typ": 19.0,
+      "max": 24,
+      "unit": "mA",
+      "conditions": "VID = ±100mV, one output GND, other output open or shorted to GND"
+    },
+    "|IOSAB|": {
+      "parameter": "Output Short-Circuit Current",
+      "min": null,
+      "typ": 4.0,
+      "max": 12,
+      "unit": "mA",
+      "conditions": "VID = ±100mV, VOUT = /VOUT"
+    },
+    "|IOSAB|_VID____100mV__VOUT____VOUT": {
+      "parameter": "Output Short-Circuit Current",
+      "min": null,
+      "typ": 4.0,
+      "max": 12,
+      "unit": "mA",
+      "conditions": "VID = ±100mV, VOUT = /VOUT"
+    },
+    "ICC": {
+      "parameter": "Supply Current",
+      "min": null,
+      "typ": 15,
+      "max": 22,
+      "unit": "mA",
+      "conditions": "MAX9377, all pins open except VCC, GND"
+    },
+    "ICC_MAX9377__all_pins_open_except": {
+      "parameter": "Supply Current",
+      "min": 13,
+      "typ": null,
+      "max": 22,
+      "unit": "mA",
+      "conditions": "MAX9377, all pins open except VCC, GND"
+    },
+    "ICC_MAX9378__RL___100__quiescent": {
+      "parameter": "Supply Current",
+      "min": 18,
+      "typ": null,
+      "max": 30,
+      "unit": "mA",
+      "conditions": "MAX9378, RL = 100, quiescent, inputs are open"
+    },
+    "tDR": {
+      "parameter": "Reset-to-Differential Output Low Delay",
+      "min": null,
+      "typ": 0.8,
+      "max": 1.0,
+      "unit": "ns",
+      "conditions": "Figure 4"
+    },
+    "tSET": {
+      "parameter": "Reset-to-Input Clock Setup Time",
+      "min": 0.5,
+      "typ": null,
+      "max": null,
+      "unit": "ns",
+      "conditions": "Figure 4"
+    },
+    "tPCO": {
+      "parameter": "Clock-to-Divider Output Propagation Delay",
+      "min": null,
+      "typ": 0.6,
+      "max": 1.0,
+      "unit": "ns",
+      "conditions": "Figure 4 (Note 5)"
+    },
+    "tSEL": {
+      "parameter": "SEL to Switched Output Delay",
+      "min": null,
+      "typ": 0.3,
+      "max": 0.6,
+      "unit": "ns",
+      "conditions": "Figure 5"
+    },
+    "fMAX": {
+      "parameter": "Switching Frequency",
+      "min": 2.0,
+      "typ": 2.5,
+      "max": null,
+      "unit": "GHz",
+      "conditions": "VOH - VOL ≥ 250mV"
+    },
+    "tPLH": {
+      "parameter": "Propagation Delay Low to High",
+      "min": 250,
+      "typ": 421,
+      "max": 600,
+      "unit": "ps",
+      "conditions": "Figure 3, SEL = 0"
+    },
+    "tPHL": {
+      "parameter": "Propagation Delay High to Low",
+      "min": 250,
+      "typ": 421,
+      "max": 600,
+      "unit": "ps",
+      "conditions": "Figure 3, SEL = 0"
+    },
+    "tSKEW": {
+      "parameter": "Pulse Skew",
+      "min": null,
+      "typ": 6,
+      "max": 30,
+      "unit": "ps",
+      "conditions": "(Note 6)"
+    },
+    "tR": {
+      "parameter": "Output Low-to-High Transition Time",
+      "min": null,
+      "typ": 116,
+      "max": 220,
+      "unit": "ps",
+      "conditions": "Figure 3"
+    },
+    "tF": {
+      "parameter": "Output High-to-Low Transition Time",
+      "min": null,
+      "typ": 116,
+      "max": 220,
+      "unit": "ps",
+      "conditions": "Figure 3"
+    },
+    "tRJ": {
+      "parameter": "Added Random Jitter",
+      "min": null,
+      "typ": 0.7,
+      "max": 2,
+      "unit": "ps(RMS)",
+      "conditions": "fIN = 1.34GHz (Note 7), SEL = 0"
+    },
+    "fMAX_VOD___250mV": {
+      "parameter": "Switching Frequency",
+      "min": 2.0,
+      "typ": 2.5,
+      "max": null,
+      "unit": "GHz",
+      "conditions": "VOD ≥ 250mV"
+    },
+    "tPLH_Figure_3__SEL___0": {
+      "parameter": "Propagation Delay Low to High",
+      "min": 250,
+      "typ": 363,
+      "max": 600,
+      "unit": "ps",
+      "conditions": "Figure 3, SEL = 0"
+    },
+    "tPHL_Figure_3__SEL___0": {
+      "parameter": "Propagation Delay High to Low",
+      "min": 250,
+      "typ": 367,
+      "max": 600,
+      "unit": "ps",
+      "conditions": "Figure 3, SEL = 0"
+    },
+    "tSKEW_Figure_3__Note_6": {
+      "parameter": "Pulse Skew",
+      "min": null,
+      "typ": 3,
+      "max": 30,
+      "unit": "ps",
+      "conditions": "Figure 3 (Note 6)"
+    },
+    "tR_Figure_2": {
+      "parameter": "Output Low-to-High Transition Time",
+      "min": null,
+      "typ": 93,
+      "max": 220,
+      "unit": "ps",
+      "conditions": "Figure 2"
+    },
+    "tF_Figure_2": {
+      "parameter": "Output High-to-Low Transition Time",
+      "min": null,
+      "typ": 93,
+      "max": 220,
+      "unit": "ps",
+      "conditions": "Figure 2"
+    },
+    "tRJ_fIN___1_34GHz__Note_7___SEL": {
+      "parameter": "Added Random Jitter",
+      "min": null,
+      "typ": 0.8,
+      "max": 2,
+      "unit": "ps(RMS)",
+      "conditions": "fIN = 1.34GHz (Note 7), SEL = 0"
+    }
+  },
+  "drc_hints": {}
+}

@@ -1,0 +1,519 @@
+{
+  "_schema": "sch-review-device/1.0",
+  "_type": "normal_ic",
+  "mpn": "FUSB340",
+  "manufacturer": "onsemi",
+  "category": "Switch",
+  "description": "SuperSpeed USB 3.1 2:1 Data Switch",
+  "packages": {
+    "XQFN-18": {
+      "pin_count": 19,
+      "pins": {
+        "1": {
+          "name": "SSTXCOM-",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "SuperSpeed TX- Common",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "SSTXCOM+",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "SuperSpeed TX+ Common",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground (connected to die attach pad)",
+          "unused_treatment": null
+        },
+        "12": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground (connected to die attach pad)",
+          "unused_treatment": null
+        },
+        "18": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground (connected to die attach pad)",
+          "unused_treatment": null
+        },
+        "EP": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground (connected to die attach pad)",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "SSRXCOM-",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "SuperSpeed RX- Common",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "SSRXCOM+",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "SuperSpeed RX+ Common",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "S",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Switch Select (0 = SW1, 1 = SW2)",
+          "unused_treatment": null
+        },
+        "7": {
+          "name": "OE",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Output Enable (0 = Switches Enabled, 1 = Switches Disabled)",
+          "unused_treatment": null
+        },
+        "8": {
+          "name": "SSRX2+",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "SuperSpeed RX2+",
+          "unused_treatment": null
+        },
+        "9": {
+          "name": "SSRX2-",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "SuperSpeed RX2-",
+          "unused_treatment": null
+        },
+        "10": {
+          "name": "SSRX1+",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "SuperSpeed RX1+",
+          "unused_treatment": null
+        },
+        "11": {
+          "name": "SSRX1-",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "SuperSpeed RX1-",
+          "unused_treatment": null
+        },
+        "13": {
+          "name": "SSTX2+",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "SuperSpeed TX2+",
+          "unused_treatment": null
+        },
+        "14": {
+          "name": "SSTX2-",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "SuperSpeed TX2-",
+          "unused_treatment": null
+        },
+        "15": {
+          "name": "SSTX1+",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "SuperSpeed TX1+",
+          "unused_treatment": null
+        },
+        "16": {
+          "name": "SSTX1-",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "SuperSpeed TX1-",
+          "unused_treatment": null
+        },
+        "17": {
+          "name": "VDD",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Device Power",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "absolute_maximum_ratings": {
+    "VDD": {
+      "parameter": "Supply Voltage",
+      "min": -0.5,
+      "max": 6.0,
+      "unit": "V",
+      "conditions": null
+    },
+    "VCNTRL": {
+      "parameter": "DC Input Voltage (S, /OE)",
+      "min": -0.5,
+      "max": null,
+      "unit": "V",
+      "conditions": "Max value is VDD"
+    },
+    "VSW": {
+      "parameter": "DC Switch I/O Voltage",
+      "min": -0.3,
+      "max": 2.1,
+      "unit": "V",
+      "conditions": null
+    },
+    "IIK": {
+      "parameter": "DC Input Diode Current",
+      "min": -50,
+      "max": null,
+      "unit": "mA",
+      "conditions": null
+    },
+    "ISW": {
+      "parameter": "DC Switch Current",
+      "min": null,
+      "max": 25,
+      "unit": "mA",
+      "conditions": null
+    },
+    "TSTG": {
+      "parameter": "Storage Temperature",
+      "min": -65,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    },
+    "MSL": {
+      "parameter": "Moisture Sensitivity Level",
+      "min": null,
+      "max": 1,
+      "unit": null,
+      "conditions": "JEDEC J-STD-020A"
+    },
+    "ESD": {
+      "parameter": "Human Body Model ESD",
+      "min": 2,
+      "max": null,
+      "unit": "kV",
+      "conditions": "All Pins, JEDEC: JESD22-A114"
+    },
+    "ESD_Switch_Pins": {
+      "parameter": "IEC 61000-4-2 ESD (Air)",
+      "min": 15,
+      "max": null,
+      "unit": "kV",
+      "conditions": "Switch Pins"
+    },
+    "ESD_JESD22_C101": {
+      "parameter": "Charged Device Model ESD",
+      "min": 1,
+      "max": null,
+      "unit": "kV",
+      "conditions": "JESD22-C101"
+    }
+  },
+  "electrical_parameters": {
+    "VDD": {
+      "parameter": "Supply Voltage",
+      "min": 1.5,
+      "typ": null,
+      "max": 5.0,
+      "unit": "V",
+      "conditions": "Recommended Operating Range"
+    },
+    "TA": {
+      "parameter": "Operating Temperature",
+      "min": -40,
+      "typ": null,
+      "max": 85,
+      "unit": "°C",
+      "conditions": "Recommended Operating Range"
+    },
+    "VIK": {
+      "parameter": "Clamp Diode Voltage S, /OE",
+      "min": -1.2,
+      "typ": null,
+      "max": -0.6,
+      "unit": "V",
+      "conditions": "IIN = -18 mA, VDD = 1.5V"
+    },
+    "IIK": {
+      "parameter": "Clamp Diode Current (Switch Pins)",
+      "min": null,
+      "typ": null,
+      "max": 18,
+      "unit": "µA",
+      "conditions": "VIN = -0.3 V, VDD = 0V"
+    },
+    "VIH": {
+      "parameter": "Control Input Voltage High",
+      "min": 1.3,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": "S, /OE, VDD = 1.5V"
+    },
+    "VIH_S___OE__VDD___3_6V": {
+      "parameter": "Control Input Voltage High",
+      "min": 1.4,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": "S, /OE, VDD = 3.6V"
+    },
+    "VIH_S___OE__VDD___5_0V": {
+      "parameter": "Control Input Voltage High",
+      "min": 1.5,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": "S, /OE, VDD = 5.0V"
+    },
+    "VIL": {
+      "parameter": "Control Input Voltage Low",
+      "min": null,
+      "typ": null,
+      "max": 0.4,
+      "unit": "V",
+      "conditions": "S, /OE, VDD = 1.5V"
+    },
+    "VIL_S___OE__VDD___3_6V": {
+      "parameter": "Control Input Voltage Low",
+      "min": null,
+      "typ": null,
+      "max": 0.4,
+      "unit": "V",
+      "conditions": "S, /OE, VDD = 3.6V"
+    },
+    "VIL_S___OE__VDD___5_0V": {
+      "parameter": "Control Input Voltage Low",
+      "min": null,
+      "typ": null,
+      "max": 0.4,
+      "unit": "V",
+      "conditions": "S, /OE, VDD = 5.0V"
+    },
+    "IIN": {
+      "parameter": "Control Input Leakage",
+      "min": -500,
+      "typ": null,
+      "max": 500,
+      "unit": "nA",
+      "conditions": "VSW = -0.6 to 2.0 V, VCNTRL = 0 to VDD, VDD = 5.0V"
+    },
+    "IOZ": {
+      "parameter": "Off-State Leakage for Open Data Paths",
+      "min": -0.5,
+      "typ": null,
+      "max": 0.5,
+      "unit": "µA",
+      "conditions": "VSW = 0.0 <= DATA <= 2.0 V, VDD = 5.0V"
+    },
+    "ICL": {
+      "parameter": "On-State Leakage for Closed Data Paths",
+      "min": -0.5,
+      "typ": null,
+      "max": 0.5,
+      "unit": "µA",
+      "conditions": "VSW = 0.0 <= DATA <= 2.0 V, VDD = 5.0V"
+    },
+    "IOFF": {
+      "parameter": "Power-Off Leakage Current (All I/O Ports)",
+      "min": -500,
+      "typ": null,
+      "max": 500,
+      "unit": "nA",
+      "conditions": "VSW = 0 V or 2.0 V, VDD = 0V"
+    },
+    "RON": {
+      "parameter": "Switch On Resistance",
+      "min": null,
+      "typ": 5.4,
+      "max": 8.0,
+      "unit": "Ω",
+      "conditions": "VSW = 0 V, ION = -8 mA, VDD = 1.5V"
+    },
+    "delta RON": {
+      "parameter": "Difference in RON Between Positive-Negative",
+      "min": null,
+      "typ": 0.1,
+      "max": null,
+      "unit": "Ω",
+      "conditions": "VSW = 0 V, ION = -8 mA, VDD = 1.5V"
+    },
+    "RONF": {
+      "parameter": "Flatness for RON",
+      "min": null,
+      "typ": 0.9,
+      "max": null,
+      "unit": "Ω",
+      "conditions": "VSW = 0 <= DATA <= 2.0 V, ION = -8 mA, VDD = 1.5V"
+    },
+    "ICC": {
+      "parameter": "Quiescent Supply Current",
+      "min": null,
+      "typ": 12,
+      "max": 30,
+      "unit": "µA",
+      "conditions": "/OE = 0, VSEL = 0 or VDD, IOUT = 0, VDD = 5.0V"
+    },
+    "ICCZ": {
+      "parameter": "Quiescent Supply Current (High Impedance)",
+      "min": null,
+      "typ": null,
+      "max": 1,
+      "unit": "µA",
+      "conditions": "VSEL = X, /OE = VDD, IOUT = 0, VDD = 5.0V"
+    },
+    "ICCT": {
+      "parameter": "Increase in Quiescent Supply Current per VCNTRL",
+      "min": null,
+      "typ": 5,
+      "max": 15,
+      "unit": "µA",
+      "conditions": "VSEL or /OE = 1.5 V, VDD = 5.0V"
+    },
+    "tON": {
+      "parameter": "Turn-On Time, S to Output",
+      "min": null,
+      "typ": 350,
+      "max": 600,
+      "unit": "ns",
+      "conditions": "RL = 50 Ω, CL = 0 pF, VSW = 0 V, VSW = 0.6 V, VDD = 1.5 to 5.0 V"
+    },
+    "tOFF": {
+      "parameter": "Turn-Off Time, S to Output",
+      "min": null,
+      "typ": 125,
+      "max": 300,
+      "unit": "ns",
+      "conditions": "RL = 50 Ω, CL = 0 pF, VSW = 0 V, VSW = 0.6 V, VDD = 1.5 to 5.0 V"
+    },
+    "tZHM,ZL": {
+      "parameter": "Enable Time, /OE to Output",
+      "min": null,
+      "typ": 60,
+      "max": 150,
+      "unit": "µs",
+      "conditions": "RL = 50 Ω, CL = 0 pF, VSW = 0.6 V, VDD = 1.5 to 5.0 V"
+    },
+    "tLZM,HZ": {
+      "parameter": "Disable Time, /OE to Output",
+      "min": null,
+      "typ": 35,
+      "max": 240,
+      "unit": "ns",
+      "conditions": "RL = 50 Ω, CL = 0 pF, VSW = 0.6 V, VDD = 1.5 to 5.0 V"
+    },
+    "tPD": {
+      "parameter": "Propagation Delay",
+      "min": null,
+      "typ": 60,
+      "max": null,
+      "unit": "ps",
+      "conditions": "CL = 0 pF, RL = 50 Ω, VDD = 1.5 to 5.0 V"
+    },
+    "tBBM": {
+      "parameter": "Break-Before-Make",
+      "min": 100,
+      "typ": null,
+      "max": 350,
+      "unit": "ns",
+      "conditions": "RL = 50 Ω, CL = 0 pF, VSW1 = 0.6 V, VSW2 = -0.6 V, VDD = 1.5 to 5.0 V"
+    },
+    "DOIRR": {
+      "parameter": "Differential Off Isolation (2.5 GHz)",
+      "min": null,
+      "typ": -28,
+      "max": null,
+      "unit": "dB",
+      "conditions": "VS = 0dBm, RL = 50 Ω, f = 2.5 GHz, VDD = 3.6 V"
+    },
+    "DOIRR_VS___0dBm__RL___50____f___5_0": {
+      "parameter": "Differential Off Isolation (5.0 GHz)",
+      "min": null,
+      "typ": -25,
+      "max": null,
+      "unit": "dB",
+      "conditions": "VS = 0dBm, RL = 50 Ω, f = 5.0 GHz, VDD = 3.6 V"
+    },
+    "SDDNEXT": {
+      "parameter": "Differential Channel Crosstalk (2.5 GHz)",
+      "min": null,
+      "typ": -44,
+      "max": null,
+      "unit": "dB",
+      "conditions": "VS = 0 dBm, RL = 50 Ω, f = 2.5 GHz, VDD = 3.6 V"
+    },
+    "SDDNEXT_VS___0_dBm__RL___50____f___5_0": {
+      "parameter": "Differential Channel Crosstalk (5.0 GHz)",
+      "min": null,
+      "typ": -40,
+      "max": null,
+      "unit": "dB",
+      "conditions": "VS = 0 dBm, RL = 50 Ω, f = 5.0 GHz, VDD = 3.6 V"
+    },
+    "DIL": {
+      "parameter": "Differential Insertion Loss (2.5 GHz)",
+      "min": null,
+      "typ": -1.0,
+      "max": null,
+      "unit": "dB",
+      "conditions": "VIN = 0dBm, f = 2.5 GHz, RL = 50 Ω, CL = 0 pF, VDD = 3.6 V"
+    },
+    "DIL_VIN___0dBm__f___5_0_GHz__RL": {
+      "parameter": "Differential Insertion Loss (5.0 GHz)",
+      "min": null,
+      "typ": -1.8,
+      "max": null,
+      "unit": "dB",
+      "conditions": "VIN = 0dBm, f = 5.0 GHz, RL = 50 Ω, CL = 0 pF, VDD = 3.6 V"
+    },
+    "BW": {
+      "parameter": "Differential, -3 dB Bandwidth",
+      "min": null,
+      "typ": 10,
+      "max": null,
+      "unit": "GHz",
+      "conditions": "VIN = 1 Vpk-pk, RL = 50 Ω, CL = 0 pF, VDD = 3.6 V"
+    },
+    "tSK(P)": {
+      "parameter": "Skew of Opposite Transitions of the Same Output",
+      "min": null,
+      "typ": 6,
+      "max": null,
+      "unit": "ps",
+      "conditions": "RPU = 50 Ω to VDD, CL = 0 pF, VDD = 3.6 V"
+    },
+    "CIN": {
+      "parameter": "Control Pin Input Capacitance",
+      "min": null,
+      "typ": 2.7,
+      "max": null,
+      "unit": "pF",
+      "conditions": "VDD = 0 V, f = 1 MHz"
+    },
+    "CON": {
+      "parameter": "On Capacitance",
+      "min": null,
+      "typ": 0.5,
+      "max": null,
+      "unit": "pF",
+      "conditions": "VDD = 3.3 V, f = 2.5 GHz"
+    },
+    "COFF": {
+      "parameter": "Off Capacitance",
+      "min": null,
+      "typ": 0.4,
+      "max": null,
+      "unit": "pF",
+      "conditions": "VDD = 3.3 V, f = 2.5 GHz"
+    }
+  },
+  "drc_hints": {}
+}

@@ -1,0 +1,433 @@
+{
+  "_schema": "sch-review-device/1.0",
+  "_type": "normal_ic",
+  "mpn": "LT1964",
+  "manufacturer": "Linear Technology",
+  "category": "LDO",
+  "description": "200mA, Low Noise, Low Dropout Negative Micropower Regulator",
+  "packages": {
+    "ThinSOT-23-5": {
+      "pin_count": 5,
+      "pins": {
+        "3": {
+          "name": "IN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power is supplied to the device through the input pin. For the DFN package, the exposed pad is also an IN connection and must be connected to IN (Pins 7, 8) at the PCB.",
+          "unused_treatment": null
+        },
+        "1": {
+          "name": "OUT",
+          "direction": "POWER_OUT",
+          "signal_type": "POWER",
+          "description": "The output supplies power to the load. A minimum output capacitor of 1μF is required to prevent oscillations.",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground.",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "SHDN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Shutdown pin. Referenced to GND, allowing the device to be driven by either positive or negative logic. Pulling SHDN within ±0.8V of GND turns the device off.",
+          "unused_treatment": "VCC"
+        },
+        "5": {
+          "name": "BYP",
+          "direction": "PASSIVE",
+          "signal_type": "ANALOG",
+          "description": "Bypass pin used to bypass the reference to achieve low noise performance. A small capacitor from the output to this pin bypasses the reference to lower output voltage noise. (also: ADJ — Input to the error amplifier for adjustable devices. The ADJ pin voltage is -1.22V referenced to ground.)",
+          "unused_treatment": "FLOAT"
+        }
+      }
+    },
+    "DFN-8": {
+      "pin_count": 9,
+      "pins": {
+        "7": {
+          "name": "IN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power is supplied to the device through the input pin. For the DFN package, the exposed pad is also an IN connection and must be connected to IN (Pins 7, 8) at the PCB.",
+          "unused_treatment": null
+        },
+        "8": {
+          "name": "IN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power is supplied to the device through the input pin. For the DFN package, the exposed pad is also an IN connection and must be connected to IN (Pins 7, 8) at the PCB.",
+          "unused_treatment": null
+        },
+        "EP": {
+          "name": "IN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power is supplied to the device through the input pin. For the DFN package, the exposed pad is also an IN connection and must be connected to IN (Pins 7, 8) at the PCB.",
+          "unused_treatment": null
+        },
+        "1": {
+          "name": "OUT",
+          "direction": "POWER_OUT",
+          "signal_type": "POWER",
+          "description": "The output supplies power to the load. A minimum output capacitor of 1μF is required to prevent oscillations.",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground.",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground.",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "SHDN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Shutdown pin. Referenced to GND, allowing the device to be driven by either positive or negative logic. Pulling SHDN within ±0.8V of GND turns the device off.",
+          "unused_treatment": "VCC"
+        },
+        "4": {
+          "name": "BYP",
+          "direction": "PASSIVE",
+          "signal_type": "ANALOG",
+          "description": "Bypass pin used to bypass the reference to achieve low noise performance. A small capacitor from the output to this pin bypasses the reference to lower output voltage noise. (also: ADJ — Input to the error amplifier for adjustable devices. The ADJ pin voltage is -1.22V referenced to ground.)",
+          "unused_treatment": "FLOAT"
+        },
+        "6": {
+          "name": "NC",
+          "direction": "NC",
+          "signal_type": "NONE",
+          "description": "No internal connection.",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "absolute_maximum_ratings": {
+    "VIN": {
+      "parameter": "IN Pin Voltage",
+      "min": -20,
+      "max": 20,
+      "unit": "V",
+      "conditions": null
+    },
+    "VOUT": {
+      "parameter": "OUT Pin Voltage",
+      "min": -20,
+      "max": 20,
+      "unit": "V",
+      "conditions": "Note 11"
+    },
+    "VADJ": {
+      "parameter": "ADJ Pin Voltage (with Respect to IN Pin)",
+      "min": -0.5,
+      "max": 20,
+      "unit": "V",
+      "conditions": "Note 11"
+    },
+    "VBYP": {
+      "parameter": "BYP Pin Voltage (with Respect to IN Pin)",
+      "min": -20,
+      "max": 20,
+      "unit": "V",
+      "conditions": null
+    },
+    "VSHDN": {
+      "parameter": "SHDN Pin Voltage (with Respect to GND Pin)",
+      "min": -20,
+      "max": 15,
+      "unit": "V",
+      "conditions": null
+    },
+    "TJ": {
+      "parameter": "Operating Junction Temperature Range",
+      "min": -40,
+      "max": 125,
+      "unit": "°C",
+      "conditions": "Note 10"
+    },
+    "TSTG": {
+      "parameter": "Storage Temperature Range",
+      "min": -65,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    }
+  },
+  "electrical_parameters": {
+    "VOUT": {
+      "parameter": "Regulated Output Voltage",
+      "min": -4.925,
+      "typ": -5,
+      "max": -5.075,
+      "unit": "V",
+      "conditions": "VIN = -5.5V, ILOAD = -1mA"
+    },
+    "VOUT_20V___VIN____6V___200mA___ILO": {
+      "parameter": "Regulated Output Voltage",
+      "min": -4.85,
+      "typ": -5,
+      "max": -5.15,
+      "unit": "V",
+      "conditions": "-20V < VIN < -6V, -200mA < ILOAD < -1mA"
+    },
+    "VADJ": {
+      "parameter": "ADJ Pin Voltage",
+      "min": -1.202,
+      "typ": -1.22,
+      "max": -1.238,
+      "unit": "V",
+      "conditions": "VIN = -2V, ILOAD = -1mA"
+    },
+    "VADJ_20V___VIN____2_8V___200mA___I": {
+      "parameter": "ADJ Pin Voltage",
+      "min": -1.184,
+      "typ": -1.22,
+      "max": -1.256,
+      "unit": "V",
+      "conditions": "-20V < VIN < -2.8V, -200mA < ILOAD < -1mA"
+    },
+    "ΔVOUT/ΔVIN": {
+      "parameter": "Line Regulation",
+      "min": null,
+      "typ": 15,
+      "max": 50,
+      "unit": "mV",
+      "conditions": "ΔVIN = -5.5V to -20V, ILOAD = -1mA"
+    },
+    "ΔVOUT/ΔVIN_VIN____2_8V_to__20V__ILOAD": {
+      "parameter": "Line Regulation",
+      "min": null,
+      "typ": 1,
+      "max": 12,
+      "unit": "mV",
+      "conditions": "ΔVIN = -2.8V to -20V, ILOAD = -1mA"
+    },
+    "ΔVOUT/ΔILOAD": {
+      "parameter": "Load Regulation",
+      "min": null,
+      "typ": 15,
+      "max": 35,
+      "unit": "mV",
+      "conditions": "VIN = -6V, ΔILOAD = -1mA to -200mA"
+    },
+    "ΔVOUT/ΔILOAD_VIN____6V___ILOAD____1mA_to__2": {
+      "parameter": "Load Regulation",
+      "min": null,
+      "typ": null,
+      "max": 50,
+      "unit": "mV",
+      "conditions": "VIN = -6V, ΔILOAD = -1mA to -200mA"
+    },
+    "ΔVOUT/ΔILOAD_VIN____2_8V___ILOAD____1mA_to": {
+      "parameter": "Load Regulation",
+      "min": null,
+      "typ": null,
+      "max": 15,
+      "unit": "mV",
+      "conditions": "VIN = -2.8V, ΔILOAD = -1mA to -200mA"
+    },
+    "VDROPOUT": {
+      "parameter": "Dropout Voltage",
+      "min": null,
+      "typ": 0.1,
+      "max": 0.15,
+      "unit": "V",
+      "conditions": "ILOAD = -1mA"
+    },
+    "VDROPOUT_ILOAD____1mA": {
+      "parameter": "Dropout Voltage",
+      "min": null,
+      "typ": null,
+      "max": 0.19,
+      "unit": "V",
+      "conditions": "ILOAD = -1mA"
+    },
+    "VDROPOUT_ILOAD____10mA": {
+      "parameter": "Dropout Voltage",
+      "min": null,
+      "typ": null,
+      "max": 0.25,
+      "unit": "V",
+      "conditions": "ILOAD = -10mA"
+    },
+    "VDROPOUT_ILOAD____100mA": {
+      "parameter": "Dropout Voltage",
+      "min": null,
+      "typ": null,
+      "max": 0.39,
+      "unit": "V",
+      "conditions": "ILOAD = -100mA"
+    },
+    "VDROPOUT_ILOAD____200mA": {
+      "parameter": "Dropout Voltage",
+      "min": null,
+      "typ": null,
+      "max": 0.49,
+      "unit": "V",
+      "conditions": "ILOAD = -200mA"
+    },
+    "IGND": {
+      "parameter": "GND Pin Current",
+      "min": null,
+      "typ": 30,
+      "max": 70,
+      "unit": "µA",
+      "conditions": "ILOAD = 0mA"
+    },
+    "IGND_ILOAD____1mA": {
+      "parameter": "GND Pin Current",
+      "min": null,
+      "typ": 85,
+      "max": 180,
+      "unit": "µA",
+      "conditions": "ILOAD = -1mA"
+    },
+    "IGND_ILOAD____10mA": {
+      "parameter": "GND Pin Current",
+      "min": null,
+      "typ": 300,
+      "max": 600,
+      "unit": "µA",
+      "conditions": "ILOAD = -10mA"
+    },
+    "IGND_ILOAD____100mA": {
+      "parameter": "GND Pin Current",
+      "min": null,
+      "typ": 1.3,
+      "max": 3,
+      "unit": "mA",
+      "conditions": "ILOAD = -100mA"
+    },
+    "IGND_ILOAD____200mA": {
+      "parameter": "GND Pin Current",
+      "min": null,
+      "typ": 2.5,
+      "max": 6,
+      "unit": "mA",
+      "conditions": "ILOAD = -200mA"
+    },
+    "en": {
+      "parameter": "Output Voltage Noise",
+      "min": null,
+      "typ": 30,
+      "max": null,
+      "unit": "µVRMS",
+      "conditions": "COUT = 10µF, CBYP = 0.01µF, ILOAD = -200mA, BW = 10Hz to 100kHz"
+    },
+    "IADJ": {
+      "parameter": "ADJ Pin Bias Current",
+      "min": null,
+      "typ": 30,
+      "max": 100,
+      "unit": "nA",
+      "conditions": "Notes 2, 7"
+    },
+    "VIN(MIN)": {
+      "parameter": "Minimum Input Voltage",
+      "min": null,
+      "typ": -1.9,
+      "max": -2.8,
+      "unit": "V",
+      "conditions": "ILOAD = -200mA"
+    },
+    "VIN(MIN)_ILOAD____200mA": {
+      "parameter": "Minimum Input Voltage",
+      "min": null,
+      "typ": -1.6,
+      "max": -2.2,
+      "unit": "V",
+      "conditions": "ILOAD = -200mA"
+    },
+    "ISHDN": {
+      "parameter": "SHDN Pin Current",
+      "min": -1,
+      "typ": 0.1,
+      "max": 1,
+      "unit": "µA",
+      "conditions": "VSHDN = 0V"
+    },
+    "ISHDN_VSHDN___15V": {
+      "parameter": "SHDN Pin Current",
+      "min": null,
+      "typ": 6,
+      "max": 15,
+      "unit": "µA",
+      "conditions": "VSHDN = 15V"
+    },
+    "ISHDN_VSHDN____15V": {
+      "parameter": "SHDN Pin Current",
+      "min": null,
+      "typ": -3,
+      "max": -9,
+      "unit": "µA",
+      "conditions": "VSHDN = -15V"
+    },
+    "IQ": {
+      "parameter": "Quiescent Current in Shutdown",
+      "min": null,
+      "typ": 3,
+      "max": 10,
+      "unit": "µA",
+      "conditions": "VIN = -6V, VSHDN = 0V"
+    },
+    "PSRR": {
+      "parameter": "Ripple Rejection",
+      "min": 46,
+      "typ": 54,
+      "max": null,
+      "unit": "dB",
+      "conditions": "VIN - VOUT = -1.5V(Avg), VRIPPLE = 0.5VP-P, fRIPPLE = 120Hz, ILOAD = -200mA"
+    },
+    "ILIM": {
+      "parameter": "Current Limit",
+      "min": null,
+      "typ": 350,
+      "max": null,
+      "unit": "mA",
+      "conditions": "VIN = -6V, VOUT = 0V"
+    },
+    "ILIM_VIN___VOUT_NOMINAL____1_5V___V": {
+      "parameter": "Current Limit",
+      "min": 220,
+      "typ": null,
+      "max": null,
+      "unit": "mA",
+      "conditions": "VIN = VOUT(NOMINAL) - 1.5V, ΔVOUT = 0.1V"
+    }
+  },
+  "drc_hints": {
+    "vin_abs_max": {
+      "value": 20,
+      "unit": "V"
+    },
+    "vout": {
+      "min": -4.925,
+      "typ": -5,
+      "max": -5.075,
+      "unit": "V"
+    },
+    "iout_operating": {
+      "typ": 350,
+      "max": null,
+      "unit": "mA"
+    },
+    "iq": {
+      "typ": 3,
+      "max": 10,
+      "unit": "µA"
+    }
+  }
+}

@@ -1,0 +1,348 @@
+{
+  "_schema": "sch-review-device/1.0",
+  "_type": "normal_ic",
+  "mpn": "RT9193",
+  "manufacturer": "RICHTEK",
+  "category": "LDO",
+  "description": "300mA, Ultra-Low Noise, Ultra-Fast CMOS LDO Regulator",
+  "packages": {
+    "SC-70-5/SOT-23-5/TSOT-23-5": {
+      "pin_count": 5,
+      "pins": {
+        "1": {
+          "name": "VIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power Input Voltage.",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground.",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "EN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Chip Enable (Active High). Note that this pin is high impedance. There should be a pull low 100kΩ resistor connected to GND when the control signal is floating.",
+          "unused_treatment": "PULL_DOWN"
+        },
+        "4": {
+          "name": "BP",
+          "direction": "PASSIVE",
+          "signal_type": "ANALOG",
+          "description": "Reference Noise Bypass. This pin can be floating. For lowest noise performance, connect a 22nF capacitor between the BP and GND pins.",
+          "unused_treatment": "FLOAT"
+        },
+        "5": {
+          "name": "VOUT",
+          "direction": "POWER_OUT",
+          "signal_type": "POWER",
+          "description": "Output Voltage.",
+          "unused_treatment": null
+        }
+      }
+    },
+    "WDFN-6L 2x2": {
+      "pin_count": 7,
+      "pins": {
+        "3": {
+          "name": "VIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power Input Voltage.",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground.",
+          "unused_treatment": null
+        },
+        "1": {
+          "name": "EN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Chip Enable (Active High). Note that this pin is high impedance. There should be a pull low 100kΩ resistor connected to GND when the control signal is floating.",
+          "unused_treatment": "PULL_DOWN"
+        },
+        "6": {
+          "name": "BP",
+          "direction": "PASSIVE",
+          "signal_type": "ANALOG",
+          "description": "Reference Noise Bypass. This pin can be floating. For lowest noise performance, connect a 22nF capacitor between the BP and GND pins.",
+          "unused_treatment": "FLOAT"
+        },
+        "4": {
+          "name": "VOUT",
+          "direction": "POWER_OUT",
+          "signal_type": "POWER",
+          "description": "Output Voltage.",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "NC",
+          "direction": "NC",
+          "signal_type": "NONE",
+          "description": "No internal connection.",
+          "unused_treatment": null
+        },
+        "7": {
+          "name": "EP",
+          "direction": "PASSIVE",
+          "signal_type": "POWER",
+          "description": "Exposed pad. The exposed pad must be soldered to a large PCB and connected to GND for maximum power dissipation.",
+          "unused_treatment": "GND"
+        }
+      }
+    },
+    "MSOP-8": {
+      "pin_count": 8,
+      "pins": {
+        "2": {
+          "name": "VIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power Input Voltage.",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground.",
+          "unused_treatment": null
+        },
+        "7": {
+          "name": "EN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Chip Enable (Active High). Note that this pin is high impedance. There should be a pull low 100kΩ resistor connected to GND when the control signal is floating.",
+          "unused_treatment": "PULL_DOWN"
+        },
+        "6": {
+          "name": "BP",
+          "direction": "PASSIVE",
+          "signal_type": "ANALOG",
+          "description": "Reference Noise Bypass. This pin can be floating. For lowest noise performance, connect a 22nF capacitor between the BP and GND pins.",
+          "unused_treatment": "FLOAT"
+        },
+        "4": {
+          "name": "VOUT",
+          "direction": "POWER_OUT",
+          "signal_type": "POWER",
+          "description": "Output Voltage.",
+          "unused_treatment": null
+        },
+        "1": {
+          "name": "NC",
+          "direction": "NC",
+          "signal_type": "NONE",
+          "description": "No internal connection.",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "NC",
+          "direction": "NC",
+          "signal_type": "NONE",
+          "description": "No internal connection.",
+          "unused_treatment": null
+        },
+        "8": {
+          "name": "NC",
+          "direction": "NC",
+          "signal_type": "NONE",
+          "description": "No internal connection.",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "absolute_maximum_ratings": {
+    "VIN": {
+      "parameter": "Supply Input Voltage",
+      "min": null,
+      "max": 6,
+      "unit": "V",
+      "conditions": null
+    },
+    "PD": {
+      "parameter": "Power Dissipation",
+      "min": null,
+      "max": 300,
+      "unit": "mW",
+      "conditions": "TA = 25°C"
+    },
+    "PD_TA___25_C": {
+      "parameter": "Power Dissipation",
+      "min": null,
+      "max": 625,
+      "unit": "mW",
+      "conditions": "TA = 25°C"
+    },
+    "θJA": {
+      "parameter": "Package Thermal Resistance",
+      "min": null,
+      "max": null,
+      "unit": "°C/W",
+      "conditions": null
+    },
+    "θJC": {
+      "parameter": "Package Thermal Resistance",
+      "min": null,
+      "max": null,
+      "unit": "°C/W",
+      "conditions": null
+    }
+  },
+  "electrical_parameters": {
+    "ΔVOUT": {
+      "parameter": "Output Voltage Accuracy",
+      "min": -2,
+      "typ": null,
+      "max": 2,
+      "unit": "%",
+      "conditions": "IOUT = 1mA"
+    },
+    "ILIM": {
+      "parameter": "Current Limit",
+      "min": 360,
+      "typ": 400,
+      "max": null,
+      "unit": "mA",
+      "conditions": "RLOAD = 1Ω"
+    },
+    "IQ": {
+      "parameter": "Quiescent Current",
+      "min": null,
+      "typ": 90,
+      "max": 130,
+      "unit": "μA",
+      "conditions": "VEN ≥ 1.2V, IOUT = 0mA"
+    },
+    "VDROP": {
+      "parameter": "Dropout Voltage",
+      "min": null,
+      "typ": 170,
+      "max": 200,
+      "unit": "mV",
+      "conditions": "IOUT = 200mA, VOUT > 2.8V"
+    },
+    "VDROP_IOUT___300mA__VOUT___2_8V": {
+      "parameter": "Dropout Voltage",
+      "min": null,
+      "typ": 220,
+      "max": 300,
+      "unit": "mV",
+      "conditions": "IOUT = 300mA, VOUT > 2.8V"
+    },
+    "ΔVLINE": {
+      "parameter": "Line Regulation",
+      "min": null,
+      "typ": null,
+      "max": 0.3,
+      "unit": "%",
+      "conditions": "VIN = (VOUT + 1V) to 5.5V, IOUT = 1mA"
+    },
+    "ΔVLOAD": {
+      "parameter": "Load Regulation",
+      "min": null,
+      "typ": null,
+      "max": 0.6,
+      "unit": "%",
+      "conditions": "1mA < IOUT < 300mA"
+    },
+    "ISTBY": {
+      "parameter": "Standby Current",
+      "min": null,
+      "typ": 0.01,
+      "max": 1,
+      "unit": "μA",
+      "conditions": "VEN = GND, Shutdown"
+    },
+    "IIBSD": {
+      "parameter": "EN Input Bias Current",
+      "min": null,
+      "typ": 0,
+      "max": 100,
+      "unit": "nA",
+      "conditions": "VEN = GND or VIN"
+    },
+    "VIL": {
+      "parameter": "EN Threshold Voltage Logic-Low",
+      "min": null,
+      "typ": null,
+      "max": 0.4,
+      "unit": "V",
+      "conditions": "VIN = 3V to 5.5V, Shutdown"
+    },
+    "VIH": {
+      "parameter": "EN Threshold Voltage Logic-High",
+      "min": 1.2,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": "VIN = 3V to 5.5V, Start-Up"
+    },
+    "eNO": {
+      "parameter": "Output Noise Voltage",
+      "min": null,
+      "typ": 100,
+      "max": null,
+      "unit": "μVRMS",
+      "conditions": "10Hz to 100kHz, IOUT = 200mA, COUT = 1μF"
+    },
+    "PSRR": {
+      "parameter": "Power Supply Rejection Rate",
+      "min": null,
+      "typ": -70,
+      "max": null,
+      "unit": "dB",
+      "conditions": "f = 100Hz, COUT = 1μF, IOUT = 10mA"
+    },
+    "PSRR_f___10kHz__COUT___1_F__IOUT": {
+      "parameter": "Power Supply Rejection Rate",
+      "min": null,
+      "typ": -50,
+      "max": null,
+      "unit": "dB",
+      "conditions": "f = 10kHz, COUT = 1μF, IOUT = 10mA"
+    },
+    "TSD": {
+      "parameter": "Thermal Shutdown Temperature",
+      "min": null,
+      "typ": 165,
+      "max": null,
+      "unit": "°C",
+      "conditions": null
+    },
+    "ΔTSD": {
+      "parameter": "Thermal Shutdown Hysteresis",
+      "min": null,
+      "typ": 30,
+      "max": null,
+      "unit": "°C",
+      "conditions": null
+    }
+  },
+  "drc_hints": {
+    "vin_abs_max": {
+      "value": 6,
+      "unit": "V"
+    },
+    "iout_operating": {
+      "typ": 400,
+      "max": null,
+      "unit": "mA"
+    },
+    "iq": {
+      "typ": 90,
+      "max": 130,
+      "unit": "μA"
+    }
+  }
+}
