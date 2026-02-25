@@ -1,0 +1,390 @@
+{
+  "_schema": "sch-review-device/1.0",
+  "_type": "normal_ic",
+  "mpn": "LM5068",
+  "manufacturer": "Texas Instruments",
+  "category": "Other",
+  "description": "Negative Voltage Hot Swap Controller",
+  "packages": {
+    "VSSOP-8": {
+      "pin_count": 8,
+      "pins": {
+        "1": {
+          "name": "PWRGD",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "Open Drain Power Good indicator. Active HIGH for LM5068-1/-2 and active LOW for LM5068-3/-4.",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "OV",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Line Over-Voltage Shutdown input. Sets the over-voltage shutdown level via an external resistor divider.",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "UV",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Line Under-Voltage Shutdown input. Sets the under-voltage shutdown level via an external resistor divider.",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "VEE",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Negative Supply Voltage Input",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "SENSE",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Current Sense Input. Monitored via an external current sense resistor (Rs).",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "GATE",
+          "direction": "OUTPUT",
+          "signal_type": "ANALOG",
+          "description": "N-Channel MOSFET Gate Drive Output. Pulled high by an internal 60 uA current source.",
+          "unused_treatment": null
+        },
+        "7": {
+          "name": "TIMER",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Timer Input. External capacitor sets start-up delay, shutdown delay, and re-try timing.",
+          "unused_treatment": null
+        },
+        "8": {
+          "name": "VDD",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Positive Supply Voltage Input",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "absolute_maximum_ratings": {
+    "VDD": {
+      "parameter": "Positive Supply Voltage",
+      "min": null,
+      "max": 100,
+      "unit": "V",
+      "conditions": null
+    },
+    "PWRGD": {
+      "parameter": "Power Good Voltage",
+      "min": null,
+      "max": 100,
+      "unit": "V",
+      "conditions": null
+    },
+    "SENSE": {
+      "parameter": "Sense Voltage",
+      "min": null,
+      "max": 8,
+      "unit": "V",
+      "conditions": null
+    },
+    "UV/OV": {
+      "parameter": "UV/OV Voltage",
+      "min": null,
+      "max": 8,
+      "unit": "V",
+      "conditions": null
+    },
+    "TJ": {
+      "parameter": "Junction Temperature",
+      "min": null,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    },
+    "TS": {
+      "parameter": "Storage Temperature",
+      "min": -55,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    }
+  },
+  "electrical_parameters": {
+    "IIN": {
+      "parameter": "Supply Current",
+      "min": null,
+      "typ": 0.82,
+      "max": 1.3,
+      "unit": "mA",
+      "conditions": null
+    },
+    "ISD": {
+      "parameter": "Shutdown Current",
+      "min": null,
+      "typ": 580,
+      "max": null,
+      "unit": "µA",
+      "conditions": "UV/OV = 0V"
+    },
+    "ISD_UV_OV___0V": {
+      "parameter": "Shutdown Current",
+      "min": null,
+      "typ": null,
+      "max": 1000,
+      "unit": "µA",
+      "conditions": "UV/OV = 0V"
+    },
+    "VDD - VEE": {
+      "parameter": "Operating Supply Range",
+      "min": 10,
+      "typ": null,
+      "max": 90,
+      "unit": "V",
+      "conditions": null
+    },
+    "VUVS": {
+      "parameter": "VDD Under-voltage Shutdown",
+      "min": null,
+      "typ": 8.5,
+      "max": null,
+      "unit": "V",
+      "conditions": null
+    },
+    "VUVSH": {
+      "parameter": "VDD Under-voltage Shutdown Hysteresis",
+      "min": null,
+      "typ": 0.6,
+      "max": null,
+      "unit": "V",
+      "conditions": null
+    },
+    "VUV": {
+      "parameter": "Under-voltage Comparator Threshold",
+      "min": 2.45,
+      "typ": null,
+      "max": 2.55,
+      "unit": "V",
+      "conditions": null
+    },
+    "IUVHCS": {
+      "parameter": "Under-voltage Hysteresis Current Source",
+      "min": 18,
+      "typ": null,
+      "max": 22,
+      "unit": "µA",
+      "conditions": null
+    },
+    "VOV": {
+      "parameter": "Over-voltage Comparator Threshold",
+      "min": 2.45,
+      "typ": null,
+      "max": 2.55,
+      "unit": "V",
+      "conditions": null
+    },
+    "IOVHCS": {
+      "parameter": "Over-voltage Hysteresis Current Sink",
+      "min": 18,
+      "typ": null,
+      "max": 22,
+      "unit": "µA",
+      "conditions": null
+    },
+    "tUVCD": {
+      "parameter": "UV Comparator Delay",
+      "min": null,
+      "typ": 1100,
+      "max": null,
+      "unit": "ns",
+      "conditions": "UV Low to Gate Low"
+    },
+    "tOVCD": {
+      "parameter": "OV Comparator Delay",
+      "min": null,
+      "typ": 500,
+      "max": null,
+      "unit": "ns",
+      "conditions": "OV High to Gate Low"
+    },
+    "VCB": {
+      "parameter": "Circuit Breaker Current Limit Voltage",
+      "min": 40,
+      "typ": null,
+      "max": 60,
+      "unit": "mV",
+      "conditions": null
+    },
+    "VAC": {
+      "parameter": "Analog Current Limit Voltage",
+      "min": 80,
+      "typ": null,
+      "max": 120,
+      "unit": "mV",
+      "conditions": null
+    },
+    "VFDC": {
+      "parameter": "Fast Discharge Current Limit Voltage",
+      "min": null,
+      "typ": 200,
+      "max": null,
+      "unit": "mV",
+      "conditions": "(Fast Gate Pull Down Threshold)"
+    },
+    "VFDC_Fast_Gate_Pull_Down_Threshold": {
+      "parameter": "Fast Discharge Current Limit Voltage",
+      "min": 150,
+      "typ": null,
+      "max": 250,
+      "unit": "mV",
+      "conditions": "(Fast Gate Pull Down Threshold)"
+    },
+    "ISENSE": {
+      "parameter": "Sense Input Current",
+      "min": null,
+      "typ": -15,
+      "max": null,
+      "unit": "µA",
+      "conditions": "VSENSE = 50mV"
+    },
+    "ISENSE_VSENSE___50mV": {
+      "parameter": "Sense Input Current",
+      "min": -30,
+      "typ": null,
+      "max": null,
+      "unit": "µA",
+      "conditions": "VSENSE = 50mV"
+    },
+    "VTHVT": {
+      "parameter": "Timer High Voltage Threshold",
+      "min": null,
+      "typ": 4,
+      "max": null,
+      "unit": "V",
+      "conditions": null
+    },
+    "VTLVT": {
+      "parameter": "Timer Low Voltage Threshold",
+      "min": null,
+      "typ": 1,
+      "max": null,
+      "unit": "V",
+      "conditions": null
+    },
+    "ITIMER": {
+      "parameter": "Timer On (Initial Cycle, Sourcing)",
+      "min": null,
+      "typ": 6,
+      "max": null,
+      "unit": "µA",
+      "conditions": "VTIMER = 2V"
+    },
+    "ITIMER_VTIMER___2V": {
+      "parameter": "Timer Off (Cooling Cycle, Sinking)",
+      "min": 4,
+      "typ": null,
+      "max": 8,
+      "unit": "µA",
+      "conditions": "VTIMER = 2V"
+    },
+    "VG": {
+      "parameter": "Saturation Gate Drive Voltage",
+      "min": null,
+      "typ": 10.6,
+      "max": null,
+      "unit": "V",
+      "conditions": "VDD- VEE = 48V"
+    },
+    "VG_VDD__VEE___48V": {
+      "parameter": "Saturation Gate Drive Voltage",
+      "min": 9,
+      "typ": null,
+      "max": 12,
+      "unit": "V",
+      "conditions": "VDD- VEE = 48V"
+    },
+    "VG_VDD__VEE___10V": {
+      "parameter": "Saturation Gate Drive Voltage",
+      "min": null,
+      "typ": 7.8,
+      "max": null,
+      "unit": "V",
+      "conditions": "VDD- VEE = 10V"
+    },
+    "VGLT": {
+      "parameter": "Gate Low Threshold",
+      "min": null,
+      "typ": 0.5,
+      "max": null,
+      "unit": "V",
+      "conditions": "Before Gate ramp-up"
+    },
+    "IGATE": {
+      "parameter": "Gate Pin Current (Sourcing)",
+      "min": null,
+      "typ": 60,
+      "max": null,
+      "unit": "µA",
+      "conditions": "VSENSE = 0V"
+    },
+    "IGATE_VSENSE___0V": {
+      "parameter": "Gate Pin Current (Sourcing)",
+      "min": 40,
+      "typ": null,
+      "max": 80,
+      "unit": "µA",
+      "conditions": "VSENSE = 0V"
+    },
+    "IGATE_VSENSE___150mV__VGATE___3V": {
+      "parameter": "Gate Pin Current (Sinking)",
+      "min": null,
+      "typ": 2.7,
+      "max": null,
+      "unit": "mA",
+      "conditions": "VSENSE = 150mV, VGATE = 3V"
+    },
+    "IGATE_VSENSE___300mV__VGATE___1V": {
+      "parameter": "Gate Pin Current (Sinking)",
+      "min": null,
+      "typ": 300,
+      "max": null,
+      "unit": "mA",
+      "conditions": "VSENSE = 300mV, VGATE = 1V"
+    },
+    "VPGLV": {
+      "parameter": "PWRGD Low Voltage",
+      "min": null,
+      "typ": 0.2,
+      "max": null,
+      "unit": "V",
+      "conditions": "ISINK = 1mA"
+    },
+    "VPGLV_ISINK___1mA": {
+      "parameter": "PWRGD Low Voltage",
+      "min": null,
+      "typ": null,
+      "max": 0.6,
+      "unit": "V",
+      "conditions": "ISINK = 1mA"
+    },
+    "IPGLC": {
+      "parameter": "PWRGD High Leakage Current",
+      "min": null,
+      "typ": 1,
+      "max": null,
+      "unit": "µA",
+      "conditions": "VPWRGD = 90V"
+    },
+    "VPGV": {
+      "parameter": "GATE Voltage at onset of PWRGD",
+      "min": null,
+      "typ": 8,
+      "max": null,
+      "unit": "V",
+      "conditions": null
+    }
+  },
+  "drc_hints": {}
+}

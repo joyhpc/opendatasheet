@@ -1,0 +1,634 @@
+{
+  "_schema": "sch-review-device/1.0",
+  "_type": "normal_ic",
+  "mpn": "TPS25940A, TPS25940L",
+  "manufacturer": "Texas Instruments",
+  "category": "Other",
+  "description": "2.7 – 18V eFuse with True Reverse Blocking and DevSleep Support for SSDs",
+  "packages": {
+    "WQFN-20": {
+      "pin_count": 21,
+      "pins": {
+        "1": {
+          "name": "DEVSLP",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Active High. DevSleep Mode control. A high at this pin will activate the DevSleep mode(Low Power Mode).",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "PGOOD",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "Active High. A high indicates PGTH has crossed the threshold value. It is an open drain output.",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "PGTH",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Positive input of PGOOD comparator.",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "OUT",
+          "direction": "POWER_OUT",
+          "signal_type": "POWER",
+          "description": "Power Output of the device.",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "OUT",
+          "direction": "POWER_OUT",
+          "signal_type": "POWER",
+          "description": "Power Output of the device.",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "OUT",
+          "direction": "POWER_OUT",
+          "signal_type": "POWER",
+          "description": "Power Output of the device.",
+          "unused_treatment": null
+        },
+        "7": {
+          "name": "OUT",
+          "direction": "POWER_OUT",
+          "signal_type": "POWER",
+          "description": "Power Output of the device.",
+          "unused_treatment": null
+        },
+        "8": {
+          "name": "OUT",
+          "direction": "POWER_OUT",
+          "signal_type": "POWER",
+          "description": "Power Output of the device.",
+          "unused_treatment": null
+        },
+        "9": {
+          "name": "IN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power Input and supply voltage of the device.",
+          "unused_treatment": null
+        },
+        "10": {
+          "name": "IN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power Input and supply voltage of the device.",
+          "unused_treatment": null
+        },
+        "11": {
+          "name": "IN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power Input and supply voltage of the device.",
+          "unused_treatment": null
+        },
+        "12": {
+          "name": "IN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power Input and supply voltage of the device.",
+          "unused_treatment": null
+        },
+        "13": {
+          "name": "IN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power Input and supply voltage of the device.",
+          "unused_treatment": null
+        },
+        "14": {
+          "name": "EN/UVLO",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Input for setting programmable undervoltage lockout threshold. An undervoltage event will open internal FET and assert FLT to indicate power-failure. When pulled to GND, resets the fault latch in TPS25940L.",
+          "unused_treatment": null
+        },
+        "15": {
+          "name": "OVP",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Input for setting programmable overvoltage protection threshold. An overvoltage event will open the internal FET and assert FLT to indicate overvoltage.",
+          "unused_treatment": null
+        },
+        "16": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground.",
+          "unused_treatment": null
+        },
+        "17": {
+          "name": "ILIM",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "A resistor from this pin to GND sets the overload and short-circuit current limit.",
+          "unused_treatment": null
+        },
+        "18": {
+          "name": "dVdT",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "A capacitor from this pin to GND sets the ramp rate of output voltage.",
+          "unused_treatment": null
+        },
+        "19": {
+          "name": "IMON",
+          "direction": "OUTPUT",
+          "signal_type": "ANALOG",
+          "description": "This pin sources a scaled down ratio of current through the internal FET. A resistor from this pin to GND converts current to proportional voltage, used as analog current monitor.",
+          "unused_treatment": null
+        },
+        "20": {
+          "name": "FLT",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "Fault event indicator, goes low to indicate fault condition due to Undervoltage, Overvoltage, Reverse voltage and Thermal shutdown event. It is an open drain output.",
+          "unused_treatment": null
+        },
+        "EP": {
+          "name": "PowerPAD",
+          "direction": "PASSIVE",
+          "signal_type": "POWER",
+          "description": "The GND terminal must be connected to the exposed PowerPAD. This PowerPAD must be connected to a PCB ground plane using multiple vias for good thermal performance.",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "absolute_maximum_ratings": {
+    "V_IN": {
+      "parameter": "Input voltage range",
+      "min": -0.3,
+      "max": 20,
+      "unit": "V",
+      "conditions": null
+    },
+    "V_IN_transient": {
+      "parameter": "Input voltage range (transient)",
+      "min": null,
+      "max": 22,
+      "unit": "V",
+      "conditions": null
+    },
+    "V_IMON": {
+      "parameter": "Input voltage range",
+      "min": -0.3,
+      "max": 7,
+      "unit": "V",
+      "conditions": null
+    },
+    "TJ": {
+      "parameter": "Maximum junction temperature",
+      "min": -40,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    },
+    "Tstg": {
+      "parameter": "Storage temperature range",
+      "min": -65,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    }
+  },
+  "electrical_parameters": {
+    "V(IN)": {
+      "parameter": "Operating Input Voltage",
+      "min": 2.7,
+      "typ": 18,
+      "max": 18,
+      "unit": "V",
+      "conditions": null
+    },
+    "V(UVR)": {
+      "parameter": "Internal UVLO threshold, rising",
+      "min": 2.2,
+      "typ": 2.3,
+      "max": 2.4,
+      "unit": "V",
+      "conditions": null
+    },
+    "V(UVRhys)": {
+      "parameter": "Internal UVLO hysteresis",
+      "min": 105,
+      "typ": 116,
+      "max": 125,
+      "unit": "mV",
+      "conditions": null
+    },
+    "IQ(ON)": {
+      "parameter": "Supply current, Enabled (3V)",
+      "min": 140,
+      "typ": 210,
+      "max": 300,
+      "unit": "µA",
+      "conditions": "V(EN/UVLO) = 2 V, V(IN) = 3 V"
+    },
+    "IQ(ON)_V_EN_UVLO____2_V__V_IN____12_V": {
+      "parameter": "Supply current, Enabled (12V)",
+      "min": 140,
+      "typ": 199,
+      "max": 260,
+      "unit": "µA",
+      "conditions": "V(EN/UVLO) = 2 V, V(IN) = 12 V"
+    },
+    "IQ(ON)_V_EN_UVLO____2_V__V_IN____18_V": {
+      "parameter": "Supply current, Enabled (18V)",
+      "min": 140,
+      "typ": 202,
+      "max": 270,
+      "unit": "µA",
+      "conditions": "V(EN/UVLO) = 2 V, V(IN) = 18 V"
+    },
+    "IQ(OFF)": {
+      "parameter": "Supply current, Disabled (3V)",
+      "min": 4,
+      "typ": 8.6,
+      "max": 15,
+      "unit": "µA",
+      "conditions": "V(EN/UVLO) = 0 V, V(IN) = 3 V"
+    },
+    "IQ(OFF)_V_EN_UVLO____0_V__V_IN____12_V": {
+      "parameter": "Supply current, Disabled (12V)",
+      "min": 6,
+      "typ": 15,
+      "max": 20,
+      "unit": "µA",
+      "conditions": "V(EN/UVLO) = 0 V, V(IN) = 12 V"
+    },
+    "IQ(OFF)_V_EN_UVLO____0_V__V_IN____18_V": {
+      "parameter": "Supply current, Disabled (18V)",
+      "min": 8,
+      "typ": 18.5,
+      "max": 25,
+      "unit": "µA",
+      "conditions": "V(EN/UVLO) = 0 V, V(IN) = 18 V"
+    },
+    "IQ(DEVSLP)": {
+      "parameter": "Supply current, DevSleep Mode",
+      "min": 70,
+      "typ": 95,
+      "max": 130,
+      "unit": "µA",
+      "conditions": "V(DEVSLP) = 2 V, V(IN) = 2.7V to 18V"
+    },
+    "V(ENR)": {
+      "parameter": "EN/UVLO threshold voltage, rising",
+      "min": 0.97,
+      "typ": 0.99,
+      "max": 1.01,
+      "unit": "V",
+      "conditions": null
+    },
+    "V(ENF)": {
+      "parameter": "EN/UVLO threshold voltage, falling",
+      "min": 0.9,
+      "typ": 0.92,
+      "max": 0.94,
+      "unit": "V",
+      "conditions": null
+    },
+    "V(SHUTF)": {
+      "parameter": "EN threshold voltage for Low IQ shutdown, falling",
+      "min": 0.3,
+      "typ": 0.47,
+      "max": 0.63,
+      "unit": "V",
+      "conditions": null
+    },
+    "V(SHUTFhys)": {
+      "parameter": "EN hysteresis for low IQ shutdown",
+      "min": null,
+      "typ": 66,
+      "max": null,
+      "unit": "mV",
+      "conditions": null
+    },
+    "IEN": {
+      "parameter": "EN Input leakage current",
+      "min": -100,
+      "typ": 0,
+      "max": 100,
+      "unit": "nA",
+      "conditions": "0 V <= V(EN/UVLO) <= 18 V"
+    },
+    "V(OVPR)": {
+      "parameter": "Overvoltage Threshold Voltage, Rising",
+      "min": 0.97,
+      "typ": 0.99,
+      "max": 1.01,
+      "unit": "V",
+      "conditions": null
+    },
+    "V(OVPF)": {
+      "parameter": "Overvoltage Threshold Voltage, Falling",
+      "min": 0.9,
+      "typ": 0.92,
+      "max": 0.94,
+      "unit": "V",
+      "conditions": null
+    },
+    "I(OVP)": {
+      "parameter": "OVP Input Leakage Current",
+      "min": -100,
+      "typ": 0,
+      "max": 100,
+      "unit": "nA",
+      "conditions": "0 V <= V(OVP) <= 5 V"
+    },
+    "V(DEVSLPR)": {
+      "parameter": "DEVSLP threshold voltage, rising",
+      "min": 1.6,
+      "typ": 1.85,
+      "max": 2,
+      "unit": "V",
+      "conditions": null
+    },
+    "V(DEVSLPF)": {
+      "parameter": "DEVSLP threshold voltage, falling",
+      "min": 0.8,
+      "typ": 0.96,
+      "max": 1.1,
+      "unit": "V",
+      "conditions": null
+    },
+    "I(DEVSLP)": {
+      "parameter": "DEVSLP input leakage current",
+      "min": 0.6,
+      "typ": 1,
+      "max": 1.25,
+      "unit": "µA",
+      "conditions": "0.2 V <= V(DEVSLP) <= 18 V"
+    },
+    "I(dVdT)": {
+      "parameter": "dVdT charging current",
+      "min": 0.85,
+      "typ": 1,
+      "max": 1.15,
+      "unit": "µA",
+      "conditions": "V(dVdT) = 0 V"
+    },
+    "R(dVdT)": {
+      "parameter": "dVdT discharging resistance",
+      "min": null,
+      "typ": 16,
+      "max": 24,
+      "unit": "Ω",
+      "conditions": "EN/UVLO = 0 V, I(dVdT) = 10 mA sinking"
+    },
+    "V(dVdTmax)": {
+      "parameter": "dVdT maximum capacitor voltage",
+      "min": 2.6,
+      "typ": 2.88,
+      "max": 3.1,
+      "unit": "V",
+      "conditions": null
+    },
+    "GAIN(dVdT)": {
+      "parameter": "dVdT to OUT gain",
+      "min": 11.65,
+      "typ": 11.9,
+      "max": 12.05,
+      "unit": "V/V",
+      "conditions": "ΔV(OUT)/ΔV(dVdT)"
+    },
+    "V(ILIM)": {
+      "parameter": "ILIM bias voltage",
+      "min": null,
+      "typ": 0.87,
+      "max": null,
+      "unit": "V",
+      "conditions": null
+    },
+    "I(LIM)": {
+      "parameter": "Current limit (150 kΩ)",
+      "min": 0.53,
+      "typ": 0.58,
+      "max": 0.63,
+      "unit": "A",
+      "conditions": "R(ILIM) = 150 kΩ, (V(IN) - V(OUT)) = 1 V"
+    },
+    "I(LIM)_R_ILIM____88_7_k____V_IN____V": {
+      "parameter": "Current limit (88.7 kΩ)",
+      "min": 0.9,
+      "typ": 0.99,
+      "max": 1.07,
+      "unit": "A",
+      "conditions": "R(ILIM) = 88.7 kΩ, (V(IN) - V(OUT)) = 1 V"
+    },
+    "I(LIM)_R_ILIM____42_2_k____V_IN____V": {
+      "parameter": "Current limit (42.2 kΩ)",
+      "min": 1.92,
+      "typ": 2.08,
+      "max": 2.25,
+      "unit": "A",
+      "conditions": "R(ILIM) = 42.2 kΩ, (V(IN) - V(OUT)) = 1 V"
+    },
+    "I(LIM)_R_ILIM____24_9_k____V_IN____V": {
+      "parameter": "Current limit (24.9 kΩ)",
+      "min": 3.25,
+      "typ": 3.53,
+      "max": 3.81,
+      "unit": "A",
+      "conditions": "R(ILIM) = 24.9 kΩ, (V(IN) - V(OUT)) = 1 V"
+    },
+    "I(LIM)_R_ILIM____20_k____V_IN____V_OU": {
+      "parameter": "Current limit (20 kΩ)",
+      "min": 4.09,
+      "typ": 4.45,
+      "max": 4.81,
+      "unit": "A",
+      "conditions": "R(ILIM) = 20 kΩ, (V(IN) - V(OUT)) = 1 V"
+    },
+    "I(LIM)_R_ILIM____16_9_k____V_IN____V": {
+      "parameter": "Current limit (16.9 kΩ)",
+      "min": 4.78,
+      "typ": 5.2,
+      "max": 5.62,
+      "unit": "A",
+      "conditions": "R(ILIM) = 16.9 kΩ, (V(IN) - V(OUT)) = 1 V"
+    },
+    "I(LIM)_R_ILIM____OPEN__Open_resistor": {
+      "parameter": "Current limit (Open)",
+      "min": 0.35,
+      "typ": 0.45,
+      "max": 0.55,
+      "unit": "A",
+      "conditions": "R(ILIM) = OPEN, Open resistor current limit (Single Point Failure Test: UL60950)"
+    },
+    "I(LIM)_R_ILIM____SHORT__Shorted_resis": {
+      "parameter": "Current limit (Short)",
+      "min": 0.55,
+      "typ": 0.67,
+      "max": 0.8,
+      "unit": "A",
+      "conditions": "R(ILIM) = SHORT, Shorted resistor current limit (Single Point Failure Test: UL60950)"
+    },
+    "I(DEVSLP(LIM))": {
+      "parameter": "DevSleep Mode Current Limit",
+      "min": 0.55,
+      "typ": 0.67,
+      "max": 0.8,
+      "unit": "A",
+      "conditions": null
+    },
+    "IOS": {
+      "parameter": "Short-circuit current limit (42.2 kΩ)",
+      "min": 1.91,
+      "typ": 2.07,
+      "max": 2.24,
+      "unit": "A",
+      "conditions": "R(ILIM) = 42.2 kΩ, V(IN) = 12 V, (V(IN) - V(OUT)) = 5 V"
+    },
+    "IOS_R_ILIM____24_9_k___V_IN____12": {
+      "parameter": "Short-circuit current limit (24.9 kΩ)",
+      "min": 3.21,
+      "typ": 3.49,
+      "max": 3.77,
+      "unit": "A",
+      "conditions": "R(ILIM) = 24.9 kΩ, V(IN) = 12 V, (V(IN) - V(OUT)) = 5 V"
+    },
+    "IOS_R_ILIM____16_9_k___V_IN____12": {
+      "parameter": "Short-circuit current limit (16.9 kΩ)",
+      "min": 4.7,
+      "typ": 5.11,
+      "max": 5.52,
+      "unit": "A",
+      "conditions": "R(ILIM) = 16.9 kΩ, V(IN) = 12 V, (V(IN) - V(OUT)) = 5 V, -40°C <= TJ <= 85°C"
+    },
+    "GAIN(IMON)": {
+      "parameter": "Gain Factor (IMON)",
+      "min": 47.78,
+      "typ": 52.3,
+      "max": 57.23,
+      "unit": "µA/A",
+      "conditions": "1 A <= I(OUT) <= 5 A"
+    },
+    "RON": {
+      "parameter": "IN to OUT - ON Resistance (25°C)",
+      "min": 34,
+      "typ": 42,
+      "max": 49,
+      "unit": "mΩ",
+      "conditions": "1 A <= I(OUT) <= 5 A, TJ = 25°C"
+    },
+    "RON_1_A____I_OUT_____5_A___40_C": {
+      "parameter": "IN to OUT - ON Resistance (125°C)",
+      "min": 26,
+      "typ": 42,
+      "max": 64,
+      "unit": "mΩ",
+      "conditions": "1 A <= I(OUT) <= 5 A, -40°C <= TJ <= 125°C"
+    },
+    "Ilkg(OUT)": {
+      "parameter": "OUT leakage current in off state (18V)",
+      "min": -2,
+      "typ": 0,
+      "max": 2,
+      "unit": "µA",
+      "conditions": "V(IN) = 18 V, V(EN/UVLO) = 0 V, V(OUT) = 0 V (Sourcing)"
+    },
+    "Ilkg(OUT)_V_IN____2_7_V__V_EN_UVLO____0": {
+      "parameter": "OUT leakage current in off state (2.7V)",
+      "min": 6,
+      "typ": 13,
+      "max": 20,
+      "unit": "µA",
+      "conditions": "V(IN) = 2.7 V, V(EN/UVLO) = 0 V, V(OUT) = 18 V (Sinking)"
+    },
+    "V(REVTH)": {
+      "parameter": "Threshold for reverse protection comparator, falling",
+      "min": -15,
+      "typ": -9.3,
+      "max": -3,
+      "unit": "mV",
+      "conditions": null
+    },
+    "V(FWDTH)": {
+      "parameter": "Threshold for reverse protection comparator, rising",
+      "min": 86,
+      "typ": 100,
+      "max": 114,
+      "unit": "mV",
+      "conditions": null
+    },
+    "R(FLT)": {
+      "parameter": "FLT internal pull-down resistance",
+      "min": 10,
+      "typ": 18,
+      "max": 30,
+      "unit": "Ω",
+      "conditions": "V(OVP) = 2 V, I(FLT) = 5 mA sinking"
+    },
+    "I(FLT)": {
+      "parameter": "FLT input leakage current",
+      "min": -1,
+      "typ": 0,
+      "max": 1,
+      "unit": "µA",
+      "conditions": "0 V <= V(FLT) <= 18 V"
+    },
+    "V(PGTHR)": {
+      "parameter": "PGTH threshold voltage, rising",
+      "min": 0.97,
+      "typ": 0.99,
+      "max": 1.01,
+      "unit": "V",
+      "conditions": null
+    },
+    "V(PGTHF)": {
+      "parameter": "PGTH threshold voltage, falling",
+      "min": 0.9,
+      "typ": 0.92,
+      "max": 0.94,
+      "unit": "V",
+      "conditions": null
+    },
+    "I(PGTH)": {
+      "parameter": "PGTH input leakage current",
+      "min": -100,
+      "typ": 0,
+      "max": 100,
+      "unit": "nA",
+      "conditions": "0 V <= V(PGTH) <= 18 V"
+    },
+    "R(PGOOD)": {
+      "parameter": "PGOOD internal pull-down resistance",
+      "min": 10,
+      "typ": 20,
+      "max": 35,
+      "unit": "Ω",
+      "conditions": "V(PGTH) = 0 V, I(PGOOD) = 5 mA sinking"
+    },
+    "I(PGOOD)": {
+      "parameter": "PGOOD input leakage current",
+      "min": -1,
+      "typ": 0,
+      "max": 1,
+      "unit": "µA",
+      "conditions": "0 V <= V(PGOOD) <= 18 V"
+    },
+    "T(TSD)": {
+      "parameter": "TSD Threshold",
+      "min": null,
+      "typ": 160,
+      "max": null,
+      "unit": "°C",
+      "conditions": null
+    },
+    "T(TSDhys)": {
+      "parameter": "TSD Hysteresis",
+      "min": null,
+      "typ": 12,
+      "max": null,
+      "unit": "°C",
+      "conditions": null
+    }
+  },
+  "drc_hints": {}
+}

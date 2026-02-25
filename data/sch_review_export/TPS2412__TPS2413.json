@@ -1,0 +1,256 @@
+{
+  "_schema": "sch-review-device/1.0",
+  "_type": "normal_ic",
+  "mpn": "TPS2412, TPS2413",
+  "manufacturer": "Texas Instruments",
+  "category": "Other",
+  "description": "TPS241x N+1 and ORing Power Rail Controller",
+  "packages": {
+    "TSSOP-8": {
+      "pin_count": 8,
+      "pins": {
+        "1": {
+          "name": "VDD",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Input power for the gate drive charge pump and internal controls; must be ≥ 3 V",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "RSET",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Connect a resistor to ground to program the turnoff threshold; can be left open",
+          "unused_treatment": "FLOAT"
+        },
+        "3": {
+          "name": "RSVD",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Reserved pin; must be connected to GND",
+          "unused_treatment": "GND"
+        },
+        "4": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Device ground",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "GATE",
+          "direction": "OUTPUT",
+          "signal_type": "ANALOG",
+          "description": "Connect to the gate of the external MOSFET to emulate a low forward-voltage diode",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "C",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Voltage sense input connected to the simulated diode cathode (MOSFET drain)",
+          "unused_treatment": null
+        },
+        "7": {
+          "name": "A",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Voltage sense input connected to the simulated diode anode (MOSFET source) and reference for BYP",
+          "unused_treatment": null
+        },
+        "8": {
+          "name": "BYP",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Connection for a storage capacitor to filter the gate drive supply voltage",
+          "unused_treatment": null
+        }
+      }
+    },
+    "SOIC-8": {
+      "pin_count": 8,
+      "pins": {
+        "1": {
+          "name": "VDD",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Input power for the gate drive charge pump and internal controls; must be ≥ 3 V",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "RSET",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Connect a resistor to ground to program the turnoff threshold; can be left open",
+          "unused_treatment": "FLOAT"
+        },
+        "3": {
+          "name": "RSVD",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Reserved pin; must be connected to GND",
+          "unused_treatment": "GND"
+        },
+        "4": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Device ground",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "GATE",
+          "direction": "OUTPUT",
+          "signal_type": "ANALOG",
+          "description": "Connect to the gate of the external MOSFET to emulate a low forward-voltage diode",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "C",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Voltage sense input connected to the simulated diode cathode (MOSFET drain)",
+          "unused_treatment": null
+        },
+        "7": {
+          "name": "A",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Voltage sense input connected to the simulated diode anode (MOSFET source) and reference for BYP",
+          "unused_treatment": null
+        },
+        "8": {
+          "name": "BYP",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Connection for a storage capacitor to filter the gate drive supply voltage",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "absolute_maximum_ratings": {
+    "TJ": {
+      "parameter": "Maximum junction temperature",
+      "min": null,
+      "max": null,
+      "unit": "°C",
+      "conditions": "Internally limited"
+    }
+  },
+  "electrical_parameters": {
+    "A, C": {
+      "parameter": "Input voltage range TPS2412",
+      "min": 3,
+      "typ": null,
+      "max": 16.5,
+      "unit": "V",
+      "conditions": "VDD = V(C)"
+    },
+    "A, C_3____VDD____16_5_V": {
+      "parameter": "Input voltage range TPS2412",
+      "min": 0.8,
+      "typ": null,
+      "max": 16.5,
+      "unit": "V",
+      "conditions": "3 <= VDD <= 16.5 V"
+    },
+    "A to C": {
+      "parameter": "Operational voltage",
+      "min": null,
+      "typ": null,
+      "max": 5,
+      "unit": "V",
+      "conditions": null
+    },
+    "R(RSET)": {
+      "parameter": "Resistance range",
+      "min": 1.5,
+      "typ": null,
+      "max": null,
+      "unit": "kΩ",
+      "conditions": null
+    },
+    "C(BYP)": {
+      "parameter": "Capacitance Range",
+      "min": 800,
+      "typ": 2200,
+      "max": 10000,
+      "unit": "pF",
+      "conditions": null
+    },
+    "TJ": {
+      "parameter": "Operating junction temperature",
+      "min": -40,
+      "typ": null,
+      "max": 125,
+      "unit": "°C",
+      "conditions": null
+    },
+    "TA": {
+      "parameter": "Operating free-air temperature",
+      "min": -40,
+      "typ": null,
+      "max": 85,
+      "unit": "°C",
+      "conditions": null
+    },
+    "VDD UVLO": {
+      "parameter": "VDD UVLO rising",
+      "min": 2.25,
+      "typ": null,
+      "max": 2.5,
+      "unit": "V",
+      "conditions": "VDD rising"
+    },
+    "VDD UVLO_Hysteresis": {
+      "parameter": "VDD UVLO Hysteresis",
+      "min": null,
+      "typ": 0.25,
+      "max": null,
+      "unit": "V",
+      "conditions": "Hysteresis"
+    },
+    "V(GATE-A)": {
+      "parameter": "Gate positive drive voltage",
+      "min": 6,
+      "typ": 7,
+      "max": 8,
+      "unit": "V",
+      "conditions": "VDD = 3 V, V(A-C) = 20 mV"
+    },
+    "V(GATE-A)_5_V____VDD____18_V__V_A_C____2": {
+      "parameter": "Gate positive drive voltage",
+      "min": 9,
+      "typ": 10.2,
+      "max": 12.5,
+      "unit": "V",
+      "conditions": "5 V <= VDD <= 18 V, V(A-C) = 20 mV"
+    },
+    "I(GATE)": {
+      "parameter": "Fast turnoff pulsed current",
+      "min": 1.75,
+      "typ": 2.35,
+      "max": null,
+      "unit": "A",
+      "conditions": "V(A-C) = -0.1 V, V(GATE) = 8 V"
+    },
+    "I(GATE)_V_A_C_____0_1_V__V_GATE____5_V": {
+      "parameter": "Fast turnoff pulsed current",
+      "min": 1.25,
+      "typ": 1.75,
+      "max": null,
+      "unit": "A",
+      "conditions": "V(A-C) = -0.1 V, V(GATE) = 5 V"
+    },
+    "I(GATE)_V_A_C_____0_1_V__V_C_____VDD": {
+      "parameter": "Sustain turnoff current",
+      "min": 15,
+      "typ": 19.5,
+      "max": null,
+      "unit": "mA",
+      "conditions": "V(A-C) = -0.1 V, V(C) <= VDD, 3 V <= VDD <= 18 V, 2 V <= V(GATE) <= 18 V"
+    }
+  },
+  "drc_hints": {}
+}

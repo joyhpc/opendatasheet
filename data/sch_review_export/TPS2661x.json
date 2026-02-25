@@ -1,0 +1,268 @@
+{
+  "_schema": "sch-review-device/1.0",
+  "_type": "normal_ic",
+  "mpn": "TPS2661x",
+  "manufacturer": "Texas Instruments",
+  "category": "Other",
+  "description": "50-V, Universal 4–20 mA, ±20-mA Current Loop Protector With Input and Output Miswiring Protection",
+  "packages": {
+    "SOT-23-8": {
+      "pin_count": 8,
+      "pins": {
+        "1": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Reference ground for all internal voltages. Connect to GND of the ±Vs supply.",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "MODE",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Mode selection pin for overload response. Sets current limit to IOL, 2 × IOL, or 2 × IOL with extended IOL expiry time.",
+          "unused_treatment": "FLOAT"
+        },
+        "3": {
+          "name": "-Vs",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Negative supply for dual supply configurations. Connect to GND when used in a single supply configuration.",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "IN",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Signal/power input",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "OUT",
+          "direction": "OUTPUT",
+          "signal_type": "ANALOG",
+          "description": "Signal/power output",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "+Vs",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Positive supply for powering the device",
+          "unused_treatment": null
+        },
+        "7": {
+          "name": "EN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Enable control. Pull EN low to turn off the device. EN has internal an pullup and it can be left floating to enable the device. (also: VSNS — Supply sensing input for transition to loop power mode. If not used, this pin can be left open or floating.)",
+          "unused_treatment": "FLOAT"
+        },
+        "8": {
+          "name": "SGOOD",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "Signal good indicator pin. Whenever the device is within normal operating condition, SGOOD shows low indicating signal is good to read.",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "absolute_maximum_ratings": {
+    "+Vs": {
+      "parameter": "Positive supply voltage",
+      "min": -0.3,
+      "max": 32,
+      "unit": "V",
+      "conditions": null
+    },
+    "-Vs": {
+      "parameter": "Negative supply voltage",
+      "min": -22,
+      "max": 0.3,
+      "unit": "V",
+      "conditions": null
+    },
+    "ISGOOD": {
+      "parameter": "SGOOD sink current",
+      "min": null,
+      "max": 200,
+      "unit": "µA",
+      "conditions": "Sink Current"
+    },
+    "TJ": {
+      "parameter": "Operating Junction temperature",
+      "min": -40,
+      "max": 150,
+      "unit": "°C",
+      "conditions": "Operating Junction temperature"
+    },
+    "TJ_Transient_Junction_temperature": {
+      "parameter": "Transient Junction temperature",
+      "min": -65,
+      "max": null,
+      "unit": "°C",
+      "conditions": "Transient Junction temperature, max is T(TSD)"
+    },
+    "Tstg": {
+      "parameter": "Storage temperature",
+      "min": -65,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    }
+  },
+  "electrical_parameters": {
+    "V(IN)": {
+      "parameter": "IN Signal Voltage",
+      "min": -50,
+      "typ": null,
+      "max": 50,
+      "unit": "V",
+      "conditions": null
+    },
+    "IQ": {
+      "parameter": "Sum of Leakage Current from IN and OUT pins to GND",
+      "min": -0.1,
+      "typ": null,
+      "max": 0.1,
+      "unit": "µA",
+      "conditions": "(-Vs) < VIN, VOUT < (+Vs - 0.35 V)"
+    },
+    "IQ_Vs___0_35_V____VIN__VOUT": {
+      "parameter": "Sum of Leakage Current from IN and OUT pins to GND",
+      "min": null,
+      "typ": null,
+      "max": 1,
+      "unit": "µA",
+      "conditions": "(+Vs - 0.35 V) < VIN, VOUT < +Vs"
+    },
+    "I(OL)": {
+      "parameter": "Bipolar current limit",
+      "min": 25,
+      "typ": 32,
+      "max": 40,
+      "unit": "mA",
+      "conditions": "V(IN)-V(OUT) = ±1 V, -Vs connected to negative supply"
+    },
+    "I(OL)_V_IN__V_OUT_____1_V___Vs_conne": {
+      "parameter": "Unipolar Current limit",
+      "min": 25,
+      "typ": 32,
+      "max": 40,
+      "unit": "mA",
+      "conditions": "V(IN)-V(OUT) = +1 V, -Vs connected to GND"
+    },
+    "I(OL)_V_IN_____24_V_V_OUT_____19_V": {
+      "parameter": "Unipolar current limit with VIN < -Vs",
+      "min": -40,
+      "typ": -32,
+      "max": -25,
+      "unit": "mA",
+      "conditions": "V(IN) = -24-V V(OUT) = -19 V, -Vs = -20 V"
+    },
+    "I(OL_Pulse)": {
+      "parameter": "Transient Pulse Over Current Limit",
+      "min": 50,
+      "typ": 60,
+      "max": 72,
+      "unit": "mA",
+      "conditions": "V(IN)-V(OUT) = +1.5 V, MODE = Floating"
+    },
+    "I(FASTRIP)": {
+      "parameter": "Fast-trip current limit (MODE = GND)",
+      "min": 65,
+      "typ": null,
+      "max": 165,
+      "unit": "mA",
+      "conditions": "MODE = GND"
+    },
+    "I(FASTRIP)_MODE___Floating_or_180_k__to_G": {
+      "parameter": "Fast-trip current limit (MODE = Floating or 180 kΩ)",
+      "min": 140,
+      "typ": null,
+      "max": 275,
+      "unit": "mA",
+      "conditions": "MODE = Floating or 180 kΩ to GND"
+    },
+    "RON": {
+      "parameter": "IN to OUT total ON resistance",
+      "min": 4.8,
+      "typ": 7.5,
+      "max": 12.5,
+      "unit": "Ω",
+      "conditions": "-40 °C < T < 125 °C, I(IN) < Overload Current"
+    },
+    "V(+Vs)": {
+      "parameter": "+Vs Supply Operating Voltage",
+      "min": 4,
+      "typ": null,
+      "max": 30,
+      "unit": "V",
+      "conditions": null
+    },
+    "V(-Vs)": {
+      "parameter": "-Vs Supply Operating Voltage",
+      "min": -20,
+      "typ": null,
+      "max": 0,
+      "unit": "V",
+      "conditions": null
+    },
+    "Vs_DIFF": {
+      "parameter": "Difference between +Vs and -Vs",
+      "min": 3,
+      "typ": null,
+      "max": 50,
+      "unit": "V",
+      "conditions": null
+    },
+    "I(+Vs)": {
+      "parameter": "Current sourced from +Vs supply to GND in normal operation",
+      "min": null,
+      "typ": 1.07,
+      "max": 1.65,
+      "unit": "mA",
+      "conditions": "SGOOD = Floating"
+    },
+    "I(-Vs)": {
+      "parameter": "Current sinked by -Vs supply from GND",
+      "min": null,
+      "typ": null,
+      "max": 0.2,
+      "unit": "mA",
+      "conditions": null
+    },
+    "V(ENR)": {
+      "parameter": "EN Rising Threshold",
+      "min": null,
+      "typ": null,
+      "max": 1.72,
+      "unit": "V",
+      "conditions": null
+    },
+    "V(ENF)": {
+      "parameter": "EN Falling Threshold",
+      "min": 1,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": null
+    },
+    "T(TSD)": {
+      "parameter": "Thermal Shutdown (TSD) threshold, Rising",
+      "min": null,
+      "typ": 160,
+      "max": null,
+      "unit": "°C",
+      "conditions": null
+    }
+  },
+  "drc_hints": {
+    "iq": {
+      "typ": null,
+      "max": 0.1,
+      "unit": "µA"
+    }
+  }
+}

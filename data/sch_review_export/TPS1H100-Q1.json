@@ -1,0 +1,649 @@
+{
+  "_schema": "sch-review-device/1.0",
+  "_type": "normal_ic",
+  "mpn": "TPS1H100-Q1",
+  "manufacturer": "Texas Instruments",
+  "category": "Switch",
+  "description": "40-V, 100-mΩ Single-Channel Smart High-Side Power Switch",
+  "packages": {
+    "HTSSOP-14": {
+      "pin_count": 15,
+      "pins": {
+        "13": {
+          "name": "CL",
+          "direction": "OUTPUT",
+          "signal_type": "ANALOG",
+          "description": "Programmable current-limit pin. Connect to device GND if external current limit is not used.",
+          "unused_treatment": "GND"
+        },
+        "14": {
+          "name": "CS",
+          "direction": "OUTPUT",
+          "signal_type": "ANALOG",
+          "description": "Current-sense output. Leave floating if not used. (also: ST — Open-drain diagnostic status output. Leave floating if not used.)",
+          "unused_treatment": "FLOAT"
+        },
+        "12": {
+          "name": "DIAG_EN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Enable and disable pin for diagnostic functions. Connect to device GND if not used.",
+          "unused_treatment": "GND"
+        },
+        "2": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground pin",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "IN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Input control for channel activation",
+          "unused_treatment": null
+        },
+        "1": {
+          "name": "NC",
+          "direction": "NC",
+          "signal_type": "NONE",
+          "description": "No-connect pin; leave floating.",
+          "unused_treatment": "FLOAT"
+        },
+        "4": {
+          "name": "NC",
+          "direction": "NC",
+          "signal_type": "NONE",
+          "description": "No-connect pin; leave floating.",
+          "unused_treatment": "FLOAT"
+        },
+        "11": {
+          "name": "NC",
+          "direction": "NC",
+          "signal_type": "NONE",
+          "description": "No-connect pin; leave floating.",
+          "unused_treatment": "FLOAT"
+        },
+        "5": {
+          "name": "OUT",
+          "direction": "OUTPUT",
+          "signal_type": "POWER",
+          "description": "Output, connected to load (NMOS source)",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "OUT",
+          "direction": "OUTPUT",
+          "signal_type": "POWER",
+          "description": "Output, connected to load (NMOS source)",
+          "unused_treatment": null
+        },
+        "7": {
+          "name": "OUT",
+          "direction": "OUTPUT",
+          "signal_type": "POWER",
+          "description": "Output, connected to load (NMOS source)",
+          "unused_treatment": null
+        },
+        "8": {
+          "name": "VS",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power supply; battery voltage",
+          "unused_treatment": null
+        },
+        "9": {
+          "name": "VS",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power supply; battery voltage",
+          "unused_treatment": null
+        },
+        "10": {
+          "name": "VS",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power supply; battery voltage",
+          "unused_treatment": null
+        },
+        "EP": {
+          "name": "Thermal pad",
+          "direction": "PASSIVE",
+          "signal_type": "POWER",
+          "description": "Thermal pad. Connect to device GND or leave floating.",
+          "unused_treatment": "FLOAT"
+        }
+      }
+    }
+  },
+  "absolute_maximum_ratings": {
+    "VS": {
+      "parameter": "Supply voltage",
+      "min": null,
+      "max": 48,
+      "unit": "V",
+      "conditions": "t < 400 ms"
+    },
+    "TA": {
+      "parameter": "Operating ambient temperature",
+      "min": -40,
+      "max": 125,
+      "unit": "°C",
+      "conditions": null
+    },
+    "TJ": {
+      "parameter": "Operating junction temperature",
+      "min": -40,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    },
+    "Tstg": {
+      "parameter": "Storage temperature",
+      "min": -65,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    }
+  },
+  "electrical_parameters": {
+    "VS,nom": {
+      "parameter": "Nominal operating voltage",
+      "min": 5,
+      "typ": null,
+      "max": 40,
+      "unit": "V",
+      "conditions": null
+    },
+    "VS,op": {
+      "parameter": "Extended operating voltage",
+      "min": 3.5,
+      "typ": null,
+      "max": 5,
+      "unit": "V",
+      "conditions": "RDS(on) value increases maximum 20%, compared to 5 V, see RDS(on) parameter"
+    },
+    "VS,UVR": {
+      "parameter": "Undervoltage restart",
+      "min": 3.5,
+      "typ": 3.7,
+      "max": 4,
+      "unit": "V",
+      "conditions": "VS rises up, VS > VS,UVR, device turn on"
+    },
+    "VS,UVF": {
+      "parameter": "Undervoltage shutdown",
+      "min": 3,
+      "typ": 3.2,
+      "max": 3.5,
+      "unit": "V",
+      "conditions": "VS falls down, VS < VS,UVF, device shuts off"
+    },
+    "VUV,hys": {
+      "parameter": "Undervoltage shutdown, hysteresis",
+      "min": null,
+      "typ": 0.5,
+      "max": null,
+      "unit": "V",
+      "conditions": null
+    },
+    "Inom": {
+      "parameter": "Nominal operating current",
+      "min": null,
+      "typ": null,
+      "max": 5,
+      "unit": "mA",
+      "conditions": "VIN = 5 V, VDIAG_EN = 0 V, no load"
+    },
+    "Inom_VIN___5_V__VDIAG_EN___0_V__10": {
+      "parameter": "Nominal operating current",
+      "min": null,
+      "typ": null,
+      "max": 10,
+      "unit": "mA",
+      "conditions": "VIN = 5 V, VDIAG_EN = 0 V, 10-Ω load"
+    },
+    "Ioff": {
+      "parameter": "Standby current",
+      "min": null,
+      "typ": null,
+      "max": 0.5,
+      "unit": "µA",
+      "conditions": "VS = 13.5 V, VIN = VDIAG_EN = VCS = VCL = VOUTPUT = 0 V, TJ = 25°C"
+    },
+    "Ioff_VS___13_5_V__VIN___VDIAG_EN": {
+      "parameter": "Standby current",
+      "min": null,
+      "typ": null,
+      "max": 5,
+      "unit": "µA",
+      "conditions": "VS = 13.5 V, VIN = VDIAG_EN = VCS = VCL = VOUTPUT = 0 V, TJ = 125°C"
+    },
+    "Ioff,diag": {
+      "parameter": "Standby current with diagnostic enabled",
+      "min": null,
+      "typ": null,
+      "max": 1.2,
+      "unit": "mA",
+      "conditions": "VIN = 0 V, VDIAG_EN = 5 V"
+    },
+    "toff,deg": {
+      "parameter": "Standby mode deglitch time",
+      "min": null,
+      "typ": 2,
+      "max": null,
+      "unit": "ms",
+      "conditions": "IN from high to low, if deglitch time > toff,deg, enters into standby mode"
+    },
+    "Ileak,out": {
+      "parameter": "Off-state output leakage current",
+      "min": null,
+      "typ": null,
+      "max": 0.5,
+      "unit": "µA",
+      "conditions": "VS = 13.5 V, VIN = VOUTPUT = 0, TJ = 25°C"
+    },
+    "Ileak,out_VS___13_5_V__VIN___VOUTPUT___0": {
+      "parameter": "Off-state output leakage current",
+      "min": null,
+      "typ": null,
+      "max": 3,
+      "unit": "µA",
+      "conditions": "VS = 13.5 V, VIN = VOUTPUT = 0, TJ = 125°C"
+    },
+    "RDS-ON": {
+      "parameter": "On-state resistance",
+      "min": null,
+      "typ": 80,
+      "max": 100,
+      "unit": "mΩ",
+      "conditions": "VS > 5 V, TJ = 25°C"
+    },
+    "RDS-ON_VS___5_V__TJ___150_C": {
+      "parameter": "On-state resistance",
+      "min": null,
+      "typ": null,
+      "max": 166,
+      "unit": "mΩ",
+      "conditions": "VS > 5 V, TJ = 150°C"
+    },
+    "RDS-ON_VS___3_5_V__TJ___25_C": {
+      "parameter": "On-state resistance",
+      "min": null,
+      "typ": null,
+      "max": 120,
+      "unit": "mΩ",
+      "conditions": "VS = 3.5 V, TJ = 25°C"
+    },
+    "Ilim,nom": {
+      "parameter": "Internal current limit",
+      "min": 7,
+      "typ": null,
+      "max": 13,
+      "unit": "A",
+      "conditions": null
+    },
+    "Ilim,tsd": {
+      "parameter": "Current limit during thermal shutdown",
+      "min": null,
+      "typ": 5,
+      "max": null,
+      "unit": "A",
+      "conditions": "Internal current limit, thermal cycling condition"
+    },
+    "Ilim,tsd_External_current_limit__therma": {
+      "parameter": "Current limit during thermal shutdown",
+      "min": null,
+      "typ": 50,
+      "max": null,
+      "unit": "%",
+      "conditions": "External current limit, thermal cycling condition; Percentage of current limit set value"
+    },
+    "VDS": {
+      "parameter": "Clamp drain-to-source voltage internally clamped",
+      "min": 50,
+      "typ": null,
+      "max": 70,
+      "unit": "V",
+      "conditions": null
+    },
+    "VF": {
+      "parameter": "Drain-to-source diode voltage",
+      "min": null,
+      "typ": 0.7,
+      "max": null,
+      "unit": "V",
+      "conditions": "VIN = 0, IOUT = -0.2 A"
+    },
+    "Irev1": {
+      "parameter": "Continuous reverse current when reverse polarity",
+      "min": null,
+      "typ": null,
+      "max": 4,
+      "unit": "A",
+      "conditions": "t < 60 s, VS = 13.5 V, GND pin 1-kΩ resistor in parallel with diode. TJ = 25°C."
+    },
+    "Irev2": {
+      "parameter": "Continuous reverse current when VOUT > VS + Vdiode",
+      "min": null,
+      "typ": null,
+      "max": 2,
+      "unit": "A",
+      "conditions": "t < 60 s, VS = 13.5 V. TJ = 25°C."
+    },
+    "Vlogic,h": {
+      "parameter": "Input or DIAG_EN high-level voltage",
+      "min": 2,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": null
+    },
+    "Vlogic,l": {
+      "parameter": "Input or DIAG_EN low-level voltage",
+      "min": null,
+      "typ": null,
+      "max": 0.8,
+      "unit": "V",
+      "conditions": null
+    },
+    "Vlogic,hys": {
+      "parameter": "Input or DIAG_EN hysteresis voltage",
+      "min": null,
+      "typ": 250,
+      "max": null,
+      "unit": "mV",
+      "conditions": null
+    },
+    "Rpd,in": {
+      "parameter": "Input pulldown resistor",
+      "min": null,
+      "typ": 500,
+      "max": null,
+      "unit": "kΩ",
+      "conditions": null
+    },
+    "Rpd,diag": {
+      "parameter": "Diag pulldown resistor",
+      "min": null,
+      "typ": 150,
+      "max": null,
+      "unit": "kΩ",
+      "conditions": null
+    },
+    "Iloss,gnd": {
+      "parameter": "Loss-of-ground output leakage current",
+      "min": null,
+      "typ": null,
+      "max": 100,
+      "unit": "µA",
+      "conditions": null
+    },
+    "Vol,off": {
+      "parameter": "Open-load detection threshold in off-state",
+      "min": 1.4,
+      "typ": 1.8,
+      "max": 2.6,
+      "unit": "V",
+      "conditions": "VIN = 0 V, When VS - VOUT < Vol,off, duration longer than tol,off."
+    },
+    "Iol,off": {
+      "parameter": "Off-state output sink current with open load",
+      "min": null,
+      "typ": null,
+      "max": -50,
+      "unit": "µA",
+      "conditions": "VIN = 0 V, VS = VOUT = 13.5 V, TJ = 125°C"
+    },
+    "tol,off": {
+      "parameter": "Open-load detection-threshold deglitch time in off-state",
+      "min": null,
+      "typ": 600,
+      "max": null,
+      "unit": "µs",
+      "conditions": "VIN = 0 V, When VS - VOUT < Vol,off, duration longer than tol,off."
+    },
+    "Iol,on": {
+      "parameter": "Open-load detection threshold in on-state",
+      "min": 2,
+      "typ": 6,
+      "max": 10,
+      "unit": "mA",
+      "conditions": "VIN = 5 V, when IOUT < Iol,on, duration longer than tol,on."
+    },
+    "tol,on": {
+      "parameter": "Open-load detection-threshold deglitch time in on-state",
+      "min": null,
+      "typ": 700,
+      "max": null,
+      "unit": "µs",
+      "conditions": "VIN = 5 V, when IOUT < Iol,on, duration longer than tol,on."
+    },
+    "VST": {
+      "parameter": "Status low output voltage",
+      "min": null,
+      "typ": null,
+      "max": 0.4,
+      "unit": "V",
+      "conditions": "IST = 2 mA"
+    },
+    "TSD": {
+      "parameter": "Thermal shutdown threshold",
+      "min": null,
+      "typ": 175,
+      "max": null,
+      "unit": "°C",
+      "conditions": null
+    },
+    "TSD,rst": {
+      "parameter": "Thermal shutdown status reset",
+      "min": null,
+      "typ": 155,
+      "max": null,
+      "unit": "°C",
+      "conditions": null
+    },
+    "Tsw": {
+      "parameter": "Thermal swing shutdown threshold",
+      "min": null,
+      "typ": 60,
+      "max": null,
+      "unit": "°C",
+      "conditions": null
+    },
+    "Thys": {
+      "parameter": "Hysteresis for resetting the thermal shutdown and swing",
+      "min": null,
+      "typ": 10,
+      "max": null,
+      "unit": "°C",
+      "conditions": null
+    },
+    "K": {
+      "parameter": "Current sense current ratio",
+      "min": null,
+      "typ": 500,
+      "max": null,
+      "unit": null,
+      "conditions": null
+    },
+    "KCL": {
+      "parameter": "Current limit current ratio",
+      "min": null,
+      "typ": 2000,
+      "max": null,
+      "unit": null,
+      "conditions": null
+    },
+    "dK/K": {
+      "parameter": "Current-sense accuracy",
+      "min": -80,
+      "typ": null,
+      "max": 80,
+      "unit": "%",
+      "conditions": "Iload >= 5 mA"
+    },
+    "dK/K_Iload____25_mA": {
+      "parameter": "Current-sense accuracy",
+      "min": -10,
+      "typ": null,
+      "max": 10,
+      "unit": "%",
+      "conditions": "Iload >= 25 mA"
+    },
+    "dK/K_Iload____50_mA": {
+      "parameter": "Current-sense accuracy",
+      "min": -7,
+      "typ": null,
+      "max": 7,
+      "unit": "%",
+      "conditions": "Iload >= 50 mA"
+    },
+    "dK/K_Iload____0_1_A": {
+      "parameter": "Current-sense accuracy",
+      "min": -5,
+      "typ": null,
+      "max": 5,
+      "unit": "%",
+      "conditions": "Iload >= 0.1 A"
+    },
+    "dK/K_Iload____1_A": {
+      "parameter": "Current-sense accuracy",
+      "min": -3,
+      "typ": null,
+      "max": 3,
+      "unit": "%",
+      "conditions": "Iload >= 1 A"
+    },
+    "dKCL/KCL": {
+      "parameter": "External current-limit accuracy",
+      "min": -20,
+      "typ": null,
+      "max": 20,
+      "unit": "%",
+      "conditions": "Ilimit >= 0.5 A"
+    },
+    "dKCL/KCL_Ilimit____1_6_A": {
+      "parameter": "External current-limit accuracy",
+      "min": -14,
+      "typ": null,
+      "max": 14,
+      "unit": "%",
+      "conditions": "Ilimit >= 1.6 A"
+    },
+    "VCS,lin": {
+      "parameter": "Linear current sense voltage range",
+      "min": 0,
+      "typ": null,
+      "max": 4,
+      "unit": "V",
+      "conditions": "VS >= 5 V"
+    },
+    "IOUT,lin": {
+      "parameter": "Linear output current range",
+      "min": 0,
+      "typ": null,
+      "max": 4,
+      "unit": "A",
+      "conditions": "VS >= 5 V, VCS,lin <= 4 V"
+    },
+    "VCS,H": {
+      "parameter": "Current-sense fault high voltage",
+      "min": 4.3,
+      "typ": 4.75,
+      "max": 4.9,
+      "unit": "V",
+      "conditions": "VS >= 7 V"
+    },
+    "VCS,H_VS____5_V__min_value_is_Min_VS": {
+      "parameter": "Current-sense fault high voltage",
+      "min": null,
+      "typ": null,
+      "max": 4.9,
+      "unit": "V",
+      "conditions": "VS >= 5 V, min value is Min(VS - 0.8, 4.3)"
+    },
+    "ICS,H": {
+      "parameter": "Current sense fault condition current",
+      "min": null,
+      "typ": 10,
+      "max": null,
+      "unit": "mA",
+      "conditions": "VCS = 4.3 V, VS > 7 V"
+    },
+    "VCL,th": {
+      "parameter": "Current limit internal threshold voltage",
+      "min": null,
+      "typ": 1.233,
+      "max": null,
+      "unit": "V",
+      "conditions": null
+    },
+    "ICS,leak": {
+      "parameter": "Current sense leakage current in disabled mode",
+      "min": null,
+      "typ": null,
+      "max": 1,
+      "unit": "µA",
+      "conditions": "VIN = 5 V, Rload = 10 Ω, VDIAG_EN = 0 V, TJ = 125°C"
+    },
+    "ICS,leak_VIN___0_V__VDIAG_EN___0_V__TJ": {
+      "parameter": "Current sense leakage current in disabled mode",
+      "min": null,
+      "typ": null,
+      "max": 1,
+      "unit": "µA",
+      "conditions": "VIN = 0 V, VDIAG_EN = 0 V, TJ = 125°C"
+    },
+    "RθJA": {
+      "parameter": "Junction-to-ambient thermal resistance",
+      "min": null,
+      "typ": 41,
+      "max": null,
+      "unit": "°C/W",
+      "conditions": "14-pin HTSSOP package"
+    },
+    "RθJC(top)": {
+      "parameter": "Junction-to-case (top) thermal resistance",
+      "min": null,
+      "typ": 29.7,
+      "max": null,
+      "unit": "°C/W",
+      "conditions": "14-pin HTSSOP package"
+    },
+    "RθJB": {
+      "parameter": "Junction-to-board thermal resistance",
+      "min": null,
+      "typ": 25.1,
+      "max": null,
+      "unit": "°C/W",
+      "conditions": "14-pin HTSSOP package"
+    },
+    "ψJT": {
+      "parameter": "Junction-to-top characterization parameter",
+      "min": null,
+      "typ": 0.9,
+      "max": null,
+      "unit": "°C/W",
+      "conditions": "14-pin HTSSOP package"
+    },
+    "ψJB": {
+      "parameter": "Junction-to-board characterization parameter",
+      "min": null,
+      "typ": 24.8,
+      "max": null,
+      "unit": "°C/W",
+      "conditions": "14-pin HTSSOP package"
+    },
+    "RθJC(bot)": {
+      "parameter": "Junction-to-case (bottom) thermal resistance",
+      "min": null,
+      "typ": 2.7,
+      "max": null,
+      "unit": "°C/W",
+      "conditions": "14-pin HTSSOP package"
+    }
+  },
+  "drc_hints": {}
+}

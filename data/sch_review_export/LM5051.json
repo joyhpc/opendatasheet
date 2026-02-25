@@ -1,0 +1,411 @@
+{
+  "_schema": "sch-review-device/1.0",
+  "_type": "normal_ic",
+  "mpn": "LM5051",
+  "manufacturer": "Texas Instruments",
+  "category": "Other",
+  "description": "Low Side OR-ing FET Controller",
+  "packages": {
+    "8-Lead SOIC": {
+      "pin_count": 8,
+      "pins": {
+        "1": {
+          "name": "LINE",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power supply pin to bias the internal 12V zener shunt regulator at the VCC pin through an internal 50 kΩ series resistor.",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "VCC",
+          "direction": "POWER_OUT",
+          "signal_type": "POWER",
+          "description": "Connection to the internal 12V zener shunt voltage regulator. Requires bypass capacitor to VSS.",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "OFF",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "FET Test Mode control input. Logic high turns off the external MOSFET. Internal pull-down.",
+          "unused_treatment": "FLOAT"
+        },
+        "4": {
+          "name": "nFGD",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "Open drain output for the FET Test circuit. Active low indicates forward voltage > 260 mV typical.",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "INP/VSS",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Negative supply voltage connection and MOSFET voltage sense connected to the external MOSFET common source connection.",
+          "unused_treatment": null
+        },
+        "7": {
+          "name": "INP/VSS",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Negative supply voltage connection and MOSFET voltage sense connected to the external MOSFET common source connection.",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "INN",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Voltage sense connection to the external MOSFET Drain pin.",
+          "unused_treatment": null
+        },
+        "8": {
+          "name": "GATE",
+          "direction": "OUTPUT",
+          "signal_type": "ANALOG",
+          "description": "Gate drive for the external N-Channel MOSFET.",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "absolute_maximum_ratings": {},
+  "electrical_parameters": {
+    "ILINE": {
+      "parameter": "LINE Pin current",
+      "min": null,
+      "typ": 690,
+      "max": null,
+      "unit": "µA",
+      "conditions": "VLINE = 48.0V, VCC Pin = Open"
+    },
+    "ILINE_VLINE___48_0V__VCC_Pin___Open": {
+      "parameter": "LINE Pin current",
+      "min": null,
+      "typ": null,
+      "max": 780,
+      "unit": "µA",
+      "conditions": "VLINE = 48.0V, VCC Pin = Open"
+    },
+    "VCC": {
+      "parameter": "Operating Voltage Range",
+      "min": 4.5,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": "LINE Pin = Open"
+    },
+    "VZ": {
+      "parameter": "VCC Shunt Zener Voltage",
+      "min": null,
+      "typ": 13.0,
+      "max": null,
+      "unit": "V",
+      "conditions": "IVCC = 2 mA"
+    },
+    "VZ_IVCC___2_mA": {
+      "parameter": "VCC Shunt Zener Voltage",
+      "min": 11.9,
+      "typ": null,
+      "max": 14.3,
+      "unit": "V",
+      "conditions": "IVCC = 2 mA"
+    },
+    "VZ_IVCC___10_mA": {
+      "parameter": "VCC Shunt Zener Voltage",
+      "min": 12.5,
+      "typ": null,
+      "max": 14.5,
+      "unit": "V",
+      "conditions": "IVCC = 10 mA"
+    },
+    "ΔVZ": {
+      "parameter": "Shunt Zener Regulation",
+      "min": null,
+      "typ": 0.5,
+      "max": null,
+      "unit": "V",
+      "conditions": "IVCC = 2 mA to 10 mA"
+    },
+    "ΔVZ_IVCC___2_mA_to_10_mA": {
+      "parameter": "Shunt Zener Regulation",
+      "min": null,
+      "typ": null,
+      "max": 1.11,
+      "unit": "V",
+      "conditions": "IVCC = 2 mA to 10 mA"
+    },
+    "IVCC": {
+      "parameter": "Supply Current",
+      "min": null,
+      "typ": 1.0,
+      "max": null,
+      "unit": "mA",
+      "conditions": "VVCC = VZ - 100mV"
+    },
+    "IVCC_VVCC___VZ___100mV": {
+      "parameter": "Supply Current",
+      "min": null,
+      "typ": null,
+      "max": 1.5,
+      "unit": "mA",
+      "conditions": "VVCC = VZ - 100mV"
+    },
+    "IVCC_VVCC___5_0V": {
+      "parameter": "Supply Current",
+      "min": null,
+      "typ": null,
+      "max": 1.1,
+      "unit": "mA",
+      "conditions": "VVCC = 5.0V"
+    },
+    "IINN": {
+      "parameter": "INN Pin Current",
+      "min": null,
+      "typ": 3.1,
+      "max": null,
+      "unit": "µA",
+      "conditions": "VINN = 0.0V"
+    },
+    "IINN_VINN___90V": {
+      "parameter": "INN Pin Current",
+      "min": null,
+      "typ": 0.04,
+      "max": null,
+      "unit": "µA",
+      "conditions": "VINN = 90V"
+    },
+    "IGATE": {
+      "parameter": "GATE Charge Current",
+      "min": null,
+      "typ": 0.66,
+      "max": null,
+      "unit": "mA",
+      "conditions": "VGATE = 5.5V, VINN = -150mV"
+    },
+    "IGATE_VGATE___5_5V__VINN____150mV": {
+      "parameter": "GATE Charge Current",
+      "min": 0.28,
+      "typ": null,
+      "max": 0.95,
+      "unit": "mA",
+      "conditions": "VGATE = 5.5V, VINN = -150mV"
+    },
+    "IGATE_VGATE___5_5V__VINN____150_mV_t": {
+      "parameter": "GATE Discharge Current",
+      "min": 2.4,
+      "typ": null,
+      "max": null,
+      "unit": "A",
+      "conditions": "VGATE = 5.5V, VINN = -150 mV to +300 mV, t <= 10 ms"
+    },
+    "VGATE": {
+      "parameter": "GATE Pin High Voltage",
+      "min": null,
+      "typ": 13.0,
+      "max": null,
+      "unit": "V",
+      "conditions": "VLINE = 48.0V"
+    },
+    "VGATE_VVCC___10_25V__LINE___Open": {
+      "parameter": "GATE Pin High Voltage",
+      "min": 9.98,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": "VVCC = 10.25V, LINE = Open"
+    },
+    "VGATE_VVCC___5_0V__LINE___Open": {
+      "parameter": "GATE Pin High Voltage",
+      "min": 4.7,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": "VVCC = 5.0V, LINE = Open"
+    },
+    "VSD(REV)": {
+      "parameter": "Reverse Threshold",
+      "min": null,
+      "typ": -45,
+      "max": null,
+      "unit": "mV",
+      "conditions": "VINN going negative until Gate Drive Turns ON"
+    },
+    "VSD(REV)_VINN_going_negative_until_Gate": {
+      "parameter": "Reverse Threshold",
+      "min": -112.2,
+      "typ": null,
+      "max": 11.4,
+      "unit": "mV",
+      "conditions": "VINN going negative until Gate Drive Turns ON"
+    },
+    "ΔVSD(REV)": {
+      "parameter": "Reverse Threshold Hysteresis",
+      "min": null,
+      "typ": 50,
+      "max": null,
+      "unit": "mV",
+      "conditions": "VINN going positive from VSD(REV) Threshold until Gate Drive Turns OFF"
+    },
+    "VSD(REG)": {
+      "parameter": "Regulated VINP/VSS to VINN Threshold",
+      "min": -10.8,
+      "typ": null,
+      "max": 30.8,
+      "unit": "mV",
+      "conditions": null
+    },
+    "tGATE(REV)": {
+      "parameter": "Gate Capacitance Discharge Time at Forward to Reverse Transition",
+      "min": null,
+      "typ": 34,
+      "max": null,
+      "unit": "ns",
+      "conditions": "CGATE = 0"
+    },
+    "tGATE(REV)_CGATE___0": {
+      "parameter": "Gate Capacitance Discharge Time at Forward to Reverse Transition",
+      "min": null,
+      "typ": null,
+      "max": 50,
+      "unit": "ns",
+      "conditions": "CGATE = 0"
+    },
+    "tGATE(REV)_CGATE___10_nF": {
+      "parameter": "Gate Capacitance Discharge Time at Forward to Reverse Transition",
+      "min": null,
+      "typ": 60,
+      "max": null,
+      "unit": "ns",
+      "conditions": "CGATE = 10 nF"
+    },
+    "tGATE(REV)_CGATE___47_nF": {
+      "parameter": "Gate Capacitance Discharge Time at Forward to Reverse Transition",
+      "min": null,
+      "typ": null,
+      "max": 230,
+      "unit": "ns",
+      "conditions": "CGATE = 47 nF"
+    },
+    "tGATE(OFF)": {
+      "parameter": "Gate Capacitance Discharge Time at OFF pin Low to High Transition",
+      "min": null,
+      "typ": 120,
+      "max": null,
+      "unit": "ns",
+      "conditions": "CGATE = 47 nF"
+    },
+    "VOFF(IH)": {
+      "parameter": "OFF Input High Threshold Voltage",
+      "min": null,
+      "typ": 1.5,
+      "max": null,
+      "unit": "V",
+      "conditions": "VINN = -400 mV, VOFF Rising until Gate is Low"
+    },
+    "VOFF(IH)_VINN____400_mV__VOFF_Rising_un": {
+      "parameter": "OFF Input High Threshold Voltage",
+      "min": 1.28,
+      "typ": null,
+      "max": 1.65,
+      "unit": "V",
+      "conditions": "VINN = -400 mV, VOFF Rising until Gate is Low"
+    },
+    "VOFF(IL)": {
+      "parameter": "OFF Input Low Threshold Voltage",
+      "min": null,
+      "typ": 1.48,
+      "max": null,
+      "unit": "V",
+      "conditions": "VINN = -400 mV, VOFF Falling until Gate is High"
+    },
+    "ΔVOFF": {
+      "parameter": "OFF Threshold Voltage Hysteresis",
+      "min": null,
+      "typ": 20,
+      "max": null,
+      "unit": "mV",
+      "conditions": "VOFF(IH) - VOFF(IL)"
+    },
+    "IOFF(IH)": {
+      "parameter": "OFF Pin Internal Pull-down",
+      "min": null,
+      "typ": 4.6,
+      "max": null,
+      "unit": "µA",
+      "conditions": "VOFF = 5.0V"
+    },
+    "IOFF(IH)_VOFF___5_0V": {
+      "parameter": "OFF Pin Internal Pull-down",
+      "min": null,
+      "typ": null,
+      "max": 6.0,
+      "unit": "µA",
+      "conditions": "VOFF = 5.0V"
+    },
+    "IOFF(IL)": {
+      "parameter": "OFF Pin Internal Pull-down",
+      "min": null,
+      "typ": -0.03,
+      "max": null,
+      "unit": "µA",
+      "conditions": "VOFF = 0.0V"
+    },
+    "VSD(TST)": {
+      "parameter": "FET Test Threshold Voltage",
+      "min": null,
+      "typ": -260,
+      "max": null,
+      "unit": "mV",
+      "conditions": "VOFF = 5.0V, VINN/VSS going negative from VINP until nFGD pin goes Hi-Z"
+    },
+    "VSD(TST)_VOFF___5_0V__VINN_VSS_going_ne": {
+      "parameter": "FET Test Threshold Voltage",
+      "min": -360,
+      "typ": null,
+      "max": -183,
+      "unit": "mV",
+      "conditions": "VOFF = 5.0V, VINN/VSS going negative from VINP until nFGD pin goes Hi-Z"
+    },
+    "ΔVSD(TST)": {
+      "parameter": "FET Test Threshold Voltage Hysteresis",
+      "min": null,
+      "typ": 6.5,
+      "max": null,
+      "unit": "mV",
+      "conditions": "VOFF = 5.0V, VINN going positive from VSD(TST) until nFGD pin goes Lo-Z"
+    },
+    "nFGDVOL": {
+      "parameter": "nFGD Output Low Voltage",
+      "min": null,
+      "typ": 285,
+      "max": null,
+      "unit": "mV",
+      "conditions": "VOFF = 5V, InFGD = 1mA Sinking"
+    },
+    "nFGDVOL_VOFF___5V__InFGD___1mA_Sinking": {
+      "parameter": "nFGD Output Low Voltage",
+      "min": null,
+      "typ": null,
+      "max": 450,
+      "unit": "mV",
+      "conditions": "VOFF = 5V, InFGD = 1mA Sinking"
+    },
+    "nFGDIOL": {
+      "parameter": "nFGD Output Leakage Current",
+      "min": null,
+      "typ": 0.01,
+      "max": null,
+      "unit": "µA",
+      "conditions": "VOFF = 0V, VnFGD = 5.0V"
+    },
+    "nFGDIOL_VOFF___0V__VnFGD___5_0V": {
+      "parameter": "nFGD Output Leakage Current",
+      "min": null,
+      "typ": null,
+      "max": 0.7,
+      "unit": "µA",
+      "conditions": "VOFF = 0V, VnFGD = 5.0V"
+    }
+  },
+  "drc_hints": {}
+}

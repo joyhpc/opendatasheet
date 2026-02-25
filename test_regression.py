@@ -760,15 +760,40 @@ def t8_15():
             assert_in(pin["pin"], by_pin, f"{fname} pin {pin['pin']} missing from lookup")
 
 
-# ─── T9: TI Hot-Swap / Ideal Diode ICs ──────────────────────────────
+# ─── T9: TI Hot-Swap / eFuse / Ideal Diode ICs ──────────────────────
 
 TI_HOTSWAP_EXPORTS = {
+    # Hot-Swap Controllers (original 6)
     "LM5060.json":          {"mpn": "LM5060", "min_pins": 10, "category": "Other"},
     "LM5064.json":          {"mpn": "LM5064", "min_pins": 28, "category": "Other"},
     "LM5069.json":          {"mpn": "LM5069", "min_pins": 10, "category": "Other"},
     "LM74610-Q1.json":      {"mpn": "LM74610-Q1", "min_pins": 7, "category": "Other"},
     "TPS2490__TPS2491.json": {"mpn": "TPS2490, TPS2491", "min_pins": 10, "category": "Other"},
     "TPS2596.json":         {"mpn": "TPS2596", "min_pins": 8, "category": "Other"},
+    # Hot-Swap Controllers (new)
+    "TPS2480.json":         {"mpn": "TPS2480", "min_pins": 18, "category": "Other"},
+    "TPS2410.json":         {"mpn": "TPS2410", "min_pins": 12, "category": "Other"},
+    "TPS2412__TPS2413.json": {"mpn": "TPS2412, TPS2413", "min_pins": 8, "category": "Other"},
+    "TPS2420.json":         {"mpn": "TPS2420", "min_pins": 11, "category": "Hot-Swap Controller"},
+    "LM5067.json":          {"mpn": "LM5067", "min_pins": 10, "category": "Other"},
+    "LM5068.json":          {"mpn": "LM5068", "min_pins": 8, "category": "Other"},
+    # eFuse
+    "TPS2595xx.json":       {"mpn": "TPS2595xx", "min_pins": 8, "category": "Other"},
+    "TPS2590.json":         {"mpn": "TPS2590", "min_pins": 8, "category": "Switch"},
+    "TPS25940A__TPS25940L.json": {"mpn": "TPS25940A, TPS25940L", "min_pins": 18, "category": "Other"},
+    "TPS26600.json":        {"mpn": "TPS26600", "min_pins": 14, "category": "Other"},
+    "TPS2661x.json":        {"mpn": "TPS2661x", "min_pins": 8, "category": "Other"},
+    "TPS2662x.json":        {"mpn": "TPS2662x", "min_pins": 8, "category": "Switch"},
+    "TPS2663.json":         {"mpn": "TPS2663", "min_pins": 14, "category": "Other"},
+    "TPS1663.json":         {"mpn": "TPS1663", "min_pins": 14, "category": "Other"},
+    "TPS1H100-Q1.json":     {"mpn": "TPS1H100-Q1", "min_pins": 8, "category": "Switch"},
+    # Ideal Diode / Power MUX
+    "LM66100.json":         {"mpn": "LM66100", "min_pins": 5, "category": "Other"},
+    "LM66200.json":         {"mpn": "LM66200", "min_pins": 6, "category": "Switch"},
+    "TPS2112__TPS2113.json": {"mpn": "TPS2112, TPS2113", "min_pins": 8, "category": "Switch"},
+    "TPS2112A__TPS2113A.json": {"mpn": "TPS2112A, TPS2113A", "min_pins": 8, "category": "Other"},
+    "TPS2114.json":         {"mpn": "TPS2114", "min_pins": 8, "category": "Switch"},
+    "LM5051.json":          {"mpn": "LM5051", "min_pins": 7, "category": "Other"},
 }
 
 
@@ -807,14 +832,16 @@ def t9_3():
 def t9_4():
     # DRC hints depend on symbol extraction quality - check that most have hints
     hints_count = 0
+    total = len(TI_HOTSWAP_EXPORTS)
     for fname, exp in TI_HOTSWAP_EXPORTS.items():
         with open(EXPORT_DIR / fname) as f:
             d = json.load(f)
         drc_hints = d.get("drc_hints", {})
         if len(drc_hints) > 0:
             hints_count += 1
-    # At least 4 out of 6 should have DRC hints
-    assert_gt(hints_count, 3, f"TI hot-swap exports with DRC hints: {hints_count}/6")
+    # At least 50% should have DRC hints
+    min_expected = total // 2
+    assert_gt(hints_count, min_expected, f"TI hot-swap exports with DRC hints: {hints_count}/{total}")
 
 
 @test("T9.5 TI hot-swap exports have correct MPN and manufacturer")

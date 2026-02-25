@@ -1,0 +1,748 @@
+{
+  "_schema": "sch-review-device/1.0",
+  "_type": "normal_ic",
+  "mpn": "TPS26600",
+  "manufacturer": "Texas Instruments",
+  "category": "Other",
+  "description": "60-V, 2-A Industrial eFuse With Integrated Reverse Input Polarity Protection",
+  "packages": {
+    "HTSSOP (16)": {
+      "pin_count": 17,
+      "pins": {
+        "12": {
+          "name": "dVdT",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "A capacitor from this pin to RTN sets output voltage slew rate. Can be left floating for default rate.",
+          "unused_treatment": "FLOAT"
+        },
+        "14": {
+          "name": "FLT",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "Fault event indicator. It is an open drain output.",
+          "unused_treatment": "FLOAT"
+        },
+        "9": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Connect GND to system ground",
+          "unused_treatment": null
+        },
+        "11": {
+          "name": "ILIM",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "A resistor from this pin to RTN sets the overload and short-circuit current limit",
+          "unused_treatment": null
+        },
+        "10": {
+          "name": "IMON",
+          "direction": "OUTPUT",
+          "signal_type": "ANALOG",
+          "description": "Analog current monitor output. This pin sources a scaled down ratio of current through the internal FET.",
+          "unused_treatment": "FLOAT"
+        },
+        "1": {
+          "name": "IN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power input and supply voltage of the device",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "IN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power input and supply voltage of the device",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "MODE",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Mode selection pin for over load fault response.",
+          "unused_treatment": "FLOAT"
+        },
+        "4": {
+          "name": "NC",
+          "direction": "NC",
+          "signal_type": "NONE",
+          "description": "No connect",
+          "unused_treatment": null
+        },
+        "13": {
+          "name": "NC",
+          "direction": "NC",
+          "signal_type": "NONE",
+          "description": "No connect",
+          "unused_treatment": null
+        },
+        "15": {
+          "name": "OUT",
+          "direction": "POWER_OUT",
+          "signal_type": "POWER",
+          "description": "Power output of the device",
+          "unused_treatment": null
+        },
+        "16": {
+          "name": "OUT",
+          "direction": "POWER_OUT",
+          "signal_type": "POWER",
+          "description": "Power output of the device",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "OVP",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Input for setting the programmable overvoltage protection threshold",
+          "unused_treatment": null
+        },
+        "EP": {
+          "name": "PowerPAD",
+          "direction": "PASSIVE",
+          "signal_type": "POWER",
+          "description": "Exposed thermal pad. Must be connected to RTN plane on PCB.",
+          "unused_treatment": null
+        },
+        "8": {
+          "name": "RTN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Reference for device internal control circuits",
+          "unused_treatment": null
+        },
+        "7": {
+          "name": "SHDN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Shutdown pin. Pulling SHDN low makes the device to enter into low power shutdown mode.",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "UVLO",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Input for setting the programmable undervoltage lockout threshold.",
+          "unused_treatment": null
+        }
+      }
+    },
+    "VQFN (24)": {
+      "pin_count": 25,
+      "pins": {
+        "20": {
+          "name": "dVdT",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "A capacitor from this pin to RTN sets output voltage slew rate. Can be left floating for default rate.",
+          "unused_treatment": "FLOAT"
+        },
+        "22": {
+          "name": "FLT",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "Fault event indicator. It is an open drain output.",
+          "unused_treatment": "FLOAT"
+        },
+        "17": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Connect GND to system ground",
+          "unused_treatment": null
+        },
+        "19": {
+          "name": "ILIM",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "A resistor from this pin to RTN sets the overload and short-circuit current limit",
+          "unused_treatment": null
+        },
+        "18": {
+          "name": "IMON",
+          "direction": "OUTPUT",
+          "signal_type": "ANALOG",
+          "description": "Analog current monitor output. This pin sources a scaled down ratio of current through the internal FET.",
+          "unused_treatment": "FLOAT"
+        },
+        "8": {
+          "name": "IN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power input and supply voltage of the device",
+          "unused_treatment": null
+        },
+        "9": {
+          "name": "IN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power input and supply voltage of the device",
+          "unused_treatment": null
+        },
+        "13": {
+          "name": "MODE",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Mode selection pin for over load fault response.",
+          "unused_treatment": "FLOAT"
+        },
+        "1": {
+          "name": "NC",
+          "direction": "NC",
+          "signal_type": "NONE",
+          "description": "No connect",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "NC",
+          "direction": "NC",
+          "signal_type": "NONE",
+          "description": "No connect",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "NC",
+          "direction": "NC",
+          "signal_type": "NONE",
+          "description": "No connect",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "NC",
+          "direction": "NC",
+          "signal_type": "NONE",
+          "description": "No connect",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "NC",
+          "direction": "NC",
+          "signal_type": "NONE",
+          "description": "No connect",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "NC",
+          "direction": "NC",
+          "signal_type": "NONE",
+          "description": "No connect",
+          "unused_treatment": null
+        },
+        "7": {
+          "name": "NC",
+          "direction": "NC",
+          "signal_type": "NONE",
+          "description": "No connect",
+          "unused_treatment": null
+        },
+        "11": {
+          "name": "NC",
+          "direction": "NC",
+          "signal_type": "NONE",
+          "description": "No connect",
+          "unused_treatment": null
+        },
+        "16": {
+          "name": "NC",
+          "direction": "NC",
+          "signal_type": "NONE",
+          "description": "No connect",
+          "unused_treatment": null
+        },
+        "21": {
+          "name": "NC",
+          "direction": "NC",
+          "signal_type": "NONE",
+          "description": "No connect",
+          "unused_treatment": null
+        },
+        "23": {
+          "name": "OUT",
+          "direction": "POWER_OUT",
+          "signal_type": "POWER",
+          "description": "Power output of the device",
+          "unused_treatment": null
+        },
+        "24": {
+          "name": "OUT",
+          "direction": "POWER_OUT",
+          "signal_type": "POWER",
+          "description": "Power output of the device",
+          "unused_treatment": null
+        },
+        "12": {
+          "name": "OVP",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Input for setting the programmable overvoltage protection threshold",
+          "unused_treatment": null
+        },
+        "EP": {
+          "name": "PowerPAD",
+          "direction": "PASSIVE",
+          "signal_type": "POWER",
+          "description": "Exposed thermal pad. Must be connected to RTN plane on PCB.",
+          "unused_treatment": null
+        },
+        "15": {
+          "name": "RTN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Reference for device internal control circuits",
+          "unused_treatment": null
+        },
+        "14": {
+          "name": "SHDN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Shutdown pin. Pulling SHDN low makes the device to enter into low power shutdown mode.",
+          "unused_treatment": null
+        },
+        "10": {
+          "name": "UVLO",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Input for setting the programmable undervoltage lockout threshold.",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "absolute_maximum_ratings": {
+    "TJ": {
+      "parameter": "Operating junction temperature",
+      "min": -40,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    },
+    "TJ_Max_is_T_TSD": {
+      "parameter": "Transient junction temperature",
+      "min": -65,
+      "max": null,
+      "unit": "°C",
+      "conditions": "Max is T(TSD)"
+    },
+    "Tstg": {
+      "parameter": "Storage temperature",
+      "min": -65,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    }
+  },
+  "electrical_parameters": {
+    "V(IN)": {
+      "parameter": "Operating input voltage",
+      "min": 4.2,
+      "typ": null,
+      "max": 60,
+      "unit": "V",
+      "conditions": null
+    },
+    "V(PORR)": {
+      "parameter": "Internal POR threshold, rising",
+      "min": 3.9,
+      "typ": 4,
+      "max": 4.1,
+      "unit": "V",
+      "conditions": null
+    },
+    "V(PORhys)": {
+      "parameter": "Internal POR hysteresis",
+      "min": 250,
+      "typ": 275,
+      "max": 300,
+      "unit": "mV",
+      "conditions": null
+    },
+    "IQ(ON)": {
+      "parameter": "Supply current",
+      "min": 190,
+      "typ": 300,
+      "max": 390,
+      "unit": "µA",
+      "conditions": "Enabled: V(SHDN) = 2 V"
+    },
+    "IQ(OFF)": {
+      "parameter": "Supply current",
+      "min": 11,
+      "typ": 20,
+      "max": 33,
+      "unit": "µA",
+      "conditions": "V(SHDN) = 0 V"
+    },
+    "I(VINR)": {
+      "parameter": "Reverse input supply current",
+      "min": null,
+      "typ": null,
+      "max": 66,
+      "unit": "µA",
+      "conditions": "V(IN) = -60 V, V(OUT) = 0 V"
+    },
+    "V(OVC)": {
+      "parameter": "Overvoltage clamp",
+      "min": 36,
+      "typ": 37.5,
+      "max": 40,
+      "unit": "V",
+      "conditions": "V(IN) > 42 V"
+    },
+    "V(IN_UVLO)": {
+      "parameter": "Factory set VIN undervoltage trip level (rising)",
+      "min": 14.25,
+      "typ": 14.9,
+      "max": 15.75,
+      "unit": "V",
+      "conditions": "V(IN) rising, V(UVLO) = 0 V"
+    },
+    "V(IN_UVLO)_V_IN__falling__V_UVLO____0_V": {
+      "parameter": "Factory set VIN undervoltage trip level (falling)",
+      "min": 13.25,
+      "typ": 13.8,
+      "max": 14.75,
+      "unit": "V",
+      "conditions": "V(IN) falling, V(UVLO) = 0 V"
+    },
+    "V(SEL_UVLO)": {
+      "parameter": "Internal UVLO select threshold",
+      "min": 180,
+      "typ": 200,
+      "max": 240,
+      "unit": "mV",
+      "conditions": null
+    },
+    "V(UVLOR)": {
+      "parameter": "UVLO threshold voltage, rising",
+      "min": 1.175,
+      "typ": 1.19,
+      "max": 1.225,
+      "unit": "V",
+      "conditions": null
+    },
+    "V(UVLOF)": {
+      "parameter": "UVLO threshold voltage, falling",
+      "min": 1.08,
+      "typ": 1.1,
+      "max": 1.125,
+      "unit": "V",
+      "conditions": null
+    },
+    "I(UVLO)": {
+      "parameter": "UVLO input leakage current",
+      "min": -100,
+      "typ": 0,
+      "max": 100,
+      "unit": "nA",
+      "conditions": "0 V <= V(UVLO) <= 60 V"
+    },
+    "V(SHDN)": {
+      "parameter": "Output voltage",
+      "min": 2,
+      "typ": 2.7,
+      "max": 3.4,
+      "unit": "V",
+      "conditions": "I(SHDN) = 0.1 µA"
+    },
+    "V(SHUTF)": {
+      "parameter": "SHDN threshold voltage for low IQ shutdown, falling",
+      "min": 0.55,
+      "typ": 0.76,
+      "max": 0.94,
+      "unit": "V",
+      "conditions": null
+    },
+    "I(SHDN)": {
+      "parameter": "Leakage current",
+      "min": -10,
+      "typ": null,
+      "max": null,
+      "unit": "µA",
+      "conditions": "V(SHDN) = 0.4 V"
+    },
+    "V(IN_OVP)": {
+      "parameter": "Factory set VIN overvoltage trip level (rising)",
+      "min": 31,
+      "typ": 32.6,
+      "max": 34,
+      "unit": "V",
+      "conditions": "V(IN) rising, V(OVP) = 0 V"
+    },
+    "V(IN_OVP)_V_IN__falling__V_OVP____0_V": {
+      "parameter": "Factory set VIN overvoltage trip level (falling)",
+      "min": 28.5,
+      "typ": 30.3,
+      "max": 31.5,
+      "unit": "V",
+      "conditions": "V(IN) falling, V(OVP) = 0 V"
+    },
+    "V(SEL_OVP)": {
+      "parameter": "Internal OVP select threshold",
+      "min": 180,
+      "typ": 200,
+      "max": 240,
+      "unit": "mV",
+      "conditions": null
+    },
+    "V(OVPR)": {
+      "parameter": "Overvoltage threshold voltage, rising",
+      "min": 1.17,
+      "typ": 1.19,
+      "max": 1.225,
+      "unit": "V",
+      "conditions": null
+    },
+    "V(OVPF)": {
+      "parameter": "Overvoltage threshold voltage, falling",
+      "min": 1.085,
+      "typ": 1.1,
+      "max": 1.125,
+      "unit": "V",
+      "conditions": null
+    },
+    "I(OVP)": {
+      "parameter": "OVP input leakage current",
+      "min": -100,
+      "typ": 0,
+      "max": 100,
+      "unit": "nA",
+      "conditions": "0 V <= V(OVP) <= 4 V"
+    },
+    "OVPMAX": {
+      "parameter": "Maximum external OVP setting",
+      "min": null,
+      "typ": null,
+      "max": 55,
+      "unit": "V",
+      "conditions": null
+    },
+    "I(dVdT)": {
+      "parameter": "dVdT charging current",
+      "min": 4,
+      "typ": 4.7,
+      "max": 5.5,
+      "unit": "µA",
+      "conditions": "V(dVdT) = 0 V"
+    },
+    "R(dVdT)": {
+      "parameter": "dVdT discharging resistance",
+      "min": null,
+      "typ": 14,
+      "max": null,
+      "unit": "Ω",
+      "conditions": "V(SHDN) = 0 V, with I(dVdT) = 10 mA sinking"
+    },
+    "GAIN(dVdT)": {
+      "parameter": "dVdT to OUT gain",
+      "min": 23.75,
+      "typ": 24.6,
+      "max": 25.5,
+      "unit": "V/V",
+      "conditions": "V(OUT)/V(dVdT)"
+    },
+    "V(ILIM)": {
+      "parameter": "ILIM bias voltage",
+      "min": null,
+      "typ": 1,
+      "max": null,
+      "unit": "V",
+      "conditions": null
+    },
+    "I(OL)": {
+      "parameter": "Overload current limit (120 kΩ)",
+      "min": 0.085,
+      "typ": 0.1,
+      "max": 0.115,
+      "unit": "A",
+      "conditions": "R(ILIM) = 120 kΩ, V(IN) - V(OUT) = 1 V"
+    },
+    "I(OL)_R_ILIM____12_k___V_IN____V_OUT": {
+      "parameter": "Overload current limit (12 kΩ)",
+      "min": 0.95,
+      "typ": 1,
+      "max": 1.05,
+      "unit": "A",
+      "conditions": "R(ILIM) = 12 kΩ, V(IN) - V(OUT) = 1 V"
+    },
+    "I(OL)_R_ILIM____8_k___V_IN____V_OUT": {
+      "parameter": "Overload current limit (8 kΩ)",
+      "min": 1.425,
+      "typ": 1.5,
+      "max": 1.575,
+      "unit": "A",
+      "conditions": "R(ILIM) = 8 kΩ, V(IN) - V(OUT) = 1 V"
+    },
+    "I(OL)_R_ILIM____5_36_k___V_IN____V_O": {
+      "parameter": "Overload current limit (5.36 kΩ)",
+      "min": 2.11,
+      "typ": 2.23,
+      "max": 2.35,
+      "unit": "A",
+      "conditions": "R(ILIM) = 5.36 kΩ, V(IN) - V(OUT) = 1 V"
+    },
+    "I(OL_R-OPEN)": {
+      "parameter": "Overload current limit (open resistor)",
+      "min": null,
+      "typ": 0.055,
+      "max": null,
+      "unit": "A",
+      "conditions": "R(ILIM) = OPEN"
+    },
+    "I(OL_R-SHORT)": {
+      "parameter": "Overload current limit (shorted resistor)",
+      "min": null,
+      "typ": 0.095,
+      "max": null,
+      "unit": "A",
+      "conditions": "R(ILIM) = SHORT"
+    },
+    "I(CB)": {
+      "parameter": "Circuit breaker detection threshold (120 kΩ)",
+      "min": 0.045,
+      "typ": 0.073,
+      "max": 0.11,
+      "unit": "A",
+      "conditions": "R(ILIM) = 120 kΩ, MODE = open"
+    },
+    "I(CB)_R_ILIM____5_36_k___MODE___open": {
+      "parameter": "Circuit breaker detection threshold (5.36 kΩ)",
+      "min": 2,
+      "typ": 2.21,
+      "max": 2.4,
+      "unit": "A",
+      "conditions": "R(ILIM) = 5.36 kΩ, MODE = open"
+    },
+    "I(SCL)": {
+      "parameter": "Short-circuit current limit (120 kΩ)",
+      "min": 0.08,
+      "typ": 0.1,
+      "max": 0.12,
+      "unit": "A",
+      "conditions": "R(ILIM) = 120 kΩ, V(IN) - V(OUT) = 5 V"
+    },
+    "I(SCL)_R_ILIM____8_k___V_IN____V_OUT": {
+      "parameter": "Short-circuit current limit (8 kΩ)",
+      "min": 1.425,
+      "typ": 1.5,
+      "max": 1.575,
+      "unit": "A",
+      "conditions": "R(ILIM) = 8 kΩ, V(IN) - V(OUT) = 5 V"
+    },
+    "I(SCL)_R_ILIM____5_36_k___V_IN____V_O": {
+      "parameter": "Short-circuit current limit (5.36 kΩ)",
+      "min": 2.11,
+      "typ": 2.23,
+      "max": 2.35,
+      "unit": "A",
+      "conditions": "R(ILIM) = 5.36 kΩ, V(IN) - V(OUT) = 5 V"
+    },
+    "GAIN(IMON)": {
+      "parameter": "Gain factor",
+      "min": 72,
+      "typ": 78.28,
+      "max": 85,
+      "unit": "µA/A",
+      "conditions": "0.1 A <= I(OUT) <= 2 A"
+    },
+    "RON": {
+      "parameter": "IN to OUT total ON resistance (25C)",
+      "min": 140,
+      "typ": 150,
+      "max": 160,
+      "unit": "mΩ",
+      "conditions": "0.1 A <= I(OUT) <= 2 A, TJ = 25°C"
+    },
+    "RON_0_1_A____I_OUT_____2_A__TJ___8": {
+      "parameter": "IN to OUT total ON resistance (85C)",
+      "min": null,
+      "typ": null,
+      "max": 210,
+      "unit": "mΩ",
+      "conditions": "0.1 A <= I(OUT) <= 2 A, TJ = 85°C"
+    },
+    "RON_0_1_A____I_OUT_____2_A___40_C": {
+      "parameter": "IN to OUT total ON resistance (full)",
+      "min": 80,
+      "typ": 150,
+      "max": 250,
+      "unit": "mΩ",
+      "conditions": "0.1 A <= I(OUT) <= 2 A, -40°C <= TJ <= +125°C"
+    },
+    "Ilkg(OUT)": {
+      "parameter": "OUT leakage current in Off state (sourcing)",
+      "min": null,
+      "typ": null,
+      "max": 12,
+      "unit": "µA",
+      "conditions": "V(IN) = 60 V, V(SHDN) = 0 V, V(OUT) = 0 V, sourcing"
+    },
+    "Ilkg(OUT)_V_IN____0_V__V_SHDN____0_V__V": {
+      "parameter": "OUT leakage current in Off state (sinking)",
+      "min": null,
+      "typ": null,
+      "max": 11,
+      "unit": "µA",
+      "conditions": "V(IN) = 0 V, V(SHDN) = 0 V, V(OUT) = 24 V, sinking"
+    },
+    "Ilkg(OUT)_V_IN_____60_V__V_SHDN____0_V": {
+      "parameter": "OUT leakage current in Off state (reverse)",
+      "min": null,
+      "typ": null,
+      "max": 50,
+      "unit": "µA",
+      "conditions": "V(IN) = -60 V, V(SHDN) = 0 V, V(OUT) = 0 V, sinking"
+    },
+    "V(REVTH)": {
+      "parameter": "Reverse protection comparator threshold, falling",
+      "min": -15,
+      "typ": -10,
+      "max": -5,
+      "unit": "mV",
+      "conditions": null
+    },
+    "V(FWDTH)": {
+      "parameter": "Reverse protection comparator threshold, rising",
+      "min": 85,
+      "typ": 96,
+      "max": 110,
+      "unit": "mV",
+      "conditions": null
+    },
+    "R(FLT)": {
+      "parameter": "FLT pull-down resistance",
+      "min": 40,
+      "typ": 85,
+      "max": 160,
+      "unit": "Ω",
+      "conditions": "V(OVP) = 2 V, I(FLT) = 5 mA sinking"
+    },
+    "I(FLT)": {
+      "parameter": "FLT input leakage current",
+      "min": -200,
+      "typ": null,
+      "max": 200,
+      "unit": "nA",
+      "conditions": "0 V <= V(FLT) <= 60 V"
+    },
+    "T(TSD)": {
+      "parameter": "TSD threshold, rising",
+      "min": null,
+      "typ": 157,
+      "max": null,
+      "unit": "°C",
+      "conditions": null
+    },
+    "T(TSDhyst)": {
+      "parameter": "TSD hysteresis",
+      "min": null,
+      "typ": 10,
+      "max": null,
+      "unit": "°C",
+      "conditions": null
+    }
+  },
+  "drc_hints": {}
+}

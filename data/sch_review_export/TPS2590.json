@@ -1,0 +1,200 @@
+{
+  "_schema": "sch-review-device/1.0",
+  "_type": "normal_ic",
+  "mpn": "TPS2590",
+  "manufacturer": "Texas Instruments",
+  "category": "Switch",
+  "description": "5-A, 20-V High-Current Load Switch",
+  "packages": {
+    "QFN-16": {
+      "pin_count": 16,
+      "pins": {
+        "1": {
+          "name": "IN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power In and control supply voltage.",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "IN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power In and control supply voltage.",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "IN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power In and control supply voltage.",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "IN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power In and control supply voltage.",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground connection.",
+          "unused_treatment": null
+        },
+        "13": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground connection.",
+          "unused_treatment": null
+        },
+        "14": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground connection.",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "RTRY",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "If low, the device attempts to restart after a fault. If floating (high), the device latches off.",
+          "unused_treatment": "FLOAT"
+        },
+        "7": {
+          "name": "ILIM",
+          "direction": "PASSIVE",
+          "signal_type": "ANALOG",
+          "description": "A resistor to ground sets the current-limit level.",
+          "unused_treatment": null
+        },
+        "8": {
+          "name": "IFLT",
+          "direction": "PASSIVE",
+          "signal_type": "ANALOG",
+          "description": "A resistor to ground sets the fault current level.",
+          "unused_treatment": null
+        },
+        "9": {
+          "name": "CT",
+          "direction": "PASSIVE",
+          "signal_type": "ANALOG",
+          "description": "A capacitor to ground sets the fault time.",
+          "unused_treatment": null
+        },
+        "10": {
+          "name": "OUT",
+          "direction": "POWER_OUT",
+          "signal_type": "POWER",
+          "description": "Output to the load.",
+          "unused_treatment": null
+        },
+        "11": {
+          "name": "OUT",
+          "direction": "POWER_OUT",
+          "signal_type": "POWER",
+          "description": "Output to the load.",
+          "unused_treatment": null
+        },
+        "12": {
+          "name": "OUT",
+          "direction": "POWER_OUT",
+          "signal_type": "POWER",
+          "description": "Output to the load.",
+          "unused_treatment": null
+        },
+        "15": {
+          "name": "FLT",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "Fault low indicated the fault time has expired and the FET is switched off.",
+          "unused_treatment": null
+        },
+        "16": {
+          "name": "EN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Device is enabled when this pin is pulled low.",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "absolute_maximum_ratings": {
+    "Tj": {
+      "parameter": "Operating junction temperature range",
+      "min": null,
+      "max": null,
+      "unit": "°C",
+      "conditions": "Internally Limited"
+    },
+    "Tstg": {
+      "parameter": "Storage temperature range",
+      "min": -65,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    }
+  },
+  "electrical_parameters": {
+    "IFAULT": {
+      "parameter": "Fault current threshold",
+      "min": 0.8,
+      "typ": 1,
+      "max": 1.2,
+      "unit": "A",
+      "conditions": "IOUT rising, ICT: sinking -> sourcing, pulsed test (RRFLT = 200 kOhm)"
+    },
+    "IFAULT_IOUT_rising__ICT__sinking____s": {
+      "parameter": "Fault current threshold",
+      "min": 3.6,
+      "typ": 4,
+      "max": 4.4,
+      "unit": "A",
+      "conditions": "IOUT rising, ICT: sinking -> sourcing, pulsed test (RRFLT = 49.9 kOhm)"
+    },
+    "ILIM": {
+      "parameter": "Current-limit program",
+      "min": 1.6,
+      "typ": 2,
+      "max": 2.4,
+      "unit": "A",
+      "conditions": "RRLIM = 100 kOhm, IOUT falling, VVIN-VOUT = 0.3 V, pulsed test"
+    },
+    "ILIM_RRLIM___66_5_kOhm__IOUT_fallin": {
+      "parameter": "Current-limit program",
+      "min": 2.6,
+      "typ": 3,
+      "max": 3.4,
+      "unit": "A",
+      "conditions": "RRLIM = 66.5 kOhm, IOUT falling, VVIN-VOUT = 0.3 V, pulsed test"
+    },
+    "ILIM_RRLIM___40_2_kOhm__IOUT_fallin": {
+      "parameter": "Current-limit program",
+      "min": 4.6,
+      "typ": 5,
+      "max": 5.4,
+      "unit": "A",
+      "conditions": "RRLIM = 40.2 kOhm, IOUT falling, VVIN-VOUT = 0.3 V, pulsed test"
+    },
+    "TJ": {
+      "parameter": "Thermal shutdown",
+      "min": null,
+      "typ": 160,
+      "max": null,
+      "unit": "°C",
+      "conditions": null
+    }
+  },
+  "drc_hints": {
+    "iout_operating": {
+      "typ": 2,
+      "max": 2.4,
+      "unit": "A"
+    }
+  }
+}

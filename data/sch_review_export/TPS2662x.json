@@ -1,0 +1,278 @@
+{
+  "_schema": "sch-review-device/1.0",
+  "_type": "normal_ic",
+  "mpn": "TPS2662x",
+  "manufacturer": "Texas Instruments",
+  "category": "Switch",
+  "description": "60-V, 800-mA Industrial eFuse With Integrated Input and Output Reverse Polarity Protection",
+  "packages": {
+    "VSON-10": {
+      "pin_count": 11,
+      "pins": {
+        "1": {
+          "name": "IN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Input supply voltage",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "UVLO",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Resistor programmable undervoltage lockout threshold setting input. Connect to IN via 1-MΩ resistor if unused.",
+          "unused_treatment": "CUSTOM"
+        },
+        "3": {
+          "name": "OVP",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Resistor programmable overvoltage protection threshold. Connect to RTN if unused.",
+          "unused_treatment": "CUSTOM"
+        },
+        "4": {
+          "name": "SHDN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Shutdown pin. Active low. Pulling low enters low power shutdown mode.",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "RTN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Reference ground for all internal voltages",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "System ground",
+          "unused_treatment": null
+        },
+        "7": {
+          "name": "ILIM",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "A resistor from this pin to RTN sets the overload and short-circuit current limit",
+          "unused_treatment": null
+        },
+        "8": {
+          "name": "dVdT",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "A capacitor from this pin to RTN sets output voltage slew rate",
+          "unused_treatment": null
+        },
+        "9": {
+          "name": "FLT",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "Fault event indicator. Open drain output.",
+          "unused_treatment": "FLOAT"
+        },
+        "10": {
+          "name": "OUT",
+          "direction": "POWER_OUT",
+          "signal_type": "POWER",
+          "description": "Output voltage",
+          "unused_treatment": null
+        },
+        "EP": {
+          "name": "PowerPAD",
+          "direction": "PASSIVE",
+          "signal_type": "POWER",
+          "description": "Exposed pad for heat sinking. Connect to RTN plane.",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "absolute_maximum_ratings": {
+    "VIN": {
+      "parameter": "Input voltage range",
+      "min": -60,
+      "max": 62,
+      "unit": "V",
+      "conditions": null
+    },
+    "VOUT": {
+      "parameter": "Output voltage range",
+      "min": null,
+      "max": 62,
+      "unit": "V",
+      "conditions": "min is -(60-VIN)"
+    },
+    "VIN_TA___25__C": {
+      "parameter": "Input voltage range (10 ms transient)",
+      "min": -70,
+      "max": 70,
+      "unit": "V",
+      "conditions": "TA = 25 °C"
+    },
+    "VRTN": {
+      "parameter": "RTN voltage range",
+      "min": -60,
+      "max": 0.3,
+      "unit": "V",
+      "conditions": null
+    },
+    "ISINK": {
+      "parameter": "Sink current",
+      "min": null,
+      "max": 10,
+      "unit": "mA",
+      "conditions": null
+    },
+    "TJ": {
+      "parameter": "Operating junction temperature",
+      "min": -40,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    },
+    "TJ_max_is_T_TSD": {
+      "parameter": "Transient junction temperature",
+      "min": -65,
+      "max": null,
+      "unit": "°C",
+      "conditions": "max is T(TSD)"
+    },
+    "Tstg": {
+      "parameter": "Storage temperature",
+      "min": -65,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    }
+  },
+  "electrical_parameters": {
+    "V(IN)": {
+      "parameter": "Operating input voltage",
+      "min": 4.5,
+      "typ": null,
+      "max": 60,
+      "unit": "V",
+      "conditions": null
+    },
+    "V(PORR)": {
+      "parameter": "Internal POR threshold, rising",
+      "min": 3.54,
+      "typ": 3.73,
+      "max": 4.2,
+      "unit": "V",
+      "conditions": null
+    },
+    "IQ(ON)": {
+      "parameter": "Supply current (Enabled)",
+      "min": null,
+      "typ": 343,
+      "max": 482,
+      "unit": "µA",
+      "conditions": "Enabled: V(SHDN) = 2 V"
+    },
+    "IQ(OFF)": {
+      "parameter": "Supply current (Shutdown)",
+      "min": null,
+      "typ": 11.5,
+      "max": 25,
+      "unit": "µA",
+      "conditions": "V(SHDN) = 0 V"
+    },
+    "V(OVC)": {
+      "parameter": "Over voltage clamp",
+      "min": 36,
+      "typ": 37.5,
+      "max": 40,
+      "unit": "V",
+      "conditions": "V(IN) > 40 V, ILOAD = 10 mA"
+    },
+    "V(UVLOR)": {
+      "parameter": "UVLO threshold voltage, rising",
+      "min": 1.18,
+      "typ": 1.2,
+      "max": 1.23,
+      "unit": "V",
+      "conditions": null
+    },
+    "V(UVLOF)": {
+      "parameter": "UVLO threshold voltage, Falling",
+      "min": 1.09,
+      "typ": 1.1,
+      "max": 1.135,
+      "unit": "V",
+      "conditions": null
+    },
+    "V(OVPR)": {
+      "parameter": "Overvoltage threshold voltage, rising",
+      "min": 1.18,
+      "typ": 1.2,
+      "max": 1.23,
+      "unit": "V",
+      "conditions": null
+    },
+    "V(OVPF)": {
+      "parameter": "Overvoltage threshold voltage, falling",
+      "min": 1.09,
+      "typ": 1.1,
+      "max": 1.135,
+      "unit": "V",
+      "conditions": null
+    },
+    "I(OL)": {
+      "parameter": "Overload Current Limit (880mA)",
+      "min": 0.83,
+      "typ": 0.88,
+      "max": 0.91,
+      "unit": "A",
+      "conditions": "R(ILIM) = 7.5 kΩ, V(IN) – V(OUT) = 1 V"
+    },
+    "RON": {
+      "parameter": "On Resistance (25C)",
+      "min": 435,
+      "typ": 478,
+      "max": 521,
+      "unit": "mΩ",
+      "conditions": "0.025 A ≤ I(OUT) ≤ 0.8 A, R(ILIM) = 7.5 kΩ"
+    },
+    "RON_0_025_A___I_OUT____0_8_A__TJ": {
+      "parameter": "On Resistance (85C)",
+      "min": null,
+      "typ": 626,
+      "max": 685,
+      "unit": "mΩ",
+      "conditions": "0.025 A ≤ I(OUT) ≤ 0.8 A, TJ = 85°C, R(ILIM) = 7.5 kΩ"
+    },
+    "RON_0_025_A___I_OUT____0_8_A___40": {
+      "parameter": "On Resistance (Full Temp)",
+      "min": 250,
+      "typ": 478,
+      "max": 800,
+      "unit": "mΩ",
+      "conditions": "0.025 A ≤ I(OUT) ≤ 0.8 A, -40°C ≤ TJ ≤ 125°C, R(ILIM) = 7.5 kΩ"
+    },
+    "Ilkg(OUT)": {
+      "parameter": "OUT leakage current under output reverse polarity condition",
+      "min": null,
+      "typ": 450,
+      "max": null,
+      "unit": "µA",
+      "conditions": "V(IN) = 24 V, V(OUT) = – 24 V, V(SHDN) = 2 V"
+    },
+    "T(TSD)": {
+      "parameter": "TSD Threshold, rising",
+      "min": null,
+      "typ": 155,
+      "max": null,
+      "unit": "°C",
+      "conditions": null
+    }
+  },
+  "drc_hints": {
+    "vin_abs_max": {
+      "value": 62,
+      "unit": "V"
+    }
+  }
+}
