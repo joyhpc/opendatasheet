@@ -3,8 +3,8 @@
   "_type": "normal_ic",
   "mpn": "LM5060",
   "manufacturer": "Texas Instruments",
-  "category": "Other",
-  "description": "High-Side Protection Controller With Low Quiescent Current",
+  "category": "Protection",
+  "description": "High-Side Protection Controller with Low Quiescent Current, 5.5V to 65V",
   "packages": {
     "VSSOP-10": {
       "pin_count": 10,
@@ -13,70 +13,70 @@
           "name": "SENSE",
           "direction": "INPUT",
           "signal_type": "ANALOG",
-          "description": "Input voltage sense: a constant current sink (16 µA typical) at the SENSE pin flows through an external resistor to set the threshold for fault detection.",
+          "description": "High-side current sense input. Connect to input supply (drain of external N-FET). Internal 16µA constant current sink flows through external resistor to GND, setting VDS fault detection threshold (VSENSE - VOUT).",
           "unused_treatment": null
         },
         "2": {
           "name": "VIN",
           "direction": "POWER_IN",
           "signal_type": "POWER",
-          "description": "Supply voltage input: the operating voltage range is 5.5 V to 65 V.",
+          "description": "Device power supply input. Operating range 5.5V to 65V. Powers internal circuitry and charge pump.",
           "unused_treatment": null
         },
         "3": {
           "name": "OVP",
           "direction": "INPUT",
           "signal_type": "ANALOG",
-          "description": "Over-voltage protection comparator input: an external resistor divider from the system input voltage sets the Over-Voltage turn-off threshold.",
+          "description": "Overvoltage protection comparator input. External resistor divider from input supply sets OVP turn-off threshold. Rising threshold 2.0V typ. Immediate MOSFET turn-off on OVP trip, auto-restart when OVP clears.",
           "unused_treatment": "GND"
         },
         "4": {
           "name": "UVLO",
           "direction": "INPUT",
           "signal_type": "ANALOG",
-          "description": "Under-voltage lock-out comparator input: used as an input under-voltage lock-out by connecting this pin to a resistor divider between input supply voltage and ground.",
+          "description": "Undervoltage lockout comparator input. External resistor divider from input supply sets UVLO turn-on threshold. Rising threshold 1.6V typ with 180mV hysteresis. Internal 5.5µA pull-down provides hysteresis.",
           "unused_treatment": "VCC"
         },
         "5": {
           "name": "EN",
           "direction": "INPUT",
           "signal_type": "DIGITAL",
-          "description": "Enable input: a voltage less than 0.8 V switches the device to a low current shutdown state. Includes an internal 6 µA pull-down.",
-          "unused_treatment": "FLOAT"
+          "description": "Enable input. High (>2.0V) enables controller, low (<0.8V) enters low-current shutdown (<15µA). Internal 6µA pull-down. Can serve as remote on/off or second enable for safety redundancy.",
+          "unused_treatment": "PULL_DOWN"
         },
         "6": {
           "name": "GND",
           "direction": "POWER_IN",
           "signal_type": "POWER",
-          "description": "Circuit ground",
+          "description": "Ground connection.",
           "unused_treatment": null
         },
         "7": {
           "name": "TIMER",
           "direction": "BIDIRECTIONAL",
           "signal_type": "ANALOG",
-          "description": "Timing capacitor: an external capacitor connected to this pin sets the VDS fault detection delay time.",
+          "description": "Fault timer capacitor pin. Single external capacitor programs three delay times: startup VGS fault delay, transition VDS fault delay, and continuous overcurrent VDS fault delay. Charged by 6µA (startup) or 11µA (post-startup), fault trips at 2.0V.",
           "unused_treatment": null
         },
         "8": {
           "name": "nPGD",
           "direction": "OUTPUT",
           "signal_type": "DIGITAL",
-          "description": "Fault status: an open drain output. Active low indicates a fault condition.",
-          "unused_treatment": null
+          "description": "Active-low open-drain Power Good output. Pulled LOW when output voltage reaches input voltage and MOSFET is fully enhanced (power good). Released (high-Z) during fault, startup, or disabled state. Requires external pull-up resistor.",
+          "unused_treatment": "FLOAT_OK"
         },
         "9": {
           "name": "OUT",
-          "direction": "INPUT",
-          "signal_type": "ANALOG",
-          "description": "Output voltage sense: connect to the output rail (external MOSFET source). Internally used to detect VDS and VGS conditions.",
+          "direction": "POWER_OUT",
+          "signal_type": "POWER",
+          "description": "Output voltage sense. Connect to source of external N-channel MOSFET (load side). Monitors VDS (SENSE-OUT) for overcurrent detection. Also serves as charge pump reference for gate drive.",
           "unused_treatment": null
         },
         "10": {
           "name": "GATE",
           "direction": "OUTPUT",
           "signal_type": "ANALOG",
-          "description": "Gate drive output: connect to the external MOSFET's gate. A charge-pump driven constant current source charges the GATE pin.",
+          "description": "Gate drive output for external N-channel MOSFET. Internal charge pump drives GATE 12V typ above VIN for full enhancement. 24µA sourcing current controls output voltage slew rate. Zener clamp 16.8V between GATE and OUT.",
           "unused_treatment": null
         }
       }
@@ -84,15 +84,85 @@
   },
   "absolute_maximum_ratings": {
     "VIN": {
-      "parameter": "VIN to GND",
+      "parameter": "VIN to GND (continuous)",
       "min": -0.3,
       "max": 75,
       "unit": "V",
       "conditions": null
     },
+    "VOUT": {
+      "parameter": "OUT to GND",
+      "min": -0.3,
+      "max": 75,
+      "unit": "V",
+      "conditions": null
+    },
+    "VSENSE": {
+      "parameter": "SENSE to GND",
+      "min": -0.3,
+      "max": 75,
+      "unit": "V",
+      "conditions": null
+    },
+    "VGATE": {
+      "parameter": "GATE to GND",
+      "min": -0.3,
+      "max": 87,
+      "unit": "V",
+      "conditions": null
+    },
+    "VEN": {
+      "parameter": "EN to GND",
+      "min": -0.3,
+      "max": 75,
+      "unit": "V",
+      "conditions": null
+    },
+    "VUVLO": {
+      "parameter": "UVLO to GND",
+      "min": -0.3,
+      "max": 7,
+      "unit": "V",
+      "conditions": null
+    },
+    "VOVP": {
+      "parameter": "OVP to GND",
+      "min": -0.3,
+      "max": 7,
+      "unit": "V",
+      "conditions": null
+    },
+    "VTIMER": {
+      "parameter": "TIMER to GND",
+      "min": -0.3,
+      "max": 7,
+      "unit": "V",
+      "conditions": null
+    },
+    "VnPGD": {
+      "parameter": "nPGD to GND",
+      "min": -0.3,
+      "max": 7,
+      "unit": "V",
+      "conditions": null
+    },
+    "TA": {
+      "parameter": "Operating Ambient Temperature Range",
+      "min": -40,
+      "max": 125,
+      "unit": "°C",
+      "conditions": null
+    },
     "Tstg": {
-      "parameter": "Storage temperature",
+      "parameter": "Storage Temperature Range",
       "min": -65,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    },
+    "TJ": {
+      "parameter": "Junction Temperature",
+      "min": null,
       "max": 150,
       "unit": "°C",
       "conditions": null
@@ -103,161 +173,49 @@
       "parameter": "Input current, enabled mode",
       "min": null,
       "typ": 1.4,
-      "max": null,
-      "unit": "mA",
-      "conditions": "TJ = 25°C"
-    },
-    "IIN-EN_TJ____40_C_to_125_C": {
-      "parameter": "Input current, enabled mode",
-      "min": null,
-      "typ": null,
       "max": 1.7,
       "unit": "mA",
-      "conditions": "TJ = -40°C to 125°C"
+      "conditions": "TJ = 25°C (typ), -40°C to 125°C (max)"
     },
     "IIN-DIS": {
       "parameter": "Input current, disabled mode",
       "min": null,
       "typ": 9,
-      "max": null,
-      "unit": "µA",
-      "conditions": "EN = 0.50 V, TJ = 25°C"
-    },
-    "IIN-DIS_EN___0_50_V__TJ____40_C_to_125": {
-      "parameter": "Input current, disabled mode",
-      "min": null,
-      "typ": null,
       "max": 15,
       "unit": "µA",
-      "conditions": "EN = 0.50 V, TJ = -40°C to 125°C"
+      "conditions": "EN = 0.50V"
     },
     "IIN-STB": {
       "parameter": "Input current, standby mode",
       "min": null,
       "typ": 0.56,
-      "max": null,
-      "unit": "mA",
-      "conditions": "UVLO = 0.00 V, TJ = 25°C"
-    },
-    "IIN-STB_UVLO___0_00_V__TJ____40_C_to_1": {
-      "parameter": "Input current, standby mode",
-      "min": null,
-      "typ": null,
       "max": 0.8,
       "unit": "mA",
-      "conditions": "UVLO = 0.00 V, TJ = -40°C to 125°C"
+      "conditions": "UVLO = 0.00V"
     },
     "POREN": {
       "parameter": "Power on reset threshold at VIN",
       "min": null,
       "typ": 5.1,
-      "max": null,
-      "unit": "V",
-      "conditions": "VIN rising, TJ = 25°C"
-    },
-    "POREN_VIN_rising__TJ____40_C_to_125": {
-      "parameter": "Power on reset threshold at VIN",
-      "min": null,
-      "typ": null,
       "max": 5.46,
       "unit": "V",
-      "conditions": "VIN rising, TJ = -40°C to 125°C"
-    },
-    "POREN-HYS": {
-      "parameter": "POREN hysteresis",
-      "min": null,
-      "typ": 500,
-      "max": null,
-      "unit": "mV",
-      "conditions": "VIN falling"
-    },
-    "IOUT-EN": {
-      "parameter": "OUT pin bias current, enabled",
-      "min": null,
-      "typ": 8,
-      "max": null,
-      "unit": "µA",
-      "conditions": "OUT = VIN, normal operation, TJ = 25°C"
-    },
-    "IOUT-EN_OUT___VIN__normal_operation__T": {
-      "parameter": "OUT pin bias current, enabled",
-      "min": 5.0,
-      "typ": null,
-      "max": 11.0,
-      "unit": "µA",
-      "conditions": "OUT = VIN, normal operation, TJ = -40°C to 125°C"
-    },
-    "IOUT-DIS": {
-      "parameter": "OUT pin leakage current, disabled",
-      "min": null,
-      "typ": 0,
-      "max": null,
-      "unit": "µA",
-      "conditions": "Disabled, OUT = 0 V, SENSE = VIN"
+      "conditions": "VIN rising"
     },
     "ISENSE": {
-      "parameter": "Threshold programming current",
-      "min": null,
-      "typ": 16,
-      "max": null,
-      "unit": "µA",
-      "conditions": "SENSE pin bias current, TJ = 25°C"
-    },
-    "ISENSE_SENSE_pin_bias_current__TJ": {
-      "parameter": "Threshold programming current",
+      "parameter": "SENSE pin bias current (threshold programming)",
       "min": 13.6,
-      "typ": null,
+      "typ": 16,
       "max": 18.0,
       "unit": "µA",
-      "conditions": "SENSE pin bias current, TJ = -40°C to 125°C"
-    },
-    "VOFFSET": {
-      "parameter": "VDS comparator offset voltage",
-      "min": null,
-      "typ": 0,
-      "max": null,
-      "unit": "mV",
-      "conditions": "SENSE - OUT voltage for fault detection, TJ = 25°C"
-    },
-    "VOFFSET_SENSE___OUT_voltage_for_fault": {
-      "parameter": "VDS comparator offset voltage",
-      "min": -7.0,
-      "typ": null,
-      "max": 7.0,
-      "unit": "mV",
-      "conditions": "SENSE - OUT voltage for fault detection, TJ = -40°C to 125°C"
-    },
-    "IRATIO": {
-      "parameter": "ISENSE and IOUT-EN current ratio",
-      "min": null,
-      "typ": 2.0,
-      "max": null,
-      "unit": null,
-      "conditions": "ISENSE / IOUT-EN, TJ = 25°C"
-    },
-    "IRATIO_ISENSE___IOUT_EN__TJ____40_C_t": {
-      "parameter": "ISENSE and IOUT-EN current ratio",
-      "min": 1.7,
-      "typ": null,
-      "max": 2.3,
-      "unit": null,
-      "conditions": "ISENSE / IOUT-EN, TJ = -40°C to 125°C"
+      "conditions": null
     },
     "OVPTH": {
-      "parameter": "OVP threshold",
-      "min": null,
-      "typ": 2.0,
-      "max": null,
-      "unit": "V",
-      "conditions": "OVP pin threshold voltage rising, TJ = 25°C"
-    },
-    "OVPTH_OVP_pin_threshold_voltage_risi": {
-      "parameter": "OVP threshold",
+      "parameter": "OVP threshold voltage",
       "min": 1.88,
-      "typ": null,
+      "typ": 2.0,
       "max": 2.12,
       "unit": "V",
-      "conditions": "OVP pin threshold voltage rising, TJ = -40°C to 125°C"
+      "conditions": "OVP pin rising"
     },
     "OVPHYS": {
       "parameter": "OVP hysteresis",
@@ -267,93 +225,45 @@
       "unit": "mV",
       "conditions": null
     },
-    "OVPDEL": {
-      "parameter": "OVP delay time",
-      "min": null,
-      "typ": 9.6,
-      "max": null,
-      "unit": "µs",
-      "conditions": "Delay from OVP pin > OVPTH to GATE low"
-    },
-    "OVPBIAS": {
-      "parameter": "OVP pin bias current",
-      "min": null,
-      "typ": 0,
-      "max": null,
-      "unit": "µA",
-      "conditions": "OVP = 1.9 V, TJ = 25°C"
-    },
-    "OVPBIAS_OVP___1_9_V__TJ____40_C_to_125": {
-      "parameter": "OVP pin bias current",
-      "min": null,
-      "typ": null,
-      "max": 0.5,
-      "unit": "µA",
-      "conditions": "OVP = 1.9 V, TJ = -40°C to 125°C"
-    },
     "UVLOTH": {
-      "parameter": "UVLO threshold",
-      "min": null,
-      "typ": 1.6,
-      "max": null,
-      "unit": "V",
-      "conditions": "UVLO pin threshold voltage rising, TJ = 25°C"
-    },
-    "UVLOTH_UVLO_pin_threshold_voltage_ris": {
-      "parameter": "UVLO threshold",
+      "parameter": "UVLO threshold voltage",
       "min": 1.45,
-      "typ": null,
+      "typ": 1.6,
       "max": 1.75,
       "unit": "V",
-      "conditions": "UVLO pin threshold voltage rising, TJ = -40°C to 125°C"
+      "conditions": "UVLO pin rising"
     },
     "UVLOHYS": {
       "parameter": "UVLO hysteresis",
-      "min": null,
-      "typ": 180,
-      "max": null,
-      "unit": "mV",
-      "conditions": "TJ = 25°C"
-    },
-    "UVLOHYS_TJ____40_C_to_125_C": {
-      "parameter": "UVLO hysteresis",
       "min": 120,
-      "typ": null,
+      "typ": 180,
       "max": 230,
       "unit": "mV",
-      "conditions": "TJ = -40°C to 125°C"
+      "conditions": null
     },
     "UVLOBIAS": {
       "parameter": "UVLO pin pull-down current",
-      "min": null,
-      "typ": 5.5,
-      "max": null,
-      "unit": "µA",
-      "conditions": "TJ = 25°C"
-    },
-    "UVLOBIAS_TJ____40_C_to_125_C": {
-      "parameter": "UVLO pin pull-down current",
       "min": 3.8,
-      "typ": null,
+      "typ": 5.5,
       "max": 7.2,
       "unit": "µA",
-      "conditions": "TJ = -40°C to 125°C"
+      "conditions": null
     },
     "ENTHH": {
-      "parameter": "High-level input voltage",
+      "parameter": "EN high-level input voltage",
       "min": 2.0,
       "typ": null,
       "max": null,
       "unit": "V",
-      "conditions": "TJ = 25°C"
+      "conditions": null
     },
     "ENTHL": {
-      "parameter": "Low-level input voltage",
+      "parameter": "EN low-level input voltage",
       "min": null,
       "typ": null,
       "max": 0.8,
       "unit": "V",
-      "conditions": "TJ = -40°C to 125°C"
+      "conditions": null
     },
     "ENHYS": {
       "parameter": "EN threshold hysteresis",
@@ -367,89 +277,33 @@
       "parameter": "EN pin pull-down current",
       "min": null,
       "typ": 6,
-      "max": null,
-      "unit": "µA",
-      "conditions": "TJ = 25°C"
-    },
-    "ENBIAS_TJ____40_C_to_125_C": {
-      "parameter": "EN pin pull-down current",
-      "min": null,
-      "typ": null,
       "max": 8.0,
       "unit": "µA",
-      "conditions": "TJ = -40°C to 125°C"
-    },
-    "IGATE": {
-      "parameter": "Gate charge (sourcing) current, on state",
-      "min": null,
-      "typ": 24,
-      "max": null,
-      "unit": "µA",
-      "conditions": "On-state, TJ = 25°C"
-    },
-    "IGATE_On_state__TJ____40_C_to_125_C": {
-      "parameter": "Gate charge (sourcing) current, on state",
-      "min": 17,
-      "typ": null,
-      "max": 31,
-      "unit": "µA",
-      "conditions": "On-state, TJ = -40°C to 125°C"
-    },
-    "IGATE-OFF": {
-      "parameter": "Gate discharge (sinking) current, off state",
-      "min": null,
-      "typ": 2.2,
-      "max": null,
-      "unit": "mA",
-      "conditions": "UVLO = 0.00 V"
-    },
-    "IGATE-FLT": {
-      "parameter": "Gate discharge (sinking) current, fault state",
-      "min": null,
-      "typ": 80,
-      "max": null,
-      "unit": "mA",
-      "conditions": "OUT < SENSE"
+      "conditions": null
     },
     "VGATE": {
-      "parameter": "Gate output voltage in normal operation",
-      "min": null,
-      "typ": 12,
-      "max": null,
-      "unit": "V",
-      "conditions": "GATE - VIN voltage, GATE pin open, TJ = 25°C"
-    },
-    "VGATE_GATE___VIN_voltage__GATE_pin_o": {
-      "parameter": "Gate output voltage in normal operation",
+      "parameter": "Gate output voltage (GATE-VIN)",
       "min": 10,
-      "typ": null,
+      "typ": 12,
       "max": 14,
       "unit": "V",
-      "conditions": "GATE - VIN voltage, GATE pin open, TJ = -40°C to 125°C"
+      "conditions": "GATE pin open, normal operation"
     },
-    "VGATE-TH": {
-      "parameter": "VGS status comparator threshold voltage",
-      "min": null,
-      "typ": 5,
-      "max": null,
-      "unit": "V",
-      "conditions": "GATE - OUT threshold voltage for TIMER voltage reset and TIMER current change, TJ = 25°C"
-    },
-    "VGATE-TH_GATE___OUT_threshold_voltage_f": {
-      "parameter": "VGS status comparator threshold voltage",
-      "min": 3.5,
-      "typ": null,
-      "max": 6.5,
-      "unit": "V",
-      "conditions": "GATE - OUT threshold voltage for TIMER voltage reset and TIMER current change, TJ = -40°C to 125°C"
+    "IGATE": {
+      "parameter": "Gate charge current, on state",
+      "min": 17,
+      "typ": 24,
+      "max": 31,
+      "unit": "µA",
+      "conditions": null
     },
     "VGATE-CLAMP": {
-      "parameter": "Zener clamp between GATE pin and OUT pin",
+      "parameter": "Zener clamp GATE to OUT",
       "min": null,
       "typ": 16.8,
       "max": null,
       "unit": "V",
-      "conditions": "IGATE-CLAMP = 0.1 mA"
+      "conditions": "IGATE-CLAMP = 0.1mA"
     },
     "VTMRH": {
       "parameter": "Timer fault threshold",
@@ -457,109 +311,33 @@
       "typ": 2.0,
       "max": null,
       "unit": "V",
-      "conditions": "TIMER pin voltage rising"
-    },
-    "VTMRL": {
-      "parameter": "Timer re-enable threshold",
-      "min": null,
-      "typ": 0.3,
-      "max": null,
-      "unit": "V",
-      "conditions": "TIMER pin voltage falling"
-    },
-    "ITIMERH": {
-      "parameter": "Timer charge current for VDS fault",
-      "min": null,
-      "typ": 11,
-      "max": null,
-      "unit": "µA",
-      "conditions": "TIMER charge current after start-up, VGS = 6.5 V, TJ = 25°C"
-    },
-    "ITIMERH_TIMER_charge_current_after_sta": {
-      "parameter": "Timer charge current for VDS fault",
-      "min": 8.5,
-      "typ": null,
-      "max": 13.0,
-      "unit": "µA",
-      "conditions": "TIMER charge current after start-up, VGS = 6.5 V, TJ = -40°C to 125°C"
-    },
-    "ITIMERL": {
-      "parameter": "Timer start-up charge current",
-      "min": null,
-      "typ": 6,
-      "max": null,
-      "unit": "µA",
-      "conditions": "TIMER charge current during start-up, VGS = 3.5 V, TJ = 25°C"
-    },
-    "ITIMERL_TIMER_charge_current_during_st": {
-      "parameter": "Timer start-up charge current",
-      "min": 4.0,
-      "typ": null,
-      "max": 7.0,
-      "unit": "µA",
-      "conditions": "TIMER charge current during start-up, VGS = 3.5 V, TJ = -40°C to 125°C"
-    },
-    "ITIMMERR": {
-      "parameter": "Timer reset discharge current",
-      "min": null,
-      "typ": 6,
-      "max": null,
-      "unit": "mA",
-      "conditions": "TIMER pin = 1.5 V, TJ = 25°C"
-    },
-    "ITIMMERR_TIMER_pin___1_5_V__TJ____40_C": {
-      "parameter": "Timer reset discharge current",
-      "min": 4.4,
-      "typ": null,
-      "max": 8.2,
-      "unit": "mA",
-      "conditions": "TIMER pin = 1.5 V, TJ = -40°C to 125°C"
-    },
-    "tFAULT": {
-      "parameter": "Fault to GATE low delay",
-      "min": null,
-      "typ": 5,
-      "max": null,
-      "unit": "µs",
-      "conditions": "TIMER pin > 2.0 V, No load on GATE pin"
+      "conditions": "TIMER pin rising"
     },
     "PGDVOL": {
-      "parameter": "Output low voltage",
+      "parameter": "nPGD output low voltage",
       "min": null,
       "typ": 80,
-      "max": null,
-      "unit": "mV",
-      "conditions": "ISINK = 2 mA, TJ = 25°C"
-    },
-    "PGDVOL_ISINK___2_mA__TJ____40_C_to_12": {
-      "parameter": "Output low voltage",
-      "min": null,
-      "typ": null,
       "max": 205,
       "unit": "mV",
-      "conditions": "ISINK = 2 mA, TJ = -40°C to 125°C"
-    },
-    "PGDIOH": {
-      "parameter": "Off leakage current",
-      "min": null,
-      "typ": 0.02,
-      "max": null,
-      "unit": "µA",
-      "conditions": "VnPGD = 10 V, TJ = 25°C"
-    },
-    "PGDIOH_VnPGD___10_V__TJ____40_C_to_12": {
-      "parameter": "Off leakage current",
-      "min": null,
-      "typ": null,
-      "max": 1.0,
-      "unit": "µA",
-      "conditions": "VnPGD = 10 V, TJ = -40°C to 125°C"
+      "conditions": "ISINK = 2mA"
     }
   },
   "drc_hints": {
+    "vin_operating": {
+      "min": 5.5,
+      "max": 65,
+      "unit": "V"
+    },
     "vin_abs_max": {
       "value": 75,
       "unit": "V"
-    }
+    },
+    "enable_threshold": {
+      "value": 2.0,
+      "unit": "V"
+    },
+    "device_function": "high_side_protection_controller",
+    "requires_external_mosfet": true,
+    "pgood_type": "open_drain_active_low"
   }
 }
