@@ -1,0 +1,284 @@
+{
+  "_schema": "sch-review-device/1.1",
+  "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
+  "mpn": "LT1615/LT1615-1",
+  "manufacturer": "Linear Technology",
+  "category": "Other",
+  "description": "Micropower Step-Up DC/DC Converter in SOT-23",
+  "packages": {
+    "SOT-23-5": {
+      "pin_count": 5,
+      "pins": {
+        "1": {
+          "name": "SW",
+          "direction": "OUTPUT",
+          "signal_type": "POWER",
+          "description": "Switch Pin. Collector of the internal NPN power transistor. Connect to inductor and Schottky diode.",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground Pin. Connect directly to local ground plane.",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "FB",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Feedback Pin. Reference voltage is 1.23V. Connect resistive divider tap here to set output voltage.",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "SHDN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Shutdown Pin. Logic low puts the device in shutdown mode. Tie to 0.9V or higher to enable.",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "VIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Input Supply Pin. Must be locally bypassed with a capacitor.",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "absolute_maximum_ratings": {
+    "VIN": {
+      "parameter": "VIN Voltage",
+      "min": null,
+      "max": 15,
+      "unit": "V",
+      "conditions": null
+    },
+    "VSW": {
+      "parameter": "SW Voltage",
+      "min": null,
+      "max": 36,
+      "unit": "V",
+      "conditions": null
+    },
+    "VFB": {
+      "parameter": "FB Voltage",
+      "min": null,
+      "max": null,
+      "unit": "V",
+      "conditions": "VIN"
+    },
+    "VSHDN": {
+      "parameter": "SHDN Voltage",
+      "min": null,
+      "max": 15,
+      "unit": "V",
+      "conditions": null
+    },
+    "TA": {
+      "parameter": "Operating Temperature Range",
+      "min": -40,
+      "max": 85,
+      "unit": "°C",
+      "conditions": null
+    },
+    "TSTG": {
+      "parameter": "Storage Temperature Range",
+      "min": -65,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    }
+  },
+  "electrical_parameters": {
+    "VIN(min)": {
+      "parameter": "Minimum Operating Voltage",
+      "min": null,
+      "typ": null,
+      "max": 1.2,
+      "unit": "V",
+      "conditions": null
+    },
+    "VIN(max)": {
+      "parameter": "Maximum Operating Voltage",
+      "min": null,
+      "typ": null,
+      "max": 15,
+      "unit": "V",
+      "conditions": null
+    },
+    "VFB": {
+      "parameter": "Feedback Voltage",
+      "min": 1.18,
+      "typ": 1.23,
+      "max": 1.28,
+      "unit": "V",
+      "conditions": null
+    },
+    "IFB": {
+      "parameter": "FB Pin Bias Current",
+      "min": null,
+      "typ": 30,
+      "max": 80,
+      "unit": "nA",
+      "conditions": "VFB = 1.23V"
+    },
+    "IFB_VFB___1_23V": {
+      "parameter": "FB Pin Bias Current",
+      "min": null,
+      "typ": null,
+      "max": 100,
+      "unit": "nA",
+      "conditions": "VFB = 1.23V"
+    },
+    "IQ": {
+      "parameter": "Quiescent Current",
+      "min": null,
+      "typ": 20,
+      "max": 30,
+      "unit": "µA",
+      "conditions": "VSHDN = 2.4V, VFB = 1.3V (Not Switching)"
+    },
+    "IQ_VSHDN___2_4V__VFB___1_3V__Not": {
+      "parameter": "Quiescent Current",
+      "min": null,
+      "typ": null,
+      "max": 35,
+      "unit": "µA",
+      "conditions": "VSHDN = 2.4V, VFB = 1.3V (Not Switching)"
+    },
+    "IQ_VSHDN___0V__VIN___2V": {
+      "parameter": "Quiescent Current in Shutdown",
+      "min": null,
+      "typ": null,
+      "max": 1.0,
+      "unit": "µA",
+      "conditions": "VSHDN = 0V, VIN = 2V"
+    },
+    "tOFF": {
+      "parameter": "Switch Off Time",
+      "min": 300,
+      "typ": 400,
+      "max": 500,
+      "unit": "ns",
+      "conditions": "VFB > 1V"
+    },
+    "tOFF_VFB___1V": {
+      "parameter": "Switch Off Time",
+      "min": 250,
+      "typ": 400,
+      "max": 550,
+      "unit": "ns",
+      "conditions": "VFB > 1V"
+    },
+    "tON": {
+      "parameter": "Switch On Time",
+      "min": null,
+      "typ": 1.5,
+      "max": null,
+      "unit": "µs",
+      "conditions": "VFB < 1V"
+    },
+    "ILIM": {
+      "parameter": "Switch Current Limit",
+      "min": 70,
+      "typ": 100,
+      "max": 150,
+      "unit": "mA",
+      "conditions": null
+    },
+    "VCESAT": {
+      "parameter": "Switch VCESAT",
+      "min": null,
+      "typ": 250,
+      "max": 350,
+      "unit": "mV",
+      "conditions": "ISW = 300mA"
+    },
+    "VCESAT_ISW___300mA": {
+      "parameter": "Switch VCESAT",
+      "min": null,
+      "typ": null,
+      "max": 400,
+      "unit": "mV",
+      "conditions": "ISW = 300mA"
+    },
+    "VCESAT_ISW___100mA": {
+      "parameter": "Switch VCESAT",
+      "min": null,
+      "typ": null,
+      "max": 250,
+      "unit": "mV",
+      "conditions": "ISW = 100mA"
+    },
+    "ISHDN": {
+      "parameter": "SHDN Pin Current",
+      "min": null,
+      "typ": 10,
+      "max": 15,
+      "unit": "µA",
+      "conditions": "VSHDN = 5V"
+    },
+    "ISHDN_VSHDN___5V": {
+      "parameter": "SHDN Pin Current",
+      "min": null,
+      "typ": null,
+      "max": 20,
+      "unit": "µA",
+      "conditions": "VSHDN = 5V"
+    },
+    "VIH": {
+      "parameter": "SHDN Input Voltage High",
+      "min": 0.9,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": null
+    },
+    "VIL": {
+      "parameter": "SHDN Input Voltage Low",
+      "min": null,
+      "typ": null,
+      "max": 0.25,
+      "unit": "V",
+      "conditions": null
+    }
+  },
+  "drc_hints": {
+    "vin_abs_max": {
+      "value": 15,
+      "unit": "V"
+    },
+    "vin_operating": {
+      "typ": 1.0,
+      "max": 1.2,
+      "unit": "V"
+    },
+    "vref": {
+      "min": 1.205,
+      "typ": 1.23,
+      "max": 1.255,
+      "unit": "V"
+    },
+    "enable_threshold": {
+      "min": 0.9,
+      "unit": "V"
+    },
+    "iout_max": {
+      "min": 300,
+      "typ": 350,
+      "max": 400,
+      "unit": "mA"
+    },
+    "iq": {
+      "typ": 20,
+      "max": 30,
+      "unit": "µA"
+    }
+  }
+}

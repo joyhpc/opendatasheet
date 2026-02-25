@@ -1,6 +1,10 @@
 {
-  "_schema": "sch-review-device/1.0",
+  "_schema": "sch-review-device/1.1",
   "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
   "mpn": "TPS2662x",
   "manufacturer": "Texas Instruments",
   "category": "Switch",
@@ -272,6 +276,28 @@
   "drc_hints": {
     "vin_abs_max": {
       "value": 62,
+      "unit": "V"
+    },
+    "vin_operating": {
+      "min": 4.5,
+      "max": 60,
+      "unit": "V"
+    },
+    "iout_max": {
+      "min": 0.83,
+      "typ": 0.88,
+      "max": 0.91,
+      "unit": "A"
+    },
+    "iq": {
+      "typ": 343,
+      "max": 482,
+      "unit": "µA"
+    },
+    "uvlo": {
+      "min": 1.18,
+      "typ": 1.2,
+      "max": 1.23,
       "unit": "V"
     }
   }

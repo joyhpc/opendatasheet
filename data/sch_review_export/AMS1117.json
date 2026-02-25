@@ -1,6 +1,10 @@
 {
-  "_schema": "sch-review-device/1.0",
+  "_schema": "sch-review-device/1.1",
   "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
   "mpn": "AMS1117",
   "manufacturer": "Advanced Monolithic Systems",
   "category": "LDO",
@@ -268,10 +272,9 @@
       "value": 15,
       "unit": "V"
     },
-    "vout": {
-      "min": 1.478,
-      "typ": 1.5,
-      "max": 1.522,
+    "vin_operating": {
+      "typ": 1.1,
+      "max": 1.3,
       "unit": "V"
     },
     "vref": {
@@ -279,6 +282,27 @@
       "typ": 1.25,
       "max": 1.268,
       "unit": "V"
+    },
+    "vout": {
+      "min": 1.478,
+      "typ": 1.5,
+      "max": 1.522,
+      "unit": "V"
+    },
+    "iout_max": {
+      "min": 900,
+      "typ": 1100,
+      "max": 1500,
+      "unit": "mA"
+    },
+    "iq": {
+      "typ": 5,
+      "max": 11,
+      "unit": "mA"
+    },
+    "thermal_resistance": {
+      "max": 15,
+      "unit": "°C/W"
     }
   }
 }

@@ -1,6 +1,10 @@
 {
-  "_schema": "sch-review-device/1.0",
+  "_schema": "sch-review-device/1.1",
   "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
   "mpn": "TPS1H100-Q1",
   "manufacturer": "Texas Instruments",
   "category": "Switch",
@@ -645,5 +649,23 @@
       "conditions": "14-pin HTSSOP package"
     }
   },
-  "drc_hints": {}
+  "drc_hints": {
+    "vin_abs_max": {
+      "value": 48,
+      "unit": "V"
+    },
+    "iout_max": {
+      "min": 7,
+      "max": 13,
+      "unit": "A"
+    },
+    "thermal_shutdown": {
+      "typ": 5,
+      "unit": "A"
+    },
+    "thermal_resistance": {
+      "typ": 41,
+      "unit": "°C/W"
+    }
+  }
 }

@@ -1,0 +1,457 @@
+{
+  "_schema": "sch-review-device/1.1",
+  "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
+  "mpn": "LP5907",
+  "manufacturer": "Texas Instruments",
+  "category": "LDO",
+  "description": "250-mA, Ultra-Low-Noise, Low-IQ LDO",
+  "packages": {
+    "DSBGA (4)": {
+      "pin_count": 4,
+      "pins": {
+        "A1": {
+          "name": "IN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Input voltage supply. Connect a 1-µF capacitor at this input.",
+          "unused_treatment": null
+        },
+        "A2": {
+          "name": "OUT",
+          "direction": "POWER_OUT",
+          "signal_type": "POWER",
+          "description": "Regulated output voltage. Connect a minimum 1-µF low-ESR capacitor to this pin.",
+          "unused_treatment": null
+        },
+        "B1": {
+          "name": "EN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Enable input. A low voltage turns the regulator off. A high voltage enables the regulator output. Internal 1-MΩ pulldown resistor.",
+          "unused_treatment": null
+        },
+        "B2": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Common ground",
+          "unused_treatment": null
+        }
+      }
+    },
+    "X2SON (4)": {
+      "pin_count": 5,
+      "pins": {
+        "4": {
+          "name": "IN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Input voltage supply. Connect a 1-µF capacitor at this input.",
+          "unused_treatment": null
+        },
+        "1": {
+          "name": "OUT",
+          "direction": "POWER_OUT",
+          "signal_type": "POWER",
+          "description": "Regulated output voltage. Connect a minimum 1-µF low-ESR capacitor to this pin.",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "EN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Enable input. A low voltage turns the regulator off. A high voltage enables the regulator output. Internal 1-MΩ pulldown resistor.",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Common ground",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "Thermal Pad",
+          "direction": "PASSIVE",
+          "signal_type": "POWER",
+          "description": "Thermal pad for X2SON package, connect to GND or leave floating. Do not connect to any potential other than GND.",
+          "unused_treatment": "FLOAT"
+        }
+      }
+    },
+    "SOT-23 (5)": {
+      "pin_count": 5,
+      "pins": {
+        "1": {
+          "name": "IN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Input voltage supply. Connect a 1-µF capacitor at this input.",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "OUT",
+          "direction": "POWER_OUT",
+          "signal_type": "POWER",
+          "description": "Regulated output voltage. Connect a minimum 1-µF low-ESR capacitor to this pin.",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "EN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Enable input. A low voltage turns the regulator off. A high voltage enables the regulator output. Internal 1-MΩ pulldown resistor.",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Common ground",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "N/C",
+          "direction": "NC",
+          "signal_type": "NONE",
+          "description": "No internal electrical connection.",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "absolute_maximum_ratings": {
+    "VIN": {
+      "parameter": "Input voltage",
+      "min": -0.3,
+      "max": 6.0,
+      "unit": "V",
+      "conditions": null
+    },
+    "VOUT": {
+      "parameter": "Output voltage",
+      "min": -0.3,
+      "max": 6.0,
+      "unit": "V",
+      "conditions": "Lessor of VIN + 0.3 V or 6 V"
+    },
+    "VEN": {
+      "parameter": "Enable input voltage",
+      "min": -0.3,
+      "max": 6.0,
+      "unit": "V",
+      "conditions": null
+    },
+    "TJMAX": {
+      "parameter": "Junction temperature",
+      "min": null,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    },
+    "Tstg": {
+      "parameter": "Storage temperature",
+      "min": -65,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    },
+    "V(ESD)": {
+      "parameter": "Electrostatic discharge (HBM)",
+      "min": -2000,
+      "max": 2000,
+      "unit": "V",
+      "conditions": "Human-body model (HBM), per ANSI/ESDA/JEDEC JS-001"
+    },
+    "V(ESD)_Charged_device_model__CDM___pe": {
+      "parameter": "Electrostatic discharge (CDM)",
+      "min": -1000,
+      "max": 1000,
+      "unit": "V",
+      "conditions": "Charged-device model (CDM), per JEDEC specification JESD22-C101"
+    }
+  },
+  "electrical_parameters": {
+    "VIN": {
+      "parameter": "Input voltage",
+      "min": 2.2,
+      "typ": null,
+      "max": 5.5,
+      "unit": "V",
+      "conditions": "TA = 25°C"
+    },
+    "ΔVOUT": {
+      "parameter": "Output voltage tolerance",
+      "min": -2,
+      "typ": null,
+      "max": 2,
+      "unit": "%VOUT",
+      "conditions": "VIN = (VOUT(NOM) + 1 V) to 5.5 V, IOUT = 1 mA to 250 mA"
+    },
+    "ΔVOUT_VIN____VOUT_NOM____1_V__to_5_5": {
+      "parameter": "Output voltage tolerance",
+      "min": -3,
+      "typ": null,
+      "max": 3,
+      "unit": "%VOUT",
+      "conditions": "VIN = (VOUT(NOM) + 1 V) to 5.5 V, IOUT = 1 mA to 250 mA, (VOUT < 1.8 V, SOT-23, X2SON packages)"
+    },
+    "ILOAD": {
+      "parameter": "Load current",
+      "min": 0,
+      "typ": null,
+      "max": 250,
+      "unit": "mA",
+      "conditions": null
+    },
+    "IQ": {
+      "parameter": "Quiescent current",
+      "min": null,
+      "typ": 12,
+      "max": 25,
+      "unit": "μA",
+      "conditions": "VEN = 1.2 V, IOUT = 0 mA"
+    },
+    "IQ_VEN___1_2_V__IOUT___250_mA": {
+      "parameter": "Quiescent current",
+      "min": null,
+      "typ": 250,
+      "max": 425,
+      "unit": "μA",
+      "conditions": "VEN = 1.2 V, IOUT = 250 mA"
+    },
+    "IQ_VEN___0_3_V__disabled": {
+      "parameter": "Quiescent current (disabled)",
+      "min": null,
+      "typ": 0.2,
+      "max": 1,
+      "unit": "μA",
+      "conditions": "VEN = 0.3 V (disabled)"
+    },
+    "IG": {
+      "parameter": "Ground current",
+      "min": null,
+      "typ": 14,
+      "max": null,
+      "unit": "μA",
+      "conditions": "VEN = 1.2 V, IOUT = 0 mA"
+    },
+    "VDO": {
+      "parameter": "Dropout voltage",
+      "min": null,
+      "typ": 50,
+      "max": null,
+      "unit": "mV",
+      "conditions": "IOUT = 100 mA"
+    },
+    "VDO_IOUT___250_mA__DSBGA_package": {
+      "parameter": "Dropout voltage",
+      "min": null,
+      "typ": 120,
+      "max": 200,
+      "unit": "mV",
+      "conditions": "IOUT = 250 mA (DSBGA package)"
+    },
+    "VDO_IOUT___250_mA__SOT_23__X2SON_p": {
+      "parameter": "Dropout voltage",
+      "min": null,
+      "typ": null,
+      "max": 250,
+      "unit": "mV",
+      "conditions": "IOUT = 250 mA (SOT-23, X2SON packages)"
+    },
+    "ISC": {
+      "parameter": "Short-circuit current limit",
+      "min": 250,
+      "typ": 500,
+      "max": null,
+      "unit": "mA",
+      "conditions": "TA = 25°C"
+    },
+    "PSRR": {
+      "parameter": "Power-supply rejection ratio",
+      "min": null,
+      "typ": 90,
+      "max": null,
+      "unit": "dB",
+      "conditions": "f = 100 Hz, IOUT = 20 mA"
+    },
+    "PSRR_f___1_kHz__IOUT___20_mA": {
+      "parameter": "Power-supply rejection ratio",
+      "min": null,
+      "typ": 82,
+      "max": null,
+      "unit": "dB",
+      "conditions": "f = 1 kHz, IOUT = 20 mA"
+    },
+    "PSRR_f___10_kHz__IOUT___20_mA": {
+      "parameter": "Power-supply rejection ratio",
+      "min": null,
+      "typ": 65,
+      "max": null,
+      "unit": "dB",
+      "conditions": "f = 10 kHz, IOUT = 20 mA"
+    },
+    "PSRR_f___100_kHz__IOUT___20_mA": {
+      "parameter": "Power-supply rejection ratio",
+      "min": null,
+      "typ": 60,
+      "max": null,
+      "unit": "dB",
+      "conditions": "f = 100 kHz, IOUT = 20 mA"
+    },
+    "eN": {
+      "parameter": "Output noise voltage",
+      "min": null,
+      "typ": 10,
+      "max": null,
+      "unit": "μVRMS",
+      "conditions": "BW = 10 Hz to 100 kHz, IOUT = 1 mA"
+    },
+    "eN_BW___10_Hz_to_100_kHz__IOUT": {
+      "parameter": "Output noise voltage",
+      "min": null,
+      "typ": 6.5,
+      "max": null,
+      "unit": "μVRMS",
+      "conditions": "BW = 10 Hz to 100 kHz, IOUT = 250 mA"
+    },
+    "RAD": {
+      "parameter": "Output automatic discharge pulldown resistance",
+      "min": null,
+      "typ": 230,
+      "max": null,
+      "unit": "Ω",
+      "conditions": "VEN < VIL (output disabled)"
+    },
+    "TSD": {
+      "parameter": "Thermal shutdown",
+      "min": null,
+      "typ": 160,
+      "max": null,
+      "unit": "°C",
+      "conditions": "TJ rising"
+    },
+    "TSD_TJ_falling_from_shutdown": {
+      "parameter": "Thermal hysteresis",
+      "min": null,
+      "typ": 15,
+      "max": null,
+      "unit": "°C",
+      "conditions": "TJ falling from shutdown"
+    },
+    "VIL": {
+      "parameter": "Low input threshold",
+      "min": null,
+      "typ": null,
+      "max": 0.4,
+      "unit": "V",
+      "conditions": "VIN = 2.2 V to 5.5 V, VEN falling until the output is disabled"
+    },
+    "VIH": {
+      "parameter": "High input threshold",
+      "min": 1.2,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": "VIN = 2.2 V to 5.5 V, VEN rising until the output is enabled"
+    },
+    "IEN": {
+      "parameter": "Input current at EN pin",
+      "min": null,
+      "typ": 5.5,
+      "max": null,
+      "unit": "μA",
+      "conditions": "VEN = 5.5 V and VIN = 5.5 V"
+    },
+    "IEN_VEN___0_V_and_VIN___5_5_V": {
+      "parameter": "Input current at EN pin",
+      "min": null,
+      "typ": 0.001,
+      "max": null,
+      "unit": "μA",
+      "conditions": "VEN = 0 V and VIN = 5.5 V"
+    },
+    "ΔVOUT_VIN____VOUT_NOM____1_V__to__VO": {
+      "parameter": "Line transient",
+      "min": -1,
+      "typ": null,
+      "max": 1,
+      "unit": "mV",
+      "conditions": "VIN = (VOUT(NOM) + 1 V) to (VOUT(NOM) + 1.6 V) in 30 μs"
+    },
+    "ΔVOUT_IOUT___1_mA_to_250_mA_in_10__s": {
+      "parameter": "Load transient",
+      "min": -40,
+      "typ": null,
+      "max": 40,
+      "unit": "mV",
+      "conditions": "IOUT = 1 mA to 250 mA in 10 μs or 250 mA to 1 mA in 10 μs"
+    },
+    "tON": {
+      "parameter": "Turnon time",
+      "min": null,
+      "typ": 80,
+      "max": 150,
+      "unit": "μs",
+      "conditions": "From VEN > VIH to VOUT = 95% of VOUT(NOM), TA = 25°C"
+    },
+    "CIN": {
+      "parameter": "Input capacitance",
+      "min": 0.7,
+      "typ": 1,
+      "max": null,
+      "unit": "μF",
+      "conditions": "Capacitance for stability"
+    },
+    "COUT": {
+      "parameter": "Output capacitance",
+      "min": 0.7,
+      "typ": 1,
+      "max": 10,
+      "unit": "μF",
+      "conditions": "Capacitance for stability"
+    },
+    "ESR": {
+      "parameter": "Output/Input capacitance ESR",
+      "min": 5,
+      "typ": null,
+      "max": 500,
+      "unit": "mΩ",
+      "conditions": null
+    }
+  },
+  "drc_hints": {
+    "vin_abs_max": {
+      "value": 6.0,
+      "unit": "V"
+    },
+    "vin_operating": {
+      "min": 2.2,
+      "max": 5.5,
+      "unit": "V"
+    },
+    "enable_threshold": {
+      "max": 0.4,
+      "unit": "V"
+    },
+    "iout_max": {
+      "min": 0,
+      "max": 250,
+      "unit": "mA"
+    },
+    "iq": {
+      "typ": 12,
+      "max": 25,
+      "unit": "μA"
+    },
+    "thermal_shutdown": {
+      "typ": 160,
+      "unit": "°C"
+    }
+  }
+}

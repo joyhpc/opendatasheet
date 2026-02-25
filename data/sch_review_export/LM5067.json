@@ -1,6 +1,10 @@
 {
-  "_schema": "sch-review-device/1.0",
+  "_schema": "sch-review-device/1.1",
   "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
   "mpn": "LM5067",
   "manufacturer": "Texas Instruments",
   "category": "Other",
@@ -507,5 +511,10 @@
       "conditions": "ISINK = 2 mA"
     }
   },
-  "drc_hints": {}
+  "drc_hints": {
+    "vin_abs_max": {
+      "value": 100,
+      "unit": "V"
+    }
+  }
 }

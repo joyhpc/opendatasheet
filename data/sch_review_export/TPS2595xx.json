@@ -1,6 +1,10 @@
 {
-  "_schema": "sch-review-device/1.0",
+  "_schema": "sch-review-device/1.1",
   "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
   "mpn": "TPS2595xx",
   "manufacturer": "Texas Instruments",
   "category": "Other",
@@ -378,10 +382,26 @@
       "value": 20,
       "unit": "V"
     },
+    "iout_max": {
+      "min": 3.87,
+      "typ": 4.17,
+      "max": 4.42,
+      "unit": "A"
+    },
     "iq": {
       "typ": 175,
       "max": 250,
       "unit": "µA"
+    },
+    "thermal_shutdown": {
+      "typ": 157,
+      "unit": "°C"
+    },
+    "uvlo": {
+      "min": 2.7,
+      "typ": 2.8,
+      "max": 2.9,
+      "unit": "V"
     }
   }
 }

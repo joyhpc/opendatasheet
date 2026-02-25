@@ -1,6 +1,10 @@
 {
-  "_schema": "sch-review-device/1.0",
+  "_schema": "sch-review-device/1.1",
   "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
   "mpn": "AD5308/AD5318/AD5328",
   "manufacturer": "Analog Devices",
   "category": "DAC",
@@ -242,5 +246,19 @@
       "conditions": "VREF = 2.5 V ± 0.1 V p-p, frequency = 10 kHz"
     }
   },
-  "drc_hints": {}
+  "drc_hints": {
+    "vin_abs_max": {
+      "value": 7.0,
+      "unit": "V"
+    },
+    "vin_operating": {
+      "min": 2.5,
+      "max": 5.5,
+      "unit": "V"
+    },
+    "enable_threshold": {
+      "max": 0.8,
+      "unit": "V"
+    }
+  }
 }

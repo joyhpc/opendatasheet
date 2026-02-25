@@ -1,0 +1,411 @@
+{
+  "_schema": "sch-review-device/1.1",
+  "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
+  "mpn": "SQ33065",
+  "manufacturer": "Silergy Corp.",
+  "category": "Buck",
+  "description": "Wide range input voltage synchronous buck controller",
+  "packages": {
+    "QFN-20": {
+      "pin_count": 21,
+      "pins": {
+        "1": {
+          "name": "EN/UVLO",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Enable and UVLO pin",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "RT",
+          "direction": "PASSIVE",
+          "signal_type": "ANALOG",
+          "description": "Switching frequency set pin. A resistor is connected to RT pin and set the operation frequency.",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "SS/TRK",
+          "direction": "PASSIVE",
+          "signal_type": "ANALOG",
+          "description": "Soft-start and voltage tracking pin. A capacitor is connected to set soft-start time.",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "COMP",
+          "direction": "OUTPUT",
+          "signal_type": "ANALOG",
+          "description": "Output of the internal error amplifier.",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "FB",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Output Feedback Pin.",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "AGND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Analog ground.",
+          "unused_treatment": null
+        },
+        "7": {
+          "name": "SYNCOUT",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "Synchronization output. Logic output that provides a clock signal that is 180° out-of phase with the high-side FET gate drive.",
+          "unused_treatment": null
+        },
+        "8": {
+          "name": "SYNCIN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Synchronization input pin.",
+          "unused_treatment": null
+        },
+        "9": {
+          "name": "NC",
+          "direction": "NC",
+          "signal_type": "NONE",
+          "description": "No electrical connection.",
+          "unused_treatment": null
+        },
+        "16": {
+          "name": "NC",
+          "direction": "NC",
+          "signal_type": "NONE",
+          "description": "No electrical connection.",
+          "unused_treatment": null
+        },
+        "10": {
+          "name": "PGOOD",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "Power Good indicator.",
+          "unused_treatment": null
+        },
+        "11": {
+          "name": "ILIM",
+          "direction": "PASSIVE",
+          "signal_type": "ANALOG",
+          "description": "Current limit set and protection pin.",
+          "unused_treatment": null
+        },
+        "12": {
+          "name": "PGND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power ground.",
+          "unused_treatment": null
+        },
+        "13": {
+          "name": "LO",
+          "direction": "OUTPUT",
+          "signal_type": "ANALOG",
+          "description": "Low side MOSFET gate driver pin.",
+          "unused_treatment": null
+        },
+        "14": {
+          "name": "VCC",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power supply pin.",
+          "unused_treatment": null
+        },
+        "15": {
+          "name": "EP",
+          "direction": "PASSIVE",
+          "signal_type": "NONE",
+          "description": "Exposed pad of the package.",
+          "unused_treatment": null
+        },
+        "EP": {
+          "name": "EP",
+          "direction": "PASSIVE",
+          "signal_type": "NONE",
+          "description": "Exposed pad of the package.",
+          "unused_treatment": null
+        },
+        "17": {
+          "name": "BST",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Bootstrap supply for the high-side gate driver.",
+          "unused_treatment": null
+        },
+        "18": {
+          "name": "HO",
+          "direction": "OUTPUT",
+          "signal_type": "ANALOG",
+          "description": "High side MOSFET gate driver pin.",
+          "unused_treatment": null
+        },
+        "19": {
+          "name": "LX",
+          "direction": "OUTPUT",
+          "signal_type": "POWER",
+          "description": "Inductor pin. Connect this pin to the switching node of inductor.",
+          "unused_treatment": null
+        },
+        "20": {
+          "name": "VIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Voltage supply for VCC LDO regulator and VIN protection pin.",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "absolute_maximum_ratings": {
+    "ΘJA": {
+      "parameter": "Thermal Resistance Junction-to-Ambient",
+      "min": null,
+      "max": null,
+      "unit": "°C/W",
+      "conditions": null
+    },
+    "ΘJC(top)": {
+      "parameter": "Thermal Resistance Junction-to-Case (top)",
+      "min": null,
+      "max": null,
+      "unit": "°C/W",
+      "conditions": null
+    }
+  },
+  "electrical_parameters": {
+    "VIN": {
+      "parameter": "VIN Voltage Range",
+      "min": 6.0,
+      "typ": null,
+      "max": 75.0,
+      "unit": "V",
+      "conditions": null
+    },
+    "IQ-RUN": {
+      "parameter": "Operating Input Current, not Switching",
+      "min": null,
+      "typ": 1.0,
+      "max": null,
+      "unit": "mA",
+      "conditions": "VEN/UVLO = 1.5V, VSS/TRK = 0V"
+    },
+    "IQ-STBY": {
+      "parameter": "Standby Input Current",
+      "min": null,
+      "typ": 0.4,
+      "max": null,
+      "unit": "mA",
+      "conditions": "VEN/UVLO = 1V"
+    },
+    "IQ-SDN": {
+      "parameter": "Shutdown Input Current",
+      "min": null,
+      "typ": 10.0,
+      "max": null,
+      "unit": "μA",
+      "conditions": "VEN/UVLO = 0V, VVCC < 1V"
+    },
+    "VIN_OVP": {
+      "parameter": "VIN OVP",
+      "min": null,
+      "typ": 88.0,
+      "max": null,
+      "unit": "V",
+      "conditions": null
+    },
+    "VIN_OVP_hys": {
+      "parameter": "VIN OVP Hysteresis",
+      "min": null,
+      "typ": 6.0,
+      "max": null,
+      "unit": "V",
+      "conditions": null
+    },
+    "VVCC": {
+      "parameter": "VCC Regulation Voltage",
+      "min": null,
+      "typ": 7.5,
+      "max": null,
+      "unit": "V",
+      "conditions": "VSS/TRK = 0V, 9V ≤ VVIN ≤ 75V, 0mA < IVCC ≤ 20mA"
+    },
+    "VVCC-LDO": {
+      "parameter": "VIN to VCC Dropout Voltage",
+      "min": null,
+      "typ": 0.25,
+      "max": null,
+      "unit": "V",
+      "conditions": "VIN = 6 V, VSS/TRK = 0 V, IVCC = 20 mA"
+    },
+    "ISC-LDO": {
+      "parameter": "VCC Short-circuit Current",
+      "min": null,
+      "typ": 50.0,
+      "max": null,
+      "unit": "mA",
+      "conditions": "VSS/TRK = 0V, VCC = 6V"
+    },
+    "VUVLO_H": {
+      "parameter": "VCC UVLO Threshold",
+      "min": null,
+      "typ": 4.75,
+      "max": null,
+      "unit": "V",
+      "conditions": "VCC rising"
+    },
+    "VUVLO_HYS": {
+      "parameter": "VCC UVLO Hysteresis",
+      "min": null,
+      "typ": 250.0,
+      "max": null,
+      "unit": "mV",
+      "conditions": "Rising threshold – falling threshold"
+    },
+    "VVCC-EXT": {
+      "parameter": "Minimum External Bias Supply Voltage",
+      "min": 8.0,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": "Voltage required to disable VCC regulator"
+    },
+    "IVCC": {
+      "parameter": "External VCC Input Current, not Switching",
+      "min": null,
+      "typ": 1.0,
+      "max": null,
+      "unit": "mA",
+      "conditions": "VSS/TRK = 0V, VVCC = 13V"
+    },
+    "VSDN": {
+      "parameter": "Shutdown to Standby Threshold",
+      "min": null,
+      "typ": 375.0,
+      "max": null,
+      "unit": "mV",
+      "conditions": "VEN/UVLO rising"
+    },
+    "RHO-UP": {
+      "parameter": "HO High-state Resistance, HO to BST",
+      "min": null,
+      "typ": 1.8,
+      "max": null,
+      "unit": "Ω",
+      "conditions": "VBST – VLX = 7 V, IHO = –100 mA"
+    },
+    "RHO-DOWN": {
+      "parameter": "HO Low-state Resistance, HO to LX",
+      "min": null,
+      "typ": 0.7,
+      "max": null,
+      "unit": "Ω",
+      "conditions": "VBST – VLX = 7 V, IHO = 100 mA"
+    },
+    "RLO-UP": {
+      "parameter": "LO High-state Resistance, LO to VCC",
+      "min": null,
+      "typ": 1.8,
+      "max": null,
+      "unit": "Ω",
+      "conditions": "VBST – VLX = 7 V, ILO = –100 mA"
+    },
+    "RLO-DOWN": {
+      "parameter": "LO Low-state Resistance, LO to PGND",
+      "min": null,
+      "typ": 0.7,
+      "max": null,
+      "unit": "Ω",
+      "conditions": "VBST – VLX = 7 V, ILO = 100 mA"
+    },
+    "IHOH, ILOH": {
+      "parameter": "HO, LO Source Current",
+      "min": null,
+      "typ": 2.3,
+      "max": null,
+      "unit": "A",
+      "conditions": "VBST – VLX = 7 V, HO = LX, LO = AGND"
+    },
+    "IHOL, ILOL": {
+      "parameter": "HO, LO Sink Current",
+      "min": null,
+      "typ": 3.9,
+      "max": null,
+      "unit": "A",
+      "conditions": "VBST – VLX = 7 V, HO = BST, LO = VCC"
+    },
+    "TSD": {
+      "parameter": "Thermal Shutdown Threshold",
+      "min": null,
+      "typ": 160.0,
+      "max": null,
+      "unit": "°C",
+      "conditions": "Tj rising"
+    },
+    "TSD-HYS": {
+      "parameter": "Thermal Shutdown Hysteresis",
+      "min": null,
+      "typ": 18.0,
+      "max": null,
+      "unit": "°C",
+      "conditions": null
+    },
+    "THO-TR, TLO-TR": {
+      "parameter": "HO, LO Rise Times",
+      "min": null,
+      "typ": 7.0,
+      "max": null,
+      "unit": "ns",
+      "conditions": "VBST – VLX = 7 V, CLOAD = 1 nF, 20% to 80%"
+    },
+    "THO-TF, TLO-TF": {
+      "parameter": "HO, LO Fall Times",
+      "min": null,
+      "typ": 4.0,
+      "max": null,
+      "unit": "ns",
+      "conditions": "VBST – VLX = 7 V, CLOAD = 1 nF, 80% to 20%"
+    },
+    "THO-DT": {
+      "parameter": "HO Turn on Dead Time",
+      "min": null,
+      "typ": 25.0,
+      "max": null,
+      "unit": "ns",
+      "conditions": "VBST – VLX = 7 V, LO off to HO on, 50% to 50%"
+    },
+    "TLO-DT": {
+      "parameter": "LO Turn on Dead Time",
+      "min": null,
+      "typ": 25.0,
+      "max": null,
+      "unit": "ns",
+      "conditions": "VBST – VLX = 7 V, HO off to LO on, 50% to 50%"
+    }
+  },
+  "drc_hints": {
+    "vin_operating": {
+      "min": 6.0,
+      "max": 75.0,
+      "unit": "V"
+    },
+    "iq": {
+      "typ": 1.0,
+      "unit": "mA"
+    },
+    "thermal_shutdown": {
+      "typ": 160.0,
+      "unit": "°C"
+    },
+    "uvlo": {
+      "typ": 4.75,
+      "unit": "V"
+    }
+  }
+}

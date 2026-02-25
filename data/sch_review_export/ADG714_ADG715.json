@@ -1,6 +1,10 @@
 {
-  "_schema": "sch-review-device/1.0",
+  "_schema": "sch-review-device/1.1",
   "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
   "mpn": "ADG714/ADG715",
   "manufacturer": "Analog Devices",
   "category": "Switch",
@@ -471,5 +475,14 @@
       "conditions": "ADG715"
     }
   },
-  "drc_hints": {}
+  "drc_hints": {
+    "vin_abs_max": {
+      "value": 7,
+      "unit": "V"
+    },
+    "thermal_resistance": {
+      "typ": 128,
+      "unit": "°C/W"
+    }
+  }
 }

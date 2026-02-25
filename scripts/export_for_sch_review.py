@@ -91,11 +91,20 @@ def export_normal_ic(data: dict) -> dict | None:
         }
 
     # --- Extract DRC-critical values ---
-    drc_hints = _extract_drc_hints(category, abs_max, elec_params)
+    raw_elec = ext.get("electrical_characteristics", [])
+    raw_abs = ext.get("absolute_maximum_ratings", [])
+    drc_hints = _extract_drc_hints(category, abs_max, elec_params,
+                                    raw_elec=raw_elec, raw_abs=raw_abs)
+
+    # --- Determine layers ---
+    layers = ["L0_skeleton"]
+    if elec_params or abs_max:
+        layers.append("L1_electrical")
 
     result = {
-        "_schema": "sch-review-device/1.0",
+        "_schema": "sch-review-device/1.1",
         "_type": "normal_ic",
+        "_layers": layers,
         "mpn": mpn,
         "manufacturer": comp.get("manufacturer"),
         "category": category,
@@ -109,78 +118,118 @@ def export_normal_ic(data: dict) -> dict | None:
     return result
 
 
-def _extract_drc_hints(category: str, abs_max: dict, elec_params: dict) -> dict:
-    """Extract DRC-critical values from parameters for quick access."""
+def _extract_drc_hints(category: str, abs_max: dict, elec_params: dict,
+                       raw_elec: list = None, raw_abs: list = None) -> dict:
+    """Extract DRC-critical values using semantic fuzzy matching.
+
+    Uses both dict-keyed params (abs_max, elec_params) and raw list params
+    (raw_elec, raw_abs) from extraction for maximum coverage.
+    """
     hints = {}
+    elec_list = raw_elec or []
+    abs_list = raw_abs or []
 
-    # Vin max
-    for key in ["VIN", "Vin", "VI"]:
-        if key in abs_max and abs_max[key].get("max") is not None:
-            hints["vin_abs_max"] = {"value": abs_max[key]["max"], "unit": abs_max[key].get("unit", "V")}
-            break
+    def _find(source_list, sym_pats=None, desc_pats=None):
+        """Fuzzy match on symbol or parameter description."""
+        for p in source_list:
+            sym = p.get('symbol') or ''
+            desc = p.get('parameter') or ''
+            if sym_pats:
+                for pat in sym_pats:
+                    if re.match(pat, sym, re.IGNORECASE):
+                        return p
+            if desc_pats:
+                for pat in desc_pats:
+                    if re.search(pat, desc, re.IGNORECASE):
+                        return p
+        return None
 
-    # Vin operating range
-    for key in ["VIN", "Vin", "VI"]:
-        if key in elec_params:
-            p = elec_params[key]
-            if p.get("min") is not None or p.get("max") is not None:
-                hints["vin_operating"] = {
-                    "min": p.get("min"), "max": p.get("max"), "unit": p.get("unit", "V")
-                }
-                break
+    def _hint(p, keys=('min', 'typ', 'max', 'unit')):
+        return {k: p.get(k) for k in keys if p.get(k) is not None}
 
-    # Vout (for regulators)
-    for key in ["VOUT", "Vout", "VO"]:
-        if key in elec_params:
-            p = elec_params[key]
-            hints["vout"] = {
-                "min": p.get("min"), "typ": p.get("typ"), "max": p.get("max"),
-                "unit": p.get("unit", "V")
-            }
-            break
+    # --- vin_abs_max ---
+    p = _find(abs_list,
+              sym_pats=[r'^V[_\(]?IN', r'^VCC', r'^VDD'],
+              desc_pats=[r'input.*volt', r'supply.*volt', r'voltage\s+at\s+pin.*VIN'])
+    if p and p.get('max') is not None:
+        hints['vin_abs_max'] = {'value': p['max'], 'unit': p.get('unit', 'V')}
 
-    # Vref / VFB (for Buck/Boost with feedback)
-    for key in ["VFB", "Vfb", "VREF", "Vref"]:
-        if key in elec_params:
-            p = elec_params[key]
-            hints["vref"] = {
-                "min": p.get("min"), "typ": p.get("typ"), "max": p.get("max"),
-                "unit": p.get("unit", "V")
-            }
-            break
+    # --- vin_operating ---
+    p = _find(elec_list,
+              sym_pats=[r'^V[_\(]?IN', r'^VCC', r'^VDD'],
+              desc_pats=[r'input.*volt.*range', r'input.*operat', r'supply.*volt.*range'])
+    if p and (p.get('min') is not None or p.get('max') is not None):
+        hints['vin_operating'] = _hint(p)
 
-    # Iout max
-    for key in ["IOUT", "Iout", "IO"]:
-        if key in abs_max and abs_max[key].get("max") is not None:
-            hints["iout_abs_max"] = {"value": abs_max[key]["max"], "unit": abs_max[key].get("unit", "A")}
-            break
-    for key in ["IOUT", "Iout", "IO", "ILIM", "Ilim"]:
-        if key in elec_params:
-            p = elec_params[key]
-            if p.get("max") is not None or p.get("typ") is not None:
-                hints["iout_operating"] = {
-                    "typ": p.get("typ"), "max": p.get("max"), "unit": p.get("unit", "A")
-                }
-                break
+    # --- vref ---
+    p = _find(elec_list,
+              sym_pats=[r'^V[_\(]?REF', r'^V[_\(]?FB', r'^VFEEDBACK'],
+              desc_pats=[r'reference\s+volt', r'feedback.*volt', r'feedback.*regul'])
+    if p:
+        hints['vref'] = _hint(p)
 
-    # Quiescent current
-    for key in ["IQ", "Iq", "IGnd", "IGND"]:
-        if key in elec_params:
-            p = elec_params[key]
-            hints["iq"] = {
-                "typ": p.get("typ"), "max": p.get("max"), "unit": p.get("unit", "µA")
-            }
-            break
+    # --- vout ---
+    p = _find(elec_list,
+              sym_pats=[r'^V[_\(]?OUT'],
+              desc_pats=[r'^output\s+volt.*range', r'^output\s+volt.*accur'])
+    if p:
+        hints['vout'] = _hint(p)
 
-    # Enable threshold
-    for key in ["VEN", "Ven", "VIH_EN", "VIL_EN"]:
-        if key in elec_params:
-            p = elec_params[key]
-            hints["enable_threshold"] = {
-                "min": p.get("min"), "typ": p.get("typ"), "max": p.get("max"),
-                "unit": p.get("unit", "V")
-            }
-            break
+    # --- enable_threshold ---
+    p = _find(elec_list,
+              sym_pats=[r'^V.*EN', r'^VTH.*EN', r'^VIH.*EN', r'^VIL.*EN', r'^VIH$', r'^VIL$'],
+              desc_pats=[r'enable.*thresh', r'enable.*volt.*ris', r'enable.*high', r'high.level\s+input\s+volt'])
+    if p:
+        hints['enable_threshold'] = _hint(p)
+
+    # --- iout_max ---
+    p = _find(elec_list,
+              sym_pats=[r'^I[_\(]?LIM', r'^I[_\(]?OUT', r'^I[_\(]?LOAD', r'^I[_\(]?OCL'],
+              desc_pats=[r'current\s+limit', r'output\s+current', r'load\s+current', r'source\s+current\s+limit'])
+    if p:
+        hints['iout_max'] = _hint(p)
+
+    # --- iq ---
+    p = _find(elec_list,
+              sym_pats=[r'^I[_\(]?Q\b', r'^I[_\(]?GND', r'^IVDD\(S0\)'],
+              desc_pats=[r'quiescent\s+curr', r'supply\s+curr.*operat', r'VDD\s+supply\s+curr'])
+    if p:
+        hints['iq'] = _hint(p)
+
+    # --- fsw ---
+    p = _find(elec_list,
+              sym_pats=[r'^f[_\(]?SW', r'^F[_\(]?OSC', r'^f[_\(]?CLK'],
+              desc_pats=[r'switch.*freq', r'oscillat.*freq', r'PWM.*freq'])
+    if p:
+        hints['fsw'] = _hint(p)
+
+    # --- soft_start ---
+    p = _find(elec_list,
+              sym_pats=[r'^t[_\(]?SS', r'^I[_\(]?SS'],
+              desc_pats=[r'soft.?start\s+time', r'soft.?start\s+charge'])
+    if p:
+        hints['soft_start'] = _hint(p)
+
+    # --- thermal_shutdown ---
+    p = _find(elec_list,
+              sym_pats=[r'^T[_\(]?SD', r'^TJ[_\(]?SD', r'^T[_\(]?OTP'],
+              desc_pats=[r'thermal\s+shut', r'over.?temp.*protect'])
+    if p:
+        hints['thermal_shutdown'] = _hint(p)
+
+    # --- thermal_resistance ---
+    p = _find(elec_list,
+              sym_pats=[r'^[θR].*JA', r'^RθJA'],
+              desc_pats=[r'junction.to.ambient', r'thermal\s+resist'])
+    if p:
+        hints['thermal_resistance'] = _hint(p)
+
+    # --- uvlo ---
+    p = _find(elec_list,
+              sym_pats=[r'^V.*UVLO', r'^V.*UVP'],
+              desc_pats=[r'under.?volt.*lock', r'UVLO.*thresh.*ris'])
+    if p:
+        hints['uvlo'] = _hint(p)
 
     return hints
 

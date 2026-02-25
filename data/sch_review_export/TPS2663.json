@@ -1,6 +1,10 @@
 {
-  "_schema": "sch-review-device/1.0",
+  "_schema": "sch-review-device/1.1",
   "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
   "mpn": "TPS2663",
   "manufacturer": "Texas Instruments",
   "category": "Other",
@@ -557,5 +561,26 @@
       "conditions": "0 V <= V(OVP) <= 4 V"
     }
   },
-  "drc_hints": {}
+  "drc_hints": {
+    "vin_abs_max": {
+      "value": 67,
+      "unit": "V"
+    },
+    "vin_operating": {
+      "min": 4.5,
+      "max": 60,
+      "unit": "V"
+    },
+    "iq": {
+      "typ": 1.38,
+      "max": 1.7,
+      "unit": "mA"
+    },
+    "uvlo": {
+      "min": 15.1,
+      "typ": 15.46,
+      "max": 15.9,
+      "unit": "V"
+    }
+  }
 }

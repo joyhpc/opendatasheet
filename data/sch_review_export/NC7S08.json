@@ -1,6 +1,10 @@
 {
-  "_schema": "sch-review-device/1.0",
+  "_schema": "sch-review-device/1.1",
   "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
   "mpn": "NC7S08",
   "manufacturer": "onsemi",
   "category": "Logic",
@@ -341,9 +345,13 @@
     }
   },
   "drc_hints": {
-    "iout_abs_max": {
-      "value": 12.5,
-      "unit": "mA"
+    "vin_abs_max": {
+      "value": 6.5,
+      "unit": "V"
+    },
+    "enable_threshold": {
+      "min": 1.5,
+      "unit": "V"
     }
   }
 }

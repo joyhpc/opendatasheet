@@ -1,0 +1,324 @@
+{
+  "_schema": "sch-review-device/1.1",
+  "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
+  "mpn": "TPS62135",
+  "manufacturer": "Texas Instruments",
+  "category": "Buck",
+  "description": "High accuracy 3V to 17V, 4A step-down converter with DCS-Control",
+  "packages": {
+    "VQFN-11": {
+      "pin_count": 11,
+      "pins": {
+        "1": {
+          "name": "VIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power supply input. Make sure the input capacitor is connected as close as possible between pin VIN and GND.",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "SW",
+          "direction": "OUTPUT",
+          "signal_type": "POWER",
+          "description": "Switch pin of the converter and is connected to the internal Power MOSFETs.",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground pin.",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "FB2",
+          "direction": "OUTPUT",
+          "signal_type": "ANALOG",
+          "description": "Open drain of an internal switch to GND. Allows to turn on a resistor in parallel to the feedback resistor R2 and increase the output voltage with VSEL = high.",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "FB",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Voltage feedback input, connect resistive output voltage divider to this pin.",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "VOS",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Output voltage sense pin. Connect directly to the positive pin of the output capacitor.",
+          "unused_treatment": null
+        },
+        "7": {
+          "name": "PG",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "Open drain power good output.",
+          "unused_treatment": null
+        },
+        "8": {
+          "name": "EN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Enable pin of the device. Connect to logic low to disable the device. Pull high to enable the device. Do not leave this pin unconnected.",
+          "unused_treatment": null
+        },
+        "9": {
+          "name": "SS/TR",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Soft-Start / Tracking pin. An external capacitor connected from this pin to GND defines the rise time for the internal reference voltage.",
+          "unused_treatment": null
+        },
+        "10": {
+          "name": "MODE",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "The device runs in PFM/PWM mode when this pin is pulled low. When the pin is pulled high, the device runs in forced PWM mode. Do not leave this pin unconnected.",
+          "unused_treatment": null
+        },
+        "11": {
+          "name": "VSEL",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Voltage scaling control input. Turns on an internal switch from FB2 to GND when this pin is set high.",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "absolute_maximum_ratings": {
+    "VIN": {
+      "parameter": "Pin voltage range",
+      "min": -0.3,
+      "max": 20,
+      "unit": "V",
+      "conditions": null
+    },
+    "SW": {
+      "parameter": "Pin voltage range",
+      "min": -2,
+      "max": 25.5,
+      "unit": "V",
+      "conditions": "While switching"
+    },
+    "TJ": {
+      "parameter": "Operating junction temperature",
+      "min": -40,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    },
+    "Tstg": {
+      "parameter": "Storage temperature range",
+      "min": -65,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    },
+    "V(ESD)": {
+      "parameter": "Electrostatic discharge",
+      "min": -2000,
+      "max": 2000,
+      "unit": "V",
+      "conditions": "per ANSI/ESDA/JEDEC JS-001"
+    },
+    "V(ESD)_per_JEDEC_specification_JESD22": {
+      "parameter": "Electrostatic discharge",
+      "min": -500,
+      "max": 500,
+      "unit": "V",
+      "conditions": "per JEDEC specification JESD22-C101"
+    }
+  },
+  "electrical_parameters": {
+    "VIN": {
+      "parameter": "Supply voltage range",
+      "min": 3,
+      "typ": null,
+      "max": 17,
+      "unit": "V",
+      "conditions": "Recommended Operating Conditions"
+    },
+    "VOUT": {
+      "parameter": "Output voltage range",
+      "min": 0.8,
+      "typ": null,
+      "max": 12,
+      "unit": "V",
+      "conditions": "Recommended Operating Conditions"
+    },
+    "IQ": {
+      "parameter": "Operating Quiescent Current",
+      "min": null,
+      "typ": null,
+      "max": 35,
+      "unit": "µA",
+      "conditions": "EN = high, IOUT= 0 mA, Device not switching, TJ= 85 °C"
+    },
+    "IQ_EN___high__IOUT__0_mA__Device": {
+      "parameter": "Operating Quiescent Current",
+      "min": null,
+      "typ": 18,
+      "max": 46,
+      "unit": "µA",
+      "conditions": "EN = high, IOUT= 0 mA, Device not switching"
+    },
+    "ISD": {
+      "parameter": "Shutdown Current",
+      "min": null,
+      "typ": 1,
+      "max": 8,
+      "unit": "µA",
+      "conditions": "EN = 0 V, Nominal value at TJ = 25 °C, Max value at TJ = 85 °C"
+    },
+    "VUVLO": {
+      "parameter": "Undervoltage Lockout Threshold",
+      "min": 2.8,
+      "typ": 2.9,
+      "max": 3.0,
+      "unit": "V",
+      "conditions": "Rising Input Voltage"
+    },
+    "VUVLO_Falling_Input_Voltage": {
+      "parameter": "Undervoltage Lockout Threshold",
+      "min": 2.5,
+      "typ": 2.6,
+      "max": 2.7,
+      "unit": "V",
+      "conditions": "Falling Input Voltage"
+    },
+    "TSD": {
+      "parameter": "Thermal Shutdown Temperature",
+      "min": null,
+      "typ": 160,
+      "max": null,
+      "unit": "°C",
+      "conditions": "Rising Junction Temperature"
+    },
+    "VIH": {
+      "parameter": "High Level Input Voltage",
+      "min": 0.9,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": "for VSEL, MODE pin"
+    },
+    "VIL": {
+      "parameter": "Low Level Input Voltage",
+      "min": null,
+      "typ": null,
+      "max": 0.3,
+      "unit": "V",
+      "conditions": "for VSEL, MODE pin"
+    },
+    "VIH_for_EN_pin__rising_edge": {
+      "parameter": "Input Threshold Voltage",
+      "min": 0.77,
+      "typ": 0.8,
+      "max": 0.83,
+      "unit": "V",
+      "conditions": "for EN pin; rising edge"
+    },
+    "VIL_for_EN_pin__falling_edge": {
+      "parameter": "Input Threshold Voltage",
+      "min": 0.67,
+      "typ": 0.7,
+      "max": 0.73,
+      "unit": "V",
+      "conditions": "for EN pin; falling edge"
+    },
+    "ILKG_EN": {
+      "parameter": "Input Leakage Current for EN, VSEL, MODE",
+      "min": null,
+      "typ": null,
+      "max": 100,
+      "unit": "nA",
+      "conditions": "VIH = VIN or VIL = GND"
+    },
+    "VTH_PG": {
+      "parameter": "Power Good Threshold Voltage; dc level",
+      "min": 93,
+      "typ": 96,
+      "max": 98,
+      "unit": "%VOUT",
+      "conditions": "Rising (%VOUT)"
+    },
+    "VTH_PG_Falling___VOUT": {
+      "parameter": "Power Good Threshold Voltage; dc level",
+      "min": 3,
+      "typ": null,
+      "max": 4.5,
+      "unit": "%VOUT",
+      "conditions": "Falling (%VOUT)"
+    },
+    "VOL_PG": {
+      "parameter": "Power Good Output Low Voltage",
+      "min": null,
+      "typ": 0.07,
+      "max": 0.3,
+      "unit": "V",
+      "conditions": "IPG = 2 mA"
+    },
+    "ILKG_PG": {
+      "parameter": "Input Leakage Current (PG)",
+      "min": null,
+      "typ": null,
+      "max": 100,
+      "unit": "nA",
+      "conditions": "VPG = 5 V"
+    },
+    "ISS/TR": {
+      "parameter": "SS/TR pin source current",
+      "min": null,
+      "typ": 2.5,
+      "max": null,
+      "unit": "µA",
+      "conditions": null
+    }
+  },
+  "drc_hints": {
+    "vin_abs_max": {
+      "value": 20,
+      "unit": "V"
+    },
+    "vin_operating": {
+      "min": 3,
+      "max": 17,
+      "unit": "V"
+    },
+    "vout": {
+      "min": 0.8,
+      "max": 12,
+      "unit": "V"
+    },
+    "enable_threshold": {
+      "min": 0.9,
+      "unit": "V"
+    },
+    "iq": {
+      "max": 35,
+      "unit": "µA"
+    },
+    "soft_start": {
+      "typ": 2.5,
+      "unit": "µA"
+    },
+    "thermal_shutdown": {
+      "typ": 160,
+      "unit": "°C"
+    },
+    "uvlo": {
+      "min": 2.8,
+      "typ": 2.9,
+      "max": 3.0,
+      "unit": "V"
+    }
+  }
+}

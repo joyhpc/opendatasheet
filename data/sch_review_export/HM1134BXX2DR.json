@@ -1,0 +1,196 @@
+{
+  "_schema": "sch-review-device/1.1",
+  "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
+  "mpn": "HM1134BXX2DR",
+  "manufacturer": "H&M semi",
+  "category": "LDO",
+  "description": "Very High PSRR Low Noise 300mA RF LDO",
+  "packages": {
+    "DFN4(1*1)": {
+      "pin_count": 5,
+      "pins": {
+        "1": {
+          "name": "OUT",
+          "direction": "POWER_OUT",
+          "signal_type": "POWER",
+          "description": "Output pin. Bypass a 1µF ceramic capacitor from this pin to ground",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "EN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Enable control input, active high. Do not leave EN floating",
+          "unused_treatment": "CUSTOM"
+        },
+        "4": {
+          "name": "IN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Supply input pin. Must be closely decoupled to GND with a 1µF or greater ceramic capacitor",
+          "unused_treatment": null
+        },
+        "EP": {
+          "name": "EP",
+          "direction": "PASSIVE",
+          "signal_type": "NONE",
+          "description": "Exposed pad for thermal dissipation",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "absolute_maximum_ratings": {
+    "VIN": {
+      "parameter": "Input Voltage",
+      "min": -0.3,
+      "max": 6.5,
+      "unit": "V",
+      "conditions": null
+    },
+    "TJ": {
+      "parameter": "Operating Junction Temperature",
+      "min": -40,
+      "max": 125,
+      "unit": "°C",
+      "conditions": null
+    },
+    "TSTG": {
+      "parameter": "Storage Temperature",
+      "min": -65,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    }
+  },
+  "electrical_parameters": {
+    "VIN": {
+      "parameter": "Input Voltage Operation Range",
+      "min": 1.4,
+      "typ": null,
+      "max": 6.0,
+      "unit": "V",
+      "conditions": null
+    },
+    "IQ_ON": {
+      "parameter": "DC Supply Quiescent Current",
+      "min": null,
+      "typ": 36,
+      "max": 49,
+      "unit": "µA",
+      "conditions": "Active mode: VEN=VIN"
+    },
+    "IQ_OFF": {
+      "parameter": "DC Supply Shutdown Current",
+      "min": null,
+      "typ": 0.01,
+      "max": 1,
+      "unit": "µA",
+      "conditions": "VEN=0V"
+    },
+    "VOUT": {
+      "parameter": "Regulated Output Voltage",
+      "min": -2,
+      "typ": null,
+      "max": 2,
+      "unit": "%",
+      "conditions": "IOUT=1mA, -40°C<=TA<=85°C"
+    },
+    "VIN<4.4V": {
+      "parameter": "Maximum Output Current",
+      "min": 150,
+      "typ": null,
+      "max": null,
+      "unit": "mA",
+      "conditions": "VOUT < 2V"
+    },
+    "VIN<4.4V_2_8V___VOUT____2V": {
+      "parameter": "Maximum Output Current",
+      "min": 250,
+      "typ": null,
+      "max": null,
+      "unit": "mA",
+      "conditions": "2.8V > VOUT >= 2V"
+    },
+    "VIN<4.4V_VOUT____2_8V": {
+      "parameter": "Maximum Output Current",
+      "min": 300,
+      "typ": null,
+      "max": null,
+      "unit": "mA",
+      "conditions": "VOUT >= 2.8V"
+    },
+    "PSRR": {
+      "parameter": "Power Supply Rejection Ratio",
+      "min": null,
+      "typ": 80,
+      "max": null,
+      "unit": "dB",
+      "conditions": "f=100Hz, COUT=1µF, IOUT=20mA"
+    },
+    "PSRR_f_1kHz__COUT_1_F__IOUT_20mA": {
+      "parameter": "Power Supply Rejection Ratio",
+      "min": null,
+      "typ": 75,
+      "max": null,
+      "unit": "dB",
+      "conditions": "f=1kHz, COUT=1µF, IOUT=20mA"
+    },
+    "PSRR_f_10kHz__COUT_1_F__IOUT_30mA": {
+      "parameter": "Power Supply Rejection Ratio",
+      "min": null,
+      "typ": 65,
+      "max": null,
+      "unit": "dB",
+      "conditions": "f=10kHz, COUT=1µF, IOUT=30mA"
+    },
+    "IEN": {
+      "parameter": "EN Pin Input Current",
+      "min": null,
+      "typ": 0,
+      "max": 0.1,
+      "unit": "µA",
+      "conditions": null
+    }
+  },
+  "drc_hints": {
+    "vin_abs_max": {
+      "value": 6.5,
+      "unit": "V"
+    },
+    "vin_operating": {
+      "min": 1.4,
+      "max": 6.0,
+      "unit": "V"
+    },
+    "vout": {
+      "min": -2,
+      "max": 2,
+      "unit": "%"
+    },
+    "iout_max": {
+      "min": 300,
+      "unit": "mA"
+    },
+    "iq": {
+      "typ": 36,
+      "max": 49,
+      "unit": "µA"
+    },
+    "soft_start": {
+      "typ": 25,
+      "unit": "µs"
+    }
+  }
+}

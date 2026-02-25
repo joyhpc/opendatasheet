@@ -1,0 +1,365 @@
+{
+  "_schema": "sch-review-device/1.1",
+  "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
+  "mpn": "TPS61040",
+  "manufacturer": "Texas Instruments",
+  "category": "Other",
+  "description": "Low-Power DC-DC Boost Converter in SOT-23 and WSON Packages",
+  "packages": {
+    "SOT-23-5": {
+      "pin_count": 5,
+      "pins": {
+        "1": {
+          "name": "SW",
+          "direction": "INPUT",
+          "signal_type": "POWER",
+          "description": "Connect the inductor and the Schottky diode to this pin. This is the switch pin and is connected to the drain of the internal power MOSFET.",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "FB",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "This is the feedback pin of the device. Connect this pin to the external voltage divider to program the desired output voltage.",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "EN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "This is the enable pin of the device. Pulling this pin to ground forces the device into shutdown mode. This pin should not be left floating and needs to be terminated.",
+          "unused_treatment": "CUSTOM"
+        },
+        "5": {
+          "name": "VIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Supply voltage pin",
+          "unused_treatment": null
+        }
+      }
+    },
+    "WSON-6": {
+      "pin_count": 7,
+      "pins": {
+        "6": {
+          "name": "SW",
+          "direction": "INPUT",
+          "signal_type": "POWER",
+          "description": "Connect the inductor and the Schottky diode to this pin. This is the switch pin and is connected to the drain of the internal power MOSFET.",
+          "unused_treatment": null
+        },
+        "1": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "FB",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "This is the feedback pin of the device. Connect this pin to the external voltage divider to program the desired output voltage.",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "EN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "This is the enable pin of the device. Pulling this pin to ground forces the device into shutdown mode. This pin should not be left floating and needs to be terminated.",
+          "unused_treatment": "CUSTOM"
+        },
+        "2": {
+          "name": "VIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Supply voltage pin",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "NC",
+          "direction": "NC",
+          "signal_type": "NONE",
+          "description": "No connection",
+          "unused_treatment": null
+        },
+        "EP": {
+          "name": "ThermalPAD",
+          "direction": "PASSIVE",
+          "signal_type": "POWER",
+          "description": "Solder to ground plane for heat sink",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "absolute_maximum_ratings": {
+    "VIN": {
+      "parameter": "Supply voltage",
+      "min": -0.3,
+      "max": 7.0,
+      "unit": "V",
+      "conditions": null
+    },
+    "VSW": {
+      "parameter": "Switch voltage",
+      "min": null,
+      "max": 30.0,
+      "unit": "V",
+      "conditions": null
+    },
+    "TJ": {
+      "parameter": "Operating junction temperature",
+      "min": -40,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    },
+    "Tstg": {
+      "parameter": "Storage temperature",
+      "min": -65,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    },
+    "V(ESD)": {
+      "parameter": "Electrostatic discharge (HBM)",
+      "min": -2000,
+      "max": 2000,
+      "unit": "V",
+      "conditions": "per ANSI/ESDA/JEDEC JS-001"
+    },
+    "V(ESD)_per_JEDEC_specification_JESD22": {
+      "parameter": "Electrostatic discharge (CDM)",
+      "min": -750,
+      "max": 750,
+      "unit": "V",
+      "conditions": "per JEDEC specification JESD22-C101"
+    }
+  },
+  "electrical_parameters": {
+    "VIN": {
+      "parameter": "Input voltage range",
+      "min": 1.8,
+      "typ": null,
+      "max": 6.0,
+      "unit": "V",
+      "conditions": null
+    },
+    "IQ": {
+      "parameter": "Operating quiescent current",
+      "min": null,
+      "typ": 28.0,
+      "max": 50.0,
+      "unit": "µA",
+      "conditions": "IOUT = 0 mA, not switching, VFB = 1.3 V"
+    },
+    "ISD": {
+      "parameter": "Shutdown current",
+      "min": null,
+      "typ": 0.1,
+      "max": 1.0,
+      "unit": "µA",
+      "conditions": "EN = GND"
+    },
+    "VUVLO": {
+      "parameter": "Undervoltage lockout threshold",
+      "min": null,
+      "typ": 1.5,
+      "max": 1.7,
+      "unit": "V",
+      "conditions": null
+    },
+    "VIH": {
+      "parameter": "EN high level input voltage",
+      "min": 1.3,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": null
+    },
+    "VIL": {
+      "parameter": "EN low level input voltage",
+      "min": null,
+      "typ": null,
+      "max": 0.4,
+      "unit": "V",
+      "conditions": null
+    },
+    "II": {
+      "parameter": "EN input leakage current",
+      "min": null,
+      "typ": 0.1,
+      "max": 1.0,
+      "unit": "µA",
+      "conditions": "EN = GND or VIN"
+    },
+    "Vsw": {
+      "parameter": "Maximum switch voltage",
+      "min": null,
+      "typ": null,
+      "max": 30.0,
+      "unit": "V",
+      "conditions": null
+    },
+    "toff": {
+      "parameter": "Minimum off time",
+      "min": 250.0,
+      "typ": 400.0,
+      "max": 550.0,
+      "unit": "ns",
+      "conditions": null
+    },
+    "ton": {
+      "parameter": "Maximum on time",
+      "min": 4.0,
+      "typ": 6.0,
+      "max": 7.5,
+      "unit": "µs",
+      "conditions": null
+    },
+    "RDS(on)": {
+      "parameter": "MOSFET on-resistance",
+      "min": null,
+      "typ": 600.0,
+      "max": 1000.0,
+      "unit": "mΩ",
+      "conditions": "VIN = 2.4 V; ISW = 200 mA"
+    },
+    "RDS(on)_VIN___2_4_V__ISW___200_mA": {
+      "parameter": "MOSFET on-resistance",
+      "min": null,
+      "typ": 750.0,
+      "max": 1250.0,
+      "unit": "mΩ",
+      "conditions": "VIN = 2.4 V; ISW = 200 mA"
+    },
+    "ILIM": {
+      "parameter": "MOSFET current limit",
+      "min": 215.0,
+      "typ": 250.0,
+      "max": 285.0,
+      "unit": "mA",
+      "conditions": null
+    },
+    "VOUT": {
+      "parameter": "Adjustable output voltage range",
+      "min": null,
+      "typ": null,
+      "max": 28.0,
+      "unit": "V",
+      "conditions": "Minimum value is VIN"
+    },
+    "Vref": {
+      "parameter": "Internal voltage reference",
+      "min": null,
+      "typ": 1.233,
+      "max": null,
+      "unit": "V",
+      "conditions": null
+    },
+    "IFB": {
+      "parameter": "Feedback input bias current",
+      "min": null,
+      "typ": null,
+      "max": 1.0,
+      "unit": "µA",
+      "conditions": "VFB = 1.3 V"
+    },
+    "VFB": {
+      "parameter": "Feedback trip point voltage",
+      "min": 1.208,
+      "typ": 1.233,
+      "max": 1.258,
+      "unit": "V",
+      "conditions": "1.8 V ≤ VIN ≤ 6 V"
+    },
+    "L": {
+      "parameter": "Inductor",
+      "min": 2.2,
+      "typ": 10.0,
+      "max": null,
+      "unit": "µH",
+      "conditions": null
+    },
+    "f": {
+      "parameter": "Switching frequency",
+      "min": null,
+      "typ": null,
+      "max": 1.0,
+      "unit": "MHz",
+      "conditions": null
+    },
+    "CIN": {
+      "parameter": "Input capacitor",
+      "min": null,
+      "typ": 4.7,
+      "max": null,
+      "unit": "µF",
+      "conditions": null
+    },
+    "COUT": {
+      "parameter": "Output capacitor",
+      "min": 1.0,
+      "typ": null,
+      "max": null,
+      "unit": "µF",
+      "conditions": null
+    }
+  },
+  "drc_hints": {
+    "vin_abs_max": {
+      "value": 7.0,
+      "unit": "V"
+    },
+    "vin_operating": {
+      "min": 1.8,
+      "max": 6.0,
+      "unit": "V"
+    },
+    "vref": {
+      "typ": 1.233,
+      "unit": "V"
+    },
+    "vout": {
+      "max": 28.0,
+      "unit": "V"
+    },
+    "enable_threshold": {
+      "min": 1.3,
+      "unit": "V"
+    },
+    "iout_max": {
+      "min": 350.0,
+      "typ": 400.0,
+      "max": 450.0,
+      "unit": "mA"
+    },
+    "iq": {
+      "typ": 28.0,
+      "max": 50.0,
+      "unit": "µA"
+    },
+    "fsw": {
+      "max": 1.0,
+      "unit": "MHz"
+    },
+    "uvlo": {
+      "typ": 1.5,
+      "max": 1.7,
+      "unit": "V"
+    }
+  }
+}

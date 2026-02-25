@@ -1,0 +1,184 @@
+{
+  "_schema": "sch-review-device/1.1",
+  "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
+  "mpn": "TPS564242, TPS564247",
+  "manufacturer": "Texas Instruments",
+  "category": "Buck",
+  "description": "3V to 16V Input, 4A Synchronous Buck Converter in SOT-563 Package with ECO (TPS564242) or FCCM (TPS564247) mode",
+  "packages": {
+    "SOT-563": {
+      "pin_count": 6,
+      "pins": {
+        "1": {
+          "name": "VIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power supply input voltage pin",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "SW",
+          "direction": "OUTPUT",
+          "signal_type": "POWER",
+          "description": "Switching node output to the inductor",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power ground pin",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "AGND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Analog ground pin",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "EN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Enable input pin",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "FB",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Feedback input pin for output voltage regulation",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "absolute_maximum_ratings": {},
+  "electrical_parameters": {
+    "VIN": {
+      "parameter": "Input voltage range",
+      "min": 3,
+      "typ": null,
+      "max": 16,
+      "unit": "V",
+      "conditions": null
+    },
+    "VOUT": {
+      "parameter": "Output voltage range",
+      "min": 0.6,
+      "typ": null,
+      "max": 7,
+      "unit": "V",
+      "conditions": null
+    },
+    "VREF": {
+      "parameter": "Reference voltage",
+      "min": null,
+      "typ": 0.6,
+      "max": null,
+      "unit": "V",
+      "conditions": null
+    },
+    "VREF_ACC": {
+      "parameter": "Reference accuracy",
+      "min": -1.5,
+      "typ": null,
+      "max": 1.5,
+      "unit": "%",
+      "conditions": null
+    },
+    "RDS(ON)H": {
+      "parameter": "High-side FET on-resistance",
+      "min": null,
+      "typ": 28.8,
+      "max": null,
+      "unit": "mΩ",
+      "conditions": null
+    },
+    "RDS(ON)L": {
+      "parameter": "Low-side FET on-resistance",
+      "min": null,
+      "typ": 15.4,
+      "max": null,
+      "unit": "mΩ",
+      "conditions": null
+    },
+    "IQ": {
+      "parameter": "Quiescent current",
+      "min": null,
+      "typ": 120,
+      "max": null,
+      "unit": "µA",
+      "conditions": null
+    },
+    "fSW": {
+      "parameter": "Switching frequency",
+      "min": null,
+      "typ": 1.2,
+      "max": null,
+      "unit": "MHz",
+      "conditions": null
+    },
+    "DMAX": {
+      "parameter": "Maximum duty cycle",
+      "min": null,
+      "typ": null,
+      "max": 95,
+      "unit": "%",
+      "conditions": null
+    },
+    "tSS": {
+      "parameter": "Fixed soft-start time",
+      "min": null,
+      "typ": 1.39,
+      "max": null,
+      "unit": "ms",
+      "conditions": "典型值"
+    },
+    "IOUT": {
+      "parameter": "Continuous output current",
+      "min": null,
+      "typ": null,
+      "max": 4,
+      "unit": "A",
+      "conditions": null
+    }
+  },
+  "drc_hints": {
+    "vin_operating": {
+      "min": 3,
+      "max": 16,
+      "unit": "V"
+    },
+    "vref": {
+      "typ": 0.6,
+      "unit": "V"
+    },
+    "vout": {
+      "min": 0.6,
+      "max": 7,
+      "unit": "V"
+    },
+    "iout_max": {
+      "max": 4,
+      "unit": "A"
+    },
+    "iq": {
+      "typ": 120,
+      "unit": "µA"
+    },
+    "fsw": {
+      "typ": 1.2,
+      "unit": "MHz"
+    },
+    "soft_start": {
+      "typ": 1.39,
+      "unit": "ms"
+    }
+  }
+}

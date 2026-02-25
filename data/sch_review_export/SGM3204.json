@@ -1,6 +1,10 @@
 {
-  "_schema": "sch-review-device/1.0",
+  "_schema": "sch-review-device/1.1",
   "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
   "mpn": "SGM3204",
   "manufacturer": "SGMICRO",
   "category": "Other",
@@ -163,15 +167,22 @@
       "unit": "V"
     },
     "vout": {
-      "min": null,
-      "typ": null,
-      "max": null,
       "unit": "V"
+    },
+    "iout_max": {
+      "min": 200.0,
+      "unit": "mA"
     },
     "iq": {
       "typ": 1.5,
       "max": 1.75,
       "unit": "mA"
+    },
+    "fsw": {
+      "min": 800.0,
+      "typ": 950.0,
+      "max": 1100.0,
+      "unit": "kHz"
     }
   }
 }

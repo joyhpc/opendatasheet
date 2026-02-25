@@ -1,0 +1,250 @@
+{
+  "_schema": "sch-review-device/1.1",
+  "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
+  "mpn": "STM809",
+  "manufacturer": "STMicroelectronics",
+  "category": "Other",
+  "description": "Precision monitoring of 3 V, 3.3 V, and 5 V supply voltages reset circuit",
+  "packages": {
+    "SOT23-3": {
+      "pin_count": 3,
+      "pins": {
+        "1": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "VCC",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Supply voltage",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "RST_N",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "Active-low reset output (push-pull) (also: RST — Active-high reset output (push-pull))",
+          "unused_treatment": null
+        }
+      }
+    },
+    "SOT143-4": {
+      "pin_count": 4,
+      "pins": {
+        "1": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "VCC",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Supply voltage",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "RST_N",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "Active-low reset output (push-pull) (also: RST — Active-high reset output (push-pull))",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "MR_N",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Manual reset input (active-low)",
+          "unused_treatment": "FLOAT"
+        }
+      }
+    }
+  },
+  "absolute_maximum_ratings": {
+    "TSTG": {
+      "parameter": "Storage temperature (VCC off)",
+      "min": -55,
+      "max": 150,
+      "unit": "°C",
+      "conditions": "VCC off"
+    },
+    "TSLD": {
+      "parameter": "Lead solder temperature for 10 seconds",
+      "min": null,
+      "max": 260,
+      "unit": "°C",
+      "conditions": "10 seconds"
+    },
+    "VIO": {
+      "parameter": "Input or output voltage",
+      "min": -0.3,
+      "max": null,
+      "unit": "V",
+      "conditions": "max is VCC + 0.3"
+    },
+    "VCC": {
+      "parameter": "Supply voltage",
+      "min": -0.3,
+      "max": 7.0,
+      "unit": "V",
+      "conditions": null
+    },
+    "IO": {
+      "parameter": "Output current",
+      "min": null,
+      "max": 20,
+      "unit": "mA",
+      "conditions": null
+    },
+    "PD": {
+      "parameter": "Power dissipation",
+      "min": null,
+      "max": 320,
+      "unit": "mW",
+      "conditions": null
+    }
+  },
+  "electrical_parameters": {
+    "VCC": {
+      "parameter": "Operating voltage",
+      "min": 1.2,
+      "typ": null,
+      "max": 5.5,
+      "unit": "V",
+      "conditions": "TA = -40 to +85 °C"
+    },
+    "VCC_TA___0_to__70__C": {
+      "parameter": "Operating voltage",
+      "min": 1.0,
+      "typ": null,
+      "max": 5.5,
+      "unit": "V",
+      "conditions": "TA = 0 to +70 °C"
+    },
+    "ICC": {
+      "parameter": "VCC supply current",
+      "min": null,
+      "typ": 5.5,
+      "max": 10,
+      "unit": "µA",
+      "conditions": "VCC < 3.6 V"
+    },
+    "ICC_VCC___5_5_V": {
+      "parameter": "VCC supply current",
+      "min": null,
+      "typ": 7,
+      "max": 15,
+      "unit": "µA",
+      "conditions": "VCC < 5.5 V"
+    },
+    "VIH": {
+      "parameter": "MR input high voltage",
+      "min": 2.2,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": "VCC > VRST (max), STM8XXL/M"
+    },
+    "VIH_VCC___VRST__max___STM8XXR_S_T": {
+      "parameter": "MR input high voltage",
+      "min": null,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": "VCC > VRST (max), STM8XXR/S/T, min is 0.7 VCC"
+    },
+    "VIL": {
+      "parameter": "MR input low voltage",
+      "min": null,
+      "typ": null,
+      "max": 0.8,
+      "unit": "V",
+      "conditions": "VCC > VRST (max), STM8XXL/M"
+    },
+    "VIL_VCC___VRST__max___STM8XXR_S_T": {
+      "parameter": "MR input low voltage",
+      "min": null,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": "VCC > VRST (max), STM8XXR/S/T, max is 0.25 VCC"
+    },
+    "VOL": {
+      "parameter": "RST output low voltage (active high or low)",
+      "min": null,
+      "typ": null,
+      "max": 0.3,
+      "unit": "V",
+      "conditions": "STM8XXR/S/T only, IOL = 1.2 mA, VCC = VRST (min)"
+    },
+    "VOL_STM8XXL_M_only__IOL___3_2_mA": {
+      "parameter": "RST output low voltage (active high or low)",
+      "min": null,
+      "typ": null,
+      "max": 0.4,
+      "unit": "V",
+      "conditions": "STM8XXL/M only, IOL = 3.2 mA, VCC = VRST (min)"
+    },
+    "VOL_IOL___50__A__VCC___1_0_V": {
+      "parameter": "RST output low voltage",
+      "min": null,
+      "typ": null,
+      "max": 0.3,
+      "unit": "V",
+      "conditions": "IOL = 50 µA; VCC > 1.0 V"
+    },
+    "VOH": {
+      "parameter": "RST output high voltage",
+      "min": null,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": "STM8XXR/S/T only, IOH = 500 µA, min is 0.8 VCC"
+    },
+    "VOH_STM8XXL_M_only__IOH___800__A": {
+      "parameter": "RST output high voltage",
+      "min": null,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": "STM8XXL/M only, IOH = 800 µA, min is 0.8 VCC"
+    },
+    "VOH_IOH___150__A__1_8_V___VCC___VR": {
+      "parameter": "RST output high voltage",
+      "min": null,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": "IOH = 150 µA, 1.8 V < VCC < VRST (min), min is 0.8 VCC"
+    },
+    "VRST": {
+      "parameter": "Reset threshold",
+      "min": 2.55,
+      "typ": null,
+      "max": 2.7,
+      "unit": "V",
+      "conditions": null
+    }
+  },
+  "drc_hints": {
+    "vin_operating": {
+      "min": 1.2,
+      "max": 5.5,
+      "unit": "V"
+    },
+    "enable_threshold": {
+      "min": 2.2,
+      "unit": "V"
+    }
+  }
+}

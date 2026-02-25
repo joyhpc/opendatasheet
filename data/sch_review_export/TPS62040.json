@@ -1,0 +1,464 @@
+{
+  "_schema": "sch-review-device/1.1",
+  "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
+  "mpn": "TPS62040",
+  "manufacturer": "Texas Instruments",
+  "category": "Buck",
+  "description": "1.2 A/1.25 MHz, High-Efficiency Step-Down Converter",
+  "packages": {
+    "DGQ PACKAGE": {
+      "pin_count": 11,
+      "pins": {
+        "1": {
+          "name": "EN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Enable. Pulling EN to ground forces the device into shutdown mode. Pulling EN to VI enables the device. EN should not be left floating and must be terminated.",
+          "unused_treatment": "CUSTOM"
+        },
+        "2": {
+          "name": "VIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Supply voltage input",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "VIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Supply voltage input",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Analog ground",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "FB",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Feedback pin. Connect FB directly to the output if the fixed output voltage version is used. For the adjustable version an external resistor divider is connected to this pin.",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "MODE",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Pulling the MODE pin high allows the device to be forced into fixed frequency operation. Pulling the MODE pin to low enables the power save mode.",
+          "unused_treatment": null
+        },
+        "7": {
+          "name": "SW",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "POWER",
+          "description": "This is the switch pin of the converter and is connected to the drain of the internal power MOSFETs",
+          "unused_treatment": null
+        },
+        "8": {
+          "name": "SW",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "POWER",
+          "description": "This is the switch pin of the converter and is connected to the drain of the internal power MOSFETs",
+          "unused_treatment": null
+        },
+        "9": {
+          "name": "PGND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power ground",
+          "unused_treatment": null
+        },
+        "10": {
+          "name": "PGND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power ground",
+          "unused_treatment": null
+        },
+        "EP": {
+          "name": "PowerPAD",
+          "direction": "PASSIVE",
+          "signal_type": "POWER",
+          "description": "Exposed thermal pad. The PowerPAD must be connected to GND.",
+          "unused_treatment": "GND"
+        }
+      }
+    },
+    "DRC PACKAGE": {
+      "pin_count": 11,
+      "pins": {
+        "1": {
+          "name": "EN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Enable. Pulling EN to ground forces the device into shutdown mode. Pulling EN to VI enables the device. EN should not be left floating and must be terminated.",
+          "unused_treatment": "CUSTOM"
+        },
+        "2": {
+          "name": "VIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Supply voltage input",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "VIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Supply voltage input",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Analog ground",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "FB",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Feedback pin. Connect FB directly to the output if the fixed output voltage version is used. For the adjustable version an external resistor divider is connected to this pin.",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "MODE",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Pulling the MODE pin high allows the device to be forced into fixed frequency operation. Pulling the MODE pin to low enables the power save mode.",
+          "unused_treatment": null
+        },
+        "7": {
+          "name": "SW",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "POWER",
+          "description": "This is the switch pin of the converter and is connected to the drain of the internal power MOSFETs",
+          "unused_treatment": null
+        },
+        "8": {
+          "name": "SW",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "POWER",
+          "description": "This is the switch pin of the converter and is connected to the drain of the internal power MOSFETs",
+          "unused_treatment": null
+        },
+        "9": {
+          "name": "PGND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power ground",
+          "unused_treatment": null
+        },
+        "10": {
+          "name": "PGND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power ground",
+          "unused_treatment": null
+        },
+        "EP": {
+          "name": "PowerPAD",
+          "direction": "PASSIVE",
+          "signal_type": "POWER",
+          "description": "Exposed thermal pad. The PowerPAD must be connected to GND.",
+          "unused_treatment": "GND"
+        }
+      }
+    }
+  },
+  "absolute_maximum_ratings": {
+    "VIN": {
+      "parameter": "Supply voltage",
+      "min": -0.3,
+      "max": 7.0,
+      "unit": "V",
+      "conditions": null
+    },
+    "TJ": {
+      "parameter": "Operating junction temperature range",
+      "min": -40,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    },
+    "Tstg": {
+      "parameter": "Storage temperature range",
+      "min": -65,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    }
+  },
+  "electrical_parameters": {
+    "VI": {
+      "parameter": "Input voltage range",
+      "min": 2.5,
+      "typ": null,
+      "max": 6.0,
+      "unit": "V",
+      "conditions": null
+    },
+    "I(Q)": {
+      "parameter": "Operating quiescent current",
+      "min": null,
+      "typ": 18,
+      "max": 35,
+      "unit": "µA",
+      "conditions": "IO = 0 mA, device is not switching"
+    },
+    "ISD": {
+      "parameter": "Shutdown supply current",
+      "min": null,
+      "typ": 0.1,
+      "max": 1,
+      "unit": "µA",
+      "conditions": "EN = GND"
+    },
+    "VUVLO": {
+      "parameter": "Under-voltage lockout threshold",
+      "min": 1.5,
+      "typ": null,
+      "max": 2.3,
+      "unit": "V",
+      "conditions": null
+    },
+    "VEN": {
+      "parameter": "EN low level input voltage",
+      "min": null,
+      "typ": null,
+      "max": 0.4,
+      "unit": "V",
+      "conditions": null
+    },
+    "IEN": {
+      "parameter": "EN input bias current",
+      "min": null,
+      "typ": 0.01,
+      "max": 1.0,
+      "unit": "µA",
+      "conditions": "EN = GND or VIN"
+    },
+    "V(MODE)": {
+      "parameter": "MODE low level input voltage",
+      "min": null,
+      "typ": null,
+      "max": 0.4,
+      "unit": "V",
+      "conditions": null
+    },
+    "I(MODE)": {
+      "parameter": "MODE input bias current",
+      "min": null,
+      "typ": 0.01,
+      "max": 1.0,
+      "unit": "µA",
+      "conditions": "MODE = GND or VIN"
+    },
+    "rDS(ON)": {
+      "parameter": "P-channel MOSFET on-resistance",
+      "min": null,
+      "typ": 115,
+      "max": 210,
+      "unit": "mΩ",
+      "conditions": "VI = VGS = 3.6 V"
+    },
+    "rDS(ON)_VI___VGS___2_5_V": {
+      "parameter": "N-channel MOSFET on-resistance",
+      "min": null,
+      "typ": 115,
+      "max": 280,
+      "unit": "mΩ",
+      "conditions": "VI = VGS = 2.5 V"
+    },
+    "Ilkg(P)": {
+      "parameter": "P-channel leakage current",
+      "min": null,
+      "typ": null,
+      "max": 1,
+      "unit": "µA",
+      "conditions": "VDS = 6.0 V"
+    },
+    "rDS(ON)_VI___VGS___3_6_V": {
+      "parameter": "N-channel MOSFET on-resistance",
+      "min": null,
+      "typ": 85,
+      "max": 200,
+      "unit": "mΩ",
+      "conditions": "VI = VGS = 3.6 V"
+    },
+    "Ilkg(N)": {
+      "parameter": "N-channel leakage current",
+      "min": null,
+      "typ": null,
+      "max": 1,
+      "unit": "µA",
+      "conditions": "VDS = 6.0 V"
+    },
+    "IL": {
+      "parameter": "P-channel current limit",
+      "min": 1.5,
+      "typ": 1.85,
+      "max": 2.2,
+      "unit": "A",
+      "conditions": "2.5 V < VI < 6.0 V"
+    },
+    "fs": {
+      "parameter": "Oscillator frequency",
+      "min": 1,
+      "typ": 1.25,
+      "max": 1.5,
+      "unit": "MHz",
+      "conditions": "VFB = 0.5 V"
+    },
+    "fs_VFB___0_V": {
+      "parameter": "Oscillator frequency",
+      "min": null,
+      "typ": 625,
+      "max": null,
+      "unit": "kHz",
+      "conditions": "VFB = 0 V"
+    },
+    "VO": {
+      "parameter": "Adjustable output voltage range",
+      "min": 0.7,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": "max is VIN"
+    },
+    "Vref": {
+      "parameter": "Reference voltage",
+      "min": null,
+      "typ": 0.5,
+      "max": null,
+      "unit": "V",
+      "conditions": null
+    },
+    "VFB": {
+      "parameter": "Feedback voltage accuracy",
+      "min": 0,
+      "typ": null,
+      "max": 3,
+      "unit": "%",
+      "conditions": "VI = 2.5 V to 6.0 V; IO = 0 mA"
+    },
+    "VFB_VI___2_5_V_to_6_0_V__0_mA____I": {
+      "parameter": "Feedback voltage accuracy",
+      "min": -3,
+      "typ": null,
+      "max": 3,
+      "unit": "%",
+      "conditions": "VI = 2.5 V to 6.0 V; 0 mA <= IO <= 1.2 A"
+    },
+    "VO_VI___2_5_V_to_6_0_V__IO___0_mA": {
+      "parameter": "Fixed output voltage accuracy",
+      "min": 0,
+      "typ": null,
+      "max": 3,
+      "unit": "%",
+      "conditions": "VI = 2.5 V to 6.0 V; IO = 0 mA"
+    },
+    "VO_VI___2_5_V_to_6_0_V__0_mA____I": {
+      "parameter": "Fixed output voltage accuracy",
+      "min": -3,
+      "typ": null,
+      "max": 3,
+      "unit": "%",
+      "conditions": "VI = 2.5 V to 6.0 V; 0 mA <= IO <= 1.2 A"
+    },
+    "VO_VI___3_6_V_to_6_0_V__IO___0_mA": {
+      "parameter": "Fixed output voltage accuracy",
+      "min": 0,
+      "typ": null,
+      "max": 3,
+      "unit": "%",
+      "conditions": "VI = 3.6 V to 6.0 V; IO = 0 mA"
+    },
+    "VO_VI___3_6_V_to_6_0_V__0_mA____I": {
+      "parameter": "Fixed output voltage accuracy",
+      "min": -3,
+      "typ": null,
+      "max": 3,
+      "unit": "%",
+      "conditions": "VI = 3.6 V to 6.0 V; 0 mA <= IO <= 1.2 A"
+    },
+    "Ilkg(SW)": {
+      "parameter": "Leakage current into SW pin",
+      "min": null,
+      "typ": 0.1,
+      "max": 1,
+      "unit": "µA",
+      "conditions": "VI > VO, 0 V <= VSW <= VI"
+    },
+    "Ilkg(SW)_VI___open__EN___GND__VSW___6_0": {
+      "parameter": "Reverse leakage current into pin SW",
+      "min": null,
+      "typ": 0.1,
+      "max": 1,
+      "unit": "µA",
+      "conditions": "VI = open; EN = GND; VSW = 6.0 V"
+    },
+    "f": {
+      "parameter": "Short circuit switching frequency",
+      "min": null,
+      "typ": 625,
+      "max": null,
+      "unit": "kHz",
+      "conditions": "VFB = 0 V"
+    }
+  },
+  "drc_hints": {
+    "vin_abs_max": {
+      "value": 7.0,
+      "unit": "V"
+    },
+    "vin_operating": {
+      "min": 2.5,
+      "max": 6.0,
+      "unit": "V"
+    },
+    "vref": {
+      "typ": 0.5,
+      "unit": "V"
+    },
+    "enable_threshold": {
+      "min": 1.4,
+      "unit": "V"
+    },
+    "iout_max": {
+      "min": 1.5,
+      "typ": 1.85,
+      "max": 2.2,
+      "unit": "A"
+    },
+    "iq": {
+      "typ": 18,
+      "max": 35,
+      "unit": "µA"
+    },
+    "fsw": {
+      "min": 1,
+      "typ": 1.25,
+      "max": 1.5,
+      "unit": "MHz"
+    },
+    "thermal_shutdown": {
+      "typ": 150,
+      "unit": "°C"
+    },
+    "uvlo": {
+      "min": 1.5,
+      "max": 2.3,
+      "unit": "V"
+    }
+  }
+}

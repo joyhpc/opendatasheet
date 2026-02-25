@@ -1,0 +1,556 @@
+{
+  "_schema": "sch-review-device/1.1",
+  "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
+  "mpn": "TPS51100",
+  "manufacturer": "Texas Instruments",
+  "category": "LDO",
+  "description": "3-A Sink / Source DDR Termination Regulator",
+  "packages": {
+    "HVSSOP-10": {
+      "pin_count": 11,
+      "pins": {
+        "1": {
+          "name": "VDDQSNS",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "VDDQ sense input",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "VLDOIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power supply for the VTT LDO and VTTREF output stage",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "VTT",
+          "direction": "POWER_OUT",
+          "signal_type": "POWER",
+          "description": "Power output for the VTT LDO",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "PGND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power ground output for the VTT LDO",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "VTTSNS",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Voltage sense input for the VTT LDO. Connect to plus terminal of the output capacitor.",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "VTTREF",
+          "direction": "OUTPUT",
+          "signal_type": "ANALOG",
+          "description": "VTT reference output. Connect to GND through 0.1-μF ceramic capacitor.",
+          "unused_treatment": null
+        },
+        "7": {
+          "name": "S3",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "S3 signal input",
+          "unused_treatment": null
+        },
+        "8": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Signal ground. Connect to negative terminal of the output capacitor",
+          "unused_treatment": null
+        },
+        "9": {
+          "name": "S5",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "S5 signal input",
+          "unused_treatment": null
+        },
+        "10": {
+          "name": "VIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "5-V power supply",
+          "unused_treatment": null
+        },
+        "EP": {
+          "name": "PowerPAD",
+          "direction": "PASSIVE",
+          "signal_type": "POWER",
+          "description": "Exposed thermal pad. Connect to GND.",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "absolute_maximum_ratings": {
+    "VIN, VLDOIN, VTTSNS, VDDQSNS, S3, S5": {
+      "parameter": "Input voltage",
+      "min": -0.3,
+      "max": 6,
+      "unit": "V",
+      "conditions": null
+    },
+    "PGND": {
+      "parameter": "Input voltage",
+      "min": -0.3,
+      "max": 0.3,
+      "unit": "V",
+      "conditions": null
+    },
+    "VTT, VTTREF": {
+      "parameter": "Output voltage",
+      "min": -0.3,
+      "max": 6,
+      "unit": "V",
+      "conditions": null
+    },
+    "TA": {
+      "parameter": "Operating ambient temperature",
+      "min": -40,
+      "max": 85,
+      "unit": "°C",
+      "conditions": null
+    },
+    "Tstg": {
+      "parameter": "Storage temperature",
+      "min": -55,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    }
+  },
+  "electrical_parameters": {
+    "VIN": {
+      "parameter": "Supply voltage",
+      "min": 4.75,
+      "typ": null,
+      "max": 5.25,
+      "unit": "V",
+      "conditions": "Recommended Operating Condition"
+    },
+    "S3, S5": {
+      "parameter": "Voltage range",
+      "min": -0.1,
+      "typ": null,
+      "max": 5.25,
+      "unit": "V",
+      "conditions": "Recommended Operating Condition"
+    },
+    "VLDOIN, VDDQSNS, VTT, VTTSNS": {
+      "parameter": "Voltage range",
+      "min": -0.1,
+      "typ": null,
+      "max": 3.6,
+      "unit": "V",
+      "conditions": "Recommended Operating Condition"
+    },
+    "VTTREF": {
+      "parameter": "Voltage range",
+      "min": -0.1,
+      "typ": null,
+      "max": 1.8,
+      "unit": "V",
+      "conditions": "Recommended Operating Condition"
+    },
+    "PGND": {
+      "parameter": "Voltage range",
+      "min": -0.1,
+      "typ": null,
+      "max": 0.1,
+      "unit": "V",
+      "conditions": "Recommended Operating Condition"
+    },
+    "IVIN": {
+      "parameter": "Supply current, VIN",
+      "min": 0.25,
+      "typ": 0.5,
+      "max": 1,
+      "unit": "mA",
+      "conditions": "TA = 25°C, VVIN = 5 V, no load, VS3 = VS5 = 5 V"
+    },
+    "IVINSTB": {
+      "parameter": "Standby current, VIN",
+      "min": 25,
+      "typ": 50,
+      "max": 80,
+      "unit": "µA",
+      "conditions": "TA = 25°C, VVIN = 5 V, no load, VS3 = 0 V, VS5 = 5 V"
+    },
+    "IVINSDN": {
+      "parameter": "Shutdown current, VIN",
+      "min": null,
+      "typ": 0.3,
+      "max": 1,
+      "unit": "µA",
+      "conditions": "TA = 25°C, VVIN = 5 V, no load, VS3 = VS5 = 0 V, VVLDOIN = VVDDQSNS = 0 V"
+    },
+    "IVLDOIN": {
+      "parameter": "Supply current, VLDOIN",
+      "min": 0.7,
+      "typ": 1.2,
+      "max": 2,
+      "unit": "mA",
+      "conditions": "TA = 25°C, VVIN = 5 V, no load, VS3 = VS5 = 5 V"
+    },
+    "IVLDOINSTB": {
+      "parameter": "Standby current, VLDOIN",
+      "min": null,
+      "typ": 6,
+      "max": 10,
+      "unit": "µA",
+      "conditions": "TA = 25°C, VVIN = 5 V, no load, VS3 = 0 V, VS5 = 5 V"
+    },
+    "IVLDOINSDN": {
+      "parameter": "Shutdown current, VLDOIN",
+      "min": null,
+      "typ": 0.3,
+      "max": 1,
+      "unit": "µA",
+      "conditions": "TA = 25°C, VVIN = 5 V, no load, VS3 = VS5 = 0 V"
+    },
+    "IVDDQSNS": {
+      "parameter": "Input current, VDDQSNS",
+      "min": 1,
+      "typ": 3,
+      "max": 5,
+      "unit": "µA",
+      "conditions": "VVIN = 5 V, VS3 = VS5 = 5 V"
+    },
+    "IVTTSNS": {
+      "parameter": "Input current, VTTSNS",
+      "min": -1,
+      "typ": -0.25,
+      "max": 1,
+      "unit": "µA",
+      "conditions": "VVIN = 5 V, VS3 = VS5 = 5 V"
+    },
+    "VVTTSNS": {
+      "parameter": "Output voltage, VTT",
+      "min": null,
+      "typ": 1.25,
+      "max": null,
+      "unit": "V",
+      "conditions": "VVLDOIN = VVDDQSNS = 2.5 V"
+    },
+    "VVTTSNS_VVLDOIN___VVDDQSNS___1_8_V": {
+      "parameter": "Output voltage, VTT",
+      "min": null,
+      "typ": 0.9,
+      "max": null,
+      "unit": "V",
+      "conditions": "VVLDOIN = VVDDQSNS = 1.8 V"
+    },
+    "VVTTSNS_VVLDOIN___VVDDQSNS___1_5_V": {
+      "parameter": "Output voltage, VTT",
+      "min": null,
+      "typ": 0.75,
+      "max": null,
+      "unit": "V",
+      "conditions": "VVLDOIN = VVDDQSNS = 1.5 V"
+    },
+    "VVTTOL25": {
+      "parameter": "Output voltage tolerance to VTTREF, VTT",
+      "min": -20,
+      "typ": null,
+      "max": 20,
+      "unit": "mV",
+      "conditions": "VVLDOIN = VVDDQSNS = 2.5 V, |IVTT| = 0 A"
+    },
+    "VVTTOL25_VVLDOIN___VVDDQSNS___2_5_V___I": {
+      "parameter": "Output voltage tolerance to VTTREF, VTT",
+      "min": -40,
+      "typ": null,
+      "max": 40,
+      "unit": "mV",
+      "conditions": "VVLDOIN = VVDDQSNS = 2.5 V, |IVTT| = 3 A"
+    },
+    "VVTTOL18": {
+      "parameter": "Output voltage tolerance to VTTREF, VTT",
+      "min": -20,
+      "typ": null,
+      "max": 20,
+      "unit": "mV",
+      "conditions": "VVLDOIN = VVDDQSNS = 1.8 V, |IVTT| = 0 A"
+    },
+    "VVTTOL18_VVLDOIN___VVDDQSNS___1_8_V___I": {
+      "parameter": "Output voltage tolerance to VTTREF, VTT",
+      "min": -40,
+      "typ": null,
+      "max": 40,
+      "unit": "mV",
+      "conditions": "VVLDOIN = VVDDQSNS = 1.8 V, |IVTT| = 2 A"
+    },
+    "VVTTOL15": {
+      "parameter": "Output voltage tolerance to VTTREF, VTT",
+      "min": -20,
+      "typ": null,
+      "max": 20,
+      "unit": "mV",
+      "conditions": "VVLDOIN = VVDDQSNS = 1.5 V, |IVTT| = 0 A"
+    },
+    "VVTTOL15_VVLDOIN___VVDDQSNS___1_5_V___I": {
+      "parameter": "Output voltage tolerance to VTTREF, VTT",
+      "min": -30,
+      "typ": null,
+      "max": 30,
+      "unit": "mV",
+      "conditions": "VVLDOIN = VVDDQSNS = 1.5 V, |IVTT| = 1 A"
+    },
+    "IVTTOCLSRC": {
+      "parameter": "Source current limit, VTT",
+      "min": 3,
+      "typ": 3.8,
+      "max": 6,
+      "unit": "A",
+      "conditions": "VTT = (VVDDQSNS / 2) * 0.95, PGOOD = High"
+    },
+    "IVTTOCLSRC_VTT___0_V": {
+      "parameter": "Source current limit, VTT",
+      "min": 1.5,
+      "typ": 2.2,
+      "max": 3,
+      "unit": "A",
+      "conditions": "VTT = 0 V"
+    },
+    "IVTTOCLSNK": {
+      "parameter": "Sink current limit, VTT",
+      "min": 3,
+      "typ": 3.6,
+      "max": 6,
+      "unit": "A",
+      "conditions": "VTT = (VVDDQSNS / 2) * 1.05, PGOOD = High"
+    },
+    "IVTTOCLSNK_VTT___VVDDQ": {
+      "parameter": "Sink current limit, VTT",
+      "min": 1.5,
+      "typ": 2.2,
+      "max": 3,
+      "unit": "A",
+      "conditions": "VTT = VVDDQ"
+    },
+    "IVTTLK": {
+      "parameter": "Leakage current, VTT",
+      "min": -1,
+      "typ": 0.5,
+      "max": 10,
+      "unit": "µA",
+      "conditions": "VTT = (VVDDQSNS / 2) * 1.25 V, TA = 25°C"
+    },
+    "IVTTLK_VS3___0_V__VS5___5_V": {
+      "parameter": "Leakage current, VTT",
+      "min": null,
+      "typ": 5,
+      "max": null,
+      "unit": "µA",
+      "conditions": "VS3 = 0 V, VS5 = 5 V"
+    },
+    "IVTTNSLK": {
+      "parameter": "Leakage current, VTTSNS",
+      "min": -1,
+      "typ": 0.01,
+      "max": 1,
+      "unit": "µA",
+      "conditions": "VTT = (VVDDQSNS / 2) * 1.25 V, TA = 25°C"
+    },
+    "IDSCHRG": {
+      "parameter": "Discharge current, VTT",
+      "min": 10,
+      "typ": 17,
+      "max": null,
+      "unit": "mA",
+      "conditions": "TA = 25°C, VVDDQSNS = 0 V, VS3 = VS5 = 0 V, VVTT = 0.5 V"
+    },
+    "VVTTREF": {
+      "parameter": "Output voltage, VTTREF",
+      "min": null,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": "VVDDQSNS / 2"
+    },
+    "VVTTREFTOL25": {
+      "parameter": "Output voltage tolerance to VDDQSNS/2, VTTREF",
+      "min": -20,
+      "typ": null,
+      "max": 20,
+      "unit": "mV",
+      "conditions": "VVLDOIN = VVDDQSNS = 2.5 V, |IVTTREF| < 10 mA"
+    },
+    "VVTTREFTOL18": {
+      "parameter": "Output voltage tolerance to VDDQSNS/2, VTTREF",
+      "min": -17,
+      "typ": null,
+      "max": 17,
+      "unit": "mV",
+      "conditions": "VVLDOIN = VVDDQSNS = 1.8 V, |IVTTREF| < 10 mA"
+    },
+    "VVTTREFTOL15": {
+      "parameter": "Output voltage tolerance to VDDQSNS/2, VTTREF",
+      "min": -15,
+      "typ": null,
+      "max": 15,
+      "unit": "mV",
+      "conditions": "VVLDOIN = VVDDQSNS = 1.5 V, |IVTTREF| < 10 mA"
+    },
+    "IVTTREFOCL": {
+      "parameter": "Source current limit, VTTREF",
+      "min": 10,
+      "typ": 20,
+      "max": 30,
+      "unit": "mA",
+      "conditions": "VVTTREF = 0 V"
+    },
+    "VVINUV": {
+      "parameter": "UVLO threshold voltage, VIN",
+      "min": 3.4,
+      "typ": 3.7,
+      "max": 4,
+      "unit": "V",
+      "conditions": "Wake up"
+    },
+    "VVINUV_Hysteresis": {
+      "parameter": "UVLO threshold voltage, VIN",
+      "min": 0.15,
+      "typ": 0.25,
+      "max": 0.35,
+      "unit": "V",
+      "conditions": "Hysteresis"
+    },
+    "VIH": {
+      "parameter": "High-level input voltage",
+      "min": 1.6,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": "S3, S5"
+    },
+    "VIL": {
+      "parameter": "Low-level input voltage",
+      "min": null,
+      "typ": null,
+      "max": 0.3,
+      "unit": "V",
+      "conditions": "S3, S5"
+    },
+    "VIHYST": {
+      "parameter": "Hysteresis voltage",
+      "min": null,
+      "typ": 0.2,
+      "max": null,
+      "unit": "V",
+      "conditions": "S3, S5"
+    },
+    "IILEAK": {
+      "parameter": "Logic input leakage current",
+      "min": -1,
+      "typ": null,
+      "max": 1,
+      "unit": "µA",
+      "conditions": "S2, S5, TA = 25°C"
+    },
+    "TSDN": {
+      "parameter": "Thermal shutdown threshold",
+      "min": null,
+      "typ": 160,
+      "max": null,
+      "unit": "°C",
+      "conditions": "Shutdown temperature"
+    },
+    "TSDN_Hysteresis": {
+      "parameter": "Thermal shutdown threshold",
+      "min": null,
+      "typ": 10,
+      "max": null,
+      "unit": "°C",
+      "conditions": "Hysteresis"
+    },
+    "RθJA": {
+      "parameter": "Junction-to-ambient thermal resistance",
+      "min": null,
+      "typ": 60.3,
+      "max": null,
+      "unit": "°C/W",
+      "conditions": "10 PINS DGQ Package"
+    },
+    "RθJC(top)": {
+      "parameter": "Junction-to-case (top) thermal resistance",
+      "min": null,
+      "typ": 63.5,
+      "max": null,
+      "unit": "°C/W",
+      "conditions": "10 PINS DGQ Package"
+    },
+    "RθJB": {
+      "parameter": "Junction-to-board thermal resistance",
+      "min": null,
+      "typ": 51.6,
+      "max": null,
+      "unit": "°C/W",
+      "conditions": "10 PINS DGQ Package"
+    },
+    "ψJT": {
+      "parameter": "Junction-to-top characterization parameter",
+      "min": null,
+      "typ": 1.5,
+      "max": null,
+      "unit": "°C/W",
+      "conditions": "10 PINS DGQ Package"
+    },
+    "ψJB": {
+      "parameter": "Junction-to-board characterization parameter",
+      "min": null,
+      "typ": 22.3,
+      "max": null,
+      "unit": "°C/W",
+      "conditions": "10 PINS DGQ Package"
+    },
+    "RθJC(bot)": {
+      "parameter": "Junction-to-case (bottom) thermal resistance",
+      "min": null,
+      "typ": 9.5,
+      "max": null,
+      "unit": "°C/W",
+      "conditions": "10 PINS DGQ Package"
+    }
+  },
+  "drc_hints": {
+    "vin_abs_max": {
+      "value": 6,
+      "unit": "V"
+    },
+    "vin_operating": {
+      "min": 4.75,
+      "max": 5.25,
+      "unit": "V"
+    },
+    "enable_threshold": {
+      "min": 1.6,
+      "unit": "V"
+    },
+    "iout_max": {
+      "min": 3,
+      "typ": 3.8,
+      "max": 6,
+      "unit": "A"
+    },
+    "thermal_shutdown": {
+      "typ": 160,
+      "unit": "°C"
+    },
+    "thermal_resistance": {
+      "typ": 60.3,
+      "unit": "°C/W"
+    }
+  }
+}

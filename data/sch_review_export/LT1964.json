@@ -1,6 +1,10 @@
 {
-  "_schema": "sch-review-device/1.0",
+  "_schema": "sch-review-device/1.1",
   "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
   "mpn": "LT1964",
   "manufacturer": "Linear Technology",
   "category": "LDO",
@@ -413,20 +417,24 @@
       "value": 20,
       "unit": "V"
     },
+    "vin_operating": {
+      "typ": -1.9,
+      "max": -2.8,
+      "unit": "V"
+    },
     "vout": {
       "min": -4.925,
       "typ": -5,
       "max": -5.075,
       "unit": "V"
     },
-    "iout_operating": {
+    "iout_max": {
       "typ": 350,
-      "max": null,
       "unit": "mA"
     },
     "iq": {
-      "typ": 3,
-      "max": 10,
+      "typ": 30,
+      "max": 70,
       "unit": "µA"
     }
   }

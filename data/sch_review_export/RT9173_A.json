@@ -1,6 +1,10 @@
 {
-  "_schema": "sch-review-device/1.0",
+  "_schema": "sch-review-device/1.1",
   "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
   "mpn": "RT9173/A",
   "manufacturer": "Richtek",
   "category": "LDO",
@@ -354,8 +358,17 @@
     },
     "vin_operating": {
       "min": 1.6,
-      "max": null,
+      "typ": 2.5,
       "unit": "V"
+    },
+    "iout_max": {
+      "min": 3.0,
+      "unit": "A"
+    },
+    "thermal_shutdown": {
+      "min": 125,
+      "typ": 150,
+      "unit": "°C"
     }
   }
 }

@@ -1,0 +1,331 @@
+{
+  "_schema": "sch-review-device/1.1",
+  "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
+  "mpn": "TPS54335A",
+  "manufacturer": "Texas Instruments",
+  "category": "Buck",
+  "description": "4.5-V to 28-V Input, 3-A Output, Synchronous Step-Down DC-DC Converter",
+  "packages": {
+    "SO PowerPAD (8)": {
+      "pin_count": 9,
+      "pins": {
+        "1": {
+          "name": "BOOT",
+          "direction": "OUTPUT",
+          "signal_type": "ANALOG",
+          "description": "A bootstrap capacitor is required between the BOOT and PH pins. If the voltage on this capacitor is below the minimum required by the output device, the output is forced to switch off until the capacitor is refreshed.",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "VIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "This pin is the 4.5- to 28-V input supply voltage.",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "PH",
+          "direction": "OUTPUT",
+          "signal_type": "POWER",
+          "description": "The PH pin is the source of the internal high-side power MOSFET.",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground connection.",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "VSENSE",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "This pin is the inverting node of the transconductance (gm) error amplifier.",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "COMP",
+          "direction": "OUTPUT",
+          "signal_type": "ANALOG",
+          "description": "This pin is the error-amplifier output and the input to the output switch-current comparator. Connect frequency compensation components to this pin.",
+          "unused_treatment": null
+        },
+        "7": {
+          "name": "EN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "This pin is the enable pin. Float the EN pin to enable.",
+          "unused_treatment": "FLOAT"
+        },
+        "8": {
+          "name": "RT",
+          "direction": "OUTPUT",
+          "signal_type": "ANALOG",
+          "description": "Connect the RT pin to an external timing resistor to adjust the switching frequency of the device (TPS54335A and TPS54335-1A). (also: SS — The SS pin is the soft-start and tracking pin. An external capacitor connected to this pin sets the internal voltage-reference rise time (TPS54336A).)",
+          "unused_treatment": null
+        },
+        "EP": {
+          "name": "Exposed Thermal Pad",
+          "direction": "PASSIVE",
+          "signal_type": "POWER",
+          "description": "For proper operation, connect the GND pin to the exposed thermal pad. This thermal pad should be connected to any internal PCB ground plane using multiple vias for good thermal performance.",
+          "unused_treatment": null
+        }
+      }
+    },
+    "VSON (10)": {
+      "pin_count": 11,
+      "pins": {
+        "9": {
+          "name": "BOOT",
+          "direction": "OUTPUT",
+          "signal_type": "ANALOG",
+          "description": "A bootstrap capacitor is required between the BOOT and PH pins. If the voltage on this capacitor is below the minimum required by the output device, the output is forced to switch off until the capacitor is refreshed.",
+          "unused_treatment": null
+        },
+        "1": {
+          "name": "VIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "This pin is the 4.5- to 28-V input supply voltage.",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "PH",
+          "direction": "OUTPUT",
+          "signal_type": "POWER",
+          "description": "The PH pin is the source of the internal high-side power MOSFET.",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground connection.",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground connection.",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground connection.",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "VSENSE",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "This pin is the inverting node of the transconductance (gm) error amplifier.",
+          "unused_treatment": null
+        },
+        "7": {
+          "name": "COMP",
+          "direction": "OUTPUT",
+          "signal_type": "ANALOG",
+          "description": "This pin is the error-amplifier output and the input to the output switch-current comparator. Connect frequency compensation components to this pin.",
+          "unused_treatment": null
+        },
+        "8": {
+          "name": "EN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "This pin is the enable pin. Float the EN pin to enable.",
+          "unused_treatment": "FLOAT"
+        },
+        "10": {
+          "name": "RT",
+          "direction": "OUTPUT",
+          "signal_type": "ANALOG",
+          "description": "Connect the RT pin to an external timing resistor to adjust the switching frequency of the device (TPS54335A and TPS54335-1A). (also: SS — The SS pin is the soft-start and tracking pin. An external capacitor connected to this pin sets the internal voltage-reference rise time (TPS54336A).)",
+          "unused_treatment": null
+        },
+        "EP": {
+          "name": "Exposed Thermal Pad",
+          "direction": "PASSIVE",
+          "signal_type": "POWER",
+          "description": "For proper operation, connect the GND pin to the exposed thermal pad. This thermal pad should be connected to any internal PCB ground plane using multiple vias for good thermal performance.",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "absolute_maximum_ratings": {
+    "VIN": {
+      "parameter": "Input voltage VIN",
+      "min": -0.3,
+      "max": 30,
+      "unit": "V",
+      "conditions": null
+    },
+    "VEN": {
+      "parameter": "Input voltage EN",
+      "min": -0.3,
+      "max": 6,
+      "unit": "V",
+      "conditions": null
+    },
+    "VBOOT": {
+      "parameter": "Input voltage BOOT",
+      "min": -0.3,
+      "max": null,
+      "unit": "V",
+      "conditions": "VPH + 7.5"
+    },
+    "VVSENSE": {
+      "parameter": "Input voltage VSENSE",
+      "min": -0.3,
+      "max": 3,
+      "unit": "V",
+      "conditions": null
+    },
+    "VCOMP": {
+      "parameter": "Input voltage COMP",
+      "min": -0.3,
+      "max": 3,
+      "unit": "V",
+      "conditions": null
+    },
+    "VRT": {
+      "parameter": "Input voltage RT",
+      "min": -0.3,
+      "max": 3,
+      "unit": "V",
+      "conditions": null
+    },
+    "VSS": {
+      "parameter": "Input voltage SS",
+      "min": -0.3,
+      "max": 3,
+      "unit": "V",
+      "conditions": null
+    },
+    "VBOOT-PH": {
+      "parameter": "Output voltage BOOT-PH",
+      "min": 0,
+      "max": 7.5,
+      "unit": "V",
+      "conditions": null
+    },
+    "VPH": {
+      "parameter": "Output voltage PH, 10-ns transient",
+      "min": -3.5,
+      "max": 30,
+      "unit": "V",
+      "conditions": null
+    },
+    "VDIFF": {
+      "parameter": "VDIFF (GND to exposed thermal pad)",
+      "min": -0.2,
+      "max": 0.2,
+      "unit": "V",
+      "conditions": null
+    },
+    "IEN": {
+      "parameter": "Source current EN",
+      "min": 100,
+      "max": 100,
+      "unit": "µA",
+      "conditions": null
+    },
+    "IRT": {
+      "parameter": "Source current RT",
+      "min": 100,
+      "max": 100,
+      "unit": "µA",
+      "conditions": null
+    },
+    "IPH": {
+      "parameter": "Source current PH",
+      "min": null,
+      "max": null,
+      "unit": "A",
+      "conditions": "Current-limit"
+    },
+    "IPH_Current_limit": {
+      "parameter": "Sink current PH",
+      "min": null,
+      "max": null,
+      "unit": "A",
+      "conditions": "Current-limit"
+    },
+    "ICOMP": {
+      "parameter": "Sink current COMP",
+      "min": 200,
+      "max": 200,
+      "unit": "µA",
+      "conditions": null
+    },
+    "TJ": {
+      "parameter": "Operating junction temperature",
+      "min": -40,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    },
+    "Tstg": {
+      "parameter": "Storage temperature",
+      "min": -65,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    },
+    "V(ESD)": {
+      "parameter": "Electrostatic discharge (HBM)",
+      "min": null,
+      "max": 2000,
+      "unit": "V",
+      "conditions": "per ANSI/ESDA/JEDEC JS-001, all pins"
+    },
+    "V(ESD)_per_JEDEC_specification_JESD22": {
+      "parameter": "Electrostatic discharge (CDM)",
+      "min": null,
+      "max": 500,
+      "unit": "V",
+      "conditions": "per JEDEC specification JESD22-C101, all pins"
+    }
+  },
+  "electrical_parameters": {},
+  "drc_hints": {
+    "vin_abs_max": {
+      "value": 30,
+      "unit": "V"
+    },
+    "vref": {
+      "min": 0.7936,
+      "typ": 0.8,
+      "max": 0.8064,
+      "unit": "V"
+    },
+    "enable_threshold": {
+      "typ": 1.21,
+      "max": 1.28,
+      "unit": "V"
+    },
+    "fsw": {
+      "min": 50,
+      "max": 1500,
+      "unit": "kHz"
+    },
+    "soft_start": {
+      "typ": 2.3,
+      "unit": "µA"
+    },
+    "thermal_shutdown": {
+      "min": 160,
+      "typ": 175,
+      "unit": "°C"
+    }
+  }
+}

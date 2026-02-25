@@ -1,6 +1,10 @@
 {
-  "_schema": "sch-review-device/1.0",
+  "_schema": "sch-review-device/1.1",
   "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
   "mpn": "TPS2661x",
   "manufacturer": "Texas Instruments",
   "category": "Other",
@@ -259,10 +263,33 @@
     }
   },
   "drc_hints": {
+    "vin_abs_max": {
+      "value": 32,
+      "unit": "V"
+    },
+    "vin_operating": {
+      "min": -50,
+      "max": 50,
+      "unit": "V"
+    },
+    "enable_threshold": {
+      "max": 1.72,
+      "unit": "V"
+    },
+    "iout_max": {
+      "min": 25,
+      "typ": 32,
+      "max": 40,
+      "unit": "mA"
+    },
     "iq": {
-      "typ": null,
+      "min": -0.1,
       "max": 0.1,
       "unit": "µA"
+    },
+    "thermal_shutdown": {
+      "typ": 160,
+      "unit": "°C"
     }
   }
 }

@@ -1,6 +1,10 @@
 {
-  "_schema": "sch-review-device/1.0",
+  "_schema": "sch-review-device/1.1",
   "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
   "mpn": "NCP349",
   "manufacturer": "ON Semiconductor",
   "category": "Other",
@@ -353,6 +357,21 @@
     "vin_operating": {
       "min": 1.2,
       "max": 28,
+      "unit": "V"
+    },
+    "enable_threshold": {
+      "min": 1.2,
+      "unit": "V"
+    },
+    "iq": {
+      "typ": 70,
+      "max": 150,
+      "unit": "μA"
+    },
+    "uvlo": {
+      "min": 2.8,
+      "typ": 2.95,
+      "max": 3.1,
       "unit": "V"
     }
   }

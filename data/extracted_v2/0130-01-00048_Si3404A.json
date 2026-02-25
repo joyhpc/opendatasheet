@@ -1,0 +1,555 @@
+{
+  "pdf_name": "0130-01-00048_Si3404A.pdf",
+  "model": "gemini-3-flash-preview",
+  "mode": "vision",
+  "is_fpga": false,
+  "checksum": "784d8fd893156534ab0a4ccb8342865a",
+  "total_pages": 23,
+  "vision_pages": [
+    0
+  ],
+  "page_classification": [
+    {
+      "page_num": 0,
+      "text_length": 812,
+      "category": "cover",
+      "matched_patterns": [],
+      "text_preview": "Si3404 数据表 符合 IEEE 802.3（1 类）要求的全集成式 PoE PD 接口和外形紧 凑的高效率开关稳压器 Si3404 集成了以太网供电 (PoE) 型供电设备 (PD) 应用中所需的所有电源管理和控制功能。设备将 通过 10/100/1000BASE-T 以太网连接供应的输入高电压转换成稳定低压输出电源。该设备的优化 体系结构能够最大程度地减小解决方案的体积和外部物料清单 (B"
+    },
+    {
+      "page_num": 1,
+      "text_length": 190,
+      "category": "other",
+      "matched_patterns": [],
+      "text_preview": "1.  订购指南 Table 1.1.  Si3404 订购指南 订购零件号 封装 温度范围（环境） 应用 Si3404-A-GM 4 x 4 毫米 20-QFN 无铅，符合 RoHS 要求 –40 至 85°C 扩展 通用 Si3404 数据表 订购指南 silabs.com | Building a more connected world. Rev. 1.0  |  2 "
+    },
+    {
+      "page_num": 2,
+      "text_length": 1780,
+      "category": "other",
+      "matched_patterns": [],
+      "text_preview": "目录 1.  订购指南. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2 2.  系统概述. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4 2.1  方框图. . . . . . . . . . . . . . . . . . ."
+    },
+    {
+      "page_num": 3,
+      "text_length": 956,
+      "category": "other",
+      "matched_patterns": [],
+      "text_preview": "2.  系统概述 以下方框图可帮助设计人员了解功能块的内部排列及其与外部引脚的关系。方框图后面提供了有关这些集成电路的功能描述。 2.1  方框图 VPOS VNEG DETECTION RDET OSCs fixed: 250kHz adjustable: 100...500kHz CLASS PoE CONTROLLER HOT-SWAP CONTROLLER THERMAL PROTECTI"
+    },
+    {
+      "page_num": 4,
+      "text_length": 859,
+      "category": "other",
+      "matched_patterns": [],
+      "text_preview": "2.2.3  检测和分类 当 Si3404 通过以太网电缆连接到基于 PSE 的以太网交换机时，它需要为 PSE 提供给定电压范围 (2.7–10.1 V) 内的特征电阻（约 25 kΩ）。这称为检 测。PSE 检测到 PD 后，PSE 使电压升高到分类阈值 14.5 V 以上。随后，PD 提供分类电流，向 PSE 告知其要求的功率等级（1 类、2 类、3 类或 4 类）。1 类 PSE 不能为 "
+    },
+    {
+      "page_num": 5,
+      "text_length": 776,
+      "category": "other",
+      "matched_patterns": [],
+      "text_preview": "2.4  HSSW 状态机 HSSW 作为简单的 4 状态状态机进行工作： OFF INRUSH ON OVERLOAD 170 mA 1 2 3 4 5 5 5 S1 S2 S3 S4 10 mA Figure 2.3.  热插拔开关 4 状态机器 转换 1. UVLO 释放。 2. 输入电容充电；PWM 开始软启动保护。 3. 检测到过电流；变为过载状态。 4. 不存在过电流；变回开启状态。 "
+    },
+    {
+      "page_num": 6,
+      "text_length": 1070,
+      "category": "other",
+      "matched_patterns": [],
+      "text_preview": "2.5  直流转换器 直流对直流转换器具有电流控制功能，可更轻松地对电流磁性元件进行补偿并提供更强大的保护。控制器具有以下功能： • 高侧和低侧误差放大器（支持降压和回扫拓扑结构）。 • <1 Ω 内部切换 FET • 过流检测 • 低电流和短路条件下的周波跳跃 SWO EROUT FBL FBH 1.32V gmh 100µS gml 100µS gmpeak 50µS 1.32V IPEAK "
+    },
+    {
+      "page_num": 7,
+      "text_length": 585,
+      "category": "other",
+      "matched_patterns": [],
+      "text_preview": "2.6  可调谐振荡器 可将直流到直流频率固定到 250 kHz 或通过外部电阻器对其进行调谐。 调谐电阻器必须连接在 RFREQ 引脚和 VPOS 之间。如果 RFREQ 短接至 VPOS，则固定频率振荡器将为直流对直流转换器提供时钟 FOSCINT；否则，电阻 器将确定频率，如以下曲线所示。 Figure 2.5.  RFREQ 频率选择器示意图 2.7  调节器 芯片提供 5 V 输出，为 "
+    },
+    {
+      "page_num": 8,
+      "text_length": 702,
+      "category": "other",
+      "matched_patterns": [],
+      "text_preview": "3.  应用示例 下图展示了 Si3404 受电设备 IC 的易用性和简单实用的 BOM。评估套件用户指南中提供了详细的参考设计。另请参阅“AN1130：在隔离和非隔离设计中 使用 Si3406/Si34061/Si34062 PoE+ 和 Si3404 PoE PD 控制器”。 RFREQ RFREQ VPOS VSS CIN VPOS RDET RDET RCLASS RCLASS EROUT"
+    },
+    {
+      "page_num": 9,
+      "text_length": 270,
+      "category": "other",
+      "matched_patterns": [],
+      "text_preview": "RCOMP RFREQ RFREQ VPOS VSS CIN VPOS RDET RDET RCLASS RCLASS EROUT SWO VDD VNEG Si3404 VNEG CDET COUT VOUT VIN VIN RSENSE ISNS HSO VSS VSS C R2 R1 VSS FBH CCOMP D L Figure 3.3.  Si3404 降压应用示意图 Si3404 数"
+    },
+    {
+      "page_num": 10,
+      "text_length": 1070,
+      "category": "other",
+      "matched_patterns": [],
+      "text_preview": "4.  电气规格 Table 4.1.  绝对最大额定值1 类型 说明 最低 最高 单位 电压 VNEG-VSS、VPOS- VNEG、HSO2、RDET3 –0.7 100 V SWO-VSS –0.7 120 V ISNS –1 1 V 低电压引脚：FBH3、EROUT、FBL、RCL2、 RFREQ3 –0.7 6 V 中电压引脚：VT15 –0.7 18 V 峰值电流 VPOS4 –5 5"
+    },
+    {
+      "page_num": 11,
+      "text_length": 1034,
+      "category": "other",
+      "matched_patterns": [],
+      "text_preview": "Table 4.3.  电气特性 符号 参数（条件） 最低 典型值 最高 单位 PoE 协议 检测 VDET 签名范围（在 VPORT） 1.5 — 10.1 V 签名电阻（在 VPORT） 23.75 — 26.25 kΩ 分类 VRESET 分类复位（在 VPORT） 0 — 2.81 V VCLASS 分类电压开（在 VPORT） — — 14.5 V 分类电压关（在 VPORT） 20.5"
+    },
+    {
+      "page_num": 12,
+      "text_length": 632,
+      "category": "other",
+      "matched_patterns": [],
+      "text_preview": "符号 参数（条件） 最低 典型值 最高 单位 VFBREF FBH（参考 VPOS）和 FBL（参考 VSS） 参考电压 1.28 1.32 1.36 V VEROUT 误差输入的工作电压范围 1 — 4 V THICCUP 如果 EROUT 为最大，则输出短路保护 — 1 — ms VISNS_OVC ISNS 上的过流限制电压（参考 VSS） –305 –270 –255 mV TSOFTST"
+    },
+    {
+      "page_num": 13,
+      "text_length": 831,
+      "category": "other",
+      "matched_patterns": [],
+      "text_preview": "5.  引脚描述 ISNS FBH EROUT VDD RDET RCL RFREQ HSO NC VNEG (ePad) 6 7 8 9 10 1 2 3 4 FBL 5 15 14 13 12 11 NC VPOS NC NC NC 20 19 18 17 16 VT15 NC SWO VSS NC Figure 5.1.  Si3404 引脚图 Table 5.1.  引脚描述 Si3404"
+    },
+    {
+      "page_num": 14,
+      "text_length": 513,
+      "category": "other",
+      "matched_patterns": [],
+      "text_preview": "5.1  详细引脚描述 Table 5.2.  等效电路和下垫板描述 引脚名称 详细描述 电路详细信息 ISNS 平均电流感应电阻器输入。该电阻值将设置应用的最大允许电流。过流阈值电压 VISNS_OVC。请注意，该引脚电压低于 VSS。 VSS ISNS FBH 高侧直流到直流反馈输入。不使用时，需要连接到 VPOS。请参见 VFBREF。 VPOS FBH EROUT 直流对直流转换器误差输出"
+    },
+    {
+      "page_num": 15,
+      "text_length": 510,
+      "category": "other",
+      "matched_patterns": [],
+      "text_preview": "引脚名称 详细描述 电路详细信息 RCL 分类电阻器输入。对于 0 类，该引脚可保持悬空。引脚仅在分类时有效。 RCL VNEG REXT + ICLASS - RFREQ 用于调节振荡器频率。 频率与相连电阻值成反比。 RFREQ REXT + IFREQ VPOS - VPOS、 VNEG 主芯片输入功率。请注意，VNEG（芯片底部的 ePad）还会产生热释放。 VPOS VNEG HSO 热"
+    },
+    {
+      "page_num": 16,
+      "text_length": 323,
+      "category": "other",
+      "matched_patterns": [],
+      "text_preview": "引脚名称 详细描述 电路详细信息 VT15 VT15 是辅助变压器偏压绕组产生的可选 15 V 电源的输入。如果偏压绕组电压低于 VT15_MIN，则内部 15 V 粗调调节器将为 11 V 调节器提供电流。Si3404 上并没有 V11，加上只是为了显示内部连接。 VPOS VT15 VSS 6V 6V 6V V11 SWO 直流对直流转换器开关晶体管漏极输出，Vmax = 120 V。 SWO"
+    },
+    {
+      "page_num": 17,
+      "text_length": 161,
+      "category": "other",
+      "matched_patterns": [],
+      "text_preview": "6.  封装 6.1  封装外形：Si3404 下图显示了 Si3404 的封装详细信息。下表列出了图示中尺寸的值。 Figure 6.1.  20 引脚，QFN 封装 Si3404 数据表 封装 silabs.com | Building a more connected world. Rev. 1.0  |  18 "
+    },
+    {
+      "page_num": 18,
+      "text_length": 557,
+      "category": "other",
+      "matched_patterns": [],
+      "text_preview": "Table 6.1.  封装示意图尺寸 尺寸 最低 公称 最高 A 0.80 0.85 0.90 A1 0.00 0.02 0.05 b 0.18 0.25 0.30 D 4.00 BSC。 D2 2.55 2.60 2.65 e 0.50 BSC。 E 4.00 BSC。 E2 2.50 2.60 2.70 L 0.30 0.40 0.50 aaa — — 0.10 bbb — — 0.10 c"
+    },
+    {
+      "page_num": 19,
+      "text_length": 553,
+      "category": "other",
+      "matched_patterns": [],
+      "text_preview": "Table 6.2.  焊盘图案尺寸 尺寸 最低 最高 C1 3.90 4.00 C2 3.90 4.00 E 0.50 BSC X1 0.20 0.30 X2 2.55 2.65 Y1 0.65 0.75 Y2 2.55 2.65 Note: 综述 1. 所有显示的尺寸均以毫米 (mm) 为单位，除非另外说明。 2. 此焊盘图案设计基于 IPC-7351 指导原则。 阻焊层设计 1. 所有金属焊"
+    },
+    {
+      "page_num": 20,
+      "text_length": 303,
+      "category": "other",
+      "matched_patterns": [],
+      "text_preview": "7.  Si3404 顶部标记 Figure 7.1.  Si3404 顶部标记 Table 7.1.  Si3404 顶部标记说明 标记方法： 激光 引脚 1 标记： 周长 = 0.50 mm 直径（左下角） 字体大小： 0.6 点 (24 mil) 线 1 标记格式： 设备部件编号 Si3404 线 2 标记格式： TTTTTT 装配采购订单表中的跟踪代码 线 3 标记格式： YY = 年份 "
+    },
+    {
+      "page_num": 21,
+      "text_length": 1287,
+      "category": "other",
+      "matched_patterns": [],
+      "text_preview": "8.  版本历史 版本 1.0 2018 年 7 月 • 更新了 Figure 2.2 受电设备电压 on page 5。 • 从图中移除 Type 2 信号。 • 更新了 Figure 2.3 热插拔开关 4 状态机器 on page 6。 • 更清晰的状态转换图和改进的转换描述。 • 更新了 2.5.1 平均电流感应、过流、低电流检测和输出短路保护。 • 增加关于输出短路保护的信息。 • 更新"
+    },
+    {
+      "page_num": 22,
+      "text_length": 2658,
+      "category": "other",
+      "matched_patterns": [],
+      "text_preview": "http://www.silabs.com Silicon Laboratories Inc. 400 West Cesar Chavez Austin, TX 78701 USA Smart.  Connected.  Energy-Friendly. Products www.silabs.com/products Quality www.silabs.com/quality Support "
+    }
+  ],
+  "extraction": {
+    "component": {
+      "mpn": "Si3404",
+      "manufacturer": "Silicon Labs",
+      "category": "Interface",
+      "description": "Fully integrated PoE PD interface and high-efficiency switching regulator for IEEE 802.3 (Type 1) applications."
+    },
+    "absolute_maximum_ratings": [
+      {
+        "parameter": "Maximum Voltage",
+        "raw_name": "绝对最大电压",
+        "symbol": null,
+        "min": null,
+        "typ": null,
+        "max": 120,
+        "unit": "V",
+        "conditions": null
+      }
+    ],
+    "electrical_characteristics": [
+      {
+        "parameter": "Operating Temperature Range",
+        "raw_name": "扩展的温度范围",
+        "symbol": null,
+        "min": -40,
+        "typ": null,
+        "max": 85,
+        "unit": "°C",
+        "conditions": null,
+        "device": "Si3404",
+        "temp_range": "full"
+      }
+    ],
+    "pin_definitions": []
+  },
+  "pin_extraction": {
+    "logical_pins": [
+      {
+        "name": "VSS",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Ground connection for the IC",
+        "packages": {
+          "QFN-20": [
+            1,
+            2,
+            3,
+            7,
+            8,
+            9,
+            19,
+            20,
+            "EP"
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "RDET",
+        "direction": "INPUT",
+        "signal_type": "ANALOG",
+        "description": "Input for the PoE detection resistor",
+        "packages": {
+          "QFN-20": [
+            4
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "RCLASS",
+        "direction": "INPUT",
+        "signal_type": "ANALOG",
+        "description": "Input for the PoE classification resistor",
+        "packages": {
+          "QFN-20": [
+            5
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "VNEG",
+        "direction": "POWER_OUT",
+        "signal_type": "POWER",
+        "description": "Switched negative supply rail for the DC-DC converter",
+        "packages": {
+          "QFN-20": [
+            6
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "SWOUT",
+        "direction": "OUTPUT",
+        "signal_type": "POWER",
+        "description": "Drain of the internal power MOSFET",
+        "packages": {
+          "QFN-20": [
+            10
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "ISNS",
+        "direction": "INPUT",
+        "signal_type": "ANALOG",
+        "description": "Current sense input for the DC-DC converter",
+        "packages": {
+          "QFN-20": [
+            11
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "VPOS",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Positive supply rail input",
+        "packages": {
+          "QFN-20": [
+            12
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "VREG",
+        "direction": "POWER_OUT",
+        "signal_type": "POWER",
+        "description": "Internal regulator output for decoupling",
+        "packages": {
+          "QFN-20": [
+            13
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "FB",
+        "direction": "INPUT",
+        "signal_type": "ANALOG",
+        "description": "Feedback input for the DC-DC converter",
+        "packages": {
+          "QFN-20": [
+            14
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "COMP",
+        "direction": "OUTPUT",
+        "signal_type": "ANALOG",
+        "description": "Error amplifier compensation output",
+        "packages": {
+          "QFN-20": [
+            15
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "SS",
+        "direction": "PASSIVE",
+        "signal_type": "ANALOG",
+        "description": "Soft-start timing capacitor connection",
+        "packages": {
+          "QFN-20": [
+            16
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "EROUT",
+        "direction": "OUTPUT",
+        "signal_type": "ANALOG",
+        "description": "Error amplifier output for opto-coupler feedback",
+        "packages": {
+          "QFN-20": [
+            17
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "AUX",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Auxiliary power supply input",
+        "packages": {
+          "QFN-20": [
+            18
+          ]
+        },
+        "unused_treatment": null
+      }
+    ]
+  },
+  "pin_index": {
+    "packages": {
+      "QFN-20": {
+        "1": {
+          "name": "VSS",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground connection for the IC",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "VSS",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground connection for the IC",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "VSS",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground connection for the IC",
+          "unused_treatment": null
+        },
+        "7": {
+          "name": "VSS",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground connection for the IC",
+          "unused_treatment": null
+        },
+        "8": {
+          "name": "VSS",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground connection for the IC",
+          "unused_treatment": null
+        },
+        "9": {
+          "name": "VSS",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground connection for the IC",
+          "unused_treatment": null
+        },
+        "19": {
+          "name": "VSS",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground connection for the IC",
+          "unused_treatment": null
+        },
+        "20": {
+          "name": "VSS",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground connection for the IC",
+          "unused_treatment": null
+        },
+        "EP": {
+          "name": "VSS",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground connection for the IC",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "RDET",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Input for the PoE detection resistor",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "RCLASS",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Input for the PoE classification resistor",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "VNEG",
+          "direction": "POWER_OUT",
+          "signal_type": "POWER",
+          "description": "Switched negative supply rail for the DC-DC converter",
+          "unused_treatment": null
+        },
+        "10": {
+          "name": "SWOUT",
+          "direction": "OUTPUT",
+          "signal_type": "POWER",
+          "description": "Drain of the internal power MOSFET",
+          "unused_treatment": null
+        },
+        "11": {
+          "name": "ISNS",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Current sense input for the DC-DC converter",
+          "unused_treatment": null
+        },
+        "12": {
+          "name": "VPOS",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Positive supply rail input",
+          "unused_treatment": null
+        },
+        "13": {
+          "name": "VREG",
+          "direction": "POWER_OUT",
+          "signal_type": "POWER",
+          "description": "Internal regulator output for decoupling",
+          "unused_treatment": null
+        },
+        "14": {
+          "name": "FB",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Feedback input for the DC-DC converter",
+          "unused_treatment": null
+        },
+        "15": {
+          "name": "COMP",
+          "direction": "OUTPUT",
+          "signal_type": "ANALOG",
+          "description": "Error amplifier compensation output",
+          "unused_treatment": null
+        },
+        "16": {
+          "name": "SS",
+          "direction": "PASSIVE",
+          "signal_type": "ANALOG",
+          "description": "Soft-start timing capacitor connection",
+          "unused_treatment": null
+        },
+        "17": {
+          "name": "EROUT",
+          "direction": "OUTPUT",
+          "signal_type": "ANALOG",
+          "description": "Error amplifier output for opto-coupler feedback",
+          "unused_treatment": null
+        },
+        "18": {
+          "name": "AUX",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Auxiliary power supply input",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "pin_validation": [],
+  "validation": [
+    {
+      "param": "Operating Temperature Range",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    }
+  ],
+  "physics_validation": [],
+  "cross_validation": {
+    "total_extracted_values": 3,
+    "values_found_in_pdf": 3,
+    "values_not_in_pdf": [],
+    "value_coverage_pct": 100.0,
+    "total_params": 2,
+    "params_verified": 2,
+    "params_suspicious": 0,
+    "suspicious_params": []
+  },
+  "timing": {
+    "l0_classify_s": 0.051,
+    "l1a_extract_s": 29.361,
+    "l1b_pin_s": 679.006
+  }
+}

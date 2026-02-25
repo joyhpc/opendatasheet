@@ -1,0 +1,222 @@
+{
+  "_schema": "sch-review-device/1.1",
+  "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
+  "mpn": "ADM7172",
+  "manufacturer": "Analog Devices",
+  "category": "LDO",
+  "description": "6.5 V, 2 A, Ultralow Noise, High PSRR, Fast Transient Response CMOS LDO",
+  "packages": {
+    "8-Lead LFCSP": {
+      "pin_count": 9,
+      "pins": {
+        "1": {
+          "name": "VOUT",
+          "direction": "POWER_OUT",
+          "signal_type": "POWER",
+          "description": "Regulated Output Voltage. Bypass this pin to GND with a 4.7 µF or greater capacitor.",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "VOUT",
+          "direction": "POWER_OUT",
+          "signal_type": "POWER",
+          "description": "Regulated Output Voltage. Bypass this pin to GND with a 4.7 µF or greater capacitor.",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "SENSE",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Sense Input. Connect this pin as close as possible to the load for best load regulation. Use an external resistor divider to set the output voltage higher than the fixed output voltage.",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "SS",
+          "direction": "PASSIVE",
+          "signal_type": "ANALOG",
+          "description": "Soft Start. A 1 nF external capacitor connected to SS results in a 1.0 ms start-up time.",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "EN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Regulator Enable. Drive EN high to turn on the regulator; drive EN low to turn off the regulator.",
+          "unused_treatment": "VCC"
+        },
+        "6": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground.",
+          "unused_treatment": null
+        },
+        "7": {
+          "name": "VIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Regulator Input Supply. Bypass this pin to GND with a 4.7 µF or greater capacitor.",
+          "unused_treatment": null
+        },
+        "8": {
+          "name": "VIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Regulator Input Supply. Bypass this pin to GND with a 4.7 µF or greater capacitor.",
+          "unused_treatment": null
+        },
+        "9": {
+          "name": "EP",
+          "direction": "PASSIVE",
+          "signal_type": "POWER",
+          "description": "Exposed Pad. The exposed pad enhances thermal performance and is electrically connected to GND inside the package. Connect the exposed pad to the ground plane on the board.",
+          "unused_treatment": "GND"
+        }
+      }
+    }
+  },
+  "absolute_maximum_ratings": {
+    "VIN": {
+      "parameter": "Input Voltage",
+      "min": -0.3,
+      "max": 7.0,
+      "unit": "V",
+      "conditions": null
+    },
+    "VOUT": {
+      "parameter": "Output Voltage",
+      "min": -0.3,
+      "max": null,
+      "unit": "V",
+      "conditions": "Max is VIN"
+    },
+    "EN": {
+      "parameter": "Enable Voltage",
+      "min": -0.3,
+      "max": 7.0,
+      "unit": "V",
+      "conditions": null
+    },
+    "SS": {
+      "parameter": "Soft Start Voltage",
+      "min": -0.3,
+      "max": null,
+      "unit": "V",
+      "conditions": "Max is VIN"
+    },
+    "SENSE": {
+      "parameter": "Sense Voltage",
+      "min": -0.3,
+      "max": 7.0,
+      "unit": "V",
+      "conditions": null
+    },
+    "TSTG": {
+      "parameter": "Storage Temperature Range",
+      "min": -65,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    },
+    "TJ": {
+      "parameter": "Operating Junction Temperature Range",
+      "min": -40,
+      "max": 125,
+      "unit": "°C",
+      "conditions": null
+    }
+  },
+  "electrical_parameters": {
+    "VIN": {
+      "parameter": "Input Voltage Range",
+      "min": 2.3,
+      "typ": null,
+      "max": 6.5,
+      "unit": "V",
+      "conditions": null
+    },
+    "ILOAD": {
+      "parameter": "Maximum Load Current",
+      "min": null,
+      "typ": null,
+      "max": 2,
+      "unit": "A",
+      "conditions": null
+    },
+    "PSRR": {
+      "parameter": "Power Supply Rejection Ratio",
+      "min": null,
+      "typ": 60,
+      "max": null,
+      "unit": "dB",
+      "conditions": "at 100 kHz"
+    },
+    "VDO": {
+      "parameter": "Dropout Voltage",
+      "min": null,
+      "typ": 172,
+      "max": null,
+      "unit": "mV",
+      "conditions": "at 2 A load, VOUT = 3 V"
+    },
+    "IGND": {
+      "parameter": "Quiescent Current",
+      "min": null,
+      "typ": 0.7,
+      "max": null,
+      "unit": "mA",
+      "conditions": "with no load"
+    },
+    "θJA": {
+      "parameter": "Junction-to-Ambient Thermal Resistance",
+      "min": null,
+      "typ": 36.4,
+      "max": null,
+      "unit": "°C/W",
+      "conditions": "8-Lead LFCSP"
+    },
+    "θJC": {
+      "parameter": "Junction-to-Case Thermal Resistance",
+      "min": null,
+      "typ": 23.5,
+      "max": null,
+      "unit": "°C/W",
+      "conditions": "8-Lead LFCSP"
+    },
+    "ΨJB": {
+      "parameter": "Junction-to-Board Thermal Characterization Parameter",
+      "min": null,
+      "typ": 13.3,
+      "max": null,
+      "unit": "°C/W",
+      "conditions": "8-Lead LFCSP"
+    }
+  },
+  "drc_hints": {
+    "vin_abs_max": {
+      "value": 7.0,
+      "unit": "V"
+    },
+    "vin_operating": {
+      "min": 2.3,
+      "max": 6.5,
+      "unit": "V"
+    },
+    "iout_max": {
+      "max": 2,
+      "unit": "A"
+    },
+    "iq": {
+      "typ": 0.7,
+      "unit": "mA"
+    },
+    "thermal_resistance": {
+      "typ": 36.4,
+      "unit": "°C/W"
+    }
+  }
+}

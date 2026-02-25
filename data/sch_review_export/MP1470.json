@@ -1,0 +1,297 @@
+{
+  "_schema": "sch-review-device/1.1",
+  "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
+  "mpn": "MP1470",
+  "manufacturer": "Monolithic Power Systems (MPS)",
+  "category": "Buck",
+  "description": "High-Efficiency, 2A, 16V, 500kHz Synchronous, Step-Down Converter In a 6-Pin TSOT 23",
+  "packages": {
+    "TSOT-23-6": {
+      "pin_count": 6,
+      "pins": {
+        "1": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "System Ground. Reference ground of the regulated output voltage.",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "SW",
+          "direction": "OUTPUT",
+          "signal_type": "POWER",
+          "description": "Switch Output. Connect using a wide PCB trace.",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "IN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Supply Voltage. 4.7V-to-16V input rail. Requires decoupling capacitor.",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "FB",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Feedback. Connect to an external resistor divider to set the output voltage.",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "EN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Enable. EN=HIGH to enable the device. Connect to VIN via 100kΩ resistor for auto start-up.",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "BST",
+          "direction": "PASSIVE",
+          "signal_type": "POWER",
+          "description": "Bootstrap. Connect a capacitor between SW and BST pins to form a floating supply.",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "absolute_maximum_ratings": {
+    "VIN": {
+      "parameter": "Supply Voltage",
+      "min": -0.3,
+      "max": 17.0,
+      "unit": "V",
+      "conditions": null
+    },
+    "VSW": {
+      "parameter": "Switch Voltage",
+      "min": -0.3,
+      "max": 17.0,
+      "unit": "V",
+      "conditions": "Normal operation"
+    },
+    "VSW_10ns": {
+      "parameter": "Switch Voltage (Transient)",
+      "min": -5.0,
+      "max": 19.0,
+      "unit": "V",
+      "conditions": "<10ns"
+    },
+    "VBS": {
+      "parameter": "Bootstrap Voltage",
+      "min": null,
+      "max": null,
+      "unit": "V",
+      "conditions": "VSW + 6V"
+    },
+    "VIN_Recommended_Operating_Conditio": {
+      "parameter": "Recommended Supply Voltage",
+      "min": 4.7,
+      "max": 16.0,
+      "unit": "V",
+      "conditions": "Recommended Operating Conditions"
+    },
+    "VOUT": {
+      "parameter": "Recommended Output Voltage",
+      "min": 0.8,
+      "max": null,
+      "unit": "V",
+      "conditions": "0.8V to 0.9VIN"
+    },
+    "TJ": {
+      "parameter": "Recommended Operating Junction Temp",
+      "min": -40.0,
+      "max": 125.0,
+      "unit": "°C",
+      "conditions": "Recommended Operating Conditions"
+    }
+  },
+  "electrical_parameters": {
+    "IIN": {
+      "parameter": "Supply Current (Shutdown)",
+      "min": null,
+      "typ": null,
+      "max": 1.0,
+      "unit": "µA",
+      "conditions": "VEN = 0V"
+    },
+    "Iq": {
+      "parameter": "Supply Current (Quiescent)",
+      "min": null,
+      "typ": 0.83,
+      "max": null,
+      "unit": "mA",
+      "conditions": "VEN = 2V, VFB = 1V"
+    },
+    "HSRDS-ON": {
+      "parameter": "HS Switch-On Resistance",
+      "min": null,
+      "typ": 163.0,
+      "max": null,
+      "unit": "mΩ",
+      "conditions": "VBST-SW=5V"
+    },
+    "LSRDS-ON": {
+      "parameter": "LS Switch-On Resistance",
+      "min": null,
+      "typ": 86.0,
+      "max": null,
+      "unit": "mΩ",
+      "conditions": "VCC=5V"
+    },
+    "SWLKG": {
+      "parameter": "Switch Leakage",
+      "min": null,
+      "typ": null,
+      "max": 1.0,
+      "unit": "µA",
+      "conditions": "VEN = 0V, VSW = 12V"
+    },
+    "ILIMIT": {
+      "parameter": "Current Limit",
+      "min": 3.0,
+      "typ": 3.7,
+      "max": null,
+      "unit": "A",
+      "conditions": null
+    },
+    "fSW": {
+      "parameter": "Oscillator Frequency",
+      "min": 400.0,
+      "typ": 490.0,
+      "max": 580.0,
+      "unit": "kHz",
+      "conditions": "VFB=0.75V"
+    },
+    "DMAX": {
+      "parameter": "Maximum Duty Cycle",
+      "min": 88.0,
+      "typ": 92.0,
+      "max": null,
+      "unit": "%",
+      "conditions": "VFB=700mV"
+    },
+    "TON_MIN": {
+      "parameter": "Minimum On Time",
+      "min": null,
+      "typ": 90.0,
+      "max": null,
+      "unit": "ns",
+      "conditions": null
+    },
+    "VFB": {
+      "parameter": "Feedback Voltage",
+      "min": 776.0,
+      "typ": 800.0,
+      "max": 824.0,
+      "unit": "mV",
+      "conditions": null
+    },
+    "VEN_RISING": {
+      "parameter": "EN Rising Threshold",
+      "min": 1.4,
+      "typ": 1.5,
+      "max": 1.6,
+      "unit": "V",
+      "conditions": null
+    },
+    "VEN_FALLING": {
+      "parameter": "EN Falling Threshold",
+      "min": 1.23,
+      "typ": 1.32,
+      "max": 1.41,
+      "unit": "V",
+      "conditions": null
+    },
+    "IEN": {
+      "parameter": "EN Input Current",
+      "min": null,
+      "typ": 1.6,
+      "max": null,
+      "unit": "µA",
+      "conditions": "VEN=2V"
+    },
+    "IEN_VEN_0": {
+      "parameter": "EN Input Current",
+      "min": null,
+      "typ": 0.0,
+      "max": null,
+      "unit": "µA",
+      "conditions": "VEN=0"
+    },
+    "INUVVth": {
+      "parameter": "VIN Under-Voltage Lockout Threshold—Rising",
+      "min": 3.85,
+      "typ": 4.2,
+      "max": 4.55,
+      "unit": "V",
+      "conditions": null
+    },
+    "INUVHYS": {
+      "parameter": "VIN Under-Voltage Lockout Threshold Hysteresis",
+      "min": null,
+      "typ": 340.0,
+      "max": null,
+      "unit": "mV",
+      "conditions": null
+    },
+    "TSS": {
+      "parameter": "Soft-Start Period",
+      "min": null,
+      "typ": 1.0,
+      "max": null,
+      "unit": "ms",
+      "conditions": null
+    }
+  },
+  "drc_hints": {
+    "vin_abs_max": {
+      "value": 17.0,
+      "unit": "V"
+    },
+    "vref": {
+      "min": 776.0,
+      "typ": 800.0,
+      "max": 824.0,
+      "unit": "mV"
+    },
+    "enable_threshold": {
+      "min": 1.4,
+      "typ": 1.5,
+      "max": 1.6,
+      "unit": "V"
+    },
+    "iout_max": {
+      "min": 3.0,
+      "typ": 3.7,
+      "unit": "A"
+    },
+    "iq": {
+      "typ": 0.83,
+      "unit": "mA"
+    },
+    "fsw": {
+      "min": 400.0,
+      "typ": 490.0,
+      "max": 580.0,
+      "unit": "kHz"
+    },
+    "soft_start": {
+      "typ": 1.0,
+      "unit": "ms"
+    },
+    "thermal_shutdown": {
+      "typ": 150.0,
+      "unit": "°C"
+    },
+    "uvlo": {
+      "min": 3.85,
+      "typ": 4.2,
+      "max": 4.55,
+      "unit": "V"
+    }
+  }
+}

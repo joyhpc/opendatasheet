@@ -1,0 +1,396 @@
+{
+  "_schema": "sch-review-device/1.1",
+  "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
+  "mpn": "A4003C",
+  "manufacturer": "AEROSEMI",
+  "category": "Buck",
+  "description": "3CH Power Management IC with three synchronous buck converters",
+  "packages": {
+    "QFN 3x3-20": {
+      "pin_count": 21,
+      "pins": {
+        "1": {
+          "name": "GND3",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power ground for Channel 3",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "FB3",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Feedback input for Channel 3",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "FB2",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Feedback input for Channel 2",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "GND2",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power ground for Channel 2",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "GND2",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power ground for Channel 2",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "LX2",
+          "direction": "OUTPUT",
+          "signal_type": "POWER",
+          "description": "Switching node for Channel 2",
+          "unused_treatment": null
+        },
+        "7": {
+          "name": "VIN2",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power supply input for Channel 2",
+          "unused_treatment": null
+        },
+        "8": {
+          "name": "EN2",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Enable control input for Channel 2",
+          "unused_treatment": null
+        },
+        "9": {
+          "name": "EN1",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Enable control input for Channel 1",
+          "unused_treatment": null
+        },
+        "10": {
+          "name": "VIN1",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power supply input for Channel 1",
+          "unused_treatment": null
+        },
+        "11": {
+          "name": "LX1",
+          "direction": "OUTPUT",
+          "signal_type": "POWER",
+          "description": "Switching node for Channel 1",
+          "unused_treatment": null
+        },
+        "12": {
+          "name": "GND1",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power ground for Channel 1",
+          "unused_treatment": null
+        },
+        "13": {
+          "name": "GND1",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power ground for Channel 1",
+          "unused_treatment": null
+        },
+        "14": {
+          "name": "FB1",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Feedback input for Channel 1",
+          "unused_treatment": null
+        },
+        "15": {
+          "name": "AGND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Analog ground",
+          "unused_treatment": null
+        },
+        "17": {
+          "name": "AGND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Analog ground",
+          "unused_treatment": null
+        },
+        "16": {
+          "name": "VCC",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Internal control circuit power supply",
+          "unused_treatment": null
+        },
+        "18": {
+          "name": "EN3",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Enable control input for Channel 3",
+          "unused_treatment": null
+        },
+        "19": {
+          "name": "VIN3",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power supply input for Channel 3",
+          "unused_treatment": null
+        },
+        "20": {
+          "name": "LX3",
+          "direction": "OUTPUT",
+          "signal_type": "POWER",
+          "description": "Switching node for Channel 3",
+          "unused_treatment": null
+        },
+        "21": {
+          "name": "EP",
+          "direction": "PASSIVE",
+          "signal_type": "POWER",
+          "description": "Exposed pad for thermal dissipation, connect to ground",
+          "unused_treatment": "GND"
+        }
+      }
+    }
+  },
+  "absolute_maximum_ratings": {
+    "VVIN1, VVIN2, VVIN3, VVCC": {
+      "parameter": "Input Voltage",
+      "min": -0.3,
+      "max": 6.5,
+      "unit": "V",
+      "conditions": null
+    },
+    "VLX1, VLX2, VLX3": {
+      "parameter": "SW Pin Voltage",
+      "min": -0.3,
+      "max": null,
+      "unit": "V",
+      "conditions": "VVINX + 0.3V"
+    },
+    "TA": {
+      "parameter": "Ambient Temperature operating Range",
+      "min": -40,
+      "max": 85,
+      "unit": "°C",
+      "conditions": null
+    },
+    "TJmax": {
+      "parameter": "Maximum Junction Temperature",
+      "min": null,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    },
+    "TS": {
+      "parameter": "Storage Temperature Range",
+      "min": -65,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    }
+  },
+  "electrical_parameters": {
+    "VINX": {
+      "parameter": "Input Voltage",
+      "min": 2.7,
+      "typ": null,
+      "max": 5.5,
+      "unit": "V",
+      "conditions": null
+    },
+    "VVCC": {
+      "parameter": "Control Circuit Input Voltage",
+      "min": 2.7,
+      "typ": null,
+      "max": 5.5,
+      "unit": "V",
+      "conditions": null
+    },
+    "ISD": {
+      "parameter": "Shutdown Supply Current",
+      "min": null,
+      "typ": 0.1,
+      "max": 1,
+      "unit": "uA",
+      "conditions": "VEN = 0V"
+    },
+    "IQ": {
+      "parameter": "Quiescent Current",
+      "min": null,
+      "typ": 40,
+      "max": 80,
+      "unit": "uA",
+      "conditions": "Non-switching, No Load"
+    },
+    "VUVLO": {
+      "parameter": "UVLO Threshold",
+      "min": 1.7,
+      "typ": 1.9,
+      "max": 2.1,
+      "unit": "V",
+      "conditions": "VVIN Rising"
+    },
+    "VUV-HYST": {
+      "parameter": "UVLO Hysteresis",
+      "min": null,
+      "typ": 0.1,
+      "max": null,
+      "unit": "V",
+      "conditions": null
+    },
+    "ILOAD": {
+      "parameter": "Output Load Current",
+      "min": null,
+      "typ": 1,
+      "max": 1.5,
+      "unit": "A",
+      "conditions": null
+    },
+    "VREF": {
+      "parameter": "Reference Voltage",
+      "min": 0.588,
+      "typ": 0.6,
+      "max": 0.612,
+      "unit": "V",
+      "conditions": null
+    },
+    "FSW": {
+      "parameter": "Switching Frequency",
+      "min": 1,
+      "typ": 1.5,
+      "max": 2,
+      "unit": "MHz",
+      "conditions": "ILOAD = 100mA"
+    },
+    "FSW-SHORT": {
+      "parameter": "Short Frequency",
+      "min": null,
+      "typ": 300,
+      "max": null,
+      "unit": "KHz",
+      "conditions": "VOUT = 0V"
+    },
+    "ILIM-P": {
+      "parameter": "PMOS Current Limit",
+      "min": 1.7,
+      "typ": 2.2,
+      "max": null,
+      "unit": "A",
+      "conditions": null
+    },
+    "RDS(ON)-P": {
+      "parameter": "PMOS On-Resistance",
+      "min": null,
+      "typ": 120,
+      "max": null,
+      "unit": "mΩ",
+      "conditions": "ILOAD = 100mA"
+    },
+    "RDS(ON)-N": {
+      "parameter": "NMOS On-Resistance",
+      "min": null,
+      "typ": 110,
+      "max": null,
+      "unit": "mΩ",
+      "conditions": "ILOAD = 100mA"
+    },
+    "VEN-L": {
+      "parameter": "Enable Pin Input Low Voltage",
+      "min": null,
+      "typ": null,
+      "max": 0.4,
+      "unit": "V",
+      "conditions": null
+    },
+    "VEN-H": {
+      "parameter": "Enable Pin Input High Voltage",
+      "min": 2,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": null
+    },
+    "DMAX": {
+      "parameter": "Maximum Duty Cycle",
+      "min": null,
+      "typ": 100,
+      "max": null,
+      "unit": "%",
+      "conditions": null
+    },
+    "TOTP": {
+      "parameter": "Thermal Shutdown Threshold",
+      "min": null,
+      "typ": 165,
+      "max": null,
+      "unit": "°C",
+      "conditions": null
+    },
+    "THYST": {
+      "parameter": "Thermal Shutdown Hysteresis",
+      "min": null,
+      "typ": 30,
+      "max": null,
+      "unit": "°C",
+      "conditions": null
+    }
+  },
+  "drc_hints": {
+    "vin_abs_max": {
+      "value": 6.5,
+      "unit": "V"
+    },
+    "vin_operating": {
+      "min": 2.7,
+      "max": 5.5,
+      "unit": "V"
+    },
+    "vref": {
+      "min": 0.588,
+      "typ": 0.6,
+      "max": 0.612,
+      "unit": "V"
+    },
+    "enable_threshold": {
+      "max": 0.4,
+      "unit": "V"
+    },
+    "iout_max": {
+      "typ": 1,
+      "max": 1.5,
+      "unit": "A"
+    },
+    "iq": {
+      "typ": 40,
+      "max": 80,
+      "unit": "uA"
+    },
+    "fsw": {
+      "min": 1,
+      "typ": 1.5,
+      "max": 2,
+      "unit": "MHz"
+    },
+    "thermal_shutdown": {
+      "typ": 165,
+      "unit": "°C"
+    },
+    "uvlo": {
+      "min": 1.7,
+      "typ": 1.9,
+      "max": 2.1,
+      "unit": "V"
+    }
+  }
+}

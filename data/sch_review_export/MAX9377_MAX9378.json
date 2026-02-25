@@ -1,6 +1,10 @@
 {
-  "_schema": "sch-review-device/1.0",
+  "_schema": "sch-review-device/1.1",
   "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
   "mpn": "MAX9377/MAX9378",
   "manufacturer": "Maxim",
   "category": "Interface",
@@ -545,5 +549,19 @@
       "conditions": "fIN = 1.34GHz (Note 7), SEL = 0"
     }
   },
-  "drc_hints": {}
+  "drc_hints": {
+    "vin_abs_max": {
+      "value": 4.1,
+      "unit": "V"
+    },
+    "enable_threshold": {
+      "min": 2.0,
+      "unit": "V"
+    },
+    "fsw": {
+      "min": 2.0,
+      "typ": 2.5,
+      "unit": "GHz"
+    }
+  }
 }

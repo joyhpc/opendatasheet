@@ -1,6 +1,10 @@
 {
-  "_schema": "sch-review-device/1.0",
+  "_schema": "sch-review-device/1.1",
   "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
   "mpn": "AD9845B",
   "manufacturer": "Analog Devices",
   "category": "Other",
@@ -503,5 +507,14 @@
       "conditions": "Measured using a 4-layer PCB"
     }
   },
-  "drc_hints": {}
+  "drc_hints": {
+    "vin_abs_max": {
+      "value": 3.9,
+      "unit": "V"
+    },
+    "thermal_resistance": {
+      "typ": 56,
+      "unit": "°C/W"
+    }
+  }
 }

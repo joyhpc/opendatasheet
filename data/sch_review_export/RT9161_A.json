@@ -1,6 +1,10 @@
 {
-  "_schema": "sch-review-device/1.0",
+  "_schema": "sch-review-device/1.1",
   "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
   "mpn": "RT9161/A",
   "manufacturer": "Richtek",
   "category": "LDO",
@@ -312,9 +316,18 @@
     }
   },
   "drc_hints": {
-    "iout_operating": {
+    "vin_abs_max": {
+      "value": 14,
+      "unit": "V"
+    },
+    "vout": {
+      "min": -2,
+      "max": 2,
+      "unit": "%"
+    },
+    "iout_max": {
+      "min": 350,
       "typ": 580,
-      "max": null,
       "unit": "mA"
     }
   }

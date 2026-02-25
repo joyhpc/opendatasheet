@@ -1,0 +1,315 @@
+{
+  "_schema": "sch-review-device/1.1",
+  "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
+  "mpn": "TPS54A24",
+  "manufacturer": "Texas Instruments",
+  "category": "Buck",
+  "description": "4.5V to 17V Input, 10A Synchronous SWIFT™ Step-Down Converter",
+  "packages": {
+    "WQFN-24": {
+      "pin_count": 25,
+      "pins": {
+        "1": {
+          "name": "AGND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground of internal analog circuitry. AGND must be connected to PGND for proper operation.",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "VIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Input voltage supply pin. Power for the internal circuit and the connection to drain of high-side MOSFET.",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "VIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Input voltage supply pin. Power for the internal circuit and the connection to drain of high-side MOSFET.",
+          "unused_treatment": null
+        },
+        "16": {
+          "name": "VIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Input voltage supply pin. Power for the internal circuit and the connection to drain of high-side MOSFET.",
+          "unused_treatment": null
+        },
+        "17": {
+          "name": "VIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Input voltage supply pin. Power for the internal circuit and the connection to drain of high-side MOSFET.",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "PGND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground return for low-side power MOSFET and its drivers.",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "PGND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground return for low-side power MOSFET and its drivers.",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "PGND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground return for low-side power MOSFET and its drivers.",
+          "unused_treatment": null
+        },
+        "7": {
+          "name": "PGND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground return for low-side power MOSFET and its drivers.",
+          "unused_treatment": null
+        },
+        "12": {
+          "name": "PGND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground return for low-side power MOSFET and its drivers.",
+          "unused_treatment": null
+        },
+        "13": {
+          "name": "PGND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground return for low-side power MOSFET and its drivers.",
+          "unused_treatment": null
+        },
+        "14": {
+          "name": "PGND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground return for low-side power MOSFET and its drivers.",
+          "unused_treatment": null
+        },
+        "15": {
+          "name": "PGND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground return for low-side power MOSFET and its drivers.",
+          "unused_treatment": null
+        },
+        "8": {
+          "name": "SW",
+          "direction": "OUTPUT",
+          "signal_type": "POWER",
+          "description": "Switching node. Connected to the source of the high-side MOSFET and drain of the low-side MOSFET.",
+          "unused_treatment": null
+        },
+        "9": {
+          "name": "SW",
+          "direction": "OUTPUT",
+          "signal_type": "POWER",
+          "description": "Switching node. Connected to the source of the high-side MOSFET and drain of the low-side MOSFET.",
+          "unused_treatment": null
+        },
+        "10": {
+          "name": "SW",
+          "direction": "OUTPUT",
+          "signal_type": "POWER",
+          "description": "Switching node. Connected to the source of the high-side MOSFET and drain of the low-side MOSFET.",
+          "unused_treatment": null
+        },
+        "11": {
+          "name": "SW",
+          "direction": "OUTPUT",
+          "signal_type": "POWER",
+          "description": "Switching node. Connected to the source of the high-side MOSFET and drain of the low-side MOSFET.",
+          "unused_treatment": null
+        },
+        "18": {
+          "name": "BOOT",
+          "direction": "INPUT",
+          "signal_type": "POWER",
+          "description": "Floating supply voltage for high-side MOSFET gate drive circuit. Connect a 0.1-μF ceramic capacitor between BOOT and SW pins.",
+          "unused_treatment": null
+        },
+        "19": {
+          "name": "PGOOD",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "Open-drain power good indicator. It is asserted low if output voltage is outside if the PGOOD thresholds.",
+          "unused_treatment": null
+        },
+        "20": {
+          "name": "EN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Enable pin. Float or pull high to enable the device. Connect a resistor divider to this pin to implement adjustable UVLO.",
+          "unused_treatment": "FLOAT"
+        },
+        "21": {
+          "name": "SS/TRK",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Soft-start and tracking pin. Connecting an external capacitor sets the soft-start time.",
+          "unused_treatment": null
+        },
+        "22": {
+          "name": "COMP",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Error amplifier output and input to the PWM modulator. Connect loop compensation to this pin.",
+          "unused_treatment": null
+        },
+        "23": {
+          "name": "FB",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Converter feedback input. Connect to the output voltage with a resistor divider.",
+          "unused_treatment": null
+        },
+        "24": {
+          "name": "RT/CLK",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Switching frequency setting pin. In RT mode, an external timing resistor adjusts the switching frequency. In CLK mode, the device synchronizes to an external clock input.",
+          "unused_treatment": null
+        },
+        "EP": {
+          "name": "Thermal PAD",
+          "direction": "PASSIVE",
+          "signal_type": "POWER",
+          "description": "Exposed thermal pad. Connect to PGND pins and to internal ground planes using multiple vias for good thermal performance.",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "absolute_maximum_ratings": {
+    "VIN": {
+      "parameter": "Input voltage",
+      "min": -0.3,
+      "max": 19,
+      "unit": "V",
+      "conditions": null
+    },
+    "BOOT": {
+      "parameter": "Bootstrap voltage (10 ns transient)",
+      "min": -0.3,
+      "max": 30,
+      "unit": "V",
+      "conditions": null
+    },
+    "BOOT-SW": {
+      "parameter": "Bootstrap voltage relative to SW",
+      "min": -0.3,
+      "max": 7,
+      "unit": "V",
+      "conditions": null
+    },
+    "SW": {
+      "parameter": "Switch node voltage (10 ns transient)",
+      "min": -3,
+      "max": 23,
+      "unit": "V",
+      "conditions": null
+    },
+    "TJ": {
+      "parameter": "Operating junction temperature",
+      "min": -40,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    },
+    "TSTG": {
+      "parameter": "Storage temperature",
+      "min": -55,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    }
+  },
+  "electrical_parameters": {
+    "VFB": {
+      "parameter": "Regulated FB voltage",
+      "min": 596,
+      "typ": 600,
+      "max": 604,
+      "unit": "mV",
+      "conditions": "TJ = 25°C"
+    },
+    "VFB_TJ____40_C_to_150_C": {
+      "parameter": "Regulated FB voltage",
+      "min": 595,
+      "typ": 600,
+      "max": 605,
+      "unit": "mV",
+      "conditions": "TJ = -40°C to 150°C"
+    },
+    "VIH": {
+      "parameter": "Logic high input voltage",
+      "min": 2,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": "RT/CLK pin"
+    },
+    "VIL": {
+      "parameter": "Logic low input voltage",
+      "min": null,
+      "typ": null,
+      "max": 0.8,
+      "unit": "V",
+      "conditions": "RT/CLK pin"
+    },
+    "TTRIP": {
+      "parameter": "Thermal protection trip point",
+      "min": null,
+      "typ": 170,
+      "max": null,
+      "unit": "°C",
+      "conditions": "Temperature rising"
+    },
+    "THYST": {
+      "parameter": "Thermal protection hysteresis",
+      "min": null,
+      "typ": 15,
+      "max": null,
+      "unit": "°C",
+      "conditions": null
+    }
+  },
+  "drc_hints": {
+    "vin_abs_max": {
+      "value": 19,
+      "unit": "V"
+    },
+    "vref": {
+      "min": 596,
+      "typ": 600,
+      "max": 604,
+      "unit": "mV"
+    },
+    "enable_threshold": {
+      "min": 2,
+      "unit": "V"
+    },
+    "iout_max": {
+      "min": 13.4,
+      "typ": 14.6,
+      "max": 15.8,
+      "unit": "A"
+    },
+    "uvlo": {
+      "typ": 4.1,
+      "max": 4.3,
+      "unit": "V"
+    }
+  }
+}

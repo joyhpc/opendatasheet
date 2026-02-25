@@ -1,6 +1,10 @@
 {
-  "_schema": "sch-review-device/1.0",
+  "_schema": "sch-review-device/1.1",
   "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
   "mpn": "LM5068",
   "manufacturer": "Texas Instruments",
   "category": "Other",
@@ -386,5 +390,19 @@
       "conditions": null
     }
   },
-  "drc_hints": {}
+  "drc_hints": {
+    "vin_abs_max": {
+      "value": 100,
+      "unit": "V"
+    },
+    "vin_operating": {
+      "min": 10,
+      "max": 90,
+      "unit": "V"
+    },
+    "iout_max": {
+      "typ": 50,
+      "unit": "mV"
+    }
+  }
 }

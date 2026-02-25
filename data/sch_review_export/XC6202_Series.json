@@ -1,0 +1,534 @@
+{
+  "_schema": "sch-review-device/1.1",
+  "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
+  "mpn": "XC6202 Series",
+  "manufacturer": "TOREX",
+  "category": "LDO",
+  "description": "High Voltage Positive Voltage Regulators",
+  "packages": {
+    "SOT-23": {
+      "pin_count": 3,
+      "pins": {
+        "3": {
+          "name": "VIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power supply input",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "VOUT",
+          "direction": "POWER_OUT",
+          "signal_type": "POWER",
+          "description": "Regulated voltage output",
+          "unused_treatment": null
+        },
+        "1": {
+          "name": "VSS",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground",
+          "unused_treatment": null
+        }
+      }
+    },
+    "SOT-89": {
+      "pin_count": 3,
+      "pins": {
+        "2": {
+          "name": "VIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power supply input",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "VOUT",
+          "direction": "POWER_OUT",
+          "signal_type": "POWER",
+          "description": "Regulated voltage output",
+          "unused_treatment": null
+        },
+        "1": {
+          "name": "VSS",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground",
+          "unused_treatment": null
+        }
+      }
+    },
+    "SOT-223": {
+      "pin_count": 4,
+      "pins": {
+        "1": {
+          "name": "VIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power supply input",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "VOUT",
+          "direction": "POWER_OUT",
+          "signal_type": "POWER",
+          "description": "Regulated voltage output",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "VSS",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "VSS",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground",
+          "unused_treatment": null
+        }
+      }
+    },
+    "USP-6B": {
+      "pin_count": 7,
+      "pins": {
+        "6": {
+          "name": "VIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power supply input",
+          "unused_treatment": null
+        },
+        "1": {
+          "name": "VOUT",
+          "direction": "POWER_OUT",
+          "signal_type": "POWER",
+          "description": "Regulated voltage output",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "VSS",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "NC",
+          "direction": "NC",
+          "signal_type": "NONE",
+          "description": "No internal connection",
+          "unused_treatment": "FLOAT"
+        },
+        "4": {
+          "name": "NC",
+          "direction": "NC",
+          "signal_type": "NONE",
+          "description": "No internal connection",
+          "unused_treatment": "FLOAT"
+        },
+        "5": {
+          "name": "NC",
+          "direction": "NC",
+          "signal_type": "NONE",
+          "description": "No internal connection",
+          "unused_treatment": "FLOAT"
+        },
+        "EP": {
+          "name": "EP",
+          "direction": "PASSIVE",
+          "signal_type": "POWER",
+          "description": "Exposed thermal pad; connect to VSS",
+          "unused_treatment": "GND"
+        }
+      }
+    }
+  },
+  "absolute_maximum_ratings": {
+    "VIN": {
+      "parameter": "Input Voltage",
+      "min": null,
+      "max": 22.0,
+      "unit": "V",
+      "conditions": "Ta = 25°C"
+    },
+    "IOUT": {
+      "parameter": "Output Current",
+      "min": null,
+      "max": 500,
+      "unit": "mA",
+      "conditions": "Ta = 25°C"
+    },
+    "VOUT": {
+      "parameter": "Output Voltage",
+      "min": -0.3,
+      "max": null,
+      "unit": "V",
+      "conditions": "Relative to VSS, Ta = 25°C"
+    },
+    "Pd": {
+      "parameter": "Power Dissipation (SOT-23)",
+      "min": null,
+      "max": 250,
+      "unit": "mW",
+      "conditions": "Ta = 25°C"
+    },
+    "Pd_40mm_x_40mm_Standard_board__Ta": {
+      "parameter": "Power Dissipation (SOT-223, Standard board)",
+      "min": null,
+      "max": 1500,
+      "unit": "mW",
+      "conditions": "40mm x 40mm Standard board, Ta = 25°C"
+    },
+    "Pd_Ta___25_C": {
+      "parameter": "Power Dissipation (SOT-223)",
+      "min": null,
+      "max": 300,
+      "unit": "mW",
+      "conditions": "Ta = 25°C"
+    },
+    "Topr": {
+      "parameter": "Operating Ambient Temperature",
+      "min": -40,
+      "max": 85,
+      "unit": "°C",
+      "conditions": null
+    },
+    "Tstg": {
+      "parameter": "Storage Temperature",
+      "min": -55,
+      "max": 125,
+      "unit": "°C",
+      "conditions": null
+    }
+  },
+  "electrical_parameters": {
+    "VOUT(E)": {
+      "parameter": "Output Voltage",
+      "min": 1.764,
+      "typ": 1.8,
+      "max": 1.836,
+      "unit": "V",
+      "conditions": "VIN=2.8V, IOUT=30mA"
+    },
+    "IOUTmax": {
+      "parameter": "Maximum Output Current",
+      "min": 60,
+      "typ": null,
+      "max": null,
+      "unit": "mA",
+      "conditions": "VIN=2.8V, VOUT >= VOUT(E) x 0.9"
+    },
+    "ΔVOUT": {
+      "parameter": "Load Regulation",
+      "min": null,
+      "typ": 10,
+      "max": 80,
+      "unit": "mV",
+      "conditions": "VIN=2.8V, 1mA <= IOUT <= 60mA"
+    },
+    "Vdif1": {
+      "parameter": "Dropout Voltage 1",
+      "min": null,
+      "typ": 340,
+      "max": 470,
+      "unit": "mV",
+      "conditions": "IOUT=30mA"
+    },
+    "Vdif2": {
+      "parameter": "Dropout Voltage 2",
+      "min": null,
+      "typ": 1000,
+      "max": 1500,
+      "unit": "mV",
+      "conditions": "IOUT=100mA"
+    },
+    "ISS": {
+      "parameter": "Supply Current",
+      "min": null,
+      "typ": 10,
+      "max": 24,
+      "unit": "μA",
+      "conditions": "VIN=2.8V"
+    },
+    "ΔVOUT / (ΔVIN · VOUT)": {
+      "parameter": "Line Regulation",
+      "min": null,
+      "typ": 0.01,
+      "max": 0.2,
+      "unit": "%/V",
+      "conditions": "IOUT=1mA, 2.8V <= VIN <= 20V"
+    },
+    "VIN": {
+      "parameter": "Input Voltage",
+      "min": null,
+      "typ": null,
+      "max": 20,
+      "unit": "V",
+      "conditions": null
+    },
+    "ΔVOUT / (ΔTa · VOUT)": {
+      "parameter": "Output Voltage Temperature Characteristics",
+      "min": null,
+      "typ": 100,
+      "max": null,
+      "unit": "ppm/°C",
+      "conditions": "IOUT=30mA, -40°C <= Ta <= 85°C"
+    },
+    "Ishort": {
+      "parameter": "Short-circuit Current",
+      "min": null,
+      "typ": 40,
+      "max": null,
+      "unit": "mA",
+      "conditions": "VIN=3.8V"
+    },
+    "VOUT(E)_VIN_4_3V__IOUT_30mA": {
+      "parameter": "Output Voltage",
+      "min": 3.234,
+      "typ": 3.3,
+      "max": 3.366,
+      "unit": "V",
+      "conditions": "VIN=4.3V, IOUT=30mA"
+    },
+    "IOUTmax_VIN_4_3V__VOUT____VOUT_E__x_0": {
+      "parameter": "Maximum Output Current",
+      "min": 150,
+      "typ": null,
+      "max": null,
+      "unit": "mA",
+      "conditions": "VIN=4.3V, VOUT >= VOUT(E) x 0.9"
+    },
+    "ΔVOUT_VIN_4_3V__1mA____IOUT____100mA": {
+      "parameter": "Load Regulation",
+      "min": null,
+      "typ": 25,
+      "max": 90,
+      "unit": "mV",
+      "conditions": "VIN=4.3V, 1mA <= IOUT <= 100mA"
+    },
+    "Vdif1_IOUT_30mA": {
+      "parameter": "Dropout Voltage 1",
+      "min": null,
+      "typ": 80,
+      "max": 150,
+      "unit": "mV",
+      "conditions": "IOUT=30mA"
+    },
+    "Vdif2_IOUT_100mA": {
+      "parameter": "Dropout Voltage 2",
+      "min": null,
+      "typ": 280,
+      "max": 380,
+      "unit": "mV",
+      "conditions": "IOUT=100mA"
+    },
+    "ISS_VIN_4_3V": {
+      "parameter": "Supply Current",
+      "min": null,
+      "typ": 10,
+      "max": 24,
+      "unit": "μA",
+      "conditions": "VIN=4.3V"
+    },
+    "ΔVOUT / (ΔVIN · VOUT)_IOUT_1mA__4_3V____VIN____20V": {
+      "parameter": "Line Regulation",
+      "min": null,
+      "typ": 0.01,
+      "max": 0.2,
+      "unit": "%/V",
+      "conditions": "IOUT=1mA, 4.3V <= VIN <= 20V"
+    },
+    "ΔVOUT / (ΔTa · VOUT)_IOUT_30mA___40_C____Ta____85_C": {
+      "parameter": "Output Voltage Temperature Characteristics",
+      "min": null,
+      "typ": 100,
+      "max": null,
+      "unit": "ppm/°C",
+      "conditions": "IOUT=30mA, -40°C <= Ta <= 85°C"
+    },
+    "Ishort_VIN_5_3V": {
+      "parameter": "Short-circuit Current",
+      "min": null,
+      "typ": 40,
+      "max": null,
+      "unit": "mA",
+      "conditions": "VIN=5.3V"
+    },
+    "VOUT(E)_VIN_6V__IOUT_30mA": {
+      "parameter": "Output Voltage",
+      "min": 4.9,
+      "typ": 5.0,
+      "max": 5.1,
+      "unit": "V",
+      "conditions": "VIN=6V, IOUT=30mA"
+    },
+    "IOUTmax_VIN_6V__VOUT____VOUT_E__x_0_9": {
+      "parameter": "Maximum Output Current",
+      "min": 200,
+      "typ": null,
+      "max": null,
+      "unit": "mA",
+      "conditions": "VIN=6V, VOUT >= VOUT(E) x 0.9"
+    },
+    "ΔVOUT_VIN_6V__1mA____IOUT____100mA": {
+      "parameter": "Load Regulation",
+      "min": null,
+      "typ": 30,
+      "max": 100,
+      "unit": "mV",
+      "conditions": "VIN=6V, 1mA <= IOUT <= 100mA"
+    },
+    "ISS_VIN_6V": {
+      "parameter": "Supply Current",
+      "min": null,
+      "typ": 10,
+      "max": 24,
+      "unit": "μA",
+      "conditions": "VIN=6V"
+    },
+    "ΔVOUT / (ΔVIN · VOUT)_IOUT_1mA__6V____VIN____20V": {
+      "parameter": "Line Regulation",
+      "min": null,
+      "typ": 0.01,
+      "max": 0.2,
+      "unit": "%/V",
+      "conditions": "IOUT=1mA, 6V <= VIN <= 20V"
+    },
+    "Ishort_VIN_7V": {
+      "parameter": "Short-circuit Current",
+      "min": null,
+      "typ": 40,
+      "max": null,
+      "unit": "mA",
+      "conditions": "VIN=7V"
+    },
+    "VOUT(E)_VIN_13V__IOUT_30mA": {
+      "parameter": "Output Voltage",
+      "min": 11.76,
+      "typ": 12.0,
+      "max": 12.24,
+      "unit": "V",
+      "conditions": "VIN=13V, IOUT=30mA"
+    },
+    "IOUTmax_VIN_13V__VOUT____VOUT_E__x_0_9": {
+      "parameter": "Maximum Output Current",
+      "min": 200,
+      "typ": null,
+      "max": null,
+      "unit": "mA",
+      "conditions": "VIN=13V, VOUT >= VOUT(E) x 0.9"
+    },
+    "ΔVOUT_VIN_13V__1mA____IOUT____100mA": {
+      "parameter": "Load Regulation",
+      "min": null,
+      "typ": 60,
+      "max": 230,
+      "unit": "mV",
+      "conditions": "VIN=13V, 1mA <= IOUT <= 100mA"
+    },
+    "ISS_VIN_13V": {
+      "parameter": "Supply Current",
+      "min": null,
+      "typ": 12,
+      "max": 28,
+      "unit": "μA",
+      "conditions": "VIN=13V"
+    },
+    "ΔVOUT / (ΔVIN · VOUT)_IOUT_1mA__13V____VIN____20V": {
+      "parameter": "Line Regulation",
+      "min": null,
+      "typ": 0.01,
+      "max": 0.2,
+      "unit": "%/V",
+      "conditions": "IOUT=1mA, 13V <= VIN <= 20V"
+    },
+    "Ishort_VIN_14V": {
+      "parameter": "Short-circuit Current",
+      "min": null,
+      "typ": 40,
+      "max": null,
+      "unit": "mA",
+      "conditions": "VIN=14V"
+    },
+    "VOUT(E)_VIN_19V__IOUT_30mA": {
+      "parameter": "Output Voltage",
+      "min": 17.64,
+      "typ": 18.0,
+      "max": 18.36,
+      "unit": "V",
+      "conditions": "VIN=19V, IOUT=30mA"
+    },
+    "IOUTmax_VIN_19V__VOUT____VOUT_E__x_0_9": {
+      "parameter": "Maximum Output Current",
+      "min": 200,
+      "typ": null,
+      "max": null,
+      "unit": "mA",
+      "conditions": "VIN=19V, VOUT >= VOUT(E) x 0.9"
+    },
+    "ΔVOUT_VIN_19V__1mA____IOUT____100mA": {
+      "parameter": "Load Regulation",
+      "min": null,
+      "typ": 120,
+      "max": 380,
+      "unit": "mV",
+      "conditions": "VIN=19V, 1mA <= IOUT <= 100mA"
+    },
+    "ISS_VIN_19V": {
+      "parameter": "Supply Current",
+      "min": null,
+      "typ": 15,
+      "max": 30,
+      "unit": "μA",
+      "conditions": "VIN=19V"
+    },
+    "ΔVOUT / (ΔVIN · VOUT)_IOUT_1mA__19V____VIN____20V": {
+      "parameter": "Line Regulation",
+      "min": null,
+      "typ": 0.01,
+      "max": 0.2,
+      "unit": "%/V",
+      "conditions": "IOUT=1mA, 19V <= VIN <= 20V"
+    },
+    "Ishort_VIN_20V": {
+      "parameter": "Short-circuit Current",
+      "min": null,
+      "typ": 40,
+      "max": null,
+      "unit": "mA",
+      "conditions": "VIN=20V"
+    }
+  },
+  "drc_hints": {
+    "vin_abs_max": {
+      "value": 22.0,
+      "unit": "V"
+    },
+    "vin_operating": {
+      "max": 20,
+      "unit": "V"
+    },
+    "vout": {
+      "min": 1.764,
+      "typ": 1.8,
+      "max": 1.836,
+      "unit": "V"
+    },
+    "iout_max": {
+      "min": 60,
+      "unit": "mA"
+    },
+    "soft_start": {
+      "typ": 10,
+      "max": 24,
+      "unit": "μA"
+    }
+  }
+}

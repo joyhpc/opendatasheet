@@ -1,6 +1,10 @@
 {
-  "_schema": "sch-review-device/1.0",
+  "_schema": "sch-review-device/1.1",
   "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
   "mpn": "XL4003",
   "manufacturer": "XLSEMI",
   "category": "Buck",
@@ -233,16 +237,24 @@
       "max": 0.824,
       "unit": "V"
     },
+    "enable_threshold": {
+      "typ": 1.4,
+      "unit": "V"
+    },
+    "iout_max": {
+      "typ": 6.0,
+      "unit": "A"
+    },
     "iq": {
       "typ": 3.0,
       "max": 5.0,
       "unit": "mA"
     },
-    "enable_threshold": {
-      "min": null,
-      "typ": 1.4,
-      "max": null,
-      "unit": "V"
+    "fsw": {
+      "min": 240.0,
+      "typ": 300.0,
+      "max": 360.0,
+      "unit": "Khz"
     }
   }
 }

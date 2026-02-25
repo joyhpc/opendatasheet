@@ -1,0 +1,441 @@
+{
+  "_schema": "sch-review-device/1.1",
+  "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
+  "mpn": "SGM2059",
+  "manufacturer": "SGMICRO",
+  "category": "LDO",
+  "description": "300mA, Low VIN, Ultra-Low Noise and High PSRR Linear Regulator",
+  "packages": {
+    "SOT-23-5": {
+      "pin_count": 5,
+      "pins": {
+        "1": {
+          "name": "IN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Input Supply Voltage Pin. It is recommended to use a 1μF or larger ceramic capacitor from IN pin to ground.",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground.",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "EN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Enable Pin. Drive EN high to turn on the regulator. Drive EN low to turn off the regulator. Internal 0.03μA pull-down ensures device is off if floated.",
+          "unused_treatment": "FLOAT"
+        },
+        "4": {
+          "name": "NC",
+          "direction": "NC",
+          "signal_type": "NONE",
+          "description": "Not Connected (fixed voltage version). (also: FB — Feedback Voltage Input Pin (adjustable voltage version only). Connect this pin to the midpoint of an external resistor divider.)",
+          "unused_treatment": "FLOAT"
+        },
+        "5": {
+          "name": "OUT",
+          "direction": "POWER_OUT",
+          "signal_type": "POWER",
+          "description": "Regulator Output Pin. Recommended output capacitor: 0.5μF to 10μF.",
+          "unused_treatment": null
+        }
+      }
+    },
+    "SC70-5": {
+      "pin_count": 5,
+      "pins": {
+        "1": {
+          "name": "IN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Input Supply Voltage Pin. It is recommended to use a 1μF or larger ceramic capacitor from IN pin to ground.",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground.",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "EN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Enable Pin. Drive EN high to turn on the regulator. Drive EN low to turn off the regulator. Internal 0.03μA pull-down ensures device is off if floated.",
+          "unused_treatment": "FLOAT"
+        },
+        "4": {
+          "name": "NC",
+          "direction": "NC",
+          "signal_type": "NONE",
+          "description": "Not Connected (fixed voltage version). (also: FB — Feedback Voltage Input Pin (adjustable voltage version only). Connect this pin to the midpoint of an external resistor divider.)",
+          "unused_treatment": "FLOAT"
+        },
+        "5": {
+          "name": "OUT",
+          "direction": "POWER_OUT",
+          "signal_type": "POWER",
+          "description": "Regulator Output Pin. Recommended output capacitor: 0.5μF to 10μF.",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "absolute_maximum_ratings": {
+    "VIN": {
+      "parameter": "Input Voltage",
+      "min": -0.3,
+      "max": 6.0,
+      "unit": "V",
+      "conditions": null
+    },
+    "VOUT": {
+      "parameter": "Output Voltage",
+      "min": -0.3,
+      "max": null,
+      "unit": "V",
+      "conditions": "Up to VIN + 0.3V"
+    },
+    "VEN, VFB": {
+      "parameter": "Enable/Feedback Voltage",
+      "min": -0.3,
+      "max": 6.0,
+      "unit": "V",
+      "conditions": null
+    },
+    "θJA": {
+      "parameter": "Package Thermal Resistance (SC70-5)",
+      "min": null,
+      "max": 223,
+      "unit": "°C/W",
+      "conditions": null
+    },
+    "θJB": {
+      "parameter": "Package Thermal Resistance (SC70-5)",
+      "min": null,
+      "max": 70,
+      "unit": "°C/W",
+      "conditions": null
+    },
+    "θJC(TOP)": {
+      "parameter": "Package Thermal Resistance (SC70-5)",
+      "min": null,
+      "max": 83,
+      "unit": "°C/W",
+      "conditions": null
+    },
+    "TJ": {
+      "parameter": "Junction Temperature",
+      "min": null,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    },
+    "TSTG": {
+      "parameter": "Storage Temperature Range",
+      "min": -65,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    },
+    "TL": {
+      "parameter": "Lead Temperature (Soldering, 10s)",
+      "min": null,
+      "max": 260,
+      "unit": "°C",
+      "conditions": null
+    }
+  },
+  "electrical_parameters": {
+    "VIN": {
+      "parameter": "Input Voltage Range",
+      "min": 1.1,
+      "typ": null,
+      "max": 5.5,
+      "unit": "V",
+      "conditions": "IOUT = 60mA"
+    },
+    "VIN_IOUT___100mA": {
+      "parameter": "Input Voltage Range",
+      "min": 1.2,
+      "typ": null,
+      "max": 5.5,
+      "unit": "V",
+      "conditions": "IOUT = 100mA"
+    },
+    "VIN_IOUT___200mA": {
+      "parameter": "Input Voltage Range",
+      "min": 1.3,
+      "typ": null,
+      "max": 5.5,
+      "unit": "V",
+      "conditions": "IOUT = 200mA"
+    },
+    "VIN_IOUT___300mA": {
+      "parameter": "Input Voltage Range",
+      "min": 1.4,
+      "typ": null,
+      "max": 5.5,
+      "unit": "V",
+      "conditions": "IOUT = 300mA"
+    },
+    "VOUT": {
+      "parameter": "Output Voltage Accuracy",
+      "min": -1,
+      "typ": null,
+      "max": 1,
+      "unit": "%",
+      "conditions": "VIN = 1.5V to 5.5V, IOUT = 0.1mA, VOUT(NOM) ≥ 1.2V"
+    },
+    "VOUT_VIN___1_5V_to_5_5V__IOUT___0_1": {
+      "parameter": "Output Voltage Accuracy",
+      "min": -2,
+      "typ": null,
+      "max": 2,
+      "unit": "%",
+      "conditions": "VIN = 1.5V to 5.5V, IOUT = 0.1mA to 300mA, VOUT(NOM) ≥ 1.2V"
+    },
+    "VFB": {
+      "parameter": "Feedback Voltage",
+      "min": 0.784,
+      "typ": 0.793,
+      "max": 0.802,
+      "unit": "V",
+      "conditions": "VIN = 1.5V to 5.5V, IOUT = 0.1mA"
+    },
+    "VFB_VIN___1_5V_to_5_5V__IOUT___0_1": {
+      "parameter": "Feedback Voltage",
+      "min": 0.773,
+      "typ": null,
+      "max": 0.813,
+      "unit": "V",
+      "conditions": "VIN = 1.5V to 5.5V, IOUT = 0.1mA to 300mA"
+    },
+    "ΔVLNR": {
+      "parameter": "Line Regulation",
+      "min": null,
+      "typ": 0.05,
+      "max": 1,
+      "unit": "mV",
+      "conditions": "VIN = (VOUT(NOM) + 0.3V) to 5.5V, IOUT = 0.1mA"
+    },
+    "ΔVLDR/VOUT": {
+      "parameter": "Load Regulation",
+      "min": null,
+      "typ": 1.2,
+      "max": 5,
+      "unit": "mV/V",
+      "conditions": "IOUT = 0.1mA to 300mA, VOUT ≥ 1.5V"
+    },
+    "VDROP": {
+      "parameter": "Dropout Voltage",
+      "min": null,
+      "typ": 185,
+      "max": 260,
+      "unit": "mV",
+      "conditions": "IOUT = 300mA, 1.2V ≤ VOUT(NOM) < 1.5V"
+    },
+    "VDROP_IOUT___300mA__1_5V___VOUT_NOM": {
+      "parameter": "Dropout Voltage",
+      "min": null,
+      "typ": 125,
+      "max": 200,
+      "unit": "mV",
+      "conditions": "IOUT = 300mA, 1.5V ≤ VOUT(NOM) < 1.8V"
+    },
+    "VDROP_IOUT___300mA__1_8V___VOUT_NOM": {
+      "parameter": "Dropout Voltage",
+      "min": null,
+      "typ": 100,
+      "max": 160,
+      "unit": "mV",
+      "conditions": "IOUT = 300mA, 1.8V ≤ VOUT(NOM) < 2.8V"
+    },
+    "VDROP_IOUT___300mA__2_8V___VOUT_NOM": {
+      "parameter": "Dropout Voltage",
+      "min": null,
+      "typ": 72,
+      "max": 120,
+      "unit": "mV",
+      "conditions": "IOUT = 300mA, 2.8V ≤ VOUT(NOM) ≤ 5.0V"
+    },
+    "ILIMIT": {
+      "parameter": "Output Current Limit",
+      "min": 300,
+      "typ": 600,
+      "max": null,
+      "unit": "mA",
+      "conditions": "VOUT = 90% × VOUT(NOM)"
+    },
+    "ISHORT": {
+      "parameter": "Short Circuit Current",
+      "min": null,
+      "typ": 380,
+      "max": null,
+      "unit": "mA",
+      "conditions": "VOUT = 0V"
+    },
+    "IQ": {
+      "parameter": "Quiescent Current",
+      "min": null,
+      "typ": 13,
+      "max": 40,
+      "unit": "μA",
+      "conditions": "IOUT = 0mA"
+    },
+    "ISHDN": {
+      "parameter": "Shutdown Supply Current",
+      "min": null,
+      "typ": 0.03,
+      "max": 2,
+      "unit": "μA",
+      "conditions": "VEN = 0V, VIN = 5.5V"
+    },
+    "VIH": {
+      "parameter": "EN Input Threshold High",
+      "min": 0.7,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": "VIN = 1.1V to 5.5V"
+    },
+    "VIL": {
+      "parameter": "EN Input Threshold Low",
+      "min": null,
+      "typ": null,
+      "max": 0.3,
+      "unit": "V",
+      "conditions": "VIN = 1.1V to 5.5V"
+    },
+    "IEN": {
+      "parameter": "EN Pull-Down Current",
+      "min": null,
+      "typ": 0.03,
+      "max": 1,
+      "unit": "μA",
+      "conditions": "VEN = VIN"
+    },
+    "RDIS": {
+      "parameter": "Output Discharge Resistance",
+      "min": null,
+      "typ": 50,
+      "max": null,
+      "unit": "Ω",
+      "conditions": "VEN = 0V, VIN = 3.3V"
+    },
+    "tON": {
+      "parameter": "Turn-On Time",
+      "min": null,
+      "typ": 100,
+      "max": 240,
+      "unit": "μs",
+      "conditions": "From EN rising from 0V to VIN to 90% × VOUT(NOM), no load"
+    },
+    "PSRR": {
+      "parameter": "Power Supply Rejection Ratio",
+      "min": null,
+      "typ": 90,
+      "max": null,
+      "unit": "dB",
+      "conditions": "f = 100Hz, IOUT = 20mA, VIN = VOUT(NOM) + 1V"
+    },
+    "PSRR_f___1kHz__IOUT___20mA__VIN___V": {
+      "parameter": "Power Supply Rejection Ratio",
+      "min": null,
+      "typ": 92,
+      "max": null,
+      "unit": "dB",
+      "conditions": "f = 1kHz, IOUT = 20mA, VIN = VOUT(NOM) + 1V"
+    },
+    "PSRR_f___10kHz__IOUT___20mA__VIN": {
+      "parameter": "Power Supply Rejection Ratio",
+      "min": null,
+      "typ": 80,
+      "max": null,
+      "unit": "dB",
+      "conditions": "f = 10kHz, IOUT = 20mA, VIN = VOUT(NOM) + 1V"
+    },
+    "PSRR_f___100kHz__IOUT___20mA__VIN": {
+      "parameter": "Power Supply Rejection Ratio",
+      "min": null,
+      "typ": 53,
+      "max": null,
+      "unit": "dB",
+      "conditions": "f = 100kHz, IOUT = 20mA, VIN = VOUT(NOM) + 1V"
+    },
+    "en": {
+      "parameter": "Output Voltage Noise",
+      "min": null,
+      "typ": 9.5,
+      "max": null,
+      "unit": "μVRMS",
+      "conditions": "f = 10Hz to 100kHz, IOUT = 20mA"
+    },
+    "TSHDN": {
+      "parameter": "Thermal Shutdown Temperature",
+      "min": null,
+      "typ": 160,
+      "max": null,
+      "unit": "°C",
+      "conditions": null
+    },
+    "ΔTSHDN": {
+      "parameter": "Thermal Shutdown Hysteresis",
+      "min": null,
+      "typ": 20,
+      "max": null,
+      "unit": "°C",
+      "conditions": null
+    }
+  },
+  "drc_hints": {
+    "vin_abs_max": {
+      "value": 6.0,
+      "unit": "V"
+    },
+    "vin_operating": {
+      "min": 1.1,
+      "max": 5.5,
+      "unit": "V"
+    },
+    "vref": {
+      "min": 0.784,
+      "typ": 0.793,
+      "max": 0.802,
+      "unit": "V"
+    },
+    "vout": {
+      "min": -1,
+      "max": 1,
+      "unit": "%"
+    },
+    "enable_threshold": {
+      "min": 0.7,
+      "unit": "V"
+    },
+    "iout_max": {
+      "min": 300,
+      "typ": 600,
+      "unit": "mA"
+    },
+    "iq": {
+      "typ": 13,
+      "max": 40,
+      "unit": "μA"
+    },
+    "thermal_shutdown": {
+      "typ": 160,
+      "unit": "°C"
+    }
+  }
+}

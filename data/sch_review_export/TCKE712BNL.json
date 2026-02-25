@@ -1,0 +1,547 @@
+{
+  "_schema": "sch-review-device/1.1",
+  "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
+  "mpn": "TCKE712BNL",
+  "manufacturer": "Toshiba",
+  "category": "Other",
+  "description": "13.2 V, eFuse with Adjustable Over Current Protection Over Voltage Protection and Slew Rate Control",
+  "packages": {
+    "WSON10": {
+      "pin_count": 11,
+      "pins": {
+        "1": {
+          "name": "VIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Supply Input. Input to the power switch and the supply voltage for the device.",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "VIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Supply Input. Input to the power switch and the supply voltage for the device.",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "dV/dT",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Rise time set input. A capacitor between dV/dT terminal and GND set the slew rate of VOUT.",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "EN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Enable input.",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "ILIM",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Current limit set input. A resistor between ILIM terminal and GND set the current limit.",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground.",
+          "unused_treatment": null
+        },
+        "7": {
+          "name": "OVP",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Over voltage protection(OVP) threshold set input.",
+          "unused_treatment": null
+        },
+        "8": {
+          "name": "FLAG",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "Open drain signal output. Fault condition flag",
+          "unused_treatment": null
+        },
+        "9": {
+          "name": "VOUT",
+          "direction": "POWER_OUT",
+          "signal_type": "POWER",
+          "description": "Output. Output of the power switch.",
+          "unused_treatment": null
+        },
+        "10": {
+          "name": "VOUT",
+          "direction": "POWER_OUT",
+          "signal_type": "POWER",
+          "description": "Output. Output of the power switch.",
+          "unused_treatment": null
+        },
+        "EP": {
+          "name": "EP",
+          "direction": "PASSIVE",
+          "signal_type": "NONE",
+          "description": "Exposed pad for thermal dissipation.",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "absolute_maximum_ratings": {
+    "VIN": {
+      "parameter": "Input voltage",
+      "min": -0.3,
+      "max": 18,
+      "unit": "V",
+      "conditions": null
+    },
+    "VILIM": {
+      "parameter": "ILIM voltage",
+      "min": -0.3,
+      "max": 6,
+      "unit": "V",
+      "conditions": null
+    },
+    "VdV/dT": {
+      "parameter": "dV/dT voltage",
+      "min": -0.3,
+      "max": 6,
+      "unit": "V",
+      "conditions": null
+    },
+    "VOVP": {
+      "parameter": "OVP voltage",
+      "min": -0.3,
+      "max": 6,
+      "unit": "V",
+      "conditions": null
+    },
+    "VEN": {
+      "parameter": "Control voltage",
+      "min": -0.3,
+      "max": 18,
+      "unit": "V",
+      "conditions": null
+    },
+    "VOUT": {
+      "parameter": "Output voltage",
+      "min": -0.3,
+      "max": 18,
+      "unit": "V",
+      "conditions": null
+    },
+    "VFLAG": {
+      "parameter": "FLAG voltage",
+      "min": -0.3,
+      "max": 18,
+      "unit": "V",
+      "conditions": null
+    },
+    "ISINK_FLAG": {
+      "parameter": "FLAG Sink current",
+      "min": 0,
+      "max": 1,
+      "unit": "mA",
+      "conditions": null
+    },
+    "PD": {
+      "parameter": "Power dissipation",
+      "min": null,
+      "max": 2.4,
+      "unit": "W",
+      "conditions": "Rating at mounting on a board: FR4 board. (76.2 mm x 114.3 mm x 1.6 mm, 4 layer)"
+    },
+    "Tj": {
+      "parameter": "Junction temperature",
+      "min": null,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    },
+    "Tstg": {
+      "parameter": "Storage temperature",
+      "min": -55,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    }
+  },
+  "electrical_parameters": {
+    "VIN_UVLO": {
+      "parameter": "VIN under voltage lockout (UVLO) threshold, rising",
+      "min": 4.0,
+      "typ": null,
+      "max": 4.4,
+      "unit": "V",
+      "conditions": null
+    },
+    "VIN_UVHyst": {
+      "parameter": "VIN under voltage lockout (UVLO) hysteresis",
+      "min": null,
+      "typ": 0.2,
+      "max": null,
+      "unit": "V",
+      "conditions": null
+    },
+    "VENR": {
+      "parameter": "EN threshold voltage, rising",
+      "min": null,
+      "typ": null,
+      "max": 1.2,
+      "unit": "V",
+      "conditions": null
+    },
+    "VENF": {
+      "parameter": "EN threshold voltage, falling",
+      "min": 0.85,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": null
+    },
+    "RON": {
+      "parameter": "On resistance",
+      "min": null,
+      "typ": 53,
+      "max": null,
+      "unit": "mΩ",
+      "conditions": "IOUT = 1 A"
+    },
+    "RON_IOUT___1_A": {
+      "parameter": "On resistance",
+      "min": null,
+      "typ": null,
+      "max": 80,
+      "unit": "mΩ",
+      "conditions": "IOUT = 1 A"
+    },
+    "IQ": {
+      "parameter": "Quiescent current (ON state)",
+      "min": null,
+      "typ": 690,
+      "max": null,
+      "unit": "µA",
+      "conditions": "VEN = 3 V, IOUT = 0 A"
+    },
+    "IQ_VEN___3_V__IOUT___0_A": {
+      "parameter": "Quiescent current (ON state)",
+      "min": null,
+      "typ": null,
+      "max": 852,
+      "unit": "µA",
+      "conditions": "VEN = 3 V, IOUT = 0 A"
+    },
+    "IQ(OFF)": {
+      "parameter": "Quiescent current (OFF state)",
+      "min": null,
+      "typ": 46,
+      "max": null,
+      "unit": "µA",
+      "conditions": "EN = 0 V"
+    },
+    "IQ(OFF)_EN___0_V": {
+      "parameter": "Quiescent current (OFF state)",
+      "min": null,
+      "typ": null,
+      "max": 80,
+      "unit": "µA",
+      "conditions": "EN = 0 V"
+    },
+    "IRB": {
+      "parameter": "Reverse blocking current",
+      "min": null,
+      "typ": 0.001,
+      "max": null,
+      "unit": "µA",
+      "conditions": "VOUT = 5 V, VIN = 0 V, VEN = 0 V"
+    },
+    "IRB_VOUT___5_V__VIN___0_V__VEN___0": {
+      "parameter": "Reverse blocking current",
+      "min": null,
+      "typ": null,
+      "max": 1.0,
+      "unit": "µA",
+      "conditions": "VOUT = 5 V, VIN = 0 V, VEN = 0 V"
+    },
+    "REN": {
+      "parameter": "EN pull down resistor",
+      "min": null,
+      "typ": 20,
+      "max": null,
+      "unit": "MΩ",
+      "conditions": "EN = 1.1 V"
+    },
+    "REN_EN___1_1_V": {
+      "parameter": "EN pull down resistor",
+      "min": 10,
+      "typ": null,
+      "max": 55,
+      "unit": "MΩ",
+      "conditions": "EN = 1.1 V"
+    },
+    "VdV/dT": {
+      "parameter": "dV/dT Voltage",
+      "min": 2.8,
+      "typ": null,
+      "max": 3.4,
+      "unit": "V",
+      "conditions": null
+    },
+    "IdV/dT": {
+      "parameter": "Charging Current",
+      "min": null,
+      "typ": 5,
+      "max": null,
+      "unit": "µA",
+      "conditions": "VdV/dT = 0 V"
+    },
+    "IdV/dT_VdV_dT___0_V": {
+      "parameter": "Charging Current",
+      "min": 3.5,
+      "typ": null,
+      "max": 6.5,
+      "unit": "µA",
+      "conditions": "VdV/dT = 0 V"
+    },
+    "GAINdV/dT": {
+      "parameter": "dV/dT to OUT gain",
+      "min": null,
+      "typ": 9.0,
+      "max": null,
+      "unit": null,
+      "conditions": "VdV/dT = 1V, IOUT = 1A"
+    },
+    "GAINdV/dT_VdV_dT___1V__IOUT___1A": {
+      "parameter": "dV/dT to OUT gain",
+      "min": 8.5,
+      "typ": null,
+      "max": 9.5,
+      "unit": null,
+      "conditions": "VdV/dT = 1V, IOUT = 1A"
+    },
+    "VOVPR": {
+      "parameter": "OVP threshold, rising",
+      "min": 1.14,
+      "typ": null,
+      "max": 1.26,
+      "unit": "V",
+      "conditions": null
+    },
+    "ROVP": {
+      "parameter": "OVP pull down resistor",
+      "min": null,
+      "typ": 22,
+      "max": null,
+      "unit": "MΩ",
+      "conditions": "VOVP = 1.2 V"
+    },
+    "ROVP_VOVP___1_2_V": {
+      "parameter": "OVP pull down resistor",
+      "min": 11,
+      "typ": null,
+      "max": 60,
+      "unit": "MΩ",
+      "conditions": "VOVP = 1.2 V"
+    },
+    "VFLAG_L": {
+      "parameter": "FLAG Output Low Voltage",
+      "min": null,
+      "typ": null,
+      "max": 0.1,
+      "unit": "V",
+      "conditions": "ISINK_FLAG = 1 mA"
+    },
+    "IFLAG_LEAK": {
+      "parameter": "FLAG Output High leakage",
+      "min": null,
+      "typ": null,
+      "max": 1,
+      "unit": "µA",
+      "conditions": "VFLAG = 18 V"
+    },
+    "IOUT_CL": {
+      "parameter": "Over current limit",
+      "min": null,
+      "typ": 3.65,
+      "max": null,
+      "unit": "A",
+      "conditions": "VIN = 5 V, RILIM = 1.7 kΩ, VIN - VOUT = 2 V"
+    },
+    "IOUT_CL_VIN___5_V__RILIM___1_7_k___VIN": {
+      "parameter": "Over current limit",
+      "min": 3.14,
+      "typ": null,
+      "max": 4.14,
+      "unit": "A",
+      "conditions": "VIN = 5 V, RILIM = 1.7 kΩ, VIN - VOUT = 2 V"
+    },
+    "IOUT_CL_VIN___9_V__RILIM___2_4_k___VIN": {
+      "parameter": "Over current limit",
+      "min": 2.21,
+      "typ": null,
+      "max": 2.99,
+      "unit": "A",
+      "conditions": "VIN = 9 V, RILIM = 2.4 kΩ, VIN - VOUT = 2 V"
+    },
+    "IOUT_CL_VIN___12_V__RILIM___3_1_k___VI": {
+      "parameter": "Over current limit",
+      "min": 1.71,
+      "typ": null,
+      "max": 2.35,
+      "unit": "A",
+      "conditions": "VIN = 12 V, RILIM = 3.1 kΩ, VIN - VOUT = 2 V"
+    },
+    "IOUT_CL_VIN___12_V__RILIM___3_6_k___VI": {
+      "parameter": "Over current limit",
+      "min": 1.47,
+      "typ": null,
+      "max": 2.04,
+      "unit": "A",
+      "conditions": "VIN = 12 V, RILIM = 3.6 kΩ, VIN - VOUT = 2 V"
+    },
+    "IOUT_CL_VIN___12_V__RILIM___6_2_k___VI": {
+      "parameter": "Over current limit",
+      "min": 0.78,
+      "typ": null,
+      "max": 1.21,
+      "unit": "A",
+      "conditions": "VIN = 12 V, RILIM = 6.2 kΩ, VIN - VOUT = 2 V"
+    },
+    "IOUT_CL_VIN___12_V__RILIM___12_k___VIN": {
+      "parameter": "Over current limit",
+      "min": 0.35,
+      "typ": null,
+      "max": 0.64,
+      "unit": "A",
+      "conditions": "VIN = 12 V, RILIM = 12 kΩ, VIN - VOUT = 2 V"
+    },
+    "IFASTTRIP": {
+      "parameter": "Fast trip comparator level",
+      "min": null,
+      "typ": null,
+      "max": null,
+      "unit": "A",
+      "conditions": "typ: IOUT_CL x 2.5"
+    },
+    "IFASTTRIP_min__IOUT_CL_x_2_0": {
+      "parameter": "Fast trip comparator level",
+      "min": null,
+      "typ": null,
+      "max": null,
+      "unit": "A",
+      "conditions": "min: IOUT_CL x 2.0"
+    },
+    "TSD": {
+      "parameter": "Thermal shut down Threshold",
+      "min": null,
+      "typ": 134,
+      "max": null,
+      "unit": "°C",
+      "conditions": "Tj"
+    },
+    "tON": {
+      "parameter": "Turn on delay",
+      "min": null,
+      "typ": 370,
+      "max": null,
+      "unit": "µs",
+      "conditions": "CdV/dT = OPEN (Note4)"
+    },
+    "tOFF": {
+      "parameter": "Turn off delay",
+      "min": null,
+      "typ": 2.2,
+      "max": null,
+      "unit": "µs",
+      "conditions": "(Note4)"
+    },
+    "tr": {
+      "parameter": "VOUT rise time",
+      "min": null,
+      "typ": 57,
+      "max": null,
+      "unit": "µs",
+      "conditions": "CdV/dT = OPEN (Note4)"
+    },
+    "tr_CdV_dT___22nF__Note4": {
+      "parameter": "VOUT rise time",
+      "min": null,
+      "typ": 4.7,
+      "max": null,
+      "unit": "ms",
+      "conditions": "CdV/dT = 22nF (Note4)"
+    },
+    "tFASTTRIP": {
+      "parameter": "Fast trip time",
+      "min": null,
+      "typ": 320,
+      "max": null,
+      "unit": "ns",
+      "conditions": "IOUT > IFASTTRIP to IOUT peak (Note4)"
+    },
+    "tOL": {
+      "parameter": "Current limit response time",
+      "min": null,
+      "typ": 175,
+      "max": null,
+      "unit": "µs",
+      "conditions": "RLOAD = OPEN to 3.6 Ω"
+    },
+    "tFLAGblank": {
+      "parameter": "Over current FLAG blanking time/Switch off delay under over current",
+      "min": null,
+      "typ": 5.5,
+      "max": null,
+      "unit": "ms",
+      "conditions": "OCL detection to VFLAG = Low voltage (Note4)"
+    },
+    "tFLAGblank_OCL_detection_to_VFLAG___Low_v": {
+      "parameter": "Over current FLAG blanking time/Switch off delay under over current",
+      "min": 3.3,
+      "typ": null,
+      "max": null,
+      "unit": "ms",
+      "conditions": "OCL detection to VFLAG = Low voltage (Note4)"
+    },
+    "tOCP_COUNT": {
+      "parameter": "Short-term (<5ms) over current limit counting time",
+      "min": null,
+      "typ": 176,
+      "max": null,
+      "unit": "ms",
+      "conditions": "Refer to Figure 4 (Note4)"
+    }
+  },
+  "drc_hints": {
+    "vin_abs_max": {
+      "value": 18,
+      "unit": "V"
+    },
+    "enable_threshold": {
+      "typ": 1.1,
+      "unit": "V"
+    },
+    "iout_max": {
+      "typ": 3.65,
+      "unit": "A"
+    },
+    "iq": {
+      "typ": 690,
+      "unit": "µA"
+    },
+    "thermal_shutdown": {
+      "typ": 134,
+      "unit": "°C"
+    },
+    "uvlo": {
+      "typ": 4.15,
+      "unit": "V"
+    }
+  }
+}

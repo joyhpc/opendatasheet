@@ -1,0 +1,419 @@
+{
+  "_schema": "sch-review-device/1.1",
+  "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
+  "mpn": "TPS3836",
+  "manufacturer": "Texas Instruments",
+  "category": "Other",
+  "description": "Nano Power Voltage Supervisor With Selectable Reset Delay",
+  "packages": {
+    "WSON-6": {
+      "pin_count": 7,
+      "pins": {
+        "1": {
+          "name": "VDD",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Supply voltage input",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "CT",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Capacitor Time Delay Pin. Connect to GND for 10 ms delay or VDD for 200 ms delay.",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "MR",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Manual Reset input (active low). If unused, connect to VDD to minimize current consumption.",
+          "unused_treatment": "VCC"
+        },
+        "3": {
+          "name": "RESET_N",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "Active-Low Output Reset. Asserted when VDD falls below VIT or when MR is low.",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "NC",
+          "direction": "NC",
+          "signal_type": "NONE",
+          "description": "No internal connection",
+          "unused_treatment": null
+        },
+        "EP": {
+          "name": "Exposed Pad",
+          "direction": "PASSIVE",
+          "signal_type": "POWER",
+          "description": "Exposed thermal pad, connect to GND",
+          "unused_treatment": null
+        }
+      }
+    },
+    "SOT-23-5": {
+      "pin_count": 5,
+      "pins": {
+        "5": {
+          "name": "VDD",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Supply voltage input",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground",
+          "unused_treatment": null
+        },
+        "1": {
+          "name": "CT",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Capacitor Time Delay Pin. Connect to GND for 10 ms delay or VDD for 200 ms delay.",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "MR",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Manual Reset input (active low). If unused, connect to VDD to minimize current consumption.",
+          "unused_treatment": "VCC"
+        },
+        "4": {
+          "name": "RESET_N",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "Active-Low Output Reset. Asserted when VDD falls below VIT or when MR is low. (also: RESET — Active-High Output Reset. Asserted when VDD falls below VIT or when MR is low.)",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "absolute_maximum_ratings": {
+    "VDD": {
+      "parameter": "Supply voltage",
+      "min": null,
+      "max": 7,
+      "unit": "V",
+      "conditions": null
+    },
+    "IOL": {
+      "parameter": "Maximum low output current",
+      "min": null,
+      "max": 5,
+      "unit": "mA",
+      "conditions": null
+    },
+    "IOH": {
+      "parameter": "Maximum high output current",
+      "min": null,
+      "max": -5,
+      "unit": "mA",
+      "conditions": null
+    },
+    "IIK": {
+      "parameter": "Input clamp current",
+      "min": -10,
+      "max": 10,
+      "unit": "mA",
+      "conditions": "VI < 0 or VI > VDD"
+    },
+    "IOK": {
+      "parameter": "Output clamp current",
+      "min": -10,
+      "max": 10,
+      "unit": "mA",
+      "conditions": "VO < 0 or VO > VDD"
+    },
+    "TA": {
+      "parameter": "Operating temperature",
+      "min": -40,
+      "max": 85,
+      "unit": "°C",
+      "conditions": null
+    },
+    "Tstg": {
+      "parameter": "Storage temperature",
+      "min": -65,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    }
+  },
+  "electrical_parameters": {
+    "VOH": {
+      "parameter": "High-level output voltage",
+      "min": 2.64,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": "VDD = 3.3 V, IOH = -2 mA"
+    },
+    "VOH_VDD___6_V__IOH____3_mA": {
+      "parameter": "High-level output voltage",
+      "min": 4.8,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": "VDD = 6 V, IOH = -3 mA"
+    },
+    "VOH_VDD___1_8_V__IOH____1_mA": {
+      "parameter": "High-level output voltage",
+      "min": 1.44,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": "VDD = 1.8 V, IOH = -1 mA"
+    },
+    "VOH_VDD___3_3_V__IOH____2_mA": {
+      "parameter": "High-level output voltage",
+      "min": 2.64,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": "VDD = 3.3 V, IOH = -2 mA"
+    },
+    "VOL": {
+      "parameter": "Low-level output voltage",
+      "min": null,
+      "typ": null,
+      "max": 0.4,
+      "unit": "V",
+      "conditions": "VDD = 1.8 V, IOL = 1 mA"
+    },
+    "VOL_VDD___3_3_V__IOL___2_mA": {
+      "parameter": "Low-level output voltage",
+      "min": null,
+      "typ": null,
+      "max": 0.4,
+      "unit": "V",
+      "conditions": "VDD = 3.3 V, IOL = 2 mA"
+    },
+    "VOL_VDD___6_V__IOL___3_mA": {
+      "parameter": "Low-level output voltage",
+      "min": null,
+      "typ": null,
+      "max": 0.4,
+      "unit": "V",
+      "conditions": "VDD = 6 V, IOL = 3 mA"
+    },
+    "VIT": {
+      "parameter": "Negative-going input threshold voltage",
+      "min": 1.66,
+      "typ": 1.71,
+      "max": 1.74,
+      "unit": "V",
+      "conditions": "TA = -40C to 85C"
+    },
+    "VIT_TA____40C_to_85C": {
+      "parameter": "Negative-going input threshold voltage",
+      "min": 2.84,
+      "typ": 2.93,
+      "max": 2.99,
+      "unit": "V",
+      "conditions": "TA = -40C to 85C"
+    },
+    "VHYS": {
+      "parameter": "Hysteresis at VDD input",
+      "min": null,
+      "typ": 30,
+      "max": null,
+      "unit": "mV",
+      "conditions": "1.7 V < VIT < 2.5 V"
+    },
+    "VHYS_2_5_V___VIT___3_5_V": {
+      "parameter": "Hysteresis at VDD input",
+      "min": null,
+      "typ": 40,
+      "max": null,
+      "unit": "mV",
+      "conditions": "2.5 V < VIT < 3.5 V"
+    },
+    "VHYS_3_5_V___VIT___5_V": {
+      "parameter": "Hysteresis at VDD input",
+      "min": null,
+      "typ": 50,
+      "max": null,
+      "unit": "mV",
+      "conditions": "3.5 V < VIT < 5 V"
+    },
+    "IIH": {
+      "parameter": "High-level input current (MR)",
+      "min": -40,
+      "typ": -60,
+      "max": -100,
+      "unit": "uA",
+      "conditions": "MR = 0.7 * VDD, VDD = 6 V"
+    },
+    "IIH_CT___VDD___6_V": {
+      "parameter": "High-level input current (CT)",
+      "min": -25,
+      "typ": null,
+      "max": 25,
+      "unit": "nA",
+      "conditions": "CT = VDD = 6 V"
+    },
+    "IIL": {
+      "parameter": "Low-level input current (MR)",
+      "min": -130,
+      "typ": -200,
+      "max": -340,
+      "unit": "uA",
+      "conditions": "MR = 0 V, VDD = 6 V"
+    },
+    "IIL_CT___0_V__VDD___6_V": {
+      "parameter": "Low-level input current (CT)",
+      "min": -25,
+      "typ": null,
+      "max": 25,
+      "unit": "nA",
+      "conditions": "CT = 0 V, VDD = 6 V"
+    },
+    "IOH": {
+      "parameter": "High-level output current",
+      "min": null,
+      "typ": null,
+      "max": 25,
+      "unit": "nA",
+      "conditions": "VDD = VIT + 0.2 V, VOH = VDD"
+    },
+    "IDD": {
+      "parameter": "Supply current",
+      "min": null,
+      "typ": 220,
+      "max": 400,
+      "unit": "nA",
+      "conditions": "VDD > VIT, VDD < 3 V"
+    },
+    "IDD_VDD___VIT__VDD___3_V": {
+      "parameter": "Supply current",
+      "min": null,
+      "typ": 250,
+      "max": 450,
+      "unit": "nA",
+      "conditions": "VDD > VIT, VDD > 3 V"
+    },
+    "IDD_VDD___VIT": {
+      "parameter": "Supply current",
+      "min": null,
+      "typ": 10,
+      "max": 15,
+      "unit": "uA",
+      "conditions": "VDD < VIT"
+    },
+    "CI": {
+      "parameter": "Input capacitance",
+      "min": null,
+      "typ": 5,
+      "max": null,
+      "unit": "pF",
+      "conditions": "VI = 0 V to VDD"
+    },
+    "tw": {
+      "parameter": "Pulse duration (VDD)",
+      "min": null,
+      "typ": 6,
+      "max": null,
+      "unit": "us",
+      "conditions": "VIH = VIT + 0.2 V, VIL = VIT - 0.2 V"
+    },
+    "tw_VDD____VIT___0_2_V__VIL___0_3": {
+      "parameter": "Pulse duration (MR)",
+      "min": null,
+      "typ": 1,
+      "max": null,
+      "unit": "us",
+      "conditions": "VDD >= VIT + 0.2 V, VIL = 0.3 * VDD, VIH = 0.7 * VDD"
+    },
+    "td": {
+      "parameter": "Delay time (CT=GND)",
+      "min": 5,
+      "typ": 10,
+      "max": 15,
+      "unit": "ms",
+      "conditions": "VDD >= VIT + 0.2 V, MR = 0.7 * VDD, CT = GND"
+    },
+    "td_VDD____VIT___0_2_V__MR___0_7": {
+      "parameter": "Delay time (CT=VDD)",
+      "min": 100,
+      "typ": 200,
+      "max": 300,
+      "unit": "ms",
+      "conditions": "VDD >= VIT + 0.2 V, MR = 0.7 * VDD, CT = VDD"
+    },
+    "tPHL": {
+      "parameter": "Propagation delay, VDD to RESET_L",
+      "min": null,
+      "typ": 10,
+      "max": null,
+      "unit": "us",
+      "conditions": "VIL = VIT - 0.2 V, VIH = VIT + 0.2 V"
+    },
+    "tPHL_VIL___1_6_V": {
+      "parameter": "Propagation delay, VDD to RESET_L",
+      "min": null,
+      "typ": 50,
+      "max": null,
+      "unit": "us",
+      "conditions": "VIL = 1.6 V"
+    },
+    "tPLH": {
+      "parameter": "Propagation delay, VDD to RESET_H",
+      "min": null,
+      "typ": 10,
+      "max": null,
+      "unit": "us",
+      "conditions": "VIL = VIT - 0.2 V, VIH = VIT + 0.2 V"
+    },
+    "tPLH_VIL___1_6_V": {
+      "parameter": "Propagation delay, VDD to RESET_H",
+      "min": null,
+      "typ": 50,
+      "max": null,
+      "unit": "us",
+      "conditions": "VIL = 1.6 V"
+    },
+    "tPHL_VDD____VIT___0_2_V__VIL___0_3": {
+      "parameter": "Propagation delay, MR to RESET_L",
+      "min": null,
+      "typ": 0.3,
+      "max": null,
+      "unit": "us",
+      "conditions": "VDD >= VIT + 0.2 V, VIL = 0.3 * VDD, VIH = 0.7 * VDD"
+    },
+    "tPLH_VDD____VIT___0_2_V__VIL___0_3": {
+      "parameter": "Propagation delay, MR to RESET_H",
+      "min": null,
+      "typ": 0.3,
+      "max": null,
+      "unit": "us",
+      "conditions": "VDD >= VIT + 0.2 V, VIL = 0.3 * VDD, VIH = 0.7 * VDD"
+    }
+  },
+  "drc_hints": {
+    "vin_abs_max": {
+      "value": 7,
+      "unit": "V"
+    },
+    "iout_max": {
+      "max": 25,
+      "unit": "nA"
+    }
+  }
+}

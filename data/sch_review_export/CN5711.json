@@ -1,6 +1,10 @@
 {
-  "_schema": "sch-review-device/1.0",
+  "_schema": "sch-review-device/1.1",
   "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
   "mpn": "CN5711",
   "manufacturer": "CONSONANCE",
   "category": "LED Driver",
@@ -103,5 +107,15 @@
       "conditions": "Set by external resistor"
     }
   },
-  "drc_hints": {}
+  "drc_hints": {
+    "vin_operating": {
+      "min": 2.8,
+      "max": 6.0,
+      "unit": "V"
+    },
+    "iout_max": {
+      "max": 1.5,
+      "unit": "A"
+    }
+  }
 }

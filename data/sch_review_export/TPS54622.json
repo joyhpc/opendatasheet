@@ -1,0 +1,232 @@
+{
+  "_schema": "sch-review-device/1.1",
+  "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
+  "mpn": "TPS54622",
+  "manufacturer": "Texas Instruments",
+  "category": "Buck",
+  "description": "4.5V to 17V Input, 6A Synchronous Step-Down SWIFT Converter with Hiccup Protection",
+  "packages": {
+    "VQFN-14": {
+      "pin_count": 15,
+      "pins": {
+        "1": {
+          "name": "RT/CLK",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Automatically selects between RT mode and CLK mode. An external timing resistor adjusts the switching frequency; In CLK mode, the device synchronizes to an external clock.",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Return for control circuitry and low-side power MOSFET.",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Return for control circuitry and low-side power MOSFET.",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "PVIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power input. Supplies the power switches of the power converter.",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "PVIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power input. Supplies the power switches of the power converter.",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "VIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Supplies the control circuitry of the power converter.",
+          "unused_treatment": null
+        },
+        "7": {
+          "name": "VSENSE",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Inverting input of the gm error amplifier.",
+          "unused_treatment": null
+        },
+        "8": {
+          "name": "COMP",
+          "direction": "OUTPUT",
+          "signal_type": "ANALOG",
+          "description": "Error amplifier output, and input to the output switch current comparator. Connect frequency compensation to this pin.",
+          "unused_treatment": null
+        },
+        "9": {
+          "name": "SS/TR",
+          "direction": "OUTPUT",
+          "signal_type": "ANALOG",
+          "description": "Slow start and tracking. An external capacitor connected to this pin sets the internal voltage reference rise time. The voltage on this pin overrides the internal reference. It can be used for tracking and sequencing.",
+          "unused_treatment": null
+        },
+        "10": {
+          "name": "EN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Enable pin. Float to enable. Adjust the input undervoltage lockout with two resistors.",
+          "unused_treatment": "FLOAT"
+        },
+        "11": {
+          "name": "PH",
+          "direction": "OUTPUT",
+          "signal_type": "POWER",
+          "description": "The switch node.",
+          "unused_treatment": null
+        },
+        "12": {
+          "name": "PH",
+          "direction": "OUTPUT",
+          "signal_type": "POWER",
+          "description": "The switch node.",
+          "unused_treatment": null
+        },
+        "13": {
+          "name": "BOOT",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "A bootstrap cap is required between BOOT and PH. The voltage on this cap carries the gate drive voltage for the high-side MOSFET.",
+          "unused_treatment": null
+        },
+        "14": {
+          "name": "PWRGD",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "Power Good fault pin. Asserts low if output voltage is low due to thermal shutdown, dropout, overvoltage, EN shutdown or during slow start.",
+          "unused_treatment": null
+        },
+        "15": {
+          "name": "Exposed Thermal PAD",
+          "direction": "PASSIVE",
+          "signal_type": "POWER",
+          "description": "Thermal pad of the package and signal ground and it must be soldered down for proper operation.",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "absolute_maximum_ratings": {
+    "VIN": {
+      "parameter": "Input voltage VIN",
+      "min": -0.3,
+      "max": 20,
+      "unit": "V",
+      "conditions": null
+    },
+    "PVIN": {
+      "parameter": "Input voltage PVIN",
+      "min": -0.3,
+      "max": 20,
+      "unit": "V",
+      "conditions": null
+    },
+    "EN": {
+      "parameter": "Input voltage EN",
+      "min": -0.3,
+      "max": 6,
+      "unit": "V",
+      "conditions": null
+    },
+    "BOOT": {
+      "parameter": "Input voltage BOOT",
+      "min": -0.3,
+      "max": 27,
+      "unit": "V",
+      "conditions": null
+    },
+    "VSENSE": {
+      "parameter": "Input voltage VSENSE",
+      "min": -0.3,
+      "max": 3,
+      "unit": "V",
+      "conditions": null
+    },
+    "COMP": {
+      "parameter": "Input voltage COMP",
+      "min": -0.3,
+      "max": 3,
+      "unit": "V",
+      "conditions": null
+    },
+    "PWRGD": {
+      "parameter": "Input voltage PWRGD",
+      "min": -0.3,
+      "max": 6,
+      "unit": "V",
+      "conditions": null
+    },
+    "SS/TR": {
+      "parameter": "Input voltage SS/TR",
+      "min": -0.3,
+      "max": 3,
+      "unit": "V",
+      "conditions": null
+    },
+    "RT/CLK": {
+      "parameter": "Input voltage RT/CLK",
+      "min": -0.3,
+      "max": 6,
+      "unit": "V",
+      "conditions": null
+    },
+    "PH": {
+      "parameter": "Output voltage PH",
+      "min": -1,
+      "max": 20,
+      "unit": "V",
+      "conditions": null
+    },
+    "Tstg": {
+      "parameter": "Storage temperature",
+      "min": -65,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    }
+  },
+  "electrical_parameters": {},
+  "drc_hints": {
+    "vin_abs_max": {
+      "value": 20,
+      "unit": "V"
+    },
+    "enable_threshold": {
+      "typ": 1.21,
+      "max": 1.26,
+      "unit": "V"
+    },
+    "iout_max": {
+      "min": 8,
+      "typ": 11,
+      "max": 14,
+      "unit": "A"
+    },
+    "fsw": {
+      "min": 160,
+      "typ": 200,
+      "max": 240,
+      "unit": "kHz"
+    },
+    "thermal_shutdown": {
+      "min": 160,
+      "typ": 175,
+      "unit": "°C"
+    }
+  }
+}

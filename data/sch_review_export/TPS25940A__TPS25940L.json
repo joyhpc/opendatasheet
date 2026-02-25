@@ -1,6 +1,10 @@
 {
-  "_schema": "sch-review-device/1.0",
+  "_schema": "sch-review-device/1.1",
   "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
   "mpn": "TPS25940A, TPS25940L",
   "manufacturer": "Texas Instruments",
   "category": "Other",
@@ -630,5 +634,40 @@
       "conditions": null
     }
   },
-  "drc_hints": {}
+  "drc_hints": {
+    "vin_abs_max": {
+      "value": 20,
+      "unit": "V"
+    },
+    "vin_operating": {
+      "min": 2.7,
+      "typ": 18,
+      "max": 18,
+      "unit": "V"
+    },
+    "enable_threshold": {
+      "min": 0.97,
+      "typ": 0.99,
+      "max": 1.01,
+      "unit": "V"
+    },
+    "iout_max": {
+      "min": 0.53,
+      "typ": 0.58,
+      "max": 0.63,
+      "unit": "A"
+    },
+    "iq": {
+      "min": 140,
+      "typ": 210,
+      "max": 300,
+      "unit": "µA"
+    },
+    "uvlo": {
+      "min": 2.2,
+      "typ": 2.3,
+      "max": 2.4,
+      "unit": "V"
+    }
+  }
 }

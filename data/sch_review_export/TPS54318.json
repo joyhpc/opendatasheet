@@ -1,0 +1,590 @@
+{
+  "_schema": "sch-review-device/1.1",
+  "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
+  "mpn": "TPS54318",
+  "manufacturer": "Texas Instruments",
+  "category": "Buck",
+  "description": "2.95V to 6V Input, 3A Output, 2MHz, Synchronous Step-Down SWIFT™ Converter",
+  "packages": {
+    "WQFN-16": {
+      "pin_count": 17,
+      "pins": {
+        "1": {
+          "name": "VIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Input supply voltage, 2.95 V to 6 V.",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "VIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Input supply voltage, 2.95 V to 6 V.",
+          "unused_treatment": null
+        },
+        "16": {
+          "name": "VIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Input supply voltage, 2.95 V to 6 V.",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power ground. This pin should be electrically connected directly to the power pad under the device.",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power ground. This pin should be electrically connected directly to the power pad under the device.",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "AGND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Analog ground should be electrically connected to GND close to the device.",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "VSENSE",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Inverting node of the transconductance (gm) error amplifier.",
+          "unused_treatment": null
+        },
+        "7": {
+          "name": "COMP",
+          "direction": "OUTPUT",
+          "signal_type": "ANALOG",
+          "description": "Error amplifier output, and input to the output switch current comparator. Connect frequency compensation components to this pin.",
+          "unused_treatment": null
+        },
+        "8": {
+          "name": "RT/CLK",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "DIGITAL",
+          "description": "Resistor Timing or External Clock input pin.",
+          "unused_treatment": null
+        },
+        "9": {
+          "name": "SS",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Slow-start. An external capacitor connected to this pin sets the output voltage rise time.",
+          "unused_treatment": null
+        },
+        "10": {
+          "name": "PH",
+          "direction": "OUTPUT",
+          "signal_type": "POWER",
+          "description": "The source of the internal high-side power MOSFET, and drain of the internal low-side (synchronous) rectifier MOSFET.",
+          "unused_treatment": null
+        },
+        "11": {
+          "name": "PH",
+          "direction": "OUTPUT",
+          "signal_type": "POWER",
+          "description": "The source of the internal high-side power MOSFET, and drain of the internal low-side (synchronous) rectifier MOSFET.",
+          "unused_treatment": null
+        },
+        "12": {
+          "name": "PH",
+          "direction": "OUTPUT",
+          "signal_type": "POWER",
+          "description": "The source of the internal high-side power MOSFET, and drain of the internal low-side (synchronous) rectifier MOSFET.",
+          "unused_treatment": null
+        },
+        "13": {
+          "name": "BOOT",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "A bootstrap capacitor is required between BOOT and PH.",
+          "unused_treatment": null
+        },
+        "14": {
+          "name": "PWRGD",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "An open drain output, asserts low if output voltage is low due to thermal shutdown, overcurrent, over/under-voltage or EN shut down.",
+          "unused_treatment": null
+        },
+        "15": {
+          "name": "EN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Enable pin, internal pull-up current source. Pull below 1.2 V to disable. Float to enable.",
+          "unused_treatment": "FLOAT"
+        },
+        "EP": {
+          "name": "Thermal Pad",
+          "direction": "PASSIVE",
+          "signal_type": "POWER",
+          "description": "GND pin should be connected to the exposed power pad for proper operation. This power pad should be connected to any internal PCB ground plane using multiple vias for good thermal performance.",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "absolute_maximum_ratings": {
+    "TJ": {
+      "parameter": "Operating junction temperature",
+      "min": -40,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    },
+    "Tstg": {
+      "parameter": "Storage temperature",
+      "min": -65,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    }
+  },
+  "electrical_parameters": {
+    "VVIN": {
+      "parameter": "Operating input voltage",
+      "min": 2.95,
+      "typ": null,
+      "max": 6,
+      "unit": "V",
+      "conditions": null
+    },
+    "VUVLO": {
+      "parameter": "Internal under voltage lockout threshold",
+      "min": null,
+      "typ": 2.6,
+      "max": 2.8,
+      "unit": "V",
+      "conditions": "No voltage hysteresis, rising and falling"
+    },
+    "IQ(vin)": {
+      "parameter": "Shutdown supply current",
+      "min": null,
+      "typ": 2,
+      "max": 5,
+      "unit": "µA",
+      "conditions": "VEN = 0 V, TA = 25°C, 2.95 V ≤ VVIN ≤ 6 V"
+    },
+    "Iq": {
+      "parameter": "Quiescent current",
+      "min": null,
+      "typ": 350,
+      "max": 500,
+      "unit": "µA",
+      "conditions": "VVSENSE = 0.9 V, VVIN = 5 V, TA = 25°C, RT = 400 kΩ"
+    },
+    "VTH(en)": {
+      "parameter": "Enable threshold (Rising)",
+      "min": 1.16,
+      "typ": 1.25,
+      "max": 1.37,
+      "unit": "V",
+      "conditions": "Rising"
+    },
+    "VTH(en)_Falling": {
+      "parameter": "Enable threshold (Falling)",
+      "min": null,
+      "typ": 1.18,
+      "max": null,
+      "unit": "V",
+      "conditions": "Falling"
+    },
+    "IEN": {
+      "parameter": "Input current (Rising)",
+      "min": null,
+      "typ": -3.2,
+      "max": null,
+      "unit": "µA",
+      "conditions": "Enable rising threshold + 50 mV"
+    },
+    "IEN_Enable_falling_threshold___50": {
+      "parameter": "Input current (Falling)",
+      "min": null,
+      "typ": -0.65,
+      "max": null,
+      "unit": "µA",
+      "conditions": "Enable falling threshold - 50 mV"
+    },
+    "VREF": {
+      "parameter": "Voltage reference",
+      "min": 0.795,
+      "typ": 0.803,
+      "max": 0.811,
+      "unit": "V",
+      "conditions": "2.95 V ≤ VVIN ≤ 6 V, -40°C < TJ < 150°C"
+    },
+    "RDS(HFET)": {
+      "parameter": "High-side switch resistance",
+      "min": null,
+      "typ": 30,
+      "max": 60,
+      "unit": "mΩ",
+      "conditions": "(VBOOT - VPH) = 5 V"
+    },
+    "RDS(HFET)_VBOOT___VPH____2_95_V": {
+      "parameter": "High-side switch resistance",
+      "min": null,
+      "typ": 44,
+      "max": 70,
+      "unit": "mΩ",
+      "conditions": "(VBOOT - VPH) = 2.95 V"
+    },
+    "RDS(LFET)": {
+      "parameter": "Low-side switch resistance",
+      "min": null,
+      "typ": 30,
+      "max": 60,
+      "unit": "mΩ",
+      "conditions": "VVIN = 5 V"
+    },
+    "RDS(LFET)_VVIN___2_95_V": {
+      "parameter": "Low-side switch resistance",
+      "min": null,
+      "typ": 44,
+      "max": 70,
+      "unit": "mΩ",
+      "conditions": "VVIN = 2.95 V"
+    },
+    "IIN": {
+      "parameter": "Input current",
+      "min": null,
+      "typ": 7,
+      "max": null,
+      "unit": "nA",
+      "conditions": null
+    },
+    "gM(ea)": {
+      "parameter": "Error amplifier transconductance",
+      "min": null,
+      "typ": 225,
+      "max": null,
+      "unit": "µS",
+      "conditions": "-2 µA < ICOMP < 2 µA, VCOMP = 1 V"
+    },
+    "gM(EA,ss)": {
+      "parameter": "Error amplifier transconductance during soft-start",
+      "min": null,
+      "typ": 70,
+      "max": null,
+      "unit": "µS",
+      "conditions": "-2 µA < ICOMP < 2 µA, VCOMP = 1 V, VVSENSE = 0.4 V"
+    },
+    "ICOMP": {
+      "parameter": "Error amplifier source/sink",
+      "min": null,
+      "typ": 20,
+      "max": null,
+      "unit": "µA",
+      "conditions": "VCOMP = 1 V, 100 mV overdrive"
+    },
+    "gM": {
+      "parameter": "COMP to ISWITCH transconductance",
+      "min": null,
+      "typ": 13,
+      "max": null,
+      "unit": "A/V",
+      "conditions": null
+    },
+    "ILIM": {
+      "parameter": "Current limit threshold",
+      "min": 3.7,
+      "typ": 5.5,
+      "max": null,
+      "unit": "A",
+      "conditions": "Instantaneous peak current"
+    },
+    "TSD": {
+      "parameter": "Thermal Shutdown",
+      "min": null,
+      "typ": 175,
+      "max": null,
+      "unit": "°C",
+      "conditions": null
+    },
+    "TSD(hyst)": {
+      "parameter": "Hysteresis",
+      "min": null,
+      "typ": 15,
+      "max": null,
+      "unit": "°C",
+      "conditions": null
+    },
+    "fSW": {
+      "parameter": "Switching frequency range using CLK mode",
+      "min": 300,
+      "typ": null,
+      "max": 2000,
+      "unit": "kHz",
+      "conditions": null
+    },
+    "fSW_RRT___400_k": {
+      "parameter": "Switching frequency",
+      "min": 400,
+      "typ": 500,
+      "max": 600,
+      "unit": "kHz",
+      "conditions": "RRT = 400 kΩ"
+    },
+    "tMIN(CLK)": {
+      "parameter": "Minimum CLK pulse width",
+      "min": 75,
+      "typ": null,
+      "max": null,
+      "unit": "ns",
+      "conditions": null
+    },
+    "VRT/CLK": {
+      "parameter": "RT/CLK voltage",
+      "min": null,
+      "typ": 0.5,
+      "max": null,
+      "unit": "V",
+      "conditions": "RRT/CLK = 400 kΩ"
+    },
+    "VIH(CLK)": {
+      "parameter": "RT/CLK high threshold",
+      "min": 1.6,
+      "typ": null,
+      "max": 2.2,
+      "unit": "V",
+      "conditions": null
+    },
+    "VIL(CLK)": {
+      "parameter": "RT/CLK low threshold",
+      "min": 0.4,
+      "typ": 0.6,
+      "max": null,
+      "unit": "V",
+      "conditions": null
+    },
+    "tDLY": {
+      "parameter": "RT/CLK falling edge to PH rising edge delay",
+      "min": null,
+      "typ": 90,
+      "max": null,
+      "unit": "ns",
+      "conditions": "fSW = 500 kHz with RRT resistor in series"
+    },
+    "tLOCK(PLL)": {
+      "parameter": "PLL lock-in time",
+      "min": null,
+      "typ": 14,
+      "max": null,
+      "unit": "µs",
+      "conditions": "fSW = 500 kHz"
+    },
+    "tON(min)": {
+      "parameter": "Minimum on time",
+      "min": null,
+      "typ": 60,
+      "max": null,
+      "unit": "ns",
+      "conditions": "Measured at 50% points on PH, IOUT = 3"
+    },
+    "tON(min)_Measured_at_50__points_on_PH": {
+      "parameter": "Minimum on time",
+      "min": null,
+      "typ": 110,
+      "max": null,
+      "unit": "ns",
+      "conditions": "Measured at 50% points on PH, VVIN = 5 V, IOUT = 0 A"
+    },
+    "tOFF(min)": {
+      "parameter": "Minimum off time",
+      "min": null,
+      "typ": 60,
+      "max": null,
+      "unit": "ns",
+      "conditions": "Prior to skipping off pulses, (VBOOT – VPH) = 2.95 V, IOUT = 3"
+    },
+    "tRISE": {
+      "parameter": "Rise time",
+      "min": null,
+      "typ": 1.5,
+      "max": null,
+      "unit": "V/ns",
+      "conditions": "VVIN = 5 V"
+    },
+    "tFALL": {
+      "parameter": "Fall time",
+      "min": null,
+      "typ": 1.5,
+      "max": null,
+      "unit": "V/ns",
+      "conditions": "VVIN = 5 V"
+    },
+    "RBOOT": {
+      "parameter": "BOOT charge resistance",
+      "min": null,
+      "typ": 16,
+      "max": null,
+      "unit": "Ω",
+      "conditions": "VVIN = 5 V"
+    },
+    "VUVLO(Boot)": {
+      "parameter": "BOOT-PH UVLO",
+      "min": null,
+      "typ": 2.1,
+      "max": null,
+      "unit": "V",
+      "conditions": "VVIN = 2.95 V"
+    },
+    "ICHG": {
+      "parameter": "Charge current",
+      "min": null,
+      "typ": 1.8,
+      "max": null,
+      "unit": "µA",
+      "conditions": "VSS = 0.4 V"
+    },
+    "VSSxREF": {
+      "parameter": "SS to reference crossover",
+      "min": null,
+      "typ": 0.9,
+      "max": null,
+      "unit": "V",
+      "conditions": "98% nominal"
+    },
+    "VDSCHG(SS)": {
+      "parameter": "SS discharge voltage (overload)",
+      "min": null,
+      "typ": 20,
+      "max": null,
+      "unit": "µA",
+      "conditions": "VVSENSE = 0 V"
+    },
+    "IDSCHG(SS)": {
+      "parameter": "SS discharge current (UVLO, EN, thermal fault)",
+      "min": null,
+      "typ": 1.25,
+      "max": null,
+      "unit": "mA",
+      "conditions": "VVIN = 5 V, VSS = 0.5 V"
+    },
+    "VTH(PG)": {
+      "parameter": "VSENSE threshold (falling fault)",
+      "min": null,
+      "typ": 91,
+      "max": null,
+      "unit": "%VREF",
+      "conditions": "VVSENSE falling (fault)"
+    },
+    "VTH(PG)_VVSENSE_rising__good": {
+      "parameter": "VSENSE threshold (rising good)",
+      "min": null,
+      "typ": 93,
+      "max": null,
+      "unit": "%VREF",
+      "conditions": "VVSENSE rising (good)"
+    },
+    "VTH(PG)_VVSENSE_rising__fault": {
+      "parameter": "VSENSE threshold (rising fault)",
+      "min": null,
+      "typ": 107,
+      "max": null,
+      "unit": "%VREF",
+      "conditions": "VVSENSE rising (fault)"
+    },
+    "VTH(PG)_VVSENSE_falling__good": {
+      "parameter": "VSENSE threshold (falling good)",
+      "min": null,
+      "typ": 105,
+      "max": null,
+      "unit": "%VREF",
+      "conditions": "VVSENSE falling (good)"
+    },
+    "VHYST(PG)": {
+      "parameter": "Hysteresis",
+      "min": null,
+      "typ": 2,
+      "max": null,
+      "unit": "%VREF",
+      "conditions": "VVSENSE falling"
+    },
+    "IPH(lkg)": {
+      "parameter": "Output high leakage",
+      "min": null,
+      "typ": 2,
+      "max": null,
+      "unit": "nA",
+      "conditions": "VVSENSE = VREF, VPWRGD = 5.5 V"
+    },
+    "RPG": {
+      "parameter": "Power Good on-resistance",
+      "min": null,
+      "typ": 100,
+      "max": null,
+      "unit": "Ω",
+      "conditions": null
+    },
+    "VOL": {
+      "parameter": "Low-level output voltage",
+      "min": null,
+      "typ": 0.3,
+      "max": null,
+      "unit": "V",
+      "conditions": "IPWRGD = 3.5 mA"
+    },
+    "VMIN(PG)": {
+      "parameter": "Minimum input voltage for valid output",
+      "min": 1.2,
+      "typ": 1.6,
+      "max": null,
+      "unit": "V",
+      "conditions": "VPWRGD < 0.5 V, IOUT = 100 µA"
+    }
+  },
+  "drc_hints": {
+    "vin_abs_max": {
+      "value": 7,
+      "unit": "V"
+    },
+    "vref": {
+      "min": 0.795,
+      "typ": 0.803,
+      "max": 0.811,
+      "unit": "V"
+    },
+    "enable_threshold": {
+      "min": 1.16,
+      "typ": 1.25,
+      "max": 1.37,
+      "unit": "V"
+    },
+    "iout_max": {
+      "min": 3.7,
+      "typ": 5.5,
+      "unit": "A"
+    },
+    "iq": {
+      "typ": 2,
+      "max": 5,
+      "unit": "µA"
+    },
+    "fsw": {
+      "min": 200,
+      "max": 2000,
+      "unit": "kHz"
+    },
+    "thermal_shutdown": {
+      "typ": 175,
+      "unit": "°C"
+    },
+    "uvlo": {
+      "typ": 2.6,
+      "max": 2.8,
+      "unit": "V"
+    }
+  }
+}

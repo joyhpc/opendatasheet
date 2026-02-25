@@ -1,6 +1,10 @@
 {
-  "_schema": "sch-review-device/1.0",
+  "_schema": "sch-review-device/1.1",
   "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
   "mpn": "TPS1663",
   "manufacturer": "Texas Instruments",
   "category": "Other",
@@ -684,5 +688,36 @@
       "conditions": null
     }
   },
-  "drc_hints": {}
+  "drc_hints": {
+    "vin_abs_max": {
+      "value": 67,
+      "unit": "V"
+    },
+    "vin_operating": {
+      "min": 4.5,
+      "max": 60,
+      "unit": "V"
+    },
+    "iout_max": {
+      "min": 0.54,
+      "typ": 0.6,
+      "max": 0.66,
+      "unit": "A"
+    },
+    "iq": {
+      "typ": 1.38,
+      "max": 1.7,
+      "unit": "mA"
+    },
+    "thermal_shutdown": {
+      "typ": 165,
+      "unit": "°C"
+    },
+    "uvlo": {
+      "min": 1.176,
+      "typ": 1.2,
+      "max": 1.224,
+      "unit": "V"
+    }
+  }
 }

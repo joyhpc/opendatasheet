@@ -1,0 +1,273 @@
+{
+  "_schema": "sch-review-device/1.1",
+  "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
+  "mpn": "TPS5401",
+  "manufacturer": "Texas Instruments",
+  "category": "Buck",
+  "description": "0.5-A, 42-V Input, Step-Down Converter",
+  "packages": {
+    "MSOP-10": {
+      "pin_count": 11,
+      "pins": {
+        "1": {
+          "name": "BOOT",
+          "direction": "OUTPUT",
+          "signal_type": "ANALOG",
+          "description": "A bootstrap capacitor is required between BOOT and PH. If the voltage on this capacitor is below the minimum required by the output device, the output is forced to switch off until the capacitor is refreshed.",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "VIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Input supply voltage, 3.5 V to 42 V.",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "EN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Enable pin, internal pullup current source. Pull below 1.2 V to disable. Float to enable. Adjust the input undervoltage lockout with two resistors.",
+          "unused_treatment": "FLOAT"
+        },
+        "4": {
+          "name": "SS/TR",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Slow-start and tracking. An external capacitor connected to this pin sets the output rise time. Because the voltage on this pin overrides the internal reference, it can be used for tracking and sequencing.",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "RT/CLK",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Resistor timing and external clock. An internal amplifier holds this pin at a fixed voltage when using an external resistor to ground to set the switching frequency. If the pin is pulled above the PLL upper threshold, a mode change occurs and the pin becomes a synchronization input.",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "PWRGD",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "An open-drain output; asserts low if output voltage is low due to thermal shutdown, dropout, overvoltage or EN shutdown.",
+          "unused_treatment": null
+        },
+        "7": {
+          "name": "VSENSE",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Inverting node of the transconductance (gm) error amplifier.",
+          "unused_treatment": null
+        },
+        "8": {
+          "name": "COMP",
+          "direction": "OUTPUT",
+          "signal_type": "ANALOG",
+          "description": "Error amplifier output, and input to the output switch current comparator. Connect frequency compensation components to this pin.",
+          "unused_treatment": null
+        },
+        "9": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground",
+          "unused_treatment": null
+        },
+        "10": {
+          "name": "PH",
+          "direction": "OUTPUT",
+          "signal_type": "POWER",
+          "description": "The source of the internal high-side power MOSFET",
+          "unused_treatment": null
+        },
+        "11": {
+          "name": "Thermal pad",
+          "direction": "PASSIVE",
+          "signal_type": "POWER",
+          "description": "GND pin must be electrically connected to the thermal pad on the printed circuit board for proper operation.",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "absolute_maximum_ratings": {
+    "VIN": {
+      "parameter": "Input voltage VIN",
+      "min": -0.3,
+      "max": 47,
+      "unit": "V",
+      "conditions": null
+    },
+    "EN": {
+      "parameter": "Input voltage EN",
+      "min": -0.3,
+      "max": 5,
+      "unit": "V",
+      "conditions": null
+    },
+    "BOOT": {
+      "parameter": "Input voltage BOOT",
+      "min": null,
+      "max": 55,
+      "unit": "V",
+      "conditions": null
+    },
+    "VSENSE": {
+      "parameter": "Input voltage VSENSE",
+      "min": -0.3,
+      "max": 3,
+      "unit": "V",
+      "conditions": null
+    },
+    "COMP": {
+      "parameter": "Input voltage COMP",
+      "min": -0.3,
+      "max": 3,
+      "unit": "V",
+      "conditions": null
+    },
+    "PWRGD": {
+      "parameter": "Input voltage PWRGD",
+      "min": -0.3,
+      "max": 6,
+      "unit": "V",
+      "conditions": null
+    },
+    "SS/TR": {
+      "parameter": "Input voltage SS/TR",
+      "min": -0.3,
+      "max": 3,
+      "unit": "V",
+      "conditions": null
+    },
+    "RT/CLK": {
+      "parameter": "Input voltage RT/CLK",
+      "min": -0.3,
+      "max": 3.6,
+      "unit": "V",
+      "conditions": null
+    },
+    "PH": {
+      "parameter": "Output voltage PH",
+      "min": -0.6,
+      "max": 47,
+      "unit": "V",
+      "conditions": null
+    },
+    "Tstg": {
+      "parameter": "Storage temperature range, Tstg",
+      "min": -65,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    },
+    "V(ESD)": {
+      "parameter": "Electrostatic discharge Human body model (HBM)",
+      "min": -1000,
+      "max": 1000,
+      "unit": "V",
+      "conditions": "per ANSI/ESDA/JEDEC JS-001, all pins"
+    },
+    "V(ESD)_per_JEDEC_specification_JESD22": {
+      "parameter": "Electrostatic discharge Charged device model (CDM)",
+      "min": -500,
+      "max": 500,
+      "unit": "V",
+      "conditions": "per JEDEC specification JESD22-C101, all pins"
+    }
+  },
+  "electrical_parameters": {
+    "VIN": {
+      "parameter": "Operating input voltage",
+      "min": 3.5,
+      "typ": null,
+      "max": 42,
+      "unit": "V",
+      "conditions": null
+    },
+    "Vref": {
+      "parameter": "Voltage reference",
+      "min": 0.772,
+      "typ": 0.8,
+      "max": 0.828,
+      "unit": "V",
+      "conditions": null
+    },
+    "gmEA": {
+      "parameter": "Error amplifier transconductance",
+      "min": null,
+      "typ": 97,
+      "max": null,
+      "unit": "µMhos",
+      "conditions": "-2 µA < ICOMP < 2 µA, VCOMP = 1 V"
+    },
+    "gmEA_2__A___ICOMP___2__A__VCOMP": {
+      "parameter": "Error amplifier transconductance during slow-start",
+      "min": null,
+      "typ": 26,
+      "max": null,
+      "unit": "µMhos",
+      "conditions": "-2 µA < ICOMP < 2 µA, VCOMP = 1 V, VVSENSE = 0.4 V"
+    },
+    "gmPS": {
+      "parameter": "COMP to switch current transconductance",
+      "min": null,
+      "typ": 1.9,
+      "max": null,
+      "unit": "A/V",
+      "conditions": null
+    },
+    "fSW": {
+      "parameter": "Switching frequency",
+      "min": 450,
+      "typ": 581,
+      "max": 720,
+      "unit": "kHz",
+      "conditions": "RT = 200 kΩ"
+    }
+  },
+  "drc_hints": {
+    "vin_abs_max": {
+      "value": 47,
+      "unit": "V"
+    },
+    "vin_operating": {
+      "min": 3.5,
+      "max": 42,
+      "unit": "V"
+    },
+    "vref": {
+      "min": 0.772,
+      "typ": 0.8,
+      "max": 0.828,
+      "unit": "V"
+    },
+    "enable_threshold": {
+      "min": 0.9,
+      "typ": 1.25,
+      "max": 1.55,
+      "unit": "V"
+    },
+    "iout_max": {
+      "min": 0.6,
+      "typ": 0.94,
+      "unit": "A"
+    },
+    "fsw": {
+      "min": 100,
+      "max": 2500,
+      "unit": "kHz"
+    },
+    "thermal_shutdown": {
+      "typ": 182,
+      "unit": "°C"
+    },
+    "uvlo": {
+      "typ": 2.5,
+      "unit": "V"
+    }
+  }
+}

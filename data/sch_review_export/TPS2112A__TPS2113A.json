@@ -1,6 +1,10 @@
 {
-  "_schema": "sch-review-device/1.0",
+  "_schema": "sch-review-device/1.1",
   "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
   "mpn": "TPS2112A, TPS2113A",
   "manufacturer": "Texas Instruments",
   "category": "Other",
@@ -237,5 +241,25 @@
       "conditions": null
     }
   },
-  "drc_hints": {}
+  "drc_hints": {
+    "vin_abs_max": {
+      "value": 6,
+      "unit": "V"
+    },
+    "enable_threshold": {
+      "min": 2,
+      "unit": "V"
+    },
+    "iout_max": {
+      "min": 0.51,
+      "typ": 0.63,
+      "max": 0.8,
+      "unit": "A"
+    },
+    "iq": {
+      "typ": 55,
+      "max": 90,
+      "unit": "μA"
+    }
+  }
 }

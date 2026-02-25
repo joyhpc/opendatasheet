@@ -1,0 +1,366 @@
+{
+  "_schema": "sch-review-device/1.1",
+  "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
+  "mpn": "AP1534",
+  "manufacturer": "Diodes Incorporated",
+  "category": "Buck",
+  "description": "PWM CONTROL 2A STEP-DOWN CONVERTER",
+  "packages": {
+    "SO-8": {
+      "pin_count": 8,
+      "pins": {
+        "1": {
+          "name": "FB",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Feedback pin for output voltage regulation",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "EN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Enable control input",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "OCSET",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Over current threshold setting pin",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "VCC",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power supply input",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "Output",
+          "direction": "OUTPUT",
+          "signal_type": "POWER",
+          "description": "Switching output pin",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "Output",
+          "direction": "OUTPUT",
+          "signal_type": "POWER",
+          "description": "Switching output pin",
+          "unused_treatment": null
+        },
+        "7": {
+          "name": "VSS",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground pin",
+          "unused_treatment": null
+        },
+        "8": {
+          "name": "VSS",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground pin",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "absolute_maximum_ratings": {
+    "ESD HBM": {
+      "parameter": "Human Body Model ESD Protection",
+      "min": null,
+      "max": 4.5,
+      "unit": "KV",
+      "conditions": null
+    },
+    "ESD MM": {
+      "parameter": "Machine Model ESD Protection",
+      "min": null,
+      "max": 150,
+      "unit": "V",
+      "conditions": null
+    },
+    "Vcc": {
+      "parameter": "VCC Pin Voltage",
+      "min": -0.3,
+      "max": 20,
+      "unit": "V",
+      "conditions": "Relative to Vss"
+    },
+    "VFB": {
+      "parameter": "Feedback Pin Voltage",
+      "min": -0.3,
+      "max": null,
+      "unit": "V",
+      "conditions": "Vss - 0.3 to Vcc"
+    },
+    "VEN": {
+      "parameter": "EN Pin Voltage",
+      "min": -0.3,
+      "max": null,
+      "unit": "V",
+      "conditions": "Vss - 0.3 to VIN"
+    },
+    "VOUT": {
+      "parameter": "Switch Pin Voltage",
+      "min": -1.0,
+      "max": null,
+      "unit": "V",
+      "conditions": "Vss - 1.0 to VIN"
+    },
+    "PD": {
+      "parameter": "Power Dissipation",
+      "min": null,
+      "max": null,
+      "unit": "mW",
+      "conditions": "Internally limited"
+    },
+    "TJ": {
+      "parameter": "Operating Junction Temperature Range",
+      "min": -40,
+      "max": 125,
+      "unit": "°C",
+      "conditions": null
+    },
+    "TST": {
+      "parameter": "Storage Temperature Range",
+      "min": -65,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    }
+  },
+  "electrical_parameters": {
+    "VIN": {
+      "parameter": "Input Voltage",
+      "min": 3.6,
+      "typ": null,
+      "max": 18,
+      "unit": "V",
+      "conditions": null
+    },
+    "IOUT": {
+      "parameter": "Output Current",
+      "min": 0,
+      "typ": null,
+      "max": 2,
+      "unit": "A",
+      "conditions": null
+    },
+    "TA": {
+      "parameter": "Operating Ambient Temperature",
+      "min": -20,
+      "typ": null,
+      "max": 85,
+      "unit": "°C",
+      "conditions": null
+    },
+    "VFB": {
+      "parameter": "Feedback Voltage",
+      "min": 0.784,
+      "typ": 0.8,
+      "max": 0.816,
+      "unit": "V",
+      "conditions": "IOUT = 0.1A, VIN = 12V"
+    },
+    "IFB": {
+      "parameter": "Feedback Bias Current",
+      "min": null,
+      "typ": 0.1,
+      "max": 0.5,
+      "unit": "µA",
+      "conditions": "IOUT = 0.1A, VIN = 12V"
+    },
+    "ISW": {
+      "parameter": "Switch Current",
+      "min": 2.0,
+      "typ": null,
+      "max": null,
+      "unit": "A",
+      "conditions": "VIN = 12V"
+    },
+    "ISHDN": {
+      "parameter": "Current Consumption During Power Off",
+      "min": null,
+      "typ": 10,
+      "max": null,
+      "unit": "µA",
+      "conditions": "VEN = 0V, VIN = 12V"
+    },
+    "ΔVOUT / VIN": {
+      "parameter": "Line Regulation",
+      "min": null,
+      "typ": 1,
+      "max": 2,
+      "unit": "%",
+      "conditions": "VIN = 5V~18V"
+    },
+    "ΔVOUT / VOUT": {
+      "parameter": "Load Regulation",
+      "min": null,
+      "typ": 0.2,
+      "max": 0.5,
+      "unit": "%",
+      "conditions": "IOUT = 0.1 to 2A, VIN = 12V"
+    },
+    "fOSC": {
+      "parameter": "Oscillation Frequency",
+      "min": 240,
+      "typ": 300,
+      "max": 400,
+      "unit": "KHz",
+      "conditions": "Measure waveform at SW pin, VIN = 12V"
+    },
+    "fOSC1": {
+      "parameter": "Frequency of Current Limit or Short Circuit Protect",
+      "min": null,
+      "typ": 50,
+      "max": null,
+      "unit": "KHz",
+      "conditions": "Measure waveform at SW pin, VIN = 12V"
+    },
+    "VIH": {
+      "parameter": "EN Pin Input Voltage High",
+      "min": 2.0,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": "Evaluate oscillation at SW pin, VIN = 12V"
+    },
+    "VIL": {
+      "parameter": "EN Pin Input Voltage Low",
+      "min": null,
+      "typ": null,
+      "max": 0.8,
+      "unit": "V",
+      "conditions": "Evaluate oscillation stop at SW pin, VIN = 12V"
+    },
+    "ISH": {
+      "parameter": "EN Pin Input Leakage Current High",
+      "min": null,
+      "typ": 20,
+      "max": null,
+      "unit": "µA",
+      "conditions": "VIN = 12V"
+    },
+    "ISL": {
+      "parameter": "EN Pin Input Leakage Current Low",
+      "min": null,
+      "typ": -10,
+      "max": null,
+      "unit": "µA",
+      "conditions": "VIN = 12V"
+    },
+    "IOCSET": {
+      "parameter": "OCSET Pin Bias Current",
+      "min": 75,
+      "typ": 90,
+      "max": 105,
+      "unit": "µA",
+      "conditions": "VIN = 12V"
+    },
+    "RDS(ON)": {
+      "parameter": "Internal MOSFET RDS(ON) (5V)",
+      "min": null,
+      "typ": 160,
+      "max": null,
+      "unit": "mΩ",
+      "conditions": "VIN = 5V, VFB = 0V"
+    },
+    "RDS(ON)_VIN___12V__VFB___0V": {
+      "parameter": "Internal MOSFET RDS(ON) (12V)",
+      "min": null,
+      "typ": 100,
+      "max": null,
+      "unit": "mΩ",
+      "conditions": "VIN = 12V, VFB = 0V"
+    },
+    "EFFI": {
+      "parameter": "Efficiency",
+      "min": null,
+      "typ": 91,
+      "max": null,
+      "unit": "%",
+      "conditions": "VIN = 12V, VOUT = 5V, IOUT = 2A"
+    },
+    "TSHDN": {
+      "parameter": "Thermal shutdown threshold",
+      "min": null,
+      "typ": 150,
+      "max": null,
+      "unit": "°C",
+      "conditions": "VIN = 12V"
+    },
+    "THYS": {
+      "parameter": "Thermal shutdown hysteresis",
+      "min": null,
+      "typ": 55,
+      "max": null,
+      "unit": "°C",
+      "conditions": "VIN = 12V"
+    },
+    "θJA": {
+      "parameter": "Thermal Resistance Junction-to-Ambient",
+      "min": null,
+      "typ": 127,
+      "max": null,
+      "unit": "°C/W",
+      "conditions": "SO-8 (Note 3), VIN = 12V"
+    },
+    "θJC": {
+      "parameter": "Thermal Resistance Junction-to-Case",
+      "min": null,
+      "typ": 28,
+      "max": null,
+      "unit": "°C/W",
+      "conditions": "SO-8 (Note 3), VIN = 12V"
+    }
+  },
+  "drc_hints": {
+    "vin_abs_max": {
+      "value": 20,
+      "unit": "V"
+    },
+    "vin_operating": {
+      "min": 3.6,
+      "max": 18,
+      "unit": "V"
+    },
+    "vref": {
+      "min": 0.784,
+      "typ": 0.8,
+      "max": 0.816,
+      "unit": "V"
+    },
+    "enable_threshold": {
+      "min": 2.0,
+      "unit": "V"
+    },
+    "iout_max": {
+      "min": 0,
+      "max": 2,
+      "unit": "A"
+    },
+    "fsw": {
+      "min": 240,
+      "typ": 300,
+      "max": 400,
+      "unit": "KHz"
+    },
+    "thermal_shutdown": {
+      "typ": 150,
+      "unit": "°C"
+    },
+    "thermal_resistance": {
+      "typ": 127,
+      "unit": "°C/W"
+    }
+  }
+}

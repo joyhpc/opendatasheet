@@ -1,0 +1,326 @@
+{
+  "_schema": "sch-review-device/1.1",
+  "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
+  "mpn": "LM2611",
+  "manufacturer": "Texas Instruments",
+  "category": "Other",
+  "description": "1.4-MHz Cuk Converter",
+  "packages": {
+    "SOT-23-5": {
+      "pin_count": 5,
+      "pins": {
+        "1": {
+          "name": "SW",
+          "direction": "OUTPUT",
+          "signal_type": "POWER",
+          "description": "Switching node; drain of the internal NMOS power switch",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "NFB",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Negative feedback input for setting the output voltage",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "SHDN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Shutdown control input, active low",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "VIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power supply input",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "absolute_maximum_ratings": {
+    "VIN": {
+      "parameter": "Input voltage",
+      "min": null,
+      "max": 14.5,
+      "unit": "V",
+      "conditions": null
+    },
+    "Tstg": {
+      "parameter": "Storage temperature",
+      "min": -65,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    },
+    "V(ESD)": {
+      "parameter": "Electrostatic discharge (MM)",
+      "min": -200,
+      "max": 200,
+      "unit": "V",
+      "conditions": null
+    }
+  },
+  "electrical_parameters": {
+    "VIN": {
+      "parameter": "Input voltage",
+      "min": 2.7,
+      "typ": null,
+      "max": 14,
+      "unit": "V",
+      "conditions": "TJ = -40°C to +85°C"
+    },
+    "ISW": {
+      "parameter": "Switch current limit",
+      "min": null,
+      "typ": 1.2,
+      "max": null,
+      "unit": "A",
+      "conditions": "Grade A"
+    },
+    "ISW_Grade_A__TJ____40_C_to__85_C": {
+      "parameter": "Switch current limit",
+      "min": 1,
+      "typ": null,
+      "max": 2,
+      "unit": "A",
+      "conditions": "Grade A; TJ = -40°C to +85°C"
+    },
+    "ISW_Grade_B": {
+      "parameter": "Switch current limit",
+      "min": null,
+      "typ": 0.9,
+      "max": null,
+      "unit": "A",
+      "conditions": "Grade B"
+    },
+    "ISW_Grade_B__TJ____40_C_to__85_C": {
+      "parameter": "Switch current limit",
+      "min": 0.7,
+      "typ": null,
+      "max": null,
+      "unit": "A",
+      "conditions": "Grade B; TJ = -40°C to +85°C"
+    },
+    "RDSON": {
+      "parameter": "Switch ON resistance",
+      "min": null,
+      "typ": 0.5,
+      "max": 0.65,
+      "unit": "Ω",
+      "conditions": "Grade A"
+    },
+    "RDSON_Grade_B": {
+      "parameter": "Switch ON resistance",
+      "min": null,
+      "typ": 0.7,
+      "max": 0.9,
+      "unit": "Ω",
+      "conditions": "Grade B"
+    },
+    "SHDNTH": {
+      "parameter": "Shutdown threshold",
+      "min": 1.5,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": "Device enabled; TJ = -40°C to +85°C"
+    },
+    "SHDNTH_Device_disabled__TJ____40_C_to": {
+      "parameter": "Shutdown threshold",
+      "min": null,
+      "typ": null,
+      "max": 0.5,
+      "unit": "V",
+      "conditions": "Device disabled; TJ = -40°C to +85°C"
+    },
+    "ISHDN": {
+      "parameter": "Shutdown pin bias current",
+      "min": null,
+      "typ": 0,
+      "max": null,
+      "unit": "µA",
+      "conditions": "VSHDN = 0 V"
+    },
+    "ISHDN_VSHDN___5_V": {
+      "parameter": "Shutdown pin bias current",
+      "min": null,
+      "typ": 0,
+      "max": null,
+      "unit": "µA",
+      "conditions": "VSHDN = 5 V"
+    },
+    "ISHDN_VSHDN___5_V__TJ____40_C_to__85": {
+      "parameter": "Shutdown pin bias current",
+      "min": null,
+      "typ": null,
+      "max": 1,
+      "unit": "µA",
+      "conditions": "VSHDN = 5 V; TJ = -40°C to +85°C"
+    },
+    "NFB": {
+      "parameter": "Negative feedback reference",
+      "min": null,
+      "typ": -1.23,
+      "max": null,
+      "unit": "V",
+      "conditions": "VIN = 3 V"
+    },
+    "NFB_VIN___3_V__TJ____40_C_to__85_C": {
+      "parameter": "Negative feedback reference",
+      "min": -1.205,
+      "typ": null,
+      "max": -1.255,
+      "unit": "V",
+      "conditions": "VIN = 3 V; TJ = -40°C to +85°C"
+    },
+    "INFB": {
+      "parameter": "NFB pin bias current",
+      "min": null,
+      "typ": -4.7,
+      "max": null,
+      "unit": "µA",
+      "conditions": "VNFB = -1.23 V"
+    },
+    "INFB_VNFB____1_23_V__TJ____40_C_to": {
+      "parameter": "NFB pin bias current",
+      "min": -2.7,
+      "typ": null,
+      "max": -6.7,
+      "unit": "µA",
+      "conditions": "VNFB = -1.23 V; TJ = -40°C to +85°C"
+    },
+    "Iq": {
+      "parameter": "Quiescent current",
+      "min": null,
+      "typ": 1.8,
+      "max": null,
+      "unit": "mA",
+      "conditions": "VSHDN = 5 V, Switching"
+    },
+    "Iq_VSHDN___5_V__Switching__TJ": {
+      "parameter": "Quiescent current",
+      "min": null,
+      "typ": null,
+      "max": 3.5,
+      "unit": "mA",
+      "conditions": "VSHDN = 5 V, Switching; TJ = -40°C to +85°C"
+    },
+    "Iq_VSHDN___5_V__Not_Switching": {
+      "parameter": "Quiescent current",
+      "min": null,
+      "typ": 270,
+      "max": null,
+      "unit": "µA",
+      "conditions": "VSHDN = 5 V, Not Switching"
+    },
+    "Iq_VSHDN___5_V__Not_Switching__TJ": {
+      "parameter": "Quiescent current",
+      "min": null,
+      "typ": null,
+      "max": 500,
+      "unit": "µA",
+      "conditions": "VSHDN = 5 V, Not Switching; TJ = -40°C to +85°C"
+    },
+    "Iq_VSHDN___0_V": {
+      "parameter": "Quiescent current",
+      "min": null,
+      "typ": 0.024,
+      "max": null,
+      "unit": "µA",
+      "conditions": "VSHDN = 0 V"
+    },
+    "Iq_VSHDN___0_V__TJ____40_C_to__85": {
+      "parameter": "Quiescent current",
+      "min": null,
+      "typ": null,
+      "max": 1,
+      "unit": "µA",
+      "conditions": "VSHDN = 0 V; TJ = -40°C to +85°C"
+    },
+    "%VOUT/ΔVIN": {
+      "parameter": "Reference line regulation",
+      "min": null,
+      "typ": 0.02,
+      "max": null,
+      "unit": "%/V",
+      "conditions": "2.7 V ≤ VIN ≤ 14 V"
+    },
+    "fS": {
+      "parameter": "Switching frequency",
+      "min": null,
+      "typ": 1.4,
+      "max": null,
+      "unit": "MHz",
+      "conditions": "TJ = 25°C"
+    },
+    "fS_TJ____40_C_to__85_C": {
+      "parameter": "Switching frequency",
+      "min": 1,
+      "typ": null,
+      "max": 1.8,
+      "unit": "MHz",
+      "conditions": "TJ = -40°C to +85°C"
+    },
+    "DMAX": {
+      "parameter": "Maximum duty cycle",
+      "min": null,
+      "typ": 88,
+      "max": null,
+      "unit": "%",
+      "conditions": "TJ = 25°C"
+    },
+    "DMAX_TJ____40_C_to__85_C": {
+      "parameter": "Maximum duty cycle",
+      "min": 82,
+      "typ": null,
+      "max": null,
+      "unit": "%",
+      "conditions": "TJ = -40°C to +85°C"
+    },
+    "IL": {
+      "parameter": "Switch leakage",
+      "min": null,
+      "typ": null,
+      "max": 1,
+      "unit": "µA",
+      "conditions": "VSW = 5 V, Not Switching"
+    }
+  },
+  "drc_hints": {
+    "vin_abs_max": {
+      "value": 14.5,
+      "unit": "V"
+    },
+    "vin_operating": {
+      "min": 2.7,
+      "max": 14,
+      "unit": "V"
+    },
+    "iout_max": {
+      "typ": 1.2,
+      "unit": "A"
+    },
+    "iq": {
+      "typ": 1.8,
+      "unit": "mA"
+    },
+    "fsw": {
+      "typ": 1.4,
+      "unit": "MHz"
+    }
+  }
+}

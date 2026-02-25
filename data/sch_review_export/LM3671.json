@@ -1,0 +1,348 @@
+{
+  "_schema": "sch-review-device/1.1",
+  "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
+  "mpn": "LM3671",
+  "manufacturer": "Texas Instruments",
+  "category": "Buck",
+  "description": "2MHz, 600mA Step-Down DC-DC Converter",
+  "packages": {
+    "SOT-23": {
+      "pin_count": 5,
+      "pins": {
+        "1": {
+          "name": "VIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power supply input. Connect to the input filter capacitor.",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground pin.",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "EN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Enable pin. The device is in shutdown mode when voltage to this pin is < 0.4 V and enabled when > 1 V. Do not leave this pin floating.",
+          "unused_treatment": "CUSTOM"
+        },
+        "4": {
+          "name": "FB",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Feedback analog input. Connect directly to the output filter capacitor for fixed voltage versions. For adjustable version external resistor dividers are required.",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "SW",
+          "direction": "OUTPUT",
+          "signal_type": "ANALOG",
+          "description": "Switching node connection to the internal PFET switch and NFET synchronous rectifier.",
+          "unused_treatment": null
+        }
+      }
+    },
+    "DSBGA": {
+      "pin_count": 5,
+      "pins": {
+        "A1": {
+          "name": "VIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power supply input. Connect to the input filter capacitor.",
+          "unused_treatment": null
+        },
+        "A3": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground pin.",
+          "unused_treatment": null
+        },
+        "C1": {
+          "name": "EN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Enable pin. The device is in shutdown mode when voltage to this pin is < 0.4 V and enabled when > 1 V. Do not leave this pin floating.",
+          "unused_treatment": "CUSTOM"
+        },
+        "C3": {
+          "name": "FB",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Feedback analog input. Connect directly to the output filter capacitor for fixed voltage versions. For adjustable version external resistor dividers are required.",
+          "unused_treatment": null
+        },
+        "B2": {
+          "name": "SW",
+          "direction": "OUTPUT",
+          "signal_type": "ANALOG",
+          "description": "Switching node connection to the internal PFET switch and NFET synchronous rectifier.",
+          "unused_treatment": null
+        }
+      }
+    },
+    "USON": {
+      "pin_count": 6,
+      "pins": {
+        "3": {
+          "name": "VIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power supply input. Connect to the input filter capacitor.",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground pin.",
+          "unused_treatment": null
+        },
+        "1": {
+          "name": "EN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Enable pin. The device is in shutdown mode when voltage to this pin is < 0.4 V and enabled when > 1 V. Do not leave this pin floating.",
+          "unused_treatment": "CUSTOM"
+        },
+        "6": {
+          "name": "FB",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Feedback analog input. Connect directly to the output filter capacitor for fixed voltage versions. For adjustable version external resistor dividers are required.",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "SW",
+          "direction": "OUTPUT",
+          "signal_type": "ANALOG",
+          "description": "Switching node connection to the internal PFET switch and NFET synchronous rectifier.",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "SGND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Signal ground (feedback ground).",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "absolute_maximum_ratings": {
+    "VIN": {
+      "parameter": "Input Voltage",
+      "min": -0.2,
+      "max": 6.0,
+      "unit": "V",
+      "conditions": null
+    },
+    "TJ-MAX": {
+      "parameter": "Junction temperature",
+      "min": null,
+      "max": 125,
+      "unit": "°C",
+      "conditions": null
+    },
+    "Tstg": {
+      "parameter": "Storage temperature",
+      "min": -65,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    },
+    "V(ESD)": {
+      "parameter": "ESD HBM",
+      "min": -2000,
+      "max": 2000,
+      "unit": "V",
+      "conditions": "LM3671"
+    },
+    "V(ESD)_LM3671": {
+      "parameter": "ESD CDM",
+      "min": -500,
+      "max": 500,
+      "unit": "V",
+      "conditions": "LM3671"
+    }
+  },
+  "electrical_parameters": {
+    "VIN": {
+      "parameter": "Input voltage",
+      "min": 2.7,
+      "typ": null,
+      "max": 5.5,
+      "unit": "V",
+      "conditions": null
+    },
+    "VFB": {
+      "parameter": "Feedback voltage (fixed) MF",
+      "min": -4,
+      "typ": null,
+      "max": 4,
+      "unit": "%",
+      "conditions": "PWM mode"
+    },
+    "VFB_PWM_mode": {
+      "parameter": "Feedback voltage (ADJ) TL",
+      "min": -2.5,
+      "typ": null,
+      "max": 2.5,
+      "unit": "%",
+      "conditions": "PWM mode"
+    },
+    "VREF": {
+      "parameter": "Internal reference voltage",
+      "min": null,
+      "typ": 0.5,
+      "max": null,
+      "unit": "V",
+      "conditions": "ADJ version"
+    },
+    "ISHDN": {
+      "parameter": "Shutdown supply current",
+      "min": null,
+      "typ": 0.01,
+      "max": null,
+      "unit": "µA",
+      "conditions": "EN = 0 V"
+    },
+    "ISHDN_EN___0_V": {
+      "parameter": "Shutdown supply current",
+      "min": null,
+      "typ": null,
+      "max": 1,
+      "unit": "µA",
+      "conditions": "EN = 0 V"
+    },
+    "IQ": {
+      "parameter": "DC bias current into VIN",
+      "min": null,
+      "typ": 16,
+      "max": null,
+      "unit": "µA",
+      "conditions": "No load, device is not switching"
+    },
+    "IQ_No_load__device_is_not_switchi": {
+      "parameter": "DC bias current into VIN",
+      "min": null,
+      "typ": null,
+      "max": 35,
+      "unit": "µA",
+      "conditions": "No load, device is not switching"
+    },
+    "RDSON (P)": {
+      "parameter": "Pin-pin resistance for PFET",
+      "min": null,
+      "typ": 380,
+      "max": 500,
+      "unit": "mΩ",
+      "conditions": "VIN = VGS = 3.6 V"
+    },
+    "RDSON (N)": {
+      "parameter": "Pin-pin resistance for NFET",
+      "min": null,
+      "typ": 250,
+      "max": 400,
+      "unit": "mΩ",
+      "conditions": "VIN = VGS = 3.6 V"
+    },
+    "ILIM": {
+      "parameter": "Switch peak current limit",
+      "min": null,
+      "typ": 1020,
+      "max": null,
+      "unit": "mA",
+      "conditions": "Open loop"
+    },
+    "ILIM_Open_loop": {
+      "parameter": "Switch peak current limit",
+      "min": 830,
+      "typ": null,
+      "max": 1150,
+      "unit": "mA",
+      "conditions": "Open loop"
+    },
+    "VIH": {
+      "parameter": "Logic high input",
+      "min": 1,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": null
+    },
+    "VIL": {
+      "parameter": "Logic low input",
+      "min": null,
+      "typ": null,
+      "max": 0.4,
+      "unit": "V",
+      "conditions": null
+    },
+    "IEN": {
+      "parameter": "Enable (EN) input current",
+      "min": null,
+      "typ": null,
+      "max": 1,
+      "unit": "µA",
+      "conditions": null
+    },
+    "fOSC": {
+      "parameter": "Internal oscillator frequency",
+      "min": null,
+      "typ": 2,
+      "max": null,
+      "unit": "MHz",
+      "conditions": "PWM Mode"
+    },
+    "fOSC_PWM_Mode": {
+      "parameter": "Internal oscillator frequency",
+      "min": 1.6,
+      "typ": null,
+      "max": 2.6,
+      "unit": "MHz",
+      "conditions": "PWM Mode"
+    }
+  },
+  "drc_hints": {
+    "vin_abs_max": {
+      "value": 6.0,
+      "unit": "V"
+    },
+    "vin_operating": {
+      "min": 2.7,
+      "max": 5.5,
+      "unit": "V"
+    },
+    "vref": {
+      "min": -4,
+      "max": 4,
+      "unit": "%"
+    },
+    "enable_threshold": {
+      "min": 1,
+      "unit": "V"
+    },
+    "iout_max": {
+      "typ": 1020,
+      "unit": "mA"
+    },
+    "iq": {
+      "typ": 16,
+      "unit": "µA"
+    },
+    "fsw": {
+      "typ": 2,
+      "unit": "MHz"
+    }
+  }
+}

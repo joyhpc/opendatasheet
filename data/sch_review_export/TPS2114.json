@@ -1,6 +1,10 @@
 {
-  "_schema": "sch-review-device/1.0",
+  "_schema": "sch-review-device/1.1",
   "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
   "mpn": "TPS2114",
   "manufacturer": "Texas Instruments",
   "category": "Switch",
@@ -222,14 +226,23 @@
       "value": 6.0,
       "unit": "V"
     },
-    "vin_operating": {
-      "min": 0,
-      "max": 5.5,
+    "enable_threshold": {
+      "min": 2,
       "unit": "V"
     },
-    "iout_abs_max": {
-      "value": 5.0,
-      "unit": "mA"
+    "iout_max": {
+      "min": 0.31,
+      "max": 0.75,
+      "unit": "A"
+    },
+    "iq": {
+      "typ": 55,
+      "max": 90,
+      "unit": "µA"
+    },
+    "thermal_shutdown": {
+      "typ": 135,
+      "unit": "°C"
     }
   }
 }

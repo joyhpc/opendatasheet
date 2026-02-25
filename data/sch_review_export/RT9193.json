@@ -1,6 +1,10 @@
 {
-  "_schema": "sch-review-device/1.0",
+  "_schema": "sch-review-device/1.1",
   "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
   "mpn": "RT9193",
   "manufacturer": "RICHTEK",
   "category": "LDO",
@@ -334,15 +338,28 @@
       "value": 6,
       "unit": "V"
     },
-    "iout_operating": {
+    "vout": {
+      "min": -2,
+      "max": 2,
+      "unit": "%"
+    },
+    "enable_threshold": {
+      "max": 0.4,
+      "unit": "V"
+    },
+    "iout_max": {
+      "min": 360,
       "typ": 400,
-      "max": null,
       "unit": "mA"
     },
     "iq": {
       "typ": 90,
       "max": 130,
       "unit": "μA"
+    },
+    "thermal_shutdown": {
+      "typ": 165,
+      "unit": "°C"
     }
   }
 }

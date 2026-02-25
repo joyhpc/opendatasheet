@@ -1,0 +1,366 @@
+{
+  "_schema": "sch-review-device/1.1",
+  "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
+  "mpn": "TPS57140-Q1",
+  "manufacturer": "Texas Instruments",
+  "category": "Buck",
+  "description": "1.5-A 42-V Step-Down DC-DC Converter With Eco-mode Control",
+  "packages": {
+    "MSOP-PowerPAD (10)": {
+      "pin_count": 11,
+      "pins": {
+        "1": {
+          "name": "BOOT",
+          "direction": "OUTPUT",
+          "signal_type": "POWER",
+          "description": "A bootstrap capacitor is required between BOOT and PH pins. If the voltage on this capacitor is below the minimum required by the device, the output is forced to switch off until the capacitor is refreshed.",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "VIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "The VIN pin is the input supply voltage which is from 3.5 to 42 V.",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "EN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Enable pin, internal pullup current source. Pull below 1.2 V to disable. Float to enable. Adjust the input undervoltage lockout with two resistors.",
+          "unused_treatment": "FLOAT"
+        },
+        "4": {
+          "name": "SS/TR",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Slow-start and tracking. An external capacitor connected to this pin sets the output rise time. The voltage on this pin overrides the internal reference, allowing use of the pin for tracking and sequencing.",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "RT/CLK",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Resistor timing and external clock. An internal amplifier holds this pin at a fixed voltage when using an external resistor to ground to set the switching frequency. Pulling the pin above the PLL upper threshold causes a mode change whereby the pin becomes a synchronization input.",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "PWRGD",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "An open-drain output, asserts low if output voltage is low due to thermal shutdown, dropout, overvoltage, or EN shutdown.",
+          "unused_treatment": null
+        },
+        "7": {
+          "name": "VSENSE",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "The VSENSE pin is the inverting node of the transconductance (gm) error amplifier.",
+          "unused_treatment": null
+        },
+        "8": {
+          "name": "COMP",
+          "direction": "OUTPUT",
+          "signal_type": "ANALOG",
+          "description": "Error-amplifier output and input to the output-switch current comparator. Connect frequency-compensation components to this pin.",
+          "unused_treatment": null
+        },
+        "9": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "The GND pin is the ground pin.",
+          "unused_treatment": null
+        },
+        "10": {
+          "name": "PH",
+          "direction": "OUTPUT",
+          "signal_type": "POWER",
+          "description": "The PH pin is the source of the internal high-side power MOSFET.",
+          "unused_treatment": null
+        },
+        "EP": {
+          "name": "Thermal pad",
+          "direction": "PASSIVE",
+          "signal_type": "POWER",
+          "description": "GND pin must have an electrical connection to the exposed pad on the printed-circuit board for proper operation.",
+          "unused_treatment": null
+        }
+      }
+    },
+    "VSON (10)": {
+      "pin_count": 11,
+      "pins": {
+        "1": {
+          "name": "BOOT",
+          "direction": "OUTPUT",
+          "signal_type": "POWER",
+          "description": "A bootstrap capacitor is required between BOOT and PH pins. If the voltage on this capacitor is below the minimum required by the device, the output is forced to switch off until the capacitor is refreshed.",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "VIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "The VIN pin is the input supply voltage which is from 3.5 to 42 V.",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "EN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Enable pin, internal pullup current source. Pull below 1.2 V to disable. Float to enable. Adjust the input undervoltage lockout with two resistors.",
+          "unused_treatment": "FLOAT"
+        },
+        "4": {
+          "name": "SS/TR",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Slow-start and tracking. An external capacitor connected to this pin sets the output rise time. The voltage on this pin overrides the internal reference, allowing use of the pin for tracking and sequencing.",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "RT/CLK",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Resistor timing and external clock. An internal amplifier holds this pin at a fixed voltage when using an external resistor to ground to set the switching frequency. Pulling the pin above the PLL upper threshold causes a mode change whereby the pin becomes a synchronization input.",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "PWRGD",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "An open-drain output, asserts low if output voltage is low due to thermal shutdown, dropout, overvoltage, or EN shutdown.",
+          "unused_treatment": null
+        },
+        "7": {
+          "name": "VSENSE",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "The VSENSE pin is the inverting node of the transconductance (gm) error amplifier.",
+          "unused_treatment": null
+        },
+        "8": {
+          "name": "COMP",
+          "direction": "OUTPUT",
+          "signal_type": "ANALOG",
+          "description": "Error-amplifier output and input to the output-switch current comparator. Connect frequency-compensation components to this pin.",
+          "unused_treatment": null
+        },
+        "9": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "The GND pin is the ground pin.",
+          "unused_treatment": null
+        },
+        "10": {
+          "name": "PH",
+          "direction": "OUTPUT",
+          "signal_type": "POWER",
+          "description": "The PH pin is the source of the internal high-side power MOSFET.",
+          "unused_treatment": null
+        },
+        "EP": {
+          "name": "Thermal pad",
+          "direction": "PASSIVE",
+          "signal_type": "POWER",
+          "description": "GND pin must have an electrical connection to the exposed pad on the printed-circuit board for proper operation.",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "absolute_maximum_ratings": {
+    "VIN": {
+      "parameter": "Input voltage",
+      "min": -0.3,
+      "max": 47,
+      "unit": "V",
+      "conditions": null
+    },
+    "EN": {
+      "parameter": "Enable voltage",
+      "min": -0.3,
+      "max": 5,
+      "unit": "V",
+      "conditions": null
+    },
+    "BOOT": {
+      "parameter": "Bootstrap voltage",
+      "min": null,
+      "max": 55,
+      "unit": "V",
+      "conditions": null
+    },
+    "VSENSE": {
+      "parameter": "Voltage sense voltage",
+      "min": -0.3,
+      "max": 3,
+      "unit": "V",
+      "conditions": null
+    },
+    "COMP": {
+      "parameter": "Compensation voltage",
+      "min": -0.3,
+      "max": 3,
+      "unit": "V",
+      "conditions": null
+    },
+    "PWRGD": {
+      "parameter": "Power good voltage",
+      "min": -0.3,
+      "max": 6,
+      "unit": "V",
+      "conditions": null
+    },
+    "SS/TR": {
+      "parameter": "Soft start / tracking voltage",
+      "min": -0.3,
+      "max": 3,
+      "unit": "V",
+      "conditions": null
+    },
+    "RT/CLK": {
+      "parameter": "RT/CLK voltage",
+      "min": -0.3,
+      "max": 3.6,
+      "unit": "V",
+      "conditions": null
+    },
+    "PH": {
+      "parameter": "PH DC voltage",
+      "min": -0.6,
+      "max": 47,
+      "unit": "V",
+      "conditions": "DC voltage"
+    },
+    "PH_200_ns": {
+      "parameter": "PH transient voltage (200 ns)",
+      "min": -1,
+      "max": 47,
+      "unit": "V",
+      "conditions": "200 ns"
+    },
+    "PH_30_ns": {
+      "parameter": "PH transient voltage (30 ns)",
+      "min": -2,
+      "max": 47,
+      "unit": "V",
+      "conditions": "30 ns"
+    },
+    "PH_DC_voltage__TJ____40_C": {
+      "parameter": "PH DC voltage at low temperature",
+      "min": -0.85,
+      "max": 47,
+      "unit": "V",
+      "conditions": "DC voltage, TJ = -40°C"
+    },
+    "VDIFF": {
+      "parameter": "Differential voltage PAD to GND",
+      "min": -200,
+      "max": 200,
+      "unit": "mV",
+      "conditions": null
+    },
+    "ISOURCE": {
+      "parameter": "RT/CLK source current",
+      "min": null,
+      "max": 100,
+      "unit": "µA",
+      "conditions": null
+    },
+    "ISINK": {
+      "parameter": "SS/TR sink current",
+      "min": null,
+      "max": 200,
+      "unit": "µA",
+      "conditions": null
+    },
+    "TJ": {
+      "parameter": "Operating junction temperature",
+      "min": -40,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    },
+    "Tstg": {
+      "parameter": "Storage temperature",
+      "min": -65,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    }
+  },
+  "electrical_parameters": {
+    "fSW": {
+      "parameter": "Switching frequency",
+      "min": 450,
+      "typ": 581,
+      "max": 720,
+      "unit": "kHz",
+      "conditions": "VIN = 12 V, RT = 200 kΩ"
+    },
+    "PWRGDTH": {
+      "parameter": "PWRGD switching threshold (falling fault)",
+      "min": null,
+      "typ": 92,
+      "max": null,
+      "unit": "% of VSENSE",
+      "conditions": "VSENSE falling (fault)"
+    },
+    "PWRGDTH_VSENSE_rising__good": {
+      "parameter": "PWRGD switching threshold (rising good)",
+      "min": null,
+      "typ": 94,
+      "max": null,
+      "unit": "% of VSENSE",
+      "conditions": "VSENSE rising (good)"
+    },
+    "PWRGDTH_VSENSE_rising__fault": {
+      "parameter": "PWRGD switching threshold (rising fault)",
+      "min": null,
+      "typ": 109,
+      "max": null,
+      "unit": "% of VSENSE",
+      "conditions": "VSENSE rising (fault)"
+    },
+    "PWRGDTH_VSENSE_falling__good": {
+      "parameter": "PWRGD switching threshold (falling good)",
+      "min": null,
+      "typ": 107,
+      "max": null,
+      "unit": "% of VSENSE",
+      "conditions": "VSENSE falling (good)"
+    }
+  },
+  "drc_hints": {
+    "vin_abs_max": {
+      "value": 47,
+      "unit": "V"
+    },
+    "enable_threshold": {
+      "min": 1.15,
+      "typ": 1.25,
+      "max": 1.36,
+      "unit": "V"
+    },
+    "fsw": {
+      "min": 100,
+      "max": 2500,
+      "unit": "kHz"
+    },
+    "thermal_shutdown": {
+      "typ": 182,
+      "unit": "°C"
+    },
+    "uvlo": {
+      "typ": 2.5,
+      "unit": "V"
+    }
+  }
+}

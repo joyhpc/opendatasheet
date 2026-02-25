@@ -1,6 +1,10 @@
 {
-  "_schema": "sch-review-device/1.0",
+  "_schema": "sch-review-device/1.1",
   "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
   "mpn": "LM358",
   "manufacturer": "onsemi",
   "category": "OpAmp",
@@ -345,5 +349,11 @@
       "conditions": "VCC = 30 V, VO = 0 V, RL = ∞, TA = 25°C"
     }
   },
-  "drc_hints": {}
+  "drc_hints": {
+    "vin_operating": {
+      "min": 0,
+      "max": 28.3,
+      "unit": "V"
+    }
+  }
 }

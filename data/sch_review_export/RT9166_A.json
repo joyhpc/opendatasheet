@@ -1,6 +1,10 @@
 {
-  "_schema": "sch-review-device/1.0",
+  "_schema": "sch-review-device/1.1",
   "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
   "mpn": "RT9166/A",
   "manufacturer": "RICHTEK",
   "category": "LDO",
@@ -378,10 +382,23 @@
       "value": 6.5,
       "unit": "V"
     },
+    "vout": {
+      "min": -1,
+      "max": 3,
+      "unit": "%"
+    },
+    "iout_max": {
+      "min": 300,
+      "unit": "mA"
+    },
     "iq": {
       "typ": 220,
       "max": 300,
       "unit": "µA"
+    },
+    "thermal_shutdown": {
+      "typ": 170,
+      "unit": "°C"
     }
   }
 }

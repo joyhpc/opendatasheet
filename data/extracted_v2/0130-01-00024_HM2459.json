@@ -1,0 +1,496 @@
+{
+  "pdf_name": "0130-01-00024_HM2459.PDF",
+  "model": "gemini-3-flash-preview",
+  "mode": "vision",
+  "is_fpga": false,
+  "checksum": "d67d59390f2489b5b3036420d999c860",
+  "total_pages": 7,
+  "vision_pages": [
+    1
+  ],
+  "page_classification": [
+    {
+      "page_num": 0,
+      "text_length": 2231,
+      "category": "ordering",
+      "matched_patterns": [
+        "(?i)ordering\\s+information"
+      ],
+      "text_preview": "  42V Input Standoff Voltage, 1.5A Step-Down Converter in SOT23-6 DESCRIPTION  The HM2459 is a wide input range, high-efficiency, and high  frequency DC-to-DC step-down switching regulator,  capable o"
+    },
+    {
+      "page_num": 1,
+      "text_length": 2184,
+      "category": "electrical",
+      "matched_patterns": [
+        "(?i)absolute\\s+maximum\\s+ratings?",
+        "(?i)pin\\s+(description|configuration|function|assignment|definition|connection|diagram)"
+      ],
+      "text_preview": "  PIN CONFIGURATION  1 2 3 6 4 SOT23-6 SW BST FB EN GND 5 IN     ABSOLUTE MAXIMUM RATINGS  (Note: Exceeding these limits may damage the device. Exposure to absolute  maximum rating conditions for long"
+    },
+    {
+      "page_num": 2,
+      "text_length": 1153,
+      "category": "other",
+      "matched_patterns": [],
+      "text_preview": "   TYPICAL CHARACTERISTICS  (Typical values are at TA = 25oC unless otherwise specified.)              0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100% 0.01 0.1 1   ŋ   IOUT (A)  Efficiency Vs  IOUT  VIN=6"
+    },
+    {
+      "page_num": 3,
+      "text_length": 891,
+      "category": "other",
+      "matched_patterns": [],
+      "text_preview": "   TYPICAL CHARACTERISTICS  (Typical values are at TA = 25oC unless otherwise specified.)                                Start-up Waveform with EN  VIN=12V,VOUT=5V,IOUT=0A  5ms/div  VEN  VOUT  ISW  St"
+    },
+    {
+      "page_num": 4,
+      "text_length": 1428,
+      "category": "other",
+      "matched_patterns": [],
+      "text_preview": "   FUNCTIONAL DESCRIPTIONS  Loop Operation  The HM2459 is a wide input range, high-efficiency, DC-to-DC step-down switching regulator, capable of delivering up to 1.5A of  output current, integrated w"
+    },
+    {
+      "page_num": 5,
+      "text_length": 2301,
+      "category": "other",
+      "matched_patterns": [],
+      "text_preview": "   APPLICATION INFORMATION  Setting Output Voltages  Output voltages are set by external resistors. The FB threshold  is 0.8V.    RTOP = RBOTTOM x [(VOUT / 0.8) - 1]  Inductor Selection  The peak-to-p"
+    },
+    {
+      "page_num": 6,
+      "text_length": 287,
+      "category": "other",
+      "matched_patterns": [],
+      "text_preview": "   PACKAGE OUTLINE       A  2.7  2.9  3.1  B  1.7  1.9  2.1  C  --  0.95  --  D  1.5  1.6  1.8  E  2.5  2.8  3.1  F  0.2  0.4  0.5  G  1  1.1  1.3  H  0.7  0.8  0.9  I  0  --  0.1  J  0.2  --  --  K  "
+    }
+  ],
+  "extraction": {
+    "component": {
+      "mpn": "HM2459",
+      "manufacturer": "H&M Semi",
+      "category": "Buck",
+      "description": "Step-down DC-DC converter"
+    },
+    "absolute_maximum_ratings": [
+      {
+        "parameter": "IN Voltage",
+        "raw_name": "IN Voltage",
+        "symbol": "VIN",
+        "min": -0.3,
+        "typ": null,
+        "max": 42,
+        "unit": "V",
+        "conditions": null
+      },
+      {
+        "parameter": "SW, EN Voltage",
+        "raw_name": "SW, EN Voltage",
+        "symbol": "VSW, VEN",
+        "min": -0.3,
+        "typ": null,
+        "max": null,
+        "unit": "V",
+        "conditions": "max is VIN+0.3V"
+      },
+      {
+        "parameter": "BST Voltage",
+        "raw_name": "BST Voltage",
+        "symbol": "VBST",
+        "min": -0.3,
+        "typ": null,
+        "max": null,
+        "unit": "V",
+        "conditions": "max is SW+6V"
+      },
+      {
+        "parameter": "FB Voltage",
+        "raw_name": "FB Voltage",
+        "symbol": "VFB",
+        "min": -0.3,
+        "typ": null,
+        "max": 6,
+        "unit": "V",
+        "conditions": null
+      },
+      {
+        "parameter": "SW to ground current",
+        "raw_name": "SW to ground current",
+        "symbol": null,
+        "min": null,
+        "typ": null,
+        "max": null,
+        "unit": "A",
+        "conditions": "Internally limited"
+      },
+      {
+        "parameter": "Operating Temperature Range",
+        "raw_name": "Operating Temperature Range",
+        "symbol": "TA",
+        "min": -40,
+        "typ": null,
+        "max": 85,
+        "unit": "°C",
+        "conditions": null
+      },
+      {
+        "parameter": "Storage Temperature Range",
+        "raw_name": "Storage Temperature Range",
+        "symbol": "TSTG",
+        "min": -55,
+        "typ": null,
+        "max": 150,
+        "unit": "°C",
+        "conditions": null
+      },
+      {
+        "parameter": "Thermal Resistance (Theta JA)",
+        "raw_name": "Thermal Resistance SOT23-6",
+        "symbol": "θJA",
+        "min": null,
+        "typ": 220,
+        "max": null,
+        "unit": "°C/W",
+        "conditions": null
+      },
+      {
+        "parameter": "Thermal Resistance (Theta JC)",
+        "raw_name": "Thermal Resistance SOT23-6",
+        "symbol": "θJC",
+        "min": null,
+        "typ": 110,
+        "max": null,
+        "unit": "°C/W",
+        "conditions": null
+      }
+    ],
+    "electrical_characteristics": [
+      {
+        "parameter": "Input Standoff Voltage",
+        "raw_name": "Input Standoff Voltage",
+        "symbol": null,
+        "min": 42,
+        "typ": null,
+        "max": null,
+        "unit": "V",
+        "conditions": "VIN = 12V, TA = 25°C",
+        "device": "HM2459",
+        "temp_range": "25C"
+      },
+      {
+        "parameter": "Input Voltage Range",
+        "raw_name": "Input Voltage Range",
+        "symbol": "VIN",
+        "min": 4,
+        "typ": null,
+        "max": 38,
+        "unit": "V",
+        "conditions": "VIN = 12V, TA = 25°C",
+        "device": "HM2459",
+        "temp_range": "25C"
+      },
+      {
+        "parameter": "Input UVLO",
+        "raw_name": "Input UVLO",
+        "symbol": null,
+        "min": null,
+        "typ": 3.8,
+        "max": null,
+        "unit": "V",
+        "conditions": "Rising, Hysteresis=140mV, VIN = 12V, TA = 25°C",
+        "device": "HM2459",
+        "temp_range": "25C"
+      },
+      {
+        "parameter": "Input OVP",
+        "raw_name": "Input OVP",
+        "symbol": null,
+        "min": null,
+        "typ": 38,
+        "max": null,
+        "unit": "V",
+        "conditions": "Rising, Hysteresis=1.3V, VIN = 12V, TA = 25°C",
+        "device": "HM2459",
+        "temp_range": "25C"
+      },
+      {
+        "parameter": "Input Supply Current",
+        "raw_name": "Input Supply Current",
+        "symbol": "IIN",
+        "min": null,
+        "typ": 0.6,
+        "max": null,
+        "unit": "mA",
+        "conditions": "VFB=0.85V, VIN = 12V, TA = 25°C",
+        "device": "HM2459",
+        "temp_range": "25C"
+      },
+      {
+        "parameter": "Input Shutdown Current",
+        "raw_name": "Input Shutdown Current",
+        "symbol": "ISHDN",
+        "min": null,
+        "typ": 6,
+        "max": null,
+        "unit": "µA",
+        "conditions": "VIN = 12V, TA = 25°C",
+        "device": "HM2459",
+        "temp_range": "25C"
+      },
+      {
+        "parameter": "FB Feedback Voltage",
+        "raw_name": "FB Feedback Voltage",
+        "symbol": "VFB",
+        "min": null,
+        "typ": 0.8,
+        "max": null,
+        "unit": "V",
+        "conditions": "VIN = 12V, TA = 25°C",
+        "device": "HM2459",
+        "temp_range": "25C"
+      },
+      {
+        "parameter": "FB Input Current",
+        "raw_name": "FB Input Current",
+        "symbol": "IFB",
+        "min": null,
+        "typ": 0.01,
+        "max": null,
+        "unit": "µA",
+        "conditions": "VIN = 12V, TA = 25°C",
+        "device": "HM2459",
+        "temp_range": "25C"
+      },
+      {
+        "parameter": "Switching Frequency",
+        "raw_name": "Switching Frequency",
+        "symbol": "fSW",
+        "min": null,
+        "typ": 650,
+        "max": null,
+        "unit": "KHz",
+        "conditions": "VIN = 12V, TA = 25°C",
+        "device": "HM2459",
+        "temp_range": "25C"
+      },
+      {
+        "parameter": "Maximum Duty Cycle",
+        "raw_name": "Maximum Duty Cycle",
+        "symbol": "DMAX",
+        "min": 90,
+        "typ": null,
+        "max": null,
+        "unit": "%",
+        "conditions": "VIN = 12V, TA = 25°C",
+        "device": "HM2459",
+        "temp_range": "25C"
+      },
+      {
+        "parameter": "FoldBack Frequency",
+        "raw_name": "FoldBack Frequency",
+        "symbol": null,
+        "min": null,
+        "typ": 60,
+        "max": null,
+        "unit": "KHz",
+        "conditions": "VFB = 0V, VIN = 12V, TA = 25°C",
+        "device": "HM2459",
+        "temp_range": "25C"
+      },
+      {
+        "parameter": "High side Switch On Resistance",
+        "raw_name": "High side Switch On Resistance",
+        "symbol": "RDS(ON)",
+        "min": null,
+        "typ": 300,
+        "max": null,
+        "unit": "mΩ",
+        "conditions": "ISW = 200mA, VIN = 12V, TA = 25°C",
+        "device": "HM2459",
+        "temp_range": "25C"
+      },
+      {
+        "parameter": "High side Switch Current Limit",
+        "raw_name": "High side Switch Current Limit",
+        "symbol": "ILIM",
+        "min": null,
+        "typ": 2.5,
+        "max": null,
+        "unit": "A",
+        "conditions": "VIN = 12V, TA = 25°C",
+        "device": "HM2459",
+        "temp_range": "25C"
+      },
+      {
+        "parameter": "SW Leakage Current",
+        "raw_name": "SW Leakage Current",
+        "symbol": "ISW_LKG",
+        "min": null,
+        "typ": null,
+        "max": 10,
+        "unit": "µA",
+        "conditions": "VIN=12V, VSW=0, EN=GND, TA = 25°C",
+        "device": "HM2459",
+        "temp_range": "25C"
+      },
+      {
+        "parameter": "EN Input Current",
+        "raw_name": "EN Input Current",
+        "symbol": "IEN",
+        "min": null,
+        "typ": 1,
+        "max": 5,
+        "unit": "µA",
+        "conditions": "VIN=12V, VEN=5V, TA = 25°C",
+        "device": "HM2459",
+        "temp_range": "25C"
+      },
+      {
+        "parameter": "EN Input Low Voltage",
+        "raw_name": "EN Input Low Voltage",
+        "symbol": "VEN_LOW",
+        "min": 0.8,
+        "typ": 1.1,
+        "max": 1.4,
+        "unit": "V",
+        "conditions": "Rising, Hysteresis=100mV, VIN = 12V, TA = 25°C",
+        "device": "HM2459",
+        "temp_range": "25C"
+      },
+      {
+        "parameter": "Thermal Shutdown",
+        "raw_name": "Thermal Shutdown",
+        "symbol": "TSD",
+        "min": null,
+        "typ": 150,
+        "max": null,
+        "unit": "°C",
+        "conditions": "Hysteresis=40°C, VIN = 12V, TA = 25°C",
+        "device": "HM2459",
+        "temp_range": "25C"
+      }
+    ],
+    "pin_definitions": [
+      {
+        "pin_number": 1,
+        "pin_name": "BST",
+        "type": "Input",
+        "description": "Bootstrap pin. Connect a 10nF capacitor from this pin to SW"
+      },
+      {
+        "pin_number": 2,
+        "pin_name": "GND",
+        "type": "Power",
+        "description": "Ground"
+      },
+      {
+        "pin_number": 3,
+        "pin_name": "FB",
+        "type": "Input",
+        "description": "Feedback Input. Connect an external resistor divider from the output to FB and GND to set VOUT"
+      },
+      {
+        "pin_number": 4,
+        "pin_name": "EN",
+        "type": "Input",
+        "description": "Enable pin for the IC. Drive this pin high to enable the part, low to disable."
+      },
+      {
+        "pin_number": 5,
+        "pin_name": "IN",
+        "type": "Power",
+        "description": "Supply Voltage. Bypass with a 10µF ceramic capacitor to GND"
+      },
+      {
+        "pin_number": 6,
+        "pin_name": "SW",
+        "type": "Output",
+        "description": "Inductor Connection. Connect an inductor between SW and the regulator output."
+      }
+    ]
+  },
+  "pin_extraction": {},
+  "pin_index": {},
+  "pin_validation": [],
+  "validation": [
+    {
+      "param": "IN Voltage",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "FB Voltage",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Operating Temperature Range",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Storage Temperature Range",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Input Voltage Range",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Switching Frequency",
+      "rule": "unit_valid",
+      "passed": false,
+      "message": "Suspicious unit: KHz"
+    },
+    {
+      "param": "FoldBack Frequency",
+      "rule": "unit_valid",
+      "passed": false,
+      "message": "Suspicious unit: KHz"
+    },
+    {
+      "param": "EN Input Current",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "EN Input Low Voltage",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    }
+  ],
+  "physics_validation": [],
+  "cross_validation": {
+    "total_extracted_values": 25,
+    "values_found_in_pdf": 24,
+    "values_not_in_pdf": [
+      220.0
+    ],
+    "value_coverage_pct": 96.0,
+    "total_params": 26,
+    "params_verified": 25,
+    "params_suspicious": 1,
+    "suspicious_params": [
+      {
+        "parameter": "Thermal Resistance (Theta JA)",
+        "device": "",
+        "values": [
+          220.0
+        ]
+      }
+    ]
+  },
+  "timing": {
+    "l0_classify_s": 0.053,
+    "l1a_extract_s": 40.959,
+    "l1b_pin_s": 0.0
+  }
+}

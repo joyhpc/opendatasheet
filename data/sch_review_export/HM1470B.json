@@ -1,0 +1,302 @@
+{
+  "_schema": "sch-review-device/1.1",
+  "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
+  "mpn": "HM1470B",
+  "manufacturer": "H&Msemi",
+  "category": "Buck",
+  "description": "2A, 4.5V-21V Input, 500kHz Synchronous Step-Down Converter",
+  "packages": {
+    "SOT23-6": {
+      "pin_count": 6,
+      "pins": {
+        "1": {
+          "name": "BS",
+          "direction": "PASSIVE",
+          "signal_type": "ANALOG",
+          "description": "Bootstrap pin for high-side gate drive. Connect a capacitor between BS and SW pins.",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground connection",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "FB",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Feedback input for output voltage regulation. Connect to the tap of an external resistor divider.",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "EN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Enable control input. Drive high to turn on the device, low to turn it off.",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "VIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power supply input voltage",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "SW",
+          "direction": "OUTPUT",
+          "signal_type": "POWER",
+          "description": "Power switching node. Connect to the output inductor.",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "absolute_maximum_ratings": {
+    "VIN": {
+      "parameter": "Input Supply Voltage",
+      "min": -0.3,
+      "max": 22,
+      "unit": "V",
+      "conditions": null
+    },
+    "VEN": {
+      "parameter": "EN Voltages",
+      "min": -0.3,
+      "max": 6,
+      "unit": "V",
+      "conditions": null
+    },
+    "VFB": {
+      "parameter": "FB Voltages",
+      "min": -0.3,
+      "max": 6,
+      "unit": "V",
+      "conditions": null
+    },
+    "VSW": {
+      "parameter": "SW Voltage",
+      "min": -0.3,
+      "max": null,
+      "unit": "V",
+      "conditions": "to (VIN + 0.5V)"
+    },
+    "VBS": {
+      "parameter": "BS Voltage",
+      "min": null,
+      "max": null,
+      "unit": "V",
+      "conditions": "(VSW - 0.3V) to (VSW + 5V)"
+    },
+    "PD": {
+      "parameter": "Power Dissipation",
+      "min": null,
+      "max": 0.6,
+      "unit": "W",
+      "conditions": null
+    },
+    "θJC": {
+      "parameter": "Thermal Resistance θJC",
+      "min": null,
+      "max": null,
+      "unit": "°C/W",
+      "conditions": null
+    },
+    "θJA": {
+      "parameter": "Thermal Resistance θJA",
+      "min": null,
+      "max": null,
+      "unit": "°C/W",
+      "conditions": null
+    },
+    "TJ": {
+      "parameter": "Junction Temperature",
+      "min": null,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    },
+    "TOPR": {
+      "parameter": "Operating Temperature Range",
+      "min": -40,
+      "max": 85,
+      "unit": "°C",
+      "conditions": null
+    },
+    "TSTG": {
+      "parameter": "Storage Temperature Range",
+      "min": -65,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    }
+  },
+  "electrical_parameters": {
+    "VIN": {
+      "parameter": "Input Voltage Range",
+      "min": 4.5,
+      "typ": null,
+      "max": 21,
+      "unit": "V",
+      "conditions": null
+    },
+    "IIN": {
+      "parameter": "Supply Current in Operation",
+      "min": null,
+      "typ": 0.6,
+      "max": 0.8,
+      "unit": "mA",
+      "conditions": "VEN=3.0V, VFB=2V"
+    },
+    "ISHDN": {
+      "parameter": "Supply Current in Shutdown",
+      "min": null,
+      "typ": 1,
+      "max": null,
+      "unit": "µA",
+      "conditions": "VEN =0 or EN = GND"
+    },
+    "VFB": {
+      "parameter": "Regulated Feedback Voltage",
+      "min": 0.776,
+      "typ": 0.8,
+      "max": 0.824,
+      "unit": "V",
+      "conditions": "TA = 25°C, 4.5V <= VIN <= 20V"
+    },
+    "RDS(ON)H": {
+      "parameter": "High-Side Switch On-Resistance",
+      "min": null,
+      "typ": 90,
+      "max": null,
+      "unit": "mΩ",
+      "conditions": null
+    },
+    "RDS(ON)L": {
+      "parameter": "Low-Side Switch On-Resistance",
+      "min": null,
+      "typ": 70,
+      "max": null,
+      "unit": "mΩ",
+      "conditions": null
+    },
+    "ILEAK_H": {
+      "parameter": "High-Side Switch Leakage Current",
+      "min": null,
+      "typ": null,
+      "max": 1,
+      "unit": "µA",
+      "conditions": "VEN=0V, VSW=0V"
+    },
+    "ILEAK_L": {
+      "parameter": "Low-Side Switch Leakage Current",
+      "min": null,
+      "typ": null,
+      "max": 1,
+      "unit": "µA",
+      "conditions": "VEN=0V, VSW=12V"
+    },
+    "ILIM": {
+      "parameter": "Upper Switch Current Limit",
+      "min": null,
+      "typ": 4.5,
+      "max": null,
+      "unit": "A",
+      "conditions": "Minimum Duty Cycle"
+    },
+    "VOVP": {
+      "parameter": "OVP",
+      "min": null,
+      "typ": 22,
+      "max": null,
+      "unit": "V",
+      "conditions": null
+    },
+    "fOSC": {
+      "parameter": "Oscillation Frequency",
+      "min": 400,
+      "typ": 500,
+      "max": 580,
+      "unit": "KHz",
+      "conditions": null
+    },
+    "DMAX": {
+      "parameter": "Maximum Duty Cycle",
+      "min": null,
+      "typ": 92,
+      "max": null,
+      "unit": "%",
+      "conditions": "VFB=0.7V"
+    },
+    "tON_MIN": {
+      "parameter": "Minimum On-Time",
+      "min": null,
+      "typ": 60,
+      "max": null,
+      "unit": "nS",
+      "conditions": null
+    },
+    "Tss": {
+      "parameter": "Soft-start Time",
+      "min": null,
+      "typ": 2,
+      "max": null,
+      "unit": "mS",
+      "conditions": null
+    },
+    "TSD": {
+      "parameter": "Thermal Shutdown",
+      "min": null,
+      "typ": 180,
+      "max": null,
+      "unit": "°C",
+      "conditions": null
+    }
+  },
+  "drc_hints": {
+    "vin_abs_max": {
+      "value": 22,
+      "unit": "V"
+    },
+    "vin_operating": {
+      "min": 4.5,
+      "max": 21,
+      "unit": "V"
+    },
+    "vref": {
+      "min": 0.776,
+      "typ": 0.8,
+      "max": 0.824,
+      "unit": "V"
+    },
+    "iout_max": {
+      "typ": 4.5,
+      "unit": "A"
+    },
+    "iq": {
+      "typ": 0.6,
+      "max": 0.8,
+      "unit": "mA"
+    },
+    "fsw": {
+      "min": 400,
+      "typ": 500,
+      "max": 580,
+      "unit": "KHz"
+    },
+    "soft_start": {
+      "typ": 2,
+      "unit": "mS"
+    },
+    "thermal_shutdown": {
+      "typ": 180,
+      "unit": "°C"
+    }
+  }
+}

@@ -1,0 +1,250 @@
+{
+  "_schema": "sch-review-device/1.1",
+  "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
+  "mpn": "LM317",
+  "manufacturer": "JIANGSU CHANGJIANG ELECTRONICS TECHNOLOGY CO., LTD",
+  "category": "LDO",
+  "description": "Three-terminal positive voltage regulator",
+  "packages": {
+    "TO-252-2L": {
+      "pin_count": 4,
+      "pins": {
+        "1": {
+          "name": "Adj",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Adjustable terminal for setting the output voltage",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "Output",
+          "direction": "POWER_OUT",
+          "signal_type": "POWER",
+          "description": "Regulated output voltage",
+          "unused_treatment": null
+        },
+        "EP": {
+          "name": "Output",
+          "direction": "POWER_OUT",
+          "signal_type": "POWER",
+          "description": "Regulated output voltage",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "Input",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power supply input",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "absolute_maximum_ratings": {
+    "VI-VO": {
+      "parameter": "Input-Output Voltage Differential",
+      "min": null,
+      "max": 40,
+      "unit": "V",
+      "conditions": null
+    },
+    "TLEAD": {
+      "parameter": "Lead Temperature",
+      "min": null,
+      "max": 230,
+      "unit": "°C",
+      "conditions": null
+    },
+    "PD": {
+      "parameter": "Power Dissipation",
+      "min": null,
+      "max": null,
+      "unit": "W",
+      "conditions": "Internally limited"
+    },
+    "TJ": {
+      "parameter": "Operating Junction Temperature Range",
+      "min": 0,
+      "max": 125,
+      "unit": "°C",
+      "conditions": null
+    },
+    "Tstg": {
+      "parameter": "Storage Temperature Range",
+      "min": -55,
+      "max": 125,
+      "unit": "°C",
+      "conditions": null
+    },
+    "ΔVO /ΔT": {
+      "parameter": "Temperature Coefficient of Output Voltage",
+      "min": null,
+      "max": null,
+      "unit": "%/°C",
+      "conditions": null
+    }
+  },
+  "electrical_parameters": {
+    "Rline": {
+      "parameter": "Line Regulation",
+      "min": null,
+      "typ": 0.01,
+      "max": 0.04,
+      "unit": "%/V",
+      "conditions": "TA=25°C, 3V≤VI-VO≤40V"
+    },
+    "Rline_3V_VI_VO_40V": {
+      "parameter": "Line Regulation",
+      "min": null,
+      "typ": 0.02,
+      "max": 0.07,
+      "unit": "%/V",
+      "conditions": "3V≤VI-VO≤40V"
+    },
+    "Rload": {
+      "parameter": "Load Regulation",
+      "min": null,
+      "typ": 18,
+      "max": 25,
+      "unit": "mV",
+      "conditions": "TA=25°C, 10mA≤IO≤IMAX, VO<5V"
+    },
+    "Rload_TA_25_C__10mA_IO_IMAX__VO_5V": {
+      "parameter": "Load Regulation",
+      "min": null,
+      "typ": 0.4,
+      "max": 0.5,
+      "unit": "%VO",
+      "conditions": "TA=25°C, 10mA≤IO≤IMAX, VO≥5V"
+    },
+    "Rload_10mA_IO_IMAX__VO_5V": {
+      "parameter": "Load Regulation",
+      "min": null,
+      "typ": 0.8,
+      "max": 1.5,
+      "unit": "%VO",
+      "conditions": "10mA≤IO≤IMAX, VO≥5V"
+    },
+    "IADJ": {
+      "parameter": "Adjustable Pin Current",
+      "min": null,
+      "typ": 46,
+      "max": 100,
+      "unit": "µA",
+      "conditions": null
+    },
+    "ΔIADJ": {
+      "parameter": "Adjustable Pin Current Change",
+      "min": null,
+      "typ": 2.0,
+      "max": 5,
+      "unit": "µA",
+      "conditions": "3V≤VI-VO≤40V, 10mA≤IO≤IMAX, PD≤PMAX"
+    },
+    "VREF": {
+      "parameter": "Reference Voltage",
+      "min": 1.2,
+      "typ": 1.25,
+      "max": 1.3,
+      "unit": "V",
+      "conditions": "3V≤VIN-VO≤40V, 10mA≤IO≤IMAX, PD≤PMAX"
+    },
+    "STT": {
+      "parameter": "Temperature Stability",
+      "min": null,
+      "typ": 0.7,
+      "max": null,
+      "unit": "%/ VO",
+      "conditions": null
+    },
+    "IL(MIN)": {
+      "parameter": "Minimum Load Current to Maintain Regulation",
+      "min": null,
+      "typ": 3.5,
+      "max": 12,
+      "unit": "mA",
+      "conditions": "VI-VO=40V"
+    },
+    "IO(MAX)": {
+      "parameter": "Maximum Output Current",
+      "min": 1.0,
+      "typ": 2.2,
+      "max": null,
+      "unit": "A",
+      "conditions": "VI-VO≤15V, PD≤PMAX"
+    },
+    "IO(MAX)_VI_VO_40V__PD_PMAX__TA_25_C": {
+      "parameter": "Maximum Output Current",
+      "min": null,
+      "typ": 0.3,
+      "max": null,
+      "unit": "A",
+      "conditions": "VI-VO≤40V, PD≤PMAX, TA=25°C"
+    },
+    "eN": {
+      "parameter": "RMS Noise, % of VOUT",
+      "min": null,
+      "typ": 0.003,
+      "max": 0.01,
+      "unit": "%/ VO",
+      "conditions": "TA=25°C, 10Hz≤f≤10KHz"
+    },
+    "RR": {
+      "parameter": "Ripple Rejection",
+      "min": null,
+      "typ": 60,
+      "max": null,
+      "unit": "dB",
+      "conditions": "Vo=10V, f=120Hz, without CADJ"
+    },
+    "RR_Vo_10V__f_120Hz__CADJ_10_F_not": {
+      "parameter": "Ripple Rejection",
+      "min": 66,
+      "typ": 75,
+      "max": null,
+      "unit": "dB",
+      "conditions": "Vo=10V, f=120Hz, CADJ=10µF(note2)"
+    },
+    "ST": {
+      "parameter": "Long-Term Stability",
+      "min": null,
+      "typ": 0.3,
+      "max": 1,
+      "unit": "%",
+      "conditions": "TA=25°C for end point measurements, 1000HR"
+    },
+    "RθJC": {
+      "parameter": "Thermal Resistance Junction to case",
+      "min": null,
+      "typ": 5,
+      "max": null,
+      "unit": "°C/W",
+      "conditions": null
+    }
+  },
+  "drc_hints": {
+    "vin_abs_max": {
+      "value": 40,
+      "unit": "V"
+    },
+    "vref": {
+      "min": 1.2,
+      "typ": 1.25,
+      "max": 1.3,
+      "unit": "V"
+    },
+    "iout_max": {
+      "typ": 3.5,
+      "max": 12,
+      "unit": "mA"
+    },
+    "thermal_resistance": {
+      "typ": 5,
+      "unit": "°C/W"
+    }
+  }
+}

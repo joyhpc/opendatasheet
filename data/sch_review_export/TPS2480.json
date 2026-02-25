@@ -1,6 +1,10 @@
 {
-  "_schema": "sch-review-device/1.0",
+  "_schema": "sch-review-device/1.1",
   "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
   "mpn": "TPS2480",
   "manufacturer": "Texas Instruments",
   "category": "Other",
@@ -561,16 +565,35 @@
     }
   },
   "drc_hints": {
+    "vin_abs_max": {
+      "value": 100,
+      "unit": "V"
+    },
+    "vin_operating": {
+      "max": 6,
+      "unit": "V"
+    },
     "vref": {
       "min": 3.9,
       "typ": 4,
       "max": 4.1,
       "unit": "V"
     },
-    "iout_operating": {
+    "enable_threshold": {
+      "min": 45,
+      "typ": 50,
+      "max": 55,
+      "unit": "mV"
+    },
+    "iout_max": {
       "typ": 8,
       "max": 20,
       "unit": "µA"
+    },
+    "iq": {
+      "typ": 0.7,
+      "max": 1.0,
+      "unit": "mA"
     }
   }
 }

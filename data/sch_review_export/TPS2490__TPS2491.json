@@ -1,6 +1,10 @@
 {
-  "_schema": "sch-review-device/1.0",
+  "_schema": "sch-review-device/1.1",
   "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
   "mpn": "TPS2490, TPS2491",
   "manufacturer": "Texas Instruments",
   "category": "Other",
@@ -324,13 +328,23 @@
     }
   },
   "drc_hints": {
+    "vin_abs_max": {
+      "value": 100.0,
+      "unit": "V"
+    },
     "vref": {
       "min": 3.9,
       "typ": 4.0,
       "max": 4.1,
       "unit": "V"
     },
-    "iout_operating": {
+    "enable_threshold": {
+      "min": 45.0,
+      "typ": 50.0,
+      "max": 55.0,
+      "unit": "mV"
+    },
+    "iout_max": {
       "typ": 8.0,
       "max": 20.0,
       "unit": "µA"

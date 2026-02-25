@@ -1,0 +1,384 @@
+{
+  "_schema": "sch-review-device/1.1",
+  "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
+  "mpn": "TPS6224x",
+  "manufacturer": "Texas Instruments",
+  "category": "Buck",
+  "description": "2.25-MHz 300-mA Step-Down Converter in 2 x 2 WSON and SOT Package",
+  "packages": {
+    "WSON-6": {
+      "pin_count": 7,
+      "pins": {
+        "5": {
+          "name": "VIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "VIN power supply pin.",
+          "unused_treatment": null
+        },
+        "1": {
+          "name": "SW",
+          "direction": "OUTPUT",
+          "signal_type": "POWER",
+          "description": "Switch pin connected to the internal MOSFET switches. Connect the inductor to this terminal.",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "GND supply pin.",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "FB",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Feedback pin for the internal regulation loop.",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "EN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Enable pin. Pulling low forces shutdown, pulling high enables device. Must be terminated.",
+          "unused_treatment": "CUSTOM"
+        },
+        "2": {
+          "name": "MODE",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Mode selection pin. High forces fixed-frequency PWM mode; Low enables power save mode. Only available in WSON package.",
+          "unused_treatment": null
+        },
+        "EP": {
+          "name": "Power PAD",
+          "direction": "PASSIVE",
+          "signal_type": "POWER",
+          "description": "Exposed thermal pad for heat dissipation.",
+          "unused_treatment": null
+        }
+      }
+    },
+    "SOT-5": {
+      "pin_count": 5,
+      "pins": {
+        "1": {
+          "name": "VIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "VIN power supply pin.",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "SW",
+          "direction": "OUTPUT",
+          "signal_type": "POWER",
+          "description": "Switch pin connected to the internal MOSFET switches. Connect the inductor to this terminal.",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "GND supply pin.",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "FB",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Feedback pin for the internal regulation loop.",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "EN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Enable pin. Pulling low forces shutdown, pulling high enables device. Must be terminated.",
+          "unused_treatment": "CUSTOM"
+        }
+      }
+    }
+  },
+  "absolute_maximum_ratings": {
+    "VIN": {
+      "parameter": "Input voltage",
+      "min": -0.3,
+      "max": 7.0,
+      "unit": "V",
+      "conditions": null
+    },
+    "TJ": {
+      "parameter": "Maximum operating junction temperature",
+      "min": -40,
+      "max": 125,
+      "unit": "°C",
+      "conditions": null
+    },
+    "Tstg": {
+      "parameter": "Storage temperature",
+      "min": -65,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    },
+    "V(ESD)": {
+      "parameter": "Electrostatic discharge (HBM)",
+      "min": -2000,
+      "max": 2000,
+      "unit": "V",
+      "conditions": "Human body model (HBM), per ANSI/ESDA/JEDEC JS-001, all pins"
+    },
+    "V(ESD)_Charged_device_model__CDM___pe": {
+      "parameter": "Electrostatic discharge (CDM)",
+      "min": -1000,
+      "max": 1000,
+      "unit": "V",
+      "conditions": "Charged device model (CDM), per JEDEC specification JESD22-C101, all pins"
+    }
+  },
+  "electrical_parameters": {
+    "VIN": {
+      "parameter": "Input voltage range",
+      "min": 2.0,
+      "typ": null,
+      "max": 6.0,
+      "unit": "V",
+      "conditions": null
+    },
+    "IOUT": {
+      "parameter": "Output current",
+      "min": null,
+      "typ": null,
+      "max": 300,
+      "unit": "mA",
+      "conditions": "2.3 V <= VIN <= 6 V"
+    },
+    "IOUT_2_V____VIN____2_3_V": {
+      "parameter": "Output current",
+      "min": null,
+      "typ": null,
+      "max": 150,
+      "unit": "mA",
+      "conditions": "2 V <= VIN <= 2.3 V"
+    },
+    "IQ": {
+      "parameter": "Operating quiescent current",
+      "min": null,
+      "typ": 15.0,
+      "max": null,
+      "unit": "µA",
+      "conditions": "IOUT = 0 mA. PFM mode enabled (MODE = GND) device not switching"
+    },
+    "IQ_IOUT___0_mA__PFM_mode_enabled": {
+      "parameter": "Operating quiescent current",
+      "min": null,
+      "typ": 18.5,
+      "max": null,
+      "unit": "µA",
+      "conditions": "IOUT = 0 mA. PFM mode enabled (MODE = GND) device switching, VOUT = 1.8 V"
+    },
+    "IQ_IOUT___0_mA__PWM_mode_enabled": {
+      "parameter": "Operating quiescent current",
+      "min": null,
+      "typ": 3.8,
+      "max": null,
+      "unit": "mA",
+      "conditions": "IOUT = 0 mA, PWM mode enabled (MODE = VIN), PWM operation, VOUT = 1.8 V, VIN = 3 V"
+    },
+    "ISD": {
+      "parameter": "Shutdown current",
+      "min": null,
+      "typ": 0.1,
+      "max": 1.0,
+      "unit": "µA",
+      "conditions": "EN = GND"
+    },
+    "UVLO": {
+      "parameter": "Undervoltage lockout threshold",
+      "min": null,
+      "typ": 1.85,
+      "max": null,
+      "unit": "V",
+      "conditions": "Falling"
+    },
+    "UVLO_Rising": {
+      "parameter": "Undervoltage lockout threshold",
+      "min": null,
+      "typ": 1.95,
+      "max": null,
+      "unit": "V",
+      "conditions": "Rising"
+    },
+    "VIH": {
+      "parameter": "High level input voltage, EN, MODE",
+      "min": 1.0,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": "2 V <= VIN <= 6 V"
+    },
+    "VIL": {
+      "parameter": "Low level input voltage, EN, MODE",
+      "min": null,
+      "typ": null,
+      "max": 0.4,
+      "unit": "V",
+      "conditions": "2 V <= VIN <= 6 V"
+    },
+    "IIN": {
+      "parameter": "Input bias current, EN, MODE",
+      "min": null,
+      "typ": 0.01,
+      "max": 1.0,
+      "unit": "µA",
+      "conditions": "EN, MODE = GND or VIN"
+    },
+    "RDS(on)": {
+      "parameter": "High-side MOSFET ON-resistance",
+      "min": null,
+      "typ": 240.0,
+      "max": 480.0,
+      "unit": "mΩ",
+      "conditions": "VIN = VGS = 3.6 V, TA = 25°C"
+    },
+    "RDS(on)_VIN___VGS___3_6_V__TA___25_C": {
+      "parameter": "Low-side MOSFET ON-resistance",
+      "min": null,
+      "typ": 180.0,
+      "max": 380.0,
+      "unit": "mΩ",
+      "conditions": "VIN = VGS = 3.6 V, TA = 25°C"
+    },
+    "ILIMF": {
+      "parameter": "Forward current-limit MOSFET high-side and low-side",
+      "min": 0.56,
+      "typ": 0.7,
+      "max": 0.84,
+      "unit": "A",
+      "conditions": "VIN = VGS = 3.6 V"
+    },
+    "TSD": {
+      "parameter": "Thermal shutdown",
+      "min": null,
+      "typ": 140.0,
+      "max": null,
+      "unit": "°C",
+      "conditions": "Increasing junction temperature"
+    },
+    "fSW": {
+      "parameter": "Oscillator frequency",
+      "min": 2.0,
+      "typ": 2.25,
+      "max": 2.5,
+      "unit": "MHz",
+      "conditions": "2 V <= VIN <= 6 V"
+    },
+    "VOUT": {
+      "parameter": "Adjustable output voltage range",
+      "min": 0.6,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": "max is VIN"
+    },
+    "VREF": {
+      "parameter": "Reference voltage",
+      "min": null,
+      "typ": 600.0,
+      "max": null,
+      "unit": "mV",
+      "conditions": null
+    },
+    "VFB": {
+      "parameter": "Feedback voltage",
+      "min": -1.5,
+      "typ": 0.0,
+      "max": 1.5,
+      "unit": "%",
+      "conditions": "MODE = VIN, PWM operation, 2 V <= VIN <= 6 V, in fixed output voltage versions VFB = VOUT"
+    },
+    "VFB_MODE___GND__device_in_PFM_mode": {
+      "parameter": "Feedback voltage PFM mode",
+      "min": null,
+      "typ": 0.0,
+      "max": null,
+      "unit": "%",
+      "conditions": "MODE = GND, device in PFM mode"
+    },
+    "tStart Up": {
+      "parameter": "Start-up Time",
+      "min": null,
+      "typ": 500.0,
+      "max": null,
+      "unit": "µs",
+      "conditions": "Time from active EN to reach 95% of VOUT nominal"
+    },
+    "tRamp": {
+      "parameter": "VOUT ramp-up time",
+      "min": null,
+      "typ": 250.0,
+      "max": null,
+      "unit": "µs",
+      "conditions": "Time to ramp from 5% to 95% of VOUT"
+    },
+    "Ilkg": {
+      "parameter": "Leakage current into SW pin",
+      "min": null,
+      "typ": 0.1,
+      "max": 1.0,
+      "unit": "µA",
+      "conditions": "VIN = 3.6 V, VIN = VOUT = VSW, EN = GND"
+    }
+  },
+  "drc_hints": {
+    "vin_abs_max": {
+      "value": 7.0,
+      "unit": "V"
+    },
+    "vin_operating": {
+      "min": 2.0,
+      "max": 6.0,
+      "unit": "V"
+    },
+    "vref": {
+      "typ": 600.0,
+      "unit": "mV"
+    },
+    "vout": {
+      "min": 0.6,
+      "unit": "V"
+    },
+    "enable_threshold": {
+      "min": 1.0,
+      "unit": "V"
+    },
+    "iout_max": {
+      "max": 300,
+      "unit": "mA"
+    },
+    "iq": {
+      "typ": 15.0,
+      "unit": "µA"
+    },
+    "fsw": {
+      "min": 2.0,
+      "typ": 2.25,
+      "max": 2.5,
+      "unit": "MHz"
+    },
+    "thermal_shutdown": {
+      "typ": 140.0,
+      "unit": "°C"
+    },
+    "uvlo": {
+      "typ": 1.85,
+      "unit": "V"
+    }
+  }
+}

@@ -1,6 +1,10 @@
 {
-  "_schema": "sch-review-device/1.0",
+  "_schema": "sch-review-device/1.1",
   "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
   "mpn": "ADG728/ADG729",
   "manufacturer": "Analog Devices",
   "category": "Switch",
@@ -319,5 +323,15 @@
       "conditions": null
     }
   },
-  "drc_hints": {}
+  "drc_hints": {
+    "vin_abs_max": {
+      "value": 7.0,
+      "unit": "V"
+    },
+    "vin_operating": {
+      "min": 2.7,
+      "max": 5.5,
+      "unit": "V"
+    }
+  }
 }

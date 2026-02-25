@@ -1,6 +1,10 @@
 {
-  "_schema": "sch-review-device/1.0",
+  "_schema": "sch-review-device/1.1",
   "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
   "mpn": "TPS2590",
   "manufacturer": "Texas Instruments",
   "category": "Switch",
@@ -191,10 +195,30 @@
     }
   },
   "drc_hints": {
-    "iout_operating": {
+    "vin_abs_max": {
+      "value": 25,
+      "unit": "V"
+    },
+    "vin_operating": {
+      "min": 3,
+      "max": 20,
+      "unit": "V"
+    },
+    "iout_max": {
+      "min": 1.6,
       "typ": 2,
       "max": 2.4,
       "unit": "A"
+    },
+    "thermal_shutdown": {
+      "typ": 160,
+      "unit": "°C"
+    },
+    "uvlo": {
+      "min": 2.6,
+      "typ": 2.85,
+      "max": 2.9,
+      "unit": "V"
     }
   }
 }

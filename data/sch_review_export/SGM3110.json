@@ -1,0 +1,360 @@
+{
+  "_schema": "sch-review-device/1.1",
+  "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
+  "mpn": "SGM3110",
+  "manufacturer": "SGMICRO",
+  "category": "Other",
+  "description": "Micro-Power Regulated Charge Pump",
+  "packages": {
+    "SOT-23-6": {
+      "pin_count": 6,
+      "pins": {
+        "1": {
+          "name": "VOUT",
+          "direction": "POWER_OUT",
+          "signal_type": "POWER",
+          "description": "Regulated Output Pin.",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground.",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "SHDN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Shutdown Input Pin. Logic low to shut down the device.",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "C-",
+          "direction": "PASSIVE",
+          "signal_type": "ANALOG",
+          "description": "Negative Terminal of the Flying Capacitor.",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "VIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Input Power Supply Pin.",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "C+",
+          "direction": "PASSIVE",
+          "signal_type": "ANALOG",
+          "description": "Positive Terminal of the Flying Capacitor.",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "absolute_maximum_ratings": {
+    "VIN": {
+      "parameter": "Input Voltage",
+      "min": -0.3,
+      "max": 6,
+      "unit": "V",
+      "conditions": null
+    },
+    "VOUT": {
+      "parameter": "Output Voltage",
+      "min": -0.3,
+      "max": 6,
+      "unit": "V",
+      "conditions": null
+    },
+    "VSHDN": {
+      "parameter": "Shutdown Input Voltage",
+      "min": -0.3,
+      "max": 6,
+      "unit": "V",
+      "conditions": null
+    },
+    "PD": {
+      "parameter": "Power Dissipation",
+      "min": null,
+      "max": 0.34,
+      "unit": "W",
+      "conditions": "SOT-23-6"
+    },
+    "θJA": {
+      "parameter": "Package Thermal Resistance",
+      "min": null,
+      "max": null,
+      "unit": "°C/W",
+      "conditions": "SOT-23-6"
+    },
+    "TJ": {
+      "parameter": "Junction Temperature",
+      "min": null,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    },
+    "TSTG": {
+      "parameter": "Storage Temperature Range",
+      "min": -65,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    }
+  },
+  "electrical_parameters": {
+    "VIN": {
+      "parameter": "Input Voltage Range",
+      "min": 2.7,
+      "typ": null,
+      "max": 5.0,
+      "unit": "V",
+      "conditions": "VOUT = 5.0V"
+    },
+    "VOUT": {
+      "parameter": "Output Voltage",
+      "min": 4.8,
+      "typ": 5.0,
+      "max": 5.2,
+      "unit": "V",
+      "conditions": "2.7V < VIN < 5V, IOUT ≤ 50mA"
+    },
+    "VOUT_3_0V___VIN___5V__IOUT___100mA": {
+      "parameter": "Output Voltage",
+      "min": 4.8,
+      "typ": 5.0,
+      "max": 5.2,
+      "unit": "V",
+      "conditions": "3.0V < VIN < 5V, IOUT ≤ 100mA"
+    },
+    "IQ": {
+      "parameter": "Quiescent Current",
+      "min": null,
+      "typ": 60,
+      "max": 68,
+      "unit": "µA",
+      "conditions": "2.7V < VIN < 5V, IOUT = 0mA, SHDN = VIN"
+    },
+    "ISHDN": {
+      "parameter": "Shutdown Supply Current",
+      "min": null,
+      "typ": 0.2,
+      "max": 1,
+      "unit": "µA",
+      "conditions": "2.7V < VIN < 3.6V, IOUT = 0mA, VSHDN = 0"
+    },
+    "ISHDN_3_6V___VIN___5V__IOUT___0mA__V": {
+      "parameter": "Shutdown Supply Current",
+      "min": null,
+      "typ": null,
+      "max": 1,
+      "unit": "µA",
+      "conditions": "3.6V < VIN < 5V, IOUT = 0mA, VSHDN = 0"
+    },
+    "VRIPPLE": {
+      "parameter": "Ripple Voltage",
+      "min": null,
+      "typ": 15,
+      "max": null,
+      "unit": "mVP-P",
+      "conditions": "VIN = 2.7V, IOUT = 50mA"
+    },
+    "VRIPPLE_VIN___3V__IOUT___100mA": {
+      "parameter": "Ripple Voltage",
+      "min": null,
+      "typ": 88,
+      "max": null,
+      "unit": "mVP-P",
+      "conditions": "VIN = 3V, IOUT = 100mA"
+    },
+    "η": {
+      "parameter": "Efficiency",
+      "min": null,
+      "typ": 91,
+      "max": null,
+      "unit": "%",
+      "conditions": "VIN = 2.7V, IOUT = 50mA"
+    },
+    "fOSC": {
+      "parameter": "Frequency",
+      "min": null,
+      "typ": 750,
+      "max": null,
+      "unit": "kHz",
+      "conditions": "Oscillator Free Running"
+    },
+    "VIH": {
+      "parameter": "SHDN Input Threshold High",
+      "min": 1.4,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": null
+    },
+    "VIL": {
+      "parameter": "SHDN Input Threshold Low",
+      "min": null,
+      "typ": null,
+      "max": 0.4,
+      "unit": "V",
+      "conditions": null
+    },
+    "IIH": {
+      "parameter": "SHDN Input High Current",
+      "min": -1,
+      "typ": null,
+      "max": 1,
+      "unit": "µA",
+      "conditions": "SHDN = VIN"
+    },
+    "IIL": {
+      "parameter": "SHDN Input Low Current",
+      "min": -1,
+      "typ": null,
+      "max": 1,
+      "unit": "µA",
+      "conditions": "SHDN = GND"
+    },
+    "tON": {
+      "parameter": "Turn-On Time",
+      "min": null,
+      "typ": 0.3,
+      "max": null,
+      "unit": "ms",
+      "conditions": "VIN = 3V, IOUT = 0mA"
+    },
+    "VIN_VOUT___4_5V": {
+      "parameter": "Input Voltage Range",
+      "min": 2.7,
+      "typ": null,
+      "max": 4.5,
+      "unit": "V",
+      "conditions": "VOUT = 4.5V"
+    },
+    "VOUT_2_7V___VIN___4_5V__IOUT___50mA": {
+      "parameter": "Output Voltage",
+      "min": 4.32,
+      "typ": 4.5,
+      "max": 4.68,
+      "unit": "V",
+      "conditions": "2.7V < VIN < 4.5V, IOUT ≤ 50mA"
+    },
+    "VOUT_3_0V___VIN___4_5V__IOUT___100m": {
+      "parameter": "Output Voltage",
+      "min": 4.32,
+      "typ": 4.5,
+      "max": 4.68,
+      "unit": "V",
+      "conditions": "3.0V < VIN < 4.5V, IOUT ≤ 100mA"
+    },
+    "IQ_2_7V___VIN___4_5V__IOUT___0mA": {
+      "parameter": "Quiescent Current",
+      "min": null,
+      "typ": 60,
+      "max": 68,
+      "unit": "µA",
+      "conditions": "2.7V < VIN < 4.5V, IOUT = 0mA, SHDN = VIN"
+    },
+    "ISHDN_2_7V___VIN___3_6V__IOUT___0mA": {
+      "parameter": "Shutdown Supply Current",
+      "min": null,
+      "typ": 0.2,
+      "max": 1,
+      "unit": "µA",
+      "conditions": "2.7V < VIN < 3.6V, IOUT = 0mA, VSHDN = 0"
+    },
+    "ISHDN_3_6V___VIN___4_5V__IOUT___0mA": {
+      "parameter": "Shutdown Supply Current",
+      "min": null,
+      "typ": null,
+      "max": 1,
+      "unit": "µA",
+      "conditions": "3.6V < VIN < 4.5V, IOUT = 0mA, VSHDN = 0"
+    },
+    "VRIPPLE_VIN___2_7V__IOUT___50mA": {
+      "parameter": "Ripple Voltage",
+      "min": null,
+      "typ": 15,
+      "max": null,
+      "unit": "mVP-P",
+      "conditions": "VIN = 2.7V, IOUT = 50mA"
+    },
+    "η_VIN___2_7V__IOUT___50mA": {
+      "parameter": "Efficiency",
+      "min": null,
+      "typ": 83,
+      "max": null,
+      "unit": "%",
+      "conditions": "VIN = 2.7V, IOUT = 50mA"
+    },
+    "fOSC_Oscillator_Free_Running": {
+      "parameter": "Frequency",
+      "min": null,
+      "typ": 750,
+      "max": null,
+      "unit": "kHz",
+      "conditions": "Oscillator Free Running"
+    },
+    "IIH_SHDN___VIN": {
+      "parameter": "SHDN Input High Current",
+      "min": -1,
+      "typ": null,
+      "max": 1,
+      "unit": "µA",
+      "conditions": "SHDN = VIN"
+    },
+    "IIL_SHDN___GND": {
+      "parameter": "SHDN Input Low Current",
+      "min": -1,
+      "typ": null,
+      "max": 1,
+      "unit": "µA",
+      "conditions": "SHDN = GND"
+    },
+    "tON_VIN___3V__IOUT___0mA": {
+      "parameter": "Turn-On Time",
+      "min": null,
+      "typ": 0.3,
+      "max": null,
+      "unit": "ms",
+      "conditions": "VIN = 3V, IOUT = 0mA"
+    }
+  },
+  "drc_hints": {
+    "vin_abs_max": {
+      "value": 6,
+      "unit": "V"
+    },
+    "vin_operating": {
+      "min": 2.7,
+      "max": 5.0,
+      "unit": "V"
+    },
+    "vout": {
+      "min": 4.8,
+      "typ": 5.0,
+      "max": 5.2,
+      "unit": "V"
+    },
+    "enable_threshold": {
+      "min": 1.4,
+      "unit": "V"
+    },
+    "iq": {
+      "typ": 60,
+      "max": 68,
+      "unit": "µA"
+    },
+    "fsw": {
+      "typ": 750,
+      "unit": "kHz"
+    }
+  }
+}

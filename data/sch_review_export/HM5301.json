@@ -1,0 +1,441 @@
+{
+  "_schema": "sch-review-device/1.1",
+  "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
+  "mpn": "HM5301",
+  "manufacturer": "H&Msemi",
+  "category": "Buck",
+  "description": "3CH Power Management IC with three synchronous buck converters",
+  "packages": {
+    "QFN 3x3-20": {
+      "pin_count": 21,
+      "pins": {
+        "1": {
+          "name": "GND3",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power ground pin of CH3.",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "FB3",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Feedback input of CH3. Connect to output voltage with a resistor divider.",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "FB2",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Feedback input of CH2. Connect to output voltage with a resistor divider.",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "GND2",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power ground pin of CH2.",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "GND2",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power ground pin of CH2.",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "LX2",
+          "direction": "OUTPUT",
+          "signal_type": "POWER",
+          "description": "Internal MOSFET switching output of CH2. Connect LX2 pin with a low pass filter circuit to obtain a stable DC output voltage.",
+          "unused_treatment": null
+        },
+        "7": {
+          "name": "VIN2",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power input pin of CH2. Recommended to use a 10uF MLCC capacitor between VIN2 pin and GND2 pin.",
+          "unused_treatment": null
+        },
+        "8": {
+          "name": "EN2",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "CH2 turns on/turns off control input. Don’t leave this pin floating.",
+          "unused_treatment": "CUSTOM"
+        },
+        "9": {
+          "name": "EN1",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "CH1 turns on/turns off control input. Don’t leave this pin floating.",
+          "unused_treatment": "CUSTOM"
+        },
+        "10": {
+          "name": "VIN1",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power input pin of CH1. Recommended to use a 10uF MLCC capacitor between VIN1 pin and GND1 pin.",
+          "unused_treatment": null
+        },
+        "11": {
+          "name": "LX1",
+          "direction": "OUTPUT",
+          "signal_type": "POWER",
+          "description": "Internal MOSFET switching output of CH1. Connect LX1 pin with a low pass filter circuit to obtain a stable DC output voltage.",
+          "unused_treatment": null
+        },
+        "12": {
+          "name": "GND1",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power ground pin of CH1.",
+          "unused_treatment": null
+        },
+        "13": {
+          "name": "GND1",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power ground pin of CH1.",
+          "unused_treatment": null
+        },
+        "14": {
+          "name": "FB1",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Feedback input of CH1. Connect to output voltage with a resistor divider.",
+          "unused_treatment": null
+        },
+        "15": {
+          "name": "AGND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Analog ground pin.",
+          "unused_treatment": null
+        },
+        "17": {
+          "name": "AGND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Analog ground pin.",
+          "unused_treatment": null
+        },
+        "16": {
+          "name": "VCC",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Input supply pin for internal control circuit.",
+          "unused_treatment": null
+        },
+        "18": {
+          "name": "EN3",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "CH3 turns on/turns off control input. Don’t leave this pin floating.",
+          "unused_treatment": "CUSTOM"
+        },
+        "19": {
+          "name": "VIN3",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power input pin of CH3. Recommended to use a 10uF MLCC capacitor between VIN3 pin and GND3 pin.",
+          "unused_treatment": null
+        },
+        "20": {
+          "name": "LX3",
+          "direction": "OUTPUT",
+          "signal_type": "POWER",
+          "description": "Internal MOSFET switching output of CH3. Connect SW3 pin with a low pass filter circuit to obtain a stable DC output voltage.",
+          "unused_treatment": null
+        },
+        "21": {
+          "name": "Exposed Pad",
+          "direction": "PASSIVE",
+          "signal_type": "POWER",
+          "description": "The Exposed Pad must be soldered to a large PCB copper plane and connected to GND for appropriate dissipation.",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "absolute_maximum_ratings": {
+    "VVINx, VVCC": {
+      "parameter": "Input Voltage",
+      "min": -0.3,
+      "max": 6.5,
+      "unit": "V",
+      "conditions": null
+    },
+    "VLXx": {
+      "parameter": "SW Pin Voltage",
+      "min": -0.3,
+      "max": null,
+      "unit": "V",
+      "conditions": "VVINx+0.3V"
+    },
+    "TA": {
+      "parameter": "Ambient Temperature operating Range",
+      "min": -40,
+      "max": 85,
+      "unit": "°C",
+      "conditions": null
+    },
+    "TJmax": {
+      "parameter": "Maximum Junction Temperature",
+      "min": null,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    },
+    "TS": {
+      "parameter": "Storage Temperature Range",
+      "min": -65,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    },
+    "θJC": {
+      "parameter": "Thermal Resistance (Junction to Case)",
+      "min": null,
+      "max": null,
+      "unit": "°C/W",
+      "conditions": null
+    },
+    "θJA": {
+      "parameter": "Thermal Resistance (Junction to Ambient)",
+      "min": null,
+      "max": null,
+      "unit": "°C/W",
+      "conditions": null
+    },
+    "PDmax": {
+      "parameter": "Power Dissipation",
+      "min": null,
+      "max": null,
+      "unit": "W",
+      "conditions": "TA=25°C"
+    }
+  },
+  "electrical_parameters": {
+    "VINX": {
+      "parameter": "Input Voltage",
+      "min": 2.7,
+      "typ": null,
+      "max": 5.5,
+      "unit": "V",
+      "conditions": "TA=25°C"
+    },
+    "VVCC": {
+      "parameter": "Control Circuit Input Voltage",
+      "min": 2.7,
+      "typ": null,
+      "max": 5.5,
+      "unit": "V",
+      "conditions": "TA=25°C"
+    },
+    "IQ-total": {
+      "parameter": "Quiescent Current",
+      "min": null,
+      "typ": 185,
+      "max": 250,
+      "unit": "uA",
+      "conditions": "VFB1 = VFB2 = VFB3 = 1V, TA=25°C"
+    },
+    "ISD": {
+      "parameter": "Shutdown Supply Current",
+      "min": null,
+      "typ": 0.1,
+      "max": 1,
+      "unit": "uA",
+      "conditions": "VEN = 0V, TA=25°C"
+    },
+    "VUVLO": {
+      "parameter": "UVLO Threshold",
+      "min": 1.7,
+      "typ": 1.9,
+      "max": 2.1,
+      "unit": "V",
+      "conditions": "VVIN Rising, TA=25°C"
+    },
+    "VUV-HYST": {
+      "parameter": "UVLO Hysteresis",
+      "min": null,
+      "typ": 0.1,
+      "max": null,
+      "unit": "V",
+      "conditions": "TA=25°C"
+    },
+    "ILOAD": {
+      "parameter": "Output Load Current",
+      "min": 1,
+      "typ": null,
+      "max": 1.5,
+      "unit": "A",
+      "conditions": "TA=25°C"
+    },
+    "VREF": {
+      "parameter": "Reference Voltage",
+      "min": 0.588,
+      "typ": 0.6,
+      "max": 0.612,
+      "unit": "V",
+      "conditions": "TA=25°C"
+    },
+    "FSW": {
+      "parameter": "Switching Frequency",
+      "min": 1,
+      "typ": 1.5,
+      "max": 2,
+      "unit": "MHz",
+      "conditions": "ILOAD = 100mA, TA=25°C"
+    },
+    "FSW-SHORT": {
+      "parameter": "Short Frequency",
+      "min": null,
+      "typ": 330,
+      "max": null,
+      "unit": "KHz",
+      "conditions": "VOUT = 0V, TA=25°C"
+    },
+    "ILIM-P": {
+      "parameter": "CH1, CH3 PMOS Current Limit",
+      "min": 1.5,
+      "typ": 2,
+      "max": null,
+      "unit": "A",
+      "conditions": "TA=25°C"
+    },
+    "ILIM-P_TA_25_C": {
+      "parameter": "CH2 PMOS Current Limit",
+      "min": 1.7,
+      "typ": 2.2,
+      "max": null,
+      "unit": "A",
+      "conditions": "TA=25°C"
+    },
+    "RDS(ON)-P": {
+      "parameter": "PMOS On-Resistance",
+      "min": null,
+      "typ": 120,
+      "max": null,
+      "unit": "mΩ",
+      "conditions": "ILOAD = 100mA, TA=25°C"
+    },
+    "RDS(ON)-N": {
+      "parameter": "NMOS On-Resistance",
+      "min": null,
+      "typ": 110,
+      "max": null,
+      "unit": "mΩ",
+      "conditions": "ILOAD = 100mA, TA=25°C"
+    },
+    "VEN-L": {
+      "parameter": "Enable Pin Input Low Voltage",
+      "min": null,
+      "typ": null,
+      "max": 0.4,
+      "unit": "V",
+      "conditions": "TA=25°C"
+    },
+    "VEN-H": {
+      "parameter": "Enable Pin Input High Voltage",
+      "min": 2,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": "TA=25°C"
+    },
+    "DMAX": {
+      "parameter": "Maximum Duty Cycle",
+      "min": null,
+      "typ": 100,
+      "max": null,
+      "unit": "%",
+      "conditions": "TA=25°C"
+    },
+    "VOVP": {
+      "parameter": "Input OVP Threshold Voltage",
+      "min": null,
+      "typ": 6.3,
+      "max": null,
+      "unit": "V",
+      "conditions": "VIN rising, TA=25°C"
+    },
+    "VOVP-HYST": {
+      "parameter": "Input OVP Threshold Hysteresis",
+      "min": null,
+      "typ": 150,
+      "max": null,
+      "unit": "mV",
+      "conditions": "TA=25°C"
+    },
+    "TOTP": {
+      "parameter": "Thermal Shutdown Threshold",
+      "min": null,
+      "typ": 165,
+      "max": null,
+      "unit": "°C",
+      "conditions": "TA=25°C"
+    },
+    "THYST": {
+      "parameter": "Thermal Shutdown Hysteresis",
+      "min": null,
+      "typ": 30,
+      "max": null,
+      "unit": "°C",
+      "conditions": "TA=25°C"
+    }
+  },
+  "drc_hints": {
+    "vin_abs_max": {
+      "value": 6.5,
+      "unit": "V"
+    },
+    "vin_operating": {
+      "min": 2.7,
+      "max": 5.5,
+      "unit": "V"
+    },
+    "vref": {
+      "min": 0.588,
+      "typ": 0.6,
+      "max": 0.612,
+      "unit": "V"
+    },
+    "enable_threshold": {
+      "max": 0.4,
+      "unit": "V"
+    },
+    "iout_max": {
+      "min": 1,
+      "max": 1.5,
+      "unit": "A"
+    },
+    "iq": {
+      "typ": 185,
+      "max": 250,
+      "unit": "uA"
+    },
+    "fsw": {
+      "min": 1,
+      "typ": 1.5,
+      "max": 2,
+      "unit": "MHz"
+    },
+    "thermal_shutdown": {
+      "typ": 165,
+      "unit": "°C"
+    },
+    "uvlo": {
+      "min": 1.7,
+      "typ": 1.9,
+      "max": 2.1,
+      "unit": "V"
+    }
+  }
+}

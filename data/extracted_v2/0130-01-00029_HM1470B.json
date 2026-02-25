@@ -1,0 +1,668 @@
+{
+  "pdf_name": "0130-01-00029_HM1470B.PDF",
+  "model": "gemini-3-flash-preview",
+  "mode": "vision",
+  "is_fpga": false,
+  "checksum": "7738a3c5758f0b8b55e04b6955aa5492",
+  "total_pages": 9,
+  "vision_pages": [
+    0,
+    1,
+    2
+  ],
+  "page_classification": [
+    {
+      "page_num": 0,
+      "text_length": 1514,
+      "category": "cover",
+      "matched_patterns": [],
+      "text_preview": "    2A,4.5V-21V Input,500kHz  Synchronous Step-Down Converter        1    FEATURES   High Efficiency: Up to 96%   500KHz Frequency Operation   2A Output Current   No Schottky Diode Required   4.5"
+    },
+    {
+      "page_num": 1,
+      "text_length": 1450,
+      "category": "electrical",
+      "matched_patterns": [
+        "(?i)absolute\\s+maximum\\s+ratings?",
+        "(?i)pin\\s+(description|configuration|function|assignment|definition|connection|diagram)",
+        "(?i)pin\\s+name"
+      ],
+      "text_preview": "        2  HM1470B   ABSOLUTE MAXIMUM RATINGS (Note 1)  Input Supply Voltage……….………-0.3V to 22V             EN Voltages…………………………-0.3V to 6V  FB Voltages…………………………-0.3V to 6V  SW Voltage………………...-0.3V"
+    },
+    {
+      "page_num": 2,
+      "text_length": 1281,
+      "category": "electrical",
+      "matched_patterns": [
+        "(?i)electrical\\s+characteristics?",
+        "(?i)absolute\\s+maximum\\s+ratings?"
+      ],
+      "text_preview": "    MT2492 Rev1.0         3  ELECTRICAL CHARACTERISTICS (Note 3)  (VIN=12V, VOUT=5V, TA = 25°C, unless otherwise noted.)  PARAMETER  CONDITIONS  MIN  TYP  MAX  UNIT  Input Voltage Range    4.5    21  "
+    },
+    {
+      "page_num": 3,
+      "text_length": 622,
+      "category": "other",
+      "matched_patterns": [],
+      "text_preview": "    MT2492 Rev1.0         4  82.00   84.00   86.00   88.00   90.00   92.00   94.00   96.00   0.05  0.1  0.2  0.5  1  1.5  2  Efficiency(%)  Load Current(A)  Efficiency vs LoadCurrent&Vin=12V  Vout=5V "
+    },
+    {
+      "page_num": 4,
+      "text_length": 405,
+      "category": "other",
+      "matched_patterns": [],
+      "text_preview": "    MT2492 Rev1.0         5  FUNCTIONAL BLOCK DIAGRAM                                          Figure 2. HM1470B Block Diagram                      VCC  REGULATOR OSCILLATOR REFERENCE 1M 400k 56pF 1pF"
+    },
+    {
+      "page_num": 5,
+      "text_length": 2681,
+      "category": "other",
+      "matched_patterns": [],
+      "text_preview": "    MT2492 Rev1.0         6  FUNCTIONAL DESCRIPTION Internal Regulator  The HM1470B is a current mode step down  DC/DC converter that provides excellent transient  response with no extra external comp"
+    },
+    {
+      "page_num": 6,
+      "text_length": 2819,
+      "category": "other",
+      "matched_patterns": [],
+      "text_preview": "    MT2492 Rev1.0         7    APPLICATIONS INFORMATION    Setting the Output Voltage  The external resistor divider is used to set the  output voltage    . The feedback resistor R1 also sets the feed"
+    },
+    {
+      "page_num": 7,
+      "text_length": 1223,
+      "category": "other",
+      "matched_patterns": [],
+      "text_preview": "    MT2492 Rev1.0         8  ESR IN OUT OSC OUT OUT R ) V V 1( L f V V      Δ   The characteristics of the output capacitor also  affect the stability of the regulation system. The  HM1470B can b"
+    },
+    {
+      "page_num": 8,
+      "text_length": 554,
+      "category": "other",
+      "matched_patterns": [],
+      "text_preview": "    MT2492 Rev1.0         9  PACKAGE DESCRIPTION                                                                    TOP VIEW RECOMMENDED SOLDER PAD LAYOUT FRONT VIEW SIDE VIEW AAAA 2.80 3.00 1.50 1.70"
+    }
+  ],
+  "extraction": {
+    "component": {
+      "mpn": "HM1470B",
+      "manufacturer": "H&Msemi",
+      "category": "Buck",
+      "description": "2A, 4.5V-21V Input, 500kHz Synchronous Step-Down Converter"
+    },
+    "absolute_maximum_ratings": [
+      {
+        "parameter": "Input Supply Voltage",
+        "raw_name": "Input Supply Voltage",
+        "symbol": "VIN",
+        "min": -0.3,
+        "typ": null,
+        "max": 22,
+        "unit": "V",
+        "conditions": null
+      },
+      {
+        "parameter": "EN Voltages",
+        "raw_name": "EN Voltages",
+        "symbol": "VEN",
+        "min": -0.3,
+        "typ": null,
+        "max": 6,
+        "unit": "V",
+        "conditions": null
+      },
+      {
+        "parameter": "FB Voltages",
+        "raw_name": "FB Voltages",
+        "symbol": "VFB",
+        "min": -0.3,
+        "typ": null,
+        "max": 6,
+        "unit": "V",
+        "conditions": null
+      },
+      {
+        "parameter": "SW Voltage",
+        "raw_name": "SW Voltage",
+        "symbol": "VSW",
+        "min": -0.3,
+        "typ": null,
+        "max": null,
+        "unit": "V",
+        "conditions": "to (VIN + 0.5V)"
+      },
+      {
+        "parameter": "BS Voltage",
+        "raw_name": "BS Voltage",
+        "symbol": "VBS",
+        "min": null,
+        "typ": null,
+        "max": null,
+        "unit": "V",
+        "conditions": "(VSW - 0.3V) to (VSW + 5V)"
+      },
+      {
+        "parameter": "Power Dissipation",
+        "raw_name": "Power Dissipation",
+        "symbol": "PD",
+        "min": null,
+        "typ": null,
+        "max": 0.6,
+        "unit": "W",
+        "conditions": null
+      },
+      {
+        "parameter": "Thermal Resistance θJC",
+        "raw_name": "Thermal Resistance θJC",
+        "symbol": "θJC",
+        "min": null,
+        "typ": 130,
+        "max": null,
+        "unit": "°C/W",
+        "conditions": null
+      },
+      {
+        "parameter": "Thermal Resistance θJA",
+        "raw_name": "Thermal Resistance θJA",
+        "symbol": "θJA",
+        "min": null,
+        "typ": 170,
+        "max": null,
+        "unit": "°C/W",
+        "conditions": null
+      },
+      {
+        "parameter": "Junction Temperature",
+        "raw_name": "Junction Temperature",
+        "symbol": "TJ",
+        "min": null,
+        "typ": null,
+        "max": 150,
+        "unit": "°C",
+        "conditions": null
+      },
+      {
+        "parameter": "Operating Temperature Range",
+        "raw_name": "Operating Temperature Range",
+        "symbol": "TOPR",
+        "min": -40,
+        "typ": null,
+        "max": 85,
+        "unit": "°C",
+        "conditions": null
+      },
+      {
+        "parameter": "Lead Temperature (Soldering, 10s)",
+        "raw_name": "Lead Temperature(Soldering, 10s)",
+        "symbol": null,
+        "min": null,
+        "typ": null,
+        "max": 300,
+        "unit": "°C",
+        "conditions": null
+      },
+      {
+        "parameter": "Storage Temperature Range",
+        "raw_name": "Storage Temperature Range",
+        "symbol": "TSTG",
+        "min": -65,
+        "typ": null,
+        "max": 150,
+        "unit": "°C",
+        "conditions": null
+      },
+      {
+        "parameter": "ESD HBM",
+        "raw_name": "ESD HBM(Human Body Mode)",
+        "symbol": null,
+        "min": null,
+        "typ": 2,
+        "max": null,
+        "unit": "kV",
+        "conditions": null
+      },
+      {
+        "parameter": "ESD MM",
+        "raw_name": "ESD MM(Machine Mode)",
+        "symbol": null,
+        "min": null,
+        "typ": 200,
+        "max": null,
+        "unit": "V",
+        "conditions": null
+      }
+    ],
+    "electrical_characteristics": [
+      {
+        "parameter": "Input Voltage Range",
+        "raw_name": "Input Voltage Range",
+        "symbol": "VIN",
+        "min": 4.5,
+        "typ": null,
+        "max": 21,
+        "unit": "V",
+        "conditions": null,
+        "device": "HM1470B",
+        "temp_range": "full"
+      },
+      {
+        "parameter": "Supply Current in Operation",
+        "raw_name": "Supply Current in Operation",
+        "symbol": "IIN",
+        "min": null,
+        "typ": 0.6,
+        "max": 0.8,
+        "unit": "mA",
+        "conditions": "VEN=3.0V, VFB=2V",
+        "device": "HM1470B",
+        "temp_range": "25C"
+      },
+      {
+        "parameter": "Supply Current in Shutdown",
+        "raw_name": "Supply Current in Shutdown",
+        "symbol": "ISHDN",
+        "min": null,
+        "typ": 1,
+        "max": null,
+        "unit": "µA",
+        "conditions": "VEN =0 or EN = GND",
+        "device": "HM1470B",
+        "temp_range": "25C"
+      },
+      {
+        "parameter": "Regulated Feedback Voltage",
+        "raw_name": "Regulated Feedback Voltage",
+        "symbol": "VFB",
+        "min": 0.776,
+        "typ": 0.8,
+        "max": 0.824,
+        "unit": "V",
+        "conditions": "TA = 25°C, 4.5V <= VIN <= 20V",
+        "device": "HM1470B",
+        "temp_range": "25C"
+      },
+      {
+        "parameter": "High-Side Switch On-Resistance",
+        "raw_name": "High-Side Switch On-Resistance",
+        "symbol": "RDS(ON)H",
+        "min": null,
+        "typ": 90,
+        "max": null,
+        "unit": "mΩ",
+        "conditions": null,
+        "device": "HM1470B",
+        "temp_range": "25C"
+      },
+      {
+        "parameter": "Low-Side Switch On-Resistance",
+        "raw_name": "Low-Side Switch On-Resistance",
+        "symbol": "RDS(ON)L",
+        "min": null,
+        "typ": 70,
+        "max": null,
+        "unit": "mΩ",
+        "conditions": null,
+        "device": "HM1470B",
+        "temp_range": "25C"
+      },
+      {
+        "parameter": "High-Side Switch Leakage Current",
+        "raw_name": "High-Side Switch Leakage Current",
+        "symbol": "ILEAK_H",
+        "min": null,
+        "typ": null,
+        "max": 1,
+        "unit": "µA",
+        "conditions": "VEN=0V, VSW=0V",
+        "device": "HM1470B",
+        "temp_range": "25C"
+      },
+      {
+        "parameter": "Low-Side Switch Leakage Current",
+        "raw_name": "Low-Side Switch Leakage Current",
+        "symbol": "ILEAK_L",
+        "min": null,
+        "typ": null,
+        "max": 1,
+        "unit": "µA",
+        "conditions": "VEN=0V, VSW=12V",
+        "device": "HM1470B",
+        "temp_range": "25C"
+      },
+      {
+        "parameter": "Upper Switch Current Limit",
+        "raw_name": "Upper Switch Current Limit",
+        "symbol": "ILIM",
+        "min": null,
+        "typ": 4.5,
+        "max": null,
+        "unit": "A",
+        "conditions": "Minimum Duty Cycle",
+        "device": "HM1470B",
+        "temp_range": "25C"
+      },
+      {
+        "parameter": "OVP",
+        "raw_name": "OVP",
+        "symbol": "VOVP",
+        "min": null,
+        "typ": 22,
+        "max": null,
+        "unit": "V",
+        "conditions": null,
+        "device": "HM1470B",
+        "temp_range": "25C"
+      },
+      {
+        "parameter": "Oscillation Frequency",
+        "raw_name": "Oscillation Frequency",
+        "symbol": "fOSC",
+        "min": 400,
+        "typ": 500,
+        "max": 580,
+        "unit": "KHz",
+        "conditions": null,
+        "device": "HM1470B",
+        "temp_range": "25C"
+      },
+      {
+        "parameter": "Maximum Duty Cycle",
+        "raw_name": "Maximum Duty Cycle",
+        "symbol": "DMAX",
+        "min": null,
+        "typ": 92,
+        "max": null,
+        "unit": "%",
+        "conditions": "VFB=0.7V",
+        "device": "HM1470B",
+        "temp_range": "25C"
+      },
+      {
+        "parameter": "Minimum On-Time",
+        "raw_name": "Minimum On-Time",
+        "symbol": "tON_MIN",
+        "min": null,
+        "typ": 60,
+        "max": null,
+        "unit": "nS",
+        "conditions": null,
+        "device": "HM1470B",
+        "temp_range": "25C"
+      },
+      {
+        "parameter": "Soft-start Time",
+        "raw_name": "Soft-start Time",
+        "symbol": "Tss",
+        "min": null,
+        "typ": 2,
+        "max": null,
+        "unit": "mS",
+        "conditions": null,
+        "device": "HM1470B",
+        "temp_range": "25C"
+      },
+      {
+        "parameter": "Thermal Shutdown",
+        "raw_name": "Thermal Shutdown",
+        "symbol": "TSD",
+        "min": null,
+        "typ": 180,
+        "max": null,
+        "unit": "°C",
+        "conditions": null,
+        "device": "HM1470B",
+        "temp_range": "25C"
+      }
+    ],
+    "pin_definitions": [
+      {
+        "pin_number": 1,
+        "pin_name": "GND",
+        "type": "Power",
+        "description": "Analog ground pin."
+      },
+      {
+        "pin_number": 2,
+        "pin_name": "SW",
+        "type": "Output",
+        "description": "Switching Pin."
+      },
+      {
+        "pin_number": 3,
+        "pin_name": "VIN",
+        "type": "Power",
+        "description": "Power supply Pin"
+      },
+      {
+        "pin_number": 4,
+        "pin_name": "FB",
+        "type": "Input",
+        "description": "Adjustable version feedback input. Connect FB to the center point of the external resistor divider"
+      },
+      {
+        "pin_number": 5,
+        "pin_name": "EN",
+        "type": "Input",
+        "description": "Drive this pin to a logic-high to enable the IC. Drive to a logic-low to disable the IC and enter micro-power shutdown mode. For automatic start-up, connect EN to VIN using a 200kΩ resistor."
+      },
+      {
+        "pin_number": 6,
+        "pin_name": "BS",
+        "type": "Input",
+        "description": "Bootstrap. A capacitor connected between SW and BS pins is required to form a floating supply across the high-side switch driver."
+      }
+    ]
+  },
+  "pin_extraction": {
+    "logical_pins": [
+      {
+        "name": "BS",
+        "direction": "PASSIVE",
+        "signal_type": "ANALOG",
+        "description": "Bootstrap pin for high-side gate drive. Connect a capacitor between BS and SW pins.",
+        "packages": {
+          "SOT23-6": [
+            1
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "GND",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Ground connection",
+        "packages": {
+          "SOT23-6": [
+            2
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "FB",
+        "direction": "INPUT",
+        "signal_type": "ANALOG",
+        "description": "Feedback input for output voltage regulation. Connect to the tap of an external resistor divider.",
+        "packages": {
+          "SOT23-6": [
+            3
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "EN",
+        "direction": "INPUT",
+        "signal_type": "DIGITAL",
+        "description": "Enable control input. Drive high to turn on the device, low to turn it off.",
+        "packages": {
+          "SOT23-6": [
+            4
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "VIN",
+        "direction": "POWER_IN",
+        "signal_type": "POWER",
+        "description": "Power supply input voltage",
+        "packages": {
+          "SOT23-6": [
+            5
+          ]
+        },
+        "unused_treatment": null
+      },
+      {
+        "name": "SW",
+        "direction": "OUTPUT",
+        "signal_type": "POWER",
+        "description": "Power switching node. Connect to the output inductor.",
+        "packages": {
+          "SOT23-6": [
+            6
+          ]
+        },
+        "unused_treatment": null
+      }
+    ]
+  },
+  "pin_index": {
+    "packages": {
+      "SOT23-6": {
+        "1": {
+          "name": "BS",
+          "direction": "PASSIVE",
+          "signal_type": "ANALOG",
+          "description": "Bootstrap pin for high-side gate drive. Connect a capacitor between BS and SW pins.",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground connection",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "FB",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Feedback input for output voltage regulation. Connect to the tap of an external resistor divider.",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "EN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Enable control input. Drive high to turn on the device, low to turn it off.",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "VIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power supply input voltage",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "SW",
+          "direction": "OUTPUT",
+          "signal_type": "POWER",
+          "description": "Power switching node. Connect to the output inductor.",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "pin_validation": [],
+  "validation": [
+    {
+      "param": "Input Supply Voltage",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "EN Voltages",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "FB Voltages",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Operating Temperature Range",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Storage Temperature Range",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Input Voltage Range",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Supply Current in Operation",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Regulated Feedback Voltage",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Oscillation Frequency",
+      "rule": "monotonicity",
+      "passed": true,
+      "message": "OK (modes: ALGEBRAIC)"
+    },
+    {
+      "param": "Oscillation Frequency",
+      "rule": "unit_valid",
+      "passed": false,
+      "message": "Suspicious unit: KHz"
+    }
+  ],
+  "physics_validation": [],
+  "cross_validation": {
+    "total_extracted_values": 27,
+    "values_found_in_pdf": 26,
+    "values_not_in_pdf": [
+      300.0
+    ],
+    "value_coverage_pct": 96.3,
+    "total_params": 29,
+    "params_verified": 28,
+    "params_suspicious": 1,
+    "suspicious_params": [
+      {
+        "parameter": "Lead Temperature (Soldering, 10s)",
+        "device": "",
+        "values": [
+          300.0
+        ]
+      }
+    ]
+  },
+  "timing": {
+    "l0_classify_s": 0.089,
+    "l1a_extract_s": 22.444,
+    "l1b_pin_s": 30.925
+  }
+}

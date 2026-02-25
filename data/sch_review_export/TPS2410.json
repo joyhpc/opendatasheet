@@ -1,6 +1,10 @@
 {
-  "_schema": "sch-review-device/1.0",
+  "_schema": "sch-review-device/1.1",
   "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
   "mpn": "TPS2410",
   "manufacturer": "Texas Instruments",
   "category": "Other",
@@ -295,5 +299,10 @@
       "conditions": "V(A-C) = -0.1 V, V(C) = VDD, 3 <= VDD <= 18 V, 2 V <= V(GATE) <= 18 V"
     }
   },
-  "drc_hints": {}
+  "drc_hints": {
+    "thermal_shutdown": {
+      "typ": 135,
+      "unit": "°C"
+    }
+  }
 }

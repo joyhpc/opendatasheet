@@ -1,6 +1,10 @@
 {
-  "_schema": "sch-review-device/1.0",
+  "_schema": "sch-review-device/1.1",
   "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
   "mpn": "LM66200",
   "manufacturer": "Texas Instruments",
   "category": "Switch",
@@ -312,11 +316,37 @@
     }
   },
   "drc_hints": {
-    "vout": {
-      "min": 0,
-      "typ": null,
+    "vin_abs_max": {
+      "value": 6,
+      "unit": "V"
+    },
+    "vin_operating": {
+      "min": 1.6,
       "max": 5.5,
       "unit": "V"
+    },
+    "vref": {
+      "min": 0.8,
+      "typ": 1,
+      "max": 1.2,
+      "unit": "V"
+    },
+    "vout": {
+      "min": 0,
+      "max": 5.5,
+      "unit": "V"
+    },
+    "iq": {
+      "typ": 1.32,
+      "unit": "uA"
+    },
+    "soft_start": {
+      "typ": 1.7,
+      "unit": "ms"
+    },
+    "thermal_shutdown": {
+      "typ": 170,
+      "unit": "°C"
     }
   }
 }
