@@ -1,0 +1,462 @@
+{
+  "_schema": "sch-review-device/1.0",
+  "_type": "normal_ic",
+  "mpn": "TPS2596",
+  "manufacturer": "Texas Instruments",
+  "category": "Other",
+  "description": "2.7 to 19 V, 0.125 to 2-A, 89-mΩ eFuse With Accurate Current Monitor and Fast Overvoltage Protection",
+  "packages": {
+    "SOIC-8": {
+      "pin_count": 9,
+      "pins": {
+        "1": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "dVdt",
+          "direction": "OUTPUT",
+          "signal_type": "ANALOG",
+          "description": "Output turn on slew rate control. Leave floating for fastest turn on.",
+          "unused_treatment": "FLOAT"
+        },
+        "3": {
+          "name": "EN/UVLO",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Active High Enable and Undervoltage Lockout threshold adjustment. Do not leave floating.",
+          "unused_treatment": "CUSTOM"
+        },
+        "4": {
+          "name": "IN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power supply input",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "OUT",
+          "direction": "POWER_OUT",
+          "signal_type": "POWER",
+          "description": "Power output",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "FLT",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "Active low fault indicator, open-drain output",
+          "unused_treatment": null
+        },
+        "7": {
+          "name": "ILM",
+          "direction": "OUTPUT",
+          "signal_type": "ANALOG",
+          "description": "Current limit set and load current monitor",
+          "unused_treatment": null
+        },
+        "8": {
+          "name": "OVLO/OVCSEL",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Overvoltage Lockout threshold adjustment (TPS25963x) or Overvoltage Clamp level select (TPS25962x)",
+          "unused_treatment": "CUSTOM"
+        },
+        "EP": {
+          "name": "Thermal pad",
+          "direction": "PASSIVE",
+          "signal_type": "POWER",
+          "description": "Exposed pad for heat dissipation, must be connected to ground",
+          "unused_treatment": "GND"
+        }
+      }
+    }
+  },
+  "absolute_maximum_ratings": {
+    "VIN": {
+      "parameter": "Maximum Input Voltage Range",
+      "min": -0.3,
+      "max": 21,
+      "unit": "V",
+      "conditions": "Pin IN"
+    },
+    "VIN_Pin_IN__TA___25__C": {
+      "parameter": "Maximum Input Voltage Range",
+      "min": null,
+      "max": 22,
+      "unit": "V",
+      "conditions": "Pin IN, TA = 25 °C"
+    },
+    "VOUT": {
+      "parameter": "Maximum Output Voltage Range",
+      "min": -0.3,
+      "max": null,
+      "unit": "V",
+      "conditions": "Pin OUT, max is min(21, VIN + 0.3)"
+    },
+    "VEN/UVLO": {
+      "parameter": "Maximum Enable Pin Voltage Range",
+      "min": -0.3,
+      "max": 7,
+      "unit": "V",
+      "conditions": "Pin EN/UVLO"
+    },
+    "VOV": {
+      "parameter": "Maximum OVCSEL/OVLO Pin Voltage Range",
+      "min": -0.3,
+      "max": 7,
+      "unit": "V",
+      "conditions": "Pin OVCSEL/OVLO"
+    },
+    "VdVdt": {
+      "parameter": "Maximum dVdt Pin Voltage Range",
+      "min": null,
+      "max": 2.5,
+      "unit": "V",
+      "conditions": "Pin DVDT"
+    },
+    "VFLTB": {
+      "parameter": "Maximum FLTb Pin Voltage Range",
+      "min": -0.3,
+      "max": 7,
+      "unit": "V",
+      "conditions": "Pin FLT"
+    },
+    "IFLTB": {
+      "parameter": "Maximum FLTb Pin Sink Current",
+      "min": null,
+      "max": 10,
+      "unit": "mA",
+      "conditions": "Pin FLT"
+    },
+    "IMAX": {
+      "parameter": "Maximum Continuous Switch Current",
+      "min": null,
+      "max": null,
+      "unit": "A",
+      "conditions": "IN to OUT, Internally Limited"
+    },
+    "TJ": {
+      "parameter": "Junction temperature",
+      "min": null,
+      "max": null,
+      "unit": "°C",
+      "conditions": "Internally Limited"
+    },
+    "TLEAD": {
+      "parameter": "Maximum Lead Temperature",
+      "min": null,
+      "max": 300,
+      "unit": "°C",
+      "conditions": null
+    },
+    "Tstg": {
+      "parameter": "Storage temperature",
+      "min": -65,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    }
+  },
+  "electrical_parameters": {
+    "IQ": {
+      "parameter": "IN quiescent current",
+      "min": null,
+      "typ": 193,
+      "max": 259,
+      "unit": "µA",
+      "conditions": "TPS25963x"
+    },
+    "IQ_TPS25962x": {
+      "parameter": "IN quiescent current",
+      "min": null,
+      "typ": 206,
+      "max": 266,
+      "unit": "µA",
+      "conditions": "TPS25962x"
+    },
+    "ISD": {
+      "parameter": "IN Shutdown Current",
+      "min": null,
+      "typ": null,
+      "max": 0.1,
+      "unit": "µA",
+      "conditions": "VIN < 4 V, VEN/UVLO < VSD"
+    },
+    "ISD_VIN___4_V__VEN_UVLO___VSD": {
+      "parameter": "IN Shutdown Current",
+      "min": null,
+      "typ": 0.4,
+      "max": 1.132,
+      "unit": "µA",
+      "conditions": "VIN ≥ 4 V, VEN/UVLO < VSD"
+    },
+    "VUVP(R)": {
+      "parameter": "IN Undervoltage Protection threshold",
+      "min": 2.46,
+      "typ": 2.53,
+      "max": 2.58,
+      "unit": "V",
+      "conditions": "VIN Rising"
+    },
+    "VUVP(F)": {
+      "parameter": "IN Undervoltage Protection threshold",
+      "min": 2.36,
+      "typ": 2.42,
+      "max": 2.46,
+      "unit": "V",
+      "conditions": "VIN Falling"
+    },
+    "VOVC": {
+      "parameter": "Overvoltage Clamp Threshold",
+      "min": 3.75,
+      "typ": 3.83,
+      "max": 3.92,
+      "unit": "V",
+      "conditions": "ROVCSEL = Short to GND, ROUT = 10 kΩ"
+    },
+    "VOVC_ROVCSEL___400_k__to_GND__ROUT": {
+      "parameter": "Overvoltage Clamp Threshold",
+      "min": 5.54,
+      "typ": 5.69,
+      "max": 5.83,
+      "unit": "V",
+      "conditions": "ROVCSEL = 400 kΩ to GND, ROUT = 10 kΩ"
+    },
+    "VOVC_ROVCSEL___OPEN__ROUT___10_k": {
+      "parameter": "Overvoltage Clamp Threshold",
+      "min": 12.97,
+      "typ": 13.77,
+      "max": 14.52,
+      "unit": "V",
+      "conditions": "ROVCSEL = OPEN, ROUT = 10 kΩ"
+    },
+    "VCLAMP": {
+      "parameter": "Output Voltage During Clamping",
+      "min": 3.47,
+      "typ": 3.59,
+      "max": 3.7,
+      "unit": "V",
+      "conditions": "ROVCSEL = Short to GND, IOUT = 10 mA"
+    },
+    "VCLAMP_ROVCSEL___400_k__to_GND__IOUT": {
+      "parameter": "Output Voltage During Clamping",
+      "min": 5.28,
+      "typ": 5.45,
+      "max": 5.61,
+      "unit": "V",
+      "conditions": "ROVCSEL = 400 kΩ to GND, IOUT = 10 mA"
+    },
+    "VCLAMP_ROVCSEL___OPEN__IOUT___10_mA": {
+      "parameter": "Output Voltage During Clamping",
+      "min": 13.13,
+      "typ": 13.58,
+      "max": 13.97,
+      "unit": "V",
+      "conditions": "ROVCSEL = OPEN, IOUT = 10 mA"
+    },
+    "GIMON": {
+      "parameter": "Current monitor gain",
+      "min": 531.22,
+      "typ": 653.21,
+      "max": 800,
+      "unit": "µA/A",
+      "conditions": "IOUT = 0.13 A"
+    },
+    "GIMON_IOUT___2_A": {
+      "parameter": "Current monitor gain",
+      "min": 635.77,
+      "typ": 657.15,
+      "max": 684.05,
+      "unit": "µA/A",
+      "conditions": "IOUT = 2 A"
+    },
+    "ILIM": {
+      "parameter": "IOUT Current Limit",
+      "min": 0.113,
+      "typ": 0.125,
+      "max": 0.139,
+      "unit": "A",
+      "conditions": "RILM = 7.87 kΩ, VDS = 0.5 V, -40°C ≤ TA ≤ 80°C"
+    },
+    "ILIM_RILM___3_83_k___VDS___0_5_V": {
+      "parameter": "IOUT Current Limit",
+      "min": 0.224,
+      "typ": 0.247,
+      "max": 0.269,
+      "unit": "A",
+      "conditions": "RILM = 3.83 kΩ, VDS = 0.5 V"
+    },
+    "ILIM_RILM___909____VDS___0_5_V": {
+      "parameter": "IOUT Current Limit",
+      "min": 0.949,
+      "typ": 1.005,
+      "max": 1.051,
+      "unit": "A",
+      "conditions": "RILM = 909 Ω, VDS = 0.5 V"
+    },
+    "ILIM_RILM___453____VDS___0_5_V": {
+      "parameter": "IOUT Current Limit",
+      "min": 1.83,
+      "typ": 2.004,
+      "max": 2.147,
+      "unit": "A",
+      "conditions": "RILM = 453 Ω, VDS = 0.5 V"
+    },
+    "ILIM_RILM___OPEN": {
+      "parameter": "IOUT Current Limit",
+      "min": null,
+      "typ": 0,
+      "max": null,
+      "unit": "A",
+      "conditions": "RILM = OPEN"
+    },
+    "ICB": {
+      "parameter": "IOUT Circuit Breaker Threshold",
+      "min": null,
+      "typ": null,
+      "max": 1.5,
+      "unit": "A",
+      "conditions": "RILM = Short to GND (Single Point Failure Test IEC 62368-1)"
+    },
+    "RON": {
+      "parameter": "ON State Resistance",
+      "min": null,
+      "typ": 97,
+      "max": 99.8,
+      "unit": "mΩ",
+      "conditions": "VIN < 4 V, IOUT = 0.2 A, TJ = 25 °C"
+    },
+    "RON_VIN___4_V__IOUT___0_2_A__TJ": {
+      "parameter": "ON State Resistance",
+      "min": null,
+      "typ": null,
+      "max": 131,
+      "unit": "mΩ",
+      "conditions": "VIN > 4 V, IOUT = 0.2 A, TJ = -40 to 125 °C"
+    },
+    "VUVLO(R)": {
+      "parameter": "UVLO Threshold",
+      "min": 1.18,
+      "typ": 1.2,
+      "max": 1.22,
+      "unit": "V",
+      "conditions": "VEN Rising"
+    },
+    "VUVLO(F)": {
+      "parameter": "UVLO Threshold",
+      "min": 1.08,
+      "typ": 1.1,
+      "max": 1.13,
+      "unit": "V",
+      "conditions": "VEN Falling"
+    },
+    "VSD": {
+      "parameter": "VEN threshold for lowest shutdown current",
+      "min": 0.53,
+      "typ": null,
+      "max": 1.05,
+      "unit": "V",
+      "conditions": "VEN Falling"
+    },
+    "IENLKG": {
+      "parameter": "EN leakage current",
+      "min": -0.1,
+      "typ": null,
+      "max": 0.1,
+      "unit": "µA",
+      "conditions": null
+    },
+    "VOVLO(R)": {
+      "parameter": "OVLO Threshold",
+      "min": 1.17,
+      "typ": 1.2,
+      "max": 1.22,
+      "unit": "V",
+      "conditions": "VOVLO Rising"
+    },
+    "VOVLO(F)": {
+      "parameter": "OVLO Threshold",
+      "min": 1.08,
+      "typ": 1.1,
+      "max": 1.13,
+      "unit": "V",
+      "conditions": "VOVLO Falling"
+    },
+    "IOVLKG": {
+      "parameter": "OVLO pin leakage current",
+      "min": -0.1,
+      "typ": null,
+      "max": 0.1,
+      "unit": "µA",
+      "conditions": "0.5 ≤ VOVLO ≤ 1.5 V"
+    },
+    "RFLTB": {
+      "parameter": "FLT Internal Pull-down resistance",
+      "min": null,
+      "typ": 11.52,
+      "max": null,
+      "unit": "Ω",
+      "conditions": "FLT asserted"
+    },
+    "IFLTLKG": {
+      "parameter": "FLT pin leakage current",
+      "min": -1,
+      "typ": null,
+      "max": 1,
+      "unit": "µA",
+      "conditions": "FLT de-asserted, pull-up voltage 6 V"
+    },
+    "TSD": {
+      "parameter": "Thermal Shutdown Rising Threshold",
+      "min": null,
+      "typ": 157,
+      "max": null,
+      "unit": "°C",
+      "conditions": "TJ Rising"
+    },
+    "TSDHYS": {
+      "parameter": "Thermal Shutdown Hysteresis",
+      "min": null,
+      "typ": 11.5,
+      "max": null,
+      "unit": "°C",
+      "conditions": "TJ Falling"
+    },
+    "IDVDT": {
+      "parameter": "dVdt Pin Charging Current",
+      "min": 1.89,
+      "typ": 2.11,
+      "max": 2.33,
+      "unit": "µA",
+      "conditions": null
+    },
+    "GDVDT": {
+      "parameter": "DVDT gain",
+      "min": 20.31,
+      "typ": 20.93,
+      "max": 21.5,
+      "unit": "V",
+      "conditions": null
+    }
+  },
+  "drc_hints": {
+    "vin_abs_max": {
+      "value": 21,
+      "unit": "V"
+    },
+    "iout_operating": {
+      "typ": 0.125,
+      "max": 0.139,
+      "unit": "A"
+    },
+    "iq": {
+      "typ": 193,
+      "max": 259,
+      "unit": "µA"
+    }
+  }
+}

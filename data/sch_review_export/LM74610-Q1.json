@@ -1,0 +1,230 @@
+{
+  "_schema": "sch-review-device/1.0",
+  "_type": "normal_ic",
+  "mpn": "LM74610-Q1",
+  "manufacturer": "Texas Instruments",
+  "category": "Other",
+  "description": "Zero IQ Reverse Polarity Protection Smart Diode Controller",
+  "packages": {
+    "VSSOP-8": {
+      "pin_count": 8,
+      "pins": {
+        "1": {
+          "name": "VcapL",
+          "direction": "PASSIVE",
+          "signal_type": "ANALOG",
+          "description": "Charge Pump Output, connect to an external charge pump capacitor",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "Gate Pull Down",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "Connect to the gate of the external MOSFET for fast turn OFF in the case of reverse polarity",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "NC",
+          "direction": "NC",
+          "signal_type": "NONE",
+          "description": "No connect. Leave floating or connect to Anode pin (pin 3) or gate drive pin (pin 5)",
+          "unused_treatment": "FLOAT"
+        },
+        "5": {
+          "name": "NC",
+          "direction": "NC",
+          "signal_type": "NONE",
+          "description": "No connect. Leave floating or connect to Anode pin (pin 3) or gate drive pin (pin 5)",
+          "unused_treatment": "FLOAT"
+        },
+        "4": {
+          "name": "Anode",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Anode of the diode, connect to source of the external MOSFET",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "Gate Drive",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "Gate Drive output, Connect to the Gate of the external MOSFET",
+          "unused_treatment": null
+        },
+        "7": {
+          "name": "VcapH",
+          "direction": "PASSIVE",
+          "signal_type": "ANALOG",
+          "description": "Charge Pump Output, connect to an external charge pump capacitor",
+          "unused_treatment": null
+        },
+        "8": {
+          "name": "Cathode",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Cathode of the diode, connect to Drain of the external MOSFET",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "absolute_maximum_ratings": {
+    "TA-MAX": {
+      "parameter": "Ambient temperature",
+      "min": -40,
+      "max": 125,
+      "unit": "°C",
+      "conditions": null
+    },
+    "TC-MAX": {
+      "parameter": "Case temperature",
+      "min": -40,
+      "max": 125,
+      "unit": "°C",
+      "conditions": null
+    },
+    "Tstg": {
+      "parameter": "Storage temperature",
+      "min": -65,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    },
+    "V(ESD)": {
+      "parameter": "Electrostatic discharge (CDM)",
+      "min": null,
+      "max": 750,
+      "unit": "V",
+      "conditions": null
+    }
+  },
+  "electrical_parameters": {
+    "VAnode to Cathode": {
+      "parameter": "Minimum startup voltage",
+      "min": 0.48,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": "External MOSFET VGS = 0V"
+    },
+    "Vcap Threshold": {
+      "parameter": "Charge pump capacitor drive threshold (Lower)",
+      "min": null,
+      "typ": 5.15,
+      "max": null,
+      "unit": "V",
+      "conditions": null
+    },
+    "IGate up": {
+      "parameter": "Gate drive pull up current",
+      "min": 8.9,
+      "typ": 9.4,
+      "max": null,
+      "unit": "µA",
+      "conditions": "VGate to Anode = 2 V"
+    },
+    "IGate down": {
+      "parameter": "Gate drive pull down current during forward voltage",
+      "min": 6.35,
+      "typ": 6.8,
+      "max": null,
+      "unit": "µA",
+      "conditions": "VGate to Anode = 4 V"
+    },
+    "IGate pull down": {
+      "parameter": "Gate drive pull down current when reverse voltage is sensed",
+      "min": null,
+      "typ": 160,
+      "max": null,
+      "unit": "mA",
+      "conditions": "VGate Pull Down = VAnode + 2 V"
+    },
+    "ICharge Current": {
+      "parameter": "Charging current for the charge pump capacitor",
+      "min": 40,
+      "typ": 46,
+      "max": null,
+      "unit": "µA",
+      "conditions": "VAnode to Cathode = 0.55 V"
+    },
+    "IDischarge Current": {
+      "parameter": "VCAP current consumption",
+      "min": null,
+      "typ": 0.95,
+      "max": null,
+      "unit": "µA",
+      "conditions": "Vcap = 6.6 V"
+    },
+    "TRecovery": {
+      "parameter": "Reverse recovery time",
+      "min": null,
+      "typ": 2.2,
+      "max": null,
+      "unit": "µs",
+      "conditions": "VAnode to Cathode = -20 mV, Cgate = 4 nF"
+    },
+    "TRecovery_VAnode_to_Cathode____20_mV__Cg": {
+      "parameter": "Reverse recovery time",
+      "min": null,
+      "typ": null,
+      "max": 5,
+      "unit": "µs",
+      "conditions": "VAnode to Cathode = -20 mV, Cgate = 4 nF"
+    },
+    "D": {
+      "parameter": "Duty cycle",
+      "min": null,
+      "typ": 98,
+      "max": null,
+      "unit": "%",
+      "conditions": "Iload = 3 A, TA = 25°C"
+    },
+    "D_Iload___3_A__TA___125_C": {
+      "parameter": "Duty cycle",
+      "min": null,
+      "typ": 92,
+      "max": null,
+      "unit": "%",
+      "conditions": "Iload = 3 A, TA = 125°C"
+    },
+    "ILKG": {
+      "parameter": "Reverse leakage current",
+      "min": null,
+      "typ": 60,
+      "max": null,
+      "unit": "µA",
+      "conditions": "VAnode to Cathode = -13.5 V"
+    },
+    "ILKG_VAnode_to_Cathode____13_5_V": {
+      "parameter": "Reverse leakage current",
+      "min": null,
+      "typ": null,
+      "max": 110,
+      "unit": "µA",
+      "conditions": "VAnode to Cathode = -13.5 V"
+    },
+    "Iq": {
+      "parameter": "Quiescent current to GND",
+      "min": null,
+      "typ": 0,
+      "max": null,
+      "unit": "µA",
+      "conditions": null
+    },
+    "IAnode": {
+      "parameter": "Current into Anode pin",
+      "min": null,
+      "typ": 30,
+      "max": null,
+      "unit": "µA",
+      "conditions": "Current into Anode pin when VAnode - Cathode = 0.3V"
+    }
+  },
+  "drc_hints": {
+    "iq": {
+      "typ": 0,
+      "max": null,
+      "unit": "µA"
+    }
+  }
+}

@@ -1,0 +1,494 @@
+{
+  "_schema": "sch-review-device/1.0",
+  "_type": "normal_ic",
+  "mpn": "LM5069",
+  "manufacturer": "Texas Instruments",
+  "category": "Other",
+  "description": "Positive High-Voltage Hot Swap and In-Rush Current Controller with Power Limiting",
+  "packages": {
+    "VSSOP-10": {
+      "pin_count": 10,
+      "pins": {
+        "1": {
+          "name": "SENSE",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Current sense input for measuring voltage across the current sense resistor (RS)",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "VIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Positive supply input",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "UVLO",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Undervoltage lockout and remote shutdown control",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "OVLO",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Overvoltage lockout",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Circuit ground",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "TIMER",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "Timing capacitor connection for insertion delay and fault timeout period",
+          "unused_treatment": null
+        },
+        "7": {
+          "name": "PWR",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Power limit set via external resistor to set maximum power dissipation",
+          "unused_treatment": null
+        },
+        "8": {
+          "name": "PGD",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "Power Good indicator (open drain output)",
+          "unused_treatment": null
+        },
+        "9": {
+          "name": "OUT",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Output feedback for sensing external MOSFET VDS voltage",
+          "unused_treatment": null
+        },
+        "10": {
+          "name": "GATE",
+          "direction": "OUTPUT",
+          "signal_type": "ANALOG",
+          "description": "Gate drive output for external N-channel MOSFET",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "absolute_maximum_ratings": {
+    "VIN": {
+      "parameter": "VIN to GND",
+      "min": -0.3,
+      "max": 100,
+      "unit": "V",
+      "conditions": null
+    },
+    "GATE": {
+      "parameter": "GATE to GND",
+      "min": -0.3,
+      "max": 100,
+      "unit": "V",
+      "conditions": null
+    },
+    "OUT": {
+      "parameter": "OUT to GND (1-ms transient)",
+      "min": -1,
+      "max": 100,
+      "unit": "V",
+      "conditions": "1-ms transient"
+    },
+    "UVLO": {
+      "parameter": "UVLO to GND",
+      "min": -0.3,
+      "max": 100,
+      "unit": "V",
+      "conditions": null
+    },
+    "OVLO": {
+      "parameter": "OVLO to GND",
+      "min": -0.3,
+      "max": 7,
+      "unit": "V",
+      "conditions": null
+    },
+    "TJMAX": {
+      "parameter": "Maximum junction temperature",
+      "min": null,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    },
+    "Tstg": {
+      "parameter": "Storage temperature",
+      "min": -65,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    },
+    "V(ESD)": {
+      "parameter": "Electrostatic discharge (HBM)",
+      "min": -2000,
+      "max": 2000,
+      "unit": "V",
+      "conditions": "per ANSI/ESDA/JEDEC JS-001"
+    },
+    "V(ESD)_per_JEDEC_specification_JESD22": {
+      "parameter": "Electrostatic discharge (CDM)",
+      "min": -500,
+      "max": 500,
+      "unit": "V",
+      "conditions": "per JEDEC specification JESD22-C101"
+    }
+  },
+  "electrical_parameters": {
+    "IIN-EN": {
+      "parameter": "Input current, enabled",
+      "min": null,
+      "typ": 1.3,
+      "max": 1.6,
+      "unit": "mA",
+      "conditions": "UVLO > 2.5 V and OVLO < 2.5 V"
+    },
+    "IIN-DIS": {
+      "parameter": "Input current, disabled",
+      "min": null,
+      "typ": 480,
+      "max": 650,
+      "unit": "µA",
+      "conditions": "UVLO < 2.5 V or OVLO > 2.5 V"
+    },
+    "PORIT": {
+      "parameter": "Power-On reset threshold at VIN to trigger insertion timer",
+      "min": 7.6,
+      "typ": 8,
+      "max": null,
+      "unit": "V",
+      "conditions": "VIN increasing"
+    },
+    "POREN": {
+      "parameter": "Power-On reset threshold at VIN to enable all functions",
+      "min": 8.4,
+      "typ": 9,
+      "max": null,
+      "unit": "V",
+      "conditions": "VIN increasing"
+    },
+    "POREN-HYS": {
+      "parameter": "POREN hysteresis",
+      "min": null,
+      "typ": 90,
+      "max": null,
+      "unit": "mV",
+      "conditions": "VIN decreasing"
+    },
+    "IOUT-EN": {
+      "parameter": "OUT bias current, enabled",
+      "min": null,
+      "typ": 11,
+      "max": null,
+      "unit": "µA",
+      "conditions": "OUT = VIN, Normal operation"
+    },
+    "IOUT-DIS": {
+      "parameter": "OUT bias current, disabled",
+      "min": null,
+      "typ": 50,
+      "max": null,
+      "unit": "µA",
+      "conditions": "Disabled, OUT = 0 V, SENSE = VIN"
+    },
+    "UVLOTH": {
+      "parameter": "UVLO threshold",
+      "min": 2.45,
+      "typ": 2.5,
+      "max": 2.55,
+      "unit": "V",
+      "conditions": null
+    },
+    "UVLOHYS": {
+      "parameter": "UVLO hysteresis current",
+      "min": 12,
+      "typ": 21,
+      "max": 30,
+      "unit": "µA",
+      "conditions": "UVLO = 1 V"
+    },
+    "UVLODEL": {
+      "parameter": "UVLO delay to GATE high",
+      "min": null,
+      "typ": 55,
+      "max": null,
+      "unit": "µs",
+      "conditions": "Delay to GATE high"
+    },
+    "UVLODEL_Delay_to_GATE_low": {
+      "parameter": "UVLO delay to GATE low",
+      "min": null,
+      "typ": 11,
+      "max": null,
+      "unit": "µs",
+      "conditions": "Delay to GATE low"
+    },
+    "UVLOBIAS": {
+      "parameter": "UVLO bias current",
+      "min": null,
+      "typ": null,
+      "max": 1,
+      "unit": "µA",
+      "conditions": "UVLO = 48 V"
+    },
+    "OVLOTH": {
+      "parameter": "OVLO threshold",
+      "min": 2.4,
+      "typ": 2.5,
+      "max": 2.6,
+      "unit": "V",
+      "conditions": null
+    },
+    "OVLOHYS": {
+      "parameter": "OVLO hysteresis current",
+      "min": 12,
+      "typ": 21,
+      "max": 30,
+      "unit": "µA",
+      "conditions": "OVLO = 2.6 V"
+    },
+    "OVLODEL": {
+      "parameter": "OVLO delay to GATE high",
+      "min": null,
+      "typ": 55,
+      "max": null,
+      "unit": "µs",
+      "conditions": "Delay to GATE high"
+    },
+    "OVLODEL_Delay_to_GATE_low": {
+      "parameter": "OVLO delay to GATE low",
+      "min": null,
+      "typ": 11,
+      "max": null,
+      "unit": "µs",
+      "conditions": "Delay to GATE low"
+    },
+    "OVLOBIAS": {
+      "parameter": "OVLO bias current",
+      "min": null,
+      "typ": null,
+      "max": 1,
+      "unit": "µA",
+      "conditions": "OVLO = 2.4 V"
+    },
+    "PWRLIM-1": {
+      "parameter": "Power limit sense voltage (VIN-SENSE) 1",
+      "min": 19,
+      "typ": 25,
+      "max": 31,
+      "unit": "mV",
+      "conditions": "SENSE-OUT = 48 V, RPWR = 150 kΩ"
+    },
+    "PWRLIM-2": {
+      "parameter": "Power limit sense voltage (VIN-SENSE) 2",
+      "min": null,
+      "typ": 25,
+      "max": null,
+      "unit": "mV",
+      "conditions": "SENSE-OUT = 24 V, RPWR = 75 kΩ"
+    },
+    "IPWR": {
+      "parameter": "PWR pin current",
+      "min": null,
+      "typ": 20,
+      "max": null,
+      "unit": "µA",
+      "conditions": "VPWR = 2.5 V"
+    },
+    "IGATE": {
+      "parameter": "GATE Source current",
+      "min": 10,
+      "typ": 16,
+      "max": 22,
+      "unit": "µA",
+      "conditions": "Normal operation, GATE-OUT = 5 V"
+    },
+    "IGATE_UVLO___2_5_V": {
+      "parameter": "GATE Sink current (UVLO)",
+      "min": 1.75,
+      "typ": 2,
+      "max": 2.6,
+      "unit": "mA",
+      "conditions": "UVLO < 2.5 V"
+    },
+    "IGATE_VIN_to_SENSE___150_mV_or_VIN": {
+      "parameter": "GATE Sink current (Fault)",
+      "min": 45,
+      "typ": 110,
+      "max": 175,
+      "unit": "mA",
+      "conditions": "VIN to SENSE = 150 mV or VIN < PORIT, VGATE = 5 V"
+    },
+    "VGATE": {
+      "parameter": "Gate output voltage in normal operation",
+      "min": 11.4,
+      "typ": 12,
+      "max": 12.6,
+      "unit": "V",
+      "conditions": "GATE-OUT voltage"
+    },
+    "VCL": {
+      "parameter": "Current Limit Threshold voltage",
+      "min": 48.5,
+      "typ": 55,
+      "max": 61.5,
+      "unit": "mV",
+      "conditions": "VIN-SENSE voltage"
+    },
+    "tCL": {
+      "parameter": "Current Limit Response time",
+      "min": null,
+      "typ": 45,
+      "max": null,
+      "unit": "µs",
+      "conditions": "VIN-SENSE stepped from 0 mV to 80 mV"
+    },
+    "ISENSE": {
+      "parameter": "SENSE input current, enabled",
+      "min": null,
+      "typ": 23,
+      "max": null,
+      "unit": "µA",
+      "conditions": "Enabled, SENSE = OUT"
+    },
+    "ISENSE_Disabled__OUT___0_V": {
+      "parameter": "SENSE input current, disabled",
+      "min": null,
+      "typ": 60,
+      "max": null,
+      "unit": "µA",
+      "conditions": "Disabled, OUT = 0 V"
+    },
+    "VCB": {
+      "parameter": "Circuit Breaker Threshold voltage",
+      "min": 80,
+      "typ": 105,
+      "max": 130,
+      "unit": "mV",
+      "conditions": "VIN to SENSE"
+    },
+    "tCB": {
+      "parameter": "Circuit Breaker Response time",
+      "min": null,
+      "typ": 0.44,
+      "max": 1.2,
+      "unit": "µs",
+      "conditions": "VIN to SENSE stepped from 0 mV to 150 mV, time to GATE low, no load"
+    },
+    "VTMRH": {
+      "parameter": "Timer Upper threshold",
+      "min": 3.76,
+      "typ": 4,
+      "max": 4.16,
+      "unit": "V",
+      "conditions": null
+    },
+    "VTMRL": {
+      "parameter": "Timer Lower threshold (Restart cycles)",
+      "min": 1.187,
+      "typ": 1.25,
+      "max": 1.313,
+      "unit": "V",
+      "conditions": "Restart cycles"
+    },
+    "VTMRL_End_of_8th_cycle": {
+      "parameter": "Timer Lower threshold (End of 8th cycle)",
+      "min": null,
+      "typ": 0.3,
+      "max": null,
+      "unit": "V",
+      "conditions": "End of 8th cycle"
+    },
+    "VTMRL_Re_enable_Threshold": {
+      "parameter": "Timer Lower threshold (Re-enable Threshold)",
+      "min": null,
+      "typ": 0.3,
+      "max": null,
+      "unit": "V",
+      "conditions": "Re-enable Threshold"
+    },
+    "ITIMER": {
+      "parameter": "Fault sink current",
+      "min": 1.25,
+      "typ": 2.5,
+      "max": 3.75,
+      "unit": "µA",
+      "conditions": null
+    },
+    "ITIMER_TIMER_pin___2_V": {
+      "parameter": "Sink current, end of insertion time",
+      "min": 1,
+      "typ": 1.5,
+      "max": 2,
+      "unit": "mA",
+      "conditions": "TIMER pin = 2 V"
+    },
+    "DCFAULT": {
+      "parameter": "Fault restart duty cycle",
+      "min": null,
+      "typ": 0.5,
+      "max": null,
+      "unit": "%",
+      "conditions": null
+    },
+    "tFAULT": {
+      "parameter": "Fault to GATE low delay",
+      "min": null,
+      "typ": 12,
+      "max": null,
+      "unit": "µs",
+      "conditions": "TIMER pin reaches 4 V"
+    },
+    "PGDTH": {
+      "parameter": "PGD Threshold (Decreasing)",
+      "min": 0.67,
+      "typ": 1.25,
+      "max": 1.85,
+      "unit": "V",
+      "conditions": "Decreasing"
+    },
+    "PGDTH_Increasing__relative_to_decrea": {
+      "parameter": "PGD Threshold (Increasing)",
+      "min": 0.95,
+      "typ": 1.25,
+      "max": 1.55,
+      "unit": "V",
+      "conditions": "Increasing, relative to decreasing threshold"
+    },
+    "PGDVOL": {
+      "parameter": "PGD Output low voltage",
+      "min": null,
+      "typ": 60,
+      "max": 150,
+      "unit": "mV",
+      "conditions": "ISINK = 2 mA"
+    },
+    "PGDIOH": {
+      "parameter": "PGD Off leakage current",
+      "min": null,
+      "typ": null,
+      "max": 5,
+      "unit": "µA",
+      "conditions": "VPGD = 80 V"
+    }
+  },
+  "drc_hints": {
+    "vin_abs_max": {
+      "value": 100,
+      "unit": "V"
+    }
+  }
+}

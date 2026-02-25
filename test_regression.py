@@ -760,6 +760,84 @@ def t8_15():
             assert_in(pin["pin"], by_pin, f"{fname} pin {pin['pin']} missing from lookup")
 
 
+# ─── T9: TI Hot-Swap / Ideal Diode ICs ──────────────────────────────
+
+TI_HOTSWAP_EXPORTS = {
+    "LM5060.json":          {"mpn": "LM5060", "min_pins": 10, "category": "Other"},
+    "LM5064.json":          {"mpn": "LM5064", "min_pins": 28, "category": "Other"},
+    "LM5069.json":          {"mpn": "LM5069", "min_pins": 10, "category": "Other"},
+    "LM74610-Q1.json":      {"mpn": "LM74610-Q1", "min_pins": 7, "category": "Other"},
+    "TPS2490__TPS2491.json": {"mpn": "TPS2490, TPS2491", "min_pins": 10, "category": "Other"},
+    "TPS2596.json":         {"mpn": "TPS2596", "min_pins": 8, "category": "Other"},
+}
+
+
+@test("T9.1 All TI hot-swap export files exist")
+def t9_1():
+    for fname in TI_HOTSWAP_EXPORTS:
+        path = EXPORT_DIR / fname
+        assert_true(path.exists(), f"Missing: {fname}")
+
+
+@test("T9.2 TI hot-swap exports have electrical_parameters")
+def t9_2():
+    for fname, exp in TI_HOTSWAP_EXPORTS.items():
+        with open(EXPORT_DIR / fname) as f:
+            d = json.load(f)
+        elec = d.get("electrical_parameters", {})
+        assert_gt(len(elec), 0, f"{fname} electrical_parameters")
+        # abs_max may be empty if extraction didn't capture symbols (Gemini limitation)
+        # but at least check it exists as a dict
+        abs_max = d.get("absolute_maximum_ratings", {})
+        assert_true(isinstance(abs_max, dict), f"{fname} absolute_maximum_ratings should be dict")
+
+
+@test("T9.3 TI hot-swap exports have complete pin definitions")
+def t9_3():
+    for fname, exp in TI_HOTSWAP_EXPORTS.items():
+        with open(EXPORT_DIR / fname) as f:
+            d = json.load(f)
+        packages = d.get("packages", {})
+        assert_gt(len(packages), 0, f"{fname} packages")
+        total_pins = sum(p.get("pin_count", 0) for p in packages.values())
+        assert_true(total_pins >= exp["min_pins"], f"{fname} pin count {total_pins} < {exp['min_pins']}")
+
+
+@test("T9.4 TI hot-swap exports have DRC hints where available")
+def t9_4():
+    # DRC hints depend on symbol extraction quality - check that most have hints
+    hints_count = 0
+    for fname, exp in TI_HOTSWAP_EXPORTS.items():
+        with open(EXPORT_DIR / fname) as f:
+            d = json.load(f)
+        drc_hints = d.get("drc_hints", {})
+        if len(drc_hints) > 0:
+            hints_count += 1
+    # At least 4 out of 6 should have DRC hints
+    assert_gt(hints_count, 3, f"TI hot-swap exports with DRC hints: {hints_count}/6")
+
+
+@test("T9.5 TI hot-swap exports have correct MPN and manufacturer")
+def t9_5():
+    for fname, exp in TI_HOTSWAP_EXPORTS.items():
+        with open(EXPORT_DIR / fname) as f:
+            d = json.load(f)
+        assert_eq(d.get("mpn"), exp["mpn"], f"{fname} mpn")
+        assert_eq(d.get("manufacturer"), "Texas Instruments", f"{fname} manufacturer")
+
+
+@test("T9.6 TI hot-swap pin directions are valid")
+def t9_6():
+    valid_directions = {"INPUT", "OUTPUT", "BIDIRECTIONAL", "POWER_IN", "POWER_OUT", "PASSIVE", "NC"}
+    for fname in TI_HOTSWAP_EXPORTS:
+        with open(EXPORT_DIR / fname) as f:
+            d = json.load(f)
+        for pkg_name, pkg in d.get("packages", {}).items():
+            for pin_num, pin in pkg.get("pins", {}).items():
+                direction = pin.get("direction", "")
+                assert_in(direction, valid_directions, f"{fname} {pkg_name} pin {pin_num} direction={direction}")
+
+
 # ─── Runner ─────────────────────────────────────────────────────────
 
 def main():
