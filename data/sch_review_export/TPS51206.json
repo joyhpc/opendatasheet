@@ -1,0 +1,51 @@
+{
+  "_schema": "sch-review-device/1.0",
+  "_type": "normal_ic",
+  "_source": "LLM_KNOWLEDGE + pstchip.dat pin names | needs verification",
+  "_confidence": "MEDIUM",
+  "mpn": "TPS51206",
+  "manufacturer": "Texas Instruments",
+  "category": "DDR VTT Regulator",
+  "description": "Sink/Source DDR Termination Regulator with VTTREF Buffered Reference",
+
+  "packages": {
+    "SON-10": {
+      "pin_count": 11,
+      "pins": {
+        "1":  {"name": "VDDQSNS", "direction": "INPUT",    "signal_type": "ANALOG",  "description": "VDDQ sense input. Connect to VDDQ rail for tracking.", "unused_treatment": null},
+        "2":  {"name": "VLDOIN",   "direction": "POWER_IN", "signal_type": "POWER",   "description": "LDO input for VTTREF buffer.", "unused_treatment": null},
+        "3":  {"name": "VTT",      "direction": "POWER_OUT","signal_type": "POWER",   "description": "VTT output. Tracks VDDQ/2.", "unused_treatment": null},
+        "4":  {"name": "PGND",     "direction": "POWER_IN", "signal_type": "POWER",   "description": "Power ground.", "unused_treatment": null},
+        "5":  {"name": "VTTSNS",   "direction": "INPUT",    "signal_type": "ANALOG",  "description": "VTT sense input for regulation.", "unused_treatment": null},
+        "6":  {"name": "VTTREF",   "direction": "POWER_OUT","signal_type": "POWER",   "description": "VTTREF output. Buffered VDDQ/2 reference.", "unused_treatment": null},
+        "7":  {"name": "S3",       "direction": "INPUT",    "signal_type": "DIGITAL", "description": "S3 state control. Low = S3 sleep mode.", "unused_treatment": "PULL_UP"},
+        "8":  {"name": "GND",      "direction": "POWER_IN", "signal_type": "POWER",   "description": "Analog ground.", "unused_treatment": null},
+        "9":  {"name": "S5",       "direction": "INPUT",    "signal_type": "DIGITAL", "description": "S5 state control. Low = S5 off mode.", "unused_treatment": "PULL_UP"},
+        "10": {"name": "VIN",      "direction": "POWER_IN", "signal_type": "POWER",   "description": "Main power input for VTT regulator.", "unused_treatment": null},
+        "11": {"name": "PAD",      "direction": "POWER_IN", "signal_type": "POWER",   "description": "Exposed pad, connect to GND.", "unused_treatment": null}
+      }
+    }
+  },
+
+  "absolute_maximum_ratings": {
+    "VIN":     {"parameter": "VIN Supply Voltage",    "min": -0.3, "max": 3.85, "unit": "V", "conditions": null},
+    "VLDOIN":  {"parameter": "VLDOIN Supply Voltage", "min": -0.3, "max": 3.85, "unit": "V", "conditions": null},
+    "VDDQSNS":{"parameter": "VDDQ Sense Voltage",   "min": -0.3, "max": 3.85, "unit": "V", "conditions": null}
+  },
+
+  "electrical_parameters": {
+    "VTT_ACCURACY":  {"parameter": "VTT Regulation Accuracy", "min": -20, "typ": null, "max": 20, "unit": "mV", "conditions": "VDDQ/2 tracking"},
+    "VTTREF_ACCURACY":{"parameter": "VTTREF Accuracy",        "min": -10, "typ": null, "max": 10, "unit": "mV", "conditions": "VDDQ/2 tracking"},
+    "IOUT_SINK":     {"parameter": "VTT Sink Current",        "min": null,"typ": null, "max": 2.0,"unit": "A",  "conditions": null},
+    "IOUT_SOURCE":   {"parameter": "VTT Source Current",      "min": null,"typ": null, "max": 2.0,"unit": "A",  "conditions": null}
+  },
+
+  "drc_hints": {
+    "vin_abs_max":      {"value": 3.85, "unit": "V"},
+    "vin_operating":    {"min": 1.0, "max": 3.5, "unit": "V"},
+    "device_function":  "ddr_vtt_regulator",
+    "vtt_tracking":     "VDDQ/2",
+    "iout_sink":        {"max": 2.0, "unit": "A"},
+    "iout_source":      {"max": 2.0, "unit": "A"}
+  }
+}

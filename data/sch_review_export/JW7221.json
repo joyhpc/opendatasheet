@@ -1,0 +1,55 @@
+{
+  "_schema": "sch-review-device/1.0",
+  "_type": "normal_ic",
+  "_source": "LLM_KNOWLEDGE + pstchip.dat pin names (DCURX MAIN version) | CRITICAL: NO PDF — needs datasheet urgently",
+  "_confidence": "LOW — pin names from pstchip.dat are authoritative, but electrical params are inferred from LM5060 compatibility claim",
+  "_critical_note": "Pin 3/4 mapping differs from LM5060! JW7221: pin3=UVLO/EN, pin4=OVLO. LM5060: pin3=OVP, pin4=UVLO. Confirmed by two different pstchip.dat versions (DCURX MAIN vs A39 BRG).",
+  "mpn": "JW7221",
+  "manufacturer": "JoulWatt (杰华特)",
+  "category": "Protection",
+  "description": "High-Side Protection Controller (LM5060 compatible with pin differences)",
+
+  "packages": {
+    "MSOP-10": {
+      "pin_count": 10,
+      "pins": {
+        "1":  {"name": "SENSE",   "direction": "INPUT",         "signal_type": "ANALOG",  "description": "High-side current sense input. Connect to input supply side.", "unused_treatment": null},
+        "2":  {"name": "VIN",     "direction": "POWER_IN",      "signal_type": "POWER",   "description": "Device power supply input.", "unused_treatment": null},
+        "3":  {"name": "UVLO/EN", "direction": "INPUT",         "signal_type": "ANALOG",  "description": "Undervoltage lockout / Enable. NOT OVP! (differs from LM5060 pin3=OVP)", "unused_treatment": null},
+        "4":  {"name": "OVLO",    "direction": "INPUT",         "signal_type": "ANALOG",  "description": "Overvoltage lockout. NOT UVLO! (differs from LM5060 pin4=UVLO)", "unused_treatment": "GND"},
+        "5":  {"name": "GND",     "direction": "POWER_IN",      "signal_type": "POWER",   "description": "Ground. (LM5060 pin5=EN)", "unused_treatment": null},
+        "6":  {"name": "TIMER",   "direction": "BIDIRECTIONAL", "signal_type": "ANALOG",  "description": "Fault timer capacitor pin. (LM5060 pin6=GND, pin7=TIMER)", "unused_treatment": null},
+        "7":  {"name": "PWR",     "direction": "BIDIRECTIONAL", "signal_type": "ANALOG",  "description": "Power/timer related. (LM5060 pin7=TIMER)", "unused_treatment": null},
+        "8":  {"name": "PGD",     "direction": "OUTPUT",        "signal_type": "DIGITAL", "description": "Power Good output. (LM5060 pin8=nPGD, active-low)", "unused_treatment": "FLOAT_OK"},
+        "9":  {"name": "OUT",     "direction": "POWER_OUT",     "signal_type": "POWER",   "description": "Output voltage sense. Connect to load side of MOSFET.", "unused_treatment": null},
+        "10": {"name": "GATE",    "direction": "OUTPUT",        "signal_type": "ANALOG",  "description": "Gate drive output for external N-channel MOSFET.", "unused_treatment": null}
+      }
+    }
+  },
+
+  "absolute_maximum_ratings": {
+    "VIN":  {"parameter": "Supply Input Voltage", "min": null, "max": null, "unit": "V", "conditions": "NEEDS DATASHEET"},
+    "GATE": {"parameter": "Gate Pin Voltage",     "min": null, "max": null, "unit": "V", "conditions": "NEEDS DATASHEET"}
+  },
+
+  "electrical_parameters": {
+    "_note": "Parameters below are INFERRED from LM5060 compatibility. JW7221 datasheet needed for verification.",
+    "ISENSE":  {"parameter": "SENSE pin bias current",  "min": null, "typ": 16,  "max": null, "unit": "uA", "conditions": "Inferred from LM5060"},
+    "UVLOTH":  {"parameter": "UVLO threshold (pin 3)",  "min": null, "typ": 1.6, "max": null, "unit": "V",  "conditions": "Inferred from LM5060 UVLO threshold"},
+    "OVLOTH":  {"parameter": "OVLO threshold (pin 4)",  "min": null, "typ": 2.0, "max": null, "unit": "V",  "conditions": "Inferred from LM5060 OVP threshold"}
+  },
+
+  "drc_hints": {
+    "device_function":          "high_side_protection_controller",
+    "requires_external_mosfet": true,
+    "lm5060_compatible":        false,
+    "pin_mapping_warning":      "Pin 3/4/5/6/7 differ from LM5060. Do NOT use LM5060 pinout for JW7221.",
+    "pin_diff_vs_lm5060": {
+      "pin3": {"jw7221": "UVLO/EN", "lm5060": "OVP"},
+      "pin4": {"jw7221": "OVLO",    "lm5060": "UVLO"},
+      "pin5": {"jw7221": "GND",     "lm5060": "EN"},
+      "pin6": {"jw7221": "TIMER",   "lm5060": "GND"},
+      "pin7": {"jw7221": "PWR",     "lm5060": "TIMER"}
+    }
+  }
+}

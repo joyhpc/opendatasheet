@@ -1,0 +1,61 @@
+{
+  "_schema": "sch-review-device/1.0",
+  "_type": "normal_ic",
+  "_source": "LLM_KNOWLEDGE + pstchip.dat pin names | needs verification — Sirius has extracted data pending export",
+  "_confidence": "MEDIUM",
+  "mpn": "TPS56C215",
+  "manufacturer": "Texas Instruments",
+  "category": "Buck",
+  "description": "4.5V-28V Input, 5A Synchronous Step-Down Converter with Integrated MOSFETs",
+
+  "packages": {
+    "QFN-18": {
+      "pin_count": 18,
+      "pins": {
+        "1":  {"name": "BOOT",   "direction": "BIDIRECTIONAL", "signal_type": "POWER",   "description": "Bootstrap supply for high-side driver.", "unused_treatment": null},
+        "2":  {"name": "VIN",    "direction": "POWER_IN",      "signal_type": "POWER",   "description": "Power input pin 1.", "unused_treatment": null},
+        "3":  {"name": "PGND",   "direction": "POWER_IN",      "signal_type": "POWER",   "description": "Power ground pin 1.", "unused_treatment": null},
+        "4":  {"name": "PGND",   "direction": "POWER_IN",      "signal_type": "POWER",   "description": "Power ground pin 2.", "unused_treatment": null},
+        "5":  {"name": "PGND",   "direction": "POWER_IN",      "signal_type": "POWER",   "description": "Power ground pin 3.", "unused_treatment": null},
+        "6":  {"name": "SW",     "direction": "OUTPUT",        "signal_type": "POWER",   "description": "Switch node output pin 1.", "unused_treatment": null},
+        "7":  {"name": "SW",     "direction": "OUTPUT",        "signal_type": "POWER",   "description": "Switch node output pin 2.", "unused_treatment": null},
+        "8":  {"name": "SW",     "direction": "OUTPUT",        "signal_type": "POWER",   "description": "Switch node output pin 3.", "unused_treatment": null},
+        "9":  {"name": "SW",     "direction": "OUTPUT",        "signal_type": "POWER",   "description": "Switch node output pin 4.", "unused_treatment": null},
+        "10": {"name": "NC",     "direction": "PASSIVE",       "signal_type": "POWER",   "description": "No connect.", "unused_treatment": "FLOAT_OK"},
+        "11": {"name": "VIN",    "direction": "POWER_IN",      "signal_type": "POWER",   "description": "Power input pin 2.", "unused_treatment": null},
+        "12": {"name": "AGND",   "direction": "POWER_IN",      "signal_type": "POWER",   "description": "Analog ground.", "unused_treatment": null},
+        "13": {"name": "FB",     "direction": "INPUT",         "signal_type": "ANALOG",  "description": "Feedback input.", "unused_treatment": null},
+        "14": {"name": "SS",     "direction": "INPUT",         "signal_type": "ANALOG",  "description": "Soft-start programming pin.", "unused_treatment": null},
+        "15": {"name": "EN",     "direction": "INPUT",         "signal_type": "ANALOG",  "description": "Enable with precision threshold for UVLO programming.", "unused_treatment": "PULL_UP"},
+        "16": {"name": "PGOOD",  "direction": "OUTPUT",        "signal_type": "DIGITAL", "description": "Open-drain power good output.", "unused_treatment": "FLOAT_OK"},
+        "17": {"name": "VREG5",  "direction": "OUTPUT",        "signal_type": "POWER",   "description": "Internal 5V LDO output. Bypass with 1uF cap.", "unused_treatment": null},
+        "18": {"name": "MODE",   "direction": "INPUT",         "signal_type": "DIGITAL", "description": "Mode selection: CCM/Auto-PFM.", "unused_treatment": null}
+      }
+    }
+  },
+
+  "absolute_maximum_ratings": {
+    "VIN":  {"parameter": "Supply Input Voltage", "min": -0.3, "max": 30.0, "unit": "V", "conditions": null},
+    "EN":   {"parameter": "EN Pin Voltage",       "min": -0.3, "max": 30.0, "unit": "V", "conditions": null}
+  },
+
+  "electrical_parameters": {
+    "VFB":      {"parameter": "Feedback Voltage",       "min": 0.592, "typ": 0.6, "max": 0.608, "unit": "V", "conditions": null},
+    "IOUT_MAX": {"parameter": "Maximum Output Current", "min": null,  "typ": null,"max": 5.0,   "unit": "A", "conditions": null},
+    "VIN_RANGE":{"parameter": "Operating Input Voltage","min": 4.5,   "typ": null,"max": 28.0,  "unit": "V", "conditions": null},
+    "EN_TH":    {"parameter": "EN Rising Threshold",    "min": 1.15,  "typ": 1.2, "max": 1.25,  "unit": "V", "conditions": null},
+    "FSW":      {"parameter": "Switching Frequency",    "min": null,  "typ": 500, "max": null,   "unit": "kHz","conditions": "Fixed frequency"}
+  },
+
+  "drc_hints": {
+    "vin_abs_max":      {"value": 30.0, "unit": "V"},
+    "vin_operating":    {"min": 4.5, "max": 28.0, "unit": "V"},
+    "vref":             {"min": 0.592, "typ": 0.6, "max": 0.608, "unit": "V"},
+    "iout_operating":   {"typ": null, "max": 5.0, "unit": "A"},
+    "enable_threshold": {"min": 1.15, "typ": 1.2, "max": 1.25, "unit": "V"},
+    "fsw_default":      {"typ": 500, "unit": "kHz"},
+    "topology":         "synchronous_buck",
+    "has_internal_fets": true,
+    "pgood_type":       "open_drain_active_low"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "_schema": "sch-review-device/1.0",
+  "_type": "normal_ic",
+  "_source": "LLM_KNOWLEDGE + pstchip.dat pin names | needs verification",
+  "_confidence": "MEDIUM",
+  "mpn": "TPS62085",
+  "manufacturer": "Texas Instruments",
+  "category": "Buck",
+  "description": "3V-17V Input, 1.2A Step-Down Converter in 2x2mm QFN",
+
+  "packages": {
+    "SON-7": {
+      "pin_count": 7,
+      "pins": {
+        "1": {"name": "EN",   "direction": "INPUT",    "signal_type": "DIGITAL", "description": "Enable input. High to enable.", "unused_treatment": "PULL_UP"},
+        "2": {"name": "PG",   "direction": "OUTPUT",   "signal_type": "DIGITAL", "description": "Open-drain power good output.", "unused_treatment": "FLOAT_OK"},
+        "3": {"name": "FB",   "direction": "INPUT",    "signal_type": "ANALOG",  "description": "Feedback input.", "unused_treatment": null},
+        "4": {"name": "VOS",  "direction": "INPUT",    "signal_type": "ANALOG",  "description": "Output voltage sense for DCS-Control.", "unused_treatment": null},
+        "5": {"name": "GND",  "direction": "POWER_IN", "signal_type": "POWER",   "description": "Ground.", "unused_treatment": null},
+        "6": {"name": "SW",   "direction": "OUTPUT",   "signal_type": "POWER",   "description": "Switch node output.", "unused_treatment": null},
+        "7": {"name": "VIN",  "direction": "POWER_IN", "signal_type": "POWER",   "description": "Power input. 3V to 17V.", "unused_treatment": null}
+      }
+    }
+  },
+
+  "absolute_maximum_ratings": {
+    "VIN": {"parameter": "Supply Input Voltage", "min": -0.3, "max": 18.0, "unit": "V", "conditions": null}
+  },
+
+  "electrical_parameters": {
+    "VFB":      {"parameter": "Feedback Voltage",       "min": 0.495, "typ": 0.5, "max": 0.505, "unit": "V", "conditions": null},
+    "IOUT_MAX": {"parameter": "Maximum Output Current", "min": null,  "typ": null,"max": 1.2,   "unit": "A", "conditions": null},
+    "VIN_RANGE":{"parameter": "Operating Input Voltage","min": 3.0,   "typ": null,"max": 17.0,  "unit": "V", "conditions": null},
+    "FSW":      {"parameter": "Switching Frequency",    "min": null,  "typ": 2400,"max": null,   "unit": "kHz","conditions": "DCS-Control"}
+  },
+
+  "drc_hints": {
+    "vin_abs_max":      {"value": 18.0, "unit": "V"},
+    "vin_operating":    {"min": 3.0, "max": 17.0, "unit": "V"},
+    "vref":             {"min": 0.495, "typ": 0.5, "max": 0.505, "unit": "V"},
+    "iout_operating":   {"typ": null, "max": 1.2, "unit": "A"},
+    "fsw_default":      {"typ": 2400, "unit": "kHz"},
+    "topology":         "synchronous_buck",
+    "has_internal_fets": true,
+    "pgood_type":       "open_drain_active_low"
+  }
+}
