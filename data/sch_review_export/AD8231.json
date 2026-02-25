@@ -1,0 +1,254 @@
+{
+  "_schema": "sch-review-device/1.1",
+  "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
+  "mpn": "AD8231",
+  "manufacturer": "Analog Devices",
+  "category": "Instrumentation Amplifier",
+  "description": "Zero Drift, Digitally Programmable Instrumentation Amplifier",
+  "packages": {
+    "16-Lead LFCSP": {
+      "pin_count": 17,
+      "pins": {
+        "1": {
+          "name": "NC",
+          "direction": "NC",
+          "signal_type": "NONE",
+          "description": "No internal connection",
+          "unused_treatment": "FLOAT"
+        },
+        "4": {
+          "name": "NC",
+          "direction": "NC",
+          "signal_type": "NONE",
+          "description": "No internal connection",
+          "unused_treatment": "FLOAT"
+        },
+        "2": {
+          "name": "-INA",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Instrumentation Amplifier Negative Input",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "+INA",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Instrumentation Amplifier Positive Input",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "SDN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Shutdown pin",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "+INB",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Operational Amplifier Positive Input",
+          "unused_treatment": null
+        },
+        "7": {
+          "name": "-INB",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Operational Amplifier Negative Input",
+          "unused_treatment": null
+        },
+        "8": {
+          "name": "OUTB",
+          "direction": "OUTPUT",
+          "signal_type": "ANALOG",
+          "description": "Operational Amplifier Output",
+          "unused_treatment": null
+        },
+        "9": {
+          "name": "REF",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Instrumentation Amplifier Reference Pin. It should be driven with a low impedance.",
+          "unused_treatment": null
+        },
+        "10": {
+          "name": "OUTA",
+          "direction": "OUTPUT",
+          "signal_type": "ANALOG",
+          "description": "Instrumentation Amplifier Output",
+          "unused_treatment": null
+        },
+        "11": {
+          "name": "-VS",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Negative Power Supply. Connect to ground in single-supply applications.",
+          "unused_treatment": null
+        },
+        "12": {
+          "name": "+VS",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Positive Power Supply",
+          "unused_treatment": null
+        },
+        "13": {
+          "name": "CS",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Chip Select. Enables digital logic interface.",
+          "unused_treatment": null
+        },
+        "14": {
+          "name": "A0",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Gain Setting Bit (LSB)",
+          "unused_treatment": null
+        },
+        "15": {
+          "name": "A1",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Gain Setting Bit",
+          "unused_treatment": null
+        },
+        "16": {
+          "name": "A2",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Gain Setting Bit (MSB)",
+          "unused_treatment": null
+        },
+        "EP": {
+          "name": "EPAD",
+          "direction": "PASSIVE",
+          "signal_type": "POWER",
+          "description": "Exposed Pad. Can be connected to the negative supply (-Vs) or left floating.",
+          "unused_treatment": "FLOAT"
+        }
+      }
+    }
+  },
+  "absolute_maximum_ratings": {
+    "Vs": {
+      "parameter": "Supply Voltage",
+      "min": null,
+      "max": 6,
+      "unit": "V",
+      "conditions": null
+    },
+    "Tg": {
+      "parameter": "Package Glass Transition Temperature",
+      "min": null,
+      "max": null,
+      "unit": "°C",
+      "conditions": null
+    }
+  },
+  "electrical_parameters": {
+    "CMR": {
+      "parameter": "Common-Mode Rejection Ratio",
+      "min": 80,
+      "typ": null,
+      "max": null,
+      "unit": "dB",
+      "conditions": "G = 1"
+    },
+    "Vos": {
+      "parameter": "Input Offset Voltage",
+      "min": null,
+      "typ": null,
+      "max": 15,
+      "unit": "µV",
+      "conditions": null
+    },
+    "Ib": {
+      "parameter": "Input Bias Current",
+      "min": null,
+      "typ": null,
+      "max": 500,
+      "unit": "pA",
+      "conditions": null
+    },
+    "BW": {
+      "parameter": "Bandwidth",
+      "min": null,
+      "typ": 2.7,
+      "max": null,
+      "unit": "MHz",
+      "conditions": "G = 1"
+    },
+    "SR": {
+      "parameter": "Slew Rate",
+      "min": null,
+      "typ": 1.1,
+      "max": null,
+      "unit": "V/µs",
+      "conditions": null
+    },
+    "Vs": {
+      "parameter": "Single-Supply Range",
+      "min": 3,
+      "typ": null,
+      "max": 5,
+      "unit": "V",
+      "conditions": null
+    },
+    "Vs_Values_are": {
+      "parameter": "Dual-Supply Range",
+      "min": 1.5,
+      "typ": null,
+      "max": 2.5,
+      "unit": "V",
+      "conditions": "Values are +/-"
+    },
+    "Isdn": {
+      "parameter": "Shutdown Current",
+      "min": null,
+      "typ": null,
+      "max": 1,
+      "unit": "µA",
+      "conditions": "In shutdown"
+    },
+    "θJA": {
+      "parameter": "Thermal Resistance Junction-to-Ambient",
+      "min": null,
+      "typ": 54,
+      "max": null,
+      "unit": "°C/W",
+      "conditions": "4-layer JEDEC standard board"
+    },
+    "θJA_4_layer_JEDEC_standard_board": {
+      "parameter": "Thermal Resistance Junction-to-Ambient",
+      "min": null,
+      "typ": 96,
+      "max": null,
+      "unit": "°C/W",
+      "conditions": "4-layer JEDEC standard board"
+    },
+    "θJC": {
+      "parameter": "Thermal Resistance Junction-to-Case",
+      "min": null,
+      "typ": 6.3,
+      "max": null,
+      "unit": "°C/W",
+      "conditions": null
+    }
+  },
+  "drc_hints": {
+    "vin_abs_max": {
+      "value": 6,
+      "unit": "V"
+    },
+    "thermal_resistance": {
+      "typ": 54,
+      "unit": "°C/W"
+    }
+  }
+}

@@ -1,61 +1,544 @@
 {
-  "_schema": "sch-review-device/1.0",
+  "_schema": "sch-review-device/1.1",
   "_type": "normal_ic",
-  "_source": "LLM_KNOWLEDGE + pstchip.dat pin names | needs verification — Sirius has extracted data pending export",
-  "_confidence": "MEDIUM",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
   "mpn": "TPS56C215",
   "manufacturer": "Texas Instruments",
   "category": "Buck",
-  "description": "4.5V-28V Input, 5A Synchronous Step-Down Converter with Integrated MOSFETs",
-
+  "description": "3.8V to 17V Input, 12A Synchronous Step-Down SWIFT™ Converter",
   "packages": {
-    "QFN-18": {
+    "VQFN-18": {
       "pin_count": 18,
       "pins": {
-        "1":  {"name": "BOOT",   "direction": "BIDIRECTIONAL", "signal_type": "POWER",   "description": "Bootstrap supply for high-side driver.", "unused_treatment": null},
-        "2":  {"name": "VIN",    "direction": "POWER_IN",      "signal_type": "POWER",   "description": "Power input pin 1.", "unused_treatment": null},
-        "3":  {"name": "PGND",   "direction": "POWER_IN",      "signal_type": "POWER",   "description": "Power ground pin 1.", "unused_treatment": null},
-        "4":  {"name": "PGND",   "direction": "POWER_IN",      "signal_type": "POWER",   "description": "Power ground pin 2.", "unused_treatment": null},
-        "5":  {"name": "PGND",   "direction": "POWER_IN",      "signal_type": "POWER",   "description": "Power ground pin 3.", "unused_treatment": null},
-        "6":  {"name": "SW",     "direction": "OUTPUT",        "signal_type": "POWER",   "description": "Switch node output pin 1.", "unused_treatment": null},
-        "7":  {"name": "SW",     "direction": "OUTPUT",        "signal_type": "POWER",   "description": "Switch node output pin 2.", "unused_treatment": null},
-        "8":  {"name": "SW",     "direction": "OUTPUT",        "signal_type": "POWER",   "description": "Switch node output pin 3.", "unused_treatment": null},
-        "9":  {"name": "SW",     "direction": "OUTPUT",        "signal_type": "POWER",   "description": "Switch node output pin 4.", "unused_treatment": null},
-        "10": {"name": "NC",     "direction": "PASSIVE",       "signal_type": "POWER",   "description": "No connect.", "unused_treatment": "FLOAT_OK"},
-        "11": {"name": "VIN",    "direction": "POWER_IN",      "signal_type": "POWER",   "description": "Power input pin 2.", "unused_treatment": null},
-        "12": {"name": "AGND",   "direction": "POWER_IN",      "signal_type": "POWER",   "description": "Analog ground.", "unused_treatment": null},
-        "13": {"name": "FB",     "direction": "INPUT",         "signal_type": "ANALOG",  "description": "Feedback input.", "unused_treatment": null},
-        "14": {"name": "SS",     "direction": "INPUT",         "signal_type": "ANALOG",  "description": "Soft-start programming pin.", "unused_treatment": null},
-        "15": {"name": "EN",     "direction": "INPUT",         "signal_type": "ANALOG",  "description": "Enable with precision threshold for UVLO programming.", "unused_treatment": "PULL_UP"},
-        "16": {"name": "PGOOD",  "direction": "OUTPUT",        "signal_type": "DIGITAL", "description": "Open-drain power good output.", "unused_treatment": "FLOAT_OK"},
-        "17": {"name": "VREG5",  "direction": "OUTPUT",        "signal_type": "POWER",   "description": "Internal 5V LDO output. Bypass with 1uF cap.", "unused_treatment": null},
-        "18": {"name": "MODE",   "direction": "INPUT",         "signal_type": "DIGITAL", "description": "Mode selection: CCM/Auto-PFM.", "unused_treatment": null}
+        "1": {
+          "name": "BOOT",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Supply input for the gate drive voltage of the high-side MOSFET",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "VIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Input voltage supply pin for the control circuitry",
+          "unused_treatment": null
+        },
+        "11": {
+          "name": "VIN",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Input voltage supply pin for the control circuitry",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "PGND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power GND terminal for the controller circuit and the internal circuitry",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "PGND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power GND terminal for the controller circuit and the internal circuitry",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "PGND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power GND terminal for the controller circuit and the internal circuitry",
+          "unused_treatment": null
+        },
+        "8": {
+          "name": "PGND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power GND terminal for the controller circuit and the internal circuitry",
+          "unused_treatment": null
+        },
+        "9": {
+          "name": "PGND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power GND terminal for the controller circuit and the internal circuitry",
+          "unused_treatment": null
+        },
+        "10": {
+          "name": "PGND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power GND terminal for the controller circuit and the internal circuitry",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "SW",
+          "direction": "OUTPUT",
+          "signal_type": "POWER",
+          "description": "Switch node terminal. Connect the output inductor to this pin",
+          "unused_treatment": null
+        },
+        "7": {
+          "name": "SW",
+          "direction": "OUTPUT",
+          "signal_type": "POWER",
+          "description": "Switch node terminal. Connect the output inductor to this pin",
+          "unused_treatment": null
+        },
+        "12": {
+          "name": "AGND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground of internal analog circuitry",
+          "unused_treatment": null
+        },
+        "13": {
+          "name": "FB",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Converter feedback input",
+          "unused_treatment": null
+        },
+        "14": {
+          "name": "SS",
+          "direction": "OUTPUT",
+          "signal_type": "ANALOG",
+          "description": "Soft-Start time selection pin",
+          "unused_treatment": null
+        },
+        "15": {
+          "name": "EN",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Enable input control",
+          "unused_treatment": "FLOAT"
+        },
+        "16": {
+          "name": "PGOOD",
+          "direction": "OUTPUT",
+          "signal_type": "DIGITAL",
+          "description": "Open-drain power good indicator",
+          "unused_treatment": null
+        },
+        "17": {
+          "name": "VREG5",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "POWER",
+          "description": "4.7-V internal LDO output which can also be driven externally",
+          "unused_treatment": null
+        },
+        "18": {
+          "name": "MODE",
+          "direction": "INPUT",
+          "signal_type": "ANALOG",
+          "description": "Switching frequency, current limit selection and light load operation mode selection pin",
+          "unused_treatment": null
+        }
       }
     }
   },
-
   "absolute_maximum_ratings": {
-    "VIN":  {"parameter": "Supply Input Voltage", "min": -0.3, "max": 30.0, "unit": "V", "conditions": null},
-    "EN":   {"parameter": "EN Pin Voltage",       "min": -0.3, "max": 30.0, "unit": "V", "conditions": null}
+    "VIN": {
+      "parameter": "Input Voltage",
+      "min": -0.3,
+      "max": 20,
+      "unit": "V",
+      "conditions": null
+    },
+    "SW": {
+      "parameter": "Switch Node Voltage (10-ns transient)",
+      "min": -5,
+      "max": 25,
+      "unit": "V",
+      "conditions": null
+    },
+    "VIN-SW": {
+      "parameter": "VIN to SW Voltage (10-ns transient)",
+      "min": null,
+      "max": 25,
+      "unit": "V",
+      "conditions": null
+    },
+    "EN": {
+      "parameter": "Enable Voltage",
+      "min": -0.3,
+      "max": 6.5,
+      "unit": "V",
+      "conditions": null
+    },
+    "BOOT - SW": {
+      "parameter": "BOOT to SW Voltage (10 ns transient)",
+      "min": -0.3,
+      "max": 7.5,
+      "unit": "V",
+      "conditions": null
+    },
+    "BOOT": {
+      "parameter": "Bootstrap Voltage",
+      "min": -0.3,
+      "max": 25.5,
+      "unit": "V",
+      "conditions": null
+    },
+    "SS, MODE, FB": {
+      "parameter": "Control Pin Voltage",
+      "min": -0.3,
+      "max": 6.5,
+      "unit": "V",
+      "conditions": null
+    },
+    "VREG5": {
+      "parameter": "LDO Output Voltage",
+      "min": -0.3,
+      "max": 6,
+      "unit": "V",
+      "conditions": null
+    },
+    "PGOOD": {
+      "parameter": "Power Good Voltage",
+      "min": -0.3,
+      "max": 6.5,
+      "unit": "V",
+      "conditions": null
+    },
+    "IOUT": {
+      "parameter": "Output Current",
+      "min": null,
+      "max": 14,
+      "unit": "A",
+      "conditions": null
+    },
+    "TJ": {
+      "parameter": "Operating junction temperature",
+      "min": -40,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    },
+    "Tstg": {
+      "parameter": "Storage temperature",
+      "min": -55,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    }
   },
-
   "electrical_parameters": {
-    "VFB":      {"parameter": "Feedback Voltage",       "min": 0.592, "typ": 0.6, "max": 0.608, "unit": "V", "conditions": null},
-    "IOUT_MAX": {"parameter": "Maximum Output Current", "min": null,  "typ": null,"max": 5.0,   "unit": "A", "conditions": null},
-    "VIN_RANGE":{"parameter": "Operating Input Voltage","min": 4.5,   "typ": null,"max": 28.0,  "unit": "V", "conditions": null},
-    "EN_TH":    {"parameter": "EN Rising Threshold",    "min": 1.15,  "typ": 1.2, "max": 1.25,  "unit": "V", "conditions": null},
-    "FSW":      {"parameter": "Switching Frequency",    "min": null,  "typ": 500, "max": null,   "unit": "kHz","conditions": "Fixed frequency"}
+    "IIN": {
+      "parameter": "VIN supply current",
+      "min": null,
+      "typ": 600,
+      "max": 700,
+      "unit": "µA",
+      "conditions": "TJ = 25°C, VEN=5 V, non switching"
+    },
+    "IVINSDN": {
+      "parameter": "VIN shutdown current",
+      "min": null,
+      "typ": 7,
+      "max": null,
+      "unit": "µA",
+      "conditions": "TJ = 25°C, VEN=0 V"
+    },
+    "VENH": {
+      "parameter": "EN H-level threshold voltage",
+      "min": 1.175,
+      "typ": 1.225,
+      "max": 1.3,
+      "unit": "V",
+      "conditions": null
+    },
+    "VENL": {
+      "parameter": "EN L-level threshold voltage",
+      "min": 1.025,
+      "typ": 1.104,
+      "max": 1.15,
+      "unit": "V",
+      "conditions": null
+    },
+    "VENHYS": {
+      "parameter": "EN hysteresis",
+      "min": null,
+      "typ": 0.121,
+      "max": null,
+      "unit": "V",
+      "conditions": null
+    },
+    "IENp1": {
+      "parameter": "EN pull-up current",
+      "min": 0.35,
+      "typ": 1.91,
+      "max": 2.95,
+      "unit": "µA",
+      "conditions": "VEN = 1.0 V"
+    },
+    "IENp2": {
+      "parameter": "EN pull-up current",
+      "min": 3,
+      "typ": 4.197,
+      "max": 5.5,
+      "unit": "µA",
+      "conditions": "VEN = 1.3 V"
+    },
+    "VFB": {
+      "parameter": "FB voltage",
+      "min": 598,
+      "typ": 600,
+      "max": 602,
+      "unit": "mV",
+      "conditions": "TJ = 25°C"
+    },
+    "VFB_TJ___0_C_to_85_C": {
+      "parameter": "FB voltage",
+      "min": 597.5,
+      "typ": 600,
+      "max": 602.5,
+      "unit": "mV",
+      "conditions": "TJ = 0°C to 85°C"
+    },
+    "VFB_TJ____40_C_to_85_C": {
+      "parameter": "FB voltage",
+      "min": 594,
+      "typ": 600,
+      "max": 602.5,
+      "unit": "mV",
+      "conditions": "TJ = -40°C to 85°C"
+    },
+    "VFB_TJ____40_C_to_150_C": {
+      "parameter": "FB voltage",
+      "min": 594,
+      "typ": 600,
+      "max": 606,
+      "unit": "mV",
+      "conditions": "TJ = -40°C to 150°C"
+    },
+    "VREG5": {
+      "parameter": "LDO Output voltage",
+      "min": 4.58,
+      "typ": 4.7,
+      "max": 4.83,
+      "unit": "V",
+      "conditions": "TJ = -40°C to 150°C"
+    },
+    "ILIM5": {
+      "parameter": "LDO Output Current limit",
+      "min": 100,
+      "typ": 150,
+      "max": 200,
+      "unit": "mA",
+      "conditions": "TJ = -40°C to 150°C"
+    },
+    "RDS(on)H": {
+      "parameter": "High side switch resistance",
+      "min": null,
+      "typ": 13.5,
+      "max": null,
+      "unit": "mΩ",
+      "conditions": "TJ = 25°C, VVREG5 = 4.7 V"
+    },
+    "RDS(on)L": {
+      "parameter": "Low side switch resistance",
+      "min": null,
+      "typ": 4.5,
+      "max": null,
+      "unit": "mΩ",
+      "conditions": "TJ = 25°C, VVREG5 = 4.7 V"
+    },
+    "ISS": {
+      "parameter": "Soft start charge current",
+      "min": 4.9,
+      "typ": 6,
+      "max": 7.1,
+      "unit": "µA",
+      "conditions": "TJ = -40°C to 150°C"
+    },
+    "IOCL": {
+      "parameter": "Current Limit (Low side sourcing)",
+      "min": 9.775,
+      "typ": 11.5,
+      "max": 13.225,
+      "unit": "A",
+      "conditions": "ILIM-1 option, Valley Current"
+    },
+    "IOCL_ILIM_option__Valley_Current": {
+      "parameter": "Current Limit (Low side sourcing)",
+      "min": 11.73,
+      "typ": 13.8,
+      "max": 15.87,
+      "unit": "A",
+      "conditions": "ILIM option, Valley Current"
+    },
+    "VPGOODTH": {
+      "parameter": "PGOOD threshold",
+      "min": null,
+      "typ": 84,
+      "max": null,
+      "unit": "%",
+      "conditions": "VFB falling (fault)"
+    },
+    "VPGOODTH_VFB_rising__good": {
+      "parameter": "PGOOD threshold",
+      "min": null,
+      "typ": 93,
+      "max": null,
+      "unit": "%",
+      "conditions": "VFB rising (good)"
+    },
+    "VPGOODTH_VFB_rising__fault": {
+      "parameter": "PGOOD threshold",
+      "min": null,
+      "typ": 116,
+      "max": null,
+      "unit": "%",
+      "conditions": "VFB rising (fault)"
+    },
+    "VPGOODTH_VFB_falling__good": {
+      "parameter": "PGOOD threshold",
+      "min": null,
+      "typ": 107,
+      "max": null,
+      "unit": "%",
+      "conditions": "VFB falling (good)"
+    },
+    "VIN": {
+      "parameter": "Input Voltage",
+      "min": 3.8,
+      "typ": null,
+      "max": 17,
+      "unit": "V",
+      "conditions": "Recommended Operating Conditions"
+    },
+    "SW": {
+      "parameter": "Switch Node Voltage",
+      "min": -1.8,
+      "typ": null,
+      "max": 17,
+      "unit": "V",
+      "conditions": "Recommended Operating Conditions"
+    },
+    "BOOT": {
+      "parameter": "Bootstrap Voltage",
+      "min": -0.1,
+      "typ": null,
+      "max": 23.5,
+      "unit": "V",
+      "conditions": "Recommended Operating Conditions"
+    },
+    "VREG5_Recommended_Operating_Conditio": {
+      "parameter": "LDO Output Voltage",
+      "min": -0.1,
+      "typ": null,
+      "max": 5.2,
+      "unit": "V",
+      "conditions": "Recommended Operating Conditions"
+    },
+    "ILOAD": {
+      "parameter": "Output Current",
+      "min": 0,
+      "typ": null,
+      "max": 12,
+      "unit": "A",
+      "conditions": "Recommended Operating Conditions"
+    },
+    "TJ": {
+      "parameter": "Operating junction temperature",
+      "min": -40,
+      "typ": null,
+      "max": 150,
+      "unit": "°C",
+      "conditions": "Recommended Operating Conditions"
+    },
+    "RθJA": {
+      "parameter": "Junction-to-ambient thermal resistance",
+      "min": null,
+      "typ": 29.5,
+      "max": null,
+      "unit": "°C/W",
+      "conditions": "RNN PACKAGE, 18 PINS"
+    },
+    "RθJC(top)": {
+      "parameter": "Junction-to-case (top) thermal resistance",
+      "min": null,
+      "typ": 17.0,
+      "max": null,
+      "unit": "°C/W",
+      "conditions": "RNN PACKAGE, 18 PINS"
+    },
+    "RθJB": {
+      "parameter": "Junction-to-board thermal resistance",
+      "min": null,
+      "typ": 8.6,
+      "max": null,
+      "unit": "°C/W",
+      "conditions": "RNN PACKAGE, 18 PINS"
+    },
+    "ψJT": {
+      "parameter": "Junction-to-top characterization parameter",
+      "min": null,
+      "typ": 0.4,
+      "max": null,
+      "unit": "°C/W",
+      "conditions": "RNN PACKAGE, 18 PINS"
+    },
+    "ψJB": {
+      "parameter": "Junction-to-board characterization parameter",
+      "min": null,
+      "typ": 8.6,
+      "max": null,
+      "unit": "°C/W",
+      "conditions": "RNN PACKAGE, 18 PINS"
+    },
+    "RθJC(bot)": {
+      "parameter": "Junction-to-case (bottom) thermal resistance",
+      "min": null,
+      "typ": 0.5,
+      "max": null,
+      "unit": "°C/W",
+      "conditions": "RNN PACKAGE, 18 PINS"
+    }
   },
-
   "drc_hints": {
-    "vin_abs_max":      {"value": 30.0, "unit": "V"},
-    "vin_operating":    {"min": 4.5, "max": 28.0, "unit": "V"},
-    "vref":             {"min": 0.592, "typ": 0.6, "max": 0.608, "unit": "V"},
-    "iout_operating":   {"typ": null, "max": 5.0, "unit": "A"},
-    "enable_threshold": {"min": 1.15, "typ": 1.2, "max": 1.25, "unit": "V"},
-    "fsw_default":      {"typ": 500, "unit": "kHz"},
-    "topology":         "synchronous_buck",
-    "has_internal_fets": true,
-    "pgood_type":       "open_drain_active_low"
+    "vin_abs_max": {
+      "value": 20,
+      "unit": "V"
+    },
+    "vin_operating": {
+      "min": 3.8,
+      "max": 17,
+      "unit": "V"
+    },
+    "vref": {
+      "min": 598,
+      "typ": 600,
+      "max": 602,
+      "unit": "mV"
+    },
+    "enable_threshold": {
+      "min": 1.175,
+      "typ": 1.225,
+      "max": 1.3,
+      "unit": "V"
+    },
+    "iout_max": {
+      "min": 100,
+      "typ": 150,
+      "max": 200,
+      "unit": "mA"
+    },
+    "soft_start": {
+      "min": 4.9,
+      "typ": 6,
+      "max": 7.1,
+      "unit": "µA"
+    },
+    "thermal_resistance": {
+      "typ": 29.5,
+      "unit": "°C/W"
+    }
   }
 }
