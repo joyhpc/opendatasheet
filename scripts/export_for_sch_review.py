@@ -225,21 +225,33 @@ def _classify_pin(pin: dict) -> str:
 def _normalize_pins(pins: list) -> list:
     """Ensure every pin has a 'category' field and normalized function."""
     FUNCTION_MAP = {
-        "I/O": "IO", "i/o": "IO", "IO": "IO",
-        "POWER": "POWER", "GROUND": "GROUND", "GND": "GROUND",
+        # IO
+        "I/O": "IO", "i/o": "IO", "IO": "IO", "DIO": "IO", "MIPI": "IO",
+        # Power / Ground
+        "POWER": "POWER", "Power": "POWER",
+        "GROUND": "GROUND", "Ground": "GROUND", "GND": "GROUND",
+        # Config
         "CONFIG": "CONFIG", "JTAG": "CONFIG",
-        "GT": "GT", "GT_POWER": "GT_POWER",
+        # GT / SerDes
+        "GT": "GT", "GT_RX": "GT", "GT_TX": "GT", "GT_REFCLK": "GT",
+        "GT_POWER": "GT_POWER",
+        "SERDES": "GT", "SERDES_RX": "GT", "SERDES_TX": "GT",
+        "SERDES_REFCLK": "GT",
+        # Special
         "RSVDGND": "RSVDGND", "NC": "NC",
         "SPECIAL": "SPECIAL", "OTHER": "SPECIAL",
-        "SERDES": "GT", "SERDES_RX": "GT", "SERDES_TX": "GT",
-        "SERDES_REFCLK": "GT", "MIPI": "IO",
     }
     for pin in pins:
         if not pin.get("category"):
             pin["category"] = _classify_pin(pin)
         # Normalize function to schema enum
         raw_func = pin.get("function", "")
-        pin["function"] = FUNCTION_MAP.get(raw_func, FUNCTION_MAP.get(pin["category"], "SPECIAL"))
+        name = pin.get("name", "")
+        # NC override: if name is exactly "NC", force NC regardless of raw function
+        if name == "NC":
+            pin["function"] = "NC"
+        else:
+            pin["function"] = FUNCTION_MAP.get(raw_func, FUNCTION_MAP.get(pin["category"], "SPECIAL"))
         # Normalize drc.must_connect to boolean
         drc = pin.get("drc")
         if drc and "must_connect" in drc:
