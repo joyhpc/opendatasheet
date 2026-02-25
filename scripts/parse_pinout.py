@@ -5,12 +5,14 @@ Supported formats:
   - AMD/Xilinx TXT pinout files (from download.amd.com)
   - Gowin XLSX pinout files (from gowin.com)
   - Gowin PDF pinout files (UG1224-style)
+  - Lattice CSV pinout files (ECP5, CrossLink-NX)
 
 Usage:
     python parse_pinout.py <input_file> [-o output.json]
     python parse_pinout.py xcku3pffva676pkg.txt
     python parse_pinout.py UG1222-1.1_GW5AT-60器件Pinout手册.xlsx
     python parse_pinout.py UG1224-1.2_GW5AT-15器件Pinout手册.pdf
+    python parse_pinout.py ecp5u25_pinout.xlsx -f lattice_csv
 """
 
 import argparse
@@ -30,11 +32,20 @@ def detect_format(input_path: Path) -> str:
         # AMD TXT format: first lines contain "Device/Package" or similar
         return "amd_txt"
     elif suffix == ".xlsx":
+        # Check if it's a Lattice CSV disguised as .xlsx
+        try:
+            first_line = input_path.read_text(encoding="utf-8", errors="replace").split("\n")[0]
+            if first_line.startswith("#") and ("Pin Out" in first_line or "ECP5" in first_line or "LIFCL" in first_line):
+                return "lattice_csv"
+        except Exception:
+            pass
         return "gowin_xlsx"
+    elif suffix == ".csv":
+        return "lattice_csv"
     elif suffix == ".pdf":
         return "gowin_pdf"
     else:
-        raise ValueError(f"Unknown file format: {suffix} (expected .txt, .xlsx, or .pdf)")
+        raise ValueError(f"Unknown file format: {suffix} (expected .txt, .xlsx, .csv, or .pdf)")
 
 
 def parse_amd_txt(input_path: Path) -> dict:
@@ -66,11 +77,24 @@ def parse_gowin_pdf(input_path: Path) -> dict:
     return {pkg: data for pkg, data in results}
 
 
+def parse_lattice_csv(input_path: Path) -> dict:
+    """Parse Lattice CSV pinout file."""
+    sys.path.insert(0, str(SCRIPT_DIR))
+    from parse_lattice_pinout import parse_lattice_csv as _parse
+    results = _parse(input_path)
+    if not results:
+        raise ValueError(f"No pinout data found in {input_path}")
+    if len(results) == 1:
+        return results[0]
+    # Multiple packages: return dict keyed by package
+    return {r["package"]: r for r in results}
+
+
 def main():
     parser = argparse.ArgumentParser(description="Unified FPGA pinout parser")
-    parser.add_argument("input", help="Input pinout file (.txt, .xlsx, .pdf)")
+    parser.add_argument("input", help="Input pinout file (.txt, .xlsx, .csv, .pdf)")
     parser.add_argument("-o", "--output", help="Output JSON path (default: auto-named)")
-    parser.add_argument("-f", "--format", choices=["amd_txt", "gowin_xlsx", "gowin_pdf"],
+    parser.add_argument("-f", "--format", choices=["amd_txt", "gowin_xlsx", "gowin_pdf", "lattice_csv"],
                         help="Force input format (auto-detected if omitted)")
     args = parser.parse_args()
 
@@ -86,6 +110,7 @@ def main():
         "amd_txt": parse_amd_txt,
         "gowin_xlsx": parse_gowin_xlsx,
         "gowin_pdf": parse_gowin_pdf,
+        "lattice_csv": parse_lattice_csv,
     }
 
     result = PARSERS[fmt](input_path)

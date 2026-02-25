@@ -1,0 +1,5323 @@
+{
+  "_schema": "sch-review-device/1.0",
+  "_type": "fpga",
+  "mpn": "ECP5U-85",
+  "manufacturer": "Lattice",
+  "category": "FPGA",
+  "description": null,
+  "package": "CSFBGA285",
+  "supply_specs": {
+    "VCC": {
+      "parameter": "Core Supply Voltage ECP5",
+      "symbol": "VCC",
+      "min": 1.045,
+      "typ": null,
+      "max": 1.155,
+      "unit": "V",
+      "conditions": "Recommended operating",
+      "source": "recommended_operating"
+    },
+    "VCCAUX": {
+      "parameter": "Auxiliary Supply Voltage",
+      "symbol": "VCCAUX",
+      "min": null,
+      "typ": 2.375,
+      "max": 2.625,
+      "unit": "V",
+      "conditions": "Recommended operating",
+      "source": "recommended_operating"
+    },
+    "VCCIO": {
+      "parameter": "I/O Driver Supply Voltage",
+      "symbol": "VCCIO",
+      "min": null,
+      "typ": 1.14,
+      "max": 3.465,
+      "unit": "V",
+      "conditions": "Recommended operating",
+      "source": "recommended_operating"
+    },
+    "VREF": {
+      "parameter": "Input Reference Voltage",
+      "symbol": "VREF",
+      "min": null,
+      "typ": 0.5,
+      "max": 1.0,
+      "unit": "V",
+      "conditions": "Recommended operating",
+      "source": "recommended_operating"
+    },
+    "tJCOM": {
+      "parameter": "Junction Temperature, Commercial Operation",
+      "symbol": "tJCOM",
+      "min": null,
+      "typ": 0.0,
+      "max": 85.0,
+      "unit": "°C",
+      "conditions": "Recommended operating",
+      "source": "recommended_operating"
+    },
+    "tJIND": {
+      "parameter": "Junction Temperature, Industrial Operation",
+      "symbol": "tJIND",
+      "min": null,
+      "typ": -40.0,
+      "max": 100.0,
+      "unit": "°C",
+      "conditions": "Recommended operating",
+      "source": "recommended_operating"
+    },
+    "SerDes External Power Supply": {
+      "parameter": "VCCA SerDes Analog Power Supply ECP5UM",
+      "symbol": "SerDes External Power Supply",
+      "min": 1.045,
+      "typ": null,
+      "max": 1.155,
+      "unit": "V",
+      "conditions": "Recommended operating",
+      "source": "recommended_operating"
+    },
+    "VCCAUXA": {
+      "parameter": "SerDes Auxiliary Supply Voltage",
+      "symbol": "VCCAUXA",
+      "min": null,
+      "typ": 2.374,
+      "max": 2.625,
+      "unit": "V",
+      "conditions": "Recommended operating",
+      "source": "recommended_operating"
+    },
+    "VCCHRX": {
+      "parameter": "SerDes Input Buffer Power Supply ECP5UM",
+      "symbol": "VCCHRX",
+      "min": 0.3,
+      "typ": null,
+      "max": 1.155,
+      "unit": "V",
+      "conditions": "Recommended operating",
+      "source": "recommended_operating"
+    },
+    "VCCHTX": {
+      "parameter": "SerDes Output Buffer Power Supply ECP5UM",
+      "symbol": "VCCHTX",
+      "min": 1.045,
+      "typ": null,
+      "max": 1.155,
+      "unit": "V",
+      "conditions": "Recommended operating",
+      "source": "recommended_operating"
+    }
+  },
+  "io_standard_specs": {
+    "lattice_VCCO_LVDS25": {
+      "standard": "LVDS25",
+      "parameter": "VCCO",
+      "value": 1.5,
+      "raw": "MIPI D-PHY LP input can be implemented by powering VCCIO to 1.5 V, and select MIPI LP primitive to meet MIPI Alliance spec on"
+    },
+    "lattice_VCCO_LVCMOS12": {
+      "standard": "LVCMOS12",
+      "parameter": "VCCO",
+      "value": 1.2,
+      "raw": "LVCMOS 1.2, VCCIO = 1.2 V"
+    },
+    "lattice_VIH_LVCMOS12": {
+      "standard": "LVCMOS12",
+      "parameter": "VIH",
+      "value": 12.0,
+      "raw": "VIH and VIL. It can also be implemented as LVCMOS12 with VCCIO at 1.2 V, which would meet VIH/VIL spec on LVCMOS12."
+    },
+    "lattice_VIL_LVCMOS12": {
+      "standard": "LVCMOS12",
+      "parameter": "VIL",
+      "value": 12.0,
+      "raw": "VIH and VIL. It can also be implemented as LVCMOS12 with VCCIO at 1.2 V, which would meet VIH/VIL spec on LVCMOS12."
+    },
+    "lattice_VCCO_LVCMOS33": {
+      "standard": "LVCMOS33",
+      "parameter": "VCCO",
+      "value": 3.3,
+      "raw": "LVCMOS, VCCIO = 3.3 V"
+    },
+    "lattice_VCCO_LVCMOS25": {
+      "standard": "LVCMOS25",
+      "parameter": "VCCO",
+      "value": 2.5,
+      "raw": "LVCMOS, VCCIO = 2.5 V"
+    },
+    "lattice_VCCO_LVCMOS18": {
+      "standard": "LVCMOS18",
+      "parameter": "VCCO",
+      "value": 1.8,
+      "raw": "LVCMOS, VCCIO = 1.8 V"
+    },
+    "lattice_VCCO_LVCMOS15": {
+      "standard": "LVCMOS15",
+      "parameter": "VCCO",
+      "value": 1.5,
+      "raw": "LVCMOS 1.5, VCCIO = 1.5 V"
+    },
+    "lattice_VCCO_LVTTL33": {
+      "standard": "LVTTL33",
+      "parameter": "VCCO",
+      "value": 3.3,
+      "raw": "LVTTL, VCCIO = 3.3 V"
+    },
+    "lattice_VCCO_SSTL18": {
+      "standard": "SSTL18",
+      "parameter": "VCCO",
+      "value": 18.0,
+      "raw": "SSTL_18 class I, II, VCCIO = 1.8 V"
+    },
+    "lattice_VCCO_SSTL15": {
+      "standard": "SSTL15",
+      "parameter": "VCCO",
+      "value": 15.0,
+      "raw": "SSTL_15 class I, II, VCCIO = 1.5 V"
+    },
+    "lattice_VCCO_SSTL135": {
+      "standard": "SSTL135",
+      "parameter": "VCCO",
+      "value": 135.0,
+      "raw": "SSTL_135 class I, II, VCCIO = 1.35 V"
+    },
+    "lattice_VCCO_HSUL12": {
+      "standard": "HSUL12",
+      "parameter": "VCCO",
+      "value": 12.0,
+      "raw": "HSUL_12 class I, II, VCCIO = 1.2 V"
+    },
+    "lattice_VCCO_LVDS": {
+      "standard": "LVDS",
+      "parameter": "VCCO",
+      "value": 2.5,
+      "raw": "BLVDS, Emulated, VCCIO = 2.5 V"
+    },
+    "lattice_VCCO_LVPECL33": {
+      "standard": "LVPECL33",
+      "parameter": "VCCO",
+      "value": 3.3,
+      "raw": "LVPECL, Emulated, VCCIO = 3.3 V"
+    }
+  },
+  "power_rails": {},
+  "banks": {
+    "0": {
+      "bank": "0",
+      "total_pins": 7,
+      "io_pins": 6,
+      "high_speed_count": 0,
+      "dqs_groups": null
+    },
+    "1": {
+      "bank": "1",
+      "total_pins": 7,
+      "io_pins": 6,
+      "high_speed_count": 0,
+      "dqs_groups": null
+    },
+    "2": {
+      "bank": "2",
+      "total_pins": 23,
+      "io_pins": 21,
+      "high_speed_count": 16,
+      "dqs_groups": [
+        "RDQ17",
+        "RDQ41",
+        "RDQS17",
+        "RDQS41",
+        "RDQSN17",
+        "RDQSN41"
+      ]
+    },
+    "3": {
+      "bank": "3",
+      "total_pins": 30,
+      "io_pins": 28,
+      "high_speed_count": 14,
+      "dqs_groups": [
+        "RDQ53",
+        "RDQ89",
+        "RDQS53",
+        "RDQS89",
+        "RDQSN53",
+        "RDQSN89"
+      ]
+    },
+    "6": {
+      "bank": "6",
+      "total_pins": 28,
+      "io_pins": 26,
+      "high_speed_count": 12,
+      "dqs_groups": [
+        "LDQ53",
+        "LDQ89",
+        "LDQS53",
+        "LDQS89",
+        "LDQSN53",
+        "LDQSN89"
+      ]
+    },
+    "7": {
+      "bank": "7",
+      "total_pins": 20,
+      "io_pins": 18,
+      "high_speed_count": 13,
+      "dqs_groups": [
+        "LDQ17",
+        "LDQ41",
+        "LDQS17",
+        "LDQS41",
+        "LDQSN17",
+        "LDQSN41"
+      ]
+    },
+    "8": {
+      "bank": "8",
+      "total_pins": 22,
+      "io_pins": 13,
+      "high_speed_count": 0,
+      "dqs_groups": null
+    },
+    "40": {
+      "bank": "40",
+      "total_pins": 4,
+      "io_pins": 0,
+      "high_speed_count": 0,
+      "dqs_groups": null
+    }
+  },
+  "diff_pairs": [
+    {
+      "type": "LVDS",
+      "pair_name": "PL11",
+      "p_pin": "C12",
+      "n_pin": "B12",
+      "p_name": "PL11A",
+      "n_name": "PL11B",
+      "bank": "7"
+    },
+    {
+      "type": "LVDS",
+      "pair_name": "PL17",
+      "p_pin": "D13",
+      "n_pin": "C13",
+      "p_name": "PL17A",
+      "n_name": "PL17B",
+      "bank": "7"
+    },
+    {
+      "type": "LVDS",
+      "pair_name": "PL35",
+      "p_pin": "B13",
+      "n_pin": "A13",
+      "p_name": "PL35A",
+      "n_name": "PL35B",
+      "bank": "7"
+    },
+    {
+      "type": "IO",
+      "pair_name": "PL35",
+      "p_pin": "C15",
+      "n_pin": "A15",
+      "p_name": "PL35C",
+      "n_name": "PL35D",
+      "bank": "7"
+    },
+    {
+      "type": "LVDS",
+      "pair_name": "PL38",
+      "p_pin": "D15",
+      "n_pin": "D16",
+      "p_name": "PL38A",
+      "n_name": "PL38B",
+      "bank": "7"
+    },
+    {
+      "type": "LVDS",
+      "pair_name": "PL41",
+      "p_pin": "B15",
+      "n_pin": "A16",
+      "p_name": "PL41A",
+      "n_name": "PL41B",
+      "bank": "7"
+    },
+    {
+      "type": "LVDS",
+      "pair_name": "PL44",
+      "p_pin": "A17",
+      "n_pin": "B17",
+      "p_name": "PL44A",
+      "n_name": "PL44B",
+      "bank": "7"
+    },
+    {
+      "type": "IO",
+      "pair_name": "PL44",
+      "p_pin": "B18",
+      "n_pin": "C17",
+      "p_name": "PL44C",
+      "n_name": "PL44D",
+      "bank": "7"
+    },
+    {
+      "type": "LVDS",
+      "pair_name": "PL47",
+      "p_pin": "D17",
+      "n_pin": "C18",
+      "p_name": "PL47A",
+      "n_name": "PL47B",
+      "bank": "6"
+    },
+    {
+      "type": "IO",
+      "pair_name": "PL47",
+      "p_pin": "D18",
+      "n_pin": "F18",
+      "p_name": "PL47C",
+      "n_name": "PL47D",
+      "bank": "6"
+    },
+    {
+      "type": "LVDS",
+      "pair_name": "PL50",
+      "p_pin": "F17",
+      "n_pin": "F16",
+      "p_name": "PL50A",
+      "n_name": "PL50B",
+      "bank": "6"
+    },
+    {
+      "type": "IO",
+      "pair_name": "PL50",
+      "p_pin": "F15",
+      "n_pin": "G16",
+      "p_name": "PL50C",
+      "n_name": "PL50D",
+      "bank": "6"
+    },
+    {
+      "type": "LVDS",
+      "pair_name": "PL53",
+      "p_pin": "G18",
+      "n_pin": "H17",
+      "p_name": "PL53A",
+      "n_name": "PL53B",
+      "bank": "6"
+    },
+    {
+      "type": "LVDS",
+      "pair_name": "PL56",
+      "p_pin": "G15",
+      "n_pin": "H15",
+      "p_name": "PL56A",
+      "n_name": "PL56B",
+      "bank": "6"
+    },
+    {
+      "type": "IO",
+      "pair_name": "PL56",
+      "p_pin": "H16",
+      "n_pin": "J16",
+      "p_name": "PL56C",
+      "n_name": "PL56D",
+      "bank": "6"
+    },
+    {
+      "type": "IO",
+      "pair_name": "PL83",
+      "p_pin": "J17",
+      "n_pin": "H18",
+      "p_name": "PL83C",
+      "n_name": "PL83D",
+      "bank": "6"
+    },
+    {
+      "type": "LVDS",
+      "pair_name": "PL86",
+      "p_pin": "J18",
+      "n_pin": "K18",
+      "p_name": "PL86A",
+      "n_name": "PL86B",
+      "bank": "6"
+    },
+    {
+      "type": "IO",
+      "pair_name": "PL86",
+      "p_pin": "K16",
+      "n_pin": "K15",
+      "p_name": "PL86C",
+      "n_name": "PL86D",
+      "bank": "6"
+    },
+    {
+      "type": "LVDS",
+      "pair_name": "PL89",
+      "p_pin": "K17",
+      "n_pin": "L18",
+      "p_name": "PL89A",
+      "n_name": "PL89B",
+      "bank": "6"
+    },
+    {
+      "type": "IO",
+      "pair_name": "PL89",
+      "p_pin": "L15",
+      "n_pin": "L16",
+      "p_name": "PL89C",
+      "n_name": "PL89D",
+      "bank": "6"
+    },
+    {
+      "type": "IO",
+      "pair_name": "PL92",
+      "p_pin": "M16",
+      "n_pin": "M17",
+      "p_name": "PL92C",
+      "n_name": "PL92D",
+      "bank": "6"
+    },
+    {
+      "type": "IO",
+      "pair_name": "PB4",
+      "p_pin": "N15",
+      "n_pin": "N16",
+      "p_name": "PB4A",
+      "n_name": "PB4B",
+      "bank": "8"
+    },
+    {
+      "type": "IO",
+      "pair_name": "PB6",
+      "p_pin": "N17",
+      "n_pin": "M18",
+      "p_name": "PB6A",
+      "n_name": "PB6B",
+      "bank": "8"
+    },
+    {
+      "type": "IO",
+      "pair_name": "PB9",
+      "p_pin": "N18",
+      "n_pin": "R18",
+      "p_name": "PB9A",
+      "n_name": "PB9B",
+      "bank": "8"
+    },
+    {
+      "type": "IO",
+      "pair_name": "PB11",
+      "p_pin": "T18",
+      "n_pin": "U18",
+      "p_name": "PB11A",
+      "n_name": "PB11B",
+      "bank": "8"
+    },
+    {
+      "type": "IO",
+      "pair_name": "PB13",
+      "p_pin": "R17",
+      "n_pin": "T17",
+      "p_name": "PB13A",
+      "n_name": "PB13B",
+      "bank": "8"
+    },
+    {
+      "type": "IO",
+      "pair_name": "PB15",
+      "p_pin": "U17",
+      "n_pin": "V17",
+      "p_name": "PB15A",
+      "n_name": "PB15B",
+      "bank": "8"
+    },
+    {
+      "type": "IO",
+      "pair_name": "PR92",
+      "p_pin": "M1",
+      "n_pin": "N1",
+      "p_name": "PR92C",
+      "n_name": "PR92D",
+      "bank": "3"
+    },
+    {
+      "type": "IO",
+      "pair_name": "PR89",
+      "p_pin": "M2",
+      "n_pin": "N2",
+      "p_name": "PR89C",
+      "n_name": "PR89D",
+      "bank": "3"
+    },
+    {
+      "type": "LVDS",
+      "pair_name": "PR89",
+      "p_pin": "K2",
+      "n_pin": "L1",
+      "p_name": "PR89A",
+      "n_name": "PR89B",
+      "bank": "3"
+    },
+    {
+      "type": "IO",
+      "pair_name": "PR86",
+      "p_pin": "K3",
+      "n_pin": "K1",
+      "p_name": "PR86C",
+      "n_name": "PR86D",
+      "bank": "3"
+    },
+    {
+      "type": "LVDS",
+      "pair_name": "PR86",
+      "p_pin": "M3",
+      "n_pin": "L3",
+      "p_name": "PR86A",
+      "n_name": "PR86B",
+      "bank": "3"
+    },
+    {
+      "type": "IO",
+      "pair_name": "PR83",
+      "p_pin": "N4",
+      "n_pin": "N3",
+      "p_name": "PR83C",
+      "n_name": "PR83D",
+      "bank": "3"
+    },
+    {
+      "type": "LVDS",
+      "pair_name": "PR83",
+      "p_pin": "K4",
+      "n_pin": "L4",
+      "p_name": "PR83A",
+      "n_name": "PR83B",
+      "bank": "3"
+    },
+    {
+      "type": "IO",
+      "pair_name": "PR56",
+      "p_pin": "F1",
+      "n_pin": "H1",
+      "p_name": "PR56C",
+      "n_name": "PR56D",
+      "bank": "3"
+    },
+    {
+      "type": "LVDS",
+      "pair_name": "PR56",
+      "p_pin": "J2",
+      "n_pin": "J1",
+      "p_name": "PR56A",
+      "n_name": "PR56B",
+      "bank": "3"
+    },
+    {
+      "type": "LVDS",
+      "pair_name": "PR53",
+      "p_pin": "F2",
+      "n_pin": "G1",
+      "p_name": "PR53A",
+      "n_name": "PR53B",
+      "bank": "3"
+    },
+    {
+      "type": "IO",
+      "pair_name": "PR50",
+      "p_pin": "J3",
+      "n_pin": "H2",
+      "p_name": "PR50C",
+      "n_name": "PR50D",
+      "bank": "3"
+    },
+    {
+      "type": "LVDS",
+      "pair_name": "PR50",
+      "p_pin": "H3",
+      "n_pin": "G3",
+      "p_name": "PR50A",
+      "n_name": "PR50B",
+      "bank": "3"
+    },
+    {
+      "type": "IO",
+      "pair_name": "PR47",
+      "p_pin": "F4",
+      "n_pin": "F3",
+      "p_name": "PR47C",
+      "n_name": "PR47D",
+      "bank": "3"
+    },
+    {
+      "type": "LVDS",
+      "pair_name": "PR47",
+      "p_pin": "H4",
+      "n_pin": "G4",
+      "p_name": "PR47A",
+      "n_name": "PR47B",
+      "bank": "3"
+    },
+    {
+      "type": "IO",
+      "pair_name": "PR44",
+      "p_pin": "C1",
+      "n_pin": "D1",
+      "p_name": "PR44C",
+      "n_name": "PR44D",
+      "bank": "2"
+    },
+    {
+      "type": "LVDS",
+      "pair_name": "PR44",
+      "p_pin": "D2",
+      "n_pin": "B1",
+      "p_name": "PR44A",
+      "n_name": "PR44B",
+      "bank": "2"
+    },
+    {
+      "type": "LVDS",
+      "pair_name": "PR41",
+      "p_pin": "A3",
+      "n_pin": "B2",
+      "p_name": "PR41A",
+      "n_name": "PR41B",
+      "bank": "2"
+    },
+    {
+      "type": "LVDS",
+      "pair_name": "PR38",
+      "p_pin": "D3",
+      "n_pin": "C2",
+      "p_name": "PR38A",
+      "n_name": "PR38B",
+      "bank": "2"
+    },
+    {
+      "type": "IO",
+      "pair_name": "PR35",
+      "p_pin": "B4",
+      "n_pin": "C3",
+      "p_name": "PR35C",
+      "n_name": "PR35D",
+      "bank": "2"
+    },
+    {
+      "type": "LVDS",
+      "pair_name": "PR35",
+      "p_pin": "D4",
+      "n_pin": "C4",
+      "p_name": "PR35A",
+      "n_name": "PR35B",
+      "bank": "2"
+    },
+    {
+      "type": "LVDS",
+      "pair_name": "PR20",
+      "p_pin": "A6",
+      "n_pin": "A4",
+      "p_name": "PR20A",
+      "n_name": "PR20B",
+      "bank": "2"
+    },
+    {
+      "type": "LVDS",
+      "pair_name": "PR17",
+      "p_pin": "B6",
+      "n_pin": "A7",
+      "p_name": "PR17A",
+      "n_name": "PR17B",
+      "bank": "2"
+    },
+    {
+      "type": "LVDS",
+      "pair_name": "PR14",
+      "p_pin": "D6",
+      "n_pin": "C6",
+      "p_name": "PR14A",
+      "n_name": "PR14B",
+      "bank": "2"
+    },
+    {
+      "type": "LVDS",
+      "pair_name": "PR11",
+      "p_pin": "C7",
+      "n_pin": "B7",
+      "p_name": "PR11A",
+      "n_name": "PR11B",
+      "bank": "2"
+    },
+    {
+      "type": "IO",
+      "pair_name": "PT121",
+      "p_pin": "B8",
+      "n_pin": "C8",
+      "p_name": "PT121A",
+      "n_name": "PT121B",
+      "bank": "1"
+    },
+    {
+      "type": "IO",
+      "pair_name": "PT71",
+      "p_pin": "A9",
+      "n_pin": "A8",
+      "p_name": "PT71A",
+      "n_name": "PT71B",
+      "bank": "1"
+    },
+    {
+      "type": "IO",
+      "pair_name": "PT69",
+      "p_pin": "B9",
+      "n_pin": "C9",
+      "p_name": "PT69A",
+      "n_name": "PT69B",
+      "bank": "1"
+    },
+    {
+      "type": "IO",
+      "pair_name": "PT65",
+      "p_pin": "B10",
+      "n_pin": "C10",
+      "p_name": "PT65A",
+      "n_name": "PT65B",
+      "bank": "0"
+    },
+    {
+      "type": "IO",
+      "pair_name": "PT63",
+      "p_pin": "A11",
+      "n_pin": "A10",
+      "p_name": "PT63A",
+      "n_name": "PT63B",
+      "bank": "0"
+    },
+    {
+      "type": "IO",
+      "pair_name": "PT4",
+      "p_pin": "B11",
+      "n_pin": "C11",
+      "p_name": "PT4A",
+      "n_name": "PT4B",
+      "bank": "0"
+    }
+  ],
+  "drc_rules": {
+    "power_integrity": {
+      "severity": "ERROR",
+      "desc": "All power and ground pins must be connected"
+    },
+    "config_pins": {
+      "severity": "ERROR",
+      "desc": "Mandatory config pins (PROGRAMN, INITN, DONE, CCLK) must be connected"
+    },
+    "vcco_bank_consistency": {
+      "severity": "ERROR",
+      "desc": "All IO in same bank must use compatible IO standards sharing same VCCIO"
+    },
+    "diff_pair_integrity": {
+      "severity": "ERROR",
+      "desc": "Differential pairs must be used together or not at all"
+    },
+    "unused_io": {
+      "severity": "WARNING",
+      "desc": "Unused IO pins should not be left floating"
+    },
+    "jtag_pins": {
+      "severity": "WARNING",
+      "desc": "JTAG pins (TCK/TMS/TDI/TDO) should be properly connected or have pull resistors"
+    }
+  },
+  "pins": [
+    {
+      "pin": "C12",
+      "name": "PL11A",
+      "function": "IO",
+      "bank": "7",
+      "pad": "6",
+      "config_function": "ULC_GPLL0T_IN",
+      "dqs": "LDQ17",
+      "high_speed": true,
+      "polarity": "P",
+      "category": "IO"
+    },
+    {
+      "pin": "B12",
+      "name": "PL11B",
+      "function": "IO",
+      "bank": "7",
+      "pad": "7",
+      "config_function": "ULC_GPLL0C_IN",
+      "dqs": "LDQ17",
+      "high_speed": true,
+      "polarity": "N",
+      "category": "IO"
+    },
+    {
+      "pin": "A12",
+      "name": "PL14A",
+      "function": "IO",
+      "bank": "7",
+      "pad": "12",
+      "config_function": null,
+      "dqs": "LDQ17",
+      "high_speed": true,
+      "polarity": "P",
+      "category": "IO"
+    },
+    {
+      "pin": "D13",
+      "name": "PL17A",
+      "function": "IO",
+      "bank": "7",
+      "pad": "18",
+      "config_function": null,
+      "dqs": "LDQS17",
+      "high_speed": true,
+      "polarity": "P",
+      "category": "IO"
+    },
+    {
+      "pin": "C13",
+      "name": "PL17B",
+      "function": "IO",
+      "bank": "7",
+      "pad": "21",
+      "config_function": null,
+      "dqs": "LDQSN17",
+      "high_speed": true,
+      "polarity": "N",
+      "category": "IO"
+    },
+    {
+      "pin": "B13",
+      "name": "PL35A",
+      "function": "IO",
+      "bank": "7",
+      "pad": "54",
+      "config_function": null,
+      "dqs": "LDQ41",
+      "high_speed": true,
+      "polarity": "P",
+      "category": "IO"
+    },
+    {
+      "pin": "C15",
+      "name": "PL35C",
+      "function": "IO",
+      "bank": "7",
+      "pad": "56",
+      "config_function": "VREF1_7",
+      "dqs": "LDQ41",
+      "high_speed": false,
+      "polarity": "P",
+      "category": "IO"
+    },
+    {
+      "pin": "A13",
+      "name": "PL35B",
+      "function": "IO",
+      "bank": "7",
+      "pad": "57",
+      "config_function": null,
+      "dqs": "LDQ41",
+      "high_speed": true,
+      "polarity": "N",
+      "category": "IO"
+    },
+    {
+      "pin": "A15",
+      "name": "PL35D",
+      "function": "IO",
+      "bank": "7",
+      "pad": "59",
+      "config_function": null,
+      "dqs": "LDQ41",
+      "high_speed": false,
+      "polarity": "N",
+      "category": "IO"
+    },
+    {
+      "pin": "D15",
+      "name": "PL38A",
+      "function": "IO",
+      "bank": "7",
+      "pad": "60",
+      "config_function": null,
+      "dqs": "LDQ41",
+      "high_speed": true,
+      "polarity": "P",
+      "category": "IO"
+    },
+    {
+      "pin": "D16",
+      "name": "PL38B",
+      "function": "IO",
+      "bank": "7",
+      "pad": "63",
+      "config_function": null,
+      "dqs": "LDQ41",
+      "high_speed": true,
+      "polarity": "N",
+      "category": "IO"
+    },
+    {
+      "pin": "B15",
+      "name": "PL41A",
+      "function": "IO",
+      "bank": "7",
+      "pad": "66",
+      "config_function": "GR_PCLK7_1",
+      "dqs": "LDQS41",
+      "high_speed": true,
+      "polarity": "P",
+      "category": "IO"
+    },
+    {
+      "pin": "C16",
+      "name": "PL41C",
+      "function": "IO",
+      "bank": "7",
+      "pad": "68",
+      "config_function": "GR_PCLK7_0",
+      "dqs": "LDQ41",
+      "high_speed": false,
+      "polarity": "P",
+      "category": "IO"
+    },
+    {
+      "pin": "A16",
+      "name": "PL41B",
+      "function": "IO",
+      "bank": "7",
+      "pad": "69",
+      "config_function": null,
+      "dqs": "LDQSN41",
+      "high_speed": true,
+      "polarity": "N",
+      "category": "IO"
+    },
+    {
+      "pin": "A17",
+      "name": "PL44A",
+      "function": "IO",
+      "bank": "7",
+      "pad": "72",
+      "config_function": "PCLKT7_1",
+      "dqs": "LDQ41",
+      "high_speed": true,
+      "polarity": "P",
+      "category": "IO"
+    },
+    {
+      "pin": "B18",
+      "name": "PL44C",
+      "function": "IO",
+      "bank": "7",
+      "pad": "74",
+      "config_function": "PCLKT7_0",
+      "dqs": "LDQ41",
+      "high_speed": false,
+      "polarity": "P",
+      "category": "IO"
+    },
+    {
+      "pin": "B17",
+      "name": "PL44B",
+      "function": "IO",
+      "bank": "7",
+      "pad": "75",
+      "config_function": "PCLKC7_1",
+      "dqs": "LDQ41",
+      "high_speed": true,
+      "polarity": "N",
+      "category": "IO"
+    },
+    {
+      "pin": "C17",
+      "name": "PL44D",
+      "function": "IO",
+      "bank": "7",
+      "pad": "77",
+      "config_function": "PCLKC7_0",
+      "dqs": "LDQ41",
+      "high_speed": false,
+      "polarity": "N",
+      "category": "IO"
+    },
+    {
+      "pin": "D17",
+      "name": "PL47A",
+      "function": "IO",
+      "bank": "6",
+      "pad": "78",
+      "config_function": "PCLKT6_1",
+      "dqs": "LDQ53",
+      "high_speed": true,
+      "polarity": "P",
+      "category": "IO"
+    },
+    {
+      "pin": "D18",
+      "name": "PL47C",
+      "function": "IO",
+      "bank": "6",
+      "pad": "80",
+      "config_function": "PCLKT6_0",
+      "dqs": "LDQ53",
+      "high_speed": false,
+      "polarity": "P",
+      "category": "IO"
+    },
+    {
+      "pin": "C18",
+      "name": "PL47B",
+      "function": "IO",
+      "bank": "6",
+      "pad": "81",
+      "config_function": "PCLKC6_1",
+      "dqs": "LDQ53",
+      "high_speed": true,
+      "polarity": "N",
+      "category": "IO"
+    },
+    {
+      "pin": "F18",
+      "name": "PL47D",
+      "function": "IO",
+      "bank": "6",
+      "pad": "83",
+      "config_function": "PCLKC6_0",
+      "dqs": "LDQ53",
+      "high_speed": false,
+      "polarity": "N",
+      "category": "IO"
+    },
+    {
+      "pin": "F17",
+      "name": "PL50A",
+      "function": "IO",
+      "bank": "6",
+      "pad": "84",
+      "config_function": "GR_PCLK6_0",
+      "dqs": "LDQ53",
+      "high_speed": true,
+      "polarity": "P",
+      "category": "IO"
+    },
+    {
+      "pin": "F15",
+      "name": "PL50C",
+      "function": "IO",
+      "bank": "6",
+      "pad": "86",
+      "config_function": "GR_PCLK6_1",
+      "dqs": "LDQ53",
+      "high_speed": false,
+      "polarity": "P",
+      "category": "IO"
+    },
+    {
+      "pin": "F16",
+      "name": "PL50B",
+      "function": "IO",
+      "bank": "6",
+      "pad": "87",
+      "config_function": null,
+      "dqs": "LDQ53",
+      "high_speed": true,
+      "polarity": "N",
+      "category": "IO"
+    },
+    {
+      "pin": "G16",
+      "name": "PL50D",
+      "function": "IO",
+      "bank": "6",
+      "pad": "89",
+      "config_function": null,
+      "dqs": "LDQ53",
+      "high_speed": false,
+      "polarity": "N",
+      "category": "IO"
+    },
+    {
+      "pin": "G18",
+      "name": "PL53A",
+      "function": "IO",
+      "bank": "6",
+      "pad": "90",
+      "config_function": null,
+      "dqs": "LDQS53",
+      "high_speed": true,
+      "polarity": "P",
+      "category": "IO"
+    },
+    {
+      "pin": "H17",
+      "name": "PL53B",
+      "function": "IO",
+      "bank": "6",
+      "pad": "93",
+      "config_function": null,
+      "dqs": "LDQSN53",
+      "high_speed": true,
+      "polarity": "N",
+      "category": "IO"
+    },
+    {
+      "pin": "G15",
+      "name": "PL56A",
+      "function": "IO",
+      "bank": "6",
+      "pad": "96",
+      "config_function": null,
+      "dqs": "LDQ53",
+      "high_speed": true,
+      "polarity": "P",
+      "category": "IO"
+    },
+    {
+      "pin": "H16",
+      "name": "PL56C",
+      "function": "IO",
+      "bank": "6",
+      "pad": "98",
+      "config_function": null,
+      "dqs": "LDQ53",
+      "high_speed": false,
+      "polarity": "P",
+      "category": "IO"
+    },
+    {
+      "pin": "H15",
+      "name": "PL56B",
+      "function": "IO",
+      "bank": "6",
+      "pad": "99",
+      "config_function": "VREF1_6",
+      "dqs": "LDQ53",
+      "high_speed": true,
+      "polarity": "N",
+      "category": "IO"
+    },
+    {
+      "pin": "J16",
+      "name": "PL56D",
+      "function": "IO",
+      "bank": "6",
+      "pad": "101",
+      "config_function": null,
+      "dqs": "LDQ53",
+      "high_speed": false,
+      "polarity": "N",
+      "category": "IO"
+    },
+    {
+      "pin": "J17",
+      "name": "PL83C",
+      "function": "IO",
+      "bank": "6",
+      "pad": "152",
+      "config_function": null,
+      "dqs": "LDQ89",
+      "high_speed": false,
+      "polarity": "P",
+      "category": "IO"
+    },
+    {
+      "pin": "H18",
+      "name": "PL83D",
+      "function": "IO",
+      "bank": "6",
+      "pad": "155",
+      "config_function": null,
+      "dqs": "LDQ89",
+      "high_speed": false,
+      "polarity": "N",
+      "category": "IO"
+    },
+    {
+      "pin": "J18",
+      "name": "PL86A",
+      "function": "IO",
+      "bank": "6",
+      "pad": "156",
+      "config_function": null,
+      "dqs": "LDQ89",
+      "high_speed": true,
+      "polarity": "P",
+      "category": "IO"
+    },
+    {
+      "pin": "K16",
+      "name": "PL86C",
+      "function": "IO",
+      "bank": "6",
+      "pad": "158",
+      "config_function": null,
+      "dqs": "LDQ89",
+      "high_speed": false,
+      "polarity": "P",
+      "category": "IO"
+    },
+    {
+      "pin": "K18",
+      "name": "PL86B",
+      "function": "IO",
+      "bank": "6",
+      "pad": "159",
+      "config_function": null,
+      "dqs": "LDQ89",
+      "high_speed": true,
+      "polarity": "N",
+      "category": "IO"
+    },
+    {
+      "pin": "K15",
+      "name": "PL86D",
+      "function": "IO",
+      "bank": "6",
+      "pad": "161",
+      "config_function": null,
+      "dqs": "LDQ89",
+      "high_speed": false,
+      "polarity": "N",
+      "category": "IO"
+    },
+    {
+      "pin": "K17",
+      "name": "PL89A",
+      "function": "IO",
+      "bank": "6",
+      "pad": "162",
+      "config_function": null,
+      "dqs": "LDQS89",
+      "high_speed": true,
+      "polarity": "P",
+      "category": "IO"
+    },
+    {
+      "pin": "L15",
+      "name": "PL89C",
+      "function": "IO",
+      "bank": "6",
+      "pad": "164",
+      "config_function": null,
+      "dqs": "LDQ89",
+      "high_speed": false,
+      "polarity": "P",
+      "category": "IO"
+    },
+    {
+      "pin": "L18",
+      "name": "PL89B",
+      "function": "IO",
+      "bank": "6",
+      "pad": "165",
+      "config_function": null,
+      "dqs": "LDQSN89",
+      "high_speed": true,
+      "polarity": "N",
+      "category": "IO"
+    },
+    {
+      "pin": "L16",
+      "name": "PL89D",
+      "function": "IO",
+      "bank": "6",
+      "pad": "167",
+      "config_function": null,
+      "dqs": "LDQ89",
+      "high_speed": false,
+      "polarity": "N",
+      "category": "IO"
+    },
+    {
+      "pin": "M16",
+      "name": "PL92C",
+      "function": "IO",
+      "bank": "6",
+      "pad": "172",
+      "config_function": "LLC_GPLL0T_IN",
+      "dqs": "LDQ89",
+      "high_speed": false,
+      "polarity": "P",
+      "category": "IO"
+    },
+    {
+      "pin": "M17",
+      "name": "PL92D",
+      "function": "IO",
+      "bank": "6",
+      "pad": "173",
+      "config_function": "LLC_GPLL0C_IN",
+      "dqs": "LDQ89",
+      "high_speed": false,
+      "polarity": "N",
+      "category": "IO"
+    },
+    {
+      "pin": "N15",
+      "name": "PB4A",
+      "function": "IO",
+      "bank": "8",
+      "pad": "180",
+      "config_function": "D7/IO7",
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "config_function": "D7/IO7",
+        "desc": "Multi-function pin: IO + D7/IO7",
+        "connect_priority": "recommended"
+      },
+      "polarity": "P",
+      "category": "IO"
+    },
+    {
+      "pin": "N17",
+      "name": "PB6A",
+      "function": "IO",
+      "bank": "8",
+      "pad": "181",
+      "config_function": "D5/MISO2/IO5",
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "config_function": "D5/MISO2/IO5",
+        "desc": "Multi-function pin: IO + D5/MISO2/IO5",
+        "connect_priority": "recommended"
+      },
+      "polarity": "P",
+      "category": "IO"
+    },
+    {
+      "pin": "N16",
+      "name": "PB4B",
+      "function": "IO",
+      "bank": "8",
+      "pad": "183",
+      "config_function": "D6/IO6",
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "config_function": "D6/IO6",
+        "desc": "Multi-function pin: IO + D6/IO6",
+        "connect_priority": "recommended"
+      },
+      "polarity": "N",
+      "category": "IO"
+    },
+    {
+      "pin": "M18",
+      "name": "PB6B",
+      "function": "IO",
+      "bank": "8",
+      "pad": "184",
+      "config_function": "D4/MOSI2/IO4",
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "config_function": "D4/MOSI2/IO4",
+        "desc": "Multi-function pin: IO + D4/MOSI2/IO4",
+        "connect_priority": "recommended"
+      },
+      "polarity": "N",
+      "category": "IO"
+    },
+    {
+      "pin": "N18",
+      "name": "PB9A",
+      "function": "IO",
+      "bank": "8",
+      "pad": "186",
+      "config_function": "D3/IO3",
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "config_function": "D3/IO3",
+        "desc": "Multi-function pin: IO + D3/IO3",
+        "connect_priority": "recommended"
+      },
+      "polarity": "P",
+      "category": "IO"
+    },
+    {
+      "pin": "T18",
+      "name": "PB11A",
+      "function": "IO",
+      "bank": "8",
+      "pad": "187",
+      "config_function": "D1/MISO/IO1",
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "config_function": "D1/MISO/IO1",
+        "desc": "Multi-function pin: IO + D1/MISO/IO1",
+        "connect_priority": "recommended"
+      },
+      "polarity": "P",
+      "category": "IO"
+    },
+    {
+      "pin": "R18",
+      "name": "PB9B",
+      "function": "IO",
+      "bank": "8",
+      "pad": "189",
+      "config_function": "D2/IO2",
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "config_function": "D2/IO2",
+        "desc": "Multi-function pin: IO + D2/IO2",
+        "connect_priority": "recommended"
+      },
+      "polarity": "N",
+      "category": "IO"
+    },
+    {
+      "pin": "U18",
+      "name": "PB11B",
+      "function": "IO",
+      "bank": "8",
+      "pad": "190",
+      "config_function": "D0/MOSI/IO0",
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "config_function": "D0/MOSI/IO0",
+        "desc": "Multi-function pin: IO + D0/MOSI/IO0",
+        "connect_priority": "recommended"
+      },
+      "polarity": "N",
+      "category": "IO"
+    },
+    {
+      "pin": "R17",
+      "name": "PB13A",
+      "function": "IO",
+      "bank": "8",
+      "pad": "192",
+      "config_function": "SN/CSN",
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "config_function": "SN/CSN",
+        "desc": "Multi-function pin: IO + SN/CSN",
+        "connect_priority": "recommended"
+      },
+      "polarity": "P",
+      "category": "IO"
+    },
+    {
+      "pin": "U17",
+      "name": "PB15A",
+      "function": "IO",
+      "bank": "8",
+      "pad": "193",
+      "config_function": "HOLDN/DI/BUSY/CSSPIN/CEN",
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "config_function": "HOLDN/DI/BUSY/CSSPIN/CEN",
+        "desc": "Multi-function pin: IO + HOLDN/DI/BUSY/CSSPIN/CEN",
+        "connect_priority": "recommended"
+      },
+      "polarity": "P",
+      "category": "IO"
+    },
+    {
+      "pin": "T17",
+      "name": "PB13B",
+      "function": "IO",
+      "bank": "8",
+      "pad": "195",
+      "config_function": "CS1N",
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "config_function": "CS1N",
+        "desc": "Multi-function pin: IO + CS1N",
+        "connect_priority": "recommended"
+      },
+      "polarity": "N",
+      "category": "IO"
+    },
+    {
+      "pin": "V17",
+      "name": "PB15B",
+      "function": "IO",
+      "bank": "8",
+      "pad": "196",
+      "config_function": "DOUT/CSON",
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "config_function": "DOUT/CSON",
+        "desc": "Multi-function pin: IO + DOUT/CSON",
+        "connect_priority": "recommended"
+      },
+      "polarity": "N",
+      "category": "IO"
+    },
+    {
+      "pin": "R16",
+      "name": "PB18A",
+      "function": "IO",
+      "bank": "8",
+      "pad": "198",
+      "config_function": "WRITEN",
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "config_function": "WRITEN",
+        "desc": "Multi-function pin: IO + WRITEN",
+        "connect_priority": "recommended"
+      },
+      "category": "IO"
+    },
+    {
+      "pin": "V16",
+      "name": "INITN",
+      "function": "CONFIG",
+      "bank": "8",
+      "pad": "199",
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "desc": "Dedicated config pin: INITN"
+      },
+      "category": "CONFIG"
+    },
+    {
+      "pin": "U16",
+      "name": "CCLK",
+      "function": "CONFIG",
+      "bank": "8",
+      "pad": "201",
+      "config_function": "MCLK/SCK",
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "desc": "Dedicated config pin: CCLK"
+      },
+      "category": "CONFIG"
+    },
+    {
+      "pin": "T15",
+      "name": "PROGRAMN",
+      "function": "CONFIG",
+      "bank": "8",
+      "pad": "202",
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "desc": "Dedicated config pin: PROGRAMN"
+      },
+      "category": "CONFIG"
+    },
+    {
+      "pin": "U15",
+      "name": "DONE",
+      "function": "CONFIG",
+      "bank": "8",
+      "pad": "204",
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "desc": "Dedicated config pin: DONE"
+      },
+      "category": "CONFIG"
+    },
+    {
+      "pin": "T14",
+      "name": "CFG_1",
+      "function": "CONFIG",
+      "bank": "8",
+      "pad": "205",
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "desc": "Dedicated config pin: CFG_1"
+      },
+      "category": "CONFIG"
+    },
+    {
+      "pin": "V15",
+      "name": "CFG_2",
+      "function": "CONFIG",
+      "bank": "8",
+      "pad": "207",
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "desc": "Dedicated config pin: CFG_2"
+      },
+      "category": "CONFIG"
+    },
+    {
+      "pin": "U14",
+      "name": "CFG_0",
+      "function": "CONFIG",
+      "bank": "8",
+      "pad": "208",
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "desc": "Dedicated config pin: CFG_0"
+      },
+      "category": "CONFIG"
+    },
+    {
+      "pin": "V14",
+      "name": "TDO",
+      "function": "CONFIG",
+      "bank": "40",
+      "pad": "210",
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "desc": "Dedicated config pin: TDO"
+      },
+      "category": "CONFIG"
+    },
+    {
+      "pin": "U13",
+      "name": "TCK",
+      "function": "CONFIG",
+      "bank": "40",
+      "pad": "211",
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "desc": "Dedicated config pin: TCK"
+      },
+      "category": "CONFIG"
+    },
+    {
+      "pin": "T13",
+      "name": "TDI",
+      "function": "CONFIG",
+      "bank": "40",
+      "pad": "213",
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "desc": "Dedicated config pin: TDI"
+      },
+      "category": "CONFIG"
+    },
+    {
+      "pin": "V13",
+      "name": "TMS",
+      "function": "CONFIG",
+      "bank": "40",
+      "pad": "214",
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "desc": "Dedicated config pin: TMS"
+      },
+      "category": "CONFIG"
+    },
+    {
+      "pin": "V12",
+      "name": "RESERVED",
+      "function": "GROUND",
+      "bank": null,
+      "pad": "224",
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND",
+        "desc": "Reserved pin — must connect to GND"
+      },
+      "category": "OTHER"
+    },
+    {
+      "pin": "U12",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": "225",
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "V11",
+      "name": "RESERVED",
+      "function": "GROUND",
+      "bank": null,
+      "pad": "226",
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND",
+        "desc": "Reserved pin — must connect to GND"
+      },
+      "category": "OTHER"
+    },
+    {
+      "pin": "V9",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": "229",
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "U8",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": "231",
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "V8",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": "232",
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "V6",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": "235",
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "U6",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": "237",
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "V5",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": "238",
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "V3",
+      "name": "RESERVED",
+      "function": "GROUND",
+      "bank": null,
+      "pad": "241",
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND",
+        "desc": "Reserved pin — must connect to GND"
+      },
+      "category": "OTHER"
+    },
+    {
+      "pin": "T5",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": "242",
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "V2",
+      "name": "RESERVED",
+      "function": "GROUND",
+      "bank": null,
+      "pad": "243",
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND",
+        "desc": "Reserved pin — must connect to GND"
+      },
+      "category": "OTHER"
+    },
+    {
+      "pin": "U1",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": "251",
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "T1",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": "253",
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "N1",
+      "name": "PR92D",
+      "function": "IO",
+      "bank": "3",
+      "pad": "332",
+      "config_function": "LRC_GPLL0C_IN",
+      "dqs": "RDQ89",
+      "high_speed": false,
+      "polarity": "N",
+      "category": "IO"
+    },
+    {
+      "pin": "M1",
+      "name": "PR92C",
+      "function": "IO",
+      "bank": "3",
+      "pad": "333",
+      "config_function": "LRC_GPLL0T_IN",
+      "dqs": "RDQ89",
+      "high_speed": false,
+      "polarity": "P",
+      "category": "IO"
+    },
+    {
+      "pin": "N2",
+      "name": "PR89D",
+      "function": "IO",
+      "bank": "3",
+      "pad": "338",
+      "config_function": null,
+      "dqs": "RDQ89",
+      "high_speed": false,
+      "polarity": "N",
+      "category": "IO"
+    },
+    {
+      "pin": "L1",
+      "name": "PR89B",
+      "function": "IO",
+      "bank": "3",
+      "pad": "340",
+      "config_function": null,
+      "dqs": "RDQSN89",
+      "high_speed": true,
+      "polarity": "N",
+      "category": "IO"
+    },
+    {
+      "pin": "M2",
+      "name": "PR89C",
+      "function": "IO",
+      "bank": "3",
+      "pad": "341",
+      "config_function": null,
+      "dqs": "RDQ89",
+      "high_speed": false,
+      "polarity": "P",
+      "category": "IO"
+    },
+    {
+      "pin": "K2",
+      "name": "PR89A",
+      "function": "IO",
+      "bank": "3",
+      "pad": "343",
+      "config_function": null,
+      "dqs": "RDQS89",
+      "high_speed": true,
+      "polarity": "P",
+      "category": "IO"
+    },
+    {
+      "pin": "K1",
+      "name": "PR86D",
+      "function": "IO",
+      "bank": "3",
+      "pad": "344",
+      "config_function": null,
+      "dqs": "RDQ89",
+      "high_speed": false,
+      "polarity": "N",
+      "category": "IO"
+    },
+    {
+      "pin": "L3",
+      "name": "PR86B",
+      "function": "IO",
+      "bank": "3",
+      "pad": "346",
+      "config_function": null,
+      "dqs": "RDQ89",
+      "high_speed": true,
+      "polarity": "N",
+      "category": "IO"
+    },
+    {
+      "pin": "K3",
+      "name": "PR86C",
+      "function": "IO",
+      "bank": "3",
+      "pad": "347",
+      "config_function": null,
+      "dqs": "RDQ89",
+      "high_speed": false,
+      "polarity": "P",
+      "category": "IO"
+    },
+    {
+      "pin": "M3",
+      "name": "PR86A",
+      "function": "IO",
+      "bank": "3",
+      "pad": "349",
+      "config_function": null,
+      "dqs": "RDQ89",
+      "high_speed": true,
+      "polarity": "P",
+      "category": "IO"
+    },
+    {
+      "pin": "N3",
+      "name": "PR83D",
+      "function": "IO",
+      "bank": "3",
+      "pad": "350",
+      "config_function": null,
+      "dqs": "RDQ89",
+      "high_speed": false,
+      "polarity": "N",
+      "category": "IO"
+    },
+    {
+      "pin": "L4",
+      "name": "PR83B",
+      "function": "IO",
+      "bank": "3",
+      "pad": "352",
+      "config_function": null,
+      "dqs": "RDQ89",
+      "high_speed": true,
+      "polarity": "N",
+      "category": "IO"
+    },
+    {
+      "pin": "N4",
+      "name": "PR83C",
+      "function": "IO",
+      "bank": "3",
+      "pad": "353",
+      "config_function": null,
+      "dqs": "RDQ89",
+      "high_speed": false,
+      "polarity": "P",
+      "category": "IO"
+    },
+    {
+      "pin": "K4",
+      "name": "PR83A",
+      "function": "IO",
+      "bank": "3",
+      "pad": "355",
+      "config_function": null,
+      "dqs": "RDQ89",
+      "high_speed": true,
+      "polarity": "P",
+      "category": "IO"
+    },
+    {
+      "pin": "H1",
+      "name": "PR56D",
+      "function": "IO",
+      "bank": "3",
+      "pad": "404",
+      "config_function": null,
+      "dqs": "RDQ53",
+      "high_speed": false,
+      "polarity": "N",
+      "category": "IO"
+    },
+    {
+      "pin": "J1",
+      "name": "PR56B",
+      "function": "IO",
+      "bank": "3",
+      "pad": "406",
+      "config_function": "VREF1_3",
+      "dqs": "RDQ53",
+      "high_speed": true,
+      "polarity": "N",
+      "category": "IO"
+    },
+    {
+      "pin": "F1",
+      "name": "PR56C",
+      "function": "IO",
+      "bank": "3",
+      "pad": "407",
+      "config_function": null,
+      "dqs": "RDQ53",
+      "high_speed": false,
+      "polarity": "P",
+      "category": "IO"
+    },
+    {
+      "pin": "J2",
+      "name": "PR56A",
+      "function": "IO",
+      "bank": "3",
+      "pad": "409",
+      "config_function": null,
+      "dqs": "RDQ53",
+      "high_speed": true,
+      "polarity": "P",
+      "category": "IO"
+    },
+    {
+      "pin": "G1",
+      "name": "PR53B",
+      "function": "IO",
+      "bank": "3",
+      "pad": "412",
+      "config_function": null,
+      "dqs": "RDQSN53",
+      "high_speed": true,
+      "polarity": "N",
+      "category": "IO"
+    },
+    {
+      "pin": "F2",
+      "name": "PR53A",
+      "function": "IO",
+      "bank": "3",
+      "pad": "415",
+      "config_function": null,
+      "dqs": "RDQS53",
+      "high_speed": true,
+      "polarity": "P",
+      "category": "IO"
+    },
+    {
+      "pin": "H2",
+      "name": "PR50D",
+      "function": "IO",
+      "bank": "3",
+      "pad": "416",
+      "config_function": null,
+      "dqs": "RDQ53",
+      "high_speed": false,
+      "polarity": "N",
+      "category": "IO"
+    },
+    {
+      "pin": "G3",
+      "name": "PR50B",
+      "function": "IO",
+      "bank": "3",
+      "pad": "418",
+      "config_function": null,
+      "dqs": "RDQ53",
+      "high_speed": true,
+      "polarity": "N",
+      "category": "IO"
+    },
+    {
+      "pin": "J3",
+      "name": "PR50C",
+      "function": "IO",
+      "bank": "3",
+      "pad": "419",
+      "config_function": "GR_PCLK3_1",
+      "dqs": "RDQ53",
+      "high_speed": false,
+      "polarity": "P",
+      "category": "IO"
+    },
+    {
+      "pin": "H3",
+      "name": "PR50A",
+      "function": "IO",
+      "bank": "3",
+      "pad": "421",
+      "config_function": "GR_PCLK3_0",
+      "dqs": "RDQ53",
+      "high_speed": true,
+      "polarity": "P",
+      "category": "IO"
+    },
+    {
+      "pin": "F3",
+      "name": "PR47D",
+      "function": "IO",
+      "bank": "3",
+      "pad": "422",
+      "config_function": "PCLKC3_0",
+      "dqs": "RDQ53",
+      "high_speed": false,
+      "polarity": "N",
+      "category": "IO"
+    },
+    {
+      "pin": "G4",
+      "name": "PR47B",
+      "function": "IO",
+      "bank": "3",
+      "pad": "424",
+      "config_function": "PCLKC3_1",
+      "dqs": "RDQ53",
+      "high_speed": true,
+      "polarity": "N",
+      "category": "IO"
+    },
+    {
+      "pin": "F4",
+      "name": "PR47C",
+      "function": "IO",
+      "bank": "3",
+      "pad": "425",
+      "config_function": "PCLKT3_0",
+      "dqs": "RDQ53",
+      "high_speed": false,
+      "polarity": "P",
+      "category": "IO"
+    },
+    {
+      "pin": "H4",
+      "name": "PR47A",
+      "function": "IO",
+      "bank": "3",
+      "pad": "427",
+      "config_function": "PCLKT3_1",
+      "dqs": "RDQ53",
+      "high_speed": true,
+      "polarity": "P",
+      "category": "IO"
+    },
+    {
+      "pin": "D1",
+      "name": "PR44D",
+      "function": "IO",
+      "bank": "2",
+      "pad": "428",
+      "config_function": "PCLKC2_0",
+      "dqs": "RDQ41",
+      "high_speed": false,
+      "polarity": "N",
+      "category": "IO"
+    },
+    {
+      "pin": "B1",
+      "name": "PR44B",
+      "function": "IO",
+      "bank": "2",
+      "pad": "430",
+      "config_function": "PCLKC2_1",
+      "dqs": "RDQ41",
+      "high_speed": true,
+      "polarity": "N",
+      "category": "IO"
+    },
+    {
+      "pin": "C1",
+      "name": "PR44C",
+      "function": "IO",
+      "bank": "2",
+      "pad": "431",
+      "config_function": "PCLKT2_0",
+      "dqs": "RDQ41",
+      "high_speed": false,
+      "polarity": "P",
+      "category": "IO"
+    },
+    {
+      "pin": "D2",
+      "name": "PR44A",
+      "function": "IO",
+      "bank": "2",
+      "pad": "433",
+      "config_function": "PCLKT2_1",
+      "dqs": "RDQ41",
+      "high_speed": true,
+      "polarity": "P",
+      "category": "IO"
+    },
+    {
+      "pin": "B2",
+      "name": "PR41B",
+      "function": "IO",
+      "bank": "2",
+      "pad": "436",
+      "config_function": null,
+      "dqs": "RDQSN41",
+      "high_speed": true,
+      "polarity": "N",
+      "category": "IO"
+    },
+    {
+      "pin": "A2",
+      "name": "PR41C",
+      "function": "IO",
+      "bank": "2",
+      "pad": "437",
+      "config_function": "GR_PCLK2_0",
+      "dqs": "RDQ41",
+      "high_speed": false,
+      "polarity": "P",
+      "category": "IO"
+    },
+    {
+      "pin": "A3",
+      "name": "PR41A",
+      "function": "IO",
+      "bank": "2",
+      "pad": "439",
+      "config_function": "GR_PCLK2_1",
+      "dqs": "RDQS41",
+      "high_speed": true,
+      "polarity": "P",
+      "category": "IO"
+    },
+    {
+      "pin": "C2",
+      "name": "PR38B",
+      "function": "IO",
+      "bank": "2",
+      "pad": "442",
+      "config_function": null,
+      "dqs": "RDQ41",
+      "high_speed": true,
+      "polarity": "N",
+      "category": "IO"
+    },
+    {
+      "pin": "D3",
+      "name": "PR38A",
+      "function": "IO",
+      "bank": "2",
+      "pad": "445",
+      "config_function": null,
+      "dqs": "RDQ41",
+      "high_speed": true,
+      "polarity": "P",
+      "category": "IO"
+    },
+    {
+      "pin": "C3",
+      "name": "PR35D",
+      "function": "IO",
+      "bank": "2",
+      "pad": "446",
+      "config_function": null,
+      "dqs": "RDQ41",
+      "high_speed": false,
+      "polarity": "N",
+      "category": "IO"
+    },
+    {
+      "pin": "C4",
+      "name": "PR35B",
+      "function": "IO",
+      "bank": "2",
+      "pad": "448",
+      "config_function": null,
+      "dqs": "RDQ41",
+      "high_speed": true,
+      "polarity": "N",
+      "category": "IO"
+    },
+    {
+      "pin": "B4",
+      "name": "PR35C",
+      "function": "IO",
+      "bank": "2",
+      "pad": "449",
+      "config_function": "VREF1_2",
+      "dqs": "RDQ41",
+      "high_speed": false,
+      "polarity": "P",
+      "category": "IO"
+    },
+    {
+      "pin": "D4",
+      "name": "PR35A",
+      "function": "IO",
+      "bank": "2",
+      "pad": "451",
+      "config_function": null,
+      "dqs": "RDQ41",
+      "high_speed": true,
+      "polarity": "P",
+      "category": "IO"
+    },
+    {
+      "pin": "A4",
+      "name": "PR20B",
+      "function": "IO",
+      "bank": "2",
+      "pad": "478",
+      "config_function": null,
+      "dqs": "RDQ17",
+      "high_speed": true,
+      "polarity": "N",
+      "category": "IO"
+    },
+    {
+      "pin": "A6",
+      "name": "PR20A",
+      "function": "IO",
+      "bank": "2",
+      "pad": "481",
+      "config_function": null,
+      "dqs": "RDQ17",
+      "high_speed": true,
+      "polarity": "P",
+      "category": "IO"
+    },
+    {
+      "pin": "A7",
+      "name": "PR17B",
+      "function": "IO",
+      "bank": "2",
+      "pad": "484",
+      "config_function": null,
+      "dqs": "RDQSN17",
+      "high_speed": true,
+      "polarity": "N",
+      "category": "IO"
+    },
+    {
+      "pin": "B6",
+      "name": "PR17A",
+      "function": "IO",
+      "bank": "2",
+      "pad": "487",
+      "config_function": null,
+      "dqs": "RDQS17",
+      "high_speed": true,
+      "polarity": "P",
+      "category": "IO"
+    },
+    {
+      "pin": "C6",
+      "name": "PR14B",
+      "function": "IO",
+      "bank": "2",
+      "pad": "490",
+      "config_function": null,
+      "dqs": "RDQ17",
+      "high_speed": true,
+      "polarity": "N",
+      "category": "IO"
+    },
+    {
+      "pin": "D6",
+      "name": "PR14A",
+      "function": "IO",
+      "bank": "2",
+      "pad": "493",
+      "config_function": null,
+      "dqs": "RDQ17",
+      "high_speed": true,
+      "polarity": "P",
+      "category": "IO"
+    },
+    {
+      "pin": "B7",
+      "name": "PR11B",
+      "function": "IO",
+      "bank": "2",
+      "pad": "498",
+      "config_function": "URC_GPLL0C_IN",
+      "dqs": "RDQ17",
+      "high_speed": true,
+      "polarity": "N",
+      "category": "IO"
+    },
+    {
+      "pin": "C7",
+      "name": "PR11A",
+      "function": "IO",
+      "bank": "2",
+      "pad": "499",
+      "config_function": "URC_GPLL0T_IN",
+      "dqs": "RDQ17",
+      "high_speed": true,
+      "polarity": "P",
+      "category": "IO"
+    },
+    {
+      "pin": "C8",
+      "name": "PT121B",
+      "function": "IO",
+      "bank": "1",
+      "pad": "509",
+      "config_function": "URC_GPLL1C_IN",
+      "dqs": null,
+      "high_speed": false,
+      "polarity": "N",
+      "category": "IO"
+    },
+    {
+      "pin": "B8",
+      "name": "PT121A",
+      "function": "IO",
+      "bank": "1",
+      "pad": "512",
+      "config_function": "URC_GPLL1T_IN",
+      "dqs": null,
+      "high_speed": false,
+      "polarity": "P",
+      "category": "IO"
+    },
+    {
+      "pin": "A8",
+      "name": "PT71B",
+      "function": "IO",
+      "bank": "1",
+      "pad": "575",
+      "config_function": "PCLKC1_0",
+      "dqs": null,
+      "high_speed": false,
+      "polarity": "N",
+      "category": "IO"
+    },
+    {
+      "pin": "C9",
+      "name": "PT69B",
+      "function": "IO",
+      "bank": "1",
+      "pad": "577",
+      "config_function": "PCLKC1_1",
+      "dqs": null,
+      "high_speed": false,
+      "polarity": "N",
+      "category": "IO"
+    },
+    {
+      "pin": "A9",
+      "name": "PT71A",
+      "function": "IO",
+      "bank": "1",
+      "pad": "578",
+      "config_function": "PCLKT1_0",
+      "dqs": null,
+      "high_speed": false,
+      "polarity": "P",
+      "category": "IO"
+    },
+    {
+      "pin": "B9",
+      "name": "PT69A",
+      "function": "IO",
+      "bank": "1",
+      "pad": "580",
+      "config_function": "PCLKT1_1",
+      "dqs": null,
+      "high_speed": false,
+      "polarity": "P",
+      "category": "IO"
+    },
+    {
+      "pin": "C10",
+      "name": "PT65B",
+      "function": "IO",
+      "bank": "0",
+      "pad": "583",
+      "config_function": "PCLKC0_0",
+      "dqs": null,
+      "high_speed": false,
+      "polarity": "N",
+      "category": "IO"
+    },
+    {
+      "pin": "A10",
+      "name": "PT63B",
+      "function": "IO",
+      "bank": "0",
+      "pad": "585",
+      "config_function": "PCLKC0_1",
+      "dqs": null,
+      "high_speed": false,
+      "polarity": "N",
+      "category": "IO"
+    },
+    {
+      "pin": "B10",
+      "name": "PT65A",
+      "function": "IO",
+      "bank": "0",
+      "pad": "586",
+      "config_function": "PCLKT0_0",
+      "dqs": null,
+      "high_speed": false,
+      "polarity": "P",
+      "category": "IO"
+    },
+    {
+      "pin": "A11",
+      "name": "PT63A",
+      "function": "IO",
+      "bank": "0",
+      "pad": "588",
+      "config_function": "PCLKT0_1",
+      "dqs": null,
+      "high_speed": false,
+      "polarity": "P",
+      "category": "IO"
+    },
+    {
+      "pin": "C11",
+      "name": "PT4B",
+      "function": "IO",
+      "bank": "0",
+      "pad": "663",
+      "config_function": "ULC_GPLL1C_IN",
+      "dqs": null,
+      "high_speed": false,
+      "polarity": "N",
+      "category": "IO"
+    },
+    {
+      "pin": "B11",
+      "name": "PT4A",
+      "function": "IO",
+      "bank": "0",
+      "pad": "666",
+      "config_function": "ULC_GPLL1T_IN",
+      "dqs": null,
+      "high_speed": false,
+      "polarity": "P",
+      "category": "IO"
+    },
+    {
+      "pin": "G2",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "L2",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "B3",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "E5",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "F5",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "K5",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "L5",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "F6",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "G6",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "H6",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "J6",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "K6",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "L6",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "M6",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "E7",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "F7",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "G7",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "H7",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "J7",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "K7",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "L7",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "M7",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "N7",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "E8",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "F8",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "G8",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "H8",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "J8",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "K8",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "L8",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "M8",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "N8",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "E9",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "F9",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "G9",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "H9",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "J9",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "K9",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "L9",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "M9",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "N9",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "E10",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "F10",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "G10",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "H10",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "J10",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "K10",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "L10",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "M10",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "N10",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "E11",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "F11",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "G11",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "H11",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "J11",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "K11",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "L11",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "M11",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "N11",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "E12",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "F12",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "G12",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "H12",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "J12",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "K12",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "L12",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "M12",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "N12",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "F13",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "G13",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "H13",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "J13",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "K13",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "L13",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "M13",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "E14",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "F14",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "K14",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "L14",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "B16",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "T16",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "G17",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "L17",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "J4",
+      "name": "VCC",
+      "function": "POWER",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true
+      },
+      "category": "POWER"
+    },
+    {
+      "pin": "M4",
+      "name": "VCC",
+      "function": "POWER",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true
+      },
+      "category": "POWER"
+    },
+    {
+      "pin": "J5",
+      "name": "VCC",
+      "function": "POWER",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true
+      },
+      "category": "POWER"
+    },
+    {
+      "pin": "P7",
+      "name": "VCC",
+      "function": "POWER",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true
+      },
+      "category": "POWER"
+    },
+    {
+      "pin": "D8",
+      "name": "VCC",
+      "function": "POWER",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true
+      },
+      "category": "POWER"
+    },
+    {
+      "pin": "D9",
+      "name": "VCC",
+      "function": "POWER",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true
+      },
+      "category": "POWER"
+    },
+    {
+      "pin": "P9",
+      "name": "VCC",
+      "function": "POWER",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true
+      },
+      "category": "POWER"
+    },
+    {
+      "pin": "D10",
+      "name": "VCC",
+      "function": "POWER",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true
+      },
+      "category": "POWER"
+    },
+    {
+      "pin": "D11",
+      "name": "VCC",
+      "function": "POWER",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true
+      },
+      "category": "POWER"
+    },
+    {
+      "pin": "P11",
+      "name": "VCC",
+      "function": "POWER",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true
+      },
+      "category": "POWER"
+    },
+    {
+      "pin": "J14",
+      "name": "VCC",
+      "function": "POWER",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true
+      },
+      "category": "POWER"
+    },
+    {
+      "pin": "J15",
+      "name": "VCC",
+      "function": "POWER",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true
+      },
+      "category": "POWER"
+    },
+    {
+      "pin": "M15",
+      "name": "VCC",
+      "function": "POWER",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true
+      },
+      "category": "POWER"
+    },
+    {
+      "pin": "E6",
+      "name": "VCCAUX",
+      "function": "POWER",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true
+      },
+      "category": "POWER"
+    },
+    {
+      "pin": "N6",
+      "name": "VCCAUX",
+      "function": "POWER",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true
+      },
+      "category": "POWER"
+    },
+    {
+      "pin": "E13",
+      "name": "VCCAUX",
+      "function": "POWER",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true
+      },
+      "category": "POWER"
+    },
+    {
+      "pin": "P13",
+      "name": "VCCAUX",
+      "function": "POWER",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true
+      },
+      "category": "POWER"
+    },
+    {
+      "pin": "D12",
+      "name": "VCCIO0",
+      "function": "POWER",
+      "bank": "0",
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true
+      },
+      "category": "POWER"
+    },
+    {
+      "pin": "D7",
+      "name": "VCCIO1",
+      "function": "POWER",
+      "bank": "1",
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true
+      },
+      "category": "POWER"
+    },
+    {
+      "pin": "G5",
+      "name": "VCCIO2",
+      "function": "POWER",
+      "bank": "2",
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true
+      },
+      "category": "POWER"
+    },
+    {
+      "pin": "H5",
+      "name": "VCCIO2",
+      "function": "POWER",
+      "bank": "2",
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true
+      },
+      "category": "POWER"
+    },
+    {
+      "pin": "M5",
+      "name": "VCCIO3",
+      "function": "POWER",
+      "bank": "3",
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true
+      },
+      "category": "POWER"
+    },
+    {
+      "pin": "N5",
+      "name": "VCCIO3",
+      "function": "POWER",
+      "bank": "3",
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true
+      },
+      "category": "POWER"
+    },
+    {
+      "pin": "R1",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "R2",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "T2",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "U2",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "T3",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "U3",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "T4",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "U4",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "V4",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "U5",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "P6",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "T6",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "T7",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "U7",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "V7",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "P8",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "T8",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "T9",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "U9",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "T10",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "U10",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "V10",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "T11",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "U11",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "P12",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "T12",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "P10",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "R10",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "R3",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "P5",
+      "name": "GND",
+      "function": "GROUND",
+      "bank": null,
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true,
+        "connect_to": "GND"
+      },
+      "category": "GROUND"
+    },
+    {
+      "pin": "N13",
+      "name": "VCCIO8",
+      "function": "POWER",
+      "bank": "8",
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true
+      },
+      "category": "POWER"
+    },
+    {
+      "pin": "P14",
+      "name": "VCCIO8",
+      "function": "POWER",
+      "bank": "8",
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true
+      },
+      "category": "POWER"
+    },
+    {
+      "pin": "M14",
+      "name": "VCCIO6",
+      "function": "POWER",
+      "bank": "6",
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true
+      },
+      "category": "POWER"
+    },
+    {
+      "pin": "N14",
+      "name": "VCCIO6",
+      "function": "POWER",
+      "bank": "6",
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true
+      },
+      "category": "POWER"
+    },
+    {
+      "pin": "G14",
+      "name": "VCCIO7",
+      "function": "POWER",
+      "bank": "7",
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true
+      },
+      "category": "POWER"
+    },
+    {
+      "pin": "H14",
+      "name": "VCCIO7",
+      "function": "POWER",
+      "bank": "7",
+      "pad": null,
+      "config_function": null,
+      "dqs": null,
+      "high_speed": false,
+      "drc": {
+        "must_connect": true
+      },
+      "category": "POWER"
+    }
+  ],
+  "lookup": {
+    "by_pin": {
+      "C12": "PL11A",
+      "B12": "PL11B",
+      "A12": "PL14A",
+      "D13": "PL17A",
+      "C13": "PL17B",
+      "B13": "PL35A",
+      "C15": "PL35C",
+      "A13": "PL35B",
+      "A15": "PL35D",
+      "D15": "PL38A",
+      "D16": "PL38B",
+      "B15": "PL41A",
+      "C16": "PL41C",
+      "A16": "PL41B",
+      "A17": "PL44A",
+      "B18": "PL44C",
+      "B17": "PL44B",
+      "C17": "PL44D",
+      "D17": "PL47A",
+      "D18": "PL47C",
+      "C18": "PL47B",
+      "F18": "PL47D",
+      "F17": "PL50A",
+      "F15": "PL50C",
+      "F16": "PL50B",
+      "G16": "PL50D",
+      "G18": "PL53A",
+      "H17": "PL53B",
+      "G15": "PL56A",
+      "H16": "PL56C",
+      "H15": "PL56B",
+      "J16": "PL56D",
+      "J17": "PL83C",
+      "H18": "PL83D",
+      "J18": "PL86A",
+      "K16": "PL86C",
+      "K18": "PL86B",
+      "K15": "PL86D",
+      "K17": "PL89A",
+      "L15": "PL89C",
+      "L18": "PL89B",
+      "L16": "PL89D",
+      "M16": "PL92C",
+      "M17": "PL92D",
+      "N15": "PB4A",
+      "N17": "PB6A",
+      "N16": "PB4B",
+      "M18": "PB6B",
+      "N18": "PB9A",
+      "T18": "PB11A",
+      "R18": "PB9B",
+      "U18": "PB11B",
+      "R17": "PB13A",
+      "U17": "PB15A",
+      "T17": "PB13B",
+      "V17": "PB15B",
+      "R16": "PB18A",
+      "V16": "INITN",
+      "U16": "CCLK",
+      "T15": "PROGRAMN",
+      "U15": "DONE",
+      "T14": "CFG_1",
+      "V15": "CFG_2",
+      "U14": "CFG_0",
+      "V14": "TDO",
+      "U13": "TCK",
+      "T13": "TDI",
+      "V13": "TMS",
+      "V12": "RESERVED",
+      "U12": "GND",
+      "V11": "RESERVED",
+      "V9": "GND",
+      "U8": "GND",
+      "V8": "GND",
+      "V6": "GND",
+      "U6": "GND",
+      "V5": "GND",
+      "V3": "RESERVED",
+      "T5": "GND",
+      "V2": "RESERVED",
+      "U1": "GND",
+      "T1": "GND",
+      "N1": "PR92D",
+      "M1": "PR92C",
+      "N2": "PR89D",
+      "L1": "PR89B",
+      "M2": "PR89C",
+      "K2": "PR89A",
+      "K1": "PR86D",
+      "L3": "PR86B",
+      "K3": "PR86C",
+      "M3": "PR86A",
+      "N3": "PR83D",
+      "L4": "PR83B",
+      "N4": "PR83C",
+      "K4": "PR83A",
+      "H1": "PR56D",
+      "J1": "PR56B",
+      "F1": "PR56C",
+      "J2": "PR56A",
+      "G1": "PR53B",
+      "F2": "PR53A",
+      "H2": "PR50D",
+      "G3": "PR50B",
+      "J3": "PR50C",
+      "H3": "PR50A",
+      "F3": "PR47D",
+      "G4": "PR47B",
+      "F4": "PR47C",
+      "H4": "PR47A",
+      "D1": "PR44D",
+      "B1": "PR44B",
+      "C1": "PR44C",
+      "D2": "PR44A",
+      "B2": "PR41B",
+      "A2": "PR41C",
+      "A3": "PR41A",
+      "C2": "PR38B",
+      "D3": "PR38A",
+      "C3": "PR35D",
+      "C4": "PR35B",
+      "B4": "PR35C",
+      "D4": "PR35A",
+      "A4": "PR20B",
+      "A6": "PR20A",
+      "A7": "PR17B",
+      "B6": "PR17A",
+      "C6": "PR14B",
+      "D6": "PR14A",
+      "B7": "PR11B",
+      "C7": "PR11A",
+      "C8": "PT121B",
+      "B8": "PT121A",
+      "A8": "PT71B",
+      "C9": "PT69B",
+      "A9": "PT71A",
+      "B9": "PT69A",
+      "C10": "PT65B",
+      "A10": "PT63B",
+      "B10": "PT65A",
+      "A11": "PT63A",
+      "C11": "PT4B",
+      "B11": "PT4A",
+      "G2": "GND",
+      "L2": "GND",
+      "B3": "GND",
+      "E5": "GND",
+      "F5": "GND",
+      "K5": "GND",
+      "L5": "GND",
+      "F6": "GND",
+      "G6": "GND",
+      "H6": "GND",
+      "J6": "GND",
+      "K6": "GND",
+      "L6": "GND",
+      "M6": "GND",
+      "E7": "GND",
+      "F7": "GND",
+      "G7": "GND",
+      "H7": "GND",
+      "J7": "GND",
+      "K7": "GND",
+      "L7": "GND",
+      "M7": "GND",
+      "N7": "GND",
+      "E8": "GND",
+      "F8": "GND",
+      "G8": "GND",
+      "H8": "GND",
+      "J8": "GND",
+      "K8": "GND",
+      "L8": "GND",
+      "M8": "GND",
+      "N8": "GND",
+      "E9": "GND",
+      "F9": "GND",
+      "G9": "GND",
+      "H9": "GND",
+      "J9": "GND",
+      "K9": "GND",
+      "L9": "GND",
+      "M9": "GND",
+      "N9": "GND",
+      "E10": "GND",
+      "F10": "GND",
+      "G10": "GND",
+      "H10": "GND",
+      "J10": "GND",
+      "K10": "GND",
+      "L10": "GND",
+      "M10": "GND",
+      "N10": "GND",
+      "E11": "GND",
+      "F11": "GND",
+      "G11": "GND",
+      "H11": "GND",
+      "J11": "GND",
+      "K11": "GND",
+      "L11": "GND",
+      "M11": "GND",
+      "N11": "GND",
+      "E12": "GND",
+      "F12": "GND",
+      "G12": "GND",
+      "H12": "GND",
+      "J12": "GND",
+      "K12": "GND",
+      "L12": "GND",
+      "M12": "GND",
+      "N12": "GND",
+      "F13": "GND",
+      "G13": "GND",
+      "H13": "GND",
+      "J13": "GND",
+      "K13": "GND",
+      "L13": "GND",
+      "M13": "GND",
+      "E14": "GND",
+      "F14": "GND",
+      "K14": "GND",
+      "L14": "GND",
+      "B16": "GND",
+      "T16": "GND",
+      "G17": "GND",
+      "L17": "GND",
+      "J4": "VCC",
+      "M4": "VCC",
+      "J5": "VCC",
+      "P7": "VCC",
+      "D8": "VCC",
+      "D9": "VCC",
+      "P9": "VCC",
+      "D10": "VCC",
+      "D11": "VCC",
+      "P11": "VCC",
+      "J14": "VCC",
+      "J15": "VCC",
+      "M15": "VCC",
+      "E6": "VCCAUX",
+      "N6": "VCCAUX",
+      "E13": "VCCAUX",
+      "P13": "VCCAUX",
+      "D12": "VCCIO0",
+      "D7": "VCCIO1",
+      "G5": "VCCIO2",
+      "H5": "VCCIO2",
+      "M5": "VCCIO3",
+      "N5": "VCCIO3",
+      "R1": "GND",
+      "R2": "GND",
+      "T2": "GND",
+      "U2": "GND",
+      "T3": "GND",
+      "U3": "GND",
+      "T4": "GND",
+      "U4": "GND",
+      "V4": "GND",
+      "U5": "GND",
+      "P6": "GND",
+      "T6": "GND",
+      "T7": "GND",
+      "U7": "GND",
+      "V7": "GND",
+      "P8": "GND",
+      "T8": "GND",
+      "T9": "GND",
+      "U9": "GND",
+      "T10": "GND",
+      "U10": "GND",
+      "V10": "GND",
+      "T11": "GND",
+      "U11": "GND",
+      "P12": "GND",
+      "T12": "GND",
+      "P10": "GND",
+      "R10": "GND",
+      "R3": "GND",
+      "P5": "GND",
+      "N13": "VCCIO8",
+      "P14": "VCCIO8",
+      "M14": "VCCIO6",
+      "N14": "VCCIO6",
+      "G14": "VCCIO7",
+      "H14": "VCCIO7"
+    },
+    "by_name": {
+      "PL11A": "C12",
+      "PL11B": "B12",
+      "PL14A": "A12",
+      "PL17A": "D13",
+      "PL17B": "C13",
+      "PL35A": "B13",
+      "PL35C": "C15",
+      "PL35B": "A13",
+      "PL35D": "A15",
+      "PL38A": "D15",
+      "PL38B": "D16",
+      "PL41A": "B15",
+      "PL41C": "C16",
+      "PL41B": "A16",
+      "PL44A": "A17",
+      "PL44C": "B18",
+      "PL44B": "B17",
+      "PL44D": "C17",
+      "PL47A": "D17",
+      "PL47C": "D18",
+      "PL47B": "C18",
+      "PL47D": "F18",
+      "PL50A": "F17",
+      "PL50C": "F15",
+      "PL50B": "F16",
+      "PL50D": "G16",
+      "PL53A": "G18",
+      "PL53B": "H17",
+      "PL56A": "G15",
+      "PL56C": "H16",
+      "PL56B": "H15",
+      "PL56D": "J16",
+      "PL83C": "J17",
+      "PL83D": "H18",
+      "PL86A": "J18",
+      "PL86C": "K16",
+      "PL86B": "K18",
+      "PL86D": "K15",
+      "PL89A": "K17",
+      "PL89C": "L15",
+      "PL89B": "L18",
+      "PL89D": "L16",
+      "PL92C": "M16",
+      "PL92D": "M17",
+      "PB4A": "N15",
+      "PB6A": "N17",
+      "PB4B": "N16",
+      "PB6B": "M18",
+      "PB9A": "N18",
+      "PB11A": "T18",
+      "PB9B": "R18",
+      "PB11B": "U18",
+      "PB13A": "R17",
+      "PB15A": "U17",
+      "PB13B": "T17",
+      "PB15B": "V17",
+      "PB18A": "R16",
+      "INITN": "V16",
+      "CCLK": "U16",
+      "PROGRAMN": "T15",
+      "DONE": "U15",
+      "CFG_1": "T14",
+      "CFG_2": "V15",
+      "CFG_0": "U14",
+      "TDO": "V14",
+      "TCK": "U13",
+      "TDI": "T13",
+      "TMS": "V13",
+      "PR92D": "N1",
+      "PR92C": "M1",
+      "PR89D": "N2",
+      "PR89B": "L1",
+      "PR89C": "M2",
+      "PR89A": "K2",
+      "PR86D": "K1",
+      "PR86B": "L3",
+      "PR86C": "K3",
+      "PR86A": "M3",
+      "PR83D": "N3",
+      "PR83B": "L4",
+      "PR83C": "N4",
+      "PR83A": "K4",
+      "PR56D": "H1",
+      "PR56B": "J1",
+      "PR56C": "F1",
+      "PR56A": "J2",
+      "PR53B": "G1",
+      "PR53A": "F2",
+      "PR50D": "H2",
+      "PR50B": "G3",
+      "PR50C": "J3",
+      "PR50A": "H3",
+      "PR47D": "F3",
+      "PR47B": "G4",
+      "PR47C": "F4",
+      "PR47A": "H4",
+      "PR44D": "D1",
+      "PR44B": "B1",
+      "PR44C": "C1",
+      "PR44A": "D2",
+      "PR41B": "B2",
+      "PR41C": "A2",
+      "PR41A": "A3",
+      "PR38B": "C2",
+      "PR38A": "D3",
+      "PR35D": "C3",
+      "PR35B": "C4",
+      "PR35C": "B4",
+      "PR35A": "D4",
+      "PR20B": "A4",
+      "PR20A": "A6",
+      "PR17B": "A7",
+      "PR17A": "B6",
+      "PR14B": "C6",
+      "PR14A": "D6",
+      "PR11B": "B7",
+      "PR11A": "C7",
+      "PT121B": "C8",
+      "PT121A": "B8",
+      "PT71B": "A8",
+      "PT69B": "C9",
+      "PT71A": "A9",
+      "PT69A": "B9",
+      "PT65B": "C10",
+      "PT63B": "A10",
+      "PT65A": "B10",
+      "PT63A": "A11",
+      "PT4B": "C11",
+      "PT4A": "B11",
+      "VCCIO0": "D12",
+      "VCCIO1": "D7"
+    }
+  },
+  "summary": {
+    "by_function": {
+      "CONFIG": 11,
+      "GROUND": 127,
+      "IO": 118,
+      "POWER": 29
+    },
+    "diff_pairs": {
+      "IO": 30,
+      "LVDS": 27
+    }
+  },
+  "absolute_maximum_ratings": {
+    "abs_VCC": {
+      "parameter": "Supply Voltage",
+      "symbol": "VCC",
+      "min": -0.5,
+      "max": 1.32,
+      "unit": "V",
+      "conditions": "Absolute maximum",
+      "source": "absolute_maximum"
+    },
+    "abs_VCCA": {
+      "parameter": "Supply Voltage",
+      "symbol": "VCCA",
+      "min": -0.5,
+      "max": 1.32,
+      "unit": "V",
+      "conditions": "Absolute maximum",
+      "source": "absolute_maximum"
+    },
+    "abs_VCCAUX, VCCAUXA": {
+      "parameter": "Supply Voltage",
+      "symbol": "VCCAUX, VCCAUXA",
+      "min": -0.5,
+      "max": 2.75,
+      "unit": "V",
+      "conditions": "Absolute maximum",
+      "source": "absolute_maximum"
+    },
+    "abs_VCCIO": {
+      "parameter": "Supply Voltage",
+      "symbol": "VCCIO",
+      "min": -0.5,
+      "max": 3.63,
+      "unit": "V",
+      "conditions": "Absolute maximum",
+      "source": "absolute_maximum"
+    },
+    "abs_Input or I/O Transient Voltage Applied": {
+      "parameter": "Input or I/O Transient Voltage Applied",
+      "symbol": "Input or I/O Transient Voltage Applied",
+      "min": -0.5,
+      "max": 3.63,
+      "unit": "V",
+      "conditions": "Absolute maximum",
+      "source": "absolute_maximum"
+    },
+    "abs_VCCHRX, VCCHTX": {
+      "parameter": "SerDes RX/TX Buffer Supply Voltages",
+      "symbol": "VCCHRX, VCCHTX",
+      "min": -0.5,
+      "max": 1.32,
+      "unit": "V",
+      "conditions": "Absolute maximum",
+      "source": "absolute_maximum"
+    },
+    "abs_Voltage Applied on SerDes Pins": {
+      "parameter": "Voltage Applied on SerDes Pins",
+      "symbol": "Voltage Applied on SerDes Pins",
+      "min": -0.5,
+      "max": 1.8,
+      "unit": "V",
+      "conditions": "Absolute maximum",
+      "source": "absolute_maximum"
+    },
+    "abs_TA": {
+      "parameter": "Storage Temperature (Ambient)",
+      "symbol": "TA",
+      "min": -65.0,
+      "max": 150.0,
+      "unit": "°C",
+      "conditions": "Absolute maximum",
+      "source": "absolute_maximum"
+    },
+    "abs_TJ": {
+      "parameter": "Junction Temperature",
+      "symbol": "TJ",
+      "min": null,
+      "max": 125.0,
+      "unit": "°C",
+      "conditions": "Absolute maximum",
+      "source": "absolute_maximum"
+    }
+  }
+}

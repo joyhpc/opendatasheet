@@ -350,17 +350,20 @@ def _normalize_drc_rules(rules: dict) -> dict:
     return result
 
 
-def export_fpga(dc_data: dict, pinout_data: dict, gowin_dc: dict = None) -> dict:
+def export_fpga(dc_data: dict, pinout_data: dict, gowin_dc: dict = None, lattice_dc: dict = None) -> dict:
     """Combine FPGA DC datasheet + pinout into sch-review format.
 
     dc_data: AMD-style extracted datasheet (with extraction.component etc.)
     gowin_dc: Gowin-style DC extraction (from extract_gowin_dc.py)
+    lattice_dc: Lattice-style DC extraction (from extract_lattice_dc.py)
     """
     ext = dc_data.get("extraction", {})
     comp = ext.get("component", {})
 
     # --- Supply voltage specs from DC datasheet ---
     supply_specs = {}
+    io_standard_specs = {}
+    abs_max_specs = {}
 
     # AMD-style DC data
     for item in ext.get("electrical_characteristics", []):
@@ -414,7 +417,7 @@ def export_fpga(dc_data: dict, pinout_data: dict, gowin_dc: dict = None) -> dict
                 }
 
         # Also add absolute maximum ratings
-        abs_max_specs = {}
+        # abs_max_specs already initialized
         has_exact_match_abs = any(device in it.get("device", "") for it in gowin_dc.get("absolute_maximum_ratings", []))
         for item in gowin_dc.get("absolute_maximum_ratings", []):
             dev_tag = item.get("device", "")
@@ -435,8 +438,63 @@ def export_fpga(dc_data: dict, pinout_data: dict, gowin_dc: dict = None) -> dict
                     "source": "absolute_maximum",
                 }
 
+    # Lattice-style DC data
+    if lattice_dc:
+        # Recommended operating conditions
+        for item in lattice_dc.get("recommended_operating", []):
+            sym = item.get("symbol") or item.get("parameter", "")
+            if not sym:
+                continue
+            param = item.get("parameter", sym)
+            key = sym
+            if key in supply_specs:
+                key = f"{sym}_lattice"
+            supply_specs[key] = {
+                "parameter": param,
+                "symbol": sym,
+                "min": item.get("min"),
+                "typ": item.get("typ"),
+                "max": item.get("max"),
+                "unit": item.get("unit", "V"),
+                "conditions": "Recommended operating",
+                "source": "recommended_operating",
+            }
+
+        # Absolute maximum ratings
+        # abs_max_specs already initialized
+        for item in lattice_dc.get("absolute_maximum_ratings", []):
+            sym = item.get("symbol") or item.get("parameter", "")
+            if not sym:
+                continue
+            param = item.get("parameter", sym)
+            key = f"abs_{sym}"
+            abs_max_specs[key] = {
+                "parameter": param,
+                "symbol": sym,
+                "min": item.get("min"),
+                "max": item.get("max"),
+                "unit": item.get("unit", "V"),
+                "conditions": "Absolute maximum",
+                "source": "absolute_maximum",
+            }
+
+        # IO standards
+        for item in lattice_dc.get("io_standards", []):
+            std = item.get("standard", "")
+            if std:
+                param = item.get("parameter", "")
+                key = f"lattice_{std}"
+                if param:
+                    key = f"lattice_{param}_{std}"
+                io_standard_specs[key] = {
+                    "standard": std,
+                    "parameter": param,
+                    "value": item.get("value"),
+                    "raw": item.get("raw"),
+                }
+
     # --- IO standard specs from DC datasheet ---
-    io_standard_specs = {}
+    # io_standard_specs already initialized
 
     # AMD-style
     for item in ext.get("electrical_characteristics", []):
@@ -479,6 +537,8 @@ def export_fpga(dc_data: dict, pinout_data: dict, gowin_dc: dict = None) -> dict
 
     if vendor == "Gowin":
         manufacturer = "Gowin"
+    elif vendor == "Lattice":
+        manufacturer = "Lattice"
     else:
         manufacturer = comp.get("manufacturer", "AMD")
 
@@ -510,7 +570,7 @@ def export_fpga(dc_data: dict, pinout_data: dict, gowin_dc: dict = None) -> dict
     }
 
     # Add absolute maximum ratings if available
-    if gowin_dc:
+    if gowin_dc or lattice_dc:
         result["absolute_maximum_ratings"] = abs_max_specs
 
     return result
@@ -569,6 +629,22 @@ def main():
         prefix = dev.split("-")[0] if "-" in dev else dev
         gowin_dc_cache[prefix] = data
 
+    # Load Lattice DC files
+    lattice_dc_files = sorted((extracted_dir / "fpga").glob("lattice_*_dc.json"))
+    lattice_dc_cache = {}
+    for dc_file in lattice_dc_files:
+        with open(dc_file) as fp:
+            data = json.load(fp)
+        family = data.get("family", "")
+        device = data.get("device", "")
+        lattice_dc_cache[dc_file.name] = data
+        # Index by family: ecp5, crosslinknx
+        if family:
+            lattice_dc_cache[family] = data
+        # Also index by device name
+        if device:
+            lattice_dc_cache[device.lower().replace("-", "_").replace(" ", "_")] = data
+
     for pinout_file in fpga_pinout_files:
         try:
             with open(pinout_file) as fp:
@@ -580,6 +656,7 @@ def main():
             # Find matching DC datasheet
             dc_data = None
             gowin_dc = None
+            lattice_dc = None
             vendor = pinout_data.get("_vendor", "")
 
             if vendor == "Gowin":
@@ -589,6 +666,14 @@ def main():
                 # Also try Arora V 60K for GW5AT-60
                 if gowin_dc is None and "GW5AT-60" in device:
                     gowin_dc = gowin_dc_cache.get("Arora V 60K")
+                dc_data = {"extraction": {"component": {}}}
+            elif vendor == "Lattice":
+                # Lattice: match by family
+                family = pinout_data.get("_family", "")
+                if "ECP5" in device.upper():
+                    lattice_dc = lattice_dc_cache.get("ecp5")
+                elif "LIFCL" in device.upper() or "CrossLink" in family:
+                    lattice_dc = lattice_dc_cache.get("crosslinknx")
                 dc_data = {"extraction": {"component": {}}}
             else:
                 # AMD: match by family
@@ -606,7 +691,7 @@ def main():
             if dc_data is None:
                 dc_data = {"extraction": {"component": {}}}
 
-            result = export_fpga(dc_data, pinout_data, gowin_dc=gowin_dc)
+            result = export_fpga(dc_data, pinout_data, gowin_dc=gowin_dc, lattice_dc=lattice_dc)
             safe_name = f"{device}_{package}"
             out_path = output_dir / f"{safe_name}.json"
             with open(out_path, "w") as fp:
@@ -625,6 +710,24 @@ def main():
     print(f"\n{'='*60}")
     print(f"Exported: {exported}, Errors: {errors}")
     print(f"Output: {output_dir}")
+
+    # Generate manifest
+    manifest = {"devices": []}
+    for f in sorted(output_dir.glob("*.json")):
+        if f.name == "_manifest.json":
+            continue
+        with open(f) as fp:
+            data = json.load(fp)
+        manifest["devices"].append({
+            "file": f.name,
+            "mpn": data.get("mpn", ""),
+            "type": data.get("_type", ""),
+            "manufacturer": data.get("manufacturer", ""),
+        })
+    manifest_path = output_dir / "_manifest.json"
+    with open(manifest_path, "w") as fp:
+        json.dump(manifest, fp, indent=2)
+    print(f"Manifest: {manifest_path} ({len(manifest['devices'])} devices)")
 
 
 if __name__ == "__main__":

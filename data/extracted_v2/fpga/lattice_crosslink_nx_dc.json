@@ -1,0 +1,535 @@
+{
+  "device": "CrossLink-NX",
+  "family": "crosslinknx",
+  "source_file": "crosslinknx_ds.pdf",
+  "absolute_maximum_ratings": [
+    {
+      "symbol": "VCC, VCCECLK",
+      "parameter": "Supply Voltage",
+      "min": -0.5,
+      "max": 1.1,
+      "unit": "V"
+    },
+    {
+      "symbol": "VCCAUX, VCCAUXA,",
+      "parameter": "VCCAUXH3, VCCAUXH4, VCCAUXH5 Supply Voltage",
+      "min": -0.5,
+      "max": 1.98,
+      "unit": "V"
+    },
+    {
+      "symbol": "VCCIO0, 1, 2, 6, 7",
+      "parameter": "I/O Supply Voltage",
+      "min": -0.5,
+      "max": 3.63,
+      "unit": "V"
+    },
+    {
+      "symbol": "VCCIO3, 4, 5",
+      "parameter": "I/O Supply Voltage",
+      "min": -0.5,
+      "max": 1.98,
+      "unit": "V"
+    },
+    {
+      "symbol": "VCCPLL_DPHY0, 1",
+      "parameter": "Hardened D-PHY PLL Supply Voltage",
+      "min": -0.5,
+      "max": 1.1,
+      "unit": "V"
+    },
+    {
+      "symbol": "VCCPLLSD0",
+      "parameter": "SerDes Block PLL Supply Voltage",
+      "min": -0.5,
+      "max": 1.98,
+      "unit": "V"
+    },
+    {
+      "symbol": "VCCA_DPHY0, 1",
+      "parameter": "Analog Supply Voltage for Hardened D-PHY",
+      "min": -0.5,
+      "max": 1.98,
+      "unit": "V"
+    },
+    {
+      "symbol": "VCC_DPHY0, 1",
+      "parameter": "Digital Supply Voltage for Hardened D-PHY",
+      "min": -0.5,
+      "max": 1.1,
+      "unit": "V"
+    },
+    {
+      "symbol": "VCCSD0",
+      "parameter": "SerDes Supply Voltage",
+      "min": -0.5,
+      "max": 1.1,
+      "unit": "V"
+    },
+    {
+      "symbol": "VCCADC18",
+      "parameter": "ADC Block 1.8 V Supply Voltage",
+      "min": -0.5,
+      "max": 1.98,
+      "unit": "V"
+    },
+    {
+      "symbol": "VCCAUXSD",
+      "parameter": "SerDes and AUX Supply Voltage",
+      "min": -0.5,
+      "max": 1.98,
+      "unit": "V"
+    },
+    {
+      "symbol": null,
+      "parameter": "Input or I/O Voltage Applied, Bank 0, Bank 1,Bank 2, Bank 6, Bank 7",
+      "min": -0.5,
+      "max": 3.63,
+      "unit": "V"
+    },
+    {
+      "symbol": null,
+      "parameter": "Input or I/O Voltage Applied, Bank 3, Bank 4, Bank 5",
+      "min": -0.5,
+      "max": 1.98,
+      "unit": "V"
+    },
+    {
+      "symbol": null,
+      "parameter": "Voltage Applied on SerDes Pins",
+      "min": -0.5,
+      "max": 1.98,
+      "unit": "V"
+    },
+    {
+      "symbol": "TA",
+      "parameter": "Storage Temperature (Ambient)",
+      "min": -65.0,
+      "max": 150.0,
+      "unit": "°C"
+    },
+    {
+      "symbol": "TJ",
+      "parameter": "Junction Temperature",
+      "min": null,
+      "max": 125.0,
+      "unit": "°C"
+    }
+  ],
+  "recommended_operating": [
+    {
+      "symbol": "VCC, VCCECLK",
+      "parameter": "Core Supply Voltage VCC = 1.0",
+      "min": 0.95,
+      "typ": 1.0,
+      "max": 1.05,
+      "unit": "V"
+    },
+    {
+      "symbol": "VCCAUX",
+      "parameter": "Auxiliary Supply Voltage Bank 0, Bank 1, Bank 2, Bank 6, Bank 7",
+      "min": 1.746,
+      "typ": 1.8,
+      "max": 1.89,
+      "unit": "V"
+    },
+    {
+      "symbol": "VCCAUXH3/4/",
+      "parameter": "Auxiliary Supply Voltage Bank 3, Bank 4, Bank 5",
+      "min": 1.746,
+      "typ": 1.8,
+      "max": 1.89,
+      "unit": "V"
+    },
+    {
+      "symbol": "VCCAUXA",
+      "parameter": "Auxiliary Supply Voltage for core logic",
+      "min": null,
+      "typ": null,
+      "max": null,
+      "unit": "V"
+    },
+    {
+      "symbol": "VCCIO",
+      "parameter": "I/O Driver Supply Voltage VCCIO = 3.3 V, Bank 0, Bank 1, Bank 2, Bank 6, Bank 7",
+      "min": 3.135,
+      "typ": 3.3,
+      "max": 3.465,
+      "unit": "V"
+    },
+    {
+      "symbol": "VCCIO = 2.5 V, Bank 0, Bank",
+      "parameter": "Bank 2, Bank 6, Bank 7",
+      "min": 2.375,
+      "typ": 2.5,
+      "max": 2.625,
+      "unit": "V"
+    },
+    {
+      "symbol": "VCCIO = 1.35 V, All Banks (For",
+      "parameter": "DDR3L Only)",
+      "min": 1.2825,
+      "typ": 1.35,
+      "max": 1.4175,
+      "unit": "V"
+    },
+    {
+      "symbol": "VCCIO = 1.0 V, Bank 3, Bank",
+      "parameter": "Bank 5",
+      "min": 0.95,
+      "typ": 1.0,
+      "max": 1.05,
+      "unit": "V"
+    },
+    {
+      "symbol": "D-PHY External Power Supplies",
+      "parameter": "VCCA_D-PHY D-PHY Analog Power Supply",
+      "min": null,
+      "typ": null,
+      "max": null,
+      "unit": "V"
+    },
+    {
+      "symbol": "VCC_D-PHY",
+      "parameter": "D-PHY Digital Power Supply",
+      "min": null,
+      "typ": null,
+      "max": null,
+      "unit": "V"
+    },
+    {
+      "symbol": "VCCPLL_D-PHY",
+      "parameter": "D-PHY PLL Power Supply",
+      "min": null,
+      "typ": null,
+      "max": null,
+      "unit": "V"
+    },
+    {
+      "symbol": "ADC External Power Supplies",
+      "parameter": "VCCADC18 ADC 1.8 V Power Supply",
+      "min": null,
+      "typ": null,
+      "max": null,
+      "unit": "V"
+    },
+    {
+      "symbol": "SerDes Block External Power Supplies",
+      "parameter": "VCCSD0 Supply Voltage for SerDes Block and SerDes I/O",
+      "min": null,
+      "typ": null,
+      "max": null,
+      "unit": "V"
+    },
+    {
+      "symbol": "VCCPLLSD",
+      "parameter": "SerDes Block PLL Supply Voltage",
+      "min": null,
+      "typ": null,
+      "max": null,
+      "unit": "V"
+    },
+    {
+      "symbol": "VCCAUXSD",
+      "parameter": "SerDes Block Auxiliary Supply Voltage",
+      "min": null,
+      "typ": null,
+      "max": null,
+      "unit": "V"
+    },
+    {
+      "symbol": "Operating Temperature",
+      "parameter": "tJCOM Junction Temperature, Commercial Operation",
+      "min": null,
+      "typ": null,
+      "max": null,
+      "unit": "°C"
+    },
+    {
+      "symbol": "tJIND",
+      "parameter": "Junction Temperature, Industrial Operation",
+      "min": null,
+      "typ": null,
+      "max": null,
+      "unit": "°C"
+    }
+  ],
+  "io_standards": [
+    {
+      "standard": "HSUL12",
+      "parameter": "VCCO",
+      "value": 3.0,
+      "raw": "Bank 3, Bank 4, and Bank 5 I/O can only mix into banks with VCCIO higher than or equal to the pin standard, due to"
+    },
+    {
+      "standard": "LVCMOS25",
+      "parameter": "VCCO",
+      "value": 25.0,
+      "raw": "LVCMOS25 uses VCCIO supply on input buffer in Bank 0, Bank 1, Bank 2, Bank 6, and Bank 7. It can be supported with VCCIO ="
+    },
+    {
+      "standard": "LVCMOS25",
+      "parameter": "VCCO",
+      "value": 3.3,
+      "raw": "3.3 V to meet the VIH and VIL requirements, but there is additional current drawn on VCCIO. Hysteresis has to be disabled"
+    },
+    {
+      "standard": "LVCMOS25",
+      "parameter": "VIH",
+      "value": 3.3,
+      "raw": "3.3 V to meet the VIH and VIL requirements, but there is additional current drawn on VCCIO. Hysteresis has to be disabled"
+    },
+    {
+      "standard": "LVCMOS25",
+      "parameter": "VIL",
+      "value": 3.3,
+      "raw": "3.3 V to meet the VIH and VIL requirements, but there is additional current drawn on VCCIO. Hysteresis has to be disabled"
+    },
+    {
+      "standard": "LVCMOS15",
+      "parameter": "VCCO",
+      "value": 15.0,
+      "raw": "LVCMOS15 uses VCCIO supply on input buffer in Bank 3, Bank 4, and Bank 5. It can be supported with VCCIO = 1.8 V to meet"
+    },
+    {
+      "standard": "SLVS",
+      "parameter": "VCCO",
+      "value": 1.2,
+      "raw": "in SLVS. D-PHY with HS and LP modes supported needs to be placed in banks with VCCIO voltage = 1.2 V. Soft MIPI D-PHY LP input"
+    },
+    {
+      "standard": "LVCMOS12",
+      "parameter": "VCCO",
+      "value": 1.35,
+      "raw": "VCCIO = 1.35 V is only supported in Bank 3, Bank 4, and Bank 5, for use with DDR3L interface in the bank. These Input and Output"
+    },
+    {
+      "standard": "LVCMOS12",
+      "parameter": "VCCO",
+      "value": 1.35,
+      "raw": "standards can fit into the same bank with the VCCIO = 1.35 V."
+    },
+    {
+      "standard": "LVCMOS15",
+      "parameter": "VCCO",
+      "value": 15.0,
+      "raw": "LVCMOS15 input uses VCCIO supply voltage. If VCCIO is 1.8 V, the DC levels for LVCMOS15 are still met, but there could be increase"
+    },
+    {
+      "standard": "LVCMOS33",
+      "parameter": "VCCO",
+      "value": 0.4,
+      "raw": "VCCIO – 0.4"
+    },
+    {
+      "standard": "LVCMOS25",
+      "parameter": "VCCO",
+      "value": 0.45,
+      "raw": "VCCIO – 0.45"
+    },
+    {
+      "standard": "LVCMOS18",
+      "parameter": "VCCO",
+      "value": 0.35,
+      "raw": "0.35 × VCCIO"
+    },
+    {
+      "standard": "LVCMOS18",
+      "parameter": "VCCO",
+      "value": 0.65,
+      "raw": "0.65 × VCCIO"
+    },
+    {
+      "standard": "LVCMOS18",
+      "parameter": "VCCO",
+      "value": 0.45,
+      "raw": "VCCIO – 0.45"
+    },
+    {
+      "standard": "LVCMOS15",
+      "parameter": "VCCO",
+      "value": 0.35,
+      "raw": "0.35 × VCCIO"
+    },
+    {
+      "standard": "LVCMOS15",
+      "parameter": "VCCO",
+      "value": 0.65,
+      "raw": "0.65 × VCCIO"
+    },
+    {
+      "standard": "LVCMOS15",
+      "parameter": "VCCO",
+      "value": 0.4,
+      "raw": "VCCIO – 0.4"
+    },
+    {
+      "standard": "LVCMOS12",
+      "parameter": "VCCO",
+      "value": 0.35,
+      "raw": "0.35 × VCCIO"
+    },
+    {
+      "standard": "LVCMOS12",
+      "parameter": "VCCO",
+      "value": 0.65,
+      "raw": "0.65 × VCCIO"
+    },
+    {
+      "standard": "LVCMOS12",
+      "parameter": "VCCO",
+      "value": 0.4,
+      "raw": "VCCIO – 0.4"
+    },
+    {
+      "standard": "LVCMOS10",
+      "parameter": "VCCO",
+      "value": 0.35,
+      "raw": "0.35 × VCCIO"
+    },
+    {
+      "standard": "LVCMOS10",
+      "parameter": "VCCO",
+      "value": 0.65,
+      "raw": "0.65 × VCCIO"
+    },
+    {
+      "standard": "LVCMOS10",
+      "parameter": "VIH",
+      "value": 0.0,
+      "raw": "VIH (MAX) for inputs on these standards (in Bank 0, Bank 1, Bank 2, Bank 6, and Bank 7) can go up to 3.465 V if the input clamp is"
+    },
+    {
+      "standard": "LVCMOS10",
+      "parameter": "VCCO",
+      "value": 0.3,
+      "raw": "OFF. Otherwise, the input cannot be higher than VCCIO + 0.3 V."
+    },
+    {
+      "standard": "LVCMOS18",
+      "parameter": "VCCO",
+      "value": 0.35,
+      "raw": "0.35 × VCCIO"
+    },
+    {
+      "standard": "LVCMOS18",
+      "parameter": "VCCO",
+      "value": 0.65,
+      "raw": "0.65 × VCCIO"
+    },
+    {
+      "standard": "LVCMOS18",
+      "parameter": "VCCO",
+      "value": 0.45,
+      "raw": "VCCIO – 0.45"
+    },
+    {
+      "standard": "LVCMOS15",
+      "parameter": "VCCO",
+      "value": 0.35,
+      "raw": "0.35 × VCCIO"
+    },
+    {
+      "standard": "LVCMOS15",
+      "parameter": "VCCO",
+      "value": 0.65,
+      "raw": "0.65 × VCCIO"
+    },
+    {
+      "standard": "LVCMOS15",
+      "parameter": "VCCO",
+      "value": 0.4,
+      "raw": "VCCIO – 0.4"
+    },
+    {
+      "standard": "LVCMOS12",
+      "parameter": "VCCO",
+      "value": 0.35,
+      "raw": "0.35 × VCCIO"
+    },
+    {
+      "standard": "LVCMOS12",
+      "parameter": "VCCO",
+      "value": 0.65,
+      "raw": "0.65 × VCCIO"
+    },
+    {
+      "standard": "LVCMOS12",
+      "parameter": "VCCO",
+      "value": 0.4,
+      "raw": "VCCIO – 0.4"
+    },
+    {
+      "standard": "LVCMOS10",
+      "parameter": "VCCO",
+      "value": 0.35,
+      "raw": "0.35 × VCCIO"
+    },
+    {
+      "standard": "LVCMOS10",
+      "parameter": "VCCO",
+      "value": 0.65,
+      "raw": "0.65 × VCCIO"
+    },
+    {
+      "standard": "LVCMOS10",
+      "parameter": "VCCO",
+      "value": 0.75,
+      "raw": "0.75 × VCCIO"
+    },
+    {
+      "standard": "SSTL15",
+      "parameter": "VCCO",
+      "value": 0.3,
+      "raw": "VCCIO – 0.30"
+    },
+    {
+      "standard": "SSTL15",
+      "parameter": "VCCO",
+      "value": 0.3,
+      "raw": "VCCIO – 0.30"
+    },
+    {
+      "standard": "HSTL15",
+      "parameter": "VCCO",
+      "value": 0.4,
+      "raw": "VCCIO – 0.40"
+    },
+    {
+      "standard": "SSTL135",
+      "parameter": "VCCO",
+      "value": 0.27,
+      "raw": "VCCIO – 0.27"
+    },
+    {
+      "standard": "SSTL135",
+      "parameter": "VCCO",
+      "value": 0.27,
+      "raw": "VCCIO – 0.27"
+    },
+    {
+      "standard": "HSUL12",
+      "parameter": "VCCO",
+      "value": 0.3,
+      "raw": "VCCIO – 0.3"
+    },
+    {
+      "standard": "HSUL12",
+      "parameter": "VCCO",
+      "value": 1.8,
+      "raw": "VCCIO = 1.8 V, 2.5 V, or 3.3 V"
+    },
+    {
+      "standard": "LVDS",
+      "parameter": "VCCO",
+      "value": 1.8,
+      "raw": "LVDS input buffer on CrossLink-NX is powered by VCCAUX = 1.8 V, and protected by the bank VCCIO. Therefore, the LVDS"
+    },
+    {
+      "standard": "LVDS",
+      "parameter": "VCCO",
+      "value": 1.8,
+      "raw": "input voltage cannot exceed the bank VCCIO voltage. LVDS output buffer is powered by the Bank VCCIO at 1.8 V."
+    }
+  ]
+}

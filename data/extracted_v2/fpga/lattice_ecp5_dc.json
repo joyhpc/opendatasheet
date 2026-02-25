@@ -1,0 +1,490 @@
+{
+  "device": "ECP5",
+  "family": "ecp5",
+  "source_file": "ecp5_ds.pdf",
+  "absolute_maximum_ratings": [
+    {
+      "symbol": "VCC",
+      "parameter": "Supply Voltage",
+      "min": -0.5,
+      "max": 1.32,
+      "unit": "V"
+    },
+    {
+      "symbol": "VCCA",
+      "parameter": "Supply Voltage",
+      "min": -0.5,
+      "max": 1.32,
+      "unit": "V"
+    },
+    {
+      "symbol": "VCCAUX, VCCAUXA",
+      "parameter": "Supply Voltage",
+      "min": -0.5,
+      "max": 2.75,
+      "unit": "V"
+    },
+    {
+      "symbol": "VCCIO",
+      "parameter": "Supply Voltage",
+      "min": -0.5,
+      "max": 3.63,
+      "unit": "V"
+    },
+    {
+      "symbol": null,
+      "parameter": "Input or I/O Transient Voltage Applied",
+      "min": -0.5,
+      "max": 3.63,
+      "unit": "V"
+    },
+    {
+      "symbol": "VCCHRX, VCCHTX",
+      "parameter": "SerDes RX/TX Buffer Supply Voltages",
+      "min": -0.5,
+      "max": 1.32,
+      "unit": "V"
+    },
+    {
+      "symbol": null,
+      "parameter": "Voltage Applied on SerDes Pins",
+      "min": -0.5,
+      "max": 1.8,
+      "unit": "V"
+    },
+    {
+      "symbol": "TA",
+      "parameter": "Storage Temperature (Ambient)",
+      "min": -65.0,
+      "max": 150.0,
+      "unit": "°C"
+    },
+    {
+      "symbol": "TJ",
+      "parameter": "Junction Temperature",
+      "min": null,
+      "max": 125.0,
+      "unit": "°C"
+    }
+  ],
+  "recommended_operating": [
+    {
+      "symbol": "VCC",
+      "parameter": "Core Supply Voltage ECP5",
+      "min": 1.045,
+      "typ": null,
+      "max": 1.155,
+      "unit": "V"
+    },
+    {
+      "symbol": "VCCAUX",
+      "parameter": "Auxiliary Supply Voltage",
+      "min": null,
+      "typ": 2.375,
+      "max": 2.625,
+      "unit": "V"
+    },
+    {
+      "symbol": "VCCIO",
+      "parameter": "I/O Driver Supply Voltage",
+      "min": null,
+      "typ": 1.14,
+      "max": 3.465,
+      "unit": "V"
+    },
+    {
+      "symbol": "VREF",
+      "parameter": "Input Reference Voltage",
+      "min": null,
+      "typ": 0.5,
+      "max": 1.0,
+      "unit": "V"
+    },
+    {
+      "symbol": "tJCOM",
+      "parameter": "Junction Temperature, Commercial Operation",
+      "min": null,
+      "typ": 0.0,
+      "max": 85.0,
+      "unit": "°C"
+    },
+    {
+      "symbol": "tJIND",
+      "parameter": "Junction Temperature, Industrial Operation",
+      "min": null,
+      "typ": -40.0,
+      "max": 100.0,
+      "unit": "°C"
+    },
+    {
+      "symbol": "SerDes External Power Supply",
+      "parameter": "VCCA SerDes Analog Power Supply ECP5UM",
+      "min": 1.045,
+      "typ": null,
+      "max": 1.155,
+      "unit": "V"
+    },
+    {
+      "symbol": "VCCAUXA",
+      "parameter": "SerDes Auxiliary Supply Voltage",
+      "min": null,
+      "typ": 2.374,
+      "max": 2.625,
+      "unit": "V"
+    },
+    {
+      "symbol": "VCCHRX",
+      "parameter": "SerDes Input Buffer Power Supply ECP5UM",
+      "min": 0.3,
+      "typ": null,
+      "max": 1.155,
+      "unit": "V"
+    },
+    {
+      "symbol": "VCCHTX",
+      "parameter": "SerDes Output Buffer Power Supply ECP5UM",
+      "min": 1.045,
+      "typ": null,
+      "max": 1.155,
+      "unit": "V"
+    }
+  ],
+  "io_standards": [
+    {
+      "standard": "LVDS25",
+      "parameter": "VCCO",
+      "value": 1.5,
+      "raw": "MIPI D-PHY LP input can be implemented by powering VCCIO to 1.5 V, and select MIPI LP primitive to meet MIPI Alliance spec on"
+    },
+    {
+      "standard": "LVCMOS12",
+      "parameter": "VCCO",
+      "value": 12.0,
+      "raw": "VIH and VIL. It can also be implemented as LVCMOS12 with VCCIO at 1.2 V, which would meet VIH/VIL spec on LVCMOS12."
+    },
+    {
+      "standard": "LVCMOS12",
+      "parameter": "VIH",
+      "value": 12.0,
+      "raw": "VIH and VIL. It can also be implemented as LVCMOS12 with VCCIO at 1.2 V, which would meet VIH/VIL spec on LVCMOS12."
+    },
+    {
+      "standard": "LVCMOS12",
+      "parameter": "VIL",
+      "value": 12.0,
+      "raw": "VIH and VIL. It can also be implemented as LVCMOS12 with VCCIO at 1.2 V, which would meet VIH/VIL spec on LVCMOS12."
+    },
+    {
+      "standard": "LVCMOS33",
+      "parameter": "VCCO",
+      "value": 0.4,
+      "raw": "VCCIO – 0.4"
+    },
+    {
+      "standard": "LVCMOS25",
+      "parameter": "VCCO",
+      "value": 0.4,
+      "raw": "VCCIO – 0.4"
+    },
+    {
+      "standard": "LVCMOS18",
+      "parameter": "VCCO",
+      "value": 0.35,
+      "raw": "0.35 VCCIO"
+    },
+    {
+      "standard": "LVCMOS18",
+      "parameter": "VCCO",
+      "value": 0.65,
+      "raw": "0.65 VCCIO"
+    },
+    {
+      "standard": "LVCMOS18",
+      "parameter": "VCCO",
+      "value": 0.4,
+      "raw": "VCCIO – 0.4"
+    },
+    {
+      "standard": "LVCMOS15",
+      "parameter": "VCCO",
+      "value": 0.35,
+      "raw": "0.35 VCCIO"
+    },
+    {
+      "standard": "LVCMOS15",
+      "parameter": "VCCO",
+      "value": 0.65,
+      "raw": "0.65 VCCIO"
+    },
+    {
+      "standard": "LVCMOS15",
+      "parameter": "VCCO",
+      "value": 0.4,
+      "raw": "VCCIO – 0.4"
+    },
+    {
+      "standard": "LVCMOS12",
+      "parameter": "VCCO",
+      "value": 0.35,
+      "raw": "0.35 VCCIO"
+    },
+    {
+      "standard": "LVCMOS12",
+      "parameter": "VCCO",
+      "value": 0.65,
+      "raw": "0.65 VCCIO"
+    },
+    {
+      "standard": "LVCMOS12",
+      "parameter": "VCCO",
+      "value": 0.4,
+      "raw": "VCCIO – 0.4"
+    },
+    {
+      "standard": "LVTTL33",
+      "parameter": "VCCO",
+      "value": 0.4,
+      "raw": "VCCIO – 0.4"
+    },
+    {
+      "standard": "SSTL18",
+      "parameter": "VCCO",
+      "value": 0.4,
+      "raw": "VCCIO – 0.4"
+    },
+    {
+      "standard": "SSTL18",
+      "parameter": "VCCO",
+      "value": 0.28,
+      "raw": "VCCIO – 0.28"
+    },
+    {
+      "standard": "SSTL15",
+      "parameter": "VCCO",
+      "value": 0.31,
+      "raw": "VCCIO – 0.31"
+    },
+    {
+      "standard": "SSTL15",
+      "parameter": "VCCO",
+      "value": 0.31,
+      "raw": "VCCIO – 0.31"
+    },
+    {
+      "standard": "SSTL135",
+      "parameter": "VCCO",
+      "value": 0.27,
+      "raw": "VCCIO – 0.27"
+    },
+    {
+      "standard": "SSTL135",
+      "parameter": "VCCO",
+      "value": 0.27,
+      "raw": "VCCIO – 0.27"
+    },
+    {
+      "standard": "HSUL12",
+      "parameter": "VCCO",
+      "value": 0.3,
+      "raw": "VCCIO – 0.3"
+    },
+    {
+      "standard": "HSUL12",
+      "parameter": "VCCO",
+      "value": 1.5,
+      "raw": "MIPI D-PHY LP input can be implemented by powering VCCIO to 1.5 V, and select MIPI LP primitive to meet MIPI Alliance spec on"
+    },
+    {
+      "standard": "LVCMOS12",
+      "parameter": "VCCO",
+      "value": 12.0,
+      "raw": "VIH and VIL. It can also be implemented as LVCMOS12 with VCCIO at 1.2 V, which would meet VIH/VIL spec on LVCMOS12."
+    },
+    {
+      "standard": "LVCMOS12",
+      "parameter": "VIH",
+      "value": 12.0,
+      "raw": "VIH and VIL. It can also be implemented as LVCMOS12 with VCCIO at 1.2 V, which would meet VIH/VIL spec on LVCMOS12."
+    },
+    {
+      "standard": "LVCMOS12",
+      "parameter": "VIL",
+      "value": 12.0,
+      "raw": "VIH and VIL. It can also be implemented as LVCMOS12 with VCCIO at 1.2 V, which would meet VIH/VIL spec on LVCMOS12."
+    },
+    {
+      "standard": "LVDS",
+      "parameter": "VCCO",
+      "value": 2.5,
+      "raw": "Note: On the left and right sides of the device, this specification is valid only for VCCIO = 2.5 V or 3.3 V."
+    },
+    {
+      "standard": "LVCMOS33",
+      "parameter": "VCCO",
+      "value": 33.0,
+      "raw": "VCCIO. The default drive current for LVCMOS33D output is 12 mA with the option to change the device strength to 4 mA,"
+    },
+    {
+      "standard": "LVDS",
+      "parameter": "VCCO",
+      "value": 2.5,
+      "raw": "VCCIO = 2.5 V (±5%)"
+    },
+    {
+      "standard": "LVDS",
+      "parameter": "VCCO",
+      "value": 2.5,
+      "raw": "VCCIO = 2.5 V (±5%)"
+    },
+    {
+      "standard": "LVDS",
+      "parameter": "VCCO",
+      "value": 3.3,
+      "raw": "VCCIO = 3.3 V"
+    },
+    {
+      "standard": "LVDS",
+      "parameter": "VCCO",
+      "value": 3.3,
+      "raw": "VCCIO = 3.3 V"
+    },
+    {
+      "standard": "LVCMOS25",
+      "parameter": "VCCO",
+      "value": 25.0,
+      "raw": "I/Os are configured with LVCMOS25 with VCCIO=2.5, 12 mA drive."
+    },
+    {
+      "standard": "LVDS",
+      "parameter": "VCCO",
+      "value": 2.5,
+      "raw": "LVDS, VCCIO = 2.5 V"
+    },
+    {
+      "standard": "LVDS",
+      "parameter": "VCCO",
+      "value": 2.5,
+      "raw": "MLVDS, Emulated, VCCIO = 2.5 V"
+    },
+    {
+      "standard": "LVDS",
+      "parameter": "VCCO",
+      "value": 2.5,
+      "raw": "BLVDS, Emulated, VCCIO = 2.5 V"
+    },
+    {
+      "standard": "LVPECL33",
+      "parameter": "VCCO",
+      "value": 3.3,
+      "raw": "LVPECL, Emulated, VCCIO = 3.3 V"
+    },
+    {
+      "standard": "SSTL18",
+      "parameter": "VCCO",
+      "value": 18.0,
+      "raw": "SSTL_18 class I, II, VCCIO = 1.8 V"
+    },
+    {
+      "standard": "SSTL15",
+      "parameter": "VCCO",
+      "value": 15.0,
+      "raw": "SSTL_15 class I, II, VCCIO = 1.5 V"
+    },
+    {
+      "standard": "SSTL135",
+      "parameter": "VCCO",
+      "value": 135.0,
+      "raw": "SSTL_135 class I, II, VCCIO = 1.35 V"
+    },
+    {
+      "standard": "HSUL12",
+      "parameter": "VCCO",
+      "value": 12.0,
+      "raw": "HSUL_12 class I, II, VCCIO = 1.2 V"
+    },
+    {
+      "standard": "LVTTL33",
+      "parameter": "VCCO",
+      "value": 3.3,
+      "raw": "LVTTL, VCCIO = 3.3 V"
+    },
+    {
+      "standard": "LVCMOS33",
+      "parameter": "VCCO",
+      "value": 3.3,
+      "raw": "LVCMOS, VCCIO = 3.3 V"
+    },
+    {
+      "standard": "LVCMOS25",
+      "parameter": "VCCO",
+      "value": 2.5,
+      "raw": "LVCMOS, VCCIO = 2.5 V"
+    },
+    {
+      "standard": "LVCMOS18",
+      "parameter": "VCCO",
+      "value": 1.8,
+      "raw": "LVCMOS, VCCIO = 1.8 V"
+    },
+    {
+      "standard": "LVCMOS15",
+      "parameter": "VCCO",
+      "value": 1.5,
+      "raw": "LVCMOS 1.5, VCCIO = 1.5 V"
+    },
+    {
+      "standard": "LVCMOS12",
+      "parameter": "VCCO",
+      "value": 1.2,
+      "raw": "LVCMOS 1.2, VCCIO = 1.2 V"
+    },
+    {
+      "standard": "LVDS",
+      "parameter": "VCCO",
+      "value": 2.5,
+      "raw": "LVDS, Emulated, VCCIO = 2.5 V"
+    },
+    {
+      "standard": "LVDS",
+      "parameter": "VCCO",
+      "value": 2.5,
+      "raw": "LVDS, VCCIO = 2.5 V"
+    },
+    {
+      "standard": "LVDS",
+      "parameter": "VCCO",
+      "value": 2.5,
+      "raw": "MLVDS, Emulated, VCCIO = 2.5 V"
+    },
+    {
+      "standard": "LVDS",
+      "parameter": "VCCO",
+      "value": 2.5,
+      "raw": "BLVDS, Emulated, VCCIO = 2.5 V"
+    },
+    {
+      "standard": "LVPECL33",
+      "parameter": "VCCO",
+      "value": 3.3,
+      "raw": "LVPECL, Emulated, VCCIO = 3.3 V"
+    },
+    {
+      "standard": "SSTL18",
+      "parameter": "VCCO",
+      "value": 18.0,
+      "raw": "SSTL_18 class I, II, VCCIO = 1.8 V"
+    },
+    {
+      "standard": "SSTL15",
+      "parameter": "VCCO",
+      "value": 15.0,
+      "raw": "SSTL_15 class I, II, VCCIO = 1.5 V"
+    },
+    {
+      "standard": "SSTL135",
+      "parameter": "VCCO",
+      "value": 135.0,
+      "raw": "SSTL_135 class I, II, VCCIO = 1.35 V"
+    }
+  ]
+}
