@@ -1,0 +1,917 @@
+{
+  "_schema": "devboard-reference/1.0",
+  "_board": "DK_START_GW5AT-LV60UG225 V1.1",
+  "_fpga": "GW5AT-LV60UG225",
+  "_date": "2024-06-17",
+  "page_map": {
+    "1": "Cover Page / Table of Contents",
+    "2": "System Diagram",
+    "3": "Power - 12V Input + DC Jack",
+    "4": "Power - Buck Regulators (12V→3.3V/1.5V/1.2V/2.1V)",
+    "5": "Power - LDO/Secondary (0.95V cores, 1.8V SerDes, current sense)",
+    "6": "FPGA Config + Clock + Signal Routing",
+    "7": "FPGA Power Pins + Decoupling",
+    "8": "DDR3 Memory",
+    "9": "DisplayPort (Type-C)",
+    "10": "MIPI + GPIO + Bank IO",
+    "11": "JTAG (FT232HQ USB Bridge)"
+  },
+  "power_topology": {
+    "regulators": [
+      {
+        "input": "12V",
+        "output": "3.3V",
+        "max_current": "6A",
+        "page": 4
+      },
+      {
+        "input": "12V",
+        "output": "1.5V",
+        "max_current": "6A",
+        "page": 4
+      },
+      {
+        "input": "12V",
+        "output": "1.2V",
+        "max_current": "6A",
+        "page": 4
+      },
+      {
+        "input": "12V",
+        "output": "2.1V",
+        "max_current": "6A",
+        "page": 4
+      },
+      {
+        "part": "TPS54620RHLR",
+        "page": 4
+      },
+      {
+        "part": "RT/CLK",
+        "page": 4
+      },
+      {
+        "part": "TPS51200DRCR",
+        "page": 4
+      },
+      {
+        "part": "TPS54620RHLR",
+        "page": 4
+      },
+      {
+        "part": "RT/CLK",
+        "page": 4
+      },
+      {
+        "part": "TPS54620RHLR",
+        "page": 4
+      },
+      {
+        "part": "RT/CLK",
+        "page": 4
+      },
+      {
+        "part": "TPS54620RHLR",
+        "page": 4
+      },
+      {
+        "part": "RT/CLK",
+        "page": 4
+      },
+      {
+        "input": "1.2V",
+        "output": "0.95V",
+        "max_current": "3A",
+        "page": 5
+      },
+      {
+        "input": "1.2V",
+        "output": "0.95V",
+        "max_current": "3A",
+        "page": 5
+      },
+      {
+        "input": "1.2V",
+        "output": "0.95V",
+        "max_current": "3A",
+        "page": 5
+      },
+      {
+        "input": "2.1V",
+        "output": "1.8V",
+        "max_current": "3A",
+        "page": 5
+      },
+      {
+        "part": "MPZ1608S101A",
+        "page": 5
+      },
+      {
+        "part": "TPS7A8400ARGRR",
+        "page": 5
+      },
+      {
+        "part": "TPS7A8400ARGRR",
+        "page": 5
+      },
+      {
+        "part": "TPS7A8400ARGRR",
+        "page": 5
+      },
+      {
+        "part": "MPZ1608S101A",
+        "page": 5
+      },
+      {
+        "part": "TPS7A8400ARGRR",
+        "page": 5
+      }
+    ],
+    "power_rails": {
+      "VCC3P3": {
+        "name": "VCC3P3",
+        "pages": [
+          4,
+          5
+        ]
+      },
+      "VCC1P5": {
+        "name": "VCC1P5",
+        "pages": [
+          4,
+          7
+        ]
+      },
+      "VCC1P2": {
+        "name": "VCC1P2",
+        "pages": [
+          4,
+          5,
+          7
+        ]
+      },
+      "VCC2P1": {
+        "name": "VCC2P1",
+        "pages": [
+          4,
+          5
+        ]
+      },
+      "V3P3:": {
+        "name": "V3P3:",
+        "pages": [
+          5
+        ]
+      },
+      "V1P8:": {
+        "name": "V1P8:",
+        "pages": [
+          5
+        ]
+      },
+      "VDD1P8_Q:": {
+        "name": "VDD1P8_Q:",
+        "pages": [
+          5
+        ]
+      },
+      "VDDD_Q:": {
+        "name": "VDDD_Q:",
+        "pages": [
+          5
+        ]
+      },
+      "VDDA_Q:": {
+        "name": "VDDA_Q:",
+        "pages": [
+          5
+        ]
+      },
+      "V0P95-1": {
+        "name": "V0P95-1",
+        "pages": [
+          5
+        ]
+      },
+      "VDD0P95_M": {
+        "name": "VDD0P95_M",
+        "pages": [
+          5,
+          7
+        ]
+      },
+      "VDDD_Q": {
+        "name": "VDDD_Q",
+        "pages": [
+          5,
+          7
+        ]
+      },
+      "V0P95-3": {
+        "name": "V0P95-3",
+        "pages": [
+          5
+        ]
+      },
+      "VDDA_Q": {
+        "name": "VDDA_Q",
+        "pages": [
+          5,
+          7
+        ]
+      },
+      "V0P95-2": {
+        "name": "V0P95-2",
+        "pages": [
+          5
+        ]
+      },
+      "VCC1P8": {
+        "name": "VCC1P8",
+        "pages": [
+          5
+        ]
+      },
+      "VDDHA_Q": {
+        "name": "VDDHA_Q",
+        "pages": [
+          5,
+          7
+        ]
+      },
+      "V1P8": {
+        "name": "V1P8",
+        "pages": [
+          5,
+          7
+        ]
+      },
+      "V3P3": {
+        "name": "V3P3",
+        "pages": [
+          5,
+          7
+        ]
+      },
+      "VCC1P8_Q": {
+        "name": "VCC1P8_Q",
+        "pages": [
+          5
+        ]
+      },
+      "VDDH_ADC": {
+        "name": "VDDH_ADC",
+        "pages": [
+          7
+        ]
+      },
+      "VDD18": {
+        "name": "VDD18",
+        "pages": [
+          7
+        ]
+      },
+      "VDD12_M": {
+        "name": "VDD12_M",
+        "pages": [
+          7
+        ]
+      }
+    },
+    "decoupling_caps_per_page": {
+      "4": 36,
+      "5": 32,
+      "7": 45
+    }
+  },
+  "fpga_power_pin_assignments": [
+    {
+      "pin": "G8",
+      "function": "VCC/VCCC",
+      "voltage": "0.9V"
+    },
+    {
+      "pin": "C86",
+      "function": "VSS",
+      "voltage": "0.9V"
+    },
+    {
+      "pin": "A15",
+      "function": "VSS",
+      "voltage": "0.9V"
+    },
+    {
+      "pin": "H9",
+      "function": "VCC/VCCC",
+      "voltage": "0.9V"
+    },
+    {
+      "pin": "H14",
+      "function": "VSS",
+      "voltage": "0.9V"
+    },
+    {
+      "pin": "B10",
+      "function": "VSS",
+      "voltage": "0.9V"
+    },
+    {
+      "pin": "J10",
+      "function": "VCC/VCCC",
+      "voltage": "0.9V"
+    },
+    {
+      "pin": "B6",
+      "function": "VSS",
+      "voltage": "0.9V"
+    },
+    {
+      "pin": "K7",
+      "function": "VCC/VCCC",
+      "voltage": "0.9V"
+    },
+    {
+      "pin": "C13",
+      "function": "VSS",
+      "voltage": "0.9V"
+    },
+    {
+      "pin": "F9",
+      "function": "VCC/VCCC",
+      "voltage": "0.9V"
+    },
+    {
+      "pin": "J12",
+      "function": "VSS",
+      "voltage": "0.9V"
+    },
+    {
+      "pin": "C3",
+      "function": "VSS",
+      "voltage": "0.9V"
+    },
+    {
+      "pin": "H7",
+      "function": "VCC/VCCC",
+      "voltage": "0.9V"
+    },
+    {
+      "pin": "M14",
+      "function": "VSS",
+      "voltage": "0.9V"
+    },
+    {
+      "pin": "E11",
+      "function": "VSS",
+      "voltage": "0.9V"
+    },
+    {
+      "pin": "F14",
+      "function": "VSS",
+      "voltage": "0.9V"
+    },
+    {
+      "pin": "P12",
+      "function": "VSS",
+      "voltage": "3.3V"
+    },
+    {
+      "pin": "F2",
+      "function": "VSS",
+      "voltage": "3.3V"
+    },
+    {
+      "pin": "G10",
+      "function": "VCCX",
+      "voltage": "3.3V"
+    },
+    {
+      "pin": "P8",
+      "function": "VSS",
+      "voltage": "3.3V"
+    },
+    {
+      "pin": "F6",
+      "function": "VSS",
+      "voltage": "3.3V"
+    },
+    {
+      "pin": "J6",
+      "function": "VCCX",
+      "voltage": "0.9V"
+    },
+    {
+      "pin": "G7",
+      "function": "VSS",
+      "voltage": "0.9V"
+    },
+    {
+      "pin": "K9",
+      "function": "VCCX",
+      "voltage": "0.9V"
+    },
+    {
+      "pin": "G9",
+      "function": "VSS",
+      "voltage": "0.9V"
+    },
+    {
+      "pin": "M12",
+      "function": "VCCX",
+      "voltage": "0.9V"
+    },
+    {
+      "pin": "M7",
+      "function": "VSS",
+      "voltage": "0.9V"
+    },
+    {
+      "pin": "H8",
+      "function": "VSS",
+      "voltage": "0.9V"
+    },
+    {
+      "pin": "F7",
+      "function": "VCCX",
+      "voltage": "0.9V"
+    },
+    {
+      "pin": "J7",
+      "function": "VSS",
+      "voltage": "0.9V"
+    },
+    {
+      "pin": "C97",
+      "function": "VSS",
+      "voltage": "0.9V"
+    },
+    {
+      "pin": "J9",
+      "function": "VSS",
+      "voltage": "0.9V"
+    },
+    {
+      "pin": "G6",
+      "function": "VCCIO10/11",
+      "voltage": "1.2V"
+    },
+    {
+      "pin": "M2",
+      "function": "VSS",
+      "voltage": "1.2V"
+    },
+    {
+      "pin": "K14",
+      "function": "VSS",
+      "voltage": "1.2V"
+    },
+    {
+      "pin": "D2",
+      "function": "MIPI_VDD12",
+      "voltage": "0.9V"
+    },
+    {
+      "pin": "K2",
+      "function": "VSS",
+      "voltage": "0.9V"
+    },
+    {
+      "pin": "H2",
+      "function": "M0_VDDA",
+      "voltage": "1.8V"
+    },
+    {
+      "pin": "K6",
+      "function": "VSS",
+      "voltage": "1.8V"
+    },
+    {
+      "pin": "G4",
+      "function": "M0_VDDA",
+      "voltage": "1.8V"
+    },
+    {
+      "pin": "N13",
+      "function": "VSS",
+      "voltage": "1.8V"
+    },
+    {
+      "pin": "L11",
+      "function": "VSS",
+      "voltage": "1.8V"
+    },
+    {
+      "pin": "N3",
+      "function": "VSS",
+      "voltage": "1.8V"
+    },
+    {
+      "pin": "D7",
+      "function": "VQPS",
+      "voltage": "1.8V"
+    },
+    {
+      "pin": "P10",
+      "function": "VSS",
+      "voltage": "1.8V"
+    },
+    {
+      "pin": "D9",
+      "function": "Q0_VDDHA",
+      "voltage": "1.8V"
+    },
+    {
+      "pin": "P6",
+      "function": "VSS",
+      "voltage": "1.8V"
+    },
+    {
+      "pin": "B4",
+      "function": "Q0_VDDHA",
+      "voltage": "0.9V"
+    },
+    {
+      "pin": "R1",
+      "function": "VSS",
+      "voltage": "0.9V"
+    },
+    {
+      "pin": "A6",
+      "function": "Q0_VDDD",
+      "voltage": "0.9V"
+    },
+    {
+      "pin": "R15",
+      "function": "VSS",
+      "voltage": "0.9V"
+    },
+    {
+      "pin": "A10",
+      "function": "Q0_VDDD",
+      "voltage": "0.9V"
+    },
+    {
+      "pin": "A2",
+      "function": "VSS",
+      "voltage": "0.9V"
+    },
+    {
+      "pin": "B8",
+      "function": "Q0_VDDD",
+      "voltage": "0.9V"
+    },
+    {
+      "pin": "B2",
+      "function": "VSS",
+      "voltage": "0.9V"
+    },
+    {
+      "pin": "D5",
+      "function": "Q0_VDDA",
+      "voltage": "0.9V"
+    },
+    {
+      "pin": "A4",
+      "function": "VSS",
+      "voltage": "0.9V"
+    },
+    {
+      "pin": "D11",
+      "function": "Q0_VDDA",
+      "voltage": "0.9V"
+    },
+    {
+      "pin": "D3",
+      "function": "VSS",
+      "voltage": "0.9V"
+    },
+    {
+      "pin": "E4",
+      "function": "VSS",
+      "voltage": "0.9V"
+    },
+    {
+      "pin": "A8",
+      "function": "VSS",
+      "voltage": "0.9V"
+    },
+    {
+      "pin": "C9",
+      "function": "VSS",
+      "voltage": "0.9V"
+    },
+    {
+      "pin": "C11",
+      "function": "VSS",
+      "voltage": "0.9V"
+    },
+    {
+      "pin": "A12",
+      "function": "VSS",
+      "voltage": "0.9V"
+    },
+    {
+      "pin": "C7",
+      "function": "VSS",
+      "voltage": "0.9V"
+    },
+    {
+      "pin": "C5",
+      "function": "VSS",
+      "voltage": "0.9V"
+    }
+  ],
+  "fpga_config": {
+    "config_signals": [
+      "F_CLK_200M_N",
+      "F_CLK_200M_P",
+      "F_CLK_50M",
+      "F_DONE",
+      "F_GPIO0",
+      "F_GPIO1",
+      "F_GPIO2",
+      "F_GPIO3",
+      "F_KEY",
+      "F_MODE0",
+      "F_MODE1",
+      "F_READY",
+      "F_RECONFIG_N",
+      "F_TCK",
+      "F_TDI",
+      "F_TDO",
+      "F_TMS",
+      "MSPI_CLK",
+      "MSPI_CS_N",
+      "MSPI_HOLD",
+      "MSPI_MISO",
+      "MSPI_MOSI",
+      "MSPI_WP"
+    ],
+    "flash_related": [
+      "CLK",
+      "CLKn",
+      "CLKp",
+      "F_CLK_200M_N",
+      "F_CLK_200M_P",
+      "F_CLK_50M",
+      "Flash",
+      "IOL45A/GCLKT_18/LVDS/X16",
+      "IOL45B/GCLKC_18/LVDS/X16",
+      "IOL48A/GCLKT_17/LVDS/X16",
+      "IOL48B/GCLKC_17/LVDS/X16",
+      "IOL50A/GCLKT_16/LVDS/X16",
+      "IOL50B/GCLKC_16/LVDS/X16",
+      "MSPI_CLK",
+      "Q0  CLK  135MHz",
+      "Q0 CLK 200MHz",
+      "Q0_REFCLKM_0",
+      "Q0_REFCLKM_1",
+      "Q0_REFCLKP_0",
+      "Q0_REFCLKP_1"
+    ]
+  },
+  "interfaces": {
+    "DDR3": {
+      "page": 8,
+      "components": [
+        "DDR3",
+        "DDR3  W632GU6NB-11",
+        "DDR3_A0",
+        "DDR3_A1",
+        "DDR3_A10",
+        "DDR3_A11",
+        "DDR3_A12",
+        "DDR3_A13",
+        "DDR3_A2",
+        "DDR3_A3",
+        "DDR3_A4",
+        "DDR3_A5",
+        "DDR3_A6",
+        "DDR3_A7",
+        "DDR3_A8",
+        "DDR3_A9",
+        "DDR3_BA0",
+        "DDR3_BA1",
+        "DDR3_BA2",
+        "DDR3_CAS#",
+        "DDR3_CKE",
+        "DDR3_CLK0_N",
+        "DDR3_CLK0_P",
+        "DDR3_CS#",
+        "DDR3_DQ0",
+        "DDR3_DQ1",
+        "DDR3_DQ10",
+        "DDR3_DQ11",
+        "DDR3_DQ12",
+        "DDR3_DQ13",
+        "DDR3_DQ14",
+        "DDR3_DQ15",
+        "DDR3_DQ2",
+        "DDR3_DQ3",
+        "DDR3_DQ4",
+        "DDR3_DQ5",
+        "DDR3_DQ6",
+        "DDR3_DQ7",
+        "DDR3_DQ8",
+        "DDR3_DQ9",
+        "DDR3_LDM0",
+        "DDR3_LDQS0_N",
+        "DDR3_LDQS0_P",
+        "DDR3_ODT",
+        "DDR3_RAS#",
+        "DDR3_RESET",
+        "DDR3_UDM0",
+        "DDR3_UDQS0_N",
+        "DDR3_UDQS0_P",
+        "DDR3_WE#"
+      ],
+      "power_rails": [
+        "VCC1P5",
+        "DDRVTT",
+        "VTTREF"
+      ]
+    },
+    "DisplayPort": {
+      "page": 9,
+      "signals": [
+        "DP_HPD_T",
+        "DP_PWR",
+        "DP_RX0_DN",
+        "DP_RX0_DP",
+        "DP_RX0_N",
+        "DP_RX0_P",
+        "DP_RX1_DN",
+        "DP_RX1_DP",
+        "DP_RX1_N",
+        "DP_RX1_P",
+        "DP_RX2_DN",
+        "DP_RX2_DP",
+        "DP_RX2_N",
+        "DP_RX2_P",
+        "DP_RX3_DN",
+        "DP_RX3_DP",
+        "DP_RX3_N",
+        "DP_RX3_P",
+        "DP_RX_AUX_N",
+        "DP_RX_AUX_P",
+        "DP_RX_CC2",
+        "DP_RX_HOT_PLUG",
+        "DP_RX_HPD",
+        "DP_RX_N",
+        "DP_RX_P",
+        "DP_TX0_DN",
+        "DP_TX0_DP",
+        "DP_TX0_N",
+        "DP_TX0_P",
+        "DP_TX1_DN",
+        "DP_TX1_DP",
+        "DP_TX1_N",
+        "DP_TX1_P",
+        "DP_TX2_DN",
+        "DP_TX2_DP",
+        "DP_TX2_N",
+        "DP_TX2_P",
+        "DP_TX3_DN",
+        "DP_TX3_DP",
+        "DP_TX3_N",
+        "DP_TX3_P",
+        "DP_TX_AUX_N",
+        "DP_TX_AUX_P",
+        "DP_TX_HOT_PLUG",
+        "DP_TX_N",
+        "DP_TX_P",
+        "RE_DP_PWR"
+      ],
+      "components": [
+        "FDL01-FSB300K6M",
+        "RClamp0524P",
+        "TPESDR0524PMUTAG",
+        "U16",
+        "U17",
+        "U18",
+        "U19",
+        "U20",
+        "U21"
+      ],
+      "connector": "Type-C"
+    },
+    "MIPI": {
+      "page": 10,
+      "signals": [
+        "CPHY",
+        "CPHY_A0",
+        "CPHY_A1",
+        "CPHY_A2",
+        "CPHY_B0",
+        "CPHY_B1",
+        "CPHY_B2",
+        "CPHY_C0",
+        "CPHY_C1",
+        "CPHY_C2",
+        "CPHY_CLK_IN",
+        "CPHY_FSIN",
+        "CPHY_RST",
+        "CPHY_SCL",
+        "CPHY_SDA",
+        "CPHY_VSYNC",
+        "DPHY",
+        "DPHY-TX1",
+        "DPHY-TX2",
+        "DPHY_TX1_CKN",
+        "DPHY_TX1_CKP",
+        "DPHY_TX1_D0N",
+        "DPHY_TX1_D0P",
+        "DPHY_TX1_D1N",
+        "DPHY_TX1_D1P",
+        "DPHY_TX1_D2N",
+        "DPHY_TX1_D2P",
+        "DPHY_TX1_D3N",
+        "DPHY_TX1_D3P",
+        "DPHY_TX1_D4N",
+        "DPHY_TX1_D4P",
+        "DPHY_TX1_D5N",
+        "DPHY_TX1_D5P",
+        "DPHY_TX1_D6N",
+        "DPHY_TX1_D6P",
+        "DPHY_TX1_D7N",
+        "DPHY_TX1_D7P",
+        "DPHY_TX1_RST",
+        "DPHY_TX1_SCK",
+        "DPHY_TX1_SDA",
+        "DPHY_TX2_CKN",
+        "DPHY_TX2_CKP",
+        "DPHY_TX2_D0N",
+        "DPHY_TX2_D0P",
+        "DPHY_TX2_D1N",
+        "DPHY_TX2_D1P",
+        "DPHY_TX2_D2N",
+        "DPHY_TX2_D2P",
+        "DPHY_TX2_D3N",
+        "DPHY_TX2_D3P",
+        "DPHY_TX2_RST",
+        "DPHY_TX2_SCK",
+        "DPHY_TX2_SDA",
+        "MIPI"
+      ]
+    },
+    "JTAG": {
+      "page": 11,
+      "components": [
+        "FT232HQ",
+        "JTAG",
+        "TPD2E001DRLR",
+        "USB",
+        "USB to JTAG",
+        "USB_D+",
+        "USB_D-",
+        "USB_VCC5"
+      ],
+      "usb_bridge": "FT232HQ"
+    }
+  },
+  "decoupling_strategy": {
+    "VCC": [
+      "100uF",
+      "4.7uF",
+      "0.1uF",
+      "0.1uF",
+      "0.1uF",
+      "0.1uF",
+      "0.1uF",
+      "0.1uF"
+    ],
+    "VDD18": [
+      "100uF",
+      "4.7uF",
+      "0.1uF",
+      "0.1uF",
+      "0.1uF",
+      "100uF",
+      "4.7uF",
+      "0.1uF",
+      "0.1uF",
+      "0.1uF",
+      "100uF",
+      "4.7uF",
+      "0.1uF",
+      "0.1uF",
+      "0.1uF",
+      "0.1uF",
+      "10uF",
+      "0.1uF",
+      "0.1uF",
+      "0.1uF",
+      "0.1uF",
+      "0.1uF",
+      "0.1uF",
+      "0.1uF",
+      "0.1uF",
+      "0.1uF",
+      "0.1uF",
+      "0.1uF",
+      "0.1uF",
+      "0.1uF",
+      "0.1uF"
+    ]
+  }
+}
