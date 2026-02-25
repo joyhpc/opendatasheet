@@ -17,7 +17,19 @@ import time
 import math
 import hashlib
 import fcntl
+import signal
+import concurrent.futures
+import httpx
 from pathlib import Path
+
+
+class GeminiTimeout(Exception):
+    """Raised when a Gemini API call exceeds the allowed time."""
+    pass
+
+
+def _timeout_handler(signum, frame):
+    raise GeminiTimeout("Gemini API call timed out after 180s")
 from dataclasses import dataclass, field, asdict
 from typing import Optional, List, Union
 
@@ -184,7 +196,21 @@ DATA_DIR = Path(__file__).parent / "data" / "raw" / "datasheet_PDF"
 OUTPUT_DIR = Path(__file__).parent / "data" / "extracted_v2"
 DPI = 200  # 渲染分辨率
 
-gemini_client = genai.Client(api_key=GEMINI_API_KEY)
+_httpx_client = httpx.Client(
+    timeout=httpx.Timeout(connect=30.0, read=120.0, write=60.0, pool=30.0)
+)
+gemini_client = genai.Client(
+    api_key=GEMINI_API_KEY,
+    http_options={"httpx_client": _httpx_client, "timeout": 300_000},
+)
+
+API_TIMEOUT = 180  # seconds — hard kill via thread timeout
+
+def gemini_generate(model, contents, config=None):
+    """Direct call to gemini_client.models.generate_content — httpx timeout handles hangs."""
+    return gemini_client.models.generate_content(
+        model=model, contents=contents, config=config or {}
+    )
 
 # ============================================
 # L0: PyMuPDF 页面分类 (复用 v0.1)
@@ -370,7 +396,7 @@ def extract_with_vision(images: list[bytes], pdf_name: str, max_retries: int = 2
 
     for attempt in range(max_retries + 1):
         try:
-            response = gemini_client.models.generate_content(
+            response = gemini_generate(
                 model=GEMINI_MODEL,
                 contents=contents,
                 config={"temperature": 0.1},
@@ -398,7 +424,7 @@ def extract_with_vision(images: list[bytes], pdf_name: str, max_retries: int = 2
                 continue
             return {"error": f"JSON parse failed: {str(e)}", "raw": raw[:500] if 'raw' in dir() else ""}
         except Exception as e:
-            if attempt < max_retries and ("503" in str(e) or "429" in str(e) or "504" in str(e)):
+            if attempt < max_retries and ("503" in str(e) or "429" in str(e) or "504" in str(e) or "timeout" in str(e).lower() or "ReadTimeout" in str(type(e).__name__) or "ConnectTimeout" in str(type(e).__name__)):
                 time.sleep(10)
                 continue
             return {"error": str(e)}
@@ -526,7 +552,7 @@ def extract_fpga_pins_with_vision(images: list[bytes], pdf_name: str, max_retrie
 
     for attempt in range(max_retries + 1):
         try:
-            response = gemini_client.models.generate_content(
+            response = gemini_generate(
                 model=GEMINI_MODEL,
                 contents=contents,
                 config={"temperature": 0.1},
@@ -559,7 +585,7 @@ def extract_fpga_pins_with_vision(images: list[bytes], pdf_name: str, max_retrie
                 continue
             return {"error": f"JSON parse failed: {str(e)}", "raw": raw[:500] if 'raw' in dir() else ""}
         except Exception as e:
-            if attempt < max_retries and ("503" in str(e) or "429" in str(e) or "504" in str(e)):
+            if attempt < max_retries and ("503" in str(e) or "429" in str(e) or "504" in str(e) or "timeout" in str(e).lower() or "ReadTimeout" in str(type(e).__name__) or "ConnectTimeout" in str(type(e).__name__)):
                 time.sleep(10)
                 continue
             return {"error": str(e)}
@@ -573,7 +599,7 @@ def extract_pins_with_vision(images: list[bytes], pdf_name: str, max_retries: in
 
     for attempt in range(max_retries + 1):
         try:
-            response = gemini_client.models.generate_content(
+            response = gemini_generate(
                 model=GEMINI_MODEL,
                 contents=contents,
                 config={"temperature": 0.1},
@@ -610,7 +636,7 @@ def extract_pins_with_vision(images: list[bytes], pdf_name: str, max_retries: in
                 continue
             return {"error": f"JSON parse failed: {str(e)}", "raw": raw[:500] if 'raw' in dir() else ""}
         except Exception as e:
-            if attempt < max_retries and ("503" in str(e) or "429" in str(e) or "504" in str(e)):
+            if attempt < max_retries and ("503" in str(e) or "429" in str(e) or "504" in str(e) or "timeout" in str(e).lower() or "ReadTimeout" in str(type(e).__name__) or "ConnectTimeout" in str(type(e).__name__)):
                 time.sleep(10)
                 continue
             return {"error": str(e)}

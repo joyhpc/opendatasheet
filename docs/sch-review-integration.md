@@ -7,7 +7,7 @@ OpenDatasheet 项目从 PDF datasheet 中提取结构化参数，输出为 `data
 **仓库**: https://github.com/joyhpc/opendatasheet
 **导出目录**: `data/sch_review_export/`
 **Schema**: `sch-review-device/1.0`
-**当前覆盖**: 26 普通 IC + 4 FPGA 封装 = 30 个文件
+**当前覆盖**: 54 普通 IC + 31 FPGA 封装 = 85 个文件 (批处理进行中，目标 346 个 PDF)
 
 ---
 
