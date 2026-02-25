@@ -552,6 +552,214 @@ def t7_3():
         assert_gt(len(abs_max), 5, f"{fname} abs_max count")
 
 
+# ─── T8: Lattice Internal Deep Validation ──────────────────────────
+
+LATTICE_PINOUTS = {
+    "lattice_ecp5u-25_cabga381.json":  {"device": "ECP5U-25",  "package": "CABGA381",  "total_pins": 381, "vendor": "Lattice"},
+    "lattice_ecp5u-25_cabga256.json":  {"device": "ECP5U-25",  "package": "CABGA256",  "total_pins": 256, "vendor": "Lattice"},
+    "lattice_ecp5u-25_tqfp144.json":   {"device": "ECP5U-25",  "package": "TQFP144",   "total_pins": 144, "vendor": "Lattice"},
+    "lattice_ecp5u-25_csfbga285.json": {"device": "ECP5U-25",  "package": "CSFBGA285", "total_pins": 285, "vendor": "Lattice"},
+    "lattice_ecp5u-45_cabga554.json":  {"device": "ECP5U-45",  "package": "CABGA554",  "total_pins": 554, "vendor": "Lattice"},
+    "lattice_ecp5u-85_cabga756.json":  {"device": "ECP5U-85",  "package": "CABGA756",  "total_pins": 756, "vendor": "Lattice"},
+    "lattice_lifcl-40_cabga400.json":  {"device": "LIFCL-40",  "package": "CABGA400",  "total_pins": 400, "vendor": "Lattice"},
+    "lattice_lifcl-40_csfbga121.json": {"device": "LIFCL-40",  "package": "CSFBGA121", "total_pins": 121, "vendor": "Lattice"},
+    "lattice_lifcl-40_qfn72.json":     {"device": "LIFCL-40",  "package": "QFN72",     "total_pins": 90,  "vendor": "Lattice"},
+}
+
+
+@test("T8.1 Lattice pinout source files exist and pin counts match")
+def t8_1():
+    for fname, exp in LATTICE_PINOUTS.items():
+        path = FPGA_PINOUT_DIR / fname
+        assert_true(path.exists(), f"Missing: {fname}")
+        with open(path) as f:
+            d = json.load(f)
+        assert_eq(len(d["pins"]), exp["total_pins"], f"{fname} pins[]")
+        assert_eq(d["total_pins"], exp["total_pins"], f"{fname} total_pins")
+        assert_eq(d["device"], exp["device"], f"{fname} device")
+        assert_eq(d["package"], exp["package"], f"{fname} package")
+
+
+@test("T8.2 Lattice pinout lookup bidirectional consistency")
+def t8_2():
+    for fname in LATTICE_PINOUTS:
+        with open(FPGA_PINOUT_DIR / fname) as f:
+            d = json.load(f)
+        lookup = d.get("lookup", {})
+        p2n = lookup.get("pin_to_name", lookup.get("by_pin", {}))
+        for pin in d["pins"]:
+            pid = pin["pin"]
+            assert_in(pid, p2n, f"{fname} pin {pid} missing from lookup")
+
+
+@test("T8.3 Lattice diff pairs reference valid pins")
+def t8_3():
+    for fname in LATTICE_PINOUTS:
+        with open(FPGA_PINOUT_DIR / fname) as f:
+            d = json.load(f)
+        pin_ids = {p["pin"] for p in d["pins"]}
+        for i, dp in enumerate(d.get("diff_pairs", [])):
+            p_pin = dp.get("p_pin", dp.get("true_pin", ""))
+            n_pin = dp.get("n_pin", dp.get("comp_pin", ""))
+            if p_pin:
+                assert_in(p_pin, pin_ids, f"{fname} dp[{i}].p_pin={p_pin}")
+            if n_pin:
+                assert_in(n_pin, pin_ids, f"{fname} dp[{i}].n_pin={n_pin}")
+
+
+@test("T8.4 Lattice exports have all 3 vendors in same schema")
+def t8_4():
+    amd = json.load(open(EXPORT_DIR / "XCKU3P_FFVA676.json"))
+    gowin = json.load(open(EXPORT_DIR / "GW5AT-60_PG484A.json"))
+    lattice = json.load(open(EXPORT_DIR / "ECP5U-25_CABGA381.json"))
+    assert_eq(amd["_schema"], lattice["_schema"], "AMD vs Lattice schema")
+    assert_eq(gowin["_schema"], lattice["_schema"], "Gowin vs Lattice schema")
+    assert_eq(lattice["_type"], "fpga", "Lattice _type")
+    assert_eq(lattice["manufacturer"], "Lattice", "Lattice manufacturer")
+
+
+@test("T8.5 Lattice exports have same core keys as AMD/Gowin")
+def t8_5():
+    core_keys = {"_schema", "_type", "mpn", "manufacturer", "category", "package",
+                 "supply_specs", "io_standard_specs", "power_rails", "banks",
+                 "diff_pairs", "drc_rules", "pins", "lookup", "summary"}
+    for fname in ["ECP5U-25_CABGA381.json", "LIFCL-40_CABGA400.json"]:
+        with open(EXPORT_DIR / fname) as f:
+            d = json.load(f)
+        missing = core_keys - set(d.keys())
+        assert_true(not missing, f"{fname} missing keys: {missing}")
+
+
+@test("T8.6 Lattice exports pin functions all valid")
+def t8_6():
+    import glob
+    for f in sorted(glob.glob(str(EXPORT_DIR / "ECP5U-*.json")) + glob.glob(str(EXPORT_DIR / "LIFCL-*.json"))):
+        fname = Path(f).name
+        with open(f) as fp:
+            d = json.load(fp)
+        for i, pin in enumerate(d.get("pins", [])):
+            func = pin.get("function", "")
+            assert_in(func, VALID_FUNCTIONS, f"{fname} pin[{i}] ({pin.get('name','?')}) function={func}")
+
+
+@test("T8.7 Lattice exports have power + ground + IO pins")
+def t8_7():
+    import glob
+    for f in sorted(glob.glob(str(EXPORT_DIR / "ECP5U-*.json")) + glob.glob(str(EXPORT_DIR / "LIFCL-*.json"))):
+        fname = Path(f).name
+        with open(f) as fp:
+            d = json.load(fp)
+        funcs = Counter(p["function"] for p in d["pins"])
+        assert_gt(funcs.get("POWER", 0), 0, f"{fname} no POWER pins")
+        assert_gt(funcs.get("IO", 0), 0, f"{fname} no IO pins")
+
+
+@test("T8.8 Lattice diff pair pins exist in export pin list")
+def t8_8():
+    import glob
+    for f in sorted(glob.glob(str(EXPORT_DIR / "ECP5U-*.json")) + glob.glob(str(EXPORT_DIR / "LIFCL-*.json"))):
+        fname = Path(f).name
+        with open(f) as fp:
+            d = json.load(fp)
+        pin_ids = {p["pin"] for p in d["pins"]}
+        for i, dp in enumerate(d.get("diff_pairs", [])):
+            if dp["p_pin"]:
+                assert_in(dp["p_pin"], pin_ids, f"{fname} dp[{i}].p_pin={dp['p_pin']}")
+            if dp["n_pin"]:
+                assert_in(dp["n_pin"], pin_ids, f"{fname} dp[{i}].n_pin={dp['n_pin']}")
+
+
+@test("T8.9 Lattice banks have required fields")
+def t8_9():
+    import glob
+    for f in sorted(glob.glob(str(EXPORT_DIR / "ECP5U-*.json")) + glob.glob(str(EXPORT_DIR / "LIFCL-*.json"))):
+        fname = Path(f).name
+        with open(f) as fp:
+            d = json.load(fp)
+        for bank_id, bank in d.get("banks", {}).items():
+            assert_true("bank" in bank, f"{fname} banks.{bank_id} missing 'bank'")
+            assert_true("total_pins" in bank, f"{fname} banks.{bank_id} missing 'total_pins'")
+
+
+@test("T8.10 Lattice supply_specs have no min > max violations")
+def t8_10():
+    import glob
+    for f in sorted(glob.glob(str(EXPORT_DIR / "ECP5U-*.json")) + glob.glob(str(EXPORT_DIR / "LIFCL-*.json"))):
+        fname = Path(f).name
+        with open(f) as fp:
+            d = json.load(fp)
+        for key, spec in d.get("supply_specs", {}).items():
+            mn = spec.get("min")
+            mx = spec.get("max")
+            if mn is not None and mx is not None:
+                assert_true(mn <= mx, f"{fname} supply_specs.{key}: min={mn} > max={mx}")
+
+
+@test("T8.11 ECP5 cross-package IO monotonicity (larger pkg >= smaller pkg IO count)")
+def t8_11():
+    # ECP5U-25: CABGA381 >= CABGA256 >= TQFP144
+    pkg_order = ["ECP5U-25_CABGA381.json", "ECP5U-25_CABGA256.json", "ECP5U-25_TQFP144.json"]
+    io_counts = []
+    for fname in pkg_order:
+        with open(EXPORT_DIR / fname) as f:
+            d = json.load(f)
+        io_count = sum(1 for p in d["pins"] if p["function"] == "IO")
+        io_counts.append((fname, io_count))
+    for i in range(len(io_counts) - 1):
+        assert_true(io_counts[i][1] >= io_counts[i+1][1],
+                    f"IO monotonicity: {io_counts[i][0]}({io_counts[i][1]}) < {io_counts[i+1][0]}({io_counts[i+1][1]})")
+
+
+@test("T8.12 Lattice DRC rules have valid severities")
+def t8_12():
+    import glob
+    for f in sorted(glob.glob(str(EXPORT_DIR / "ECP5U-*.json")) + glob.glob(str(EXPORT_DIR / "LIFCL-*.json"))):
+        fname = Path(f).name
+        with open(f) as fp:
+            d = json.load(fp)
+        for rule_name, rule in d.get("drc_rules", {}).items():
+            sev = rule.get("severity", "")
+            assert_in(sev, VALID_SEVERITIES, f"{fname} drc_rules.{rule_name}.severity={sev}")
+
+
+@test("T8.13 Lattice must_connect is boolean")
+def t8_13():
+    import glob
+    for f in sorted(glob.glob(str(EXPORT_DIR / "ECP5U-*.json")) + glob.glob(str(EXPORT_DIR / "LIFCL-*.json"))):
+        fname = Path(f).name
+        with open(f) as fp:
+            d = json.load(fp)
+        for i, pin in enumerate(d.get("pins", [])):
+            drc = pin.get("drc")
+            if drc and "must_connect" in drc:
+                mc = drc["must_connect"]
+                assert_true(isinstance(mc, bool), f"{fname} pin[{i}] must_connect={mc} type={type(mc).__name__}")
+
+
+@test("T8.14 All 18 Lattice exports exist")
+def t8_14():
+    expected = [
+        "ECP5U-25_CABGA256.json", "ECP5U-25_CABGA381.json", "ECP5U-25_CSFBGA285.json", "ECP5U-25_TQFP144.json",
+        "ECP5U-45_CABGA256.json", "ECP5U-45_CABGA381.json", "ECP5U-45_CABGA554.json", "ECP5U-45_CSFBGA285.json", "ECP5U-45_TQFP144.json",
+        "ECP5U-85_CABGA381.json", "ECP5U-85_CABGA554.json", "ECP5U-85_CABGA756.json", "ECP5U-85_CSFBGA285.json",
+        "LIFCL-40_CABGA256.json", "LIFCL-40_CABGA400.json", "LIFCL-40_CSBGA289.json", "LIFCL-40_CSFBGA121.json", "LIFCL-40_QFN72.json",
+    ]
+    for fname in expected:
+        assert_true((EXPORT_DIR / fname).exists(), f"Missing: {fname}")
+
+
+@test("T8.15 Lattice lookup completeness — every pin in by_pin")
+def t8_15():
+    import glob
+    for f in sorted(glob.glob(str(EXPORT_DIR / "ECP5U-*.json")) + glob.glob(str(EXPORT_DIR / "LIFCL-*.json"))):
+        fname = Path(f).name
+        with open(f) as fp:
+            d = json.load(fp)
+        by_pin = d.get("lookup", {}).get("by_pin", {})
+        for pin in d["pins"]:
+            assert_in(pin["pin"], by_pin, f"{fname} pin {pin['pin']} missing from lookup")
+
+
 # ─── Runner ─────────────────────────────────────────────────────────
 
 def main():
