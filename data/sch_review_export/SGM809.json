@@ -1,0 +1,40 @@
+{
+  "_schema": "sch-review-device/1.0",
+  "_type": "normal_ic",
+  "_source": "LLM_KNOWLEDGE + pstchip.dat pin names | needs verification from datasheet",
+  "_confidence": "MEDIUM — SGM809 is STM809 compatible, threshold depends on suffix (XXN3L)",
+  "mpn": "SGM809",
+  "manufacturer": "SGMICRO",
+  "category": "Voltage Supervisor",
+  "description": "Microprocessor Supervisory Circuit with Open-Drain Reset Output",
+
+  "packages": {
+    "SOT-23": {
+      "pin_count": 3,
+      "pins": {
+        "1": {"name": "VSS",  "direction": "POWER_IN",  "signal_type": "POWER",   "description": "Ground.", "unused_treatment": null},
+        "2": {"name": "RST",  "direction": "OUTPUT",     "signal_type": "DIGITAL", "description": "Active-low open-drain reset output. Asserted when VCC falls below threshold.", "unused_treatment": null},
+        "3": {"name": "VCC",  "direction": "POWER_IN",  "signal_type": "POWER",   "description": "Supply voltage input. Monitored for undervoltage.", "unused_treatment": null}
+      }
+    }
+  },
+
+  "absolute_maximum_ratings": {
+    "VCC": {"parameter": "Supply Voltage", "min": -0.3, "max": 6.0, "unit": "V", "conditions": null}
+  },
+
+  "electrical_parameters": {
+    "VTH_FALL":  {"parameter": "Reset Threshold (falling)", "min": null, "typ": 2.93, "max": null, "unit": "V", "conditions": "SGM809-RXN3L, VCC falling (suffix dependent)"},
+    "VTH_HYS":  {"parameter": "Threshold Hysteresis",      "min": null, "typ": 50,   "max": null, "unit": "mV", "conditions": null},
+    "TRST":     {"parameter": "Reset Timeout Period",       "min": null, "typ": 240,  "max": null, "unit": "ms", "conditions": "After VCC rises above threshold"},
+    "IQ":       {"parameter": "Supply Current",             "min": null, "typ": 5,    "max": 15,   "unit": "uA", "conditions": null}
+  },
+
+  "drc_hints": {
+    "vin_abs_max":       {"value": 6.0, "unit": "V"},
+    "reset_threshold":   {"typ": 2.93, "unit": "V", "note": "Suffix-dependent: -RXN3L series. Check actual suffix."},
+    "reset_delay":       {"typ": 240, "unit": "ms"},
+    "output_type":       "open_drain_active_low",
+    "device_function":   "voltage_supervisor"
+  }
+}
