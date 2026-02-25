@@ -6,8 +6,130 @@
   "category": "FPGA",
   "description": null,
   "package": "UG256",
-  "supply_specs": {},
-  "io_standard_specs": {},
+  "supply_specs": {
+    "VCC": {
+      "parameter": "VCC (核电压, EV[2])",
+      "symbol": "VCC",
+      "min": 1.14,
+      "max": 1.8,
+      "unit": "V",
+      "conditions": "Recommended operating",
+      "source": "recommended_operating"
+    },
+    "VCCIO": {
+      "parameter": "VCCIO (I/O Bank 电压)",
+      "symbol": "VCCIO",
+      "min": 1.0,
+      "max": 3.465,
+      "unit": "V",
+      "conditions": "Recommended operating",
+      "source": "recommended_operating"
+    },
+    "VCCX、": {
+      "parameter": "VCCX、 (辅助电压)",
+      "symbol": "VCCX、",
+      "min": 2.375,
+      "max": 3.465,
+      "unit": "V",
+      "conditions": "Recommended operating",
+      "source": "recommended_operating"
+    },
+    "VCC_REG": {
+      "parameter": "VCC_REG (Regulator 电压)",
+      "symbol": "VCC_REG",
+      "min": 1.14,
+      "max": 3.3,
+      "unit": "V",
+      "conditions": "Recommended operating",
+      "source": "recommended_operating"
+    }
+  },
+  "io_standard_specs": {
+    "gowin_LVCMOS33": {
+      "standard": "LVCMOS33",
+      "vcco": -0.2,
+      "parameter": null,
+      "value": null,
+      "raw": "VCCIO-0.2V"
+    },
+    "gowin_LVCMOS25": {
+      "standard": "LVCMOS25",
+      "vcco": -0.2,
+      "parameter": null,
+      "value": null,
+      "raw": "VCCIO-0.2V"
+    },
+    "gowin_LVCMOS18": {
+      "standard": "LVCMOS18",
+      "vcco": -0.2,
+      "parameter": null,
+      "value": null,
+      "raw": "VCCIO-0.2V"
+    },
+    "gowin_LVCMOS15": {
+      "standard": "LVCMOS15",
+      "vcco": -0.2,
+      "parameter": null,
+      "value": null,
+      "raw": "VCCIO-0.2V"
+    },
+    "gowin_LVCMOS12": {
+      "standard": "LVCMOS12",
+      "vcco": -0.4,
+      "parameter": null,
+      "value": null,
+      "raw": "VCCIO-0.4V"
+    },
+    "gowin_PCI33": {
+      "standard": "PCI33",
+      "vcco": 0.3,
+      "parameter": null,
+      "value": null,
+      "raw": "VCCIO+0.3 VCCIO/2-"
+    },
+    "gowin_SSTL25": {
+      "standard": "SSTL25",
+      "vcco": 0.15,
+      "parameter": null,
+      "value": null,
+      "raw": "VREF+0.15V VCCIO+0.3 VCCIO/2-"
+    },
+    "gowin_SSTL18": {
+      "standard": "SSTL18",
+      "vcco": 0.3,
+      "parameter": null,
+      "value": null,
+      "raw": "VCCIO+0.3 VCCIO/2-"
+    },
+    "gowin_SSTL15": {
+      "standard": "SSTL15",
+      "vcco": 0.3,
+      "parameter": null,
+      "value": null,
+      "raw": "VCCIO+0.3 VCCIO/2-"
+    },
+    "gowin_SSTL135": {
+      "standard": "SSTL135",
+      "vcco": 0.09,
+      "parameter": null,
+      "value": null,
+      "raw": "VREF+0.09V VCCIO+0.3 VCCIO/2-"
+    },
+    "gowin_HSTL18": {
+      "standard": "HSTL18",
+      "vcco": -0.4,
+      "parameter": null,
+      "value": null,
+      "raw": "VCCIO-0.40V 16"
+    },
+    "gowin_HSTL15": {
+      "standard": "HSTL15",
+      "vcco": 0.13,
+      "parameter": null,
+      "value": null,
+      "raw": "VREF+ 0.13V VCCIO+0.3 0.2"
+    }
+  },
   "power_rails": {
     "VCCIO0/VCCIO1/VCCIO10/VCCIO2/VCCIO6/VCCIO7": {
       "description": "I/O Bank电压VCCIO0/VCCIO1/VCCIO10/VCCIO2/VCCIO6/VCCIO7短接",
@@ -571,7 +693,7 @@
     {
       "pin": "A3",
       "name": "IOB10A/D06/SSPI_CS_N",
-      "function": "IO",
+      "function": "I/O",
       "bank": "5",
       "config_function": "D06/SSPI_CS_N",
       "dqs": null,
@@ -582,45 +704,49 @@
         "config_function": "SSPI_CS_N",
         "must_connect": true,
         "desc": "Multi-function pin: IO + SSPI_CS_N"
-      }
+      },
+      "category": "IO"
     },
     {
       "pin": "A2",
       "name": "IOB10B/D05/SI/SSI0",
-      "function": "IO",
+      "function": "I/O",
       "bank": "5",
       "config_function": "D05/SI/SSI0",
       "dqs": null,
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOB10A"
+      "diff_complement": "IOB10A",
+      "category": "IO"
     },
     {
       "pin": "B3",
       "name": "IOB12A/GCLKT_10B/D15/SSPI_WPN/SSI2",
-      "function": "IO",
+      "function": "I/O",
       "bank": "5",
       "config_function": "GCLKT_10B/D15/SSPI_WPN/SSI2",
       "dqs": null,
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOB12B"
+      "diff_complement": "IOB12B",
+      "category": "IO"
     },
     {
       "pin": "C4",
       "name": "IOB12B/GCLKC_10B/D07/DOUT/LPLL1_C_IN1",
-      "function": "IO",
+      "function": "I/O",
       "bank": "5",
       "config_function": "GCLKC_10B/D07/DOUT/LPLL1_C_IN1",
       "dqs": null,
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOB12A"
+      "diff_complement": "IOB12A",
+      "category": "IO"
     },
     {
       "pin": "C5",
       "name": "IOB14A/SSPI_CLK",
-      "function": "IO",
+      "function": "I/O",
       "bank": "5",
       "config_function": "SSPI_CLK",
       "dqs": null,
@@ -631,219 +757,239 @@
         "config_function": "SSPI_CLK",
         "must_connect": true,
         "desc": "Multi-function pin: IO + SSPI_CLK"
-      }
+      },
+      "category": "IO"
     },
     {
       "pin": "C6",
       "name": "IOB14B/CLKHOLD_N/SSI3",
-      "function": "IO",
+      "function": "I/O",
       "bank": "5",
       "config_function": "CLKHOLD_N/SSI3",
       "dqs": null,
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOB14A"
+      "diff_complement": "IOB14A",
+      "category": "IO"
     },
     {
       "pin": "C7",
       "name": "IOB16A",
-      "function": "IO",
+      "function": "I/O",
       "bank": "5",
       "config_function": null,
       "dqs": null,
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOB16B"
+      "diff_complement": "IOB16B",
+      "category": "IO"
     },
     {
       "pin": "D7",
       "name": "IOB16B",
-      "function": "IO",
+      "function": "I/O",
       "bank": "5",
       "config_function": null,
       "dqs": null,
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOB16A"
+      "diff_complement": "IOB16A",
+      "category": "IO"
     },
     {
       "pin": "C2",
       "name": "IOB18A",
-      "function": "IO",
+      "function": "I/O",
       "bank": "5",
       "config_function": null,
       "dqs": null,
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOB18B"
+      "diff_complement": "IOB18B",
+      "category": "IO"
     },
     {
       "pin": "D3",
       "name": "IOB18B",
-      "function": "IO",
+      "function": "I/O",
       "bank": "5",
       "config_function": null,
       "dqs": null,
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOB18A"
+      "diff_complement": "IOB18A",
+      "category": "IO"
     },
     {
       "pin": "A8",
       "name": "IOB1A",
-      "function": "IO",
+      "function": "I/O",
       "bank": "5",
       "config_function": null,
       "dqs": null,
-      "lvds_capable": false
+      "lvds_capable": false,
+      "category": "IO"
     },
     {
       "pin": "B1",
       "name": "IOB20A",
-      "function": "IO",
+      "function": "I/O",
       "bank": "5",
       "config_function": null,
       "dqs": null,
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOB20B"
+      "diff_complement": "IOB20B",
+      "category": "IO"
     },
     {
       "pin": "C1",
       "name": "IOB20B",
-      "function": "IO",
+      "function": "I/O",
       "bank": "5",
       "config_function": null,
       "dqs": null,
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOB20A"
+      "diff_complement": "IOB20A",
+      "category": "IO"
     },
     {
       "pin": "D2",
       "name": "IOB22A",
-      "function": "IO",
+      "function": "I/O",
       "bank": "5",
       "config_function": null,
       "dqs": null,
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOB22B"
+      "diff_complement": "IOB22B",
+      "category": "IO"
     },
     {
       "pin": "D1",
       "name": "IOB22B",
-      "function": "IO",
+      "function": "I/O",
       "bank": "5",
       "config_function": null,
       "dqs": null,
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOB22A"
+      "diff_complement": "IOB22A",
+      "category": "IO"
     },
     {
       "pin": "D6",
       "name": "IOB24A",
-      "function": "IO",
+      "function": "I/O",
       "bank": "5",
       "config_function": null,
       "dqs": null,
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOB24B"
+      "diff_complement": "IOB24B",
+      "category": "IO"
     },
     {
       "pin": "E7",
       "name": "IOB24B",
-      "function": "IO",
+      "function": "I/O",
       "bank": "5",
       "config_function": null,
       "dqs": null,
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOB24A"
+      "diff_complement": "IOB24A",
+      "category": "IO"
     },
     {
       "pin": "E6",
       "name": "IOB26A/GCLKT_12",
-      "function": "IO",
+      "function": "I/O",
       "bank": "5",
       "config_function": "GCLKT_12",
       "dqs": null,
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOB26B"
+      "diff_complement": "IOB26B",
+      "category": "IO"
     },
     {
       "pin": "E3",
       "name": "IOB26B/GCLKC_12",
-      "function": "IO",
+      "function": "I/O",
       "bank": "5",
       "config_function": "GCLKC_12",
       "dqs": null,
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOB26A"
+      "diff_complement": "IOB26A",
+      "category": "IO"
     },
     {
       "pin": "E2",
       "name": "IOB29A/GCLKT_11A",
-      "function": "IO",
+      "function": "I/O",
       "bank": "4",
       "config_function": "GCLKT_11A",
       "dqs": null,
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOB29B"
+      "diff_complement": "IOB29B",
+      "category": "IO"
     },
     {
       "pin": "E1",
       "name": "IOB29B/GCLKC_11A",
-      "function": "IO",
+      "function": "I/O",
       "bank": "4",
       "config_function": "GCLKC_11A",
       "dqs": null,
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOB29A"
+      "diff_complement": "IOB29A",
+      "category": "IO"
     },
     {
       "pin": "A7",
       "name": "IOB2A",
-      "function": "IO",
+      "function": "I/O",
       "bank": "5",
       "config_function": null,
       "dqs": null,
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOB2B"
+      "diff_complement": "IOB2B",
+      "category": "IO"
     },
     {
       "pin": "B7",
       "name": "IOB2B",
-      "function": "IO",
+      "function": "I/O",
       "bank": "5",
       "config_function": null,
       "dqs": null,
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOB2A"
+      "diff_complement": "IOB2A",
+      "category": "IO"
     },
     {
       "pin": "F1",
       "name": "IOB31A/GCLKT_10A/D14",
-      "function": "IO",
+      "function": "I/O",
       "bank": "4",
       "config_function": "GCLKT_10A/D14",
       "dqs": null,
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOB31B"
+      "diff_complement": "IOB31B",
+      "category": "IO"
     },
     {
       "pin": "F2",
       "name": "IOB31B/GCLKC_10A/D01/MOSI/MI0/BPLL_C_FB0",
-      "function": "IO",
+      "function": "I/O",
       "bank": "4",
       "config_function": "GCLKC_10A/D01/MOSI/MI0/BPLL_C_FB0",
       "dqs": null,
@@ -854,232 +1000,253 @@
         "config_function": "MOSI",
         "must_connect": true,
         "desc": "Multi-function pin: IO + MOSI"
-      }
+      },
+      "category": "IO"
     },
     {
       "pin": "F3",
       "name": "IOB33A/GCLKT_9/D13/MCSN/BPLL_T_IN1",
-      "function": "IO",
+      "function": "I/O",
       "bank": "4",
       "config_function": "GCLKT_9/D13/MCSN/BPLL_T_IN1",
       "dqs": null,
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOB33B"
+      "diff_complement": "IOB33B",
+      "category": "IO"
     },
     {
       "pin": "F4",
       "name": "IOB33B/GCLKC_9",
-      "function": "IO",
+      "function": "I/O",
       "bank": "4",
       "config_function": "GCLKC_9",
       "dqs": null,
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOB33A"
+      "diff_complement": "IOB33A",
+      "category": "IO"
     },
     {
       "pin": "F5",
       "name": "IOB35A/GCLKT_8",
-      "function": "IO",
+      "function": "I/O",
       "bank": "4",
       "config_function": "GCLKT_8",
       "dqs": null,
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOB35B"
+      "diff_complement": "IOB35B",
+      "category": "IO"
     },
     {
       "pin": "G4",
       "name": "IOB35B/GCLKC_8",
-      "function": "IO",
+      "function": "I/O",
       "bank": "4",
       "config_function": "GCLKC_8",
       "dqs": null,
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOB35A"
+      "diff_complement": "IOB35A",
+      "category": "IO"
     },
     {
       "pin": "G3",
       "name": "IOB37A/D08",
-      "function": "IO",
+      "function": "I/O",
       "bank": "4",
       "config_function": "D08",
       "dqs": null,
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOB37B"
+      "diff_complement": "IOB37B",
+      "category": "IO"
     },
     {
       "pin": "G2",
       "name": "IOB37B",
-      "function": "IO",
+      "function": "I/O",
       "bank": "4",
       "config_function": null,
       "dqs": null,
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOB37A"
+      "diff_complement": "IOB37A",
+      "category": "IO"
     },
     {
       "pin": "G1",
       "name": "IOB39A",
-      "function": "IO",
+      "function": "I/O",
       "bank": "4",
       "config_function": null,
       "dqs": null,
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOB39B"
+      "diff_complement": "IOB39B",
+      "category": "IO"
     },
     {
       "pin": "H1",
       "name": "IOB39B",
-      "function": "IO",
+      "function": "I/O",
       "bank": "4",
       "config_function": null,
       "dqs": null,
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOB39A"
+      "diff_complement": "IOB39A",
+      "category": "IO"
     },
     {
       "pin": "H2",
       "name": "IOB41A",
-      "function": "IO",
+      "function": "I/O",
       "bank": "4",
       "config_function": null,
       "dqs": null,
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOB41B"
+      "diff_complement": "IOB41B",
+      "category": "IO"
     },
     {
       "pin": "H3",
       "name": "IOB41B",
-      "function": "IO",
+      "function": "I/O",
       "bank": "4",
       "config_function": null,
       "dqs": null,
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOB41A"
+      "diff_complement": "IOB41A",
+      "category": "IO"
     },
     {
       "pin": "H4",
       "name": "IOB43A",
-      "function": "IO",
+      "function": "I/O",
       "bank": "4",
       "config_function": null,
       "dqs": null,
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOB43B"
+      "diff_complement": "IOB43B",
+      "category": "IO"
     },
     {
       "pin": "G5",
       "name": "IOB43B",
-      "function": "IO",
+      "function": "I/O",
       "bank": "4",
       "config_function": null,
       "dqs": null,
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOB43A"
+      "diff_complement": "IOB43A",
+      "category": "IO"
     },
     {
       "pin": "G6",
       "name": "IOB45A",
-      "function": "IO",
+      "function": "I/O",
       "bank": "4",
       "config_function": null,
       "dqs": null,
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOB45B"
+      "diff_complement": "IOB45B",
+      "category": "IO"
     },
     {
       "pin": "H5",
       "name": "IOB45B",
-      "function": "IO",
+      "function": "I/O",
       "bank": "4",
       "config_function": null,
       "dqs": null,
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOB45A"
+      "diff_complement": "IOB45A",
+      "category": "IO"
     },
     {
       "pin": "H6",
       "name": "IOB48A",
-      "function": "IO",
+      "function": "I/O",
       "bank": "4",
       "config_function": null,
       "dqs": null,
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOB48B"
+      "diff_complement": "IOB48B",
+      "category": "IO"
     },
     {
       "pin": "J6",
       "name": "IOB48B",
-      "function": "IO",
+      "function": "I/O",
       "bank": "4",
       "config_function": null,
       "dqs": null,
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOB48A"
+      "diff_complement": "IOB48A",
+      "category": "IO"
     },
     {
       "pin": "A6",
       "name": "IOB4A/D04/SDA/LPLL1_T_FB0",
-      "function": "IO",
+      "function": "I/O",
       "bank": "5",
       "config_function": "D04/SDA/LPLL1_T_FB0",
       "dqs": null,
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOB4B"
+      "diff_complement": "IOB4B",
+      "category": "IO"
     },
     {
       "pin": "B6",
       "name": "IOB4B/D09/SCL",
-      "function": "IO",
+      "function": "I/O",
       "bank": "5",
       "config_function": "D09/SCL",
       "dqs": null,
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOB4A"
+      "diff_complement": "IOB4A",
+      "category": "IO"
     },
     {
       "pin": "J1",
       "name": "IOB50A/D11",
-      "function": "IO",
+      "function": "I/O",
       "bank": "4",
       "config_function": "D11",
       "dqs": null,
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOB50B"
+      "diff_complement": "IOB50B",
+      "category": "IO"
     },
     {
       "pin": "J2",
       "name": "IOB50B/D12",
-      "function": "IO",
+      "function": "I/O",
       "bank": "4",
       "config_function": "D12",
       "dqs": null,
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOB50A"
+      "diff_complement": "IOB50A",
+      "category": "IO"
     },
     {
       "pin": "J3",
       "name": "IOB52A/RECONFIG_N",
-      "function": "IO",
+      "function": "I/O",
       "bank": "4",
       "config_function": "RECONFIG_N",
       "dqs": null,
@@ -1090,67 +1257,73 @@
         "config_function": "RECONFIG_N",
         "must_connect": true,
         "desc": "Multi-function pin: IO + RECONFIG_N"
-      }
+      },
+      "category": "IO"
     },
     {
       "pin": "J4",
       "name": "IOB52B",
-      "function": "IO",
+      "function": "I/O",
       "bank": "4",
       "config_function": null,
       "dqs": null,
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOB52A"
+      "diff_complement": "IOB52A",
+      "category": "IO"
     },
     {
       "pin": "J5",
       "name": "IOB54A/GCLKT_11B/D10/MI2",
-      "function": "IO",
+      "function": "I/O",
       "bank": "4",
       "config_function": "GCLKT_11B/D10/MI2",
       "dqs": null,
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOB54B"
+      "diff_complement": "IOB54B",
+      "category": "IO"
     },
     {
       "pin": "K5",
       "name": "IOB54B/GCLKC_11B/MI3/BPLL_C_FB1",
-      "function": "IO",
+      "function": "I/O",
       "bank": "4",
       "config_function": "GCLKC_11B/MI3/BPLL_C_FB1",
       "dqs": null,
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOB54A"
+      "diff_complement": "IOB54A",
+      "category": "IO"
     },
     {
       "pin": "K2",
       "name": "IOB56A",
-      "function": "IO",
+      "function": "I/O",
       "bank": "4",
       "config_function": null,
       "dqs": null,
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOB56B"
+      "diff_complement": "IOB56B",
+      "category": "IO"
     },
     {
       "pin": "K1",
       "name": "IOB56B",
-      "function": "IO",
+      "function": "I/O",
       "bank": "4",
       "config_function": null,
       "dqs": null,
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOB56A"
+      "diff_complement": "IOB56A",
+      "category": "IO"
     },
     {
       "pin": "K4",
       "name": "IOB58A/D00/DIN/MISO/MI1",
-      "function": "IO",
+      "function": "I/O",
       "bank": "4",
       "config_function": "D00/DIN/MISO/MI1",
       "dqs": null,
@@ -1161,45 +1334,49 @@
         "config_function": "MISO",
         "must_connect": "recommended",
         "desc": "Multi-function pin: IO + MISO"
-      }
+      },
+      "category": "IO"
     },
     {
       "pin": "K3",
       "name": "IOB58B/RDWR_B",
-      "function": "IO",
+      "function": "I/O",
       "bank": "4",
       "config_function": "RDWR_B",
       "dqs": null,
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOB58A"
+      "diff_complement": "IOB58A",
+      "category": "IO"
     },
     {
       "pin": "K6",
       "name": "IOB60A",
-      "function": "IO",
+      "function": "I/O",
       "bank": "4",
       "config_function": null,
       "dqs": null,
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOB60B"
+      "diff_complement": "IOB60B",
+      "category": "IO"
     },
     {
       "pin": "L5",
       "name": "IOB60B",
-      "function": "IO",
+      "function": "I/O",
       "bank": "4",
       "config_function": null,
       "dqs": null,
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOB60A"
+      "diff_complement": "IOB60A",
+      "category": "IO"
     },
     {
       "pin": "L4",
       "name": "IOB62A/CCLK",
-      "function": "IO",
+      "function": "I/O",
       "bank": "4",
       "config_function": "CCLK",
       "dqs": null,
@@ -1210,23 +1387,25 @@
         "config_function": "CCLK",
         "must_connect": true,
         "desc": "Multi-function pin: IO + CCLK"
-      }
+      },
+      "category": "IO"
     },
     {
       "pin": "L3",
       "name": "IOB62B/CSI_B",
-      "function": "IO",
+      "function": "I/O",
       "bank": "4",
       "config_function": "CSI_B",
       "dqs": null,
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOB62A"
+      "diff_complement": "IOB62A",
+      "category": "IO"
     },
     {
       "pin": "L2",
       "name": "IOB64A/READY",
-      "function": "IO",
+      "function": "I/O",
       "bank": "4",
       "config_function": "READY",
       "dqs": null,
@@ -1235,551 +1414,601 @@
         "config_function": "READY",
         "must_connect": true,
         "desc": "Multi-function pin: IO + READY"
-      }
+      },
+      "category": "IO"
     },
     {
       "pin": "M1",
       "name": "IOB65A",
-      "function": "IO",
+      "function": "I/O",
       "bank": "3",
       "config_function": null,
       "dqs": null,
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOB65B"
+      "diff_complement": "IOB65B",
+      "category": "IO"
     },
     {
       "pin": "L1",
       "name": "IOB65B",
-      "function": "IO",
+      "function": "I/O",
       "bank": "3",
       "config_function": null,
       "dqs": null,
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOB65A"
+      "diff_complement": "IOB65A",
+      "category": "IO"
     },
     {
       "pin": "M3",
       "name": "IOB67A",
-      "function": "IO",
+      "function": "I/O",
       "bank": "3",
       "config_function": null,
       "dqs": null,
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOB67B"
+      "diff_complement": "IOB67B",
+      "category": "IO"
     },
     {
       "pin": "M2",
       "name": "IOB67B",
-      "function": "IO",
+      "function": "I/O",
       "bank": "3",
       "config_function": null,
       "dqs": null,
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOB67A"
+      "diff_complement": "IOB67A",
+      "category": "IO"
     },
     {
       "pin": "M6",
       "name": "IOB69A",
-      "function": "IO",
+      "function": "I/O",
       "bank": "3",
       "config_function": null,
       "dqs": "DQ5",
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOB69B"
+      "diff_complement": "IOB69B",
+      "category": "IO"
     },
     {
       "pin": "M7",
       "name": "IOB69B",
-      "function": "IO",
+      "function": "I/O",
       "bank": "3",
       "config_function": null,
       "dqs": "DQ5",
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOB69A"
+      "diff_complement": "IOB69A",
+      "category": "IO"
     },
     {
       "pin": "A4",
       "name": "IOB6A",
-      "function": "IO",
+      "function": "I/O",
       "bank": "5",
       "config_function": null,
       "dqs": null,
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOB6B"
+      "diff_complement": "IOB6B",
+      "category": "IO"
     },
     {
       "pin": "A5",
       "name": "IOB6B",
-      "function": "IO",
+      "function": "I/O",
       "bank": "5",
       "config_function": null,
       "dqs": null,
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOB6A"
+      "diff_complement": "IOB6A",
+      "category": "IO"
     },
     {
       "pin": "N7",
       "name": "IOB71A",
-      "function": "IO",
+      "function": "I/O",
       "bank": "3",
       "config_function": null,
       "dqs": "DQ5",
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOB71B"
+      "diff_complement": "IOB71B",
+      "category": "IO"
     },
     {
       "pin": "N6",
       "name": "IOB71B",
-      "function": "IO",
+      "function": "I/O",
       "bank": "3",
       "config_function": null,
       "dqs": "DQ5",
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOB71A"
+      "diff_complement": "IOB71A",
+      "category": "IO"
     },
     {
       "pin": "N3",
       "name": "IOB73A",
-      "function": "IO",
+      "function": "I/O",
       "bank": "3",
       "config_function": null,
       "dqs": "DQ5",
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOB73B"
+      "diff_complement": "IOB73B",
+      "category": "IO"
     },
     {
       "pin": "N2",
       "name": "IOB73B",
-      "function": "IO",
+      "function": "I/O",
       "bank": "3",
       "config_function": null,
       "dqs": "DQ5",
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOB73A"
+      "diff_complement": "IOB73A",
+      "category": "IO"
     },
     {
       "pin": "N1",
       "name": "IOB75A/GCLKT_6B",
-      "function": "IO",
+      "function": "I/O",
       "bank": "3",
       "config_function": "GCLKT_6B",
       "dqs": "DQS5/DQ5",
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOB75B"
+      "diff_complement": "IOB75B",
+      "category": "IO"
     },
     {
       "pin": "P1",
       "name": "IOB75B/GCLKC_6B",
-      "function": "IO",
+      "function": "I/O",
       "bank": "3",
       "config_function": "GCLKC_6B",
       "dqs": "DQS5/DQ5",
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOB75A"
+      "diff_complement": "IOB75A",
+      "category": "IO"
     },
     {
       "pin": "P2",
       "name": "IOB77A",
-      "function": "IO",
+      "function": "I/O",
       "bank": "3",
       "config_function": null,
       "dqs": "DQ5",
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOB77B"
+      "diff_complement": "IOB77B",
+      "category": "IO"
     },
     {
       "pin": "R1",
       "name": "IOB77B",
-      "function": "IO",
+      "function": "I/O",
       "bank": "3",
       "config_function": null,
       "dqs": "DQ5",
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOB77A"
+      "diff_complement": "IOB77A",
+      "category": "IO"
     },
     {
       "pin": "P5",
       "name": "IOB79A",
-      "function": "IO",
+      "function": "I/O",
       "bank": "3",
       "config_function": null,
       "dqs": "DQ5/DQS_45",
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOB79B"
+      "diff_complement": "IOB79B",
+      "category": "IO"
     },
     {
       "pin": "P6",
       "name": "IOB79B",
-      "function": "IO",
+      "function": "I/O",
       "bank": "3",
       "config_function": null,
       "dqs": "DQ5/DQS_45",
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOB79A"
+      "diff_complement": "IOB79A",
+      "category": "IO"
     },
     {
       "pin": "P7",
       "name": "IOB81A",
-      "function": "IO",
+      "function": "I/O",
       "bank": "3",
       "config_function": null,
       "dqs": "DQ4",
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOB81B"
+      "diff_complement": "IOB81B",
+      "category": "IO"
     },
     {
       "pin": "R7",
       "name": "IOB81B",
-      "function": "IO",
+      "function": "I/O",
       "bank": "3",
       "config_function": null,
       "dqs": "DQ4",
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOB81A"
+      "diff_complement": "IOB81A",
+      "category": "IO"
     },
     {
       "pin": "R6",
       "name": "IOB83A",
-      "function": "IO",
+      "function": "I/O",
       "bank": "3",
       "config_function": null,
       "dqs": "DQ4",
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOB83B"
+      "diff_complement": "IOB83B",
+      "category": "IO"
     },
     {
       "pin": "R5",
       "name": "IOB83B",
-      "function": "IO",
+      "function": "I/O",
       "bank": "3",
       "config_function": null,
       "dqs": "DQ4",
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOB83A"
+      "diff_complement": "IOB83A",
+      "category": "IO"
     },
     {
       "pin": "R4",
       "name": "IOB85A",
-      "function": "IO",
+      "function": "I/O",
       "bank": "3",
       "config_function": null,
       "dqs": "DQS4/DQ4",
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOB85B"
+      "diff_complement": "IOB85B",
+      "category": "IO"
     },
     {
       "pin": "P4",
       "name": "IOB85B",
-      "function": "IO",
+      "function": "I/O",
       "bank": "3",
       "config_function": null,
       "dqs": "DQS4/DQ4",
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOB85A"
+      "diff_complement": "IOB85A",
+      "category": "IO"
     },
     {
       "pin": "R3",
       "name": "IOB87A",
-      "function": "IO",
+      "function": "I/O",
       "bank": "3",
       "config_function": null,
       "dqs": "DQ4",
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOB87B"
+      "diff_complement": "IOB87B",
+      "category": "IO"
     },
     {
       "pin": "T3",
       "name": "IOB87B",
-      "function": "IO",
+      "function": "I/O",
       "bank": "3",
       "config_function": null,
       "dqs": "DQ4",
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOB87A"
+      "diff_complement": "IOB87A",
+      "category": "IO"
     },
     {
       "pin": "T2",
       "name": "IOB89A/GCLKT_7/BPLL_T_IN0",
-      "function": "IO",
+      "function": "I/O",
       "bank": "3",
       "config_function": "GCLKT_7/BPLL_T_IN0",
       "dqs": "DQ4",
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOB89B"
+      "diff_complement": "IOB89B",
+      "category": "IO"
     },
     {
       "pin": "T4",
       "name": "IOB89B/GCLKC_7",
-      "function": "IO",
+      "function": "I/O",
       "bank": "3",
       "config_function": "GCLKC_7",
       "dqs": "DQ4",
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOB89A"
+      "diff_complement": "IOB89A",
+      "category": "IO"
     },
     {
       "pin": "B4",
       "name": "IOB8A/D03/SO/SSI1",
-      "function": "IO",
+      "function": "I/O",
       "bank": "5",
       "config_function": "D03/SO/SSI1",
       "dqs": null,
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOB8B"
+      "diff_complement": "IOB8B",
+      "category": "IO"
     },
     {
       "pin": "B5",
       "name": "IOB8B/D02",
-      "function": "IO",
+      "function": "I/O",
       "bank": "5",
       "config_function": "D02",
       "dqs": null,
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOB8A"
+      "diff_complement": "IOB8A",
+      "category": "IO"
     },
     {
       "pin": "T5",
       "name": "IOB91A/GCLKT_6A",
-      "function": "IO",
+      "function": "I/O",
       "bank": "3",
       "config_function": "GCLKT_6A",
       "dqs": "DQ4",
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOB91B"
+      "diff_complement": "IOB91B",
+      "category": "IO"
     },
     {
       "pin": "T6",
       "name": "IOB91B/GCLKC_6A",
-      "function": "IO",
+      "function": "I/O",
       "bank": "3",
       "config_function": "GCLKC_6A",
       "dqs": "DQ4",
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOB91A"
+      "diff_complement": "IOB91A",
+      "category": "IO"
     },
     {
       "pin": "A11",
       "name": "IOL12A",
-      "function": "IO",
+      "function": "I/O",
       "bank": "6",
       "config_function": null,
       "dqs": "DQ7",
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOL12B"
+      "diff_complement": "IOL12B",
+      "category": "IO"
     },
     {
       "pin": "B11",
       "name": "IOL12B",
-      "function": "IO",
+      "function": "I/O",
       "bank": "6",
       "config_function": null,
       "dqs": "DQ7",
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOL12A"
+      "diff_complement": "IOL12A",
+      "category": "IO"
     },
     {
       "pin": "C10",
       "name": "IOL14A/LPLL1A_T_IN0",
-      "function": "IO",
+      "function": "I/O",
       "bank": "6",
       "config_function": "LPLL1A_T_IN0",
       "dqs": "DQ7",
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOL14B"
+      "diff_complement": "IOL14B",
+      "category": "IO"
     },
     {
       "pin": "D10",
       "name": "IOL14B",
-      "function": "IO",
+      "function": "I/O",
       "bank": "6",
       "config_function": null,
       "dqs": "DQ7",
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOL14A"
+      "diff_complement": "IOL14A",
+      "category": "IO"
     },
     {
       "pin": "E9",
       "name": "IOL3A/GCLKT_14/LPLL0_T_IN2",
-      "function": "IO",
+      "function": "I/O",
       "bank": "6",
       "config_function": "GCLKT_14/LPLL0_T_IN2",
       "dqs": "DQ7",
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOL3B"
+      "diff_complement": "IOL3B",
+      "category": "IO"
     },
     {
       "pin": "E10",
       "name": "IOL3B/GCLKC_14",
-      "function": "IO",
+      "function": "I/O",
       "bank": "6",
       "config_function": "GCLKC_14",
       "dqs": "DQ7",
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOL3A"
+      "diff_complement": "IOL3A",
+      "category": "IO"
     },
     {
       "pin": "C11",
       "name": "IOL5A/GCLKT_13/LPLL0_T_IN1",
-      "function": "IO",
+      "function": "I/O",
       "bank": "6",
       "config_function": "GCLKT_13/LPLL0_T_IN1",
       "dqs": "DQ7",
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOL5B"
+      "diff_complement": "IOL5B",
+      "category": "IO"
     },
     {
       "pin": "D11",
       "name": "IOL5B/GCLKC_13/LPLL0_C_FB1",
-      "function": "IO",
+      "function": "I/O",
       "bank": "6",
       "config_function": "GCLKC_13/LPLL0_C_FB1",
       "dqs": "DQ7",
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOL5A"
+      "diff_complement": "IOL5A",
+      "category": "IO"
     },
     {
       "pin": "B12",
       "name": "IOL7A",
-      "function": "IO",
+      "function": "I/O",
       "bank": "6",
       "config_function": null,
       "dqs": "DQ7",
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOL7B"
+      "diff_complement": "IOL7B",
+      "category": "IO"
     },
     {
       "pin": "C12",
       "name": "IOL7B",
-      "function": "IO",
+      "function": "I/O",
       "bank": "6",
       "config_function": null,
       "dqs": "DQ7",
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOL7A"
+      "diff_complement": "IOL7A",
+      "category": "IO"
     },
     {
       "pin": "A12",
       "name": "IOL9A",
-      "function": "IO",
+      "function": "I/O",
       "bank": "6",
       "config_function": null,
       "dqs": "DQS7/DQ7",
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOL9B"
+      "diff_complement": "IOL9B",
+      "category": "IO"
     },
     {
       "pin": "A13",
       "name": "IOL9B",
-      "function": "IO",
+      "function": "I/O",
       "bank": "6",
       "config_function": null,
       "dqs": "DQS7/DQ7",
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOL9A"
+      "diff_complement": "IOL9A",
+      "category": "IO"
     },
     {
       "pin": "M9",
       "name": "IOR14B",
-      "function": "IO",
+      "function": "I/O",
       "bank": "2",
       "config_function": null,
       "dqs": "DQ2",
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOR14A"
+      "diff_complement": "IOR14A",
+      "category": "IO"
     },
     {
       "pin": "N8",
       "name": "IOR16A",
-      "function": "IO",
+      "function": "I/O",
       "bank": "2",
       "config_function": null,
       "dqs": "DQ2",
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOR16B"
+      "diff_complement": "IOR16B",
+      "category": "IO"
     },
     {
       "pin": "M8",
       "name": "IOR16B",
-      "function": "IO",
+      "function": "I/O",
       "bank": "2",
       "config_function": null,
       "dqs": "DQ2",
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOR16A"
+      "diff_complement": "IOR16A",
+      "category": "IO"
     },
     {
       "pin": "N9",
       "name": "IOR18A",
-      "function": "IO",
+      "function": "I/O",
       "bank": "2",
       "config_function": null,
       "dqs": "DQ2/DQS_23",
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOR18B"
+      "diff_complement": "IOR18B",
+      "category": "IO"
     },
     {
       "pin": "N10",
       "name": "IOR18B",
-      "function": "IO",
+      "function": "I/O",
       "bank": "2",
       "config_function": null,
       "dqs": "DQ2/DQS_23",
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOR18A"
+      "diff_complement": "IOR18A",
+      "category": "IO"
     },
     {
       "pin": "L10",
       "name": "IOR1A/TCK",
-      "function": "IO",
+      "function": "I/O",
       "bank": "10",
       "config_function": "TCK",
       "dqs": null,
@@ -1788,12 +2017,13 @@
         "config_function": "TCK",
         "must_connect": "recommended",
         "desc": "Multi-function pin: IO + TCK"
-      }
+      },
+      "category": "IO"
     },
     {
       "pin": "M10",
       "name": "IOR1B/TDI",
-      "function": "IO",
+      "function": "I/O",
       "bank": "10",
       "config_function": "TDI",
       "dqs": null,
@@ -1802,166 +2032,181 @@
         "config_function": "TDI",
         "must_connect": "recommended",
         "desc": "Multi-function pin: IO + TDI"
-      }
+      },
+      "category": "IO"
     },
     {
       "pin": "R12",
       "name": "IOR20A",
-      "function": "IO",
+      "function": "I/O",
       "bank": "2",
       "config_function": null,
       "dqs": "DQ3",
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOR20B"
+      "diff_complement": "IOR20B",
+      "category": "IO"
     },
     {
       "pin": "P12",
       "name": "IOR20B",
-      "function": "IO",
+      "function": "I/O",
       "bank": "2",
       "config_function": null,
       "dqs": "DQ3",
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOR20A"
+      "diff_complement": "IOR20A",
+      "category": "IO"
     },
     {
       "pin": "P10",
       "name": "IOR22A",
-      "function": "IO",
+      "function": "I/O",
       "bank": "2",
       "config_function": null,
       "dqs": "DQ3",
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOR22B"
+      "diff_complement": "IOR22B",
+      "category": "IO"
     },
     {
       "pin": "P11",
       "name": "IOR22B",
-      "function": "IO",
+      "function": "I/O",
       "bank": "2",
       "config_function": null,
       "dqs": "DQ3",
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOR22A"
+      "diff_complement": "IOR22A",
+      "category": "IO"
     },
     {
       "pin": "R10",
       "name": "IOR24A/RPLL1B_T_IN0",
-      "function": "IO",
+      "function": "I/O",
       "bank": "2",
       "config_function": "RPLL1B_T_IN0",
       "dqs": "DQ3",
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOR24B"
+      "diff_complement": "IOR24B",
+      "category": "IO"
     },
     {
       "pin": "R11",
       "name": "IOR24B",
-      "function": "IO",
+      "function": "I/O",
       "bank": "2",
       "config_function": null,
       "dqs": "DQ3",
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOR24A"
+      "diff_complement": "IOR24A",
+      "category": "IO"
     },
     {
       "pin": "P8",
       "name": "IOR26A",
-      "function": "IO",
+      "function": "I/O",
       "bank": "2",
       "config_function": null,
       "dqs": "DQS3/DQ3",
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOR26B"
+      "diff_complement": "IOR26B",
+      "category": "IO"
     },
     {
       "pin": "P9",
       "name": "IOR26B",
-      "function": "IO",
+      "function": "I/O",
       "bank": "2",
       "config_function": null,
       "dqs": "DQS3/DQ3",
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOR26A"
+      "diff_complement": "IOR26A",
+      "category": "IO"
     },
     {
       "pin": "R8",
       "name": "IOR29A",
-      "function": "IO",
+      "function": "I/O",
       "bank": "2",
       "config_function": null,
       "dqs": "DQ3",
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOR29B"
+      "diff_complement": "IOR29B",
+      "category": "IO"
     },
     {
       "pin": "R9",
       "name": "IOR29B",
-      "function": "IO",
+      "function": "I/O",
       "bank": "2",
       "config_function": null,
       "dqs": "DQ3",
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOR29A"
+      "diff_complement": "IOR29A",
+      "category": "IO"
     },
     {
       "pin": "T10",
       "name": "IOR31A/GCLKT_4/RPLL1A_T_IN0",
-      "function": "IO",
+      "function": "I/O",
       "bank": "2",
       "config_function": "GCLKT_4/RPLL1A_T_IN0",
       "dqs": "DQ3",
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOR31B"
+      "diff_complement": "IOR31B",
+      "category": "IO"
     },
     {
       "pin": "T9",
       "name": "IOR31B/GCLKC_4/RPLL1_C_FB1",
-      "function": "IO",
+      "function": "I/O",
       "bank": "2",
       "config_function": "GCLKC_4/RPLL1_C_FB1",
       "dqs": "DQ3",
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOR31A"
+      "diff_complement": "IOR31A",
+      "category": "IO"
     },
     {
       "pin": "T8",
       "name": "IOR33A/GCLKT_5/RPLL1_T_IN1",
-      "function": "IO",
+      "function": "I/O",
       "bank": "2",
       "config_function": "GCLKT_5/RPLL1_T_IN1",
       "dqs": null,
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOR33B"
+      "diff_complement": "IOR33B",
+      "category": "IO"
     },
     {
       "pin": "T7",
       "name": "IOR33B/GCLKC_5/RPLL1_C_FB0",
-      "function": "IO",
+      "function": "I/O",
       "bank": "2",
       "config_function": "GCLKC_5/RPLL1_C_FB0",
       "dqs": null,
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOR33A"
+      "diff_complement": "IOR33A",
+      "category": "IO"
     },
     {
       "pin": "M11",
       "name": "IOR3A/TMS",
-      "function": "IO",
+      "function": "I/O",
       "bank": "10",
       "config_function": "TMS",
       "dqs": null,
@@ -1970,12 +2215,13 @@
         "config_function": "TMS",
         "must_connect": "recommended",
         "desc": "Multi-function pin: IO + TMS"
-      }
+      },
+      "category": "IO"
     },
     {
       "pin": "N11",
       "name": "IOR3B/TDO",
-      "function": "IO",
+      "function": "I/O",
       "bank": "10",
       "config_function": "TDO",
       "dqs": null,
@@ -1984,12 +2230,13 @@
         "config_function": "TDO",
         "must_connect": "recommended",
         "desc": "Multi-function pin: IO + TDO"
-      }
+      },
+      "category": "IO"
     },
     {
       "pin": "F7",
       "name": "IOT19A/EMCCLK",
-      "function": "IO",
+      "function": "I/O",
       "bank": "7",
       "config_function": "EMCCLK",
       "dqs": null,
@@ -2000,45 +2247,49 @@
         "config_function": "CCLK",
         "must_connect": true,
         "desc": "Multi-function pin: IO + CCLK"
-      }
+      },
+      "category": "IO"
     },
     {
       "pin": "F8",
       "name": "IOT19B/CSO_B",
-      "function": "IO",
+      "function": "I/O",
       "bank": "7",
       "config_function": "CSO_B",
       "dqs": null,
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOT19A"
+      "diff_complement": "IOT19A",
+      "category": "IO"
     },
     {
       "pin": "G12",
       "name": "IOT1A/GCLKT_15/LPLL0_T_IN0",
-      "function": "IO",
+      "function": "I/O",
       "bank": "7",
       "config_function": "GCLKT_15/LPLL0_T_IN0",
       "dqs": null,
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOT1B"
+      "diff_complement": "IOT1B",
+      "category": "IO"
     },
     {
       "pin": "G11",
       "name": "IOT1B/GCLKC_15",
-      "function": "IO",
+      "function": "I/O",
       "bank": "7",
       "config_function": "GCLKC_15",
       "dqs": null,
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOT1A"
+      "diff_complement": "IOT1A",
+      "category": "IO"
     },
     {
       "pin": "F9",
       "name": "IOT25A/MODE0",
-      "function": "IO",
+      "function": "I/O",
       "bank": "7",
       "config_function": "MODE0",
       "dqs": null,
@@ -2049,12 +2300,13 @@
         "config_function": "MODE0",
         "must_connect": true,
         "desc": "Multi-function pin: IO + MODE0"
-      }
+      },
+      "category": "IO"
     },
     {
       "pin": "F10",
       "name": "IOT25B/MODE1",
-      "function": "IO",
+      "function": "I/O",
       "bank": "7",
       "config_function": "MODE1",
       "dqs": null,
@@ -2065,12 +2317,13 @@
         "config_function": "MODE1",
         "must_connect": true,
         "desc": "Multi-function pin: IO + MODE1"
-      }
+      },
+      "category": "IO"
     },
     {
       "pin": "F12",
       "name": "IOT27A/MODE2",
-      "function": "IO",
+      "function": "I/O",
       "bank": "7",
       "config_function": "MODE2",
       "dqs": null,
@@ -2081,12 +2334,13 @@
         "config_function": "MODE2",
         "must_connect": true,
         "desc": "Multi-function pin: IO + MODE2"
-      }
+      },
+      "category": "IO"
     },
     {
       "pin": "F13",
       "name": "IOT27B/DONE",
-      "function": "IO",
+      "function": "I/O",
       "bank": "7",
       "config_function": "DONE",
       "dqs": null,
@@ -2097,128 +2351,140 @@
         "config_function": "DONE",
         "must_connect": true,
         "desc": "Multi-function pin: IO + DONE"
-      }
+      },
+      "category": "IO"
     },
     {
       "pin": "E11",
       "name": "IOT29A/PUDC_B",
-      "function": "IO",
+      "function": "I/O",
       "bank": "0",
       "config_function": "PUDC_B",
       "dqs": null,
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOT29B"
+      "diff_complement": "IOT29B",
+      "category": "IO"
     },
     {
       "pin": "H12",
       "name": "IOT3A/GCLKT_16",
-      "function": "IO",
+      "function": "I/O",
       "bank": "7",
       "config_function": "GCLKT_16",
       "dqs": null,
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOT3B"
+      "diff_complement": "IOT3B",
+      "category": "IO"
     },
     {
       "pin": "H11",
       "name": "IOT3B/GCLKC_16/LPLL0_C_FB0",
-      "function": "IO",
+      "function": "I/O",
       "bank": "7",
       "config_function": "GCLKC_16/LPLL0_C_FB0",
       "dqs": null,
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOT3A"
+      "diff_complement": "IOT3A",
+      "category": "IO"
     },
     {
       "pin": "J11",
       "name": "IOT74A",
-      "function": "IO",
+      "function": "I/O",
       "bank": "1",
       "config_function": null,
       "dqs": "DQ1/DQS_01",
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOT74B"
+      "diff_complement": "IOT74B",
+      "category": "IO"
     },
     {
       "pin": "J12",
       "name": "IOT74B",
-      "function": "IO",
+      "function": "I/O",
       "bank": "1",
       "config_function": null,
       "dqs": "DQ1/DQS_01",
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOT74A"
+      "diff_complement": "IOT74A",
+      "category": "IO"
     },
     {
       "pin": "K12",
       "name": "IOT76A",
-      "function": "IO",
+      "function": "I/O",
       "bank": "1",
       "config_function": null,
       "dqs": "DQ1",
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOT76B"
+      "diff_complement": "IOT76B",
+      "category": "IO"
     },
     {
       "pin": "K11",
       "name": "IOT76B",
-      "function": "IO",
+      "function": "I/O",
       "bank": "1",
       "config_function": null,
       "dqs": "DQ1",
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOT76A"
+      "diff_complement": "IOT76A",
+      "category": "IO"
     },
     {
       "pin": "L12",
       "name": "IOT89A/RPLL0_T_FB1",
-      "function": "IO",
+      "function": "I/O",
       "bank": "1",
       "config_function": "RPLL0_T_FB1",
       "dqs": null,
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOT89B"
+      "diff_complement": "IOT89B",
+      "category": "IO"
     },
     {
       "pin": "L9",
       "name": "IOT89B",
-      "function": "IO",
+      "function": "I/O",
       "bank": "1",
       "config_function": null,
       "dqs": null,
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOT89A"
+      "diff_complement": "IOT89A",
+      "category": "IO"
     },
     {
       "pin": "L8",
       "name": "IOT91A/RPLL0_T_IN1",
-      "function": "IO",
+      "function": "I/O",
       "bank": "1",
       "config_function": "RPLL0_T_IN1",
       "dqs": null,
       "lvds_capable": true,
       "polarity": "P",
-      "diff_complement": "IOT91B"
+      "diff_complement": "IOT91B",
+      "category": "IO"
     },
     {
       "pin": "L7",
       "name": "IOT91B/RPLL0_C_FB0",
-      "function": "IO",
+      "function": "I/O",
       "bank": "1",
       "config_function": "RPLL0_C_FB0",
       "dqs": null,
       "lvds_capable": true,
       "polarity": "N",
-      "diff_complement": "IOT91A"
+      "diff_complement": "IOT91A",
+      "category": "IO"
     },
     {
       "pin": "B9",
@@ -2228,7 +2494,8 @@
       "config_function": null,
       "dqs": null,
       "lvds_capable": false,
-      "polarity": "N"
+      "polarity": "N",
+      "category": "MIPI"
     },
     {
       "pin": "A9",
@@ -2238,7 +2505,8 @@
       "config_function": null,
       "dqs": null,
       "lvds_capable": false,
-      "polarity": "P"
+      "polarity": "P",
+      "category": "MIPI"
     },
     {
       "pin": "A10",
@@ -2248,7 +2516,8 @@
       "config_function": null,
       "dqs": null,
       "lvds_capable": false,
-      "polarity": "N"
+      "polarity": "N",
+      "category": "MIPI"
     },
     {
       "pin": "B10",
@@ -2258,7 +2527,8 @@
       "config_function": null,
       "dqs": null,
       "lvds_capable": false,
-      "polarity": "P"
+      "polarity": "P",
+      "category": "MIPI"
     },
     {
       "pin": "D9",
@@ -2268,7 +2538,8 @@
       "config_function": null,
       "dqs": null,
       "lvds_capable": false,
-      "polarity": "N"
+      "polarity": "N",
+      "category": "MIPI"
     },
     {
       "pin": "C9",
@@ -2278,7 +2549,8 @@
       "config_function": null,
       "dqs": null,
       "lvds_capable": false,
-      "polarity": "P"
+      "polarity": "P",
+      "category": "MIPI"
     },
     {
       "pin": "E8",
@@ -2288,7 +2560,8 @@
       "config_function": null,
       "dqs": null,
       "lvds_capable": false,
-      "polarity": "N"
+      "polarity": "N",
+      "category": "MIPI"
     },
     {
       "pin": "D8",
@@ -2298,7 +2571,8 @@
       "config_function": null,
       "dqs": null,
       "lvds_capable": false,
-      "polarity": "P"
+      "polarity": "P",
+      "category": "MIPI"
     },
     {
       "pin": "C8",
@@ -2308,7 +2582,8 @@
       "config_function": null,
       "dqs": null,
       "lvds_capable": false,
-      "polarity": "N"
+      "polarity": "N",
+      "category": "MIPI"
     },
     {
       "pin": "B8",
@@ -2318,7 +2593,8 @@
       "config_function": null,
       "dqs": null,
       "lvds_capable": false,
-      "polarity": "P"
+      "polarity": "P",
+      "category": "MIPI"
     },
     {
       "pin": "D13",
@@ -2331,7 +2607,8 @@
       "drc": {
         "must_connect": true,
         "net": "GND"
-      }
+      },
+      "category": "GROUND"
     },
     {
       "pin": "D12",
@@ -2343,7 +2620,8 @@
       "lvds_capable": false,
       "drc": {
         "must_connect": true
-      }
+      },
+      "category": "POWER"
     },
     {
       "pin": "J10",
@@ -2355,7 +2633,8 @@
       "lvds_capable": false,
       "drc": {
         "must_connect": true
-      }
+      },
+      "category": "POWER"
     },
     {
       "pin": "M13",
@@ -2367,7 +2646,8 @@
       "lvds_capable": false,
       "drc": {
         "must_connect": true
-      }
+      },
+      "category": "POWER"
     },
     {
       "pin": "N12",
@@ -2379,7 +2659,8 @@
       "lvds_capable": false,
       "drc": {
         "must_connect": true
-      }
+      },
+      "category": "POWER"
     },
     {
       "pin": "R16",
@@ -2388,7 +2669,8 @@
       "bank": null,
       "config_function": null,
       "dqs": null,
-      "lvds_capable": false
+      "lvds_capable": false,
+      "category": "OTHER"
     },
     {
       "pin": "J16",
@@ -2397,7 +2679,8 @@
       "bank": null,
       "config_function": null,
       "dqs": null,
-      "lvds_capable": false
+      "lvds_capable": false,
+      "category": "OTHER"
     },
     {
       "pin": "E16",
@@ -2406,7 +2689,8 @@
       "bank": null,
       "config_function": null,
       "dqs": null,
-      "lvds_capable": false
+      "lvds_capable": false,
+      "category": "OTHER"
     },
     {
       "pin": "E15",
@@ -2415,7 +2699,8 @@
       "bank": null,
       "config_function": null,
       "dqs": null,
-      "lvds_capable": false
+      "lvds_capable": false,
+      "category": "OTHER"
     },
     {
       "pin": "T13",
@@ -2424,7 +2709,8 @@
       "bank": null,
       "config_function": null,
       "dqs": null,
-      "lvds_capable": false
+      "lvds_capable": false,
+      "category": "OTHER"
     },
     {
       "pin": "T14",
@@ -2433,7 +2719,8 @@
       "bank": null,
       "config_function": null,
       "dqs": null,
-      "lvds_capable": false
+      "lvds_capable": false,
+      "category": "OTHER"
     },
     {
       "pin": "T15",
@@ -2442,7 +2729,8 @@
       "bank": null,
       "config_function": null,
       "dqs": null,
-      "lvds_capable": false
+      "lvds_capable": false,
+      "category": "OTHER"
     },
     {
       "pin": "K15",
@@ -2451,7 +2739,8 @@
       "bank": null,
       "config_function": null,
       "dqs": null,
-      "lvds_capable": false
+      "lvds_capable": false,
+      "category": "OTHER"
     },
     {
       "pin": "L14",
@@ -2460,7 +2749,8 @@
       "bank": null,
       "config_function": null,
       "dqs": null,
-      "lvds_capable": false
+      "lvds_capable": false,
+      "category": "OTHER"
     },
     {
       "pin": "L15",
@@ -2469,7 +2759,8 @@
       "bank": null,
       "config_function": null,
       "dqs": null,
-      "lvds_capable": false
+      "lvds_capable": false,
+      "category": "OTHER"
     },
     {
       "pin": "D16",
@@ -2478,7 +2769,8 @@
       "bank": null,
       "config_function": null,
       "dqs": null,
-      "lvds_capable": false
+      "lvds_capable": false,
+      "category": "OTHER"
     },
     {
       "pin": "C16",
@@ -2487,7 +2779,8 @@
       "bank": null,
       "config_function": null,
       "dqs": null,
-      "lvds_capable": false
+      "lvds_capable": false,
+      "category": "OTHER"
     },
     {
       "pin": "D15",
@@ -2496,7 +2789,8 @@
       "bank": null,
       "config_function": null,
       "dqs": null,
-      "lvds_capable": false
+      "lvds_capable": false,
+      "category": "OTHER"
     },
     {
       "pin": "T11",
@@ -2505,7 +2799,8 @@
       "bank": null,
       "config_function": null,
       "dqs": null,
-      "lvds_capable": false
+      "lvds_capable": false,
+      "category": "OTHER"
     },
     {
       "pin": "T12",
@@ -2514,7 +2809,8 @@
       "bank": null,
       "config_function": null,
       "dqs": null,
-      "lvds_capable": false
+      "lvds_capable": false,
+      "category": "OTHER"
     },
     {
       "pin": "E14",
@@ -2523,7 +2819,8 @@
       "bank": null,
       "config_function": null,
       "dqs": null,
-      "lvds_capable": false
+      "lvds_capable": false,
+      "category": "OTHER"
     },
     {
       "pin": "D14",
@@ -2532,7 +2829,8 @@
       "bank": null,
       "config_function": null,
       "dqs": null,
-      "lvds_capable": false
+      "lvds_capable": false,
+      "category": "OTHER"
     },
     {
       "pin": "A14",
@@ -2541,7 +2839,8 @@
       "bank": null,
       "config_function": null,
       "dqs": null,
-      "lvds_capable": false
+      "lvds_capable": false,
+      "category": "OTHER"
     },
     {
       "pin": "G13",
@@ -2550,7 +2849,8 @@
       "bank": null,
       "config_function": null,
       "dqs": null,
-      "lvds_capable": false
+      "lvds_capable": false,
+      "category": "OTHER"
     },
     {
       "pin": "G15",
@@ -2559,7 +2859,8 @@
       "bank": null,
       "config_function": null,
       "dqs": null,
-      "lvds_capable": false
+      "lvds_capable": false,
+      "category": "OTHER"
     },
     {
       "pin": "H14",
@@ -2568,7 +2869,8 @@
       "bank": null,
       "config_function": null,
       "dqs": null,
-      "lvds_capable": false
+      "lvds_capable": false,
+      "category": "OTHER"
     },
     {
       "pin": "H15",
@@ -2577,7 +2879,8 @@
       "bank": null,
       "config_function": null,
       "dqs": null,
-      "lvds_capable": false
+      "lvds_capable": false,
+      "category": "OTHER"
     },
     {
       "pin": "A15",
@@ -2586,7 +2889,8 @@
       "bank": null,
       "config_function": null,
       "dqs": null,
-      "lvds_capable": false
+      "lvds_capable": false,
+      "category": "OTHER"
     },
     {
       "pin": "N14",
@@ -2595,7 +2899,8 @@
       "bank": null,
       "config_function": null,
       "dqs": null,
-      "lvds_capable": false
+      "lvds_capable": false,
+      "category": "OTHER"
     },
     {
       "pin": "R14",
@@ -2604,7 +2909,8 @@
       "bank": null,
       "config_function": null,
       "dqs": null,
-      "lvds_capable": false
+      "lvds_capable": false,
+      "category": "OTHER"
     },
     {
       "pin": "N15",
@@ -2613,7 +2919,8 @@
       "bank": null,
       "config_function": null,
       "dqs": null,
-      "lvds_capable": false
+      "lvds_capable": false,
+      "category": "OTHER"
     },
     {
       "pin": "P15",
@@ -2622,7 +2929,8 @@
       "bank": null,
       "config_function": null,
       "dqs": null,
-      "lvds_capable": false
+      "lvds_capable": false,
+      "category": "OTHER"
     },
     {
       "pin": "P16",
@@ -2631,7 +2939,8 @@
       "bank": null,
       "config_function": null,
       "dqs": null,
-      "lvds_capable": false
+      "lvds_capable": false,
+      "category": "OTHER"
     },
     {
       "pin": "N16",
@@ -2640,7 +2949,8 @@
       "bank": null,
       "config_function": null,
       "dqs": null,
-      "lvds_capable": false
+      "lvds_capable": false,
+      "category": "OTHER"
     },
     {
       "pin": "F16",
@@ -2649,7 +2959,8 @@
       "bank": null,
       "config_function": null,
       "dqs": null,
-      "lvds_capable": false
+      "lvds_capable": false,
+      "category": "OTHER"
     },
     {
       "pin": "F15",
@@ -2658,7 +2969,8 @@
       "bank": null,
       "config_function": null,
       "dqs": null,
-      "lvds_capable": false
+      "lvds_capable": false,
+      "category": "OTHER"
     },
     {
       "pin": "M14",
@@ -2667,7 +2979,8 @@
       "bank": null,
       "config_function": null,
       "dqs": null,
-      "lvds_capable": false
+      "lvds_capable": false,
+      "category": "OTHER"
     },
     {
       "pin": "M16",
@@ -2676,7 +2989,8 @@
       "bank": null,
       "config_function": null,
       "dqs": null,
-      "lvds_capable": false
+      "lvds_capable": false,
+      "category": "OTHER"
     },
     {
       "pin": "L16",
@@ -2685,7 +2999,8 @@
       "bank": null,
       "config_function": null,
       "dqs": null,
-      "lvds_capable": false
+      "lvds_capable": false,
+      "category": "OTHER"
     },
     {
       "pin": "K16",
@@ -2694,7 +3009,8 @@
       "bank": null,
       "config_function": null,
       "dqs": null,
-      "lvds_capable": false
+      "lvds_capable": false,
+      "category": "OTHER"
     },
     {
       "pin": "F14",
@@ -2703,7 +3019,8 @@
       "bank": null,
       "config_function": null,
       "dqs": null,
-      "lvds_capable": false
+      "lvds_capable": false,
+      "category": "OTHER"
     },
     {
       "pin": "B16",
@@ -2712,7 +3029,8 @@
       "bank": null,
       "config_function": null,
       "dqs": null,
-      "lvds_capable": false
+      "lvds_capable": false,
+      "category": "OTHER"
     },
     {
       "pin": "C15",
@@ -2721,7 +3039,8 @@
       "bank": null,
       "config_function": null,
       "dqs": null,
-      "lvds_capable": false
+      "lvds_capable": false,
+      "category": "OTHER"
     },
     {
       "pin": "J15",
@@ -2730,7 +3049,8 @@
       "bank": null,
       "config_function": null,
       "dqs": null,
-      "lvds_capable": false
+      "lvds_capable": false,
+      "category": "OTHER"
     },
     {
       "pin": "J14",
@@ -2739,7 +3059,8 @@
       "bank": null,
       "config_function": null,
       "dqs": null,
-      "lvds_capable": false
+      "lvds_capable": false,
+      "category": "OTHER"
     },
     {
       "pin": "K13",
@@ -2748,7 +3069,8 @@
       "bank": null,
       "config_function": null,
       "dqs": null,
-      "lvds_capable": false
+      "lvds_capable": false,
+      "category": "OTHER"
     },
     {
       "pin": "L13",
@@ -2757,7 +3079,8 @@
       "bank": null,
       "config_function": null,
       "dqs": null,
-      "lvds_capable": false
+      "lvds_capable": false,
+      "category": "OTHER"
     },
     {
       "pin": "J13",
@@ -2766,7 +3089,8 @@
       "bank": null,
       "config_function": null,
       "dqs": null,
-      "lvds_capable": false
+      "lvds_capable": false,
+      "category": "OTHER"
     },
     {
       "pin": "M15",
@@ -2775,7 +3099,8 @@
       "bank": null,
       "config_function": null,
       "dqs": null,
-      "lvds_capable": false
+      "lvds_capable": false,
+      "category": "OTHER"
     },
     {
       "pin": "P13",
@@ -2784,7 +3109,8 @@
       "bank": null,
       "config_function": null,
       "dqs": null,
-      "lvds_capable": false
+      "lvds_capable": false,
+      "category": "OTHER"
     },
     {
       "pin": "R13",
@@ -2793,7 +3119,8 @@
       "bank": null,
       "config_function": null,
       "dqs": null,
-      "lvds_capable": false
+      "lvds_capable": false,
+      "category": "OTHER"
     },
     {
       "pin": "H13",
@@ -2802,7 +3129,8 @@
       "bank": null,
       "config_function": null,
       "dqs": null,
-      "lvds_capable": false
+      "lvds_capable": false,
+      "category": "OTHER"
     },
     {
       "pin": "C13",
@@ -2811,7 +3139,8 @@
       "bank": null,
       "config_function": null,
       "dqs": null,
-      "lvds_capable": false
+      "lvds_capable": false,
+      "category": "OTHER"
     },
     {
       "pin": "B14",
@@ -2820,7 +3149,8 @@
       "bank": null,
       "config_function": null,
       "dqs": null,
-      "lvds_capable": false
+      "lvds_capable": false,
+      "category": "OTHER"
     },
     {
       "pin": "B13",
@@ -2829,7 +3159,8 @@
       "bank": null,
       "config_function": null,
       "dqs": null,
-      "lvds_capable": false
+      "lvds_capable": false,
+      "category": "OTHER"
     },
     {
       "pin": "H16",
@@ -2838,7 +3169,8 @@
       "bank": null,
       "config_function": null,
       "dqs": null,
-      "lvds_capable": false
+      "lvds_capable": false,
+      "category": "OTHER"
     },
     {
       "pin": "G16",
@@ -2847,7 +3179,8 @@
       "bank": null,
       "config_function": null,
       "dqs": null,
-      "lvds_capable": false
+      "lvds_capable": false,
+      "category": "OTHER"
     },
     {
       "pin": "K14",
@@ -2856,7 +3189,8 @@
       "bank": null,
       "config_function": null,
       "dqs": null,
-      "lvds_capable": false
+      "lvds_capable": false,
+      "category": "OTHER"
     },
     {
       "pin": "G14",
@@ -2865,7 +3199,8 @@
       "bank": null,
       "config_function": null,
       "dqs": null,
-      "lvds_capable": false
+      "lvds_capable": false,
+      "category": "OTHER"
     },
     {
       "pin": "E13",
@@ -2874,7 +3209,8 @@
       "bank": null,
       "config_function": null,
       "dqs": null,
-      "lvds_capable": false
+      "lvds_capable": false,
+      "category": "OTHER"
     },
     {
       "pin": "E4",
@@ -2886,7 +3222,8 @@
       "lvds_capable": false,
       "drc": {
         "must_connect": true
-      }
+      },
+      "category": "POWER"
     },
     {
       "pin": "G8",
@@ -2898,7 +3235,8 @@
       "lvds_capable": false,
       "drc": {
         "must_connect": true
-      }
+      },
+      "category": "POWER"
     },
     {
       "pin": "G7",
@@ -2910,7 +3248,8 @@
       "lvds_capable": false,
       "drc": {
         "must_connect": true
-      }
+      },
+      "category": "POWER"
     },
     {
       "pin": "T1",
@@ -2922,7 +3261,8 @@
       "lvds_capable": false,
       "drc": {
         "must_connect": true
-      }
+      },
+      "category": "POWER"
     },
     {
       "pin": "K7",
@@ -2934,7 +3274,8 @@
       "lvds_capable": false,
       "drc": {
         "must_connect": true
-      }
+      },
+      "category": "POWER"
     },
     {
       "pin": "G10",
@@ -2946,7 +3287,8 @@
       "lvds_capable": false,
       "drc": {
         "must_connect": true
-      }
+      },
+      "category": "POWER"
     },
     {
       "pin": "K10",
@@ -2958,7 +3300,8 @@
       "lvds_capable": false,
       "drc": {
         "must_connect": true
-      }
+      },
+      "category": "POWER"
     },
     {
       "pin": "T16",
@@ -2970,7 +3313,8 @@
       "lvds_capable": false,
       "drc": {
         "must_connect": true
-      }
+      },
+      "category": "POWER"
     },
     {
       "pin": "A16",
@@ -2982,7 +3326,8 @@
       "lvds_capable": false,
       "drc": {
         "must_connect": true
-      }
+      },
+      "category": "POWER"
     },
     {
       "pin": "A1",
@@ -2994,7 +3339,8 @@
       "lvds_capable": false,
       "drc": {
         "must_connect": true
-      }
+      },
+      "category": "POWER"
     },
     {
       "pin": "H7",
@@ -3006,7 +3352,8 @@
       "lvds_capable": false,
       "drc": {
         "must_connect": true
-      }
+      },
+      "category": "POWER"
     },
     {
       "pin": "K9",
@@ -3018,7 +3365,8 @@
       "lvds_capable": false,
       "drc": {
         "must_connect": true
-      }
+      },
+      "category": "POWER"
     },
     {
       "pin": "H10",
@@ -3030,7 +3378,8 @@
       "lvds_capable": false,
       "drc": {
         "must_connect": true
-      }
+      },
+      "category": "POWER"
     },
     {
       "pin": "G9",
@@ -3042,7 +3391,8 @@
       "lvds_capable": false,
       "drc": {
         "must_connect": true
-      }
+      },
+      "category": "POWER"
     },
     {
       "pin": "M4",
@@ -3054,7 +3404,8 @@
       "lvds_capable": false,
       "drc": {
         "must_connect": true
-      }
+      },
+      "category": "POWER"
     },
     {
       "pin": "N5",
@@ -3066,7 +3417,8 @@
       "lvds_capable": false,
       "drc": {
         "must_connect": true
-      }
+      },
+      "category": "POWER"
     },
     {
       "pin": "D5",
@@ -3078,7 +3430,8 @@
       "lvds_capable": false,
       "drc": {
         "must_connect": true
-      }
+      },
+      "category": "POWER"
     },
     {
       "pin": "J7",
@@ -3090,7 +3443,8 @@
       "lvds_capable": false,
       "drc": {
         "must_connect": true
-      }
+      },
+      "category": "POWER"
     },
     {
       "pin": "K8",
@@ -3099,7 +3453,8 @@
       "bank": "N/A",
       "config_function": null,
       "dqs": null,
-      "lvds_capable": false
+      "lvds_capable": false,
+      "category": "POWER"
     },
     {
       "pin": "B15",
@@ -3112,7 +3467,8 @@
       "drc": {
         "must_connect": true,
         "net": "GND"
-      }
+      },
+      "category": "GROUND"
     },
     {
       "pin": "C3",
@@ -3125,7 +3481,8 @@
       "drc": {
         "must_connect": true,
         "net": "GND"
-      }
+      },
+      "category": "GROUND"
     },
     {
       "pin": "C14",
@@ -3138,7 +3495,8 @@
       "drc": {
         "must_connect": true,
         "net": "GND"
-      }
+      },
+      "category": "GROUND"
     },
     {
       "pin": "D4",
@@ -3151,7 +3509,8 @@
       "drc": {
         "must_connect": true,
         "net": "GND"
-      }
+      },
+      "category": "GROUND"
     },
     {
       "pin": "E5",
@@ -3164,7 +3523,8 @@
       "drc": {
         "must_connect": true,
         "net": "GND"
-      }
+      },
+      "category": "GROUND"
     },
     {
       "pin": "E12",
@@ -3177,7 +3537,8 @@
       "drc": {
         "must_connect": true,
         "net": "GND"
-      }
+      },
+      "category": "GROUND"
     },
     {
       "pin": "F6",
@@ -3190,7 +3551,8 @@
       "drc": {
         "must_connect": true,
         "net": "GND"
-      }
+      },
+      "category": "GROUND"
     },
     {
       "pin": "F11",
@@ -3203,7 +3565,8 @@
       "drc": {
         "must_connect": true,
         "net": "GND"
-      }
+      },
+      "category": "GROUND"
     },
     {
       "pin": "H8",
@@ -3216,7 +3579,8 @@
       "drc": {
         "must_connect": true,
         "net": "GND"
-      }
+      },
+      "category": "GROUND"
     },
     {
       "pin": "H9",
@@ -3229,7 +3593,8 @@
       "drc": {
         "must_connect": true,
         "net": "GND"
-      }
+      },
+      "category": "GROUND"
     },
     {
       "pin": "J8",
@@ -3242,7 +3607,8 @@
       "drc": {
         "must_connect": true,
         "net": "GND"
-      }
+      },
+      "category": "GROUND"
     },
     {
       "pin": "J9",
@@ -3255,7 +3621,8 @@
       "drc": {
         "must_connect": true,
         "net": "GND"
-      }
+      },
+      "category": "GROUND"
     },
     {
       "pin": "L6",
@@ -3268,7 +3635,8 @@
       "drc": {
         "must_connect": true,
         "net": "GND"
-      }
+      },
+      "category": "GROUND"
     },
     {
       "pin": "L11",
@@ -3281,7 +3649,8 @@
       "drc": {
         "must_connect": true,
         "net": "GND"
-      }
+      },
+      "category": "GROUND"
     },
     {
       "pin": "M5",
@@ -3294,7 +3663,8 @@
       "drc": {
         "must_connect": true,
         "net": "GND"
-      }
+      },
+      "category": "GROUND"
     },
     {
       "pin": "M12",
@@ -3307,7 +3677,8 @@
       "drc": {
         "must_connect": true,
         "net": "GND"
-      }
+      },
+      "category": "GROUND"
     },
     {
       "pin": "N4",
@@ -3320,7 +3691,8 @@
       "drc": {
         "must_connect": true,
         "net": "GND"
-      }
+      },
+      "category": "GROUND"
     },
     {
       "pin": "N13",
@@ -3333,7 +3705,8 @@
       "drc": {
         "must_connect": true,
         "net": "GND"
-      }
+      },
+      "category": "GROUND"
     },
     {
       "pin": "P3",
@@ -3346,7 +3719,8 @@
       "drc": {
         "must_connect": true,
         "net": "GND"
-      }
+      },
+      "category": "GROUND"
     },
     {
       "pin": "P14",
@@ -3359,7 +3733,8 @@
       "drc": {
         "must_connect": true,
         "net": "GND"
-      }
+      },
+      "category": "GROUND"
     },
     {
       "pin": "R2",
@@ -3372,7 +3747,8 @@
       "drc": {
         "must_connect": true,
         "net": "GND"
-      }
+      },
+      "category": "GROUND"
     },
     {
       "pin": "R15",
@@ -3385,7 +3761,8 @@
       "drc": {
         "must_connect": true,
         "net": "GND"
-      }
+      },
+      "category": "GROUND"
     },
     {
       "pin": "B2",
@@ -3398,11 +3775,12 @@
       "drc": {
         "must_connect": true,
         "net": "GND"
-      }
+      },
+      "category": "GROUND"
     }
   ],
   "lookup": {
-    "pin_to_name": {
+    "by_pin": {
       "A3": "IOB10A/D06/SSPI_CS_N",
       "A2": "IOB10B/D05/SI/SSI0",
       "B3": "IOB12A/GCLKT_10B/D15/SSPI_WPN/SSI2",
@@ -3660,7 +4038,7 @@
       "R15": "VSS",
       "B2": "VSS"
     },
-    "name_to_pin": {
+    "by_name": {
       "IOB10A/D06/SSPI_CS_N": "A3",
       "IOB10B/D05/SI/SSI0": "A2",
       "IOB12A/GCLKT_10B/D15/SSPI_WPN/SSI2": "B3",
@@ -3877,202 +4255,7 @@
       "M0_VDDX/VCCX": "G8",
       "VCC_REG": "H7",
       "VQPS": "K8"
-    },
-    "io_pins": [
-      "A3",
-      "A2",
-      "B3",
-      "C4",
-      "C5",
-      "C6",
-      "C7",
-      "D7",
-      "C2",
-      "D3",
-      "A8",
-      "B1",
-      "C1",
-      "D2",
-      "D1",
-      "D6",
-      "E7",
-      "E6",
-      "E3",
-      "E2",
-      "E1",
-      "A7",
-      "B7",
-      "F1",
-      "F2",
-      "F3",
-      "F4",
-      "F5",
-      "G4",
-      "G3",
-      "G2",
-      "G1",
-      "H1",
-      "H2",
-      "H3",
-      "H4",
-      "G5",
-      "G6",
-      "H5",
-      "H6",
-      "J6",
-      "A6",
-      "B6",
-      "J1",
-      "J2",
-      "J3",
-      "J4",
-      "J5",
-      "K5",
-      "K2",
-      "K1",
-      "K4",
-      "K3",
-      "K6",
-      "L5",
-      "L4",
-      "L3",
-      "L2",
-      "M1",
-      "L1",
-      "M3",
-      "M2",
-      "M6",
-      "M7",
-      "A4",
-      "A5",
-      "N7",
-      "N6",
-      "N3",
-      "N2",
-      "N1",
-      "P1",
-      "P2",
-      "R1",
-      "P5",
-      "P6",
-      "P7",
-      "R7",
-      "R6",
-      "R5",
-      "R4",
-      "P4",
-      "R3",
-      "T3",
-      "T2",
-      "T4",
-      "B4",
-      "B5",
-      "T5",
-      "T6",
-      "A11",
-      "B11",
-      "C10",
-      "D10",
-      "E9",
-      "E10",
-      "C11",
-      "D11",
-      "B12",
-      "C12",
-      "A12",
-      "A13",
-      "M9",
-      "N8",
-      "M8",
-      "N9",
-      "N10",
-      "L10",
-      "M10",
-      "R12",
-      "P12",
-      "P10",
-      "P11",
-      "R10",
-      "R11",
-      "P8",
-      "P9",
-      "R8",
-      "R9",
-      "T10",
-      "T9",
-      "T8",
-      "T7",
-      "M11",
-      "N11",
-      "F7",
-      "F8",
-      "G12",
-      "G11",
-      "F9",
-      "F10",
-      "F12",
-      "F13",
-      "E11",
-      "H12",
-      "H11",
-      "J11",
-      "J12",
-      "K12",
-      "K11",
-      "L12",
-      "L9",
-      "L8",
-      "L7"
-    ],
-    "power_pins": [
-      "D13",
-      "D12",
-      "J10",
-      "M13",
-      "N12",
-      "E4",
-      "G8",
-      "G7",
-      "T1",
-      "K7",
-      "G10",
-      "K10",
-      "T16",
-      "A16",
-      "A1",
-      "H7",
-      "K9",
-      "H10",
-      "G9",
-      "M4",
-      "N5",
-      "D5",
-      "J7",
-      "B15",
-      "C3",
-      "C14",
-      "D4",
-      "E5",
-      "E12",
-      "F6",
-      "F11",
-      "H8",
-      "H9",
-      "J8",
-      "J9",
-      "L6",
-      "L11",
-      "M5",
-      "M12",
-      "N4",
-      "N13",
-      "P3",
-      "P14",
-      "R2",
-      "R15",
-      "B2"
-    ],
-    "config_pins": []
+    }
   },
   "summary": {
     "by_function": {
@@ -4088,6 +4271,71 @@
       "SERDES_RX": 0,
       "SERDES_TX": 0,
       "SERDES_REFCLK": 0
+    }
+  },
+  "absolute_maximum_ratings": {
+    "abs_VCC_FPGA_Logic": {
+      "parameter": "VCC (核电压, EV)",
+      "symbol": "VCC",
+      "min": -0.5,
+      "max": 3.75,
+      "unit": "V",
+      "conditions": "Absolute maximum, FPGA Logic",
+      "source": "absolute_maximum"
+    },
+    "abs_VCCIO_FPGA_Logic": {
+      "parameter": "VCCIO (I/O Bank 电压)",
+      "symbol": "VCCIO",
+      "min": -0.5,
+      "max": 3.75,
+      "unit": "V",
+      "conditions": "Absolute maximum, FPGA Logic",
+      "source": "absolute_maximum"
+    },
+    "abs_VCCX_FPGA_Logic": {
+      "parameter": "VCCX (辅助电压)",
+      "symbol": "VCCX",
+      "min": -0.5,
+      "max": 3.75,
+      "unit": "V",
+      "conditions": "Absolute maximum, FPGA Logic",
+      "source": "absolute_maximum"
+    },
+    "abs_VCC_REG_FPGA_Logic": {
+      "parameter": "VCC_REG (Regulator 电压)",
+      "symbol": "VCC_REG",
+      "min": -0.5,
+      "max": 3.75,
+      "unit": "V",
+      "conditions": "Absolute maximum, FPGA Logic",
+      "source": "absolute_maximum"
+    },
+    "abs_VIN_FPGA_Logic": {
+      "parameter": "VIN (单端输入)",
+      "symbol": "VIN",
+      "min": -0.4,
+      "max": 3.75,
+      "unit": "V",
+      "conditions": "Absolute maximum, FPGA Logic",
+      "source": "absolute_maximum"
+    },
+    "abs_Storage Temperature_": {
+      "parameter": "Storage Temperature (储存温度)",
+      "symbol": "Storage Temperature",
+      "min": -65.0,
+      "max": 150.0,
+      "unit": "℃",
+      "conditions": "Absolute maximum, 温度",
+      "source": "absolute_maximum"
+    },
+    "abs_Junction Temperature_": {
+      "parameter": "Junction Temperature (结温)",
+      "symbol": "Junction Temperature",
+      "min": -40.0,
+      "max": 125.0,
+      "unit": "℃",
+      "conditions": "Absolute maximum, 温度",
+      "source": "absolute_maximum"
     }
   }
 }

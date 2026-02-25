@@ -190,16 +190,94 @@ def _sanitize(s: str) -> str:
     return re.sub(r"[^a-zA-Z0-9]", "_", s)[:30].strip("_")
 
 
+# ─── FPGA Pin Normalization ─────────────────────────────────────────
+
+
+def _classify_pin(pin: dict) -> str:
+    """Classify a pin into a standard category."""
+    if pin.get("category"):
+        return pin["category"]
+    name = pin.get("name", "")
+    func = pin.get("function", "")
+    if "VSS" in name or "GND" in name:
+        return "GROUND"
+    if "VCC" in name or "VDD" in name or "VQPS" in name:
+        return "POWER"
+    if func in ("IO", "I/O"):
+        return "IO"
+    if "Q0_" in name or "Q1_" in name:
+        if "RX" in name:
+            return "SERDES_RX"
+        if "TX" in name:
+            return "SERDES_TX"
+        if "REFCLK" in name:
+            return "SERDES_REFCLK"
+        return "SERDES"
+    if "MIPI" in name or "M0_" in name:
+        return "MIPI"
+    if "NC" == name:
+        return "NC"
+    if func in ("CONFIG", "JTAG"):
+        return "CONFIG"
+    return "OTHER"
+
+
+def _normalize_pins(pins: list) -> list:
+    """Ensure every pin has a 'category' field."""
+    for pin in pins:
+        if not pin.get("category"):
+            pin["category"] = _classify_pin(pin)
+        # Normalize function field
+        if pin.get("function") == "IO":
+            pin["function"] = "I/O"
+    return pins
+
+
+def _normalize_lookup(pinout_data: dict) -> dict:
+    """Normalize lookup to standard {by_pin, by_name} format."""
+    lookup = pinout_data.get("lookup", {})
+    result = {}
+
+    # Handle xlsx format: pin_to_name / name_to_pin
+    if "pin_to_name" in lookup:
+        result["by_pin"] = dict(lookup["pin_to_name"]) if isinstance(lookup["pin_to_name"], list) else lookup["pin_to_name"]
+        result["by_name"] = dict(lookup["name_to_pin"]) if isinstance(lookup["name_to_pin"], list) else lookup["name_to_pin"]
+    # Handle PDF format: by_pin / by_name
+    elif "by_pin" in lookup:
+        result["by_pin"] = lookup["by_pin"]
+        result["by_name"] = lookup["by_name"]
+    else:
+        # Build from pins
+        by_pin = {}
+        by_name = {}
+        for pin in pinout_data.get("pins", []):
+            p = pin.get("pin", "")
+            n = pin.get("name", "")
+            if p and n:
+                by_pin[p] = n
+                by_name[n] = p
+        result["by_pin"] = by_pin
+        result["by_name"] = by_name
+
+    return result
+
+
 # ─── FPGA Export ────────────────────────────────────────────────────
 
 
-def export_fpga(dc_data: dict, pinout_data: dict) -> dict:
-    """Combine FPGA DC datasheet + pinout into sch-review format."""
+def export_fpga(dc_data: dict, pinout_data: dict, gowin_dc: dict = None) -> dict:
+    """Combine FPGA DC datasheet + pinout into sch-review format.
+
+    dc_data: AMD-style extracted datasheet (with extraction.component etc.)
+    gowin_dc: Gowin-style DC extraction (from extract_gowin_dc.py)
+    """
     ext = dc_data.get("extraction", {})
     comp = ext.get("component", {})
 
     # --- Supply voltage specs from DC datasheet ---
     supply_specs = {}
+
+    # AMD-style DC data
     for item in ext.get("electrical_characteristics", []):
         sym = item.get("symbol", "")
         param = item.get("parameter", "")
@@ -222,12 +300,63 @@ def export_fpga(dc_data: dict, pinout_data: dict) -> dict:
                 "conditions": cond or None,
             }
 
+    # Gowin-style DC data
+    if gowin_dc:
+        device = pinout_data["device"]
+        # Find matching recommended operating entries for this device
+        for item in gowin_dc.get("recommended_operating", []):
+            dev_tag = item.get("device", "")
+            # Match: GW5AT-60 matches "GW5AT-60", GW5AT-138 matches "GW5AT-138 / GW5AT-75"
+            # For devices without exact match (e.g. GW5AT-15 in old DS981), check if any entry matches
+            has_exact_match = any(device in it.get("device", "") for it in gowin_dc.get("recommended_operating", []))
+            if device in dev_tag or not dev_tag or not has_exact_match:
+                param_name = item["parameter"]
+                desc = item.get("description", "")
+                section = item.get("section", "")
+                key = param_name
+                if section:
+                    key = f"{param_name}_{_sanitize(section)}"
+                if desc and key in supply_specs:
+                    key = f"{param_name}_{_sanitize(desc)}"
+                supply_specs[key] = {
+                    "parameter": f"{param_name} ({desc})" if desc else param_name,
+                    "symbol": param_name,
+                    "min": item.get("min"),
+                    "max": item.get("max"),
+                    "unit": item.get("unit", "V"),
+                    "conditions": f"Recommended operating, {section}" if section else "Recommended operating",
+                    "source": "recommended_operating",
+                }
+
+        # Also add absolute maximum ratings
+        abs_max_specs = {}
+        has_exact_match_abs = any(device in it.get("device", "") for it in gowin_dc.get("absolute_maximum_ratings", []))
+        for item in gowin_dc.get("absolute_maximum_ratings", []):
+            dev_tag = item.get("device", "")
+            if device in dev_tag or not dev_tag or not has_exact_match_abs:
+                param_name = item["parameter"]
+                desc = item.get("description", "")
+                section = item.get("section", "")
+                key = f"abs_{param_name}"
+                if section:
+                    key = f"abs_{param_name}_{_sanitize(section)}"
+                abs_max_specs[key] = {
+                    "parameter": f"{param_name} ({desc})" if desc else param_name,
+                    "symbol": param_name,
+                    "min": item.get("min"),
+                    "max": item.get("max"),
+                    "unit": item.get("unit", "V"),
+                    "conditions": f"Absolute maximum, {section}" if section else "Absolute maximum",
+                    "source": "absolute_maximum",
+                }
+
     # --- IO standard specs from DC datasheet ---
     io_standard_specs = {}
+
+    # AMD-style
     for item in ext.get("electrical_characteristics", []):
         cond = item.get("conditions", "") or ""
         param = item.get("parameter", "")
-        # Detect IO standard specs (LVDS, SSTL, etc.)
         for std in ("LVDS_25", "LVDS", "SSTL12", "SSTL15", "HSTL", "LVCMOS"):
             if std in cond or std in param:
                 key = f"{item.get('symbol', '')}_{std}"
@@ -242,13 +371,27 @@ def export_fpga(dc_data: dict, pinout_data: dict) -> dict:
                 }
                 break
 
+    # Gowin-style IO standards
+    if gowin_dc:
+        for item in gowin_dc.get("io_standards", []):
+            std = item.get("standard", "")
+            if std:
+                key = f"gowin_{std}"
+                if "parameter" in item:
+                    key = f"gowin_{item['parameter']}_{std}"
+                io_standard_specs[key] = {
+                    "standard": std,
+                    "vcco": item.get("vcco"),
+                    "parameter": item.get("parameter"),
+                    "value": item.get("value"),
+                    "raw": item.get("raw"),
+                }
+
     # --- Merge pinout data ---
-    # Pinout already has: pins, banks, diff_pairs, power_rails, drc_rules, lookup
     device = pinout_data["device"]
     package = pinout_data["package"]
-    vendor = pinout_data.get("_vendor", "AMD")  # Gowin sets _vendor
+    vendor = pinout_data.get("_vendor", "AMD")
 
-    # Determine manufacturer
     if vendor == "Gowin":
         manufacturer = "Gowin"
     else:
@@ -273,13 +416,17 @@ def export_fpga(dc_data: dict, pinout_data: dict) -> dict:
         "diff_pairs": pinout_data.get("diff_pairs", []),
         "drc_rules": pinout_data.get("drc_rules", {}),
 
-        # Pin data — full list + lookup
-        "pins": pinout_data.get("pins", []),
-        "lookup": pinout_data.get("lookup", {}),
+        # Pin data — full list + normalized lookup
+        "pins": _normalize_pins(pinout_data.get("pins", [])),
+        "lookup": _normalize_lookup(pinout_data),
 
         # Summary
         "summary": pinout_data.get("summary", {}),
     }
+
+    # Add absolute maximum ratings if available
+    if gowin_dc:
+        result["absolute_maximum_ratings"] = abs_max_specs
 
     return result
 
@@ -321,9 +468,21 @@ def main():
 
     # --- Export FPGAs ---
     print("\n=== FPGAs ===")
-    # Load DC datasheet
+    # Load DC datasheets
     fpga_dc_files = sorted((extracted_dir / "fpga").glob("ds*.json"))
     fpga_pinout_files = sorted(fpga_pinout_dir.glob("*.json"))
+
+    # Load Gowin DC files
+    gowin_dc_files = sorted((extracted_dir / "fpga").glob("gowin_*_dc.json"))
+    gowin_dc_cache = {}
+    for dc_file in gowin_dc_files:
+        with open(dc_file) as fp:
+            data = json.load(fp)
+        dev = data.get("device", "")
+        gowin_dc_cache[dc_file.name] = data
+        # Index by device prefix: GW5AT, GW5AR, GW5AS, etc.
+        prefix = dev.split("-")[0] if "-" in dev else dev
+        gowin_dc_cache[prefix] = data
 
     for pinout_file in fpga_pinout_files:
         try:
@@ -335,9 +494,18 @@ def main():
 
             # Find matching DC datasheet
             dc_data = None
+            gowin_dc = None
             vendor = pinout_data.get("_vendor", "")
 
-            if vendor != "Gowin":
+            if vendor == "Gowin":
+                # Gowin: match by device prefix (GW5AT-60 → GW5AT)
+                prefix = device.split("-")[0] if "-" in device else device
+                gowin_dc = gowin_dc_cache.get(prefix)
+                # Also try Arora V 60K for GW5AT-60
+                if gowin_dc is None and "GW5AT-60" in device:
+                    gowin_dc = gowin_dc_cache.get("Arora V 60K")
+                dc_data = {"extraction": {"component": {}}}
+            else:
                 # AMD: match by family
                 for dc_file in fpga_dc_files:
                     with open(dc_file) as fp:
@@ -353,7 +521,7 @@ def main():
             if dc_data is None:
                 dc_data = {"extraction": {"component": {}}}
 
-            result = export_fpga(dc_data, pinout_data)
+            result = export_fpga(dc_data, pinout_data, gowin_dc=gowin_dc)
             safe_name = f"{device}_{package}"
             out_path = output_dir / f"{safe_name}.json"
             with open(out_path, "w") as fp:
