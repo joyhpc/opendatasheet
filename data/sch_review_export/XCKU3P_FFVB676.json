@@ -2365,9 +2365,10 @@
       "slr": null,
       "function": "CONFIG",
       "drc": {
-        "must_connect": "mode_dependent",
+        "must_connect": true,
         "pull": null,
-        "desc": "Config data bit 2. Required for x4/x8/x16 config modes."
+        "desc": "Config data bit 2. Required for x4/x8/x16 config modes.",
+        "connect_priority": "mode_dependent"
       },
       "category": "CONFIG"
     },
@@ -2380,9 +2381,10 @@
       "slr": null,
       "function": "CONFIG",
       "drc": {
-        "must_connect": "mode_dependent",
+        "must_connect": true,
         "pull": null,
-        "desc": "Config data bit 3. Required for x4/x8/x16 config modes."
+        "desc": "Config data bit 3. Required for x4/x8/x16 config modes.",
+        "connect_priority": "mode_dependent"
       },
       "category": "CONFIG"
     },
@@ -2510,7 +2512,7 @@
       "io_type": null,
       "memory_byte_group": null,
       "slr": null,
-      "function": "OTHER",
+      "function": "SPECIAL",
       "category": "OTHER"
     },
     {
@@ -2567,9 +2569,10 @@
       "slr": null,
       "function": "CONFIG",
       "drc": {
-        "must_connect": "recommended",
+        "must_connect": true,
         "pull": "4.7k to GND",
-        "desc": "JTAG clock."
+        "desc": "JTAG clock.",
+        "connect_priority": "recommended"
       },
       "category": "CONFIG"
     },
@@ -2582,9 +2585,10 @@
       "slr": null,
       "function": "CONFIG",
       "drc": {
-        "must_connect": "recommended",
+        "must_connect": true,
         "pull": "4.7k to VCCO_0",
-        "desc": "JTAG data in."
+        "desc": "JTAG data in.",
+        "connect_priority": "recommended"
       },
       "category": "CONFIG"
     },
@@ -2597,9 +2601,10 @@
       "slr": null,
       "function": "CONFIG",
       "drc": {
-        "must_connect": "recommended",
+        "must_connect": true,
         "pull": null,
-        "desc": "JTAG data out."
+        "desc": "JTAG data out.",
+        "connect_priority": "recommended"
       },
       "category": "CONFIG"
     },
@@ -2612,9 +2617,10 @@
       "slr": null,
       "function": "CONFIG",
       "drc": {
-        "must_connect": "recommended",
+        "must_connect": true,
         "pull": "4.7k to VCCO_0",
-        "desc": "JTAG mode select."
+        "desc": "JTAG mode select.",
+        "connect_priority": "recommended"
       },
       "category": "CONFIG"
     },
@@ -2625,7 +2631,7 @@
       "io_type": null,
       "memory_byte_group": null,
       "slr": null,
-      "function": "OTHER",
+      "function": "SPECIAL",
       "category": "OTHER"
     },
     {
@@ -2705,7 +2711,7 @@
       "io_type": "HP",
       "memory_byte_group": "3U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -2717,7 +2723,7 @@
       "io_type": "HP",
       "memory_byte_group": "3U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -2729,7 +2735,7 @@
       "io_type": "HP",
       "memory_byte_group": "3U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -2741,7 +2747,7 @@
       "io_type": "HP",
       "memory_byte_group": "3U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -2753,7 +2759,7 @@
       "io_type": "HP",
       "memory_byte_group": "3U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "DBC",
@@ -2768,7 +2774,7 @@
       "io_type": "HP",
       "memory_byte_group": "3U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "DBC",
@@ -2783,7 +2789,7 @@
       "io_type": "HP",
       "memory_byte_group": "3L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -2795,7 +2801,7 @@
       "io_type": "HP",
       "memory_byte_group": "3L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -2807,7 +2813,7 @@
       "io_type": "HP",
       "memory_byte_group": "3L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -2819,7 +2825,7 @@
       "io_type": "HP",
       "memory_byte_group": "3L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -2831,7 +2837,7 @@
       "io_type": "HP",
       "memory_byte_group": "3L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "DBC"
@@ -2845,7 +2851,7 @@
       "io_type": "HP",
       "memory_byte_group": "3L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "DBC"
@@ -2859,7 +2865,7 @@
       "io_type": "HP",
       "memory_byte_group": "3U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -2871,7 +2877,7 @@
       "io_type": "HP",
       "memory_byte_group": "2U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -2883,7 +2889,7 @@
       "io_type": "HP",
       "memory_byte_group": "2U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -2895,7 +2901,7 @@
       "io_type": "HP",
       "memory_byte_group": "2U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -2907,7 +2913,7 @@
       "io_type": "HP",
       "memory_byte_group": "2U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -2919,7 +2925,7 @@
       "io_type": "HP",
       "memory_byte_group": "2U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -2931,7 +2937,7 @@
       "io_type": "HP",
       "memory_byte_group": "2U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -2945,7 +2951,7 @@
       "io_type": "HP",
       "memory_byte_group": "2U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -2959,7 +2965,7 @@
       "io_type": "HP",
       "memory_byte_group": "2L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -2971,7 +2977,7 @@
       "io_type": "HP",
       "memory_byte_group": "2L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -2983,7 +2989,7 @@
       "io_type": "HP",
       "memory_byte_group": "2L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -2997,7 +3003,7 @@
       "io_type": "HP",
       "memory_byte_group": "2L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -3011,7 +3017,7 @@
       "io_type": "HP",
       "memory_byte_group": "2L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -3025,7 +3031,7 @@
       "io_type": "HP",
       "memory_byte_group": "2L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -3039,7 +3045,7 @@
       "io_type": "HP",
       "memory_byte_group": "1U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -3053,7 +3059,7 @@
       "io_type": "HP",
       "memory_byte_group": "1U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -3067,7 +3073,7 @@
       "io_type": "HP",
       "memory_byte_group": "1U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -3081,7 +3087,7 @@
       "io_type": "HP",
       "memory_byte_group": "1U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -3095,7 +3101,7 @@
       "io_type": "HP",
       "memory_byte_group": "1U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -3109,7 +3115,7 @@
       "io_type": "HP",
       "memory_byte_group": "1U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -3123,7 +3129,7 @@
       "io_type": "HP",
       "memory_byte_group": "1L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -3135,7 +3141,7 @@
       "io_type": "HP",
       "memory_byte_group": "1L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -3147,7 +3153,7 @@
       "io_type": "HP",
       "memory_byte_group": "1L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -3159,7 +3165,7 @@
       "io_type": "HP",
       "memory_byte_group": "1L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -3171,7 +3177,7 @@
       "io_type": "HP",
       "memory_byte_group": "1L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -3185,7 +3191,7 @@
       "io_type": "HP",
       "memory_byte_group": "1L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -3199,7 +3205,7 @@
       "io_type": "HP",
       "memory_byte_group": "1U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -3211,7 +3217,7 @@
       "io_type": "HP",
       "memory_byte_group": "0U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -3223,7 +3229,7 @@
       "io_type": "HP",
       "memory_byte_group": "0U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -3235,7 +3241,7 @@
       "io_type": "HP",
       "memory_byte_group": "0U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -3247,7 +3253,7 @@
       "io_type": "HP",
       "memory_byte_group": "0U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -3259,7 +3265,7 @@
       "io_type": "HP",
       "memory_byte_group": "0U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -3271,7 +3277,7 @@
       "io_type": "HP",
       "memory_byte_group": "0U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "DBC"
@@ -3285,7 +3291,7 @@
       "io_type": "HP",
       "memory_byte_group": "0U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "DBC"
@@ -3299,7 +3305,7 @@
       "io_type": "HP",
       "memory_byte_group": "0L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -3311,7 +3317,7 @@
       "io_type": "HP",
       "memory_byte_group": "0L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -3323,7 +3329,7 @@
       "io_type": "HP",
       "memory_byte_group": "0L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -3335,7 +3341,7 @@
       "io_type": "HP",
       "memory_byte_group": "0L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -3347,7 +3353,7 @@
       "io_type": "HP",
       "memory_byte_group": "0L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "DBC"
@@ -3361,7 +3367,7 @@
       "io_type": "HP",
       "memory_byte_group": "0L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "DBC"
@@ -3375,7 +3381,7 @@
       "io_type": "HP",
       "memory_byte_group": null,
       "slr": null,
-      "function": "OTHER",
+      "function": "SPECIAL",
       "category": "OTHER"
     },
     {
@@ -3385,7 +3391,7 @@
       "io_type": "HP",
       "memory_byte_group": "3U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -3397,7 +3403,7 @@
       "io_type": "HP",
       "memory_byte_group": "3U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -3409,7 +3415,7 @@
       "io_type": "HP",
       "memory_byte_group": "3U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -3421,7 +3427,7 @@
       "io_type": "HP",
       "memory_byte_group": "3U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -3433,7 +3439,7 @@
       "io_type": "HP",
       "memory_byte_group": "3U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "DBC",
@@ -3448,7 +3454,7 @@
       "io_type": "HP",
       "memory_byte_group": "3U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "DBC",
@@ -3463,7 +3469,7 @@
       "io_type": "HP",
       "memory_byte_group": "3L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -3475,7 +3481,7 @@
       "io_type": "HP",
       "memory_byte_group": "3L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -3487,7 +3493,7 @@
       "io_type": "HP",
       "memory_byte_group": "3L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -3499,7 +3505,7 @@
       "io_type": "HP",
       "memory_byte_group": "3L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -3511,7 +3517,7 @@
       "io_type": "HP",
       "memory_byte_group": "3L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "DBC"
@@ -3525,7 +3531,7 @@
       "io_type": "HP",
       "memory_byte_group": "3L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "DBC"
@@ -3539,7 +3545,7 @@
       "io_type": "HP",
       "memory_byte_group": "3U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -3551,7 +3557,7 @@
       "io_type": "HP",
       "memory_byte_group": "2U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -3563,7 +3569,7 @@
       "io_type": "HP",
       "memory_byte_group": "2U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -3575,7 +3581,7 @@
       "io_type": "HP",
       "memory_byte_group": "2U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -3587,7 +3593,7 @@
       "io_type": "HP",
       "memory_byte_group": "2U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -3599,7 +3605,7 @@
       "io_type": "HP",
       "memory_byte_group": "2U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -3611,7 +3617,7 @@
       "io_type": "HP",
       "memory_byte_group": "2U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -3625,7 +3631,7 @@
       "io_type": "HP",
       "memory_byte_group": "2U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -3639,7 +3645,7 @@
       "io_type": "HP",
       "memory_byte_group": "2L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -3651,7 +3657,7 @@
       "io_type": "HP",
       "memory_byte_group": "2L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -3663,7 +3669,7 @@
       "io_type": "HP",
       "memory_byte_group": "2L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -3677,7 +3683,7 @@
       "io_type": "HP",
       "memory_byte_group": "2L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -3691,7 +3697,7 @@
       "io_type": "HP",
       "memory_byte_group": "2L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -3705,7 +3711,7 @@
       "io_type": "HP",
       "memory_byte_group": "2L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -3719,7 +3725,7 @@
       "io_type": "HP",
       "memory_byte_group": "1U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -3733,7 +3739,7 @@
       "io_type": "HP",
       "memory_byte_group": "1U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -3747,7 +3753,7 @@
       "io_type": "HP",
       "memory_byte_group": "1U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -3761,7 +3767,7 @@
       "io_type": "HP",
       "memory_byte_group": "1U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -3775,7 +3781,7 @@
       "io_type": "HP",
       "memory_byte_group": "1U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -3789,7 +3795,7 @@
       "io_type": "HP",
       "memory_byte_group": "1U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -3803,7 +3809,7 @@
       "io_type": "HP",
       "memory_byte_group": "1L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -3815,7 +3821,7 @@
       "io_type": "HP",
       "memory_byte_group": "1L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -3827,7 +3833,7 @@
       "io_type": "HP",
       "memory_byte_group": "1L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -3839,7 +3845,7 @@
       "io_type": "HP",
       "memory_byte_group": "1L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -3851,7 +3857,7 @@
       "io_type": "HP",
       "memory_byte_group": "1L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -3865,7 +3871,7 @@
       "io_type": "HP",
       "memory_byte_group": "1L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -3879,7 +3885,7 @@
       "io_type": "HP",
       "memory_byte_group": "1U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -3891,7 +3897,7 @@
       "io_type": "HP",
       "memory_byte_group": "0U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -3903,7 +3909,7 @@
       "io_type": "HP",
       "memory_byte_group": "0U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -3915,7 +3921,7 @@
       "io_type": "HP",
       "memory_byte_group": "0U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -3927,7 +3933,7 @@
       "io_type": "HP",
       "memory_byte_group": "0U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -3939,7 +3945,7 @@
       "io_type": "HP",
       "memory_byte_group": "0U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -3951,7 +3957,7 @@
       "io_type": "HP",
       "memory_byte_group": "0U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "DBC"
@@ -3965,7 +3971,7 @@
       "io_type": "HP",
       "memory_byte_group": "0U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "DBC"
@@ -3979,7 +3985,7 @@
       "io_type": "HP",
       "memory_byte_group": "0L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -3991,7 +3997,7 @@
       "io_type": "HP",
       "memory_byte_group": "0L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -4003,7 +4009,7 @@
       "io_type": "HP",
       "memory_byte_group": "0L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -4015,7 +4021,7 @@
       "io_type": "HP",
       "memory_byte_group": "0L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -4027,7 +4033,7 @@
       "io_type": "HP",
       "memory_byte_group": "0L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "DBC"
@@ -4041,7 +4047,7 @@
       "io_type": "HP",
       "memory_byte_group": "0L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "DBC"
@@ -4055,7 +4061,7 @@
       "io_type": "HP",
       "memory_byte_group": null,
       "slr": null,
-      "function": "OTHER",
+      "function": "SPECIAL",
       "category": "OTHER"
     },
     {
@@ -4065,7 +4071,7 @@
       "io_type": "HP",
       "memory_byte_group": "3U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -4077,7 +4083,7 @@
       "io_type": "HP",
       "memory_byte_group": "3U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -4089,7 +4095,7 @@
       "io_type": "HP",
       "memory_byte_group": "3U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -4101,7 +4107,7 @@
       "io_type": "HP",
       "memory_byte_group": "3U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -4113,7 +4119,7 @@
       "io_type": "HP",
       "memory_byte_group": "3U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "DBC",
@@ -4128,7 +4134,7 @@
       "io_type": "HP",
       "memory_byte_group": "3U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "DBC",
@@ -4143,7 +4149,7 @@
       "io_type": "HP",
       "memory_byte_group": "3L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -4155,7 +4161,7 @@
       "io_type": "HP",
       "memory_byte_group": "3L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -4167,7 +4173,7 @@
       "io_type": "HP",
       "memory_byte_group": "3L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -4179,7 +4185,7 @@
       "io_type": "HP",
       "memory_byte_group": "3L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -4191,7 +4197,7 @@
       "io_type": "HP",
       "memory_byte_group": "3L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "DBC"
@@ -4205,7 +4211,7 @@
       "io_type": "HP",
       "memory_byte_group": "3L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "DBC"
@@ -4219,7 +4225,7 @@
       "io_type": "HP",
       "memory_byte_group": "3U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -4231,7 +4237,7 @@
       "io_type": "HP",
       "memory_byte_group": "2U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -4243,7 +4249,7 @@
       "io_type": "HP",
       "memory_byte_group": "2U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -4255,7 +4261,7 @@
       "io_type": "HP",
       "memory_byte_group": "2U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -4267,7 +4273,7 @@
       "io_type": "HP",
       "memory_byte_group": "2U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -4279,7 +4285,7 @@
       "io_type": "HP",
       "memory_byte_group": "2U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -4291,7 +4297,7 @@
       "io_type": "HP",
       "memory_byte_group": "2U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -4305,7 +4311,7 @@
       "io_type": "HP",
       "memory_byte_group": "2U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -4319,7 +4325,7 @@
       "io_type": "HP",
       "memory_byte_group": "2L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -4331,7 +4337,7 @@
       "io_type": "HP",
       "memory_byte_group": "2L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -4343,7 +4349,7 @@
       "io_type": "HP",
       "memory_byte_group": "2L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -4357,7 +4363,7 @@
       "io_type": "HP",
       "memory_byte_group": "2L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -4371,7 +4377,7 @@
       "io_type": "HP",
       "memory_byte_group": "2L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -4385,7 +4391,7 @@
       "io_type": "HP",
       "memory_byte_group": "2L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -4399,7 +4405,7 @@
       "io_type": "HP",
       "memory_byte_group": "1U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -4413,7 +4419,7 @@
       "io_type": "HP",
       "memory_byte_group": "1U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -4427,7 +4433,7 @@
       "io_type": "HP",
       "memory_byte_group": "1U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -4441,7 +4447,7 @@
       "io_type": "HP",
       "memory_byte_group": "1U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -4455,7 +4461,7 @@
       "io_type": "HP",
       "memory_byte_group": "1U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -4469,7 +4475,7 @@
       "io_type": "HP",
       "memory_byte_group": "1U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -4483,7 +4489,7 @@
       "io_type": "HP",
       "memory_byte_group": "1L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -4495,7 +4501,7 @@
       "io_type": "HP",
       "memory_byte_group": "1L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -4507,7 +4513,7 @@
       "io_type": "HP",
       "memory_byte_group": "1L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -4519,7 +4525,7 @@
       "io_type": "HP",
       "memory_byte_group": "1L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -4531,7 +4537,7 @@
       "io_type": "HP",
       "memory_byte_group": "1L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -4545,7 +4551,7 @@
       "io_type": "HP",
       "memory_byte_group": "1L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -4559,7 +4565,7 @@
       "io_type": "HP",
       "memory_byte_group": "1U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -4571,7 +4577,7 @@
       "io_type": "HP",
       "memory_byte_group": "0U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -4583,7 +4589,7 @@
       "io_type": "HP",
       "memory_byte_group": "0U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -4595,7 +4601,7 @@
       "io_type": "HP",
       "memory_byte_group": "0U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -4607,7 +4613,7 @@
       "io_type": "HP",
       "memory_byte_group": "0U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -4619,7 +4625,7 @@
       "io_type": "HP",
       "memory_byte_group": "0U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -4631,7 +4637,7 @@
       "io_type": "HP",
       "memory_byte_group": "0U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "DBC"
@@ -4645,7 +4651,7 @@
       "io_type": "HP",
       "memory_byte_group": "0U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "DBC"
@@ -4659,7 +4665,7 @@
       "io_type": "HP",
       "memory_byte_group": "0L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -4671,7 +4677,7 @@
       "io_type": "HP",
       "memory_byte_group": "0L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -4683,7 +4689,7 @@
       "io_type": "HP",
       "memory_byte_group": "0L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -4695,7 +4701,7 @@
       "io_type": "HP",
       "memory_byte_group": "0L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -4707,7 +4713,7 @@
       "io_type": "HP",
       "memory_byte_group": "0L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "DBC"
@@ -4721,7 +4727,7 @@
       "io_type": "HP",
       "memory_byte_group": "0L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "DBC"
@@ -4735,7 +4741,7 @@
       "io_type": "HP",
       "memory_byte_group": null,
       "slr": null,
-      "function": "OTHER",
+      "function": "SPECIAL",
       "category": "OTHER"
     },
     {
@@ -4745,7 +4751,7 @@
       "io_type": "HP",
       "memory_byte_group": "3U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -4757,7 +4763,7 @@
       "io_type": "HP",
       "memory_byte_group": "3U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -4769,7 +4775,7 @@
       "io_type": "HP",
       "memory_byte_group": "3U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -4781,7 +4787,7 @@
       "io_type": "HP",
       "memory_byte_group": "3U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -4793,7 +4799,7 @@
       "io_type": "HP",
       "memory_byte_group": "3U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "DBC",
@@ -4808,7 +4814,7 @@
       "io_type": "HP",
       "memory_byte_group": "3U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "DBC",
@@ -4823,7 +4829,7 @@
       "io_type": "HP",
       "memory_byte_group": "3L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -4835,7 +4841,7 @@
       "io_type": "HP",
       "memory_byte_group": "3L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -4847,7 +4853,7 @@
       "io_type": "HP",
       "memory_byte_group": "3L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -4859,7 +4865,7 @@
       "io_type": "HP",
       "memory_byte_group": "3L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -4871,7 +4877,7 @@
       "io_type": "HP",
       "memory_byte_group": "3L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "DBC"
@@ -4885,7 +4891,7 @@
       "io_type": "HP",
       "memory_byte_group": "3L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "DBC"
@@ -4899,7 +4905,7 @@
       "io_type": "HP",
       "memory_byte_group": "3U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -4911,7 +4917,7 @@
       "io_type": "HP",
       "memory_byte_group": "2U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -4923,7 +4929,7 @@
       "io_type": "HP",
       "memory_byte_group": "2U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -4935,7 +4941,7 @@
       "io_type": "HP",
       "memory_byte_group": "2U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -4947,7 +4953,7 @@
       "io_type": "HP",
       "memory_byte_group": "2U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -4959,7 +4965,7 @@
       "io_type": "HP",
       "memory_byte_group": "2U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -4971,7 +4977,7 @@
       "io_type": "HP",
       "memory_byte_group": "2U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -4985,7 +4991,7 @@
       "io_type": "HP",
       "memory_byte_group": "2U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -4999,7 +5005,7 @@
       "io_type": "HP",
       "memory_byte_group": "2L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -5011,7 +5017,7 @@
       "io_type": "HP",
       "memory_byte_group": "2L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -5023,7 +5029,7 @@
       "io_type": "HP",
       "memory_byte_group": "2L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -5037,7 +5043,7 @@
       "io_type": "HP",
       "memory_byte_group": "2L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -5051,7 +5057,7 @@
       "io_type": "HP",
       "memory_byte_group": "2L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -5065,7 +5071,7 @@
       "io_type": "HP",
       "memory_byte_group": "2L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -5079,7 +5085,7 @@
       "io_type": "HP",
       "memory_byte_group": "1U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -5093,7 +5099,7 @@
       "io_type": "HP",
       "memory_byte_group": "1U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -5107,7 +5113,7 @@
       "io_type": "HP",
       "memory_byte_group": "1U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -5121,7 +5127,7 @@
       "io_type": "HP",
       "memory_byte_group": "1U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -5135,7 +5141,7 @@
       "io_type": "HP",
       "memory_byte_group": "1U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -5149,7 +5155,7 @@
       "io_type": "HP",
       "memory_byte_group": "1U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -5163,7 +5169,7 @@
       "io_type": "HP",
       "memory_byte_group": "1L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -5175,7 +5181,7 @@
       "io_type": "HP",
       "memory_byte_group": "1L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -5187,7 +5193,7 @@
       "io_type": "HP",
       "memory_byte_group": "1L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -5199,7 +5205,7 @@
       "io_type": "HP",
       "memory_byte_group": "1L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -5211,7 +5217,7 @@
       "io_type": "HP",
       "memory_byte_group": "1L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -5225,7 +5231,7 @@
       "io_type": "HP",
       "memory_byte_group": "1L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -5239,7 +5245,7 @@
       "io_type": "HP",
       "memory_byte_group": "1U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -5251,7 +5257,7 @@
       "io_type": "HP",
       "memory_byte_group": "0U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -5263,7 +5269,7 @@
       "io_type": "HP",
       "memory_byte_group": "0U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -5275,7 +5281,7 @@
       "io_type": "HP",
       "memory_byte_group": "0U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -5287,7 +5293,7 @@
       "io_type": "HP",
       "memory_byte_group": "0U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -5299,7 +5305,7 @@
       "io_type": "HP",
       "memory_byte_group": "0U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -5311,7 +5317,7 @@
       "io_type": "HP",
       "memory_byte_group": "0U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "DBC"
@@ -5325,7 +5331,7 @@
       "io_type": "HP",
       "memory_byte_group": "0U",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "DBC"
@@ -5339,7 +5345,7 @@
       "io_type": "HP",
       "memory_byte_group": "0L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -5351,7 +5357,7 @@
       "io_type": "HP",
       "memory_byte_group": "0L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -5363,7 +5369,7 @@
       "io_type": "HP",
       "memory_byte_group": "0L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -5375,7 +5381,7 @@
       "io_type": "HP",
       "memory_byte_group": "0L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -5387,7 +5393,7 @@
       "io_type": "HP",
       "memory_byte_group": "0L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "DBC"
@@ -5401,7 +5407,7 @@
       "io_type": "HP",
       "memory_byte_group": "0L",
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "DBC"
@@ -5415,7 +5421,7 @@
       "io_type": "HP",
       "memory_byte_group": null,
       "slr": null,
-      "function": "OTHER",
+      "function": "SPECIAL",
       "category": "OTHER"
     },
     {
@@ -5425,7 +5431,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -5437,7 +5443,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -5449,7 +5455,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -5461,7 +5467,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -5473,7 +5479,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -5485,7 +5491,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -5497,7 +5503,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -5509,7 +5515,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -5521,7 +5527,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -5535,7 +5541,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -5549,7 +5555,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -5563,7 +5569,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -5577,7 +5583,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -5591,7 +5597,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -5605,7 +5611,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -5619,7 +5625,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -5633,7 +5639,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -5645,7 +5651,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -5657,7 +5663,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -5669,7 +5675,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -5681,7 +5687,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -5693,7 +5699,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -5705,7 +5711,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -5717,7 +5723,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -5729,7 +5735,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "VREF"
@@ -5743,7 +5749,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "VREF"
@@ -5757,7 +5763,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -5769,7 +5775,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -5781,7 +5787,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -5793,7 +5799,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -5805,7 +5811,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -5817,7 +5823,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -5829,7 +5835,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -5843,7 +5849,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -5857,7 +5863,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -5871,7 +5877,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -5885,7 +5891,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -5899,7 +5905,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -5913,7 +5919,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -5927,7 +5933,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -5941,7 +5947,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -5953,7 +5959,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -5965,7 +5971,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -5977,7 +5983,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -5989,7 +5995,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -6001,7 +6007,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -6013,7 +6019,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -6025,7 +6031,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -6037,7 +6043,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "VREF"
@@ -6051,7 +6057,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "VREF"
@@ -6065,7 +6071,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -6077,7 +6083,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -6089,7 +6095,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -6101,7 +6107,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -6113,7 +6119,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -6125,7 +6131,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -6137,7 +6143,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -6151,7 +6157,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -6165,7 +6171,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -6179,7 +6185,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -6193,7 +6199,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -6207,7 +6213,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -6221,7 +6227,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -6235,7 +6241,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": [
         "CLOCK"
@@ -6249,7 +6255,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -6261,7 +6267,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -6273,7 +6279,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -6285,7 +6291,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -6297,7 +6303,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -6309,7 +6315,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -6321,7 +6327,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -6333,7 +6339,7 @@
       "io_type": "HD",
       "memory_byte_group": null,
       "slr": null,
-      "function": "I/O",
+      "function": "IO",
       "polarity": null,
       "special_functions": null,
       "category": "IO"
@@ -6345,7 +6351,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_REFCLK",
+      "function": "SPECIAL",
       "polarity": "N",
       "refclk_index": 0,
       "gt_bank": 224,
@@ -6358,7 +6364,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_REFCLK",
+      "function": "SPECIAL",
       "polarity": "P",
       "refclk_index": 0,
       "gt_bank": 224,
@@ -6371,7 +6377,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_REFCLK",
+      "function": "SPECIAL",
       "polarity": "N",
       "refclk_index": 1,
       "gt_bank": 224,
@@ -6384,7 +6390,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_REFCLK",
+      "function": "SPECIAL",
       "polarity": "P",
       "refclk_index": 1,
       "gt_bank": 224,
@@ -6397,7 +6403,7 @@
       "io_type": null,
       "memory_byte_group": null,
       "slr": null,
-      "function": "OTHER",
+      "function": "SPECIAL",
       "category": "OTHER"
     },
     {
@@ -6422,7 +6428,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_RX",
+      "function": "SPECIAL",
       "polarity": "N",
       "gt_type": "GTY",
       "lane": 0,
@@ -6436,7 +6442,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_RX",
+      "function": "SPECIAL",
       "polarity": "N",
       "gt_type": "GTY",
       "lane": 1,
@@ -6450,7 +6456,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_RX",
+      "function": "SPECIAL",
       "polarity": "N",
       "gt_type": "GTY",
       "lane": 2,
@@ -6464,7 +6470,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_RX",
+      "function": "SPECIAL",
       "polarity": "N",
       "gt_type": "GTY",
       "lane": 3,
@@ -6478,7 +6484,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_RX",
+      "function": "SPECIAL",
       "polarity": "P",
       "gt_type": "GTY",
       "lane": 0,
@@ -6492,7 +6498,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_RX",
+      "function": "SPECIAL",
       "polarity": "P",
       "gt_type": "GTY",
       "lane": 1,
@@ -6506,7 +6512,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_RX",
+      "function": "SPECIAL",
       "polarity": "P",
       "gt_type": "GTY",
       "lane": 2,
@@ -6520,7 +6526,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_RX",
+      "function": "SPECIAL",
       "polarity": "P",
       "gt_type": "GTY",
       "lane": 3,
@@ -6534,7 +6540,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_TX",
+      "function": "SPECIAL",
       "polarity": "N",
       "gt_type": "GTY",
       "lane": 0,
@@ -6548,7 +6554,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_TX",
+      "function": "SPECIAL",
       "polarity": "N",
       "gt_type": "GTY",
       "lane": 1,
@@ -6562,7 +6568,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_TX",
+      "function": "SPECIAL",
       "polarity": "N",
       "gt_type": "GTY",
       "lane": 2,
@@ -6576,7 +6582,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_TX",
+      "function": "SPECIAL",
       "polarity": "N",
       "gt_type": "GTY",
       "lane": 3,
@@ -6590,7 +6596,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_TX",
+      "function": "SPECIAL",
       "polarity": "P",
       "gt_type": "GTY",
       "lane": 0,
@@ -6604,7 +6610,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_TX",
+      "function": "SPECIAL",
       "polarity": "P",
       "gt_type": "GTY",
       "lane": 1,
@@ -6618,7 +6624,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_TX",
+      "function": "SPECIAL",
       "polarity": "P",
       "gt_type": "GTY",
       "lane": 2,
@@ -6632,7 +6638,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_TX",
+      "function": "SPECIAL",
       "polarity": "P",
       "gt_type": "GTY",
       "lane": 3,
@@ -6646,7 +6652,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_REFCLK",
+      "function": "SPECIAL",
       "polarity": "N",
       "refclk_index": 0,
       "gt_bank": 225,
@@ -6659,7 +6665,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_REFCLK",
+      "function": "SPECIAL",
       "polarity": "P",
       "refclk_index": 0,
       "gt_bank": 225,
@@ -6672,7 +6678,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_REFCLK",
+      "function": "SPECIAL",
       "polarity": "N",
       "refclk_index": 1,
       "gt_bank": 225,
@@ -6685,7 +6691,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_REFCLK",
+      "function": "SPECIAL",
       "polarity": "P",
       "refclk_index": 1,
       "gt_bank": 225,
@@ -6698,7 +6704,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_RX",
+      "function": "SPECIAL",
       "polarity": "N",
       "gt_type": "GTY",
       "lane": 0,
@@ -6712,7 +6718,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_RX",
+      "function": "SPECIAL",
       "polarity": "N",
       "gt_type": "GTY",
       "lane": 1,
@@ -6726,7 +6732,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_RX",
+      "function": "SPECIAL",
       "polarity": "N",
       "gt_type": "GTY",
       "lane": 2,
@@ -6740,7 +6746,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_RX",
+      "function": "SPECIAL",
       "polarity": "N",
       "gt_type": "GTY",
       "lane": 3,
@@ -6754,7 +6760,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_RX",
+      "function": "SPECIAL",
       "polarity": "P",
       "gt_type": "GTY",
       "lane": 0,
@@ -6768,7 +6774,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_RX",
+      "function": "SPECIAL",
       "polarity": "P",
       "gt_type": "GTY",
       "lane": 1,
@@ -6782,7 +6788,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_RX",
+      "function": "SPECIAL",
       "polarity": "P",
       "gt_type": "GTY",
       "lane": 2,
@@ -6796,7 +6802,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_RX",
+      "function": "SPECIAL",
       "polarity": "P",
       "gt_type": "GTY",
       "lane": 3,
@@ -6810,7 +6816,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_TX",
+      "function": "SPECIAL",
       "polarity": "N",
       "gt_type": "GTY",
       "lane": 0,
@@ -6824,7 +6830,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_TX",
+      "function": "SPECIAL",
       "polarity": "N",
       "gt_type": "GTY",
       "lane": 1,
@@ -6838,7 +6844,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_TX",
+      "function": "SPECIAL",
       "polarity": "N",
       "gt_type": "GTY",
       "lane": 2,
@@ -6852,7 +6858,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_TX",
+      "function": "SPECIAL",
       "polarity": "N",
       "gt_type": "GTY",
       "lane": 3,
@@ -6866,7 +6872,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_TX",
+      "function": "SPECIAL",
       "polarity": "P",
       "gt_type": "GTY",
       "lane": 0,
@@ -6880,7 +6886,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_TX",
+      "function": "SPECIAL",
       "polarity": "P",
       "gt_type": "GTY",
       "lane": 1,
@@ -6894,7 +6900,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_TX",
+      "function": "SPECIAL",
       "polarity": "P",
       "gt_type": "GTY",
       "lane": 2,
@@ -6908,7 +6914,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_TX",
+      "function": "SPECIAL",
       "polarity": "P",
       "gt_type": "GTY",
       "lane": 3,
@@ -6922,7 +6928,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_REFCLK",
+      "function": "SPECIAL",
       "polarity": "N",
       "refclk_index": 0,
       "gt_bank": 226,
@@ -6935,7 +6941,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_REFCLK",
+      "function": "SPECIAL",
       "polarity": "P",
       "refclk_index": 0,
       "gt_bank": 226,
@@ -6948,7 +6954,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_REFCLK",
+      "function": "SPECIAL",
       "polarity": "N",
       "refclk_index": 1,
       "gt_bank": 226,
@@ -6961,7 +6967,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_REFCLK",
+      "function": "SPECIAL",
       "polarity": "P",
       "refclk_index": 1,
       "gt_bank": 226,
@@ -6974,7 +6980,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_RX",
+      "function": "SPECIAL",
       "polarity": "N",
       "gt_type": "GTY",
       "lane": 0,
@@ -6988,7 +6994,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_RX",
+      "function": "SPECIAL",
       "polarity": "N",
       "gt_type": "GTY",
       "lane": 1,
@@ -7002,7 +7008,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_RX",
+      "function": "SPECIAL",
       "polarity": "N",
       "gt_type": "GTY",
       "lane": 2,
@@ -7016,7 +7022,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_RX",
+      "function": "SPECIAL",
       "polarity": "N",
       "gt_type": "GTY",
       "lane": 3,
@@ -7030,7 +7036,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_RX",
+      "function": "SPECIAL",
       "polarity": "P",
       "gt_type": "GTY",
       "lane": 0,
@@ -7044,7 +7050,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_RX",
+      "function": "SPECIAL",
       "polarity": "P",
       "gt_type": "GTY",
       "lane": 1,
@@ -7058,7 +7064,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_RX",
+      "function": "SPECIAL",
       "polarity": "P",
       "gt_type": "GTY",
       "lane": 2,
@@ -7072,7 +7078,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_RX",
+      "function": "SPECIAL",
       "polarity": "P",
       "gt_type": "GTY",
       "lane": 3,
@@ -7086,7 +7092,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_TX",
+      "function": "SPECIAL",
       "polarity": "N",
       "gt_type": "GTY",
       "lane": 0,
@@ -7100,7 +7106,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_TX",
+      "function": "SPECIAL",
       "polarity": "N",
       "gt_type": "GTY",
       "lane": 1,
@@ -7114,7 +7120,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_TX",
+      "function": "SPECIAL",
       "polarity": "N",
       "gt_type": "GTY",
       "lane": 2,
@@ -7128,7 +7134,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_TX",
+      "function": "SPECIAL",
       "polarity": "N",
       "gt_type": "GTY",
       "lane": 3,
@@ -7142,7 +7148,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_TX",
+      "function": "SPECIAL",
       "polarity": "P",
       "gt_type": "GTY",
       "lane": 0,
@@ -7156,7 +7162,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_TX",
+      "function": "SPECIAL",
       "polarity": "P",
       "gt_type": "GTY",
       "lane": 1,
@@ -7170,7 +7176,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_TX",
+      "function": "SPECIAL",
       "polarity": "P",
       "gt_type": "GTY",
       "lane": 2,
@@ -7184,7 +7190,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_TX",
+      "function": "SPECIAL",
       "polarity": "P",
       "gt_type": "GTY",
       "lane": 3,
@@ -7198,7 +7204,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_REFCLK",
+      "function": "SPECIAL",
       "polarity": "N",
       "refclk_index": 0,
       "gt_bank": 227,
@@ -7211,7 +7217,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_REFCLK",
+      "function": "SPECIAL",
       "polarity": "P",
       "refclk_index": 0,
       "gt_bank": 227,
@@ -7224,7 +7230,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_REFCLK",
+      "function": "SPECIAL",
       "polarity": "N",
       "refclk_index": 1,
       "gt_bank": 227,
@@ -7237,7 +7243,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_REFCLK",
+      "function": "SPECIAL",
       "polarity": "P",
       "refclk_index": 1,
       "gt_bank": 227,
@@ -7250,7 +7256,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_RX",
+      "function": "SPECIAL",
       "polarity": "N",
       "gt_type": "GTY",
       "lane": 0,
@@ -7264,7 +7270,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_RX",
+      "function": "SPECIAL",
       "polarity": "N",
       "gt_type": "GTY",
       "lane": 1,
@@ -7278,7 +7284,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_RX",
+      "function": "SPECIAL",
       "polarity": "N",
       "gt_type": "GTY",
       "lane": 2,
@@ -7292,7 +7298,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_RX",
+      "function": "SPECIAL",
       "polarity": "N",
       "gt_type": "GTY",
       "lane": 3,
@@ -7306,7 +7312,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_RX",
+      "function": "SPECIAL",
       "polarity": "P",
       "gt_type": "GTY",
       "lane": 0,
@@ -7320,7 +7326,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_RX",
+      "function": "SPECIAL",
       "polarity": "P",
       "gt_type": "GTY",
       "lane": 1,
@@ -7334,7 +7340,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_RX",
+      "function": "SPECIAL",
       "polarity": "P",
       "gt_type": "GTY",
       "lane": 2,
@@ -7348,7 +7354,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_RX",
+      "function": "SPECIAL",
       "polarity": "P",
       "gt_type": "GTY",
       "lane": 3,
@@ -7362,7 +7368,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_TX",
+      "function": "SPECIAL",
       "polarity": "N",
       "gt_type": "GTY",
       "lane": 0,
@@ -7376,7 +7382,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_TX",
+      "function": "SPECIAL",
       "polarity": "N",
       "gt_type": "GTY",
       "lane": 1,
@@ -7390,7 +7396,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_TX",
+      "function": "SPECIAL",
       "polarity": "N",
       "gt_type": "GTY",
       "lane": 2,
@@ -7404,7 +7410,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_TX",
+      "function": "SPECIAL",
       "polarity": "N",
       "gt_type": "GTY",
       "lane": 3,
@@ -7418,7 +7424,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_TX",
+      "function": "SPECIAL",
       "polarity": "P",
       "gt_type": "GTY",
       "lane": 0,
@@ -7432,7 +7438,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_TX",
+      "function": "SPECIAL",
       "polarity": "P",
       "gt_type": "GTY",
       "lane": 1,
@@ -7446,7 +7452,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_TX",
+      "function": "SPECIAL",
       "polarity": "P",
       "gt_type": "GTY",
       "lane": 2,
@@ -7460,7 +7466,7 @@
       "io_type": "GTY",
       "memory_byte_group": null,
       "slr": null,
-      "function": "GT_TX",
+      "function": "SPECIAL",
       "polarity": "P",
       "gt_type": "GTY",
       "lane": 3,

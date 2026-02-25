@@ -223,13 +223,31 @@ def _classify_pin(pin: dict) -> str:
 
 
 def _normalize_pins(pins: list) -> list:
-    """Ensure every pin has a 'category' field."""
+    """Ensure every pin has a 'category' field and normalized function."""
+    FUNCTION_MAP = {
+        "I/O": "IO", "i/o": "IO", "IO": "IO",
+        "POWER": "POWER", "GROUND": "GROUND", "GND": "GROUND",
+        "CONFIG": "CONFIG", "JTAG": "CONFIG",
+        "GT": "GT", "GT_POWER": "GT_POWER",
+        "RSVDGND": "RSVDGND", "NC": "NC",
+        "SPECIAL": "SPECIAL", "OTHER": "SPECIAL",
+        "SERDES": "GT", "SERDES_RX": "GT", "SERDES_TX": "GT",
+        "SERDES_REFCLK": "GT", "MIPI": "IO",
+    }
     for pin in pins:
         if not pin.get("category"):
             pin["category"] = _classify_pin(pin)
-        # Normalize function field
-        if pin.get("function") == "IO":
-            pin["function"] = "I/O"
+        # Normalize function to schema enum
+        raw_func = pin.get("function", "")
+        pin["function"] = FUNCTION_MAP.get(raw_func, FUNCTION_MAP.get(pin["category"], "SPECIAL"))
+        # Normalize drc.must_connect to boolean
+        drc = pin.get("drc")
+        if drc and "must_connect" in drc:
+            mc = drc["must_connect"]
+            if isinstance(mc, str):
+                # "recommended" → True with priority hint, "mode_dependent" → True with hint
+                drc["connect_priority"] = mc  # preserve original semantics
+                drc["must_connect"] = mc not in ("false", "no", "optional")
     return pins
 
 
@@ -263,6 +281,61 @@ def _normalize_lookup(pinout_data: dict) -> dict:
 
 
 # ─── FPGA Export ────────────────────────────────────────────────────
+
+
+def _normalize_banks(banks: dict) -> dict:
+    """Ensure every bank entry has a 'bank' key."""
+    result = {}
+    for bank_id, bank_data in banks.items():
+        if isinstance(bank_data, dict):
+            if "bank" not in bank_data:
+                bank_data = {"bank": str(bank_id), **bank_data}
+            # Ensure total_pins and io_pins exist
+            if "total_pins" not in bank_data:
+                bank_data["total_pins"] = len(bank_data.get("pins", []))
+            if "io_pins" not in bank_data:
+                bank_data["io_pins"] = bank_data.get("io_count", bank_data["total_pins"])
+        result[bank_id] = bank_data
+    return result
+
+
+def _normalize_diff_pairs(pairs: list) -> list:
+    """Normalize diff pair field names to p_pin/n_pin standard."""
+    result = []
+    for dp in pairs:
+        normalized = dict(dp)
+        # GW5AT-15 PDF format: true_pin/comp_pin → p_pin/n_pin
+        if "true_pin" in normalized and "p_pin" not in normalized:
+            normalized["p_pin"] = normalized.pop("true_pin")
+            normalized["n_pin"] = normalized.pop("comp_pin", "")
+            normalized["p_name"] = normalized.pop("true_name", None)
+            normalized["n_name"] = normalized.pop("comp_name", None)
+        # Ensure required fields
+        if "p_pin" not in normalized:
+            normalized["p_pin"] = ""
+        if "n_pin" not in normalized:
+            normalized["n_pin"] = ""
+        if "type" not in normalized:
+            normalized["type"] = "LVDS"
+        result.append(normalized)
+    return result
+
+
+def _normalize_drc_rules(rules: dict) -> dict:
+    """Ensure every DRC rule has a valid severity field."""
+    SEVERITY_MAP = {
+        "critical": "ERROR", "error": "ERROR", "ERROR": "ERROR",
+        "warning": "WARNING", "WARNING": "WARNING",
+        "info": "INFO", "INFO": "INFO",
+    }
+    result = {}
+    for key, rule in rules.items():
+        if isinstance(rule, dict):
+            sev = rule.get("severity", "ERROR")
+            rule = dict(rule)
+            rule["severity"] = SEVERITY_MAP.get(sev, "ERROR")
+        result[key] = rule
+    return result
 
 
 def export_fpga(dc_data: dict, pinout_data: dict, gowin_dc: dict = None) -> dict:
@@ -412,9 +485,9 @@ def export_fpga(dc_data: dict, pinout_data: dict, gowin_dc: dict = None) -> dict
 
         # From pinout (L1-L5)
         "power_rails": pinout_data.get("power_rails", {}),
-        "banks": pinout_data.get("banks", {}),
-        "diff_pairs": pinout_data.get("diff_pairs", []),
-        "drc_rules": pinout_data.get("drc_rules", {}),
+        "banks": _normalize_banks(pinout_data.get("banks", {})),
+        "diff_pairs": _normalize_diff_pairs(pinout_data.get("diff_pairs", [])),
+        "drc_rules": _normalize_drc_rules(pinout_data.get("drc_rules", {})),
 
         # Pin data — full list + normalized lookup
         "pins": _normalize_pins(pinout_data.get("pins", [])),

@@ -1,0 +1,204 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opendatasheet.dev/schemas/sch-review-device/1.0",
+  "title": "Schematic Review Device Schema",
+  "description": "Unified device knowledge base for schematic review DRC engine. Supports normal ICs and FPGAs via discriminated union on _type.",
+
+  "type": "object",
+  "required": ["_schema", "_type", "mpn"],
+  "properties": {
+    "_schema": { "const": "sch-review-device/1.0" },
+    "_type": { "enum": ["normal_ic", "fpga"] },
+    "mpn": { "type": "string", "minLength": 1 },
+    "manufacturer": { "type": ["string", "null"] },
+    "category": { "type": ["string", "null"] },
+    "description": { "type": ["string", "null"] }
+  },
+
+  "allOf": [
+    {
+      "if": { "properties": { "_type": { "const": "normal_ic" } } },
+      "then": { "$ref": "#/$defs/normal_ic" }
+    },
+    {
+      "if": { "properties": { "_type": { "const": "fpga" } } },
+      "then": { "$ref": "#/$defs/fpga" }
+    }
+  ],
+
+  "$defs": {
+    "param_value": {
+      "description": "A numeric parameter with optional min/typ/max/unit/conditions",
+      "type": "object",
+      "properties": {
+        "parameter": { "type": ["string", "null"] },
+        "symbol": { "type": ["string", "null"] },
+        "min": { "type": ["number", "null"] },
+        "typ": { "type": ["number", "null"] },
+        "max": { "type": ["number", "null"] },
+        "value": { "type": ["number", "string", "null"] },
+        "unit": { "type": ["string", "null"] },
+        "conditions": { "type": ["string", "null"] },
+        "source": { "type": ["string", "null"] }
+      },
+      "additionalProperties": true
+    },
+
+    "drc_rule": {
+      "type": "object",
+      "required": ["severity"],
+      "properties": {
+        "severity": { "enum": ["ERROR", "WARNING", "INFO"] },
+        "desc": { "type": "string" },
+        "check": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+
+    "normal_ic": {
+      "type": "object",
+      "required": ["packages"],
+      "properties": {
+        "packages": {
+          "type": "object",
+          "description": "Keyed by package name (e.g. SOT-223)",
+          "additionalProperties": {
+            "type": "object",
+            "required": ["pin_count", "pins"],
+            "properties": {
+              "pin_count": { "type": "integer", "minimum": 1 },
+              "pins": {
+                "type": "object",
+                "description": "Keyed by pin number (string)",
+                "additionalProperties": {
+                  "type": "object",
+                  "required": ["name"],
+                  "properties": {
+                    "name": { "type": "string" },
+                    "direction": { "type": ["string", "null"], "enum": ["INPUT", "OUTPUT", "BIDIRECTIONAL", "POWER_IN", "POWER_OUT", "PASSIVE", "NC", null] },
+                    "signal_type": { "type": ["string", "null"] },
+                    "description": { "type": ["string", "null"] },
+                    "unused_treatment": { "type": ["string", "null"] }
+                  },
+                  "additionalProperties": true
+                }
+              }
+            },
+            "additionalProperties": true
+          }
+        },
+        "absolute_maximum_ratings": {
+          "type": "object",
+          "additionalProperties": { "$ref": "#/$defs/param_value" }
+        },
+        "electrical_parameters": {
+          "type": "object",
+          "additionalProperties": { "$ref": "#/$defs/param_value" }
+        },
+        "drc_hints": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    },
+
+    "fpga_pin": {
+      "type": "object",
+      "required": ["pin", "name", "function"],
+      "properties": {
+        "pin": { "type": "string", "description": "Physical pin designator (e.g. A1, AA20)" },
+        "name": { "type": "string", "description": "Signal/net name" },
+        "function": { "enum": ["IO", "POWER", "GROUND", "CONFIG", "GT", "GT_POWER", "RSVDGND", "NC", "SPECIAL"] },
+        "bank": { "type": ["string", "null"] },
+        "drc": {
+          "type": "object",
+          "properties": {
+            "must_connect": { "type": "boolean" },
+            "connect_to": { "type": ["string", "null"] }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    },
+
+    "diff_pair": {
+      "type": "object",
+      "required": ["type", "p_pin", "n_pin"],
+      "properties": {
+        "type": { "type": "string", "description": "LVDS, GT_RX, GT_TX, REFCLK, etc." },
+        "pair_name": { "type": ["string", "null"] },
+        "p_pin": { "type": "string" },
+        "n_pin": { "type": "string" },
+        "p_name": { "type": ["string", "null"] },
+        "n_name": { "type": ["string", "null"] },
+        "bank": { "type": ["string", "null"] }
+      },
+      "additionalProperties": true
+    },
+
+    "fpga": {
+      "type": "object",
+      "required": ["package", "pins"],
+      "properties": {
+        "package": { "type": "string", "minLength": 1 },
+        "supply_specs": {
+          "type": "object",
+          "additionalProperties": { "$ref": "#/$defs/param_value" }
+        },
+        "io_standard_specs": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "absolute_maximum_ratings": {
+          "type": "object",
+          "additionalProperties": { "$ref": "#/$defs/param_value" }
+        },
+        "power_rails": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        },
+        "banks": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "required": ["bank"],
+            "properties": {
+              "bank": { "type": "string" },
+              "total_pins": { "type": "integer" },
+              "io_pins": { "type": "integer" }
+            },
+            "additionalProperties": true
+          }
+        },
+        "diff_pairs": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/diff_pair" }
+        },
+        "drc_rules": {
+          "type": "object",
+          "additionalProperties": { "$ref": "#/$defs/drc_rule" }
+        },
+        "pins": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/fpga_pin" },
+          "minItems": 1
+        },
+        "lookup": {
+          "type": "object",
+          "properties": {
+            "by_pin": { "type": "object" },
+            "by_name": { "type": "object" }
+          },
+          "additionalProperties": true
+        },
+        "summary": { "type": "object", "additionalProperties": true }
+      },
+      "additionalProperties": true
+    }
+  }
+}
