@@ -22,6 +22,7 @@ import concurrent.futures
 import argparse
 import httpx
 from pathlib import Path
+from design_info_utils import APPLICATION_PATTERNS, detect_design_page_kind, extract_design_context
 
 
 class GeminiTimeout(Exception):
@@ -339,6 +340,11 @@ def classify_pages(pdf_path: str, is_fpga: bool = False) -> list[PageInfo]:
             if pat.search(text):
                 if category not in ("electrical", "pin", "fpga_supply"):
                     category = "ordering"
+                matched.append(pat.pattern)
+        for pat in APPLICATION_PATTERNS:
+            if pat.search(text):
+                if category not in ("electrical", "pin", "fpga_supply", "ordering"):
+                    category = "application"
                 matched.append(pat.pattern)
         if text_len < 100:
             category = "image_only"
@@ -1088,6 +1094,29 @@ def cross_validate(pdf_path: str, extraction: dict, pages: list[PageInfo]) -> di
     }
 
 
+def extract_design_pages_from_pdf(pdf_path: str, pages: list[PageInfo]) -> dict:
+    """Extract schematic-design hints from application/layout pages using PDF text."""
+    if not pages:
+        return {
+            "design_page_candidates": [],
+            "recommended_external_components": [],
+            "design_equation_hints": [],
+            "layout_hints": [],
+            "supply_recommendations": [],
+            "topology_hints": [],
+        }
+
+    doc = fitz.open(pdf_path)
+    text_pages = []
+    for page in pages:
+        text = doc[page.page_num].get_text()
+        kind = detect_design_page_kind(text) or detect_design_page_kind(page.text_preview)
+        if kind:
+            text_pages.append({"page_num": page.page_num, "kind": kind, "text": text})
+    doc.close()
+    return extract_design_context(text_pages)
+
+
 # ============================================
 # Main Pipeline
 # ============================================
@@ -1112,6 +1141,7 @@ def process_single_pdf(pdf_path: str, verbose: bool = True) -> dict:
     electrical_pages = [p for p in pages if p.category == "electrical"]
     pin_pages = [p for p in pages if p.category == "pin"]
     cover_pages = [p for p in pages if p.category == "cover"]
+    application_pages = [p for p in pages if p.category == "application"]
     fpga_supply_pages = [p for p in pages if p.category == "fpga_supply"]
 
     # Vision 目标页面: electrical + pin + cover
@@ -1126,6 +1156,7 @@ def process_single_pdf(pdf_path: str, verbose: bool = True) -> dict:
         print(f"  Total pages: {len(pages)}")
         print(f"  Electrical: {len(electrical_pages)} pages")
         print(f"  Pin defs:   {len(pin_pages)} pages")
+        print(f"  Application:{len(application_pages)} pages")
         print(f"  Vision targets: {len(vision_page_nums)} pages → {vision_page_nums}")
         for p in pages:
             marker = "★" if p.page_num in vision_page_nums else " "
@@ -1315,6 +1346,15 @@ def process_single_pdf(pdf_path: str, verbose: bool = True) -> dict:
                 for sp in cross_val['suspicious_params'][:5]:
                     print(f"    - {sp['parameter']} ({sp['device']}): {sp['values']}")
 
+    # L4: 原理图设计信息提取（Application/Layout/Selection 页面）
+    design_extraction = extract_design_pages_from_pdf(pdf_path, application_pages)
+    if verbose and design_extraction.get("design_page_candidates"):
+        print(f"\nL4 Design Extraction:")
+        print(f"  Design pages: {len(design_extraction['design_page_candidates'])}")
+        print(f"  External hints: {len(design_extraction['recommended_external_components'])}")
+        print(f"  Layout hints: {len(design_extraction['layout_hints'])}")
+        print(f"  Equation hints: {len(design_extraction['design_equation_hints'])}")
+
     # L5: 物理规则引擎
     physics_val = []
     if "error" not in extraction:
@@ -1337,7 +1377,9 @@ def process_single_pdf(pdf_path: str, verbose: bool = True) -> dict:
         "total_pages": len(pages),
         "vision_pages": vision_page_nums,
         "page_classification": [asdict(p) for p in pages],
+        "application_pages": [p.page_num for p in application_pages],
         "extraction": extraction,
+        "design_extraction": design_extraction,
         "pin_extraction": pin_extraction,
         "pin_index": pin_index,
         "pin_validation": pin_validation_issues,

@@ -28,6 +28,8 @@
 ## Integration
 
 - [`sch-review-integration.md`](sch-review-integration.md) — Export contract, field meanings, and downstream usage patterns. **Best for:** consumers of `data/sch_review_export/`, DRC/integration developers.
+- [`design-bundle-export.md`](design-bundle-export.md) — Layered design-helper bundle format for schematic/module bring-up. **Best for:** hardware designers starting a module from a single device export.
+- [`design-extraction-validation.md`](design-extraction-validation.md) — Corpus baseline and sample outputs for PDF-aware design extraction. **Best for:** reviewers validating parsing quality and regression coverage.
 - [`../schemas/sch-review-device.schema.json`](../schemas/sch-review-device.schema.json) — Formal schema definition for exported device knowledge. **Best for:** schema/tooling maintainers, downstream validators.
 
 ## Technical Deep Dives
@@ -55,5 +57,6 @@
 - Want to understand the repo quickly? → [`../GUIDE.md`](../GUIDE.md)
 - Want to run checks safely? → [`maintenance.md`](maintenance.md)
 - Want to consume exported JSON? → [`sch-review-integration.md`](sch-review-integration.md)
+- Want schematic-oriented starter files? → [`design-bundle-export.md`](design-bundle-export.md)
 - Want to change schema or export behavior? → [`../schemas/sch-review-device.schema.json`](../schemas/sch-review-device.schema.json), [`design-document.md`](design-document.md), [`maintenance.md`](maintenance.md)
 - Not sure whether something is support, bug, feature, or security? → [`../SUPPORT.md`](../SUPPORT.md), [`../SECURITY.md`](../SECURITY.md)
