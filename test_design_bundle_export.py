@@ -410,3 +410,73 @@ def test_ds90ub_bundle_export_supports_raw_pdf_and_parallel_outputs(tmp_path):
     ds9702_template = json.loads((ds9702_dir / "L3_module_template.json").read_text(encoding="utf-8"))
     assert ds9702_intent["datasheet_design_context"]["source_mode"] == "raw_pdf_scan"
     assert ds9702_template["default_decoder_template"] == "serial_deserializer_to_csi"
+
+
+def test_gowin_fpga_bundle_export_includes_customer_scenarios(tmp_path):
+    output_dir = tmp_path / "bundles"
+    subprocess.run(
+        [
+            sys.executable,
+            "scripts/export_design_bundle.py",
+            "--device",
+            "GW5AT-60_UG225",
+            "--output-dir",
+            str(output_dir),
+        ],
+        cwd=REPO_ROOT,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+
+    bundle_dir = output_dir / "GW5AT-60"
+    design_intent = json.loads((bundle_dir / "L1_design_intent.json").read_text(encoding="utf-8"))
+    module_template = json.loads((bundle_dir / "L3_module_template.json").read_text(encoding="utf-8"))
+    quickstart = (bundle_dir / "L2_quickstart.md").read_text(encoding="utf-8")
+
+    scenario_names = {item["name"] for item in design_intent.get("customer_scenarios", [])}
+    role_names = {item["role"] for item in design_intent.get("external_components", [])}
+    starter_nets = {item["name"] for item in design_intent.get("starter_nets", [])}
+    template_names = {item["name"] for item in module_template.get("fpga_templates", [])}
+
+    assert {"qspi_jtag_bringup", "mipi_camera_bridge", "lvds_io_expansion", "high_speed_link_bridge", "ddr_memory_interface"}.issubset(scenario_names)
+    assert {"configuration_flash", "boot_mode_straps", "mipi_camera_connector", "lvds_io_connector", "high_speed_link_connector", "memory_connector_or_footprint", "reference_clock_source"}.issubset(role_names)
+    assert {"CFG_SPI", "MIPI_CLK", "LVDS_IO", "REFCLK", "SERDES_RX", "DDR_DQ"}.issubset(starter_nets)
+    assert {"qspi_jtag_bringup", "mipi_camera_bridge", "lvds_io_expansion", "high_speed_link_bridge", "ddr_memory_interface"}.issubset(template_names)
+    assert module_template["default_fpga_template"] == "mipi_camera_bridge"
+    assert "Customer scenarios" in quickstart
+    assert "L3 Templates" in quickstart
+    assert "Start here:" in quickstart
+
+
+def test_gowin_fpga_scenarios_generalize_across_other_families(tmp_path):
+    output_dir = tmp_path / "bundles"
+    subprocess.run(
+        [
+            sys.executable,
+            "scripts/export_design_bundle.py",
+            "--device",
+            "GW5AR-25_UG256P",
+            "--device",
+            "GW5AS-25_UG256",
+            "--device",
+            "GW5AT-15_MG132",
+            "--output-dir",
+            str(output_dir),
+        ],
+        cwd=REPO_ROOT,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+
+    gw5ar_template = json.loads((output_dir / "GW5AR-25" / "L3_module_template.json").read_text(encoding="utf-8"))
+    gw5as_template = json.loads((output_dir / "GW5AS-25" / "L3_module_template.json").read_text(encoding="utf-8"))
+    gw5at15_template = json.loads((output_dir / "GW5AT-15" / "L3_module_template.json").read_text(encoding="utf-8"))
+
+    assert gw5ar_template["default_fpga_template"] == "qspi_jtag_bringup"
+    assert "ddr_memory_interface" in {item["name"] for item in gw5ar_template.get("fpga_templates", [])}
+    assert gw5as_template["default_fpga_template"] == "qspi_jtag_bringup"
+    assert "lvds_io_expansion" in {item["name"] for item in gw5as_template.get("fpga_templates", [])}
+    assert gw5at15_template["default_fpga_template"] == "qspi_jtag_bringup"
+    assert "mipi_camera_bridge" not in {item["name"] for item in gw5at15_template.get("fpga_templates", [])}

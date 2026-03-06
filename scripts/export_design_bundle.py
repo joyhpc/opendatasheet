@@ -913,22 +913,12 @@ def _build_fpga_design_intent(device: dict, datasheet_design_context: dict | Non
             }
         )
 
-    external_components = [
-        {
-            "role": "rail_decoupling",
-            "designator": "Cbulk/Cdecap",
-            "status": "required",
-            "connect_between": ["each_power_rail", "nearest_ground"],
-            "why": "Every FPGA rail requires distributed bulk and high-frequency decoupling.",
-        },
-        {
-            "role": "configuration_header",
-            "designator": "JCFG",
-            "status": "recommended",
-            "connect_between": ["JTAG_or_config_pins"],
-            "why": "Bring-up is significantly faster if programming/debug pins are exposed early.",
-        },
-    ]
+    customer_scenarios = _fpga_customer_scenarios(device, {
+        "pin_groups": grouped,
+        "power_rails": power_rails,
+    })
+    external_components = _fpga_external_components(device, {"pin_groups": grouped, "power_rails": power_rails}, customer_scenarios)
+    starter_nets = _fpga_starter_nets(device, {"pin_groups": grouped, "power_rails": power_rails}, customer_scenarios)
 
     return {
         "_schema": BUNDLE_SCHEMA,
@@ -947,13 +937,357 @@ def _build_fpga_design_intent(device: dict, datasheet_design_context: dict | Non
         "attention_items": attention_items,
         "external_components": external_components,
         "datasheet_design_context": datasheet_design_context or {},
-        "starter_nets": [
-            {"name": "VCCINT", "purpose": "core_supply_placeholder"},
-            {"name": "VCCIO", "purpose": "io_bank_supply_placeholder"},
-            {"name": "GND", "purpose": "reference_ground"},
-            {"name": "JTAG", "purpose": "bring_up_and_debug"},
-        ],
+        "customer_scenarios": customer_scenarios,
+        "starter_nets": starter_nets,
     }
+
+
+def _fpga_customer_scenarios(device: dict, design_intent: dict) -> list[dict]:
+    pins = device.get("pins", [])
+    diff_pairs = device.get("diff_pairs", []) or []
+    power_rails = design_intent.get("power_rails", []) or []
+    power_rail_names = {item.get("name") or "" for item in power_rails}
+    pin_names = {pin.get("name") or "" for pin in pins}
+    special_names = {pin.get("name") or "" for pin in design_intent.get("pin_groups", {}).get("special_pins", [])}
+    scenarios = []
+    seen = set()
+
+    def add(name: str, label: str, why: str, nets: list[dict], blocks: list[dict], todo: list[str]) -> None:
+        if name in seen:
+            return
+        seen.add(name)
+        scenarios.append(
+            {
+                "name": name,
+                "label": label,
+                "why": why,
+                "nets": nets,
+                "blocks": blocks,
+                "todo": todo,
+            }
+        )
+
+    has_config = any(pin.get("function") == "CONFIG" for pin in pins)
+    has_spi_cfg = any(any(token in (pin.get("name") or "") for token in ("SSPI", "CCLK", "DONE", "RECONFIG", "MODE")) for pin in pins)
+    if has_config or has_spi_cfg:
+        add(
+            "qspi_jtag_bringup",
+            "QSPI / JTAG Bring-Up",
+            "Customer bring-up usually starts with a deterministic boot mode, programming header, and local config flash footprint.",
+            [
+                {"name": "JTAG", "purpose": "programming_and_debug"},
+                {"name": "CFG_SPI", "purpose": "configuration_flash_bus"},
+                {"name": "DONE", "purpose": "configuration_status"},
+                {"name": "RECONFIG_N", "purpose": "reconfiguration_control"},
+                {"name": "MODE_STRAP", "purpose": "boot_mode_selection"},
+            ],
+            [
+                {"ref": "JCFG", "type": "connector", "role": "configuration_header"},
+                {"ref": "UCFG", "type": "memory", "role": "configuration_flash"},
+                {"ref": "RMODE", "type": "support_component", "role": "boot_mode_straps"},
+            ],
+            ["Freeze boot mode, flash size, and programming header ownership before schematic review."],
+        )
+
+    has_mipi = any("mipi" in name.lower() for name in special_names | power_rail_names)
+    if has_mipi:
+        add(
+            "mipi_camera_bridge",
+            "MIPI Camera Bridge",
+            "Camera-centric customers need sensor connector, MIPI rail planning, and control bus grouped as one module boundary.",
+            [
+                {"name": "MIPI_CLK", "purpose": "camera_clock_lane"},
+                {"name": "MIPI_DATA", "purpose": "camera_data_lanes"},
+                {"name": "CAM_I2C", "purpose": "camera_control_bus"},
+                {"name": "CAM_RESET_N", "purpose": "camera_reset"},
+            ],
+            [
+                {"ref": "JCAM", "type": "connector", "role": "mipi_camera_connector"},
+                {"ref": "PMIPI", "type": "power_block", "role": "mipi_rail_group"},
+                {"ref": "RCAM", "type": "support_component", "role": "camera_control_pullups"},
+            ],
+            ["Freeze sensor lane count, connector pinout, and shared control bus topology before layout."],
+        )
+
+    if len(diff_pairs) >= 8:
+        add(
+            "lvds_io_expansion",
+            "LVDS / Bank Expansion",
+            "Many customer designs use Gowin devices as LVDS data concentrators or bank-level IO bridges.",
+            [
+                {"name": "LVDS_IO", "purpose": "differential_io_bundle"},
+                {"name": "BANK_VCCIO", "purpose": "io_bank_supply"},
+            ],
+            [
+                {"ref": "JLVDS", "type": "connector", "role": "lvds_io_connector"},
+                {"ref": "TPBANK", "type": "testpoint", "role": "bank_voltage_testpoints"},
+            ],
+            ["Freeze each VCCIO bank voltage and diff-pair ownership before pin assignment freeze."],
+        )
+
+    has_serdes = any(re.search(r"Q\d+_LN\d+_(?:RX|TX)", name) for name in special_names)
+    if has_serdes:
+        add(
+            "high_speed_link_bridge",
+            "High-Speed Link Bridge",
+            "Customers using transceiver-capable Gowin packages need refclk, AC-coupling, and link connector partitioned up front.",
+            [
+                {"name": "REFCLK", "purpose": "serdes_reference_clock"},
+                {"name": "SERDES_RX", "purpose": "high_speed_receive_lanes"},
+                {"name": "SERDES_TX", "purpose": "high_speed_transmit_lanes"},
+            ],
+            [
+                {"ref": "JHS", "type": "connector", "role": "high_speed_link_connector"},
+                {"ref": "XO1", "type": "timing_source", "role": "reference_clock_source"},
+                {"ref": "CACHS", "type": "support_component", "role": "ac_coupling_network"},
+            ],
+            ["Freeze link standard, refclk frequency, and AC-coupling placement before stack-up review."],
+        )
+
+    dqs_count = sum(1 for pin in pins if pin.get("dqs"))
+    if dqs_count >= 8:
+        add(
+            "ddr_memory_interface",
+            "DDR Memory Interface",
+            "Memory-oriented customers need byte-lane grouping, VCCIO planning, and memory footprint placeholders early.",
+            [
+                {"name": "DDR_CLK", "purpose": "memory_clock"},
+                {"name": "DDR_ADDR", "purpose": "memory_address_command"},
+                {"name": "DDR_DQ", "purpose": "memory_data_bus"},
+                {"name": "DDR_DQS", "purpose": "memory_strobes"},
+            ],
+            [
+                {"ref": "UDDR", "type": "memory", "role": "external_memory"},
+                {"ref": "RTERM_DDR", "type": "support_component", "role": "memory_termination_review"},
+            ],
+            ["Freeze memory width, byte-lane placement, and bank voltage compatibility before PCB floorplanning."],
+        )
+
+    return scenarios
+
+
+def _fpga_external_components(device: dict, design_intent: dict, scenarios: list[dict]) -> list[dict]:
+    components = [
+        {
+            "role": "rail_decoupling",
+            "designator": "Cbulk/Cdecap",
+            "status": "required",
+            "connect_between": ["each_power_rail", "nearest_ground"],
+            "why": "Every FPGA rail requires distributed bulk and high-frequency decoupling.",
+        },
+        {
+            "role": "configuration_header",
+            "designator": "JCFG",
+            "status": "recommended",
+            "connect_between": ["JTAG_or_config_pins"],
+            "why": "Bring-up is significantly faster if programming/debug pins are exposed early.",
+        },
+    ]
+    names = {item["name"] for item in scenarios}
+    if "qspi_jtag_bringup" in names:
+        components.extend(
+            [
+                {
+                    "role": "configuration_flash",
+                    "designator": "UCFG",
+                    "status": "recommended",
+                    "connect_between": ["CFG_SPI", "FPGA_config_pins"],
+                    "why": "Most customer boards need a local nonvolatile image source for production bring-up.",
+                },
+                {
+                    "role": "boot_mode_straps",
+                    "designator": "RMODE",
+                    "status": "required",
+                    "connect_between": ["MODE_pins", "VCCIO_or_GND"],
+                    "why": "Boot mode straps must be deterministic before first power-up.",
+                },
+            ]
+        )
+    if "mipi_camera_bridge" in names:
+        components.extend(
+            [
+                {
+                    "role": "mipi_camera_connector",
+                    "designator": "JCAM",
+                    "status": "design_specific",
+                    "connect_between": ["MIPI_CLK/MIPI_DATA", "camera_module"],
+                    "why": "Camera customers usually need a fixed sensor mezzanine or FFC connector boundary.",
+                },
+                {
+                    "role": "mipi_rail_filter",
+                    "designator": "PMIPI",
+                    "status": "recommended",
+                    "connect_between": ["MIPI_power_rails", "local_ground"],
+                    "why": "MIPI analog rails benefit from explicit filtering and local decoupling partitions.",
+                },
+            ]
+        )
+    if "lvds_io_expansion" in names:
+        components.append(
+            {
+                "role": "lvds_io_connector",
+                "designator": "JLVDS",
+                "status": "design_specific",
+                "connect_between": ["LVDS_IO", "remote_adc_or_sensor"],
+                "why": "Expose grouped differential pairs at a stable boundary so bank ownership stays reviewable.",
+            }
+        )
+    if "high_speed_link_bridge" in names:
+        components.extend(
+            [
+                {
+                    "role": "reference_clock_source",
+                    "designator": "XO1",
+                    "status": "recommended",
+                    "connect_between": ["REFCLK", "GT_refclk_input"],
+                    "why": "High-speed links need a clearly owned low-jitter reference clock source.",
+                },
+                {
+                    "role": "high_speed_link_connector",
+                    "designator": "JHS",
+                    "status": "design_specific",
+                    "connect_between": ["SERDES_RX/SERDES_TX", "backplane_or_mezzanine"],
+                    "why": "Link connector placement drives lane escape and AC-coupling ownership.",
+                },
+            ]
+        )
+    if "ddr_memory_interface" in names:
+        components.append(
+            {
+                "role": "memory_connector_or_footprint",
+                "designator": "UDDR",
+                "status": "design_specific",
+                "connect_between": ["DDR_bus", "external_memory"],
+                "why": "Memory-oriented projects need the downstream DRAM footprint represented in the first schematic partition.",
+            }
+        )
+    return components
+
+
+def _fpga_starter_nets(device: dict, design_intent: dict, scenarios: list[dict]) -> list[dict]:
+    nets = [
+        {"name": "VCCINT", "purpose": "core_supply_placeholder"},
+        {"name": "VCCIO", "purpose": "io_bank_supply_placeholder"},
+        {"name": "GND", "purpose": "reference_ground"},
+        {"name": "JTAG", "purpose": "bring_up_and_debug"},
+    ]
+    for scenario in scenarios:
+        for net in scenario.get("nets", []):
+            if not any(item.get("name") == net["name"] for item in nets):
+                nets.append(net)
+    return nets
+
+
+def _choose_default_fpga_template(fpga_templates: list[dict]) -> str | None:
+    if not fpga_templates:
+        return None
+    names = {item.get("name") for item in fpga_templates}
+    for preferred in ("mipi_camera_bridge", "high_speed_link_bridge", "qspi_jtag_bringup", "ddr_memory_interface", "lvds_io_expansion"):
+        if preferred in names:
+            return preferred
+    return fpga_templates[0].get("name")
+
+
+def _fpga_standard_templates(device: dict, design_intent: dict, scenarios: list[dict]) -> list[dict]:
+    templates = []
+
+    def add_template(name: str, label: str, sheet_name: str, summary: str, recommended_when: str, nets: list[str], blocks: list[str], connections: list[dict], checklist: list[str]) -> None:
+        templates.append(
+            {
+                "name": name,
+                "label": label,
+                "sheet_name": sheet_name,
+                "summary": summary,
+                "recommended_when": recommended_when,
+                "nets": nets,
+                "blocks": blocks,
+                "default_refdes_map": {block: block for block in blocks},
+                "connections": connections,
+                "checklist": checklist,
+            }
+        )
+
+    scenario_names = {item["name"] for item in scenarios}
+    if "qspi_jtag_bringup" in scenario_names:
+        add_template(
+            "qspi_jtag_bringup",
+            "QSPI / JTAG Bring-Up",
+            "F1_qspi_bringup",
+            "Boot source, mode straps, and programming header grouped around one production-friendly FPGA bring-up sheet.",
+            "Use when the board needs local config flash or repeatable factory programming.",
+            ["JTAG", "CFG_SPI", "DONE", "RECONFIG_N", "MODE_STRAP"],
+            ["U1", "JCFG", "UCFG", "RMODE"],
+            [
+                {"from": "JTAG", "to": "JCFG", "note": "Expose programming/debug access without opening the main IO connector set."},
+                {"from": "CFG_SPI", "to": "UCFG", "note": "Keep configuration flash on the same sheet as boot pins for review clarity."},
+                {"from": "MODE_STRAP", "to": "RMODE", "note": "Document strap polarity before board release."},
+            ],
+            ["Freeze boot mode and flash image path before pin assignment freeze."],
+        )
+    if "mipi_camera_bridge" in scenario_names:
+        add_template(
+            "mipi_camera_bridge",
+            "MIPI Camera Bridge",
+            "F2_mipi_camera_bridge",
+            "Camera connector, control bus, and MIPI rail planning grouped for fast sensor bring-up.",
+            "Use when the Gowin FPGA sits between image sensors and the rest of the system.",
+            ["MIPI_CLK", "MIPI_DATA", "CAM_I2C", "CAM_RESET_N"],
+            ["U1", "JCAM", "PMIPI", "RCAM"],
+            [
+                {"from": "MIPI_CLK", "to": "JCAM", "note": "Keep lane ownership explicit at the sensor connector."},
+                {"from": "MIPI_DATA", "to": "JCAM", "note": "Bundle data lanes with consistent polarity naming before layout."},
+                {"from": "CAM_I2C", "to": "RCAM", "note": "Bias shared control bus close to the FPGA or bridge MCU domain."},
+            ],
+            ["Freeze lane count, connector pinout, and reset polarity before schematic review."],
+        )
+    if "lvds_io_expansion" in scenario_names:
+        add_template(
+            "lvds_io_expansion",
+            "LVDS / Bank Expansion",
+            "F3_lvds_io_expansion",
+            "Differential IO bank breakout grouped so connector ownership and VCCIO planning are visible early.",
+            "Use when the FPGA is acting as a sensor concentrator or fast GPIO bridge.",
+            ["LVDS_IO", "BANK_VCCIO"],
+            ["U1", "JLVDS", "TPBANK"],
+            [
+                {"from": "LVDS_IO", "to": "JLVDS", "note": "Group customer-facing diff pairs at a stable boundary."},
+                {"from": "BANK_VCCIO", "to": "TPBANK", "note": "Expose bank-voltage ownership for bring-up and rework."},
+            ],
+            ["Freeze bank voltage plan before finalizing connector pin swaps."],
+        )
+    if "high_speed_link_bridge" in scenario_names:
+        add_template(
+            "high_speed_link_bridge",
+            "High-Speed Link Bridge",
+            "F4_high_speed_link_bridge",
+            "SerDes connector, AC-coupling, and refclk source grouped for signal-integrity review.",
+            "Use when the selected Gowin package exposes multi-gigabit lanes.",
+            ["REFCLK", "SERDES_RX", "SERDES_TX"],
+            ["U1", "JHS", "XO1", "CACHS"],
+            [
+                {"from": "REFCLK", "to": "XO1", "note": "Fix the refclk source before routing or SI review."},
+                {"from": "SERDES_RX", "to": "JHS", "note": "Document ingress lane ownership clearly."},
+                {"from": "SERDES_TX", "to": "JHS", "note": "Keep egress lanes adjacent to AC-coupling network placeholders."},
+            ],
+            ["Freeze link standard, refclk frequency, and AC-coupling placement before layout."],
+        )
+    if "ddr_memory_interface" in scenario_names:
+        add_template(
+            "ddr_memory_interface",
+            "DDR Memory Interface",
+            "F5_ddr_memory_interface",
+            "Memory footprint and byte-lane grouping captured as a dedicated first-pass FPGA memory sheet.",
+            "Use when the device acts as a frame buffer, soft CPU, or bandwidth-heavy compute node.",
+            ["DDR_CLK", "DDR_ADDR", "DDR_DQ", "DDR_DQS"],
+            ["U1", "UDDR", "RTERM_DDR"],
+            [
+                {"from": "DDR_CLK", "to": "UDDR", "note": "Lock the memory clock topology before byte-lane routing starts."},
+                {"from": "DDR_DQ", "to": "UDDR", "note": "Preserve byte-lane grouping between schematic and PCB placement."},
+                {"from": "DDR_DQS", "to": "UDDR", "note": "Keep strobe ownership visible for timing review."},
+            ],
+            ["Freeze memory width and bank mapping before finalizing pin constraints."],
+        )
+    return templates
 
 
 def build_design_intent(device: dict, datasheet_design_context: dict | None = None) -> dict:
@@ -2206,12 +2540,24 @@ def build_module_template(device: dict, design_intent: dict) -> dict:
     topology_candidates = []
     opamp_templates = []
     decoder_templates = []
+    fpga_scenarios = []
+    fpga_templates = []
     opamp_device_context = None
     decoder_device_context = design_intent.get("decoder_device_context")
     category = (device.get("category") or "").lower()
     default_opamp_template = None
     default_decoder_template = None
-    if "opamp" in category or "amplifier" in category:
+    default_fpga_template = None
+    if device.get("_type") == "fpga":
+        fpga_scenarios = design_intent.get("customer_scenarios", [])
+        fpga_templates = _fpga_standard_templates(device, design_intent, fpga_scenarios)
+        default_fpga_template = _choose_default_fpga_template(fpga_templates)
+        for candidate in fpga_scenarios:
+            for net in candidate.get("nets", []):
+                _append_net_once(nets, net["name"], net["purpose"])
+            for block in candidate.get("blocks", []):
+                _append_block_once(blocks, block["ref"], block["type"], block["role"], scenario=candidate["name"])
+    elif "opamp" in category or "amplifier" in category:
         opamp_device_context = _infer_opamp_traits(device, design_intent)
         topology_candidates = _opamp_topology_candidates(design_intent)
         opamp_templates = _opamp_standard_templates(device, design_intent, topology_candidates)
@@ -2256,6 +2602,10 @@ def build_module_template(device: dict, design_intent: dict) -> dict:
     ]
     if device.get("_type") == "fpga":
         todos.append("Map IO banks, configuration mode, and JTAG access before pin assignment freeze.")
+        for candidate in fpga_scenarios:
+            for item in candidate.get("todo", []):
+                if item not in todos:
+                    todos.append(item)
     else:
         todos.append("Close the power loop layout early for power devices before PCB placement starts.")
     for candidate in topology_candidates:
@@ -2279,8 +2629,11 @@ def build_module_template(device: dict, design_intent: dict) -> dict:
         "topology_candidates": topology_candidates,
         "opamp_templates": opamp_templates,
         "decoder_templates": decoder_templates,
+        "fpga_scenarios": fpga_scenarios,
+        "fpga_templates": fpga_templates,
         "default_opamp_template": default_opamp_template,
         "default_decoder_template": default_decoder_template,
+        "default_fpga_template": default_fpga_template,
         "todo": todos,
     }
 
@@ -2325,6 +2678,17 @@ def build_quickstart_markdown(device: dict, design_intent: dict) -> str:
         lines.extend(["", "## Attention items", ""])
         for item in attention_items[:12]:
             lines.append(f"- `{item.get('name')}` / pin `{item.get('pin')}`: {item.get('action')}")
+
+    customer_scenarios = design_intent.get("customer_scenarios", [])
+    if customer_scenarios:
+        lines.extend(["", "## Customer scenarios", ""])
+        for scenario in customer_scenarios[:8]:
+            lines.append(f"- `{scenario.get('label')}`: {scenario.get('why')}")
+        lines.extend(["", "## L3 Templates", ""])
+        default_name = _choose_default_fpga_template(_fpga_standard_templates(device, design_intent, customer_scenarios))
+        for template in _fpga_standard_templates(device, design_intent, customer_scenarios):
+            prefix = "Start here: " if template.get("name") == default_name else ""
+            lines.append(f"- {prefix}`{template.get('name')}` — {template.get('recommended_when')}")
 
     pin_groups = design_intent.get("pin_groups", {})
     if pin_groups:
