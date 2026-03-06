@@ -4,6 +4,14 @@
 
 ## Start Here
 
+- [Repository Checklist](README.md#quick-start) — Setup, validation, CI, and contribution entry points
+- [Maintenance Notes](docs/maintenance.md) — Regeneration, validation, and repository upkeep workflow
+- [Documentation Index](docs/index.md) — Topic-oriented map of repository docs
+- [Command Cheat Sheet](docs/commands.md) — Copy/paste-friendly setup, validation, export, and release commands
+- [FAQ](docs/faq.md) — Short answers to common workflow and repository questions
+- [Troubleshooting](docs/troubleshooting.md) — Common failure modes and recovery steps
+- [Release Checklist](RELEASE.md) — Lightweight pre-release and regeneration checklist
+
 ### 1. [Extraction Methodology](docs/extraction-methodology.md)
 How the pipeline works: Vision + Text hybrid approach, why we render pages as images instead of parsing text, and how cross-validation catches errors.
 
@@ -11,11 +19,11 @@ How the pipeline works: Vision + Text hybrid approach, why we render pages as im
 **The most important file for downstream consumers.** Complete data structure reference, JSON examples for both normal IC and FPGA, Python code snippets for every use case (pin lookup, Vout calculation, voltage limit check, FPGA bank/diff-pair/config DRC).
 
 ### 3. [Schema Definition](schemas/sch-review-device.schema.json)
-Formal JSON Schema (`sch-review-device/1.0`). Two types: `normal_ic` (packages → pins + electrical params) and `fpga` (pins + banks + diff pairs + DRC rules + power rails).
+Formal JSON Schema (`sch-review-device/1.1`). Two types: `normal_ic` (packages → pins + electrical params) and `fpga` (pins + banks + diff pairs + DRC rules + power rails). Validator remains compatible with checked-in `1.0` artifacts during migration.
 
 ## Data
 
-### 4. [Exported Device Data](data/sch_review_export/) — 85 files (54 IC + 31 FPGA)
+### 4. [Exported Device Data](data/sch_review_export/) — 194 files (163 IC + 31 FPGA)
 Ready-to-consume JSON files conforming to the schema above. One file per device (IC) or device+package (FPGA).
 
 Example files to look at:
@@ -48,6 +56,22 @@ Original pipeline architecture and design decisions.
 | [`scripts/parse_fpga_pinout.py`](scripts/parse_fpga_pinout.py) | AMD/Xilinx FPGA pinout parser |
 | [`scripts/parse_gowin_pinout.py`](scripts/parse_gowin_pinout.py) | Gowin FPGA pinout parser |
 | [`scripts/parse_lattice_pinout.py`](scripts/parse_lattice_pinout.py) | Lattice FPGA pinout parser |
+
+## Environment
+
+- Export `GEMINI_API_KEY` before running `pipeline.py` or `pipeline_v2.py`.
+- Example: `export GEMINI_API_KEY='<your-api-key>'`
+- Extraction scripts now fail fast with a clear error if the variable is missing.
+
+## Local Engineering Workflow
+
+- Install runtime deps: `pip install -r requirements.txt`
+- Install dev deps: `pip install -r requirements-dev.txt`
+- Run environment doctor: `python3 scripts/doctor.py --dev`
+- Run full local gate: `./scripts/run_checks.sh`
+- Optional schema validation shortcut: `make validate`
+- Optional regression shortcut: `make regression`
+- Optional `pytest` shortcut: `make pytest`
 
 ## What This Data Can Do (for Schematic Review)
 

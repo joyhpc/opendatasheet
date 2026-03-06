@@ -1,13 +1,13 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://opendatasheet.dev/schemas/sch-review-device/1.0",
+  "$id": "https://opendatasheet.dev/schemas/sch-review-device/1.1",
   "title": "Schematic Review Device Schema",
   "description": "Unified device knowledge base for schematic review DRC engine. Supports normal ICs and FPGAs via discriminated union on _type.",
 
   "type": "object",
   "required": ["_schema", "_type", "mpn"],
   "properties": {
-    "_schema": { "const": "sch-review-device/1.0" },
+    "_schema": { "enum": ["sch-review-device/1.0", "sch-review-device/1.1"], "description": "Current exports use 1.1; 1.0 remains valid for checked-in legacy artifacts during migration." },
     "_type": { "enum": ["normal_ic", "fpga"] },
     "mpn": { "type": "string", "minLength": 1 },
     "manufacturer": { "type": ["string", "null"] },
@@ -89,10 +89,16 @@
         },
         "absolute_maximum_ratings": {
           "type": "object",
+          "patternProperties": {
+            "^_": { "type": ["string", "null"] }
+          },
           "additionalProperties": { "$ref": "#/$defs/param_value" }
         },
         "electrical_parameters": {
           "type": "object",
+          "patternProperties": {
+            "^_": { "type": ["string", "null"] }
+          },
           "additionalProperties": { "$ref": "#/$defs/param_value" }
         },
         "drc_hints": {

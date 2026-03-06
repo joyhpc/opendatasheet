@@ -1,16 +1,45 @@
 # OpenDatasheet
 
+[![CI](https://github.com/joyhpc/opendatasheet/actions/workflows/ci.yml/badge.svg)](https://github.com/joyhpc/opendatasheet/actions/workflows/ci.yml)
+[![Schema](https://img.shields.io/badge/schema-sch--review--device%2F1.1-2f81f7)](schemas/sch-review-device.schema.json)
+[![Exports](https://img.shields.io/badge/exports-194%20files-8250df)](data/sch_review_export/)
+[![Docs](https://img.shields.io/badge/docs-index-238636)](docs/index.md)
+
 AI-powered electronic component datasheet parameter extraction pipeline.
 PDF datasheets → structured JSON for schematic review DRC engines.
 
 ## 📖 [Reading Guide](GUIDE.md) — Start here
 
+## Quick Start
+
+- **Setup**: `pip install -r requirements.txt` and `pip install -r requirements-dev.txt`
+- **Credentials**: `export GEMINI_API_KEY='<your-api-key>'`
+- **Doctor**: `python3 scripts/doctor.py --dev`
+- **Checks**: `./scripts/run_checks.sh`
+- **CI**: `.github/workflows/ci.yml`
+- **Contributing**: `CONTRIBUTING.md`
+- **Support**: `SUPPORT.md`
+- **Security**: `SECURITY.md`
+- **Maintenance**: `docs/maintenance.md`
+- **Docs Index**: `docs/index.md`
+- **Command Cheat Sheet**: `docs/commands.md`
+- **FAQ**: `docs/faq.md`
+- **Troubleshooting**: `docs/troubleshooting.md`
+- **Release Notes**: `RELEASE.md`
+- **Maintainers**: `MAINTAINERS.md`
+
+## Who Should Read What?
+
+- **New here?** Start with `GUIDE.md`, then use `docs/index.md` for topic routing.
+- **Integrating exports?** Read `docs/sch-review-integration.md` and `schemas/sch-review-device.schema.json`.
+- **Maintaining the repo?** Use `docs/maintenance.md`, `MAINTAINERS.md`, and `RELEASE.md`.
+
 ## Quick Links
 
 - [Extraction Methodology](docs/extraction-methodology.md) — How the Vision + Text hybrid pipeline works
 - [Schematic Review Integration](docs/sch-review-integration.md) — Data structures, examples, and Python code for consumers
-- [Schema](schemas/sch-review-device.schema.json) — `sch-review-device/1.0` JSON Schema
-- [Exported Data](data/sch_review_export/) — 85 device files ready for consumption
+- [Schema](schemas/sch-review-device.schema.json) — `sch-review-device/1.1` JSON Schema (兼容已提交的 `1.0` 历史产物)
+- [Exported Data](data/sch_review_export/) — 194 device files ready for consumption
 
 ## Pipeline
 
@@ -26,9 +55,9 @@ PDF → L0 Page Classification (PyMuPDF + regex)
 
 | Type | Count | Examples |
 |------|-------|---------|
-| Normal IC | 54 | LDO, Buck, OpAmp, Switch, ADC/DAC, Interface, SerDes |
+| Normal IC | 163 | LDO, Buck, OpAmp, Switch, ADC/DAC, Interface, SerDes |
 | FPGA | 31 | Xilinx UltraScale+, Gowin GW5AT/GW5AR, Lattice ECP5/CrossLink-NX |
-| **Total** | **85** | Batch processing 346 PDFs (in progress) |
+| **Total** | **194** | Batch processing 346 PDFs (in progress) |
 
 ## Stack
 
@@ -36,3 +65,22 @@ PDF → L0 Page Classification (PyMuPDF + regex)
 - **Gemini 3 Flash** — Multimodal Vision extraction (page images → structured JSON)
 - **Pydantic-style validation** — L2 physics rules
 - **Cross-validation** — L3 PDF raw text vs extracted values
+
+## Environment
+
+- Set `GEMINI_API_KEY` before running extraction scripts.
+- Example: `export GEMINI_API_KEY='<your-api-key>'`
+- The pipelines no longer fall back to any hardcoded API key.
+
+## Setup
+
+- Runtime dependencies: `pip install -r requirements.txt`
+- Dev/test dependencies: `pip install -r requirements-dev.txt`
+- Environment self-check: `python3 scripts/doctor.py --dev`
+- One-shot local gate: `./scripts/run_checks.sh`
+- Optional shortcuts if `make` is available: `make validate`, `make regression`, `make pytest`, `make check`
+
+## CI
+
+- GitHub Actions workflow: `.github/workflows/ci.yml`
+- CI runs `./scripts/run_checks.sh`, covering syntax compilation, export schema validation, regression suite, and `pytest` on every push / pull request.

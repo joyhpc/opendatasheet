@@ -23,7 +23,7 @@ TEST_PDFS = [
 ]
 
 
-def test_one(pdf_filename: str, label: str):
+def run_one(pdf_filename: str, label: str):
     pdf_path = str(DATA_DIR / pdf_filename)
     if not os.path.exists(pdf_path):
         print(f"  ❌ File not found: {pdf_path}")
@@ -120,7 +120,7 @@ if __name__ == "__main__":
         print(f"📋 {label}")
         print(f"   {pdf_filename}")
         print(f"{'─'*50}")
-        result = test_one(pdf_filename, label)
+        result = run_one(pdf_filename, label)
         results[pdf_filename] = result
         if result and "error" not in result:
             update_extracted_file(pdf_filename, result)

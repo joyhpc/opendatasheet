@@ -143,30 +143,35 @@ def extract_drc_hints_v2(extraction: dict) -> dict:
 
 # === 测试 ===
 
-test_files = {
+TEST_FILES = {
     'RT6365 (DCDC Buck)': 'data/extracted_v2/0130-01-00049_RT6365GSP.json',
     'TPS62085 (DCDC Buck)': 'data/extracted_v2/0130-01-00016_TPS62085RLTR.json',
     'TPS51206 (DDR VTT)': 'data/extracted_v2/0130-01-00014_TPS51206DSQR.json',
 }
 
-for label, path in test_files.items():
-    with open(path) as f:
-        d = json.load(f)
-    ext = d['extraction']
-    hints = extract_drc_hints_v2(ext)
-    
-    print(f'\n{"="*60}')
-    print(f'{label} — {ext["component"]["mpn"]}')
-    print(f'{"="*60}')
-    
-    for k, v in hints.items():
-        matched = v.pop('_matched', '')
-        print(f'  ✅ {k}: {v}')
-        print(f'     ← {matched}')
-    
-    # Show what we DIDN'T match
-    all_rules = set(RULES.keys())
-    matched_rules = set(hints.keys())
-    missing = all_rules - matched_rules
-    if missing:
-        print(f'  ❌ Not found: {", ".join(sorted(missing))}')
+
+def main():
+    for label, path in TEST_FILES.items():
+        with open(path) as f:
+            d = json.load(f)
+        ext = d['extraction']
+        hints = extract_drc_hints_v2(ext)
+
+        print(f'\n{"="*60}')
+        print(f'{label} — {ext["component"]["mpn"]}')
+        print(f'{"="*60}')
+
+        for k, v in hints.items():
+            matched = v.pop('_matched', '')
+            print(f'  ✅ {k}: {v}')
+            print(f'     ← {matched}')
+
+        all_rules = set(RULES.keys())
+        matched_rules = set(hints.keys())
+        missing = all_rules - matched_rules
+        if missing:
+            print(f'  ❌ Not found: {", ".join(sorted(missing))}')
+
+
+if __name__ == '__main__':
+    main()

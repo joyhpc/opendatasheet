@@ -23,12 +23,21 @@ from google import genai
 # ============================================
 # Config
 # ============================================
-GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "AIzaSyDhJ4wpmDGI139p-bC4dmB_A2MIFAlT1R4")
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
 GEMINI_MODEL = "gemini-3-flash-preview"  # Gemini 3 Flash — 速度+成本优势
 DATA_DIR = Path(__file__).parent / "data" / "raw" / "datasheet_PDF"
 OUTPUT_DIR = Path(__file__).parent / "data" / "extracted"
 
-gemini_client = genai.Client(api_key=GEMINI_API_KEY)
+
+def get_gemini_client() -> genai.Client:
+    """Return a configured Gemini client or raise a clear configuration error."""
+    if not GEMINI_API_KEY:
+        raise RuntimeError(
+            "Missing GEMINI_API_KEY environment variable. "
+            "Export it before running pipeline.py, for example: "
+            "export GEMINI_API_KEY='<your-api-key>'"
+        )
+    return genai.Client(api_key=GEMINI_API_KEY)
 
 # ============================================
 # L0: PyMuPDF 页面分类
@@ -198,6 +207,7 @@ DATASHEET TEXT:
 def extract_with_gemini(text: str, pdf_name: str, max_retries: int = 2) -> dict:
     """L1: 用 Gemini 提取结构化参数，带重试"""
     prompt = EXTRACTION_PROMPT + text[:30000]
+    gemini_client = get_gemini_client()
 
     for attempt in range(max_retries + 1):
         try:

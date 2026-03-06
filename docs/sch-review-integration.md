@@ -6,8 +6,8 @@ OpenDatasheet 项目从 PDF datasheet 中提取结构化参数，输出为 `data
 
 **仓库**: https://github.com/joyhpc/opendatasheet
 **导出目录**: `data/sch_review_export/`
-**Schema**: `sch-review-device/1.0`
-**当前覆盖**: 54 普通 IC + 31 FPGA 封装 = 85 个文件 (批处理进行中，目标 346 个 PDF)
+**Schema**: `sch-review-device/1.1`（当前导出目标；校验工具在迁移期兼容已提交的 `1.0` 历史产物）
+**当前覆盖**: 163 普通 IC + 31 FPGA 封装 = 194 个文件
 
 ---
 
@@ -29,8 +29,9 @@ MPN 中的特殊字符 (`/`, ` `) 替换为 `_`。
 
 ```json
 {
-  "_schema": "sch-review-device/1.0",
+  "_schema": "sch-review-device/1.1",
   "_type": "normal_ic",
+  "_layers": ["L0_skeleton", "L1_electrical"],
   "mpn": "XL4003",
   "manufacturer": "XLSEMI",
   "category": "Buck",           // LDO / Buck / OpAmp / Switch / Logic / DAC / Interface / ...
@@ -73,19 +74,19 @@ MPN 中的特殊字符 (`/`, ` `) 替换为 `_`。
 | 字段 | 用途 |
 |------|------|
 | `packages[pkg].pins[pin_num]` | 通过物理 pin number 查 pin 功能。key 与 `DeviceInfo.pins` 的 key 一致 |
-| `pins[].direction` | 信号方向: `INPUT` / `OUTPUT` / `BIDIRECTIONAL` / `POWER_IN` / `POWER_OUT` / `PASSIVE` / `OPEN_DRAIN` |
+| `pins[].direction` | 信号方向: `INPUT` / `OUTPUT` / `BIDIRECTIONAL` / `POWER_IN` / `POWER_OUT` / `PASSIVE` / `NC` |
 | `pins[].signal_type` | 信号类型: `POWER` / `DIGITAL` / `ANALOG` |
 | `pins[].unused_treatment` | 未使用时处理: `PULL_UP` / `PULL_DOWN` / `null`(必须连接) |
 | `drc_hints.vref` | **FB 分压器反算 Vout 的关键参数**。Stage 7 用 `Vout = Vref * (1 + R_upper/R_lower)` |
 | `drc_hints.vin_abs_max` | 输入电压绝对最大值，用于过压检查 |
 | `absolute_maximum_ratings` | 完整的绝对最大额定值表 |
-| `electrical_parameters` | 完整的电气参数表 |
+| `electrical_parameters` | 完整的电气参数表；`_` 前缀键保留给迁移期注释元数据 |
 
 ### FPGA (`_type: "fpga"`)
 
 ```json
 {
-  "_schema": "sch-review-device/1.0",
+  "_schema": "sch-review-device/1.1",
   "_type": "fpga",
   "mpn": "XCKU3P",
   "package": "FFVB676",
@@ -117,8 +118,8 @@ MPN 中的特殊字符 (`/`, ` `) 替换为 `_`。
 
   "diff_pairs": [
     {"type": "IO",       "pair_name": "IO_L10_64", "p_pin": "AA22", "n_pin": "AB22", "bank": "64", "io_type": "HP"},
-    {"type": "GT_RX",    "pair_name": "RX_0_224",  "p_pin": "AF2",  "n_pin": "AF1",  "bank": "224"},
-    {"type": "GT_REFCLK","pair_name": "REFCLK0_224","p_pin": "AB7", "n_pin": "AB6",  "bank": "224"}
+    {"type": "GT",       "pair_name": "RX_0_224",  "p_pin": "AF2",  "n_pin": "AF1",  "bank": "224"},
+    {"type": "GT",       "pair_name": "REFCLK0_224", "p_pin": "AB7", "n_pin": "AB6",  "bank": "224"}
   ],
 
   "drc_rules": {
@@ -133,14 +134,14 @@ MPN 中的特殊字符 (`/`, ` `) 替换为 `_`。
   },
 
   "pins": [
-    {"pin": "AF1", "name": "MGTYRXN0_224", "bank": "224", "io_type": "GTY", "function": "GT_RX", "polarity": "N", "gt_type": "GTY", "lane": 0, "gt_bank": 224},
+    {"pin": "AF1", "name": "MGTYRXN0_224", "bank": "224", "io_type": "GTY", "function": "GT", "polarity": "N", "gt_type": "GTY", "lane": 0, "gt_bank": 224},
     {"pin": "Y11", "name": "CCLK_0",       "bank": "0",   "io_type": "CONFIG", "function": "CONFIG", "drc": {"must_connect": true, "pull": null, "desc": "Config clock."}},
     {"pin": "W11", "name": "RSVDGND",      "bank": null,  "function": "GROUND", "drc": {"must_connect": true, "net": "GND", "critical": true}}
   ],
 
   "lookup": {
-    "pin_to_name": {"AF1": "MGTYRXN0_224", "Y11": "CCLK_0", ...},
-    "name_to_pin": {"MGTYRXN0_224": "AF1", "CCLK_0": "Y11", ...},
+    "by_pin": {"AF1": "MGTYRXN0_224", "Y11": "CCLK_0", ...},
+    "by_name": {"MGTYRXN0_224": "AF1", "CCLK_0": "Y11", ...},
     "io_pins":     ["AA18", "Y18", ...],
     "power_pins":  ["AA11", "AD12", ...],
     "config_pins": ["Y11", "AD11", ...],
@@ -228,12 +229,12 @@ if actual_vin > vin_max:
 fpga_kb = load_device_kb("XCKU3P", package="FFVB676")
 
 # 通过 pin number 查 pin name
-pin_name = fpga_kb["lookup"]["pin_to_name"]["AF1"]
+pin_name = fpga_kb["lookup"]["by_pin"]["AF1"]
 # → "MGTYRXN0_224"
 
 # 获取完整 pin 信息
 pin_info = next(p for p in fpga_kb["pins"] if p["pin"] == "AF1")
-# → {"function": "GT_RX", "bank": "224", "polarity": "N", "gt_type": "GTY", "lane": 0, ...}
+# → {"function": "GT", "bank": "224", "polarity": "N", "gt_type": "GTY", "lane": 0, ...}
 ```
 
 ### 6. FPGA — Bank VCCO 兼容性检查

@@ -19,6 +19,7 @@ import hashlib
 import fcntl
 import signal
 import concurrent.futures
+import argparse
 import httpx
 from pathlib import Path
 
@@ -190,7 +191,7 @@ class DatasheetValueValidator:
 # ============================================
 # Config
 # ============================================
-GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "AIzaSyDhJ4wpmDGI139p-bC4dmB_A2MIFAlT1R4")
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
 GEMINI_MODEL = "gemini-3-flash-preview"
 DATA_DIR = Path(__file__).parent / "data" / "raw" / "datasheet_PDF"
 OUTPUT_DIR = Path(__file__).parent / "data" / "extracted_v2"
@@ -199,16 +200,26 @@ DPI = 200  # 渲染分辨率
 _httpx_client = httpx.Client(
     timeout=httpx.Timeout(connect=30.0, read=120.0, write=60.0, pool=30.0)
 )
-gemini_client = genai.Client(
-    api_key=GEMINI_API_KEY,
-    http_options={"httpx_client": _httpx_client, "timeout": 300_000},
-)
+
+
+def get_gemini_client() -> genai.Client:
+    """Return a configured Gemini client or raise a clear configuration error."""
+    if not GEMINI_API_KEY:
+        raise RuntimeError(
+            "Missing GEMINI_API_KEY environment variable. "
+            "Export it before running pipeline_v2.py, for example: "
+            "export GEMINI_API_KEY='<your-api-key>'"
+        )
+    return genai.Client(
+        api_key=GEMINI_API_KEY,
+        http_options={"httpx_client": _httpx_client, "timeout": 300_000},
+    )
 
 API_TIMEOUT = 180  # seconds — hard kill via thread timeout
 
 def gemini_generate(model, contents, config=None):
     """Direct call to gemini_client.models.generate_content — httpx timeout handles hangs."""
-    return gemini_client.models.generate_content(
+    return get_gemini_client().models.generate_content(
         model=model, contents=contents, config=config or {}
     )
 
@@ -1436,6 +1447,34 @@ def run_batch(limit: int = 5):
     return all_results
 
 
-if __name__ == "__main__":
-    limit = int(sys.argv[1]) if len(sys.argv) > 1 else 5
+def main():
+    parser = argparse.ArgumentParser(
+        description="OpenDatasheet v0.2 vision pipeline"
+    )
+    parser.add_argument(
+        "input",
+        nargs="?",
+        help="PDF path for single-file extraction, or an integer batch limit"
+    )
+    args = parser.parse_args()
+
+    if args.input:
+        candidate = Path(args.input)
+        if candidate.exists() and candidate.is_file():
+            result = process_single_pdf(str(candidate))
+            print(json.dumps(result, ensure_ascii=False, indent=2))
+            return
+        try:
+            limit = int(args.input)
+        except ValueError as exc:
+            raise SystemExit(
+                f"Unsupported input '{args.input}'. Pass a PDF path or batch limit integer."
+            ) from exc
+    else:
+        limit = 5
+
     run_batch(limit=limit)
+
+
+if __name__ == "__main__":
+    main()

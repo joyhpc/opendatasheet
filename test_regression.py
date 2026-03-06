@@ -35,7 +35,7 @@ failed = 0
 errors = []
 
 
-def test(name):
+def case(name):
     """Decorator for test functions."""
     def decorator(fn):
         fn._test_name = name
@@ -109,14 +109,14 @@ EXPECTED_PINOUTS = {
 }
 
 
-@test("T1.1 All pinout files exist")
+@case("T1.1 All pinout files exist")
 def t1_1():
     for fname in EXPECTED_PINOUTS:
         path = FPGA_PINOUT_DIR / fname
         assert_true(path.exists(), f"Missing: {fname}")
 
 
-@test("T1.2 Pinout pin counts match")
+@case("T1.2 Pinout pin counts match")
 def t1_2():
     for fname, exp in EXPECTED_PINOUTS.items():
         with open(FPGA_PINOUT_DIR / fname) as f:
@@ -125,7 +125,7 @@ def t1_2():
         assert_eq(d["total_pins"], exp["total_pins"], f"{fname} total_pins")
 
 
-@test("T1.3 Pinout device/package metadata")
+@case("T1.3 Pinout device/package metadata")
 def t1_3():
     for fname, exp in EXPECTED_PINOUTS.items():
         with open(FPGA_PINOUT_DIR / fname) as f:
@@ -134,7 +134,7 @@ def t1_3():
         assert_eq(d["package"], exp["package"], f"{fname} package")
 
 
-@test("T1.4 Pinout lookup bidirectional consistency")
+@case("T1.4 Pinout lookup bidirectional consistency")
 def t1_4():
     for fname in EXPECTED_PINOUTS:
         with open(FPGA_PINOUT_DIR / fname) as f:
@@ -148,7 +148,7 @@ def t1_4():
             assert_in(pid, p2n, f"{fname} pin {pid} missing from lookup")
 
 
-@test("T1.5 Pinout diff pairs reference valid pins")
+@case("T1.5 Pinout diff pairs reference valid pins")
 def t1_5():
     for fname in EXPECTED_PINOUTS:
         with open(FPGA_PINOUT_DIR / fname) as f:
@@ -163,7 +163,7 @@ def t1_5():
                 assert_in(n_pin, pin_ids, f"{fname} diff_pair n_pin {n_pin}")
 
 
-@test("T1.6 Every pinout has banks")
+@case("T1.6 Every pinout has banks")
 def t1_6():
     for fname in EXPECTED_PINOUTS:
         with open(FPGA_PINOUT_DIR / fname) as f:
@@ -173,7 +173,7 @@ def t1_6():
 
 # ─── T2: Schema Validation ─────────────────────────────────────────
 
-@test("T2.1 Schema file exists and is valid JSON Schema")
+@case("T2.1 Schema file exists and is valid JSON Schema")
 def t2_1():
     assert_true(SCHEMA_PATH.exists(), "Schema file missing")
     with open(SCHEMA_PATH) as f:
@@ -184,7 +184,7 @@ def t2_1():
     assert_in("fpga", schema["$defs"], "Missing fpga def")
 
 
-@test("T2.2 All exports pass schema validation")
+@case("T2.2 All exports pass schema validation")
 def t2_2():
     from jsonschema import Draft202012Validator
     with open(SCHEMA_PATH) as f:
@@ -236,13 +236,13 @@ EXPECTED_EXPORTS = {
 }
 
 
-@test("T3.1 All expected export files exist")
+@case("T3.1 All expected export files exist")
 def t3_1():
     for fname in EXPECTED_EXPORTS:
         assert_true((EXPORT_DIR / fname).exists(), f"Missing: {fname}")
 
 
-@test("T3.2 Export _type matches expected")
+@case("T3.2 Export _type matches expected")
 def t3_2():
     for fname, exp in EXPECTED_EXPORTS.items():
         with open(EXPORT_DIR / fname) as f:
@@ -250,7 +250,7 @@ def t3_2():
         assert_eq(d["_type"], exp["type"], f"{fname} _type")
 
 
-@test("T3.3 Normal IC exports have packages with pins")
+@case("T3.3 Normal IC exports have packages with pins")
 def t3_3():
     for fname, exp in EXPECTED_EXPORTS.items():
         if exp["type"] != "normal_ic":
@@ -267,7 +267,7 @@ def t3_3():
                 assert_true(pin_data.get("name"), f"{fname}/{pkg_name}/pin{pin_num} missing name")
 
 
-@test("T3.4 FPGA exports have correct pin counts")
+@case("T3.4 FPGA exports have correct pin counts")
 def t3_4():
     for fname, exp in EXPECTED_EXPORTS.items():
         if exp["type"] != "fpga":
@@ -277,7 +277,7 @@ def t3_4():
         assert_eq(len(d["pins"]), exp["pins"], f"{fname} pin count")
 
 
-@test("T3.5 FPGA pin functions are all valid enum values")
+@case("T3.5 FPGA pin functions are all valid enum values")
 def t3_5():
     for f in sorted(EXPORT_DIR.glob("*.json")):
         if f.name == "_manifest.json":
@@ -291,7 +291,7 @@ def t3_5():
             assert_in(func, VALID_FUNCTIONS, f"{f.name} pin[{i}] ({pin.get('name','?')}) function={func}")
 
 
-@test("T3.6 FPGA DRC rule severities are valid")
+@case("T3.6 FPGA DRC rule severities are valid")
 def t3_6():
     for f in sorted(EXPORT_DIR.glob("*.json")):
         if f.name == "_manifest.json":
@@ -305,7 +305,7 @@ def t3_6():
             assert_in(sev, VALID_SEVERITIES, f"{f.name} drc_rules.{rule_name}.severity={sev}")
 
 
-@test("T3.7 FPGA diff pairs have p_pin and n_pin")
+@case("T3.7 FPGA diff pairs have p_pin and n_pin")
 def t3_7():
     for f in sorted(EXPORT_DIR.glob("*.json")):
         if f.name == "_manifest.json":
@@ -319,7 +319,7 @@ def t3_7():
             assert_true("n_pin" in dp, f"{f.name} diff_pairs[{i}] missing n_pin")
 
 
-@test("T3.8 FPGA diff pair pins exist in pin list")
+@case("T3.8 FPGA diff pair pins exist in pin list")
 def t3_8():
     for f in sorted(EXPORT_DIR.glob("*.json")):
         if f.name == "_manifest.json":
@@ -336,7 +336,7 @@ def t3_8():
                 assert_in(dp["n_pin"], pin_ids, f"{f.name} diff_pairs[{i}].n_pin={dp['n_pin']}")
 
 
-@test("T3.9 FPGA lookup consistency — every pin in lookup")
+@case("T3.9 FPGA lookup consistency — every pin in lookup")
 def t3_9():
     for f in sorted(EXPORT_DIR.glob("*.json")):
         if f.name == "_manifest.json":
@@ -352,7 +352,7 @@ def t3_9():
             assert_in(pid, by_pin, f"{f.name} pin {pid} missing from lookup.by_pin")
 
 
-@test("T3.10 FPGA banks have required fields")
+@case("T3.10 FPGA banks have required fields")
 def t3_10():
     for f in sorted(EXPORT_DIR.glob("*.json")):
         if f.name == "_manifest.json":
@@ -365,7 +365,7 @@ def t3_10():
             assert_true("bank" in bank, f"{f.name} banks.{bank_id} missing 'bank' field")
 
 
-@test("T3.11 FPGA must_connect is boolean")
+@case("T3.11 FPGA must_connect is boolean")
 def t3_11():
     for f in sorted(EXPORT_DIR.glob("*.json")):
         if f.name == "_manifest.json":
@@ -381,7 +381,7 @@ def t3_11():
                 assert_true(isinstance(mc, bool), f"{f.name} pin[{i}] ({pin.get('name','?')}) must_connect={mc} (type={type(mc).__name__})")
 
 
-@test("T3.12 FPGA supply_specs have min or max voltage")
+@case("T3.12 FPGA supply_specs have min or max voltage")
 def t3_12():
     for fname, exp in EXPECTED_EXPORTS.items():
         if exp["type"] != "fpga":
@@ -401,7 +401,7 @@ def t3_12():
         assert_gt(valid_count, min_required - 1, f"{fname} supply_specs: only {valid_count}/{len(specs)} have values")
 
 
-@test("T3.13 Normal IC drc_hints have units")
+@case("T3.13 Normal IC drc_hints have units")
 def t3_13():
     for fname, exp in EXPECTED_EXPORTS.items():
         if exp["type"] != "normal_ic":
@@ -415,7 +415,7 @@ def t3_13():
 
 # ─── T4: Cross-Vendor Consistency ──────────────────────────────────
 
-@test("T4.1 AMD and Gowin exports share same _schema")
+@case("T4.1 AMD and Gowin exports share same _schema")
 def t4_1():
     amd = json.load(open(EXPORT_DIR / "XCKU3P_FFVA676.json"))
     gowin = json.load(open(EXPORT_DIR / "GW5AT-60_PG484A.json"))
@@ -423,7 +423,7 @@ def t4_1():
     assert_eq(amd["_type"], gowin["_type"], "type mismatch")
 
 
-@test("T4.2 AMD and Gowin exports have same top-level keys (core set)")
+@case("T4.2 AMD and Gowin exports have same top-level keys (core set)")
 def t4_2():
     amd = json.load(open(EXPORT_DIR / "XCKU3P_FFVA676.json"))
     gowin = json.load(open(EXPORT_DIR / "GW5AT-60_PG484A.json"))
@@ -438,7 +438,7 @@ def t4_2():
     assert_true(not missing_gowin, f"Gowin missing: {missing_gowin}")
 
 
-@test("T4.3 All FPGA exports have power + ground pins")
+@case("T4.3 All FPGA exports have power + ground pins")
 def t4_3():
     for f in sorted(EXPORT_DIR.glob("*.json")):
         if f.name == "_manifest.json":
@@ -455,7 +455,7 @@ def t4_3():
             assert_gt(funcs.get("GROUND", 0), 0, f"{f.name} no GROUND pins")
 
 
-@test("T4.4 All FPGA exports have IO pins")
+@case("T4.4 All FPGA exports have IO pins")
 def t4_4():
     for f in sorted(EXPORT_DIR.glob("*.json")):
         if f.name == "_manifest.json":
@@ -470,7 +470,7 @@ def t4_4():
 
 # ─── T5: Manifest Consistency ──────────────────────────────────────
 
-@test("T5.1 Manifest exists and lists all export files")
+@case("T5.1 Manifest exists and lists all export files")
 def t5_1():
     manifest_path = EXPORT_DIR / "_manifest.json"
     assert_true(manifest_path.exists(), "Manifest missing")
@@ -488,7 +488,7 @@ def t5_1():
 
 # ─── T6: Gowin DC Data Integration ─────────────────────────────────
 
-@test("T6.1 Gowin FPGA exports have supply_specs from DC data")
+@case("T6.1 Gowin FPGA exports have supply_specs from DC data")
 def t6_1():
     gowin_exports = [
         "GW5AT-60_PG484A.json", "GW5AT-15_MG132.json",
@@ -501,7 +501,7 @@ def t6_1():
         assert_gt(len(specs), 5, f"{fname} supply_specs count")
 
 
-@test("T6.2 Gowin FPGA exports have absolute_maximum_ratings")
+@case("T6.2 Gowin FPGA exports have absolute_maximum_ratings")
 def t6_2():
     gowin_exports = [
         "GW5AT-60_PG484A.json", "GW5AT-15_MG132.json",
@@ -516,7 +516,7 @@ def t6_2():
 
 # ─── T7: Lattice DC Data Integration ───────────────────────────────
 
-@test("T7.1 Lattice ECP5 exports have supply_specs from DC data")
+@case("T7.1 Lattice ECP5 exports have supply_specs from DC data")
 def t7_1():
     lattice_exports = [
         "ECP5U-25_CABGA381.json", "ECP5U-85_CABGA756.json",
@@ -528,7 +528,7 @@ def t7_1():
         assert_gt(len(specs), 5, f"{fname} supply_specs count")
 
 
-@test("T7.2 Lattice CrossLink-NX exports have supply_specs from DC data")
+@case("T7.2 Lattice CrossLink-NX exports have supply_specs from DC data")
 def t7_2():
     lattice_exports = [
         "LIFCL-40_CABGA400.json", "LIFCL-40_QFN72.json",
@@ -540,7 +540,7 @@ def t7_2():
         assert_gt(len(specs), 10, f"{fname} supply_specs count")
 
 
-@test("T7.3 Lattice exports have absolute_maximum_ratings")
+@case("T7.3 Lattice exports have absolute_maximum_ratings")
 def t7_3():
     lattice_exports = [
         "ECP5U-25_CABGA381.json", "LIFCL-40_CABGA400.json",
@@ -567,7 +567,7 @@ LATTICE_PINOUTS = {
 }
 
 
-@test("T8.1 Lattice pinout source files exist and pin counts match")
+@case("T8.1 Lattice pinout source files exist and pin counts match")
 def t8_1():
     for fname, exp in LATTICE_PINOUTS.items():
         path = FPGA_PINOUT_DIR / fname
@@ -580,7 +580,7 @@ def t8_1():
         assert_eq(d["package"], exp["package"], f"{fname} package")
 
 
-@test("T8.2 Lattice pinout lookup bidirectional consistency")
+@case("T8.2 Lattice pinout lookup bidirectional consistency")
 def t8_2():
     for fname in LATTICE_PINOUTS:
         with open(FPGA_PINOUT_DIR / fname) as f:
@@ -592,7 +592,7 @@ def t8_2():
             assert_in(pid, p2n, f"{fname} pin {pid} missing from lookup")
 
 
-@test("T8.3 Lattice diff pairs reference valid pins")
+@case("T8.3 Lattice diff pairs reference valid pins")
 def t8_3():
     for fname in LATTICE_PINOUTS:
         with open(FPGA_PINOUT_DIR / fname) as f:
@@ -607,7 +607,7 @@ def t8_3():
                 assert_in(n_pin, pin_ids, f"{fname} dp[{i}].n_pin={n_pin}")
 
 
-@test("T8.4 Lattice exports have all 3 vendors in same schema")
+@case("T8.4 Lattice exports have all 3 vendors in same schema")
 def t8_4():
     amd = json.load(open(EXPORT_DIR / "XCKU3P_FFVA676.json"))
     gowin = json.load(open(EXPORT_DIR / "GW5AT-60_PG484A.json"))
@@ -618,7 +618,7 @@ def t8_4():
     assert_eq(lattice["manufacturer"], "Lattice", "Lattice manufacturer")
 
 
-@test("T8.5 Lattice exports have same core keys as AMD/Gowin")
+@case("T8.5 Lattice exports have same core keys as AMD/Gowin")
 def t8_5():
     core_keys = {"_schema", "_type", "mpn", "manufacturer", "category", "package",
                  "supply_specs", "io_standard_specs", "power_rails", "banks",
@@ -630,7 +630,7 @@ def t8_5():
         assert_true(not missing, f"{fname} missing keys: {missing}")
 
 
-@test("T8.6 Lattice exports pin functions all valid")
+@case("T8.6 Lattice exports pin functions all valid")
 def t8_6():
     import glob
     for f in sorted(glob.glob(str(EXPORT_DIR / "ECP5U-*.json")) + glob.glob(str(EXPORT_DIR / "LIFCL-*.json"))):
@@ -642,7 +642,7 @@ def t8_6():
             assert_in(func, VALID_FUNCTIONS, f"{fname} pin[{i}] ({pin.get('name','?')}) function={func}")
 
 
-@test("T8.7 Lattice exports have power + ground + IO pins")
+@case("T8.7 Lattice exports have power + ground + IO pins")
 def t8_7():
     import glob
     for f in sorted(glob.glob(str(EXPORT_DIR / "ECP5U-*.json")) + glob.glob(str(EXPORT_DIR / "LIFCL-*.json"))):
@@ -654,7 +654,7 @@ def t8_7():
         assert_gt(funcs.get("IO", 0), 0, f"{fname} no IO pins")
 
 
-@test("T8.8 Lattice diff pair pins exist in export pin list")
+@case("T8.8 Lattice diff pair pins exist in export pin list")
 def t8_8():
     import glob
     for f in sorted(glob.glob(str(EXPORT_DIR / "ECP5U-*.json")) + glob.glob(str(EXPORT_DIR / "LIFCL-*.json"))):
@@ -669,7 +669,7 @@ def t8_8():
                 assert_in(dp["n_pin"], pin_ids, f"{fname} dp[{i}].n_pin={dp['n_pin']}")
 
 
-@test("T8.9 Lattice banks have required fields")
+@case("T8.9 Lattice banks have required fields")
 def t8_9():
     import glob
     for f in sorted(glob.glob(str(EXPORT_DIR / "ECP5U-*.json")) + glob.glob(str(EXPORT_DIR / "LIFCL-*.json"))):
@@ -681,7 +681,7 @@ def t8_9():
             assert_true("total_pins" in bank, f"{fname} banks.{bank_id} missing 'total_pins'")
 
 
-@test("T8.10 Lattice supply_specs have no min > max violations")
+@case("T8.10 Lattice supply_specs have no min > max violations")
 def t8_10():
     import glob
     for f in sorted(glob.glob(str(EXPORT_DIR / "ECP5U-*.json")) + glob.glob(str(EXPORT_DIR / "LIFCL-*.json"))):
@@ -695,7 +695,7 @@ def t8_10():
                 assert_true(mn <= mx, f"{fname} supply_specs.{key}: min={mn} > max={mx}")
 
 
-@test("T8.11 ECP5 cross-package IO monotonicity (larger pkg >= smaller pkg IO count)")
+@case("T8.11 ECP5 cross-package IO monotonicity (larger pkg >= smaller pkg IO count)")
 def t8_11():
     # ECP5U-25: CABGA381 >= CABGA256 >= TQFP144
     pkg_order = ["ECP5U-25_CABGA381.json", "ECP5U-25_CABGA256.json", "ECP5U-25_TQFP144.json"]
@@ -710,7 +710,7 @@ def t8_11():
                     f"IO monotonicity: {io_counts[i][0]}({io_counts[i][1]}) < {io_counts[i+1][0]}({io_counts[i+1][1]})")
 
 
-@test("T8.12 Lattice DRC rules have valid severities")
+@case("T8.12 Lattice DRC rules have valid severities")
 def t8_12():
     import glob
     for f in sorted(glob.glob(str(EXPORT_DIR / "ECP5U-*.json")) + glob.glob(str(EXPORT_DIR / "LIFCL-*.json"))):
@@ -722,7 +722,7 @@ def t8_12():
             assert_in(sev, VALID_SEVERITIES, f"{fname} drc_rules.{rule_name}.severity={sev}")
 
 
-@test("T8.13 Lattice must_connect is boolean")
+@case("T8.13 Lattice must_connect is boolean")
 def t8_13():
     import glob
     for f in sorted(glob.glob(str(EXPORT_DIR / "ECP5U-*.json")) + glob.glob(str(EXPORT_DIR / "LIFCL-*.json"))):
@@ -736,7 +736,7 @@ def t8_13():
                 assert_true(isinstance(mc, bool), f"{fname} pin[{i}] must_connect={mc} type={type(mc).__name__}")
 
 
-@test("T8.14 All 18 Lattice exports exist")
+@case("T8.14 All 18 Lattice exports exist")
 def t8_14():
     expected = [
         "ECP5U-25_CABGA256.json", "ECP5U-25_CABGA381.json", "ECP5U-25_CSFBGA285.json", "ECP5U-25_TQFP144.json",
@@ -748,7 +748,7 @@ def t8_14():
         assert_true((EXPORT_DIR / fname).exists(), f"Missing: {fname}")
 
 
-@test("T8.15 Lattice lookup completeness — every pin in by_pin")
+@case("T8.15 Lattice lookup completeness — every pin in by_pin")
 def t8_15():
     import glob
     for f in sorted(glob.glob(str(EXPORT_DIR / "ECP5U-*.json")) + glob.glob(str(EXPORT_DIR / "LIFCL-*.json"))):
@@ -797,14 +797,14 @@ TI_HOTSWAP_EXPORTS = {
 }
 
 
-@test("T9.1 All TI hot-swap export files exist")
+@case("T9.1 All TI hot-swap export files exist")
 def t9_1():
     for fname in TI_HOTSWAP_EXPORTS:
         path = EXPORT_DIR / fname
         assert_true(path.exists(), f"Missing: {fname}")
 
 
-@test("T9.2 TI hot-swap exports have electrical_parameters")
+@case("T9.2 TI hot-swap exports have electrical_parameters")
 def t9_2():
     for fname, exp in TI_HOTSWAP_EXPORTS.items():
         with open(EXPORT_DIR / fname) as f:
@@ -817,7 +817,7 @@ def t9_2():
         assert_true(isinstance(abs_max, dict), f"{fname} absolute_maximum_ratings should be dict")
 
 
-@test("T9.3 TI hot-swap exports have complete pin definitions")
+@case("T9.3 TI hot-swap exports have complete pin definitions")
 def t9_3():
     for fname, exp in TI_HOTSWAP_EXPORTS.items():
         with open(EXPORT_DIR / fname) as f:
@@ -828,7 +828,7 @@ def t9_3():
         assert_true(total_pins >= exp["min_pins"], f"{fname} pin count {total_pins} < {exp['min_pins']}")
 
 
-@test("T9.4 TI hot-swap exports have DRC hints where available")
+@case("T9.4 TI hot-swap exports have DRC hints where available")
 def t9_4():
     # DRC hints depend on symbol extraction quality - check that most have hints
     hints_count = 0
@@ -844,7 +844,7 @@ def t9_4():
     assert_gt(hints_count, min_expected, f"TI hot-swap exports with DRC hints: {hints_count}/{total}")
 
 
-@test("T9.5 TI hot-swap exports have correct MPN and manufacturer")
+@case("T9.5 TI hot-swap exports have correct MPN and manufacturer")
 def t9_5():
     for fname, exp in TI_HOTSWAP_EXPORTS.items():
         with open(EXPORT_DIR / fname) as f:
@@ -853,7 +853,7 @@ def t9_5():
         assert_eq(d.get("manufacturer"), "Texas Instruments", f"{fname} manufacturer")
 
 
-@test("T9.6 TI hot-swap pin directions are valid")
+@case("T9.6 TI hot-swap pin directions are valid")
 def t9_6():
     valid_directions = {"INPUT", "OUTPUT", "BIDIRECTIONAL", "POWER_IN", "POWER_OUT", "PASSIVE", "NC"}
     for fname in TI_HOTSWAP_EXPORTS:
@@ -867,6 +867,34 @@ def t9_6():
 
 # ─── Runner ─────────────────────────────────────────────────────────
 
+def collect_cases():
+    cases = []
+    for name, obj in sorted(globals().items()):
+        if callable(obj) and hasattr(obj, "_test_name"):
+            cases.append(obj)
+    return cases
+
+
+def run_all_cases():
+    global passed, failed, errors
+    passed = 0
+    failed = 0
+    errors = []
+
+    cases = collect_cases()
+
+    print(f"\nRunning {len(cases)} tests...\n")
+
+    for t in cases:
+        run_test(t)
+
+    return failed
+
+
+def test_regression_suite():
+    assert run_all_cases() == 0
+
+
 def main():
     global passed, failed
 
@@ -874,16 +902,7 @@ def main():
     print("OpenDatasheet Regression Test Suite")
     print("=" * 60)
 
-    # Collect all test functions
-    tests = []
-    for name, obj in sorted(globals().items()):
-        if callable(obj) and hasattr(obj, "_test_name"):
-            tests.append(obj)
-
-    print(f"\nRunning {len(tests)} tests...\n")
-
-    for t in tests:
-        run_test(t)
+    run_all_cases()
 
     print(f"\n{'=' * 60}")
     print(f"Results: {passed} passed, {failed} failed, {passed + failed} total")

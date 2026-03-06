@@ -17,6 +17,8 @@ import sys
 from collections import defaultdict
 from pathlib import Path
 
+SCHEMA_VERSION = "sch-review-device/1.1"
+
 DEFAULT_EXTRACTED_DIR = Path(__file__).parent.parent / "data/extracted_v2"
 DEFAULT_FPGA_PINOUT_DIR = Path(__file__).parent.parent / "data/extracted_v2/fpga/pinout"
 DEFAULT_OUTPUT_DIR = Path(__file__).parent.parent / "data/sch_review_export"
@@ -102,7 +104,7 @@ def export_normal_ic(data: dict) -> dict | None:
         layers.append("L1_electrical")
 
     result = {
-        "_schema": "sch-review-device/1.1",
+        "_schema": SCHEMA_VERSION,
         "_type": "normal_ic",
         "_layers": layers,
         "mpn": mpn,
@@ -592,7 +594,7 @@ def export_fpga(dc_data: dict, pinout_data: dict, gowin_dc: dict = None, lattice
         manufacturer = comp.get("manufacturer", "AMD")
 
     result = {
-        "_schema": "sch-review-device/1.0",
+        "_schema": SCHEMA_VERSION,
         "_type": "fpga",
         "mpn": device,
         "manufacturer": manufacturer,
