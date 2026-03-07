@@ -97,6 +97,7 @@ def export_normal_ic(data: dict) -> dict | None:
     raw_abs = ext.get("absolute_maximum_ratings", [])
     drc_hints = _extract_drc_hints(category, abs_max, elec_params,
                                     raw_elec=raw_elec, raw_abs=raw_abs)
+    thermal = _extract_thermal(raw_elec=raw_elec, raw_abs=raw_abs)
 
     # --- Determine layers ---
     layers = ["L0_skeleton"]
@@ -115,9 +116,74 @@ def export_normal_ic(data: dict) -> dict | None:
         "absolute_maximum_ratings": abs_max,
         "electrical_parameters": elec_params,
         "drc_hints": drc_hints,
+        "thermal": thermal,
     }
 
     return result
+
+
+def _thermal_record(item: dict, source: str) -> dict:
+    return {
+        "parameter": item.get("parameter"),
+        "symbol": item.get("symbol"),
+        "min": item.get("min"),
+        "typ": item.get("typ"),
+        "max": item.get("max"),
+        "value": item.get("value"),
+        "unit": item.get("unit"),
+        "conditions": item.get("conditions"),
+        "source": source,
+    }
+
+
+def _classify_thermal_key(item: dict) -> str | None:
+    symbol = (item.get("symbol") or "").upper().replace(" ", "")
+    parameter = (item.get("parameter") or "").lower()
+    conditions = (item.get("conditions") or "").lower()
+    haystack = f"{symbol} {parameter} {conditions}"
+
+    if "power dissipation capacitance" in parameter:
+        return None
+    if "power dissipation" in parameter or re.match(r"^P[Dd]$", symbol):
+        return "power_dissipation"
+    if re.search(r"(PSI|Ψ)\s*JT", symbol) or "junction-to-top" in parameter or "junction to top" in parameter:
+        return "psi_jt"
+    if re.search(r"(PSI|Ψ)\s*JB", symbol) or "junction-to-board characterization" in parameter or "junction to board characterization" in parameter:
+        return "psi_jb"
+    if re.search(r"(R|θ|Θ).*JC", symbol) or "junction-to-case" in parameter or "junction to case" in parameter:
+        if "bottom" in haystack or "bot" in symbol:
+            return "theta_jc_bottom"
+        if "top" in haystack:
+            return "theta_jc_top"
+        return "theta_jc"
+    if re.search(r"(R|θ|Θ).*JB", symbol) or "junction-to-board" in parameter or "junction to board" in parameter:
+        return "theta_jb"
+    if re.search(r"(R|θ|Θ).*JA", symbol) or "junction-to-ambient" in parameter or "junction to ambient" in parameter or "junction-to-air" in parameter or "junction to air" in parameter:
+        return "theta_ja"
+    if "thermal resistance" in parameter and not any(token in parameter for token in ("case", "board", "top", "bottom")):
+        return "theta_ja"
+    return None
+
+
+def _append_thermal_entry(thermal: dict, key: str, item: dict, source: str) -> None:
+    record = _thermal_record(item, source)
+    candidate = key
+    if candidate in thermal:
+        suffix = _sanitize(item.get("conditions") or item.get("parameter") or item.get("symbol") or str(len(thermal)))
+        candidate = f"{key}_{suffix}" if suffix else f"{key}_{len(thermal)}"
+        while candidate in thermal:
+            candidate = f"{candidate}_dup"
+    thermal[candidate] = record
+
+
+def _extract_thermal(raw_elec: list = None, raw_abs: list = None) -> dict:
+    thermal = {}
+    for source, items in (("electrical_characteristics", raw_elec or []), ("absolute_maximum_ratings", raw_abs or [])):
+        for item in items:
+            key = _classify_thermal_key(item)
+            if key:
+                _append_thermal_entry(thermal, key, item, source)
+    return thermal
 
 
 def _extract_drc_hints(category: str, abs_max: dict, elec_params: dict,
@@ -593,6 +659,14 @@ def export_fpga(dc_data: dict, pinout_data: dict, gowin_dc: dict = None, lattice
     else:
         manufacturer = comp.get("manufacturer", "AMD")
 
+    raw_elec = ext.get("electrical_characteristics", [])
+    raw_abs = ext.get("absolute_maximum_ratings", [])
+    if gowin_dc:
+        raw_abs = raw_abs + list(gowin_dc.get("absolute_maximum_ratings", []))
+    if lattice_dc:
+        raw_abs = raw_abs + list(lattice_dc.get("absolute_maximum_ratings", []))
+    thermal = _extract_thermal(raw_elec=raw_elec, raw_abs=raw_abs)
+
     result = {
         "_schema": SCHEMA_VERSION,
         "_type": "fpga",
@@ -605,6 +679,7 @@ def export_fpga(dc_data: dict, pinout_data: dict, gowin_dc: dict = None, lattice
         # From DC datasheet
         "supply_specs": supply_specs,
         "io_standard_specs": io_standard_specs,
+        "thermal": thermal,
 
         # From pinout (L1-L5)
         "power_rails": pinout_data.get("power_rails", {}),

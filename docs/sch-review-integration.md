@@ -79,6 +79,9 @@ MPN 中的特殊字符 (`/`, ` `) 替换为 `_`。
 | `pins[].unused_treatment` | 未使用时处理: `PULL_UP` / `PULL_DOWN` / `null`(必须连接) |
 | `drc_hints.vref` | **FB 分压器反算 Vout 的关键参数**。Stage 7 用 `Vout = Vref * (1 + R_upper/R_lower)` |
 | `drc_hints.vin_abs_max` | 输入电压绝对最大值，用于过压检查 |
+| `thermal.theta_ja` | 热阻（结到环境），用于结温预算和热设计估算 |
+| `thermal.theta_jc` | 热阻（结到壳），用于封装/散热路径评估 |
+| `thermal.power_dissipation` | 功耗上限或典型功耗，用于热预算和器件选型 |
 | `absolute_maximum_ratings` | 完整的绝对最大额定值表 |
 | `electrical_parameters` | 完整的电气参数表；`_` 前缀键保留给迁移期注释元数据 |
 
