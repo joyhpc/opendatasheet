@@ -7,7 +7,7 @@
   ],
   "mpn": "STM32F401xB/C",
   "manufacturer": "STMicroelectronics",
-  "category": "Other",
+  "category": "SoC",
   "description": "ARM Cortex-M4 32b MCU+FPU, 105 DMIPS, 256KB Flash/64KB RAM, 11 TIMs, 1 ADC, 11 comm. interfaces",
   "packages": {
     "LQFP100": {
@@ -17,35 +17,35 @@
           "name": "PE2",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port E2",
           "unused_treatment": "FLOAT"
         },
         "2": {
           "name": "PE3",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port E3",
           "unused_treatment": "FLOAT"
         },
         "3": {
           "name": "PE4",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port E4",
           "unused_treatment": "FLOAT"
         },
         "4": {
           "name": "PE5",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port E5",
           "unused_treatment": "FLOAT"
         },
         "5": {
           "name": "PE6",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port E6",
           "unused_treatment": "FLOAT"
         },
         "10": {
@@ -87,42 +87,42 @@
           "name": "VDD",
           "direction": "POWER_IN",
           "signal_type": "POWER",
-          "description": "System power supply",
+          "description": "Power supply",
           "unused_treatment": null
         },
         "19": {
           "name": "VDD",
           "direction": "POWER_IN",
           "signal_type": "POWER",
-          "description": "System power supply",
+          "description": "Power supply",
           "unused_treatment": null
         },
         "28": {
           "name": "VDD",
           "direction": "POWER_IN",
           "signal_type": "POWER",
-          "description": "System power supply",
+          "description": "Power supply",
           "unused_treatment": null
         },
         "50": {
           "name": "VDD",
           "direction": "POWER_IN",
           "signal_type": "POWER",
-          "description": "System power supply",
+          "description": "Power supply",
           "unused_treatment": null
         },
         "75": {
           "name": "VDD",
           "direction": "POWER_IN",
           "signal_type": "POWER",
-          "description": "System power supply",
+          "description": "Power supply",
           "unused_treatment": null
         },
         "100": {
           "name": "VDD",
           "direction": "POWER_IN",
           "signal_type": "POWER",
-          "description": "System power supply",
+          "description": "Power supply",
           "unused_treatment": null
         },
         "6": {
@@ -136,84 +136,77 @@
           "name": "PC13",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port C13",
           "unused_treatment": "FLOAT"
         },
         "8": {
           "name": "PC14-OSC32_IN (PC14)",
           "direction": "BIDIRECTIONAL",
-          "signal_type": "DIGITAL",
-          "description": "General-purpose I/O or low-speed external crystal oscillator input",
+          "signal_type": "ANALOG",
+          "description": "Port C14 or OSC32_IN",
           "unused_treatment": "FLOAT"
         },
         "9": {
           "name": "PC15-OSC32_OUT (PC15)",
           "direction": "BIDIRECTIONAL",
-          "signal_type": "DIGITAL",
-          "description": "General-purpose I/O or low-speed external crystal oscillator output",
+          "signal_type": "ANALOG",
+          "description": "Port C15 or OSC32_OUT",
           "unused_treatment": "FLOAT"
         },
         "12": {
           "name": "PH0-OSC_IN (PH0)",
           "direction": "BIDIRECTIONAL",
-          "signal_type": "DIGITAL",
-          "description": "General-purpose I/O or high-speed external crystal oscillator input",
+          "signal_type": "ANALOG",
+          "description": "Port H0 or OSC_IN",
           "unused_treatment": "FLOAT"
         },
         "13": {
           "name": "PH1-OSC_OUT (PH1)",
           "direction": "BIDIRECTIONAL",
-          "signal_type": "DIGITAL",
-          "description": "General-purpose I/O or high-speed external crystal oscillator output",
+          "signal_type": "ANALOG",
+          "description": "Port H1 or OSC_OUT",
           "unused_treatment": "FLOAT"
         },
         "14": {
           "name": "NRST",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "System reset (active low)",
+          "description": "Reset",
           "unused_treatment": null
         },
         "15": {
           "name": "PC0",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port C0",
           "unused_treatment": "FLOAT"
         },
         "16": {
           "name": "PC1",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port C1",
           "unused_treatment": "FLOAT"
         },
         "17": {
           "name": "PC2",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port C2",
           "unused_treatment": "FLOAT"
         },
         "18": {
           "name": "PC3",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port C3",
           "unused_treatment": "FLOAT"
         },
         "20": {
-          "name": "VSSA/VREF-",
+          "name": "VSSA",
           "direction": "POWER_IN",
           "signal_type": "POWER",
-          "description": "Analog ground and negative reference",
-          "unused_treatment": null
-        },
-        "21": {
-          "name": "VREF+",
-          "direction": "POWER_IN",
-          "signal_type": "POWER",
-          "description": "Analog positive reference",
+          "description": "Analog ground (also: VREF- — Analog reference negative)",
           "unused_treatment": null
         },
         "22": {
@@ -223,459 +216,466 @@
           "description": "Analog power supply",
           "unused_treatment": null
         },
+        "21": {
+          "name": "VREF+",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Analog reference positive",
+          "unused_treatment": null
+        },
         "23": {
           "name": "PA0",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A0",
           "unused_treatment": "FLOAT"
         },
         "24": {
           "name": "PA1",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A1",
           "unused_treatment": "FLOAT"
         },
         "25": {
           "name": "PA2",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A2",
           "unused_treatment": "FLOAT"
         },
         "26": {
           "name": "PA3",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A3",
           "unused_treatment": "FLOAT"
         },
         "29": {
           "name": "PA4",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A4",
           "unused_treatment": "FLOAT"
         },
         "30": {
           "name": "PA5",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A5",
           "unused_treatment": "FLOAT"
         },
         "31": {
           "name": "PA6",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A6",
           "unused_treatment": "FLOAT"
         },
         "32": {
           "name": "PA7",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A7",
           "unused_treatment": "FLOAT"
         },
         "33": {
           "name": "PC4",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port C4",
           "unused_treatment": "FLOAT"
         },
         "34": {
           "name": "PC5",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port C5",
           "unused_treatment": "FLOAT"
         },
         "35": {
           "name": "PB0",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B0",
           "unused_treatment": "FLOAT"
         },
         "36": {
           "name": "PB1",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B1",
           "unused_treatment": "FLOAT"
         },
         "37": {
           "name": "PB2",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B2",
           "unused_treatment": "FLOAT"
         },
         "38": {
           "name": "PE7",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port E7",
           "unused_treatment": "FLOAT"
         },
         "39": {
           "name": "PE8",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port E8",
           "unused_treatment": "FLOAT"
         },
         "40": {
           "name": "PE9",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port E9",
           "unused_treatment": "FLOAT"
         },
         "41": {
           "name": "PE10",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port E10",
           "unused_treatment": "FLOAT"
         },
         "42": {
           "name": "PE11",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port E11",
           "unused_treatment": "FLOAT"
         },
         "43": {
           "name": "PE12",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port E12",
           "unused_treatment": "FLOAT"
         },
         "44": {
           "name": "PE13",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port E13",
           "unused_treatment": "FLOAT"
         },
         "45": {
           "name": "PE14",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port E14",
           "unused_treatment": "FLOAT"
         },
         "46": {
           "name": "PE15",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port E15",
           "unused_treatment": "FLOAT"
         },
         "47": {
           "name": "PB10",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B10",
           "unused_treatment": "FLOAT"
         },
         "48": {
           "name": "VCAP_1",
           "direction": "PASSIVE",
-          "signal_type": "POWER",
-          "description": "External capacitor for internal regulator",
+          "signal_type": "ANALOG",
+          "description": "Internal regulator bypass capacitor 1",
           "unused_treatment": null
         },
         "51": {
           "name": "PB12",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B12",
           "unused_treatment": "FLOAT"
         },
         "52": {
           "name": "PB13",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B13",
           "unused_treatment": "FLOAT"
         },
         "53": {
           "name": "PB14",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B14",
           "unused_treatment": "FLOAT"
         },
         "54": {
           "name": "PB15",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B15",
           "unused_treatment": "FLOAT"
         },
         "55": {
           "name": "PD8",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port D8",
           "unused_treatment": "FLOAT"
         },
         "56": {
           "name": "PD9",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port D9",
           "unused_treatment": "FLOAT"
         },
         "57": {
           "name": "PD10",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port D10",
           "unused_treatment": "FLOAT"
         },
         "58": {
           "name": "PD11",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port D11",
           "unused_treatment": "FLOAT"
         },
         "59": {
           "name": "PD12",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port D12",
           "unused_treatment": "FLOAT"
         },
         "60": {
           "name": "PD13",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port D13",
           "unused_treatment": "FLOAT"
         },
         "61": {
           "name": "PD14",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port D14",
           "unused_treatment": "FLOAT"
         },
         "62": {
           "name": "PD15",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port D15",
           "unused_treatment": "FLOAT"
         },
         "63": {
           "name": "PC6",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port C6",
           "unused_treatment": "FLOAT"
         },
         "64": {
           "name": "PC7",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port C7",
           "unused_treatment": "FLOAT"
         },
         "65": {
           "name": "PC8",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port C8",
           "unused_treatment": "FLOAT"
         },
         "66": {
           "name": "PC9",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port C9",
           "unused_treatment": "FLOAT"
         },
         "67": {
           "name": "PA8",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A8",
           "unused_treatment": "FLOAT"
         },
         "68": {
           "name": "PA9",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A9",
           "unused_treatment": "FLOAT"
         },
         "69": {
           "name": "PA10",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A10",
           "unused_treatment": "FLOAT"
         },
         "70": {
           "name": "PA11",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A11",
           "unused_treatment": "FLOAT"
         },
         "71": {
           "name": "PA12",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A12",
           "unused_treatment": "FLOAT"
         },
         "72": {
           "name": "PA13 (JTMS-SWDIO)",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O or JTAG/SWD debug data",
+          "description": "Port A13 or JTMS-SWDIO",
           "unused_treatment": "FLOAT"
         },
         "73": {
           "name": "VCAP_2",
           "direction": "PASSIVE",
-          "signal_type": "POWER",
-          "description": "External capacitor for internal regulator",
+          "signal_type": "ANALOG",
+          "description": "Internal regulator bypass capacitor 2",
           "unused_treatment": null
         },
         "76": {
           "name": "PA14 (JTCK-SWCLK)",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O or JTAG/SWD debug clock",
+          "description": "Port A14 or JTCK-SWCLK",
           "unused_treatment": "FLOAT"
         },
         "77": {
           "name": "PA15 (JTDI)",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O or JTAG debug data input",
+          "description": "Port A15 or JTDI",
           "unused_treatment": "FLOAT"
         },
         "78": {
           "name": "PC10",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port C10",
           "unused_treatment": "FLOAT"
         },
         "79": {
           "name": "PC11",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port C11",
           "unused_treatment": "FLOAT"
         },
         "80": {
           "name": "PC12",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port C12",
           "unused_treatment": "FLOAT"
         },
         "81": {
           "name": "PD0",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port D0",
           "unused_treatment": "FLOAT"
         },
         "82": {
           "name": "PD1",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port D1",
           "unused_treatment": "FLOAT"
         },
         "83": {
           "name": "PD2",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port D2",
           "unused_treatment": "FLOAT"
         },
         "84": {
           "name": "PD3",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port D3",
           "unused_treatment": "FLOAT"
         },
         "85": {
           "name": "PD4",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port D4",
           "unused_treatment": "FLOAT"
         },
         "86": {
           "name": "PD5",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port D5",
           "unused_treatment": "FLOAT"
         },
         "87": {
           "name": "PD6",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port D6",
           "unused_treatment": "FLOAT"
         },
         "88": {
           "name": "PD7",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port D7",
           "unused_treatment": "FLOAT"
         },
         "89": {
           "name": "PB3 (JTDO-SWO)",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O or JTAG debug data output",
+          "description": "Port B3 or JTDO-SWO",
           "unused_treatment": "FLOAT"
         },
         "90": {
           "name": "PB4 (NJTRST)",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O or JTAG reset",
+          "description": "Port B4 or NJTRST",
           "unused_treatment": "FLOAT"
         },
         "91": {
           "name": "PB5",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B5",
           "unused_treatment": "FLOAT"
         },
         "92": {
           "name": "PB6",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B6",
           "unused_treatment": "FLOAT"
         },
         "93": {
           "name": "PB7",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B7",
           "unused_treatment": "FLOAT"
         },
         "94": {
@@ -689,68 +689,68 @@
           "name": "PB8",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B8",
           "unused_treatment": "FLOAT"
         },
         "96": {
           "name": "PB9",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B9",
           "unused_treatment": "FLOAT"
         },
         "97": {
           "name": "PE0",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port E0",
           "unused_treatment": "FLOAT"
         },
         "98": {
           "name": "PE1",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port E1",
           "unused_treatment": "FLOAT"
         }
       }
     },
     "UFBGA100": {
-      "pin_count": 100,
+      "pin_count": 101,
       "pins": {
         "B2": {
           "name": "PE2",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port E2",
           "unused_treatment": "FLOAT"
         },
         "A1": {
           "name": "PE3",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port E3",
           "unused_treatment": "FLOAT"
         },
         "B1": {
           "name": "PE4",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port E4",
           "unused_treatment": "FLOAT"
         },
         "C2": {
           "name": "PE5",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port E5",
           "unused_treatment": "FLOAT"
         },
         "D2": {
           "name": "PE6",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port E6",
           "unused_treatment": "FLOAT"
         },
         "D3": {
@@ -767,14 +767,21 @@
           "description": "Ground",
           "unused_treatment": null
         },
-        "F11": {
+        "F9": {
           "name": "VSS",
           "direction": "POWER_IN",
           "signal_type": "POWER",
           "description": "Ground",
           "unused_treatment": null
         },
-        "F12": {
+        "F10": {
+          "name": "VSS",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground",
+          "unused_treatment": null
+        },
+        "F11": {
           "name": "VSS",
           "direction": "POWER_IN",
           "signal_type": "POWER",
@@ -785,28 +792,28 @@
           "name": "VDD",
           "direction": "POWER_IN",
           "signal_type": "POWER",
-          "description": "System power supply",
+          "description": "Power supply",
           "unused_treatment": null
         },
         "G2": {
           "name": "VDD",
           "direction": "POWER_IN",
           "signal_type": "POWER",
-          "description": "System power supply",
+          "description": "Power supply",
           "unused_treatment": null
         },
         "G11": {
           "name": "VDD",
           "direction": "POWER_IN",
           "signal_type": "POWER",
-          "description": "System power supply",
+          "description": "Power supply",
           "unused_treatment": null
         },
         "G12": {
           "name": "VDD",
           "direction": "POWER_IN",
           "signal_type": "POWER",
-          "description": "System power supply",
+          "description": "Power supply",
           "unused_treatment": null
         },
         "E2": {
@@ -820,70 +827,70 @@
           "name": "PC13",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port C13",
           "unused_treatment": "FLOAT"
         },
         "D1": {
           "name": "PC14-OSC32_IN (PC14)",
           "direction": "BIDIRECTIONAL",
-          "signal_type": "DIGITAL",
-          "description": "General-purpose I/O or low-speed external crystal oscillator input",
+          "signal_type": "ANALOG",
+          "description": "Port C14 or OSC32_IN",
           "unused_treatment": "FLOAT"
         },
         "E1": {
           "name": "PC15-OSC32_OUT (PC15)",
           "direction": "BIDIRECTIONAL",
-          "signal_type": "DIGITAL",
-          "description": "General-purpose I/O or low-speed external crystal oscillator output",
+          "signal_type": "ANALOG",
+          "description": "Port C15 or OSC32_OUT",
           "unused_treatment": "FLOAT"
         },
         "F1": {
           "name": "PH0-OSC_IN (PH0)",
           "direction": "BIDIRECTIONAL",
-          "signal_type": "DIGITAL",
-          "description": "General-purpose I/O or high-speed external crystal oscillator input",
+          "signal_type": "ANALOG",
+          "description": "Port H0 or OSC_IN",
           "unused_treatment": "FLOAT"
         },
         "G1": {
           "name": "PH1-OSC_OUT (PH1)",
           "direction": "BIDIRECTIONAL",
-          "signal_type": "DIGITAL",
-          "description": "General-purpose I/O or high-speed external crystal oscillator output",
+          "signal_type": "ANALOG",
+          "description": "Port H1 or OSC_OUT",
           "unused_treatment": "FLOAT"
         },
         "H2": {
           "name": "NRST",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "System reset (active low)",
+          "description": "Reset",
           "unused_treatment": null
         },
         "H1": {
           "name": "PC0",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port C0",
           "unused_treatment": "FLOAT"
         },
         "J2": {
           "name": "PC1",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port C1",
           "unused_treatment": "FLOAT"
         },
         "J3": {
           "name": "PC2",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port C2",
           "unused_treatment": "FLOAT"
         },
         "K2": {
           "name": "PC3",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port C3",
           "unused_treatment": "FLOAT"
         },
         "J1": {
@@ -897,14 +904,7 @@
           "name": "VREF-",
           "direction": "POWER_IN",
           "signal_type": "POWER",
-          "description": "Analog negative reference",
-          "unused_treatment": null
-        },
-        "L1": {
-          "name": "VREF+",
-          "direction": "POWER_IN",
-          "signal_type": "POWER",
-          "description": "Analog positive reference",
+          "description": "Analog reference negative",
           "unused_treatment": null
         },
         "M1": {
@@ -914,32 +914,39 @@
           "description": "Analog power supply",
           "unused_treatment": null
         },
+        "L1": {
+          "name": "VREF+",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Analog reference positive",
+          "unused_treatment": null
+        },
         "L2": {
           "name": "PA0",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A0",
           "unused_treatment": "FLOAT"
         },
         "M2": {
           "name": "PA1",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A1",
           "unused_treatment": "FLOAT"
         },
         "K3": {
           "name": "PA2",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A2",
           "unused_treatment": "FLOAT"
         },
         "L3": {
           "name": "PA3",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A3",
           "unused_treatment": "FLOAT"
         },
         "E3": {
@@ -953,427 +960,427 @@
           "name": "PA4",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A4",
           "unused_treatment": "FLOAT"
         },
         "K4": {
           "name": "PA5",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A5",
           "unused_treatment": "FLOAT"
         },
         "L4": {
           "name": "PA6",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A6",
           "unused_treatment": "FLOAT"
         },
         "M4": {
           "name": "PA7",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A7",
           "unused_treatment": "FLOAT"
         },
         "K5": {
           "name": "PC4",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port C4",
           "unused_treatment": "FLOAT"
         },
         "L5": {
           "name": "PC5",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port C5",
           "unused_treatment": "FLOAT"
         },
         "M5": {
           "name": "PB0",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B0",
           "unused_treatment": "FLOAT"
         },
         "M6": {
           "name": "PB1",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B1",
           "unused_treatment": "FLOAT"
         },
         "L6": {
           "name": "PB2",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B2",
           "unused_treatment": "FLOAT"
         },
         "M7": {
           "name": "PE7",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port E7",
           "unused_treatment": "FLOAT"
         },
         "L7": {
           "name": "PE8",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port E8",
           "unused_treatment": "FLOAT"
         },
         "M8": {
           "name": "PE9",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port E9",
           "unused_treatment": "FLOAT"
         },
         "L8": {
           "name": "PE10",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port E10",
           "unused_treatment": "FLOAT"
         },
         "M9": {
           "name": "PE11",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port E11",
           "unused_treatment": "FLOAT"
         },
         "L9": {
           "name": "PE12",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port E12",
           "unused_treatment": "FLOAT"
         },
         "M10": {
           "name": "PE13",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port E13",
           "unused_treatment": "FLOAT"
         },
         "M11": {
           "name": "PE14",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port E14",
           "unused_treatment": "FLOAT"
         },
         "M12": {
           "name": "PE15",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port E15",
           "unused_treatment": "FLOAT"
         },
         "L10": {
           "name": "PB10",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B10",
           "unused_treatment": "FLOAT"
         },
         "K9": {
           "name": "PB11",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B11",
           "unused_treatment": "FLOAT"
         },
         "L11": {
           "name": "VCAP_1",
           "direction": "PASSIVE",
-          "signal_type": "POWER",
-          "description": "External capacitor for internal regulator",
+          "signal_type": "ANALOG",
+          "description": "Internal regulator bypass capacitor 1",
           "unused_treatment": null
         },
         "L12": {
           "name": "PB12",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B12",
           "unused_treatment": "FLOAT"
         },
         "K12": {
           "name": "PB13",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B13",
           "unused_treatment": "FLOAT"
         },
         "K11": {
           "name": "PB14",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B14",
           "unused_treatment": "FLOAT"
         },
         "K10": {
           "name": "PB15",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B15",
           "unused_treatment": "FLOAT"
         },
         "K8": {
           "name": "PD9",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port D9",
           "unused_treatment": "FLOAT"
         },
         "J12": {
           "name": "PD10",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port D10",
           "unused_treatment": "FLOAT"
         },
         "J11": {
           "name": "PD11",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port D11",
           "unused_treatment": "FLOAT"
         },
         "J10": {
           "name": "PD12",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port D12",
           "unused_treatment": "FLOAT"
         },
         "H12": {
           "name": "PD13",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port D13",
           "unused_treatment": "FLOAT"
         },
         "H11": {
           "name": "PD14",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port D14",
           "unused_treatment": "FLOAT"
         },
         "H10": {
           "name": "PD15",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port D15",
           "unused_treatment": "FLOAT"
         },
         "E12": {
           "name": "PC6",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port C6",
           "unused_treatment": "FLOAT"
         },
         "E11": {
           "name": "PC7",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port C7",
           "unused_treatment": "FLOAT"
         },
         "E10": {
           "name": "PC8",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port C8",
           "unused_treatment": "FLOAT"
         },
         "D12": {
           "name": "PC9",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port C9",
           "unused_treatment": "FLOAT"
         },
         "D11": {
           "name": "PA8",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A8",
           "unused_treatment": "FLOAT"
         },
         "D10": {
           "name": "PA9",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A9",
           "unused_treatment": "FLOAT"
         },
         "C12": {
           "name": "PA10",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A10",
           "unused_treatment": "FLOAT"
         },
         "B12": {
           "name": "PA11",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A11",
           "unused_treatment": "FLOAT"
         },
         "A12": {
           "name": "PA12",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A12",
           "unused_treatment": "FLOAT"
         },
         "A11": {
           "name": "PA13 (JTMS-SWDIO)",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O or JTAG/SWD debug data",
+          "description": "Port A13 or JTMS-SWDIO",
           "unused_treatment": "FLOAT"
         },
         "C11": {
           "name": "VCAP_2",
           "direction": "PASSIVE",
-          "signal_type": "POWER",
-          "description": "External capacitor for internal regulator",
+          "signal_type": "ANALOG",
+          "description": "Internal regulator bypass capacitor 2",
           "unused_treatment": null
         },
         "A10": {
           "name": "PA14 (JTCK-SWCLK)",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O or JTAG/SWD debug clock",
+          "description": "Port A14 or JTCK-SWCLK",
           "unused_treatment": "FLOAT"
         },
         "A9": {
           "name": "PA15 (JTDI)",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O or JTAG debug data input",
+          "description": "Port A15 or JTDI",
           "unused_treatment": "FLOAT"
         },
         "B11": {
           "name": "PC10",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port C10",
           "unused_treatment": "FLOAT"
         },
         "C10": {
           "name": "PC11",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port C11",
           "unused_treatment": "FLOAT"
         },
         "B10": {
           "name": "PC12",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port C12",
           "unused_treatment": "FLOAT"
         },
         "C9": {
           "name": "PD0",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port D0",
           "unused_treatment": "FLOAT"
         },
         "B9": {
           "name": "PD1",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port D1",
           "unused_treatment": "FLOAT"
         },
         "C8": {
           "name": "PD2",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port D2",
           "unused_treatment": "FLOAT"
         },
         "B8": {
           "name": "PD3",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port D3",
           "unused_treatment": "FLOAT"
         },
         "B7": {
           "name": "PD4",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port D4",
           "unused_treatment": "FLOAT"
         },
         "A6": {
           "name": "PD5",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port D5",
           "unused_treatment": "FLOAT"
         },
         "B6": {
           "name": "PD6",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port D6",
           "unused_treatment": "FLOAT"
         },
         "A5": {
           "name": "PD7",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port D7",
           "unused_treatment": "FLOAT"
         },
         "A8": {
           "name": "PB3 (JTDO-SWO)",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O or JTAG debug data output",
+          "description": "Port B3 or JTDO-SWO",
           "unused_treatment": "FLOAT"
         },
         "A7": {
           "name": "PB4 (NJTRST)",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O or JTAG reset",
+          "description": "Port B4 or NJTRST",
           "unused_treatment": "FLOAT"
         },
         "C5": {
           "name": "PB5",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B5",
           "unused_treatment": "FLOAT"
         },
         "B5": {
           "name": "PB6",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B6",
           "unused_treatment": "FLOAT"
         },
         "B4": {
           "name": "PB7",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B7",
           "unused_treatment": "FLOAT"
         },
         "A4": {
@@ -1387,28 +1394,28 @@
           "name": "PB8",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B8",
           "unused_treatment": "FLOAT"
         },
         "B3": {
           "name": "PB9",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B9",
           "unused_treatment": "FLOAT"
         },
         "C3": {
           "name": "PE0",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port E0",
           "unused_treatment": "FLOAT"
         },
         "A2": {
           "name": "PE1",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port E1",
           "unused_treatment": "FLOAT"
         },
         "H3": {
@@ -1421,7 +1428,7 @@
       }
     },
     "UFQFPN48": {
-      "pin_count": 48,
+      "pin_count": 47,
       "pins": {
         "23": {
           "name": "VSS",
@@ -1448,21 +1455,21 @@
           "name": "VDD",
           "direction": "POWER_IN",
           "signal_type": "POWER",
-          "description": "System power supply",
+          "description": "Power supply",
           "unused_treatment": null
         },
         "36": {
           "name": "VDD",
           "direction": "POWER_IN",
           "signal_type": "POWER",
-          "description": "System power supply",
+          "description": "Power supply",
           "unused_treatment": null
         },
         "48": {
           "name": "VDD",
           "direction": "POWER_IN",
           "signal_type": "POWER",
-          "description": "System power supply",
+          "description": "Power supply",
           "unused_treatment": null
         },
         "1": {
@@ -1476,266 +1483,259 @@
           "name": "PC13",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port C13",
           "unused_treatment": "FLOAT"
         },
         "3": {
           "name": "PC14-OSC32_IN (PC14)",
           "direction": "BIDIRECTIONAL",
-          "signal_type": "DIGITAL",
-          "description": "General-purpose I/O or low-speed external crystal oscillator input",
+          "signal_type": "ANALOG",
+          "description": "Port C14 or OSC32_IN",
           "unused_treatment": "FLOAT"
         },
         "4": {
           "name": "PC15-OSC32_OUT (PC15)",
           "direction": "BIDIRECTIONAL",
-          "signal_type": "DIGITAL",
-          "description": "General-purpose I/O or low-speed external crystal oscillator output",
+          "signal_type": "ANALOG",
+          "description": "Port C15 or OSC32_OUT",
           "unused_treatment": "FLOAT"
         },
         "5": {
           "name": "PH0-OSC_IN (PH0)",
           "direction": "BIDIRECTIONAL",
-          "signal_type": "DIGITAL",
-          "description": "General-purpose I/O or high-speed external crystal oscillator input",
+          "signal_type": "ANALOG",
+          "description": "Port H0 or OSC_IN",
           "unused_treatment": "FLOAT"
         },
         "6": {
           "name": "PH1-OSC_OUT (PH1)",
           "direction": "BIDIRECTIONAL",
-          "signal_type": "DIGITAL",
-          "description": "General-purpose I/O or high-speed external crystal oscillator output",
+          "signal_type": "ANALOG",
+          "description": "Port H1 or OSC_OUT",
           "unused_treatment": "FLOAT"
         },
         "7": {
           "name": "NRST",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "System reset (active low)",
+          "description": "Reset",
           "unused_treatment": null
         },
         "8": {
-          "name": "VSSA/VREF-",
+          "name": "VSSA",
           "direction": "POWER_IN",
           "signal_type": "POWER",
-          "description": "Analog ground and negative reference",
+          "description": "Analog ground (also: VREF- — Analog reference negative)",
           "unused_treatment": null
         },
         "9": {
-          "name": "VDDA/VREF+",
+          "name": "VDDA",
           "direction": "POWER_IN",
           "signal_type": "POWER",
-          "description": "Analog power supply and positive reference",
+          "description": "Analog power supply (also: VREF+ — Analog reference positive)",
           "unused_treatment": null
         },
         "10": {
           "name": "PA0",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A0",
           "unused_treatment": "FLOAT"
         },
         "11": {
           "name": "PA1",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A1",
           "unused_treatment": "FLOAT"
         },
         "12": {
           "name": "PA2",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
-          "unused_treatment": "FLOAT"
-        },
-        "13": {
-          "name": "PA3",
-          "direction": "BIDIRECTIONAL",
-          "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A2 (also: PA3 — Port A3)",
           "unused_treatment": "FLOAT"
         },
         "14": {
           "name": "PA4",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A4",
           "unused_treatment": "FLOAT"
         },
         "15": {
           "name": "PA5",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A5",
           "unused_treatment": "FLOAT"
         },
         "16": {
           "name": "PA6",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A6",
           "unused_treatment": "FLOAT"
         },
         "17": {
           "name": "PA7",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A7",
           "unused_treatment": "FLOAT"
         },
         "18": {
           "name": "PB0",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B0",
           "unused_treatment": "FLOAT"
         },
         "19": {
           "name": "PB1",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B1",
           "unused_treatment": "FLOAT"
         },
         "20": {
           "name": "PB2",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B2",
           "unused_treatment": "FLOAT"
         },
         "21": {
           "name": "PB10",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B10",
           "unused_treatment": "FLOAT"
         },
         "22": {
           "name": "VCAP_1",
           "direction": "PASSIVE",
-          "signal_type": "POWER",
-          "description": "External capacitor for internal regulator",
+          "signal_type": "ANALOG",
+          "description": "Internal regulator bypass capacitor 1",
           "unused_treatment": null
         },
         "25": {
           "name": "PB12",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B12",
           "unused_treatment": "FLOAT"
         },
         "26": {
           "name": "PB13",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B13",
           "unused_treatment": "FLOAT"
         },
         "27": {
           "name": "PB14",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B14",
           "unused_treatment": "FLOAT"
         },
         "28": {
           "name": "PB15",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B15",
           "unused_treatment": "FLOAT"
         },
         "29": {
           "name": "PA8",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A8",
           "unused_treatment": "FLOAT"
         },
         "30": {
           "name": "PA9",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A9",
           "unused_treatment": "FLOAT"
         },
         "31": {
           "name": "PA10",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A10",
           "unused_treatment": "FLOAT"
         },
         "32": {
           "name": "PA11",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A11",
           "unused_treatment": "FLOAT"
         },
         "33": {
           "name": "PA12",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A12",
           "unused_treatment": "FLOAT"
         },
         "34": {
           "name": "PA13 (JTMS-SWDIO)",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O or JTAG/SWD debug data",
+          "description": "Port A13 or JTMS-SWDIO",
           "unused_treatment": "FLOAT"
         },
         "37": {
           "name": "PA14 (JTCK-SWCLK)",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O or JTAG/SWD debug clock",
+          "description": "Port A14 or JTCK-SWCLK",
           "unused_treatment": "FLOAT"
         },
         "38": {
           "name": "PA15 (JTDI)",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O or JTAG debug data input",
+          "description": "Port A15 or JTDI",
           "unused_treatment": "FLOAT"
         },
         "39": {
           "name": "PB3 (JTDO-SWO)",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O or JTAG debug data output",
+          "description": "Port B3 or JTDO-SWO",
           "unused_treatment": "FLOAT"
         },
         "40": {
           "name": "PB4 (NJTRST)",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O or JTAG reset",
+          "description": "Port B4 or NJTRST",
           "unused_treatment": "FLOAT"
         },
         "41": {
           "name": "PB5",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B5",
           "unused_treatment": "FLOAT"
         },
         "42": {
           "name": "PB6",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B6",
           "unused_treatment": "FLOAT"
         },
         "43": {
           "name": "PB7",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B7",
           "unused_treatment": "FLOAT"
         },
         "44": {
@@ -1749,14 +1749,14 @@
           "name": "PB8",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B8",
           "unused_treatment": "FLOAT"
         },
         "46": {
           "name": "PB9",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B9",
           "unused_treatment": "FLOAT"
         }
       }
@@ -1789,21 +1789,21 @@
           "name": "VDD",
           "direction": "POWER_IN",
           "signal_type": "POWER",
-          "description": "System power supply",
+          "description": "Power supply",
           "unused_treatment": null
         },
         "B2": {
           "name": "VDD",
           "direction": "POWER_IN",
           "signal_type": "POWER",
-          "description": "System power supply",
+          "description": "Power supply",
           "unused_treatment": null
         },
         "F2": {
           "name": "VDD",
           "direction": "POWER_IN",
           "signal_type": "POWER",
-          "description": "System power supply",
+          "description": "Power supply",
           "unused_treatment": null
         },
         "B7": {
@@ -1817,266 +1817,266 @@
           "name": "PC13",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port C13",
           "unused_treatment": "FLOAT"
         },
         "C7": {
           "name": "PC14-OSC32_IN (PC14)",
           "direction": "BIDIRECTIONAL",
-          "signal_type": "DIGITAL",
-          "description": "General-purpose I/O or low-speed external crystal oscillator input",
+          "signal_type": "ANALOG",
+          "description": "Port C14 or OSC32_IN",
           "unused_treatment": "FLOAT"
         },
         "C6": {
           "name": "PC15-OSC32_OUT (PC15)",
           "direction": "BIDIRECTIONAL",
-          "signal_type": "DIGITAL",
-          "description": "General-purpose I/O or low-speed external crystal oscillator output",
+          "signal_type": "ANALOG",
+          "description": "Port C15 or OSC32_OUT",
           "unused_treatment": "FLOAT"
         },
         "D7": {
           "name": "PH0-OSC_IN (PH0)",
           "direction": "BIDIRECTIONAL",
-          "signal_type": "DIGITAL",
-          "description": "General-purpose I/O or high-speed external crystal oscillator input",
+          "signal_type": "ANALOG",
+          "description": "Port H0 or OSC_IN",
           "unused_treatment": "FLOAT"
         },
         "D6": {
           "name": "PH1-OSC_OUT (PH1)",
           "direction": "BIDIRECTIONAL",
-          "signal_type": "DIGITAL",
-          "description": "General-purpose I/O or high-speed external crystal oscillator output",
+          "signal_type": "ANALOG",
+          "description": "Port H1 or OSC_OUT",
           "unused_treatment": "FLOAT"
         },
         "E7": {
           "name": "NRST",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "System reset (active low)",
+          "description": "Reset",
           "unused_treatment": null
         },
         "E6": {
-          "name": "VSSA/VREF-",
+          "name": "VSSA",
           "direction": "POWER_IN",
           "signal_type": "POWER",
-          "description": "Analog ground and negative reference",
+          "description": "Analog ground (also: VREF- — Analog reference negative)",
           "unused_treatment": null
         },
         "F7": {
-          "name": "VDDA/VREF+",
+          "name": "VDDA",
           "direction": "POWER_IN",
           "signal_type": "POWER",
-          "description": "Analog power supply and positive reference",
+          "description": "Analog power supply (also: VREF+ — Analog reference positive)",
           "unused_treatment": null
         },
         "F6": {
           "name": "PA0",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A0",
           "unused_treatment": "FLOAT"
         },
         "G7": {
           "name": "PA1",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A1",
           "unused_treatment": "FLOAT"
         },
         "E5": {
           "name": "PA2",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A2",
           "unused_treatment": "FLOAT"
         },
         "E4": {
           "name": "PA3",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A3",
           "unused_treatment": "FLOAT"
         },
         "G6": {
           "name": "PA4",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A4",
           "unused_treatment": "FLOAT"
         },
         "F5": {
           "name": "PA5",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A5",
           "unused_treatment": "FLOAT"
         },
         "F4": {
           "name": "PA6",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A6",
           "unused_treatment": "FLOAT"
         },
         "F3": {
           "name": "PA7",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A7",
           "unused_treatment": "FLOAT"
         },
         "G5": {
           "name": "PB0",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B0",
           "unused_treatment": "FLOAT"
         },
         "G4": {
           "name": "PB1",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B1",
           "unused_treatment": "FLOAT"
         },
         "G3": {
           "name": "PB2",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B2",
           "unused_treatment": "FLOAT"
         },
         "E3": {
           "name": "PB10",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B10",
           "unused_treatment": "FLOAT"
         },
         "G2": {
           "name": "VCAP_1",
           "direction": "PASSIVE",
-          "signal_type": "POWER",
-          "description": "External capacitor for internal regulator",
+          "signal_type": "ANALOG",
+          "description": "Internal regulator bypass capacitor 1",
           "unused_treatment": null
         },
         "E2": {
           "name": "PB12",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B12",
           "unused_treatment": "FLOAT"
         },
         "G1": {
           "name": "PB13",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B13",
           "unused_treatment": "FLOAT"
         },
         "F1": {
           "name": "PB14",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B14",
           "unused_treatment": "FLOAT"
         },
         "E1": {
           "name": "PB15",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B15",
           "unused_treatment": "FLOAT"
         },
         "D1": {
           "name": "PA8",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A8",
           "unused_treatment": "FLOAT"
         },
         "D2": {
           "name": "PA9",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A9",
           "unused_treatment": "FLOAT"
         },
         "C2": {
           "name": "PA10",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A10",
           "unused_treatment": "FLOAT"
         },
         "C1": {
           "name": "PA11",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A11",
           "unused_treatment": "FLOAT"
         },
         "C3": {
           "name": "PA12",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A12",
           "unused_treatment": "FLOAT"
         },
         "B3": {
           "name": "PA13 (JTMS-SWDIO)",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O or JTAG/SWD debug data",
+          "description": "Port A13 or JTMS-SWDIO",
           "unused_treatment": "FLOAT"
         },
         "A1": {
           "name": "PA14 (JTCK-SWCLK)",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O or JTAG/SWD debug clock",
+          "description": "Port A14 or JTCK-SWCLK",
           "unused_treatment": "FLOAT"
         },
         "A2": {
           "name": "PA15 (JTDI)",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O or JTAG debug data input",
+          "description": "Port A15 or JTDI",
           "unused_treatment": "FLOAT"
         },
         "A3": {
           "name": "PB3 (JTDO-SWO)",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O or JTAG debug data output",
+          "description": "Port B3 or JTDO-SWO",
           "unused_treatment": "FLOAT"
         },
         "A4": {
           "name": "PB4 (NJTRST)",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O or JTAG reset",
+          "description": "Port B4 or NJTRST",
           "unused_treatment": "FLOAT"
         },
         "B4": {
           "name": "PB5",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B5",
           "unused_treatment": "FLOAT"
         },
         "C4": {
           "name": "PB6",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B6",
           "unused_treatment": "FLOAT"
         },
         "D4": {
           "name": "PB7",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B7",
           "unused_treatment": "FLOAT"
         },
         "A5": {
@@ -2090,14 +2090,14 @@
           "name": "PB8",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B8",
           "unused_treatment": "FLOAT"
         },
         "C5": {
           "name": "PB9",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B9",
           "unused_treatment": "FLOAT"
         },
         "B6": {
@@ -2110,7 +2110,7 @@
       }
     },
     "LQFP64": {
-      "pin_count": 61,
+      "pin_count": 64,
       "pins": {
         "18": {
           "name": "VSS",
@@ -2144,28 +2144,28 @@
           "name": "VDD",
           "direction": "POWER_IN",
           "signal_type": "POWER",
-          "description": "System power supply",
+          "description": "Power supply",
           "unused_treatment": null
         },
         "32": {
           "name": "VDD",
           "direction": "POWER_IN",
           "signal_type": "POWER",
-          "description": "System power supply",
+          "description": "Power supply",
           "unused_treatment": null
         },
         "48": {
           "name": "VDD",
           "direction": "POWER_IN",
           "signal_type": "POWER",
-          "description": "System power supply",
+          "description": "Power supply",
           "unused_treatment": null
         },
         "64": {
           "name": "VDD",
           "direction": "POWER_IN",
           "signal_type": "POWER",
-          "description": "System power supply",
+          "description": "Power supply",
           "unused_treatment": null
         },
         "1": {
@@ -2179,343 +2179,364 @@
           "name": "PC13",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port C13",
           "unused_treatment": "FLOAT"
         },
         "3": {
           "name": "PC14-OSC32_IN (PC14)",
           "direction": "BIDIRECTIONAL",
-          "signal_type": "DIGITAL",
-          "description": "General-purpose I/O or low-speed external crystal oscillator input",
+          "signal_type": "ANALOG",
+          "description": "Port C14 or OSC32_IN",
           "unused_treatment": "FLOAT"
         },
         "4": {
           "name": "PC15-OSC32_OUT (PC15)",
           "direction": "BIDIRECTIONAL",
-          "signal_type": "DIGITAL",
-          "description": "General-purpose I/O or low-speed external crystal oscillator output",
+          "signal_type": "ANALOG",
+          "description": "Port C15 or OSC32_OUT",
           "unused_treatment": "FLOAT"
         },
         "5": {
           "name": "PH0-OSC_IN (PH0)",
           "direction": "BIDIRECTIONAL",
-          "signal_type": "DIGITAL",
-          "description": "General-purpose I/O or high-speed external crystal oscillator input",
+          "signal_type": "ANALOG",
+          "description": "Port H0 or OSC_IN",
           "unused_treatment": "FLOAT"
         },
         "6": {
           "name": "PH1-OSC_OUT (PH1)",
           "direction": "BIDIRECTIONAL",
-          "signal_type": "DIGITAL",
-          "description": "General-purpose I/O or high-speed external crystal oscillator output",
+          "signal_type": "ANALOG",
+          "description": "Port H1 or OSC_OUT",
           "unused_treatment": "FLOAT"
         },
         "7": {
           "name": "NRST",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "System reset (active low)",
+          "description": "Reset",
           "unused_treatment": null
         },
         "8": {
           "name": "PC0",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port C0",
           "unused_treatment": "FLOAT"
         },
         "9": {
           "name": "PC1",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port C1",
           "unused_treatment": "FLOAT"
         },
         "10": {
           "name": "PC2",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port C2",
           "unused_treatment": "FLOAT"
         },
         "11": {
           "name": "PC3",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port C3",
           "unused_treatment": "FLOAT"
         },
         "12": {
-          "name": "VSSA/VREF-",
+          "name": "VSSA",
           "direction": "POWER_IN",
           "signal_type": "POWER",
-          "description": "Analog ground and negative reference",
+          "description": "Analog ground (also: VREF- — Analog reference negative)",
           "unused_treatment": null
         },
         "13": {
-          "name": "VDDA/VREF+",
+          "name": "VDDA",
           "direction": "POWER_IN",
           "signal_type": "POWER",
-          "description": "Analog power supply and positive reference",
+          "description": "Analog power supply (also: VREF+ — Analog reference positive)",
           "unused_treatment": null
         },
         "14": {
           "name": "PA0",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A0",
           "unused_treatment": "FLOAT"
         },
         "15": {
           "name": "PA1",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A1",
           "unused_treatment": "FLOAT"
         },
         "16": {
           "name": "PA2",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A2",
           "unused_treatment": "FLOAT"
         },
         "17": {
           "name": "PA3",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A3",
           "unused_treatment": "FLOAT"
         },
         "20": {
           "name": "PA4",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A4",
           "unused_treatment": "FLOAT"
         },
         "21": {
           "name": "PA5",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A5",
           "unused_treatment": "FLOAT"
         },
         "22": {
           "name": "PA6",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A6",
           "unused_treatment": "FLOAT"
         },
         "23": {
           "name": "PA7",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A7",
           "unused_treatment": "FLOAT"
         },
         "24": {
           "name": "PC4",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port C4",
           "unused_treatment": "FLOAT"
         },
         "25": {
           "name": "PC5",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port C5",
           "unused_treatment": "FLOAT"
         },
         "26": {
           "name": "PB0",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B0",
           "unused_treatment": "FLOAT"
         },
         "27": {
           "name": "PB1",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B1",
           "unused_treatment": "FLOAT"
         },
         "28": {
           "name": "PB2",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B2",
           "unused_treatment": "FLOAT"
         },
         "29": {
           "name": "PB10",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B10",
           "unused_treatment": "FLOAT"
         },
         "30": {
           "name": "VCAP_1",
           "direction": "PASSIVE",
-          "signal_type": "POWER",
-          "description": "External capacitor for internal regulator",
+          "signal_type": "ANALOG",
+          "description": "Internal regulator bypass capacitor 1",
           "unused_treatment": null
         },
         "33": {
           "name": "PB12",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B12",
           "unused_treatment": "FLOAT"
         },
         "34": {
           "name": "PB13",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B13",
           "unused_treatment": "FLOAT"
         },
         "35": {
           "name": "PB14",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B14",
           "unused_treatment": "FLOAT"
         },
         "36": {
           "name": "PB15",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B15",
           "unused_treatment": "FLOAT"
         },
         "37": {
           "name": "PC6",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port C6",
           "unused_treatment": "FLOAT"
         },
         "38": {
           "name": "PC7",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port C7",
           "unused_treatment": "FLOAT"
         },
         "39": {
           "name": "PC8",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port C8",
           "unused_treatment": "FLOAT"
         },
         "40": {
           "name": "PC9",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port C9",
           "unused_treatment": "FLOAT"
         },
         "41": {
           "name": "PA8",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A8",
           "unused_treatment": "FLOAT"
         },
         "42": {
           "name": "PA9",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A9",
           "unused_treatment": "FLOAT"
         },
         "43": {
           "name": "PA10",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A10",
           "unused_treatment": "FLOAT"
         },
         "44": {
           "name": "PA11",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A11",
           "unused_treatment": "FLOAT"
         },
         "45": {
           "name": "PA12",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port A12",
           "unused_treatment": "FLOAT"
         },
         "46": {
           "name": "PA13 (JTMS-SWDIO)",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O or JTAG/SWD debug data",
+          "description": "Port A13 or JTMS-SWDIO",
           "unused_treatment": "FLOAT"
         },
         "49": {
           "name": "PA14 (JTCK-SWCLK)",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O or JTAG/SWD debug clock",
+          "description": "Port A14 or JTCK-SWCLK",
           "unused_treatment": "FLOAT"
         },
         "50": {
           "name": "PA15 (JTDI)",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O or JTAG debug data input",
+          "description": "Port A15 or JTDI",
+          "unused_treatment": "FLOAT"
+        },
+        "51": {
+          "name": "PC10",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "DIGITAL",
+          "description": "Port C10",
+          "unused_treatment": "FLOAT"
+        },
+        "52": {
+          "name": "PC11",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "DIGITAL",
+          "description": "Port C11",
+          "unused_treatment": "FLOAT"
+        },
+        "53": {
+          "name": "PC12",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "DIGITAL",
+          "description": "Port C12",
           "unused_treatment": "FLOAT"
         },
         "54": {
           "name": "PD2",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port D2",
           "unused_treatment": "FLOAT"
         },
         "55": {
           "name": "PB3 (JTDO-SWO)",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O or JTAG debug data output",
+          "description": "Port B3 or JTDO-SWO",
           "unused_treatment": "FLOAT"
         },
         "56": {
           "name": "PB4 (NJTRST)",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O or JTAG reset",
+          "description": "Port B4 or NJTRST",
           "unused_treatment": "FLOAT"
         },
         "57": {
           "name": "PB5",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B5",
           "unused_treatment": "FLOAT"
         },
         "58": {
           "name": "PB6",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B6",
           "unused_treatment": "FLOAT"
         },
         "59": {
           "name": "PB7",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B7",
           "unused_treatment": "FLOAT"
         },
         "60": {
@@ -2529,14 +2550,14 @@
           "name": "PB8",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B8",
           "unused_treatment": "FLOAT"
         },
         "62": {
           "name": "PB9",
           "direction": "BIDIRECTIONAL",
           "signal_type": "DIGITAL",
-          "description": "General-purpose I/O",
+          "description": "Port B9",
           "unused_treatment": "FLOAT"
         }
       }
@@ -2548,18 +2569,18 @@
       "min": -0.3,
       "max": 4.0,
       "unit": "V",
-      "conditions": "including VDDA, VDD and VBAT"
+      "conditions": "Including VDDA, VDD and VBAT"
     },
     "VIN": {
       "parameter": "Input voltage on FT pins",
-      "min": null,
-      "max": null,
+      "min": -0.3,
+      "max": 7.6,
       "unit": "V",
       "conditions": "VSS-0.3 to VDD+4.0"
     },
     "VIN_VSS_0_3_to_4_0": {
       "parameter": "Input voltage on any other pin",
-      "min": null,
+      "min": -0.3,
       "max": 4.0,
       "unit": "V",
       "conditions": "VSS-0.3 to 4.0"
@@ -2570,20 +2591,6 @@
       "max": 9.0,
       "unit": "V",
       "conditions": "VSS to 9.0"
-    },
-    "ΔVDD": {
-      "parameter": "Variations between different VDD power pins",
-      "min": null,
-      "max": 50,
-      "unit": "mV",
-      "conditions": null
-    },
-    "ΔVSS": {
-      "parameter": "Variations between all the different ground pins",
-      "min": null,
-      "max": 50,
-      "unit": "mV",
-      "conditions": "including VREF-"
     },
     "ΣIVDD": {
       "parameter": "Total current into sum of all VDD_x power lines (source)",
@@ -2596,27 +2603,6 @@
       "parameter": "Total current out of sum of all VSS_x ground lines (sink)",
       "min": null,
       "max": 160,
-      "unit": "mA",
-      "conditions": null
-    },
-    "IVDD": {
-      "parameter": "Maximum current into each VDD_x power line (source)",
-      "min": null,
-      "max": 100,
-      "unit": "mA",
-      "conditions": null
-    },
-    "IVSS": {
-      "parameter": "Maximum current out of each VSS_x ground line (sink)",
-      "min": null,
-      "max": 100,
-      "unit": "mA",
-      "conditions": null
-    },
-    "IIO": {
-      "parameter": "Output current sourced by any I/O and control pin",
-      "min": null,
-      "max": -25,
       "unit": "mA",
       "conditions": null
     },
@@ -2644,61 +2630,13 @@
       "unit": "V",
       "conditions": null
     },
-    "VDDA": {
-      "parameter": "Analog operating voltage (ADC limited to 1.2 M samples)",
-      "min": 1.7,
-      "typ": null,
-      "max": 2.4,
-      "unit": "V",
-      "conditions": "Must be the same potential as VDD"
-    },
-    "VDDA_Must_be_the_same_potential_as": {
-      "parameter": "Analog operating voltage (ADC limited to 2.4 M samples)",
-      "min": 2.4,
-      "typ": null,
-      "max": 3.6,
-      "unit": "V",
-      "conditions": "Must be the same potential as VDD"
-    },
-    "VBAT": {
-      "parameter": "Backup operating voltage",
-      "min": 1.65,
-      "typ": null,
-      "max": 3.6,
-      "unit": "V",
-      "conditions": null
-    },
     "fHCLK": {
-      "parameter": "Internal AHB clock frequency (Power Scale 2)",
+      "parameter": "Internal AHB clock frequency",
       "min": 0,
       "typ": null,
       "max": 84,
       "unit": "MHz",
-      "conditions": "Regulator ON, VOS[1:0] = 0x10"
-    },
-    "fHCLK_Regulator_ON__VOS_1_0____0x01": {
-      "parameter": "Internal AHB clock frequency (Power Scale 3)",
-      "min": 0,
-      "typ": null,
-      "max": 60,
-      "unit": "MHz",
-      "conditions": "Regulator ON, VOS[1:0] = 0x01"
-    },
-    "ACCHSI": {
-      "parameter": "Accuracy of the HSI oscillator",
-      "min": -1,
-      "typ": null,
-      "max": 1,
-      "unit": "%",
-      "conditions": "Factory Calibrated"
-    },
-    "ACCHSI_Factory_Calibrated": {
-      "parameter": "Accuracy of the HSI oscillator",
-      "min": -8,
-      "typ": null,
-      "max": 5.5,
-      "unit": "%",
-      "conditions": "Factory Calibrated"
+      "conditions": "Power Scale2: Regulator ON"
     },
     "IDD": {
       "parameter": "Supply current in Run mode",
@@ -2706,70 +2644,94 @@
       "typ": 20.0,
       "max": 21,
       "unit": "mA",
-      "conditions": "84 MHz, all peripherals enabled, VDD = 1.8 V"
+      "conditions": "fHCLK=84MHz, VDD=1.8V, all peripherals enabled"
     },
-    "IDD_84_MHz__all_peripherals_enable": {
+    "IDD_fHCLK_84MHz__VDD_1_8V__all_per": {
       "parameter": "Supply current in Run mode",
       "min": null,
       "typ": 20.0,
       "max": 24.1,
       "unit": "mA",
-      "conditions": "84 MHz, all peripherals enabled, VDD = 1.8 V"
+      "conditions": "fHCLK=84MHz, VDD=1.8V, all peripherals enabled"
     },
-    "IDD_STOP": {
-      "parameter": "Low-power regulator usage current in Stop mode",
-      "min": null,
-      "typ": 42,
-      "max": 65,
-      "unit": "µA",
-      "conditions": "VDD = 3.3 V, Flash in Stop mode, all oscillators OFF, no IWDG"
-    },
-    "IDD_STOP_VDD___3_3_V__Flash_in_Stop_mod": {
-      "parameter": "Low-power regulator usage current in Stop mode",
-      "min": null,
-      "typ": 42,
-      "max": 1100,
-      "unit": "µA",
-      "conditions": "VDD = 3.3 V, Flash in Stop mode, all oscillators OFF, no IWDG"
-    },
-    "VREFINT": {
-      "parameter": "Internal reference voltage",
-      "min": 1.18,
-      "typ": 1.21,
-      "max": 1.24,
+    "VPOR/PDR": {
+      "parameter": "Power-on/power-down reset threshold (rising edge)",
+      "min": 1.64,
+      "typ": 1.72,
+      "max": 1.8,
       "unit": "V",
-      "conditions": "-40 °C < TA < + 125 °C"
+      "conditions": null
+    },
+    "fHSI": {
+      "parameter": "HSI oscillator frequency",
+      "min": null,
+      "typ": 16,
+      "max": null,
+      "unit": "MHz",
+      "conditions": "VDD=3.3V"
+    },
+    "ACCHSI": {
+      "parameter": "Accuracy of the HSI oscillator",
+      "min": -1,
+      "typ": null,
+      "max": 1,
+      "unit": "%",
+      "conditions": "Factory Calibrated, TA=25°C"
+    },
+    "ACCHSI_Factory_Calibrated__TA__40_to": {
+      "parameter": "Accuracy of the HSI oscillator",
+      "min": -8,
+      "typ": null,
+      "max": 5.5,
+      "unit": "%",
+      "conditions": "Factory Calibrated, TA=-40 to 125°C"
+    },
+    "fLSI": {
+      "parameter": "LSI oscillator frequency",
+      "min": 17,
+      "typ": 32,
+      "max": 47,
+      "unit": "kHz",
+      "conditions": null
+    },
+    "RPU": {
+      "parameter": "Weak pull-up equivalent resistor",
+      "min": 30,
+      "typ": 40,
+      "max": 50,
+      "unit": "kΩ",
+      "conditions": "VIN=VSS"
+    },
+    "RPD": {
+      "parameter": "Weak pull-down equivalent resistor",
+      "min": 30,
+      "typ": 40,
+      "max": 50,
+      "unit": "kΩ",
+      "conditions": "VIN=VDD"
     },
     "fADC": {
-      "parameter": "ADC clock frequency",
-      "min": 0.6,
-      "typ": 15,
-      "max": 18,
-      "unit": "MHz",
-      "conditions": "VDDA = 1.7 to 2.4 V"
-    },
-    "fADC_VDDA___2_4_to_3_6_V": {
       "parameter": "ADC clock frequency",
       "min": 0.6,
       "typ": 30,
       "max": 36,
       "unit": "MHz",
-      "conditions": "VDDA = 2.4 to 3.6 V"
-    },
-    "Avg_Slope": {
-      "parameter": "Temperature sensor average slope",
-      "min": null,
-      "typ": 2.5,
-      "max": null,
-      "unit": "mV/°C",
-      "conditions": null
+      "conditions": "VDDA=2.4 to 3.6V"
     },
     "V25": {
-      "parameter": "Temperature sensor voltage at 25 °C",
+      "parameter": "Voltage at 25 °C",
       "min": null,
       "typ": 0.76,
       "max": null,
       "unit": "V",
+      "conditions": null
+    },
+    "Avg_Slope": {
+      "parameter": "Average slope",
+      "min": null,
+      "typ": 2.5,
+      "max": null,
+      "unit": "mV/°C",
       "conditions": null
     }
   },
@@ -2783,11 +2745,9 @@
       "max": 3.6,
       "unit": "V"
     },
-    "vref": {
-      "min": 1.18,
-      "typ": 1.21,
-      "max": 1.24,
-      "unit": "V"
+    "fsw": {
+      "typ": 16,
+      "unit": "MHz"
     }
   },
   "thermal": {}
