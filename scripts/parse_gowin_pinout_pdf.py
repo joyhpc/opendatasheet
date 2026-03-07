@@ -394,6 +394,43 @@ def build_output(device, package, pins, power_rails, lvds_pairs):
     return result
 
 
+def parse_gowin_pdf_pinout(filepath):
+    """Parse supported Gowin PDF pinout manuals.
+
+    Returns a list of ``(package, data)`` tuples so ``scripts/parse_pinout.py``
+    can keep a stable interface across single- and multi-package manuals.
+    """
+    filepath = Path(filepath)
+    doc = fitz.open(str(filepath))
+    try:
+        stem = filepath.stem
+
+        if "GW5AT-15" in stem or "UG1224" in stem:
+            power_rails = parse_power_page(doc, 8)
+            package_specs = [
+                ("MG132", (9, 13), (24, 26)),
+                ("CS130", (14, 18), (27, 29)),
+                ("CS130F", (19, 23), (30, 32)),
+            ]
+            device = "GW5AT-15"
+        else:
+            raise ValueError(
+                f"Unsupported Gowin PDF pinout manual: {filepath.name}; "
+                "use the XLSX pinout manuals for GW1N/GW2A families or add a family-specific PDF parser first."
+            )
+
+        results = []
+        for pkg_name, pin_pages, lvds_pages in package_specs:
+            pins = parse_pin_list_pages(doc, pin_pages[0], pin_pages[1])
+            lvds_pairs = parse_lvds_pages(doc, lvds_pages[0], lvds_pages[1])
+            result = build_output(device, pkg_name, pins, power_rails, lvds_pairs)
+            result["source_file"] = filepath.name
+            results.append((pkg_name, result))
+        return results
+    finally:
+        doc.close()
+
+
 def main():
     doc = fitz.open(str(PDF_PATH))
     print(f"Parsing {PDF_PATH.name} ({doc.page_count} pages)")
@@ -401,6 +438,8 @@ def main():
     # Parse power info
     power_rails = parse_power_page(doc, 8)
     print(f"  Power rails: {len(power_rails)}")
+
+    device = 'GW5AT-15'
 
     # Parse each package
     packages = [
@@ -419,7 +458,7 @@ def main():
         lvds_pairs = parse_lvds_pages(doc, lvds_pages[0], lvds_pages[1])
         print(f"  LVDS pairs: {len(lvds_pairs)}")
 
-        result = build_output('GW5AT-15', pkg_name, pins, power_rails, lvds_pairs)
+        result = build_output(device, pkg_name, pins, power_rails, lvds_pairs)
 
         out_path = OUTPUT_DIR / f"gowin_gw5at-15_{pkg_name.lower()}.json"
         with open(out_path, 'w') as f:

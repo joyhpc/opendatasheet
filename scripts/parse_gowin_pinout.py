@@ -30,9 +30,17 @@ def parse_gowin_xlsx(filepath: Path) -> list[dict]:
 
     # Extract device name from filename: UG1110-1.0.4_GW5AR-25器件Pinout手册.xlsx → GW5AR-25
     fname = filepath.stem
-    m = re.search(r"(GW5\w+-\d+)", fname)
-    if not m:
-        m = re.search(r"(AroraV)", fname)
+    device_patterns = [
+        r"(GW5\w+-\d+)",
+        r"(GW2A-\d+)",
+        r"(GW1N(?:R)?-(?:\d+(?:P\d+)?[A-Z]?|1S|9C))",
+        r"(AroraV)",
+    ]
+    m = None
+    for pattern in device_patterns:
+        m = re.search(pattern, fname)
+        if m:
+            break
     device = m.group(1) if m else fname
 
     # --- Parse Pin Definitions sheet (pin function descriptions) ---

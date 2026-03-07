@@ -25,6 +25,38 @@ DEFAULT_INPUT_DIR = Path(__file__).parent.parent / "data/raw/fpga/gowin/高云 F
 DEFAULT_OUTPUT_DIR = Path(__file__).parent.parent / "data/extracted_v2/fpga"
 
 
+def detect_gowin_device(filepath: Path, doc) -> str:
+    """Infer the Gowin family/device from filename plus title pages."""
+    candidates = [filepath.stem]
+    for page_idx in range(min(2, doc.page_count)):
+        candidates.append(doc[page_idx].get_text("text"))
+    haystack = "\n".join(candidates)
+
+    patterns = [
+        (r"(GW5\w+-\d+)", None),
+        (r"Arora[_ ]?V[_ ]?60K", "Arora V 60K"),
+        (r"Arora[_ ]?V", "AroraV"),
+        (r"GW2A(?:-\d+)?", None),
+        (r"GW1NR(?:-\d+)?", None),
+        (r"GW1N(?:-\d+(?:P\d+)?[A-Z]?|[- ]?1S|[- ]?9C)?", None),
+    ]
+    for pattern, forced in patterns:
+        match = re.search(pattern, haystack, flags=re.IGNORECASE)
+        if not match:
+            continue
+        if forced:
+            return forced
+        value = match.group(0).replace(" ", "")
+        if value.lower().startswith("arora"):
+            value = value.replace("_", " ")
+        if value.upper().startswith("GW"):
+            value = value.upper()
+        if value.startswith("GW1N "):
+            value = value.replace("GW1N ", "GW1N-")
+        return value
+    return filepath.stem
+
+
 def parse_voltage(s: str) -> float | None:
     """Parse voltage string like '0.87V', '-0.5V', '3.465V'."""
     if not s:
@@ -357,55 +389,73 @@ def parse_dc_characteristics(text: str) -> list[dict]:
 def parse_io_dc_specs(doc, start_page: int, end_page: int) -> list[dict]:
     """Parse single-ended and differential IO DC specs from pages."""
     results = []
+    standards = [
+        "LVTTL33", "LVCMOS33", "LVCMOS25", "LVCMOS18", "LVCMOS15", "LVCMOS12",
+        "SSTL15", "SSTL15D", "SSTL18_I", "SSTL18_II", "SSTL18D_I", "SSTL18D_II",
+        "SSTL25_I", "SSTL25_II", "SSTL25D_I", "SSTL25D_II",
+        "SSTL33_I", "SSTL33_II", "SSTL33D_I", "SSTL33D_II",
+        "HSTL15", "HSTL15_I", "HSTL15_II", "HSTL15D",
+        "HSTL18_I", "HSTL18_II", "HSTL18D_I", "HSTL18D_II",
+        "PCI33", "LVPECL33E", "MLVDS25E", "BLVDS25E", "RSDS25E", "LVDS25E",
+        "LVDS25", "LVDS", "RSDS", "PPDS", "BLVDS", "Mini_LVDS",
+    ]
+    standard_set = set(standards)
 
     for pg in range(start_page, min(end_page, doc.page_count)):
-        text = doc[pg].get_text()
-        lines = text.split("\n")
-        current_standard = None
+        lines = [line.strip() for line in doc[pg].get_text().split("\n")]
         current_device = ""
+        idx = 0
+        while idx < len(lines):
+            line = lines[idx]
+            if not line:
+                idx += 1
+                continue
 
-        for line in lines:
-            line = line.strip()
+            match = re.search(r"\(([^)]+)\)", line)
+            if match and match.group(1).upper().startswith("GW"):
+                current_device = match.group(1)
 
-            # Detect device context
-            m = re.search(r"\(([^)]+)\)", line)
-            if m and "GW5AT" in m.group(1):
-                current_device = m.group(1)
+            if line in standard_set:
+                values = []
+                lookahead = idx + 1
+                while lookahead < len(lines):
+                    token = lines[lookahead]
+                    if not token:
+                        lookahead += 1
+                        continue
+                    if token in standard_set or token.startswith("4.3.5") or token.startswith("4.3.6"):
+                        break
+                    if token in {"名称", "最小值", "典型值", "最大值", "输出对应的VCCO(V)", "输入对应的VREF(V)"}:
+                        lookahead += 1
+                        continue
+                    if re.fullmatch(r"-?\d+\.\d+|-?\d+|-", token):
+                        values.append(token)
+                        if len(values) >= 6:
+                            break
+                    lookahead += 1
 
-            # Detect IO standard
-            for std in ["LVCMOS33", "LVCMOS25", "LVCMOS18", "LVCMOS15", "LVCMOS12",
-                        "SSTL25", "SSTL18", "SSTL15", "SSTL135",
-                        "HSTL18", "HSTL15",
-                        "LVDS25", "LVDS", "LVDS_25",
-                        "RSDS", "PPDS", "BLVDS", "Mini_LVDS",
-                        "PCI33"]:
-                if std.lower() in line.lower().replace(" ", ""):
-                    current_standard = std
-                    break
-
-            # Capture VCCO info
-            if current_standard and "VCCIO" in line.upper():
-                v = parse_voltage(line)
-                if v is not None:
-                    results.append({
-                        "standard": current_standard,
-                        "vcco": v,
-                        "raw": line,
-                        "device": current_device,
+                entry = {
+                    "standard": line,
+                    "device": current_device,
+                    "raw": " ".join([line] + values),
+                }
+                if len(values) >= 3:
+                    entry.update({
+                        "vcco_min": float(values[0]) if values[0] != "-" else None,
+                        "vcco": float(values[1]) if values[1] != "-" else None,
+                        "vcco_max": float(values[2]) if values[2] != "-" else None,
                     })
+                if len(values) >= 6:
+                    entry.update({
+                        "vref_min": float(values[3]) if values[3] != "-" else None,
+                        "vref": float(values[4]) if values[4] != "-" else None,
+                        "vref_max": float(values[5]) if values[5] != "-" else None,
+                    })
+                results.append(entry)
+                idx = lookahead
+                continue
 
-            # Capture voltage thresholds (VIH, VIL, VOH, VOL)
-            for param in ["VIH", "VIL", "VOH", "VOL"]:
-                if param in line and current_standard:
-                    v = parse_voltage(line)
-                    if v is not None:
-                        results.append({
-                            "standard": current_standard,
-                            "parameter": param,
-                            "value": v,
-                            "raw": line,
-                            "device": current_device,
-                        })
+            idx += 1
 
     return results
 
@@ -415,10 +465,8 @@ def extract_gowin_dc(filepath: Path) -> dict:
     doc = fitz.open(str(filepath))
     toc = doc.get_toc()
 
-    # Identify device from filename
-    fname = filepath.stem
-    m = re.search(r"(GW5\w+[-\d]*|Arora[_ ]?V[_ ]?\d*K?)", fname)
-    device = m.group(1).replace("_", " ") if m else fname
+    # Identify device / family from filename and title pages
+    device = detect_gowin_device(filepath, doc)
 
     # Find relevant page ranges from TOC
     sections = {}
@@ -429,6 +477,8 @@ def extract_gowin_dc(filepath: Path) -> dict:
             sections["abs_max"] = page - 1
         elif "推荐工作范围" in title and "DC" not in title and "I/O" not in title:
             sections["recommended"] = page - 1
+        elif "I/O推荐工作条件" in title or "I/O 推荐工作条件" in title:
+            sections["io_recommended"] = page - 1
         elif "DC" in title.replace(" ", "") and "电气特性" in title:
             if "推荐工作范围" in title:
                 sections["dc_recommended"] = page - 1
@@ -479,7 +529,7 @@ def extract_gowin_dc(filepath: Path) -> dict:
         result["dc_characteristics"] = parse_dc_characteristics(text)
 
     # --- Extract IO Standards ---
-    io_start = sections.get("single_ended", sections.get("io_recommended"))
+    io_start = sections.get("io_recommended", sections.get("single_ended"))
     if io_start is not None:
         end = sections.get("transceiver", io_start + 6)
         result["io_standards"] = parse_io_dc_specs(doc, io_start, end)
@@ -493,9 +543,14 @@ def main():
     output_dir = Path(sys.argv[2]) if len(sys.argv) > 2 else DEFAULT_OUTPUT_DIR
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    ds_files = sorted([f for f in input_dir.glob("DS*.pdf")])
+    if input_dir.is_file():
+        ds_files = [input_dir]
+    else:
+        ds_files = sorted([f for f in input_dir.glob("DS*.pdf")])
+        if not ds_files:
+            ds_files = sorted([f for f in input_dir.glob("*.pdf") if "GW" in f.stem.upper() or "ARORA" in f.stem.upper()])
     if not ds_files:
-        print(f"No DS*.pdf files found in {input_dir}")
+        print(f"No Gowin datasheet PDFs found in {input_dir}")
         sys.exit(1)
 
     print(f"Found {len(ds_files)} Gowin datasheet PDFs")
