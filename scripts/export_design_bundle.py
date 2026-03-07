@@ -851,6 +851,7 @@ def _build_normal_ic_design_intent(device: dict, datasheet_design_context: dict 
     constraints = _collect_constraints(device, datasheet_design_context=datasheet_design_context)
     category = (device.get("category") or "").lower()
     decoder_device_context = None
+    interface_switch_device_context = None
     switch_device_context = None
 
     datasheet_components = _datasheet_component_entries(datasheet_design_context)
@@ -867,6 +868,17 @@ def _build_normal_ic_design_intent(device: dict, datasheet_design_context: dict 
             "ovp_divider",
             "gain_resistor",
             "sense_resistor",
+            "snubber_capacitor",
+            "snubber_resistor",
+            "filter_network",
+        }
+        datasheet_components = [item for item in datasheet_components if item.get("role") not in noisy_roles]
+    elif _is_interface_switch_like(device):
+        interface_switch_device_context = _infer_interface_switch_traits(device)
+        external_components = _interface_switch_external_components(interface_switch_device_context)
+        noisy_roles = {
+            "input_capacitor",
+            "output_capacitor",
             "snubber_capacitor",
             "snubber_resistor",
             "filter_network",
@@ -897,6 +909,8 @@ def _build_normal_ic_design_intent(device: dict, datasheet_design_context: dict 
         ]
     elif decoder_device_context:
         starter_nets = _decoder_starter_nets(decoder_device_context)
+    elif interface_switch_device_context:
+        starter_nets = _interface_switch_starter_nets(interface_switch_device_context)
     elif switch_device_context:
         starter_nets = _switch_starter_nets(switch_device_context)
     else:
@@ -928,6 +942,7 @@ def _build_normal_ic_design_intent(device: dict, datasheet_design_context: dict 
         "external_components": external_components,
         "starter_nets": starter_nets,
         "decoder_device_context": decoder_device_context,
+        "interface_switch_device_context": interface_switch_device_context,
         "switch_device_context": switch_device_context,
         "datasheet_design_context": datasheet_design_context,
     }
@@ -1466,7 +1481,7 @@ def _is_signal_switch_like(device: dict) -> bool:
     drain_count = sum(1 for name in names if re.match(r"^D\d+[A-Z]?$", name.upper()) or name.upper() in {"D", "DA", "DB"})
 
     return (source_count >= 4 and drain_count >= 1) or any(
-        token in text for token in ("analog switch", "matrix switch", "multiplexer", "demultiplexer", "spst switch", "bus switch")
+        token in text for token in ("analog switch", "matrix switch", "multiplexer", "demultiplexer", "spst switch")
     )
 
 
@@ -1784,6 +1799,369 @@ def _switch_standard_templates(device: dict, switch_context: dict) -> list[dict]
                 {"from": "SIG_PORT_B", "to": "JSW", "note": "Keep destination-side signals grouped for review and labeling."},
             ],
             ["Freeze normally-on/off expectations and channel naming before schematic release."],
+        )
+
+    return templates
+
+
+def _is_interface_switch_like(device: dict) -> bool:
+    category = (device.get("category") or "").lower()
+    if category != "switch":
+        return False
+
+    text = " ".join(
+        [
+            device.get("mpn") or "",
+            device.get("description") or "",
+            device.get("category") or "",
+        ]
+    ).lower()
+    if any(
+        token in text
+        for token in (
+            "efuse",
+            "load switch",
+            "power switch",
+            "power mux",
+            "power multiplexer",
+            "ideal diode",
+            "high-side",
+            "current-limited",
+            "power-distribution",
+            "reverse polarity",
+        )
+    ):
+        return False
+
+    preferred_package = _pick_preferred_package(device)
+    package_data = device.get("packages", {}).get(preferred_package or "", {}) if preferred_package else {}
+    pins = package_data.get("pins", {})
+    names = [(pin.get("name") or "").upper() for pin in pins.values()]
+
+    return any(token in text for token in ("usb", "pcie", "superspeed", "displayport", "bus switch")) or any(
+        re.match(r"^\d+[AB]$", name) or re.match(r"^[ABC]\d+[+-]$", name) or name in {"D+", "D-", "SEL", "OE", "/OE"}
+        or "SSRX" in name or "SSTX" in name
+        for name in names
+    )
+
+
+def _infer_interface_switch_traits(device: dict) -> dict:
+    preferred_package = _pick_preferred_package(device)
+    package_data = device.get("packages", {}).get(preferred_package or "", {}) if preferred_package else {}
+    pins = package_data.get("pins", {})
+
+    def record(pin_number: str, pin_data: dict) -> dict:
+        return {
+            "pin": pin_number,
+            "name": pin_data.get("name"),
+            "description": pin_data.get("description"),
+            "direction": pin_data.get("direction"),
+        }
+
+    text = " ".join([device.get("mpn") or "", device.get("description") or ""]).lower()
+    power_pins = []
+    ground_pins = []
+    select_pins = []
+    enable_pins = []
+    reset_pins = []
+    common_pins = []
+    branch_a_pins = []
+    branch_b_pins = []
+    aux_pins = []
+    diff_groups = {"A": [], "B": [], "C": []}
+    bus_a_pins = []
+    bus_b_pins = []
+    usb_common = []
+    usb_port1 = []
+    usb_port2 = []
+    ss_common = []
+    ss_port1 = []
+    ss_port2 = []
+
+    for pin_number, pin_data in pins.items():
+        item = record(pin_number, pin_data)
+        name = (pin_data.get("name") or "").upper()
+        desc = (pin_data.get("description") or "").lower()
+
+        if name in {"VCC", "VDD", "AVDD", "DVDD"}:
+            power_pins.append(item)
+        elif name in {"GND", "AGND", "DGND", "EP"}:
+            ground_pins.append(item)
+        elif name in {"S", "SEL"}:
+            select_pins.append(item)
+        elif name in {"OE", "/OE", "OEB"} or re.match(r"^/?OE\d*$", name) or re.match(r"^OEB\d*$", name):
+            enable_pins.append(item)
+        elif name in {"RESET", "RST", "RESETB", "RSTB"}:
+            reset_pins.append(item)
+
+        if name in {"D+", "D-"}:
+            usb_common.append(item)
+        elif re.match(r"^[12]D[+-]$", name):
+            if name.startswith("1"):
+                usb_port1.append(item)
+            else:
+                usb_port2.append(item)
+        elif "COM" in name and ("SSRX" in name or "SSTX" in name):
+            ss_common.append(item)
+        elif ("SSRX1" in name or "SSTX1" in name):
+            ss_port1.append(item)
+        elif ("SSRX2" in name or "SSTX2" in name):
+            ss_port2.append(item)
+
+        diff_match = re.match(r"^([ABC])(\d+)[+-]$", name)
+        if diff_match:
+            diff_groups[diff_match.group(1)].append(item)
+        bus_match = re.match(r"^(\d+)([AB])$", name)
+        if bus_match:
+            if bus_match.group(2) == "A":
+                bus_a_pins.append(item)
+            else:
+                bus_b_pins.append(item)
+
+    interface_kind = "generic_interface_switch"
+    topology_kind = "interface_switch"
+    channel_count = 0
+    if usb_common or usb_port1 or usb_port2:
+        interface_kind = "usb2"
+        topology_kind = "usb2_mux"
+        common_pins = usb_common
+        branch_a_pins = usb_port1
+        branch_b_pins = usb_port2
+        channel_count = max(len(usb_common) // 2, 1)
+    elif ss_common or ss_port1 or ss_port2:
+        interface_kind = "superspeed"
+        topology_kind = "superspeed_mux"
+        common_pins = ss_common
+        branch_a_pins = ss_port1
+        branch_b_pins = ss_port2
+        channel_count = max(len(ss_common) // 2, 1)
+    elif diff_groups["C"] or diff_groups["A"] or diff_groups["B"]:
+        interface_kind = "pcie"
+        topology_kind = "pcie_diff_mux"
+        common_pins = diff_groups["C"]
+        branch_a_pins = diff_groups["A"]
+        branch_b_pins = diff_groups["B"]
+        channel_count = max(len(common_pins) // 2, 1) if common_pins else max(len(branch_a_pins) // 2, len(branch_b_pins) // 2, 1)
+    elif bus_a_pins or bus_b_pins or "bus switch" in text:
+        interface_kind = "bus"
+        topology_kind = "bus_switch"
+        common_pins = []
+        branch_a_pins = bus_a_pins
+        branch_b_pins = bus_b_pins
+        channel_count = max(len(bus_a_pins), len(bus_b_pins), 1)
+    else:
+        for item in pins.values():
+            name = (item.get("name") or "").upper()
+            if name not in {"VCC", "VDD", "GND", "AGND", "DGND", "S", "SEL", "OE", "/OE", "OEB"}:
+                aux_pins.append(record(next(k for k,v in pins.items() if v is item), item))
+
+    return {
+        "preferred_package": preferred_package,
+        "power_pins": power_pins,
+        "ground_pins": ground_pins,
+        "select_pins": select_pins,
+        "enable_pins": enable_pins,
+        "reset_pins": reset_pins,
+        "common_pins": common_pins,
+        "branch_a_pins": branch_a_pins,
+        "branch_b_pins": branch_b_pins,
+        "aux_pins": aux_pins,
+        "interface_kind": interface_kind,
+        "topology_kind": topology_kind,
+        "channel_count": channel_count,
+        "supply_nets": [item["name"] for item in power_pins + ground_pins],
+    }
+
+
+def _interface_switch_external_components(interface_context: dict) -> list[dict]:
+    components = [
+        {
+            "role": "supply_decoupling",
+            "designator": "CBYP",
+            "status": "required",
+            "connect_between": ["VDD_OR_VCC", "GND"],
+            "why": "High-speed and bus switches still need local supply bypassing at the package pins.",
+        }
+    ]
+    if interface_context.get("select_pins"):
+        components.append(
+            {
+                "role": "select_bias",
+                "designator": "RSEL",
+                "status": "recommended",
+                "connect_between": ["SEL", "logic_default"],
+                "why": "Selection pins should not float during reset or cable hot-plug events.",
+            }
+        )
+    if interface_context.get("enable_pins"):
+        components.append(
+            {
+                "role": "enable_bias",
+                "designator": "ROE",
+                "status": "recommended",
+                "connect_between": ["OE_N", "logic_default"],
+                "why": "Output-enable polarity should be deterministic before the host controller takes over.",
+            }
+        )
+    if interface_context.get("interface_kind") in {"usb2", "superspeed"}:
+        components.append(
+            {
+                "role": "esd_review",
+                "designator": "DESD",
+                "status": "design_specific",
+                "connect_between": ["high_speed_connector", "switch_lanes"],
+                "why": "USB-facing ports usually need coordinated ESD protection and lane ownership review.",
+            }
+        )
+    if interface_context.get("interface_kind") in {"superspeed", "pcie"}:
+        components.append(
+            {
+                "role": "ac_coupling_review",
+                "designator": "CAC",
+                "status": "design_specific",
+                "connect_between": ["common_diff_lanes", "branch_diff_lanes"],
+                "why": "High-speed differential paths need an explicit decision on AC-coupling placement and ownership.",
+            }
+        )
+    components.append(
+        {
+            "role": "signal_path_breakout",
+            "designator": "JPATH",
+            "status": "design_specific",
+            "connect_between": ["common_path", "branch_paths"],
+            "why": "Keep common and branch-side path ownership explicit before schematic and layout diverge.",
+        }
+    )
+    return components
+
+
+def _interface_switch_starter_nets(interface_context: dict) -> list[dict]:
+    nets = []
+    seen = set()
+
+    def add(name: str, purpose: str) -> None:
+        if name in seen:
+            return
+        seen.add(name)
+        nets.append({"name": name, "purpose": purpose})
+
+    add("VCC", "interface_switch_supply")
+    add("GND", "module_ground")
+    if interface_context.get("select_pins"):
+        add("SEL", "path_select_control")
+    if interface_context.get("enable_pins"):
+        add("OE_N", "output_enable_control")
+    kind = interface_context.get("interface_kind")
+    if kind == "usb2":
+        add("USB2_COM", "common_usb2_pair")
+        add("USB2_PORT_A", "usb2_branch_a_pair")
+        add("USB2_PORT_B", "usb2_branch_b_pair")
+    elif kind == "superspeed":
+        add("SS_TXRX_COM", "superspeed_common_lanes")
+        add("SS_PORT_A", "superspeed_branch_a_lanes")
+        add("SS_PORT_B", "superspeed_branch_b_lanes")
+    elif kind == "pcie":
+        add("PCIE_COM", "pcie_common_lanes")
+        add("PCIE_PORT_A", "pcie_branch_a_lanes")
+        add("PCIE_PORT_B", "pcie_branch_b_lanes")
+    elif kind == "bus":
+        add("BUS_A", "bus_side_a")
+        add("BUS_B", "bus_side_b")
+    return nets
+
+
+def _choose_default_interface_switch_template(interface_switch_templates: list[dict]) -> str | None:
+    names = {item.get("name") for item in interface_switch_templates}
+    for preferred in ("superspeed_data_switch", "pcie_diff_switch", "usb2_data_switch", "bus_switch_bridge"):
+        if preferred in names:
+            return preferred
+    return interface_switch_templates[0].get("name") if interface_switch_templates else None
+
+
+def _interface_switch_standard_templates(device: dict, interface_context: dict) -> list[dict]:
+    templates = []
+
+    def add_template(name: str, label: str, sheet_name: str, recommended_when: str, summary: str, nets: list[str], blocks: list[str], connections: list[dict], checklist: list[str]) -> None:
+        templates.append(
+            {
+                "name": name,
+                "label": label,
+                "sheet_name": sheet_name,
+                "recommended_when": recommended_when,
+                "summary": summary,
+                "nets": nets,
+                "blocks": blocks,
+                "default_refdes_map": {block: block for block in blocks},
+                "connections": connections,
+                "checklist": checklist,
+            }
+        )
+
+    kind = interface_context.get("interface_kind")
+    common_ctrl = (["SEL"] if interface_context.get("select_pins") else []) + (["OE_N"] if interface_context.get("enable_pins") else [])
+
+    if kind == "usb2":
+        add_template(
+            "usb2_data_switch",
+            "USB2 Data Switch",
+            "H1_usb2_data_switch",
+            "Use when one USB2 D+/D- pair is switched between two downstream or upstream paths.",
+            "Captures common/branch USB2 pairs, control pins, bypassing, and ESD review in one place.",
+            ["VCC", "GND", "USB2_COM", "USB2_PORT_A", "USB2_PORT_B"] + common_ctrl,
+            ["U1", "CBYP", "RSEL", "ROE", "DESD", "JPATH"],
+            [
+                {"from": "USB2_COM", "to": "JPATH", "note": "Keep the common D+/D- pair visible at the shared connector or controller boundary."},
+                {"from": "USB2_PORT_A", "to": "JPATH", "note": "Document the first switched USB2 path explicitly."},
+                {"from": "USB2_PORT_B", "to": "JPATH", "note": "Document the second switched USB2 path explicitly."},
+            ],
+            ["Freeze select polarity and ESD placement before USB compliance review."],
+        )
+    elif kind == "superspeed":
+        add_template(
+            "superspeed_data_switch",
+            "SuperSpeed Data Switch",
+            "H2_superspeed_data_switch",
+            "Use when a SuperSpeed common lane group is switched between two branch ports.",
+            "Groups TX/RX common lanes, branch lanes, control pins, AC-coupling review, and ESD ownership.",
+            ["VCC", "GND", "SS_TXRX_COM", "SS_PORT_A", "SS_PORT_B"] + common_ctrl,
+            ["U1", "CBYP", "RSEL", "ROE", "DESD", "CAC", "JPATH"],
+            [
+                {"from": "SS_TXRX_COM", "to": "JPATH", "note": "Keep common SuperSpeed lanes adjacent in the schematic hierarchy."},
+                {"from": "SS_PORT_A", "to": "JPATH", "note": "Lock the first branch lane ownership before layout."},
+                {"from": "SS_PORT_B", "to": "JPATH", "note": "Lock the second branch lane ownership before layout."},
+            ],
+            ["Freeze AC-coupling ownership, lane polarity, and select default before SI review."],
+        )
+    elif kind == "pcie":
+        add_template(
+            "pcie_diff_switch",
+            "PCIe Differential Switch",
+            "H3_pcie_diff_switch",
+            "Use when common PCIe lanes are muxed between two branches or slots.",
+            "Captures common/branch differential lane ownership, select pins, and AC-coupling review for PCIe fabrics.",
+            ["VCC", "GND", "PCIE_COM", "PCIE_PORT_A", "PCIE_PORT_B"] + common_ctrl,
+            ["U1", "CBYP", "RSEL", "ROE", "CAC", "JPATH"],
+            [
+                {"from": "PCIE_COM", "to": "JPATH", "note": "Keep common PCIe lanes grouped to the root complex or common slot boundary."},
+                {"from": "PCIE_PORT_A", "to": "JPATH", "note": "Document branch A lane ownership before connector mapping shifts."},
+                {"from": "PCIE_PORT_B", "to": "JPATH", "note": "Document branch B lane ownership before connector mapping shifts."},
+            ],
+            ["Freeze enable/select polarity and AC-coupling placement before PCIe layout review."],
+        )
+    elif kind == "bus":
+        add_template(
+            "bus_switch_bridge",
+            "Bus Switch Bridge",
+            "H4_bus_switch_bridge",
+            "Use when a simple digital bus is transparently gated or bridged across two sides.",
+            "Groups bus-side A/B naming and OE control so the boundary is clear for bring-up and review.",
+            ["VCC", "GND", "BUS_A", "BUS_B"] + common_ctrl,
+            ["U1", "CBYP", "ROE", "JPATH"],
+            [
+                {"from": "BUS_A", "to": "JPATH", "note": "Keep side-A signal ownership grouped together."},
+                {"from": "BUS_B", "to": "JPATH", "note": "Keep side-B signal ownership grouped together."},
+            ],
+            ["Freeze OE default state and side-A/side-B naming before release."],
         )
 
     return templates
@@ -3006,15 +3384,18 @@ def build_module_template(device: dict, design_intent: dict) -> dict:
     topology_candidates = []
     opamp_templates = []
     decoder_templates = []
+    interface_switch_templates = []
     switch_templates = []
     fpga_scenarios = []
     fpga_templates = []
     opamp_device_context = None
     decoder_device_context = design_intent.get("decoder_device_context")
+    interface_switch_device_context = design_intent.get("interface_switch_device_context")
     switch_device_context = design_intent.get("switch_device_context")
     category = (device.get("category") or "").lower()
     default_opamp_template = None
     default_decoder_template = None
+    default_interface_switch_template = None
     default_switch_template = None
     default_fpga_template = None
     if device.get("_type") == "fpga":
@@ -3063,6 +3444,16 @@ def build_module_template(device: dict, design_intent: dict) -> dict:
                     block["role"],
                     topology=candidate["name"],
                 )
+    elif interface_switch_device_context:
+        interface_switch_templates = _interface_switch_standard_templates(device, interface_switch_device_context)
+        default_interface_switch_template = _choose_default_interface_switch_template(interface_switch_templates)
+        for template in interface_switch_templates:
+            for net_name in template.get("nets", []):
+                _append_net_once(nets, net_name, "interface_switch_template_placeholder")
+            for block_name in template.get("blocks", []):
+                if block_name == "U1":
+                    continue
+                _append_block_once(blocks, block_name, "topology_block", "interface_switch_template_block", template=template["name"])
     elif switch_device_context:
         switch_templates = _switch_standard_templates(device, switch_device_context)
         default_switch_template = _choose_default_switch_template(switch_templates)
@@ -3105,15 +3496,18 @@ def build_module_template(device: dict, design_intent: dict) -> dict:
         "blocks": blocks,
         "opamp_device_context": opamp_device_context,
         "decoder_device_context": decoder_device_context,
+        "interface_switch_device_context": interface_switch_device_context,
         "switch_device_context": switch_device_context,
         "topology_candidates": topology_candidates,
         "opamp_templates": opamp_templates,
         "decoder_templates": decoder_templates,
+        "interface_switch_templates": interface_switch_templates,
         "switch_templates": switch_templates,
         "fpga_scenarios": fpga_scenarios,
         "fpga_templates": fpga_templates,
         "default_opamp_template": default_opamp_template,
         "default_decoder_template": default_decoder_template,
+        "default_interface_switch_template": default_interface_switch_template,
         "default_switch_template": default_switch_template,
         "default_fpga_template": default_fpga_template,
         "todo": todos,
@@ -3211,9 +3605,11 @@ def build_quickstart_markdown(device: dict, design_intent: dict) -> str:
     topology_candidates = []
     opamp_templates = []
     decoder_templates = []
+    interface_switch_templates = []
     switch_templates = []
     opamp_device_context = None
     decoder_device_context = design_intent.get("decoder_device_context")
+    interface_switch_device_context = design_intent.get("interface_switch_device_context")
     switch_device_context = design_intent.get("switch_device_context")
     category = (device.get("category") or "").lower()
     if "opamp" in category or "amplifier" in category:
@@ -3223,11 +3619,14 @@ def build_quickstart_markdown(device: dict, design_intent: dict) -> str:
     elif decoder_device_context:
         topology_candidates = _decoder_topology_candidates(decoder_device_context)
         decoder_templates = _decoder_standard_templates(device, decoder_device_context, topology_candidates)
+    elif interface_switch_device_context:
+        interface_switch_templates = _interface_switch_standard_templates(device, interface_switch_device_context)
     elif switch_device_context:
         switch_templates = _switch_standard_templates(device, switch_device_context)
 
     default_opamp_template = _choose_default_opamp_template(opamp_templates, topology_candidates)
     default_decoder_template = _choose_default_decoder_template(decoder_templates, topology_candidates)
+    default_interface_switch_template = _choose_default_interface_switch_template(interface_switch_templates)
     default_switch_template = _choose_default_switch_template(switch_templates)
 
     if opamp_device_context:
@@ -3282,6 +3681,20 @@ def build_quickstart_markdown(device: dict, design_intent: dict) -> str:
         if interface_bits:
             lines.append(f"- Suggested interfaces: {' '.join(f'`{item}`' for item in interface_bits)}")
 
+    if interface_switch_device_context:
+        lines.extend(["", "## Interface switch implementation notes", ""])
+        lines.append(f"- Preferred package: `{interface_switch_device_context['preferred_package']}`")
+        lines.append(f"- Interface kind: `{interface_switch_device_context['interface_kind']}` topology=`{interface_switch_device_context['topology_kind']}` channels=`{interface_switch_device_context['channel_count']}`")
+        if interface_switch_device_context.get("supply_nets"):
+            lines.append(f"- Supply nets: {' '.join(f'`{item}`' for item in interface_switch_device_context['supply_nets'][:6])}")
+        control_bits = []
+        if interface_switch_device_context.get("select_pins"):
+            control_bits.append("select")
+        if interface_switch_device_context.get("enable_pins"):
+            control_bits.append("enable")
+        if control_bits:
+            lines.append(f"- Control pins: {' '.join(f'`{item}`' for item in control_bits)}")
+
     if switch_device_context:
         lines.extend(["", "## Analog switch implementation notes", ""])
         lines.append(f"- Preferred package: `{switch_device_context['preferred_package']}`")
@@ -3317,6 +3730,11 @@ def build_quickstart_markdown(device: dict, design_intent: dict) -> str:
         lines.extend(["", "## L3 Templates", ""])
         for template in decoder_templates[:8]:
             prefix = "Start here: " if template.get("name") == default_decoder_template else ""
+            lines.append(f"- {prefix}`{template.get('sheet_name')}` `{template.get('label')}`: {template.get('recommended_when')}")
+    elif interface_switch_templates:
+        lines.extend(["", "## L3 Templates", ""])
+        for template in interface_switch_templates[:8]:
+            prefix = "Start here: " if template.get("name") == default_interface_switch_template else ""
             lines.append(f"- {prefix}`{template.get('sheet_name')}` `{template.get('label')}`: {template.get('recommended_when')}")
     elif switch_templates:
         lines.extend(["", "## L3 Templates", ""])
