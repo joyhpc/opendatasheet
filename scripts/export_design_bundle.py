@@ -917,6 +917,7 @@ def _build_fpga_design_intent(device: dict, datasheet_design_context: dict | Non
         "pin_groups": grouped,
         "power_rails": power_rails,
     })
+    vendor_design_rules = _gowin_family_design_rules(device)
     external_components = _fpga_external_components(device, {"pin_groups": grouped, "power_rails": power_rails}, customer_scenarios)
     starter_nets = _fpga_starter_nets(device, {"pin_groups": grouped, "power_rails": power_rails}, customer_scenarios)
 
@@ -938,7 +939,35 @@ def _build_fpga_design_intent(device: dict, datasheet_design_context: dict | Non
         "external_components": external_components,
         "datasheet_design_context": datasheet_design_context or {},
         "customer_scenarios": customer_scenarios,
+        "vendor_design_rules": vendor_design_rules,
         "starter_nets": starter_nets,
+    }
+
+
+def _gowin_family_design_rules(device: dict) -> dict:
+    if (device.get("manufacturer") or "").lower() != "gowin":
+        return {}
+    return {
+        "power_rules": [
+            "推荐 `VCCX` 先于 `VCC` 上电，并控制上升斜率在器件建议范围内。",
+            "`VCC` 建议单独供电；MIPI / SerDes 模拟与数字电源优先低噪声分区。",
+            "不同电压域之间优先用磁珠 + 陶瓷电容隔离，避免直接硬并。",
+        ],
+        "config_rules": [
+            "`RECONFIG_N` 上电期间保持高电平，稳定后再允许重配置。",
+            "`DONE` / `READY` 作为开漏状态脚时，默认预留 `4.7kΩ` 上拉到 `3.3V`。",
+            "`CFGBVS` 必须明确绑高或绑低，`PUDC_B` 不允许悬空。",
+            "`MODE[2:0]` 默认按 `4.7kΩ` 上拉 / `1kΩ` 下拉策略规划，不要等 PCB 后补。",
+        ],
+        "clock_rules": [
+            "系统时钟优先走专用 `GCLK/PLL` 管脚；外部晶振按磁珠 + `10nF` 去耦预留。",
+            "SerDes 高速参考时钟靠近 FPGA 管脚处预留 `0.1uF` 串联 AC 耦合。",
+            "`TCK` 默认预留 `4.7kΩ` 上拉到 `VCCIO`，并就近放 `0.1uF` 去耦。",
+        ],
+        "io_rules": [
+            "先冻结每个 `VCCIO Bank` 电压，再做管脚交换和接口定义。",
+            "LVDS / DDR / MIPI / SerDes 相关管脚优先按字节组或 lane 组整体分区。",
+        ],
     }
 
 
@@ -2689,6 +2718,16 @@ def build_quickstart_markdown(device: dict, design_intent: dict) -> str:
         for template in _fpga_standard_templates(device, design_intent, customer_scenarios):
             prefix = "Start here: " if template.get("name") == default_name else ""
             lines.append(f"- {prefix}`{template.get('name')}` — {template.get('recommended_when')}")
+
+    vendor_design_rules = design_intent.get("vendor_design_rules", {})
+    if vendor_design_rules:
+        lines.extend(["", "## Vendor design rules", ""])
+        for title, items in (("Power", vendor_design_rules.get("power_rules", [])), ("Config", vendor_design_rules.get("config_rules", [])), ("Clock", vendor_design_rules.get("clock_rules", [])), ("IO", vendor_design_rules.get("io_rules", []))):
+            if not items:
+                continue
+            lines.append(f"- `{title}`: {items[0]}")
+            for extra in items[1:3]:
+                lines.append(f"- `{title}`: {extra}")
 
     pin_groups = design_intent.get("pin_groups", {})
     if pin_groups:

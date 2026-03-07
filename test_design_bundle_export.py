@@ -444,8 +444,12 @@ def test_gowin_fpga_bundle_export_includes_customer_scenarios(tmp_path):
     assert {"CFG_SPI", "MIPI_CLK", "LVDS_IO", "REFCLK", "SERDES_RX", "DDR_DQ"}.issubset(starter_nets)
     assert {"qspi_jtag_bringup", "mipi_camera_bridge", "lvds_io_expansion", "high_speed_link_bridge", "ddr_memory_interface"}.issubset(template_names)
     assert module_template["default_fpga_template"] == "mipi_camera_bridge"
+    assert set(design_intent.get("vendor_design_rules", {}).keys()) == {"power_rules", "config_rules", "clock_rules", "io_rules"}
     assert "Customer scenarios" in quickstart
     assert "L3 Templates" in quickstart
+    assert "Vendor design rules" in quickstart
+    assert "CFGBVS" in quickstart
+    assert "RECONFIG_N" in quickstart
     assert "Start here:" in quickstart
 
 
