@@ -71,6 +71,8 @@ def semantic_checks(data: dict) -> list[str]:
             errors.append("  [capability_blocks.high_speed_serial] missing high_speed_serial capability block")
         if has_refclk and "refclk_requirements" not in constraint_blocks:
             errors.append("  [constraint_blocks.refclk_requirements] missing refclk_requirements constraint block")
+        if "refclk_requirements" in constraint_blocks and not constraint_blocks.get("refclk_requirements", {}).get("refclk_pairs"):
+            errors.append("  [constraint_blocks.refclk_requirements.refclk_pairs] missing concrete refclk pair details")
     if data.get("_type") == "normal_ic":
         capability_blocks = data.get("capability_blocks", {}) or {}
         constraint_blocks = data.get("constraint_blocks", {}) or {}

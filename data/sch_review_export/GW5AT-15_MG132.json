@@ -2388,6 +2388,49 @@
       ],
       "source": "pinout_inference"
     },
+    "refclk_requirements": {
+      "class": "clocking",
+      "required": true,
+      "selection_required": true,
+      "refclk_pair_count": 2,
+      "refclk_pairs": [
+        {
+          "type": "REFCLK",
+          "pair_name": "Q0_REFCLK_0",
+          "p_pin": "A8",
+          "n_pin": "A7",
+          "p_name": "Q0_REFCLKP_0",
+          "n_name": "Q0_REFCLKM_0",
+          "bank": "",
+          "source": "pin_name_inference"
+        },
+        {
+          "type": "REFCLK",
+          "pair_name": "Q0_REFCLK_1",
+          "p_pin": "C10",
+          "n_pin": "B10",
+          "p_name": "Q0_REFCLKP_1",
+          "n_name": "Q0_REFCLKM_1",
+          "bank": "",
+          "source": "pin_name_inference"
+        }
+      ],
+      "review_required": true,
+      "source": "gowin_product_detail_72",
+      "protocol_refclk_profiles": {
+        "PCIe 3.0": {
+          "frequencies_mhz": [
+            100.0
+          ],
+          "source": "protocol_standard",
+          "note": "PCIe reference clock is normally 100 MHz differential HCSL or equivalent translated clock."
+        }
+      },
+      "common_review_candidates_mhz": [
+        100.0
+      ],
+      "selection_note": "Refclk frequency, clock standard, jitter budget, and pair-to-quad mapping must be frozen against the selected protocol before schematic sign-off."
+    },
     "mipi_phy": {
       "class": "clocking",
       "review_required": true,

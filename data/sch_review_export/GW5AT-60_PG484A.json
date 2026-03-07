@@ -8419,6 +8419,7 @@
     "refclk_requirements": {
       "class": "clocking",
       "required": true,
+      "selection_required": true,
       "refclk_pair_count": 2,
       "refclk_pairs": [
         {
@@ -8426,24 +8427,39 @@
           "type": "SERDES_REFCLK",
           "p_pin": "F6",
           "n_pin": "E6",
-          "bank": "Q0"
+          "p_name": "Q0_REFCLKP_0",
+          "n_name": "Q0_REFCLKM_0",
+          "bank": "Q0",
+          "source": "diff_pair_export"
         },
         {
           "pair_name": "REFCLK_Q0_C1",
           "type": "SERDES_REFCLK",
           "p_pin": "F10",
           "n_pin": "E10",
-          "bank": "Q0"
+          "p_name": "Q0_REFCLKP_1",
+          "n_name": "Q0_REFCLKM_1",
+          "bank": "Q0",
+          "source": "diff_pair_export"
         }
       ],
       "review_required": true,
       "source": "gowin_product_detail_72",
-      "protocol_refclk_mhz": {
-        "PCIe 3.0": [
-          100.0
-        ]
+      "protocol_refclk_profiles": {
+        "PCIe 3.0": {
+          "frequencies_mhz": [
+            100.0
+          ],
+          "source": "protocol_standard",
+          "note": "PCIe reference clock is normally 100 MHz differential HCSL or equivalent translated clock."
+        }
       },
-      "package_rate_ceiling_gbps": 8.0
+      "common_review_candidates_mhz": [
+        100.0
+      ],
+      "selection_note": "Refclk frequency, clock standard, jitter budget, and pair-to-quad mapping must be frozen against the selected protocol before schematic sign-off.",
+      "package_rate_ceiling_gbps": 8.0,
+      "package_rate_note": "Package-level transceiver ceiling is 8.0 Gbps per official Gowin product page."
     },
     "mipi_phy": {
       "class": "clocking",

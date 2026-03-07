@@ -500,13 +500,17 @@ def t4_6():
             d = json.load(fp)
         if d.get("_type") != "fpga":
             continue
+        by_function = (d.get("summary") or {}).get("by_function", {}) if isinstance(d.get("summary"), dict) else {}
         has_refclk = any(pair.get("type") in ("SERDES_REFCLK", "GT_REFCLK", "REFCLK") for pair in d.get("diff_pairs", []))
-        if not has_refclk:
+        has_gt = any(pair.get("type") in ("SERDES_RX", "SERDES_TX", "GT_RX", "GT_TX") for pair in d.get("diff_pairs", [])) or any(key in by_function for key in ("SERDES_RX", "SERDES_TX", "GT_RX", "GT_TX"))
+        if not (has_refclk or has_gt):
             continue
         constraints = d.get("constraint_blocks", {})
         refclk = constraints.get("refclk_requirements")
         assert_true(refclk is not None, f"{f.name} missing constraint_blocks.refclk_requirements")
         assert_gt(refclk.get("refclk_pair_count", 0), 0, f"{f.name} refclk_pair_count")
+        assert_true(refclk.get("selection_required") is True, f"{f.name} selection_required")
+        assert_true(refclk.get("refclk_pairs"), f"{f.name} refclk_pairs missing")
 
 
 @case("T4.7 STM32 exports expose capability and constraint blocks")
@@ -569,6 +573,20 @@ def t6_2():
             d = json.load(f)
         abs_max = d.get("absolute_maximum_ratings", {})
         assert_gt(len(abs_max), 5, f"{fname} abs_max count")
+
+
+@case("T4.8 Refclk protocol profiles and pin inference are populated")
+def t4_8():
+    gw = json.load(open(EXPORT_DIR / "GW5AT-60_UG225.json"))
+    gw_refclk = gw.get("constraint_blocks", {}).get("refclk_requirements", {})
+    assert_eq(gw_refclk.get("protocol_refclk_profiles", {}).get("PCIe 3.0", {}).get("frequencies_mhz"), [100.0], "GW5AT-60_UG225 PCIe refclk")
+
+    lifcl = json.load(open(EXPORT_DIR / "LIFCL-40_CABGA400.json"))
+    lifcl_refclk = lifcl.get("constraint_blocks", {}).get("refclk_requirements", {})
+    inferred = [pair for pair in lifcl_refclk.get("refclk_pairs", []) if pair.get("source") == "pin_name_inference"]
+    assert_true(inferred, "LIFCL-40_CABGA400 missing inferred refclk pair")
+    assert_eq(inferred[0].get("p_name"), "SD_REFCLKP", "LIFCL-40_CABGA400 inferred p_name")
+    assert_eq(inferred[0].get("n_name"), "SD_REFCLKN", "LIFCL-40_CABGA400 inferred n_name")
 
 
 @case("T6.3 Gowin GW5AT exports expose package-specific ip_blocks")

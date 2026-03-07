@@ -5168,6 +5168,29 @@
         "JTAG_EN"
       ],
       "source": "pinout_inference"
+    },
+    "refclk_requirements": {
+      "class": "clocking",
+      "required": true,
+      "selection_required": true,
+      "refclk_pair_count": 1,
+      "refclk_pairs": [
+        {
+          "type": "REFCLK",
+          "pair_name": "SD_REFCLK",
+          "p_pin": "A9",
+          "n_pin": "B9",
+          "p_name": "SD_REFCLKP",
+          "n_name": "SD_REFCLKN",
+          "bank": null,
+          "source": "pin_name_inference"
+        }
+      ],
+      "review_required": true,
+      "source": "pinout_inference",
+      "protocol_refclk_profiles": {},
+      "common_review_candidates_mhz": [],
+      "selection_note": "Refclk frequency, clock standard, jitter budget, and pair-to-quad mapping must be frozen against the selected protocol before schematic sign-off."
     }
   },
   "absolute_maximum_ratings": {

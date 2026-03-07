@@ -525,6 +525,101 @@ def _gt_pair_counts(diff_pairs: list[dict]) -> dict:
     return counts
 
 
+def _normalize_protocol_refclk_profiles(protocols: list[str] | None) -> dict:
+    profiles = {}
+    for protocol in protocols or []:
+        if protocol == "PCIe 3.0":
+            profiles[protocol] = {
+                "frequencies_mhz": [100.0],
+                "source": "protocol_standard",
+                "note": "PCIe reference clock is normally 100 MHz differential HCSL or equivalent translated clock.",
+            }
+        elif protocol == "SGMII":
+            profiles[protocol] = {
+                "frequencies_mhz": [125.0],
+                "source": "protocol_standard",
+                "note": "SGMII line-side designs commonly use a 125 MHz reference clock.",
+            }
+        elif protocol in ("XAUI", "10GBASE-R", "10G Ethernet"):
+            profiles[protocol] = {
+                "frequencies_mhz": [156.25],
+                "source": "protocol_standard",
+                "note": "10G serial Ethernet families commonly use a 156.25 MHz differential reference clock.",
+            }
+    return profiles
+
+
+def _infer_refclk_pairs_from_pins(pins: list[dict], existing_pairs: list[dict]) -> list[dict]:
+    existing = {(pair.get("p_pin"), pair.get("n_pin")) for pair in existing_pairs}
+    normalized_pin_by_name = {}
+    for pin in pins:
+        name = pin.get("name") or ""
+        normalized_name = (name.split("/")[0]).strip()
+        if normalized_name:
+            normalized_pin_by_name[normalized_name] = pin
+    inferred = []
+    for pin in pins:
+        raw_name = pin.get("name") or ""
+        name = (raw_name.split("/")[0]).strip()
+        upper = _safe_upper(name)
+        comp_name = None
+        pair_name = None
+        if upper.endswith("REFCLKP"):
+            comp_name = re.sub(r"REFCLKP$", "REFCLKN", name, flags=re.IGNORECASE)
+            pair_name = re.sub(r"P$", "", name)
+        elif re.search(r"REFCLKP_\d+$", upper):
+            match = re.search(r"(.*)REFCLKP(_\d+)$", name, flags=re.IGNORECASE)
+            if match:
+                comp_name = f"{match.group(1)}REFCLKM{match.group(2)}"
+                pair_name = f"{match.group(1)}REFCLK{match.group(2)}"
+        if not comp_name:
+            continue
+        comp_pin = normalized_pin_by_name.get(comp_name)
+        if not comp_pin:
+            continue
+        key = (pin.get("pin"), comp_pin.get("pin"))
+        rev_key = (comp_pin.get("pin"), pin.get("pin"))
+        if key in existing or rev_key in existing:
+            continue
+        inferred.append({
+            "type": "REFCLK",
+            "pair_name": pair_name,
+            "p_pin": pin.get("pin"),
+            "n_pin": comp_pin.get("pin"),
+            "p_name": name,
+            "n_name": comp_name,
+            "bank": pin.get("bank") or comp_pin.get("bank"),
+            "source": "pin_name_inference",
+        })
+    return inferred
+
+
+def _collect_refclk_pairs(diff_pairs: list[dict], pins: list[dict]) -> list[dict]:
+    refclk_pairs = []
+    for pair in diff_pairs:
+        pair_type = _safe_upper(pair.get("type"))
+        if pair_type in ("SERDES_REFCLK", "GT_REFCLK", "REFCLK"):
+            refclk_pairs.append({
+                "pair_name": pair.get("pair_name"),
+                "type": pair.get("type"),
+                "p_pin": pair.get("p_pin"),
+                "n_pin": pair.get("n_pin"),
+                "p_name": pair.get("p_name"),
+                "n_name": pair.get("n_name"),
+                "bank": pair.get("bank"),
+                "source": "diff_pair_export",
+            })
+    refclk_pairs.extend(_infer_refclk_pairs_from_pins(pins, refclk_pairs))
+    return refclk_pairs
+
+
+def _package_rate_note(vendor: str, package: str, hs_serial: dict) -> str | None:
+    if vendor == "Gowin" and hs_serial.get("package_rate_ceiling_gbps") is not None:
+        ceiling = hs_serial.get("package_rate_ceiling_gbps")
+        return f"Package-level transceiver ceiling is {ceiling} Gbps per official Gowin product page."
+    return None
+
+
 def _generic_fpga_capability_blocks(pinout_data: dict, vendor: str, device: str, package: str, diff_pairs: list[dict]) -> dict:
     summary = pinout_data.get("summary", {}) if isinstance(pinout_data.get("summary"), dict) else {}
     by_function = summary.get("by_function", {}) if isinstance(summary, dict) else {}
@@ -592,31 +687,27 @@ def _generic_fpga_constraint_blocks(pinout_data: dict, capability_blocks: dict, 
         }
 
     hs_serial = capability_blocks.get("high_speed_serial")
-    refclk_pairs = []
-    for pair in diff_pairs:
-        pair_type = _safe_upper(pair.get("type"))
-        if pair_type in ("SERDES_REFCLK", "GT_REFCLK", "REFCLK"):
-            refclk_pairs.append({
-                "pair_name": pair.get("pair_name"),
-                "type": pair.get("type"),
-                "p_pin": pair.get("p_pin"),
-                "n_pin": pair.get("n_pin"),
-                "bank": pair.get("bank"),
-            })
+    refclk_pairs = _collect_refclk_pairs(diff_pairs, pinout_data.get("pins", []))
     if hs_serial and refclk_pairs:
+        protocol_profiles = _normalize_protocol_refclk_profiles(hs_serial.get("supported_protocols") or [])
+        protocol_candidates = sorted({freq for profile in protocol_profiles.values() for freq in profile.get("frequencies_mhz", [])})
         blocks["refclk_requirements"] = {
             "class": "clocking",
             "required": True,
+            "selection_required": True,
             "refclk_pair_count": len(refclk_pairs),
             "refclk_pairs": refclk_pairs,
             "review_required": True,
             "source": hs_serial.get("source"),
+            "protocol_refclk_profiles": protocol_profiles,
+            "common_review_candidates_mhz": protocol_candidates,
+            "selection_note": "Refclk frequency, clock standard, jitter budget, and pair-to-quad mapping must be frozen against the selected protocol before schematic sign-off.",
         }
-        protocols = hs_serial.get("supported_protocols") or []
-        if "PCIe 3.0" in protocols:
-            blocks["refclk_requirements"]["protocol_refclk_mhz"] = {"PCIe 3.0": [100.0]}
         if hs_serial.get("package_rate_ceiling_gbps") is not None:
             blocks["refclk_requirements"]["package_rate_ceiling_gbps"] = hs_serial.get("package_rate_ceiling_gbps")
+        package_note = _package_rate_note(pinout_data.get("_vendor", ""), pinout_data.get("package", ""), hs_serial)
+        if package_note:
+            blocks["refclk_requirements"]["package_rate_note"] = package_note
 
     mipi = capability_blocks.get("mipi_phy")
     if mipi:

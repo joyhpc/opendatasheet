@@ -5884,6 +5884,7 @@
     "refclk_requirements": {
       "class": "clocking",
       "required": true,
+      "selection_required": true,
       "refclk_pair_count": 4,
       "refclk_pairs": [
         {
@@ -5891,37 +5892,57 @@
           "type": "SERDES_REFCLK",
           "p_pin": "B8",
           "n_pin": "A8",
-          "bank": "Q0"
+          "p_name": "Q0_REFCLKP_0",
+          "n_name": "Q0_REFCLKM_0",
+          "bank": "Q0",
+          "source": "diff_pair_export"
         },
         {
           "pair_name": "REFCLK_Q0_C1",
           "type": "SERDES_REFCLK",
           "p_pin": "D9",
           "n_pin": "C9",
-          "bank": "Q0"
+          "p_name": "Q0_REFCLKP_1",
+          "n_name": "Q0_REFCLKM_1",
+          "bank": "Q0",
+          "source": "diff_pair_export"
         },
         {
           "pair_name": "REFCLK_Q0_C2",
           "type": "SERDES_REFCLK",
           "p_pin": "B10",
           "n_pin": "A10",
-          "bank": "Q0"
+          "p_name": "Q0_REFCLKP_2",
+          "n_name": "Q0_REFCLKM_2",
+          "bank": "Q0",
+          "source": "diff_pair_export"
         },
         {
           "pair_name": "REFCLK_Q0_C3",
           "type": "SERDES_REFCLK",
           "p_pin": "F10",
           "n_pin": "E10",
-          "bank": "Q0"
+          "p_name": "Q0_REFCLKP_3",
+          "n_name": "Q0_REFCLKM_3",
+          "bank": "Q0",
+          "source": "diff_pair_export"
         }
       ],
       "review_required": true,
       "source": "gowin_product_detail_72",
-      "protocol_refclk_mhz": {
-        "PCIe 3.0": [
-          100.0
-        ]
-      }
+      "protocol_refclk_profiles": {
+        "PCIe 3.0": {
+          "frequencies_mhz": [
+            100.0
+          ],
+          "source": "protocol_standard",
+          "note": "PCIe reference clock is normally 100 MHz differential HCSL or equivalent translated clock."
+        }
+      },
+      "common_review_candidates_mhz": [
+        100.0
+      ],
+      "selection_note": "Refclk frequency, clock standard, jitter budget, and pair-to-quad mapping must be frozen against the selected protocol before schematic sign-off."
     },
     "mipi_phy": {
       "class": "clocking",

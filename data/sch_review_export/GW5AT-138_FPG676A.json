@@ -10922,6 +10922,7 @@
     "refclk_requirements": {
       "class": "clocking",
       "required": true,
+      "selection_required": true,
       "refclk_pair_count": 4,
       "refclk_pairs": [
         {
@@ -10929,38 +10930,59 @@
           "type": "SERDES_REFCLK",
           "p_pin": "F11",
           "n_pin": "E11",
-          "bank": "Q0"
+          "p_name": "q0_refclkp_0",
+          "n_name": "q0_refclkm_0",
+          "bank": "Q0",
+          "source": "diff_pair_export"
         },
         {
           "pair_name": "REFCLK_Q0_C1",
           "type": "SERDES_REFCLK",
           "p_pin": "F13",
           "n_pin": "E13",
-          "bank": "Q0"
+          "p_name": "q0_refclkp_1",
+          "n_name": "q0_refclkm_1",
+          "bank": "Q0",
+          "source": "diff_pair_export"
         },
         {
           "pair_name": "REFCLK_Q1_C0",
           "type": "SERDES_REFCLK",
           "p_pin": "AA11",
           "n_pin": "AB11",
-          "bank": "Q1"
+          "p_name": "q1_refclkp_0",
+          "n_name": "q1_refclkm_0",
+          "bank": "Q1",
+          "source": "diff_pair_export"
         },
         {
           "pair_name": "REFCLK_Q1_C1",
           "type": "SERDES_REFCLK",
           "p_pin": "AA13",
           "n_pin": "AB13",
-          "bank": "Q1"
+          "p_name": "q1_refclkp_1",
+          "n_name": "q1_refclkm_1",
+          "bank": "Q1",
+          "source": "diff_pair_export"
         }
       ],
       "review_required": true,
       "source": "gowin_product_detail_72",
-      "protocol_refclk_mhz": {
-        "PCIe 3.0": [
-          100.0
-        ]
+      "protocol_refclk_profiles": {
+        "PCIe 3.0": {
+          "frequencies_mhz": [
+            100.0
+          ],
+          "source": "protocol_standard",
+          "note": "PCIe reference clock is normally 100 MHz differential HCSL or equivalent translated clock."
+        }
       },
-      "package_rate_ceiling_gbps": 12.5
+      "common_review_candidates_mhz": [
+        100.0
+      ],
+      "selection_note": "Refclk frequency, clock standard, jitter budget, and pair-to-quad mapping must be frozen against the selected protocol before schematic sign-off.",
+      "package_rate_ceiling_gbps": 12.5,
+      "package_rate_note": "Package-level transceiver ceiling is 12.5 Gbps per official Gowin product page."
     },
     "mipi_phy": {
       "class": "clocking",

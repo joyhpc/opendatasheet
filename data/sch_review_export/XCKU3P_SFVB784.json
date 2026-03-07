@@ -14492,6 +14492,7 @@
     "refclk_requirements": {
       "class": "clocking",
       "required": true,
+      "selection_required": true,
       "refclk_pair_count": 8,
       "refclk_pairs": [
         {
@@ -14499,60 +14500,87 @@
           "type": "GT_REFCLK",
           "p_pin": "Y7",
           "n_pin": "Y6",
-          "bank": "224"
+          "p_name": "MGTREFCLK0P_224",
+          "n_name": "MGTREFCLK0N_224",
+          "bank": "224",
+          "source": "diff_pair_export"
         },
         {
           "pair_name": "REFCLK0_225",
           "type": "GT_REFCLK",
           "p_pin": "T7",
           "n_pin": "T6",
-          "bank": "225"
+          "p_name": "MGTREFCLK0P_225",
+          "n_name": "MGTREFCLK0N_225",
+          "bank": "225",
+          "source": "diff_pair_export"
         },
         {
           "pair_name": "REFCLK0_226",
           "type": "GT_REFCLK",
           "p_pin": "M7",
           "n_pin": "M6",
-          "bank": "226"
+          "p_name": "MGTREFCLK0P_226",
+          "n_name": "MGTREFCLK0N_226",
+          "bank": "226",
+          "source": "diff_pair_export"
         },
         {
           "pair_name": "REFCLK0_227",
           "type": "GT_REFCLK",
           "p_pin": "H7",
           "n_pin": "H6",
-          "bank": "227"
+          "p_name": "MGTREFCLK0P_227",
+          "n_name": "MGTREFCLK0N_227",
+          "bank": "227",
+          "source": "diff_pair_export"
         },
         {
           "pair_name": "REFCLK1_224",
           "type": "GT_REFCLK",
           "p_pin": "V7",
           "n_pin": "V6",
-          "bank": "224"
+          "p_name": "MGTREFCLK1P_224",
+          "n_name": "MGTREFCLK1N_224",
+          "bank": "224",
+          "source": "diff_pair_export"
         },
         {
           "pair_name": "REFCLK1_225",
           "type": "GT_REFCLK",
           "p_pin": "P7",
           "n_pin": "P6",
-          "bank": "225"
+          "p_name": "MGTREFCLK1P_225",
+          "n_name": "MGTREFCLK1N_225",
+          "bank": "225",
+          "source": "diff_pair_export"
         },
         {
           "pair_name": "REFCLK1_226",
           "type": "GT_REFCLK",
           "p_pin": "K7",
           "n_pin": "K6",
-          "bank": "226"
+          "p_name": "MGTREFCLK1P_226",
+          "n_name": "MGTREFCLK1N_226",
+          "bank": "226",
+          "source": "diff_pair_export"
         },
         {
           "pair_name": "REFCLK1_227",
           "type": "GT_REFCLK",
           "p_pin": "F7",
           "n_pin": "F6",
-          "bank": "227"
+          "p_name": "MGTREFCLK1P_227",
+          "n_name": "MGTREFCLK1N_227",
+          "bank": "227",
+          "source": "diff_pair_export"
         }
       ],
       "review_required": true,
-      "source": "pinout_inference"
+      "source": "pinout_inference",
+      "protocol_refclk_profiles": {},
+      "common_review_candidates_mhz": [],
+      "selection_note": "Refclk frequency, clock standard, jitter budget, and pair-to-quad mapping must be frozen against the selected protocol before schematic sign-off."
     }
   }
 }
