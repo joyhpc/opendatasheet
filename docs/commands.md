@@ -23,11 +23,15 @@ python3 scripts/doctor.py --dev --strict-env
 ```bash
 ./scripts/run_checks.sh
 python3 scripts/validate_exports.py --summary
+python3 scripts/validate_design_extraction.py
+python3 scripts/validate_design_extraction.py --strict
 ```
 
 ## Export
 
 ```bash
+python3 scripts/build_raw_source_manifest.py
+python3 scripts/build_raw_source_manifest.py --check
 python3 scripts/export_for_sch_review.py
 python3 scripts/export_design_bundle.py --device TPS62147
 python3 scripts/export_design_bundle.py --limit 10

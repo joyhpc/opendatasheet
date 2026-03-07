@@ -13,6 +13,7 @@ PDF datasheets → structured JSON for schematic review DRC engines.
 ## Quick Start
 
 - **Setup**: `pip install -r requirements.txt` and `pip install -r requirements-dev.txt`
+- **Raw Sources**: new `pdf/xlsx/csv` go to `data/raw/_staging/` first, then run `python3 scripts/build_raw_source_manifest.py` after canonical placement
 - **Credentials**: `export GEMINI_API_KEY='<your-api-key>'`
 - **Doctor**: `python3 scripts/doctor.py --dev`
 - **Checks**: `./scripts/run_checks.sh`
@@ -75,6 +76,8 @@ PDF → L0 Page Classification (PyMuPDF + regex)
 ## Setup
 
 - Runtime dependencies: `pip install -r requirements.txt`
+- Raw-source inventory refresh after adding or moving original source files: `python3 scripts/build_raw_source_manifest.py`
+- Strict raw-source reproducibility check: `python3 scripts/build_raw_source_manifest.py --check`
 - Dev/test dependencies: `pip install -r requirements-dev.txt`
 - Environment self-check: `python3 scripts/doctor.py --dev`
 - One-shot local gate: `./scripts/run_checks.sh`
@@ -84,3 +87,10 @@ PDF → L0 Page Classification (PyMuPDF + regex)
 
 - GitHub Actions workflow: `.github/workflows/ci.yml`
 - CI runs `./scripts/run_checks.sh`, covering syntax compilation, export schema validation, regression suite, and `pytest` on every push / pull request.
+
+## Raw Source Workflow
+
+- Store finalized canonical originals under `data/raw/`; put unreviewed downloads in `data/raw/_staging/` first
+- Rebuild the raw-source manifest with `python3 scripts/build_raw_source_manifest.py` after any `pdf/xlsx/csv` add/move/remove
+- Run `python3 scripts/validate_design_extraction.py` for normal validation; use `--strict` before merge/release to catch stale manifest entries
+- See `docs/raw-source-storage.md` for the full storage policy and manifest field definitions
