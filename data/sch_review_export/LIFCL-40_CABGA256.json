@@ -5156,7 +5156,41 @@
       "tx_lane_pairs": 1,
       "refclk_pair_count": 0,
       "quad_count": null,
-      "source": "pinout_inference"
+      "source": "lattice_crosslink_nx_product_page",
+      "supported_protocols": [
+        "SGMII",
+        "1000BASE-X",
+        "PCIe Gen1",
+        "PCIe Gen2"
+      ],
+      "protocol_matrix": {
+        "SGMII": {
+          "lane_widths": [
+            1
+          ],
+          "hardcore": false
+        },
+        "1000BASE-X": {
+          "lane_widths": [
+            1
+          ],
+          "hardcore": false
+        },
+        "PCIe Gen1": {
+          "lane_widths": [
+            1
+          ],
+          "hardcore": false
+        },
+        "PCIe Gen2": {
+          "lane_widths": [
+            1
+          ],
+          "hardcore": false
+        }
+      },
+      "source_url": "https://www.latticesemi.com/en/Products/FPGAandCPLD/CrossLink-NX",
+      "review_note": "CrossLink-NX exports only the single-channel SerDes topology here; protocol selection must still be matched against the chosen Lattice IP/reference design."
     }
   },
   "constraint_blocks": {
@@ -5187,10 +5221,70 @@
         }
       ],
       "review_required": true,
-      "source": "pinout_inference",
-      "protocol_refclk_profiles": {},
-      "common_review_candidates_mhz": [],
-      "selection_note": "Refclk frequency, clock standard, jitter budget, and pair-to-quad mapping must be frozen against the selected protocol before schematic sign-off."
+      "source": "lattice_crosslink_nx_product_page",
+      "source_url": "https://www.latticesemi.com/en/Products/FPGAandCPLD/CrossLink-NX",
+      "protocol_refclk_profiles": {
+        "SGMII": {
+          "frequencies_mhz": [
+            125.0
+          ],
+          "source": "protocol_standard",
+          "note": "1G serial Ethernet PHY-side links commonly use a 125 MHz differential reference clock."
+        },
+        "1000BASE-X": {
+          "frequencies_mhz": [
+            125.0
+          ],
+          "source": "protocol_standard",
+          "note": "1G serial Ethernet PHY-side links commonly use a 125 MHz differential reference clock."
+        },
+        "PCIe Gen1": {
+          "frequencies_mhz": [
+            100.0
+          ],
+          "source": "protocol_standard",
+          "note": "PCI Express reference clocks are typically implemented as 100 MHz differential HCSL or translated equivalents."
+        },
+        "PCIe Gen2": {
+          "frequencies_mhz": [
+            100.0
+          ],
+          "source": "protocol_standard",
+          "note": "PCI Express reference clocks are typically implemented as 100 MHz differential HCSL or translated equivalents."
+        }
+      },
+      "common_review_candidates_mhz": [
+        100.0,
+        125.0
+      ],
+      "selection_note": "Refclk frequency, clock standard, jitter budget, and pair-to-quad mapping must be frozen against the selected protocol before schematic sign-off.",
+      "protocol_matrix": {
+        "SGMII": {
+          "lane_widths": [
+            1
+          ],
+          "hardcore": false
+        },
+        "1000BASE-X": {
+          "lane_widths": [
+            1
+          ],
+          "hardcore": false
+        },
+        "PCIe Gen1": {
+          "lane_widths": [
+            1
+          ],
+          "hardcore": false
+        },
+        "PCIe Gen2": {
+          "lane_widths": [
+            1
+          ],
+          "hardcore": false
+        }
+      },
+      "review_note": "CrossLink-NX exports only the single-channel SerDes topology here; protocol selection must still be matched against the chosen Lattice IP/reference design."
     }
   },
   "absolute_maximum_ratings": {

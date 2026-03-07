@@ -2391,19 +2391,38 @@
       ],
       "review_required": true,
       "source": "gowin_product_detail_72",
+      "source_url": "https://www.gowinsemi.com/en/product/detail/72/",
       "protocol_refclk_profiles": {
         "PCIe 3.0": {
           "frequencies_mhz": [
             100.0
           ],
           "source": "protocol_standard",
-          "note": "PCIe reference clock is normally 100 MHz differential HCSL or equivalent translated clock."
+          "note": "PCI Express reference clocks are typically implemented as 100 MHz differential HCSL or translated equivalents."
         }
       },
       "common_review_candidates_mhz": [
         100.0
       ],
-      "selection_note": "Refclk frequency, clock standard, jitter budget, and pair-to-quad mapping must be frozen against the selected protocol before schematic sign-off."
+      "selection_note": "Refclk frequency, clock standard, jitter budget, and pair-to-quad mapping must be frozen against the selected protocol before schematic sign-off.",
+      "protocol_matrix": {
+        "custom": {
+          "hardcore": false,
+          "lane_widths": [
+            1,
+            2,
+            4
+          ]
+        },
+        "PCIe 3.0": {
+          "hardcore": true,
+          "lane_widths": [
+            1,
+            2,
+            4
+          ]
+        }
+      }
     },
     "mipi_phy": {
       "class": "clocking",

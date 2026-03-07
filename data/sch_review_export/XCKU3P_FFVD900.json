@@ -15743,7 +15743,63 @@
       "tx_lane_pairs": 16,
       "refclk_pair_count": 8,
       "quad_count": 4,
-      "source": "pinout_inference"
+      "source": "amd_high_speed_serial_overview",
+      "transceiver_type": "GTY",
+      "supported_protocols": [
+        "PCIe 3.0",
+        "PCIe 4.0",
+        "SGMII",
+        "1000BASE-X",
+        "XAUI",
+        "10GBASE-R"
+      ],
+      "protocol_matrix": {
+        "PCIe 3.0": {
+          "lane_widths": [
+            1,
+            2,
+            4,
+            8,
+            16
+          ],
+          "hardcore": true
+        },
+        "PCIe 4.0": {
+          "lane_widths": [
+            1,
+            2,
+            4,
+            8
+          ],
+          "hardcore": true
+        },
+        "SGMII": {
+          "lane_widths": [
+            1
+          ],
+          "hardcore": false
+        },
+        "1000BASE-X": {
+          "lane_widths": [
+            1
+          ],
+          "hardcore": false
+        },
+        "XAUI": {
+          "lane_widths": [
+            4
+          ],
+          "hardcore": false
+        },
+        "10GBASE-R": {
+          "lane_widths": [
+            1
+          ],
+          "hardcore": false
+        }
+      },
+      "source_url": "https://www.amd.com/en/products/adaptive-socs-and-fpgas/technologies/high-speed-serial.html",
+      "review_note": "Exact AMD high-speed IP enablement still depends on device speed grade, selected IP core, and quad placement; freeze the protocol before schematic sign-off."
     }
   },
   "constraint_blocks": {
@@ -15856,10 +15912,104 @@
         }
       ],
       "review_required": true,
-      "source": "pinout_inference",
-      "protocol_refclk_profiles": {},
-      "common_review_candidates_mhz": [],
-      "selection_note": "Refclk frequency, clock standard, jitter budget, and pair-to-quad mapping must be frozen against the selected protocol before schematic sign-off."
+      "source": "amd_high_speed_serial_overview",
+      "source_url": "https://www.amd.com/en/products/adaptive-socs-and-fpgas/technologies/high-speed-serial.html",
+      "protocol_refclk_profiles": {
+        "PCIe 3.0": {
+          "frequencies_mhz": [
+            100.0
+          ],
+          "source": "protocol_standard",
+          "note": "PCI Express reference clocks are typically implemented as 100 MHz differential HCSL or translated equivalents."
+        },
+        "PCIe 4.0": {
+          "frequencies_mhz": [
+            100.0
+          ],
+          "source": "protocol_standard",
+          "note": "PCI Express reference clocks are typically implemented as 100 MHz differential HCSL or translated equivalents."
+        },
+        "SGMII": {
+          "frequencies_mhz": [
+            125.0
+          ],
+          "source": "protocol_standard",
+          "note": "1G serial Ethernet PHY-side links commonly use a 125 MHz differential reference clock."
+        },
+        "1000BASE-X": {
+          "frequencies_mhz": [
+            125.0
+          ],
+          "source": "protocol_standard",
+          "note": "1G serial Ethernet PHY-side links commonly use a 125 MHz differential reference clock."
+        },
+        "XAUI": {
+          "frequencies_mhz": [
+            156.25
+          ],
+          "source": "protocol_standard",
+          "note": "10G serial Ethernet families commonly use a 156.25 MHz differential reference clock."
+        },
+        "10GBASE-R": {
+          "frequencies_mhz": [
+            156.25
+          ],
+          "source": "protocol_standard",
+          "note": "10G serial Ethernet families commonly use a 156.25 MHz differential reference clock."
+        }
+      },
+      "common_review_candidates_mhz": [
+        100.0,
+        125.0,
+        156.25
+      ],
+      "selection_note": "Refclk frequency, clock standard, jitter budget, and pair-to-quad mapping must be frozen against the selected protocol before schematic sign-off.",
+      "protocol_matrix": {
+        "PCIe 3.0": {
+          "lane_widths": [
+            1,
+            2,
+            4,
+            8,
+            16
+          ],
+          "hardcore": true
+        },
+        "PCIe 4.0": {
+          "lane_widths": [
+            1,
+            2,
+            4,
+            8
+          ],
+          "hardcore": true
+        },
+        "SGMII": {
+          "lane_widths": [
+            1
+          ],
+          "hardcore": false
+        },
+        "1000BASE-X": {
+          "lane_widths": [
+            1
+          ],
+          "hardcore": false
+        },
+        "XAUI": {
+          "lane_widths": [
+            4
+          ],
+          "hardcore": false
+        },
+        "10GBASE-R": {
+          "lane_widths": [
+            1
+          ],
+          "hardcore": false
+        }
+      },
+      "review_note": "Exact AMD high-speed IP enablement still depends on device speed grade, selected IP core, and quad placement; freeze the protocol before schematic sign-off."
     }
   }
 }

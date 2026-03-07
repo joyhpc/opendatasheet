@@ -669,17 +669,17 @@ def _gt_pair_counts(diff_pairs: list[dict]) -> dict:
 def _normalize_protocol_refclk_profiles(protocols: list[str] | None) -> dict:
     profiles = {}
     for protocol in protocols or []:
-        if protocol == "PCIe 3.0":
+        if protocol in ("PCIe Gen1", "PCIe Gen2", "PCIe 3.0", "PCIe 4.0"):
             profiles[protocol] = {
                 "frequencies_mhz": [100.0],
                 "source": "protocol_standard",
-                "note": "PCIe reference clock is normally 100 MHz differential HCSL or equivalent translated clock.",
+                "note": "PCI Express reference clocks are typically implemented as 100 MHz differential HCSL or translated equivalents.",
             }
-        elif protocol == "SGMII":
+        elif protocol in ("SGMII", "1000BASE-X"):
             profiles[protocol] = {
                 "frequencies_mhz": [125.0],
                 "source": "protocol_standard",
-                "note": "SGMII line-side designs commonly use a 125 MHz reference clock.",
+                "note": "1G serial Ethernet PHY-side links commonly use a 125 MHz differential reference clock.",
             }
         elif protocol in ("XAUI", "10GBASE-R", "10G Ethernet"):
             profiles[protocol] = {
@@ -688,6 +688,42 @@ def _normalize_protocol_refclk_profiles(protocols: list[str] | None) -> dict:
                 "note": "10G serial Ethernet families commonly use a 156.25 MHz differential reference clock.",
             }
     return profiles
+
+
+def _fpga_family_high_speed_metadata(vendor: str, device: str, family: str | None, hs_serial: dict) -> dict:
+    family_upper = _safe_upper(family)
+    device_upper = _safe_upper(device)
+    if vendor == "AMD" and device_upper.startswith("XCKU"):
+        lane_pairs = min(hs_serial.get("rx_lane_pairs") or 0, hs_serial.get("tx_lane_pairs") or 0)
+        return {
+            "transceiver_type": "GTY",
+            "supported_protocols": ["PCIe 3.0", "PCIe 4.0", "SGMII", "1000BASE-X", "XAUI", "10GBASE-R"],
+            "protocol_matrix": {
+                "PCIe 3.0": {"lane_widths": [width for width in (1, 2, 4, 8, 16) if width <= lane_pairs], "hardcore": True},
+                "PCIe 4.0": {"lane_widths": [width for width in (1, 2, 4, 8) if width <= lane_pairs], "hardcore": True},
+                "SGMII": {"lane_widths": [1], "hardcore": False},
+                "1000BASE-X": {"lane_widths": [1], "hardcore": False},
+                "XAUI": {"lane_widths": [4] if lane_pairs >= 4 else [], "hardcore": False},
+                "10GBASE-R": {"lane_widths": [1], "hardcore": False},
+            },
+            "source": "amd_high_speed_serial_overview",
+            "source_url": "https://www.amd.com/en/products/adaptive-socs-and-fpgas/technologies/high-speed-serial.html",
+            "review_note": "Exact AMD high-speed IP enablement still depends on device speed grade, selected IP core, and quad placement; freeze the protocol before schematic sign-off.",
+        }
+    if vendor == "Lattice" and (family_upper == "CROSSLINKNX" or device_upper.startswith("LIFCL")):
+        return {
+            "supported_protocols": ["SGMII", "1000BASE-X", "PCIe Gen1", "PCIe Gen2"],
+            "protocol_matrix": {
+                "SGMII": {"lane_widths": [1], "hardcore": False},
+                "1000BASE-X": {"lane_widths": [1], "hardcore": False},
+                "PCIe Gen1": {"lane_widths": [1], "hardcore": False},
+                "PCIe Gen2": {"lane_widths": [1], "hardcore": False},
+            },
+            "source": "lattice_crosslink_nx_product_page",
+            "source_url": "https://www.latticesemi.com/en/Products/FPGAandCPLD/CrossLink-NX",
+            "review_note": "CrossLink-NX exports only the single-channel SerDes topology here; protocol selection must still be matched against the chosen Lattice IP/reference design.",
+        }
+    return {}
 
 
 def _infer_refclk_pairs_from_pins(pins: list[dict], existing_pairs: list[dict]) -> list[dict]:
@@ -765,6 +801,7 @@ def _generic_fpga_capability_blocks(pinout_data: dict, vendor: str, device: str,
     summary = pinout_data.get("summary", {}) if isinstance(pinout_data.get("summary"), dict) else {}
     by_function = summary.get("by_function", {}) if isinstance(summary, dict) else {}
     pins = pinout_data.get("pins", [])
+    family = pinout_data.get("_family")
     config_summary = _config_signal_summary(pins)
     gt_counts = _gt_pair_counts(diff_pairs)
     blocks = {}
@@ -789,6 +826,7 @@ def _generic_fpga_capability_blocks(pinout_data: dict, vendor: str, device: str,
             "quad_count": quad_count,
             "source": "pinout_inference",
         }
+        blocks["high_speed_serial"].update(_fpga_family_high_speed_metadata(vendor, device, family, blocks["high_speed_serial"]))
 
     if by_function.get("MIPI", 0) > 0:
         blocks["mipi_phy"] = {
@@ -840,10 +878,15 @@ def _generic_fpga_constraint_blocks(pinout_data: dict, capability_blocks: dict, 
             "refclk_pairs": refclk_pairs,
             "review_required": True,
             "source": hs_serial.get("source"),
+            "source_url": hs_serial.get("source_url"),
             "protocol_refclk_profiles": protocol_profiles,
             "common_review_candidates_mhz": protocol_candidates,
             "selection_note": "Refclk frequency, clock standard, jitter budget, and pair-to-quad mapping must be frozen against the selected protocol before schematic sign-off.",
         }
+        if hs_serial.get("protocol_matrix"):
+            blocks["refclk_requirements"]["protocol_matrix"] = hs_serial.get("protocol_matrix")
+        if hs_serial.get("review_note"):
+            blocks["refclk_requirements"]["review_note"] = hs_serial.get("review_note")
         if hs_serial.get("package_rate_ceiling_gbps") is not None:
             blocks["refclk_requirements"]["package_rate_ceiling_gbps"] = hs_serial.get("package_rate_ceiling_gbps")
         package_note = _package_rate_note(pinout_data.get("_vendor", ""), pinout_data.get("package", ""), hs_serial)

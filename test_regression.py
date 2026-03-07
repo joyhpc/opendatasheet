@@ -618,6 +618,30 @@ def t4_9():
             assert_true(key in f205_cons, f"STM32F205xx missing {key} constraint")
 
 
+@case("T4.10 AMD and Lattice high-speed exports expose family protocol profiles")
+def t4_10():
+    xcku = json.load(open(EXPORT_DIR / "XCKU3P_FFVA676.json"))
+    xcku_hs = xcku.get("capability_blocks", {}).get("high_speed_serial", {})
+    xcku_refclk = xcku.get("constraint_blocks", {}).get("refclk_requirements", {})
+    assert_true("PCIe 4.0" in xcku_hs.get("supported_protocols", []), "XCKU3P missing PCIe 4.0 support")
+    assert_true("10GBASE-R" in xcku_hs.get("supported_protocols", []), "XCKU3P missing 10GBASE-R support")
+    assert_eq(xcku_hs.get("transceiver_type"), "GTY", "XCKU3P transceiver type")
+    assert_eq(xcku_refclk.get("protocol_refclk_profiles", {}).get("PCIe 4.0", {}).get("frequencies_mhz"), [100.0], "XCKU3P PCIe 4.0 refclk")
+    assert_eq(xcku_refclk.get("protocol_refclk_profiles", {}).get("10GBASE-R", {}).get("frequencies_mhz"), [156.25], "XCKU3P 10GBASE-R refclk")
+    assert_true(100.0 in xcku_refclk.get("common_review_candidates_mhz", []), "XCKU3P missing 100 MHz candidate")
+    assert_true(156.25 in xcku_refclk.get("common_review_candidates_mhz", []), "XCKU3P missing 156.25 MHz candidate")
+
+    lifcl = json.load(open(EXPORT_DIR / "LIFCL-40_CABGA400.json"))
+    lifcl_hs = lifcl.get("capability_blocks", {}).get("high_speed_serial", {})
+    lifcl_refclk = lifcl.get("constraint_blocks", {}).get("refclk_requirements", {})
+    assert_true("SGMII" in lifcl_hs.get("supported_protocols", []), "LIFCL-40 missing SGMII support")
+    assert_true("PCIe Gen2" in lifcl_hs.get("supported_protocols", []), "LIFCL-40 missing PCIe Gen2 support")
+    assert_eq(lifcl_refclk.get("protocol_refclk_profiles", {}).get("SGMII", {}).get("frequencies_mhz"), [125.0], "LIFCL-40 SGMII refclk")
+    assert_eq(lifcl_refclk.get("protocol_refclk_profiles", {}).get("PCIe Gen2", {}).get("frequencies_mhz"), [100.0], "LIFCL-40 PCIe Gen2 refclk")
+    assert_true(125.0 in lifcl_refclk.get("common_review_candidates_mhz", []), "LIFCL-40 missing 125 MHz candidate")
+    assert_true(100.0 in lifcl_refclk.get("common_review_candidates_mhz", []), "LIFCL-40 missing 100 MHz candidate")
+
+
 @case("T6.3 Gowin GW5AT exports expose package-specific ip_blocks")
 def t6_3():
     ug225 = json.load(open(EXPORT_DIR / "GW5AT-60_UG225.json"))
