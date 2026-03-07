@@ -3,6 +3,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+from scripts.export_design_bundle import _infer_mcu_traits
+
 
 REPO_ROOT = Path(__file__).resolve().parent
 
@@ -860,3 +862,27 @@ def test_bundle_export_tolerates_string_constraint_entries(tmp_path):
     design_intent = json.loads((bundle_dir / "L1_design_intent.json").read_text(encoding="utf-8"))
     assert design_intent["device_ref"]["mpn"] == "STRING-CONSTRAINT-IC"
     assert bundle_dir.joinpath("L2_quickstart.md").exists()
+
+
+
+def test_infer_mcu_traits_separates_hse_and_lse_pins():
+    device = {
+        "mpn": "STM32H745xI/G",
+        "manufacturer": "STMicroelectronics",
+        "packages": {
+            "LQFP144": {
+                "pin_count": 4,
+                "pins": {
+                    "10": {"name": "PC14-OSC32_IN", "description": "32.768 kHz crystal oscillator input", "direction": "BIDIRECTIONAL", "signal_type": "ANALOG"},
+                    "11": {"name": "PC15-OSC32_OUT", "description": "32.768 kHz crystal oscillator output", "direction": "BIDIRECTIONAL", "signal_type": "ANALOG"},
+                    "25": {"name": "PH0-OSC_IN", "description": "High-speed external crystal oscillator input", "direction": "BIDIRECTIONAL", "signal_type": "ANALOG"},
+                    "26": {"name": "PH1-OSC_OUT", "description": "High-speed external crystal oscillator output", "direction": "BIDIRECTIONAL", "signal_type": "ANALOG"},
+                },
+            }
+        },
+    }
+
+    traits = _infer_mcu_traits(device, {"control_inputs": []})
+
+    assert {item["name"] for item in traits["hse_pins"]} == {"PH0-OSC_IN", "PH1-OSC_OUT"}
+    assert {item["name"] for item in traits["lse_pins"]} == {"PC14-OSC32_IN", "PC15-OSC32_OUT"}

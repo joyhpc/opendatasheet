@@ -850,9 +850,16 @@ def _infer_mcu_traits(device: dict, pin_groups: dict, datasheet_context: dict | 
             boot_pins.append(item)
         if any(token in pin_name for token in ("SWDIO", "SWCLK", "SWO", "JTMS", "JTCK", "JTDI", "JTDO", "TMS", "TCK", "TDI", "TDO", "TRACESWO")):
             debug_pins.append(item)
-        if any(token in pin_name for token in ("OSC_IN", "OSC_OUT", "HSE_IN", "HSE_OUT", "PH0", "PH1")) or "OSCILLATOR" in description or "HSE" in description:
+        is_lse_pin = any(token in pin_name for token in ("LSE_IN", "LSE_OUT", "OSC32", "PC14", "PC15")) or any(token in description for token in ("LOW SPEED EXTERNAL", "32.768", "LSE"))
+        is_hse_pin = (
+            any(token in pin_name for token in ("HSE_IN", "HSE_OUT", "OSC_IN", "OSC_OUT", "PH0", "PH1"))
+            or "HSE" in description
+            or "HIGH-SPEED EXTERNAL" in description
+            or ("OSCILLATOR" in description and not is_lse_pin)
+        ) and not is_lse_pin
+        if is_hse_pin:
             hse_pins.append(item)
-        if any(token in pin_name for token in ("LSE_IN", "LSE_OUT", "PC14", "PC15")) or "LOW SPEED EXTERNAL" in description or "LSE" in description:
+        if is_lse_pin:
             lse_pins.append(item)
         if "VCAP" in pin_name:
             vcap_pins.append(item)
