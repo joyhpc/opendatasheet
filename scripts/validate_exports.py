@@ -95,6 +95,9 @@ def semantic_checks(data: dict) -> list[str]:
                 errors.append("  [capability_blocks.clocking] missing clocking capability block")
             if has_debug and "debug_access" not in constraint_blocks:
                 errors.append("  [constraint_blocks.debug_access] missing debug_access constraint block")
+            for block_name in ("usb_interface", "ethernet_interface", "can_interface", "serial_memory_interface", "storage_interface"):
+                if block_name in capability_blocks and block_name not in constraint_blocks:
+                    errors.append(f"  [constraint_blocks.{block_name}] missing {block_name} constraint block")
     return errors
 
 

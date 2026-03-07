@@ -5529,26 +5529,98 @@
       },
       "source": "pin_inference"
     },
-    "can_interface": {
+    "usb_interface": {
       "class": "interface",
       "protocols": [
-        "CAN",
-        "FDCAN"
+        "USB 2.0"
       ],
       "signal_names": [
+        "PA10",
         "PA11",
         "PA12",
+        "PA9",
+        "PB12",
+        "PB14",
+        "PB15"
+      ],
+      "signal_roles": {
+        "dp": [
+          "PA12",
+          "PB15"
+        ],
+        "dm": [
+          "PA11",
+          "PB14"
+        ],
+        "vbus": [
+          "PA9"
+        ],
+        "id": [
+          "PA10",
+          "PB12"
+        ]
+      },
+      "source": "pin_inference"
+    },
+    "ethernet_interface": {
+      "class": "interface",
+      "protocols": [
+        "Ethernet MAC"
+      ],
+      "signal_names": [
+        "PA1",
+        "PA2",
+        "PA7",
+        "PB0",
+        "PB1",
+        "PB10",
+        "PB11",
         "PB12",
         "PB13",
-        "PB5",
-        "PB6",
         "PB8",
-        "PB9",
-        "PD0",
-        "PD1",
-        "PH13",
-        "PI9"
+        "PC1",
+        "PC2",
+        "PC3",
+        "PE2",
+        "PG11",
+        "PG13",
+        "PG14",
+        "PH6",
+        "PH7",
+        "PI10"
       ],
+      "signal_roles": {
+        "mdio": [
+          "PA2"
+        ],
+        "mdc": [
+          "PC1"
+        ],
+        "ref_clk": [
+          "PA1",
+          "PC3"
+        ],
+        "tx": [
+          "PB11",
+          "PB12",
+          "PB13",
+          "PB8",
+          "PC2",
+          "PE2",
+          "PG11",
+          "PG13",
+          "PG14"
+        ],
+        "rx": [
+          "PA7",
+          "PB0",
+          "PB1",
+          "PB10",
+          "PH6",
+          "PH7",
+          "PI10"
+        ]
+      },
       "source": "pin_inference"
     },
     "storage_interface": {
@@ -5569,6 +5641,38 @@
         "PC9",
         "PD2"
       ],
+      "signal_roles": {
+        "ck": [
+          "PC12"
+        ],
+        "cmd": [
+          "PD2"
+        ],
+        "d0": [
+          "PC8"
+        ],
+        "d1": [
+          "PC9"
+        ],
+        "d2": [
+          "PC10"
+        ],
+        "d3": [
+          "PC11"
+        ],
+        "d4": [
+          "PB8"
+        ],
+        "d5": [
+          "PB9"
+        ],
+        "d6": [
+          "PC6"
+        ],
+        "d7": [
+          "PC7"
+        ]
+      },
       "source": "pin_inference"
     }
   },
@@ -5594,6 +5698,111 @@
         ]
       },
       "review_required": true,
+      "source": "pin_inference"
+    },
+    "usb_interface": {
+      "class": "interface",
+      "required_signal_groups": [
+        [
+          "PA11",
+          "PA12",
+          "PB14",
+          "PB15"
+        ]
+      ],
+      "vbus_related_signals": [
+        "PA9"
+      ],
+      "present_signal_roles": [
+        "dm",
+        "dp",
+        "id",
+        "vbus"
+      ],
+      "review_required": true,
+      "review_items": [
+        "Freeze USB role, connector type, and VBUS policy before schematic sign-off.",
+        "Verify DP/DM routing, ESD placement, and supply/domain wiring for the selected USB instance."
+      ],
+      "source": "pin_inference"
+    },
+    "ethernet_interface": {
+      "class": "interface",
+      "management_signals": [
+        "PA2",
+        "PC1"
+      ],
+      "clock_signals": [
+        "PA1",
+        "PC3"
+      ],
+      "data_signals": [
+        "PA7",
+        "PB0",
+        "PB1",
+        "PB10",
+        "PB11",
+        "PB12",
+        "PB13",
+        "PB8",
+        "PC2",
+        "PE2",
+        "PG11",
+        "PG13",
+        "PG14",
+        "PH6",
+        "PH7",
+        "PI10"
+      ],
+      "present_signal_roles": [
+        "mdc",
+        "mdio",
+        "ref_clk",
+        "rx",
+        "tx"
+      ],
+      "review_required": true,
+      "review_items": [
+        "Freeze MAC-to-PHY mode and reference clock source/direction before schematic sign-off.",
+        "Review PHY reset, strap pins, and management bus accessibility."
+      ],
+      "source": "pin_inference"
+    },
+    "storage_interface": {
+      "class": "interface",
+      "clock_signals": [
+        "PC12"
+      ],
+      "command_signals": [
+        "PD2"
+      ],
+      "data_signals": [
+        "PB8",
+        "PB9",
+        "PC10",
+        "PC11",
+        "PC6",
+        "PC7",
+        "PC8",
+        "PC9"
+      ],
+      "present_signal_roles": [
+        "ck",
+        "cmd",
+        "d0",
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5",
+        "d6",
+        "d7"
+      ],
+      "review_required": true,
+      "review_items": [
+        "Freeze bus width, IO voltage, and removable-vs-embedded media assumptions before schematic sign-off.",
+        "Review pull-ups, card-detect/write-protect policy, and power sequencing for the selected storage interface."
+      ],
       "source": "pin_inference"
     }
   }

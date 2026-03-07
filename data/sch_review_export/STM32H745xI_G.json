@@ -6865,6 +6865,13 @@
         "VDD33USB",
         "VDD50USB"
       ],
+      "signal_roles": {
+        "usb_supply": [
+          "VDD",
+          "VDD33USB",
+          "VDD50USB"
+        ]
+      },
       "source": "pin_inference"
     }
   },
@@ -6905,10 +6912,20 @@
     },
     "usb_interface": {
       "class": "interface",
-      "required_signal_groups": [
-        []
+      "required_signal_groups": [],
+      "vbus_related_signals": [
+        "VDD",
+        "VDD33USB",
+        "VDD50USB"
       ],
-      "vbus_related_signals": [],
+      "present_signal_roles": [
+        "usb_supply"
+      ],
+      "review_required": true,
+      "review_items": [
+        "Freeze USB role, connector type, and VBUS policy before schematic sign-off.",
+        "Verify DP/DM routing, ESD placement, and supply/domain wiring for the selected USB instance."
+      ],
       "source": "pin_inference"
     }
   }

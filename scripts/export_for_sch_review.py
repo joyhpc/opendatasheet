@@ -353,6 +353,39 @@ def _signal_groups(pin_records: list[dict], matcher) -> list[dict]:
     return sorted(groups.values(), key=lambda item: item["name"])
 
 
+def _signal_role_names(pin_records: list[dict], role_matchers: dict[str, object]) -> dict:
+    roles = {}
+    for role, matcher in role_matchers.items():
+        names = [item["name"] for item in _signal_groups(pin_records, matcher) if item.get("name")]
+        if names:
+            roles[role] = names
+    return roles
+
+
+def _merge_signal_names(*signal_sets) -> list[str]:
+    names = set()
+    for signal_set in signal_sets:
+        if isinstance(signal_set, dict):
+            iterables = signal_set.values()
+            for items in iterables:
+                for name in items or []:
+                    if name:
+                        names.add(name)
+            continue
+        for item in signal_set or []:
+            if isinstance(item, dict):
+                name = item.get("name")
+            else:
+                name = item
+            if name:
+                names.add(name)
+    return sorted(names)
+
+
+def _role_subset(role_map: dict, *roles: str) -> list[str]:
+    return sorted({name for role in roles for name in role_map.get(role, [])})
+
+
 def _mcu_like_device(mpn: str, manufacturer: str | None, category: str | None, description: str | None) -> bool:
     haystack = " ".join(filter(None, [mpn, manufacturer or "", category or "", description or ""])).upper()
     prefixes = ("STM32", "GD32", "N32", "LPC", "PIC", "ATSAM", "SAMD", "SAME")
@@ -374,10 +407,39 @@ def _infer_normal_ic_capability_blocks(mpn: str, manufacturer: str | None, categ
     )
     lse_signals = _signal_groups(pin_records, lambda name, desc: any(token in name for token in ("LSE_IN", "LSE_OUT", "OSC32", "PC14", "PC15")) or any(token in desc for token in ("LOW SPEED EXTERNAL", "32.768", "LSE")))
     usb_signals = _signal_groups(pin_records, lambda name, desc: any(token in name for token in ("USB", "OTG", "VBUS", "VDDUSB")) or "USB" in desc)
+    usb_roles = _signal_role_names(pin_records, {
+        "dp": lambda name, desc: any(token in f"{name} {desc}" for token in ("USBDP", "USB_DP", "OTG_FS_DP", "OTG_HS_DP")),
+        "dm": lambda name, desc: any(token in f"{name} {desc}" for token in ("USBDM", "USB_DM", "OTG_FS_DM", "OTG_HS_DM")),
+        "vbus": lambda name, desc: "VBUS" in f"{name} {desc}",
+        "id": lambda name, desc: any(token in f"{name} {desc}" for token in ("USB_ID", "OTG_FS_ID", "OTG_HS_ID")),
+        "usb_supply": lambda name, desc: any(token in name for token in ("VDDUSB", "VDD33USB", "VDD50USB")) or "USB POWER SUPPLY" in desc,
+    })
     eth_signals = _signal_groups(pin_records, lambda name, desc: any(token in name for token in ("ETH", "RMII", "MII", "RGMII")) or "ETHERNET" in desc)
-    can_signals = _signal_groups(pin_records, lambda name, desc: any(token in name for token in ("FDCAN", "CANRX", "CANTX", "CAN_")) or "CAN" in desc)
-    qspi_signals = _signal_groups(pin_records, lambda name, desc: any(token in name for token in ("QUADSPI", "QSPI", "OCTOSPI", "OSPI")) or any(token in desc for token in ("QUADSPI", "OCTOSPI")))
+    eth_roles = _signal_role_names(pin_records, {
+        "mdio": lambda name, desc: "MDIO" in f"{name} {desc}",
+        "mdc": lambda name, desc: "MDC" in f"{name} {desc}",
+        "ref_clk": lambda name, desc: any(token in f"{name} {desc}" for token in ("RMII_REF_CLK", "REF_CLK", "RX_CLK", "TX_CLK", "ETH_CLK")),
+        "tx": lambda name, desc: any(token in f"{name} {desc}" for token in ("TXD", "TX_EN", "TX_ER", "TXER")),
+        "rx": lambda name, desc: any(token in f"{name} {desc}" for token in ("RXD", "RX_ER", "RXER", "RX_DV", "CRS_DV")),
+    })
+    can_signals = _signal_groups(pin_records, lambda name, desc: any(token in name for token in ("FDCAN", "CANRX", "CANTX", "CAN_")) or any(token in desc for token in ("CAN_RX", "CAN_TX", "FDCAN")))
+    can_roles = _signal_role_names(pin_records, {
+        "rx": lambda name, desc: any(token in f"{name} {desc}" for token in ("CAN_RX", "CANRX")) or bool(re.search(r"FDCAN[0-9_]*.*RX", f"{name} {desc}")),
+        "tx": lambda name, desc: any(token in f"{name} {desc}" for token in ("CAN_TX", "CANTX")) or bool(re.search(r"FDCAN[0-9_]*.*TX", f"{name} {desc}")),
+    })
+    qspi_signals = _signal_groups(pin_records, lambda name, desc: any(token in name for token in ("QUADSPI", "QSPI", "OCTOSPI", "OSPI")) or any(token in desc for token in ("QUADSPI", "QSPI", "OCTOSPI", "OSPI")))
+    qspi_roles = _signal_role_names(pin_records, {
+        "clk": lambda name, desc: any(token in f"{name} {desc}" for token in ("QUADSPI_CLK", "QSPI_CLK", "OCTOSPI_CLK", "OSPI_CLK")),
+        "cs": lambda name, desc: any(token in f"{name} {desc}" for token in ("QUADSPI_NCS", "QSPI_NCS", "OCTOSPI_NCS", "OSPI_NCS", "QUADSPI_CS", "QSPI_CS", "OCTOSPI_CS", "OSPI_CS")),
+        "dqs": lambda name, desc: any(token in f"{name} {desc}" for token in ("OCTOSPI_DQS", "OSPI_DQS", "QUADSPI_DQS", "QSPI_DQS")),
+        **{f"io{idx}": (lambda idx: (lambda name, desc: any(token in f"{name} {desc}" for token in (f"QUADSPI_BK1_IO{idx}", f"QUADSPI_BK2_IO{idx}", f"QUADSPI_IO{idx}", f"QSPI_IO{idx}", f"OCTOSPI_IO{idx}", f"OSPI_IO{idx}", f"BK1_IO{idx}", f"BK2_IO{idx}"))))(idx) for idx in range(8)},
+    })
     sdmmc_signals = _signal_groups(pin_records, lambda name, desc: any(token in name for token in ("SDMMC", "SDIO")) or any(token in desc for token in ("SDMMC", "SDIO")))
+    sdmmc_roles = _signal_role_names(pin_records, {
+        "ck": lambda name, desc: any(token in f"{name} {desc}" for token in ("SDMMC_CK", "SDIO_CK")),
+        "cmd": lambda name, desc: any(token in f"{name} {desc}" for token in ("SDMMC_CMD", "SDIO_CMD")),
+        **{f"d{idx}": (lambda idx: (lambda name, desc: any(token in f"{name} {desc}" for token in (f"SDMMC_D{idx}", f"SDIO_D{idx}"))))(idx) for idx in range(8)},
+    })
 
     blocks = {}
     if debug_signals:
@@ -410,39 +472,44 @@ def _infer_normal_ic_capability_blocks(mpn: str, manufacturer: str | None, categ
             },
             "source": "pin_inference",
         }
-    if usb_signals:
+    if usb_signals or usb_roles:
         blocks["usb_interface"] = {
             "class": "interface",
             "protocols": ["USB 2.0"],
-            "signal_names": [item["name"] for item in usb_signals],
+            "signal_names": _merge_signal_names(usb_signals, usb_roles),
+            "signal_roles": usb_roles,
             "source": "pin_inference",
         }
-    if eth_signals:
+    if eth_signals or eth_roles:
         blocks["ethernet_interface"] = {
             "class": "interface",
             "protocols": ["Ethernet MAC"],
-            "signal_names": [item["name"] for item in eth_signals],
+            "signal_names": _merge_signal_names(eth_signals, eth_roles),
+            "signal_roles": eth_roles,
             "source": "pin_inference",
         }
-    if can_signals:
+    if can_signals or can_roles:
         blocks["can_interface"] = {
             "class": "interface",
             "protocols": ["CAN", "FDCAN"],
-            "signal_names": [item["name"] for item in can_signals],
+            "signal_names": _merge_signal_names(can_signals, can_roles),
+            "signal_roles": can_roles,
             "source": "pin_inference",
         }
-    if qspi_signals:
+    if qspi_signals or qspi_roles:
         blocks["serial_memory_interface"] = {
             "class": "interface",
             "protocols": ["QSPI", "OctoSPI"],
-            "signal_names": [item["name"] for item in qspi_signals],
+            "signal_names": _merge_signal_names(qspi_signals, qspi_roles),
+            "signal_roles": qspi_roles,
             "source": "pin_inference",
         }
-    if sdmmc_signals:
+    if sdmmc_signals or sdmmc_roles:
         blocks["storage_interface"] = {
             "class": "interface",
             "protocols": ["SDMMC", "SDIO"],
-            "signal_names": [item["name"] for item in sdmmc_signals],
+            "signal_names": _merge_signal_names(sdmmc_signals, sdmmc_roles),
+            "signal_roles": sdmmc_roles,
             "source": "pin_inference",
         }
     if description and "DUAL" in description.upper() and "CORTEX-M7" in description.upper() and "CORTEX-M4" in description.upper():
@@ -483,12 +550,86 @@ def _infer_normal_ic_constraint_blocks(capability_blocks: dict) -> dict:
         }
     usb = capability_blocks.get("usb_interface")
     if usb:
-        signal_names = usb.get("signal_names", [])
+        usb_roles = usb.get("signal_roles", {}) or {}
+        dp_dm_group = _role_subset(usb_roles, "dp", "dm")
         blocks["usb_interface"] = {
             "class": "interface",
-            "required_signal_groups": [[name for name in signal_names if any(token in name.upper() for token in ("USB_DP", "USB_DM", "OTG_FS_DP", "OTG_FS_DM"))]],
-            "vbus_related_signals": [name for name in signal_names if "VBUS" in name.upper() or "VDDUSB" in name.upper()],
+            "required_signal_groups": [dp_dm_group] if dp_dm_group else [],
+            "vbus_related_signals": _role_subset(usb_roles, "vbus", "usb_supply"),
+            "present_signal_roles": sorted(usb_roles),
+            "review_required": True,
+            "review_items": [
+                "Freeze USB role, connector type, and VBUS policy before schematic sign-off.",
+                "Verify DP/DM routing, ESD placement, and supply/domain wiring for the selected USB instance.",
+            ],
             "source": usb.get("source"),
+        }
+    ethernet = capability_blocks.get("ethernet_interface")
+    if ethernet:
+        ethernet_roles = ethernet.get("signal_roles", {}) or {}
+        blocks["ethernet_interface"] = {
+            "class": "interface",
+            "management_signals": _role_subset(ethernet_roles, "mdio", "mdc"),
+            "clock_signals": _role_subset(ethernet_roles, "ref_clk"),
+            "data_signals": _role_subset(ethernet_roles, "tx", "rx"),
+            "present_signal_roles": sorted(ethernet_roles),
+            "review_required": True,
+            "review_items": [
+                "Freeze MAC-to-PHY mode and reference clock source/direction before schematic sign-off.",
+                "Review PHY reset, strap pins, and management bus accessibility.",
+            ],
+            "source": ethernet.get("source"),
+        }
+    can = capability_blocks.get("can_interface")
+    if can:
+        can_roles = can.get("signal_roles", {}) or {}
+        tx_rx_group = _role_subset(can_roles, "tx", "rx")
+        blocks["can_interface"] = {
+            "class": "interface",
+            "required_signal_groups": [tx_rx_group] if tx_rx_group else [],
+            "present_signal_roles": sorted(can_roles),
+            "external_component_required": "can_transceiver",
+            "review_required": True,
+            "review_items": [
+                "Freeze MCU-to-transceiver channel assignment before schematic sign-off.",
+                "Review CAN termination, standby, and bus protection around the external transceiver.",
+            ],
+            "source": can.get("source"),
+        }
+    serial_memory = capability_blocks.get("serial_memory_interface")
+    if serial_memory:
+        memory_roles = serial_memory.get("signal_roles", {}) or {}
+        io_roles = [role for role in sorted(memory_roles) if role.startswith("io")]
+        blocks["serial_memory_interface"] = {
+            "class": "interface",
+            "clock_signals": _role_subset(memory_roles, "clk"),
+            "chip_select_signals": _role_subset(memory_roles, "cs"),
+            "data_signals": _role_subset(memory_roles, *io_roles),
+            "strobe_signals": _role_subset(memory_roles, "dqs"),
+            "present_signal_roles": sorted(memory_roles),
+            "review_required": True,
+            "review_items": [
+                "Freeze boot source, flash voltage, and bus width before schematic sign-off.",
+                "Review pull states, reset interactions, and unused IO handling for the selected memory mode.",
+            ],
+            "source": serial_memory.get("source"),
+        }
+    storage = capability_blocks.get("storage_interface")
+    if storage:
+        storage_roles = storage.get("signal_roles", {}) or {}
+        data_roles = [role for role in sorted(storage_roles) if role.startswith("d")]
+        blocks["storage_interface"] = {
+            "class": "interface",
+            "clock_signals": _role_subset(storage_roles, "ck"),
+            "command_signals": _role_subset(storage_roles, "cmd"),
+            "data_signals": _role_subset(storage_roles, *data_roles),
+            "present_signal_roles": sorted(storage_roles),
+            "review_required": True,
+            "review_items": [
+                "Freeze bus width, IO voltage, and removable-vs-embedded media assumptions before schematic sign-off.",
+                "Review pull-ups, card-detect/write-protect policy, and power sequencing for the selected storage interface.",
+            ],
+            "source": storage.get("source"),
         }
     return {key: value for key, value in blocks.items() if value}
 

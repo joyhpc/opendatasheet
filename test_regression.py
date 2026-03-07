@@ -589,6 +589,35 @@ def t4_8():
     assert_eq(inferred[0].get("n_name"), "SD_REFCLKN", "LIFCL-40_CABGA400 inferred n_name")
 
 
+@case("T4.9 MCU interface blocks expose review constraints")
+def t4_9():
+    f103 = json.load(open(EXPORT_DIR / "STM32F103xC.json"))
+    f103_caps = f103.get("capability_blocks", {})
+    f103_cons = f103.get("constraint_blocks", {})
+    for key in ("usb_interface", "can_interface", "storage_interface"):
+        assert_true(key in f103_caps, f"STM32F103xC missing {key} capability")
+        assert_true(key in f103_cons, f"STM32F103xC missing {key} constraint")
+    assert_eq(f103_caps["usb_interface"].get("signal_roles", {}).get("dm"), ["PA11"], "STM32F103xC USB DM role")
+    assert_eq(f103_caps["usb_interface"].get("signal_roles", {}).get("dp"), ["PA12"], "STM32F103xC USB DP role")
+    can_rx_roles = set(f103_caps["can_interface"].get("signal_roles", {}).get("rx", []))
+    can_tx_roles = set(f103_caps["can_interface"].get("signal_roles", {}).get("tx", []))
+    assert_true({"PA11", "PD0"}.issubset(can_rx_roles), f"STM32F103xC CAN RX roles incomplete: {sorted(can_rx_roles)}")
+    assert_true({"PA12", "PD1"}.issubset(can_tx_roles), f"STM32F103xC CAN TX roles incomplete: {sorted(can_tx_roles)}")
+    storage_roles = f103_caps["storage_interface"].get("signal_roles", {})
+    assert_eq(storage_roles.get("ck"), ["PC12"], "STM32F103xC SDIO CK role")
+    assert_eq(storage_roles.get("cmd"), ["PD2"], "STM32F103xC SDIO CMD role")
+    assert_eq(storage_roles.get("d0"), ["PC8"], "STM32F103xC SDIO D0 role")
+    assert_true("tx" in f103_cons["can_interface"].get("present_signal_roles", []), "STM32F103xC CAN constraint missing tx role")
+    assert_true("rx" in f103_cons["can_interface"].get("present_signal_roles", []), "STM32F103xC CAN constraint missing rx role")
+
+    f205 = json.load(open(EXPORT_DIR / "STM32F205xx.json"))
+    f205_caps = f205.get("capability_blocks", {})
+    f205_cons = f205.get("constraint_blocks", {})
+    for key in ("usb_interface", "ethernet_interface", "can_interface", "serial_memory_interface", "storage_interface"):
+        if key in f205_caps:
+            assert_true(key in f205_cons, f"STM32F205xx missing {key} constraint")
+
+
 @case("T6.3 Gowin GW5AT exports expose package-specific ip_blocks")
 def t6_3():
     ug225 = json.load(open(EXPORT_DIR / "GW5AT-60_UG225.json"))

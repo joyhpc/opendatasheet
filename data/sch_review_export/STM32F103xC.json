@@ -4599,6 +4599,14 @@
         "PA11",
         "PA12"
       ],
+      "signal_roles": {
+        "dp": [
+          "PA12"
+        ],
+        "dm": [
+          "PA11"
+        ]
+      },
       "source": "pin_inference"
     },
     "can_interface": {
@@ -4615,6 +4623,18 @@
         "PD0",
         "PD1"
       ],
+      "signal_roles": {
+        "rx": [
+          "OSC_IN",
+          "PA11",
+          "PD0"
+        ],
+        "tx": [
+          "OSC_OUT",
+          "PA12",
+          "PD1"
+        ]
+      },
       "source": "pin_inference"
     },
     "storage_interface": {
@@ -4635,6 +4655,38 @@
         "PC9",
         "PD2"
       ],
+      "signal_roles": {
+        "ck": [
+          "PC12"
+        ],
+        "cmd": [
+          "PD2"
+        ],
+        "d0": [
+          "PC8"
+        ],
+        "d1": [
+          "PC9"
+        ],
+        "d2": [
+          "PC10"
+        ],
+        "d3": [
+          "PC11"
+        ],
+        "d4": [
+          "PB8"
+        ],
+        "d5": [
+          "PB9"
+        ],
+        "d6": [
+          "PC6"
+        ],
+        "d7": [
+          "PC7"
+        ]
+      },
       "source": "pin_inference"
     }
   },
@@ -4665,9 +4717,82 @@
     "usb_interface": {
       "class": "interface",
       "required_signal_groups": [
-        []
+        [
+          "PA11",
+          "PA12"
+        ]
       ],
       "vbus_related_signals": [],
+      "present_signal_roles": [
+        "dm",
+        "dp"
+      ],
+      "review_required": true,
+      "review_items": [
+        "Freeze USB role, connector type, and VBUS policy before schematic sign-off.",
+        "Verify DP/DM routing, ESD placement, and supply/domain wiring for the selected USB instance."
+      ],
+      "source": "pin_inference"
+    },
+    "can_interface": {
+      "class": "interface",
+      "required_signal_groups": [
+        [
+          "OSC_IN",
+          "OSC_OUT",
+          "PA11",
+          "PA12",
+          "PD0",
+          "PD1"
+        ]
+      ],
+      "present_signal_roles": [
+        "rx",
+        "tx"
+      ],
+      "external_component_required": "can_transceiver",
+      "review_required": true,
+      "review_items": [
+        "Freeze MCU-to-transceiver channel assignment before schematic sign-off.",
+        "Review CAN termination, standby, and bus protection around the external transceiver."
+      ],
+      "source": "pin_inference"
+    },
+    "storage_interface": {
+      "class": "interface",
+      "clock_signals": [
+        "PC12"
+      ],
+      "command_signals": [
+        "PD2"
+      ],
+      "data_signals": [
+        "PB8",
+        "PB9",
+        "PC10",
+        "PC11",
+        "PC6",
+        "PC7",
+        "PC8",
+        "PC9"
+      ],
+      "present_signal_roles": [
+        "ck",
+        "cmd",
+        "d0",
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5",
+        "d6",
+        "d7"
+      ],
+      "review_required": true,
+      "review_items": [
+        "Freeze bus width, IO voltage, and removable-vs-embedded media assumptions before schematic sign-off.",
+        "Review pull-ups, card-detect/write-protect policy, and power sequencing for the selected storage interface."
+      ],
       "source": "pin_inference"
     }
   }
