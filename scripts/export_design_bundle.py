@@ -1037,26 +1037,40 @@ def _build_fpga_design_intent(device: dict, datasheet_design_context: dict | Non
 def _gowin_family_design_rules(device: dict) -> dict:
     if (device.get("manufacturer") or "").lower() != "gowin":
         return {}
+
+    mpn = (device.get("mpn") or "").upper()
+    is_littlebee = mpn.startswith("GW1N") or mpn.startswith("GW1NR")
+    is_arora = mpn.startswith("GW2A") or "ARORA" in mpn or mpn.startswith("GW5")
+
+    config_rules = [
+        "`RECONFIG_N` 上电期间保持高电平，稳定后再允许重配置。",
+        "`DONE` / `READY` 作为状态脚时默认预留上拉，量产前冻结其复用方式。",
+        "`MODE[2:0]`、`JTAGSEL`、`MSPI/SSPI` 启动拓扑在原理图阶段一次定版，不要等 PCB 后补。",
+        "配置接口若走 `I2C` / `SSPI` / `MSPI`，相关 `SCL/SDA/CLK/CS` 拉阻和主从归属必须写进页注释。",
+    ]
+    if is_littlebee:
+        config_rules.append("LittleBee 系列常见为 `JTAG + Autoboot/SSPI/MSPI`，需提前确认模式脚默认电平与 Flash 上电时序。")
+    if is_arora:
+        config_rules.append("Arora / GW5 / GW2A 若启用高速接口，配置模式与高速 refclk、电源域分区一起评审。")
+
+    clock_rules = [
+        "系统时钟优先走专用 `GCLK/PLL` 管脚；外部晶振或有源时钟源按磁珠 + 去耦预留。",
+        "`TCK` 默认预留上拉到对应 `VCCIO` 域，并保持 JTAG header 回路最短。",
+    ]
+    if is_arora:
+        clock_rules.append("SerDes / MIPI 高速参考时钟靠近 FPGA 管脚处预留 AC 耦合与测试点。")
+
     return {
         "power_rules": [
-            "推荐 `VCCX` 先于 `VCC` 上电，并控制上升斜率在器件建议范围内。",
-            "`VCC` 建议单独供电；MIPI / SerDes 模拟与数字电源优先低噪声分区。",
-            "不同电压域之间优先用磁珠 + 陶瓷电容隔离，避免直接硬并。",
+            "按器件手册冻结 `VCC` / `VCCX` / `VCCIO` / 模拟电源的上电顺序与斜率。",
+            "MIPI / SerDes / PLL 等模拟与数字电源优先低噪声分区，跨域避免直接硬并。",
+            "不同 Bank 的 `VCCIO` 先定电压，再做 pin swap、接口分配和 connector 映射。",
         ],
-        "config_rules": [
-            "`RECONFIG_N` 上电期间保持高电平，稳定后再允许重配置。",
-            "`DONE` / `READY` 作为开漏状态脚时，默认预留 `4.7kΩ` 上拉到 `3.3V`。",
-            "`CFGBVS` 必须明确绑高或绑低，`PUDC_B` 不允许悬空。",
-            "`MODE[2:0]` 默认按 `4.7kΩ` 上拉 / `1kΩ` 下拉策略规划，不要等 PCB 后补。",
-        ],
-        "clock_rules": [
-            "系统时钟优先走专用 `GCLK/PLL` 管脚；外部晶振按磁珠 + `10nF` 去耦预留。",
-            "SerDes 高速参考时钟靠近 FPGA 管脚处预留 `0.1uF` 串联 AC 耦合。",
-            "`TCK` 默认预留 `4.7kΩ` 上拉到 `VCCIO`，并就近放 `0.1uF` 去耦。",
-        ],
+        "config_rules": config_rules,
+        "clock_rules": clock_rules,
         "io_rules": [
-            "先冻结每个 `VCCIO Bank` 电压，再做管脚交换和接口定义。",
-            "LVDS / DDR / MIPI / SerDes 相关管脚优先按字节组或 lane 组整体分区。",
+            "LVDS / DDR / MIPI / SerDes 相关管脚优先按 byte-lane 或 lane 组整体分区。",
+            "开发板参考设计里的 Bank 电压、终端和 strap 做法优先复用，不同物料不要混搭同类参考文件。",
         ],
     }
 

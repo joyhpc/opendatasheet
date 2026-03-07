@@ -604,7 +604,8 @@ def test_gowin_fpga_bundle_export_includes_customer_scenarios(tmp_path):
     assert "L3 Templates" in quickstart
     assert "Vendor design rules" in quickstart
     assert "Reference assets" in quickstart
-    assert "CFGBVS" in quickstart
+    assert "JTAGSEL" in quickstart
+    assert "MODE[2:0]" in quickstart
     assert "RECONFIG_N" in quickstart
     assert "gowin_gw5at_design_guide.md" in quickstart
     assert "gowin_gw5at60_devboard_ref.md" in quickstart
@@ -651,3 +652,44 @@ def test_gowin_fpga_scenarios_generalize_across_other_families(tmp_path):
     assert {item["source_path"] for item in gw5at138_intent.get("reference_design_assets", [])} == {
         "data/sch_review_export/reference/gowin_gw5at_design_guide.md"
     }
+
+
+
+def test_gowin_bundle_rules_are_family_specific(tmp_path):
+    output_dir = tmp_path / "bundles"
+    subprocess.run(
+        [
+            sys.executable,
+            "scripts/export_design_bundle.py",
+            "--device",
+            "GW5AT-60_UG225",
+            "--output-dir",
+            str(output_dir),
+        ],
+        cwd=REPO_ROOT,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+
+    bundle_dir = output_dir / "GW5AT-60_UG225"
+    design_intent = json.loads((bundle_dir / "L1_design_intent.json").read_text(encoding="utf-8"))
+    config_rules = "\n".join(design_intent["vendor_design_rules"]["config_rules"])
+
+    assert "CFGBVS" not in config_rules
+    assert "PUDC_B" not in config_rules
+    assert "MODE[2:0]" in config_rules
+    assert "JTAGSEL" in config_rules
+
+
+def test_extract_gw1n_dc_supports_combined_datasheet():
+    from pathlib import Path
+    from scripts.extract_gowin_dc import extract_gowin_dc
+
+    result = extract_gowin_dc(Path("data/raw/datasheet_PDF/0130-08-00028_GW1N-LV2QN48HC7.pdf"))
+
+    assert result["device"] == "GW1N"
+    assert len(result["absolute_maximum_ratings"]) >= 3
+    assert len(result["recommended_operating"]) >= 3
+    assert any(item.get("standard") == "LVCMOS33" and item.get("vcco") == 3.3 for item in result["io_standards"])
+    assert any(item.get("standard") == "LVCMOS12" and item.get("vcco") == 1.2 for item in result["io_standards"])
