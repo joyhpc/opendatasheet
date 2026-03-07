@@ -29,6 +29,10 @@ python3 scripts/validate_exports.py --summary
 
 ```bash
 python3 scripts/export_for_sch_review.py
+python3 scripts/export_design_bundle.py --device TPS62147
+python3 scripts/export_design_bundle.py --limit 10
+python3 scripts/organize_datasheet_pdfs.py --apply
+python3 scripts/validate_design_extraction.py --strict
 python3 pipeline_v2.py <pdf-path>
 python3 pipeline_v2.py <batch-limit>
 ```
