@@ -1498,12 +1498,22 @@ def main():
         nargs="?",
         help="PDF path for single-file extraction, or an integer batch limit"
     )
+    parser.add_argument(
+        "-o",
+        "--output",
+        help="Optional output JSON path for single-file extraction"
+    )
     args = parser.parse_args()
 
     if args.input:
         candidate = Path(args.input)
         if candidate.exists() and candidate.is_file():
             result = process_single_pdf(str(candidate))
+            if args.output:
+                out_path = Path(args.output)
+                out_path.parent.mkdir(parents=True, exist_ok=True)
+                out_path.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+                print(f"saved {out_path}")
             print(json.dumps(result, ensure_ascii=False, indent=2))
             return
         try:

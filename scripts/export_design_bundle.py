@@ -95,28 +95,42 @@ def _pick_preferred_package(device: dict) -> str | None:
     return ranked[0][0]
 
 
-def _constraint_record(source_kind: str, source_key: str | None, entry: dict, source_page: int | None = None) -> dict:
+def _constraint_record(source_kind: str, source_key: str | None, entry: dict | str, source_page: int | None = None) -> dict:
+    if isinstance(entry, dict):
+        parameter = entry.get("parameter")
+        min_value = entry.get("min")
+        typ_value = entry.get("typ")
+        max_value = entry.get("max")
+        unit = entry.get("unit")
+        conditions = entry.get("conditions")
+    else:
+        parameter = str(entry)
+        min_value = None
+        typ_value = None
+        max_value = None
+        unit = None
+        conditions = None
     return {
         "source_kind": source_kind,
         "source_key": source_key,
         "source_page": source_page,
-        "parameter": entry.get("parameter"),
-        "min": entry.get("min"),
-        "typ": entry.get("typ"),
-        "max": entry.get("max"),
-        "unit": entry.get("unit"),
-        "conditions": entry.get("conditions"),
+        "parameter": parameter,
+        "min": min_value,
+        "typ": typ_value,
+        "max": max_value,
+        "unit": unit,
+        "conditions": conditions,
     }
 
 
-def _entry_haystack(key: str, entry: dict) -> str:
-    return " ".join(
-        [
-            key,
-            entry.get("parameter") or "",
-            entry.get("conditions") or "",
-        ]
-    )
+def _entry_haystack(key: str, entry: dict | str) -> str:
+    if isinstance(entry, dict):
+        parameter = entry.get("parameter") or ""
+        conditions = entry.get("conditions") or ""
+    else:
+        parameter = str(entry)
+        conditions = ""
+    return " ".join([key, parameter, conditions])
 
 
 def _score_constraint_candidate(
@@ -143,7 +157,7 @@ def _score_constraint_candidate(
     if prefer_keys and normalized_key in prefer_keys:
         score += 4
 
-    unit = entry.get("unit") or ""
+    unit = entry.get("unit") or "" if isinstance(entry, dict) else ""
     if unit_allow and unit not in unit_allow:
         return None
     if unit_allow:
@@ -799,6 +813,263 @@ def _normal_ic_external_components(device: dict, pin_groups: dict) -> list[dict]
     return components
 
 
+
+
+def _infer_mcu_traits(device: dict, pin_groups: dict, datasheet_context: dict | None = None) -> dict | None:
+    mpn = (device.get("mpn") or "").upper()
+    manufacturer = (device.get("manufacturer") or "")
+    package_name = _pick_preferred_package(device)
+    package_data = (device.get("packages") or {}).get(package_name or "", {})
+    pins = package_data.get("pins", {})
+    datasheet_context = datasheet_context or {}
+
+    def record(pin_number: str, pin_data: dict) -> dict:
+        item = _pin_record(pin_number, pin_data)
+        item["description"] = pin_data.get("description")
+        return item
+
+    reset_pins = []
+    boot_pins = []
+    debug_pins = []
+    hse_pins = []
+    lse_pins = []
+    vcap_pins = []
+    analog_supply_pins = []
+    backup_supply_pins = []
+    usb_pins = []
+    comm_pins = []
+
+    for pin_number, pin_data in pins.items():
+        pin_name = (pin_data.get("name") or "").upper()
+        description = (pin_data.get("description") or "").upper()
+        item = record(pin_number, pin_data)
+
+        if any(token in pin_name for token in ("NRST", "RESET", "RST")):
+            reset_pins.append(item)
+        if "BOOT" in pin_name:
+            boot_pins.append(item)
+        if any(token in pin_name for token in ("SWDIO", "SWCLK", "SWO", "JTMS", "JTCK", "JTDI", "JTDO", "TMS", "TCK", "TDI", "TDO", "TRACESWO")):
+            debug_pins.append(item)
+        if any(token in pin_name for token in ("OSC_IN", "OSC_OUT", "HSE_IN", "HSE_OUT", "PH0", "PH1")) or "OSCILLATOR" in description or "HSE" in description:
+            hse_pins.append(item)
+        if any(token in pin_name for token in ("LSE_IN", "LSE_OUT", "PC14", "PC15")) or "LOW SPEED EXTERNAL" in description or "LSE" in description:
+            lse_pins.append(item)
+        if "VCAP" in pin_name:
+            vcap_pins.append(item)
+        if any(token in pin_name for token in ("VDDA", "VSSA", "VREF+", "VREF-", "VREF")):
+            analog_supply_pins.append(item)
+        if "VBAT" in pin_name:
+            backup_supply_pins.append(item)
+        if any(token in pin_name for token in ("USB_DM", "USB_DP", "OTG_FS_DM", "OTG_FS_DP")) or ("USB" in description and any(token in description for token in ("DM", "DP", "D-", "D+"))):
+            usb_pins.append(item)
+        if any(token in pin_name for token in ("USART", "UART", "I2C", "SPI", "CAN", "FDCAN", "ETH", "SDIO", "ADC", "DAC")) or any(token in description for token in ("USART", "UART", "I2C", "SPI", "CAN", "USB", "ETHERNET", "SDIO", "ADC", "DAC")):
+            comm_pins.append(item)
+
+    control_names = {item.get("name", "").upper() for item in pin_groups.get("control_inputs", [])}
+    is_stm32 = mpn.startswith("STM32") or manufacturer == "STMicroelectronics"
+    has_mcu_markers = any((reset_pins, boot_pins, debug_pins, hse_pins, lse_pins, vcap_pins))
+    if not is_stm32 and not has_mcu_markers:
+        return None
+
+    return {
+        "family": "STM32" if mpn.startswith("STM32") else manufacturer,
+        "preferred_package": package_name,
+        "reset_pins": reset_pins,
+        "boot_pins": boot_pins,
+        "debug_pins": debug_pins,
+        "hse_pins": hse_pins,
+        "lse_pins": lse_pins,
+        "vcap_pins": vcap_pins,
+        "analog_supply_pins": analog_supply_pins,
+        "backup_supply_pins": backup_supply_pins,
+        "usb_pins": usb_pins,
+        "comm_pins": comm_pins,
+        "control_names": sorted(control_names),
+        "datasheet_hints": datasheet_context.get("topology_hints", []),
+    }
+
+
+def _mcu_external_components(mcu_context: dict) -> list[dict]:
+    components = [
+        {
+            "role": "supply_decoupling",
+            "designator": "CDEC",
+            "status": "required",
+            "connect_between": ["VDD", "VSS"],
+            "why": "Each STM32 supply domain needs local high-frequency decoupling close to the package pins.",
+        },
+        {
+            "role": "swd_header",
+            "designator": "JDBG",
+            "status": "required",
+            "connect_between": ["SWDIO", "SWCLK", "NRST", "VTREF", "GND"],
+            "why": "Bring-up and recovery are significantly easier if SWD/JTAG access is exposed from rev A.",
+        },
+        {
+            "role": "reset_bias_or_button",
+            "designator": "RRESET/SRESET",
+            "status": "recommended",
+            "connect_between": ["NRST", "VDD", "GND"],
+            "why": "A deterministic reset network avoids ambiguous boot behavior during power-up and programming.",
+        },
+    ]
+    if mcu_context.get("boot_pins"):
+        components.append(
+            {
+                "role": "boot_mode_straps",
+                "designator": "RBOOT",
+                "status": "required_if_boot_pins_present",
+                "connect_between": ["BOOT0", "VDD_or_GND"],
+                "why": "Boot straps should be fixed in hardware before firmware and factory programming flow are frozen.",
+            }
+        )
+    if mcu_context.get("hse_pins"):
+        components.append(
+            {
+                "role": "hse_clock_source",
+                "designator": "YHSE/CLOAD_HSE",
+                "status": "design_specific",
+                "connect_between": ["HSE_IN", "HSE_OUT"],
+                "why": "Many STM32 designs need an HSE crystal or oscillator footprint to lock debug, USB, or comms timing early.",
+            }
+        )
+    if mcu_context.get("lse_pins"):
+        components.append(
+            {
+                "role": "lse_clock_source",
+                "designator": "YLSE/CLOAD_LSE",
+                "status": "optional_but_common",
+                "connect_between": ["LSE_IN", "LSE_OUT"],
+                "why": "RTC and low-power timekeeping usually need a 32.768 kHz source reserved up front.",
+            }
+        )
+    if mcu_context.get("vcap_pins"):
+        components.append(
+            {
+                "role": "vcap_stabilizer",
+                "designator": "CVCAP",
+                "status": "required_if_vcap_present",
+                "connect_between": ["VCAP", "GND"],
+                "why": "Internal regulator VCAP pins require the datasheet-specified capacitor and should never be repurposed as normal IO.",
+            }
+        )
+    if mcu_context.get("analog_supply_pins"):
+        components.append(
+            {
+                "role": "analog_rail_filter",
+                "designator": "FBANA/CANA",
+                "status": "recommended",
+                "connect_between": ["VDD", "VDDA"],
+                "why": "ADC/DAC/reference performance usually depends on isolating VDDA/VREF from noisy digital rails.",
+            }
+        )
+    if mcu_context.get("backup_supply_pins"):
+        components.append(
+            {
+                "role": "backup_supply_source",
+                "designator": "VBAT_SRC",
+                "status": "optional",
+                "connect_between": ["VBAT", "backup_cell_or_main_rail"],
+                "why": "RTC/backup domains need explicit ownership instead of being left floating until late firmware bring-up.",
+            }
+        )
+    if mcu_context.get("usb_pins"):
+        components.append(
+            {
+                "role": "usb_connector_or_esd",
+                "designator": "JUSB/UESD",
+                "status": "required_if_usb_used",
+                "connect_between": ["USB_DP", "USB_DM", "VBUS", "GND"],
+                "why": "USB-capable STM32 designs should freeze connector, ESD, and VBUS sensing topology before layout.",
+            }
+        )
+    return components
+
+
+def _mcu_starter_nets(mcu_context: dict) -> list[dict]:
+    nets = [
+        {"name": "VDD", "purpose": "primary_digital_supply"},
+        {"name": "VSS", "purpose": "digital_ground"},
+        {"name": "NRST", "purpose": "system_reset"},
+        {"name": "SWDIO", "purpose": "debug_data"},
+        {"name": "SWCLK", "purpose": "debug_clock"},
+    ]
+    if mcu_context.get("boot_pins"):
+        nets.append({"name": "BOOT0", "purpose": "boot_mode_strap"})
+    if mcu_context.get("hse_pins"):
+        nets.extend([
+            {"name": "HSE_IN", "purpose": "high_speed_clock_input"},
+            {"name": "HSE_OUT", "purpose": "high_speed_clock_output"},
+        ])
+    if mcu_context.get("lse_pins"):
+        nets.extend([
+            {"name": "LSE_IN", "purpose": "rtc_clock_input"},
+            {"name": "LSE_OUT", "purpose": "rtc_clock_output"},
+        ])
+    if mcu_context.get("analog_supply_pins"):
+        nets.extend([
+            {"name": "VDDA", "purpose": "analog_supply"},
+            {"name": "VSSA", "purpose": "analog_ground"},
+        ])
+    if mcu_context.get("vcap_pins"):
+        nets.append({"name": "VCAP", "purpose": "internal_regulator_stabilization"})
+    if mcu_context.get("backup_supply_pins"):
+        nets.append({"name": "VBAT", "purpose": "backup_domain_supply"})
+    if mcu_context.get("usb_pins"):
+        nets.extend([
+            {"name": "USB_DP", "purpose": "usb_full_speed_d_plus"},
+            {"name": "USB_DM", "purpose": "usb_full_speed_d_minus"},
+            {"name": "VBUS", "purpose": "usb_bus_power_sense"},
+        ])
+    if any((item.get("name") or "").upper() == "SWO" for item in mcu_context.get("debug_pins", [])):
+        nets.append({"name": "SWO", "purpose": "trace_output"})
+    return nets
+
+
+def _mcu_standard_templates(device: dict, mcu_context: dict) -> list[dict]:
+    templates = [
+        {
+            "name": "stm32_minimum_system",
+            "label": "STM32 Minimum System",
+            "sheet_name": "U1_minimum_system",
+            "summary": "Core rails, reset, boot straps, debug header, and mandatory support parts grouped for first-pass bring-up.",
+            "recommended_when": "Use for any STM32 design before peripheral-specific daughter sheets split away.",
+            "nets": [item["name"] for item in _mcu_starter_nets(mcu_context)],
+            "blocks": ["U1", "CDEC", "JDBG", "RRESET/SRESET"] + (["RBOOT"] if mcu_context.get("boot_pins") else []) + (["CVCAP"] if mcu_context.get("vcap_pins") else []),
+            "default_refdes_map": {"U1": "U1", "CDEC": "CDEC", "JDBG": "JDBG", "RRESET/SRESET": "RRESET/SRESET"},
+            "connections": [
+                {"from": "SWDIO", "to": "JDBG", "note": "Keep SWD ownership explicit from day one."},
+                {"from": "SWCLK", "to": "JDBG", "note": "Route the debug clock with a deterministic return path."},
+                {"from": "NRST", "to": "RRESET/SRESET", "note": "Reset bias and manual reset should live on the root MCU sheet."},
+            ],
+            "checklist": ["Freeze debug header, reset topology, and boot mode straps before firmware bring-up starts."],
+        }
+    ]
+    if mcu_context.get("usb_pins"):
+        templates.append(
+            {
+                "name": "stm32_usb_device",
+                "label": "STM32 USB Device",
+                "sheet_name": "U2_usb_device",
+                "summary": "USB data pair, VBUS sense, ESD, and connector ownership grouped with the MCU root sheet.",
+                "recommended_when": "Use when the STM32 exposes native USB FS/HS device connectivity.",
+                "nets": ["USB_DP", "USB_DM", "VBUS", "GND"],
+                "blocks": ["U1", "JUSB/UESD"],
+                "default_refdes_map": {"U1": "U1", "JUSB/UESD": "JUSB/UESD"},
+                "connections": [
+                    {"from": "USB_DP", "to": "JUSB/UESD", "note": "Keep the D+ path visible for ESD and connector review."},
+                    {"from": "USB_DM", "to": "JUSB/UESD", "note": "Keep the D- path coupled with D+ and the protection network."},
+                ],
+                "checklist": ["Freeze connector type, VBUS sense method, and ESD placement before layout."],
+            }
+        )
+    return templates
+
+
+def _choose_default_mcu_template(templates: list[dict]) -> str | None:
+    if not templates:
+        return None
+    return templates[0]["name"]
 def _datasheet_component_entries(datasheet_design_context: dict) -> list[dict]:
     grouped: dict[str, dict] = {}
     for hint in datasheet_design_context.get("recommended_external_components", []):
@@ -853,6 +1124,7 @@ def _build_normal_ic_design_intent(device: dict, datasheet_design_context: dict 
     decoder_device_context = None
     interface_switch_device_context = None
     switch_device_context = None
+    mcu_device_context = _infer_mcu_traits(device, pin_groups, datasheet_context=datasheet_design_context)
 
     datasheet_components = _datasheet_component_entries(datasheet_design_context)
     if _is_decoder_like(device):
@@ -895,6 +1167,8 @@ def _build_normal_ic_design_intent(device: dict, datasheet_design_context: dict 
             "filter_network",
         }
         datasheet_components = [item for item in datasheet_components if item.get("role") not in noisy_roles]
+    elif mcu_device_context:
+        external_components = _mcu_external_components(mcu_device_context)
     else:
         external_components = _normal_ic_external_components(device, pin_groups)
     external_components.extend(datasheet_components)
@@ -913,6 +1187,8 @@ def _build_normal_ic_design_intent(device: dict, datasheet_design_context: dict 
         starter_nets = _interface_switch_starter_nets(interface_switch_device_context)
     elif switch_device_context:
         starter_nets = _switch_starter_nets(switch_device_context)
+    elif mcu_device_context:
+        starter_nets = _mcu_starter_nets(mcu_device_context)
     else:
         starter_nets = [
             {"name": "VIN", "purpose": "primary_input_supply"},
@@ -944,6 +1220,7 @@ def _build_normal_ic_design_intent(device: dict, datasheet_design_context: dict 
         "decoder_device_context": decoder_device_context,
         "interface_switch_device_context": interface_switch_device_context,
         "switch_device_context": switch_device_context,
+        "mcu_device_context": mcu_device_context,
         "datasheet_design_context": datasheet_design_context,
     }
 
@@ -3406,7 +3683,10 @@ def build_module_template(device: dict, design_intent: dict) -> dict:
     decoder_device_context = design_intent.get("decoder_device_context")
     interface_switch_device_context = design_intent.get("interface_switch_device_context")
     switch_device_context = design_intent.get("switch_device_context")
+    mcu_device_context = design_intent.get("mcu_device_context")
     category = (device.get("category") or "").lower()
+    mcu_templates = []
+    default_mcu_template = None
     default_opamp_template = None
     default_decoder_template = None
     default_interface_switch_template = None
@@ -3478,6 +3758,22 @@ def build_module_template(device: dict, design_intent: dict) -> dict:
                 if block_name == "U1":
                     continue
                 _append_block_once(blocks, block_name, "topology_block", "switch_template_block", template=template["name"])
+    elif mcu_device_context:
+        mcu_templates = _mcu_standard_templates(device, mcu_device_context)
+        default_mcu_template = _choose_default_mcu_template(mcu_templates)
+        for template in mcu_templates:
+            for net_name in template.get("nets", []):
+                _append_net_once(nets, net_name, "mcu_template_placeholder")
+            for block_name in template.get("blocks", []):
+                if block_name == "U1":
+                    continue
+                _append_block_once(blocks, block_name, "topology_block", "mcu_template_block", template=template["name"])
+            for net_name in template.get("nets", []):
+                _append_net_once(nets, net_name, "switch_template_placeholder")
+            for block_name in template.get("blocks", []):
+                if block_name == "U1":
+                    continue
+                _append_block_once(blocks, block_name, "topology_block", "switch_template_block", template=template["name"])
 
     todos = [
         "Confirm preferred package against footprint library and assembly constraints.",
@@ -3512,17 +3808,20 @@ def build_module_template(device: dict, design_intent: dict) -> dict:
         "decoder_device_context": decoder_device_context,
         "interface_switch_device_context": interface_switch_device_context,
         "switch_device_context": switch_device_context,
+        "mcu_device_context": mcu_device_context,
         "topology_candidates": topology_candidates,
         "opamp_templates": opamp_templates,
         "decoder_templates": decoder_templates,
         "interface_switch_templates": interface_switch_templates,
         "switch_templates": switch_templates,
+        "mcu_templates": mcu_templates,
         "fpga_scenarios": fpga_scenarios,
         "fpga_templates": fpga_templates,
         "default_opamp_template": default_opamp_template,
         "default_decoder_template": default_decoder_template,
         "default_interface_switch_template": default_interface_switch_template,
         "default_switch_template": default_switch_template,
+        "default_mcu_template": default_mcu_template,
         "default_fpga_template": default_fpga_template,
         "todo": todos,
     }
@@ -3621,10 +3920,12 @@ def build_quickstart_markdown(device: dict, design_intent: dict) -> str:
     decoder_templates = []
     interface_switch_templates = []
     switch_templates = []
+    mcu_templates = []
     opamp_device_context = None
     decoder_device_context = design_intent.get("decoder_device_context")
     interface_switch_device_context = design_intent.get("interface_switch_device_context")
     switch_device_context = design_intent.get("switch_device_context")
+    mcu_device_context = design_intent.get("mcu_device_context")
     category = (device.get("category") or "").lower()
     if "opamp" in category or "amplifier" in category:
         opamp_device_context = _infer_opamp_traits(device, design_intent)
@@ -3637,11 +3938,14 @@ def build_quickstart_markdown(device: dict, design_intent: dict) -> str:
         interface_switch_templates = _interface_switch_standard_templates(device, interface_switch_device_context)
     elif switch_device_context:
         switch_templates = _switch_standard_templates(device, switch_device_context)
+    elif mcu_device_context:
+        mcu_templates = _mcu_standard_templates(device, mcu_device_context)
 
     default_opamp_template = _choose_default_opamp_template(opamp_templates, topology_candidates)
     default_decoder_template = _choose_default_decoder_template(decoder_templates, topology_candidates)
     default_interface_switch_template = _choose_default_interface_switch_template(interface_switch_templates)
     default_switch_template = _choose_default_switch_template(switch_templates)
+    default_mcu_template = _choose_default_mcu_template(mcu_templates)
 
     if opamp_device_context:
         lines.extend(["", "## OpAmp implementation notes", ""])
@@ -3709,6 +4013,21 @@ def build_quickstart_markdown(device: dict, design_intent: dict) -> str:
         if control_bits:
             lines.append(f"- Control pins: {' '.join(f'`{item}`' for item in control_bits)}")
 
+    if mcu_device_context:
+        lines.extend(["", "## MCU implementation notes", ""])
+        if mcu_device_context.get("reset_pins"):
+            lines.append(f"- Reset pins: {' '.join(f'`{item['name']}({item['pin']})`' for item in mcu_device_context['reset_pins'][:4])}")
+        if mcu_device_context.get("boot_pins"):
+            lines.append(f"- Boot straps: {' '.join(f'`{item['name']}({item['pin']})`' for item in mcu_device_context['boot_pins'][:4])}")
+        if mcu_device_context.get("debug_pins"):
+            lines.append(f"- Debug pins: {' '.join(f'`{item['name']}({item['pin']})`' for item in mcu_device_context['debug_pins'][:6])}")
+        if mcu_device_context.get("hse_pins"):
+            lines.append(f"- HSE clock pins: {' '.join(f'`{item['name']}({item['pin']})`' for item in mcu_device_context['hse_pins'][:4])}")
+        if mcu_device_context.get("analog_supply_pins"):
+            lines.append(f"- Analog rails: {' '.join(f'`{item['name']}({item['pin']})`' for item in mcu_device_context['analog_supply_pins'][:6])}")
+        if mcu_device_context.get("vcap_pins"):
+            lines.append(f"- VCAP pins: {' '.join(f'`{item['name']}({item['pin']})`' for item in mcu_device_context['vcap_pins'][:4])}")
+
     if switch_device_context:
         lines.extend(["", "## Analog switch implementation notes", ""])
         lines.append(f"- Preferred package: `{switch_device_context['preferred_package']}`")
@@ -3749,6 +4068,11 @@ def build_quickstart_markdown(device: dict, design_intent: dict) -> str:
         lines.extend(["", "## L3 Templates", ""])
         for template in interface_switch_templates[:8]:
             prefix = "Start here: " if template.get("name") == default_interface_switch_template else ""
+            lines.append(f"- {prefix}`{template.get('sheet_name')}` `{template.get('label')}`: {template.get('recommended_when')}")
+    elif mcu_templates:
+        lines.extend(["", "## MCU templates", ""])
+        for template in mcu_templates[:8]:
+            prefix = "Start here: " if template.get("name") == default_mcu_template else ""
             lines.append(f"- {prefix}`{template.get('sheet_name')}` `{template.get('label')}`: {template.get('recommended_when')}")
     elif switch_templates:
         lines.extend(["", "## L3 Templates", ""])
