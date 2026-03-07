@@ -24,14 +24,17 @@ from pathlib import Path
 
 import fitz
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+REPO_ROOT = Path(__file__).resolve().parents[1]
+
+sys.path.insert(0, str(REPO_ROOT))
 
 from design_info_utils import detect_design_page_kind, extract_design_context
 
-DEFAULT_INPUT_DIR = Path(__file__).parent.parent / "data/sch_review_export"
-DEFAULT_EXTRACTED_DIR = Path(__file__).parent.parent / "data/extracted_v2"
-DEFAULT_PDF_DIR = Path(__file__).parent.parent / "data/raw/datasheet_PDF"
-DEFAULT_OUTPUT_DIR = Path(__file__).parent.parent / "data/design_bundle"
+DEFAULT_INPUT_DIR = REPO_ROOT / "data/sch_review_export"
+DEFAULT_EXTRACTED_DIR = REPO_ROOT / "data/extracted_v2"
+DEFAULT_PDF_DIR = REPO_ROOT / "data/raw/datasheet_PDF"
+DEFAULT_OUTPUT_DIR = REPO_ROOT / "data/design_bundle"
+DEFAULT_REFERENCE_DIR = DEFAULT_INPUT_DIR / "reference"
 BUNDLE_SCHEMA = "opendatasheet-design-bundle/0.1"
 
 
@@ -529,6 +532,61 @@ def _load_datasheet_design_context(device: dict, extracted_index: dict[str, Path
     return design_context
 
 
+def _repo_relative_path(path: Path) -> str:
+    try:
+        return str(path.relative_to(REPO_ROOT))
+    except ValueError:
+        return str(path)
+
+
+def _reference_asset_record(path: Path, title: str, summary: str, topics: list[str], applicability: str) -> dict:
+    return {
+        "title": title,
+        "summary": summary,
+        "topics": topics,
+        "applicability": applicability,
+        "source_path": _repo_relative_path(path),
+    }
+
+
+def _gowin_reference_design_assets(device: dict) -> list[dict]:
+    if (device.get("manufacturer") or "").lower() != "gowin":
+        return []
+
+    mpn = device.get("mpn") or ""
+    assets = []
+    guide_path = DEFAULT_REFERENCE_DIR / "gowin_gw5at_design_guide.md"
+    devboard_path = DEFAULT_REFERENCE_DIR / "gowin_gw5at60_devboard_ref.md"
+
+    if mpn.startswith(("GW5AT", "GW5AST")) and guide_path.exists():
+        assets.append(
+            _reference_asset_record(
+                guide_path,
+                "GW5AT schematic guide",
+                "UG984 family-level rules for power sequencing, configuration straps, JTAG, clocks, LVDS, and package planning.",
+                ["power", "configuration", "JTAG", "clock", "LVDS"],
+                "family_guidance",
+            )
+        )
+
+    if mpn.startswith("GW5AT-60") and devboard_path.exists():
+        assets.append(
+            _reference_asset_record(
+                devboard_path,
+                "GW5AT-60 devboard reference",
+                "DK_START_GW5AT-LV60UG225 board topology for power tree, config/JTAG, DDR, MIPI, SerDes, and decoupling review.",
+                ["devboard", "configuration", "JTAG", "MIPI", "DDR", "SerDes"],
+                "topology_reference",
+            )
+        )
+
+    return assets
+
+
+def _reference_design_assets(device: dict) -> list[dict]:
+    return _gowin_reference_design_assets(device)
+
+
 def _pin_record(pin_number: str, pin_data: dict) -> dict:
     return {
         "pin": pin_number,
@@ -918,6 +976,7 @@ def _build_fpga_design_intent(device: dict, datasheet_design_context: dict | Non
         "power_rails": power_rails,
     })
     vendor_design_rules = _gowin_family_design_rules(device)
+    reference_design_assets = _reference_design_assets(device)
     external_components = _fpga_external_components(device, {"pin_groups": grouped, "power_rails": power_rails}, customer_scenarios)
     starter_nets = _fpga_starter_nets(device, {"pin_groups": grouped, "power_rails": power_rails}, customer_scenarios)
 
@@ -940,6 +999,7 @@ def _build_fpga_design_intent(device: dict, datasheet_design_context: dict | Non
         "datasheet_design_context": datasheet_design_context or {},
         "customer_scenarios": customer_scenarios,
         "vendor_design_rules": vendor_design_rules,
+        "reference_design_assets": reference_design_assets,
         "starter_nets": starter_nets,
     }
 
@@ -2729,6 +2789,16 @@ def build_quickstart_markdown(device: dict, design_intent: dict) -> str:
             for extra in items[1:3]:
                 lines.append(f"- `{title}`: {extra}")
 
+    reference_assets = design_intent.get("reference_design_assets", [])
+    if reference_assets:
+        lines.extend(["", "## Reference assets", ""])
+        for asset in reference_assets[:6]:
+            topics = ", ".join(asset.get("topics", [])[:6])
+            topic_suffix = f" Topics: {topics}." if topics else ""
+            lines.append(
+                f"- `{asset.get('title')}` (`{asset.get('source_path')}`): {asset.get('summary')}{topic_suffix}"
+            )
+
     pin_groups = design_intent.get("pin_groups", {})
     if pin_groups:
         lines.extend(["", "## Pin groups", ""])
@@ -2871,7 +2941,10 @@ def build_quickstart_markdown(device: dict, design_intent: dict) -> str:
 
 def export_device_bundle(device_path: Path, output_dir: Path, extracted_index: dict[str, Path], pdf_dir: Path) -> Path:
     device = json.loads(device_path.read_text(encoding="utf-8"))
-    bundle_name = _sanitize_name(device.get("mpn") or device_path.stem)
+    bundle_key = device.get("mpn") or device_path.stem
+    if device.get("package"):
+        bundle_key = f"{bundle_key}_{device['package']}"
+    bundle_name = _sanitize_name(bundle_key)
     bundle_dir = output_dir / bundle_name
     bundle_dir.mkdir(parents=True, exist_ok=True)
 
@@ -2904,6 +2977,7 @@ def export_device_bundle(device_path: Path, output_dir: Path, extracted_index: d
         "source_export": str(device_path.name),
         "datasheet_source_mode": datasheet_design_context.get("source_mode"),
         "datasheet_source_record": datasheet_design_context.get("source_record"),
+        "reference_files": [item["source_path"] for item in design_intent.get("reference_design_assets", [])],
         "files": [
             "L0_device.json",
             "L1_design_intent.json",

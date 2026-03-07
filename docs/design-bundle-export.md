@@ -19,7 +19,7 @@
 
 ## 输出层次
 
-默认输出目录：`data/design_bundle/<MPN>/`
+默认输出目录：普通器件为 `data/design_bundle/<MPN>/`；带独立 `package` 的 FPGA 为 `data/design_bundle/<MPN>_<PACKAGE>/`，避免同料号不同封装互相覆盖。
 
 每个器件包含：
 
@@ -46,6 +46,7 @@
 - 不替代 datasheet，但能把第一轮关注点提前拎出来
 - 对 OpAmp 会额外总结通道数、供电方式、偏置策略、封装 pin 锚点与首选模板
 对 Decoder / Deserializer 会额外总结电源 rail、参考时钟、控制总线、视频链路与首选模板
+- 对 Gowin FPGA 会额外索引现成的 family design guide / devboard reference，不重复拷贝已有参考文件
 
 ### `L3_module_template.json`
 

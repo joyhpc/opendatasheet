@@ -65,7 +65,7 @@ def test_fpga_bundle_export(tmp_path):
         check=True,
     )
 
-    bundle_dir = output_dir / "GW5AT-60"
+    bundle_dir = output_dir / "GW5AT-60_UG225"
     design_intent = json.loads((bundle_dir / "L1_design_intent.json").read_text(encoding="utf-8"))
     module_template = json.loads((bundle_dir / "L3_module_template.json").read_text(encoding="utf-8"))
 
@@ -73,6 +73,37 @@ def test_fpga_bundle_export(tmp_path):
     assert "power_rails" in design_intent
     assert any(item["role"] == "configuration_header" for item in design_intent["external_components"])
     assert any(net["name"] == "JTAG" for net in module_template["nets"])
+    assert {item["source_path"] for item in design_intent.get("reference_design_assets", [])} == {
+        "data/sch_review_export/reference/gowin_gw5at60_devboard_ref.md",
+        "data/sch_review_export/reference/gowin_gw5at_design_guide.md",
+    }
+
+
+def test_fpga_bundle_export_keeps_package_specific_bundle_dirs(tmp_path):
+    output_dir = tmp_path / "bundles"
+    subprocess.run(
+        [
+            sys.executable,
+            "scripts/export_design_bundle.py",
+            "--device",
+            "GW5AT-60_UG225",
+            "--device",
+            "GW5AT-60_UG324S",
+            "--output-dir",
+            str(output_dir),
+        ],
+        cwd=REPO_ROOT,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+
+    ug225_manifest = json.loads((output_dir / "GW5AT-60_UG225" / "bundle_manifest.json").read_text(encoding="utf-8"))
+    ug324s_manifest = json.loads((output_dir / "GW5AT-60_UG324S" / "bundle_manifest.json").read_text(encoding="utf-8"))
+
+    assert ug225_manifest["source_export"] == "GW5AT-60_UG225.json"
+    assert ug324s_manifest["source_export"] == "GW5AT-60_UG324S.json"
+    assert ug225_manifest["reference_files"] == ug324s_manifest["reference_files"]
 
 
 def test_ldo_constraints_include_capacitor_windows(tmp_path):
@@ -429,7 +460,7 @@ def test_gowin_fpga_bundle_export_includes_customer_scenarios(tmp_path):
         check=True,
     )
 
-    bundle_dir = output_dir / "GW5AT-60"
+    bundle_dir = output_dir / "GW5AT-60_UG225"
     design_intent = json.loads((bundle_dir / "L1_design_intent.json").read_text(encoding="utf-8"))
     module_template = json.loads((bundle_dir / "L3_module_template.json").read_text(encoding="utf-8"))
     quickstart = (bundle_dir / "L2_quickstart.md").read_text(encoding="utf-8")
@@ -445,11 +476,15 @@ def test_gowin_fpga_bundle_export_includes_customer_scenarios(tmp_path):
     assert {"qspi_jtag_bringup", "mipi_camera_bridge", "lvds_io_expansion", "high_speed_link_bridge", "ddr_memory_interface"}.issubset(template_names)
     assert module_template["default_fpga_template"] == "mipi_camera_bridge"
     assert set(design_intent.get("vendor_design_rules", {}).keys()) == {"power_rules", "config_rules", "clock_rules", "io_rules"}
+    assert {item["title"] for item in design_intent.get("reference_design_assets", [])} == {"GW5AT schematic guide", "GW5AT-60 devboard reference"}
     assert "Customer scenarios" in quickstart
     assert "L3 Templates" in quickstart
     assert "Vendor design rules" in quickstart
+    assert "Reference assets" in quickstart
     assert "CFGBVS" in quickstart
     assert "RECONFIG_N" in quickstart
+    assert "gowin_gw5at_design_guide.md" in quickstart
+    assert "gowin_gw5at60_devboard_ref.md" in quickstart
     assert "Start here:" in quickstart
 
 
@@ -465,6 +500,8 @@ def test_gowin_fpga_scenarios_generalize_across_other_families(tmp_path):
             "GW5AS-25_UG256",
             "--device",
             "GW5AT-15_MG132",
+            "--device",
+            "GW5AT-138_FPG676A",
             "--output-dir",
             str(output_dir),
         ],
@@ -474,9 +511,11 @@ def test_gowin_fpga_scenarios_generalize_across_other_families(tmp_path):
         check=True,
     )
 
-    gw5ar_template = json.loads((output_dir / "GW5AR-25" / "L3_module_template.json").read_text(encoding="utf-8"))
-    gw5as_template = json.loads((output_dir / "GW5AS-25" / "L3_module_template.json").read_text(encoding="utf-8"))
-    gw5at15_template = json.loads((output_dir / "GW5AT-15" / "L3_module_template.json").read_text(encoding="utf-8"))
+    gw5ar_template = json.loads((output_dir / "GW5AR-25_UG256P" / "L3_module_template.json").read_text(encoding="utf-8"))
+    gw5as_template = json.loads((output_dir / "GW5AS-25_UG256" / "L3_module_template.json").read_text(encoding="utf-8"))
+    gw5at15_template = json.loads((output_dir / "GW5AT-15_MG132" / "L3_module_template.json").read_text(encoding="utf-8"))
+    gw5at138_intent = json.loads((output_dir / "GW5AT-138_FPG676A" / "L1_design_intent.json").read_text(encoding="utf-8"))
+    gw5at138_template = json.loads((output_dir / "GW5AT-138_FPG676A" / "L3_module_template.json").read_text(encoding="utf-8"))
 
     assert gw5ar_template["default_fpga_template"] == "qspi_jtag_bringup"
     assert "ddr_memory_interface" in {item["name"] for item in gw5ar_template.get("fpga_templates", [])}
@@ -484,3 +523,8 @@ def test_gowin_fpga_scenarios_generalize_across_other_families(tmp_path):
     assert "lvds_io_expansion" in {item["name"] for item in gw5as_template.get("fpga_templates", [])}
     assert gw5at15_template["default_fpga_template"] == "qspi_jtag_bringup"
     assert "mipi_camera_bridge" not in {item["name"] for item in gw5at15_template.get("fpga_templates", [])}
+    assert gw5at138_template["default_fpga_template"] == "qspi_jtag_bringup"
+    assert {item["name"] for item in gw5at138_template.get("fpga_templates", [])} >= {"lvds_io_expansion", "ddr_memory_interface"}
+    assert {item["source_path"] for item in gw5at138_intent.get("reference_design_assets", [])} == {
+        "data/sch_review_export/reference/gowin_gw5at_design_guide.md"
+    }
