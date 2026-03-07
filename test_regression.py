@@ -514,6 +514,41 @@ def t6_2():
         assert_gt(len(abs_max), 5, f"{fname} abs_max count")
 
 
+@case("T6.3 Gowin GW5AT exports expose package-specific ip_blocks")
+def t6_3():
+    ug225 = json.load(open(EXPORT_DIR / "GW5AT-60_UG225.json"))
+    ug324s = json.load(open(EXPORT_DIR / "GW5AT-60_UG324S.json"))
+    pg484a = json.load(open(EXPORT_DIR / "GW5AT-60_PG484A.json"))
+    fpg676a = json.load(open(EXPORT_DIR / "GW5AT-138_FPG676A.json"))
+
+    ug225_mipi = ug225.get("ip_blocks", {}).get("mipi", {})
+    ug225_serdes = ug225.get("ip_blocks", {}).get("serdes", {})
+    assert_true(ug225_mipi.get("present") is True, "GW5AT-60_UG225 MIPI missing")
+    assert_eq(ug225_mipi.get("phy_types"), ["D-PHY", "C-PHY"], "GW5AT-60_UG225 phy types")
+    assert_eq(ug225_mipi.get("directions"), ["RX", "TX"], "GW5AT-60_UG225 MIPI directions")
+    assert_eq(ug225_mipi.get("dphy", {}).get("max_data_lanes"), 4, "GW5AT-60_UG225 D-PHY lanes")
+    assert_eq(ug225_mipi.get("cphy", {}).get("max_trios"), 3, "GW5AT-60_UG225 C-PHY trios")
+    assert_eq(ug225_serdes.get("transceiver_count"), 4, "GW5AT-60_UG225 transceiver count")
+    assert_eq(ug225_serdes.get("quad_count"), 1, "GW5AT-60_UG225 quad count")
+    assert_eq(ug225_serdes.get("protocol_matrix", {}).get("PCIe 3.0", {}).get("lane_widths"), [1, 2, 4], "GW5AT-60_UG225 PCIe widths")
+
+    for export in (ug324s, pg484a):
+        mipi = export.get("ip_blocks", {}).get("mipi", {})
+        assert_true(mipi.get("present") is False, f"{export.get('mpn')}_{export.get('package')} should not expose MIPI on this package")
+        assert_eq(mipi.get("phy_types"), [], f"{export.get('mpn')}_{export.get('package')} phy types")
+
+    pg484a_serdes = pg484a.get("ip_blocks", {}).get("serdes", {})
+    assert_eq(pg484a_serdes.get("package_rate_ceiling_gbps"), 8.0, "GW5AT-60_PG484A package SerDes ceiling")
+
+    fpg676a_mipi = fpg676a.get("ip_blocks", {}).get("mipi", {})
+    fpg676a_serdes = fpg676a.get("ip_blocks", {}).get("serdes", {})
+    assert_eq(fpg676a_mipi.get("phy_types"), ["D-PHY"], "GW5AT-138_FPG676A phy types")
+    assert_eq(fpg676a_mipi.get("directions"), ["RX"], "GW5AT-138_FPG676A MIPI directions")
+    assert_eq(fpg676a_mipi.get("dphy", {}).get("max_data_lanes"), 8, "GW5AT-138_FPG676A D-PHY lanes")
+    assert_eq(fpg676a_serdes.get("transceiver_count"), 8, "GW5AT-138_FPG676A transceiver count")
+    assert_eq(fpg676a_serdes.get("quad_count"), 2, "GW5AT-138_FPG676A quad count")
+
+
 # ─── T7: Lattice DC Data Integration ───────────────────────────────
 
 @case("T7.1 Lattice ECP5 exports have supply_specs from DC data")

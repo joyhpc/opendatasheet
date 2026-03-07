@@ -467,6 +467,259 @@ def _normalize_drc_rules(rules: dict) -> dict:
     return result
 
 
+def _normalize_package_token(package: str) -> str:
+    return re.sub(r"[^A-Z0-9]", "", (package or "").upper())
+
+
+def _gowin_serdes_package_rate_ceiling(package: str) -> float | None:
+    package_token = _normalize_package_token(package)
+    if package_token.startswith("PG"):
+        return 8.0
+    if package_token.startswith("FPG"):
+        return 12.5
+    if package_token.startswith("MBG"):
+        return 10.3125
+    return None
+
+
+def _gowin_protocol_matrix(transceiver_count: int) -> dict:
+    lane_widths = [1]
+    if transceiver_count >= 2:
+        lane_widths.append(2)
+    if transceiver_count >= 4:
+        lane_widths.append(4)
+    if transceiver_count >= 8:
+        lane_widths.append(8)
+    return {
+        "custom": {
+            "hardcore": False,
+            "lane_widths": lane_widths,
+        },
+        "PCIe 3.0": {
+            "hardcore": transceiver_count >= 4,
+            "lane_widths": [width for width in lane_widths if width <= 4],
+        },
+    }
+
+
+def _infer_gowin_ip_blocks(pinout_data: dict) -> dict | None:
+    device = pinout_data.get("device", "")
+    package = pinout_data.get("package", "")
+    if not device.startswith("GW5AT-"):
+        return None
+
+    package_token = _normalize_package_token(package)
+    summary = pinout_data.get("summary", {})
+    diff_summary = summary.get("diff_pairs", {}) if isinstance(summary, dict) else {}
+
+    profiles = {
+        "GW5AT-15": {
+            "default": {
+                "transceiver_count": 4,
+                "mipi": {
+                    "present": True,
+                    "phy_types": ["D-PHY", "C-PHY"],
+                    "directions": ["RX", "TX"],
+                    "dphy": {
+                        "max_data_lanes": 4,
+                        "max_clock_lanes": 1,
+                        "max_rate_gbps_per_lane": 2.5,
+                    },
+                    "cphy": {
+                        "max_trios": 3,
+                        "max_symbol_rate_gsps": 2.28,
+                    },
+                },
+            },
+            "package_overrides": {},
+        },
+        "GW5AT-60": {
+            "default": {
+                "transceiver_count": 4,
+                "mipi": {
+                    "present": False,
+                    "phy_types": [],
+                    "directions": [],
+                },
+            },
+            "package_overrides": {
+                "UG225": {
+                    "mipi": {
+                        "present": True,
+                        "phy_types": ["D-PHY", "C-PHY"],
+                        "directions": ["RX", "TX"],
+                        "dphy": {
+                            "max_data_lanes": 4,
+                            "max_clock_lanes": 1,
+                            "max_rate_gbps_per_lane": 2.5,
+                        },
+                        "cphy": {
+                            "max_trios": 3,
+                            "max_symbol_rate_gsps": 2.28,
+                        },
+                    },
+                },
+                "UG225H": {
+                    "mipi": {
+                        "present": True,
+                        "phy_types": ["D-PHY", "C-PHY"],
+                        "directions": ["RX", "TX"],
+                        "dphy": {
+                            "max_data_lanes": 4,
+                            "max_clock_lanes": 1,
+                            "max_rate_gbps_per_lane": 2.5,
+                        },
+                        "cphy": {
+                            "max_trios": 3,
+                            "max_symbol_rate_gsps": 2.28,
+                        },
+                    },
+                },
+                "CS234": {
+                    "mipi": {
+                        "present": True,
+                        "phy_types": ["D-PHY", "C-PHY"],
+                        "directions": ["RX", "TX"],
+                        "dphy": {
+                            "max_data_lanes": 4,
+                            "max_clock_lanes": 1,
+                            "max_rate_gbps_per_lane": 2.5,
+                        },
+                        "cphy": {
+                            "max_trios": 3,
+                            "max_symbol_rate_gsps": 2.28,
+                        },
+                    },
+                },
+            },
+        },
+        "GW5AT-75": {
+            "default": {
+                "transceiver_count": 8,
+                "mipi": {
+                    "present": False,
+                    "phy_types": [],
+                    "directions": [],
+                },
+            },
+            "package_overrides": {
+                "UG484": {
+                    "mipi": {
+                        "present": True,
+                        "phy_types": ["D-PHY"],
+                        "directions": ["RX"],
+                        "dphy": {
+                            "max_data_lanes": 8,
+                            "max_clock_lanes": 2,
+                            "max_rate_gbps_per_lane": 2.5,
+                        },
+                    },
+                },
+            },
+        },
+        "GW5AT-138": {
+            "default": {
+                "transceiver_count": 4,
+                "mipi": {
+                    "present": False,
+                    "phy_types": [],
+                    "directions": [],
+                },
+            },
+            "package_overrides": {
+                "FPG676A": {
+                    "transceiver_count": 8,
+                    "mipi": {
+                        "present": True,
+                        "phy_types": ["D-PHY"],
+                        "directions": ["RX"],
+                        "dphy": {
+                            "max_data_lanes": 8,
+                            "max_clock_lanes": 2,
+                            "max_rate_gbps_per_lane": 2.5,
+                        },
+                    },
+                },
+                "PG676A": {
+                    "transceiver_count": 8,
+                    "mipi": {
+                        "present": True,
+                        "phy_types": ["D-PHY"],
+                        "directions": ["RX"],
+                        "dphy": {
+                            "max_data_lanes": 8,
+                            "max_clock_lanes": 2,
+                            "max_rate_gbps_per_lane": 2.5,
+                        },
+                    },
+                },
+                "UG324A": {
+                    "transceiver_count": 4,
+                    "mipi": {
+                        "present": True,
+                        "phy_types": ["D-PHY"],
+                        "directions": ["RX"],
+                        "dphy": {
+                            "max_data_lanes": 8,
+                            "max_clock_lanes": 2,
+                            "max_rate_gbps_per_lane": 2.5,
+                        },
+                    },
+                },
+                "PG484": {
+                    "transceiver_count": 4,
+                    "mipi": {
+                        "present": True,
+                        "phy_types": ["D-PHY"],
+                        "directions": ["RX"],
+                        "dphy": {
+                            "max_data_lanes": 8,
+                            "max_clock_lanes": 2,
+                            "max_rate_gbps_per_lane": 2.5,
+                        },
+                    },
+                },
+            },
+        },
+    }
+
+    profile = profiles.get(device)
+    if not profile:
+        return None
+
+    merged = dict(profile["default"])
+    package_override = profile.get("package_overrides", {}).get(package_token, {})
+    merged.update({k: v for k, v in package_override.items() if k != "mipi"})
+    mipi = dict(profile["default"].get("mipi", {}))
+    mipi.update(package_override.get("mipi", {}))
+
+    transceiver_count = merged.get("transceiver_count") or 0
+    quad_count = transceiver_count // 4 if transceiver_count else 0
+    package_rate_ceiling = _gowin_serdes_package_rate_ceiling(package)
+    refclk_pair_count = diff_summary.get("SERDES_REFCLK") if isinstance(diff_summary, dict) else None
+
+    result = {
+        "mipi": {
+            **mipi,
+            "source": "gowin_product_detail_72",
+            "source_url": "https://www.gowinsemi.com/en/product/detail/72/",
+        },
+        "serdes": {
+            "transceiver_count": transceiver_count,
+            "quad_count": quad_count,
+            "lanes_per_quad": 4 if quad_count else 0,
+            "rate_range_gbps": [0.27, 12.5],
+            "package_rate_ceiling_gbps": package_rate_ceiling,
+            "supported_protocols": ["custom", "PCIe 3.0"],
+            "protocol_matrix": _gowin_protocol_matrix(transceiver_count),
+            "refclk_pair_count": refclk_pair_count,
+            "source": "gowin_product_detail_72",
+            "source_url": "https://www.gowinsemi.com/en/product/detail/72/",
+        },
+    }
+    return result
+
+
 def export_fpga(dc_data: dict, pinout_data: dict, gowin_dc: dict = None, lattice_dc: dict = None) -> dict:
     """Combine FPGA DC datasheet + pinout into sch-review format.
 
@@ -694,6 +947,9 @@ def export_fpga(dc_data: dict, pinout_data: dict, gowin_dc: dict = None, lattice
         # Summary
         "summary": pinout_data.get("summary", {}),
     }
+    ip_blocks = _infer_gowin_ip_blocks(pinout_data)
+    if ip_blocks:
+        result["ip_blocks"] = ip_blocks
 
     # Add absolute maximum ratings if available
     if gowin_dc or lattice_dc:
