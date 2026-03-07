@@ -162,6 +162,63 @@ def test_switch_bundle_export_includes_schematic_hints(tmp_path):
     assert "AUTO_DVDT_CAPACITOR" in quickstart
 
 
+def test_analog_switch_bundle_export_includes_switch_templates(tmp_path):
+    output_dir = tmp_path / "bundles"
+    subprocess.run(
+        [
+            sys.executable,
+            "scripts/export_design_bundle.py",
+            "--device",
+            "ADG706/ADG707",
+            "--device",
+            "ADG714/ADG715",
+            "--device",
+            "ADG728/ADG729",
+            "--output-dir",
+            str(output_dir),
+        ],
+        cwd=REPO_ROOT,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+
+    adg706_dir = output_dir / "ADG706_ADG707"
+    adg706_intent = json.loads((adg706_dir / "L1_design_intent.json").read_text(encoding="utf-8"))
+    adg706_template = json.loads((adg706_dir / "L3_module_template.json").read_text(encoding="utf-8"))
+    adg706_quickstart = (adg706_dir / "L2_quickstart.md").read_text(encoding="utf-8")
+    adg706_roles = {item["role"] for item in adg706_intent["external_components"]}
+
+    assert {"supply_decoupling", "address_source_or_straps", "enable_bias", "analog_channel_breakout"}.issubset(adg706_roles)
+    assert "input_capacitor" not in adg706_roles
+    assert adg706_template["default_switch_template"] == "addressable_analog_mux"
+    assert "addressable_analog_mux" in {item["name"] for item in adg706_template.get("switch_templates", [])}
+    assert "Analog switch implementation notes" in adg706_quickstart
+    assert "Start here:" in adg706_quickstart
+
+    adg714_dir = output_dir / "ADG714_ADG715"
+    adg714_intent = json.loads((adg714_dir / "L1_design_intent.json").read_text(encoding="utf-8"))
+    adg714_template = json.loads((adg714_dir / "L3_module_template.json").read_text(encoding="utf-8"))
+    adg714_roles = {item["role"] for item in adg714_intent["external_components"]}
+
+    assert {"supply_decoupling", "reset_bias", "control_header_or_mcu", "switch_bank_breakout"}.issubset(adg714_roles)
+    assert adg714_template["default_switch_template"] == "serial_switch_bank"
+    assert "serial_switch_bank" in {item["name"] for item in adg714_template.get("switch_templates", [])}
+
+    adg728_dir = output_dir / "ADG728_ADG729"
+    adg728_intent = json.loads((adg728_dir / "L1_design_intent.json").read_text(encoding="utf-8"))
+    adg728_template = json.loads((adg728_dir / "L3_module_template.json").read_text(encoding="utf-8"))
+    adg728_quickstart = (adg728_dir / "L2_quickstart.md").read_text(encoding="utf-8")
+    adg728_roles = {item["role"] for item in adg728_intent["external_components"]}
+    adg728_nets = {item["name"] for item in adg728_intent["starter_nets"]}
+
+    assert {"supply_decoupling", "i2c_pullups", "address_source_or_straps", "reset_bias", "analog_channel_breakout"}.issubset(adg728_roles)
+    assert {"I2C_SCL", "I2C_SDA", "ADDR_BUS", "RESET_N", "MUX_COM", "MUX_CH"}.issubset(adg728_nets)
+    assert adg728_template["default_switch_template"] == "i2c_switch_matrix"
+    assert "i2c_switch_matrix" in {item["name"] for item in adg728_template.get("switch_templates", [])}
+    assert "Control modes: `parallel_address` `i2c`" in adg728_quickstart
+
+
 def test_opamp_bundle_export_includes_analog_constraints(tmp_path):
     output_dir = tmp_path / "bundles"
     subprocess.run(
