@@ -4017,6 +4017,247 @@
       "SERDES_REFCLK": 2
     }
   },
+  "capability_blocks": {
+    "configuration": {
+      "class": "boot_configuration",
+      "interfaces": [
+        "JTAG",
+        "SPI"
+      ],
+      "mode_signals": [
+        "IOL66A/PUDC_B/LPLL1_T_IN1/LPLL1_T_FB0",
+        "IOR17A/MODE1/GCLKT_4",
+        "IOR5B/MODE0",
+        "M0_CKN",
+        "M0_CKP",
+        "M0_D0N",
+        "M0_D0P",
+        "M0_D1N",
+        "M0_D1P",
+        "M0_D2N",
+        "M0_D2P",
+        "M0_D3N",
+        "M0_D3P",
+        "M1_D0A",
+        "M1_D0B",
+        "M1_D0C",
+        "M1_D1A",
+        "M1_D1B",
+        "M1_D1C",
+        "M1_D2A",
+        "M1_D2B",
+        "M1_D2C"
+      ],
+      "status_signals": [
+        "IOR47A/DONE",
+        "IOR56A/RECONFIG_N",
+        "IOR72A/READY/RPLL1_T_IN0"
+      ],
+      "jtag_signals": [
+        "IOR1A/TCK",
+        "IOR1B/TDI",
+        "IOR3A/TMS",
+        "IOR3B/TDO"
+      ],
+      "source": "pinout_inference"
+    },
+    "high_speed_serial": {
+      "class": "high_speed_serial",
+      "transceiver_count": 4,
+      "quad_count": 1,
+      "lanes_per_quad": 4,
+      "rate_range_gbps": [
+        0.27,
+        12.5
+      ],
+      "package_rate_ceiling_gbps": null,
+      "supported_protocols": [
+        "custom",
+        "PCIe 3.0"
+      ],
+      "protocol_matrix": {
+        "custom": {
+          "hardcore": false,
+          "lane_widths": [
+            1,
+            2,
+            4
+          ]
+        },
+        "PCIe 3.0": {
+          "hardcore": true,
+          "lane_widths": [
+            1,
+            2,
+            4
+          ]
+        }
+      },
+      "refclk_pair_count": 2,
+      "source": "gowin_product_detail_72",
+      "source_url": "https://www.gowinsemi.com/en/product/detail/72/"
+    },
+    "mipi_phy": {
+      "class": "mipi_phy",
+      "present": true,
+      "phy_types": [
+        "D-PHY",
+        "C-PHY"
+      ],
+      "directions": [
+        "RX",
+        "TX"
+      ],
+      "dphy": {
+        "max_data_lanes": 4,
+        "max_clock_lanes": 1,
+        "max_rate_gbps_per_lane": 2.5
+      },
+      "cphy": {
+        "max_trios": 3,
+        "max_symbol_rate_gsps": 2.28
+      },
+      "source": "gowin_product_detail_72",
+      "source_url": "https://www.gowinsemi.com/en/product/detail/72/"
+    },
+    "legacy_ip_blocks": {
+      "mipi": {
+        "present": true,
+        "phy_types": [
+          "D-PHY",
+          "C-PHY"
+        ],
+        "directions": [
+          "RX",
+          "TX"
+        ],
+        "dphy": {
+          "max_data_lanes": 4,
+          "max_clock_lanes": 1,
+          "max_rate_gbps_per_lane": 2.5
+        },
+        "cphy": {
+          "max_trios": 3,
+          "max_symbol_rate_gsps": 2.28
+        },
+        "source": "gowin_product_detail_72",
+        "source_url": "https://www.gowinsemi.com/en/product/detail/72/"
+      },
+      "serdes": {
+        "transceiver_count": 4,
+        "quad_count": 1,
+        "lanes_per_quad": 4,
+        "rate_range_gbps": [
+          0.27,
+          12.5
+        ],
+        "package_rate_ceiling_gbps": null,
+        "supported_protocols": [
+          "custom",
+          "PCIe 3.0"
+        ],
+        "protocol_matrix": {
+          "custom": {
+            "hardcore": false,
+            "lane_widths": [
+              1,
+              2,
+              4
+            ]
+          },
+          "PCIe 3.0": {
+            "hardcore": true,
+            "lane_widths": [
+              1,
+              2,
+              4
+            ]
+          }
+        },
+        "refclk_pair_count": 2,
+        "source": "gowin_product_detail_72",
+        "source_url": "https://www.gowinsemi.com/en/product/detail/72/"
+      }
+    }
+  },
+  "constraint_blocks": {
+    "configuration_boot": {
+      "class": "boot_configuration",
+      "mode_signals": [
+        "IOL66A/PUDC_B/LPLL1_T_IN1/LPLL1_T_FB0",
+        "IOR17A/MODE1/GCLKT_4",
+        "IOR5B/MODE0",
+        "M0_CKN",
+        "M0_CKP",
+        "M0_D0N",
+        "M0_D0P",
+        "M0_D1N",
+        "M0_D1P",
+        "M0_D2N",
+        "M0_D2P",
+        "M0_D3N",
+        "M0_D3P",
+        "M1_D0A",
+        "M1_D0B",
+        "M1_D0C",
+        "M1_D1A",
+        "M1_D1B",
+        "M1_D1C",
+        "M1_D2A",
+        "M1_D2B",
+        "M1_D2C"
+      ],
+      "status_signals": [
+        "IOR47A/DONE",
+        "IOR56A/RECONFIG_N",
+        "IOR72A/READY/RPLL1_T_IN0"
+      ],
+      "jtag_signals": [
+        "IOR1A/TCK",
+        "IOR1B/TDI",
+        "IOR3A/TMS",
+        "IOR3B/TDO"
+      ],
+      "source": "pinout_inference"
+    },
+    "refclk_requirements": {
+      "class": "clocking",
+      "required": true,
+      "refclk_pair_count": 2,
+      "refclk_pairs": [
+        {
+          "pair_name": "REFCLK_Q0_C0",
+          "type": "SERDES_REFCLK",
+          "p_pin": "B5",
+          "n_pin": "A5",
+          "bank": "Q0"
+        },
+        {
+          "pair_name": "REFCLK_Q0_C1",
+          "type": "SERDES_REFCLK",
+          "p_pin": "D10",
+          "n_pin": "C10",
+          "bank": "Q0"
+        }
+      ],
+      "review_required": true,
+      "source": "gowin_product_detail_72",
+      "protocol_refclk_mhz": {
+        "PCIe 3.0": [
+          100.0
+        ]
+      }
+    },
+    "mipi_phy": {
+      "class": "clocking",
+      "review_required": true,
+      "directions": [
+        "RX",
+        "TX"
+      ],
+      "source": "gowin_product_detail_72"
+    }
+  },
   "ip_blocks": {
     "mipi": {
       "present": true,

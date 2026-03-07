@@ -8279,6 +8279,179 @@
       "SERDES_REFCLK": 2
     }
   },
+  "capability_blocks": {
+    "configuration": {
+      "class": "boot_configuration",
+      "interfaces": [
+        "JTAG",
+        "SPI"
+      ],
+      "mode_signals": [
+        "IOB117A/PUDC_B",
+        "IOR11B/MODE2/TPLL1_C_IN0/TPLL1_C_FB1",
+        "IOR7A/MODE1",
+        "IOR7B/MODE0"
+      ],
+      "status_signals": [
+        "IOR5B/READY",
+        "IOR9A/DONE",
+        "IOR9B/RECONFIG_N"
+      ],
+      "jtag_signals": [
+        "IOR1A/TCK",
+        "IOR1B/TDI",
+        "IOR3A/TMS",
+        "IOR3B/TDO"
+      ],
+      "source": "pinout_inference"
+    },
+    "high_speed_serial": {
+      "class": "high_speed_serial",
+      "transceiver_count": 4,
+      "quad_count": 1,
+      "lanes_per_quad": 4,
+      "rate_range_gbps": [
+        0.27,
+        12.5
+      ],
+      "package_rate_ceiling_gbps": 8.0,
+      "supported_protocols": [
+        "custom",
+        "PCIe 3.0"
+      ],
+      "protocol_matrix": {
+        "custom": {
+          "hardcore": false,
+          "lane_widths": [
+            1,
+            2,
+            4
+          ]
+        },
+        "PCIe 3.0": {
+          "hardcore": true,
+          "lane_widths": [
+            1,
+            2,
+            4
+          ]
+        }
+      },
+      "refclk_pair_count": 2,
+      "source": "gowin_product_detail_72",
+      "source_url": "https://www.gowinsemi.com/en/product/detail/72/"
+    },
+    "mipi_phy": {
+      "class": "mipi_phy",
+      "present": false,
+      "phy_types": [],
+      "directions": [],
+      "source": "gowin_product_detail_72",
+      "source_url": "https://www.gowinsemi.com/en/product/detail/72/"
+    },
+    "legacy_ip_blocks": {
+      "mipi": {
+        "present": false,
+        "phy_types": [],
+        "directions": [],
+        "source": "gowin_product_detail_72",
+        "source_url": "https://www.gowinsemi.com/en/product/detail/72/"
+      },
+      "serdes": {
+        "transceiver_count": 4,
+        "quad_count": 1,
+        "lanes_per_quad": 4,
+        "rate_range_gbps": [
+          0.27,
+          12.5
+        ],
+        "package_rate_ceiling_gbps": 8.0,
+        "supported_protocols": [
+          "custom",
+          "PCIe 3.0"
+        ],
+        "protocol_matrix": {
+          "custom": {
+            "hardcore": false,
+            "lane_widths": [
+              1,
+              2,
+              4
+            ]
+          },
+          "PCIe 3.0": {
+            "hardcore": true,
+            "lane_widths": [
+              1,
+              2,
+              4
+            ]
+          }
+        },
+        "refclk_pair_count": 2,
+        "source": "gowin_product_detail_72",
+        "source_url": "https://www.gowinsemi.com/en/product/detail/72/"
+      }
+    }
+  },
+  "constraint_blocks": {
+    "configuration_boot": {
+      "class": "boot_configuration",
+      "mode_signals": [
+        "IOB117A/PUDC_B",
+        "IOR11B/MODE2/TPLL1_C_IN0/TPLL1_C_FB1",
+        "IOR7A/MODE1",
+        "IOR7B/MODE0"
+      ],
+      "status_signals": [
+        "IOR5B/READY",
+        "IOR9A/DONE",
+        "IOR9B/RECONFIG_N"
+      ],
+      "jtag_signals": [
+        "IOR1A/TCK",
+        "IOR1B/TDI",
+        "IOR3A/TMS",
+        "IOR3B/TDO"
+      ],
+      "source": "pinout_inference"
+    },
+    "refclk_requirements": {
+      "class": "clocking",
+      "required": true,
+      "refclk_pair_count": 2,
+      "refclk_pairs": [
+        {
+          "pair_name": "REFCLK_Q0_C0",
+          "type": "SERDES_REFCLK",
+          "p_pin": "F6",
+          "n_pin": "E6",
+          "bank": "Q0"
+        },
+        {
+          "pair_name": "REFCLK_Q0_C1",
+          "type": "SERDES_REFCLK",
+          "p_pin": "F10",
+          "n_pin": "E10",
+          "bank": "Q0"
+        }
+      ],
+      "review_required": true,
+      "source": "gowin_product_detail_72",
+      "protocol_refclk_mhz": {
+        "PCIe 3.0": [
+          100.0
+        ]
+      },
+      "package_rate_ceiling_gbps": 8.0
+    },
+    "mipi_phy": {
+      "class": "clocking",
+      "review_required": false,
+      "directions": [],
+      "source": "gowin_product_detail_72"
+    }
+  },
   "ip_blocks": {
     "mipi": {
       "present": false,

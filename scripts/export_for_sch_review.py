@@ -118,6 +118,18 @@ def export_normal_ic(data: dict) -> dict | None:
         "drc_hints": drc_hints,
         "thermal": thermal,
     }
+    capability_blocks = _infer_normal_ic_capability_blocks(
+        mpn=mpn,
+        manufacturer=comp.get("manufacturer"),
+        category=category,
+        description=comp.get("description"),
+        packages=packages,
+    )
+    constraint_blocks = _infer_normal_ic_constraint_blocks(capability_blocks)
+    if capability_blocks:
+        result["capability_blocks"] = capability_blocks
+    if constraint_blocks:
+        result["constraint_blocks"] = constraint_blocks
 
     return result
 
@@ -305,6 +317,316 @@ def _extract_drc_hints(category: str, abs_max: dict, elec_params: dict,
 def _sanitize(s: str) -> str:
     """Sanitize a string for use as a dict key."""
     return re.sub(r"[^a-zA-Z0-9]", "_", s)[:30].strip("_")
+
+
+def _safe_upper(value: str | None) -> str:
+    return (value or "").upper()
+
+
+def _flatten_package_pins(packages: dict) -> list[dict]:
+    records = []
+    for package_name, package_data in packages.items():
+        pins = package_data.get("pins", {}) if isinstance(package_data, dict) else {}
+        for pin_number, pin_info in pins.items():
+            records.append({
+                "package": package_name,
+                "pin": str(pin_number),
+                "name": pin_info.get("name"),
+                "description": pin_info.get("description"),
+                "direction": pin_info.get("direction"),
+                "signal_type": pin_info.get("signal_type"),
+            })
+    return records
+
+
+def _signal_groups(pin_records: list[dict], matcher) -> list[dict]:
+    groups: dict[str, dict] = {}
+    for record in pin_records:
+        name = record.get("name") or ""
+        description = record.get("description") or ""
+        if not name:
+            continue
+        if not matcher(_safe_upper(name), _safe_upper(description)):
+            continue
+        entry = groups.setdefault(name, {"name": name, "packages": []})
+        entry["packages"].append({"package": record["package"], "pin": record["pin"]})
+    return sorted(groups.values(), key=lambda item: item["name"])
+
+
+def _mcu_like_device(mpn: str, manufacturer: str | None, category: str | None, description: str | None) -> bool:
+    haystack = " ".join(filter(None, [mpn, manufacturer or "", category or "", description or ""])).upper()
+    prefixes = ("STM32", "GD32", "N32", "LPC", "PIC", "ATSAM", "SAMD", "SAME")
+    return mpn.upper().startswith(prefixes) or any(token in haystack for token in ("CORTEX-M", "MICROCONTROLLER", "MCU", "SOC"))
+
+
+def _infer_normal_ic_capability_blocks(mpn: str, manufacturer: str | None, category: str | None, description: str | None, packages: dict) -> dict:
+    if not _mcu_like_device(mpn, manufacturer, category, description):
+        return {}
+
+    pin_records = _flatten_package_pins(packages)
+    debug_signals = _signal_groups(pin_records, lambda name, desc: any(token in name for token in ("SWDIO", "SWCLK", "SWO", "JTMS", "JTCK", "JTDI", "JTDO", "TRACESWO")))
+    boot_signals = _signal_groups(pin_records, lambda name, desc: "BOOT" in name)
+    hse_signals = _signal_groups(
+        pin_records,
+        lambda name, desc: any(token in name for token in ("HSE_IN", "HSE_OUT", "OSC_IN", "OSC_OUT"))
+        or bool(re.search(r"(^|[^A-Z0-9])PH[01]([^A-Z0-9]|$)", name))
+        or "HIGH-SPEED EXTERNAL" in desc,
+    )
+    lse_signals = _signal_groups(pin_records, lambda name, desc: any(token in name for token in ("LSE_IN", "LSE_OUT", "OSC32", "PC14", "PC15")) or any(token in desc for token in ("LOW SPEED EXTERNAL", "32.768", "LSE")))
+    usb_signals = _signal_groups(pin_records, lambda name, desc: any(token in name for token in ("USB", "OTG", "VBUS", "VDDUSB")) or "USB" in desc)
+    eth_signals = _signal_groups(pin_records, lambda name, desc: any(token in name for token in ("ETH", "RMII", "MII", "RGMII")) or "ETHERNET" in desc)
+    can_signals = _signal_groups(pin_records, lambda name, desc: any(token in name for token in ("FDCAN", "CANRX", "CANTX", "CAN_")) or "CAN" in desc)
+    qspi_signals = _signal_groups(pin_records, lambda name, desc: any(token in name for token in ("QUADSPI", "QSPI", "OCTOSPI", "OSPI")) or any(token in desc for token in ("QUADSPI", "OCTOSPI")))
+    sdmmc_signals = _signal_groups(pin_records, lambda name, desc: any(token in name for token in ("SDMMC", "SDIO")) or any(token in desc for token in ("SDMMC", "SDIO")))
+
+    blocks = {}
+    if debug_signals:
+        interfaces = []
+        debug_names = {item["name"].upper() for item in debug_signals}
+        if any(token in " ".join(debug_names) for token in ("SWDIO", "SWCLK")):
+            interfaces.append("SWD")
+        if any(token in " ".join(debug_names) for token in ("JTMS", "JTCK", "JTDI", "JTDO")):
+            interfaces.append("JTAG")
+        if any(token in " ".join(debug_names) for token in ("SWO", "TRACESWO")):
+            interfaces.append("TRACE")
+        blocks["debug_access"] = {
+            "class": "debug_access",
+            "interfaces": interfaces,
+            "signal_names": [item["name"] for item in debug_signals],
+            "source": "pin_inference",
+        }
+    if boot_signals:
+        blocks["boot_configuration"] = {
+            "class": "boot_configuration",
+            "signal_names": [item["name"] for item in boot_signals],
+            "source": "pin_inference",
+        }
+    if hse_signals or lse_signals:
+        blocks["clocking"] = {
+            "class": "clocking",
+            "external_sources": {
+                "hse": [item["name"] for item in hse_signals],
+                "lse": [item["name"] for item in lse_signals],
+            },
+            "source": "pin_inference",
+        }
+    if usb_signals:
+        blocks["usb_interface"] = {
+            "class": "interface",
+            "protocols": ["USB 2.0"],
+            "signal_names": [item["name"] for item in usb_signals],
+            "source": "pin_inference",
+        }
+    if eth_signals:
+        blocks["ethernet_interface"] = {
+            "class": "interface",
+            "protocols": ["Ethernet MAC"],
+            "signal_names": [item["name"] for item in eth_signals],
+            "source": "pin_inference",
+        }
+    if can_signals:
+        blocks["can_interface"] = {
+            "class": "interface",
+            "protocols": ["CAN", "FDCAN"],
+            "signal_names": [item["name"] for item in can_signals],
+            "source": "pin_inference",
+        }
+    if qspi_signals:
+        blocks["serial_memory_interface"] = {
+            "class": "interface",
+            "protocols": ["QSPI", "OctoSPI"],
+            "signal_names": [item["name"] for item in qspi_signals],
+            "source": "pin_inference",
+        }
+    if sdmmc_signals:
+        blocks["storage_interface"] = {
+            "class": "interface",
+            "protocols": ["SDMMC", "SDIO"],
+            "signal_names": [item["name"] for item in sdmmc_signals],
+            "source": "pin_inference",
+        }
+    if description and "DUAL" in description.upper() and "CORTEX-M7" in description.upper() and "CORTEX-M4" in description.upper():
+        blocks["compute_topology"] = {
+            "class": "compute",
+            "topology": "dual_core",
+            "cores": ["Cortex-M7", "Cortex-M4"],
+            "source": "description_inference",
+        }
+    return blocks
+
+
+def _infer_normal_ic_constraint_blocks(capability_blocks: dict) -> dict:
+    blocks = {}
+    debug = capability_blocks.get("debug_access")
+    if debug:
+        blocks["debug_access"] = {
+            "class": "debug_access",
+            "required_signals": debug.get("signal_names", []),
+            "recommended_connector": "SWD" if "SWD" in debug.get("interfaces", []) else "JTAG",
+            "source": debug.get("source"),
+        }
+    boot = capability_blocks.get("boot_configuration")
+    if boot:
+        blocks["boot_configuration"] = {
+            "class": "boot_configuration",
+            "strap_signals": boot.get("signal_names", []),
+            "review_required": True,
+            "source": boot.get("source"),
+        }
+    clocking = capability_blocks.get("clocking")
+    if clocking:
+        blocks["clocking"] = {
+            "class": "clocking",
+            "domains": clocking.get("external_sources", {}),
+            "review_required": True,
+            "source": clocking.get("source"),
+        }
+    usb = capability_blocks.get("usb_interface")
+    if usb:
+        signal_names = usb.get("signal_names", [])
+        blocks["usb_interface"] = {
+            "class": "interface",
+            "required_signal_groups": [[name for name in signal_names if any(token in name.upper() for token in ("USB_DP", "USB_DM", "OTG_FS_DP", "OTG_FS_DM"))]],
+            "vbus_related_signals": [name for name in signal_names if "VBUS" in name.upper() or "VDDUSB" in name.upper()],
+            "source": usb.get("source"),
+        }
+    return {key: value for key, value in blocks.items() if value}
+
+
+def _config_signal_summary(pins: list[dict]) -> dict:
+    names = [pin.get("name") for pin in pins if pin.get("name")]
+    upper_names = [_safe_upper(name) for name in names]
+    mode_signals = [name for name in names if any(token in _safe_upper(name) for token in ("MODE", "M0_", "M1_", "M2_", "CFGBVS", "PUDC", "BOOT"))]
+    status_signals = [name for name in names if any(token in _safe_upper(name) for token in ("DONE", "READY", "INIT", "PROGRAM", "RECONFIG"))]
+    jtag_signals = [name for name in names if any(token in _safe_upper(name) for token in ("TCK", "TMS", "TDI", "TDO", "JTAG"))]
+    interfaces = []
+    if jtag_signals:
+        interfaces.append("JTAG")
+    if any(token in " ".join(upper_names) for token in ("MSPI", "SSPI", "SPI")):
+        interfaces.append("SPI")
+    return {
+        "mode_signals": sorted(set(mode_signals)),
+        "status_signals": sorted(set(status_signals)),
+        "jtag_signals": sorted(set(jtag_signals)),
+        "interfaces": interfaces,
+    }
+
+
+def _gt_pair_counts(diff_pairs: list[dict]) -> dict:
+    counts = {"rx": 0, "tx": 0, "refclk": 0}
+    for pair in diff_pairs:
+        pair_type = _safe_upper(pair.get("type"))
+        if pair_type in ("SERDES_RX", "GT_RX"):
+            counts["rx"] += 1
+        elif pair_type in ("SERDES_TX", "GT_TX"):
+            counts["tx"] += 1
+        elif pair_type in ("SERDES_REFCLK", "GT_REFCLK", "REFCLK"):
+            counts["refclk"] += 1
+    return counts
+
+
+def _generic_fpga_capability_blocks(pinout_data: dict, vendor: str, device: str, package: str, diff_pairs: list[dict]) -> dict:
+    summary = pinout_data.get("summary", {}) if isinstance(pinout_data.get("summary"), dict) else {}
+    by_function = summary.get("by_function", {}) if isinstance(summary, dict) else {}
+    pins = pinout_data.get("pins", [])
+    config_summary = _config_signal_summary(pins)
+    gt_counts = _gt_pair_counts(diff_pairs)
+    blocks = {}
+
+    if any(config_summary.values()):
+        blocks["configuration"] = {
+            "class": "boot_configuration",
+            "interfaces": config_summary["interfaces"],
+            "mode_signals": config_summary["mode_signals"],
+            "status_signals": config_summary["status_signals"],
+            "jtag_signals": config_summary["jtag_signals"],
+            "source": "pinout_inference",
+        }
+
+    if any(gt_counts.values()):
+        quad_count = gt_counts["rx"] // 4 if gt_counts["rx"] and gt_counts["rx"] % 4 == 0 else None
+        blocks["high_speed_serial"] = {
+            "class": "high_speed_serial",
+            "rx_lane_pairs": gt_counts["rx"],
+            "tx_lane_pairs": gt_counts["tx"],
+            "refclk_pair_count": gt_counts["refclk"],
+            "quad_count": quad_count,
+            "source": "pinout_inference",
+        }
+
+    if by_function.get("MIPI", 0) > 0:
+        blocks["mipi_phy"] = {
+            "class": "mipi_phy",
+            "signal_count": by_function.get("MIPI", 0),
+            "source": "pinout_inference",
+        }
+
+    if vendor == "Gowin":
+        gowin_ip = _infer_gowin_ip_blocks(pinout_data)
+        if gowin_ip:
+            if "mipi" in gowin_ip:
+                blocks["mipi_phy"] = {
+                    "class": "mipi_phy",
+                    **gowin_ip["mipi"],
+                }
+            if "serdes" in gowin_ip:
+                blocks["high_speed_serial"] = {
+                    "class": "high_speed_serial",
+                    **gowin_ip["serdes"],
+                }
+            blocks["legacy_ip_blocks"] = gowin_ip
+
+    return blocks
+
+
+def _generic_fpga_constraint_blocks(pinout_data: dict, capability_blocks: dict, diff_pairs: list[dict]) -> dict:
+    blocks = {}
+    configuration = capability_blocks.get("configuration")
+    if configuration:
+        blocks["configuration_boot"] = {
+            "class": "boot_configuration",
+            "mode_signals": configuration.get("mode_signals", []),
+            "status_signals": configuration.get("status_signals", []),
+            "jtag_signals": configuration.get("jtag_signals", []),
+            "source": configuration.get("source"),
+        }
+
+    hs_serial = capability_blocks.get("high_speed_serial")
+    refclk_pairs = []
+    for pair in diff_pairs:
+        pair_type = _safe_upper(pair.get("type"))
+        if pair_type in ("SERDES_REFCLK", "GT_REFCLK", "REFCLK"):
+            refclk_pairs.append({
+                "pair_name": pair.get("pair_name"),
+                "type": pair.get("type"),
+                "p_pin": pair.get("p_pin"),
+                "n_pin": pair.get("n_pin"),
+                "bank": pair.get("bank"),
+            })
+    if hs_serial and refclk_pairs:
+        blocks["refclk_requirements"] = {
+            "class": "clocking",
+            "required": True,
+            "refclk_pair_count": len(refclk_pairs),
+            "refclk_pairs": refclk_pairs,
+            "review_required": True,
+            "source": hs_serial.get("source"),
+        }
+        protocols = hs_serial.get("supported_protocols") or []
+        if "PCIe 3.0" in protocols:
+            blocks["refclk_requirements"]["protocol_refclk_mhz"] = {"PCIe 3.0": [100.0]}
+        if hs_serial.get("package_rate_ceiling_gbps") is not None:
+            blocks["refclk_requirements"]["package_rate_ceiling_gbps"] = hs_serial.get("package_rate_ceiling_gbps")
+
+    mipi = capability_blocks.get("mipi_phy")
+    if mipi:
+        blocks["mipi_phy"] = {
+            "class": "clocking",
+            "review_required": bool(mipi.get("present", True)),
+            "directions": mipi.get("directions", []),
+            "source": mipi.get("source"),
+        }
+    return blocks
 
 
 # ─── FPGA Pin Normalization ─────────────────────────────────────────
@@ -920,6 +1242,8 @@ def export_fpga(dc_data: dict, pinout_data: dict, gowin_dc: dict = None, lattice
         raw_abs = raw_abs + list(lattice_dc.get("absolute_maximum_ratings", []))
     thermal = _extract_thermal(raw_elec=raw_elec, raw_abs=raw_abs)
 
+    normalized_diff_pairs = _normalize_diff_pairs(pinout_data.get("diff_pairs", []))
+    normalized_pins = _normalize_pins(pinout_data.get("pins", []))
     result = {
         "_schema": SCHEMA_VERSION,
         "_type": "fpga",
@@ -937,19 +1261,25 @@ def export_fpga(dc_data: dict, pinout_data: dict, gowin_dc: dict = None, lattice
         # From pinout (L1-L5)
         "power_rails": pinout_data.get("power_rails", {}),
         "banks": _normalize_banks(pinout_data.get("banks", {})),
-        "diff_pairs": _normalize_diff_pairs(pinout_data.get("diff_pairs", [])),
+        "diff_pairs": normalized_diff_pairs,
         "drc_rules": _normalize_drc_rules(pinout_data.get("drc_rules", {})),
 
         # Pin data — full list + normalized lookup
-        "pins": _normalize_pins(pinout_data.get("pins", [])),
+        "pins": normalized_pins,
         "lookup": _normalize_lookup(pinout_data),
 
         # Summary
         "summary": pinout_data.get("summary", {}),
     }
-    ip_blocks = _infer_gowin_ip_blocks(pinout_data)
-    if ip_blocks:
-        result["ip_blocks"] = ip_blocks
+    capability_blocks = _generic_fpga_capability_blocks(pinout_data, vendor, device, package, normalized_diff_pairs)
+    constraint_blocks = _generic_fpga_constraint_blocks(pinout_data, capability_blocks, normalized_diff_pairs)
+    if capability_blocks:
+        result["capability_blocks"] = capability_blocks
+    if constraint_blocks:
+        result["constraint_blocks"] = constraint_blocks
+    legacy_ip_blocks = capability_blocks.get("legacy_ip_blocks") if capability_blocks else None
+    if legacy_ip_blocks:
+        result["ip_blocks"] = legacy_ip_blocks
 
     # Add absolute maximum ratings if available
     if gowin_dc or lattice_dc:

@@ -12,7 +12,20 @@
     "mpn": { "type": "string", "minLength": 1 },
     "manufacturer": { "type": ["string", "null"] },
     "category": { "type": ["string", "null"] },
-    "description": { "type": ["string", "null"] }
+    "description": { "type": ["string", "null"] },
+    "capability_blocks": {
+      "type": "object",
+      "additionalProperties": { "$ref": "#/$defs/capability_block" }
+    },
+    "constraint_blocks": {
+      "type": "object",
+      "additionalProperties": { "$ref": "#/$defs/constraint_block" }
+    },
+    "ip_blocks": {
+      "type": "object",
+      "description": "Legacy vendor-specific IP capability map; retained for compatibility while capability_blocks becomes the normalized interface.",
+      "additionalProperties": true
+    }
   },
 
   "allOf": [
@@ -27,6 +40,31 @@
   ],
 
   "$defs": {
+    "capability_block": {
+      "type": "object",
+      "properties": {
+        "class": { "type": ["string", "null"] },
+        "source": { "type": ["string", "null"] },
+        "source_url": { "type": ["string", "null"] },
+        "interfaces": { "type": "array", "items": { "type": "string" } },
+        "protocols": { "type": "array", "items": { "type": "string" } },
+        "signal_names": { "type": "array", "items": { "type": "string" } },
+        "directions": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": true
+    },
+
+    "constraint_block": {
+      "type": "object",
+      "properties": {
+        "class": { "type": ["string", "null"] },
+        "source": { "type": ["string", "null"] },
+        "required": { "type": ["boolean", "null"] },
+        "review_required": { "type": ["boolean", "null"] }
+      },
+      "additionalProperties": true
+    },
+
     "param_value": {
       "description": "A numeric parameter with optional min/typ/max/unit/conditions",
       "type": "object",

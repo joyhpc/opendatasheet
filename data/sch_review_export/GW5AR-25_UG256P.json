@@ -4543,6 +4543,91 @@
       "SERDES_REFCLK": 0
     }
   },
+  "capability_blocks": {
+    "configuration": {
+      "class": "boot_configuration",
+      "interfaces": [
+        "JTAG",
+        "SPI"
+      ],
+      "mode_signals": [
+        "IOB52A/MODE1",
+        "IOB62B/MODE0",
+        "IOT29A/PUDC_B",
+        "M0_CKN",
+        "M0_CKP",
+        "M0_D0N",
+        "M0_D0P",
+        "M0_D1N",
+        "M0_D1P",
+        "M0_D2N",
+        "M0_D2P",
+        "M0_D3N",
+        "M0_D3P",
+        "M0_VDDA/M0_VDDD",
+        "M0_VDDX/VCC_REG/VCCIO10/VCCX",
+        "M0_VDD_12"
+      ],
+      "status_signals": [
+        "IOB1A/RECONFIG_N",
+        "IOB37A/READY",
+        "IOB64A/DONE"
+      ],
+      "jtag_signals": [
+        "IOR1A/TCK",
+        "IOR1B/TDI",
+        "IOR3A/TMS",
+        "IOR3B/TDO"
+      ],
+      "source": "pinout_inference"
+    },
+    "mipi_phy": {
+      "class": "mipi_phy",
+      "signal_count": 10,
+      "source": "pinout_inference"
+    }
+  },
+  "constraint_blocks": {
+    "configuration_boot": {
+      "class": "boot_configuration",
+      "mode_signals": [
+        "IOB52A/MODE1",
+        "IOB62B/MODE0",
+        "IOT29A/PUDC_B",
+        "M0_CKN",
+        "M0_CKP",
+        "M0_D0N",
+        "M0_D0P",
+        "M0_D1N",
+        "M0_D1P",
+        "M0_D2N",
+        "M0_D2P",
+        "M0_D3N",
+        "M0_D3P",
+        "M0_VDDA/M0_VDDD",
+        "M0_VDDX/VCC_REG/VCCIO10/VCCX",
+        "M0_VDD_12"
+      ],
+      "status_signals": [
+        "IOB1A/RECONFIG_N",
+        "IOB37A/READY",
+        "IOB64A/DONE"
+      ],
+      "jtag_signals": [
+        "IOR1A/TCK",
+        "IOR1B/TDI",
+        "IOR3A/TMS",
+        "IOR3B/TDO"
+      ],
+      "source": "pinout_inference"
+    },
+    "mipi_phy": {
+      "class": "clocking",
+      "review_required": true,
+      "directions": [],
+      "source": "pinout_inference"
+    }
+  },
   "absolute_maximum_ratings": {
     "abs_VCC_FPGA_Logic": {
       "parameter": "VCC (核电压, LV)",

@@ -50,6 +50,52 @@ def validate_file(validator, path: Path) -> list[str]:
     return validate_data(validator, load_json(path))
 
 
+def semantic_checks(data: dict) -> list[str]:
+    errors = []
+    if data.get("_type") == "fpga":
+        summary = data.get("summary", {}) if isinstance(data.get("summary"), dict) else {}
+        by_function = summary.get("by_function", {}) if isinstance(summary, dict) else {}
+        capability_blocks = data.get("capability_blocks", {}) or {}
+        constraint_blocks = data.get("constraint_blocks", {}) or {}
+        has_mipi = by_function.get("MIPI", 0) > 0
+        has_hs = any(
+            pair.get("type") in ("SERDES_RX", "SERDES_TX", "SERDES_REFCLK", "GT_RX", "GT_TX", "GT_REFCLK", "REFCLK")
+            for pair in data.get("diff_pairs", [])
+        )
+        has_refclk = any(pair.get("type") in ("SERDES_REFCLK", "GT_REFCLK", "REFCLK") for pair in data.get("diff_pairs", []))
+        if (has_mipi or has_hs) and not capability_blocks:
+            errors.append("  [capability_blocks] missing capability_blocks for FPGA with high-speed interface pins")
+        if has_mipi and "mipi_phy" not in capability_blocks:
+            errors.append("  [capability_blocks.mipi_phy] missing mipi_phy capability block")
+        if has_hs and "high_speed_serial" not in capability_blocks:
+            errors.append("  [capability_blocks.high_speed_serial] missing high_speed_serial capability block")
+        if has_refclk and "refclk_requirements" not in constraint_blocks:
+            errors.append("  [constraint_blocks.refclk_requirements] missing refclk_requirements constraint block")
+    if data.get("_type") == "normal_ic":
+        capability_blocks = data.get("capability_blocks", {}) or {}
+        constraint_blocks = data.get("constraint_blocks", {}) or {}
+        if str(data.get("mpn", "")).upper().startswith(("STM32", "GD32", "N32", "LPC", "PIC")):
+            packages = data.get("packages", {})
+            pin_names = []
+            for package in packages.values():
+                for pin in package.get("pins", {}).values():
+                    pin_names.append((pin.get("name") or "").upper())
+            has_debug = any(any(token in name for token in ("SWDIO", "SWCLK", "JTMS", "JTCK", "JTDI", "JTDO")) for name in pin_names)
+            has_boot = any("BOOT" in name for name in pin_names)
+            has_clock = any(any(token in name for token in ("OSC_IN", "OSC_OUT", "OSC32", "HSE", "LSE", "PH0", "PH1", "PC14", "PC15")) for name in pin_names)
+            if (has_debug or has_boot or has_clock) and not capability_blocks:
+                errors.append("  [capability_blocks] missing capability_blocks for MCU-like device with debug/boot/clock pins")
+            if has_debug and "debug_access" not in capability_blocks:
+                errors.append("  [capability_blocks.debug_access] missing debug_access capability block")
+            if has_boot and "boot_configuration" not in capability_blocks:
+                errors.append("  [capability_blocks.boot_configuration] missing boot_configuration capability block")
+            if has_clock and "clocking" not in capability_blocks:
+                errors.append("  [capability_blocks.clocking] missing clocking capability block")
+            if has_debug and "debug_access" not in constraint_blocks:
+                errors.append("  [constraint_blocks.debug_access] missing debug_access constraint block")
+    return errors
+
+
 def main():
     args = sys.argv[1:]
     summary_only = "--summary" in args
@@ -74,7 +120,7 @@ def main():
         data = load_json(f)
         schema_ver = data.get("_schema", "<missing>")
         schema_versions[schema_ver] = schema_versions.get(schema_ver, 0) + 1
-        errors = validate_data(validator, data)
+        errors = validate_data(validator, data) + semantic_checks(data)
         if errors:
             failed += 1
             fail_details[f.name] = errors

@@ -12642,5 +12642,127 @@
       "GT_TX": 16,
       "GT_REFCLK": 8
     }
+  },
+  "capability_blocks": {
+    "configuration": {
+      "class": "boot_configuration",
+      "interfaces": [
+        "JTAG"
+      ],
+      "mode_signals": [
+        "M0_0",
+        "M1_0",
+        "M2_0",
+        "PUDC_B_0"
+      ],
+      "status_signals": [
+        "DONE_0",
+        "INIT_B_0",
+        "PROGRAM_B_0"
+      ],
+      "jtag_signals": [
+        "TCK_0",
+        "TDI_0",
+        "TDO_0",
+        "TMS_0"
+      ],
+      "source": "pinout_inference"
+    },
+    "high_speed_serial": {
+      "class": "high_speed_serial",
+      "rx_lane_pairs": 16,
+      "tx_lane_pairs": 16,
+      "refclk_pair_count": 8,
+      "quad_count": 4,
+      "source": "pinout_inference"
+    }
+  },
+  "constraint_blocks": {
+    "configuration_boot": {
+      "class": "boot_configuration",
+      "mode_signals": [
+        "M0_0",
+        "M1_0",
+        "M2_0",
+        "PUDC_B_0"
+      ],
+      "status_signals": [
+        "DONE_0",
+        "INIT_B_0",
+        "PROGRAM_B_0"
+      ],
+      "jtag_signals": [
+        "TCK_0",
+        "TDI_0",
+        "TDO_0",
+        "TMS_0"
+      ],
+      "source": "pinout_inference"
+    },
+    "refclk_requirements": {
+      "class": "clocking",
+      "required": true,
+      "refclk_pair_count": 8,
+      "refclk_pairs": [
+        {
+          "pair_name": "REFCLK0_224",
+          "type": "GT_REFCLK",
+          "p_pin": "AB7",
+          "n_pin": "AB6",
+          "bank": "224"
+        },
+        {
+          "pair_name": "REFCLK0_225",
+          "type": "GT_REFCLK",
+          "p_pin": "V7",
+          "n_pin": "V6",
+          "bank": "225"
+        },
+        {
+          "pair_name": "REFCLK0_226",
+          "type": "GT_REFCLK",
+          "p_pin": "P7",
+          "n_pin": "P6",
+          "bank": "226"
+        },
+        {
+          "pair_name": "REFCLK0_227",
+          "type": "GT_REFCLK",
+          "p_pin": "K7",
+          "n_pin": "K6",
+          "bank": "227"
+        },
+        {
+          "pair_name": "REFCLK1_224",
+          "type": "GT_REFCLK",
+          "p_pin": "Y7",
+          "n_pin": "Y6",
+          "bank": "224"
+        },
+        {
+          "pair_name": "REFCLK1_225",
+          "type": "GT_REFCLK",
+          "p_pin": "T7",
+          "n_pin": "T6",
+          "bank": "225"
+        },
+        {
+          "pair_name": "REFCLK1_226",
+          "type": "GT_REFCLK",
+          "p_pin": "M7",
+          "n_pin": "M6",
+          "bank": "226"
+        },
+        {
+          "pair_name": "REFCLK1_227",
+          "type": "GT_REFCLK",
+          "p_pin": "H7",
+          "n_pin": "H6",
+          "bank": "227"
+        }
+      ],
+      "review_required": true,
+      "source": "pinout_inference"
+    }
   }
 }

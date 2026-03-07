@@ -5715,5 +5715,53 @@
       "unit": "MHz"
     }
   },
-  "thermal": {}
+  "thermal": {},
+  "capability_blocks": {
+    "boot_configuration": {
+      "class": "boot_configuration",
+      "signal_names": [
+        "BOOT0"
+      ],
+      "source": "pin_inference"
+    },
+    "clocking": {
+      "class": "clocking",
+      "external_sources": {
+        "hse": [
+          "PH0",
+          "PH1"
+        ],
+        "lse": [
+          "PC14",
+          "PC15"
+        ]
+      },
+      "source": "pin_inference"
+    }
+  },
+  "constraint_blocks": {
+    "boot_configuration": {
+      "class": "boot_configuration",
+      "strap_signals": [
+        "BOOT0"
+      ],
+      "review_required": true,
+      "source": "pin_inference"
+    },
+    "clocking": {
+      "class": "clocking",
+      "domains": {
+        "hse": [
+          "PH0",
+          "PH1"
+        ],
+        "lse": [
+          "PC14",
+          "PC15"
+        ]
+      },
+      "review_required": true,
+      "source": "pin_inference"
+    }
+  }
 }

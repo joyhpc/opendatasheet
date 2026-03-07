@@ -2207,6 +2207,197 @@
       "IO": 24
     }
   },
+  "capability_blocks": {
+    "configuration": {
+      "class": "boot_configuration",
+      "interfaces": [
+        "JTAG",
+        "SPI"
+      ],
+      "mode_signals": [
+        "IOL31A/GCLKT_5/MODE1",
+        "M0_CKN",
+        "M0_CKP",
+        "M0_D0N",
+        "M0_D0P",
+        "M0_D1N",
+        "M0_D1P",
+        "M0_D2N",
+        "M0_D2P",
+        "M0_D3N",
+        "M0_D3P/M1_D0A/M1_D0B/M1_D0C/M1_D1A/M1_D1B/M1_D1C/M1_D2A/M1_D2B/M1_D2C"
+      ],
+      "status_signals": [
+        "IOB9A/READY",
+        "IOL29A/DONE",
+        "IOL29B/RECONFIG_N"
+      ],
+      "jtag_signals": [
+        "IOL20A/TCK",
+        "IOL20B/TMS",
+        "IOL24A/TDI",
+        "IOL24B/TDO"
+      ],
+      "source": "pinout_inference"
+    },
+    "mipi_phy": {
+      "class": "mipi_phy",
+      "present": true,
+      "phy_types": [
+        "D-PHY",
+        "C-PHY"
+      ],
+      "directions": [
+        "RX",
+        "TX"
+      ],
+      "dphy": {
+        "max_data_lanes": 4,
+        "max_clock_lanes": 1,
+        "max_rate_gbps_per_lane": 2.5
+      },
+      "cphy": {
+        "max_trios": 3,
+        "max_symbol_rate_gsps": 2.28
+      },
+      "source": "gowin_product_detail_72",
+      "source_url": "https://www.gowinsemi.com/en/product/detail/72/"
+    },
+    "high_speed_serial": {
+      "class": "high_speed_serial",
+      "transceiver_count": 4,
+      "quad_count": 1,
+      "lanes_per_quad": 4,
+      "rate_range_gbps": [
+        0.27,
+        12.5
+      ],
+      "package_rate_ceiling_gbps": null,
+      "supported_protocols": [
+        "custom",
+        "PCIe 3.0"
+      ],
+      "protocol_matrix": {
+        "custom": {
+          "hardcore": false,
+          "lane_widths": [
+            1,
+            2,
+            4
+          ]
+        },
+        "PCIe 3.0": {
+          "hardcore": true,
+          "lane_widths": [
+            1,
+            2,
+            4
+          ]
+        }
+      },
+      "refclk_pair_count": null,
+      "source": "gowin_product_detail_72",
+      "source_url": "https://www.gowinsemi.com/en/product/detail/72/"
+    },
+    "legacy_ip_blocks": {
+      "mipi": {
+        "present": true,
+        "phy_types": [
+          "D-PHY",
+          "C-PHY"
+        ],
+        "directions": [
+          "RX",
+          "TX"
+        ],
+        "dphy": {
+          "max_data_lanes": 4,
+          "max_clock_lanes": 1,
+          "max_rate_gbps_per_lane": 2.5
+        },
+        "cphy": {
+          "max_trios": 3,
+          "max_symbol_rate_gsps": 2.28
+        },
+        "source": "gowin_product_detail_72",
+        "source_url": "https://www.gowinsemi.com/en/product/detail/72/"
+      },
+      "serdes": {
+        "transceiver_count": 4,
+        "quad_count": 1,
+        "lanes_per_quad": 4,
+        "rate_range_gbps": [
+          0.27,
+          12.5
+        ],
+        "package_rate_ceiling_gbps": null,
+        "supported_protocols": [
+          "custom",
+          "PCIe 3.0"
+        ],
+        "protocol_matrix": {
+          "custom": {
+            "hardcore": false,
+            "lane_widths": [
+              1,
+              2,
+              4
+            ]
+          },
+          "PCIe 3.0": {
+            "hardcore": true,
+            "lane_widths": [
+              1,
+              2,
+              4
+            ]
+          }
+        },
+        "refclk_pair_count": null,
+        "source": "gowin_product_detail_72",
+        "source_url": "https://www.gowinsemi.com/en/product/detail/72/"
+      }
+    }
+  },
+  "constraint_blocks": {
+    "configuration_boot": {
+      "class": "boot_configuration",
+      "mode_signals": [
+        "IOL31A/GCLKT_5/MODE1",
+        "M0_CKN",
+        "M0_CKP",
+        "M0_D0N",
+        "M0_D0P",
+        "M0_D1N",
+        "M0_D1P",
+        "M0_D2N",
+        "M0_D2P",
+        "M0_D3N",
+        "M0_D3P/M1_D0A/M1_D0B/M1_D0C/M1_D1A/M1_D1B/M1_D1C/M1_D2A/M1_D2B/M1_D2C"
+      ],
+      "status_signals": [
+        "IOB9A/READY",
+        "IOL29A/DONE",
+        "IOL29B/RECONFIG_N"
+      ],
+      "jtag_signals": [
+        "IOL20A/TCK",
+        "IOL20B/TMS",
+        "IOL24A/TDI",
+        "IOL24B/TDO"
+      ],
+      "source": "pinout_inference"
+    },
+    "mipi_phy": {
+      "class": "clocking",
+      "review_required": true,
+      "directions": [
+        "RX",
+        "TX"
+      ],
+      "source": "gowin_product_detail_72"
+    }
+  },
   "ip_blocks": {
     "mipi": {
       "present": true,

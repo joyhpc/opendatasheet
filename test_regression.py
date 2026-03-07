@@ -468,6 +468,63 @@ def t4_4():
         assert_gt(funcs.get("IO", 0), 0, f"{f.name} no IO pins")
 
 
+@case("T4.5 FPGA high-speed and MIPI exports expose capability_blocks")
+def t4_5():
+    for f in sorted(EXPORT_DIR.glob("*.json")):
+        if f.name == "_manifest.json":
+            continue
+        with open(f) as fp:
+            d = json.load(fp)
+        if d.get("_type") != "fpga":
+            continue
+        summary = d.get("summary", {})
+        by_function = summary.get("by_function", {}) if isinstance(summary, dict) else {}
+        has_mipi = by_function.get("MIPI", 0) > 0
+        has_hs = any(pair.get("type") in ("SERDES_RX", "SERDES_TX", "SERDES_REFCLK", "GT_RX", "GT_TX", "GT_REFCLK", "REFCLK") for pair in d.get("diff_pairs", []))
+        if not (has_mipi or has_hs):
+            continue
+        capability_blocks = d.get("capability_blocks", {})
+        assert_true(capability_blocks, f"{f.name} missing capability_blocks")
+        if has_mipi:
+            assert_true("mipi_phy" in capability_blocks, f"{f.name} missing capability_blocks.mipi_phy")
+        if has_hs:
+            assert_true("high_speed_serial" in capability_blocks, f"{f.name} missing capability_blocks.high_speed_serial")
+
+
+@case("T4.6 FPGA refclk pairs expose refclk_requirements constraints")
+def t4_6():
+    for f in sorted(EXPORT_DIR.glob("*.json")):
+        if f.name == "_manifest.json":
+            continue
+        with open(f) as fp:
+            d = json.load(fp)
+        if d.get("_type") != "fpga":
+            continue
+        has_refclk = any(pair.get("type") in ("SERDES_REFCLK", "GT_REFCLK", "REFCLK") for pair in d.get("diff_pairs", []))
+        if not has_refclk:
+            continue
+        constraints = d.get("constraint_blocks", {})
+        refclk = constraints.get("refclk_requirements")
+        assert_true(refclk is not None, f"{f.name} missing constraint_blocks.refclk_requirements")
+        assert_gt(refclk.get("refclk_pair_count", 0), 0, f"{f.name} refclk_pair_count")
+
+
+@case("T4.7 STM32 exports expose capability and constraint blocks")
+def t4_7():
+    for f in sorted(EXPORT_DIR.glob("STM32*.json")):
+        with open(f) as fp:
+            d = json.load(fp)
+        capability_blocks = d.get("capability_blocks", {})
+        constraint_blocks = d.get("constraint_blocks", {})
+        assert_true(capability_blocks, f"{f.name} missing capability_blocks")
+        assert_true("boot_configuration" in capability_blocks, f"{f.name} missing boot_configuration")
+        assert_true("clocking" in capability_blocks, f"{f.name} missing clocking")
+        assert_true("boot_configuration" in constraint_blocks, f"{f.name} missing constraint_blocks.boot_configuration")
+        if f.name in ("STM32F401xB_C.json", "STM32H745xI_G.json"):
+            assert_true("debug_access" in capability_blocks, f"{f.name} missing debug_access")
+            assert_true("debug_access" in constraint_blocks, f"{f.name} missing constraint_blocks.debug_access")
+
+
 # ─── T5: Manifest Consistency ──────────────────────────────────────
 
 @case("T5.1 Manifest exists and lists all export files")
