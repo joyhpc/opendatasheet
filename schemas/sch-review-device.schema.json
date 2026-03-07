@@ -104,6 +104,11 @@
         "drc_hints": {
           "type": "object",
           "additionalProperties": true
+        },
+        "thermal": {
+          "type": "object",
+          "description": "Thermal metrics such as theta-JA/theta-JC and power dissipation limits.",
+          "additionalProperties": { "$ref": "#/$defs/param_value" }
         }
       },
       "additionalProperties": true
@@ -151,6 +156,11 @@
         "package": { "type": "string", "minLength": 1 },
         "supply_specs": {
           "type": "object",
+          "additionalProperties": { "$ref": "#/$defs/param_value" }
+        },
+        "thermal": {
+          "type": "object",
+          "description": "Thermal metrics such as theta-JA/theta-JC and power dissipation limits.",
           "additionalProperties": { "$ref": "#/$defs/param_value" }
         },
         "io_standard_specs": {
