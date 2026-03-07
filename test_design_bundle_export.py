@@ -693,3 +693,170 @@ def test_extract_gw1n_dc_supports_combined_datasheet():
     assert len(result["recommended_operating"]) >= 3
     assert any(item.get("standard") == "LVCMOS33" and item.get("vcco") == 3.3 for item in result["io_standards"])
     assert any(item.get("standard") == "LVCMOS12" and item.get("vcco") == 1.2 for item in result["io_standards"])
+
+
+
+def test_stm32_mcu_bundle_export_includes_minimum_system_templates(tmp_path):
+    input_dir = tmp_path / "exports"
+    output_dir = tmp_path / "bundles"
+    input_dir.mkdir()
+    (tmp_path / "extracted").mkdir()
+    (tmp_path / "pdfs").mkdir()
+
+    device = {
+        "_schema": "sch-review-device/1.1",
+        "_type": "normal_ic",
+        "mpn": "STM32F401CBU6",
+        "manufacturer": "STMicroelectronics",
+        "category": "Other",
+        "description": "STM32 MCU",
+        "packages": {
+            "UFQFPN48": {
+                "pin_count": 48,
+                "pins": {
+                    "1": {"name": "VBAT", "direction": "POWER_IN", "signal_type": "POWER", "description": "Backup supply", "unused_treatment": None},
+                    "7": {"name": "BOOT0", "direction": "INPUT", "signal_type": "DIGITAL", "description": "Boot configuration", "unused_treatment": None},
+                    "8": {"name": "PF0-OSC_IN", "direction": "INPUT", "signal_type": "DIGITAL", "description": "HSE oscillator input", "unused_treatment": None},
+                    "9": {"name": "PF1-OSC_OUT", "direction": "OUTPUT", "signal_type": "DIGITAL", "description": "HSE oscillator output", "unused_treatment": None},
+                    "14": {"name": "VSS", "direction": "POWER_IN", "signal_type": "POWER", "description": "Ground", "unused_treatment": None},
+                    "15": {"name": "VDD", "direction": "POWER_IN", "signal_type": "POWER", "description": "Digital supply", "unused_treatment": None},
+                    "21": {"name": "PA13-SWDIO", "direction": "BIDIR", "signal_type": "DIGITAL", "description": "Serial wire debug data", "unused_treatment": None},
+                    "22": {"name": "PA14-SWCLK", "direction": "INPUT", "signal_type": "DIGITAL", "description": "Serial wire debug clock", "unused_treatment": None},
+                    "23": {"name": "PA15-SWO", "direction": "OUTPUT", "signal_type": "DIGITAL", "description": "Trace output", "unused_treatment": None},
+                    "24": {"name": "NRST", "direction": "INPUT", "signal_type": "DIGITAL", "description": "System reset", "unused_treatment": None},
+                    "25": {"name": "VDDA", "direction": "POWER_IN", "signal_type": "POWER", "description": "Analog supply", "unused_treatment": None},
+                    "26": {"name": "VSSA", "direction": "POWER_IN", "signal_type": "POWER", "description": "Analog ground", "unused_treatment": None},
+                    "27": {"name": "VCAP1", "direction": "POWER_IN", "signal_type": "POWER", "description": "Internal regulator capacitor", "unused_treatment": None},
+                    "33": {"name": "PA11-USB_DM", "direction": "BIDIR", "signal_type": "DIGITAL", "description": "USB D-", "unused_treatment": None},
+                    "34": {"name": "PA12-USB_DP", "direction": "BIDIR", "signal_type": "DIGITAL", "description": "USB D+", "unused_treatment": None}
+                }
+            }
+        },
+        "absolute_maximum_ratings": {},
+        "electrical_parameters": {},
+        "drc_hints": [],
+        "thermal": {}
+    }
+
+    (input_dir / "STM32F401CBU6.json").write_text(json.dumps(device, ensure_ascii=False, indent=2), encoding="utf-8")
+
+    subprocess.run(
+        [
+            sys.executable,
+            "scripts/export_design_bundle.py",
+            "--input-dir",
+            str(input_dir),
+            "--extracted-dir",
+            str(tmp_path / "extracted"),
+            "--pdf-dir",
+            str(tmp_path / "pdfs"),
+            "--device",
+            "STM32F401CBU6",
+            "--output-dir",
+            str(output_dir),
+        ],
+        cwd=REPO_ROOT,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+
+    bundle_dir = output_dir / "STM32F401CBU6"
+    design_intent = json.loads((bundle_dir / "L1_design_intent.json").read_text(encoding="utf-8"))
+    module_template = json.loads((bundle_dir / "L3_module_template.json").read_text(encoding="utf-8"))
+    quickstart = (bundle_dir / "L2_quickstart.md").read_text(encoding="utf-8")
+
+    roles = {item["role"] for item in design_intent["external_components"]}
+    starter_nets = {item["name"] for item in design_intent["starter_nets"]}
+    template_names = {item["name"] for item in module_template.get("mcu_templates", [])}
+
+    assert {"supply_decoupling", "swd_header", "reset_bias_or_button", "boot_mode_straps", "hse_clock_source", "vcap_stabilizer", "analog_rail_filter", "backup_supply_source", "usb_connector_or_esd"}.issubset(roles)
+    assert {"VDD", "VSS", "NRST", "SWDIO", "SWCLK", "BOOT0", "HSE_IN", "HSE_OUT", "VDDA", "VSSA", "VCAP", "VBAT", "USB_DP", "USB_DM", "VBUS"}.issubset(starter_nets)
+    assert module_template["default_mcu_template"] == "stm32_minimum_system"
+    assert {"stm32_minimum_system", "stm32_usb_device"}.issubset(template_names)
+    assert "MCU implementation notes" in quickstart
+    assert "MCU templates" in quickstart
+
+
+
+def test_bundle_export_tolerates_string_constraint_entries(tmp_path):
+    input_dir = tmp_path / "input"
+    output_dir = tmp_path / "bundles"
+    input_dir.mkdir()
+
+    device = {
+        "_schema": "sch-review-device/1.1",
+        "_type": "normal_ic",
+        "_layers": ["L0_skeleton", "L1_electrical"],
+        "mpn": "STRING-CONSTRAINT-IC",
+        "manufacturer": "TestVendor",
+        "category": "LDO",
+        "description": "Synthetic device with legacy string constraint entries",
+        "packages": {
+            "SOT23-5": {
+                "pin_count": 5,
+                "pins": {
+                    "1": {"name": "IN", "direction": "POWER_IN", "signal_type": "POWER", "description": "Input supply", "unused_treatment": None},
+                    "2": {"name": "GND", "direction": "POWER_IN", "signal_type": "POWER", "description": "Ground", "unused_treatment": None},
+                    "3": {"name": "EN", "direction": "INPUT", "signal_type": "DIGITAL", "description": "Enable", "unused_treatment": None},
+                    "4": {"name": "NC", "direction": "INPUT", "signal_type": "NC", "description": "No connect", "unused_treatment": None},
+                    "5": {"name": "OUT", "direction": "POWER_OUT", "signal_type": "POWER", "description": "Regulated output", "unused_treatment": None}
+                }
+            }
+        },
+        "absolute_maximum_ratings": {
+            "VIN": {
+                "parameter": "Input voltage",
+                "min": -0.3,
+                "max": 6.0,
+                "unit": "V",
+                "conditions": None
+            },
+            "legacy_note": "Do not exceed absolute maximum conditions."
+        },
+        "electrical_parameters": {
+            "VOUT": {
+                "parameter": "Output voltage",
+                "min": 1.8,
+                "typ": 1.8,
+                "max": 1.8,
+                "unit": "V",
+                "conditions": None
+            },
+            "legacy_condition": "Stable with 1uF output capacitor."
+        },
+        "drc_hints": {
+            "vin_abs_max": {"max": 6.0, "unit": "V"},
+            "vout_nominal": {"typ": 1.8, "unit": "V"}
+        },
+        "thermal": {}
+    }
+
+    (input_dir / "STRING-CONSTRAINT-IC.json").write_text(json.dumps(device, ensure_ascii=False, indent=2), encoding="utf-8")
+
+    result = subprocess.run(
+        [
+            sys.executable,
+            "scripts/export_design_bundle.py",
+            "--input-dir",
+            str(input_dir),
+            "--extracted-dir",
+            str(tmp_path / "extracted"),
+            "--pdf-dir",
+            str(tmp_path / "pdfs"),
+            "--device",
+            "STRING-CONSTRAINT-IC",
+            "--output-dir",
+            str(output_dir),
+        ],
+        cwd=REPO_ROOT,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+
+    assert "generated" in result.stdout
+    bundle_dir = output_dir / "STRING-CONSTRAINT-IC"
+    design_intent = json.loads((bundle_dir / "L1_design_intent.json").read_text(encoding="utf-8"))
+    assert design_intent["device_ref"]["mpn"] == "STRING-CONSTRAINT-IC"
+    assert bundle_dir.joinpath("L2_quickstart.md").exists()
