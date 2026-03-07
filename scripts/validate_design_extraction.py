@@ -12,6 +12,10 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT))
 
+from scripts.build_raw_source_manifest import (  # noqa: E402
+    DEFAULT_OUTPUT as DEFAULT_RAW_MANIFEST,
+    build_manifest,
+)
 from scripts.export_design_bundle import (  # noqa: E402
     _index_extracted_records,
     _load_datasheet_design_context,
@@ -203,6 +207,38 @@ def validate_category_baselines(category_counts: dict[str, Counter]) -> list[str
     return failures
 
 
+def validate_raw_source_manifest(raw_root: Path, strict: bool = False, manifest_path: Path | None = None) -> list[str]:
+    failures: list[str] = []
+    manifest_path = manifest_path or (raw_root / DEFAULT_RAW_MANIFEST.name)
+
+    if not manifest_path.exists():
+        return [f"raw manifest missing: {manifest_path}"]
+
+    try:
+        current_text = manifest_path.read_text(encoding="utf-8")
+        current = json.loads(current_text)
+    except Exception as exc:
+        return [f"raw manifest unreadable: {manifest_path} ({exc})"]
+
+    if current.get("entry_count", 0) <= 0:
+        failures.append(f"raw manifest empty: {manifest_path}")
+
+    entries = current.get("entries") or []
+    if not isinstance(entries, list):
+        failures.append(f"raw manifest malformed entries: {manifest_path}")
+        return failures
+
+    if not any((item.get("storage_tier") == "canonical") for item in entries if isinstance(item, dict)):
+        failures.append(f"raw manifest has no canonical entries: {manifest_path}")
+
+    if strict:
+        rendered = json.dumps(build_manifest(raw_root), indent=2, ensure_ascii=False) + "\n"
+        if current_text != rendered:
+            failures.append(f"raw manifest stale: {manifest_path}")
+
+    return failures
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--export-dir", type=Path, default=DEFAULT_EXPORT_DIR)
@@ -218,8 +254,10 @@ def main() -> int:
     extracted_index = _index_extracted_records(args.extracted_dir)
     counts, contexts = summarize_corpus(devices, extracted_index, args.pdf_dir)
     category_counts = summarize_by_category(devices, contexts)
+    raw_root = args.pdf_dir.parent if args.pdf_dir.name == "datasheet_PDF" else args.pdf_dir
     failures = (
-        validate_curated(devices, contexts)
+        validate_raw_source_manifest(raw_root, strict=args.strict)
+        + validate_curated(devices, contexts)
         + validate_baseline(counts)
         + validate_category_baselines(category_counts)
     )
