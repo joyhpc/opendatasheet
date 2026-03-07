@@ -219,6 +219,72 @@ def test_analog_switch_bundle_export_includes_switch_templates(tmp_path):
     assert "Control modes: `parallel_address` `i2c`" in adg728_quickstart
 
 
+def test_interface_switch_bundle_export_includes_high_speed_templates(tmp_path):
+    output_dir = tmp_path / "bundles"
+    subprocess.run(
+        [
+            sys.executable,
+            "scripts/export_design_bundle.py",
+            "--device",
+            "FUSB340",
+            "--device",
+            "TC7USB40MU",
+            "--device",
+            "TC7PCI3212MT__TC7PCI3215MT",
+            "--device",
+            "FST3125",
+            "--output-dir",
+            str(output_dir),
+        ],
+        cwd=REPO_ROOT,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+
+    fusb_dir = output_dir / "FUSB340"
+    fusb_intent = json.loads((fusb_dir / "L1_design_intent.json").read_text(encoding="utf-8"))
+    fusb_template = json.loads((fusb_dir / "L3_module_template.json").read_text(encoding="utf-8"))
+    fusb_quickstart = (fusb_dir / "L2_quickstart.md").read_text(encoding="utf-8")
+    fusb_roles = {item["role"] for item in fusb_intent["external_components"]}
+    fusb_nets = {item["name"] for item in fusb_intent["starter_nets"]}
+
+    assert {"supply_decoupling", "select_bias", "enable_bias", "esd_review", "ac_coupling_review", "signal_path_breakout"}.issubset(fusb_roles)
+    assert {"SS_TXRX_COM", "SS_PORT_A", "SS_PORT_B", "SEL", "OE_N"}.issubset(fusb_nets)
+    assert fusb_template["default_interface_switch_template"] == "superspeed_data_switch"
+    assert "superspeed_data_switch" in {item["name"] for item in fusb_template.get("interface_switch_templates", [])}
+    assert "Interface switch implementation notes" in fusb_quickstart
+
+    usb2_dir = output_dir / "TC7USB40MU"
+    usb2_intent = json.loads((usb2_dir / "L1_design_intent.json").read_text(encoding="utf-8"))
+    usb2_template = json.loads((usb2_dir / "L3_module_template.json").read_text(encoding="utf-8"))
+    usb2_roles = {item["role"] for item in usb2_intent["external_components"]}
+
+    assert {"supply_decoupling", "select_bias", "enable_bias", "esd_review", "signal_path_breakout"}.issubset(usb2_roles)
+    assert usb2_template["default_interface_switch_template"] == "usb2_data_switch"
+
+    pcie_dir = output_dir / "TC7PCI3212MT_TC7PCI3215MT"
+    pcie_intent = json.loads((pcie_dir / "L1_design_intent.json").read_text(encoding="utf-8"))
+    pcie_template = json.loads((pcie_dir / "L3_module_template.json").read_text(encoding="utf-8"))
+    pcie_roles = {item["role"] for item in pcie_intent["external_components"]}
+    pcie_nets = {item["name"] for item in pcie_intent["starter_nets"]}
+
+    assert {"supply_decoupling", "select_bias", "enable_bias", "ac_coupling_review", "signal_path_breakout"}.issubset(pcie_roles)
+    assert {"PCIE_COM", "PCIE_PORT_A", "PCIE_PORT_B", "SEL", "OE_N"}.issubset(pcie_nets)
+    assert pcie_template["default_interface_switch_template"] == "pcie_diff_switch"
+
+    fst_dir = output_dir / "FST3125"
+    fst_intent = json.loads((fst_dir / "L1_design_intent.json").read_text(encoding="utf-8"))
+    fst_template = json.loads((fst_dir / "L3_module_template.json").read_text(encoding="utf-8"))
+    fst_quickstart = (fst_dir / "L2_quickstart.md").read_text(encoding="utf-8")
+    fst_nets = {item["name"] for item in fst_intent["starter_nets"]}
+
+    assert {"BUS_A", "BUS_B", "OE_N"}.issubset(fst_nets)
+    assert fst_template["default_interface_switch_template"] == "bus_switch_bridge"
+    assert "bus_switch_bridge" in {item["name"] for item in fst_template.get("interface_switch_templates", [])}
+    assert "Interface kind: `bus` topology=`bus_switch`" in fst_quickstart
+
+
 def test_opamp_bundle_export_includes_analog_constraints(tmp_path):
     output_dir = tmp_path / "bundles"
     subprocess.run(
