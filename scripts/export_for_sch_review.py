@@ -968,6 +968,7 @@ def _lane_group_protocol_candidates(lane_group_mappings: list[dict], protocol_ma
         entry["selection_required"] = bool(candidate_protocols)
         if candidate_protocols:
             entry["selection_note"] = "Freeze the protocol/IP assignment for this lane group and bind it to one of the mapped refclk pairs before schematic sign-off."
+            entry.update(_protocol_bundle_context(candidate_protocols))
         enriched.append(entry)
     return enriched
 
@@ -990,10 +991,47 @@ def _refclk_pair_protocol_candidates(refclk_pairs: list[dict], lane_group_mappin
                     protocol_lane_widths[protocol] = sorted(set(protocol_lane_widths[protocol]) | set(widths))
         if protocols:
             entry["candidate_protocols"] = protocols
+            entry.update(_protocol_bundle_context(protocols))
         if protocol_lane_widths:
             entry["protocol_lane_widths"] = protocol_lane_widths
         enriched.append(entry)
     return enriched
+
+
+def _protocol_bundle_context(protocols: list[str]) -> dict:
+    protocols = [protocol for protocol in protocols or [] if protocol]
+    bundle_tags = []
+    use_case_tags = []
+    scenario_candidates = []
+
+    def add_unique(target: list[str], *values: str) -> None:
+        for value in values:
+            if value and value not in target:
+                target.append(value)
+
+    if protocols:
+        add_unique(bundle_tags, "SerDes", "clock")
+        add_unique(use_case_tags, "high_speed_link")
+        add_unique(scenario_candidates, "high_speed_link_bridge")
+
+    pcie_protocols = [p for p in protocols if p.startswith("PCIe")]
+    ethernet_protocols = [p for p in protocols if p in ("SGMII", "1000BASE-X", "XAUI", "10GBASE-R", "10G Ethernet")]
+    custom_protocols = [p for p in protocols if p == "custom"]
+
+    if pcie_protocols:
+        add_unique(bundle_tags, "PCIe")
+        add_unique(use_case_tags, "pcie_link")
+    if ethernet_protocols:
+        add_unique(bundle_tags, "Ethernet")
+        add_unique(use_case_tags, "ethernet_link")
+    if custom_protocols:
+        add_unique(use_case_tags, "custom_serdes")
+
+    return {
+        "bundle_tags": bundle_tags,
+        "use_case_tags": use_case_tags,
+        "bundle_scenario_candidates": scenario_candidates,
+    }
 
 
 def _package_rate_note(vendor: str, package: str, hs_serial: dict) -> str | None:

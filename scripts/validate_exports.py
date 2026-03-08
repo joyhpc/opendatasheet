@@ -85,9 +85,15 @@ def semantic_checks(data: dict) -> list[str]:
                 if not group.get("candidate_protocols"):
                     errors.append("  [constraint_blocks.refclk_requirements.lane_group_mappings.candidate_protocols] missing protocol candidates for lane group")
                     break
+                if not group.get("bundle_tags") or not group.get("use_case_tags"):
+                    errors.append("  [constraint_blocks.refclk_requirements.lane_group_mappings.bundle_tags] missing bundle/use-case tags for lane group")
+                    break
             for pair in refclk_req.get("refclk_pairs", []) or []:
                 if pair.get("mapped_lane_groups") and not pair.get("candidate_protocols"):
                     errors.append("  [constraint_blocks.refclk_requirements.refclk_pairs.candidate_protocols] missing protocol candidates for refclk pair")
+                    break
+                if pair.get("mapped_lane_groups") and (not pair.get("bundle_tags") or not pair.get("use_case_tags")):
+                    errors.append("  [constraint_blocks.refclk_requirements.refclk_pairs.bundle_tags] missing bundle/use-case tags for refclk pair")
                     break
     if data.get("_type") == "normal_ic":
         capability_blocks = data.get("capability_blocks", {}) or {}

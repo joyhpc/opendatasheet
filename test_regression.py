@@ -690,6 +690,24 @@ def t4_12():
     assert_true("PCIe Gen2" in lifcl_pair.get("candidate_protocols", []), "LIFCL SD_REFCLK missing PCIe Gen2")
 
 
+@case("T4.13 Lane groups and refclk pairs expose bundle/use-case tags")
+def t4_13():
+    xcku = json.load(open(EXPORT_DIR / "XCKU3P_FFVA676.json"))
+    quad224 = {entry.get("group_id"): entry for entry in xcku.get("constraint_blocks", {}).get("refclk_requirements", {}).get("lane_group_mappings", [])}["224"]
+    assert_true("SerDes" in quad224.get("bundle_tags", []), "XCKU3P quad 224 missing SerDes tag")
+    assert_true("PCIe" in quad224.get("bundle_tags", []), "XCKU3P quad 224 missing PCIe tag")
+    assert_true("high_speed_link" in quad224.get("use_case_tags", []), "XCKU3P quad 224 missing high_speed_link use case")
+    assert_true("pcie_link" in quad224.get("use_case_tags", []), "XCKU3P quad 224 missing pcie_link use case")
+    assert_eq(quad224.get("bundle_scenario_candidates"), ["high_speed_link_bridge"], "XCKU3P quad 224 scenario candidates")
+
+    refclk0_224 = [pair for pair in xcku.get("constraint_blocks", {}).get("refclk_requirements", {}).get("refclk_pairs", []) if pair.get("pair_name") == "REFCLK0_224"][0]
+    assert_true("Ethernet" in refclk0_224.get("bundle_tags", []), "XCKU3P REFCLK0_224 missing Ethernet tag")
+
+    lifcl_pair = lifcl_pair = json.load(open(EXPORT_DIR / "LIFCL-40_CABGA400.json")).get("constraint_blocks", {}).get("refclk_requirements", {}).get("refclk_pairs", [])[0]
+    assert_true("high_speed_link_bridge" in lifcl_pair.get("bundle_scenario_candidates", []), "LIFCL SD_REFCLK missing scenario candidate")
+    assert_true("ethernet_link" in lifcl_pair.get("use_case_tags", []), "LIFCL SD_REFCLK missing ethernet_link use case")
+
+
 @case("T6.3 Gowin GW5AT exports expose package-specific ip_blocks")
 def t6_3():
     ug225 = json.load(open(EXPORT_DIR / "GW5AT-60_UG225.json"))
