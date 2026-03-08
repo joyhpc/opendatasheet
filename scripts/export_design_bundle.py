@@ -2136,6 +2136,8 @@ def _infer_switch_traits(device: dict, datasheet_context: dict | None = None) ->
             address_pins.append(item)
         elif re.match(r"^SEL\d+$", name) or (re.match(r"^S\d+$", name) and item.get("direction") == "INPUT" and "select" in desc):
             select_bank_pins.append(item)
+        elif re.match(r"^IN\d+(?:-\d+)?$", name) and item.get("direction") == "INPUT" and any(token in desc for token in ("control", "select", "connect com")):
+            select_bank_pins.append(item)
         if name in {"EN", "ENABLE"}:
             enable_pins.append(item)
         if name in {"RESET", "RST", "RESETB", "RSTB"}:
@@ -2476,6 +2478,8 @@ def _switch_standard_templates(device: dict, switch_context: dict) -> list[dict]
         starter_nets = [switch_context.get("positive_supply_net", "VDD"), switch_context.get("ground_net", "GND"), "SW_COM", "SW_NO"]
         if switch_context.get("normally_closed_pins"):
             starter_nets.append("SW_NC")
+        if switch_context.get("supports_direct_select_bank"):
+            starter_nets.append("SEL_BANK")
         if switch_context.get("enable_pins"):
             starter_nets.append("EN")
         add_template(
@@ -2485,18 +2489,18 @@ def _switch_standard_templates(device: dict, switch_context: dict) -> list[dict]
             "Use when one common analog node is switched between normally-open and normally-closed throws.",
             "Captures COM/NO/NC ownership, default state, and enable control for first-pass schematic capture.",
             starter_nets,
-            ["U1", "CBYP", "JANA"] + (["REN"] if switch_context.get("enable_pins") else []),
+            ["U1", "CBYP", "JANA"] + (["JCTRL"] if switch_context.get("supports_direct_select_bank") else []) + (["REN"] if switch_context.get("enable_pins") else []),
             [
                 {"from": "SW_COM", "to": "JANA", "note": "Keep the common analog node explicit at the upstream/downstream boundary."},
                 {"from": "SW_NO", "to": "JANA", "note": "Label the normally-open path before control polarity diverges from the schematic."},
-            ] + ([{"from": "SW_NC", "to": "JANA", "note": "Label the normally-closed path so the default conduction state is reviewable."}] if switch_context.get("normally_closed_pins") else []),
+            ] + ([{"from": "SW_NC", "to": "JANA", "note": "Label the normally-closed path so the default conduction state is reviewable."}] if switch_context.get("normally_closed_pins") else []) + ([{"from": "SEL_BANK", "to": "JCTRL", "note": "Keep grouped select-line ownership visible when one control pin drives multiple throws."}] if switch_context.get("supports_direct_select_bank") else []),
             ["Freeze default conduction state, enable polarity, and COM / NO / NC naming before review."],
         )
         templates[-1]["source"] = switch_context.get("source")
         templates[-1]["source_refs"] = [
             ref
             for ref in [
-                _pin_source_ref(switch_context.get("preferred_package"), switch_context.get("enable_pins"), note="enable pins from official package pin table"),
+                _pin_source_ref(switch_context.get("preferred_package"), switch_context.get("select_bank_pins"), switch_context.get("enable_pins"), note="control pins from official package pin table"),
                 _pin_source_ref(switch_context.get("preferred_package"), switch_context.get("common_pins"), switch_context.get("normally_open_pins"), switch_context.get("normally_closed_pins"), note="COM / NO / NC pins from official package pin table"),
             ]
             if ref
@@ -2589,9 +2593,16 @@ def _is_interface_switch_like(device: dict) -> bool:
     pins = package_data.get("pins", {})
     names = [(pin.get("name") or "").upper() for pin in pins.values()]
 
-    return any(token in text for token in ("usb", "pcie", "superspeed", "displayport", "bus switch")) or any(
-        re.match(r"^\d+[AB]$", name) or re.match(r"^[ABC]\d+[+-]$", name) or name in {"D+", "D-", "SEL", "OE", "/OE"}
-        or "SSRX" in name or "SSTX" in name
+    return any(token in text for token in ("usb", "pcie", "superspeed", "displayport", "display port", "bus switch")) or any(
+        re.match(r"^\d+[AB]$", name)
+        or re.match(r"^[ABC]\d+[+-]$", name)
+        or re.match(r"^D\d+[+-][-_]?[AB]$", name)
+        or re.match(r"^D\d+[+-]$", name)
+        or name in {"D+", "D-", "SEL", "OE", "/OE", "HPD", "AUX+", "AUX-"}
+        or name.endswith("_A")
+        or name.endswith("_B")
+        or "SSRX" in name
+        or "SSTX" in name
         for name in names
     )
 
@@ -2611,6 +2622,7 @@ def _infer_interface_switch_traits(device: dict, datasheet_context: dict | None 
         }
 
     text = " ".join([device.get("mpn") or "", device.get("description") or ""]).lower()
+    design_page_text = " ".join((page.get("preview") or "") for page in datasheet_context.get("design_page_candidates", [])).lower()
     power_pins = []
     ground_pins = []
     select_pins = []
@@ -2620,6 +2632,9 @@ def _infer_interface_switch_traits(device: dict, datasheet_context: dict | None 
     branch_a_pins = []
     branch_b_pins = []
     aux_pins = []
+    sideband_common_pins = []
+    sideband_a_pins = []
+    sideband_b_pins = []
     diff_groups = {"A": [], "B": [], "C": []}
     bus_a_pins = []
     bus_b_pins = []
@@ -2635,6 +2650,9 @@ def _infer_interface_switch_traits(device: dict, datasheet_context: dict | None 
     ss_common = []
     ss_port1 = []
     ss_port2 = []
+    dp_common = []
+    dp_port_a = []
+    dp_port_b = []
 
     for pin_number, pin_data in pins.items():
         item = record(pin_number, pin_data)
@@ -2643,11 +2661,11 @@ def _infer_interface_switch_traits(device: dict, datasheet_context: dict | None 
 
         if name in {"VCC", "VDD", "AVDD", "DVDD"}:
             power_pins.append(item)
-        elif name in {"GND", "AGND", "DGND", "EP"}:
+        elif name in {"GND", "AGND", "DGND", "EP", "EP GND"} or name.endswith(" GND"):
             ground_pins.append(item)
         elif name in {"S", "SEL"} or re.match(r"^S\d+$", name) or re.match(r"^SEL\d+$", name):
             select_pins.append(item)
-        elif name in {"OE", "/OE", "OEB"} or re.match(r"^/?OE\d*$", name) or re.match(r"^OEB\d*$", name):
+        elif name in {"OE", "/OE", "OEB", "EN"} or re.match(r"^/?OE\d*$", name) or re.match(r"^OEB\d*$", name):
             enable_pins.append(item)
         elif name in {"RESET", "RST", "RESETB", "RSTB"}:
             reset_pins.append(item)
@@ -2661,9 +2679,9 @@ def _infer_interface_switch_traits(device: dict, datasheet_context: dict | None 
                 usb_port2.append(item)
         elif name in {"D+/R", "D-/L"} or "common connector" in desc:
             usb_audio_common.append(item)
-        elif re.match(r"^D0[+-]$", name):
+        elif re.match(r"^D0[+-]$", name) and any(token in desc for token in ("usb", "mhl", "uart", "audio")):
             usb_audio_path0.append(item)
-        elif re.match(r"^D1[+-]$", name):
+        elif re.match(r"^D1[+-]$", name) and any(token in desc for token in ("usb", "mhl", "uart", "audio")):
             usb_audio_path1.append(item)
         elif name in {"R", "L"} and "audio" in desc:
             usb_audio_lr.append(item)
@@ -2673,6 +2691,20 @@ def _infer_interface_switch_traits(device: dict, datasheet_context: dict | None 
             ss_port1.append(item)
         elif ("SSRX2" in name or "SSTX2" in name):
             ss_port2.append(item)
+
+        if re.match(r"^D\d+[+-]$", name) and "common port" in desc:
+            dp_common.append(item)
+        elif re.match(r"^D\d+[+-][-_]?[AB]$", name) and "port a" in desc:
+            dp_port_a.append(item)
+        elif re.match(r"^D\d+[+-][-_]?[AB]$", name) and "port b" in desc:
+            dp_port_b.append(item)
+
+        if name in {"SCL", "SDA", "HPD", "CEC", "AUX+", "AUX-"} and "common port" in desc:
+            sideband_common_pins.append(item)
+        elif (name.endswith("_A") or name.endswith("A")) and any(token in name for token in {"SCL", "SDA", "HPD", "CEC", "AUX"}) and "port a" in desc:
+            sideband_a_pins.append(item)
+        elif (name.endswith("_B") or name.endswith("B")) and any(token in name for token in {"SCL", "SDA", "HPD", "CEC", "AUX"}) and "port b" in desc:
+            sideband_b_pins.append(item)
 
         diff_match = re.match(r"^([ABC])(\d+)[+-]$", name)
         if diff_match:
@@ -2691,7 +2723,15 @@ def _infer_interface_switch_traits(device: dict, datasheet_context: dict | None 
     interface_kind = "generic_interface_switch"
     topology_kind = "interface_switch"
     channel_count = 0
-    if usb_common or usb_port1 or usb_port2:
+    if dp_common or dp_port_a or dp_port_b or "displayport" in text or "display port" in design_page_text:
+        interface_kind = "displayport"
+        topology_kind = "displayport_mux"
+        common_pins = dp_common
+        branch_a_pins = dp_port_a
+        branch_b_pins = dp_port_b
+        aux_pins = sideband_common_pins + sideband_a_pins + sideband_b_pins
+        channel_count = max(len(common_pins) // 2, len(branch_a_pins) // 2, len(branch_b_pins) // 2, 1)
+    elif usb_common or usb_port1 or usb_port2:
         interface_kind = "usb2"
         topology_kind = "usb2_mux"
         common_pins = usb_common
@@ -2735,10 +2775,10 @@ def _infer_interface_switch_traits(device: dict, datasheet_context: dict | None 
         branch_b_pins = bus_b_pins
         channel_count = max(len(bus_a_pins), len(bus_b_pins), 1)
     else:
-        for item in pins.values():
+        for pin_number, item in pins.items():
             name = (item.get("name") or "").upper()
-            if name not in {"VCC", "VDD", "GND", "AGND", "DGND", "S", "SEL", "OE", "/OE", "OEB"}:
-                aux_pins.append(record(next(k for k,v in pins.items() if v is item), item))
+            if name not in {"VCC", "VDD", "GND", "AGND", "DGND", "S", "SEL", "OE", "/OE", "OEB", "EN"}:
+                aux_pins.append(record(pin_number, item))
 
     return {
         "preferred_package": preferred_package,
@@ -2751,6 +2791,9 @@ def _infer_interface_switch_traits(device: dict, datasheet_context: dict | None 
         "branch_a_pins": branch_a_pins,
         "branch_b_pins": branch_b_pins,
         "aux_pins": aux_pins,
+        "sideband_common_pins": sideband_common_pins,
+        "sideband_a_pins": sideband_a_pins,
+        "sideband_b_pins": sideband_b_pins,
         "interface_kind": interface_kind,
         "topology_kind": topology_kind,
         "channel_count": channel_count,
@@ -2761,7 +2804,7 @@ def _infer_interface_switch_traits(device: dict, datasheet_context: dict | None 
             for ref in [
                 _pin_source_ref(preferred_package, power_pins, ground_pins, note="supply pins from official package pin table"),
                 _pin_source_ref(preferred_package, select_pins, enable_pins, reset_pins, note="control pins from official package pin table"),
-                _pin_source_ref(preferred_package, common_pins, branch_a_pins, branch_b_pins, bus_a_pins, bus_b_pins, note="signal path pins from official package pin table"),
+                _pin_source_ref(preferred_package, common_pins, branch_a_pins, branch_b_pins, sideband_common_pins, sideband_a_pins, sideband_b_pins, note="signal path pins from official package pin table"),
             ]
             if ref
         ],
@@ -2809,7 +2852,7 @@ def _interface_switch_external_components(interface_context: dict) -> list[dict]
                 "why": "USB-facing ports usually need coordinated ESD protection and lane ownership review.",
             }
         )
-    if interface_context.get("interface_kind") in {"superspeed", "pcie"}:
+    if interface_context.get("interface_kind") in {"superspeed", "pcie", "displayport"}:
         components.append(
             {
                 "role": "ac_coupling_review",
@@ -2861,6 +2904,13 @@ def _interface_switch_starter_nets(interface_context: dict) -> list[dict]:
         add("SS_TXRX_COM", "superspeed_common_lanes")
         add("SS_PORT_A", "superspeed_branch_a_lanes")
         add("SS_PORT_B", "superspeed_branch_b_lanes")
+    elif kind == "displayport":
+        add("DP_COM", "displayport_common_mainlink")
+        add("DP_PORT_A", "displayport_branch_a_mainlink")
+        add("DP_PORT_B", "displayport_branch_b_mainlink")
+        add("DP_CTRL_COM", "displayport_common_sideband")
+        add("DP_CTRL_A", "displayport_branch_a_sideband")
+        add("DP_CTRL_B", "displayport_branch_b_sideband")
     elif kind == "pcie":
         add("PCIE_COM", "pcie_common_lanes")
         add("PCIE_PORT_A", "pcie_branch_a_lanes")
@@ -2876,7 +2926,7 @@ def _interface_switch_starter_nets(interface_context: dict) -> list[dict]:
 
 def _choose_default_interface_switch_template(interface_switch_templates: list[dict]) -> str | None:
     names = {item.get("name") for item in interface_switch_templates}
-    for preferred in ("superspeed_data_switch", "pcie_diff_switch", "usb2_audio_switch", "usb2_data_switch", "bus_mux_bridge", "bus_switch_bridge"):
+    for preferred in ("displayport_data_switch", "superspeed_data_switch", "pcie_diff_switch", "usb2_audio_switch", "usb2_data_switch", "bus_mux_bridge", "bus_switch_bridge"):
         if preferred in names:
             return preferred
     return interface_switch_templates[0].get("name") if interface_switch_templates else None
@@ -2952,6 +3002,32 @@ def _interface_switch_standard_templates(device: dict, interface_context: dict) 
             for ref in [
                 _pin_source_ref(interface_context.get("preferred_package"), interface_context.get("select_pins"), note="control pins from official package pin table"),
                 _pin_source_ref(interface_context.get("preferred_package"), interface_context.get("common_pins"), interface_context.get("branch_a_pins"), interface_context.get("branch_b_pins"), interface_context.get("aux_pins"), note="USB/audio path pins from official package pin table"),
+            ]
+            if ref
+        ]
+    elif kind == "displayport":
+        add_template(
+            "displayport_data_switch",
+            "DisplayPort Data Switch",
+            "H2a_displayport_data_switch",
+            "Use when one DisplayPort main-link group and sideband channel set are switched between two source or sink branches.",
+            "Captures common DisplayPort Main Link lanes, branch lanes, sideband ownership, select pins, and AC-coupling review from the official pin table and application pages.",
+            ["VCC", "GND", "DP_COM", "DP_PORT_A", "DP_PORT_B", "DP_CTRL_COM", "DP_CTRL_A", "DP_CTRL_B"] + common_ctrl,
+            ["U1", "CBYP", "RSEL", "ROE", "CAC", "JPATH"],
+            [
+                {"from": "DP_COM", "to": "JPATH", "note": "Keep the common Main Link lanes grouped at the shared connector or GPU boundary."},
+                {"from": "DP_PORT_A", "to": "JPATH", "note": "Document branch A Main Link ownership before connector mapping shifts."},
+                {"from": "DP_PORT_B", "to": "JPATH", "note": "Document branch B Main Link ownership before connector mapping shifts."},
+                {"from": "DP_CTRL_COM", "to": "JPATH", "note": "Keep AUX / HPD / DDC sideband ownership explicit at the common port boundary."},
+            ],
+            ["Freeze select polarity, Main Link lane ownership, and AUX / HPD coupling placement before SI review."],
+        )
+        templates[-1]["source"] = interface_context.get("source")
+        templates[-1]["source_refs"] = [
+            ref
+            for ref in [
+                _pin_source_ref(interface_context.get("preferred_package"), interface_context.get("select_pins"), interface_context.get("enable_pins"), note="control pins from official package pin table"),
+                _pin_source_ref(interface_context.get("preferred_package"), interface_context.get("common_pins"), interface_context.get("branch_a_pins"), interface_context.get("branch_b_pins"), interface_context.get("sideband_common_pins"), interface_context.get("sideband_a_pins"), interface_context.get("sideband_b_pins"), note="DisplayPort signal and sideband pins from official package pin table"),
             ]
             if ref
         ]

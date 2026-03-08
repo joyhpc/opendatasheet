@@ -239,6 +239,8 @@ def test_new_switch_family_bundle_exports(tmp_path):
             "--device",
             "TS5A2053",
             "--device",
+            "TS3A44159",
+            "--device",
             "SN74CBT3251",
             "--device",
             "SN74CB3Q3125",
@@ -261,6 +263,25 @@ def test_new_switch_family_bundle_exports(tmp_path):
     assert {"V+", "GND", "EN", "SW_COM", "SW_NO", "SW_NC"}.issubset(ts5a_nets)
     assert ts5a_intent["official_source_documents"][0]["path"] == "data/raw/datasheet_PDF/0130-06-00007_TS5A2053DCTR.pdf"
     assert "SPDT Analog Switch" in ts5a_quickstart
+
+    ts3a_dir = output_dir / "TS3A44159"
+    ts3a_intent = json.loads((ts3a_dir / "L1_design_intent.json").read_text(encoding="utf-8"))
+    ts3a_template = json.loads((ts3a_dir / "L3_module_template.json").read_text(encoding="utf-8"))
+    ts3a_manifest = json.loads((ts3a_dir / "bundle_manifest.json").read_text(encoding="utf-8"))
+    ts3a_quickstart = (ts3a_dir / "L2_quickstart.md").read_text(encoding="utf-8")
+    ts3a_roles = {item["role"] for item in ts3a_intent["external_components"]}
+    ts3a_nets = {item["name"] for item in ts3a_intent["starter_nets"]}
+    ts3a_switch = next(item for item in ts3a_template.get("switch_templates", []) if item["name"] == "spdt_analog_switch")
+    ts3a_source_pins = {pin["name"] for ref in ts3a_switch.get("source_refs", []) for pin in ref.get("pins", [])}
+
+    assert {"supply_decoupling", "control_header_or_gpio", "analog_channel_breakout"}.issubset(ts3a_roles)
+    assert {"VCC", "GND", "SEL_BANK", "SW_COM", "SW_NO", "SW_NC"}.issubset(ts3a_nets)
+    assert ts3a_intent["official_source_documents"][0]["path"] == "data/raw/datasheet_PDF/0130-06-00011_TS3A44159RSVR.pdf"
+    assert ts3a_manifest["official_source_documents"][0]["path"] == "data/raw/datasheet_PDF/0130-06-00011_TS3A44159RSVR.pdf"
+    assert ts3a_template["default_switch_template"] == "spdt_analog_switch"
+    assert {"IN1-2", "IN3-4", "COM1", "NO1", "NC1"}.issubset(ts3a_source_pins)
+    assert "## Official source documents" in ts3a_quickstart
+    assert "Control modes: `direct_select_bank`" in ts3a_quickstart
 
     cbt_dir = output_dir / "SN74CBT3251"
     cbt_intent = json.loads((cbt_dir / "L1_design_intent.json").read_text(encoding="utf-8"))
@@ -330,6 +351,8 @@ def test_interface_switch_bundle_export_includes_high_speed_templates(tmp_path):
             "--device",
             "TS3USBA225",
             "--device",
+            "TS3DV642",
+            "--device",
             "TC7USB40MU",
             "--device",
             "TC7PCI3212MT__TC7PCI3215MT",
@@ -391,6 +414,25 @@ def test_interface_switch_bundle_export_includes_high_speed_templates(tmp_path):
     assert {"D+/R", "D-/L", "D0+", "D1+", "R", "L"}.issubset(ts3usba225_source_pins)
     assert "## Official source documents" in ts3usba225_quickstart
     assert "Interface kind: `usb2_audio` topology=`usb2_audio_sp3t`" in ts3usba225_quickstart
+
+    ts3dv642_dir = output_dir / "TS3DV642"
+    ts3dv642_intent = json.loads((ts3dv642_dir / "L1_design_intent.json").read_text(encoding="utf-8"))
+    ts3dv642_template = json.loads((ts3dv642_dir / "L3_module_template.json").read_text(encoding="utf-8"))
+    ts3dv642_manifest = json.loads((ts3dv642_dir / "bundle_manifest.json").read_text(encoding="utf-8"))
+    ts3dv642_quickstart = (ts3dv642_dir / "L2_quickstart.md").read_text(encoding="utf-8")
+    ts3dv642_roles = {item["role"] for item in ts3dv642_intent["external_components"]}
+    ts3dv642_nets = {item["name"] for item in ts3dv642_intent["starter_nets"]}
+    ts3dv642_switch = next(item for item in ts3dv642_template.get("interface_switch_templates", []) if item["name"] == "displayport_data_switch")
+    ts3dv642_source_pins = {pin["name"] for ref in ts3dv642_switch.get("source_refs", []) for pin in ref.get("pins", [])}
+
+    assert {"supply_decoupling", "select_bias", "enable_bias", "ac_coupling_review", "signal_path_breakout", "pullup_resistor", "link_isolation_capacitor"}.issubset(ts3dv642_roles)
+    assert {"DP_COM", "DP_PORT_A", "DP_PORT_B", "DP_CTRL_COM", "DP_CTRL_A", "DP_CTRL_B", "SEL", "OE_N"}.issubset(ts3dv642_nets)
+    assert ts3dv642_intent["official_source_documents"][0]["path"] == "data/raw/datasheet_PDF/0130-06-00012_TS3DV642A0RUAR.pdf"
+    assert ts3dv642_manifest["official_source_documents"][0]["path"] == "data/raw/datasheet_PDF/0130-06-00012_TS3DV642A0RUAR.pdf"
+    assert ts3dv642_template["default_interface_switch_template"] == "displayport_data_switch"
+    assert {"D0+", "D0+A", "D0+B", "SCL", "SCL_A", "SCL_B", "HPD", "HPD_A", "HPD_B"}.issubset(ts3dv642_source_pins)
+    assert "## Official source documents" in ts3dv642_quickstart
+    assert "Interface kind: `displayport` topology=`displayport_mux`" in ts3dv642_quickstart
 
     usb2_dir = output_dir / "TC7USB40MU"
     usb2_intent = json.loads((usb2_dir / "L1_design_intent.json").read_text(encoding="utf-8"))
