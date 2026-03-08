@@ -1684,6 +1684,7 @@ def _fpga_standard_templates(device: dict, design_intent: dict, scenarios: list[
         )
 
     scenario_names = {item["name"] for item in scenarios}
+    scenario_by_name = {item["name"]: item for item in scenarios}
     if "qspi_jtag_bringup" in scenario_names:
         add_template(
             "qspi_jtag_bringup",
@@ -1732,21 +1733,34 @@ def _fpga_standard_templates(device: dict, design_intent: dict, scenarios: list[
             ["Freeze bank voltage plan before finalizing connector pin swaps."],
         )
     if "high_speed_link_bridge" in scenario_names:
+        semantic = scenario_by_name.get("high_speed_link_bridge", {})
+        protocol_candidates = semantic.get("protocol_candidates", [])
+        lane_group_refs = semantic.get("lane_group_refs", [])
+        protocol_suffix = f" Protocol candidates: {', '.join(protocol_candidates[:6])}." if protocol_candidates else ""
+        lane_group_suffix = f" Lane groups: {', '.join(lane_group_refs[:8])}." if lane_group_refs else ""
         add_template(
             "high_speed_link_bridge",
             "High-Speed Link Bridge",
             "F4_high_speed_link_bridge",
-            "SerDes connector, AC-coupling, and refclk source grouped for signal-integrity review.",
-            "Use when the selected Gowin package exposes multi-gigabit lanes.",
+            f"SerDes connector, AC-coupling, and refclk source grouped for signal-integrity review.{protocol_suffix}{lane_group_suffix}",
+            "Use when exported high-speed lane groups require protocol/refclk ownership to be frozen early.",
             ["REFCLK", "SERDES_RX", "SERDES_TX"],
             ["U1", "JHS", "XO1", "CACHS"],
             [
-                {"from": "REFCLK", "to": "XO1", "note": "Fix the refclk source before routing or SI review."},
-                {"from": "SERDES_RX", "to": "JHS", "note": "Document ingress lane ownership clearly."},
-                {"from": "SERDES_TX", "to": "JHS", "note": "Keep egress lanes adjacent to AC-coupling network placeholders."},
+                {"from": "REFCLK", "to": "XO1", "note": "Fix the refclk source against the exported protocol candidates before routing or SI review."},
+                {"from": "SERDES_RX", "to": "JHS", "note": "Document ingress lane ownership per exported lane group."},
+                {"from": "SERDES_TX", "to": "JHS", "note": "Keep egress lanes adjacent to AC-coupling network placeholders and lane-group boundaries."},
             ],
-            ["Freeze link standard, refclk frequency, and AC-coupling placement before layout."],
+            [
+                "Freeze link standard, refclk frequency, and AC-coupling placement before layout.",
+                *([f"Freeze protocol ownership for exported lane groups: {', '.join(lane_group_refs[:8])}."] if lane_group_refs else []),
+                *([f"Review candidate protocols from export: {', '.join(protocol_candidates[:6])}."] if protocol_candidates else []),
+            ],
         )
+        templates[-1]["protocol_candidates"] = protocol_candidates
+        templates[-1]["lane_group_refs"] = lane_group_refs
+        templates[-1]["bundle_tags"] = semantic.get("bundle_tags", [])
+        templates[-1]["use_case_tags"] = semantic.get("use_case_tags", [])
     if "ddr_memory_interface" in scenario_names:
         add_template(
             "ddr_memory_interface",
@@ -3883,6 +3897,7 @@ def build_module_template(device: dict, design_intent: dict) -> dict:
         "mcu_templates": mcu_templates,
         "fpga_scenarios": fpga_scenarios,
         "fpga_templates": fpga_templates,
+        "high_speed_semantic_context": design_intent.get("high_speed_semantic_context"),
         "default_opamp_template": default_opamp_template,
         "default_decoder_template": default_decoder_template,
         "default_interface_switch_template": default_interface_switch_template,
@@ -3939,11 +3954,29 @@ def build_quickstart_markdown(device: dict, design_intent: dict) -> str:
         lines.extend(["", "## Customer scenarios", ""])
         for scenario in customer_scenarios[:8]:
             lines.append(f"- `{scenario.get('label')}`: {scenario.get('why')}")
+
+        high_speed_context = design_intent.get("high_speed_semantic_context", {}) or {}
+        if high_speed_context:
+            lines.extend(["", "## High-speed semantics", ""])
+            if high_speed_context.get("protocol_candidates"):
+                lines.append(f"- Protocol candidates: `{', '.join(high_speed_context.get('protocol_candidates', [])[:8])}`")
+            lane_groups = high_speed_context.get("lane_groups") or []
+            for group in lane_groups[:6]:
+                group_id = group.get("group_id")
+                protocols = ", ".join(group.get("candidate_protocols", [])[:6])
+                refs = ", ".join(group.get("refclk_pair_names", [])[:4])
+                lines.append(f"- Lane group `{group_id}` → protocols `{protocols}`; refclk `{refs}`")
+
         lines.extend(["", "## L3 Templates", ""])
         default_name = _choose_default_fpga_template(_fpga_standard_templates(device, design_intent, customer_scenarios))
         for template in _fpga_standard_templates(device, design_intent, customer_scenarios):
             prefix = "Start here: " if template.get("name") == default_name else ""
-            lines.append(f"- {prefix}`{template.get('name')}` — {template.get('recommended_when')}")
+            semantic_suffix = ""
+            if template.get("protocol_candidates"):
+                semantic_suffix = f" Protocols: {', '.join(template.get('protocol_candidates', [])[:6])}."
+            if template.get("lane_group_refs"):
+                semantic_suffix += f" Lane groups: {', '.join(template.get('lane_group_refs', [])[:8])}."
+            lines.append(f"- {prefix}`{template.get('name')}` — {template.get('recommended_when')}{semantic_suffix}")
 
     vendor_design_rules = design_intent.get("vendor_design_rules", {})
     if vendor_design_rules:

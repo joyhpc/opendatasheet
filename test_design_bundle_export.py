@@ -604,11 +604,17 @@ def test_gowin_fpga_bundle_export_includes_customer_scenarios(tmp_path):
     hs_scenario = next(item for item in design_intent.get("customer_scenarios", []) if item["name"] == "high_speed_link_bridge")
     assert hs_scenario.get("source") == "semantic_export"
     assert "Q0" in hs_scenario.get("lane_group_refs", [])
+    hs_template = next(item for item in module_template.get("fpga_templates", []) if item["name"] == "high_speed_link_bridge")
+    assert "PCIe 3.0" in hs_template.get("protocol_candidates", [])
+    assert "Q0" in hs_template.get("lane_group_refs", [])
+    assert module_template.get("high_speed_semantic_context", {}).get("protocol_candidates")
     assert {"qspi_jtag_bringup", "mipi_camera_bridge", "lvds_io_expansion", "high_speed_link_bridge", "ddr_memory_interface"}.issubset(template_names)
     assert module_template["default_fpga_template"] == "mipi_camera_bridge"
     assert set(design_intent.get("vendor_design_rules", {}).keys()) == {"power_rules", "config_rules", "clock_rules", "io_rules"}
     assert {item["title"] for item in design_intent.get("reference_design_assets", [])} == {"GW5AT schematic guide", "GW5AT-60 devboard reference"}
     assert "Customer scenarios" in quickstart
+    assert "High-speed semantics" in quickstart
+    assert "Lane group `Q0`" in quickstart
     assert "L3 Templates" in quickstart
     assert "Vendor design rules" in quickstart
     assert "Reference assets" in quickstart
@@ -694,7 +700,10 @@ def test_amd_fpga_bundle_export_uses_semantic_high_speed_context(tmp_path):
     assert "224" in scenario.get("lane_group_refs", [])
     assert "PCIe 4.0" in scenario.get("protocol_candidates", [])
     assert module_template["default_fpga_template"] == "high_speed_link_bridge"
-    assert "high_speed_link_bridge" in {item["name"] for item in module_template.get("fpga_templates", [])}
+    hs_template = next(item for item in module_template.get("fpga_templates", []) if item["name"] == "high_speed_link_bridge")
+    assert "224" in hs_template.get("lane_group_refs", [])
+    assert "PCIe 4.0" in hs_template.get("protocol_candidates", [])
+    assert module_template.get("high_speed_semantic_context", {}).get("lane_groups")
 
 
 def test_gowin_bundle_rules_are_family_specific(tmp_path):
