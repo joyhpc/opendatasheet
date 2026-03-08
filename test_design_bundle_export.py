@@ -241,6 +241,8 @@ def test_new_switch_family_bundle_exports(tmp_path):
             "--device",
             "TS3A44159",
             "--device",
+            "TS12A12511",
+            "--device",
             "SN74CBT3251",
             "--device",
             "SN74CB3Q3125",
@@ -282,6 +284,25 @@ def test_new_switch_family_bundle_exports(tmp_path):
     assert {"IN1-2", "IN3-4", "COM1", "NO1", "NC1"}.issubset(ts3a_source_pins)
     assert "## Official source documents" in ts3a_quickstart
     assert "Control modes: `direct_select_bank`" in ts3a_quickstart
+
+    ts12_dir = output_dir / "TS12A12511"
+    ts12_intent = json.loads((ts12_dir / "L1_design_intent.json").read_text(encoding="utf-8"))
+    ts12_template = json.loads((ts12_dir / "L3_module_template.json").read_text(encoding="utf-8"))
+    ts12_manifest = json.loads((ts12_dir / "bundle_manifest.json").read_text(encoding="utf-8"))
+    ts12_quickstart = (ts12_dir / "L2_quickstart.md").read_text(encoding="utf-8")
+    ts12_roles = {item["role"] for item in ts12_intent["external_components"]}
+    ts12_nets = {item["name"] for item in ts12_intent["starter_nets"]}
+    ts12_switch = next(item for item in ts12_template.get("switch_templates", []) if item["name"] == "spdt_analog_switch")
+    ts12_source_pins = {pin["name"] for ref in ts12_switch.get("source_refs", []) for pin in ref.get("pins", [])}
+
+    assert {"supply_decoupling", "control_header_or_gpio", "analog_channel_breakout"}.issubset(ts12_roles)
+    assert {"VCC", "-VCC", "GND", "SEL_BANK", "SW_COM", "SW_NO", "SW_NC"}.issubset(ts12_nets)
+    assert ts12_intent["official_source_documents"][0]["path"] == "data/raw/datasheet_PDF/0130-06-00015_TS12A12511DCNR.pdf"
+    assert ts12_manifest["official_source_documents"][0]["path"] == "data/raw/datasheet_PDF/0130-06-00015_TS12A12511DCNR.pdf"
+    assert ts12_template["default_switch_template"] == "spdt_analog_switch"
+    assert {"IN", "COM", "NO", "NC"}.issubset(ts12_source_pins)
+    assert "## Official source documents" in ts12_quickstart
+    assert "Control modes: `direct_select_bank`" in ts12_quickstart
 
     cbt_dir = output_dir / "SN74CBT3251"
     cbt_intent = json.loads((cbt_dir / "L1_design_intent.json").read_text(encoding="utf-8"))

@@ -2118,7 +2118,7 @@ def _infer_switch_traits(device: dict, datasheet_context: dict | None = None) ->
             power_pins.append(item)
         elif name in {"GND", "AGND", "DGND"}:
             ground_pins.append(item)
-        elif name in {"VSS", "VEE", "V-"}:
+        elif name in {"VSS", "VEE", "V-", "-VCC", "-VDD"}:
             negative_supply_pins.append(item)
 
         if re.match(r"^S\d+[A-Z]?$", name):
@@ -2136,7 +2136,7 @@ def _infer_switch_traits(device: dict, datasheet_context: dict | None = None) ->
             address_pins.append(item)
         elif re.match(r"^SEL\d+$", name) or (re.match(r"^S\d+$", name) and item.get("direction") == "INPUT" and "select" in desc):
             select_bank_pins.append(item)
-        elif re.match(r"^IN\d+(?:-\d+)?$", name) and item.get("direction") == "INPUT" and any(token in desc for token in ("control", "select", "connect com")):
+        elif (name == "IN" or re.match(r"^IN\d+(?:-\d+)?$", name)) and item.get("direction") == "INPUT" and any(token in desc for token in ("control", "select", "connect com", "logic control")):
             select_bank_pins.append(item)
         if name in {"EN", "ENABLE"}:
             enable_pins.append(item)
