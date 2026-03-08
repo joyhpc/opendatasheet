@@ -73,6 +73,8 @@ def semantic_checks(data: dict) -> list[str]:
             errors.append("  [constraint_blocks.refclk_requirements] missing refclk_requirements constraint block")
         if "refclk_requirements" in constraint_blocks and not constraint_blocks.get("refclk_requirements", {}).get("refclk_pairs"):
             errors.append("  [constraint_blocks.refclk_requirements.refclk_pairs] missing concrete refclk pair details")
+        if has_refclk and has_hs and not (constraint_blocks.get("refclk_requirements", {}) or {}).get("lane_group_mappings"):
+            errors.append("  [constraint_blocks.refclk_requirements.lane_group_mappings] missing refclk-to-lane group mapping details")
         hs_protocols = [p for p in (capability_blocks.get("high_speed_serial", {}) or {}).get("supported_protocols", []) if p != "custom"]
         refclk_profiles = (constraint_blocks.get("refclk_requirements", {}) or {}).get("protocol_refclk_profiles", {})
         if hs_protocols and not refclk_profiles:

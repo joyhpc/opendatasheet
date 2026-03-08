@@ -4234,7 +4234,12 @@
           "p_name": "Q0_REFCLKP_0",
           "n_name": "Q0_REFCLKM_0",
           "bank": "Q0",
-          "source": "diff_pair_export"
+          "source": "diff_pair_export",
+          "group_id": "Q0",
+          "refclk_index": 0,
+          "mapped_lane_groups": [
+            "Q0"
+          ]
         },
         {
           "pair_name": "REFCLK_Q0_C1",
@@ -4244,7 +4249,12 @@
           "p_name": "Q0_REFCLKP_1",
           "n_name": "Q0_REFCLKM_1",
           "bank": "Q0",
-          "source": "diff_pair_export"
+          "source": "diff_pair_export",
+          "group_id": "Q0",
+          "refclk_index": 1,
+          "mapped_lane_groups": [
+            "Q0"
+          ]
         }
       ],
       "review_required": true,
@@ -4263,6 +4273,40 @@
         100.0
       ],
       "selection_note": "Refclk frequency, clock standard, jitter budget, and pair-to-quad mapping must be frozen against the selected protocol before schematic sign-off.",
+      "lane_group_mappings": [
+        {
+          "group_id": "Q0",
+          "group_type": "serdes_quad",
+          "bank": "Q0",
+          "rx_pair_names": [
+            "RX_Q0_L0",
+            "RX_Q0_L1",
+            "RX_Q0_L2",
+            "RX_Q0_L3"
+          ],
+          "tx_pair_names": [
+            "TX_Q0_L0",
+            "TX_Q0_L1",
+            "TX_Q0_L2",
+            "TX_Q0_L3"
+          ],
+          "lane_indices": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "refclk_pair_names": [
+            "REFCLK_Q0_C0",
+            "REFCLK_Q0_C1"
+          ],
+          "refclk_indices": [
+            0,
+            1
+          ],
+          "source": "pair_name_inference"
+        }
+      ],
       "protocol_matrix": {
         "custom": {
           "hardcore": false,

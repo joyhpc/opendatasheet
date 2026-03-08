@@ -642,6 +642,31 @@ def t4_10():
     assert_true(100.0 in lifcl_refclk.get("common_review_candidates_mhz", []), "LIFCL-40 missing 100 MHz candidate")
 
 
+@case("T4.11 Refclk constraints expose lane group topology")
+def t4_11():
+    xcku = json.load(open(EXPORT_DIR / "XCKU3P_FFVA676.json"))
+    xcku_refclk = xcku.get("constraint_blocks", {}).get("refclk_requirements", {})
+    xcku_groups = {entry.get("group_id"): entry for entry in xcku_refclk.get("lane_group_mappings", [])}
+    assert_true("224" in xcku_groups, "XCKU3P missing quad 224 topology")
+    assert_eq(xcku_groups["224"].get("lane_indices"), [0, 1, 2, 3], "XCKU3P quad 224 lane indices")
+    assert_eq(xcku_groups["224"].get("refclk_indices"), [0, 1], "XCKU3P quad 224 refclk indices")
+    refclk0_224 = [pair for pair in xcku_refclk.get("refclk_pairs", []) if pair.get("pair_name") == "REFCLK0_224"][0]
+    assert_eq(refclk0_224.get("mapped_lane_groups"), ["224"], "XCKU3P REFCLK0_224 mapping")
+
+    gw = json.load(open(EXPORT_DIR / "GW5AT-60_UG225.json"))
+    gw_refclk = gw.get("constraint_blocks", {}).get("refclk_requirements", {})
+    gw_groups = {entry.get("group_id"): entry for entry in gw_refclk.get("lane_group_mappings", [])}
+    assert_true("Q0" in gw_groups, "GW5AT-60_UG225 missing Q0 topology")
+    assert_eq(gw_groups["Q0"].get("lane_indices"), [0, 1, 2, 3], "GW5AT-60_UG225 Q0 lane indices")
+    assert_eq(gw_groups["Q0"].get("refclk_indices"), [0, 1], "GW5AT-60_UG225 Q0 refclk indices")
+
+    lifcl = json.load(open(EXPORT_DIR / "LIFCL-40_CABGA400.json"))
+    lifcl_refclk = lifcl.get("constraint_blocks", {}).get("refclk_requirements", {})
+    lifcl_groups = {entry.get("group_id"): entry for entry in lifcl_refclk.get("lane_group_mappings", [])}
+    assert_true("SD0" in lifcl_groups, "LIFCL-40 missing SD0 topology")
+    assert_eq(lifcl_groups["SD0"].get("refclk_pair_names"), ["SD_REFCLK"], "LIFCL-40 SD0 refclk mapping")
+
+
 @case("T6.3 Gowin GW5AT exports expose package-specific ip_blocks")
 def t6_3():
     ug225 = json.load(open(EXPORT_DIR / "GW5AT-60_UG225.json"))

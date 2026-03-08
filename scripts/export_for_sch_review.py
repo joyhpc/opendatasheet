@@ -790,6 +790,164 @@ def _collect_refclk_pairs(diff_pairs: list[dict], pins: list[dict]) -> list[dict
     return refclk_pairs
 
 
+def _infer_hs_pair_topology(pair: dict) -> dict:
+    pair_type = _safe_upper(pair.get("type"))
+    pair_name = pair.get("pair_name") or ""
+    p_name = pair.get("p_name") or ""
+    upper_pair_name = _safe_upper(pair_name)
+    upper_p_name = _safe_upper(p_name)
+    bank = pair.get("bank")
+
+    match = re.search(r"(Q\d+)_LN(\d+)_(RX|TX)", upper_p_name)
+    if match:
+        return {
+            "group_id": match.group(1),
+            "group_type": "serdes_quad",
+            "lane_index": int(match.group(2)),
+            "bank": bank or match.group(1),
+        }
+    match = re.search(r"REFCLK_(Q\d+)_C(\d+)", upper_pair_name)
+    if match:
+        return {
+            "group_id": match.group(1),
+            "group_type": "serdes_quad",
+            "refclk_index": int(match.group(2)),
+            "bank": bank or match.group(1),
+        }
+    match = re.search(r"(Q\d+)_REFCLK[PM]?_(\d+)", upper_p_name)
+    if match:
+        return {
+            "group_id": match.group(1),
+            "group_type": "serdes_quad",
+            "refclk_index": int(match.group(2)),
+            "bank": bank or match.group(1),
+        }
+
+    match = re.search(r"MGT(?:Y|H)?(?:RX|TX)P(\d+)_(\d+)$", upper_p_name)
+    if match:
+        return {
+            "group_id": match.group(2),
+            "group_type": "transceiver_quad",
+            "lane_index": int(match.group(1)),
+            "bank": bank or match.group(2),
+        }
+    match = re.search(r"MGTREFCLK(\d+)P_(\d+)$", upper_p_name)
+    if match:
+        return {
+            "group_id": match.group(2),
+            "group_type": "transceiver_quad",
+            "refclk_index": int(match.group(1)),
+            "bank": bank or match.group(2),
+        }
+
+    match = re.search(r"(SD\d+)_(RX|TX)D[PN]$", upper_p_name)
+    if match:
+        channel = match.group(1)
+        channel_idx = re.search(r"\d+", channel)
+        return {
+            "group_id": channel,
+            "group_type": "serdes_channel",
+            "lane_index": int(channel_idx.group(0)) if channel_idx else None,
+            "bank": bank,
+        }
+    if upper_p_name == "SD_REFCLKP" or upper_pair_name == "SD_REFCLK":
+        return {
+            "group_id": "SD",
+            "group_type": "serdes_refclk_domain",
+            "bank": bank,
+        }
+
+    if pair_type in ("GT_RX", "GT_TX", "SERDES_RX", "SERDES_TX") and bank:
+        return {
+            "group_id": str(bank),
+            "group_type": "lane_bank",
+            "bank": bank,
+        }
+    if pair_type in ("GT_REFCLK", "SERDES_REFCLK", "REFCLK") and bank:
+        return {
+            "group_id": str(bank),
+            "group_type": "refclk_bank",
+            "bank": bank,
+        }
+    return {}
+
+
+def _candidate_group_ids(refclk_meta: dict, lane_groups: dict) -> list[str]:
+    group_id = refclk_meta.get("group_id")
+    if not group_id:
+        return []
+    if group_id in lane_groups:
+        return [group_id]
+    matches = sorted(group for group in lane_groups if group.startswith(group_id))
+    if matches:
+        return matches
+    bank = refclk_meta.get("bank")
+    if bank is not None:
+        return sorted(group_id for group_id, group in lane_groups.items() if group.get("bank") == bank)
+    return []
+
+
+def _high_speed_topology(diff_pairs: list[dict], refclk_pairs: list[dict]) -> tuple[list[dict], list[dict]]:
+    lane_groups = {}
+    for pair in diff_pairs:
+        pair_type = _safe_upper(pair.get("type"))
+        if pair_type not in ("GT_RX", "GT_TX", "SERDES_RX", "SERDES_TX"):
+            continue
+        meta = _infer_hs_pair_topology(pair)
+        group_id = meta.get("group_id")
+        if not group_id:
+            continue
+        entry = lane_groups.setdefault(group_id, {
+            "group_id": group_id,
+            "group_type": meta.get("group_type"),
+            "bank": meta.get("bank"),
+            "rx_pair_names": [],
+            "tx_pair_names": [],
+            "lane_indices": [],
+            "refclk_pair_names": [],
+            "refclk_indices": [],
+            "source": "pair_name_inference",
+        })
+        if pair_type in ("GT_RX", "SERDES_RX") and pair.get("pair_name"):
+            entry["rx_pair_names"].append(pair.get("pair_name"))
+        if pair_type in ("GT_TX", "SERDES_TX") and pair.get("pair_name"):
+            entry["tx_pair_names"].append(pair.get("pair_name"))
+        lane_index = meta.get("lane_index")
+        if lane_index is not None:
+            entry["lane_indices"].append(lane_index)
+
+    enriched_refclk_pairs = []
+    for pair in refclk_pairs:
+        enriched = dict(pair)
+        meta = _infer_hs_pair_topology(pair)
+        if meta.get("group_id"):
+            enriched["group_id"] = meta.get("group_id")
+        if meta.get("refclk_index") is not None:
+            enriched["refclk_index"] = meta.get("refclk_index")
+        candidate_ids = _candidate_group_ids(meta, lane_groups)
+        if candidate_ids:
+            enriched["mapped_lane_groups"] = candidate_ids
+        enriched_refclk_pairs.append(enriched)
+        for group_id in candidate_ids:
+            entry = lane_groups[group_id]
+            if pair.get("pair_name"):
+                entry["refclk_pair_names"].append(pair.get("pair_name"))
+            refclk_index = meta.get("refclk_index")
+            if refclk_index is not None:
+                entry["refclk_indices"].append(refclk_index)
+
+    lane_group_mappings = []
+    for group_id in sorted(lane_groups):
+        entry = dict(lane_groups[group_id])
+        entry["rx_pair_names"] = sorted(set(entry["rx_pair_names"]))
+        entry["tx_pair_names"] = sorted(set(entry["tx_pair_names"]))
+        entry["lane_indices"] = sorted(set(entry["lane_indices"]))
+        entry["refclk_pair_names"] = sorted(set(entry["refclk_pair_names"]))
+        entry["refclk_indices"] = sorted(set(entry["refclk_indices"]))
+        lane_group_mappings.append(entry)
+    return enriched_refclk_pairs, lane_group_mappings
+
+
 def _package_rate_note(vendor: str, package: str, hs_serial: dict) -> str | None:
     if vendor == "Gowin" and hs_serial.get("package_rate_ceiling_gbps") is not None:
         ceiling = hs_serial.get("package_rate_ceiling_gbps")
@@ -870,12 +1028,13 @@ def _generic_fpga_constraint_blocks(pinout_data: dict, capability_blocks: dict, 
     if hs_serial and refclk_pairs:
         protocol_profiles = _normalize_protocol_refclk_profiles(hs_serial.get("supported_protocols") or [])
         protocol_candidates = sorted({freq for profile in protocol_profiles.values() for freq in profile.get("frequencies_mhz", [])})
+        enriched_refclk_pairs, lane_group_mappings = _high_speed_topology(diff_pairs, refclk_pairs)
         blocks["refclk_requirements"] = {
             "class": "clocking",
             "required": True,
             "selection_required": True,
-            "refclk_pair_count": len(refclk_pairs),
-            "refclk_pairs": refclk_pairs,
+            "refclk_pair_count": len(enriched_refclk_pairs),
+            "refclk_pairs": enriched_refclk_pairs,
             "review_required": True,
             "source": hs_serial.get("source"),
             "source_url": hs_serial.get("source_url"),
@@ -883,6 +1042,8 @@ def _generic_fpga_constraint_blocks(pinout_data: dict, capability_blocks: dict, 
             "common_review_candidates_mhz": protocol_candidates,
             "selection_note": "Refclk frequency, clock standard, jitter budget, and pair-to-quad mapping must be frozen against the selected protocol before schematic sign-off.",
         }
+        if lane_group_mappings:
+            blocks["refclk_requirements"]["lane_group_mappings"] = lane_group_mappings
         if hs_serial.get("protocol_matrix"):
             blocks["refclk_requirements"]["protocol_matrix"] = hs_serial.get("protocol_matrix")
         if hs_serial.get("review_note"):

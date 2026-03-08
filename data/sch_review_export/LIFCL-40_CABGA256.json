@@ -5217,7 +5217,11 @@
           "p_name": "SD_REFCLKP",
           "n_name": "SD_REFCLKN",
           "bank": null,
-          "source": "pin_name_inference"
+          "source": "pin_name_inference",
+          "group_id": "SD",
+          "mapped_lane_groups": [
+            "SD0"
+          ]
         }
       ],
       "review_required": true,
@@ -5258,6 +5262,27 @@
         125.0
       ],
       "selection_note": "Refclk frequency, clock standard, jitter budget, and pair-to-quad mapping must be frozen against the selected protocol before schematic sign-off.",
+      "lane_group_mappings": [
+        {
+          "group_id": "SD0",
+          "group_type": "serdes_channel",
+          "bank": "80",
+          "rx_pair_names": [
+            "RX_SD0"
+          ],
+          "tx_pair_names": [
+            "TX_SD0"
+          ],
+          "lane_indices": [
+            0
+          ],
+          "refclk_pair_names": [
+            "SD_REFCLK"
+          ],
+          "refclk_indices": [],
+          "source": "pair_name_inference"
+        }
+      ],
       "protocol_matrix": {
         "SGMII": {
           "lane_widths": [
