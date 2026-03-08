@@ -282,6 +282,41 @@ def test_new_switch_family_bundle_exports(tmp_path):
     assert {"VCC", "GND", "BUS_A", "BUS_B"}.issubset(cb3_nets)
 
 
+def test_tmux111x_family_bundle_export_uses_family_mpn_and_direct_select_bank(tmp_path):
+    output_dir = tmp_path / "bundles"
+    subprocess.run(
+        [
+            sys.executable,
+            "scripts/export_design_bundle.py",
+            "--device",
+            "TMUX1111/TMUX1112/TMUX1113",
+            "--output-dir",
+            str(output_dir),
+        ],
+        cwd=REPO_ROOT,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+
+    tmux_dir = output_dir / "TMUX1111_TMUX1112_TMUX1113"
+    tmux_intent = json.loads((tmux_dir / "L1_design_intent.json").read_text(encoding="utf-8"))
+    tmux_template = json.loads((tmux_dir / "L3_module_template.json").read_text(encoding="utf-8"))
+    tmux_manifest = json.loads((tmux_dir / "bundle_manifest.json").read_text(encoding="utf-8"))
+    tmux_quickstart = (tmux_dir / "L2_quickstart.md").read_text(encoding="utf-8")
+    tmux_nets = {item["name"] for item in tmux_intent["starter_nets"]}
+
+    assert tmux_template["default_switch_template"] == "direct_control_switch_bank"
+    assert {"VDD", "GND", "SEL_BANK", "SIG_PORT_A", "SIG_PORT_B"}.issubset(tmux_nets)
+    assert tmux_intent["switch_device_context"]["supports_direct_select_bank"] is True
+    assert tmux_intent["official_source_documents"][0]["path"] == "data/raw/datasheet_PDF/0130-06-00016_TMUX1112RSVR.pdf"
+    assert tmux_manifest["official_source_documents"][0]["path"] == "data/raw/datasheet_PDF/0130-06-00016_TMUX1112RSVR.pdf"
+    tmux_switch = next(item for item in tmux_template.get("switch_templates", []) if item["name"] == "direct_control_switch_bank")
+    tmux_source_pins = {pin["name"] for ref in tmux_switch.get("source_refs", []) for pin in ref.get("pins", [])}
+    assert {"SEL1", "SEL2", "SEL3", "SEL4", "S1", "D1"}.issubset(tmux_source_pins)
+    assert "Control modes: `direct_select_bank`" in tmux_quickstart
+
+
 def test_interface_switch_bundle_export_includes_high_speed_templates(tmp_path):
     output_dir = tmp_path / "bundles"
     subprocess.run(

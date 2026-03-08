@@ -2098,6 +2098,7 @@ def _infer_switch_traits(device: dict, datasheet_context: dict | None = None) ->
     normally_open_pins = []
     normally_closed_pins = []
     address_pins = []
+    select_bank_pins = []
     enable_pins = []
     reset_pins = []
     serial_clock_pins = []
@@ -2131,8 +2132,10 @@ def _infer_switch_traits(device: dict, datasheet_context: dict | None = None) ->
             normally_open_pins.append(item)
         if (name == "NC" or re.match(r"^NC\d+$", name)) and not is_no_connect:
             normally_closed_pins.append(item)
-        if re.match(r"^A\d+$", name) or name == "SEL" or re.match(r"^SEL\d+$", name) or (re.match(r"^S\d+$", name) and item.get("direction") == "INPUT" and "select" in desc):
+        if re.match(r"^A\d+$", name):
             address_pins.append(item)
+        elif re.match(r"^SEL\d+$", name) or (re.match(r"^S\d+$", name) and item.get("direction") == "INPUT" and "select" in desc):
+            select_bank_pins.append(item)
         if name in {"EN", "ENABLE"}:
             enable_pins.append(item)
         if name in {"RESET", "RST", "RESETB", "RSTB"}:
@@ -2165,6 +2168,7 @@ def _infer_switch_traits(device: dict, datasheet_context: dict | None = None) ->
         and any((item.get("name") or "").upper() in {"DIN", "SDI"} for item in serial_data_pins)
     )
     supports_parallel_address = bool(address_pins)
+    supports_direct_select_bank = bool(select_bank_pins)
     positive_supply_net = power_pins[0]["name"] if power_pins else "VDD"
     ground_net = ground_pins[0]["name"] if ground_pins else "GND"
 
@@ -2179,6 +2183,7 @@ def _infer_switch_traits(device: dict, datasheet_context: dict | None = None) ->
         "normally_open_pins": normally_open_pins,
         "normally_closed_pins": normally_closed_pins,
         "address_pins": address_pins,
+        "select_bank_pins": select_bank_pins,
         "enable_pins": enable_pins,
         "reset_pins": reset_pins,
         "serial_clock_pins": serial_clock_pins,
@@ -2188,6 +2193,7 @@ def _infer_switch_traits(device: dict, datasheet_context: dict | None = None) ->
         "supports_i2c": i2c_support,
         "supports_shift_register": supports_shift_register,
         "supports_parallel_address": supports_parallel_address,
+        "supports_direct_select_bank": supports_direct_select_bank,
         "topology_kind": topology_kind,
         "channel_count": channel_count,
         "positive_supply_net": positive_supply_net,
@@ -2198,7 +2204,7 @@ def _infer_switch_traits(device: dict, datasheet_context: dict | None = None) ->
             ref
             for ref in [
                 _pin_source_ref(preferred_package, power_pins, ground_pins, negative_supply_pins, note="supply pins from official package pin table"),
-                _pin_source_ref(preferred_package, address_pins, enable_pins, reset_pins, serial_clock_pins, serial_data_pins, serial_output_pins, sync_pins, note="control pins from official package pin table"),
+                _pin_source_ref(preferred_package, address_pins, select_bank_pins, enable_pins, reset_pins, serial_clock_pins, serial_data_pins, serial_output_pins, sync_pins, note="control pins from official package pin table"),
                 _pin_source_ref(preferred_package, source_pins, drain_pins, common_pins, normally_open_pins, normally_closed_pins, note="analog path pins from official package pin table"),
             ]
             if ref
@@ -2225,7 +2231,17 @@ def _switch_external_components(switch_context: dict) -> list[dict]:
                 "designator": "RADDR/JSEL",
                 "status": "design_specific",
                 "connect_between": ["ADDR_BUS", "logic_controller_or_straps"],
-                "why": "Selector pins should not float during bring-up; tie them to a controller or deterministic straps.",
+                "why": "Binary selector pins should not float during bring-up; tie them to a controller or deterministic straps.",
+            }
+        )
+    if switch_context.get("supports_direct_select_bank"):
+        components.append(
+            {
+                "role": "control_header_or_gpio",
+                "designator": "JCTRL/RSEL",
+                "status": "design_specific",
+                "connect_between": ["SEL_BANK", "gpio_or_straps"],
+                "why": "Per-channel select pins should be assigned to a deterministic GPIO or strap bank before schematic freeze.",
             }
         )
     if switch_context.get("enable_pins"):
@@ -2319,7 +2335,9 @@ def _switch_starter_nets(switch_context: dict) -> list[dict]:
         add((switch_context.get("negative_supply_pins") or [{"name": "VSS"}])[0]["name"], "analog_switch_negative_supply_or_ground")
     add(switch_context.get("ground_net", "GND"), "module_ground")
     if switch_context.get("supports_parallel_address"):
-        add("ADDR_BUS", "switch_address_or_select_lines")
+        add("ADDR_BUS", "switch_binary_address_lines")
+    if switch_context.get("supports_direct_select_bank"):
+        add("SEL_BANK", "switch_direct_channel_select_lines")
     if switch_context.get("enable_pins"):
         add("EN", "switch_enable_control")
     if switch_context.get("reset_pins"):
@@ -2350,7 +2368,7 @@ def _switch_starter_nets(switch_context: dict) -> list[dict]:
 
 def _choose_default_switch_template(switch_templates: list[dict]) -> str | None:
     template_names = {item.get("name") for item in switch_templates}
-    for preferred in ("i2c_switch_matrix", "serial_switch_bank", "addressable_analog_mux", "spdt_analog_switch", "switch_bank_breakout"):
+    for preferred in ("i2c_switch_matrix", "serial_switch_bank", "addressable_analog_mux", "spdt_analog_switch", "direct_control_switch_bank", "switch_bank_breakout"):
         if preferred in template_names:
             return preferred
     return switch_templates[0].get("name") if switch_templates else None
@@ -2480,6 +2498,32 @@ def _switch_standard_templates(device: dict, switch_context: dict) -> list[dict]
             for ref in [
                 _pin_source_ref(switch_context.get("preferred_package"), switch_context.get("enable_pins"), note="enable pins from official package pin table"),
                 _pin_source_ref(switch_context.get("preferred_package"), switch_context.get("common_pins"), switch_context.get("normally_open_pins"), switch_context.get("normally_closed_pins"), note="COM / NO / NC pins from official package pin table"),
+            ]
+            if ref
+        ]
+
+    if switch_context.get("topology_kind") == "independent_switch_bank" and switch_context.get("supports_direct_select_bank") and not switch_context.get("supports_shift_register"):
+        add_template(
+            "direct_control_switch_bank",
+            "Direct-Control Switch Bank",
+            "S5_direct_control_switch_bank",
+            "Use when each channel in the switch bank has its own dedicated select line from an MCU/FPGA/GPIO bank.",
+            "Captures per-channel select ownership together with the two switched signal sides for first-pass schematic capture.",
+            [switch_context.get("positive_supply_net", "VDD"), switch_context.get("ground_net", "GND"), "SEL_BANK", "SIG_PORT_A", "SIG_PORT_B"] + (["EN"] if switch_context.get("enable_pins") else []),
+            ["U1", "CBYP", "JCTRL", "JSW"] + (["REN"] if switch_context.get("enable_pins") else []),
+            [
+                {"from": "SEL_BANK", "to": "JCTRL", "note": "Keep per-channel select ownership visible at the controller boundary."},
+                {"from": "SIG_PORT_A", "to": "JSW", "note": "Group one side of the switch bank together to simplify routing review."},
+                {"from": "SIG_PORT_B", "to": "JSW", "note": "Group the switched outputs on the opposite boundary."},
+            ],
+            ["Freeze per-channel default state, select polarity, and channel naming before schematic release."],
+        )
+        templates[-1]["source"] = switch_context.get("source")
+        templates[-1]["source_refs"] = [
+            ref
+            for ref in [
+                _pin_source_ref(switch_context.get("preferred_package"), switch_context.get("select_bank_pins"), switch_context.get("enable_pins"), note="per-channel select pins from official package pin table"),
+                _pin_source_ref(switch_context.get("preferred_package"), switch_context.get("source_pins"), switch_context.get("drain_pins"), note="switch-bank signal pins from official package pin table"),
             ]
             if ref
         ]
@@ -4570,6 +4614,8 @@ def build_quickstart_markdown(device: dict, design_intent: dict) -> str:
         control_modes = []
         if switch_device_context.get("supports_parallel_address"):
             control_modes.append("parallel_address")
+        if switch_device_context.get("supports_direct_select_bank"):
+            control_modes.append("direct_select_bank")
         if switch_device_context.get("supports_shift_register"):
             control_modes.append("serial_shift")
         if switch_device_context.get("supports_i2c"):
