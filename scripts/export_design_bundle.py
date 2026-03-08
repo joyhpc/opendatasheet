@@ -1857,15 +1857,37 @@ def _fpga_standard_templates(device: dict, design_intent: dict, scenarios: list[
             {"from": "SERDES_RX", "to": "JHS", "note": "Document ingress lane ownership per exported lane group."},
             {"from": "SERDES_TX", "to": "JHS", "note": "Keep egress lanes adjacent to AC-coupling network placeholders and lane-group boundaries."},
         ]
+        template_checklist = [
+            "Freeze link standard, refclk frequency, and AC-coupling placement before layout.",
+            *([f"Freeze protocol ownership for exported lane groups: {', '.join(lane_group_refs[:8])}."] if lane_group_refs else []),
+            *([f"Review candidate protocols from export: {', '.join(protocol_candidates[:6])}."] if protocol_candidates else []),
+        ]
         if "PCIE_REFCLK" in template_nets:
             template_connections.extend([
                 {"from": "PCIE_REFCLK", "to": "XPCIE", "note": "Bind PCIe-capable groups to the explicit 100 MHz clock source or buffer boundary."},
-                {"from": "PCIE_TXRX", "to": "JPCIE", "note": "Keep PCIe lane ownership visible at the connector or slot boundary."},
+                {"from": "PCIE_TXRX", "to": "JPCIE", "note": "Keep PCIe lane ownership visible at the connector or slot boundary and freeze lane width."},
+            ])
+            template_checklist.extend([
+                "Freeze PCIe-capable lane-group ownership and REFCLK topology against the exported protocol candidates before sign-off.",
+                "Review PCIe AC-coupling placement, reset/perst ownership, and connector-or-endpoint boundary.",
             ])
         if "ETH_REFCLK" in template_nets:
-            template_connections.append({"from": "ETH_SERDES", "to": "JETH/SFP/UETH", "note": "Show whether Ethernet-capable groups land on SFP, PHY, or peer-link attachment."})
+            template_connections.extend([
+                {"from": "ETH_REFCLK", "to": "XO1/JETH/SFP/UETH", "note": "Bind Ethernet-capable groups to one of the exported Ethernet reference-clock candidates and make the attachment explicit."},
+                {"from": "ETH_SERDES", "to": "JETH/SFP/UETH", "note": "Show whether Ethernet-capable groups land on SFP, PHY, or peer-link attachment."},
+            ])
+            template_checklist.extend([
+                "Freeze Ethernet attachment style (PHY, backplane, direct link, or SFP cage) before schematic release.",
+                "Review exported Ethernet reference-clock ownership and any required attachment sideband signals before sign-off.",
+            ])
         if "SERDES_USER_REFCLK" in template_nets:
-            template_connections.append({"from": "SERDES_USER_DATA", "to": "JHSUSR", "note": "Keep custom SerDes ownership explicit even when no standard protocol is frozen yet."})
+            template_connections.extend([
+                {"from": "SERDES_USER_REFCLK", "to": "JHSUSR/XO1", "note": "Document the custom-link reference-clock producer and consumer explicitly."},
+                {"from": "SERDES_USER_DATA", "to": "JHSUSR", "note": "Keep custom SerDes ownership explicit even when no standard protocol is frozen yet."},
+            ])
+            template_checklist.extend([
+                "Freeze custom SerDes lane-group ownership, refclk producer/consumer, and polarity policy before layout review.",
+            ])
         add_template(
             "high_speed_link_bridge",
             "High-Speed Link Bridge",
@@ -1875,11 +1897,7 @@ def _fpga_standard_templates(device: dict, design_intent: dict, scenarios: list[
             template_nets,
             template_blocks,
             template_connections,
-            [
-                "Freeze link standard, refclk frequency, and AC-coupling placement before layout.",
-                *([f"Freeze protocol ownership for exported lane groups: {', '.join(lane_group_refs[:8])}."] if lane_group_refs else []),
-                *([f"Review candidate protocols from export: {', '.join(protocol_candidates[:6])}."] if protocol_candidates else []),
-            ],
+            template_checklist,
         )
         templates[-1]["protocol_candidates"] = protocol_candidates
         templates[-1]["lane_group_refs"] = lane_group_refs
