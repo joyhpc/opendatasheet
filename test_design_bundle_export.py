@@ -188,14 +188,23 @@ def test_analog_switch_bundle_export_includes_switch_templates(tmp_path):
     adg706_dir = output_dir / "ADG706_ADG707"
     adg706_intent = json.loads((adg706_dir / "L1_design_intent.json").read_text(encoding="utf-8"))
     adg706_template = json.loads((adg706_dir / "L3_module_template.json").read_text(encoding="utf-8"))
+    adg706_manifest = json.loads((adg706_dir / "bundle_manifest.json").read_text(encoding="utf-8"))
     adg706_quickstart = (adg706_dir / "L2_quickstart.md").read_text(encoding="utf-8")
     adg706_roles = {item["role"] for item in adg706_intent["external_components"]}
+    adg706_switch_template = next(item for item in adg706_template.get("switch_templates", []) if item["name"] == "addressable_analog_mux")
+    adg706_source_pins = {pin["name"] for ref in adg706_switch_template.get("source_refs", []) for pin in ref.get("pins", [])}
 
     assert {"supply_decoupling", "address_source_or_straps", "enable_bias", "analog_channel_breakout"}.issubset(adg706_roles)
     assert "input_capacitor" not in adg706_roles
     assert adg706_template["default_switch_template"] == "addressable_analog_mux"
     assert "addressable_analog_mux" in {item["name"] for item in adg706_template.get("switch_templates", [])}
+    assert adg706_intent["switch_device_context"]["source"] == "sch_review_export.packages.pins"
+    assert adg706_intent["official_source_documents"][0]["path"] == "data/raw/datasheet_PDF/0130-06-00004_ADG706BRU.pdf"
+    assert adg706_manifest["official_source_documents"][0]["path"] == "data/raw/datasheet_PDF/0130-06-00004_ADG706BRU.pdf"
+    assert {"A0", "A1", "A2"}.issubset(adg706_source_pins)
     assert "Analog switch implementation notes" in adg706_quickstart
+    assert "## Official source documents" in adg706_quickstart
+    assert "data/raw/datasheet_PDF/0130-06-00004_ADG706BRU.pdf" in adg706_quickstart
     assert "Start here:" in adg706_quickstart
 
     adg714_dir = output_dir / "ADG714_ADG715"
@@ -219,6 +228,58 @@ def test_analog_switch_bundle_export_includes_switch_templates(tmp_path):
     assert adg728_template["default_switch_template"] == "i2c_switch_matrix"
     assert "i2c_switch_matrix" in {item["name"] for item in adg728_template.get("switch_templates", [])}
     assert "Control modes: `parallel_address` `i2c`" in adg728_quickstart
+
+
+def test_new_switch_family_bundle_exports(tmp_path):
+    output_dir = tmp_path / "bundles"
+    subprocess.run(
+        [
+            sys.executable,
+            "scripts/export_design_bundle.py",
+            "--device",
+            "TS5A2053",
+            "--device",
+            "SN74CBT3251",
+            "--device",
+            "SN74CB3Q3125",
+            "--output-dir",
+            str(output_dir),
+        ],
+        cwd=REPO_ROOT,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+
+    ts5a_dir = output_dir / "TS5A2053"
+    ts5a_intent = json.loads((ts5a_dir / "L1_design_intent.json").read_text(encoding="utf-8"))
+    ts5a_template = json.loads((ts5a_dir / "L3_module_template.json").read_text(encoding="utf-8"))
+    ts5a_quickstart = (ts5a_dir / "L2_quickstart.md").read_text(encoding="utf-8")
+    ts5a_nets = {item["name"] for item in ts5a_intent["starter_nets"]}
+
+    assert ts5a_template["default_switch_template"] == "spdt_analog_switch"
+    assert {"V+", "GND", "EN", "SW_COM", "SW_NO", "SW_NC"}.issubset(ts5a_nets)
+    assert ts5a_intent["official_source_documents"][0]["path"] == "data/raw/datasheet_PDF/0130-06-00007_TS5A2053DCTR.pdf"
+    assert "SPDT Analog Switch" in ts5a_quickstart
+
+    cbt_dir = output_dir / "SN74CBT3251"
+    cbt_intent = json.loads((cbt_dir / "L1_design_intent.json").read_text(encoding="utf-8"))
+    cbt_template = json.loads((cbt_dir / "L3_module_template.json").read_text(encoding="utf-8"))
+    cbt_nets = {item["name"] for item in cbt_intent["starter_nets"]}
+
+    assert cbt_template["default_interface_switch_template"] == "bus_mux_bridge"
+    assert {"VCC", "GND", "SEL", "OE_N", "BUS_COM", "BUS_CH"}.issubset(cbt_nets)
+    cbt_bridge = next(item for item in cbt_template.get("interface_switch_templates", []) if item["name"] == "bus_mux_bridge")
+    cbt_source_pins = {pin["name"] for ref in cbt_bridge.get("source_refs", []) for pin in ref.get("pins", [])}
+    assert {"A", "B1", "S0", "S1", "S2", "OE"}.issubset(cbt_source_pins)
+
+    cb3_dir = output_dir / "SN74CB3Q3125"
+    cb3_intent = json.loads((cb3_dir / "L1_design_intent.json").read_text(encoding="utf-8"))
+    cb3_template = json.loads((cb3_dir / "L3_module_template.json").read_text(encoding="utf-8"))
+    cb3_nets = {item["name"] for item in cb3_intent["starter_nets"]}
+
+    assert cb3_template["default_interface_switch_template"] == "bus_switch_bridge"
+    assert {"VCC", "GND", "BUS_A", "BUS_B"}.issubset(cb3_nets)
 
 
 def test_interface_switch_bundle_export_includes_high_speed_templates(tmp_path):
@@ -278,12 +339,19 @@ def test_interface_switch_bundle_export_includes_high_speed_templates(tmp_path):
     fst_dir = output_dir / "FST3125"
     fst_intent = json.loads((fst_dir / "L1_design_intent.json").read_text(encoding="utf-8"))
     fst_template = json.loads((fst_dir / "L3_module_template.json").read_text(encoding="utf-8"))
+    fst_manifest = json.loads((fst_dir / "bundle_manifest.json").read_text(encoding="utf-8"))
     fst_quickstart = (fst_dir / "L2_quickstart.md").read_text(encoding="utf-8")
     fst_nets = {item["name"] for item in fst_intent["starter_nets"]}
 
     assert {"BUS_A", "BUS_B", "OE_N"}.issubset(fst_nets)
+    assert fst_intent["official_source_documents"][0]["path"] == "data/raw/datasheet_PDF/0130-06-00006_FST3125MTCX.pdf"
+    assert fst_manifest["official_source_documents"][0]["path"] == "data/raw/datasheet_PDF/0130-06-00006_FST3125MTCX.pdf"
     assert fst_template["default_interface_switch_template"] == "bus_switch_bridge"
     assert "bus_switch_bridge" in {item["name"] for item in fst_template.get("interface_switch_templates", [])}
+    fst_bridge = next(item for item in fst_template.get("interface_switch_templates", []) if item["name"] == "bus_switch_bridge")
+    fst_source_pins = {pin["name"] for ref in fst_bridge.get("source_refs", []) for pin in ref.get("pins", [])}
+    assert {"1A", "1B", "2A", "2B"}.intersection(fst_source_pins)
+    assert "## Official source documents" in fst_quickstart
     assert "Interface kind: `bus` topology=`bus_switch`" in fst_quickstart
 
 

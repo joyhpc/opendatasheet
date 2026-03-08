@@ -20,6 +20,7 @@ import json
 import re
 import shutil
 import sys
+from functools import lru_cache
 from pathlib import Path
 
 import fitz
@@ -33,6 +34,7 @@ from design_info_utils import detect_design_page_kind, extract_design_context
 DEFAULT_INPUT_DIR = REPO_ROOT / "data/sch_review_export"
 DEFAULT_EXTRACTED_DIR = REPO_ROOT / "data/extracted_v2"
 DEFAULT_PDF_DIR = REPO_ROOT / "data/raw/datasheet_PDF"
+DEFAULT_RAW_SOURCE_MANIFEST = REPO_ROOT / "data/raw/_source_manifest.json"
 DEFAULT_OUTPUT_DIR = REPO_ROOT / "data/design_bundle"
 DEFAULT_REFERENCE_DIR = DEFAULT_INPUT_DIR / "reference"
 BUNDLE_SCHEMA = "opendatasheet-design-bundle/0.1"
@@ -517,6 +519,7 @@ def _load_datasheet_design_context(device: dict, extracted_index: dict[str, Path
             design_context = dict(extracted_record["design_extraction"])
             design_context["source_mode"] = "pipeline_design_extraction"
             design_context["source_record"] = record_path.name if record_path else None
+            design_context["pdf_name"] = extracted_record.get("pdf_name")
             return design_context
 
         text_pages = _build_design_text_pages_from_pdf(extracted_record, pdf_dir)
@@ -551,6 +554,80 @@ def _repo_relative_path(path: Path) -> str:
         return str(path.relative_to(REPO_ROOT))
     except ValueError:
         return str(path)
+
+
+@lru_cache(maxsize=1)
+def _raw_source_manifest_index(manifest_path: str = str(DEFAULT_RAW_SOURCE_MANIFEST)) -> dict[str, dict]:
+    path = Path(manifest_path)
+    if not path.exists():
+        return {}
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {}
+
+    index = {}
+    for entry in payload.get("entries", []):
+        filename = entry.get("filename")
+        if filename and filename not in index:
+            index[filename] = entry
+    return index
+
+
+def _official_source_documents(datasheet_design_context: dict) -> list[dict]:
+    pdf_name = datasheet_design_context.get("pdf_name")
+    if not pdf_name:
+        return []
+
+    entry = _raw_source_manifest_index().get(pdf_name)
+    if not entry:
+        return [
+            {
+                "filename": pdf_name,
+                "path": _repo_relative_path(DEFAULT_PDF_DIR / pdf_name),
+                "doc_type": "datasheet",
+                "source": "datasheet_design_context.pdf_name",
+            }
+        ]
+
+    return [
+        {
+            "filename": entry.get("filename"),
+            "path": _repo_relative_path(REPO_ROOT / "data/raw" / entry["path"]),
+            "doc_type": entry.get("doc_type"),
+            "storage_tier": entry.get("storage_tier"),
+            "vendor_hint": entry.get("vendor_hint"),
+            "material_hint": entry.get("material_hint"),
+            "sha256": entry.get("sha256"),
+            "source": "data/raw/_source_manifest.json",
+        }
+    ]
+
+
+def _pin_source_ref(preferred_package: str | None, *pin_groups: list[dict], note: str | None = None) -> dict | None:
+    pins = []
+    seen = set()
+    for group in pin_groups:
+        for item in group or []:
+            name = item.get("name")
+            pin = item.get("pin")
+            key = (pin, name)
+            if not name or key in seen:
+                continue
+            seen.add(key)
+            pins.append({"pin": pin, "name": name})
+
+    if not pins and not preferred_package:
+        return None
+
+    ref = {
+        "source": "sch_review_export.packages.pins",
+        "package": preferred_package,
+        "pins": pins,
+    }
+    if note:
+        ref["note"] = note
+    return ref
 
 
 def _reference_asset_record(path: Path, title: str, summary: str, topics: list[str], applicability: str) -> dict:
@@ -1153,7 +1230,7 @@ def _build_normal_ic_design_intent(device: dict, datasheet_design_context: dict 
         }
         datasheet_components = [item for item in datasheet_components if item.get("role") not in noisy_roles]
     elif _is_interface_switch_like(device):
-        interface_switch_device_context = _infer_interface_switch_traits(device)
+        interface_switch_device_context = _infer_interface_switch_traits(device, datasheet_context=datasheet_design_context)
         external_components = _interface_switch_external_components(interface_switch_device_context)
         noisy_roles = {
             "input_capacitor",
@@ -1164,7 +1241,7 @@ def _build_normal_ic_design_intent(device: dict, datasheet_design_context: dict 
         }
         datasheet_components = [item for item in datasheet_components if item.get("role") not in noisy_roles]
     elif _is_signal_switch_like(device):
-        switch_device_context = _infer_switch_traits(device, pin_groups)
+        switch_device_context = _infer_switch_traits(device, datasheet_context=datasheet_design_context)
         external_components = _switch_external_components(switch_device_context)
         noisy_roles = {
             "input_capacitor",
@@ -1998,10 +2075,11 @@ def _is_signal_switch_like(device: dict) -> bool:
     )
 
 
-def _infer_switch_traits(device: dict, design_intent: dict) -> dict:
+def _infer_switch_traits(device: dict, datasheet_context: dict | None = None) -> dict:
     preferred_package = _pick_preferred_package(device)
     package_data = device.get("packages", {}).get(preferred_package or "", {}) if preferred_package else {}
     pins = package_data.get("pins", {})
+    datasheet_context = datasheet_context or {}
 
     def record(pin_number: str, pin_data: dict) -> dict:
         return {
@@ -2016,6 +2094,9 @@ def _infer_switch_traits(device: dict, design_intent: dict) -> dict:
     negative_supply_pins = []
     source_pins = []
     drain_pins = []
+    common_pins = []
+    normally_open_pins = []
+    normally_closed_pins = []
     address_pins = []
     enable_pins = []
     reset_pins = []
@@ -2030,18 +2111,27 @@ def _infer_switch_traits(device: dict, design_intent: dict) -> dict:
         name = (pin_data.get("name") or "").upper()
         desc = (pin_data.get("description") or "").lower()
 
-        if name in {"VDD", "VCC", "AVDD", "DVDD"}:
+        is_no_connect = (item.get("direction") == "NC") or ("no internal connection" in desc)
+
+        if name in {"VDD", "VCC", "AVDD", "DVDD", "V+", "VDD+"}:
             power_pins.append(item)
         elif name in {"GND", "AGND", "DGND"}:
             ground_pins.append(item)
-        elif name == "VSS":
+        elif name in {"VSS", "VEE", "V-"}:
             negative_supply_pins.append(item)
 
         if re.match(r"^S\d+[A-Z]?$", name):
             source_pins.append(item)
         if re.match(r"^D\d+[A-Z]?$", name) or name in {"D", "DA", "DB"}:
             drain_pins.append(item)
-        if re.match(r"^A\d+$", name):
+            common_pins.append(item)
+        if (name == "COM" or re.match(r"^COM\d+$", name)) and not is_no_connect:
+            common_pins.append(item)
+        if (name == "NO" or re.match(r"^NO\d+$", name)) and not is_no_connect:
+            normally_open_pins.append(item)
+        if (name == "NC" or re.match(r"^NC\d+$", name)) and not is_no_connect:
+            normally_closed_pins.append(item)
+        if re.match(r"^A\d+$", name) or name == "SEL" or re.match(r"^SEL\d+$", name) or (re.match(r"^S\d+$", name) and item.get("direction") == "INPUT" and "select" in desc):
             address_pins.append(item)
         if name in {"EN", "ENABLE"}:
             enable_pins.append(item)
@@ -2060,16 +2150,23 @@ def _infer_switch_traits(device: dict, design_intent: dict) -> dict:
             i2c_support = True
 
     topology_kind = "generic_signal_switch"
-    if len(source_pins) >= 8 and len(drain_pins) <= 3:
+    channel_count = len(source_pins)
+    if common_pins and (normally_open_pins or normally_closed_pins):
+        topology_kind = "spdt_switch" if normally_closed_pins else "spst_switch"
+        channel_count = max(len(common_pins), len(normally_open_pins), len(normally_closed_pins), 1)
+    elif len(source_pins) >= 8 and len(drain_pins) <= 3:
         topology_kind = "mux_matrix"
     elif len(source_pins) >= 4 and len(drain_pins) >= 4:
         topology_kind = "independent_switch_bank"
+        channel_count = max(len(source_pins), len(drain_pins))
 
     supports_shift_register = bool(
         any((item.get("name") or "").upper() in {"SCLK", "CLK"} for item in serial_clock_pins)
         and any((item.get("name") or "").upper() in {"DIN", "SDI"} for item in serial_data_pins)
     )
-    supports_parallel_address = bool(address_pins or enable_pins)
+    supports_parallel_address = bool(address_pins)
+    positive_supply_net = power_pins[0]["name"] if power_pins else "VDD"
+    ground_net = ground_pins[0]["name"] if ground_pins else "GND"
 
     return {
         "preferred_package": preferred_package,
@@ -2078,6 +2175,9 @@ def _infer_switch_traits(device: dict, design_intent: dict) -> dict:
         "negative_supply_pins": negative_supply_pins,
         "source_pins": source_pins,
         "drain_pins": drain_pins,
+        "common_pins": common_pins,
+        "normally_open_pins": normally_open_pins,
+        "normally_closed_pins": normally_closed_pins,
         "address_pins": address_pins,
         "enable_pins": enable_pins,
         "reset_pins": reset_pins,
@@ -2089,8 +2189,21 @@ def _infer_switch_traits(device: dict, design_intent: dict) -> dict:
         "supports_shift_register": supports_shift_register,
         "supports_parallel_address": supports_parallel_address,
         "topology_kind": topology_kind,
-        "channel_count": len(source_pins),
-        "supply_nets": [item["name"] for item in power_pins + negative_supply_pins + ground_pins],
+        "channel_count": channel_count,
+        "positive_supply_net": positive_supply_net,
+        "ground_net": ground_net,
+        "supply_nets": list(dict.fromkeys(item["name"] for item in power_pins + negative_supply_pins + ground_pins)),
+        "source": "sch_review_export.packages.pins",
+        "source_refs": [
+            ref
+            for ref in [
+                _pin_source_ref(preferred_package, power_pins, ground_pins, negative_supply_pins, note="supply pins from official package pin table"),
+                _pin_source_ref(preferred_package, address_pins, enable_pins, reset_pins, serial_clock_pins, serial_data_pins, serial_output_pins, sync_pins, note="control pins from official package pin table"),
+                _pin_source_ref(preferred_package, source_pins, drain_pins, common_pins, normally_open_pins, normally_closed_pins, note="analog path pins from official package pin table"),
+            ]
+            if ref
+        ],
+        "official_source_documents": _official_source_documents(datasheet_context),
     }
 
 
@@ -2100,7 +2213,7 @@ def _switch_external_components(switch_context: dict) -> list[dict]:
             "role": "supply_decoupling",
             "designator": "CBYP",
             "status": "required",
-            "connect_between": ["VDD", "GND"],
+            "connect_between": [switch_context.get("positive_supply_net", "VDD"), switch_context.get("ground_net", "GND")],
             "why": "Low-charge-injection analog switches still need local bypassing close to the supply pins.",
         }
     ]
@@ -2166,6 +2279,17 @@ def _switch_external_components(switch_context: dict) -> list[dict]:
                 "why": "Keep the common node and channel bank visible at the schematic boundary for signal ownership review.",
             }
         )
+    elif switch_context.get("topology_kind") in {"spdt_switch", "spst_switch"}:
+        breakout_nets = ["SW_COM", "SW_NO"] + (["SW_NC"] if switch_context.get("normally_closed_pins") else [])
+        components.append(
+            {
+                "role": "analog_channel_breakout",
+                "designator": "JANA",
+                "status": "design_specific",
+                "connect_between": breakout_nets,
+                "why": "Keep COM / NO / NC path ownership explicit at the schematic boundary for review.",
+            }
+        )
     elif switch_context.get("topology_kind") == "independent_switch_bank":
         components.append(
             {
@@ -2190,10 +2314,10 @@ def _switch_starter_nets(switch_context: dict) -> list[dict]:
         seen.add(name)
         nets.append({"name": name, "purpose": purpose})
 
-    add("VDD", "analog_switch_positive_supply")
+    add(switch_context.get("positive_supply_net", "VDD"), "analog_switch_positive_supply")
     if switch_context.get("negative_supply_pins"):
-        add("VSS", "analog_switch_negative_supply_or_ground")
-    add("GND", "module_ground")
+        add((switch_context.get("negative_supply_pins") or [{"name": "VSS"}])[0]["name"], "analog_switch_negative_supply_or_ground")
+    add(switch_context.get("ground_net", "GND"), "module_ground")
     if switch_context.get("supports_parallel_address"):
         add("ADDR_BUS", "switch_address_or_select_lines")
     if switch_context.get("enable_pins"):
@@ -2213,6 +2337,11 @@ def _switch_starter_nets(switch_context: dict) -> list[dict]:
     if switch_context.get("topology_kind") == "mux_matrix":
         add("MUX_COM", "common_analog_node")
         add("MUX_CH", "switched_channel_bank")
+    elif switch_context.get("topology_kind") in {"spdt_switch", "spst_switch"}:
+        add("SW_COM", "common_analog_node")
+        add("SW_NO", "normally_open_path")
+        if switch_context.get("normally_closed_pins"):
+            add("SW_NC", "normally_closed_path")
     elif switch_context.get("topology_kind") == "independent_switch_bank":
         add("SIG_PORT_A", "switch_bank_side_a")
         add("SIG_PORT_B", "switch_bank_side_b")
@@ -2221,7 +2350,7 @@ def _switch_starter_nets(switch_context: dict) -> list[dict]:
 
 def _choose_default_switch_template(switch_templates: list[dict]) -> str | None:
     template_names = {item.get("name") for item in switch_templates}
-    for preferred in ("i2c_switch_matrix", "serial_switch_bank", "addressable_analog_mux", "switch_bank_breakout"):
+    for preferred in ("i2c_switch_matrix", "serial_switch_bank", "addressable_analog_mux", "spdt_analog_switch", "switch_bank_breakout"):
         if preferred in template_names:
             return preferred
     return switch_templates[0].get("name") if switch_templates else None
@@ -2262,6 +2391,15 @@ def _switch_standard_templates(device: dict, switch_context: dict) -> list[dict]
             ],
             ["Freeze the default selected channel and any break-before-make assumptions before review."],
         )
+        templates[-1]["source"] = switch_context.get("source")
+        templates[-1]["source_refs"] = [
+            ref
+            for ref in [
+                _pin_source_ref(switch_context.get("preferred_package"), switch_context.get("address_pins"), switch_context.get("enable_pins"), note="selector pins from official package pin table"),
+                _pin_source_ref(switch_context.get("preferred_package"), switch_context.get("source_pins"), switch_context.get("drain_pins"), note="analog mux channels from official package pin table"),
+            ]
+            if ref
+        ]
 
     if switch_context.get("supports_i2c") and switch_context.get("topology_kind") == "mux_matrix":
         add_template(
@@ -2279,6 +2417,15 @@ def _switch_standard_templates(device: dict, switch_context: dict) -> list[dict]
             ],
             ["Freeze I2C address map, reset default, and analog source impedance before layout."],
         )
+        templates[-1]["source"] = switch_context.get("source")
+        templates[-1]["source_refs"] = [
+            ref
+            for ref in [
+                _pin_source_ref(switch_context.get("preferred_package"), switch_context.get("serial_clock_pins"), switch_context.get("serial_data_pins"), switch_context.get("address_pins"), switch_context.get("reset_pins"), note="I2C and control pins from official package pin table"),
+                _pin_source_ref(switch_context.get("preferred_package"), switch_context.get("source_pins"), switch_context.get("drain_pins"), note="analog matrix pins from official package pin table"),
+            ]
+            if ref
+        ]
 
     if switch_context.get("supports_shift_register"):
         add_template(
@@ -2297,15 +2444,54 @@ def _switch_standard_templates(device: dict, switch_context: dict) -> list[dict]
             ],
             ["Freeze reset behavior, frame-sync polarity, and off-state leakage expectations before review."],
         )
+        templates[-1]["source"] = switch_context.get("source")
+        templates[-1]["source_refs"] = [
+            ref
+            for ref in [
+                _pin_source_ref(switch_context.get("preferred_package"), switch_context.get("serial_clock_pins"), switch_context.get("serial_data_pins"), switch_context.get("serial_output_pins"), switch_context.get("sync_pins"), switch_context.get("reset_pins"), note="serial control pins from official package pin table"),
+                _pin_source_ref(switch_context.get("preferred_package"), switch_context.get("source_pins"), switch_context.get("drain_pins"), note="switch-bank signal pins from official package pin table"),
+            ]
+            if ref
+        ]
+
+    if switch_context.get("topology_kind") in {"spdt_switch", "spst_switch"}:
+        starter_nets = [switch_context.get("positive_supply_net", "VDD"), switch_context.get("ground_net", "GND"), "SW_COM", "SW_NO"]
+        if switch_context.get("normally_closed_pins"):
+            starter_nets.append("SW_NC")
+        if switch_context.get("enable_pins"):
+            starter_nets.append("EN")
+        add_template(
+            "spdt_analog_switch",
+            "SPDT Analog Switch",
+            "S4_spdt_analog_switch",
+            "Use when one common analog node is switched between normally-open and normally-closed throws.",
+            "Captures COM/NO/NC ownership, default state, and enable control for first-pass schematic capture.",
+            starter_nets,
+            ["U1", "CBYP", "JANA"] + (["REN"] if switch_context.get("enable_pins") else []),
+            [
+                {"from": "SW_COM", "to": "JANA", "note": "Keep the common analog node explicit at the upstream/downstream boundary."},
+                {"from": "SW_NO", "to": "JANA", "note": "Label the normally-open path before control polarity diverges from the schematic."},
+            ] + ([{"from": "SW_NC", "to": "JANA", "note": "Label the normally-closed path so the default conduction state is reviewable."}] if switch_context.get("normally_closed_pins") else []),
+            ["Freeze default conduction state, enable polarity, and COM / NO / NC naming before review."],
+        )
+        templates[-1]["source"] = switch_context.get("source")
+        templates[-1]["source_refs"] = [
+            ref
+            for ref in [
+                _pin_source_ref(switch_context.get("preferred_package"), switch_context.get("enable_pins"), note="enable pins from official package pin table"),
+                _pin_source_ref(switch_context.get("preferred_package"), switch_context.get("common_pins"), switch_context.get("normally_open_pins"), switch_context.get("normally_closed_pins"), note="COM / NO / NC pins from official package pin table"),
+            ]
+            if ref
+        ]
 
     if switch_context.get("topology_kind") == "independent_switch_bank" and not switch_context.get("supports_shift_register"):
         add_template(
             "switch_bank_breakout",
             "Switch Bank Breakout",
-            "S4_switch_bank_breakout",
+            "S5_switch_bank_breakout",
             "Use when independent switched channels need only direct control and a clean signal partition.",
             "Captures bypassing and side-A/side-B signal ownership for a multi-channel analog switch bank.",
-            ["VDD", "GND", "SIG_PORT_A", "SIG_PORT_B"],
+            [switch_context.get("positive_supply_net", "VDD"), switch_context.get("ground_net", "GND"), "SIG_PORT_A", "SIG_PORT_B"],
             ["U1", "CBYP", "JSW"],
             [
                 {"from": "SIG_PORT_A", "to": "JSW", "note": "Keep source-side signals grouped by connector or upstream analog block."},
@@ -2313,6 +2499,14 @@ def _switch_standard_templates(device: dict, switch_context: dict) -> list[dict]
             ],
             ["Freeze normally-on/off expectations and channel naming before schematic release."],
         )
+        templates[-1]["source"] = switch_context.get("source")
+        templates[-1]["source_refs"] = [
+            ref
+            for ref in [
+                _pin_source_ref(switch_context.get("preferred_package"), switch_context.get("source_pins"), switch_context.get("drain_pins"), note="switch-bank signal pins from official package pin table"),
+            ]
+            if ref
+        ]
 
     return templates
 
@@ -2358,10 +2552,11 @@ def _is_interface_switch_like(device: dict) -> bool:
     )
 
 
-def _infer_interface_switch_traits(device: dict) -> dict:
+def _infer_interface_switch_traits(device: dict, datasheet_context: dict | None = None) -> dict:
     preferred_package = _pick_preferred_package(device)
     package_data = device.get("packages", {}).get(preferred_package or "", {}) if preferred_package else {}
     pins = package_data.get("pins", {})
+    datasheet_context = datasheet_context or {}
 
     def record(pin_number: str, pin_data: dict) -> dict:
         return {
@@ -2384,6 +2579,8 @@ def _infer_interface_switch_traits(device: dict) -> dict:
     diff_groups = {"A": [], "B": [], "C": []}
     bus_a_pins = []
     bus_b_pins = []
+    bus_common_pins = []
+    bus_mux_channel_pins = []
     usb_common = []
     usb_port1 = []
     usb_port2 = []
@@ -2400,7 +2597,7 @@ def _infer_interface_switch_traits(device: dict) -> dict:
             power_pins.append(item)
         elif name in {"GND", "AGND", "DGND", "EP"}:
             ground_pins.append(item)
-        elif name in {"S", "SEL"}:
+        elif name in {"S", "SEL"} or re.match(r"^S\d+$", name) or re.match(r"^SEL\d+$", name):
             select_pins.append(item)
         elif name in {"OE", "/OE", "OEB"} or re.match(r"^/?OE\d*$", name) or re.match(r"^OEB\d*$", name):
             enable_pins.append(item)
@@ -2430,6 +2627,10 @@ def _infer_interface_switch_traits(device: dict) -> dict:
                 bus_a_pins.append(item)
             else:
                 bus_b_pins.append(item)
+        if name == "A":
+            bus_common_pins.append(item)
+        if re.match(r"^B\d+$", name):
+            bus_mux_channel_pins.append(item)
 
     interface_kind = "generic_interface_switch"
     topology_kind = "interface_switch"
@@ -2455,6 +2656,13 @@ def _infer_interface_switch_traits(device: dict) -> dict:
         branch_a_pins = diff_groups["A"]
         branch_b_pins = diff_groups["B"]
         channel_count = max(len(common_pins) // 2, 1) if common_pins else max(len(branch_a_pins) // 2, len(branch_b_pins) // 2, 1)
+    elif bus_common_pins and bus_mux_channel_pins:
+        interface_kind = "bus"
+        topology_kind = "bus_mux"
+        common_pins = bus_common_pins
+        branch_a_pins = bus_mux_channel_pins
+        branch_b_pins = []
+        channel_count = len(bus_mux_channel_pins)
     elif bus_a_pins or bus_b_pins or "bus switch" in text:
         interface_kind = "bus"
         topology_kind = "bus_switch"
@@ -2483,6 +2691,17 @@ def _infer_interface_switch_traits(device: dict) -> dict:
         "topology_kind": topology_kind,
         "channel_count": channel_count,
         "supply_nets": [item["name"] for item in power_pins + ground_pins],
+        "source": "sch_review_export.packages.pins",
+        "source_refs": [
+            ref
+            for ref in [
+                _pin_source_ref(preferred_package, power_pins, ground_pins, note="supply pins from official package pin table"),
+                _pin_source_ref(preferred_package, select_pins, enable_pins, reset_pins, note="control pins from official package pin table"),
+                _pin_source_ref(preferred_package, common_pins, branch_a_pins, branch_b_pins, bus_a_pins, bus_b_pins, note="signal path pins from official package pin table"),
+            ]
+            if ref
+        ],
+        "official_source_documents": _official_source_documents(datasheet_context),
     }
 
 
@@ -2577,6 +2796,9 @@ def _interface_switch_starter_nets(interface_context: dict) -> list[dict]:
         add("PCIE_COM", "pcie_common_lanes")
         add("PCIE_PORT_A", "pcie_branch_a_lanes")
         add("PCIE_PORT_B", "pcie_branch_b_lanes")
+    elif kind == "bus" and interface_context.get("topology_kind") == "bus_mux":
+        add("BUS_COM", "bus_common_node")
+        add("BUS_CH", "bus_mux_channel_bank")
     elif kind == "bus":
         add("BUS_A", "bus_side_a")
         add("BUS_B", "bus_side_b")
@@ -2585,7 +2807,7 @@ def _interface_switch_starter_nets(interface_context: dict) -> list[dict]:
 
 def _choose_default_interface_switch_template(interface_switch_templates: list[dict]) -> str | None:
     names = {item.get("name") for item in interface_switch_templates}
-    for preferred in ("superspeed_data_switch", "pcie_diff_switch", "usb2_data_switch", "bus_switch_bridge"):
+    for preferred in ("superspeed_data_switch", "pcie_diff_switch", "usb2_data_switch", "bus_mux_bridge", "bus_switch_bridge"):
         if preferred in names:
             return preferred
     return interface_switch_templates[0].get("name") if interface_switch_templates else None
@@ -2629,6 +2851,15 @@ def _interface_switch_standard_templates(device: dict, interface_context: dict) 
             ],
             ["Freeze select polarity and ESD placement before USB compliance review."],
         )
+        templates[-1]["source"] = interface_context.get("source")
+        templates[-1]["source_refs"] = [
+            ref
+            for ref in [
+                _pin_source_ref(interface_context.get("preferred_package"), interface_context.get("select_pins"), interface_context.get("enable_pins"), note="control pins from official package pin table"),
+                _pin_source_ref(interface_context.get("preferred_package"), interface_context.get("common_pins"), interface_context.get("branch_a_pins"), interface_context.get("branch_b_pins"), note="USB2 path pins from official package pin table"),
+            ]
+            if ref
+        ]
     elif kind == "superspeed":
         add_template(
             "superspeed_data_switch",
@@ -2645,6 +2876,15 @@ def _interface_switch_standard_templates(device: dict, interface_context: dict) 
             ],
             ["Freeze AC-coupling ownership, lane polarity, and select default before SI review."],
         )
+        templates[-1]["source"] = interface_context.get("source")
+        templates[-1]["source_refs"] = [
+            ref
+            for ref in [
+                _pin_source_ref(interface_context.get("preferred_package"), interface_context.get("select_pins"), interface_context.get("enable_pins"), note="control pins from official package pin table"),
+                _pin_source_ref(interface_context.get("preferred_package"), interface_context.get("common_pins"), interface_context.get("branch_a_pins"), interface_context.get("branch_b_pins"), note="SuperSpeed path pins from official package pin table"),
+            ]
+            if ref
+        ]
     elif kind == "pcie":
         add_template(
             "pcie_diff_switch",
@@ -2661,11 +2901,45 @@ def _interface_switch_standard_templates(device: dict, interface_context: dict) 
             ],
             ["Freeze enable/select polarity and AC-coupling placement before PCIe layout review."],
         )
+        templates[-1]["source"] = interface_context.get("source")
+        templates[-1]["source_refs"] = [
+            ref
+            for ref in [
+                _pin_source_ref(interface_context.get("preferred_package"), interface_context.get("select_pins"), interface_context.get("enable_pins"), note="control pins from official package pin table"),
+                _pin_source_ref(interface_context.get("preferred_package"), interface_context.get("common_pins"), interface_context.get("branch_a_pins"), interface_context.get("branch_b_pins"), note="PCIe path pins from official package pin table"),
+            ]
+            if ref
+        ]
+    elif kind == "bus" and interface_context.get("topology_kind") == "bus_mux":
+        add_template(
+            "bus_mux_bridge",
+            "Bus Mux Bridge",
+            "H4_bus_mux_bridge",
+            "Use when one common bus node is muxed across a numbered channel bank by select pins.",
+            "Groups common bus node, numbered channels, select pins, and OE control for bus-mux review.",
+            ["VCC", "GND", "BUS_COM", "BUS_CH"] + common_ctrl + (["SEL"] if interface_context.get("select_pins") else []),
+            ["U1", "CBYP", "RSEL", "ROE", "JPATH"],
+            [
+                {"from": "BUS_COM", "to": "JPATH", "note": "Keep the common bus node explicit at the upstream/downstream boundary."},
+                {"from": "BUS_CH", "to": "JPATH", "note": "Group numbered bus channels as one reviewable boundary."},
+                {"from": "SEL", "to": "RSEL", "note": "Freeze mux select ownership before firmware and schematic diverge."},
+            ],
+            ["Freeze select polarity, OE default state, and common-to-channel naming before release."],
+        )
+        templates[-1]["source"] = interface_context.get("source")
+        templates[-1]["source_refs"] = [
+            ref
+            for ref in [
+                _pin_source_ref(interface_context.get("preferred_package"), interface_context.get("select_pins"), interface_context.get("enable_pins"), note="mux control pins from official package pin table"),
+                _pin_source_ref(interface_context.get("preferred_package"), interface_context.get("common_pins"), interface_context.get("branch_a_pins"), note="common bus and channel pins from official package pin table"),
+            ]
+            if ref
+        ]
     elif kind == "bus":
         add_template(
             "bus_switch_bridge",
             "Bus Switch Bridge",
-            "H4_bus_switch_bridge",
+            "H5_bus_switch_bridge",
             "Use when a simple digital bus is transparently gated or bridged across two sides.",
             "Groups bus-side A/B naming and OE control so the boundary is clear for bring-up and review.",
             ["VCC", "GND", "BUS_A", "BUS_B"] + common_ctrl,
@@ -2676,6 +2950,15 @@ def _interface_switch_standard_templates(device: dict, interface_context: dict) 
             ],
             ["Freeze OE default state and side-A/side-B naming before release."],
         )
+        templates[-1]["source"] = interface_context.get("source")
+        templates[-1]["source_refs"] = [
+            ref
+            for ref in [
+                _pin_source_ref(interface_context.get("preferred_package"), interface_context.get("enable_pins"), note="enable pins from official package pin table"),
+                _pin_source_ref(interface_context.get("preferred_package"), interface_context.get("branch_a_pins"), interface_context.get("branch_b_pins"), note="bus path pins from official package pin table"),
+            ]
+            if ref
+        ]
 
     return templates
 
@@ -4254,6 +4537,15 @@ def build_quickstart_markdown(device: dict, design_intent: dict) -> str:
         if control_bits:
             lines.append(f"- Control pins: {' '.join(f'`{item}`' for item in control_bits)}")
 
+    official_source_documents = design_intent.get("official_source_documents", [])
+
+    if official_source_documents:
+        lines.extend(["", "## Official source documents", ""])
+        for item in official_source_documents[:6]:
+            sha = item.get("sha256")
+            sha_suffix = f" sha256=`{sha[:12]}`" if sha else ""
+            lines.append(f"- `{item.get("path")}` `{item.get("doc_type")}`{sha_suffix}")
+
     if mcu_device_context:
         lines.extend(["", "## MCU implementation notes", ""])
         if mcu_device_context.get("reset_pins"):
@@ -4373,6 +4665,7 @@ def export_device_bundle(device_path: Path, output_dir: Path, extracted_index: d
 
     datasheet_design_context = _load_datasheet_design_context(device, extracted_index, pdf_dir)
     design_intent = build_design_intent(device, datasheet_design_context=datasheet_design_context)
+    design_intent["official_source_documents"] = _official_source_documents(datasheet_design_context)
     module_template = build_module_template(device, design_intent)
     quickstart_text = build_quickstart_markdown(device, design_intent)
 
@@ -4397,6 +4690,7 @@ def export_device_bundle(device_path: Path, output_dir: Path, extracted_index: d
         "source_export": str(device_path.name),
         "datasheet_source_mode": datasheet_design_context.get("source_mode"),
         "datasheet_source_record": datasheet_design_context.get("source_record"),
+        "official_source_documents": design_intent.get("official_source_documents", []),
         "reference_files": [item["source_path"] for item in design_intent.get("reference_design_assets", [])],
         "files": [
             "L0_device.json",
