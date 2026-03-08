@@ -2628,6 +2628,10 @@ def _infer_interface_switch_traits(device: dict, datasheet_context: dict | None 
     usb_common = []
     usb_port1 = []
     usb_port2 = []
+    usb_audio_common = []
+    usb_audio_path0 = []
+    usb_audio_path1 = []
+    usb_audio_lr = []
     ss_common = []
     ss_port1 = []
     ss_port2 = []
@@ -2655,6 +2659,14 @@ def _infer_interface_switch_traits(device: dict, datasheet_context: dict | None 
                 usb_port1.append(item)
             else:
                 usb_port2.append(item)
+        elif name in {"D+/R", "D-/L"} or "common connector" in desc:
+            usb_audio_common.append(item)
+        elif re.match(r"^D0[+-]$", name):
+            usb_audio_path0.append(item)
+        elif re.match(r"^D1[+-]$", name):
+            usb_audio_path1.append(item)
+        elif name in {"R", "L"} and "audio" in desc:
+            usb_audio_lr.append(item)
         elif "COM" in name and ("SSRX" in name or "SSTX" in name):
             ss_common.append(item)
         elif ("SSRX1" in name or "SSTX1" in name):
@@ -2686,6 +2698,14 @@ def _infer_interface_switch_traits(device: dict, datasheet_context: dict | None 
         branch_a_pins = usb_port1
         branch_b_pins = usb_port2
         channel_count = max(len(usb_common) // 2, 1)
+    elif usb_audio_common or usb_audio_path0 or usb_audio_path1 or usb_audio_lr:
+        interface_kind = "usb2_audio"
+        topology_kind = "usb2_audio_sp3t"
+        common_pins = usb_audio_common
+        branch_a_pins = usb_audio_path0
+        branch_b_pins = usb_audio_path1
+        aux_pins = usb_audio_lr
+        channel_count = max(len(common_pins), len(branch_a_pins), len(branch_b_pins), len(aux_pins), 1)
     elif ss_common or ss_port1 or ss_port2:
         interface_kind = "superspeed"
         topology_kind = "superspeed_mux"
@@ -2779,7 +2799,7 @@ def _interface_switch_external_components(interface_context: dict) -> list[dict]
                 "why": "Output-enable polarity should be deterministic before the host controller takes over.",
             }
         )
-    if interface_context.get("interface_kind") in {"usb2", "superspeed"}:
+    if interface_context.get("interface_kind") in {"usb2", "usb2_audio", "superspeed"}:
         components.append(
             {
                 "role": "esd_review",
@@ -2832,6 +2852,11 @@ def _interface_switch_starter_nets(interface_context: dict) -> list[dict]:
         add("USB2_COM", "common_usb2_pair")
         add("USB2_PORT_A", "usb2_branch_a_pair")
         add("USB2_PORT_B", "usb2_branch_b_pair")
+    elif kind == "usb2_audio":
+        add("USB_AUDIO_COM", "common_usb2_or_audio_pair")
+        add("USB_PATH_0", "usb2_or_mhl_path_0")
+        add("USB_PATH_1", "usb2_or_mhl_path_1")
+        add("AUDIO_LR", "stereo_audio_pair")
     elif kind == "superspeed":
         add("SS_TXRX_COM", "superspeed_common_lanes")
         add("SS_PORT_A", "superspeed_branch_a_lanes")
@@ -2851,7 +2876,7 @@ def _interface_switch_starter_nets(interface_context: dict) -> list[dict]:
 
 def _choose_default_interface_switch_template(interface_switch_templates: list[dict]) -> str | None:
     names = {item.get("name") for item in interface_switch_templates}
-    for preferred in ("superspeed_data_switch", "pcie_diff_switch", "usb2_data_switch", "bus_mux_bridge", "bus_switch_bridge"):
+    for preferred in ("superspeed_data_switch", "pcie_diff_switch", "usb2_audio_switch", "usb2_data_switch", "bus_mux_bridge", "bus_switch_bridge"):
         if preferred in names:
             return preferred
     return interface_switch_templates[0].get("name") if interface_switch_templates else None
@@ -2901,6 +2926,32 @@ def _interface_switch_standard_templates(device: dict, interface_context: dict) 
             for ref in [
                 _pin_source_ref(interface_context.get("preferred_package"), interface_context.get("select_pins"), interface_context.get("enable_pins"), note="control pins from official package pin table"),
                 _pin_source_ref(interface_context.get("preferred_package"), interface_context.get("common_pins"), interface_context.get("branch_a_pins"), interface_context.get("branch_b_pins"), note="USB2 path pins from official package pin table"),
+            ]
+            if ref
+        ]
+    elif kind == "usb2_audio":
+        add_template(
+            "usb2_audio_switch",
+            "USB2 / Audio Switch",
+            "H1a_usb2_audio_switch",
+            "Use when one common connector pair is steered between two USB/MHL paths or a stereo audio path by shared select pins.",
+            "Captures the shared connector pair, two switched high-speed paths, stereo audio branch, and select ownership from the official pin table.",
+            ["VCC", "GND", "USB_AUDIO_COM", "USB_PATH_0", "USB_PATH_1", "AUDIO_LR"] + common_ctrl,
+            ["U1", "CBYP", "RSEL", "DESD", "JPATH"],
+            [
+                {"from": "USB_AUDIO_COM", "to": "JPATH", "note": "Keep the common connector pair explicit at the downstream connector boundary."},
+                {"from": "USB_PATH_0", "to": "JPATH", "note": "Document the first switched USB/MHL/UART path as a paired route."},
+                {"from": "USB_PATH_1", "to": "JPATH", "note": "Document the second switched USB/MHL/UART path as a paired route."},
+                {"from": "AUDIO_LR", "to": "JPATH", "note": "Keep the stereo audio branch explicit so mode-dependent ownership is reviewable."},
+            ],
+            ["Freeze SEL1/SEL2 truth-table ownership and connector mode naming before release."],
+        )
+        templates[-1]["source"] = interface_context.get("source")
+        templates[-1]["source_refs"] = [
+            ref
+            for ref in [
+                _pin_source_ref(interface_context.get("preferred_package"), interface_context.get("select_pins"), note="control pins from official package pin table"),
+                _pin_source_ref(interface_context.get("preferred_package"), interface_context.get("common_pins"), interface_context.get("branch_a_pins"), interface_context.get("branch_b_pins"), interface_context.get("aux_pins"), note="USB/audio path pins from official package pin table"),
             ]
             if ref
         ]

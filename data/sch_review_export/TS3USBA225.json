@@ -1,0 +1,307 @@
+{
+  "_schema": "sch-review-device/1.1",
+  "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton",
+    "L1_electrical"
+  ],
+  "mpn": "TS3USBA225",
+  "manufacturer": "Texas Instruments",
+  "category": "Switch",
+  "description": "Dual-Channel SP3T USB 2.0 High-Speed (480Mbps) Audio Switch with Negative Signal Support and 1.8V Logic Compatibility",
+  "packages": {
+    "UQFN-12": {
+      "pin_count": 12,
+      "pins": {
+        "1": {
+          "name": "D0+",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "MHL/USB/UART Data 1 (Differential +)",
+          "unused_treatment": null
+        },
+        "2": {
+          "name": "D1+",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "MHL/USB/UART Data 2 (Differential +)",
+          "unused_treatment": null
+        },
+        "3": {
+          "name": "VCC",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Power supply input",
+          "unused_treatment": null
+        },
+        "4": {
+          "name": "D1-",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "MHL/USB/UART Data 2 (Differential -)",
+          "unused_treatment": null
+        },
+        "5": {
+          "name": "D0-",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "MHL/USB/UART Data 1 (Differential -)",
+          "unused_treatment": null
+        },
+        "6": {
+          "name": "L",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "USB-/Left Channel Audio",
+          "unused_treatment": null
+        },
+        "7": {
+          "name": "SEL2",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Control Input Select Line 2",
+          "unused_treatment": null
+        },
+        "8": {
+          "name": "D-/L",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "MHL/USB/UART/Audio Common Connector",
+          "unused_treatment": null
+        },
+        "9": {
+          "name": "GND",
+          "direction": "POWER_IN",
+          "signal_type": "POWER",
+          "description": "Ground",
+          "unused_treatment": null
+        },
+        "10": {
+          "name": "D+/R",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "MHL/USB/UART/Audio Common Connector",
+          "unused_treatment": null
+        },
+        "11": {
+          "name": "SEL1",
+          "direction": "INPUT",
+          "signal_type": "DIGITAL",
+          "description": "Control Input Select Line 1",
+          "unused_treatment": null
+        },
+        "12": {
+          "name": "R",
+          "direction": "BIDIRECTIONAL",
+          "signal_type": "ANALOG",
+          "description": "USB+/Right Channel Audio",
+          "unused_treatment": null
+        }
+      }
+    }
+  },
+  "absolute_maximum_ratings": {
+    "VCC": {
+      "parameter": "Supply voltage",
+      "min": -0.3,
+      "max": 6.0,
+      "unit": "V",
+      "conditions": null
+    },
+    "VD0+, VD0-, VD1+, VD1-": {
+      "parameter": "High speed differential signal voltage",
+      "min": -0.3,
+      "max": 4.6,
+      "unit": "V",
+      "conditions": null
+    },
+    "VR, VL": {
+      "parameter": "Audio signal voltage",
+      "min": -1.9,
+      "max": 4.6,
+      "unit": "V",
+      "conditions": null
+    },
+    "IK": {
+      "parameter": "Analog port diode current",
+      "min": null,
+      "max": -50,
+      "unit": "mA",
+      "conditions": "VI/O+, VI/O- < 0"
+    },
+    "VI": {
+      "parameter": "Digital input voltage",
+      "min": -0.3,
+      "max": 6.0,
+      "unit": "V",
+      "conditions": "SEL1, SEL2"
+    },
+    "IIK": {
+      "parameter": "Digital logic input clamp current",
+      "min": null,
+      "max": -50,
+      "unit": "mA",
+      "conditions": "VI < 0"
+    },
+    "ICC": {
+      "parameter": "Continuous current through VCC",
+      "min": null,
+      "max": 100,
+      "unit": "mA",
+      "conditions": null
+    },
+    "IGND": {
+      "parameter": "Continuous current through GND",
+      "min": -100,
+      "max": null,
+      "unit": "mA",
+      "conditions": null
+    },
+    "Tstg": {
+      "parameter": "Storage temperature",
+      "min": -65,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    },
+    "V(ESD)": {
+      "parameter": "Electrostatic discharge (HBM)",
+      "min": null,
+      "max": null,
+      "unit": "V",
+      "conditions": "Human-body model (HBM), per ANSI/ESDA/JEDEC JS-001"
+    },
+    "V(ESD)_Charged_device_model__CDM___pe": {
+      "parameter": "Electrostatic discharge (CDM)",
+      "min": null,
+      "max": null,
+      "unit": "V",
+      "conditions": "Charged-device model (CDM), per JEDEC specification JESD22-C101"
+    }
+  },
+  "electrical_parameters": {
+    "ron": {
+      "parameter": "ON-state resistance",
+      "min": null,
+      "typ": 6.5,
+      "max": 7.5,
+      "unit": "Ω",
+      "conditions": "VCC = 3.0 V, VI/O+/I/O- = 0.4 V, ION = 15 mA"
+    },
+    "Δron": {
+      "parameter": "ON-state resistance match between channels",
+      "min": null,
+      "typ": 0.1,
+      "max": null,
+      "unit": "Ω",
+      "conditions": "VCC = 3.0 V, VI/O+/I/O- = 1.7 V, ION = 15 mA"
+    },
+    "ron (flat)": {
+      "parameter": "ON-state resistance flatness",
+      "min": null,
+      "typ": 0.5,
+      "max": null,
+      "unit": "Ω",
+      "conditions": "VCC = 3.0 V, VI/O+/I/O- = 0 to 1.7 V, ION = 15 mA"
+    },
+    "IOZ": {
+      "parameter": "OFF leakage current",
+      "min": null,
+      "typ": null,
+      "max": 1,
+      "unit": "μA",
+      "conditions": "VCC = 3.6 V, Switch OFF, VI/O+/I/O- = 0 to 3.6 V, VD+/R, D-/L = 0 V"
+    },
+    "ron_VCC___3_0_V__SEL1___High__SEL2": {
+      "parameter": "ON-state resistance",
+      "min": null,
+      "typ": 2.5,
+      "max": 3.5,
+      "unit": "Ω",
+      "conditions": "VCC = 3.0 V, SEL1 = High, SEL2 = Low, VL/R = -1.8 V, 0 V, 0.7 V, ION = -26 mA"
+    },
+    "Δron_VCC___3_0_V__SEL1___High__SEL2": {
+      "parameter": "ON-state resistance match between channels",
+      "min": null,
+      "typ": 0.1,
+      "max": null,
+      "unit": "Ω",
+      "conditions": "VCC = 3.0 V, SEL1 = High, SEL2 = Low, VL/R = 0.7 V, ION = -26 mA"
+    },
+    "ron (flat)_VCC___3_0_V__SEL1___High__SEL2": {
+      "parameter": "ON-state resistance flatness",
+      "min": null,
+      "typ": 0.1,
+      "max": null,
+      "unit": "Ω",
+      "conditions": "VCC = 3.0 V, SEL1 = High, SEL2 = Low, VL/R = -1.8 V, 0 V, 0.7 V, ION = -26 mA"
+    },
+    "rSHUNT": {
+      "parameter": "Shunt resistance",
+      "min": null,
+      "typ": 100,
+      "max": 200,
+      "unit": "Ω",
+      "conditions": "VCC = 2.7 V to 5.0 V, Switch OFF, VL/R = 0.7 V, ISHUNT = 10 mA"
+    },
+    "VIH": {
+      "parameter": "Input logic high",
+      "min": 1.3,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": "VCC = 3.3 V to 5.0 V"
+    },
+    "VIL": {
+      "parameter": "Input logic low",
+      "min": null,
+      "typ": null,
+      "max": 0.25,
+      "unit": "V",
+      "conditions": "VCC = 2.7 V to 3.3 V"
+    },
+    "VIL_VCC___3_3_V_to_5_0_V": {
+      "parameter": "Input logic low",
+      "min": null,
+      "typ": null,
+      "max": 0.4,
+      "unit": "V",
+      "conditions": "VCC = 3.3 V to 5.0 V"
+    },
+    "IIN": {
+      "parameter": "Input leakage current",
+      "min": null,
+      "typ": 3,
+      "max": null,
+      "unit": "μA",
+      "conditions": "VCC = 2.7 V to 5.0 V, VIN = 5.0 V"
+    },
+    "IIN_VCC___2_7_V_to_5_0_V__VIN___0": {
+      "parameter": "Input leakage current",
+      "min": null,
+      "typ": 0.1,
+      "max": null,
+      "unit": "μA",
+      "conditions": "VCC = 2.7 V to 5.0 V, VIN = 0 V"
+    },
+    "rPD1, rPD2": {
+      "parameter": "Internal pulldown resistance",
+      "min": null,
+      "typ": 3,
+      "max": null,
+      "unit": "MΩ",
+      "conditions": "VCC = 2.7 V to 5.0 V"
+    }
+  },
+  "drc_hints": {
+    "vin_abs_max": {
+      "value": 6.0,
+      "unit": "V"
+    },
+    "enable_threshold": {
+      "min": 1.3,
+      "unit": "V"
+    }
+  },
+  "thermal": {}
+}

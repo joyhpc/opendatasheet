@@ -326,6 +326,10 @@ def test_interface_switch_bundle_export_includes_high_speed_templates(tmp_path):
             "--device",
             "FUSB340",
             "--device",
+            "TS3USB30",
+            "--device",
+            "TS3USBA225",
+            "--device",
             "TC7USB40MU",
             "--device",
             "TC7PCI3212MT__TC7PCI3215MT",
@@ -352,6 +356,41 @@ def test_interface_switch_bundle_export_includes_high_speed_templates(tmp_path):
     assert fusb_template["default_interface_switch_template"] == "superspeed_data_switch"
     assert "superspeed_data_switch" in {item["name"] for item in fusb_template.get("interface_switch_templates", [])}
     assert "Interface switch implementation notes" in fusb_quickstart
+
+    ts3usb30_dir = output_dir / "TS3USB30"
+    ts3usb30_intent = json.loads((ts3usb30_dir / "L1_design_intent.json").read_text(encoding="utf-8"))
+    ts3usb30_template = json.loads((ts3usb30_dir / "L3_module_template.json").read_text(encoding="utf-8"))
+    ts3usb30_manifest = json.loads((ts3usb30_dir / "bundle_manifest.json").read_text(encoding="utf-8"))
+    ts3usb30_quickstart = (ts3usb30_dir / "L2_quickstart.md").read_text(encoding="utf-8")
+    ts3usb30_roles = {item["role"] for item in ts3usb30_intent["external_components"]}
+    ts3usb30_nets = {item["name"] for item in ts3usb30_intent["starter_nets"]}
+
+    assert {"supply_decoupling", "select_bias", "enable_bias", "esd_review", "signal_path_breakout"}.issubset(ts3usb30_roles)
+    assert {"USB2_COM", "USB2_PORT_A", "USB2_PORT_B", "SEL", "OE_N"}.issubset(ts3usb30_nets)
+    assert ts3usb30_intent["official_source_documents"][0]["path"] == "data/raw/datasheet_PDF/0130-06-00005_TS3USB30RSWR.pdf"
+    assert ts3usb30_manifest["official_source_documents"][0]["path"] == "data/raw/datasheet_PDF/0130-06-00005_TS3USB30RSWR.pdf"
+    assert ts3usb30_template["default_interface_switch_template"] == "usb2_data_switch"
+    assert "## Official source documents" in ts3usb30_quickstart
+    assert "Interface kind: `usb2` topology=`usb2_mux`" in ts3usb30_quickstart
+
+    ts3usba225_dir = output_dir / "TS3USBA225"
+    ts3usba225_intent = json.loads((ts3usba225_dir / "L1_design_intent.json").read_text(encoding="utf-8"))
+    ts3usba225_template = json.loads((ts3usba225_dir / "L3_module_template.json").read_text(encoding="utf-8"))
+    ts3usba225_manifest = json.loads((ts3usba225_dir / "bundle_manifest.json").read_text(encoding="utf-8"))
+    ts3usba225_quickstart = (ts3usba225_dir / "L2_quickstart.md").read_text(encoding="utf-8")
+    ts3usba225_roles = {item["role"] for item in ts3usba225_intent["external_components"]}
+    ts3usba225_nets = {item["name"] for item in ts3usba225_intent["starter_nets"]}
+
+    assert {"supply_decoupling", "select_bias", "esd_review", "signal_path_breakout"}.issubset(ts3usba225_roles)
+    assert {"USB_AUDIO_COM", "USB_PATH_0", "USB_PATH_1", "AUDIO_LR", "SEL"}.issubset(ts3usba225_nets)
+    assert ts3usba225_intent["official_source_documents"][0]["path"] == "data/raw/datasheet_PDF/0130-06-00008_TS3USBA225RUTR.pdf"
+    assert ts3usba225_manifest["official_source_documents"][0]["path"] == "data/raw/datasheet_PDF/0130-06-00008_TS3USBA225RUTR.pdf"
+    assert ts3usba225_template["default_interface_switch_template"] == "usb2_audio_switch"
+    ts3usba225_switch = next(item for item in ts3usba225_template.get("interface_switch_templates", []) if item["name"] == "usb2_audio_switch")
+    ts3usba225_source_pins = {pin["name"] for ref in ts3usba225_switch.get("source_refs", []) for pin in ref.get("pins", [])}
+    assert {"D+/R", "D-/L", "D0+", "D1+", "R", "L"}.issubset(ts3usba225_source_pins)
+    assert "## Official source documents" in ts3usba225_quickstart
+    assert "Interface kind: `usb2_audio` topology=`usb2_audio_sp3t`" in ts3usba225_quickstart
 
     usb2_dir = output_dir / "TC7USB40MU"
     usb2_intent = json.loads((usb2_dir / "L1_design_intent.json").read_text(encoding="utf-8"))
