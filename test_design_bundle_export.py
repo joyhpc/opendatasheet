@@ -607,6 +607,8 @@ def test_gowin_fpga_bundle_export_includes_customer_scenarios(tmp_path):
     hs_template = next(item for item in module_template.get("fpga_templates", []) if item["name"] == "high_speed_link_bridge")
     assert "PCIe 3.0" in hs_template.get("protocol_candidates", [])
     assert "Q0" in hs_template.get("lane_group_refs", [])
+    assert {"JPCIE", "XPCIE", "JHSUSR"}.issubset(set(hs_template.get("blocks", [])))
+    assert {"PCIE_REFCLK", "PCIE_TXRX", "SERDES_USER_REFCLK"}.issubset(set(hs_template.get("nets", [])))
     assert module_template.get("high_speed_semantic_context", {}).get("protocol_candidates")
     assert {"qspi_jtag_bringup", "mipi_camera_bridge", "lvds_io_expansion", "high_speed_link_bridge", "ddr_memory_interface"}.issubset(template_names)
     assert module_template["default_fpga_template"] == "mipi_camera_bridge"
@@ -705,6 +707,8 @@ def test_amd_fpga_bundle_export_uses_semantic_high_speed_context(tmp_path):
     hs_template = next(item for item in module_template.get("fpga_templates", []) if item["name"] == "high_speed_link_bridge")
     assert "224" in hs_template.get("lane_group_refs", [])
     assert "PCIe 4.0" in hs_template.get("protocol_candidates", [])
+    assert {"JPCIE", "XPCIE", "JETH/SFP/UETH"}.issubset(set(hs_template.get("blocks", [])))
+    assert {"PCIE_REFCLK", "PCIE_TXRX", "ETH_REFCLK", "ETH_SERDES"}.issubset(set(hs_template.get("nets", [])))
     assert module_template.get("high_speed_semantic_context", {}).get("lane_groups")
     assert {"pcie_link_boundary", "pcie_refclk_source_or_buffer", "ethernet_serdes_attachment"}.issubset(roles)
     assert {"PCIE_REFCLK", "PCIE_TXRX", "ETH_REFCLK", "ETH_SERDES", "HS_224_RX", "HS_224_TX", "HS_224_REFCLK"}.issubset(starter_nets)

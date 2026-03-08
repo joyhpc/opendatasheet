@@ -1498,20 +1498,43 @@ def _fpga_customer_scenarios(device: dict, design_intent: dict) -> list[dict]:
         todo = ["Freeze link standard, refclk frequency, and AC-coupling placement before stack-up review."]
         if semantic_protocols:
             todo.insert(0, f"Freeze protocol ownership per lane group from exported candidates: {', '.join(semantic_protocols[:6])}.")
+        hs_nets = [
+            {"name": "REFCLK", "purpose": "serdes_reference_clock"},
+            {"name": "SERDES_RX", "purpose": "high_speed_receive_lanes"},
+            {"name": "SERDES_TX", "purpose": "high_speed_transmit_lanes"},
+        ]
+        hs_blocks = [
+            {"ref": "JHS", "type": "connector", "role": "high_speed_link_connector"},
+            {"ref": "XO1", "type": "timing_source", "role": "reference_clock_source"},
+            {"ref": "CACHS", "type": "support_component", "role": "ac_coupling_network"},
+        ]
+        if "pcie_link" in semantic_use_case_tags:
+            hs_nets.extend([
+                {"name": "PCIE_REFCLK", "purpose": "pcie_reference_clock"},
+                {"name": "PCIE_TXRX", "purpose": "pcie_lane_bundle"},
+            ])
+            hs_blocks.extend([
+                {"ref": "JPCIE", "type": "connector", "role": "pcie_link_boundary"},
+                {"ref": "XPCIE", "type": "timing_source", "role": "pcie_refclk_source_or_buffer"},
+            ])
+        if "ethernet_link" in semantic_use_case_tags:
+            hs_nets.extend([
+                {"name": "ETH_REFCLK", "purpose": "ethernet_serdes_reference_clock"},
+                {"name": "ETH_SERDES", "purpose": "ethernet_serdes_lane_bundle"},
+            ])
+            hs_blocks.append({"ref": "JETH/SFP/UETH", "type": "connector", "role": "ethernet_serdes_attachment"})
+        if "custom_serdes" in semantic_use_case_tags:
+            hs_nets.extend([
+                {"name": "SERDES_USER_REFCLK", "purpose": "custom_serdes_reference_clock"},
+                {"name": "SERDES_USER_DATA", "purpose": "custom_serdes_lane_bundle"},
+            ])
+            hs_blocks.append({"ref": "JHSUSR", "type": "connector", "role": "custom_serdes_breakout"})
         add(
             "high_speed_link_bridge",
             "High-Speed Link Bridge",
             why,
-            [
-                {"name": "REFCLK", "purpose": "serdes_reference_clock"},
-                {"name": "SERDES_RX", "purpose": "high_speed_receive_lanes"},
-                {"name": "SERDES_TX", "purpose": "high_speed_transmit_lanes"},
-            ],
-            [
-                {"ref": "JHS", "type": "connector", "role": "high_speed_link_connector"},
-                {"ref": "XO1", "type": "timing_source", "role": "reference_clock_source"},
-                {"ref": "CACHS", "type": "support_component", "role": "ac_coupling_network"},
-            ],
+            hs_nets,
+            hs_blocks,
             todo,
         )
         scenarios[-1]["source"] = "semantic_export" if semantic_protocols else "pin_inference"
@@ -1827,19 +1850,31 @@ def _fpga_standard_templates(device: dict, design_intent: dict, scenarios: list[
         lane_group_refs = semantic.get("lane_group_refs", [])
         protocol_suffix = f" Protocol candidates: {', '.join(protocol_candidates[:6])}." if protocol_candidates else ""
         lane_group_suffix = f" Lane groups: {', '.join(lane_group_refs[:8])}." if lane_group_refs else ""
+        template_nets = [item.get("name") for item in semantic.get("nets", []) if item.get("name")]
+        template_blocks = ["U1"] + [item.get("ref") for item in semantic.get("blocks", []) if item.get("ref")]
+        template_connections = [
+            {"from": "REFCLK", "to": "XO1", "note": "Fix the refclk source against the exported protocol candidates before routing or SI review."},
+            {"from": "SERDES_RX", "to": "JHS", "note": "Document ingress lane ownership per exported lane group."},
+            {"from": "SERDES_TX", "to": "JHS", "note": "Keep egress lanes adjacent to AC-coupling network placeholders and lane-group boundaries."},
+        ]
+        if "PCIE_REFCLK" in template_nets:
+            template_connections.extend([
+                {"from": "PCIE_REFCLK", "to": "XPCIE", "note": "Bind PCIe-capable groups to the explicit 100 MHz clock source or buffer boundary."},
+                {"from": "PCIE_TXRX", "to": "JPCIE", "note": "Keep PCIe lane ownership visible at the connector or slot boundary."},
+            ])
+        if "ETH_REFCLK" in template_nets:
+            template_connections.append({"from": "ETH_SERDES", "to": "JETH/SFP/UETH", "note": "Show whether Ethernet-capable groups land on SFP, PHY, or peer-link attachment."})
+        if "SERDES_USER_REFCLK" in template_nets:
+            template_connections.append({"from": "SERDES_USER_DATA", "to": "JHSUSR", "note": "Keep custom SerDes ownership explicit even when no standard protocol is frozen yet."})
         add_template(
             "high_speed_link_bridge",
             "High-Speed Link Bridge",
             "F4_high_speed_link_bridge",
             f"SerDes connector, AC-coupling, and refclk source grouped for signal-integrity review.{protocol_suffix}{lane_group_suffix}",
             "Use when exported high-speed lane groups require protocol/refclk ownership to be frozen early.",
-            ["REFCLK", "SERDES_RX", "SERDES_TX"],
-            ["U1", "JHS", "XO1", "CACHS"],
-            [
-                {"from": "REFCLK", "to": "XO1", "note": "Fix the refclk source against the exported protocol candidates before routing or SI review."},
-                {"from": "SERDES_RX", "to": "JHS", "note": "Document ingress lane ownership per exported lane group."},
-                {"from": "SERDES_TX", "to": "JHS", "note": "Keep egress lanes adjacent to AC-coupling network placeholders and lane-group boundaries."},
-            ],
+            template_nets,
+            template_blocks,
+            template_connections,
             [
                 "Freeze link standard, refclk frequency, and AC-coupling placement before layout.",
                 *([f"Freeze protocol ownership for exported lane groups: {', '.join(lane_group_refs[:8])}."] if lane_group_refs else []),
