@@ -596,8 +596,8 @@ def test_gowin_fpga_bundle_export_includes_customer_scenarios(tmp_path):
     template_names = {item["name"] for item in module_template.get("fpga_templates", [])}
 
     assert {"qspi_jtag_bringup", "mipi_camera_bridge", "lvds_io_expansion", "high_speed_link_bridge", "ddr_memory_interface"}.issubset(scenario_names)
-    assert {"configuration_flash", "boot_mode_straps", "mipi_camera_connector", "lvds_io_connector", "high_speed_link_connector", "memory_connector_or_footprint", "reference_clock_source"}.issubset(role_names)
-    assert {"CFG_SPI", "MIPI_CLK", "LVDS_IO", "REFCLK", "SERDES_RX", "DDR_DQ"}.issubset(starter_nets)
+    assert {"configuration_flash", "boot_mode_straps", "mipi_camera_connector", "lvds_io_connector", "high_speed_link_connector", "memory_connector_or_footprint", "reference_clock_source", "pcie_link_boundary", "pcie_refclk_source_or_buffer", "custom_serdes_breakout"}.issubset(role_names)
+    assert {"CFG_SPI", "MIPI_CLK", "LVDS_IO", "REFCLK", "SERDES_RX", "DDR_DQ", "PCIE_REFCLK", "PCIE_TXRX", "SERDES_USER_REFCLK", "HS_Q0_RX", "HS_Q0_TX", "HS_Q0_REFCLK"}.issubset(starter_nets)
     hs_context = design_intent.get("high_speed_semantic_context", {})
     assert hs_context.get("source") == "sch_review_export.constraint_blocks.refclk_requirements"
     assert "PCIe 3.0" in hs_context.get("protocol_candidates", [])
@@ -692,6 +692,8 @@ def test_amd_fpga_bundle_export_uses_semantic_high_speed_context(tmp_path):
 
     hs_context = design_intent.get("high_speed_semantic_context", {})
     scenario = next(item for item in design_intent.get("customer_scenarios", []) if item["name"] == "high_speed_link_bridge")
+    roles = {item["role"] for item in design_intent.get("external_components", [])}
+    starter_nets = {item["name"] for item in design_intent.get("starter_nets", [])}
 
     assert hs_context.get("source") == "sch_review_export.constraint_blocks.refclk_requirements"
     assert "PCIe 4.0" in hs_context.get("protocol_candidates", [])
@@ -704,6 +706,8 @@ def test_amd_fpga_bundle_export_uses_semantic_high_speed_context(tmp_path):
     assert "224" in hs_template.get("lane_group_refs", [])
     assert "PCIe 4.0" in hs_template.get("protocol_candidates", [])
     assert module_template.get("high_speed_semantic_context", {}).get("lane_groups")
+    assert {"pcie_link_boundary", "pcie_refclk_source_or_buffer", "ethernet_serdes_attachment"}.issubset(roles)
+    assert {"PCIE_REFCLK", "PCIE_TXRX", "ETH_REFCLK", "ETH_SERDES", "HS_224_RX", "HS_224_TX", "HS_224_REFCLK"}.issubset(starter_nets)
 
 
 def test_gowin_bundle_rules_are_family_specific(tmp_path):

@@ -1332,8 +1332,9 @@ def _build_fpga_design_intent(device: dict, datasheet_design_context: dict | Non
     })
     vendor_design_rules = _gowin_family_design_rules(device)
     reference_design_assets = _reference_design_assets(device)
-    external_components = _fpga_external_components(device, {"pin_groups": grouped, "power_rails": power_rails}, customer_scenarios)
-    starter_nets = _fpga_starter_nets(device, {"pin_groups": grouped, "power_rails": power_rails}, customer_scenarios)
+    fpga_context = {"pin_groups": grouped, "power_rails": power_rails, "high_speed_semantic_context": high_speed_semantic_context}
+    external_components = _fpga_external_components(device, fpga_context, customer_scenarios)
+    starter_nets = _fpga_starter_nets(device, fpga_context, customer_scenarios)
 
     return {
         "_schema": BUNDLE_SCHEMA,
@@ -1542,6 +1543,31 @@ def _fpga_customer_scenarios(device: dict, design_intent: dict) -> list[dict]:
     return scenarios
 
 
+def _high_speed_bundle_families(high_speed_semantic_context: dict | None) -> set[str]:
+    use_case_tags = set((high_speed_semantic_context or {}).get("use_case_tags") or [])
+    families = set()
+    if "pcie_link" in use_case_tags:
+        families.add("pcie")
+    if "ethernet_link" in use_case_tags:
+        families.add("ethernet")
+    if "custom_serdes" in use_case_tags:
+        families.add("custom")
+    return families
+
+
+def _high_speed_lane_group_nets(high_speed_semantic_context: dict | None) -> list[dict]:
+    nets = []
+    for group in (high_speed_semantic_context or {}).get("lane_groups", []) or []:
+        group_id = group.get("group_id")
+        if not group_id:
+            continue
+        nets.append({"name": f"HS_{group_id}_RX", "purpose": f"lane_group_{group_id}_receive_bundle"})
+        nets.append({"name": f"HS_{group_id}_TX", "purpose": f"lane_group_{group_id}_transmit_bundle"})
+        if group.get("refclk_pair_names"):
+            nets.append({"name": f"HS_{group_id}_REFCLK", "purpose": f"lane_group_{group_id}_reference_clock"})
+    return nets
+
+
 def _fpga_external_components(device: dict, design_intent: dict, scenarios: list[dict]) -> list[dict]:
     components = [
         {
@@ -1560,6 +1586,8 @@ def _fpga_external_components(device: dict, design_intent: dict, scenarios: list
         },
     ]
     names = {item["name"] for item in scenarios}
+    high_speed_semantic_context = design_intent.get("high_speed_semantic_context", {}) or {}
+    high_speed_families = _high_speed_bundle_families(high_speed_semantic_context)
     if "qspi_jtag_bringup" in names:
         components.extend(
             [
@@ -1627,6 +1655,45 @@ def _fpga_external_components(device: dict, design_intent: dict, scenarios: list
                 },
             ]
         )
+        if "pcie" in high_speed_families:
+            components.extend(
+                [
+                    {
+                        "role": "pcie_link_boundary",
+                        "designator": "JPCIE",
+                        "status": "design_specific",
+                        "connect_between": ["PCIE_TXRX", "slot_or_peer_device"],
+                        "why": "PCIe-capable lane groups should terminate at an explicit card-edge, connector, or peer-device boundary in the schematic.",
+                    },
+                    {
+                        "role": "pcie_refclk_source_or_buffer",
+                        "designator": "XPCIE",
+                        "status": "recommended",
+                        "connect_between": ["PCIE_REFCLK", "HS_lane_groups"],
+                        "why": "PCIe review needs an explicit 100 MHz reference-clock ownership point and any required fanout/buffer decision.",
+                    },
+                ]
+            )
+        if "ethernet" in high_speed_families:
+            components.append(
+                {
+                    "role": "ethernet_serdes_attachment",
+                    "designator": "JETH/SFP/UETH",
+                    "status": "design_specific",
+                    "connect_between": ["ETH_SERDES", "phy_or_cage_or_peer_link"],
+                    "why": "Ethernet-oriented SerDes designs need a clear attachment point such as an SFP cage, PHY, or direct link peer.",
+                }
+            )
+        if "custom" in high_speed_families:
+            components.append(
+                {
+                    "role": "custom_serdes_breakout",
+                    "designator": "JHSUSR",
+                    "status": "design_specific",
+                    "connect_between": ["SERDES_USER_DATA", "custom_link_partner"],
+                    "why": "Custom SerDes mode still needs an explicit boundary so lane ownership and AC-coupling policy stay reviewable.",
+                }
+            )
     if "ddr_memory_interface" in names:
         components.append(
             {
@@ -1651,6 +1718,28 @@ def _fpga_starter_nets(device: dict, design_intent: dict, scenarios: list[dict])
         for net in scenario.get("nets", []):
             if not any(item.get("name") == net["name"] for item in nets):
                 nets.append(net)
+
+    high_speed_semantic_context = design_intent.get("high_speed_semantic_context", {}) or {}
+    high_speed_families = _high_speed_bundle_families(high_speed_semantic_context)
+    extra_nets = _high_speed_lane_group_nets(high_speed_semantic_context)
+    if "pcie" in high_speed_families:
+        extra_nets.extend([
+            {"name": "PCIE_REFCLK", "purpose": "pcie_reference_clock"},
+            {"name": "PCIE_TXRX", "purpose": "pcie_lane_bundle"},
+        ])
+    if "ethernet" in high_speed_families:
+        extra_nets.extend([
+            {"name": "ETH_REFCLK", "purpose": "ethernet_serdes_reference_clock"},
+            {"name": "ETH_SERDES", "purpose": "ethernet_serdes_lane_bundle"},
+        ])
+    if "custom" in high_speed_families:
+        extra_nets.extend([
+            {"name": "SERDES_USER_REFCLK", "purpose": "custom_serdes_reference_clock"},
+            {"name": "SERDES_USER_DATA", "purpose": "custom_serdes_lane_bundle"},
+        ])
+    for net in extra_nets:
+        if not any(item.get("name") == net["name"] for item in nets):
+            nets.append(net)
     return nets
 
 
