@@ -667,6 +667,29 @@ def t4_11():
     assert_eq(lifcl_groups["SD0"].get("refclk_pair_names"), ["SD_REFCLK"], "LIFCL-40 SD0 refclk mapping")
 
 
+@case("T4.12 Lane groups and refclk pairs expose protocol candidates")
+def t4_12():
+    xcku = json.load(open(EXPORT_DIR / "XCKU3P_FFVA676.json"))
+    xcku_refclk = xcku.get("constraint_blocks", {}).get("refclk_requirements", {})
+    xcku_groups = {entry.get("group_id"): entry for entry in xcku_refclk.get("lane_group_mappings", [])}
+    quad224 = xcku_groups["224"]
+    assert_true("PCIe 4.0" in quad224.get("candidate_protocols", []), "XCKU3P quad 224 missing PCIe 4.0")
+    assert_eq(quad224.get("protocol_lane_widths", {}).get("PCIe 4.0"), [1, 2, 4], "XCKU3P quad 224 PCIe 4.0 widths")
+    refclk0_224 = [pair for pair in xcku_refclk.get("refclk_pairs", []) if pair.get("pair_name") == "REFCLK0_224"][0]
+    assert_true("XAUI" in refclk0_224.get("candidate_protocols", []), "XCKU3P REFCLK0_224 missing XAUI")
+    assert_eq(refclk0_224.get("protocol_lane_widths", {}).get("XAUI"), [4], "XCKU3P REFCLK0_224 XAUI width")
+
+    gw = json.load(open(EXPORT_DIR / "GW5AT-60_UG225.json"))
+    gw_group = gw.get("constraint_blocks", {}).get("refclk_requirements", {}).get("lane_group_mappings", [])[0]
+    assert_eq(gw_group.get("protocol_lane_widths", {}).get("PCIe 3.0"), [1, 2, 4], "GW5AT Q0 PCIe widths")
+
+    lifcl = json.load(open(EXPORT_DIR / "LIFCL-40_CABGA400.json"))
+    lifcl_group = lifcl.get("constraint_blocks", {}).get("refclk_requirements", {}).get("lane_group_mappings", [])[0]
+    assert_eq(lifcl_group.get("protocol_lane_widths", {}).get("SGMII"), [1], "LIFCL SD0 SGMII width")
+    lifcl_pair = lifcl.get("constraint_blocks", {}).get("refclk_requirements", {}).get("refclk_pairs", [])[0]
+    assert_true("PCIe Gen2" in lifcl_pair.get("candidate_protocols", []), "LIFCL SD_REFCLK missing PCIe Gen2")
+
+
 @case("T6.3 Gowin GW5AT exports expose package-specific ip_blocks")
 def t6_3():
     ug225 = json.load(open(EXPORT_DIR / "GW5AT-60_UG225.json"))

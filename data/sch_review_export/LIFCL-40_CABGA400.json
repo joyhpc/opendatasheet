@@ -7262,7 +7262,27 @@
           "group_id": "SD",
           "mapped_lane_groups": [
             "SD0"
-          ]
+          ],
+          "candidate_protocols": [
+            "SGMII",
+            "1000BASE-X",
+            "PCIe Gen1",
+            "PCIe Gen2"
+          ],
+          "protocol_lane_widths": {
+            "SGMII": [
+              1
+            ],
+            "1000BASE-X": [
+              1
+            ],
+            "PCIe Gen1": [
+              1
+            ],
+            "PCIe Gen2": [
+              1
+            ]
+          }
         }
       ],
       "review_required": true,
@@ -7321,7 +7341,30 @@
             "SD_REFCLK"
           ],
           "refclk_indices": [],
-          "source": "pair_name_inference"
+          "source": "pair_name_inference",
+          "max_lane_pairs": 1,
+          "candidate_protocols": [
+            "SGMII",
+            "1000BASE-X",
+            "PCIe Gen1",
+            "PCIe Gen2"
+          ],
+          "protocol_lane_widths": {
+            "SGMII": [
+              1
+            ],
+            "1000BASE-X": [
+              1
+            ],
+            "PCIe Gen1": [
+              1
+            ],
+            "PCIe Gen2": [
+              1
+            ]
+          },
+          "selection_required": true,
+          "selection_note": "Freeze the protocol/IP assignment for this lane group and bind it to one of the mapped refclk pairs before schematic sign-off."
         }
       ],
       "protocol_matrix": {

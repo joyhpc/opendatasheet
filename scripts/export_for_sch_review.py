@@ -948,6 +948,54 @@ def _high_speed_topology(diff_pairs: list[dict], refclk_pairs: list[dict]) -> tu
     return enriched_refclk_pairs, lane_group_mappings
 
 
+def _lane_group_protocol_candidates(lane_group_mappings: list[dict], protocol_matrix: dict | None) -> list[dict]:
+    protocol_matrix = protocol_matrix or {}
+    enriched = []
+    for group in lane_group_mappings:
+        entry = dict(group)
+        max_lane_pairs = len(entry.get("lane_indices") or []) or min(len(entry.get("rx_pair_names") or []), len(entry.get("tx_pair_names") or [])) or max(len(entry.get("rx_pair_names") or []), len(entry.get("tx_pair_names") or []))
+        entry["max_lane_pairs"] = max_lane_pairs
+        protocol_lane_widths = {}
+        candidate_protocols = []
+        for protocol, meta in protocol_matrix.items():
+            lane_widths = [width for width in (meta or {}).get("lane_widths", []) if isinstance(width, int) and width <= max_lane_pairs]
+            if lane_widths:
+                protocol_lane_widths[protocol] = lane_widths
+                candidate_protocols.append(protocol)
+        entry["candidate_protocols"] = candidate_protocols
+        if protocol_lane_widths:
+            entry["protocol_lane_widths"] = protocol_lane_widths
+        entry["selection_required"] = bool(candidate_protocols)
+        if candidate_protocols:
+            entry["selection_note"] = "Freeze the protocol/IP assignment for this lane group and bind it to one of the mapped refclk pairs before schematic sign-off."
+        enriched.append(entry)
+    return enriched
+
+
+def _refclk_pair_protocol_candidates(refclk_pairs: list[dict], lane_group_mappings: list[dict]) -> list[dict]:
+    group_map = {entry.get("group_id"): entry for entry in lane_group_mappings}
+    enriched = []
+    for pair in refclk_pairs:
+        entry = dict(pair)
+        protocols = []
+        protocol_lane_widths = {}
+        for group_id in entry.get("mapped_lane_groups", []) or []:
+            group = group_map.get(group_id, {})
+            for protocol in group.get("candidate_protocols", []) or []:
+                if protocol not in protocols:
+                    protocols.append(protocol)
+                widths = group.get("protocol_lane_widths", {}).get(protocol, [])
+                if widths:
+                    protocol_lane_widths.setdefault(protocol, [])
+                    protocol_lane_widths[protocol] = sorted(set(protocol_lane_widths[protocol]) | set(widths))
+        if protocols:
+            entry["candidate_protocols"] = protocols
+        if protocol_lane_widths:
+            entry["protocol_lane_widths"] = protocol_lane_widths
+        enriched.append(entry)
+    return enriched
+
+
 def _package_rate_note(vendor: str, package: str, hs_serial: dict) -> str | None:
     if vendor == "Gowin" and hs_serial.get("package_rate_ceiling_gbps") is not None:
         ceiling = hs_serial.get("package_rate_ceiling_gbps")
@@ -1029,6 +1077,8 @@ def _generic_fpga_constraint_blocks(pinout_data: dict, capability_blocks: dict, 
         protocol_profiles = _normalize_protocol_refclk_profiles(hs_serial.get("supported_protocols") or [])
         protocol_candidates = sorted({freq for profile in protocol_profiles.values() for freq in profile.get("frequencies_mhz", [])})
         enriched_refclk_pairs, lane_group_mappings = _high_speed_topology(diff_pairs, refclk_pairs)
+        lane_group_mappings = _lane_group_protocol_candidates(lane_group_mappings, hs_serial.get("protocol_matrix"))
+        enriched_refclk_pairs = _refclk_pair_protocol_candidates(enriched_refclk_pairs, lane_group_mappings)
         blocks["refclk_requirements"] = {
             "class": "clocking",
             "required": True,

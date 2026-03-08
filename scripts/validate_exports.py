@@ -73,12 +73,22 @@ def semantic_checks(data: dict) -> list[str]:
             errors.append("  [constraint_blocks.refclk_requirements] missing refclk_requirements constraint block")
         if "refclk_requirements" in constraint_blocks and not constraint_blocks.get("refclk_requirements", {}).get("refclk_pairs"):
             errors.append("  [constraint_blocks.refclk_requirements.refclk_pairs] missing concrete refclk pair details")
-        if has_refclk and has_hs and not (constraint_blocks.get("refclk_requirements", {}) or {}).get("lane_group_mappings"):
+        refclk_req = constraint_blocks.get("refclk_requirements", {}) or {}
+        if has_refclk and has_hs and not refclk_req.get("lane_group_mappings"):
             errors.append("  [constraint_blocks.refclk_requirements.lane_group_mappings] missing refclk-to-lane group mapping details")
         hs_protocols = [p for p in (capability_blocks.get("high_speed_serial", {}) or {}).get("supported_protocols", []) if p != "custom"]
-        refclk_profiles = (constraint_blocks.get("refclk_requirements", {}) or {}).get("protocol_refclk_profiles", {})
+        refclk_profiles = refclk_req.get("protocol_refclk_profiles", {})
         if hs_protocols and not refclk_profiles:
             errors.append("  [constraint_blocks.refclk_requirements.protocol_refclk_profiles] missing source-backed protocol refclk profiles")
+        if hs_protocols:
+            for group in refclk_req.get("lane_group_mappings", []) or []:
+                if not group.get("candidate_protocols"):
+                    errors.append("  [constraint_blocks.refclk_requirements.lane_group_mappings.candidate_protocols] missing protocol candidates for lane group")
+                    break
+            for pair in refclk_req.get("refclk_pairs", []) or []:
+                if pair.get("mapped_lane_groups") and not pair.get("candidate_protocols"):
+                    errors.append("  [constraint_blocks.refclk_requirements.refclk_pairs.candidate_protocols] missing protocol candidates for refclk pair")
+                    break
     if data.get("_type") == "normal_ic":
         capability_blocks = data.get("capability_blocks", {}) or {}
         constraint_blocks = data.get("constraint_blocks", {}) or {}
