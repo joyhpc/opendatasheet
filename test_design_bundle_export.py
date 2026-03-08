@@ -598,6 +598,12 @@ def test_gowin_fpga_bundle_export_includes_customer_scenarios(tmp_path):
     assert {"qspi_jtag_bringup", "mipi_camera_bridge", "lvds_io_expansion", "high_speed_link_bridge", "ddr_memory_interface"}.issubset(scenario_names)
     assert {"configuration_flash", "boot_mode_straps", "mipi_camera_connector", "lvds_io_connector", "high_speed_link_connector", "memory_connector_or_footprint", "reference_clock_source"}.issubset(role_names)
     assert {"CFG_SPI", "MIPI_CLK", "LVDS_IO", "REFCLK", "SERDES_RX", "DDR_DQ"}.issubset(starter_nets)
+    hs_context = design_intent.get("high_speed_semantic_context", {})
+    assert hs_context.get("source") == "sch_review_export.constraint_blocks.refclk_requirements"
+    assert "PCIe 3.0" in hs_context.get("protocol_candidates", [])
+    hs_scenario = next(item for item in design_intent.get("customer_scenarios", []) if item["name"] == "high_speed_link_bridge")
+    assert hs_scenario.get("source") == "semantic_export"
+    assert "Q0" in hs_scenario.get("lane_group_refs", [])
     assert {"qspi_jtag_bringup", "mipi_camera_bridge", "lvds_io_expansion", "high_speed_link_bridge", "ddr_memory_interface"}.issubset(template_names)
     assert module_template["default_fpga_template"] == "mipi_camera_bridge"
     assert set(design_intent.get("vendor_design_rules", {}).keys()) == {"power_rules", "config_rules", "clock_rules", "io_rules"}
@@ -649,12 +655,46 @@ def test_gowin_fpga_scenarios_generalize_across_other_families(tmp_path):
     assert "lvds_io_expansion" in {item["name"] for item in gw5as_template.get("fpga_templates", [])}
     assert gw5at15_template["default_fpga_template"] == "qspi_jtag_bringup"
     assert "mipi_camera_bridge" not in {item["name"] for item in gw5at15_template.get("fpga_templates", [])}
-    assert gw5at138_template["default_fpga_template"] == "qspi_jtag_bringup"
+    assert gw5at138_template["default_fpga_template"] == "high_speed_link_bridge"
     assert {item["name"] for item in gw5at138_template.get("fpga_templates", [])} >= {"lvds_io_expansion", "ddr_memory_interface"}
     assert {item["source_path"] for item in gw5at138_intent.get("reference_design_assets", [])} == {
         "data/sch_review_export/reference/gowin_gw5at_design_guide.md"
     }
 
+
+
+def test_amd_fpga_bundle_export_uses_semantic_high_speed_context(tmp_path):
+    output_dir = tmp_path / "bundles"
+    subprocess.run(
+        [
+            sys.executable,
+            "scripts/export_design_bundle.py",
+            "--device",
+            "XCKU3P_FFVA676",
+            "--output-dir",
+            str(output_dir),
+        ],
+        cwd=REPO_ROOT,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+
+    bundle_dir = output_dir / "XCKU3P_FFVA676"
+    design_intent = json.loads((bundle_dir / "L1_design_intent.json").read_text(encoding="utf-8"))
+    module_template = json.loads((bundle_dir / "L3_module_template.json").read_text(encoding="utf-8"))
+
+    hs_context = design_intent.get("high_speed_semantic_context", {})
+    scenario = next(item for item in design_intent.get("customer_scenarios", []) if item["name"] == "high_speed_link_bridge")
+
+    assert hs_context.get("source") == "sch_review_export.constraint_blocks.refclk_requirements"
+    assert "PCIe 4.0" in hs_context.get("protocol_candidates", [])
+    assert "224" in {item.get("group_id") for item in hs_context.get("lane_groups", [])}
+    assert scenario.get("source") == "semantic_export"
+    assert "224" in scenario.get("lane_group_refs", [])
+    assert "PCIe 4.0" in scenario.get("protocol_candidates", [])
+    assert module_template["default_fpga_template"] == "high_speed_link_bridge"
+    assert "high_speed_link_bridge" in {item["name"] for item in module_template.get("fpga_templates", [])}
 
 
 def test_gowin_bundle_rules_are_family_specific(tmp_path):

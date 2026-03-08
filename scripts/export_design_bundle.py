@@ -1232,6 +1232,45 @@ def _build_normal_ic_design_intent(device: dict, datasheet_design_context: dict 
     }
 
 
+def _fpga_high_speed_semantic_context(device: dict) -> dict:
+    refclk_requirements = ((device.get("constraint_blocks") or {}).get("refclk_requirements") or {})
+    lane_groups = refclk_requirements.get("lane_group_mappings") or []
+    refclk_pairs = refclk_requirements.get("refclk_pairs") or []
+    if not lane_groups and not refclk_pairs:
+        return {}
+
+    scenario_candidates = []
+    bundle_tags = []
+    use_case_tags = []
+    protocol_candidates = []
+
+    def add_unique(target: list[str], values) -> None:
+        for value in values or []:
+            if value and value not in target:
+                target.append(value)
+
+    for group in lane_groups:
+        add_unique(scenario_candidates, group.get("bundle_scenario_candidates") or [])
+        add_unique(bundle_tags, group.get("bundle_tags") or [])
+        add_unique(use_case_tags, group.get("use_case_tags") or [])
+        add_unique(protocol_candidates, group.get("candidate_protocols") or [])
+    for pair in refclk_pairs:
+        add_unique(scenario_candidates, pair.get("bundle_scenario_candidates") or [])
+        add_unique(bundle_tags, pair.get("bundle_tags") or [])
+        add_unique(use_case_tags, pair.get("use_case_tags") or [])
+        add_unique(protocol_candidates, pair.get("candidate_protocols") or [])
+
+    return {
+        "lane_groups": lane_groups,
+        "refclk_pairs": refclk_pairs,
+        "scenario_candidates": scenario_candidates,
+        "bundle_tags": bundle_tags,
+        "use_case_tags": use_case_tags,
+        "protocol_candidates": protocol_candidates,
+        "source": "sch_review_export.constraint_blocks.refclk_requirements",
+    }
+
+
 def _build_fpga_design_intent(device: dict, datasheet_design_context: dict | None = None) -> dict:
     pins = device.get("pins", [])
     grouped = {
@@ -1285,9 +1324,11 @@ def _build_fpga_design_intent(device: dict, datasheet_design_context: dict | Non
             }
         )
 
+    high_speed_semantic_context = _fpga_high_speed_semantic_context(device)
     customer_scenarios = _fpga_customer_scenarios(device, {
         "pin_groups": grouped,
         "power_rails": power_rails,
+        "high_speed_semantic_context": high_speed_semantic_context,
     })
     vendor_design_rules = _gowin_family_design_rules(device)
     reference_design_assets = _reference_design_assets(device)
@@ -1311,6 +1352,7 @@ def _build_fpga_design_intent(device: dict, datasheet_design_context: dict | Non
         "attention_items": attention_items,
         "external_components": external_components,
         "datasheet_design_context": datasheet_design_context or {},
+        "high_speed_semantic_context": high_speed_semantic_context,
         "customer_scenarios": customer_scenarios,
         "vendor_design_rules": vendor_design_rules,
         "reference_design_assets": reference_design_assets,
@@ -1366,6 +1408,11 @@ def _fpga_customer_scenarios(device: dict, design_intent: dict) -> list[dict]:
     power_rail_names = {item.get("name") or "" for item in power_rails}
     pin_names = {pin.get("name") or "" for pin in pins}
     special_names = {pin.get("name") or "" for pin in design_intent.get("pin_groups", {}).get("special_pins", [])}
+    high_speed_semantic_context = design_intent.get("high_speed_semantic_context", {}) or {}
+    semantic_scenario_candidates = set(high_speed_semantic_context.get("scenario_candidates", []) or [])
+    semantic_protocols = high_speed_semantic_context.get("protocol_candidates", []) or []
+    semantic_bundle_tags = set(high_speed_semantic_context.get("bundle_tags", []) or [])
+    semantic_use_case_tags = set(high_speed_semantic_context.get("use_case_tags", []) or [])
     scenarios = []
     seen = set()
 
@@ -1443,11 +1490,17 @@ def _fpga_customer_scenarios(device: dict, design_intent: dict) -> list[dict]:
         )
 
     has_serdes = any(re.search(r"Q\d+_LN\d+_(?:RX|TX)", name) for name in special_names)
-    if has_serdes:
+    if has_serdes or "high_speed_link_bridge" in semantic_scenario_candidates or "high_speed_link" in semantic_use_case_tags:
+        why = "Customers using transceiver-capable packages need refclk, AC-coupling, and link connector partitioned up front."
+        if semantic_protocols:
+            why = f"High-speed lane groups already export protocol candidates ({', '.join(semantic_protocols[:6])}); bind those groups to connectors and refclk sources early."
+        todo = ["Freeze link standard, refclk frequency, and AC-coupling placement before stack-up review."]
+        if semantic_protocols:
+            todo.insert(0, f"Freeze protocol ownership per lane group from exported candidates: {', '.join(semantic_protocols[:6])}.")
         add(
             "high_speed_link_bridge",
             "High-Speed Link Bridge",
-            "Customers using transceiver-capable Gowin packages need refclk, AC-coupling, and link connector partitioned up front.",
+            why,
             [
                 {"name": "REFCLK", "purpose": "serdes_reference_clock"},
                 {"name": "SERDES_RX", "purpose": "high_speed_receive_lanes"},
@@ -1458,8 +1511,14 @@ def _fpga_customer_scenarios(device: dict, design_intent: dict) -> list[dict]:
                 {"ref": "XO1", "type": "timing_source", "role": "reference_clock_source"},
                 {"ref": "CACHS", "type": "support_component", "role": "ac_coupling_network"},
             ],
-            ["Freeze link standard, refclk frequency, and AC-coupling placement before stack-up review."],
+            todo,
         )
+        scenarios[-1]["source"] = "semantic_export" if semantic_protocols else "pin_inference"
+        if semantic_protocols:
+            scenarios[-1]["protocol_candidates"] = semantic_protocols
+            scenarios[-1]["bundle_tags"] = sorted(semantic_bundle_tags)
+            scenarios[-1]["use_case_tags"] = sorted(semantic_use_case_tags)
+            scenarios[-1]["lane_group_refs"] = [group.get("group_id") for group in high_speed_semantic_context.get("lane_groups", []) if group.get("group_id")]
 
     dqs_count = sum(1 for pin in pins if pin.get("dqs"))
     if dqs_count >= 8:
