@@ -86,6 +86,22 @@ def get_register_data(data: dict) -> dict:
     return {}
 
 
+def get_timing_data(data: dict) -> dict:
+    """Get timing data (only available in domains format)."""
+    fmt = detect_input_format(data)
+    if fmt == "domains":
+        return data["domains"].get("timing", {})
+    return {}
+
+
+def get_power_sequence_data(data: dict) -> dict:
+    """Get power sequence data (only available in domains format)."""
+    fmt = detect_input_format(data)
+    if fmt == "domains":
+        return data["domains"].get("power_sequence", {})
+    return {}
+
+
 # ─── Normal IC Export ───────────────────────────────────────────────
 
 
@@ -172,8 +188,15 @@ def export_normal_ic(data: dict) -> dict | None:
     # --- Check for register data ---
     register_data = get_register_data(data)
 
+    # --- Check for timing data ---
+    timing_data = get_timing_data(data)
+
+    # --- Check for power sequence data ---
+    power_seq_data = get_power_sequence_data(data)
+
     # --- Determine schema version ---
-    schema_version = SCHEMA_VERSION_V2 if register_data else SCHEMA_VERSION
+    # Upgrade to 2.0 if any domain data is present
+    schema_version = SCHEMA_VERSION_V2 if (register_data or timing_data or power_seq_data) else SCHEMA_VERSION
 
     # --- Determine layers ---
     layers = ["L0_skeleton"]
@@ -207,9 +230,16 @@ def export_normal_ic(data: dict) -> dict | None:
     if constraint_blocks:
         result["constraint_blocks"] = constraint_blocks
 
-    # Include register domain if present
-    if register_data:
-        result["domains"] = {"register": register_data}
+    # Include new domains if present
+    if register_data or timing_data or power_seq_data:
+        domains_block = {}
+        if register_data:
+            domains_block["register"] = register_data
+        if timing_data:
+            domains_block["timing"] = timing_data
+        if power_seq_data:
+            domains_block["power_sequence"] = power_seq_data
+        result["domains"] = domains_block
 
     return result
 
