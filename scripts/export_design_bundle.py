@@ -397,6 +397,32 @@ def _collect_constraints(device: dict, datasheet_design_context: dict | None = N
 
 
 
+def _detect_extracted_format(payload: dict) -> str:
+    """Detect whether extracted record is flat (v1) or domains-based (v2)."""
+    if "domains" in payload and isinstance(payload["domains"], dict):
+        return "domains"
+    return "flat"
+
+
+def _get_extracted_mpn(payload: dict) -> str | None:
+    """Get MPN from extracted record in either format."""
+    fmt = _detect_extracted_format(payload)
+    if fmt == "domains":
+        electrical = payload["domains"].get("electrical", {})
+        mpn = electrical.get("component", {}).get("mpn")
+        if mpn:
+            return mpn
+    return payload.get("extraction", {}).get("component", {}).get("mpn")
+
+
+def _get_extracted_design_context(payload: dict) -> dict | None:
+    """Get design extraction from extracted record in either format."""
+    fmt = _detect_extracted_format(payload)
+    if fmt == "domains":
+        return payload["domains"].get("design_context")
+    return payload.get("design_extraction")
+
+
 def _index_extracted_records(extracted_dir: Path) -> dict[str, Path]:
     index: dict[str, Path] = {}
     if not extracted_dir.exists():
@@ -406,7 +432,7 @@ def _index_extracted_records(extracted_dir: Path) -> dict[str, Path]:
             payload = json.loads(path.read_text(encoding="utf-8"))
         except json.JSONDecodeError:
             continue
-        mpn = payload.get("extraction", {}).get("component", {}).get("mpn")
+        mpn = _get_extracted_mpn(payload)
         if not mpn:
             continue
         index.setdefault(_sanitize_name(mpn), path)
@@ -515,8 +541,9 @@ def _build_design_text_pages_from_preview(extracted_record: dict) -> list[dict]:
 def _load_datasheet_design_context(device: dict, extracted_index: dict[str, Path], pdf_dir: Path) -> dict:
     extracted_record, record_path = _load_extracted_record(device, extracted_index)
     if extracted_record:
-        if extracted_record.get("design_extraction"):
-            design_context = dict(extracted_record["design_extraction"])
+        design_extraction = _get_extracted_design_context(extracted_record)
+        if design_extraction:
+            design_context = dict(design_extraction)
             design_context["source_mode"] = "pipeline_design_extraction"
             design_context["source_record"] = record_path.name if record_path else None
             design_context["pdf_name"] = extracted_record.get("pdf_name")
