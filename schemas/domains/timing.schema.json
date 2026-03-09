@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opendatasheet.dev/schemas/domains/timing/1.0",
+  "title": "Timing Domain",
+  "description": "Timing specifications: propagation delays, setup/hold times, rise/fall times, clock specs.",
+  "type": "object",
+  "properties": {
+    "timing_parameters": {
+      "type": "array",
+      "description": "Array of timing parameter definitions.",
+      "items": { "$ref": "#/$defs/timing_parameter" }
+    },
+    "timing_summary": {
+      "type": "object",
+      "description": "Summary metadata about the timing specifications.",
+      "properties": {
+        "total_parameters": { "type": "integer", "minimum": 0 },
+        "categories": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Types of timing specs found (e.g., propagation_delay, setup_hold, rise_fall, clock)"
+        },
+        "has_timing_diagram": { "type": "boolean" }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "timing_parameter": {
+      "type": "object",
+      "required": ["parameter", "category"],
+      "properties": {
+        "parameter": { "type": "string", "description": "Parameter name as shown in datasheet" },
+        "symbol": { "type": ["string", "null"] },
+        "category": {
+          "type": "string",
+          "enum": ["propagation_delay", "setup_time", "hold_time", "rise_time", "fall_time", "pulse_width", "clock_frequency", "clock_period", "skew", "jitter", "duty_cycle", "other"]
+        },
+        "min": { "type": ["number", "null"] },
+        "typ": { "type": ["number", "null"] },
+        "max": { "type": ["number", "null"] },
+        "unit": { "type": ["string", "null"], "description": "ns, ps, us, MHz, GHz, etc." },
+        "conditions": { "type": ["string", "null"], "description": "Test conditions" },
+        "signal_from": { "type": ["string", "null"], "description": "Source signal/pin name" },
+        "signal_to": { "type": ["string", "null"], "description": "Destination signal/pin name" },
+        "edge": { "type": ["string", "null"], "enum": ["rising", "falling", "both", null] },
+        "load_conditions": { "type": ["string", "null"], "description": "Load capacitance, resistance" }
+      },
+      "additionalProperties": true
+    }
+  }
+}
