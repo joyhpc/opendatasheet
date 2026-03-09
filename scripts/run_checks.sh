@@ -12,7 +12,13 @@ python3 -m py_compile \
   test_pin_extraction.py \
   test_drc_hints_v2.py \
   test_raw_source_manifest.py \
-  test_validate_design_extraction_manifest.py
+  test_validate_design_extraction_manifest.py \
+  extractors/__init__.py \
+  extractors/base.py \
+  extractors/register.py
+
+echo "=== Extractor Registry Check ==="
+python3 -c "from extractors import EXTRACTOR_REGISTRY; assert len(EXTRACTOR_REGISTRY) >= 5, 'Expected at least 5 extractors'; print(f'  {len(EXTRACTOR_REGISTRY)} extractors registered')"
 
 if ! python3 scripts/build_raw_source_manifest.py --check; then
   echo "raw-source manifest is missing or stale; run: python3 scripts/build_raw_source_manifest.py" >&2

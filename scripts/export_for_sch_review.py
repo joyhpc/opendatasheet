@@ -18,19 +18,82 @@ from collections import defaultdict
 from pathlib import Path
 
 SCHEMA_VERSION = "sch-review-device/1.1"
+SCHEMA_VERSION_V2 = "device-knowledge/2.0"
 
 DEFAULT_EXTRACTED_DIR = Path(__file__).parent.parent / "data/extracted_v2"
 DEFAULT_FPGA_PINOUT_DIR = Path(__file__).parent.parent / "data/extracted_v2/fpga/pinout"
 DEFAULT_OUTPUT_DIR = Path(__file__).parent.parent / "data/sch_review_export"
+
+
+# ─── Format Detection & Accessors ──────────────────────────────────
+
+
+def detect_input_format(data: dict) -> str:
+    """Detect whether input is flat (v1) or domains-based (v2).
+    Returns 'flat' or 'domains'.
+    """
+    if "domains" in data and isinstance(data["domains"], dict):
+        return "domains"
+    return "flat"
+
+
+def get_extraction(data: dict) -> dict:
+    """Get electrical extraction from either format."""
+    fmt = detect_input_format(data)
+    if fmt == "domains":
+        return data["domains"].get("electrical", {})
+    return data.get("extraction", {})
+
+
+def get_pin_data(data: dict) -> dict:
+    """Get pin extraction from either format."""
+    fmt = detect_input_format(data)
+    if fmt == "domains":
+        return data["domains"].get("pin", {})
+    return data.get("pin_extraction", {})
+
+
+def get_pin_index(data: dict) -> dict:
+    """Get pin index from either format."""
+    fmt = detect_input_format(data)
+    if fmt == "domains":
+        pin = data["domains"].get("pin", {})
+        return pin.get("pin_index", pin)
+    return data.get("pin_index", {})
+
+
+def get_thermal_data(data: dict) -> dict:
+    """Get thermal data from either format."""
+    fmt = detect_input_format(data)
+    if fmt == "domains":
+        return data["domains"].get("thermal", {})
+    return {}  # In flat format, thermal is embedded in extraction
+
+
+def get_design_context(data: dict) -> dict:
+    """Get design context from either format."""
+    fmt = detect_input_format(data)
+    if fmt == "domains":
+        return data["domains"].get("design_context", {})
+    return data.get("design_extraction", {})
+
+
+def get_register_data(data: dict) -> dict:
+    """Get register data (only available in domains format)."""
+    fmt = detect_input_format(data)
+    if fmt == "domains":
+        return data["domains"].get("register", {})
+    return {}
+
 
 # ─── Normal IC Export ───────────────────────────────────────────────
 
 
 def export_normal_ic(data: dict) -> dict | None:
     """Convert a normal IC datasheet JSON to sch-review format."""
-    ext = data.get("extraction", {})
+    ext = get_extraction(data)
     comp = ext.get("component", {})
-    pin_index = data.get("pin_index", {})
+    pin_index = get_pin_index(data)
 
     if not comp.get("mpn"):
         return None
@@ -99,13 +162,26 @@ def export_normal_ic(data: dict) -> dict | None:
                                     raw_elec=raw_elec, raw_abs=raw_abs)
     thermal = _extract_thermal(raw_elec=raw_elec, raw_abs=raw_abs)
 
+    # If domains format provided standalone thermal data, merge it in
+    thermal_domain = get_thermal_data(data)
+    if thermal_domain:
+        for key, value in thermal_domain.items():
+            if key not in thermal and isinstance(value, dict):
+                thermal[key] = value
+
+    # --- Check for register data ---
+    register_data = get_register_data(data)
+
+    # --- Determine schema version ---
+    schema_version = SCHEMA_VERSION_V2 if register_data else SCHEMA_VERSION
+
     # --- Determine layers ---
     layers = ["L0_skeleton"]
     if elec_params or abs_max:
         layers.append("L1_electrical")
 
     result = {
-        "_schema": SCHEMA_VERSION,
+        "_schema": schema_version,
         "_type": "normal_ic",
         "_layers": layers,
         "mpn": mpn,
@@ -130,6 +206,10 @@ def export_normal_ic(data: dict) -> dict | None:
         result["capability_blocks"] = capability_blocks
     if constraint_blocks:
         result["constraint_blocks"] = constraint_blocks
+
+    # Include register domain if present
+    if register_data:
+        result["domains"] = {"register": register_data}
 
     return result
 
@@ -1573,7 +1653,7 @@ def export_fpga(dc_data: dict, pinout_data: dict, gowin_dc: dict = None, lattice
     gowin_dc: Gowin-style DC extraction (from extract_gowin_dc.py)
     lattice_dc: Lattice-style DC extraction (from extract_lattice_dc.py)
     """
-    ext = dc_data.get("extraction", {})
+    ext = get_extraction(dc_data)
     comp = ext.get("component", {})
 
     # --- Supply voltage specs from DC datasheet ---

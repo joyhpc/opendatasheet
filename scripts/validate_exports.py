@@ -8,6 +8,7 @@ Usage:
 
 Notes:
     Current export target is sch-review-device/1.1.
+    Also supports device-knowledge/2.0 with domain sub-schemas.
     Legacy checked-in artifacts using sch-review-device/1.0 remain valid during migration.
 """
 
@@ -16,12 +17,14 @@ import sys
 from pathlib import Path
 
 try:
+    import jsonschema
     from jsonschema import Draft202012Validator
 except ImportError:
     print("ERROR: pip install jsonschema  (requires jsonschema>=4.18)")
     sys.exit(1)
 
-SCHEMA_PATH = Path(__file__).parent.parent / "schemas/sch-review-device.schema.json"
+SCHEMA_DIR = Path(__file__).parent.parent / "schemas"
+SCHEMA_PATH = SCHEMA_DIR / "sch-review-device.schema.json"
 DEFAULT_EXPORT_DIR = Path(__file__).parent.parent / "data/sch_review_export"
 
 
@@ -29,7 +32,12 @@ def load_schema():
     with open(SCHEMA_PATH) as f:
         schema = json.load(f)
     Draft202012Validator.check_schema(schema)
-    return Draft202012Validator(schema)
+    # Set up a RefResolver that can resolve $ref to domain sub-schemas
+    resolver = jsonschema.RefResolver(
+        base_uri=f"file://{SCHEMA_DIR}/",
+        referrer=schema,
+    )
+    return Draft202012Validator(schema, resolver=resolver)
 
 
 def load_json(path: Path) -> dict:
