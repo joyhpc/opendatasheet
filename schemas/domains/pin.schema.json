@@ -1,0 +1,132 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opendatasheet.dev/schemas/domains/pin/1.0",
+  "title": "Pin Definition Domain",
+  "description": "Pin-out definitions for normal ICs (package-keyed) and FPGAs (array-based with banks and differential pairs).",
+  "type": "object",
+  "oneOf": [
+    { "$ref": "#/$defs/normal_ic_pins" },
+    { "$ref": "#/$defs/fpga_pins" }
+  ],
+  "$defs": {
+    "pin_direction": {
+      "type": ["string", "null"],
+      "enum": ["INPUT", "OUTPUT", "BIDIRECTIONAL", "POWER_IN", "POWER_OUT", "PASSIVE", "NC", null]
+    },
+
+    "normal_ic_pin": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string" },
+        "direction": { "$ref": "#/$defs/pin_direction" },
+        "signal_type": { "type": ["string", "null"] },
+        "description": { "type": ["string", "null"] },
+        "unused_treatment": { "type": ["string", "null"] }
+      },
+      "additionalProperties": true
+    },
+
+    "normal_ic_package": {
+      "type": "object",
+      "required": ["pin_count", "pins"],
+      "properties": {
+        "pin_count": { "type": "integer", "minimum": 1 },
+        "pins": {
+          "type": "object",
+          "description": "Keyed by pin number (string)",
+          "additionalProperties": { "$ref": "#/$defs/normal_ic_pin" }
+        }
+      },
+      "additionalProperties": true
+    },
+
+    "normal_ic_pins": {
+      "type": "object",
+      "required": ["packages"],
+      "properties": {
+        "packages": {
+          "type": "object",
+          "description": "Keyed by package name (e.g. SOT-223)",
+          "additionalProperties": { "$ref": "#/$defs/normal_ic_package" }
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "fpga_pin": {
+      "type": "object",
+      "required": ["pin", "name", "function"],
+      "properties": {
+        "pin": { "type": "string", "description": "Physical pin designator (e.g. A1, AA20)" },
+        "name": { "type": "string", "description": "Signal/net name" },
+        "function": { "enum": ["IO", "POWER", "GROUND", "CONFIG", "GT", "GT_POWER", "RSVDGND", "NC", "SPECIAL"] },
+        "bank": { "type": ["string", "null"] },
+        "drc": {
+          "type": "object",
+          "properties": {
+            "must_connect": { "type": "boolean" },
+            "connect_to": { "type": ["string", "null"] }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    },
+
+    "diff_pair": {
+      "type": "object",
+      "required": ["type", "p_pin", "n_pin"],
+      "properties": {
+        "type": { "type": "string", "description": "LVDS, GT_RX, GT_TX, REFCLK, etc." },
+        "pair_name": { "type": ["string", "null"] },
+        "p_pin": { "type": "string" },
+        "n_pin": { "type": "string" },
+        "p_name": { "type": ["string", "null"] },
+        "n_name": { "type": ["string", "null"] },
+        "bank": { "type": ["string", "null"] }
+      },
+      "additionalProperties": true
+    },
+
+    "fpga_bank": {
+      "type": "object",
+      "required": ["bank"],
+      "properties": {
+        "bank": { "type": "string" },
+        "total_pins": { "type": "integer" },
+        "io_pins": { "type": "integer" }
+      },
+      "additionalProperties": true
+    },
+
+    "fpga_pins": {
+      "type": "object",
+      "required": ["pins"],
+      "properties": {
+        "pins": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/fpga_pin" },
+          "minItems": 1
+        },
+        "banks": {
+          "type": "object",
+          "additionalProperties": { "$ref": "#/$defs/fpga_bank" }
+        },
+        "diff_pairs": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/diff_pair" }
+        },
+        "lookup": {
+          "type": "object",
+          "properties": {
+            "by_pin": { "type": "object" },
+            "by_name": { "type": "object" }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}
