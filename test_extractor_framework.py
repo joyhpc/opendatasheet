@@ -10,7 +10,7 @@ import pytest
 class TestExtractorFramework:
     def test_registry_count(self):
         from extractors import EXTRACTOR_REGISTRY
-        assert len(EXTRACTOR_REGISTRY) == 7
+        assert len(EXTRACTOR_REGISTRY) == 8
 
     def test_all_have_domain_name(self):
         from extractors import EXTRACTOR_REGISTRY
@@ -31,7 +31,7 @@ class TestExtractorFramework:
     def test_expected_domain_names(self):
         from extractors import EXTRACTOR_REGISTRY
         names = {E.DOMAIN_NAME for E in EXTRACTOR_REGISTRY}
-        expected = {"electrical", "pin", "thermal", "design_context", "register", "timing", "power_sequence"}
+        expected = {"electrical", "pin", "thermal", "design_context", "register", "timing", "power_sequence", "parametric"}
         assert names == expected, f"Expected {expected}, got {names}"
 
     def test_all_have_required_methods(self):
@@ -53,7 +53,7 @@ class TestExtractorFramework:
         """Registry order matters -- verify the expected ordering."""
         from extractors import EXTRACTOR_REGISTRY
         order = [E.DOMAIN_NAME for E in EXTRACTOR_REGISTRY]
-        assert order == ["electrical", "pin", "thermal", "design_context", "register", "timing", "power_sequence"]
+        assert order == ["electrical", "pin", "thermal", "design_context", "register", "timing", "power_sequence", "parametric"]
 
     def test_base_extractor_init_params(self):
         """Verify BaseExtractor stores constructor params correctly."""
@@ -85,6 +85,7 @@ class TestExtractorFramework:
             RegisterExtractor,
             TimingExtractor,
             PowerSequenceExtractor,
+            ParametricExtractor,
         )
         assert BaseExtractor is not None
         assert len(EXTRACTOR_REGISTRY) > 0

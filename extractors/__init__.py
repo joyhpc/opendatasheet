@@ -11,6 +11,7 @@ from extractors.design_context import DesignContextExtractor
 from extractors.register import RegisterExtractor
 from extractors.timing import TimingExtractor
 from extractors.power_sequence import PowerSequenceExtractor
+from extractors.parametric import ParametricExtractor
 
 # Registry: order matters — some extractors may depend on earlier results
 EXTRACTOR_REGISTRY = [
@@ -21,6 +22,7 @@ EXTRACTOR_REGISTRY = [
     RegisterExtractor,
     TimingExtractor,
     PowerSequenceExtractor,
+    ParametricExtractor,
 ]
 
 __all__ = [
@@ -33,4 +35,5 @@ __all__ = [
     'RegisterExtractor',
     'TimingExtractor',
     'PowerSequenceExtractor',
+    'ParametricExtractor',
 ]
