@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opendatasheet.dev/schemas/domains/parametric/1.0",
+  "title": "Parametric Domain",
+  "description": "Key selection parameters aggregated from electrical characteristics for component comparison and selection.",
+  "type": "object",
+  "properties": {
+    "key_specs": {
+      "type": "array",
+      "description": "Key selection parameters extracted and normalized from electrical data.",
+      "items": { "$ref": "#/$defs/key_spec" }
+    },
+    "operating_conditions": {
+      "type": "object",
+      "description": "Operating condition ranges.",
+      "properties": {
+        "vin_min": { "type": ["number", "null"] },
+        "vin_max": { "type": ["number", "null"] },
+        "vout_min": { "type": ["number", "null"] },
+        "vout_max": { "type": ["number", "null"] },
+        "iout_max": { "type": ["number", "null"] },
+        "temp_min": { "type": ["number", "null"] },
+        "temp_max": { "type": ["number", "null"] },
+        "temp_unit": { "type": "string", "default": "C" }
+      },
+      "additionalProperties": true
+    },
+    "parametric_summary": {
+      "type": "object",
+      "properties": {
+        "category": { "type": ["string", "null"] },
+        "total_key_specs": { "type": "integer", "minimum": 0 },
+        "has_voltage_specs": { "type": "boolean" },
+        "has_current_specs": { "type": "boolean" },
+        "has_frequency_specs": { "type": "boolean" },
+        "packages_available": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "key_spec": {
+      "type": "object",
+      "required": ["name", "spec_type"],
+      "properties": {
+        "name": { "type": "string", "description": "Normalized parameter name" },
+        "spec_type": {
+          "type": "string",
+          "enum": [
+            "input_voltage",
+            "output_voltage",
+            "output_current",
+            "quiescent_current",
+            "switching_frequency",
+            "dropout_voltage",
+            "accuracy",
+            "efficiency",
+            "bandwidth",
+            "slew_rate",
+            "input_offset",
+            "supply_current",
+            "leakage_current",
+            "on_resistance",
+            "propagation_delay",
+            "power_dissipation",
+            "other"
+          ],
+          "description": "Normalized spec category for cross-device comparison"
+        },
+        "min": { "type": ["number", "null"] },
+        "typ": { "type": ["number", "null"] },
+        "max": { "type": ["number", "null"] },
+        "unit": { "type": ["string", "null"] },
+        "conditions": { "type": ["string", "null"] },
+        "source_parameter": { "type": ["string", "null"], "description": "Original parameter name from extraction" }
+      },
+      "additionalProperties": true
+    }
+  }
+}
