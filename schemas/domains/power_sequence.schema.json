@@ -1,0 +1,139 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opendatasheet.dev/schemas/domains/power_sequence/1.0",
+  "title": "Power Sequence Domain",
+  "description": "Power-up/down sequencing, soft-start, inrush current, enable/shutdown timing, UVLO thresholds.",
+  "type": "object",
+  "properties": {
+    "power_stages": {
+      "type": "array",
+      "description": "Ordered sequence of power stages during power-up or power-down.",
+      "items": { "$ref": "#/$defs/power_stage" }
+    },
+    "power_rails": {
+      "type": "array",
+      "description": "Power rails involved in sequencing.",
+      "items": { "$ref": "#/$defs/power_rail" }
+    },
+    "startup_parameters": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/startup_parameter" }
+    },
+    "protection_thresholds": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/protection_threshold" }
+    },
+    "sequencing_rules": {
+      "type": "array",
+      "description": "Ordering constraints between rails.",
+      "items": { "$ref": "#/$defs/sequencing_rule" }
+    },
+    "power_sequence_summary": {
+      "type": "object",
+      "properties": {
+        "has_soft_start": { "type": "boolean" },
+        "has_power_good": { "type": "boolean" },
+        "has_enable_pin": { "type": "boolean" },
+        "has_uvlo": { "type": "boolean" },
+        "rail_count": { "type": "integer", "minimum": 0 },
+        "sequencing_type": {
+          "type": ["string", "null"],
+          "enum": ["fixed", "configurable", "independent", "simultaneous", null],
+          "description": "How power sequencing is managed"
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "power_stage": {
+      "type": "object",
+      "required": ["stage_name"],
+      "properties": {
+        "stage_name": { "type": "string", "description": "e.g., 'VIN applied', 'EN high', 'Soft-start begin', 'Output regulated'" },
+        "stage_order": { "type": ["integer", "null"], "description": "Sequence order (1-based)" },
+        "description": { "type": ["string", "null"] },
+        "trigger": { "type": ["string", "null"], "description": "What triggers this stage" },
+        "duration": { "$ref": "#/$defs/param_value" },
+        "associated_rail": { "type": ["string", "null"] }
+      },
+      "additionalProperties": true
+    },
+    "power_rail": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string", "description": "Rail name, e.g., VCCINT, VDD_IO, VOUT" },
+        "nominal_voltage": { "type": ["number", "null"] },
+        "voltage_range": {
+          "type": "object",
+          "properties": {
+            "min": { "type": ["number", "null"] },
+            "max": { "type": ["number", "null"] },
+            "unit": { "type": "string" }
+          }
+        },
+        "sequence_order": { "type": ["integer", "null"], "description": "Order in power-up sequence" },
+        "ramp_rate": { "$ref": "#/$defs/param_value" },
+        "max_current": { "$ref": "#/$defs/param_value" }
+      },
+      "additionalProperties": true
+    },
+    "startup_parameter": {
+      "type": "object",
+      "required": ["parameter"],
+      "properties": {
+        "parameter": { "type": "string" },
+        "category": {
+          "type": "string",
+          "enum": ["soft_start_time", "inrush_current", "startup_time", "enable_delay", "shutdown_delay", "power_good_delay", "ramp_rate", "turn_on_time", "turn_off_time", "other"]
+        },
+        "min": { "type": ["number", "null"] },
+        "typ": { "type": ["number", "null"] },
+        "max": { "type": ["number", "null"] },
+        "unit": { "type": ["string", "null"] },
+        "conditions": { "type": ["string", "null"] }
+      },
+      "additionalProperties": true
+    },
+    "protection_threshold": {
+      "type": "object",
+      "required": ["parameter"],
+      "properties": {
+        "parameter": { "type": "string" },
+        "category": {
+          "type": "string",
+          "enum": ["UVLO_rising", "UVLO_falling", "UVLO_hysteresis", "OVP", "OCP", "OTP", "power_on_reset", "brownout", "other"]
+        },
+        "min": { "type": ["number", "null"] },
+        "typ": { "type": ["number", "null"] },
+        "max": { "type": ["number", "null"] },
+        "unit": { "type": ["string", "null"] },
+        "conditions": { "type": ["string", "null"] }
+      },
+      "additionalProperties": true
+    },
+    "sequencing_rule": {
+      "type": "object",
+      "properties": {
+        "rail_before": { "type": "string", "description": "Rail that must power up first" },
+        "rail_after": { "type": "string", "description": "Rail that powers up after" },
+        "min_delay": { "$ref": "#/$defs/param_value" },
+        "max_delay": { "$ref": "#/$defs/param_value" },
+        "description": { "type": ["string", "null"] }
+      },
+      "additionalProperties": true
+    },
+    "param_value": {
+      "type": "object",
+      "properties": {
+        "min": { "type": ["number", "null"] },
+        "typ": { "type": ["number", "null"] },
+        "max": { "type": ["number", "null"] },
+        "unit": { "type": ["string", "null"] }
+      },
+      "additionalProperties": true
+    }
+  }
+}
