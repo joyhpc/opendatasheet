@@ -24,6 +24,8 @@ import httpx
 from pathlib import Path
 from design_info_utils import APPLICATION_PATTERNS, detect_design_page_kind, extract_design_context
 
+from extractors import EXTRACTOR_REGISTRY
+
 
 class GeminiTimeout(Exception):
     """Raised when a Gemini API call exceeds the allowed time."""
@@ -1162,15 +1164,51 @@ def process_single_pdf(pdf_path: str, verbose: bool = True) -> dict:
             marker = "★" if p.page_num in vision_page_nums else " "
             print(f"  {marker} P{p.page_num+1:2d} [{p.category:12s}] {p.text_length:5d} chars")
 
-    # L1a: Vision 提取
-    t1 = time.time()
-    images = render_pages_to_images(pdf_path, vision_page_nums)
-    if verbose:
-        total_img_size = sum(len(img) for img in images)
-        print(f"\n  Rendered {len(images)} pages → {total_img_size/1024:.0f} KB")
+    # --- Domain-driven extraction via extractor registry ---
+    gemini_client = get_gemini_client()
+    domains = {}
+    domain_validations = {}
+    domain_timings = {}
 
-    extraction = extract_with_vision(images, pdf_name)
-    l1_time = time.time() - t1
+    for ExtractorClass in EXTRACTOR_REGISTRY:
+        extractor = ExtractorClass(
+            client=gemini_client,
+            model=GEMINI_MODEL,
+            pdf_path=pdf_path,
+            page_classification=pages,
+            is_fpga=is_fpga,
+        )
+        domain_name = extractor.DOMAIN_NAME
+
+        t_domain = time.time()
+        selected_pages = extractor.select_pages()
+
+        if domain_name == "thermal":
+            # ThermalExtractor post-processes electrical extraction
+            electrical_result = domains.get("electrical", {})
+            result = extractor.extract(electrical_result)
+            validation = extractor.validate(result)
+        elif domain_name == "design_context":
+            # DesignContextExtractor reads PDF text directly, no images needed
+            result = extractor.extract({})
+            validation = extractor.validate(result)
+        elif selected_pages:
+            images = render_pages_to_images(pdf_path, selected_pages)
+            result = extractor.extract(images)
+            validation = extractor.validate(result)
+        else:
+            result = {}
+            validation = {}
+
+        domain_timings[domain_name] = round(time.time() - t_domain, 3)
+        domains[domain_name] = result
+        domain_validations[domain_name] = validation
+
+    # --- Map domain results back to original flat output structure ---
+
+    # L1a: Electrical extraction result
+    extraction = domains.get("electrical", {})
+    l1_time = domain_timings.get("electrical", 0)
 
     if verbose:
         if "error" in extraction:
@@ -1179,13 +1217,13 @@ def process_single_pdf(pdf_path: str, verbose: bool = True) -> dict:
             comp = extraction.get("component", {})
             amr = extraction.get("absolute_maximum_ratings", [])
             ec = extraction.get("electrical_characteristics", [])
-            pins = extraction.get("pin_definitions", [])
+            pins_from_vision = extraction.get("pin_definitions", [])
             print(f"\nL1 Vision Extraction ({l1_time:.1f}s):")
             print(f"  Component: {comp.get('mpn', '?')} ({comp.get('manufacturer', '?')})")
             print(f"  Category:  {comp.get('category', '?')}")
             print(f"  Abs Max Ratings:  {len(amr)} params")
             print(f"  Elec Chars:       {len(ec)} params")
-            print(f"  Pin Definitions:  {len(pins)} pins")
+            print(f"  Pin Definitions:  {len(pins_from_vision)} pins")
             # 变体和温度覆盖统计
             devices = set(p.get('device', '') for p in ec if p.get('device'))
             temps = set(p.get('temp_range', '') for p in ec if p.get('temp_range'))
@@ -1194,120 +1232,80 @@ def process_single_pdf(pdf_path: str, verbose: bool = True) -> dict:
             if temps:
                 print(f"  Temp ranges: {sorted(temps)}")
 
-    # L1b: Pin Extraction (独立阶段)
-    pin_extraction = {}
-    pin_validation_issues = []
+    # L1b: Pin extraction result
+    pin_extraction = domains.get("pin", {})
+    pin_validation_issues = domain_validations.get("pin", {}).get("pin_validation_issues", [])
+    l1b_time = domain_timings.get("pin", 0)
 
-    if is_fpga:
-        # FPGA mode: use electrical + supply pages for power/config pin extraction
-        # Send ALL electrical pages (they contain supply specs, config switching, transceiver specs)
-        fpga_pin_page_nums = sorted(set(
-            [p.page_num for p in electrical_pages] +
-            [p.page_num for p in fpga_supply_pages] +
-            [p.page_num for p in cover_pages]
-        ))
-    else:
-        fpga_pin_page_nums = []
-
-    pin_page_nums = sorted(set(
-        [p.page_num for p in pin_pages] +
-        [p.page_num for p in cover_pages]
-    ))
-    t1b = time.time()
-
-    if is_fpga and fpga_pin_page_nums:
-        # FPGA: use specialized FPGA pin extraction
-        pin_images = render_pages_to_images(pdf_path, fpga_pin_page_nums)
-        if verbose:
-            pin_img_size = sum(len(img) for img in pin_images)
-            print(f"\nL1b FPGA Pin Extraction:")
-            print(f"  Pages: {fpga_pin_page_nums} ({len(pin_images)} images, {pin_img_size/1024:.0f} KB)")
-
-        pin_extraction = extract_fpga_pins_with_vision(pin_images, pdf_name)
-
-        if "error" in pin_extraction:
-            if verbose:
-                print(f"  ❌ FAILED: {pin_extraction['error']}")
+    if verbose:
+        if not pin_extraction or (isinstance(pin_extraction, dict) and "error" in pin_extraction):
+            if pin_extraction and "error" in pin_extraction:
+                print(f"\nL1b Pin Extraction FAILED: {pin_extraction.get('error')}")
+            else:
+                pin_page_nums = sorted(set(
+                    [p.page_num for p in pin_pages] +
+                    [p.page_num for p in cover_pages]
+                ))
+                if not pin_page_nums and not (is_fpga and fpga_supply_pages):
+                    print(f"\nL1b Pin Extraction: SKIPPED (no pin/cover pages)")
         else:
             logical_pins = pin_extraction.get("logical_pins", [])
-            # FPGA pins don't need package validation (packages are empty by design)
-            pin_validation_issues = validate_fpga_pins(pin_extraction)
             errors = [i for i in pin_validation_issues if i["level"] == "error"]
             warnings = [i for i in pin_validation_issues if i["level"] == "warning"]
 
-            if verbose:
+            if is_fpga:
+                print(f"\nL1b FPGA Pin Extraction:")
+                fpga_pin_page_nums = sorted(set(
+                    [p.page_num for p in electrical_pages] +
+                    [p.page_num for p in fpga_supply_pages] +
+                    [p.page_num for p in cover_pages]
+                ))
+                print(f"  Pages: {fpga_pin_page_nums}")
                 print(f"  Logical pins: {len(logical_pins)}")
-                # pin_group 分布
                 group_dist = {}
                 for p in logical_pins:
                     g = p.get("pin_group", "?")
                     group_dist[g] = group_dist.get(g, 0) + 1
                 print(f"  Pin group distribution: {group_dist}")
-                # direction 分布
                 dir_dist = {}
                 for p in logical_pins:
                     d = p.get("direction", "?")
                     dir_dist[d] = dir_dist.get(d, 0) + 1
                 print(f"  Direction distribution: {dir_dist}")
-                # signal_type 分布
                 sig_dist = {}
                 for p in logical_pins:
                     s = p.get("signal_type", "?")
                     sig_dist[s] = sig_dist.get(s, 0) + 1
                 print(f"  Signal type distribution: {sig_dist}")
-                print(f"  Validation: {len(errors)} errors, {len(warnings)} warnings")
-                for issue in pin_validation_issues:
-                    icon = "❌" if issue["level"] == "error" else "⚠️"
-                    print(f"    {icon} {issue['message']}")
-
-    elif pin_page_nums:
-        pin_images = render_pages_to_images(pdf_path, pin_page_nums)
-        if verbose:
-            pin_img_size = sum(len(img) for img in pin_images)
-            print(f"\nL1b Pin Extraction:")
-            print(f"  Pages: {pin_page_nums} ({len(pin_images)} images, {pin_img_size/1024:.0f} KB)")
-
-        pin_extraction = extract_pins_with_vision(pin_images, pdf_name)
-
-        if "error" in pin_extraction:
-            if verbose:
-                print(f"  ❌ FAILED: {pin_extraction['error']}")
-        else:
-            logical_pins = pin_extraction.get("logical_pins", [])
-            pin_validation_issues = validate_pins(pin_extraction)
-            errors = [i for i in pin_validation_issues if i["level"] == "error"]
-            warnings = [i for i in pin_validation_issues if i["level"] == "warning"]
-
-            if verbose:
+            else:
+                print(f"\nL1b Pin Extraction:")
+                pin_page_nums_display = sorted(set(
+                    [p.page_num for p in pin_pages] +
+                    [p.page_num for p in cover_pages]
+                ))
+                print(f"  Pages: {pin_page_nums_display}")
                 print(f"  Logical pins: {len(logical_pins)}")
-                # direction 分布
                 dir_dist = {}
                 for p in logical_pins:
                     d = p.get("direction", "?")
                     dir_dist[d] = dir_dist.get(d, 0) + 1
                 print(f"  Direction distribution: {dir_dist}")
-                # signal_type 分布
                 sig_dist = {}
                 for p in logical_pins:
                     s = p.get("signal_type", "?")
                     sig_dist[s] = sig_dist.get(s, 0) + 1
                 print(f"  Signal type distribution: {sig_dist}")
-                # packages 结构
                 all_pkgs = set()
                 for p in logical_pins:
                     pkgs = p.get("packages", {})
                     if isinstance(pkgs, dict):
                         all_pkgs.update(pkgs.keys())
                 print(f"  Packages found: {sorted(all_pkgs)}")
-                # 验证结果
-                print(f"  Validation: {len(errors)} errors, {len(warnings)} warnings")
-                for issue in pin_validation_issues:
-                    icon = "❌" if issue["level"] == "error" else "⚠️"
-                    print(f"    {icon} {issue['message']}")
-    else:
-        if verbose:
-            print(f"\nL1b Pin Extraction: SKIPPED (no pin/cover pages)")
-    l1b_time = time.time() - t1b
+
+            print(f"  Validation: {len(errors)} errors, {len(warnings)} warnings")
+            for issue in pin_validation_issues:
+                icon = "❌" if issue["level"] == "error" else "⚠️"
+                print(f"    {icon} {issue['message']}")
 
     # Transform pin_extraction → pin_index (按封装拆分、pin number 做 key)
     pin_index = {}
@@ -1320,20 +1318,30 @@ def process_single_pdf(pdf_path: str, verbose: bool = True) -> dict:
                 for pkg_name, pins_map in pin_index.get("packages", {}).items():
                     print(f"    {pkg_name}: {len(pins_map)} pins")
 
-    # L2: 校验
+    # L2: 校验 — use electrical domain validation
     validations = []
-    if "error" not in extraction:
+    electrical_val = domain_validations.get("electrical", {})
+    l2_items = electrical_val.get("l2_validation", [])
+    if l2_items:
+        for item in l2_items:
+            validations.append(ValidationResult(
+                param=item["param"], rule=item["rule"],
+                passed=item["passed"], message=item["message"]
+            ))
+    elif "error" not in extraction:
+        # Fallback: run inline validation (should not happen if extractor worked)
         validations = validate_extraction(extraction)
-        failures = [v for v in validations if not v.passed]
-        if verbose:
-            print(f"\nL2 Validation:")
-            print(f"  Total checks: {len(validations)}")
-            print(f"  Passed: {len(validations) - len(failures)}")
-            print(f"  Failed: {len(failures)}")
-            for f in failures:
-                print(f"  ❌ {f.param}: {f.message}")
 
-    # L3: 交叉验证
+    if verbose and validations:
+        failures = [v for v in validations if not v.passed]
+        print(f"\nL2 Validation:")
+        print(f"  Total checks: {len(validations)}")
+        print(f"  Passed: {len(validations) - len(failures)}")
+        print(f"  Failed: {len(failures)}")
+        for f in failures:
+            print(f"  ❌ {f.param}: {f.message}")
+
+    # L3: 交叉验证 (cross-domain, stays in pipeline)
     cross_val = {}
     if "error" not in extraction:
         cross_val = cross_validate(pdf_path, extraction, pages)
@@ -1346,8 +1354,8 @@ def process_single_pdf(pdf_path: str, verbose: bool = True) -> dict:
                 for sp in cross_val['suspicious_params'][:5]:
                     print(f"    - {sp['parameter']} ({sp['device']}): {sp['values']}")
 
-    # L4: 原理图设计信息提取（Application/Layout/Selection 页面）
-    design_extraction = extract_design_pages_from_pdf(pdf_path, application_pages)
+    # L4: Design extraction result
+    design_extraction = domains.get("design_context", {})
     if verbose and design_extraction.get("design_page_candidates"):
         print(f"\nL4 Design Extraction:")
         print(f"  Design pages: {len(design_extraction['design_page_candidates'])}")
@@ -1355,19 +1363,29 @@ def process_single_pdf(pdf_path: str, verbose: bool = True) -> dict:
         print(f"  Layout hints: {len(design_extraction['layout_hints'])}")
         print(f"  Equation hints: {len(design_extraction['design_equation_hints'])}")
 
-    # L5: 物理规则引擎
+    # L5: Physics validation — use electrical domain validation
     physics_val = []
-    if "error" not in extraction:
+    l5_items = electrical_val.get("l5_physics", [])
+    if l5_items:
+        for item in l5_items:
+            physics_val.append(ValidationResult(
+                param=item["param"], rule=item["rule"],
+                passed=item["passed"], message=item["message"]
+            ))
+    elif "error" not in extraction:
+        # Fallback: run inline physics validation (should not happen if extractor worked)
         physics_val = validate_physics(extraction)
-        physics_failures = [v for v in physics_val if not v.passed]
-        if verbose:
-            print(f"\nL5 Physics Validation:")
-            print(f"  Total checks: {len(physics_val)}")
-            print(f"  Passed: {len(physics_val) - len(physics_failures)}")
-            print(f"  Failed: {len(physics_failures)}")
-            for f in physics_failures:
-                print(f"  ❌ {f.param}: {f.message}")
 
+    if verbose and physics_val:
+        physics_failures = [v for v in physics_val if not v.passed]
+        print(f"\nL5 Physics Validation:")
+        print(f"  Total checks: {len(physics_val)}")
+        print(f"  Passed: {len(physics_val) - len(physics_failures)}")
+        print(f"  Failed: {len(physics_failures)}")
+        for f in physics_failures:
+            print(f"  ❌ {f.param}: {f.message}")
+
+    # Assemble output — flat structure for backward compatibility (1.1 compat)
     result = {
         "pdf_name": pdf_name,
         "model": GEMINI_MODEL,
@@ -1390,7 +1408,11 @@ def process_single_pdf(pdf_path: str, verbose: bool = True) -> dict:
             "l0_classify_s": round(l0_time, 3),
             "l1a_extract_s": round(l1_time, 3),
             "l1b_pin_s": round(l1b_time, 3),
-        }
+        },
+        # New: domain-structured results (for future use)
+        "domains": {name: data for name, data in domains.items()},
+        "domain_validations": {name: data for name, data in domain_validations.items()},
+        "domain_timings": domain_timings,
     }
     return result
 
