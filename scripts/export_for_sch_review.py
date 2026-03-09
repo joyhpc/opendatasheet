@@ -110,6 +110,14 @@ def get_parametric_data(data: dict) -> dict:
     return {}
 
 
+def get_protocol_data(data: dict) -> dict:
+    """Get protocol data (only available in domains format)."""
+    fmt = detect_input_format(data)
+    if fmt == "domains":
+        return data["domains"].get("protocol", {})
+    return {}
+
+
 # ─── Normal IC Export ───────────────────────────────────────────────
 
 
@@ -205,9 +213,12 @@ def export_normal_ic(data: dict) -> dict | None:
     # --- Check for parametric data ---
     parametric_data = get_parametric_data(data)
 
+    # --- Check for protocol data ---
+    protocol_data = get_protocol_data(data)
+
     # --- Determine schema version ---
     # Upgrade to 2.0 if any domain data is present
-    schema_version = SCHEMA_VERSION_V2 if (register_data or timing_data or power_seq_data or parametric_data) else SCHEMA_VERSION
+    schema_version = SCHEMA_VERSION_V2 if (register_data or timing_data or power_seq_data or parametric_data or protocol_data) else SCHEMA_VERSION
 
     # --- Determine layers ---
     layers = ["L0_skeleton"]
@@ -242,7 +253,7 @@ def export_normal_ic(data: dict) -> dict | None:
         result["constraint_blocks"] = constraint_blocks
 
     # Include new domains if present
-    if register_data or timing_data or power_seq_data or parametric_data:
+    if register_data or timing_data or power_seq_data or parametric_data or protocol_data:
         domains_block = {}
         if register_data:
             domains_block["register"] = register_data
@@ -252,6 +263,8 @@ def export_normal_ic(data: dict) -> dict | None:
             domains_block["power_sequence"] = power_seq_data
         if parametric_data:
             domains_block["parametric"] = parametric_data
+        if protocol_data:
+            domains_block["protocol"] = protocol_data
         result["domains"] = domains_block
 
     return result

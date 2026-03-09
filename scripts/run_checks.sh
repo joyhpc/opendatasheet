@@ -18,10 +18,11 @@ python3 -m py_compile \
   extractors/register.py \
   extractors/timing.py \
   extractors/power_sequence.py \
-  extractors/parametric.py
+  extractors/parametric.py \
+  extractors/protocol.py
 
 echo "=== Extractor Registry Check ==="
-python3 -c "from extractors import EXTRACTOR_REGISTRY; assert len(EXTRACTOR_REGISTRY) >= 8, 'Expected at least 8 extractors'; print(f'  {len(EXTRACTOR_REGISTRY)} extractors registered')"
+python3 -c "from extractors import EXTRACTOR_REGISTRY; assert len(EXTRACTOR_REGISTRY) >= 9, 'Expected at least 9 extractors'; print(f'  {len(EXTRACTOR_REGISTRY)} extractors registered')"
 
 if ! python3 scripts/build_raw_source_manifest.py --check; then
   echo "raw-source manifest is missing or stale; run: python3 scripts/build_raw_source_manifest.py" >&2
