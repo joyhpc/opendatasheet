@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opendatasheet.dev/schemas/domains/design_context/1.0",
+  "title": "Design Context Domain",
+  "description": "Design guidance including external components, equations, layout hints, supply recommendations, and topology hints.",
+  "type": "object",
+  "properties": {
+    "recommended_external_components": {
+      "type": "array",
+      "description": "List of recommended external components for the design.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "component": { "type": "string" },
+          "value": { "type": ["string", "null"] },
+          "purpose": { "type": ["string", "null"] },
+          "conditions": { "type": ["string", "null"] },
+          "source": { "type": ["string", "null"] }
+        },
+        "additionalProperties": true
+      }
+    },
+    "design_equation_hints": {
+      "type": "array",
+      "description": "Design equations and formulas for component selection.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": ["string", "null"] },
+          "equation": { "type": "string" },
+          "variables": { "type": "object", "additionalProperties": true },
+          "description": { "type": ["string", "null"] },
+          "source": { "type": ["string", "null"] }
+        },
+        "additionalProperties": true
+      }
+    },
+    "layout_hints": {
+      "type": "array",
+      "description": "PCB layout recommendations and constraints.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "hint": { "type": "string" },
+          "severity": { "enum": ["ERROR", "WARNING", "INFO"] },
+          "applies_to": { "type": ["string", "null"] },
+          "source": { "type": ["string", "null"] }
+        },
+        "additionalProperties": true
+      }
+    },
+    "supply_recommendations": {
+      "type": "array",
+      "description": "Power supply design recommendations.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "rail": { "type": "string" },
+          "voltage": { "$ref": "#/$defs/param_value" },
+          "current": { "$ref": "#/$defs/param_value" },
+          "notes": { "type": ["string", "null"] },
+          "source": { "type": ["string", "null"] }
+        },
+        "additionalProperties": true
+      }
+    },
+    "topology_hints": {
+      "type": "array",
+      "description": "Circuit topology recommendations.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "topology": { "type": "string" },
+          "description": { "type": ["string", "null"] },
+          "conditions": { "type": ["string", "null"] },
+          "source": { "type": ["string", "null"] }
+        },
+        "additionalProperties": true
+      }
+    },
+    "design_pages": {
+      "type": "object",
+      "description": "Metadata about design-relevant datasheet pages.",
+      "properties": {
+        "pages": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "page": { "type": "integer" },
+              "title": { "type": ["string", "null"] },
+              "content_type": { "type": ["string", "null"] }
+            },
+            "additionalProperties": true
+          }
+        },
+        "total_pages": { "type": "integer" }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "param_value": {
+      "description": "A numeric parameter with optional min/typ/max/unit/conditions",
+      "type": "object",
+      "properties": {
+        "parameter": { "type": ["string", "null"] },
+        "symbol": { "type": ["string", "null"] },
+        "min": { "type": ["number", "null"] },
+        "typ": { "type": ["number", "null"] },
+        "max": { "type": ["number", "null"] },
+        "value": { "type": ["number", "string", "null"] },
+        "unit": { "type": ["string", "null"] },
+        "conditions": { "type": ["string", "null"] },
+        "source": { "type": ["string", "null"] }
+      },
+      "additionalProperties": true
+    }
+  }
+}

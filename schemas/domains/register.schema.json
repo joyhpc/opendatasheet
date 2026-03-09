@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opendatasheet.dev/schemas/domains/register/1.0",
+  "title": "Register Map Domain",
+  "description": "Register map definitions for devices with addressable registers (I2C, SPI, memory-mapped).",
+  "type": "object",
+  "properties": {
+    "registers": {
+      "type": "array",
+      "description": "Array of register definitions.",
+      "items": { "$ref": "#/$defs/register" }
+    },
+    "register_map_summary": {
+      "type": "object",
+      "description": "Summary metadata about the register map.",
+      "properties": {
+        "total_registers": { "type": "integer", "minimum": 0 },
+        "address_range": { "type": "string", "description": "Address range, e.g. '0x00-0xFF'" },
+        "bus_type": {
+          "type": "string",
+          "enum": ["I2C", "SPI", "memory_mapped", "AHB", "APB", "AXI", "PCIe", "other"]
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "register": {
+      "type": "object",
+      "required": ["address", "name"],
+      "properties": {
+        "address": { "type": "string", "description": "Hex address, e.g. '0x00'" },
+        "name": { "type": "string" },
+        "description": { "type": ["string", "null"] },
+        "size_bits": { "type": "integer", "enum": [8, 16, 32] },
+        "access": {
+          "type": "string",
+          "enum": ["R", "W", "RW", "RO", "WO", "W1C"]
+        },
+        "reset_value": { "type": ["string", "null"], "description": "Hex reset value, e.g. '0x00'" },
+        "fields": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/register_field" }
+        }
+      },
+      "additionalProperties": true
+    },
+    "register_field": {
+      "type": "object",
+      "required": ["bits", "name"],
+      "properties": {
+        "bits": { "type": "string", "description": "Bit range, e.g. '7:4' or '3'" },
+        "name": { "type": "string" },
+        "description": { "type": ["string", "null"] },
+        "access": {
+          "type": ["string", "null"],
+          "enum": ["R", "W", "RW", "RO", "WO", "W1C", null]
+        },
+        "reset_value": { "type": ["string", "null"] },
+        "enum_values": {
+          "type": "object",
+          "description": "Optional mapping of bit values to descriptions, e.g. {'0': 'Disabled', '1': 'Enabled'}",
+          "additionalProperties": { "type": "string" }
+        }
+      },
+      "additionalProperties": true
+    }
+  }
+}

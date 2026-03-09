@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opendatasheet.dev/schemas/domains/electrical/1.0",
+  "title": "Electrical Parameters Domain",
+  "description": "Absolute maximum ratings, electrical parameters, and DRC hints.",
+  "type": "object",
+  "properties": {
+    "absolute_maximum_ratings": {
+      "type": "object",
+      "description": "Absolute maximum ratings keyed by parameter name. Keys starting with '_' are metadata.",
+      "patternProperties": {
+        "^_": { "type": ["string", "null"] }
+      },
+      "additionalProperties": { "$ref": "#/$defs/param_value" }
+    },
+    "electrical_parameters": {
+      "type": "object",
+      "description": "Electrical parameters keyed by parameter name. Keys starting with '_' are metadata.",
+      "patternProperties": {
+        "^_": { "type": ["string", "null"] }
+      },
+      "additionalProperties": { "$ref": "#/$defs/param_value" }
+    },
+    "drc_hints": {
+      "type": "object",
+      "description": "Free-form DRC hint data for design rule checking.",
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "param_value": {
+      "description": "A numeric parameter with optional min/typ/max/unit/conditions",
+      "type": "object",
+      "properties": {
+        "parameter": { "type": ["string", "null"] },
+        "symbol": { "type": ["string", "null"] },
+        "min": { "type": ["number", "null"] },
+        "typ": { "type": ["number", "null"] },
+        "max": { "type": ["number", "null"] },
+        "value": { "type": ["number", "string", "null"] },
+        "unit": { "type": ["string", "null"] },
+        "conditions": { "type": ["string", "null"] },
+        "source": { "type": ["string", "null"] }
+      },
+      "additionalProperties": true
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opendatasheet.dev/schemas/domains/thermal/1.0",
+  "title": "Thermal Characteristics Domain",
+  "description": "Thermal parameters such as theta-JA, theta-JC, and power dissipation limits.",
+  "type": "object",
+  "additionalProperties": { "$ref": "#/$defs/param_value" },
+  "$defs": {
+    "param_value": {
+      "description": "A numeric parameter with optional min/typ/max/unit/conditions",
+      "type": "object",
+      "properties": {
+        "parameter": { "type": ["string", "null"] },
+        "symbol": { "type": ["string", "null"] },
+        "min": { "type": ["number", "null"] },
+        "typ": { "type": ["number", "null"] },
+        "max": { "type": ["number", "null"] },
+        "value": { "type": ["number", "string", "null"] },
+        "unit": { "type": ["string", "null"] },
+        "conditions": { "type": ["string", "null"] },
+        "source": { "type": ["string", "null"] }
+      },
+      "additionalProperties": true
+    }
+  }
+}
