@@ -8,6 +8,7 @@ from extractors.pin import PinExtractor
 from extractors.electrical import ElectricalExtractor
 from extractors.thermal import ThermalExtractor
 from extractors.design_context import DesignContextExtractor
+from extractors.register import RegisterExtractor
 
 # Registry: order matters — some extractors may depend on earlier results
 EXTRACTOR_REGISTRY = [
@@ -15,6 +16,7 @@ EXTRACTOR_REGISTRY = [
     PinExtractor,
     ThermalExtractor,
     DesignContextExtractor,
+    RegisterExtractor,
 ]
 
 __all__ = [
@@ -24,4 +26,5 @@ __all__ = [
     'ElectricalExtractor',
     'ThermalExtractor',
     'DesignContextExtractor',
+    'RegisterExtractor',
 ]
