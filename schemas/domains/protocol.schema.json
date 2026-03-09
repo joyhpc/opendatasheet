@@ -1,0 +1,224 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opendatasheet.dev/schemas/domains/protocol/1.0",
+  "title": "Protocol Domain",
+  "description": "Communication protocol interfaces, configurations, and constraints extracted from datasheets.",
+  "type": "object",
+  "properties": {
+    "interfaces": {
+      "type": "array",
+      "description": "Array of protocol interface definitions found in the device.",
+      "items": { "$ref": "#/$defs/protocol_interface" }
+    },
+    "protocol_summary": {
+      "type": "object",
+      "description": "Summary metadata about protocol interfaces.",
+      "properties": {
+        "total_interfaces": { "type": "integer", "minimum": 0 },
+        "has_i2c": { "type": "boolean" },
+        "has_spi": { "type": "boolean" },
+        "has_uart": { "type": "boolean" },
+        "primary_interface": {
+          "type": ["string", "null"],
+          "description": "The main protocol type for the device"
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "protocol_interface": {
+      "type": "object",
+      "required": ["protocol_type"],
+      "properties": {
+        "protocol_type": {
+          "type": "string",
+          "enum": ["I2C", "SPI", "UART", "JTAG", "SDIO", "USB", "MIPI", "GMII", "RGMII", "PCIe", "MDIO", "PMBus", "SMBus", "LIN", "CAN", "other"]
+        },
+        "role": {
+          "type": ["string", "null"],
+          "enum": ["master", "slave", "both", null]
+        },
+        "instance_name": {
+          "type": ["string", "null"],
+          "description": "Instance identifier, e.g. 'SPI0', 'I2C_MGMT'"
+        },
+        "i2c_config": {
+          "oneOf": [
+            { "$ref": "#/$defs/i2c_config" },
+            { "type": "null" }
+          ]
+        },
+        "spi_config": {
+          "oneOf": [
+            { "$ref": "#/$defs/spi_config" },
+            { "type": "null" }
+          ]
+        },
+        "uart_config": {
+          "oneOf": [
+            { "$ref": "#/$defs/uart_config" },
+            { "type": "null" }
+          ]
+        },
+        "signals": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/protocol_signal" }
+        },
+        "timing_constraints": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/timing_constraint" }
+        },
+        "command_set": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/protocol_command" }
+        },
+        "notes": { "type": ["string", "null"] }
+      },
+      "additionalProperties": true
+    },
+    "i2c_config": {
+      "type": "object",
+      "properties": {
+        "slave_address_hex": {
+          "type": ["string", "null"],
+          "description": "7-bit hex address, e.g. '0x48'"
+        },
+        "address_configurable": { "type": "boolean" },
+        "address_pins": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Pin names used for address configuration"
+        },
+        "address_bits": {
+          "type": "integer",
+          "enum": [7, 10]
+        },
+        "max_clock_hz": {
+          "type": ["number", "null"],
+          "description": "Maximum SCL frequency in Hz"
+        },
+        "supports_clock_stretching": { "type": ["boolean", "null"] },
+        "supports_repeated_start": { "type": ["boolean", "null"] }
+      },
+      "additionalProperties": true
+    },
+    "spi_config": {
+      "type": "object",
+      "properties": {
+        "mode": {
+          "type": ["integer", "null"],
+          "enum": [0, 1, 2, 3, null]
+        },
+        "cpol": {
+          "type": ["integer", "null"],
+          "enum": [0, 1, null]
+        },
+        "cpha": {
+          "type": ["integer", "null"],
+          "enum": [0, 1, null]
+        },
+        "max_clock_hz": {
+          "type": ["number", "null"],
+          "description": "Maximum SPI clock frequency in Hz"
+        },
+        "bit_order": {
+          "type": ["string", "null"],
+          "enum": ["MSB_first", "LSB_first", null]
+        },
+        "data_width": {
+          "type": ["integer", "null"],
+          "description": "Data width in bits (8, 16, 32 typical)"
+        },
+        "cs_active_low": { "type": ["boolean", "null"] }
+      },
+      "additionalProperties": true
+    },
+    "uart_config": {
+      "type": "object",
+      "properties": {
+        "baud_rates": {
+          "type": "array",
+          "items": { "type": "integer" },
+          "description": "Supported baud rates"
+        },
+        "max_baud_rate": {
+          "type": ["number", "null"],
+          "description": "Maximum supported baud rate"
+        },
+        "data_bits": {
+          "type": ["integer", "null"],
+          "description": "Data bits per frame (7, 8, 9 typical)"
+        },
+        "stop_bits": {
+          "type": ["number", "null"],
+          "description": "Stop bits (1, 1.5, 2)"
+        },
+        "parity": {
+          "type": ["string", "null"],
+          "enum": ["none", "even", "odd", "mark", "space", null]
+        },
+        "flow_control": {
+          "type": ["string", "null"],
+          "enum": ["none", "hardware", "software", "both", null]
+        }
+      },
+      "additionalProperties": true
+    },
+    "protocol_signal": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string" },
+        "direction": {
+          "type": ["string", "null"],
+          "enum": ["input", "output", "bidirectional", null]
+        },
+        "description": { "type": ["string", "null"] }
+      },
+      "additionalProperties": true
+    },
+    "timing_constraint": {
+      "type": "object",
+      "required": ["parameter"],
+      "properties": {
+        "parameter": {
+          "type": "string",
+          "description": "e.g. 'SCL clock frequency', 'setup time SDA'"
+        },
+        "symbol": {
+          "type": ["string", "null"],
+          "description": "e.g. 'fSCL', 'tSU;DAT'"
+        },
+        "min": { "type": ["number", "null"] },
+        "typ": { "type": ["number", "null"] },
+        "max": { "type": ["number", "null"] },
+        "unit": { "type": ["string", "null"] },
+        "conditions": { "type": ["string", "null"] }
+      },
+      "additionalProperties": true
+    },
+    "protocol_command": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "e.g. 'Read Register', 'Write Register'"
+        },
+        "opcode_hex": {
+          "type": ["string", "null"],
+          "description": "Hex string, e.g. '0x03'"
+        },
+        "description": { "type": ["string", "null"] },
+        "access": {
+          "type": ["string", "null"],
+          "enum": ["read", "write", "read_write", "special", null]
+        },
+        "byte_count": { "type": ["integer", "null"] }
+      },
+      "additionalProperties": true
+    }
+  }
+}
