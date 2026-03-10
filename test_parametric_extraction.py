@@ -567,8 +567,8 @@ class TestFrameworkIntegration:
 
     def test_registry_position(self):
         from extractors import EXTRACTOR_REGISTRY
-        # ParametricExtractor should be last (8th, index 7)
-        assert EXTRACTOR_REGISTRY[-1] is ParametricExtractor
+        # ParametricExtractor should be 8th (index 7)
+        assert EXTRACTOR_REGISTRY[7] is ParametricExtractor
 
 
 # ======================================================================

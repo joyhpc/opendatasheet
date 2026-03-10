@@ -171,10 +171,10 @@ class TestFrameworkIntegration:
         assert ProtocolExtractor in EXTRACTOR_REGISTRY
 
     def test_registry_position(self):
-        """ProtocolExtractor should be the 9th (last) entry in the registry."""
+        """ProtocolExtractor should be the 9th entry (index 8) in the registry."""
         from extractors import EXTRACTOR_REGISTRY
-        assert EXTRACTOR_REGISTRY[-1] is ProtocolExtractor
-        assert len(EXTRACTOR_REGISTRY) == 9
+        assert EXTRACTOR_REGISTRY[8] is ProtocolExtractor
+        assert len(EXTRACTOR_REGISTRY) == 10
 
     def test_has_required_methods(self):
         """ProtocolExtractor must implement select_pages, extract, validate."""

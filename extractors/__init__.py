@@ -13,6 +13,7 @@ from extractors.timing import TimingExtractor
 from extractors.power_sequence import PowerSequenceExtractor
 from extractors.parametric import ParametricExtractor
 from extractors.protocol import ProtocolExtractor
+from extractors.package import PackageExtractor
 
 # Registry: order matters — some extractors may depend on earlier results
 EXTRACTOR_REGISTRY = [
@@ -25,6 +26,7 @@ EXTRACTOR_REGISTRY = [
     PowerSequenceExtractor,
     ParametricExtractor,
     ProtocolExtractor,
+    PackageExtractor,
 ]
 
 __all__ = [
@@ -39,4 +41,5 @@ __all__ = [
     'PowerSequenceExtractor',
     'ParametricExtractor',
     'ProtocolExtractor',
+    'PackageExtractor',
 ]
