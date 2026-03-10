@@ -1,0 +1,247 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opendatasheet.dev/schemas/domains/package/1.0",
+  "title": "Package / Mechanical Domain",
+  "description": "Package and mechanical specifications extracted from datasheets, including dimensions, thermal properties, land patterns, and reflow profiles.",
+  "type": "object",
+  "properties": {
+    "packages": {
+      "type": "array",
+      "description": "Array of package/mechanical definitions found in the device datasheet.",
+      "items": { "$ref": "#/$defs/package_info" }
+    },
+    "package_summary": {
+      "type": "object",
+      "description": "Summary metadata about available packages.",
+      "properties": {
+        "total_packages": { "type": "integer", "minimum": 0 },
+        "package_types": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "List of distinct package types offered."
+        },
+        "has_exposed_pad": { "type": "boolean" },
+        "has_land_pattern": { "type": "boolean" },
+        "has_reflow_profile": { "type": "boolean" }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "dim_range": {
+      "type": "object",
+      "description": "Dimensional range with min/nom/max values in the stated unit.",
+      "properties": {
+        "min": { "type": ["number", "null"] },
+        "nom": { "type": ["number", "null"] },
+        "max": { "type": ["number", "null"] }
+      },
+      "additionalProperties": true
+    },
+    "exposed_pad": {
+      "type": "object",
+      "description": "Exposed/thermal pad specification.",
+      "properties": {
+        "present": { "type": "boolean" },
+        "length_mm": { "$ref": "#/$defs/dim_range" },
+        "width_mm": { "$ref": "#/$defs/dim_range" },
+        "is_ground": {
+          "type": ["boolean", "null"],
+          "description": "Whether the exposed pad is connected to ground."
+        },
+        "is_thermal": {
+          "type": ["boolean", "null"],
+          "description": "Whether the exposed pad serves as a thermal pad."
+        }
+      },
+      "additionalProperties": true
+    },
+    "land_pattern": {
+      "type": "object",
+      "description": "Recommended land pattern (footprint) dimensions.",
+      "properties": {
+        "recommended": {
+          "type": ["boolean", "null"],
+          "description": "Whether this is the manufacturer-recommended land pattern."
+        },
+        "pad_length_mm": { "$ref": "#/$defs/dim_range" },
+        "pad_width_mm": { "$ref": "#/$defs/dim_range" },
+        "thermal_pad_length_mm": { "$ref": "#/$defs/dim_range" },
+        "thermal_pad_width_mm": { "$ref": "#/$defs/dim_range" },
+        "solder_paste_coverage_pct": {
+          "type": ["number", "null"],
+          "description": "Solder paste coverage percentage for the thermal pad."
+        },
+        "via_in_pad": {
+          "type": ["boolean", "null"],
+          "description": "Whether vias in the thermal pad are recommended."
+        }
+      },
+      "additionalProperties": true
+    },
+    "reflow_profile": {
+      "type": "object",
+      "description": "Reflow soldering profile parameters.",
+      "properties": {
+        "peak_temperature_c": { "$ref": "#/$defs/dim_range" },
+        "time_above_liquidus_s": { "$ref": "#/$defs/dim_range" },
+        "ramp_rate_c_per_s": { "$ref": "#/$defs/dim_range" },
+        "preheat_temp_range_c": {
+          "type": "object",
+          "properties": {
+            "min": { "type": ["number", "null"] },
+            "max": { "type": ["number", "null"] }
+          },
+          "additionalProperties": true
+        },
+        "lead_free": {
+          "type": ["boolean", "null"],
+          "description": "Whether this profile is for lead-free solder."
+        },
+        "classification": {
+          "type": ["string", "null"],
+          "description": "Reflow classification, e.g. 'J-STD-020' level."
+        }
+      },
+      "additionalProperties": true
+    },
+    "ordering_entry": {
+      "type": "object",
+      "description": "Ordering information entry for a specific part variant.",
+      "properties": {
+        "part_number": { "type": ["string", "null"] },
+        "package_name": { "type": ["string", "null"] },
+        "temperature_range": { "type": ["string", "null"] },
+        "quantity": { "type": ["integer", "null"] },
+        "packing": {
+          "type": ["string", "null"],
+          "description": "Packing method, e.g. 'tape_and_reel', 'tray', 'tube'."
+        }
+      },
+      "additionalProperties": true
+    },
+    "package_info": {
+      "type": "object",
+      "description": "Complete package specification for one package variant.",
+      "required": ["package_type", "package_name"],
+      "properties": {
+        "package_type": {
+          "type": "string",
+          "enum": [
+            "QFN", "DFN", "BGA", "WLCSP",
+            "SOIC", "SOP", "SSOP", "TSSOP", "MSOP",
+            "QFP", "LQFP", "TQFP",
+            "SOT-23", "SOT-223", "SOT-363", "SOT-563",
+            "SC-70",
+            "TO-220", "TO-263", "TO-252",
+            "DPAK", "D2PAK",
+            "DIP", "PDIP", "CDIP",
+            "CSP", "LGA", "PLCC",
+            "USON", "WSON", "SON",
+            "VQFN", "HVQFN",
+            "DSBGA",
+            "module",
+            "other"
+          ],
+          "description": "Standard package type identifier."
+        },
+        "package_name": {
+          "type": "string",
+          "description": "Full package name, e.g. 'VQFN-20', 'TSSOP-16'."
+        },
+        "pin_count": {
+          "type": ["integer", "null"],
+          "description": "Total number of pins/balls/pads."
+        },
+        "dimensions": {
+          "type": "object",
+          "description": "Package body and lead dimensions in millimeters.",
+          "properties": {
+            "body_length_mm": { "$ref": "#/$defs/dim_range" },
+            "body_width_mm": { "$ref": "#/$defs/dim_range" },
+            "body_height_mm": { "$ref": "#/$defs/dim_range" },
+            "lead_span_mm": { "$ref": "#/$defs/dim_range" },
+            "lead_width_mm": { "$ref": "#/$defs/dim_range" }
+          },
+          "additionalProperties": true
+        },
+        "pin_pitch_mm": {
+          "type": ["number", "null"],
+          "description": "Pin-to-pin pitch in millimeters."
+        },
+        "exposed_pad": {
+          "oneOf": [
+            { "$ref": "#/$defs/exposed_pad" },
+            { "type": "null" }
+          ]
+        },
+        "land_pattern": {
+          "oneOf": [
+            { "$ref": "#/$defs/land_pattern" },
+            { "type": "null" }
+          ]
+        },
+        "thermal_properties": {
+          "type": "object",
+          "description": "Thermal resistance and power dissipation properties.",
+          "properties": {
+            "theta_ja": {
+              "type": ["number", "null"],
+              "description": "Junction-to-ambient thermal resistance in C/W."
+            },
+            "theta_jc": {
+              "type": ["number", "null"],
+              "description": "Junction-to-case thermal resistance in C/W."
+            },
+            "theta_jb": {
+              "type": ["number", "null"],
+              "description": "Junction-to-board thermal resistance in C/W."
+            },
+            "psi_jt": {
+              "type": ["number", "null"],
+              "description": "Junction-to-top characterization parameter in C/W."
+            },
+            "psi_jb": {
+              "type": ["number", "null"],
+              "description": "Junction-to-board characterization parameter in C/W."
+            },
+            "power_dissipation_max_w": {
+              "type": ["number", "null"],
+              "description": "Maximum power dissipation in watts."
+            }
+          },
+          "additionalProperties": true
+        },
+        "moisture_sensitivity_level": {
+          "type": ["string", "null"],
+          "description": "IPC/JEDEC J-STD-020 MSL rating, e.g. '1', '3'."
+        },
+        "weight_mg": {
+          "type": ["number", "null"],
+          "description": "Package weight in milligrams."
+        },
+        "reflow_profile": {
+          "oneOf": [
+            { "$ref": "#/$defs/reflow_profile" },
+            { "type": "null" }
+          ]
+        },
+        "marking": {
+          "type": ["string", "null"],
+          "description": "Top marking or device marking code."
+        },
+        "ordering_info": {
+          "type": "array",
+          "description": "Ordering information for this package variant.",
+          "items": { "$ref": "#/$defs/ordering_entry" }
+        },
+        "notes": {
+          "type": ["string", "null"],
+          "description": "Additional notes about this package."
+        }
+      },
+      "additionalProperties": true
+    }
+  }
+}
