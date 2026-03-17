@@ -13,6 +13,8 @@ import sys
 from collections import defaultdict
 from pathlib import Path
 
+from normalize_fpga_parse import normalize_fpga_parse_result
+
 try:
     import fitz
 except ImportError:
@@ -391,7 +393,7 @@ def build_output(device, package, pins, power_rails, lvds_pairs):
         },
     }
 
-    return result
+    return normalize_fpga_parse_result(result)
 
 
 def parse_gowin_pdf_pinout(filepath):
@@ -463,6 +465,7 @@ def main():
         out_path = OUTPUT_DIR / f"gowin_gw5at-15_{pkg_name.lower()}.json"
         with open(out_path, 'w') as f:
             json.dump(result, f, indent=2, ensure_ascii=False)
+            f.write("\n")
 
         print(f"  Total pins: {result['total_pins']}")
         print(f"  By function: {result['summary']['by_function']}")

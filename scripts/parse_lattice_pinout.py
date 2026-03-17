@@ -20,6 +20,8 @@ import sys
 from collections import defaultdict
 from pathlib import Path
 
+from normalize_fpga_parse import normalize_fpga_parse_result
+
 DEFAULT_CSV_DIR = Path(__file__).parent.parent / "data/raw/fpga/lattice"
 DEFAULT_OUTPUT_DIR = Path(__file__).parent.parent / "data/extracted_v2/fpga/pinout"
 
@@ -568,7 +570,7 @@ def parse_lattice_csv(filepath: Path) -> list[dict]:
             "lookup": lookup,
         }
 
-        results.append(result)
+        results.append(normalize_fpga_parse_result(result))
 
     return results
 
@@ -607,6 +609,7 @@ def main():
             out_path = output_dir / f"{safe_name}.json"
             with open(out_path, "w") as fp:
                 json.dump(result, fp, indent=2, ensure_ascii=False)
+                fp.write("\n")
 
             s = result["summary"]
             print(f"  {result['device']} {result['package']}: {result['total_pins']} pins")

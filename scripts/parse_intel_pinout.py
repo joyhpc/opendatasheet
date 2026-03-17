@@ -15,6 +15,8 @@ from collections import Counter, defaultdict
 from pathlib import Path
 from zipfile import ZipFile
 
+from normalize_fpga_parse import normalize_fpga_parse_result
+
 DEFAULT_XLSX_DIR = Path(__file__).parent.parent / "data/raw/fpga/intel_agilex5"
 DEFAULT_OUTPUT_DIR = Path(__file__).parent.parent / "data/extracted_v2/fpga/pinout"
 PINOUT_INDEX_URL = "https://www.altera.com/design/devices/resources/pinouts"
@@ -454,7 +456,7 @@ def parse_intel_xlsx(filepath: Path) -> list[dict]:
                 "pins": pins,
                 "lookup": _build_lookup(pins),
             }
-            results.append(result)
+            results.append(normalize_fpga_parse_result(result))
 
     return results
 

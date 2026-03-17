@@ -22,6 +22,8 @@ import sys
 from collections import defaultdict
 from pathlib import Path
 
+from normalize_fpga_parse import normalize_fpga_parse_result
+
 DEFAULT_PINOUT_DIR = Path(__file__).parent.parent / "data/raw/fpga/pinout"
 DEFAULT_OUTPUT_DIR = Path(__file__).parent.parent / "data/extracted_v2/fpga/pinout"
 
@@ -192,7 +194,7 @@ def classify_pin(pin_name: str, io_type: str) -> dict:
                 result["drc"] = rule
                 break
 
-    return result
+    return normalize_fpga_parse_result(result)
 
 
 def extract_diff_pairs(pins: list) -> list:
@@ -531,6 +533,7 @@ def main():
         out_path = output_dir / f"{f.stem}.json"
         with open(out_path, "w") as fp:
             json.dump(result, fp, indent=2, ensure_ascii=False)
+            fp.write("\n")
 
         s = result["summary"]
         dp = s["diff_pairs"]

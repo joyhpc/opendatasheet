@@ -51,9 +51,8 @@ def detect_format(input_path: Path) -> str:
 def parse_amd_txt(input_path: Path) -> dict:
     """Parse AMD/Xilinx TXT pinout file."""
     sys.path.insert(0, str(SCRIPT_DIR))
-    from parse_fpga_pinout import parse_pinout_file, build_schema_v2
-    raw_pins = parse_pinout_file(str(input_path))
-    return build_schema_v2(raw_pins, str(input_path))
+    from parse_fpga_pinout import parse_pinout_file
+    return parse_pinout_file(input_path)
 
 
 def parse_gowin_xlsx(input_path: Path) -> dict:
@@ -128,11 +127,13 @@ def main():
             pkg_out = out_path.parent / f"{out_path.stem}_{pkg_name}.json"
             with open(pkg_out, "w") as f:
                 json.dump(pkg_data, f, indent=2, ensure_ascii=False)
+                f.write("\n")
             n_pins = len(pkg_data.get("pins", []))
             print(f"  {pkg_name}: {n_pins} pins → {pkg_out}")
     else:
         with open(out_path, "w") as f:
             json.dump(result, f, indent=2, ensure_ascii=False)
+            f.write("\n")
         n_pins = len(result.get("pins", []))
         device = result.get("device", "?")
         package = result.get("package", "?")

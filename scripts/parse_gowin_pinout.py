@@ -14,6 +14,8 @@ import sys
 from collections import defaultdict
 from pathlib import Path
 
+from normalize_fpga_parse import normalize_fpga_parse_result
+
 try:
     import openpyxl
 except ImportError:
@@ -275,7 +277,7 @@ def parse_gowin_xlsx(filepath: Path) -> list[dict]:
             "lookup": lookup,
         }
 
-        results.append(result)
+        results.append(normalize_fpga_parse_result(result))
 
     return results
 
@@ -506,6 +508,7 @@ def main():
             out_path = output_dir / f"{safe_name}.json"
             with open(out_path, "w") as fp:
                 json.dump(result, fp, indent=2, ensure_ascii=False)
+                fp.write("\n")
 
             s = result["summary"]
             dp = s["diff_pairs"]
