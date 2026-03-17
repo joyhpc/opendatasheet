@@ -194,7 +194,7 @@ def classify_pin(pin_name: str, io_type: str) -> dict:
                 result["drc"] = rule
                 break
 
-    return normalize_fpga_parse_result(result)
+    return result
 
 
 def extract_diff_pairs(pins: list) -> list:
@@ -512,7 +512,7 @@ def parse_pinout_file(filepath: Path) -> dict:
         "lookup": lookup,
     }
 
-    return result
+    return normalize_fpga_parse_result(result)
 
 
 def main():
