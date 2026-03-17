@@ -1022,20 +1022,65 @@ def _infer_fpga_device_identity(manufacturer: str, pinout_data: dict, descriptio
     }
 
 
+def _canonical_fpga_vendor(vendor: str | None, fallback: str | None = None) -> str | None:
+    if vendor in ("Intel/Altera", "Intel", "Altera"):
+        return "Intel/Altera"
+    if vendor in ("AMD", "Gowin", "Lattice"):
+        return vendor
+    return fallback
+
+
+def _pinout_manufacturer(pinout_data: dict, component_manufacturer: str | None = None) -> str:
+    device_identity = pinout_data.get("device_identity", {}) if isinstance(pinout_data.get("device_identity"), dict) else {}
+    explicit_vendor = device_identity.get("vendor") or pinout_data.get("_vendor")
+    return _canonical_fpga_vendor(explicit_vendor, component_manufacturer or "AMD") or "AMD"
+
+
+def _pinout_device_identity(manufacturer: str, pinout_data: dict, description: str | None = None) -> dict:
+    inferred = _infer_fpga_device_identity(manufacturer, pinout_data, description)
+    explicit = pinout_data.get("device_identity", {}) if isinstance(pinout_data.get("device_identity"), dict) else {}
+    explicit = {key: value for key, value in explicit.items() if value is not None}
+    explicit_vendor = _canonical_fpga_vendor(explicit.get("vendor"), inferred.get("vendor"))
+    if explicit_vendor:
+        explicit["vendor"] = explicit_vendor
+    return _deep_merge_dict(inferred, explicit)
+
+
 def _generic_fpga_source_traceability(pinout_data: dict) -> dict:
-    package_pinout = {
-        "source_file": pinout_data.get("source_file"),
-        "source_document_id": pinout_data.get("source_document_id"),
-        "source_url": pinout_data.get("source_url"),
-        "source_index_url": pinout_data.get("source_index_url"),
-        "source_version": pinout_data.get("source_version"),
-        "source_status": pinout_data.get("source_status"),
-        "source_revision_note": pinout_data.get("source_revision_note"),
+    legacy_traceability = {
+        "package_pinout": {
+            "source_file": pinout_data.get("source_file"),
+            "source_document_id": pinout_data.get("source_document_id"),
+            "source_url": pinout_data.get("source_url"),
+            "source_index_url": pinout_data.get("source_index_url"),
+            "source_version": pinout_data.get("source_version"),
+            "source_status": pinout_data.get("source_status"),
+            "source_revision_note": pinout_data.get("source_revision_note"),
+        }
     }
-    package_pinout = {key: value for key, value in package_pinout.items() if value is not None}
-    if not package_pinout:
-        return {}
-    return {"package_pinout": package_pinout}
+    legacy_traceability["package_pinout"] = {
+        key: value for key, value in legacy_traceability["package_pinout"].items() if value is not None
+    }
+    if not legacy_traceability["package_pinout"]:
+        legacy_traceability = {}
+
+    normalized = pinout_data.get("source_traceability")
+    if isinstance(normalized, dict) and normalized:
+        return _deep_merge_dict(legacy_traceability, normalized)
+
+    return legacy_traceability
+
+
+def _pinout_source_traceability(pinout_data: dict) -> dict:
+    return _generic_fpga_source_traceability(pinout_data)
+
+
+def _pinout_identity_field(manufacturer: str, pinout_data: dict, field: str, description: str | None = None):
+    return _pinout_device_identity(manufacturer, pinout_data, description).get(field)
+
+
+def _pinout_family(manufacturer: str, pinout_data: dict, description: str | None = None) -> str | None:
+    return _pinout_identity_field(manufacturer, pinout_data, "family", description)
 
 
 def _fpga_family_high_speed_metadata(vendor: str, device: str, family: str | None, hs_serial: dict) -> dict:
@@ -1095,12 +1140,16 @@ def _fpga_family_high_speed_metadata(vendor: str, device: str, family: str | Non
     return {}
 
 
-def _intel_agilex5_public_device_overlay(pinout_data: dict) -> dict:
-    if _safe_upper(pinout_data.get("_family")) != "AGILEX 5":
+def _intel_agilex5_public_device_overlay(pinout_data: dict, manufacturer: str | None = None, description: str | None = None) -> dict:
+    manufacturer = manufacturer or _pinout_manufacturer(pinout_data)
+    family = _pinout_family(manufacturer, pinout_data, description)
+    if _safe_upper(family) != "AGILEX 5":
         return {}
 
-    device = _safe_upper(pinout_data.get("device"))
-    base_device = _intel_agilex5_base_device(device)
+    device_identity = _pinout_device_identity(manufacturer, pinout_data, description)
+    source_traceability = _pinout_source_traceability(pinout_data)
+    device = _safe_upper(device_identity.get("device"))
+    base_device = device_identity.get("base_device") or _intel_agilex5_base_device(device)
     profile = INTEL_AGILEX5_DEVICE_PROFILES.get(base_device or "")
     variant = _intel_agilex5_variant(device)
     if not profile or not variant:
@@ -1109,31 +1158,25 @@ def _intel_agilex5_public_device_overlay(pinout_data: dict) -> dict:
     overlay = {
         "device_identity": {
             "vendor": "Intel/Altera",
-            "family": pinout_data.get("_family"),
-            "series": pinout_data.get("_series"),
+            "family": family,
+            "series": device_identity.get("series"),
             "base_device": base_device,
             "device": device,
-            "package": pinout_data.get("package"),
+            "package": device_identity.get("package"),
         },
-        "source_traceability": {
-            "package_pinout": {
-                "source_file": pinout_data.get("source_file"),
-                "source_document_id": pinout_data.get("source_document_id"),
-                "source_url": pinout_data.get("source_url"),
-                "source_index_url": pinout_data.get("source_index_url"),
-                "source_version": pinout_data.get("source_version"),
-                "source_status": pinout_data.get("source_status"),
-                "source_revision_note": pinout_data.get("source_revision_note"),
+        "source_traceability": _deep_merge_dict(
+            source_traceability,
+            {
+                "device_capability": {
+                    **INTEL_AGILEX5_OVERVIEW_SOURCE,
+                    "scope": "device-level capability boundary",
+                },
+                "ordering_variant": {
+                    **INTEL_AGILEX5_PART_DECODER_SOURCE,
+                    "scope": "ordering-code role/features",
+                },
             },
-            "device_capability": {
-                **INTEL_AGILEX5_OVERVIEW_SOURCE,
-                "scope": "device-level capability boundary",
-            },
-            "ordering_variant": {
-                **INTEL_AGILEX5_PART_DECODER_SOURCE,
-                "scope": "ordering-code role/features",
-            },
-        },
+        ),
         "ordering_variant": {
             **variant,
             **INTEL_AGILEX5_PART_DECODER_SOURCE,
@@ -1530,11 +1573,14 @@ def _package_rate_note(vendor: str, package: str, hs_serial: dict) -> str | None
     return None
 
 
-def _generic_fpga_capability_blocks(pinout_data: dict, vendor: str, device: str, package: str, diff_pairs: list[dict]) -> dict:
+def _generic_fpga_capability_blocks(pinout_data: dict, device_identity: dict, diff_pairs: list[dict]) -> dict:
     summary = pinout_data.get("summary", {}) if isinstance(pinout_data.get("summary"), dict) else {}
     by_function = summary.get("by_function", {}) if isinstance(summary, dict) else {}
     pins = pinout_data.get("pins", [])
-    family = pinout_data.get("_family")
+    vendor = device_identity.get("vendor", "")
+    device = device_identity.get("device") or pinout_data.get("device") or ""
+    package = device_identity.get("package") or pinout_data.get("package") or ""
+    family = device_identity.get("family")
     config_summary = _config_signal_summary(pins)
     gt_counts = _gt_pair_counts(diff_pairs)
     blocks = {}
@@ -1586,7 +1632,7 @@ def _generic_fpga_capability_blocks(pinout_data: dict, vendor: str, device: str,
     return blocks
 
 
-def _generic_fpga_constraint_blocks(pinout_data: dict, capability_blocks: dict, diff_pairs: list[dict]) -> dict:
+def _generic_fpga_constraint_blocks(pinout_data: dict, device_identity: dict, capability_blocks: dict, diff_pairs: list[dict]) -> dict:
     blocks = {}
     configuration = capability_blocks.get("configuration")
     if configuration:
@@ -1627,7 +1673,7 @@ def _generic_fpga_constraint_blocks(pinout_data: dict, capability_blocks: dict, 
             blocks["refclk_requirements"]["review_note"] = hs_serial.get("review_note")
         if hs_serial.get("package_rate_ceiling_gbps") is not None:
             blocks["refclk_requirements"]["package_rate_ceiling_gbps"] = hs_serial.get("package_rate_ceiling_gbps")
-        package_note = _package_rate_note(pinout_data.get("_vendor", ""), pinout_data.get("package", ""), hs_serial)
+        package_note = _package_rate_note(device_identity.get("vendor", ""), device_identity.get("package", ""), hs_serial)
         if package_note:
             blocks["refclk_requirements"]["package_rate_note"] = package_note
 
@@ -1720,12 +1766,12 @@ def _normalize_lookup(pinout_data: dict) -> dict:
     lookup = pinout_data.get("lookup", {})
     result = {}
 
-    # Handle xlsx format: pin_to_name / name_to_pin
-    if "pin_to_name" in lookup:
+    # Preferred normalized parse format: pin_to_name / name_to_pin
+    if "pin_to_name" in lookup and "name_to_pin" in lookup:
         result["by_pin"] = dict(lookup["pin_to_name"]) if isinstance(lookup["pin_to_name"], list) else lookup["pin_to_name"]
         result["by_name"] = dict(lookup["name_to_pin"]) if isinstance(lookup["name_to_pin"], list) else lookup["name_to_pin"]
-    # Handle PDF format: by_pin / by_name
-    elif "by_pin" in lookup:
+    # Legacy export format: by_pin / by_name
+    elif "by_pin" in lookup and "by_name" in lookup:
         result["by_pin"] = lookup["by_pin"]
         result["by_name"] = lookup["by_name"]
     else:
@@ -1768,8 +1814,7 @@ def _normalize_diff_pairs(pairs: list) -> list:
     result = []
     for dp in pairs:
         normalized = dict(dp)
-        # GW5AT-15 PDF format: true_pin/comp_pin → p_pin/n_pin
-        if "true_pin" in normalized and "p_pin" not in normalized:
+        if "p_pin" not in normalized and "true_pin" in normalized:
             normalized["p_pin"] = normalized.pop("true_pin")
             normalized["n_pin"] = normalized.pop("comp_pin", "")
             normalized["p_name"] = normalized.pop("true_name", None)
@@ -2548,18 +2593,11 @@ def export_fpga(dc_data: dict, pinout_data: dict, gowin_dc: dict = None, lattice
                 }
 
     # --- Merge pinout data ---
-    device = pinout_data["device"]
-    package = pinout_data["package"]
-    vendor = pinout_data.get("_vendor", "AMD")
-
-    if vendor == "Gowin":
-        manufacturer = "Gowin"
-    elif vendor == "Lattice":
-        manufacturer = "Lattice"
-    elif vendor in ("Intel/Altera", "Intel", "Altera"):
-        manufacturer = "Intel/Altera"
-    else:
-        manufacturer = comp.get("manufacturer", "AMD")
+    manufacturer = _pinout_manufacturer(pinout_data, comp.get("manufacturer"))
+    device_identity = _pinout_device_identity(manufacturer, pinout_data, comp.get("description"))
+    vendor = device_identity.get("vendor") or manufacturer
+    device = device_identity.get("device") or pinout_data["device"]
+    package = device_identity.get("package") or pinout_data["package"]
 
     raw_elec = ext.get("electrical_characteristics", [])
     raw_abs = ext.get("absolute_maximum_ratings", [])
@@ -2571,8 +2609,7 @@ def export_fpga(dc_data: dict, pinout_data: dict, gowin_dc: dict = None, lattice
 
     normalized_diff_pairs = _normalize_diff_pairs(pinout_data.get("diff_pairs", []))
     normalized_pins = _normalize_pins(pinout_data.get("pins", []))
-    device_identity = _infer_fpga_device_identity(manufacturer, pinout_data, comp.get("description"))
-    source_traceability = _generic_fpga_source_traceability(pinout_data)
+    source_traceability = _pinout_source_traceability(pinout_data)
     result = {
         "_schema": SCHEMA_VERSION,
         "_type": "fpga",
@@ -2603,8 +2640,8 @@ def export_fpga(dc_data: dict, pinout_data: dict, gowin_dc: dict = None, lattice
     }
     if source_traceability:
         result["source_traceability"] = source_traceability
-    capability_blocks = _generic_fpga_capability_blocks(pinout_data, vendor, device, package, normalized_diff_pairs)
-    constraint_blocks = _generic_fpga_constraint_blocks(pinout_data, capability_blocks, normalized_diff_pairs)
+    capability_blocks = _generic_fpga_capability_blocks(pinout_data, device_identity, normalized_diff_pairs)
+    constraint_blocks = _generic_fpga_constraint_blocks(pinout_data, device_identity, capability_blocks, normalized_diff_pairs)
     guide_data = _load_gowin_family_design_guide(device, package, pinout_data, gowin_dc=gowin_dc) if vendor == "Gowin" else {}
     if guide_data.get("constraint_overlays"):
         constraint_blocks = _deep_merge_dict(constraint_blocks, guide_data["constraint_overlays"])
@@ -2627,7 +2664,7 @@ def export_fpga(dc_data: dict, pinout_data: dict, gowin_dc: dict = None, lattice
         if public_overlay:
             result = _deep_merge_dict(result, public_overlay)
     elif vendor in ("Intel/Altera", "Intel", "Altera"):
-        public_overlay = _intel_agilex5_public_device_overlay(pinout_data)
+        public_overlay = _intel_agilex5_public_device_overlay(pinout_data, manufacturer=manufacturer, description=comp.get("description"))
         if public_overlay:
             result = _deep_merge_dict(result, public_overlay)
 
@@ -2716,7 +2753,9 @@ def main():
             dc_data = None
             gowin_dc = None
             lattice_dc = None
-            vendor = pinout_data.get("_vendor", "")
+            manufacturer = _pinout_manufacturer(pinout_data)
+            device_identity = _pinout_device_identity(manufacturer, pinout_data)
+            vendor = device_identity.get("vendor", "")
 
             if vendor == "Gowin":
                 # Gowin: match by device prefix (GW5AT-60 → GW5AT)
@@ -2728,7 +2767,7 @@ def main():
                 dc_data = {"extraction": {"component": {}}}
             elif vendor == "Lattice":
                 # Lattice: match by family
-                family = pinout_data.get("_family", "")
+                family = device_identity.get("family", "")
                 if "ECP5" in device.upper():
                     lattice_dc = lattice_dc_cache.get("ecp5")
                 elif "LIFCL" in device.upper() or "CrossLink" in family:
