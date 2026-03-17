@@ -17,6 +17,7 @@ import sys
 from collections import defaultdict
 from pathlib import Path
 
+from build_fpga_catalog import build_catalog
 from design_guide_domain import load_gowin_design_guide_bundle, resolve_gowin_design_guide_source_path
 
 SCHEMA_VERSION = "sch-review-device/1.1"
@@ -947,6 +948,94 @@ def _intel_agilex5_variant(device: str) -> dict:
     if not match:
         return {}
     return {"variant_code": match.group(1), **INTEL_AGILEX5_VARIANTS.get(match.group(1), {})}
+
+
+def _gowin_family_series(device: str) -> tuple[str | None, str | None]:
+    device_upper = _safe_upper(device)
+    if device_upper.startswith("GW5AR"):
+        return "Arora V", "Arora VR"
+    if device_upper.startswith("GW5AS"):
+        return "Arora V", "Arora VS"
+    if device_upper.startswith("GW5AT"):
+        return "Arora V", "Arora VT"
+    if device_upper.startswith("GW5A"):
+        return "Arora V", "Arora V"
+    return None, None
+
+
+def _amd_family_series(device: str, description: str | None) -> tuple[str | None, str | None]:
+    device_upper = _safe_upper(device)
+    desc_upper = _safe_upper(description)
+    if device_upper.startswith("XCKU") or "KINTEX ULTRASCALE+" in desc_upper:
+        return "Kintex UltraScale+", "Kintex UltraScale+"
+    if device_upper.startswith("XCAU") or "ARTIX ULTRASCALE+" in desc_upper:
+        return "Artix UltraScale+", "Artix UltraScale+"
+    return None, None
+
+
+def _lattice_series(family: str | None, device: str) -> str | None:
+    family_upper = _safe_upper(family)
+    device_upper = _safe_upper(device)
+    if family_upper in ("ECP5", "CROSSLINK-NX"):
+        return family
+    if device_upper.startswith("ECP5"):
+        return "ECP5"
+    if device_upper.startswith("LIFCL"):
+        return "CrossLink-NX"
+    return None
+
+
+def _infer_fpga_device_identity(manufacturer: str, pinout_data: dict, description: str | None = None) -> dict:
+    device = pinout_data.get("device")
+    package = pinout_data.get("package")
+    family = pinout_data.get("_family")
+    series = pinout_data.get("_series")
+    base_device = pinout_data.get("_base_device") or device
+
+    if manufacturer == "Gowin":
+        inferred_family, inferred_series = _gowin_family_series(device or "")
+        family = family or inferred_family
+        series = series or inferred_series
+    elif manufacturer == "AMD":
+        inferred_family, inferred_series = _amd_family_series(device or "", description)
+        family = family or inferred_family
+        series = series or inferred_series
+    elif manufacturer == "Lattice":
+        if not family:
+            if _safe_upper(device).startswith("ECP5"):
+                family = "ECP5"
+            elif _safe_upper(device).startswith("LIFCL"):
+                family = "CrossLink-NX"
+        series = series or _lattice_series(family, device or "")
+    elif manufacturer == "Intel/Altera":
+        family = family or "Agilex 5"
+        series = series or "E-Series"
+        base_device = pinout_data.get("_base_device") or _intel_agilex5_base_device(device or "") or device
+
+    return {
+        "vendor": manufacturer,
+        "family": family,
+        "series": series,
+        "base_device": base_device,
+        "device": device,
+        "package": package,
+    }
+
+
+def _generic_fpga_source_traceability(pinout_data: dict) -> dict:
+    package_pinout = {
+        "source_file": pinout_data.get("source_file"),
+        "source_document_id": pinout_data.get("source_document_id"),
+        "source_url": pinout_data.get("source_url"),
+        "source_index_url": pinout_data.get("source_index_url"),
+        "source_version": pinout_data.get("source_version"),
+        "source_status": pinout_data.get("source_status"),
+        "source_revision_note": pinout_data.get("source_revision_note"),
+    }
+    package_pinout = {key: value for key, value in package_pinout.items() if value is not None}
+    if not package_pinout:
+        return {}
+    return {"package_pinout": package_pinout}
 
 
 def _fpga_family_high_speed_metadata(vendor: str, device: str, family: str | None, hs_serial: dict) -> dict:
@@ -2482,6 +2571,8 @@ def export_fpga(dc_data: dict, pinout_data: dict, gowin_dc: dict = None, lattice
 
     normalized_diff_pairs = _normalize_diff_pairs(pinout_data.get("diff_pairs", []))
     normalized_pins = _normalize_pins(pinout_data.get("pins", []))
+    device_identity = _infer_fpga_device_identity(manufacturer, pinout_data, comp.get("description"))
+    source_traceability = _generic_fpga_source_traceability(pinout_data)
     result = {
         "_schema": SCHEMA_VERSION,
         "_type": "fpga",
@@ -2490,6 +2581,7 @@ def export_fpga(dc_data: dict, pinout_data: dict, gowin_dc: dict = None, lattice
         "category": "FPGA",
         "description": comp.get("description"),
         "package": package,
+        "device_identity": device_identity,
 
         # From DC datasheet
         "supply_specs": supply_specs,
@@ -2509,6 +2601,8 @@ def export_fpga(dc_data: dict, pinout_data: dict, gowin_dc: dict = None, lattice
         # Summary
         "summary": pinout_data.get("summary", {}),
     }
+    if source_traceability:
+        result["source_traceability"] = source_traceability
     capability_blocks = _generic_fpga_capability_blocks(pinout_data, vendor, device, package, normalized_diff_pairs)
     constraint_blocks = _generic_fpga_constraint_blocks(pinout_data, capability_blocks, normalized_diff_pairs)
     guide_data = _load_gowin_family_design_guide(device, package, pinout_data, gowin_dc=gowin_dc) if vendor == "Gowin" else {}
@@ -2680,7 +2774,7 @@ def main():
     # Generate manifest
     manifest = {"devices": []}
     for f in sorted(output_dir.glob("*.json")):
-        if f.name == "_manifest.json":
+        if f.name in {"_manifest.json", "_fpga_catalog.json"}:
             continue
         with open(f) as fp:
             data = json.load(fp)
@@ -2695,6 +2789,11 @@ def main():
         json.dump(manifest, fp, indent=2)
         fp.write("\n")
     print(f"Manifest: {manifest_path} ({len(manifest['devices'])} devices)")
+
+    fpga_catalog = build_catalog(output_dir)
+    fpga_catalog_path = output_dir / "_fpga_catalog.json"
+    fpga_catalog_path.write_text(json.dumps(fpga_catalog, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    print(f"FPGA catalog: {fpga_catalog_path} ({fpga_catalog['summary']['device_count']} devices, {fpga_catalog['summary']['package_count']} packages)")
 
 
 if __name__ == "__main__":
