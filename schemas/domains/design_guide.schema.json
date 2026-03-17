@@ -1,0 +1,288 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opendatasheet.dev/schemas/domains/design_guide/1.0",
+  "title": "Design Guide Domain",
+  "description": "Hardware design guide rules extracted from manufacturer design guides (e.g., FPGA schematic design guides). Contains power domain maps, sequencing constraints, pin connection rules, decoupling requirements, clock design rules, and configuration mode support.",
+  "type": "object",
+  "properties": {
+    "source_document": {
+      "type": "object",
+      "description": "Source design guide document metadata.",
+      "properties": {
+        "title": { "type": ["string", "null"] },
+        "document_id": { "type": ["string", "null"], "description": "Document number, e.g. UG984" },
+        "version": { "type": ["string", "null"] },
+        "device_family": { "type": ["string", "null"], "description": "Target device family, e.g. GW5AT" }
+      },
+      "additionalProperties": true
+    },
+    "source_documents": {
+      "type": "array",
+      "description": "Primary and boundary source documents used to interpret family-vs-package applicability.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "title": { "type": ["string", "null"] },
+          "document_id": { "type": ["string", "null"] },
+          "version": { "type": ["string", "null"] },
+          "released_on": { "type": ["string", "null"] },
+          "url": { "type": ["string", "null"] },
+          "path": { "type": ["string", "null"] },
+          "scope": { "type": ["string", "null"] },
+          "device": { "type": ["string", "null"] },
+          "package": { "type": ["string", "null"] }
+        },
+        "additionalProperties": true
+      }
+    },
+    "package_profile": {
+      "type": "object",
+      "description": "Package-specific override data layered on top of family-level design-guide rules.",
+      "properties": {
+        "device": { "type": ["string", "null"] },
+        "package": { "type": ["string", "null"] },
+        "family_rules_apply": { "type": ["boolean", "null"] },
+        "source_documents": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        },
+        "power_rail_aliases": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "physical_rail": { "type": "string" },
+              "logical_rails": {
+                "type": "array",
+                "items": { "type": "string" }
+              },
+              "pin_count": { "type": ["integer", "null"] },
+              "pins": {
+                "type": "array",
+                "items": { "type": "string" }
+              },
+              "merge_type": { "type": ["string", "null"] },
+              "source": { "type": ["string", "null"] }
+            },
+            "required": ["physical_rail", "logical_rails"],
+            "additionalProperties": true
+          }
+        },
+        "logical_rail_map": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": true
+            }
+          }
+        },
+        "merged_logical_rail_groups": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        },
+        "package_notes": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": true
+    },
+    "power_domain_map": {
+      "type": "array",
+      "description": "Power supply domain classification and voltage requirements.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "group": { "type": "string", "description": "Domain group, e.g. FPGA, SerDes, MIPI" },
+          "rail_name": { "type": "string", "description": "Rail name, e.g. VCC, VCCIO, VDDAQ0" },
+          "description": { "type": ["string", "null"] },
+          "nominal_voltage": { "type": ["number", "null"] },
+          "voltage_range": {
+            "type": ["object", "null"],
+            "properties": {
+              "min": { "type": ["number", "null"] },
+              "max": { "type": ["number", "null"] },
+              "unit": { "type": "string", "default": "V" }
+            }
+          },
+          "ripple_max_pct": { "type": ["number", "null"], "description": "Maximum ripple as percentage" },
+          "source": { "type": ["string", "null"] }
+        },
+        "required": ["group", "rail_name"],
+        "additionalProperties": true
+      }
+    },
+    "power_sequencing_rules": {
+      "type": "array",
+      "description": "Power-up/down sequencing constraints.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "rule": { "type": "string", "description": "Human-readable rule statement" },
+          "rail_before": { "type": ["string", "null"], "description": "Rail that must power up first" },
+          "rail_after": { "type": ["string", "null"], "description": "Rail that powers up after" },
+          "severity": { "enum": ["ERROR", "WARNING", "INFO"] },
+          "source": { "type": ["string", "null"] }
+        },
+        "required": ["rule", "severity"],
+        "additionalProperties": true
+      }
+    },
+    "power_ramp_constraints": {
+      "type": "array",
+      "description": "Power rail slew rate / ramp rate constraints.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "rail": { "type": "string" },
+          "slew_rate_min": { "type": ["number", "null"] },
+          "slew_rate_max": { "type": ["number", "null"] },
+          "unit": { "type": "string", "default": "mV/us" },
+          "source": { "type": ["string", "null"] }
+        },
+        "required": ["rail"],
+        "additionalProperties": true
+      }
+    },
+    "rail_merge_guidelines": {
+      "type": "array",
+      "description": "Guidelines on which power rails can or cannot be merged.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "rails": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Rails involved in the merge guideline"
+          },
+          "can_merge": { "type": "boolean" },
+          "conditions": { "type": ["string", "null"], "description": "Conditions under which merge is allowed/disallowed" },
+          "recommendation": { "type": ["string", "null"], "description": "Additional notes, e.g. use LDO, use ferrite bead" },
+          "severity": { "enum": ["ERROR", "WARNING", "INFO"] },
+          "source": { "type": ["string", "null"] }
+        },
+        "required": ["rails", "can_merge", "severity"],
+        "additionalProperties": true
+      }
+    },
+    "pin_connection_rules": {
+      "type": "array",
+      "description": "Mandatory or recommended pin connection rules.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "pin": { "type": "string", "description": "Pin name, e.g. RECONFIG_N, CFGBVS" },
+          "rule": { "type": "string", "description": "Connection rule description" },
+          "connection_type": {
+            "enum": ["must_connect", "must_not_float", "pull_up", "pull_down", "tie_high", "tie_low", "external_component", "conditional", "other"],
+            "description": "Type of connection requirement"
+          },
+          "external_component": { "type": ["string", "null"], "description": "Required external component, e.g. 4.7K pull-up to 3.3V" },
+          "condition": { "type": ["string", "null"], "description": "Condition under which the rule applies" },
+          "severity": { "enum": ["ERROR", "WARNING", "INFO"] },
+          "source": { "type": ["string", "null"] }
+        },
+        "required": ["pin", "rule", "severity"],
+        "additionalProperties": true
+      }
+    },
+    "decoupling_requirements": {
+      "type": "array",
+      "description": "Decoupling and filtering requirements for power rails.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "rail": { "type": "string" },
+          "ripple_max_pct": { "type": ["number", "null"] },
+          "filter_type": { "type": ["string", "null"], "description": "e.g. ferrite bead + ceramic cap" },
+          "capacitor_tolerance": { "type": ["string", "null"], "description": "e.g. ±10%" },
+          "notes": { "type": ["string", "null"] },
+          "severity": { "enum": ["ERROR", "WARNING", "INFO"] },
+          "source": { "type": ["string", "null"] }
+        },
+        "required": ["rail", "severity"],
+        "additionalProperties": true
+      }
+    },
+    "clock_design_rules": {
+      "type": "array",
+      "description": "Clock input and reference clock design rules.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "signal": { "type": "string", "description": "Clock signal or group, e.g. SerDes reference clock" },
+          "requirement": { "type": "string" },
+          "external_component": { "type": ["string", "null"], "description": "Required component, e.g. 0.1uF AC coupling cap" },
+          "notes": { "type": ["string", "null"] },
+          "severity": { "enum": ["ERROR", "WARNING", "INFO"] },
+          "source": { "type": ["string", "null"] }
+        },
+        "required": ["signal", "requirement", "severity"],
+        "additionalProperties": true
+      }
+    },
+    "configuration_mode_support": {
+      "type": "array",
+      "description": "Supported configuration/programming modes per device/package.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "device": { "type": ["string", "null"] },
+          "package": { "type": ["string", "null"] },
+          "mode": { "type": "string", "description": "Configuration mode name, e.g. JTAG, MSPI, SSPI" },
+          "supported": { "type": "boolean" },
+          "max_clock_freq": { "type": ["string", "null"] },
+          "signals": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Signal names used by this mode"
+          },
+          "notes": { "type": ["string", "null"] },
+          "source": { "type": ["string", "null"] }
+        },
+        "required": ["mode", "supported"],
+        "additionalProperties": true
+      }
+    },
+    "io_standard_rules": {
+      "type": "array",
+      "description": "IO standard and differential pair design rules.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "standard": { "type": "string", "description": "IO standard, e.g. LVDS, SSTL, HSTL" },
+          "requirement": { "type": "string" },
+          "termination": { "type": ["string", "null"], "description": "Termination type, e.g. 100Ω internal differential" },
+          "applies_to": { "type": ["string", "null"], "description": "Which banks/partitions this applies to" },
+          "severity": { "enum": ["ERROR", "WARNING", "INFO"] },
+          "source": { "type": ["string", "null"] }
+        },
+        "required": ["standard", "requirement", "severity"],
+        "additionalProperties": true
+      }
+    },
+    "design_guideline_text": {
+      "type": "array",
+      "description": "Free-form design guidelines that cannot be structured into specific rule categories. For LLM RAG consumption.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "category": { "type": "string", "description": "Topic category, e.g. power, clock, io, config, layout" },
+          "guideline": { "type": "string" },
+          "source": { "type": ["string", "null"] }
+        },
+        "required": ["category", "guideline"],
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": false
+}

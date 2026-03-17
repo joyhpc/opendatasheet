@@ -14,6 +14,7 @@ from extractors.power_sequence import PowerSequenceExtractor
 from extractors.parametric import ParametricExtractor
 from extractors.protocol import ProtocolExtractor
 from extractors.package import PackageExtractor
+from extractors.design_guide import DesignGuideExtractor
 
 # Registry: order matters — some extractors may depend on earlier results
 EXTRACTOR_REGISTRY = [
@@ -27,6 +28,7 @@ EXTRACTOR_REGISTRY = [
     ParametricExtractor,
     ProtocolExtractor,
     PackageExtractor,
+    DesignGuideExtractor,
 ]
 
 __all__ = [
@@ -42,4 +44,5 @@ __all__ = [
     'ParametricExtractor',
     'ProtocolExtractor',
     'PackageExtractor',
+    'DesignGuideExtractor',
 ]

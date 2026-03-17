@@ -186,10 +186,21 @@ def t2_1():
 
 @case("T2.2 All exports pass schema validation")
 def t2_2():
-    from jsonschema import Draft202012Validator
+    from jsonschema import Draft202012Validator, RefResolver
+
+    schema_dir = SCHEMA_PATH.parent
     with open(SCHEMA_PATH) as f:
         schema = json.load(f)
-    validator = Draft202012Validator(schema)
+
+    store = {}
+    for domain_schema in (schema_dir / "domains").glob("*.schema.json"):
+        with open(domain_schema) as f:
+            domain = json.load(f)
+        store[f"https://opendatasheet.dev/schemas/sch-review-device/domains/{domain_schema.name}"] = domain
+        if "$id" in domain:
+            store[domain["$id"]] = domain
+    resolver = RefResolver.from_schema(schema, store=store)
+    validator = Draft202012Validator(schema, resolver=resolver)
     
     failures = []
     for f in sorted(EXPORT_DIR.glob("*.json")):
@@ -741,6 +752,163 @@ def t6_3():
     assert_eq(fpg676a_mipi.get("dphy", {}).get("max_data_lanes"), 8, "GW5AT-138_FPG676A D-PHY lanes")
     assert_eq(fpg676a_serdes.get("transceiver_count"), 8, "GW5AT-138_FPG676A transceiver count")
     assert_eq(fpg676a_serdes.get("quad_count"), 2, "GW5AT-138_FPG676A quad count")
+
+
+@case("T6.4 Gowin GW5AT exports expose design-guide power and config rules")
+def t6_4():
+    ug225 = json.load(open(EXPORT_DIR / "GW5AT-60_UG225.json"))
+    power_sequence = ug225.get("domains", {}).get("power_sequence", {})
+    sequencing_rules = power_sequence.get("sequencing_rules", [])
+    assert_true(sequencing_rules, "GW5AT-60_UG225 missing domains.power_sequence.sequencing_rules")
+    first_rule = sequencing_rules[0]
+    assert_eq(first_rule.get("rail_before"), "VCCX", "GW5AT-60_UG225 sequence before rail")
+    assert_eq(first_rule.get("rail_after"), "VCC", "GW5AT-60_UG225 sequence after rail")
+
+    ramps = {entry.get("name"): entry.get("ramp_rate") for entry in power_sequence.get("power_rails", [])}
+    assert_eq(ramps.get("VCC", {}).get("min"), 0.1, "GW5AT-60_UG225 VCC ramp min")
+    assert_eq(ramps.get("VCCIO", {}).get("max"), 15.0, "GW5AT-60_UG225 VCCIO ramp max")
+
+    constraints = ug225.get("constraint_blocks", {})
+    cfg = constraints.get("configuration_boot", {})
+    pins = cfg.get("pin_requirements", {})
+    assert_true(pins.get("RECONFIG_N", {}).get("must_be_high_during_powerup") is True, "GW5AT-60_UG225 RECONFIG_N power-up rule")
+    assert_eq(pins.get("READY", {}).get("requires_pullup", {}).get("resistance_ohm"), 4700, "GW5AT-60_UG225 READY pullup")
+    assert_true(pins.get("CFGBVS", {}).get("must_not_float") is True, "GW5AT-60_UG225 CFGBVS must_not_float")
+
+    power_integrity = constraints.get("power_integrity", {})
+    assert_eq(power_integrity.get("ripple_limits_pct", {}).get("VCC", {}).get("max_pct"), 3.0, "GW5AT-60_UG225 VCC ripple")
+    mipi_group = power_integrity.get("sensitive_power_pin_groups", {}).get("mipi", {})
+    assert_true("VDDX_MIPI" in mipi_group.get("pin_name_tokens", []), "GW5AT-60_UG225 MIPI sensitive power tokens")
+    assert_eq(mipi_group.get("missing_isolation_severity"), "WARNING", "GW5AT-60_UG225 MIPI isolation severity")
+
+    clocking = constraints.get("clocking", {})
+    assert_eq(clocking.get("serdes_refclk_ac_coupling_nf"), 100.0, "GW5AT-60_UG225 SerDes AC coupling")
+
+
+@case("T6.5 Gowin design-guide domain preserves family and package source boundaries")
+def t6_5():
+    ug225 = json.load(open(EXPORT_DIR / "GW5AT-60_UG225.json"))
+    cs130 = json.load(open(EXPORT_DIR / "GW5AT-15_CS130.json"))
+
+    ug225_guide = ug225.get("domains", {}).get("design_guide", {})
+    cs130_guide = cs130.get("domains", {}).get("design_guide", {})
+    assert_true(ug225_guide, "GW5AT-60_UG225 missing domains.design_guide")
+    assert_true(cs130_guide, "GW5AT-15_CS130 missing domains.design_guide")
+
+    family_doc = ug225_guide.get("source_document", {})
+    assert_eq(family_doc.get("document_id"), "UG984", "GW5AT family guide doc id")
+    assert_eq(family_doc.get("version"), "1.2", "GW5AT family guide version")
+
+    ug225_docs = {
+        (item.get("document_id"), item.get("version"), item.get("package"))
+        for item in ug225_guide.get("source_documents", [])
+    }
+    cs130_docs = {
+        (item.get("document_id"), item.get("version"), item.get("package"))
+        for item in cs130_guide.get("source_documents", [])
+    }
+    assert_true(("UG1222", "1.3.3E", "UG225") in ug225_docs, "GW5AT-60_UG225 missing latest package guide boundary")
+    assert_true(("UG1224", "1.2E", "CS130") in cs130_docs, "GW5AT-15_CS130 missing latest package guide boundary")
+
+    io_signaling = ug225.get("constraint_blocks", {}).get("io_signaling", {})
+    scope = io_signaling.get("lvds_input_termination", {}).get("package_scope", {})
+    assert_eq(scope.get("GW5AT-60"), "all_regions", "GW5AT-60 LVDS termination scope")
+    assert_eq(scope.get("GW5AT-138"), "top_bottom_only", "GW5AT-138 LVDS termination scope")
+
+
+@case("T6.6 GW5AT-15 package profiles expose bonded rail overrides")
+def t6_6():
+    cs130 = json.load(open(EXPORT_DIR / "GW5AT-15_CS130.json"))
+    cs130f = json.load(open(EXPORT_DIR / "GW5AT-15_CS130F.json"))
+    mg132 = json.load(open(EXPORT_DIR / "GW5AT-15_MG132.json"))
+
+    cs130_profile = cs130.get("domains", {}).get("design_guide", {}).get("package_profile", {})
+    cs130f_profile = cs130f.get("domains", {}).get("design_guide", {}).get("package_profile", {})
+    mg132_profile = mg132.get("domains", {}).get("design_guide", {}).get("package_profile", {})
+
+    cs130_aliases = {item.get("physical_rail"): item for item in cs130_profile.get("power_rail_aliases", [])}
+    assert_true("VCCX_VCCLDO_VDDXM" in cs130_aliases, "CS130 missing merged auxiliary rail alias")
+    assert_eq(cs130_aliases["VCCX_VCCLDO_VDDXM"].get("logical_rails"), ["VCCX", "VCCLDO", "VDDXM"], "CS130 merged logical rails")
+    assert_true(any("VDD12M" in alias.get("logical_rails", []) for alias in cs130_aliases.values()), "CS130 missing VDD12M bonded rail alias")
+
+    cs130f_aliases = {item.get("physical_rail"): item for item in cs130f_profile.get("power_rail_aliases", [])}
+    assert_eq(cs130f_aliases.get("VCCX_VDDXM", {}).get("logical_rails"), ["VCCX", "VDDXM"], "CS130F VCCX/VDDXM merge")
+    assert_eq(cs130f_aliases.get("VCCLDO_VDD12M", {}).get("logical_rails"), ["VCCLDO", "VDD12M"], "CS130F VCCLDO/VDD12M merge")
+    assert_true(any("binding source" in note for note in cs130f_profile.get("package_notes", [])), "CS130F missing pinout-priority note")
+
+    mg132_aliases = {item.get("physical_rail"): item for item in mg132_profile.get("power_rail_aliases", [])}
+    assert_eq(mg132_aliases.get("VCCX", {}).get("logical_rails"), ["VCCX"], "MG132 dedicated VCCX")
+    assert_eq(mg132_aliases.get("VCCLDO", {}).get("logical_rails"), ["VCCLDO"], "MG132 dedicated VCCLDO")
+    assert_eq(mg132_aliases.get("VDDAM/VDDXM", {}).get("logical_rails"), ["VDDAM", "VDDXM"], "MG132 MIPI bonded rail")
+
+    power_block = cs130f.get("constraint_blocks", {}).get("power_integrity", {})
+    alias_physical = {item.get("physical_rail") for item in power_block.get("package_power_rail_aliases", [])}
+    assert_true("VCCX_VDDXM" in alias_physical, "CS130F power_integrity missing package alias")
+    assert_true(["VCCX", "VDDXM"] in power_block.get("package_merged_logical_rail_groups", []), "CS130F power_integrity missing merged logical group")
+
+
+@case("T6.7 Gowin GW5AR/GW5AS exports expose metadata-only design-guide package profiles")
+def t6_7():
+    gw5ar = json.load(open(EXPORT_DIR / "GW5AR-25_UG256P.json"))
+    gw5as = json.load(open(EXPORT_DIR / "GW5AS-25_UG256.json"))
+
+    gw5ar_guide = gw5ar.get("domains", {}).get("design_guide", {})
+    gw5as_guide = gw5as.get("domains", {}).get("design_guide", {})
+    assert_true(gw5ar_guide, "GW5AR-25_UG256P missing domains.design_guide")
+    assert_true(gw5as_guide, "GW5AS-25_UG256 missing domains.design_guide")
+
+    assert_eq(gw5ar_guide.get("source_document", {}).get("document_id"), "UG1117", "GW5AR family guide doc id")
+    assert_eq(gw5ar_guide.get("source_document", {}).get("version"), "1.1E", "GW5AR family guide version")
+    assert_eq(gw5as_guide.get("source_document", {}).get("document_id"), "UG1116", "GW5AS family guide doc id")
+    assert_eq(gw5as_guide.get("source_document", {}).get("version"), "1.1E", "GW5AS family guide version")
+
+    gw5ar_docs = {
+        (item.get("document_id"), item.get("version"), item.get("package"))
+        for item in gw5ar_guide.get("source_documents", [])
+    }
+    gw5as_docs = {
+        (item.get("document_id"), item.get("version"), item.get("package"))
+        for item in gw5as_guide.get("source_documents", [])
+    }
+    assert_true(("UG1110", "1.1.1E", "UG256P") in gw5ar_docs, "GW5AR-25_UG256P missing latest package guide boundary")
+    assert_true(("UG1115", "1.1.4E", "UG256") in gw5as_docs, "GW5AS-25_UG256 missing latest package guide boundary")
+
+    gw5ar_profile = gw5ar_guide.get("package_profile", {})
+    gw5as_profile = gw5as_guide.get("package_profile", {})
+    assert_true(gw5ar_profile.get("family_rules_apply") is False, "GW5AR package profile should be metadata-only")
+    assert_true(gw5as_profile.get("family_rules_apply") is False, "GW5AS package profile should be metadata-only")
+
+    gw5ar_pin_rules = gw5ar_guide.get("pin_connection_rules", [])
+    gw5ar_io_rules = {item.get("standard"): item for item in gw5ar_guide.get("io_standard_rules", [])}
+    gw5as_modes = {item.get("mode"): item for item in gw5as_guide.get("configuration_mode_support", [])}
+    assert_true(any(item.get("pin") == "RECONFIG_N" for item in gw5ar_pin_rules), "GW5AR should derive RECONFIG_N pin rule from pinout")
+    assert_true(any(item.get("pin") == "PUDC_B" and item.get("connection_type") == "must_not_float" for item in gw5ar_pin_rules), "GW5AR should derive PUDC_B must_not_float rule")
+    assert_eq(gw5ar_io_rules.get("LVDS", {}).get("requirement"), "Set the bank VCCIO to 2.5 V when using True LVDS.", "GW5AR LVDS VCCIO rule")
+    assert_true("JTAG" in gw5as_modes, "GW5AS should derive JTAG configuration mode from pinout")
+    assert_true("SERIAL_BOOT" in gw5as_modes, "GW5AS should derive SERIAL_BOOT configuration mode from pinout")
+
+    gw5ar_aliases = {item.get("physical_rail"): item for item in gw5ar_profile.get("power_rail_aliases", [])}
+    gw5as_aliases = {item.get("physical_rail"): item for item in gw5as_profile.get("power_rail_aliases", [])}
+    assert_eq(
+        gw5ar_aliases.get("M0_VDDX/VCC_REG/VCCIO10/VCCX", {}).get("logical_rails"),
+        ["M0_VDDX", "VCC_REG", "VCCIO", "VCCX"],
+        "GW5AR merged auxiliary rail map",
+    )
+    assert_eq(
+        gw5as_aliases.get("VCCIO0/VCCIO1/VCCIO10/VCCIO2/VCCIO6/VCCIO7", {}).get("logical_rails"),
+        ["VCCIO"],
+        "GW5AS merged VCCIO bank group should normalize to logical VCCIO",
+    )
+
+    gw5ar_io_block = gw5ar.get("constraint_blocks", {}).get("io_signaling", {})
+    cfg_block = gw5as.get("constraint_blocks", {}).get("configuration_boot", {})
+    power_block = gw5as.get("constraint_blocks", {}).get("power_integrity", {})
+    io_block = gw5as.get("constraint_blocks", {}).get("io_signaling", {})
+    assert_eq(gw5ar_io_block.get("lvds_bank_vccio_requirement_v"), 2.5, "GW5AR io_signaling LVDS VCCIO requirement")
+    assert_true(cfg_block.get("pin_requirements", {}).get("MODE0", {}).get("must_not_float") is True, "GW5AS configuration_boot should expose MODE0 strap requirement")
+    assert_true(io_block.get("lvds_bank_vccio_requirement_v") is None, "GW5AS should not invent LVDS VCCIO rule without source")
+    assert_eq(power_block.get("coverage"), "package_profile_only", "GW5AS power_integrity coverage")
+    assert_true(power_block.get("design_guide_rules_normalized") is False, "GW5AS power_integrity should stay metadata-only")
 
 
 # ─── T7: Lattice DC Data Integration ───────────────────────────────

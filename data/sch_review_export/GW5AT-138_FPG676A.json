@@ -10917,7 +10917,142 @@
         "IOB173A/TCK",
         "IOB173B/TDI"
       ],
-      "source": "pinout_inference"
+      "source": "pinout_inference",
+      "review_required": true,
+      "design_guide_source": "UG984-1.2",
+      "design_guide_source_path": "data/extracted_v2/fpga/gowin_gw5at_schematic_guide.md",
+      "source_documents": [
+        {
+          "title": "GW5AT & GW5AST FPGA Schematic Design Guide",
+          "document_id": "UG984",
+          "version": "1.2",
+          "device_family": "GW5AT/GW5AST",
+          "path": "data/extracted_v2/fpga/gowin_gw5at_schematic_guide.md"
+        },
+        {
+          "document_id": "UG982",
+          "version": "1.5.4E",
+          "released_on": "2025-06-27",
+          "title": "GW5AT-138 Device Pinout Guide",
+          "url": "https://www.gowinsemi.com/en/support/database/1880/",
+          "scope": "package_pinout",
+          "device": "GW5AT-138",
+          "package": "FPG676A"
+        },
+        {
+          "document_id": "local_pinout_extract",
+          "version": null,
+          "released_on": null,
+          "title": "UG982-1.0_GW5AT-138器件Pinout手册-Preliminary.xlsx",
+          "url": null,
+          "scope": "local_extract_input",
+          "device": "GW5AT-138",
+          "package": "FPG676A"
+        },
+        {
+          "document_id": "product_detail_72",
+          "version": null,
+          "released_on": null,
+          "title": "Gowin Arora V FPGA Product Detail",
+          "url": "https://www.gowinsemi.com/en/product/detail/72/",
+          "scope": "product_page_capability_boundary",
+          "device": "GW5AT-138",
+          "package": "FPG676A"
+        }
+      ],
+      "package_profile_summary": {
+        "device": "GW5AT-138",
+        "package": "FPG676A",
+        "package_notes": []
+      },
+      "pin_requirements": {
+        "RECONFIG_N": {
+          "must_not_float": true,
+          "must_be_high_during_powerup": true,
+          "release_after": {
+            "typ": 1.0,
+            "unit": "ms"
+          },
+          "reconfig_pulse_low_min": {
+            "min": 25.0,
+            "unit": "ns"
+          },
+          "gpio_usage": "output_only",
+          "source": "UG984-1.2"
+        },
+        "READY": {
+          "must_not_float": true,
+          "open_drain": true,
+          "requires_pullup": {
+            "resistance_ohm": 4700,
+            "target_voltage": 3.3,
+            "unit": "V"
+          },
+          "source": "UG984-1.2"
+        },
+        "DONE": {
+          "must_not_float": true,
+          "open_drain": true,
+          "requires_pullup": {
+            "resistance_ohm": 4700,
+            "target_voltage": 3.3,
+            "unit": "V"
+          },
+          "gpio_input_requires_initial_high": true,
+          "source": "UG984-1.2"
+        },
+        "CFGBVS": {
+          "must_not_float": true,
+          "configuration_banks": [
+            "bank3",
+            "bank4",
+            "bank10"
+          ],
+          "tie_high_when_vccio_gte_v": 2.5,
+          "tie_low_when_vccio_lte_v": 1.8,
+          "source": "UG984-1.2"
+        },
+        "PUDC_B": {
+          "must_not_float": true,
+          "strap_resistor_ohm": 1000,
+          "tie_to": [
+            "VCCIO",
+            "GND"
+          ],
+          "low_behavior": "all_gpio_weak_pullup",
+          "high_behavior": "all_gpio_high_z",
+          "source": "UG984-1.2"
+        }
+      },
+      "mode_requirements": {
+        "strap_required": true,
+        "signals": [
+          "MODE0",
+          "MODE1",
+          "MODE2"
+        ],
+        "pullup_resistor_ohm": 4700,
+        "pulldown_resistor_ohm": 1000,
+        "post_config_default_mode": "SSPI",
+        "unused_interface_rules": [
+          {
+            "interface": "SSPI",
+            "allowed_mitigations": [
+              "pull SSPI_HOLDN low",
+              "pull SSPI_CSN high"
+            ]
+          }
+        ],
+        "source": "UG984-1.2"
+      },
+      "jtag_constraints": {
+        "tck_max_freq_mhz": 100.0,
+        "tck_pullup_resistor_ohm": 4700,
+        "tck_local_bypass_cap_nf": 100.0,
+        "vccio_alignment_required": true,
+        "esd_recommended": "SP3003_04XTG",
+        "source": "UG984-1.2"
+      }
     },
     "refclk_requirements": {
       "class": "clocking",
@@ -11277,6 +11412,421 @@
         "RX"
       ],
       "source": "gowin_product_detail_72"
+    },
+    "power_integrity": {
+      "class": "power_integrity",
+      "review_required": true,
+      "design_guide_source": "UG984-1.2",
+      "design_guide_source_path": "data/extracted_v2/fpga/gowin_gw5at_schematic_guide.md",
+      "source_documents": [
+        {
+          "title": "GW5AT & GW5AST FPGA Schematic Design Guide",
+          "document_id": "UG984",
+          "version": "1.2",
+          "device_family": "GW5AT/GW5AST",
+          "path": "data/extracted_v2/fpga/gowin_gw5at_schematic_guide.md"
+        },
+        {
+          "document_id": "UG982",
+          "version": "1.5.4E",
+          "released_on": "2025-06-27",
+          "title": "GW5AT-138 Device Pinout Guide",
+          "url": "https://www.gowinsemi.com/en/support/database/1880/",
+          "scope": "package_pinout",
+          "device": "GW5AT-138",
+          "package": "FPG676A"
+        },
+        {
+          "document_id": "local_pinout_extract",
+          "version": null,
+          "released_on": null,
+          "title": "UG982-1.0_GW5AT-138器件Pinout手册-Preliminary.xlsx",
+          "url": null,
+          "scope": "local_extract_input",
+          "device": "GW5AT-138",
+          "package": "FPG676A"
+        },
+        {
+          "document_id": "product_detail_72",
+          "version": null,
+          "released_on": null,
+          "title": "Gowin Arora V FPGA Product Detail",
+          "url": "https://www.gowinsemi.com/en/product/detail/72/",
+          "scope": "product_page_capability_boundary",
+          "device": "GW5AT-138",
+          "package": "FPG676A"
+        }
+      ],
+      "package_power_rail_aliases": [
+        {
+          "physical_rail": "VCC",
+          "logical_rails": [
+            "VCC"
+          ],
+          "pin_count": null,
+          "pins": [],
+          "merge_type": "dedicated",
+          "source": "package_pinout"
+        },
+        {
+          "physical_rail": "VCC/VCCC",
+          "logical_rails": [
+            "VCC"
+          ],
+          "pin_count": 13,
+          "pins": [
+            "J13",
+            "V12",
+            "U11",
+            "T12",
+            "V10",
+            "K10",
+            "L13",
+            "K12",
+            "M10",
+            "L11",
+            "T10",
+            "P10",
+            "J11"
+          ],
+          "merge_type": "dedicated",
+          "source": "package_pinout"
+        },
+        {
+          "physical_rail": "VCCO10",
+          "logical_rails": [
+            "VCC"
+          ],
+          "pin_count": 2,
+          "pins": [
+            "W11",
+            "Y14"
+          ],
+          "merge_type": "dedicated",
+          "source": "package_pinout"
+        },
+        {
+          "physical_rail": "VCCO2",
+          "logical_rails": [
+            "VCC"
+          ],
+          "pin_count": 6,
+          "pins": [
+            "Y24",
+            "U23",
+            "AC25",
+            "T16",
+            "T26",
+            "V20"
+          ],
+          "merge_type": "dedicated",
+          "source": "package_pinout"
+        },
+        {
+          "physical_rail": "VCCO2、VCCO3、VCCO4、VCCO5、VCCO6、VCCO7、VCCO10",
+          "logical_rails": [
+            "VCC"
+          ],
+          "pin_count": null,
+          "pins": [],
+          "merge_type": "dedicated",
+          "source": "package_pinout"
+        },
+        {
+          "physical_rail": "VCCO3",
+          "logical_rails": [
+            "VCC"
+          ],
+          "pin_count": 6,
+          "pins": [
+            "L21",
+            "K24",
+            "R19",
+            "N15",
+            "N25",
+            "P22"
+          ],
+          "merge_type": "dedicated",
+          "source": "package_pinout"
+        },
+        {
+          "physical_rail": "VCCO4",
+          "logical_rails": [
+            "VCC"
+          ],
+          "pin_count": 6,
+          "pins": [
+            "M18",
+            "H20",
+            "G23",
+            "J17",
+            "F26",
+            "K14"
+          ],
+          "merge_type": "dedicated",
+          "source": "package_pinout"
+        },
+        {
+          "physical_rail": "VCCO5",
+          "logical_rails": [
+            "VCC"
+          ],
+          "pin_count": 6,
+          "pins": [
+            "C25",
+            "B18",
+            "D22",
+            "E19",
+            "F16",
+            "A21"
+          ],
+          "merge_type": "dedicated",
+          "source": "package_pinout"
+        },
+        {
+          "physical_rail": "VCCO6",
+          "logical_rails": [
+            "VCC"
+          ],
+          "pin_count": 6,
+          "pins": [
+            "J7",
+            "D2",
+            "C5",
+            "A1",
+            "F6",
+            "G3"
+          ],
+          "merge_type": "dedicated",
+          "source": "package_pinout"
+        },
+        {
+          "physical_rail": "VCCO7",
+          "logical_rails": [
+            "VCC"
+          ],
+          "pin_count": 6,
+          "pins": [
+            "L1",
+            "N5",
+            "M8",
+            "K4",
+            "T6",
+            "P2"
+          ],
+          "merge_type": "dedicated",
+          "source": "package_pinout"
+        },
+        {
+          "physical_rail": "VCCX",
+          "logical_rails": [
+            "VCCX"
+          ],
+          "pin_count": 3,
+          "pins": [
+            "J9",
+            "N9",
+            "L9"
+          ],
+          "merge_type": "dedicated",
+          "source": "package_pinout"
+        },
+        {
+          "physical_rail": "Vcc_reg",
+          "logical_rails": [
+            "VCC"
+          ],
+          "pin_count": 6,
+          "pins": [
+            "B14",
+            "B8",
+            "B12",
+            "C7",
+            "C15",
+            "B10"
+          ],
+          "merge_type": "dedicated",
+          "source": "package_pinout"
+        }
+      ],
+      "package_merged_logical_rail_groups": [],
+      "package_specific_notes": [],
+      "ripple_limits_pct": {
+        "VCC": {
+          "max_pct": 3.0,
+          "unit": "%"
+        },
+        "VCCIO": {
+          "max_pct": 5.0,
+          "unit": "%"
+        },
+        "VCCX": {
+          "max_pct": 5.0,
+          "unit": "%"
+        }
+      },
+      "ramp_rates": {
+        "VCC": {
+          "min": 0.1,
+          "typ": null,
+          "max": 15.0,
+          "unit": "mV/us"
+        },
+        "VCCLDO": {
+          "min": 0.09,
+          "typ": null,
+          "max": 15.0,
+          "unit": "mV/us"
+        },
+        "VCCX": {
+          "min": 0.005,
+          "typ": null,
+          "max": 15.0,
+          "unit": "mV/us"
+        },
+        "VCCIO": {
+          "min": 0.06,
+          "typ": null,
+          "max": 15.0,
+          "unit": "mV/us"
+        }
+      },
+      "cross_domain_isolation_recommended": true,
+      "ferrite_bead_recommended": true,
+      "sensitive_rail_groups": {
+        "serdes": [
+          "VDDAQ/VDDDQ",
+          "VDDTQ"
+        ],
+        "mipi": [
+          "VDDAM/VDDDM/VDDXM"
+        ]
+      },
+      "merge_recommendations": {
+        "VCC": "dedicated_supply_recommended",
+        "VCCX": "merge_allowed_if_same_voltage_and_current_budget_ok",
+        "VCCLDO": "merge_allowed_if_same_voltage_and_current_budget_ok",
+        "VDDTQ": "do_not_merge_with_other_rails",
+        "VDDAQ_VDDDQ": "low_noise_ldo_recommended_if_merged"
+      }
+    },
+    "clocking": {
+      "class": "clocking",
+      "review_required": true,
+      "design_guide_source": "UG984-1.2",
+      "design_guide_source_path": "data/extracted_v2/fpga/gowin_gw5at_schematic_guide.md",
+      "source_documents": [
+        {
+          "title": "GW5AT & GW5AST FPGA Schematic Design Guide",
+          "document_id": "UG984",
+          "version": "1.2",
+          "device_family": "GW5AT/GW5AST",
+          "path": "data/extracted_v2/fpga/gowin_gw5at_schematic_guide.md"
+        },
+        {
+          "document_id": "UG982",
+          "version": "1.5.4E",
+          "released_on": "2025-06-27",
+          "title": "GW5AT-138 Device Pinout Guide",
+          "url": "https://www.gowinsemi.com/en/support/database/1880/",
+          "scope": "package_pinout",
+          "device": "GW5AT-138",
+          "package": "FPG676A"
+        },
+        {
+          "document_id": "local_pinout_extract",
+          "version": null,
+          "released_on": null,
+          "title": "UG982-1.0_GW5AT-138器件Pinout手册-Preliminary.xlsx",
+          "url": null,
+          "scope": "local_extract_input",
+          "device": "GW5AT-138",
+          "package": "FPG676A"
+        },
+        {
+          "document_id": "product_detail_72",
+          "version": null,
+          "released_on": null,
+          "title": "Gowin Arora V FPGA Product Detail",
+          "url": "https://www.gowinsemi.com/en/product/detail/72/",
+          "scope": "product_page_capability_boundary",
+          "device": "GW5AT-138",
+          "package": "FPG676A"
+        }
+      ],
+      "system_clock_preferred_single_ended_pin": "GCLK_T",
+      "pll_clock_preferred_single_ended_pin": "PLL_T",
+      "serdes_refclk_ac_coupling_nf": 100.0,
+      "serdes_refclk_placement": "close_to_fpga_pins",
+      "external_crystal_recommendation": {
+        "ferrite_bead": "MH2029-221Y",
+        "local_decoupling_nf": 10.0,
+        "series_resistor_tolerance_pct_max": 5.0
+      }
+    },
+    "io_signaling": {
+      "class": "io_signaling",
+      "review_required": true,
+      "design_guide_source": "UG984-1.2",
+      "design_guide_source_path": "data/extracted_v2/fpga/gowin_gw5at_schematic_guide.md",
+      "source_documents": [
+        {
+          "title": "GW5AT & GW5AST FPGA Schematic Design Guide",
+          "document_id": "UG984",
+          "version": "1.2",
+          "device_family": "GW5AT/GW5AST",
+          "path": "data/extracted_v2/fpga/gowin_gw5at_schematic_guide.md"
+        },
+        {
+          "document_id": "UG982",
+          "version": "1.5.4E",
+          "released_on": "2025-06-27",
+          "title": "GW5AT-138 Device Pinout Guide",
+          "url": "https://www.gowinsemi.com/en/support/database/1880/",
+          "scope": "package_pinout",
+          "device": "GW5AT-138",
+          "package": "FPG676A"
+        },
+        {
+          "document_id": "local_pinout_extract",
+          "version": null,
+          "released_on": null,
+          "title": "UG982-1.0_GW5AT-138器件Pinout手册-Preliminary.xlsx",
+          "url": null,
+          "scope": "local_extract_input",
+          "device": "GW5AT-138",
+          "package": "FPG676A"
+        },
+        {
+          "document_id": "product_detail_72",
+          "version": null,
+          "released_on": null,
+          "title": "Gowin Arora V FPGA Product Detail",
+          "url": "https://www.gowinsemi.com/en/product/detail/72/",
+          "scope": "product_page_capability_boundary",
+          "device": "GW5AT-138",
+          "package": "FPG676A"
+        }
+      ],
+      "lvds_input_termination": {
+        "supported": true,
+        "differential_termination_ohm": 100,
+        "package_scope": {
+          "GW5AT-15": "all_regions",
+          "GW5AT-60": "all_regions",
+          "GW5AT-138": "top_bottom_only",
+          "GW5AT-75": "top_bottom_only"
+        }
+      },
+      "vref_required_for": [
+        "SSTL",
+        "HSTL"
+      ],
+      "vref_options": [
+        "internal_0.5x_vccio",
+        "external_input"
+      ],
+      "all_banks_true_lvds_output": true
     }
   },
   "ip_blocks": {
@@ -11331,6 +11881,1093 @@
       "refclk_pair_count": 4,
       "source": "gowin_product_detail_72",
       "source_url": "https://www.gowinsemi.com/en/product/detail/72/"
+    }
+  },
+  "domains": {
+    "design_guide": {
+      "source_document": {
+        "title": "GW5AT & GW5AST FPGA Schematic Design Guide",
+        "document_id": "UG984",
+        "version": "1.2",
+        "device_family": "GW5AT/GW5AST",
+        "path": "data/extracted_v2/fpga/gowin_gw5at_schematic_guide.md"
+      },
+      "source_documents": [
+        {
+          "title": "GW5AT & GW5AST FPGA Schematic Design Guide",
+          "document_id": "UG984",
+          "version": "1.2",
+          "device_family": "GW5AT/GW5AST",
+          "path": "data/extracted_v2/fpga/gowin_gw5at_schematic_guide.md"
+        },
+        {
+          "document_id": "UG982",
+          "version": "1.5.4E",
+          "released_on": "2025-06-27",
+          "title": "GW5AT-138 Device Pinout Guide",
+          "url": "https://www.gowinsemi.com/en/support/database/1880/",
+          "scope": "package_pinout",
+          "device": "GW5AT-138",
+          "package": "FPG676A"
+        },
+        {
+          "document_id": "local_pinout_extract",
+          "version": null,
+          "released_on": null,
+          "title": "UG982-1.0_GW5AT-138器件Pinout手册-Preliminary.xlsx",
+          "url": null,
+          "scope": "local_extract_input",
+          "device": "GW5AT-138",
+          "package": "FPG676A"
+        },
+        {
+          "document_id": "product_detail_72",
+          "version": null,
+          "released_on": null,
+          "title": "Gowin Arora V FPGA Product Detail",
+          "url": "https://www.gowinsemi.com/en/product/detail/72/",
+          "scope": "product_page_capability_boundary",
+          "device": "GW5AT-138",
+          "package": "FPG676A"
+        }
+      ],
+      "power_domain_map": [
+        {
+          "group": "FPGA",
+          "rail_name": "VCC",
+          "description": "核电压",
+          "nominal_voltage": null,
+          "ripple_max_pct": 3.0,
+          "source": "UG984-1.2"
+        },
+        {
+          "group": "FPGA",
+          "rail_name": "VCCX",
+          "description": "辅助电压",
+          "nominal_voltage": null,
+          "ripple_max_pct": 5.0,
+          "source": "UG984-1.2"
+        },
+        {
+          "group": "FPGA",
+          "rail_name": "VCCIO",
+          "description": "I/O Bank 电压",
+          "nominal_voltage": null,
+          "ripple_max_pct": 5.0,
+          "source": "UG984-1.2"
+        },
+        {
+          "group": "FPGA",
+          "rail_name": "VCCLDO",
+          "description": "内部 LDO 模块电源（为 SRAM 和 PLL 供电）",
+          "nominal_voltage": null,
+          "ripple_max_pct": null,
+          "source": "UG984-1.2"
+        },
+        {
+          "group": "SerDes",
+          "rail_name": "VDDAQ*",
+          "description": "QUAD* 模拟电路供电",
+          "nominal_voltage": null,
+          "ripple_max_pct": null,
+          "source": "UG984-1.2"
+        },
+        {
+          "group": "SerDes",
+          "rail_name": "VDDDQ*",
+          "description": "QUAD* 数字电路供电",
+          "nominal_voltage": null,
+          "ripple_max_pct": null,
+          "source": "UG984-1.2"
+        },
+        {
+          "group": "SerDes",
+          "rail_name": "VDDHAQ*",
+          "description": "QUAD* 高压供电",
+          "nominal_voltage": null,
+          "ripple_max_pct": null,
+          "source": "UG984-1.2"
+        },
+        {
+          "group": "SerDes",
+          "rail_name": "VDDTQ*",
+          "description": "QUAD* TX 发送端供电",
+          "nominal_voltage": null,
+          "ripple_max_pct": null,
+          "source": "UG984-1.2"
+        },
+        {
+          "group": "MIPI",
+          "rail_name": "VDDAM",
+          "description": "模拟电路供电",
+          "nominal_voltage": null,
+          "ripple_max_pct": null,
+          "source": "UG984-1.2"
+        },
+        {
+          "group": "MIPI",
+          "rail_name": "VDDDM",
+          "description": "数字电路供电",
+          "nominal_voltage": null,
+          "ripple_max_pct": null,
+          "source": "UG984-1.2"
+        },
+        {
+          "group": "MIPI",
+          "rail_name": "VDDXM",
+          "description": "辅助供电",
+          "nominal_voltage": null,
+          "ripple_max_pct": null,
+          "source": "UG984-1.2"
+        }
+      ],
+      "power_sequencing_rules": [
+        {
+          "rule": "Power up VCCX before VCC.",
+          "rail_before": "VCCX",
+          "rail_after": "VCC",
+          "severity": "WARNING",
+          "source": "UG984-1.2"
+        }
+      ],
+      "power_ramp_constraints": [
+        {
+          "rail": "VCC",
+          "slew_rate_min": 0.1,
+          "slew_rate_max": 15.0,
+          "unit": "mV/us",
+          "source": "UG984-1.2"
+        },
+        {
+          "rail": "VCCLDO",
+          "slew_rate_min": 0.09,
+          "slew_rate_max": 15.0,
+          "unit": "mV/us",
+          "source": "UG984-1.2"
+        },
+        {
+          "rail": "VCCX",
+          "slew_rate_min": 0.005,
+          "slew_rate_max": 15.0,
+          "unit": "mV/us",
+          "source": "UG984-1.2"
+        },
+        {
+          "rail": "VCCIO",
+          "slew_rate_min": 0.06,
+          "slew_rate_max": 15.0,
+          "unit": "mV/us",
+          "source": "UG984-1.2"
+        }
+      ],
+      "rail_merge_guidelines": [
+        {
+          "rails": [
+            "VCC"
+          ],
+          "can_merge": false,
+          "conditions": "电流大，**建议单独供电**",
+          "recommendation": "电流大，**建议单独供电**",
+          "severity": "WARNING",
+          "source": "UG984-1.2"
+        },
+        {
+          "rails": [
+            "VCCX"
+          ],
+          "can_merge": true,
+          "conditions": "满足电流需求下，可与同电压电源合并",
+          "recommendation": "满足电流需求下，可与同电压电源合并",
+          "severity": "INFO",
+          "source": "UG984-1.2"
+        },
+        {
+          "rails": [
+            "VCCLDO"
+          ],
+          "can_merge": true,
+          "conditions": "满足电流需求下，可与同电压电源合并",
+          "recommendation": "满足电流需求下，可与同电压电源合并",
+          "severity": "INFO",
+          "source": "UG984-1.2"
+        },
+        {
+          "rails": [
+            "VDDAQ0",
+            "Q1",
+            "VDDDQ0",
+            "Q1"
+          ],
+          "can_merge": true,
+          "conditions": "电压一致可合并，**建议用低噪声电源（LDO）**",
+          "recommendation": "电压一致可合并，**建议用低噪声电源（LDO）**",
+          "severity": "INFO",
+          "source": "UG984-1.2"
+        },
+        {
+          "rails": [
+            "VDDHAQ0",
+            "Q1"
+          ],
+          "can_merge": true,
+          "conditions": "电压一致可合并",
+          "recommendation": "电压一致可合并",
+          "severity": "INFO",
+          "source": "UG984-1.2"
+        },
+        {
+          "rails": [
+            "VDDTQ0",
+            "Q1"
+          ],
+          "can_merge": true,
+          "conditions": "可合并，但**噪声大，不要和其他电源合并**",
+          "recommendation": "可合并，但**噪声大，不要和其他电源合并**",
+          "severity": "WARNING",
+          "source": "UG984-1.2"
+        },
+        {
+          "rails": [
+            "VDDAM",
+            "VDDDM"
+          ],
+          "can_merge": true,
+          "conditions": "满足电流需求下可合并",
+          "recommendation": "满足电流需求下可合并",
+          "severity": "INFO",
+          "source": "UG984-1.2"
+        },
+        {
+          "rails": [
+            "VDDXM"
+          ],
+          "can_merge": true,
+          "conditions": "满足电流需求下可合并",
+          "recommendation": "满足电流需求下可合并",
+          "severity": "INFO",
+          "source": "UG984-1.2"
+        }
+      ],
+      "pin_connection_rules": [
+        {
+          "pin": "RECONFIG_N",
+          "rule": "Keep high during power-up; release after power is stable for 1 ms.",
+          "connection_type": "pull_up",
+          "external_component": null,
+          "condition": null,
+          "severity": "ERROR",
+          "source": "UG984-1.2"
+        },
+        {
+          "pin": "RECONFIG_N",
+          "rule": "Reconfiguration requires a low pulse of at least 25 ns.",
+          "connection_type": "conditional",
+          "external_component": null,
+          "condition": null,
+          "severity": "INFO",
+          "source": "UG984-1.2"
+        },
+        {
+          "pin": "READY",
+          "rule": "External pull-up required for open-drain READY output.",
+          "connection_type": "pull_up",
+          "external_component": "4.7K pull-up to 3.3V",
+          "condition": null,
+          "severity": "ERROR",
+          "source": "UG984-1.2"
+        },
+        {
+          "pin": "DONE",
+          "rule": "External pull-up required for open-drain DONE output.",
+          "connection_type": "pull_up",
+          "external_component": "4.7K pull-up to 3.3V",
+          "condition": null,
+          "severity": "ERROR",
+          "source": "UG984-1.2"
+        },
+        {
+          "pin": "DONE",
+          "rule": "When used as GPIO input, keep the initial value high before configuration.",
+          "connection_type": "conditional",
+          "external_component": null,
+          "condition": null,
+          "severity": "WARNING",
+          "source": "UG984-1.2"
+        },
+        {
+          "pin": "CFGBVS",
+          "rule": "CFGBVS must not float.",
+          "connection_type": "must_not_float",
+          "external_component": null,
+          "condition": null,
+          "severity": "ERROR",
+          "source": "UG984-1.2"
+        },
+        {
+          "pin": "CFGBVS",
+          "rule": "Tie high when configuration-bank VCCIO is at least 2.5 V.",
+          "connection_type": "tie_high",
+          "external_component": null,
+          "condition": "configuration-bank VCCIO >= 2.5V",
+          "severity": "ERROR",
+          "source": "UG984-1.2"
+        },
+        {
+          "pin": "CFGBVS",
+          "rule": "Tie low when configuration-bank VCCIO is at most 1.8 V.",
+          "connection_type": "tie_low",
+          "external_component": null,
+          "condition": "configuration-bank VCCIO <= 1.8V",
+          "severity": "ERROR",
+          "source": "UG984-1.2"
+        },
+        {
+          "pin": "PUDC_B",
+          "rule": "PUDC_B must not float.",
+          "connection_type": "must_not_float",
+          "external_component": null,
+          "condition": null,
+          "severity": "ERROR",
+          "source": "UG984-1.2"
+        },
+        {
+          "pin": "PUDC_B",
+          "rule": "Bias PUDC_B through a 1k resistor to VCCIO or GND.",
+          "connection_type": "external_component",
+          "external_component": "1k resistor to VCCIO or GND",
+          "condition": null,
+          "severity": "ERROR",
+          "source": "UG984-1.2"
+        },
+        {
+          "pin": "MODE[2:0]",
+          "rule": "Bias MODE straps with 4.7K pull-up and 1K pull-down resistors.",
+          "connection_type": "external_component",
+          "external_component": "4.7K pull-up, 1K pull-down",
+          "condition": null,
+          "severity": "ERROR",
+          "source": "UG984-1.2"
+        },
+        {
+          "pin": "SSPI_HOLDN/SSPI_CSN",
+          "rule": "If SSPI is unused, pull SSPI_HOLDN low or pull SSPI_CSN high.",
+          "connection_type": "conditional",
+          "external_component": null,
+          "condition": null,
+          "severity": "WARNING",
+          "source": "UG984-1.2"
+        }
+      ],
+      "decoupling_requirements": [
+        {
+          "rail": "VCC",
+          "ripple_max_pct": 3.0,
+          "filter_type": "ferrite bead isolation plus ceramic capacitor",
+          "capacitor_tolerance": "±10%",
+          "notes": "Cross-domain isolation and ferrite-bead filtering are recommended.",
+          "severity": "WARNING",
+          "source": "UG984-1.2"
+        },
+        {
+          "rail": "VCCIO",
+          "ripple_max_pct": 5.0,
+          "filter_type": "ferrite bead isolation plus ceramic capacitor",
+          "capacitor_tolerance": "±10%",
+          "notes": "Cross-domain isolation and ferrite-bead filtering are recommended.",
+          "severity": "WARNING",
+          "source": "UG984-1.2"
+        },
+        {
+          "rail": "VCCX",
+          "ripple_max_pct": 5.0,
+          "filter_type": "ferrite bead isolation plus ceramic capacitor",
+          "capacitor_tolerance": "±10%",
+          "notes": "Cross-domain isolation and ferrite-bead filtering are recommended.",
+          "severity": "WARNING",
+          "source": "UG984-1.2"
+        },
+        {
+          "rail": "VDDAQ/VDDDQ",
+          "ripple_max_pct": null,
+          "filter_type": "ferrite bead isolation plus ceramic capacitor",
+          "capacitor_tolerance": "±10%",
+          "notes": "Use a low-noise LDO if merged.",
+          "severity": "WARNING",
+          "source": "UG984-1.2"
+        },
+        {
+          "rail": "VDDTQ",
+          "ripple_max_pct": null,
+          "filter_type": "ferrite bead isolation plus ceramic capacitor",
+          "capacitor_tolerance": "±10%",
+          "notes": "Do not merge with other noisy rails.",
+          "severity": "WARNING",
+          "source": "UG984-1.2"
+        },
+        {
+          "rail": "VDDAM/VDDDM/VDDXM",
+          "ripple_max_pct": null,
+          "filter_type": "ferrite bead isolation plus ceramic capacitor",
+          "capacitor_tolerance": "±10%",
+          "notes": "Use ferrite-bead isolation for MIPI-sensitive rails.",
+          "severity": "WARNING",
+          "source": "UG984-1.2"
+        }
+      ],
+      "clock_design_rules": [
+        {
+          "signal": "SerDes reference clock",
+          "requirement": "AC-couple the SerDes high-speed reference clock close to the FPGA pins.",
+          "external_component": "0.1uF series capacitor",
+          "notes": "Applies to high-speed SerDes reference-clock inputs.",
+          "severity": "ERROR",
+          "source": "UG984-1.2"
+        },
+        {
+          "signal": "System clock",
+          "requirement": "Prefer a dedicated GCLK_T pin for single-ended system clocks.",
+          "external_component": null,
+          "notes": null,
+          "severity": "WARNING",
+          "source": "UG984-1.2"
+        },
+        {
+          "signal": "PLL clock input",
+          "requirement": "Prefer a dedicated PLL_T pin for single-ended PLL clock inputs.",
+          "external_component": null,
+          "notes": null,
+          "severity": "WARNING",
+          "source": "UG984-1.2"
+        },
+        {
+          "signal": "External crystal",
+          "requirement": "Bias the crystal supply with a ferrite bead and local decoupling.",
+          "external_component": "MH2029-221Y ferrite bead + 10nF decoupling",
+          "notes": "Series resistor tolerance should be <= ±5%.",
+          "severity": "WARNING",
+          "source": "UG984-1.2"
+        }
+      ],
+      "configuration_mode_support": [
+        {
+          "device": "GW5AT-15",
+          "package": "CS130",
+          "mode": "JTAG",
+          "supported": true,
+          "max_clock_freq": "100MHz",
+          "signals": [],
+          "notes": null,
+          "source": "UG984-1.2"
+        },
+        {
+          "device": "GW5AT-15",
+          "package": "CS130",
+          "mode": "MSPI",
+          "supported": true,
+          "max_clock_freq": null,
+          "signals": [],
+          "notes": null,
+          "source": "UG984-1.2"
+        },
+        {
+          "device": "GW5AT-15",
+          "package": "CS130",
+          "mode": "SSPI",
+          "supported": true,
+          "max_clock_freq": null,
+          "signals": [],
+          "notes": null,
+          "source": "UG984-1.2"
+        },
+        {
+          "device": "GW5AT-15",
+          "package": "CS130",
+          "mode": "Slave Serial",
+          "supported": true,
+          "max_clock_freq": null,
+          "signals": [],
+          "notes": null,
+          "source": "UG984-1.2"
+        },
+        {
+          "device": "GW5AT-15",
+          "package": "CS130",
+          "mode": "Slave CPU",
+          "supported": true,
+          "max_clock_freq": null,
+          "signals": [],
+          "notes": null,
+          "source": "UG984-1.2"
+        },
+        {
+          "device": "GW5AT-15",
+          "package": "CS130F",
+          "mode": "JTAG",
+          "supported": true,
+          "max_clock_freq": "100MHz",
+          "signals": [],
+          "notes": null,
+          "source": "UG984-1.2"
+        },
+        {
+          "device": "GW5AT-15",
+          "package": "CS130F",
+          "mode": "MSPI",
+          "supported": true,
+          "max_clock_freq": null,
+          "signals": [],
+          "notes": null,
+          "source": "UG984-1.2"
+        },
+        {
+          "device": "GW5AT-15",
+          "package": "CS130F",
+          "mode": "SSPI",
+          "supported": true,
+          "max_clock_freq": null,
+          "signals": [],
+          "notes": null,
+          "source": "UG984-1.2"
+        },
+        {
+          "device": "GW5AT-15",
+          "package": "CS130F",
+          "mode": "Slave Serial",
+          "supported": true,
+          "max_clock_freq": null,
+          "signals": [],
+          "notes": null,
+          "source": "UG984-1.2"
+        },
+        {
+          "device": "GW5AT-15",
+          "package": "CS130F",
+          "mode": "Slave CPU",
+          "supported": true,
+          "max_clock_freq": null,
+          "signals": [],
+          "notes": null,
+          "source": "UG984-1.2"
+        },
+        {
+          "device": "GW5AT-15",
+          "package": "MG132",
+          "mode": "JTAG",
+          "supported": true,
+          "max_clock_freq": "100MHz",
+          "signals": [],
+          "notes": null,
+          "source": "UG984-1.2"
+        },
+        {
+          "device": "GW5AT-15",
+          "package": "MG132",
+          "mode": "MSPI",
+          "supported": true,
+          "max_clock_freq": null,
+          "signals": [],
+          "notes": null,
+          "source": "UG984-1.2"
+        },
+        {
+          "device": "GW5AT-15",
+          "package": "MG132",
+          "mode": "SSPI",
+          "supported": true,
+          "max_clock_freq": null,
+          "signals": [],
+          "notes": null,
+          "source": "UG984-1.2"
+        },
+        {
+          "device": "GW5AT-15",
+          "package": "MG132",
+          "mode": "Slave Serial",
+          "supported": true,
+          "max_clock_freq": null,
+          "signals": [],
+          "notes": null,
+          "source": "UG984-1.2"
+        },
+        {
+          "device": "GW5AT-15",
+          "package": "MG132",
+          "mode": "Slave CPU",
+          "supported": true,
+          "max_clock_freq": null,
+          "signals": [],
+          "notes": null,
+          "source": "UG984-1.2"
+        },
+        {
+          "device": null,
+          "package": null,
+          "mode": "JTAG",
+          "supported": true,
+          "max_clock_freq": "100MHz",
+          "signals": [
+            "TCK",
+            "TMS",
+            "TDI",
+            "TDO"
+          ],
+          "notes": "Align VCCIO with the JTAG bank voltage.",
+          "source": "UG984-1.2"
+        }
+      ],
+      "io_standard_rules": [
+        {
+          "standard": "LVDS",
+          "requirement": "Use internal programmable 100Ω differential input termination where supported.",
+          "termination": "100Ω internal differential termination",
+          "applies_to": "GW5AT-15/GW5AT-60 all regions; GW5AT-138/GW5AT-75 top and bottom regions only",
+          "severity": "WARNING",
+          "source": "UG984-1.2"
+        },
+        {
+          "standard": "SSTL/HSTL",
+          "requirement": "Provide VREF for SSTL/HSTL using internal 0.5x VCCIO or an external VREF input.",
+          "termination": null,
+          "applies_to": "Banks using SSTL/HSTL inputs or outputs",
+          "severity": "ERROR",
+          "source": "UG984-1.2"
+        }
+      ],
+      "design_guideline_text": [
+        {
+          "category": "power",
+          "guideline": "Use ferrite-bead isolation between different voltage domains.",
+          "source": "UG984-1.2"
+        },
+        {
+          "category": "power",
+          "guideline": "Prefer a dedicated supply for VCC; do not merge noisy VDDTQ rails with other domains.",
+          "source": "UG984-1.2"
+        },
+        {
+          "category": "clock",
+          "guideline": "Place SerDes reference-clock AC coupling close to the FPGA pins.",
+          "source": "UG984-1.2"
+        },
+        {
+          "category": "clock",
+          "guideline": "Use dedicated clock input pins for system and PLL clocks when available.",
+          "source": "UG984-1.2"
+        },
+        {
+          "category": "io",
+          "guideline": "All banks support true LVDS output; review package-specific input-termination scope before reusing family capability.",
+          "source": "UG984-1.2"
+        },
+        {
+          "category": "config",
+          "guideline": "MODE straps should use resistor networks instead of hard ties whenever possible.",
+          "source": "UG984-1.2"
+        }
+      ],
+      "package_profile": {
+        "device": "GW5AT-138",
+        "package": "FPG676A",
+        "family_rules_apply": true,
+        "source_documents": [
+          {
+            "title": "GW5AT & GW5AST FPGA Schematic Design Guide",
+            "document_id": "UG984",
+            "version": "1.2",
+            "device_family": "GW5AT/GW5AST",
+            "path": "data/extracted_v2/fpga/gowin_gw5at_schematic_guide.md"
+          },
+          {
+            "document_id": "UG982",
+            "version": "1.5.4E",
+            "released_on": "2025-06-27",
+            "title": "GW5AT-138 Device Pinout Guide",
+            "url": "https://www.gowinsemi.com/en/support/database/1880/",
+            "scope": "package_pinout",
+            "device": "GW5AT-138",
+            "package": "FPG676A"
+          },
+          {
+            "document_id": "local_pinout_extract",
+            "version": null,
+            "released_on": null,
+            "title": "UG982-1.0_GW5AT-138器件Pinout手册-Preliminary.xlsx",
+            "url": null,
+            "scope": "local_extract_input",
+            "device": "GW5AT-138",
+            "package": "FPG676A"
+          },
+          {
+            "document_id": "product_detail_72",
+            "version": null,
+            "released_on": null,
+            "title": "Gowin Arora V FPGA Product Detail",
+            "url": "https://www.gowinsemi.com/en/product/detail/72/",
+            "scope": "product_page_capability_boundary",
+            "device": "GW5AT-138",
+            "package": "FPG676A"
+          }
+        ],
+        "power_rail_aliases": [
+          {
+            "physical_rail": "VCC",
+            "logical_rails": [
+              "VCC"
+            ],
+            "pin_count": null,
+            "pins": [],
+            "merge_type": "dedicated",
+            "source": "package_pinout"
+          },
+          {
+            "physical_rail": "VCC/VCCC",
+            "logical_rails": [
+              "VCC"
+            ],
+            "pin_count": 13,
+            "pins": [
+              "J13",
+              "V12",
+              "U11",
+              "T12",
+              "V10",
+              "K10",
+              "L13",
+              "K12",
+              "M10",
+              "L11",
+              "T10",
+              "P10",
+              "J11"
+            ],
+            "merge_type": "dedicated",
+            "source": "package_pinout"
+          },
+          {
+            "physical_rail": "VCCO10",
+            "logical_rails": [
+              "VCC"
+            ],
+            "pin_count": 2,
+            "pins": [
+              "W11",
+              "Y14"
+            ],
+            "merge_type": "dedicated",
+            "source": "package_pinout"
+          },
+          {
+            "physical_rail": "VCCO2",
+            "logical_rails": [
+              "VCC"
+            ],
+            "pin_count": 6,
+            "pins": [
+              "Y24",
+              "U23",
+              "AC25",
+              "T16",
+              "T26",
+              "V20"
+            ],
+            "merge_type": "dedicated",
+            "source": "package_pinout"
+          },
+          {
+            "physical_rail": "VCCO2、VCCO3、VCCO4、VCCO5、VCCO6、VCCO7、VCCO10",
+            "logical_rails": [
+              "VCC"
+            ],
+            "pin_count": null,
+            "pins": [],
+            "merge_type": "dedicated",
+            "source": "package_pinout"
+          },
+          {
+            "physical_rail": "VCCO3",
+            "logical_rails": [
+              "VCC"
+            ],
+            "pin_count": 6,
+            "pins": [
+              "L21",
+              "K24",
+              "R19",
+              "N15",
+              "N25",
+              "P22"
+            ],
+            "merge_type": "dedicated",
+            "source": "package_pinout"
+          },
+          {
+            "physical_rail": "VCCO4",
+            "logical_rails": [
+              "VCC"
+            ],
+            "pin_count": 6,
+            "pins": [
+              "M18",
+              "H20",
+              "G23",
+              "J17",
+              "F26",
+              "K14"
+            ],
+            "merge_type": "dedicated",
+            "source": "package_pinout"
+          },
+          {
+            "physical_rail": "VCCO5",
+            "logical_rails": [
+              "VCC"
+            ],
+            "pin_count": 6,
+            "pins": [
+              "C25",
+              "B18",
+              "D22",
+              "E19",
+              "F16",
+              "A21"
+            ],
+            "merge_type": "dedicated",
+            "source": "package_pinout"
+          },
+          {
+            "physical_rail": "VCCO6",
+            "logical_rails": [
+              "VCC"
+            ],
+            "pin_count": 6,
+            "pins": [
+              "J7",
+              "D2",
+              "C5",
+              "A1",
+              "F6",
+              "G3"
+            ],
+            "merge_type": "dedicated",
+            "source": "package_pinout"
+          },
+          {
+            "physical_rail": "VCCO7",
+            "logical_rails": [
+              "VCC"
+            ],
+            "pin_count": 6,
+            "pins": [
+              "L1",
+              "N5",
+              "M8",
+              "K4",
+              "T6",
+              "P2"
+            ],
+            "merge_type": "dedicated",
+            "source": "package_pinout"
+          },
+          {
+            "physical_rail": "VCCX",
+            "logical_rails": [
+              "VCCX"
+            ],
+            "pin_count": 3,
+            "pins": [
+              "J9",
+              "N9",
+              "L9"
+            ],
+            "merge_type": "dedicated",
+            "source": "package_pinout"
+          },
+          {
+            "physical_rail": "Vcc_reg",
+            "logical_rails": [
+              "VCC"
+            ],
+            "pin_count": 6,
+            "pins": [
+              "B14",
+              "B8",
+              "B12",
+              "C7",
+              "C15",
+              "B10"
+            ],
+            "merge_type": "dedicated",
+            "source": "package_pinout"
+          }
+        ],
+        "logical_rail_map": {
+          "VCC": [
+            {
+              "physical_rail": "VCC",
+              "pin_count": null,
+              "source": "package_pinout"
+            },
+            {
+              "physical_rail": "VCC/VCCC",
+              "pin_count": 13,
+              "source": "package_pinout"
+            },
+            {
+              "physical_rail": "VCCO10",
+              "pin_count": 2,
+              "source": "package_pinout"
+            },
+            {
+              "physical_rail": "VCCO2",
+              "pin_count": 6,
+              "source": "package_pinout"
+            },
+            {
+              "physical_rail": "VCCO2、VCCO3、VCCO4、VCCO5、VCCO6、VCCO7、VCCO10",
+              "pin_count": null,
+              "source": "package_pinout"
+            },
+            {
+              "physical_rail": "VCCO3",
+              "pin_count": 6,
+              "source": "package_pinout"
+            },
+            {
+              "physical_rail": "VCCO4",
+              "pin_count": 6,
+              "source": "package_pinout"
+            },
+            {
+              "physical_rail": "VCCO5",
+              "pin_count": 6,
+              "source": "package_pinout"
+            },
+            {
+              "physical_rail": "VCCO6",
+              "pin_count": 6,
+              "source": "package_pinout"
+            },
+            {
+              "physical_rail": "VCCO7",
+              "pin_count": 6,
+              "source": "package_pinout"
+            },
+            {
+              "physical_rail": "Vcc_reg",
+              "pin_count": 6,
+              "source": "package_pinout"
+            }
+          ],
+          "VCCX": [
+            {
+              "physical_rail": "VCCX",
+              "pin_count": 3,
+              "source": "package_pinout"
+            }
+          ]
+        },
+        "merged_logical_rail_groups": [],
+        "package_notes": []
+      }
+    },
+    "power_sequence": {
+      "power_stages": [],
+      "power_rails": [
+        {
+          "name": "VCCX",
+          "nominal_voltage": null,
+          "voltage_range": {
+            "min": null,
+            "max": null,
+            "unit": "V"
+          },
+          "sequence_order": 1,
+          "ramp_rate": {
+            "min": 0.005,
+            "typ": null,
+            "max": 15.0,
+            "unit": "mV/us"
+          },
+          "max_current": {},
+          "source": "UG984-1.2"
+        },
+        {
+          "name": "VCC",
+          "nominal_voltage": null,
+          "voltage_range": {
+            "min": null,
+            "max": null,
+            "unit": "V"
+          },
+          "sequence_order": 2,
+          "ramp_rate": {
+            "min": 0.1,
+            "typ": null,
+            "max": 15.0,
+            "unit": "mV/us"
+          },
+          "max_current": {},
+          "source": "UG984-1.2"
+        },
+        {
+          "name": "VCCLDO",
+          "nominal_voltage": null,
+          "voltage_range": {
+            "min": null,
+            "max": null,
+            "unit": "V"
+          },
+          "sequence_order": null,
+          "ramp_rate": {
+            "min": 0.09,
+            "typ": null,
+            "max": 15.0,
+            "unit": "mV/us"
+          },
+          "max_current": {},
+          "source": "UG984-1.2"
+        },
+        {
+          "name": "VCCIO",
+          "nominal_voltage": null,
+          "voltage_range": {
+            "min": null,
+            "max": null,
+            "unit": "V"
+          },
+          "sequence_order": null,
+          "ramp_rate": {
+            "min": 0.06,
+            "typ": null,
+            "max": 15.0,
+            "unit": "mV/us"
+          },
+          "max_current": {},
+          "source": "UG984-1.2"
+        }
+      ],
+      "startup_parameters": [],
+      "protection_thresholds": [],
+      "sequencing_rules": [
+        {
+          "rail_before": "VCCX",
+          "rail_after": "VCC",
+          "min_delay": {},
+          "max_delay": {},
+          "description": "Power up VCCX before VCC.",
+          "source": "UG984-1.2"
+        }
+      ],
+      "power_sequence_summary": {
+        "has_soft_start": false,
+        "has_power_good": false,
+        "has_enable_pin": false,
+        "has_uvlo": false,
+        "rail_count": 4,
+        "sequencing_type": "fixed",
+        "source": "UG984-1.2",
+        "source_path": "data/extracted_v2/fpga/gowin_gw5at_schematic_guide.md"
+      }
     }
   },
   "absolute_maximum_ratings": {

@@ -4619,13 +4619,1258 @@
         "IOR3A/TMS",
         "IOR3B/TDO"
       ],
-      "source": "pinout_inference"
+      "source": "pinout_inference",
+      "review_required": true,
+      "design_guide_source": "UG1117-1.1E",
+      "design_guide_source_path": null,
+      "source_documents": [
+        {
+          "document_id": "UG1117",
+          "version": "1.1E",
+          "released_on": "2025-08-08",
+          "title": "GW5AR FPGA Schematic Manual",
+          "url": "https://www.gowinsemi.com/en/support/database/1823/",
+          "device_family": "GW5AR",
+          "scope": "family_schematic_manual",
+          "device": "GW5AR-25",
+          "package": "UG256P"
+        },
+        {
+          "document_id": "UG1110",
+          "version": "1.1.1E",
+          "released_on": "2025-06-27",
+          "title": "GW5AR-25 Device Pinout Guide",
+          "url": "https://www.gowinsemi.com/en/support/database/1840/",
+          "scope": "package_pinout",
+          "device": "GW5AR-25",
+          "package": "UG256P"
+        },
+        {
+          "document_id": "local_pinout_extract",
+          "version": null,
+          "released_on": null,
+          "title": "UG1110-1.0.4_GW5AR-25器件Pinout手册.xlsx",
+          "url": null,
+          "scope": "local_extract_input",
+          "device": "GW5AR-25",
+          "package": "UG256P"
+        },
+        {
+          "document_id": "product_detail_79",
+          "version": null,
+          "released_on": null,
+          "title": "Gowin Arora-R FPGA Product Detail",
+          "url": "https://www.gowinsemi.com/en/product/detail/79/",
+          "scope": "product_page_capability_boundary",
+          "device": "GW5AR-25",
+          "package": "UG256P"
+        }
+      ],
+      "package_profile_summary": {
+        "device": "GW5AR-25",
+        "package": "UG256P",
+        "package_notes": [
+          "Use the package pinout as the binding source for bonded rails such as VCC/VCCC and M0_VDDX/VCC_REG/VCCIO10/VCCX."
+        ]
+      },
+      "pin_requirements": {
+        "RECONFIG_N": {
+          "must_not_float": false,
+          "must_connect": true,
+          "source": "UG1117-1.1E"
+        },
+        "CCLK": {
+          "must_not_float": false,
+          "must_connect": true,
+          "source": "UG1117-1.1E"
+        },
+        "READY": {
+          "must_not_float": false,
+          "must_connect": true,
+          "source": "UG1117-1.1E"
+        },
+        "MODE1": {
+          "must_not_float": true,
+          "must_connect": true,
+          "source": "UG1117-1.1E"
+        },
+        "MODE0": {
+          "must_not_float": true,
+          "must_connect": true,
+          "source": "UG1117-1.1E"
+        },
+        "DONE": {
+          "must_not_float": false,
+          "must_connect": true,
+          "source": "UG1117-1.1E"
+        },
+        "PUDC_B": {
+          "must_not_float": true,
+          "must_connect": true,
+          "source": "UG1117-1.1E"
+        }
+      },
+      "mode_requirements": {
+        "strap_required": true,
+        "signals": [
+          "CCLK",
+          "MOSI",
+          "MISO",
+          "SSPI_CLK",
+          "SSPI_CS_N",
+          "SSPI_WPN"
+        ],
+        "source": "UG1117-1.1E",
+        "derived_from": "package_pinout"
+      }
     },
     "mipi_phy": {
       "class": "clocking",
       "review_required": true,
       "directions": [],
       "source": "pinout_inference"
+    },
+    "power_integrity": {
+      "class": "power_integrity",
+      "review_required": true,
+      "design_guide_source": "UG1117-1.1E",
+      "design_guide_source_path": null,
+      "source_documents": [
+        {
+          "document_id": "UG1117",
+          "version": "1.1E",
+          "released_on": "2025-08-08",
+          "title": "GW5AR FPGA Schematic Manual",
+          "url": "https://www.gowinsemi.com/en/support/database/1823/",
+          "device_family": "GW5AR",
+          "scope": "family_schematic_manual",
+          "device": "GW5AR-25",
+          "package": "UG256P"
+        },
+        {
+          "document_id": "UG1110",
+          "version": "1.1.1E",
+          "released_on": "2025-06-27",
+          "title": "GW5AR-25 Device Pinout Guide",
+          "url": "https://www.gowinsemi.com/en/support/database/1840/",
+          "scope": "package_pinout",
+          "device": "GW5AR-25",
+          "package": "UG256P"
+        },
+        {
+          "document_id": "local_pinout_extract",
+          "version": null,
+          "released_on": null,
+          "title": "UG1110-1.0.4_GW5AR-25器件Pinout手册.xlsx",
+          "url": null,
+          "scope": "local_extract_input",
+          "device": "GW5AR-25",
+          "package": "UG256P"
+        },
+        {
+          "document_id": "product_detail_79",
+          "version": null,
+          "released_on": null,
+          "title": "Gowin Arora-R FPGA Product Detail",
+          "url": "https://www.gowinsemi.com/en/product/detail/79/",
+          "scope": "product_page_capability_boundary",
+          "device": "GW5AR-25",
+          "package": "UG256P"
+        }
+      ],
+      "package_power_rail_aliases": [
+        {
+          "physical_rail": "M0_VDDA/M0_VDDD",
+          "logical_rails": [
+            "M0_VDDA",
+            "M0_VDDD"
+          ],
+          "pin_count": 1,
+          "pins": [
+            "G6"
+          ],
+          "merge_type": "bonded_merge",
+          "source": "package_pinout"
+        },
+        {
+          "physical_rail": "M0_VDDX/VCC_REG/VCCIO10/VCCX",
+          "logical_rails": [
+            "M0_VDDX",
+            "VCC_REG",
+            "VCCIO",
+            "VCCX"
+          ],
+          "pin_count": 2,
+          "pins": [
+            "L5",
+            "F12"
+          ],
+          "merge_type": "bonded_merge",
+          "source": "package_pinout"
+        },
+        {
+          "physical_rail": "M0_VDD_12",
+          "logical_rails": [
+            "M0_VDD_12"
+          ],
+          "pin_count": 1,
+          "pins": [
+            "G9"
+          ],
+          "merge_type": "dedicated",
+          "source": "package_pinout"
+        },
+        {
+          "physical_rail": "VCC/VCCC",
+          "logical_rails": [
+            "VCC",
+            "VCCC"
+          ],
+          "pin_count": 8,
+          "pins": [
+            "D13",
+            "H6",
+            "G10",
+            "G7",
+            "H11",
+            "K7",
+            "G8",
+            "N4"
+          ],
+          "merge_type": "bonded_merge",
+          "source": "package_pinout"
+        },
+        {
+          "physical_rail": "VCCIO0",
+          "logical_rails": [
+            "VCCIO"
+          ],
+          "pin_count": 2,
+          "pins": [
+            "M14",
+            "K14"
+          ],
+          "merge_type": "dedicated",
+          "source": "package_pinout"
+        },
+        {
+          "physical_rail": "VCCIO1",
+          "logical_rails": [
+            "VCCIO"
+          ],
+          "pin_count": 3,
+          "pins": [
+            "P10",
+            "P13",
+            "T16"
+          ],
+          "merge_type": "dedicated",
+          "source": "package_pinout"
+        },
+        {
+          "physical_rail": "VCCIO2",
+          "logical_rails": [
+            "VCCIO"
+          ],
+          "pin_count": 3,
+          "pins": [
+            "T1",
+            "P4",
+            "P7"
+          ],
+          "merge_type": "dedicated",
+          "source": "package_pinout"
+        },
+        {
+          "physical_rail": "VCCIO3",
+          "logical_rails": [
+            "VCCIO"
+          ],
+          "pin_count": 2,
+          "pins": [
+            "M3",
+            "K3"
+          ],
+          "merge_type": "dedicated",
+          "source": "package_pinout"
+        },
+        {
+          "physical_rail": "VCCIO4",
+          "logical_rails": [
+            "VCCIO"
+          ],
+          "pin_count": 2,
+          "pins": [
+            "G3",
+            "E3"
+          ],
+          "merge_type": "dedicated",
+          "source": "package_pinout"
+        },
+        {
+          "physical_rail": "VCCIO5",
+          "logical_rails": [
+            "VCCIO"
+          ],
+          "pin_count": 3,
+          "pins": [
+            "A1",
+            "C4",
+            "C7"
+          ],
+          "merge_type": "dedicated",
+          "source": "package_pinout"
+        },
+        {
+          "physical_rail": "VCCIO6",
+          "logical_rails": [
+            "VCCIO"
+          ],
+          "pin_count": 3,
+          "pins": [
+            "C10",
+            "A16",
+            "C13"
+          ],
+          "merge_type": "dedicated",
+          "source": "package_pinout"
+        },
+        {
+          "physical_rail": "VCCIO7",
+          "logical_rails": [
+            "VCCIO"
+          ],
+          "pin_count": 4,
+          "pins": [
+            "E14",
+            "H13",
+            "G14",
+            "H12"
+          ],
+          "merge_type": "dedicated",
+          "source": "package_pinout"
+        },
+        {
+          "physical_rail": "VQPS",
+          "logical_rails": [
+            "VQPS"
+          ],
+          "pin_count": 1,
+          "pins": [
+            "M5"
+          ],
+          "merge_type": "dedicated",
+          "source": "package_pinout"
+        },
+        {
+          "physical_rail": "VQPS[1]",
+          "logical_rails": [
+            "VQPS"
+          ],
+          "pin_count": null,
+          "pins": [],
+          "merge_type": "dedicated",
+          "source": "package_pinout"
+        }
+      ],
+      "package_merged_logical_rail_groups": [
+        [
+          "M0_VDDA",
+          "M0_VDDD"
+        ],
+        [
+          "M0_VDDX",
+          "VCC_REG",
+          "VCCIO",
+          "VCCX"
+        ],
+        [
+          "VCC",
+          "VCCC"
+        ]
+      ],
+      "package_specific_notes": [
+        "Use the package pinout as the binding source for bonded rails such as VCC/VCCC and M0_VDDX/VCC_REG/VCCIO10/VCCX."
+      ],
+      "design_guide_rules_normalized": false,
+      "coverage": "package_profile_only"
+    },
+    "io_signaling": {
+      "class": "io_signaling",
+      "review_required": true,
+      "design_guide_source": "UG1117-1.1E",
+      "design_guide_source_path": null,
+      "source_documents": [
+        {
+          "document_id": "UG1117",
+          "version": "1.1E",
+          "released_on": "2025-08-08",
+          "title": "GW5AR FPGA Schematic Manual",
+          "url": "https://www.gowinsemi.com/en/support/database/1823/",
+          "device_family": "GW5AR",
+          "scope": "family_schematic_manual",
+          "device": "GW5AR-25",
+          "package": "UG256P"
+        },
+        {
+          "document_id": "UG1110",
+          "version": "1.1.1E",
+          "released_on": "2025-06-27",
+          "title": "GW5AR-25 Device Pinout Guide",
+          "url": "https://www.gowinsemi.com/en/support/database/1840/",
+          "scope": "package_pinout",
+          "device": "GW5AR-25",
+          "package": "UG256P"
+        },
+        {
+          "document_id": "local_pinout_extract",
+          "version": null,
+          "released_on": null,
+          "title": "UG1110-1.0.4_GW5AR-25器件Pinout手册.xlsx",
+          "url": null,
+          "scope": "local_extract_input",
+          "device": "GW5AR-25",
+          "package": "UG256P"
+        },
+        {
+          "document_id": "product_detail_79",
+          "version": null,
+          "released_on": null,
+          "title": "Gowin Arora-R FPGA Product Detail",
+          "url": "https://www.gowinsemi.com/en/product/detail/79/",
+          "scope": "product_page_capability_boundary",
+          "device": "GW5AR-25",
+          "package": "UG256P"
+        }
+      ],
+      "design_guide_rules_normalized": false,
+      "coverage": "package_dc_only",
+      "lvds_bank_vccio_requirement_v": 2.5,
+      "lvds_requirement_source": "UG1117-1.1E"
+    }
+  },
+  "domains": {
+    "design_guide": {
+      "source_document": {
+        "document_id": "UG1117",
+        "version": "1.1E",
+        "released_on": "2025-08-08",
+        "title": "GW5AR FPGA Schematic Manual",
+        "url": "https://www.gowinsemi.com/en/support/database/1823/",
+        "device_family": "GW5AR",
+        "scope": "family_schematic_manual",
+        "device": "GW5AR-25",
+        "package": "UG256P"
+      },
+      "source_documents": [
+        {
+          "document_id": "UG1117",
+          "version": "1.1E",
+          "released_on": "2025-08-08",
+          "title": "GW5AR FPGA Schematic Manual",
+          "url": "https://www.gowinsemi.com/en/support/database/1823/",
+          "device_family": "GW5AR",
+          "scope": "family_schematic_manual",
+          "device": "GW5AR-25",
+          "package": "UG256P"
+        },
+        {
+          "document_id": "UG1110",
+          "version": "1.1.1E",
+          "released_on": "2025-06-27",
+          "title": "GW5AR-25 Device Pinout Guide",
+          "url": "https://www.gowinsemi.com/en/support/database/1840/",
+          "scope": "package_pinout",
+          "device": "GW5AR-25",
+          "package": "UG256P"
+        },
+        {
+          "document_id": "local_pinout_extract",
+          "version": null,
+          "released_on": null,
+          "title": "UG1110-1.0.4_GW5AR-25器件Pinout手册.xlsx",
+          "url": null,
+          "scope": "local_extract_input",
+          "device": "GW5AR-25",
+          "package": "UG256P"
+        },
+        {
+          "document_id": "product_detail_79",
+          "version": null,
+          "released_on": null,
+          "title": "Gowin Arora-R FPGA Product Detail",
+          "url": "https://www.gowinsemi.com/en/product/detail/79/",
+          "scope": "product_page_capability_boundary",
+          "device": "GW5AR-25",
+          "package": "UG256P"
+        }
+      ],
+      "package_profile": {
+        "device": "GW5AR-25",
+        "package": "UG256P",
+        "family_rules_apply": false,
+        "source_documents": [
+          {
+            "document_id": "UG1117",
+            "version": "1.1E",
+            "released_on": "2025-08-08",
+            "title": "GW5AR FPGA Schematic Manual",
+            "url": "https://www.gowinsemi.com/en/support/database/1823/",
+            "device_family": "GW5AR",
+            "scope": "family_schematic_manual",
+            "device": "GW5AR-25",
+            "package": "UG256P"
+          },
+          {
+            "document_id": "UG1110",
+            "version": "1.1.1E",
+            "released_on": "2025-06-27",
+            "title": "GW5AR-25 Device Pinout Guide",
+            "url": "https://www.gowinsemi.com/en/support/database/1840/",
+            "scope": "package_pinout",
+            "device": "GW5AR-25",
+            "package": "UG256P"
+          },
+          {
+            "document_id": "local_pinout_extract",
+            "version": null,
+            "released_on": null,
+            "title": "UG1110-1.0.4_GW5AR-25器件Pinout手册.xlsx",
+            "url": null,
+            "scope": "local_extract_input",
+            "device": "GW5AR-25",
+            "package": "UG256P"
+          },
+          {
+            "document_id": "product_detail_79",
+            "version": null,
+            "released_on": null,
+            "title": "Gowin Arora-R FPGA Product Detail",
+            "url": "https://www.gowinsemi.com/en/product/detail/79/",
+            "scope": "product_page_capability_boundary",
+            "device": "GW5AR-25",
+            "package": "UG256P"
+          }
+        ],
+        "power_rail_aliases": [
+          {
+            "physical_rail": "M0_VDDA/M0_VDDD",
+            "logical_rails": [
+              "M0_VDDA",
+              "M0_VDDD"
+            ],
+            "pin_count": 1,
+            "pins": [
+              "G6"
+            ],
+            "merge_type": "bonded_merge",
+            "source": "package_pinout"
+          },
+          {
+            "physical_rail": "M0_VDDX/VCC_REG/VCCIO10/VCCX",
+            "logical_rails": [
+              "M0_VDDX",
+              "VCC_REG",
+              "VCCIO",
+              "VCCX"
+            ],
+            "pin_count": 2,
+            "pins": [
+              "L5",
+              "F12"
+            ],
+            "merge_type": "bonded_merge",
+            "source": "package_pinout"
+          },
+          {
+            "physical_rail": "M0_VDD_12",
+            "logical_rails": [
+              "M0_VDD_12"
+            ],
+            "pin_count": 1,
+            "pins": [
+              "G9"
+            ],
+            "merge_type": "dedicated",
+            "source": "package_pinout"
+          },
+          {
+            "physical_rail": "VCC/VCCC",
+            "logical_rails": [
+              "VCC",
+              "VCCC"
+            ],
+            "pin_count": 8,
+            "pins": [
+              "D13",
+              "H6",
+              "G10",
+              "G7",
+              "H11",
+              "K7",
+              "G8",
+              "N4"
+            ],
+            "merge_type": "bonded_merge",
+            "source": "package_pinout"
+          },
+          {
+            "physical_rail": "VCCIO0",
+            "logical_rails": [
+              "VCCIO"
+            ],
+            "pin_count": 2,
+            "pins": [
+              "M14",
+              "K14"
+            ],
+            "merge_type": "dedicated",
+            "source": "package_pinout"
+          },
+          {
+            "physical_rail": "VCCIO1",
+            "logical_rails": [
+              "VCCIO"
+            ],
+            "pin_count": 3,
+            "pins": [
+              "P10",
+              "P13",
+              "T16"
+            ],
+            "merge_type": "dedicated",
+            "source": "package_pinout"
+          },
+          {
+            "physical_rail": "VCCIO2",
+            "logical_rails": [
+              "VCCIO"
+            ],
+            "pin_count": 3,
+            "pins": [
+              "T1",
+              "P4",
+              "P7"
+            ],
+            "merge_type": "dedicated",
+            "source": "package_pinout"
+          },
+          {
+            "physical_rail": "VCCIO3",
+            "logical_rails": [
+              "VCCIO"
+            ],
+            "pin_count": 2,
+            "pins": [
+              "M3",
+              "K3"
+            ],
+            "merge_type": "dedicated",
+            "source": "package_pinout"
+          },
+          {
+            "physical_rail": "VCCIO4",
+            "logical_rails": [
+              "VCCIO"
+            ],
+            "pin_count": 2,
+            "pins": [
+              "G3",
+              "E3"
+            ],
+            "merge_type": "dedicated",
+            "source": "package_pinout"
+          },
+          {
+            "physical_rail": "VCCIO5",
+            "logical_rails": [
+              "VCCIO"
+            ],
+            "pin_count": 3,
+            "pins": [
+              "A1",
+              "C4",
+              "C7"
+            ],
+            "merge_type": "dedicated",
+            "source": "package_pinout"
+          },
+          {
+            "physical_rail": "VCCIO6",
+            "logical_rails": [
+              "VCCIO"
+            ],
+            "pin_count": 3,
+            "pins": [
+              "C10",
+              "A16",
+              "C13"
+            ],
+            "merge_type": "dedicated",
+            "source": "package_pinout"
+          },
+          {
+            "physical_rail": "VCCIO7",
+            "logical_rails": [
+              "VCCIO"
+            ],
+            "pin_count": 4,
+            "pins": [
+              "E14",
+              "H13",
+              "G14",
+              "H12"
+            ],
+            "merge_type": "dedicated",
+            "source": "package_pinout"
+          },
+          {
+            "physical_rail": "VQPS",
+            "logical_rails": [
+              "VQPS"
+            ],
+            "pin_count": 1,
+            "pins": [
+              "M5"
+            ],
+            "merge_type": "dedicated",
+            "source": "package_pinout"
+          },
+          {
+            "physical_rail": "VQPS[1]",
+            "logical_rails": [
+              "VQPS"
+            ],
+            "pin_count": null,
+            "pins": [],
+            "merge_type": "dedicated",
+            "source": "package_pinout"
+          }
+        ],
+        "logical_rail_map": {
+          "M0_VDDA": [
+            {
+              "physical_rail": "M0_VDDA/M0_VDDD",
+              "pin_count": 1,
+              "source": "package_pinout"
+            }
+          ],
+          "M0_VDDD": [
+            {
+              "physical_rail": "M0_VDDA/M0_VDDD",
+              "pin_count": 1,
+              "source": "package_pinout"
+            }
+          ],
+          "M0_VDDX": [
+            {
+              "physical_rail": "M0_VDDX/VCC_REG/VCCIO10/VCCX",
+              "pin_count": 2,
+              "source": "package_pinout"
+            }
+          ],
+          "VCC_REG": [
+            {
+              "physical_rail": "M0_VDDX/VCC_REG/VCCIO10/VCCX",
+              "pin_count": 2,
+              "source": "package_pinout"
+            }
+          ],
+          "VCCIO": [
+            {
+              "physical_rail": "M0_VDDX/VCC_REG/VCCIO10/VCCX",
+              "pin_count": 2,
+              "source": "package_pinout"
+            },
+            {
+              "physical_rail": "VCCIO0",
+              "pin_count": 2,
+              "source": "package_pinout"
+            },
+            {
+              "physical_rail": "VCCIO1",
+              "pin_count": 3,
+              "source": "package_pinout"
+            },
+            {
+              "physical_rail": "VCCIO2",
+              "pin_count": 3,
+              "source": "package_pinout"
+            },
+            {
+              "physical_rail": "VCCIO3",
+              "pin_count": 2,
+              "source": "package_pinout"
+            },
+            {
+              "physical_rail": "VCCIO4",
+              "pin_count": 2,
+              "source": "package_pinout"
+            },
+            {
+              "physical_rail": "VCCIO5",
+              "pin_count": 3,
+              "source": "package_pinout"
+            },
+            {
+              "physical_rail": "VCCIO6",
+              "pin_count": 3,
+              "source": "package_pinout"
+            },
+            {
+              "physical_rail": "VCCIO7",
+              "pin_count": 4,
+              "source": "package_pinout"
+            }
+          ],
+          "VCCX": [
+            {
+              "physical_rail": "M0_VDDX/VCC_REG/VCCIO10/VCCX",
+              "pin_count": 2,
+              "source": "package_pinout"
+            }
+          ],
+          "M0_VDD_12": [
+            {
+              "physical_rail": "M0_VDD_12",
+              "pin_count": 1,
+              "source": "package_pinout"
+            }
+          ],
+          "VCC": [
+            {
+              "physical_rail": "VCC/VCCC",
+              "pin_count": 8,
+              "source": "package_pinout"
+            }
+          ],
+          "VCCC": [
+            {
+              "physical_rail": "VCC/VCCC",
+              "pin_count": 8,
+              "source": "package_pinout"
+            }
+          ],
+          "VQPS": [
+            {
+              "physical_rail": "VQPS",
+              "pin_count": 1,
+              "source": "package_pinout"
+            },
+            {
+              "physical_rail": "VQPS[1]",
+              "pin_count": null,
+              "source": "package_pinout"
+            }
+          ]
+        },
+        "merged_logical_rail_groups": [
+          [
+            "M0_VDDA",
+            "M0_VDDD"
+          ],
+          [
+            "M0_VDDX",
+            "VCC_REG",
+            "VCCIO",
+            "VCCX"
+          ],
+          [
+            "VCC",
+            "VCCC"
+          ]
+        ],
+        "package_notes": [
+          "Use the package pinout as the binding source for bonded rails such as VCC/VCCC and M0_VDDX/VCC_REG/VCCIO10/VCCX."
+        ]
+      },
+      "power_domain_map": [
+        {
+          "group": "io_bank",
+          "rail_name": "VCCIO0",
+          "description": "I/O Bank电压",
+          "nominal_voltage": null,
+          "voltage_range": {
+            "min": 1.14,
+            "max": 3.465,
+            "unit": "V"
+          },
+          "logical_rails": [
+            "VCCIO"
+          ],
+          "source": "UG1117-1.1E"
+        },
+        {
+          "group": "io_bank",
+          "rail_name": "VCCIO1",
+          "description": "I/O Bank电源电压，与PSRAM接口相连，VCCIO1提供PSRAM工作电压",
+          "nominal_voltage": null,
+          "voltage_range": {
+            "min": 1.71,
+            "max": 1.89,
+            "unit": "V"
+          },
+          "logical_rails": [
+            "VCCIO"
+          ],
+          "source": "UG1117-1.1E"
+        },
+        {
+          "group": "io_bank",
+          "rail_name": "VCCIO2",
+          "description": "I/O Bank电压",
+          "nominal_voltage": null,
+          "voltage_range": {
+            "min": 1.14,
+            "max": 3.465,
+            "unit": "V"
+          },
+          "logical_rails": [
+            "VCCIO"
+          ],
+          "source": "UG1117-1.1E"
+        },
+        {
+          "group": "io_bank",
+          "rail_name": "VCCIO3",
+          "description": "I/O Bank电压",
+          "nominal_voltage": null,
+          "voltage_range": {
+            "min": 1.14,
+            "max": 3.465,
+            "unit": "V"
+          },
+          "logical_rails": [
+            "VCCIO"
+          ],
+          "source": "UG1117-1.1E"
+        },
+        {
+          "group": "io_bank",
+          "rail_name": "VCCIO4",
+          "description": "I/O Bank电压",
+          "nominal_voltage": null,
+          "voltage_range": {
+            "min": 1.14,
+            "max": 3.465,
+            "unit": "V"
+          },
+          "logical_rails": [
+            "VCCIO"
+          ],
+          "source": "UG1117-1.1E"
+        },
+        {
+          "group": "io_bank",
+          "rail_name": "VCCIO5",
+          "description": "I/O Bank电压",
+          "nominal_voltage": null,
+          "voltage_range": {
+            "min": 1.14,
+            "max": 3.465,
+            "unit": "V"
+          },
+          "logical_rails": [
+            "VCCIO"
+          ],
+          "source": "UG1117-1.1E"
+        },
+        {
+          "group": "io_bank",
+          "rail_name": "VCCIO6",
+          "description": "I/O Bank电压",
+          "nominal_voltage": null,
+          "voltage_range": {
+            "min": 1.14,
+            "max": 3.465,
+            "unit": "V"
+          },
+          "logical_rails": [
+            "VCCIO"
+          ],
+          "source": "UG1117-1.1E"
+        },
+        {
+          "group": "io_bank",
+          "rail_name": "VCCIO7",
+          "description": "I/O Bank电压",
+          "nominal_voltage": null,
+          "voltage_range": {
+            "min": 1.14,
+            "max": 3.465,
+            "unit": "V"
+          },
+          "logical_rails": [
+            "VCCIO"
+          ],
+          "source": "UG1117-1.1E"
+        },
+        {
+          "group": "mipi",
+          "rail_name": "M0_VDDX/VCC_REG/VCCIO10/VCCX",
+          "description": "MIPI电压M0_VDDX, Regulator电压, I/O Bank电压VCCIO10和辅助电压VCCX内部短接在一起",
+          "nominal_voltage": null,
+          "voltage_range": {
+            "min": 2.375,
+            "max": 3.3,
+            "unit": "V"
+          },
+          "logical_rails": [
+            "M0_VDDX",
+            "VCC_REG",
+            "VCCIO",
+            "VCCX"
+          ],
+          "source": "UG1117-1.1E"
+        },
+        {
+          "group": "efuse",
+          "rail_name": "VQPS[1]",
+          "description": "eFuse写入所需电压",
+          "nominal_voltage": null,
+          "voltage_range": {
+            "min": 1.62,
+            "max": 1.98,
+            "unit": "V"
+          },
+          "logical_rails": [
+            "VQPS"
+          ],
+          "source": "UG1117-1.1E"
+        },
+        {
+          "group": "core_aux",
+          "rail_name": "VCC/VCCC",
+          "description": "核电压和Clock tree电压内部短接在一起",
+          "nominal_voltage": null,
+          "voltage_range": {
+            "min": 0.87,
+            "max": 1.0,
+            "unit": "V"
+          },
+          "logical_rails": [
+            "VCC",
+            "VCCC"
+          ],
+          "source": "UG1117-1.1E"
+        },
+        {
+          "group": "mipi",
+          "rail_name": "M0_VDD_12",
+          "description": "MIPI电压M0_VDD_12",
+          "nominal_voltage": null,
+          "voltage_range": {
+            "min": 1.14,
+            "max": 1.32,
+            "unit": "V"
+          },
+          "logical_rails": [
+            "M0_VDD_12"
+          ],
+          "source": "UG1117-1.1E"
+        },
+        {
+          "group": "mipi",
+          "rail_name": "M0_VDDA/M0_VDDD",
+          "description": "MIPI电压M0_VDDA和M0_VDDD内部短接在一起",
+          "nominal_voltage": null,
+          "voltage_range": {
+            "min": 0.87,
+            "max": 1.0,
+            "unit": "V"
+          },
+          "logical_rails": [
+            "M0_VDDA",
+            "M0_VDDD"
+          ],
+          "source": "UG1117-1.1E"
+        }
+      ],
+      "power_sequencing_rules": [],
+      "power_ramp_constraints": [],
+      "rail_merge_guidelines": [],
+      "pin_connection_rules": [
+        {
+          "pin": "SSPI_CS_N",
+          "rule": "Package pinout exposes SSPI_CS_N for serial configuration mode.",
+          "connection_type": "conditional",
+          "severity": "INFO",
+          "source": "UG1117-1.1E"
+        },
+        {
+          "pin": "SSPI_WPN",
+          "rule": "Package pinout exposes SSPI_WPN for serial configuration mode.",
+          "connection_type": "conditional",
+          "severity": "INFO",
+          "source": "UG1117-1.1E"
+        },
+        {
+          "pin": "SSPI_CLK",
+          "rule": "Package pinout exposes SSPI_CLK for serial configuration mode.",
+          "connection_type": "conditional",
+          "severity": "INFO",
+          "source": "UG1117-1.1E"
+        },
+        {
+          "pin": "RECONFIG_N",
+          "rule": "Package pinout marks RECONFIG_N as a required configuration connection.",
+          "connection_type": "must_connect",
+          "severity": "ERROR",
+          "source": "UG1117-1.1E"
+        },
+        {
+          "pin": "CCLK",
+          "rule": "Package pinout marks CCLK as a required configuration clock connection.",
+          "connection_type": "must_connect",
+          "severity": "ERROR",
+          "source": "UG1117-1.1E"
+        },
+        {
+          "pin": "READY",
+          "rule": "Package pinout marks READY as a required status output connection.",
+          "connection_type": "must_connect",
+          "severity": "ERROR",
+          "source": "UG1117-1.1E"
+        },
+        {
+          "pin": "MODE1",
+          "rule": "Package pinout marks MODE1 as a required configuration strap.",
+          "connection_type": "must_not_float",
+          "severity": "ERROR",
+          "source": "UG1117-1.1E"
+        },
+        {
+          "pin": "MISO",
+          "rule": "Package pinout exposes MISO as a serial configuration data path.",
+          "connection_type": "conditional",
+          "severity": "INFO",
+          "source": "UG1117-1.1E"
+        },
+        {
+          "pin": "MOSI",
+          "rule": "Package pinout exposes MOSI as a serial configuration data path.",
+          "connection_type": "conditional",
+          "severity": "INFO",
+          "source": "UG1117-1.1E"
+        },
+        {
+          "pin": "MODE0",
+          "rule": "Package pinout marks MODE0 as a required configuration strap.",
+          "connection_type": "must_not_float",
+          "severity": "ERROR",
+          "source": "UG1117-1.1E"
+        },
+        {
+          "pin": "DONE",
+          "rule": "Package pinout marks DONE as a required status output connection.",
+          "connection_type": "must_connect",
+          "severity": "ERROR",
+          "source": "UG1117-1.1E"
+        },
+        {
+          "pin": "TCK",
+          "rule": "Package pinout exposes TCK for JTAG configuration/debug access.",
+          "connection_type": "conditional",
+          "severity": "INFO",
+          "source": "UG1117-1.1E"
+        },
+        {
+          "pin": "TDI",
+          "rule": "Package pinout exposes TDI for JTAG configuration/debug access.",
+          "connection_type": "conditional",
+          "severity": "INFO",
+          "source": "UG1117-1.1E"
+        },
+        {
+          "pin": "TMS",
+          "rule": "Package pinout exposes TMS for JTAG configuration/debug access.",
+          "connection_type": "conditional",
+          "severity": "INFO",
+          "source": "UG1117-1.1E"
+        },
+        {
+          "pin": "TDO",
+          "rule": "Package pinout exposes TDO for JTAG configuration/debug access.",
+          "connection_type": "conditional",
+          "severity": "INFO",
+          "source": "UG1117-1.1E"
+        },
+        {
+          "pin": "PUDC_B",
+          "rule": "Package pinout exposes PUDC_B as a configuration strap that must not be left floating.",
+          "connection_type": "must_not_float",
+          "severity": "ERROR",
+          "source": "UG1117-1.1E"
+        }
+      ],
+      "decoupling_requirements": [],
+      "clock_design_rules": [],
+      "configuration_mode_support": [
+        {
+          "device": "GW5AR-25",
+          "package": "UG256P",
+          "mode": "JTAG",
+          "supported": true,
+          "max_clock_freq": null,
+          "signals": [
+            "TCK",
+            "TMS",
+            "TDI",
+            "TDO"
+          ],
+          "notes": "Derived from package pinout JTAG signal exposure.",
+          "source": "UG1117-1.1E"
+        },
+        {
+          "device": "GW5AR-25",
+          "package": "UG256P",
+          "mode": "SERIAL_BOOT",
+          "supported": true,
+          "max_clock_freq": null,
+          "signals": [
+            "CCLK",
+            "MOSI",
+            "MISO",
+            "SSPI_CLK",
+            "SSPI_CS_N",
+            "SSPI_WPN"
+          ],
+          "notes": "Derived from package pinout configuration/status signal exposure.",
+          "source": "UG1117-1.1E"
+        }
+      ],
+      "io_standard_rules": [
+        {
+          "standard": "LVDS",
+          "requirement": "Set the bank VCCIO to 2.5 V when using True LVDS.",
+          "termination": null,
+          "applies_to": "Banks using True LVDS",
+          "severity": "WARNING",
+          "source": "UG1117-1.1E"
+        }
+      ],
+      "design_guideline_text": [
+        {
+          "category": "coverage",
+          "guideline": "This design-guide bundle is derived from package pinout and DC datasheet facts; family prose rules are not yet normalized.",
+          "source": "UG1117-1.1E"
+        },
+        {
+          "category": "config",
+          "guideline": "Treat PUDC_B and MODE straps as explicit configuration nets, not optional GPIO defaults.",
+          "source": "UG1117-1.1E"
+        },
+        {
+          "category": "power",
+          "guideline": "Package power rails include dedicated MIPI-related supplies; keep package-level rail binding visible during review.",
+          "source": "UG1117-1.1E"
+        },
+        {
+          "category": "io",
+          "guideline": "True LVDS use should be checked against package/DC VCCIO requirements before reusing generic family assumptions.",
+          "source": "UG1117-1.1E"
+        }
+      ]
     }
   },
   "absolute_maximum_ratings": {

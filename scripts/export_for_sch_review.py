@@ -17,14 +17,14 @@ import sys
 from collections import defaultdict
 from pathlib import Path
 
+from design_guide_domain import load_gowin_design_guide_bundle, resolve_gowin_design_guide_source_path
+
 SCHEMA_VERSION = "sch-review-device/1.1"
 SCHEMA_VERSION_V2 = "device-knowledge/2.0"
 
 DEFAULT_EXTRACTED_DIR = Path(__file__).parent.parent / "data/extracted_v2"
 DEFAULT_FPGA_PINOUT_DIR = Path(__file__).parent.parent / "data/extracted_v2/fpga/pinout"
 DEFAULT_OUTPUT_DIR = Path(__file__).parent.parent / "data/sch_review_export"
-
-
 # ─── Format Detection & Accessors ──────────────────────────────────
 
 
@@ -472,6 +472,19 @@ def _safe_upper(value: str | None) -> str:
     return (value or "").upper()
 
 
+def _deep_merge_dict(base: dict, overlay: dict) -> dict:
+    merged = dict(base)
+    for key, value in overlay.items():
+        existing = merged.get(key)
+        if isinstance(existing, dict) and isinstance(value, dict):
+            merged[key] = _deep_merge_dict(existing, value)
+        elif isinstance(existing, list) and isinstance(value, list):
+            merged[key] = existing + [item for item in value if item not in existing]
+        else:
+            merged[key] = value
+    return merged
+
+
 def _flatten_package_pins(packages: dict) -> list[dict]:
     records = []
     for package_name, package_data in packages.items():
@@ -837,6 +850,16 @@ def _normalize_protocol_refclk_profiles(protocols: list[str] | None) -> dict:
                 "note": "10G serial Ethernet families commonly use a 156.25 MHz differential reference clock.",
             }
     return profiles
+
+
+def _load_gowin_family_design_guide(device: str, package: str, pinout_data: dict, gowin_dc: dict | None = None) -> dict:
+    return load_gowin_design_guide_bundle(
+        device=device,
+        package=package,
+        pinout_data=pinout_data,
+        guide_path=resolve_gowin_design_guide_source_path(device),
+        gowin_dc=gowin_dc,
+    )
 
 
 def _fpga_family_high_speed_metadata(vendor: str, device: str, family: str | None, hs_serial: dict) -> dict:
@@ -1946,6 +1969,9 @@ def export_fpga(dc_data: dict, pinout_data: dict, gowin_dc: dict = None, lattice
     }
     capability_blocks = _generic_fpga_capability_blocks(pinout_data, vendor, device, package, normalized_diff_pairs)
     constraint_blocks = _generic_fpga_constraint_blocks(pinout_data, capability_blocks, normalized_diff_pairs)
+    guide_data = _load_gowin_family_design_guide(device, package, pinout_data, gowin_dc=gowin_dc) if vendor == "Gowin" else {}
+    if guide_data.get("constraint_overlays"):
+        constraint_blocks = _deep_merge_dict(constraint_blocks, guide_data["constraint_overlays"])
     if capability_blocks:
         result["capability_blocks"] = capability_blocks
     if constraint_blocks:
@@ -1953,6 +1979,8 @@ def export_fpga(dc_data: dict, pinout_data: dict, gowin_dc: dict = None, lattice
     legacy_ip_blocks = capability_blocks.get("legacy_ip_blocks") if capability_blocks else None
     if legacy_ip_blocks:
         result["ip_blocks"] = legacy_ip_blocks
+    if guide_data.get("domains"):
+        result["domains"] = guide_data["domains"]
 
     # Add absolute maximum ratings if available
     if gowin_dc or lattice_dc:
