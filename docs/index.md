@@ -23,6 +23,7 @@
 
 - [`design-document.md`](design-document.md) — Project positioning, system architecture, data flow, and design rationale. **Best for:** architects, reviewers, downstream integrators.
 - [`extraction-methodology.md`](extraction-methodology.md) — End-to-end extraction method and why the pipeline uses hybrid Vision + Text. **Best for:** pipeline contributors, evaluators of extraction quality.
+- [`fpga-board-architecture-comparison.md`](fpga-board-architecture-comparison.md) — Board-architect comparison of AMD, Intel/Altera, Lattice, and Gowin using the currently validated FPGA families. **Best for:** schematic owners, platform architects, FPGA selection reviews.
 - [`roadmap-v2.md`](roadmap-v2.md) — Near-term direction and planned improvements. **Best for:** maintainers, planning discussions.
 
 ## Integration
