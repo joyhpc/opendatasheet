@@ -2297,7 +2297,27 @@
       },
       "refclk_pair_count": null,
       "source": "gowin_product_detail_72",
-      "source_url": "https://www.gowinsemi.com/en/product/detail/72/"
+      "source_url": "https://www.gowinsemi.com/en/product/detail/72/",
+      "package_listing_status": {
+        "listed_on_current_product_page": true,
+        "current_public_packages": [
+          "CS130F",
+          "MG132"
+        ],
+        "source": "gowin_product_detail_72",
+        "source_url": "https://www.gowinsemi.com/en/product/detail/72/"
+      },
+      "link_reach_guidance": {
+        "rate_threshold_gbps": 8.0,
+        "recommended_scope_above_threshold": "on_board_only",
+        "discouraged_scopes_above_threshold": [
+          "backplane",
+          "long_reach_cable"
+        ],
+        "note": "For rates above 8 Gbps, official current product page guidance limits MG132 to board-level interconnect.",
+        "source": "gowin_product_detail_72",
+        "source_url": "https://www.gowinsemi.com/en/product/detail/72/"
+      }
     },
     "legacy_ip_blocks": {
       "mipi": {
@@ -2355,7 +2375,27 @@
         },
         "refclk_pair_count": null,
         "source": "gowin_product_detail_72",
-        "source_url": "https://www.gowinsemi.com/en/product/detail/72/"
+        "source_url": "https://www.gowinsemi.com/en/product/detail/72/",
+        "package_listing_status": {
+          "listed_on_current_product_page": true,
+          "current_public_packages": [
+            "CS130F",
+            "MG132"
+          ],
+          "source": "gowin_product_detail_72",
+          "source_url": "https://www.gowinsemi.com/en/product/detail/72/"
+        },
+        "link_reach_guidance": {
+          "rate_threshold_gbps": 8.0,
+          "recommended_scope_above_threshold": "on_board_only",
+          "discouraged_scopes_above_threshold": [
+            "backplane",
+            "long_reach_cable"
+          ],
+          "note": "For rates above 8 Gbps, official current product page guidance limits MG132 to board-level interconnect.",
+          "source": "gowin_product_detail_72",
+          "source_url": "https://www.gowinsemi.com/en/product/detail/72/"
+        }
       }
     }
   },
@@ -2788,46 +2828,6 @@
           ],
           "merge_type": "bonded_merge",
           "source": "package_pinout"
-        },
-        {
-          "physical_rail": "VDDAQ0",
-          "logical_rails": [
-            "VDDAQ"
-          ],
-          "pin_count": 4,
-          "pins": [
-            "A3",
-            "A6",
-            "A12",
-            "A9"
-          ],
-          "merge_type": "dedicated",
-          "source": "package_pinout"
-        },
-        {
-          "physical_rail": "VDDHAQ0",
-          "logical_rails": [
-            "VDDHAQ"
-          ],
-          "pin_count": 2,
-          "pins": [
-            "C7",
-            "C11"
-          ],
-          "merge_type": "dedicated",
-          "source": "package_pinout"
-        },
-        {
-          "physical_rail": "VDDTQ0",
-          "logical_rails": [
-            "VDDTQ"
-          ],
-          "pin_count": 1,
-          "pins": [
-            "B4"
-          ],
-          "merge_type": "dedicated",
-          "source": "package_pinout"
         }
       ],
       "package_merged_logical_rail_groups": [
@@ -2893,6 +2893,38 @@
         "mipi": [
           "VDDAM/VDDDM/VDDXM"
         ]
+      },
+      "sensitive_power_pin_groups": {
+        "serdes": {
+          "logical_rails": [
+            "VDDAQ",
+            "VDDDQ",
+            "VDDTQ"
+          ],
+          "pin_name_tokens": [
+            "VDDAQ",
+            "VDDDQ",
+            "VDDTQ"
+          ],
+          "recommended_component": "ferrite_bead",
+          "missing_isolation_severity": "ERROR",
+          "source": "UG984-1.2"
+        },
+        "mipi": {
+          "logical_rails": [
+            "VDDAM",
+            "VDDDM",
+            "VDDXM"
+          ],
+          "pin_name_tokens": [
+            "VDDAM",
+            "VDDDM",
+            "VDDXM"
+          ],
+          "recommended_component": "ferrite_bead",
+          "missing_isolation_severity": "WARNING",
+          "source": "UG984-1.2"
+        }
       },
       "merge_recommendations": {
         "VCC": "dedicated_supply_recommended",
@@ -3077,7 +3109,27 @@
       },
       "refclk_pair_count": null,
       "source": "gowin_product_detail_72",
-      "source_url": "https://www.gowinsemi.com/en/product/detail/72/"
+      "source_url": "https://www.gowinsemi.com/en/product/detail/72/",
+      "package_listing_status": {
+        "listed_on_current_product_page": true,
+        "current_public_packages": [
+          "CS130F",
+          "MG132"
+        ],
+        "source": "gowin_product_detail_72",
+        "source_url": "https://www.gowinsemi.com/en/product/detail/72/"
+      },
+      "link_reach_guidance": {
+        "rate_threshold_gbps": 8.0,
+        "recommended_scope_above_threshold": "on_board_only",
+        "discouraged_scopes_above_threshold": [
+          "backplane",
+          "long_reach_cable"
+        ],
+        "note": "For rates above 8 Gbps, official current product page guidance limits MG132 to board-level interconnect.",
+        "source": "gowin_product_detail_72",
+        "source_url": "https://www.gowinsemi.com/en/product/detail/72/"
+      }
     }
   },
   "domains": {
@@ -3949,46 +4001,6 @@
             ],
             "merge_type": "bonded_merge",
             "source": "package_pinout"
-          },
-          {
-            "physical_rail": "VDDAQ0",
-            "logical_rails": [
-              "VDDAQ"
-            ],
-            "pin_count": 4,
-            "pins": [
-              "A3",
-              "A6",
-              "A12",
-              "A9"
-            ],
-            "merge_type": "dedicated",
-            "source": "package_pinout"
-          },
-          {
-            "physical_rail": "VDDHAQ0",
-            "logical_rails": [
-              "VDDHAQ"
-            ],
-            "pin_count": 2,
-            "pins": [
-              "C7",
-              "C11"
-            ],
-            "merge_type": "dedicated",
-            "source": "package_pinout"
-          },
-          {
-            "physical_rail": "VDDTQ0",
-            "logical_rails": [
-              "VDDTQ"
-            ],
-            "pin_count": 1,
-            "pins": [
-              "B4"
-            ],
-            "merge_type": "dedicated",
-            "source": "package_pinout"
           }
         ],
         "logical_rail_map": {
@@ -4069,27 +4081,6 @@
           "VDDXM": [
             {
               "physical_rail": "VDDAM/VDDXM",
-              "pin_count": 1,
-              "source": "package_pinout"
-            }
-          ],
-          "VDDAQ": [
-            {
-              "physical_rail": "VDDAQ0",
-              "pin_count": 4,
-              "source": "package_pinout"
-            }
-          ],
-          "VDDHAQ": [
-            {
-              "physical_rail": "VDDHAQ0",
-              "pin_count": 2,
-              "source": "package_pinout"
-            }
-          ],
-          "VDDTQ": [
-            {
-              "physical_rail": "VDDTQ0",
               "pin_count": 1,
               "source": "package_pinout"
             }

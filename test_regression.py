@@ -752,6 +752,7 @@ def t6_3():
     assert_eq(fpg676a_mipi.get("dphy", {}).get("max_data_lanes"), 8, "GW5AT-138_FPG676A D-PHY lanes")
     assert_eq(fpg676a_serdes.get("transceiver_count"), 8, "GW5AT-138_FPG676A transceiver count")
     assert_eq(fpg676a_serdes.get("quad_count"), 2, "GW5AT-138_FPG676A quad count")
+    assert_eq(fpg676a_serdes.get("protocol_matrix", {}).get("PCIe 3.0", {}).get("lane_widths"), [1, 2, 4, 8], "GW5AT-138_FPG676A PCIe widths")
 
 
 @case("T6.4 Gowin GW5AT exports expose design-guide power and config rules")
@@ -847,6 +848,24 @@ def t6_6():
     assert_true(["VCCX", "VDDXM"] in power_block.get("package_merged_logical_rail_groups", []), "CS130F power_integrity missing merged logical group")
 
 
+@case("T6.6B GW5AT-15 exports expose current package-listing status and MG132 high-speed guidance")
+def t6_6b():
+    cs130 = json.load(open(EXPORT_DIR / "GW5AT-15_CS130.json"))
+    cs130f = json.load(open(EXPORT_DIR / "GW5AT-15_CS130F.json"))
+    mg132 = json.load(open(EXPORT_DIR / "GW5AT-15_MG132.json"))
+
+    cs130_status = cs130.get("ip_blocks", {}).get("serdes", {}).get("package_listing_status", {})
+    cs130f_status = cs130f.get("ip_blocks", {}).get("serdes", {}).get("package_listing_status", {})
+    mg132_serdes = mg132.get("ip_blocks", {}).get("serdes", {})
+
+    assert_true(cs130_status.get("listed_on_current_product_page") is False, "GW5AT-15_CS130 should be absent from current product page package list")
+    assert_true(cs130f_status.get("listed_on_current_product_page") is True, "GW5AT-15_CS130F should remain listed on current product page")
+    assert_true(mg132_serdes.get("package_listing_status", {}).get("listed_on_current_product_page") is True, "GW5AT-15_MG132 should remain listed on current product page")
+    guidance = mg132_serdes.get("link_reach_guidance", {})
+    assert_eq(guidance.get("rate_threshold_gbps"), 8.0, "GW5AT-15_MG132 guidance threshold")
+    assert_eq(guidance.get("recommended_scope_above_threshold"), "on_board_only", "GW5AT-15_MG132 high-rate scope")
+
+
 @case("T6.7 Gowin GW5AR/GW5AS exports expose metadata-only design-guide package profiles")
 def t6_7():
     gw5ar = json.load(open(EXPORT_DIR / "GW5AR-25_UG256P.json"))
@@ -909,6 +928,71 @@ def t6_7():
     assert_true(io_block.get("lvds_bank_vccio_requirement_v") is None, "GW5AS should not invent LVDS VCCIO rule without source")
     assert_eq(power_block.get("coverage"), "package_profile_only", "GW5AS power_integrity coverage")
     assert_true(power_block.get("design_guide_rules_normalized") is False, "GW5AS power_integrity should stay metadata-only")
+
+    gw5ar_resources = gw5ar.get("resources", {})
+    gw5as_resources = gw5as.get("resources", {})
+    gw5ar_mem = gw5ar.get("embedded_memories", {})
+    gw5as_mem = gw5as.get("embedded_memories", {})
+    gw5ar_mipi = gw5ar.get("ip_blocks", {}).get("mipi", {})
+    gw5as_mipi = gw5as.get("ip_blocks", {}).get("mipi", {})
+    assert_eq(gw5ar_resources.get("lut4"), 23040, "GW5AR-25 LUT4 summary")
+    assert_eq(gw5ar_resources.get("bsram_kbit"), 1008, "GW5AR-25 BSRAM summary")
+    assert_eq(gw5ar_resources.get("dsp"), 28, "GW5AR-25 DSP summary")
+    assert_eq(gw5ar_mem.get("embedded_psram_mbit"), 64, "GW5AR-25 embedded PSRAM summary")
+    assert_eq(gw5ar_mipi.get("directions"), ["RX", "TX"], "GW5AR-25 MIPI directions")
+    assert_eq(gw5as_resources.get("lut4"), 41472, "GW5AS-25 LUT4 summary")
+    assert_eq(gw5as_resources.get("dsp"), 178, "GW5AS-25 DSP summary")
+    assert_eq(gw5as_resources.get("adc", {}).get("total"), 4, "GW5AS-25 ADC summary")
+    assert_eq(gw5as_mem.get("embedded_psram_mbit"), 64, "GW5AS-25 embedded PSRAM summary")
+    assert_eq(gw5as_mipi.get("directions"), ["RX", "TX"], "GW5AS-25 MIPI directions")
+    assert_eq(gw5ar.get("device_role"), "FPGA", "GW5AR device role")
+    assert_eq(gw5as.get("device_role"), "FPGA SoC", "GW5AS device role")
+
+
+@case("T6.8 GW5AT-75 and GW5AT-138 package exports cover current public package set")
+def t6_8():
+    gw5at75 = json.load(open(EXPORT_DIR / "GW5AT-75_UG484.json"))
+    pg484 = json.load(open(EXPORT_DIR / "GW5AT-138_PG484.json"))
+    pg484a = json.load(open(EXPORT_DIR / "GW5AT-138_PG484A.json"))
+    pg676a = json.load(open(EXPORT_DIR / "GW5AT-138_PG676A.json"))
+    ug324a = json.load(open(EXPORT_DIR / "GW5AT-138_UG324A.json"))
+
+    gw5at75_serdes = gw5at75.get("ip_blocks", {}).get("serdes", {})
+    gw5at75_mipi = gw5at75.get("ip_blocks", {}).get("mipi", {})
+    assert_eq(gw5at75_serdes.get("transceiver_count"), 8, "GW5AT-75 transceiver count")
+    assert_eq(gw5at75_serdes.get("protocol_matrix", {}).get("PCIe 3.0", {}).get("lane_widths"), [1, 2, 4, 8], "GW5AT-75 PCIe widths")
+    assert_eq(gw5at75_mipi.get("directions"), ["RX"], "GW5AT-75 MIPI directions")
+    assert_eq(gw5at75_mipi.get("dphy", {}).get("max_data_lanes"), 8, "GW5AT-75 D-PHY lanes")
+
+    assert_true(pg484.get("ip_blocks", {}).get("serdes", {}).get("package_listing_status", {}).get("listed_on_current_product_page") is True, "GW5AT-138_PG484 listing status")
+    assert_true(pg484a.get("ip_blocks", {}).get("serdes", {}).get("package_listing_status", {}).get("listed_on_current_product_page") is True, "GW5AT-138_PG484A listing status")
+    assert_true(pg676a.get("ip_blocks", {}).get("serdes", {}).get("package_listing_status", {}).get("listed_on_current_product_page") is True, "GW5AT-138_PG676A listing status")
+    assert_true(ug324a.get("ip_blocks", {}).get("serdes", {}).get("package_listing_status", {}).get("listed_on_current_product_page") is True, "GW5AT-138_UG324A listing status")
+    assert_eq(pg676a.get("ip_blocks", {}).get("serdes", {}).get("protocol_matrix", {}).get("PCIe 3.0", {}).get("lane_widths"), [1, 2, 4, 8], "GW5AT-138_PG676A PCIe widths")
+
+
+@case("T6.9 GW5A exports provide package pinout coverage plus public capability summaries")
+def t6_9():
+    gw5a25 = json.load(open(EXPORT_DIR / "GW5A-25_UG324.json"))
+    gw5a60s = json.load(open(EXPORT_DIR / "GW5A-60_UG324S.json"))
+    gw5a60a = json.load(open(EXPORT_DIR / "GW5A-60_UG324A.json"))
+
+    assert_true(gw5a25.get("banks"), "GW5A-25_UG324 missing banks")
+    assert_true(gw5a25.get("power_rails"), "GW5A-25_UG324 missing power_rails")
+    assert_true(gw5a25.get("lookup", {}).get("by_pin"), "GW5A-25_UG324 missing lookup.by_pin")
+    assert_eq(gw5a25.get("resources", {}).get("lut4"), 23040, "GW5A-25 LUT4 summary")
+    assert_eq(gw5a25.get("resources", {}).get("user_io"), 206, "GW5A-25 user IO summary")
+    assert_eq(gw5a25.get("capability_blocks", {}).get("memory_interface", {}).get("ddr3_mbps"), 800, "GW5A-25 DDR3 summary")
+    assert_eq(gw5a25.get("ip_blocks", {}).get("mipi", {}).get("directions"), ["RX", "TX"], "GW5A-25 MIPI directions")
+
+    for export, expected_io in ((gw5a60s, 226), (gw5a60a, 222)):
+        assert_true(export.get("banks"), f"{export.get('mpn')}_{export.get('package')} missing banks")
+        assert_true(export.get("power_rails"), f"{export.get('mpn')}_{export.get('package')} missing power_rails")
+        assert_eq(export.get("resources", {}).get("lut4"), 59904, f"{export.get('mpn')}_{export.get('package')} LUT4 summary")
+        assert_eq(export.get("resources", {}).get("user_io"), expected_io, f"{export.get('mpn')}_{export.get('package')} user IO summary")
+        assert_eq(export.get("capability_blocks", {}).get("memory_interface", {}).get("ddr3_mbps"), 1100, f"{export.get('mpn')}_{export.get('package')} DDR3 summary")
+        assert_eq(export.get("ip_blocks", {}).get("mipi", {}).get("phy_types"), ["D-PHY", "C-PHY"], f"{export.get('mpn')}_{export.get('package')} MIPI phy types")
+
 
 
 # ─── T7: Lattice DC Data Integration ───────────────────────────────

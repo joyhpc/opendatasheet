@@ -101,14 +101,22 @@ def parse_gowin_xlsx(filepath: Path) -> list[dict]:
         if not package:
             package = "DEFAULT"
 
-        # Parse header
+        # Parse header. Some newer Gowin pinout workbooks prepend a note row
+        # before the actual header, so scan the first few rows for "Pin Name".
         header = []
-        for row in ws.iter_rows(min_row=1, max_row=1, values_only=True):
-            header = [str(c).strip() if c else "" for c in row]
-            break
+        header_row_idx = None
+        for row_idx, row in enumerate(ws.iter_rows(min_row=1, max_row=5, values_only=True), start=1):
+            candidate = [str(c).strip() if c else "" for c in row]
+            if any(cell.lower() == "pin name" for cell in candidate):
+                header = candidate
+                header_row_idx = row_idx
+                break
+        if not header:
+            continue
 
         # Map column indices
         col_map = {}
+        package_columns = []
         for i, h in enumerate(header):
             hl = h.lower() if h else ""
             if "管脚名称" in hl or "pin name" in hl or h == "管脚名称":
@@ -128,9 +136,11 @@ def parse_gowin_xlsx(filepath: Path) -> list[dict]:
             elif h == "X16" or hl == "x16":
                 pass  # Skip X16 column
             elif package.upper() in h.upper():
-                col_map["pin_loc"] = i
+                package_columns.append(i)
 
         # If pin_loc not found, use last non-mapped column as package pin
+        if package_columns:
+            col_map["pin_loc"] = package_columns[0]
         if "pin_loc" not in col_map:
             for i in range(len(header) - 1, -1, -1):
                 if i not in col_map.values() and header[i] and header[i] not in ("X16", ""):
@@ -145,7 +155,7 @@ def parse_gowin_xlsx(filepath: Path) -> list[dict]:
 
         # Parse pins
         pins = []
-        for row in ws.iter_rows(min_row=2, values_only=True):
+        for row in ws.iter_rows(min_row=(header_row_idx or 1) + 1, values_only=True):
             if not row:
                 continue
             name_val = row[col_map["name"]] if col_map["name"] < len(row) else None

@@ -4321,7 +4321,52 @@
     "mipi_phy": {
       "class": "mipi_phy",
       "signal_count": 10,
-      "source": "pinout_inference"
+      "source": "gowin_product_detail_78",
+      "present": true,
+      "phy_types": [
+        "D-PHY"
+      ],
+      "directions": [
+        "RX",
+        "TX"
+      ],
+      "dphy": {
+        "max_data_lanes": 4,
+        "max_clock_lanes": 1
+      },
+      "source_url": "https://www.gowinsemi.com/en/product/detail/78/"
+    },
+    "device_role": {
+      "class": "device_role",
+      "device_role": "FPGA SoC",
+      "source": "gowin_product_detail_78",
+      "source_url": "https://www.gowinsemi.com/en/product/detail/78/"
+    },
+    "fabric_resources": {
+      "class": "fpga_fabric",
+      "lut4": 41472,
+      "bsram_kbit": 1512,
+      "dsp": 178,
+      "pll": 12,
+      "adc": {
+        "fpga": 1,
+        "cortex_m4": 3,
+        "total": 4
+      },
+      "source": "gowin_product_detail_78",
+      "source_url": "https://www.gowinsemi.com/en/product/detail/78/"
+    },
+    "embedded_memory": {
+      "class": "embedded_memory",
+      "embedded_psram_mbit": 64,
+      "source": "gowin_product_detail_78",
+      "source_url": "https://www.gowinsemi.com/en/product/detail/78/"
+    },
+    "hard_processor": {
+      "class": "hard_processor",
+      "core": "Cortex-M4",
+      "source": "gowin_product_detail_78",
+      "source_url": "https://www.gowinsemi.com/en/product/detail/78/"
     }
   },
   "constraint_blocks": {
@@ -5372,6 +5417,37 @@
       "unit": "℃",
       "conditions": "Absolute maximum, 温度",
       "source": "absolute_maximum"
+    }
+  },
+  "device_role": "FPGA SoC",
+  "resources": {
+    "lut4": 41472,
+    "bsram_kbit": 1512,
+    "dsp": 178,
+    "pll": 12,
+    "adc": {
+      "fpga": 1,
+      "cortex_m4": 3,
+      "total": 4
+    }
+  },
+  "embedded_memories": {
+    "embedded_psram_mbit": 64
+  },
+  "ip_blocks": {
+    "mipi": {
+      "present": true,
+      "phy_types": [
+        "D-PHY"
+      ],
+      "directions": [
+        "RX",
+        "TX"
+      ],
+      "dphy": {
+        "max_data_lanes": 4,
+        "max_clock_lanes": 1
+      }
     }
   }
 }

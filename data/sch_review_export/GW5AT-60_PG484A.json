@@ -8826,16 +8826,6 @@
           "source": "package_pinout"
         },
         {
-          "physical_rail": "VCCIO",
-          "logical_rails": [
-            "VCCIO"
-          ],
-          "pin_count": null,
-          "pins": [],
-          "merge_type": "dedicated",
-          "source": "package_pinout"
-        },
-        {
           "physical_rail": "VCCIO1",
           "logical_rails": [
             "VCCIO"
@@ -9014,14 +9004,42 @@
           "source": "package_pinout"
         },
         {
-          "physical_rail": "VCC_ADC",
+          "physical_rail": "VDD12_MIPI",
           "logical_rails": [
-            "VCC"
+            "VDD12M"
           ],
-          "pin_count": 1,
-          "pins": [
-            "K10"
+          "pin_count": null,
+          "pins": [],
+          "merge_type": "dedicated",
+          "source": "package_pinout"
+        },
+        {
+          "physical_rail": "VDDA_MIPI",
+          "logical_rails": [
+            "VDDAM"
           ],
+          "pin_count": null,
+          "pins": [],
+          "merge_type": "dedicated",
+          "source": "package_pinout"
+        },
+        {
+          "physical_rail": "VDDD_MIPI",
+          "logical_rails": [
+            "VDDDM"
+          ],
+          "pin_count": null,
+          "pins": [],
+          "merge_type": "dedicated",
+          "source": "package_pinout"
+        },
+        {
+          "physical_rail": "VDDX_MIPI",
+          "logical_rails": [
+            "VDDXM"
+          ],
+          "pin_count": null,
+          "pins": [],
           "merge_type": "dedicated",
           "source": "package_pinout"
         }
@@ -9078,6 +9096,41 @@
         "mipi": [
           "VDDAM/VDDDM/VDDXM"
         ]
+      },
+      "sensitive_power_pin_groups": {
+        "serdes": {
+          "logical_rails": [
+            "VDDAQ",
+            "VDDDQ",
+            "VDDTQ"
+          ],
+          "pin_name_tokens": [
+            "VDDAQ",
+            "VDDDQ",
+            "VDDTQ"
+          ],
+          "recommended_component": "ferrite_bead",
+          "missing_isolation_severity": "ERROR",
+          "source": "UG984-1.2"
+        },
+        "mipi": {
+          "logical_rails": [
+            "VDDAM",
+            "VDDDM",
+            "VDDXM"
+          ],
+          "pin_name_tokens": [
+            "VDDAM",
+            "VDDDM",
+            "VDDXM",
+            "VDDA_MIPI",
+            "VDDD_MIPI",
+            "VDDX_MIPI"
+          ],
+          "recommended_component": "ferrite_bead",
+          "missing_isolation_severity": "WARNING",
+          "source": "UG984-1.2"
+        }
       },
       "merge_recommendations": {
         "VCC": "dedicated_supply_recommended",
@@ -10002,16 +10055,6 @@
             "source": "package_pinout"
           },
           {
-            "physical_rail": "VCCIO",
-            "logical_rails": [
-              "VCCIO"
-            ],
-            "pin_count": null,
-            "pins": [],
-            "merge_type": "dedicated",
-            "source": "package_pinout"
-          },
-          {
             "physical_rail": "VCCIO1",
             "logical_rails": [
               "VCCIO"
@@ -10190,14 +10233,42 @@
             "source": "package_pinout"
           },
           {
-            "physical_rail": "VCC_ADC",
+            "physical_rail": "VDD12_MIPI",
             "logical_rails": [
-              "VCC"
+              "VDD12M"
             ],
-            "pin_count": 1,
-            "pins": [
-              "K10"
+            "pin_count": null,
+            "pins": [],
+            "merge_type": "dedicated",
+            "source": "package_pinout"
+          },
+          {
+            "physical_rail": "VDDA_MIPI",
+            "logical_rails": [
+              "VDDAM"
             ],
+            "pin_count": null,
+            "pins": [],
+            "merge_type": "dedicated",
+            "source": "package_pinout"
+          },
+          {
+            "physical_rail": "VDDD_MIPI",
+            "logical_rails": [
+              "VDDDM"
+            ],
+            "pin_count": null,
+            "pins": [],
+            "merge_type": "dedicated",
+            "source": "package_pinout"
+          },
+          {
+            "physical_rail": "VDDX_MIPI",
+            "logical_rails": [
+              "VDDXM"
+            ],
+            "pin_count": null,
+            "pins": [],
             "merge_type": "dedicated",
             "source": "package_pinout"
           }
@@ -10208,19 +10279,9 @@
               "physical_rail": "VCC",
               "pin_count": 14,
               "source": "package_pinout"
-            },
-            {
-              "physical_rail": "VCC_ADC",
-              "pin_count": 1,
-              "source": "package_pinout"
             }
           ],
           "VCCIO": [
-            {
-              "physical_rail": "VCCIO",
-              "pin_count": null,
-              "source": "package_pinout"
-            },
             {
               "physical_rail": "VCCIO1",
               "pin_count": 3,
@@ -10285,6 +10346,34 @@
             },
             {
               "physical_rail": "VCCX[1]",
+              "pin_count": null,
+              "source": "package_pinout"
+            }
+          ],
+          "VDD12M": [
+            {
+              "physical_rail": "VDD12_MIPI",
+              "pin_count": null,
+              "source": "package_pinout"
+            }
+          ],
+          "VDDAM": [
+            {
+              "physical_rail": "VDDA_MIPI",
+              "pin_count": null,
+              "source": "package_pinout"
+            }
+          ],
+          "VDDDM": [
+            {
+              "physical_rail": "VDDD_MIPI",
+              "pin_count": null,
+              "source": "package_pinout"
+            }
+          ],
+          "VDDXM": [
+            {
+              "physical_rail": "VDDX_MIPI",
               "pin_count": null,
               "source": "package_pinout"
             }

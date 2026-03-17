@@ -1515,9 +1515,305 @@ def _gowin_protocol_matrix(transceiver_count: int) -> dict:
         },
         "PCIe 3.0": {
             "hardcore": transceiver_count >= 4,
-            "lane_widths": [width for width in lane_widths if width <= 4],
+            "lane_widths": [width for width in lane_widths if width <= (8 if transceiver_count >= 8 else 4)],
         },
     }
+
+
+def _gowin_package_listing_overlay(device: str, package: str) -> dict:
+    package_token = _normalize_package_token(package)
+    listings = {
+        "GW5AT-15": {
+            "source": "gowin_product_detail_72",
+            "source_url": "https://www.gowinsemi.com/en/product/detail/72/",
+            "current_public_packages": ["CS130F", "MG132"],
+        },
+        "GW5AT-75": {
+            "source": "gowin_product_detail_72",
+            "source_url": "https://www.gowinsemi.com/en/product/detail/72/",
+            "current_public_packages": ["UG484"],
+        },
+        "GW5AT-138": {
+            "source": "gowin_product_detail_72",
+            "source_url": "https://www.gowinsemi.com/en/product/detail/72/",
+            "current_public_packages": ["FPG676A", "PG484A", "PG484", "PG676A", "UG324A"],
+        },
+        "GW5A-25": {
+            "source": "gowin_product_detail_77",
+            "source_url": "https://www.gowinsemi.com/en/product/detail/77/",
+            "current_public_packages": ["UG324"],
+        },
+        "GW5A-60": {
+            "source": "gowin_product_detail_75",
+            "source_url": "https://www.gowinsemi.com/en/product/detail/75/",
+            "current_public_packages": ["UG324S", "UG324A"],
+        },
+        "GW5A-138": {
+            "source": "gowin_product_detail_76",
+            "source_url": "https://www.gowinsemi.com/en/product/detail/76/",
+            "current_public_packages": ["UG324A"],
+        },
+    }
+    profile = listings.get(device)
+    if not profile:
+        return {}
+    current_public_packages = profile["current_public_packages"]
+    listed = package_token in current_public_packages
+    overlay = {
+        "package_listing_status": {
+            "listed_on_current_product_page": listed,
+            "current_public_packages": current_public_packages,
+            "source": profile["source"],
+            "source_url": profile["source_url"],
+        }
+    }
+    if device == "GW5AT-15" and package_token == "MG132":
+        overlay["link_reach_guidance"] = {
+            "rate_threshold_gbps": 8.0,
+            "recommended_scope_above_threshold": "on_board_only",
+            "discouraged_scopes_above_threshold": ["backplane", "long_reach_cable"],
+            "note": "For rates above 8 Gbps, official current product page guidance limits MG132 to board-level interconnect.",
+            "source": profile["source"],
+            "source_url": profile["source_url"],
+        }
+    return overlay
+
+
+def _gowin_public_device_overlay(pinout_data: dict) -> dict:
+    device = pinout_data.get("device", "")
+    package = pinout_data.get("package", "")
+    package_token = _normalize_package_token(package)
+
+    profiles = {
+        "GW5AR-25": {
+            "source": "gowin_product_detail_79",
+            "source_url": "https://www.gowinsemi.com/en/product/detail/79/",
+            "device_role": "FPGA",
+            "resources": {
+                "lut4": 23040,
+                "bsram_kbit": 1008,
+                "dsp": 28,
+                "pll": 6,
+                "adc": 1,
+                "user_io": 178,
+            },
+            "embedded_memories": {
+                "embedded_psram_mbit": 64,
+            },
+            "ip_blocks": {
+                "mipi": {
+                    "present": True,
+                    "phy_types": ["D-PHY"],
+                    "directions": ["RX", "TX"],
+                    "dphy": {
+                        "max_data_lanes": 4,
+                        "max_clock_lanes": 1,
+                    },
+                }
+            },
+        },
+        "GW5AS-25": {
+            "source": "gowin_product_detail_78",
+            "source_url": "https://www.gowinsemi.com/en/product/detail/78/",
+            "device_role": "FPGA SoC",
+            "resources": {
+                "lut4": 41472,
+                "bsram_kbit": 1512,
+                "dsp": 178,
+                "pll": 12,
+                "adc": {
+                    "fpga": 1,
+                    "cortex_m4": 3,
+                    "total": 4,
+                },
+            },
+            "embedded_memories": {
+                "embedded_psram_mbit": 64,
+            },
+            "hard_processor": {
+                "core": "Cortex-M4",
+            },
+            "ip_blocks": {
+                "mipi": {
+                    "present": True,
+                    "phy_types": ["D-PHY"],
+                    "directions": ["RX", "TX"],
+                    "dphy": {
+                        "max_data_lanes": 4,
+                        "max_clock_lanes": 1,
+                    },
+                }
+            },
+        },
+        "GW5A-25": {
+            "source": "gowin_product_detail_77",
+            "source_url": "https://www.gowinsemi.com/en/product/detail/77/",
+            "device_role": "FPGA",
+            "resources": {
+                "lut4": 23040,
+                "bsram_kbit": 1008,
+                "dsp": 28,
+                "pll": 6,
+                "adc": 1,
+            },
+            "memory_interface": {
+                "ddr3_mbps": 800,
+            },
+            "ip_blocks": {
+                "mipi": {
+                    "present": True,
+                    "phy_types": ["D-PHY"],
+                    "directions": ["RX", "TX"],
+                    "dphy": {
+                        "max_data_lanes": 4,
+                        "max_clock_lanes": 1,
+                        "max_rate_gbps_per_lane": 2.5,
+                    },
+                }
+            },
+            "package_profiles": {
+                "UG324": {"user_io": 206, "true_lvds_pairs": 100},
+            },
+        },
+        "GW5A-60": {
+            "source": "gowin_product_detail_75",
+            "source_url": "https://www.gowinsemi.com/en/product/detail/75/",
+            "device_role": "FPGA",
+            "resources": {
+                "lut4": 59904,
+                "bsram_kbit": 2124,
+                "dsp": 118,
+                "pll": 8,
+                "adc": 2,
+                "gpio_bank_count": 11,
+                "max_gpio": 320,
+            },
+            "memory_interface": {
+                "ddr3_mbps": 1100,
+            },
+            "ip_blocks": {
+                "mipi": {
+                    "present": True,
+                    "phy_types": ["D-PHY", "C-PHY"],
+                    "directions": ["RX", "TX"],
+                    "dphy": {
+                        "max_data_lanes": 4,
+                        "max_clock_lanes": 1,
+                        "max_rate_gbps_per_lane": 2.5,
+                    },
+                    "cphy": {
+                        "max_trios": 3,
+                        "max_symbol_rate_gsps": 2.5,
+                    },
+                }
+            },
+            "package_profiles": {
+                "UG324S": {"user_io": 226, "true_lvds_pairs": 110},
+                "UG324A": {"user_io": 222, "true_lvds_pairs": 106},
+            },
+        },
+        "GW5A-138": {
+            "source": "gowin_product_detail_76",
+            "source_url": "https://www.gowinsemi.com/en/product/detail/76/",
+            "device_role": "FPGA SoC",
+            "resources": {
+                "lut4": 138240,
+                "bsram_kbit": 6012,
+                "dsp": 298,
+                "pll": 20,
+                "adc": 3,
+                "max_gpio": 398,
+            },
+            "memory_interface": {
+                "ddr3_mbps": 1600,
+            },
+            "hard_processor": {
+                "core": "RiscV AE350_SOC",
+            },
+            "ip_blocks": {
+                "mipi": {
+                    "present": True,
+                    "phy_types": ["D-PHY"],
+                    "directions": ["RX"],
+                    "dphy": {
+                        "max_data_lanes": 8,
+                        "max_clock_lanes": 2,
+                        "max_rate_gbps_per_lane": 2.5,
+                    },
+                }
+            },
+            "package_profiles": {
+                "UG324A": {"user_io": 222, "true_lvds_pairs": 106},
+            },
+        },
+    }
+
+    profile = profiles.get(device)
+    if not profile:
+        return {}
+
+    source = profile["source"]
+    source_url = profile["source_url"]
+    resources = dict(profile.get("resources", {}))
+    package_profile = profile.get("package_profiles", {}).get(package_token)
+    if package_profile:
+        resources.update(package_profile)
+
+    overlay = {
+        "device_role": profile["device_role"],
+        "resources": resources,
+        "capability_blocks": {
+            "device_role": {
+                "class": "device_role",
+                "device_role": profile["device_role"],
+                "source": source,
+                "source_url": source_url,
+            },
+            "fabric_resources": {
+                "class": "fpga_fabric",
+                **resources,
+                "source": source,
+                "source_url": source_url,
+            },
+        },
+    }
+
+    if profile.get("embedded_memories"):
+        overlay["embedded_memories"] = profile["embedded_memories"]
+        overlay["capability_blocks"]["embedded_memory"] = {
+            "class": "embedded_memory",
+            **profile["embedded_memories"],
+            "source": source,
+            "source_url": source_url,
+        }
+
+    if profile.get("memory_interface"):
+        overlay["capability_blocks"]["memory_interface"] = {
+            "class": "memory_interface",
+            **profile["memory_interface"],
+            "source": source,
+            "source_url": source_url,
+        }
+
+    if profile.get("hard_processor"):
+        overlay["capability_blocks"]["hard_processor"] = {
+            "class": "hard_processor",
+            **profile["hard_processor"],
+            "source": source,
+            "source_url": source_url,
+        }
+
+    if profile.get("ip_blocks"):
+        overlay["ip_blocks"] = profile["ip_blocks"]
+        if "mipi" in profile["ip_blocks"]:
+            overlay["capability_blocks"]["mipi_phy"] = {
+                "class": "mipi_phy",
+                **profile["ip_blocks"]["mipi"],
+                "source": source,
+                "source_url": source_url,
+            }
+
+    return overlay
 
 
 def _infer_gowin_ip_blocks(pinout_data: dict) -> dict | None:
@@ -1697,6 +1993,19 @@ def _infer_gowin_ip_blocks(pinout_data: dict) -> dict | None:
                         },
                     },
                 },
+                "PG484F": {
+                    "transceiver_count": 4,
+                    "mipi": {
+                        "present": True,
+                        "phy_types": ["D-PHY"],
+                        "directions": ["RX"],
+                        "dphy": {
+                            "max_data_lanes": 8,
+                            "max_clock_lanes": 2,
+                            "max_rate_gbps_per_lane": 2.5,
+                        },
+                    },
+                },
             },
         },
     }
@@ -1735,6 +2044,9 @@ def _infer_gowin_ip_blocks(pinout_data: dict) -> dict | None:
             "source_url": "https://www.gowinsemi.com/en/product/detail/72/",
         },
     }
+    package_overlay = _gowin_package_listing_overlay(device, package)
+    if package_overlay:
+        result["serdes"] = _deep_merge_dict(result["serdes"], package_overlay)
     return result
 
 
@@ -1985,6 +2297,11 @@ def export_fpga(dc_data: dict, pinout_data: dict, gowin_dc: dict = None, lattice
     # Add absolute maximum ratings if available
     if gowin_dc or lattice_dc:
         result["absolute_maximum_ratings"] = abs_max_specs
+
+    if vendor == "Gowin":
+        public_overlay = _gowin_public_device_overlay(pinout_data)
+        if public_overlay:
+            result = _deep_merge_dict(result, public_overlay)
 
     return result
 

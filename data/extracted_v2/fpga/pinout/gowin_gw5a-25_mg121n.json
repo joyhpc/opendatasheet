@@ -1,0 +1,1853 @@
+{
+  "_schema_version": "2.0",
+  "_purpose": "FPGA pin definition for LLM-driven schematic DRC",
+  "_vendor": "Gowin",
+  "device": "GW5A-25",
+  "package": "MG121N",
+  "source_file": "GW5A-25_Pinout.xlsx",
+  "total_pins": 128,
+  "summary": {
+    "by_function": {
+      "GROUND": 10,
+      "IO": 89,
+      "MIPI": 10,
+      "NC": 2,
+      "OTHER": 1,
+      "POWER": 16
+    },
+    "diff_pairs": {
+      "IO": 0,
+      "LVDS": 0,
+      "SERDES_RX": 0,
+      "SERDES_TX": 0,
+      "SERDES_REFCLK": 0
+    }
+  },
+  "power_rails": {
+    "VCC": {
+      "description": "Core voltage, LV",
+      "min_voltage": 0.87,
+      "max_voltage": 1.03
+    },
+    "VCCIO": {
+      "description": "I/O Bank voltage",
+      "min_voltage": 1.14,
+      "max_voltage": 3.465
+    },
+    "VCCX": {
+      "description": "Auxiliary voltage",
+      "min_voltage": 3.465,
+      "max_voltage": null
+    },
+    "VCCLDO[1]": {
+      "description": "Power supply voltage for internal LDO module that powers SRAM",
+      "min_voltage": 1.14,
+      "max_voltage": 3.3
+    },
+    "VDDAM": {
+      "description": "Analog core power supply voltage",
+      "min_voltage": 0.87,
+      "max_voltage": 1.0
+    },
+    "VDDDM": {
+      "description": "Digital core power supply voltage",
+      "min_voltage": 0.87,
+      "max_voltage": 1.0
+    },
+    "VDDXM": {
+      "description": "Analog auxiliary power supply voltage",
+      "min_voltage": 2.375,
+      "max_voltage": 3.465
+    },
+    "VDD12M": {
+      "description": "MIPI LP power supply voltage",
+      "min_voltage": 1.14,
+      "max_voltage": 1.32
+    }
+  },
+  "banks": {
+    "0": {
+      "bank": "0",
+      "total_pins": 6,
+      "io_pins": 6,
+      "lvds_capable_count": 6,
+      "clock_capable_pins": null
+    },
+    "1": {
+      "bank": "1",
+      "total_pins": 10,
+      "io_pins": 10,
+      "lvds_capable_count": 10,
+      "clock_capable_pins": null
+    },
+    "2": {
+      "bank": "2",
+      "total_pins": 12,
+      "io_pins": 12,
+      "lvds_capable_count": 12,
+      "clock_capable_pins": null
+    },
+    "3": {
+      "bank": "3",
+      "total_pins": 4,
+      "io_pins": 4,
+      "lvds_capable_count": 4,
+      "clock_capable_pins": null
+    },
+    "4": {
+      "bank": "4",
+      "total_pins": 13,
+      "io_pins": 13,
+      "lvds_capable_count": 12,
+      "clock_capable_pins": null
+    },
+    "5": {
+      "bank": "5",
+      "total_pins": 13,
+      "io_pins": 13,
+      "lvds_capable_count": 12,
+      "clock_capable_pins": null
+    },
+    "6": {
+      "bank": "6",
+      "total_pins": 10,
+      "io_pins": 10,
+      "lvds_capable_count": 10,
+      "clock_capable_pins": null
+    },
+    "7": {
+      "bank": "7",
+      "total_pins": 16,
+      "io_pins": 16,
+      "lvds_capable_count": 16,
+      "clock_capable_pins": null
+    },
+    "10": {
+      "bank": "10",
+      "total_pins": 4,
+      "io_pins": 4,
+      "lvds_capable_count": 0,
+      "clock_capable_pins": null
+    },
+    "MIPI": {
+      "bank": "MIPI",
+      "total_pins": 10,
+      "io_pins": 0,
+      "lvds_capable_count": 0,
+      "clock_capable_pins": null
+    },
+    "N/A": {
+      "bank": "N/A",
+      "total_pins": 29,
+      "io_pins": 0,
+      "lvds_capable_count": 0,
+      "clock_capable_pins": null
+    }
+  },
+  "diff_pairs": [],
+  "drc_rules": {
+    "power_integrity": {
+      "severity": "ERROR",
+      "desc": "All power and ground pins must be connected"
+    },
+    "config_pins": {
+      "severity": "ERROR",
+      "desc": "Mandatory config pins (MODE, JTAGSEL, RECONFIG_N) must be connected"
+    },
+    "vcco_bank_consistency": {
+      "severity": "ERROR",
+      "desc": "All IO in same bank must use compatible IO standards sharing same VCCIO"
+    },
+    "diff_pair_integrity": {
+      "severity": "ERROR",
+      "desc": "Differential pairs must be used together or not at all"
+    },
+    "unused_io": {
+      "severity": "WARNING",
+      "desc": "Unused IO pins should not be left floating"
+    },
+    "jtag_pins": {
+      "severity": "WARNING",
+      "desc": "JTAG pins (TCK/TMS/TDI/TDO) should be properly connected or have pull resistors"
+    }
+  },
+  "pins": [
+    {
+      "pin": "B1_B10A[1]",
+      "name": "IOB10A/D03/SSPI_CS_N",
+      "function": "IO",
+      "bank": "5",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": true,
+      "drc": {
+        "config_function": "SSPI_CS_N",
+        "must_connect": true,
+        "desc": "Multi-function pin: IO + SSPI_CS_N"
+      }
+    },
+    {
+      "pin": "A3_B10B[1]",
+      "name": "IOB10B/D04/SI/SSI0",
+      "function": "IO",
+      "bank": "5",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": true
+    },
+    {
+      "pin": "E2",
+      "name": "IOB12A/GCLKT_10B[5]/D07/SSPI_WPN/SSI2/LPLL1_T_IN1",
+      "function": "IO",
+      "bank": "5",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": true
+    },
+    {
+      "pin": "E1",
+      "name": "IOB12B/GCLKC_10B[5]/RDWR_B/LPLL1_C_IN1",
+      "function": "IO",
+      "bank": "5",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": true
+    },
+    {
+      "pin": "C1_B14A[1]",
+      "name": "IOB14A/SSPI_CLK",
+      "function": "IO",
+      "bank": "5",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": true,
+      "drc": {
+        "config_function": "SSPI_CLK",
+        "must_connect": true,
+        "desc": "Multi-function pin: IO + SSPI_CLK"
+      }
+    },
+    {
+      "pin": "D1",
+      "name": "IOB14B/CLKHOLD_N/SSI3",
+      "function": "IO",
+      "bank": "5",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": true
+    },
+    {
+      "pin": "D8",
+      "name": "IOB1A/RECONFIGN",
+      "function": "IO",
+      "bank": "5",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": false
+    },
+    {
+      "pin": "A1",
+      "name": "IOB24A",
+      "function": "IO",
+      "bank": "5",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": true
+    },
+    {
+      "pin": "F2",
+      "name": "IOB26A/GCLKT_9B[5]",
+      "function": "IO",
+      "bank": "5",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": true
+    },
+    {
+      "pin": "F1",
+      "name": "IOB26B/GCLKC_9B[5]",
+      "function": "IO",
+      "bank": "5",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": true
+    },
+    {
+      "pin": "E8",
+      "name": "IOB37A/READY",
+      "function": "IO",
+      "bank": "4",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": true,
+      "drc": {
+        "config_function": "READY",
+        "must_connect": true,
+        "desc": "Multi-function pin: IO + READY"
+      }
+    },
+    {
+      "pin": "E6",
+      "name": "IOB37B/MCS_N/CSO_B",
+      "function": "IO",
+      "bank": "4",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": true
+    },
+    {
+      "pin": "B2",
+      "name": "IOB4A/D08/LPLL1_T_FB0",
+      "function": "IO",
+      "bank": "5",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": true
+    },
+    {
+      "pin": "C2",
+      "name": "IOB4B/D09/LPLL1_C_FB0",
+      "function": "IO",
+      "bank": "5",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": true
+    },
+    {
+      "pin": "GND[2]",
+      "name": "IOB52A/MODE1",
+      "function": "IO",
+      "bank": "4",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": true,
+      "drc": {
+        "config_function": "MODE1",
+        "must_connect": true,
+        "desc": "Multi-function pin: IO + MODE1"
+      }
+    },
+    {
+      "pin": "D5",
+      "name": "IOB54A/GCLKT_11B[5]/D01/MI2/BPLL_T_FB1",
+      "function": "IO",
+      "bank": "4",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": true
+    },
+    {
+      "pin": "E4",
+      "name": "IOB54B/GCLKC_11B[5]/D02/MI3/BPLL_C_FB1",
+      "function": "IO",
+      "bank": "4",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": true
+    },
+    {
+      "pin": "B3",
+      "name": "IOB56A",
+      "function": "IO",
+      "bank": "4",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": true
+    },
+    {
+      "pin": "C3",
+      "name": "IOB56B",
+      "function": "IO",
+      "bank": "4",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": true
+    },
+    {
+      "pin": "E5",
+      "name": "IOB58A/D00/MISO/MI1/DIN",
+      "function": "IO",
+      "bank": "4",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": true,
+      "drc": {
+        "config_function": "MISO",
+        "must_connect": "recommended",
+        "desc": "Multi-function pin: IO + MISO"
+      }
+    },
+    {
+      "pin": "D6",
+      "name": "IOB58B/MOSI/CSI_B/MI0",
+      "function": "IO",
+      "bank": "4",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": true,
+      "drc": {
+        "config_function": "MOSI",
+        "must_connect": true,
+        "desc": "Multi-function pin: IO + MOSI"
+      }
+    },
+    {
+      "pin": "E3",
+      "name": "IOB60A",
+      "function": "IO",
+      "bank": "4",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": true
+    },
+    {
+      "pin": "E7",
+      "name": "IOB62A/CCLK",
+      "function": "IO",
+      "bank": "4",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": true,
+      "drc": {
+        "config_function": "CCLK",
+        "must_connect": true,
+        "desc": "Multi-function pin: IO + CCLK"
+      }
+    },
+    {
+      "pin": "VCCIO[3]",
+      "name": "IOB62B/MODE0",
+      "function": "IO",
+      "bank": "4",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": true,
+      "drc": {
+        "config_function": "MODE0",
+        "must_connect": true,
+        "desc": "Multi-function pin: IO + MODE0"
+      }
+    },
+    {
+      "pin": "D7",
+      "name": "IOB64A/DONE",
+      "function": "IO",
+      "bank": "4",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": false,
+      "drc": {
+        "config_function": "DONE",
+        "must_connect": true,
+        "desc": "Multi-function pin: IO + DONE"
+      }
+    },
+    {
+      "pin": "G4",
+      "name": "IOB89A/GCLKT_7/BPLL_T_IN0",
+      "function": "IO",
+      "bank": "3",
+      "config_function": null,
+      "dqs": "DQ4",
+      "lvds_capable": true
+    },
+    {
+      "pin": "H4",
+      "name": "IOB89B/GCLKC_7/BPLL_C_IN0",
+      "function": "IO",
+      "bank": "3",
+      "config_function": null,
+      "dqs": "DQ4",
+      "lvds_capable": true
+    },
+    {
+      "pin": "A2_B8A[1]",
+      "name": "IOB8A/D05/SO/SSI1",
+      "function": "IO",
+      "bank": "5",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": true
+    },
+    {
+      "pin": "H1",
+      "name": "IOB91A/GCLKT_6A[5]",
+      "function": "IO",
+      "bank": "3",
+      "config_function": null,
+      "dqs": "DQ4",
+      "lvds_capable": true
+    },
+    {
+      "pin": "H2",
+      "name": "IOB91B/GCLKC_6A[5]",
+      "function": "IO",
+      "bank": "3",
+      "config_function": null,
+      "dqs": "DQ4",
+      "lvds_capable": true
+    },
+    {
+      "pin": "B11",
+      "name": "IOL12A",
+      "function": "IO",
+      "bank": "6",
+      "config_function": null,
+      "dqs": "DQ7",
+      "lvds_capable": true
+    },
+    {
+      "pin": "B10",
+      "name": "IOL12B",
+      "function": "IO",
+      "bank": "6",
+      "config_function": null,
+      "dqs": "DQ7",
+      "lvds_capable": true
+    },
+    {
+      "pin": "A11",
+      "name": "IOL14A/LPLL1_T_IN0",
+      "function": "IO",
+      "bank": "6",
+      "config_function": null,
+      "dqs": "DQ7",
+      "lvds_capable": true
+    },
+    {
+      "pin": "A10",
+      "name": "IOL14B/LPLL1_C_IN0",
+      "function": "IO",
+      "bank": "6",
+      "config_function": null,
+      "dqs": "DQ7",
+      "lvds_capable": true
+    },
+    {
+      "pin": "E11",
+      "name": "IOL3A/GCLKT_14/LPLL0_T_IN2/LPLL0_T_FB0",
+      "function": "IO",
+      "bank": "6",
+      "config_function": null,
+      "dqs": "DQ7",
+      "lvds_capable": true
+    },
+    {
+      "pin": "E10",
+      "name": "IOL3B/GCLKC_14/LPLL0_C_IN2/LPLL0_C_FB0",
+      "function": "IO",
+      "bank": "6",
+      "config_function": null,
+      "dqs": "DQ7",
+      "lvds_capable": true
+    },
+    {
+      "pin": "C11",
+      "name": "IOL5A/GCLKT_13/LPLL0_T_IN1/LPLL0_T_FB1",
+      "function": "IO",
+      "bank": "6",
+      "config_function": null,
+      "dqs": "DQ7",
+      "lvds_capable": true
+    },
+    {
+      "pin": "C10",
+      "name": "IOL5B/GCLKC_13/LPLL0_C_IN1/LPLL0_C_FB1",
+      "function": "IO",
+      "bank": "6",
+      "config_function": null,
+      "dqs": "DQ7",
+      "lvds_capable": true
+    },
+    {
+      "pin": "D11",
+      "name": "IOL9A",
+      "function": "IO",
+      "bank": "6",
+      "config_function": null,
+      "dqs": "DQS7/DQ7",
+      "lvds_capable": true
+    },
+    {
+      "pin": "D10",
+      "name": "IOL9B",
+      "function": "IO",
+      "bank": "6",
+      "config_function": null,
+      "dqs": "DQS7/DQ7",
+      "lvds_capable": true
+    },
+    {
+      "pin": "L2",
+      "name": "IOR18A",
+      "function": "IO",
+      "bank": "2",
+      "config_function": null,
+      "dqs": "DQ2/DQS_23",
+      "lvds_capable": true
+    },
+    {
+      "pin": "L1",
+      "name": "IOR18B",
+      "function": "IO",
+      "bank": "2",
+      "config_function": null,
+      "dqs": "DQ2/DQS_23",
+      "lvds_capable": true
+    },
+    {
+      "pin": "C1",
+      "name": "IOR1A/TCK",
+      "function": "IO",
+      "bank": "10",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": false,
+      "drc": {
+        "config_function": "TCK",
+        "must_connect": "recommended",
+        "desc": "Multi-function pin: IO + TCK"
+      }
+    },
+    {
+      "pin": "A3",
+      "name": "IOR1B/TDI",
+      "function": "IO",
+      "bank": "10",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": false,
+      "drc": {
+        "config_function": "TDI",
+        "must_connect": "recommended",
+        "desc": "Multi-function pin: IO + TDI"
+      }
+    },
+    {
+      "pin": "K1",
+      "name": "IOR20A",
+      "function": "IO",
+      "bank": "2",
+      "config_function": null,
+      "dqs": "DQ3",
+      "lvds_capable": true
+    },
+    {
+      "pin": "K2",
+      "name": "IOR20B",
+      "function": "IO",
+      "bank": "2",
+      "config_function": null,
+      "dqs": "DQ3",
+      "lvds_capable": true
+    },
+    {
+      "pin": "J4",
+      "name": "IOR22A",
+      "function": "IO",
+      "bank": "2",
+      "config_function": null,
+      "dqs": "DQ3",
+      "lvds_capable": true
+    },
+    {
+      "pin": "K4",
+      "name": "IOR22B",
+      "function": "IO",
+      "bank": "2",
+      "config_function": null,
+      "dqs": "DQ3",
+      "lvds_capable": true
+    },
+    {
+      "pin": "G2",
+      "name": "IOR24A",
+      "function": "IO",
+      "bank": "2",
+      "config_function": null,
+      "dqs": "DQ3",
+      "lvds_capable": true
+    },
+    {
+      "pin": "G1",
+      "name": "IOR24B",
+      "function": "IO",
+      "bank": "2",
+      "config_function": null,
+      "dqs": "DQ3",
+      "lvds_capable": true
+    },
+    {
+      "pin": "L4",
+      "name": "IOR31A/GCLKT_4/RPLL1_T_IN0/RPLL1_T_FB1",
+      "function": "IO",
+      "bank": "2",
+      "config_function": null,
+      "dqs": "DQ3",
+      "lvds_capable": true
+    },
+    {
+      "pin": "L3",
+      "name": "IOR31B/GCLKC_4/RPLL1_C_IN0/RPLL1_C_FB1",
+      "function": "IO",
+      "bank": "2",
+      "config_function": null,
+      "dqs": "DQ3",
+      "lvds_capable": true
+    },
+    {
+      "pin": "J1",
+      "name": "IOR33A/GCLKT_5/RPLL1_T_IN1/RPLL1_T_FB0",
+      "function": "IO",
+      "bank": "2",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": true
+    },
+    {
+      "pin": "J2",
+      "name": "IOR33B/GCLKC_5/RPLL1_C_IN1/RPLL1_C_FB0",
+      "function": "IO",
+      "bank": "2",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": true
+    },
+    {
+      "pin": "B1",
+      "name": "IOR3A/TMS",
+      "function": "IO",
+      "bank": "10",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": false,
+      "drc": {
+        "config_function": "TMS",
+        "must_connect": "recommended",
+        "desc": "Multi-function pin: IO + TMS"
+      }
+    },
+    {
+      "pin": "A2",
+      "name": "IOR3B/TDO",
+      "function": "IO",
+      "bank": "10",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": false,
+      "drc": {
+        "config_function": "TDO",
+        "must_connect": "recommended",
+        "desc": "Multi-function pin: IO + TDO"
+      }
+    },
+    {
+      "pin": "K11",
+      "name": "IOT11A",
+      "function": "IO",
+      "bank": "7",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": true
+    },
+    {
+      "pin": "L11",
+      "name": "IOT11B",
+      "function": "IO",
+      "bank": "7",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": true
+    },
+    {
+      "pin": "L10",
+      "name": "IOT15A",
+      "function": "IO",
+      "bank": "7",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": true
+    },
+    {
+      "pin": "K10",
+      "name": "IOT15B",
+      "function": "IO",
+      "bank": "7",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": true
+    },
+    {
+      "pin": "L7",
+      "name": "IOT19A",
+      "function": "IO",
+      "bank": "7",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": true
+    },
+    {
+      "pin": "L8",
+      "name": "IOT19B",
+      "function": "IO",
+      "bank": "7",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": true
+    },
+    {
+      "pin": "J11",
+      "name": "IOT1A/GCLKT_15/LPLL0_T_IN0",
+      "function": "IO",
+      "bank": "7",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": true
+    },
+    {
+      "pin": "J10",
+      "name": "IOT1B/GCLKC_15/LPLL0_C_IN0",
+      "function": "IO",
+      "bank": "7",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": true
+    },
+    {
+      "pin": "K7",
+      "name": "IOT21A",
+      "function": "IO",
+      "bank": "7",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": true
+    },
+    {
+      "pin": "J7",
+      "name": "IOT21B",
+      "function": "IO",
+      "bank": "7",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": true
+    },
+    {
+      "pin": "L6",
+      "name": "IOT23A",
+      "function": "IO",
+      "bank": "7",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": true
+    },
+    {
+      "pin": "K6",
+      "name": "IOT23B",
+      "function": "IO",
+      "bank": "7",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": true
+    },
+    {
+      "pin": "GND[2]",
+      "name": "IOT29A/PUDC_B",
+      "function": "IO",
+      "bank": null,
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": true
+    },
+    {
+      "pin": "L9",
+      "name": "IOT31A",
+      "function": "IO",
+      "bank": "0",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": true
+    },
+    {
+      "pin": "K9",
+      "name": "IOT31B",
+      "function": "IO",
+      "bank": "0",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": true
+    },
+    {
+      "pin": "H11",
+      "name": "IOT3A/GCLKT_16",
+      "function": "IO",
+      "bank": "7",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": true
+    },
+    {
+      "pin": "H10",
+      "name": "IOT3B/GCLKC_16",
+      "function": "IO",
+      "bank": "7",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": true
+    },
+    {
+      "pin": "J8",
+      "name": "IOT56A/GCLKT_0/TPLL_T_IN1/TPLL_T_FB1",
+      "function": "IO",
+      "bank": "0",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": true
+    },
+    {
+      "pin": "K8",
+      "name": "IOT56B/GCLKC_0/TPLL_C_IN1/TPLL_C_FB1",
+      "function": "IO",
+      "bank": "0",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": true
+    },
+    {
+      "pin": "F7",
+      "name": "IOT58A/GCLKT_1/TPLL_T_IN2/TPLL_T_FB0",
+      "function": "IO",
+      "bank": "0",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": true
+    },
+    {
+      "pin": "F6",
+      "name": "IOT58B/GCLKC_1/TPLL_C_IN2/TPLL_C_FB0",
+      "function": "IO",
+      "bank": "0",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": true
+    },
+    {
+      "pin": "H5",
+      "name": "IOT61A/GCLKT_2/TPLL_T_IN0",
+      "function": "IO",
+      "bank": "1",
+      "config_function": null,
+      "dqs": "DQS0/DQ0",
+      "lvds_capable": true
+    },
+    {
+      "pin": "J5",
+      "name": "IOT61B/GCLKC_2/TPLL_C_IN0",
+      "function": "IO",
+      "bank": "1",
+      "config_function": null,
+      "dqs": "DQS0/DQ0",
+      "lvds_capable": true
+    },
+    {
+      "pin": "L5",
+      "name": "IOT63A/GCLKT_3/RPLL0_T_IN0",
+      "function": "IO",
+      "bank": "1",
+      "config_function": null,
+      "dqs": "DQ0",
+      "lvds_capable": true
+    },
+    {
+      "pin": "K5",
+      "name": "IOT63B/GCLKC_3/RPLL0_C_IN0",
+      "function": "IO",
+      "bank": "1",
+      "config_function": null,
+      "dqs": "DQ0",
+      "lvds_capable": true
+    },
+    {
+      "pin": "H8",
+      "name": "IOT66A",
+      "function": "IO",
+      "bank": "1",
+      "config_function": null,
+      "dqs": "DQ0",
+      "lvds_capable": true
+    },
+    {
+      "pin": "H7",
+      "name": "IOT66B",
+      "function": "IO",
+      "bank": "1",
+      "config_function": null,
+      "dqs": "DQ0",
+      "lvds_capable": true
+    },
+    {
+      "pin": "G7",
+      "name": "IOT68A",
+      "function": "IO",
+      "bank": "1",
+      "config_function": null,
+      "dqs": "DQ0",
+      "lvds_capable": true
+    },
+    {
+      "pin": "G8",
+      "name": "IOT68B",
+      "function": "IO",
+      "bank": "1",
+      "config_function": null,
+      "dqs": "DQ0",
+      "lvds_capable": true
+    },
+    {
+      "pin": "F5",
+      "name": "IOT72A",
+      "function": "IO",
+      "bank": "1",
+      "config_function": null,
+      "dqs": "DQ0",
+      "lvds_capable": true
+    },
+    {
+      "pin": "G5",
+      "name": "IOT72B",
+      "function": "IO",
+      "bank": "1",
+      "config_function": null,
+      "dqs": "DQ0",
+      "lvds_capable": true
+    },
+    {
+      "pin": "G11",
+      "name": "IOT7A",
+      "function": "IO",
+      "bank": "7",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": true
+    },
+    {
+      "pin": "G10",
+      "name": "IOT7B",
+      "function": "IO",
+      "bank": "7",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": true
+    },
+    {
+      "pin": "B7",
+      "name": "M0_CKN",
+      "function": "MIPI",
+      "bank": "MIPI",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": false,
+      "polarity": "N"
+    },
+    {
+      "pin": "A7",
+      "name": "M0_CKP",
+      "function": "MIPI",
+      "bank": "MIPI",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": false,
+      "polarity": "P"
+    },
+    {
+      "pin": "B9",
+      "name": "M0_D0N",
+      "function": "MIPI",
+      "bank": "MIPI",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": false,
+      "polarity": "N"
+    },
+    {
+      "pin": "A9",
+      "name": "M0_D0P",
+      "function": "MIPI",
+      "bank": "MIPI",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": false,
+      "polarity": "P"
+    },
+    {
+      "pin": "B8",
+      "name": "M0_D1N",
+      "function": "MIPI",
+      "bank": "MIPI",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": false,
+      "polarity": "N"
+    },
+    {
+      "pin": "A8",
+      "name": "M0_D1P",
+      "function": "MIPI",
+      "bank": "MIPI",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": false,
+      "polarity": "P"
+    },
+    {
+      "pin": "B6",
+      "name": "M0_D2N",
+      "function": "MIPI",
+      "bank": "MIPI",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": false,
+      "polarity": "N"
+    },
+    {
+      "pin": "A6",
+      "name": "M0_D2P",
+      "function": "MIPI",
+      "bank": "MIPI",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": false,
+      "polarity": "P"
+    },
+    {
+      "pin": "B5",
+      "name": "M0_D3N",
+      "function": "MIPI",
+      "bank": "MIPI",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": false,
+      "polarity": "N"
+    },
+    {
+      "pin": "A5",
+      "name": "M0_D3P",
+      "function": "MIPI",
+      "bank": "MIPI",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": false,
+      "polarity": "P"
+    },
+    {
+      "pin": "K3",
+      "name": "VDD12M",
+      "function": "POWER",
+      "bank": "N/A",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": false,
+      "drc": {
+        "must_connect": true
+      }
+    },
+    {
+      "pin": "C8",
+      "name": "VDDAM",
+      "function": "POWER",
+      "bank": "N/A",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": false,
+      "drc": {
+        "must_connect": true
+      }
+    },
+    {
+      "pin": "D9",
+      "name": "VDDDM",
+      "function": "POWER",
+      "bank": "N/A",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": false,
+      "drc": {
+        "must_connect": true
+      }
+    },
+    {
+      "pin": "H3",
+      "name": "VCCX_VDDXM",
+      "function": "POWER",
+      "bank": "N/A",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": false,
+      "drc": {
+        "must_connect": true
+      }
+    },
+    {
+      "pin": "G6",
+      "name": "VCCX_VDDXM",
+      "function": "POWER",
+      "bank": "N/A",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": false,
+      "drc": {
+        "must_connect": true
+      }
+    },
+    {
+      "pin": "G3",
+      "name": "VCCX_VDDXM",
+      "function": "POWER",
+      "bank": "N/A",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": false,
+      "drc": {
+        "must_connect": true
+      }
+    },
+    {
+      "pin": "G9",
+      "name": "VCCX_VDDXM",
+      "function": "POWER",
+      "bank": "N/A",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": false,
+      "drc": {
+        "must_connect": true
+      }
+    },
+    {
+      "pin": "C4",
+      "name": "NC",
+      "function": "NC",
+      "bank": "N/A",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": false
+    },
+    {
+      "pin": "C6",
+      "name": "NC",
+      "function": "NC",
+      "bank": "N/A",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": false
+    },
+    {
+      "pin": "F8",
+      "name": "VCC",
+      "function": "POWER",
+      "bank": "N/A",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": false,
+      "drc": {
+        "must_connect": true
+      }
+    },
+    {
+      "pin": "F4",
+      "name": "VCC",
+      "function": "POWER",
+      "bank": "N/A",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": false,
+      "drc": {
+        "must_connect": true
+      }
+    },
+    {
+      "pin": "E9",
+      "name": "VCC",
+      "function": "POWER",
+      "bank": "N/A",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": false,
+      "drc": {
+        "must_connect": true
+      }
+    },
+    {
+      "pin": "J6",
+      "name": "VCCLDO",
+      "function": "POWER",
+      "bank": "N/A",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": false,
+      "drc": {
+        "must_connect": true
+      }
+    },
+    {
+      "pin": "D4",
+      "name": "VCCIO4",
+      "function": "POWER",
+      "bank": "N/A",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": false,
+      "drc": {
+        "must_connect": true
+      }
+    },
+    {
+      "pin": "J9",
+      "name": "VCCIO0_1",
+      "function": "POWER",
+      "bank": "N/A",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": false,
+      "drc": {
+        "must_connect": true
+      }
+    },
+    {
+      "pin": "D2",
+      "name": "VCCIO5_10",
+      "function": "POWER",
+      "bank": "N/A",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": false,
+      "drc": {
+        "must_connect": true
+      }
+    },
+    {
+      "pin": "A4",
+      "name": "VCCIO2_3",
+      "function": "POWER",
+      "bank": "N/A",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": false,
+      "drc": {
+        "must_connect": true
+      }
+    },
+    {
+      "pin": "F10",
+      "name": "VCCIO6_7",
+      "function": "POWER",
+      "bank": "N/A",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": false,
+      "drc": {
+        "must_connect": true
+      }
+    },
+    {
+      "pin": "D3",
+      "name": "VEFUSE",
+      "function": "OTHER",
+      "bank": "N/A",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": false
+    },
+    {
+      "pin": "B4",
+      "name": "VSS",
+      "function": "GROUND",
+      "bank": "N/A",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": false,
+      "drc": {
+        "must_connect": true,
+        "net": "GND"
+      }
+    },
+    {
+      "pin": "C5",
+      "name": "VSS",
+      "function": "GROUND",
+      "bank": "N/A",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": false,
+      "drc": {
+        "must_connect": true,
+        "net": "GND"
+      }
+    },
+    {
+      "pin": "C7",
+      "name": "VSS",
+      "function": "GROUND",
+      "bank": "N/A",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": false,
+      "drc": {
+        "must_connect": true,
+        "net": "GND"
+      }
+    },
+    {
+      "pin": "C9",
+      "name": "VSS",
+      "function": "GROUND",
+      "bank": "N/A",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": false,
+      "drc": {
+        "must_connect": true,
+        "net": "GND"
+      }
+    },
+    {
+      "pin": "F11",
+      "name": "VSS",
+      "function": "GROUND",
+      "bank": "N/A",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": false,
+      "drc": {
+        "must_connect": true,
+        "net": "GND"
+      }
+    },
+    {
+      "pin": "F3",
+      "name": "VSS",
+      "function": "GROUND",
+      "bank": "N/A",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": false,
+      "drc": {
+        "must_connect": true,
+        "net": "GND"
+      }
+    },
+    {
+      "pin": "F9",
+      "name": "VSS",
+      "function": "GROUND",
+      "bank": "N/A",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": false,
+      "drc": {
+        "must_connect": true,
+        "net": "GND"
+      }
+    },
+    {
+      "pin": "H6",
+      "name": "VSS",
+      "function": "GROUND",
+      "bank": "N/A",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": false,
+      "drc": {
+        "must_connect": true,
+        "net": "GND"
+      }
+    },
+    {
+      "pin": "H9",
+      "name": "VSS",
+      "function": "GROUND",
+      "bank": "N/A",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": false,
+      "drc": {
+        "must_connect": true,
+        "net": "GND"
+      }
+    },
+    {
+      "pin": "J3",
+      "name": "VSS",
+      "function": "GROUND",
+      "bank": "N/A",
+      "config_function": null,
+      "dqs": null,
+      "lvds_capable": false,
+      "drc": {
+        "must_connect": true,
+        "net": "GND"
+      }
+    }
+  ],
+  "lookup": {
+    "pin_to_name": {
+      "B1_B10A[1]": "IOB10A/D03/SSPI_CS_N",
+      "A3_B10B[1]": "IOB10B/D04/SI/SSI0",
+      "E2": "IOB12A/GCLKT_10B[5]/D07/SSPI_WPN/SSI2/LPLL1_T_IN1",
+      "E1": "IOB12B/GCLKC_10B[5]/RDWR_B/LPLL1_C_IN1",
+      "C1_B14A[1]": "IOB14A/SSPI_CLK",
+      "D1": "IOB14B/CLKHOLD_N/SSI3",
+      "D8": "IOB1A/RECONFIGN",
+      "A1": "IOB24A",
+      "F2": "IOB26A/GCLKT_9B[5]",
+      "F1": "IOB26B/GCLKC_9B[5]",
+      "E8": "IOB37A/READY",
+      "E6": "IOB37B/MCS_N/CSO_B",
+      "B2": "IOB4A/D08/LPLL1_T_FB0",
+      "C2": "IOB4B/D09/LPLL1_C_FB0",
+      "GND[2]": "IOT29A/PUDC_B",
+      "D5": "IOB54A/GCLKT_11B[5]/D01/MI2/BPLL_T_FB1",
+      "E4": "IOB54B/GCLKC_11B[5]/D02/MI3/BPLL_C_FB1",
+      "B3": "IOB56A",
+      "C3": "IOB56B",
+      "E5": "IOB58A/D00/MISO/MI1/DIN",
+      "D6": "IOB58B/MOSI/CSI_B/MI0",
+      "E3": "IOB60A",
+      "E7": "IOB62A/CCLK",
+      "VCCIO[3]": "IOB62B/MODE0",
+      "D7": "IOB64A/DONE",
+      "G4": "IOB89A/GCLKT_7/BPLL_T_IN0",
+      "H4": "IOB89B/GCLKC_7/BPLL_C_IN0",
+      "A2_B8A[1]": "IOB8A/D05/SO/SSI1",
+      "H1": "IOB91A/GCLKT_6A[5]",
+      "H2": "IOB91B/GCLKC_6A[5]",
+      "B11": "IOL12A",
+      "B10": "IOL12B",
+      "A11": "IOL14A/LPLL1_T_IN0",
+      "A10": "IOL14B/LPLL1_C_IN0",
+      "E11": "IOL3A/GCLKT_14/LPLL0_T_IN2/LPLL0_T_FB0",
+      "E10": "IOL3B/GCLKC_14/LPLL0_C_IN2/LPLL0_C_FB0",
+      "C11": "IOL5A/GCLKT_13/LPLL0_T_IN1/LPLL0_T_FB1",
+      "C10": "IOL5B/GCLKC_13/LPLL0_C_IN1/LPLL0_C_FB1",
+      "D11": "IOL9A",
+      "D10": "IOL9B",
+      "L2": "IOR18A",
+      "L1": "IOR18B",
+      "C1": "IOR1A/TCK",
+      "A3": "IOR1B/TDI",
+      "K1": "IOR20A",
+      "K2": "IOR20B",
+      "J4": "IOR22A",
+      "K4": "IOR22B",
+      "G2": "IOR24A",
+      "G1": "IOR24B",
+      "L4": "IOR31A/GCLKT_4/RPLL1_T_IN0/RPLL1_T_FB1",
+      "L3": "IOR31B/GCLKC_4/RPLL1_C_IN0/RPLL1_C_FB1",
+      "J1": "IOR33A/GCLKT_5/RPLL1_T_IN1/RPLL1_T_FB0",
+      "J2": "IOR33B/GCLKC_5/RPLL1_C_IN1/RPLL1_C_FB0",
+      "B1": "IOR3A/TMS",
+      "A2": "IOR3B/TDO",
+      "K11": "IOT11A",
+      "L11": "IOT11B",
+      "L10": "IOT15A",
+      "K10": "IOT15B",
+      "L7": "IOT19A",
+      "L8": "IOT19B",
+      "J11": "IOT1A/GCLKT_15/LPLL0_T_IN0",
+      "J10": "IOT1B/GCLKC_15/LPLL0_C_IN0",
+      "K7": "IOT21A",
+      "J7": "IOT21B",
+      "L6": "IOT23A",
+      "K6": "IOT23B",
+      "L9": "IOT31A",
+      "K9": "IOT31B",
+      "H11": "IOT3A/GCLKT_16",
+      "H10": "IOT3B/GCLKC_16",
+      "J8": "IOT56A/GCLKT_0/TPLL_T_IN1/TPLL_T_FB1",
+      "K8": "IOT56B/GCLKC_0/TPLL_C_IN1/TPLL_C_FB1",
+      "F7": "IOT58A/GCLKT_1/TPLL_T_IN2/TPLL_T_FB0",
+      "F6": "IOT58B/GCLKC_1/TPLL_C_IN2/TPLL_C_FB0",
+      "H5": "IOT61A/GCLKT_2/TPLL_T_IN0",
+      "J5": "IOT61B/GCLKC_2/TPLL_C_IN0",
+      "L5": "IOT63A/GCLKT_3/RPLL0_T_IN0",
+      "K5": "IOT63B/GCLKC_3/RPLL0_C_IN0",
+      "H8": "IOT66A",
+      "H7": "IOT66B",
+      "G7": "IOT68A",
+      "G8": "IOT68B",
+      "F5": "IOT72A",
+      "G5": "IOT72B",
+      "G11": "IOT7A",
+      "G10": "IOT7B",
+      "B7": "M0_CKN",
+      "A7": "M0_CKP",
+      "B9": "M0_D0N",
+      "A9": "M0_D0P",
+      "B8": "M0_D1N",
+      "A8": "M0_D1P",
+      "B6": "M0_D2N",
+      "A6": "M0_D2P",
+      "B5": "M0_D3N",
+      "A5": "M0_D3P",
+      "K3": "VDD12M",
+      "C8": "VDDAM",
+      "D9": "VDDDM",
+      "H3": "VCCX_VDDXM",
+      "G6": "VCCX_VDDXM",
+      "G3": "VCCX_VDDXM",
+      "G9": "VCCX_VDDXM",
+      "C4": "NC",
+      "C6": "NC",
+      "F8": "VCC",
+      "F4": "VCC",
+      "E9": "VCC",
+      "J6": "VCCLDO",
+      "D4": "VCCIO4",
+      "J9": "VCCIO0_1",
+      "D2": "VCCIO5_10",
+      "A4": "VCCIO2_3",
+      "F10": "VCCIO6_7",
+      "D3": "VEFUSE",
+      "B4": "VSS",
+      "C5": "VSS",
+      "C7": "VSS",
+      "C9": "VSS",
+      "F11": "VSS",
+      "F3": "VSS",
+      "F9": "VSS",
+      "H6": "VSS",
+      "H9": "VSS",
+      "J3": "VSS"
+    },
+    "name_to_pin": {
+      "IOB10A/D03/SSPI_CS_N": "B1_B10A[1]",
+      "IOB10B/D04/SI/SSI0": "A3_B10B[1]",
+      "IOB12A/GCLKT_10B[5]/D07/SSPI_WPN/SSI2/LPLL1_T_IN1": "E2",
+      "IOB12B/GCLKC_10B[5]/RDWR_B/LPLL1_C_IN1": "E1",
+      "IOB14A/SSPI_CLK": "C1_B14A[1]",
+      "IOB14B/CLKHOLD_N/SSI3": "D1",
+      "IOB1A/RECONFIGN": "D8",
+      "IOB24A": "A1",
+      "IOB26A/GCLKT_9B[5]": "F2",
+      "IOB26B/GCLKC_9B[5]": "F1",
+      "IOB37A/READY": "E8",
+      "IOB37B/MCS_N/CSO_B": "E6",
+      "IOB4A/D08/LPLL1_T_FB0": "B2",
+      "IOB4B/D09/LPLL1_C_FB0": "C2",
+      "IOB52A/MODE1": "GND[2]",
+      "IOB54A/GCLKT_11B[5]/D01/MI2/BPLL_T_FB1": "D5",
+      "IOB54B/GCLKC_11B[5]/D02/MI3/BPLL_C_FB1": "E4",
+      "IOB56A": "B3",
+      "IOB56B": "C3",
+      "IOB58A/D00/MISO/MI1/DIN": "E5",
+      "IOB58B/MOSI/CSI_B/MI0": "D6",
+      "IOB60A": "E3",
+      "IOB62A/CCLK": "E7",
+      "IOB62B/MODE0": "VCCIO[3]",
+      "IOB64A/DONE": "D7",
+      "IOB89A/GCLKT_7/BPLL_T_IN0": "G4",
+      "IOB89B/GCLKC_7/BPLL_C_IN0": "H4",
+      "IOB8A/D05/SO/SSI1": "A2_B8A[1]",
+      "IOB91A/GCLKT_6A[5]": "H1",
+      "IOB91B/GCLKC_6A[5]": "H2",
+      "IOL12A": "B11",
+      "IOL12B": "B10",
+      "IOL14A/LPLL1_T_IN0": "A11",
+      "IOL14B/LPLL1_C_IN0": "A10",
+      "IOL3A/GCLKT_14/LPLL0_T_IN2/LPLL0_T_FB0": "E11",
+      "IOL3B/GCLKC_14/LPLL0_C_IN2/LPLL0_C_FB0": "E10",
+      "IOL5A/GCLKT_13/LPLL0_T_IN1/LPLL0_T_FB1": "C11",
+      "IOL5B/GCLKC_13/LPLL0_C_IN1/LPLL0_C_FB1": "C10",
+      "IOL9A": "D11",
+      "IOL9B": "D10",
+      "IOR18A": "L2",
+      "IOR18B": "L1",
+      "IOR1A/TCK": "C1",
+      "IOR1B/TDI": "A3",
+      "IOR20A": "K1",
+      "IOR20B": "K2",
+      "IOR22A": "J4",
+      "IOR22B": "K4",
+      "IOR24A": "G2",
+      "IOR24B": "G1",
+      "IOR31A/GCLKT_4/RPLL1_T_IN0/RPLL1_T_FB1": "L4",
+      "IOR31B/GCLKC_4/RPLL1_C_IN0/RPLL1_C_FB1": "L3",
+      "IOR33A/GCLKT_5/RPLL1_T_IN1/RPLL1_T_FB0": "J1",
+      "IOR33B/GCLKC_5/RPLL1_C_IN1/RPLL1_C_FB0": "J2",
+      "IOR3A/TMS": "B1",
+      "IOR3B/TDO": "A2",
+      "IOT11A": "K11",
+      "IOT11B": "L11",
+      "IOT15A": "L10",
+      "IOT15B": "K10",
+      "IOT19A": "L7",
+      "IOT19B": "L8",
+      "IOT1A/GCLKT_15/LPLL0_T_IN0": "J11",
+      "IOT1B/GCLKC_15/LPLL0_C_IN0": "J10",
+      "IOT21A": "K7",
+      "IOT21B": "J7",
+      "IOT23A": "L6",
+      "IOT23B": "K6",
+      "IOT29A/PUDC_B": "GND[2]",
+      "IOT31A": "L9",
+      "IOT31B": "K9",
+      "IOT3A/GCLKT_16": "H11",
+      "IOT3B/GCLKC_16": "H10",
+      "IOT56A/GCLKT_0/TPLL_T_IN1/TPLL_T_FB1": "J8",
+      "IOT56B/GCLKC_0/TPLL_C_IN1/TPLL_C_FB1": "K8",
+      "IOT58A/GCLKT_1/TPLL_T_IN2/TPLL_T_FB0": "F7",
+      "IOT58B/GCLKC_1/TPLL_C_IN2/TPLL_C_FB0": "F6",
+      "IOT61A/GCLKT_2/TPLL_T_IN0": "H5",
+      "IOT61B/GCLKC_2/TPLL_C_IN0": "J5",
+      "IOT63A/GCLKT_3/RPLL0_T_IN0": "L5",
+      "IOT63B/GCLKC_3/RPLL0_C_IN0": "K5",
+      "IOT66A": "H8",
+      "IOT66B": "H7",
+      "IOT68A": "G7",
+      "IOT68B": "G8",
+      "IOT72A": "F5",
+      "IOT72B": "G5",
+      "IOT7A": "G11",
+      "IOT7B": "G10",
+      "M0_CKN": "B7",
+      "M0_CKP": "A7",
+      "M0_D0N": "B9",
+      "M0_D0P": "A9",
+      "M0_D1N": "B8",
+      "M0_D1P": "A8",
+      "M0_D2N": "B6",
+      "M0_D2P": "A6",
+      "M0_D3N": "B5",
+      "M0_D3P": "A5",
+      "VDD12M": "K3",
+      "VDDAM": "C8",
+      "VDDDM": "D9",
+      "VCCLDO": "J6",
+      "VCCIO4": "D4",
+      "VCCIO0_1": "J9",
+      "VCCIO5_10": "D2",
+      "VCCIO2_3": "A4",
+      "VCCIO6_7": "F10",
+      "VEFUSE": "D3"
+    },
+    "io_pins": [
+      "B1_B10A[1]",
+      "A3_B10B[1]",
+      "E2",
+      "E1",
+      "C1_B14A[1]",
+      "D1",
+      "D8",
+      "A1",
+      "F2",
+      "F1",
+      "E8",
+      "E6",
+      "B2",
+      "C2",
+      "GND[2]",
+      "D5",
+      "E4",
+      "B3",
+      "C3",
+      "E5",
+      "D6",
+      "E3",
+      "E7",
+      "VCCIO[3]",
+      "D7",
+      "G4",
+      "H4",
+      "A2_B8A[1]",
+      "H1",
+      "H2",
+      "B11",
+      "B10",
+      "A11",
+      "A10",
+      "E11",
+      "E10",
+      "C11",
+      "C10",
+      "D11",
+      "D10",
+      "L2",
+      "L1",
+      "C1",
+      "A3",
+      "K1",
+      "K2",
+      "J4",
+      "K4",
+      "G2",
+      "G1",
+      "L4",
+      "L3",
+      "J1",
+      "J2",
+      "B1",
+      "A2",
+      "K11",
+      "L11",
+      "L10",
+      "K10",
+      "L7",
+      "L8",
+      "J11",
+      "J10",
+      "K7",
+      "J7",
+      "L6",
+      "K6",
+      "GND[2]",
+      "L9",
+      "K9",
+      "H11",
+      "H10",
+      "J8",
+      "K8",
+      "F7",
+      "F6",
+      "H5",
+      "J5",
+      "L5",
+      "K5",
+      "H8",
+      "H7",
+      "G7",
+      "G8",
+      "F5",
+      "G5",
+      "G11",
+      "G10"
+    ],
+    "power_pins": [
+      "K3",
+      "C8",
+      "D9",
+      "H3",
+      "G6",
+      "G3",
+      "G9",
+      "F8",
+      "F4",
+      "E9",
+      "J6",
+      "D4",
+      "J9",
+      "D2",
+      "A4",
+      "F10",
+      "B4",
+      "C5",
+      "C7",
+      "C9",
+      "F11",
+      "F3",
+      "F9",
+      "H6",
+      "H9",
+      "J3"
+    ],
+    "config_pins": []
+  }
+}

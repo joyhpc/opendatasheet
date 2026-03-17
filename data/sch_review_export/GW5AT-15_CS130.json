@@ -2271,7 +2271,16 @@
       },
       "refclk_pair_count": null,
       "source": "gowin_product_detail_72",
-      "source_url": "https://www.gowinsemi.com/en/product/detail/72/"
+      "source_url": "https://www.gowinsemi.com/en/product/detail/72/",
+      "package_listing_status": {
+        "listed_on_current_product_page": false,
+        "current_public_packages": [
+          "CS130F",
+          "MG132"
+        ],
+        "source": "gowin_product_detail_72",
+        "source_url": "https://www.gowinsemi.com/en/product/detail/72/"
+      }
     },
     "legacy_ip_blocks": {
       "mipi": {
@@ -2329,7 +2338,16 @@
         },
         "refclk_pair_count": null,
         "source": "gowin_product_detail_72",
-        "source_url": "https://www.gowinsemi.com/en/product/detail/72/"
+        "source_url": "https://www.gowinsemi.com/en/product/detail/72/",
+        "package_listing_status": {
+          "listed_on_current_product_page": false,
+          "current_public_packages": [
+            "CS130F",
+            "MG132"
+          ],
+          "source": "gowin_product_detail_72",
+          "source_url": "https://www.gowinsemi.com/en/product/detail/72/"
+        }
       }
     }
   },
@@ -2740,46 +2758,6 @@
           ],
           "merge_type": "dedicated",
           "source": "package_pinout"
-        },
-        {
-          "physical_rail": "VDDAQ0",
-          "logical_rails": [
-            "VDDAQ"
-          ],
-          "pin_count": 3,
-          "pins": [
-            "C2",
-            "C6",
-            "C10"
-          ],
-          "merge_type": "dedicated",
-          "source": "package_pinout"
-        },
-        {
-          "physical_rail": "VDDHAQ0",
-          "logical_rails": [
-            "VDDHAQ"
-          ],
-          "pin_count": 2,
-          "pins": [
-            "D6",
-            "D7"
-          ],
-          "merge_type": "dedicated",
-          "source": "package_pinout"
-        },
-        {
-          "physical_rail": "VDDTQ0",
-          "logical_rails": [
-            "VDDTQ"
-          ],
-          "pin_count": 2,
-          "pins": [
-            "C8",
-            "C4"
-          ],
-          "merge_type": "dedicated",
-          "source": "package_pinout"
         }
       ],
       "package_merged_logical_rail_groups": [
@@ -2848,6 +2826,40 @@
         "mipi": [
           "VDDAM/VDDDM/VDDXM"
         ]
+      },
+      "sensitive_power_pin_groups": {
+        "serdes": {
+          "logical_rails": [
+            "VDDAQ",
+            "VDDDQ",
+            "VDDTQ"
+          ],
+          "pin_name_tokens": [
+            "VDDAQ",
+            "VDDDQ",
+            "VDDTQ"
+          ],
+          "recommended_component": "ferrite_bead",
+          "missing_isolation_severity": "ERROR",
+          "source": "UG984-1.2"
+        },
+        "mipi": {
+          "logical_rails": [
+            "VDDAM",
+            "VDDDM",
+            "VDDXM"
+          ],
+          "pin_name_tokens": [
+            "VDDAM",
+            "VDDDM",
+            "VDDXM",
+            "VCCX_VCCLDO_VDDXM",
+            "VDD12M"
+          ],
+          "recommended_component": "ferrite_bead",
+          "missing_isolation_severity": "WARNING",
+          "source": "UG984-1.2"
+        }
       },
       "merge_recommendations": {
         "VCC": "dedicated_supply_recommended",
@@ -3032,7 +3044,16 @@
       },
       "refclk_pair_count": null,
       "source": "gowin_product_detail_72",
-      "source_url": "https://www.gowinsemi.com/en/product/detail/72/"
+      "source_url": "https://www.gowinsemi.com/en/product/detail/72/",
+      "package_listing_status": {
+        "listed_on_current_product_page": false,
+        "current_public_packages": [
+          "CS130F",
+          "MG132"
+        ],
+        "source": "gowin_product_detail_72",
+        "source_url": "https://www.gowinsemi.com/en/product/detail/72/"
+      }
     }
   },
   "domains": {
@@ -3882,46 +3903,6 @@
             ],
             "merge_type": "dedicated",
             "source": "package_pinout"
-          },
-          {
-            "physical_rail": "VDDAQ0",
-            "logical_rails": [
-              "VDDAQ"
-            ],
-            "pin_count": 3,
-            "pins": [
-              "C2",
-              "C6",
-              "C10"
-            ],
-            "merge_type": "dedicated",
-            "source": "package_pinout"
-          },
-          {
-            "physical_rail": "VDDHAQ0",
-            "logical_rails": [
-              "VDDHAQ"
-            ],
-            "pin_count": 2,
-            "pins": [
-              "D6",
-              "D7"
-            ],
-            "merge_type": "dedicated",
-            "source": "package_pinout"
-          },
-          {
-            "physical_rail": "VDDTQ0",
-            "logical_rails": [
-              "VDDTQ"
-            ],
-            "pin_count": 2,
-            "pins": [
-              "C8",
-              "C4"
-            ],
-            "merge_type": "dedicated",
-            "source": "package_pinout"
           }
         ],
         "logical_rail_map": {
@@ -4008,27 +3989,6 @@
             {
               "physical_rail": "VDDAM",
               "pin_count": 4,
-              "source": "package_pinout"
-            }
-          ],
-          "VDDAQ": [
-            {
-              "physical_rail": "VDDAQ0",
-              "pin_count": 3,
-              "source": "package_pinout"
-            }
-          ],
-          "VDDHAQ": [
-            {
-              "physical_rail": "VDDHAQ0",
-              "pin_count": 2,
-              "source": "package_pinout"
-            }
-          ],
-          "VDDTQ": [
-            {
-              "physical_rail": "VDDTQ0",
-              "pin_count": 2,
               "source": "package_pinout"
             }
           ]
