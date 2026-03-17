@@ -15,6 +15,8 @@ PDF datasheets → structured JSON for schematic review DRC engines.
 - **Setup**: `pip install -r requirements.txt` and `pip install -r requirements-dev.txt`
 - **Raw Sources**: new `pdf/xlsx/csv` go to `data/raw/_staging/` first, then run `python3 scripts/build_raw_source_manifest.py` after canonical placement
 - **Credentials**: `export GEMINI_API_KEY='<your-api-key>'`
+- **First 30 Minutes**: `docs/first-30-minutes.md`
+- **Setup Playbook**: `docs/local-setup-playbook.md`
 - **Doctor**: `python3 scripts/doctor.py --dev`
 - **Checks**: `./scripts/run_checks.sh`
 - **CI**: `.github/workflows/ci.yml`
@@ -37,6 +39,8 @@ PDF datasheets → structured JSON for schematic review DRC engines.
 
 ## Quick Links
 
+- [First 30 Minutes](docs/first-30-minutes.md) — Fast orientation for new contributors and reviewers
+- [Local Setup Playbook](docs/local-setup-playbook.md) — Practical environment bring-up and validation loop
 - [Extraction Methodology](docs/extraction-methodology.md) — How the Vision + Text hybrid pipeline works
 - [Schematic Review Integration](docs/sch-review-integration.md) — Data structures, examples, and Python code for consumers
 - [Schema](schemas/sch-review-device.schema.json) — `sch-review-device/1.1` JSON Schema (兼容已提交的 `1.0` 历史产物)
