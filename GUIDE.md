@@ -7,6 +7,7 @@
 - [Repository Checklist](README.md#quick-start) — Setup, validation, CI, and contribution entry points
 - [First 30 Minutes](docs/first-30-minutes.md) — Fast orientation path for a fresh checkout
 - [Local Setup Playbook](docs/local-setup-playbook.md) — Practical environment bring-up steps
+- [Hardware Engineer Index](docs/hardware-engineer-index.md) — Curated board-review and bring-up docs
 - [Maintenance Notes](docs/maintenance.md) — Regeneration, validation, and repository upkeep workflow
 - [Documentation Index](docs/index.md) — Topic-oriented map of repository docs
 - [Command Cheat Sheet](docs/commands.md) — Copy/paste-friendly setup, validation, export, and release commands

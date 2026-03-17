@@ -25,11 +25,34 @@
 
 - [`design-document.md`](design-document.md) — Project positioning, system architecture, data flow, and design rationale. **Best for:** architects, reviewers, downstream integrators.
 - [`extraction-methodology.md`](extraction-methodology.md) — End-to-end extraction method and why the pipeline uses hybrid Vision + Text. **Best for:** pipeline contributors, evaluators of extraction quality.
+- [`page-classification-and-routing.md`](page-classification-and-routing.md) — L0 routing model, page categories, and why narrow page selection is the primary cost-control layer. **Best for:** pipeline contributors tuning selectors or adding domains.
+- [`extractor-registry-contract.md`](extractor-registry-contract.md) — `BaseExtractor` contract, registry order semantics, and rules for adding a new domain. **Best for:** extractor authors and reviewers.
+- [`domain-cost-control.md`](domain-cost-control.md) — Cost-class thinking for cheap, medium, and expensive domains. **Best for:** maintainers deciding whether a domain belongs on the always-on path.
+- [`discrete-component-fast-path.md`](discrete-component-fast-path.md) — Why and how simple discrete semiconductors take a narrowed extraction path. **Best for:** contributors working on Transistor / diode / TVS / MOSFET corpora.
 - [`extractor-domain-map.md`](extractor-domain-map.md) — Ownership map for modular extractor domains and why boundaries matter. **Best for:** pipeline contributors, schema maintainers.
 - [`schema-v2-domains-guide.md`](schema-v2-domains-guide.md) — Practical notes on `device-knowledge/2.0` and the `domains` container. **Best for:** schema maintainers, migration reviewers.
 - [`a57-class-fpga-architecture-notes.md`](a57-class-fpga-architecture-notes.md) — Deep architecture notes from an A57-class automotive camera/domain-controller platform viewpoint, focusing on DDR, MIPI, SerDes, and heterogeneous FPGA partitioning. **Best for:** board architects, schematic owners, and platform review.
 - [`fpga-board-architecture-comparison.md`](fpga-board-architecture-comparison.md) — Board-architect comparison of AMD, Intel/Altera, Lattice, and Gowin using the currently validated FPGA families. **Best for:** schematic owners, platform architects, FPGA selection reviews.
 - [`roadmap-v2.md`](roadmap-v2.md) — Near-term direction and planned improvements. **Best for:** maintainers, planning discussions.
+
+## Hardware Engineering
+
+- [`hardware-engineer-index.md`](hardware-engineer-index.md) — Landing page for board architects, schematic owners, and bring-up engineers. **Best for:** hardware engineers who want the curated path through this doc set.
+- [`hardware-best-practice-source-basis.md`](hardware-best-practice-source-basis.md) — Official-source baseline used to tighten the hardware engineering docs. **Best for:** reviewers who want primary-source grounding.
+- [`hardware-engineering/`](hardware-engineering/) — Advanced single-topic hardware engineering library covering power, clocks, FPGA, DDR, interfaces, and analog front ends. **Best for:** engineers who want focused deep dives after the main index.
+- [`schematic-freeze-checklist.md`](schematic-freeze-checklist.md) — Final pre-freeze review list for complex boards. **Best for:** schematic owners and board leads.
+- [`power-tree-review-checklist.md`](power-tree-review-checklist.md) — Rail-planning questions that should be answered before layout. **Best for:** power owners, platform reviewers.
+- [`clock-source-and-refclk-ownership.md`](clock-source-and-refclk-ownership.md) — Treating clocks and refclks as ownership problems, not just frequencies. **Best for:** FPGA/high-speed board architects.
+- [`test-point-and-observability-strategy.md`](test-point-and-observability-strategy.md) — Observability planning for bring-up and failure isolation. **Best for:** bring-up engineers.
+- [`mcu-fpga-boundary-patterns.md`](mcu-fpga-boundary-patterns.md) — Partitioning control-plane and protocol complexity between MCU and FPGA. **Best for:** mixed MCU-FPGA platform designers.
+- [`bank-vcco-planning.md`](bank-vcco-planning.md) — FPGA bank-voltage planning before pin usage hardens into layout debt. **Best for:** FPGA schematic owners.
+- [`mipi-dphy-board-review.md`](mipi-dphy-board-review.md) — Board-level review for MIPI ingress implementation. **Best for:** camera-ingress board designers.
+- [`serdes-link-budget-review.md`](serdes-link-budget-review.md) — End-to-end loss and margin thinking for serial links. **Best for:** high-speed board reviewers.
+- [`pcie-aic-board-review.md`](pcie-aic-board-review.md) — PCIe add-in-card and edge-connector review checklist. **Best for:** PCIe board designers.
+- [`ddr-buffering-and-margin-budget.md`](ddr-buffering-and-margin-budget.md) — Treating DDR as elasticity and debug budget, not just capacity. **Best for:** video and routing platform architects.
+- [`thermal-risk-review.md`](thermal-risk-review.md) — Early thermal review that ties back to power and workload. **Best for:** board leads and bring-up teams.
+- [`i2c-control-bus-review.md`](i2c-control-bus-review.md) — Practical control-bus review for pull-ups, capacitance, and segmentation. **Best for:** board designers and bring-up engineers.
+- [`esd-tvs-selection-review.md`](esd-tvs-selection-review.md) — ESD and TVS review grounded in placement and return path. **Best for:** connector and interface owners.
 
 ## Data Contracts
 
@@ -46,14 +69,24 @@
 - [`design-extraction-reporting.md`](design-extraction-reporting.md) — How to regenerate the human-readable design extraction report and samples. **Best for:** maintainers, extraction reviewers.
 - [`../schemas/sch-review-device.schema.json`](../schemas/sch-review-device.schema.json) — Formal schema definition for exported device knowledge. **Best for:** schema/tooling maintainers, downstream validators.
 
+## Hardware Engineering
+
+- [`hardware-engineering/index.md`](hardware-engineering/index.md) — 50 篇面向硬件工程师的评审、选型、布局、bring-up 文档总索引。 **Best for:** schematic owners, bring-up engineers, board architects.
+- [`hardware-engineering/best-practice-reference-matrix.md`](hardware-engineering/best-practice-reference-matrix.md) — 这些硬件文档背后的官方最佳实践来源矩阵。 **Best for:** reviewers who want source-oriented traceability.
+
 ## Workflows
 
 - [`adding-normal-ic-datasheet.md`](adding-normal-ic-datasheet.md) — Intake-to-export workflow for a new normal IC datasheet. **Best for:** data curators, extraction contributors.
 - [`batch-processing-runbook.md`](batch-processing-runbook.md) — Safe batch-processing patterns for `batch_all.py`. **Best for:** extraction operators, maintainers.
+- [`gemini-api-operations.md`](gemini-api-operations.md) — Separating key failures, hangs, and structured extraction problems in Gemini-backed flows. **Best for:** extraction operators and maintainers.
+- [`invalid-pdf-triage.md`](invalid-pdf-triage.md) — How to identify fake PDFs and treat them as raw-source defects instead of parser bugs. **Best for:** corpus maintainers and batch triage.
+- [`raw-source-quality-gates.md`](raw-source-quality-gates.md) — Canonical raw-source hygiene rules, manifest refresh expectations, and deletion policy for bad inputs. **Best for:** data maintainers.
 - [`export-validation-playbook.md`](export-validation-playbook.md) — How to run and interpret export validation. **Best for:** maintainers, reviewers.
 - [`regression-workflow.md`](regression-workflow.md) — How to use `test_regression.py` and `pytest` efficiently. **Best for:** maintainers, contributors.
+- [`test-strategy-and-regression.md`](test-strategy-and-regression.md) — Test layering, incident-driven regression additions, and what good policy coverage looks like. **Best for:** contributors fixing bugs or adding maintainability tests.
 - [`release-regeneration-matrix.md`](release-regeneration-matrix.md) — Decision table for whether a change needs regeneration. **Best for:** maintainers, release owners, reviewers.
 - [`raw-source-storage.md`](raw-source-storage.md) — Storage policy for original source files. **Best for:** maintainers, data curators.
+- [`transistor-batch-postmortem-2026-03.md`](transistor-batch-postmortem-2026-03.md) — Incident review of the Transistor corpus cleanup, fast-path rollout, and bad-PDF removal. **Best for:** maintainers wanting historical context for recent routing changes.
 
 ## FPGA Workflows
 
@@ -71,6 +104,16 @@
 - [`Q2-negative-text-matching.md`](Q2-negative-text-matching.md) — Minus-sign normalization and text matching details. **Best for:** cross-validation and parsing maintainers.
 - [`Q3-pin-schema-design.md`](Q3-pin-schema-design.md) — Multi-package logical pin model design. **Best for:** export/schema maintainers.
 - [`Q4-fpga-drc-data-loading-strategy.md`](Q4-fpga-drc-data-loading-strategy.md) — FPGA DRC data loading and code/LLM responsibility split. **Best for:** FPGA and downstream DRC maintainers.
+- [`electrical-domain-contract.md`](electrical-domain-contract.md) — Role of the electrical domain as the first trustworthy component-identity anchor. **Best for:** electrical extractor maintainers.
+- [`pin-domain-contract.md`](pin-domain-contract.md) — Logical pin modeling, package-aware mappings, and why `pin` remains valuable for simple discretes. **Best for:** pin/schema maintainers.
+- [`thermal-and-parametric-derivation.md`](thermal-and-parametric-derivation.md) — Why `thermal` and part of `parametric` should prefer derivation over new image-heavy passes. **Best for:** maintainers deciding where to normalize vs re-extract.
+- [`package-domain-guidelines.md`](package-domain-guidelines.md) — When package extraction adds real value and when it is just expensive noise. **Best for:** package-domain contributors.
+- [`design-domain-guidelines.md`](design-domain-guidelines.md) — Boundary between `design_context` and `design_guide`, and how to keep design extraction focused. **Best for:** design-domain contributors.
+- [`timing-domain-guidelines.md`](timing-domain-guidelines.md) — When timing extraction matters and why it should be skipped for simple discrete parts. **Best for:** timing-domain maintainers.
+- [`register-domain-guidelines.md`](register-domain-guidelines.md) — Register-map extraction boundary and validation priorities. **Best for:** register-domain maintainers.
+- [`protocol-domain-guidelines.md`](protocol-domain-guidelines.md) — Communication-interface extraction boundary and common selector mistakes. **Best for:** protocol-domain maintainers.
+- [`power-sequence-domain-guidelines.md`](power-sequence-domain-guidelines.md) — Where structured sequencing adds value and where it should stay off. **Best for:** PMIC and sequencing-domain contributors.
+- [`discrete-export-normalization.md`](discrete-export-normalization.md) — How discrete parts normalize into downstream export and selection-profile semantics. **Best for:** export and downstream tooling maintainers.
 
 ## Operations
 
@@ -89,9 +132,14 @@
 
 - Want the fastest repo orientation? → [`first-30-minutes.md`](first-30-minutes.md)
 - Want setup and local checks? → [`local-setup-playbook.md`](local-setup-playbook.md)
+- Want the hardware-engineering doc hub? → [`hardware-engineer-index.md`](hardware-engineer-index.md)
 - Want to add a new datasheet? → [`adding-normal-ic-datasheet.md`](adding-normal-ic-datasheet.md)
 - Want to batch-process PDFs? → [`batch-processing-runbook.md`](batch-processing-runbook.md)
+- Want to understand why some parts skip heavy domains? → [`discrete-component-fast-path.md`](discrete-component-fast-path.md)
+- Want to debug Gemini auth vs hang behavior? → [`gemini-api-operations.md`](gemini-api-operations.md)
+- Want to debug a bad raw file before touching prompts? → [`invalid-pdf-triage.md`](invalid-pdf-triage.md)
 - Want to understand the export contract? → [`sch-review-integration.md`](sch-review-integration.md), [`normal-ic-export-field-guide.md`](normal-ic-export-field-guide.md), [`fpga-export-field-guide.md`](fpga-export-field-guide.md)
+- Want hardware review and bring-up checklists? → [`hardware-engineering/index.md`](hardware-engineering/index.md)
 - Want to consume exported JSON? → [`consumer-query-recipes.md`](consumer-query-recipes.md)
 - Want design-helper bundles? → [`design-bundle-workflow.md`](design-bundle-workflow.md)
 - Want schema or domain migration context? → [`schema-v2-domains-guide.md`](schema-v2-domains-guide.md), [`../schemas/sch-review-device.schema.json`](../schemas/sch-review-device.schema.json)

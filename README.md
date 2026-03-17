@@ -17,6 +17,7 @@ PDF datasheets → structured JSON for schematic review DRC engines.
 - **Credentials**: `export GEMINI_API_KEY='<your-api-key>'`
 - **First 30 Minutes**: `docs/first-30-minutes.md`
 - **Setup Playbook**: `docs/local-setup-playbook.md`
+- **Hardware Engineer Hub**: `docs/hardware-engineer-index.md`
 - **Doctor**: `python3 scripts/doctor.py --dev`
 - **Checks**: `./scripts/run_checks.sh`
 - **CI**: `.github/workflows/ci.yml`
@@ -41,6 +42,7 @@ PDF datasheets → structured JSON for schematic review DRC engines.
 
 - [First 30 Minutes](docs/first-30-minutes.md) — Fast orientation for new contributors and reviewers
 - [Local Setup Playbook](docs/local-setup-playbook.md) — Practical environment bring-up and validation loop
+- [Hardware Engineer Index](docs/hardware-engineer-index.md) — Board-review and bring-up oriented hardware docs
 - [Extraction Methodology](docs/extraction-methodology.md) — How the Vision + Text hybrid pipeline works
 - [Schematic Review Integration](docs/sch-review-integration.md) — Data structures, examples, and Python code for consumers
 - [Schema](schemas/sch-review-device.schema.json) — `sch-review-device/1.1` JSON Schema (兼容已提交的 `1.0` 历史产物)
