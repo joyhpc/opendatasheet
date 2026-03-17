@@ -42,6 +42,9 @@ VENDOR_HINTS = [
 ]
 
 FAMILY_PATTERNS = [
+    r"(A5E[A-Z]\d{3}[AB])",
+    r"(A5D\d{3})",
+    r"(Agilex\s*5)",
     r"(GW5\w+-\d+)",
     r"(GW5\w+)",
     r"(GW2A-\d+)",
@@ -61,6 +64,7 @@ FAMILY_PATTERNS = [
 DOC_TYPE_RULES = [
     ("package_guide", ("封装与管脚", "package and pin", "package_pin", "package guide", "封装信息")),
     ("pinout", ("pinout", "器件pinout", "管脚手册", "pin list")),
+    ("marketing_summary", ("overview", "device overview", "product overview", "selector guide")),
     ("design_guide", ("原理图指导", "design guide", "layout guide", "layout guideline", "schematic guide")),
     ("reference", ("reference design", "devboard", "evaluation module", "evm", "evb", "开发板", "dk_start")),
     ("app_note", ("application note", "appnote", "app note", "用户手册")),
@@ -109,6 +113,8 @@ def _classify_doc_type(path: Path, relative_path: Path) -> str:
     for doc_type, tokens in DOC_TYPE_RULES:
         if any(token in haystack for token in tokens):
             return doc_type
+    if path.suffix.lower() in {".xlsx", ".xls"} and re.search(r"\bA5E[A-Z]\d{3}[AB]\b", path.stem, flags=re.IGNORECASE):
+        return "pinout"
     if path.stem.lower().startswith("ds"):
         return "datasheet"
     if relative_path.parts and relative_path.parts[0] == "datasheet_PDF":
@@ -117,9 +123,10 @@ def _classify_doc_type(path: Path, relative_path: Path) -> str:
 
 
 def _vendor_hint(path: Path, relative_path: Path) -> str | None:
-    haystack = f"{path.stem} {' '.join(relative_path.parts)}".lower()
+    haystack = re.sub(r"[^a-z0-9]+", " ", f"{path.stem} {' '.join(relative_path.parts)}".lower())
     for token, vendor in VENDOR_HINTS:
-        if token in haystack:
+        normalized_token = re.sub(r"[^a-z0-9]+", " ", token.lower()).strip()
+        if re.search(rf"(?<![a-z0-9]){re.escape(normalized_token)}(?![a-z0-9])", haystack):
             return vendor
     return None
 
@@ -129,7 +136,13 @@ def _family_hint(path: Path) -> str | None:
     for pattern in FAMILY_PATTERNS:
         match = re.search(pattern, stem, flags=re.IGNORECASE)
         if match:
-            return match.group(1).replace("_", " ").upper() if match.group(1).upper().startswith("GW") or match.group(1).upper().startswith("XC") or match.group(1).upper().startswith("LIFCL") or match.group(1).upper().startswith("ECP5") else match.group(1).replace("_", " ")
+            token = match.group(1).replace("_", " ")
+            upper = token.upper()
+            if upper.startswith(("GW", "XC", "LIFCL", "ECP5", "A5E", "A5D")):
+                return upper
+            if upper.replace(" ", "") == "AGILEX5":
+                return "Agilex 5"
+            return token
     return None
 
 

@@ -862,6 +862,93 @@ def _load_gowin_family_design_guide(device: str, package: str, pinout_data: dict
     )
 
 
+INTEL_AGILEX5_OVERVIEW_SOURCE = {
+    "source": "agilex5_device_overview_762191_2024_09_06",
+    "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk",
+}
+
+INTEL_AGILEX5_PART_DECODER_SOURCE = {
+    "source": "agilex5_part_number_decoder_762191_2024_09_06",
+    "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk",
+}
+
+INTEL_AGILEX5_DEVICE_PROFILES = {
+    "A5E013B": {
+        "device_group": "B",
+        "logic_elements": 138060,
+        "adaptive_logic_modules": 46800,
+        "m20k_count": 358,
+        "m20k_mbit": 6.99,
+        "mlab_count": 2340,
+        "mlab_mbit": 1.43,
+        "dsp_count": 376,
+        "int8_tops": 4.93,
+        "hvio_count": 200,
+        "hsio_count": 192,
+        "hps_io_count": 48,
+        "io_pll_count": 4,
+        "fabric_feeding_io_pll_count": 8,
+        "lvds_pairs_1v3_1p6gbps": 96,
+        "memory_interface_x32_count": 2,
+        "mipi_dphy_interface_count": 14,
+        "transceiver_channel_count": 4,
+        "pcie4_x4_instance_count": 1,
+        "gigabit_ethernet_mac_pcs_count": 1,
+        "transceiver_max_rate_gbps": 17.16,
+        "memory_standards": ["DDR4", "LPDDR4", "LPDDR5"],
+        "ethernet_protocols": ["10G Ethernet"],
+    },
+    "A5E052A": {
+        "device_group": "A",
+        "logic_elements": 523920,
+        "adaptive_logic_modules": 177600,
+        "m20k_count": 1288,
+        "m20k_mbit": 25.16,
+        "mlab_count": 8440,
+        "mlab_mbit": 5.15,
+        "dsp_count": 1352,
+        "int8_tops": 20.78,
+        "hvio_count": 120,
+        "hsio_count": 384,
+        "hps_io_count": 48,
+        "io_pll_count": 8,
+        "fabric_feeding_io_pll_count": 13,
+        "lvds_pairs_1v3_1p6gbps": 192,
+        "memory_interface_x32_count": 4,
+        "mipi_dphy_interface_count": 28,
+        "transceiver_channel_count": 24,
+        "pcie4_x4_instance_count": 6,
+        "gigabit_ethernet_mac_pcs_count": 4,
+        "transceiver_max_rate_gbps": 28.1,
+        "memory_standards": ["DDR4", "DDR5", "LPDDR4", "LPDDR5"],
+        "ethernet_protocols": ["10G Ethernet", "25G Ethernet"],
+    },
+}
+
+INTEL_AGILEX5_VARIANTS = {
+    "A": {"device_role": "FPGA", "hps": "none", "transceiver": False, "crypto": False},
+    "B": {"device_role": "FPGA SoC", "hps": "quad", "transceiver": False, "crypto": True},
+    "C": {"device_role": "FPGA", "hps": "none", "transceiver": True, "crypto": False},
+    "D": {"device_role": "FPGA SoC", "hps": "quad", "transceiver": True, "crypto": True},
+    "E": {"device_role": "FPGA SoC", "hps": "dual", "transceiver": False, "crypto": False},
+    "G": {"device_role": "FPGA", "hps": "none", "transceiver": False, "crypto": True},
+}
+
+
+def _intel_agilex5_base_device(device: str) -> str | None:
+    match = re.match(r"^(A5E)[A-Z](\d{3}[AB])$", _safe_upper(device))
+    if not match:
+        return None
+    return f"{match.group(1)}{match.group(2)}"
+
+
+def _intel_agilex5_variant(device: str) -> dict:
+    match = re.match(r"^A5E([A-Z])\d{3}[AB]$", _safe_upper(device))
+    if not match:
+        return {}
+    return {"variant_code": match.group(1), **INTEL_AGILEX5_VARIANTS.get(match.group(1), {})}
+
+
 def _fpga_family_high_speed_metadata(vendor: str, device: str, family: str | None, hs_serial: dict) -> dict:
     family_upper = _safe_upper(family)
     device_upper = _safe_upper(device)
@@ -895,7 +982,148 @@ def _fpga_family_high_speed_metadata(vendor: str, device: str, family: str | Non
             "source_url": "https://www.latticesemi.com/en/Products/FPGAandCPLD/CrossLink-NX",
             "review_note": "CrossLink-NX exports only the single-channel SerDes topology here; protocol selection must still be matched against the chosen Lattice IP/reference design.",
         }
+    if vendor == "Intel/Altera" and family_upper == "AGILEX 5":
+        base_device = _intel_agilex5_base_device(device)
+        profile = INTEL_AGILEX5_DEVICE_PROFILES.get(base_device or "")
+        variant = _intel_agilex5_variant(device)
+        if profile and variant.get("transceiver"):
+            supported_protocols = ["PCIe 4.0", *profile.get("ethernet_protocols", []), "custom"]
+            protocol_matrix = {
+                "PCIe 4.0": {"lane_widths": [1, 2, 4], "hardcore": True},
+                "custom": {"lane_widths": [1, 2, 4], "hardcore": False},
+            }
+            for protocol in profile.get("ethernet_protocols", []):
+                protocol_matrix[protocol] = {"lane_widths": [1], "hardcore": False}
+            return {
+                "supported_protocols": supported_protocols,
+                "protocol_matrix": protocol_matrix,
+                "max_rate_gbps": profile["transceiver_max_rate_gbps"],
+                "pcie4_x4_instance_count": profile["pcie4_x4_instance_count"],
+                "gigabit_ethernet_mac_pcs_count": profile["gigabit_ethernet_mac_pcs_count"],
+                **INTEL_AGILEX5_OVERVIEW_SOURCE,
+                "review_note": "Agilex 5 transceiver protocol/IP enablement still depends on the selected ordering code, package migration limits, and design-specific quad usage.",
+            }
     return {}
+
+
+def _intel_agilex5_public_device_overlay(pinout_data: dict) -> dict:
+    if _safe_upper(pinout_data.get("_family")) != "AGILEX 5":
+        return {}
+
+    device = _safe_upper(pinout_data.get("device"))
+    base_device = _intel_agilex5_base_device(device)
+    profile = INTEL_AGILEX5_DEVICE_PROFILES.get(base_device or "")
+    variant = _intel_agilex5_variant(device)
+    if not profile or not variant:
+        return {}
+
+    overlay = {
+        "device_identity": {
+            "vendor": "Intel/Altera",
+            "family": pinout_data.get("_family"),
+            "series": pinout_data.get("_series"),
+            "base_device": base_device,
+            "device": device,
+            "package": pinout_data.get("package"),
+        },
+        "source_traceability": {
+            "package_pinout": {
+                "source_file": pinout_data.get("source_file"),
+                "source_document_id": pinout_data.get("source_document_id"),
+                "source_url": pinout_data.get("source_url"),
+                "source_index_url": pinout_data.get("source_index_url"),
+                "source_version": pinout_data.get("source_version"),
+                "source_status": pinout_data.get("source_status"),
+                "source_revision_note": pinout_data.get("source_revision_note"),
+            },
+            "device_capability": {
+                **INTEL_AGILEX5_OVERVIEW_SOURCE,
+                "scope": "device-level capability boundary",
+            },
+            "ordering_variant": {
+                **INTEL_AGILEX5_PART_DECODER_SOURCE,
+                "scope": "ordering-code role/features",
+            },
+        },
+        "ordering_variant": {
+            **variant,
+            **INTEL_AGILEX5_PART_DECODER_SOURCE,
+        },
+        "device_role": variant["device_role"],
+        "resources": {
+            "logic_elements": profile["logic_elements"],
+            "adaptive_logic_modules": profile["adaptive_logic_modules"],
+            "m20k_count": profile["m20k_count"],
+            "m20k_mbit": profile["m20k_mbit"],
+            "mlab_count": profile["mlab_count"],
+            "mlab_mbit": profile["mlab_mbit"],
+            "dsp_count": profile["dsp_count"],
+            "int8_tops": profile["int8_tops"],
+        },
+        "capability_blocks": {
+            "device_role": {
+                "class": "device_role",
+                "device_role": variant["device_role"],
+                **INTEL_AGILEX5_PART_DECODER_SOURCE,
+            },
+            "fabric_resources": {
+                "class": "fpga_fabric",
+                "logic_elements": profile["logic_elements"],
+                "adaptive_logic_modules": profile["adaptive_logic_modules"],
+                "m20k_count": profile["m20k_count"],
+                "m20k_mbit": profile["m20k_mbit"],
+                "mlab_count": profile["mlab_count"],
+                "mlab_mbit": profile["mlab_mbit"],
+                "dsp_count": profile["dsp_count"],
+                "int8_tops": profile["int8_tops"],
+                **INTEL_AGILEX5_OVERVIEW_SOURCE,
+            },
+            "io_resources": {
+                "class": "io_resources",
+                "hvio_count": profile["hvio_count"],
+                "hsio_count": profile["hsio_count"],
+                "hps_io_count": profile["hps_io_count"],
+                "io_pll_count": profile["io_pll_count"],
+                "fabric_feeding_io_pll_count": profile["fabric_feeding_io_pll_count"],
+                "lvds_pairs_1v3_1p6gbps": profile["lvds_pairs_1v3_1p6gbps"],
+                "mipi_dphy_interface_count": profile["mipi_dphy_interface_count"],
+                **INTEL_AGILEX5_OVERVIEW_SOURCE,
+            },
+            "memory_interface": {
+                "class": "memory_interface",
+                "supported_standards": profile["memory_standards"],
+                "x32_interface_count": profile["memory_interface_x32_count"],
+                **INTEL_AGILEX5_OVERVIEW_SOURCE,
+            },
+        },
+    }
+
+    if variant.get("transceiver"):
+        overlay["capability_blocks"]["high_speed_serial"] = {
+            "class": "high_speed_serial",
+            "transceiver_channel_count": profile["transceiver_channel_count"],
+            "max_rate_gbps": profile["transceiver_max_rate_gbps"],
+            "pcie4_x4_instance_count": profile["pcie4_x4_instance_count"],
+            "gigabit_ethernet_mac_pcs_count": profile["gigabit_ethernet_mac_pcs_count"],
+            "supported_protocols": ["PCIe 4.0", *profile.get("ethernet_protocols", []), "custom"],
+            **INTEL_AGILEX5_OVERVIEW_SOURCE,
+        }
+
+    if variant.get("hps") and variant["hps"] != "none":
+        overlay["capability_blocks"]["hard_processor"] = {
+            "class": "hard_processor",
+            "mode": variant["hps"],
+            "cores": ["Arm Cortex-A76", "Arm Cortex-A55"],
+            "cache": {
+                "l3_mb": 2,
+                "cortex_a76_l1_kb": 64,
+                "cortex_a76_l2_kb": 256,
+                "cortex_a55_l1_kb": 32,
+                "cortex_a55_l2_kb": 128,
+            },
+            **INTEL_AGILEX5_OVERVIEW_SOURCE,
+        }
+    return overlay
 
 
 def _infer_refclk_pairs_from_pins(pins: list[dict], existing_pairs: list[dict]) -> list[dict]:
@@ -1361,7 +1589,7 @@ def _normalize_pins(pins: list) -> list:
     """Ensure every pin has a 'category' field and normalized function."""
     FUNCTION_MAP = {
         # IO
-        "I/O": "IO", "i/o": "IO", "IO": "IO", "DIO": "IO", "MIPI": "IO",
+        "I/O": "IO", "i/o": "IO", "IO": "IO", "DIO": "IO", "MIPI": "IO", "HPS_IO": "IO",
         # Power / Ground
         "POWER": "POWER", "Power": "POWER",
         "GROUND": "GROUND", "Ground": "GROUND", "GND": "GROUND",
@@ -2239,6 +2467,8 @@ def export_fpga(dc_data: dict, pinout_data: dict, gowin_dc: dict = None, lattice
         manufacturer = "Gowin"
     elif vendor == "Lattice":
         manufacturer = "Lattice"
+    elif vendor in ("Intel/Altera", "Intel", "Altera"):
+        manufacturer = "Intel/Altera"
     else:
         manufacturer = comp.get("manufacturer", "AMD")
 
@@ -2302,6 +2532,10 @@ def export_fpga(dc_data: dict, pinout_data: dict, gowin_dc: dict = None, lattice
         public_overlay = _gowin_public_device_overlay(pinout_data)
         if public_overlay:
             result = _deep_merge_dict(result, public_overlay)
+    elif vendor in ("Intel/Altera", "Intel", "Altera"):
+        public_overlay = _intel_agilex5_public_device_overlay(pinout_data)
+        if public_overlay:
+            result = _deep_merge_dict(result, public_overlay)
 
     return result
 
@@ -2332,6 +2566,7 @@ def main():
             out_path = output_dir / f"{safe_name}.json"
             with open(out_path, "w") as fp:
                 json.dump(result, fp, indent=2, ensure_ascii=False)
+                fp.write("\n")
             pkg_count = len(result["packages"])
             pin_total = sum(p["pin_count"] for p in result["packages"].values())
             hints = len(result["drc_hints"])
@@ -2426,6 +2661,7 @@ def main():
             out_path = output_dir / f"{safe_name}.json"
             with open(out_path, "w") as fp:
                 json.dump(result, fp, indent=2, ensure_ascii=False)
+                fp.write("\n")
 
             n_pins = len(result["pins"])
             n_pairs = len(result["diff_pairs"])
@@ -2457,6 +2693,7 @@ def main():
     manifest_path = output_dir / "_manifest.json"
     with open(manifest_path, "w") as fp:
         json.dump(manifest, fp, indent=2)
+        fp.write("\n")
     print(f"Manifest: {manifest_path} ({len(manifest['devices'])} devices)")
 
 
