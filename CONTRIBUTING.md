@@ -23,6 +23,14 @@
 - Use `python3 -m pytest -q` for the pytest-compatible entrypoint.
 - Use `python3 scripts/doctor.py --dev` to validate local tooling and key paths.
 
+## Agent Context Hygiene
+
+- Treat `docs/` as a routed knowledge base, not a bulk context source.
+- Start with `README.md`, `GUIDE.md`, `docs/index.md`, or `docs/hardware-engineer-index.md`.
+- Open only the smallest set of docs needed for the task.
+- For coding, validation, or export changes, prefer reading the actual script, schema, or test before opening more docs.
+- Do not recursively scan `docs/hardware-engineering/` unless the task is explicitly a hardware review writing task.
+
 ## Generated Data Policy
 
 - Treat `data/sch_review_export/*.json` as generated artifacts.
