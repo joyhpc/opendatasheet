@@ -22,6 +22,8 @@ DEFAULT_OUTPUT = DEFAULT_RAW_ROOT / "_source_manifest.json"
 POLICY_VERSION = "1.0"
 
 VENDOR_HINTS = [
+    ("anlogic", "Anlogic"),
+    ("安路", "Anlogic"),
     ("gowin", "Gowin"),
     ("xilinx", "AMD/Xilinx"),
     ("amd", "AMD/Xilinx"),
@@ -42,6 +44,8 @@ VENDOR_HINTS = [
 ]
 
 FAMILY_PATTERNS = [
+    r"(PH1A)",
+    r"(PH1A\d+(?:[A-Z]{3}\d+)?)",
     r"(A5E[A-Z]\d{3}[AB])",
     r"(A5D\d{3})",
     r"(Agilex\s*5)",
@@ -64,10 +68,10 @@ FAMILY_PATTERNS = [
 DOC_TYPE_RULES = [
     ("package_guide", ("封装与管脚", "package and pin", "package_pin", "package guide", "封装信息")),
     ("pinout", ("pinout", "器件pinout", "管脚手册", "pin list")),
-    ("marketing_summary", ("overview", "device overview", "product overview", "selector guide")),
-    ("design_guide", ("原理图指导", "design guide", "layout guide", "layout guideline", "schematic guide")),
-    ("reference", ("reference design", "devboard", "evaluation module", "evm", "evb", "开发板", "dk_start")),
-    ("app_note", ("application note", "appnote", "app note", "用户手册")),
+    ("marketing_summary", ("overview", "device overview", "product overview", "selector guide", "选型手册")),
+    ("design_guide", ("原理图指导", "design guide", "layout guide", "layout guideline", "schematic guide", "硬件设计指南")),
+    ("reference", ("reference design", "devboard", "evaluation module", "evm", "evb", "开发板", "dk_start", "使用指南", "使用说明")),
+    ("app_note", ("application note", "appnote", "app note", "用户手册", "技术报告", "技术说明")),
     ("datasheet", ("datasheet", "数据手册")),
 ]
 

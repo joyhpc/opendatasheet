@@ -92,6 +92,7 @@
 ## FPGA Workflows
 
 - [`fpga-pinout-parser-overview.md`](fpga-pinout-parser-overview.md) — Cross-vendor map of the FPGA pinout parsers in this repo. **Best for:** FPGA contributors, reviewers.
+- [`anlogic-ph1a-source-intake.md`](anlogic-ph1a-source-intake.md) — Initial intake notes for the imported Anlogic `PH1A` family source bundle, including current support boundaries and missing pinout sources. **Best for:** FPGA maintainers planning Anlogic support.
 - [`amd-pinout-workflow.md`](amd-pinout-workflow.md) — Workflow for AMD/Xilinx UltraScale+ TXT pinout parsing. **Best for:** AMD FPGA contributors.
 - [`gowin-pinout-workflow.md`](gowin-pinout-workflow.md) — Workflow for Gowin XLSX pinout parsing. **Best for:** Gowin FPGA contributors.
 - [`lattice-pinout-workflow.md`](lattice-pinout-workflow.md) — Workflow for Lattice ECP5 / CrossLink-NX pinout parsing. **Best for:** Lattice FPGA contributors.
