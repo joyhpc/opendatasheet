@@ -1,0 +1,1737 @@
+{
+  "_schema_version": "1.0",
+  "_type": "fpga_family_package_matrix",
+  "_vendor": "Anlogic",
+  "_family": "SALPHOENIX 1A",
+  "_series": "PH1A",
+  "family": "PH1A",
+  "summary": {
+    "device_count": 7,
+    "serdes_capable_packages": [
+      "PH1A90SBG484",
+      "PH1A90SEG324",
+      "PH1A90SEG325",
+      "PH1A180SFG676",
+      "PH1A400SFG676",
+      "PH1A400SFG900"
+    ],
+    "ddr_capable_packages": [
+      "PH1A90SBG484",
+      "PH1A90SEG324",
+      "PH1A90SEG325",
+      "PH1A180SFG676",
+      "PH1A400SFG676",
+      "PH1A400SFG900"
+    ],
+    "mipi_capable_packages": [
+      "PH1A90SBG484",
+      "PH1A90SEG325",
+      "PH1A180SFG676"
+    ],
+    "pcie_capable_packages": [
+      "PH1A90SBG484",
+      "PH1A90SEG324",
+      "PH1A180SFG676",
+      "PH1A400SFG676",
+      "PH1A400SFG900"
+    ],
+    "locale_conflict_devices": [
+      "PH1A90SBG484",
+      "PH1A90SEG324",
+      "PH1A90SEG325"
+    ]
+  },
+  "source_traceability": {
+    "official_product_pages": {
+      "primary_locale": "zh-CN",
+      "sources": [
+        {
+          "locale": "zh-CN",
+          "source_url": "https://www.anlogic.com/product/fpga/phoenix/ph1a"
+        },
+        {
+          "locale": "en",
+          "source_url": "https://www.anlogic.com/en/product/fpga/phoenix/ph1a"
+        },
+        {
+          "locale": "jp",
+          "source_url": "https://www.anlogic.com/jp/product/fpga/phoenix/ph1a"
+        }
+      ]
+    },
+    "io_user_manual": {
+      "source_file": "UG911_安路科技PH1A系列FPGA IO用户手册.pdf",
+      "source_path": "data/raw/fpga/anlogic_ph1a/UG911_安路科技PH1A系列FPGA IO用户手册.pdf",
+      "source_version": null
+    },
+    "serdes_user_manual": {
+      "source_file": "UG909_安路科技PH1A系列FPGA SERDES用户手册.pdf",
+      "source_path": "data/raw/fpga/anlogic_ph1a/UG909_安路科技PH1A系列FPGA SERDES用户手册.pdf",
+      "source_version": null
+    },
+    "pcie_user_manual": {
+      "source_file": "UG913_安路科技PH1A系列FPGA PCIE用户手册.pdf",
+      "source_path": "data/raw/fpga/anlogic_ph1a/UG913_安路科技PH1A系列FPGA PCIE用户手册.pdf",
+      "source_version": null
+    },
+    "ddr_user_manual": {
+      "source_file": "UG915_安路科技PH1A系列FPGA DDR3_4高速接口用户手册.pdf",
+      "source_path": "data/raw/fpga/anlogic_ph1a/UG915_安路科技PH1A系列FPGA DDR3_4高速接口用户手册.pdf",
+      "source_version": null
+    },
+    "hardware_design_guide": {
+      "source_file": "UG907_安路科技PH1A系列FPGA 硬件设计指南.pdf",
+      "source_path": "data/raw/fpga/anlogic_ph1a/UG907_安路科技PH1A系列FPGA 硬件设计指南.pdf",
+      "source_version": null
+    }
+  },
+  "devices": [
+    {
+      "_schema_version": "1.0",
+      "_type": "fpga_package_capability",
+      "_vendor": "Anlogic",
+      "_family": "SALPHOENIX 1A",
+      "_series": "PH1A",
+      "_base_device": "PH1A60",
+      "device": "PH1A60GEG324",
+      "package": "GEG324",
+      "ordering_suffix": "C",
+      "device_identity": {
+        "vendor": "Anlogic",
+        "family": "SALPHOENIX 1A",
+        "series": "PH1A",
+        "base_device": "PH1A60",
+        "device": "PH1A60GEG324",
+        "package": "GEG324"
+      },
+      "package_info": {
+        "package_code": "GEG324",
+        "package_body": "LFBGA324",
+        "package_size_mm": {
+          "x_mm": 15.0,
+          "y_mm": 15.0
+        },
+        "ball_pitch_mm": 0.8
+      },
+      "resources": {
+        "luts": 70848,
+        "dffs": 78720,
+        "distributed_ram_kbits": 780,
+        "eram_20k_blocks": 158,
+        "eram_total_kbits": 3160,
+        "dsp_blocks": 120,
+        "pll_blocks": 12
+      },
+      "package_summary": {
+        "serdes_channels": null,
+        "serdes_rate_gbps": null,
+        "ddr_rate_mbps": null,
+        "ddr_width_bits": null,
+        "mipi_io_count": null,
+        "user_io_count": 211,
+        "package_body": "LFBGA324",
+        "package_size_mm": {
+          "x_mm": 15.0,
+          "y_mm": 15.0
+        },
+        "ball_pitch_mm": 0.8
+      },
+      "package_io_banks": {
+        "hr_banks": [
+          0,
+          11,
+          12,
+          13,
+          32,
+          33
+        ],
+        "hp_banks": [],
+        "notes": [
+          "Bank0 主要分布配置相关 I/O"
+        ],
+        "evidence_level": "package_verified",
+        "source": "UG911"
+      },
+      "capability_blocks": {
+        "memory_interface": {
+          "present": false,
+          "hard_ppc": false,
+          "supported_standards": [],
+          "max_rate_mbps": null,
+          "max_data_width_bits": null,
+          "evidence_level": "package_verified",
+          "source": "official_product_page"
+        },
+        "mipi_phy": {
+          "present": false,
+          "directions": [],
+          "mipi_io_count": null,
+          "group_count": null,
+          "max_data_lanes_per_group": null,
+          "evidence_level": "package_verified",
+          "source": "UG907",
+          "notes": []
+        },
+        "high_speed_serial": {
+          "present": false,
+          "channel_pairs": 0,
+          "serdes_dual_count": 0,
+          "package_rate_ceiling_gbps": null,
+          "supported_protocols": [],
+          "protocol_matrix": {},
+          "evidence_level": "package_verified",
+          "source": "official_product_page+UG909",
+          "notes": []
+        },
+        "pcie": {
+          "present": false,
+          "max_link_width": 0,
+          "generations": [],
+          "hardcore": false,
+          "phy_banks": [],
+          "evidence_level": "package_verified",
+          "source": "UG913",
+          "notes": []
+        }
+      },
+      "source_conflicts": [],
+      "source_traceability": {
+        "official_product_page": {
+          "primary_locale": "zh-CN",
+          "locales_observed": [
+            "en",
+            "jp",
+            "zh-CN"
+          ],
+          "source_url": "https://www.anlogic.com/product/fpga/phoenix/ph1a",
+          "product_name": "PH1A60GEG324/C"
+        },
+        "package_bank_distribution": {
+          "source_file": "UG911_安路科技PH1A系列FPGA IO用户手册.pdf",
+          "source_path": "data/raw/fpga/anlogic_ph1a/UG911_安路科技PH1A系列FPGA IO用户手册.pdf",
+          "source_version": null
+        },
+        "serdes": {
+          "source_file": "UG909_安路科技PH1A系列FPGA SERDES用户手册.pdf",
+          "source_path": "data/raw/fpga/anlogic_ph1a/UG909_安路科技PH1A系列FPGA SERDES用户手册.pdf",
+          "source_version": null
+        },
+        "pcie": {
+          "source_file": "UG913_安路科技PH1A系列FPGA PCIE用户手册.pdf",
+          "source_path": "data/raw/fpga/anlogic_ph1a/UG913_安路科技PH1A系列FPGA PCIE用户手册.pdf",
+          "source_version": null
+        },
+        "ddr": {
+          "source_file": "UG915_安路科技PH1A系列FPGA DDR3_4高速接口用户手册.pdf",
+          "source_path": "data/raw/fpga/anlogic_ph1a/UG915_安路科技PH1A系列FPGA DDR3_4高速接口用户手册.pdf",
+          "source_version": null
+        },
+        "mipi_and_hardware": {
+          "source_file": "UG907_安路科技PH1A系列FPGA 硬件设计指南.pdf",
+          "source_path": "data/raw/fpga/anlogic_ph1a/UG907_安路科技PH1A系列FPGA 硬件设计指南.pdf",
+          "source_version": null
+        }
+      }
+    },
+    {
+      "_schema_version": "1.0",
+      "_type": "fpga_package_capability",
+      "_vendor": "Anlogic",
+      "_family": "SALPHOENIX 1A",
+      "_series": "PH1A",
+      "_base_device": "PH1A90",
+      "device": "PH1A90SBG484",
+      "package": "SBG484",
+      "ordering_suffix": null,
+      "device_identity": {
+        "vendor": "Anlogic",
+        "family": "SALPHOENIX 1A",
+        "series": "PH1A",
+        "base_device": "PH1A90",
+        "device": "PH1A90SBG484",
+        "package": "SBG484"
+      },
+      "package_info": {
+        "package_code": "SBG484",
+        "package_body": "LFBGA484",
+        "package_size_mm": {
+          "x_mm": 23.0,
+          "y_mm": 23.0
+        },
+        "ball_pitch_mm": 1.0
+      },
+      "resources": {
+        "luts": 115776,
+        "dffs": 128640,
+        "distributed_ram_kbits": 1680,
+        "eram_20k_blocks": 272,
+        "eram_total_kbits": 5440,
+        "dsp_blocks": 240,
+        "pll_blocks": 12
+      },
+      "package_summary": {
+        "serdes_channels": 4,
+        "serdes_rate_gbps": 12.5,
+        "ddr_rate_mbps": 1066,
+        "ddr_width_bits": 40,
+        "mipi_io_count": 20,
+        "user_io_count": 280,
+        "package_body": "LFBGA484",
+        "package_size_mm": {
+          "x_mm": 23.0,
+          "y_mm": 23.0
+        },
+        "ball_pitch_mm": 1.0
+      },
+      "package_io_banks": {
+        "hr_banks": [
+          0,
+          11,
+          12,
+          13,
+          14
+        ],
+        "hp_banks": [
+          31,
+          32
+        ],
+        "notes": [
+          "bank0 主要分布配置相关 I/O"
+        ],
+        "evidence_level": "package_verified",
+        "source": "UG911"
+      },
+      "capability_blocks": {
+        "memory_interface": {
+          "present": true,
+          "hard_ppc": true,
+          "supported_standards": [
+            "DDR3",
+            "DDR3L",
+            "DDR4"
+          ],
+          "max_rate_mbps": 1066,
+          "max_data_width_bits": 40,
+          "evidence_level": "product_page_plus_family_manual",
+          "source": "official_product_page+UG915",
+          "notes": [
+            "UG915 confirms DDR3/DDR4 support for PH1A90/PH1A180/PH1A400 families; exact package-bank ownership should still be frozen in TD IO planning."
+          ]
+        },
+        "mipi_phy": {
+          "present": true,
+          "directions": [
+            "rx"
+          ],
+          "mipi_io_count": 20,
+          "group_count": 2,
+          "max_data_lanes_per_group": 4,
+          "evidence_level": "package_verified",
+          "source": "UG907",
+          "notes": [
+            "UG921 explicitly documents 2 MIPI DPHY-RX groups, each up to 1 clock lane + 4 data lanes."
+          ]
+        },
+        "high_speed_serial": {
+          "present": true,
+          "channel_pairs": 4,
+          "serdes_dual_count": 2,
+          "package_rate_ceiling_gbps": 12.5,
+          "supported_protocols": [
+            "1000BASE-KX",
+            "10GBASE-KR",
+            "10GBASE-KX4",
+            "CEI",
+            "CPRI",
+            "JESD204B",
+            "PCI Express",
+            "QSGMII",
+            "RXAUI",
+            "SGMII",
+            "SRIO",
+            "XAUI"
+          ],
+          "protocol_matrix": {
+            "PCI Express": {
+              "variants": [
+                "Gen1",
+                "Gen2",
+                "Gen3"
+              ],
+              "lane_widths": [
+                1,
+                2,
+                4
+              ]
+            },
+            "1000BASE-KX": {
+              "supported": true
+            },
+            "SGMII": {
+              "supported": true
+            },
+            "QSGMII": {
+              "supported": true
+            },
+            "XAUI": {
+              "supported": true
+            },
+            "RXAUI": {
+              "supported": true
+            },
+            "10GBASE-KX4": {
+              "supported": true
+            },
+            "10GBASE-KR": {
+              "supported": true
+            },
+            "CEI": {
+              "line_rates_gbps": [
+                6.0,
+                11.0
+              ]
+            },
+            "CPRI": {
+              "line_rates_gbps": [
+                2.4576,
+                4.9152,
+                6.144,
+                9.8304
+              ]
+            },
+            "JESD204B": {
+              "line_rates_gbps": [
+                1.25,
+                2.5,
+                5.0,
+                6.25,
+                12.5
+              ]
+            },
+            "SRIO": {
+              "line_rates_gbps": [
+                1.25,
+                2.5,
+                3.125,
+                5.0,
+                6.25
+              ]
+            }
+          },
+          "evidence_level": "package_verified",
+          "source": "official_product_page+UG909",
+          "notes": [
+            "UG909 documents bidirectional adjacent-DUAL refclk sharing on PH1A90/PH1A180."
+          ]
+        },
+        "pcie": {
+          "present": true,
+          "max_link_width": 4,
+          "generations": [
+            "Gen1",
+            "Gen2",
+            "Gen3"
+          ],
+          "hardcore": true,
+          "phy_banks": [
+            82,
+            83
+          ],
+          "evidence_level": "package_verified",
+          "source": "UG913",
+          "notes": []
+        }
+      },
+      "source_conflicts": [
+        {
+          "field": "serdes_rate_gbps",
+          "observations": {
+            "zh-CN": 12.5,
+            "en": 12.5,
+            "jp": 10.3125
+          }
+        }
+      ],
+      "source_traceability": {
+        "official_product_page": {
+          "primary_locale": "zh-CN",
+          "locales_observed": [
+            "en",
+            "jp",
+            "zh-CN"
+          ],
+          "source_url": "https://www.anlogic.com/product/fpga/phoenix/ph1a",
+          "product_name": "PH1A90SBG484"
+        },
+        "package_bank_distribution": {
+          "source_file": "UG911_安路科技PH1A系列FPGA IO用户手册.pdf",
+          "source_path": "data/raw/fpga/anlogic_ph1a/UG911_安路科技PH1A系列FPGA IO用户手册.pdf",
+          "source_version": null
+        },
+        "serdes": {
+          "source_file": "UG909_安路科技PH1A系列FPGA SERDES用户手册.pdf",
+          "source_path": "data/raw/fpga/anlogic_ph1a/UG909_安路科技PH1A系列FPGA SERDES用户手册.pdf",
+          "source_version": null
+        },
+        "pcie": {
+          "source_file": "UG913_安路科技PH1A系列FPGA PCIE用户手册.pdf",
+          "source_path": "data/raw/fpga/anlogic_ph1a/UG913_安路科技PH1A系列FPGA PCIE用户手册.pdf",
+          "source_version": null
+        },
+        "ddr": {
+          "source_file": "UG915_安路科技PH1A系列FPGA DDR3_4高速接口用户手册.pdf",
+          "source_path": "data/raw/fpga/anlogic_ph1a/UG915_安路科技PH1A系列FPGA DDR3_4高速接口用户手册.pdf",
+          "source_version": null
+        },
+        "mipi_and_hardware": {
+          "source_file": "UG907_安路科技PH1A系列FPGA 硬件设计指南.pdf",
+          "source_path": "data/raw/fpga/anlogic_ph1a/UG907_安路科技PH1A系列FPGA 硬件设计指南.pdf",
+          "source_version": null
+        }
+      }
+    },
+    {
+      "_schema_version": "1.0",
+      "_type": "fpga_package_capability",
+      "_vendor": "Anlogic",
+      "_family": "SALPHOENIX 1A",
+      "_series": "PH1A",
+      "_base_device": "PH1A90",
+      "device": "PH1A90SEG324",
+      "package": "SEG324",
+      "ordering_suffix": null,
+      "device_identity": {
+        "vendor": "Anlogic",
+        "family": "SALPHOENIX 1A",
+        "series": "PH1A",
+        "base_device": "PH1A90",
+        "device": "PH1A90SEG324",
+        "package": "SEG324"
+      },
+      "package_info": {
+        "package_code": "SEG324",
+        "package_body": "LFBGA324",
+        "package_size_mm": {
+          "x_mm": 15.0,
+          "y_mm": 15.0
+        },
+        "ball_pitch_mm": 0.8
+      },
+      "resources": {
+        "luts": 115776,
+        "dffs": 128640,
+        "distributed_ram_kbits": 1680,
+        "eram_20k_blocks": 272,
+        "eram_total_kbits": 5440,
+        "dsp_blocks": 240,
+        "pll_blocks": 12
+      },
+      "package_summary": {
+        "serdes_channels": 8,
+        "serdes_rate_gbps": 10.3125,
+        "ddr_rate_mbps": 1066,
+        "ddr_width_bits": 16,
+        "mipi_io_count": null,
+        "user_io_count": 148,
+        "package_body": "LFBGA324",
+        "package_size_mm": {
+          "x_mm": 15.0,
+          "y_mm": 15.0
+        },
+        "ball_pitch_mm": 0.8
+      },
+      "package_io_banks": {
+        "hr_banks": [
+          0,
+          12,
+          13
+        ],
+        "hp_banks": [
+          32
+        ],
+        "notes": [
+          "bank0 主要分布配置相关 I/O"
+        ],
+        "evidence_level": "package_verified",
+        "source": "UG911"
+      },
+      "capability_blocks": {
+        "memory_interface": {
+          "present": true,
+          "hard_ppc": true,
+          "supported_standards": [
+            "DDR3",
+            "DDR3L",
+            "DDR4"
+          ],
+          "max_rate_mbps": 1066,
+          "max_data_width_bits": 16,
+          "evidence_level": "product_page_plus_family_manual",
+          "source": "official_product_page+UG915",
+          "notes": [
+            "UG915 confirms DDR3/DDR4 support for PH1A90/PH1A180/PH1A400 families; exact package-bank ownership should still be frozen in TD IO planning."
+          ]
+        },
+        "mipi_phy": {
+          "present": false,
+          "directions": [],
+          "mipi_io_count": null,
+          "group_count": null,
+          "max_data_lanes_per_group": null,
+          "evidence_level": "package_verified",
+          "source": "UG907",
+          "notes": []
+        },
+        "high_speed_serial": {
+          "present": true,
+          "channel_pairs": 8,
+          "serdes_dual_count": 4,
+          "package_rate_ceiling_gbps": 10.3125,
+          "supported_protocols": [
+            "1000BASE-KX",
+            "10GBASE-KR",
+            "10GBASE-KX4",
+            "CEI",
+            "CPRI",
+            "JESD204B",
+            "PCI Express",
+            "QSGMII",
+            "RXAUI",
+            "SGMII",
+            "SRIO",
+            "XAUI"
+          ],
+          "protocol_matrix": {
+            "PCI Express": {
+              "variants": [
+                "Gen1",
+                "Gen2",
+                "Gen3"
+              ],
+              "lane_widths": [
+                1,
+                2,
+                4
+              ]
+            },
+            "1000BASE-KX": {
+              "supported": true
+            },
+            "SGMII": {
+              "supported": true
+            },
+            "QSGMII": {
+              "supported": true
+            },
+            "XAUI": {
+              "supported": true
+            },
+            "RXAUI": {
+              "supported": true
+            },
+            "10GBASE-KX4": {
+              "supported": true
+            },
+            "10GBASE-KR": {
+              "supported": true
+            },
+            "CEI": {
+              "line_rates_gbps": [
+                6.0,
+                11.0
+              ]
+            },
+            "CPRI": {
+              "line_rates_gbps": [
+                2.4576,
+                4.9152,
+                6.144,
+                9.8304
+              ]
+            },
+            "JESD204B": {
+              "line_rates_gbps": [
+                1.25,
+                2.5,
+                5.0,
+                6.25,
+                12.5
+              ]
+            },
+            "SRIO": {
+              "line_rates_gbps": [
+                1.25,
+                2.5,
+                3.125,
+                5.0,
+                6.25
+              ]
+            }
+          },
+          "evidence_level": "package_verified",
+          "source": "official_product_page+UG909",
+          "notes": [
+            "UG909 documents bidirectional adjacent-DUAL refclk sharing on PH1A90/PH1A180."
+          ]
+        },
+        "pcie": {
+          "present": true,
+          "max_link_width": 4,
+          "generations": [
+            "Gen1",
+            "Gen2",
+            "Gen3"
+          ],
+          "hardcore": true,
+          "phy_banks": [
+            82,
+            83
+          ],
+          "evidence_level": "package_verified",
+          "source": "UG913",
+          "notes": []
+        }
+      },
+      "source_conflicts": [
+        {
+          "field": "serdes_rate_gbps",
+          "observations": {
+            "zh-CN": 10.3125,
+            "en": 6.25,
+            "jp": 6.25
+          }
+        }
+      ],
+      "source_traceability": {
+        "official_product_page": {
+          "primary_locale": "zh-CN",
+          "locales_observed": [
+            "en",
+            "jp",
+            "zh-CN"
+          ],
+          "source_url": "https://www.anlogic.com/product/fpga/phoenix/ph1a",
+          "product_name": "PH1A90SEG324"
+        },
+        "package_bank_distribution": {
+          "source_file": "UG911_安路科技PH1A系列FPGA IO用户手册.pdf",
+          "source_path": "data/raw/fpga/anlogic_ph1a/UG911_安路科技PH1A系列FPGA IO用户手册.pdf",
+          "source_version": null
+        },
+        "serdes": {
+          "source_file": "UG909_安路科技PH1A系列FPGA SERDES用户手册.pdf",
+          "source_path": "data/raw/fpga/anlogic_ph1a/UG909_安路科技PH1A系列FPGA SERDES用户手册.pdf",
+          "source_version": null
+        },
+        "pcie": {
+          "source_file": "UG913_安路科技PH1A系列FPGA PCIE用户手册.pdf",
+          "source_path": "data/raw/fpga/anlogic_ph1a/UG913_安路科技PH1A系列FPGA PCIE用户手册.pdf",
+          "source_version": null
+        },
+        "ddr": {
+          "source_file": "UG915_安路科技PH1A系列FPGA DDR3_4高速接口用户手册.pdf",
+          "source_path": "data/raw/fpga/anlogic_ph1a/UG915_安路科技PH1A系列FPGA DDR3_4高速接口用户手册.pdf",
+          "source_version": null
+        },
+        "mipi_and_hardware": {
+          "source_file": "UG907_安路科技PH1A系列FPGA 硬件设计指南.pdf",
+          "source_path": "data/raw/fpga/anlogic_ph1a/UG907_安路科技PH1A系列FPGA 硬件设计指南.pdf",
+          "source_version": null
+        }
+      }
+    },
+    {
+      "_schema_version": "1.0",
+      "_type": "fpga_package_capability",
+      "_vendor": "Anlogic",
+      "_family": "SALPHOENIX 1A",
+      "_series": "PH1A",
+      "_base_device": "PH1A90",
+      "device": "PH1A90SEG325",
+      "package": "SEG325",
+      "ordering_suffix": null,
+      "device_identity": {
+        "vendor": "Anlogic",
+        "family": "SALPHOENIX 1A",
+        "series": "PH1A",
+        "base_device": "PH1A90",
+        "device": "PH1A90SEG325",
+        "package": "SEG325"
+      },
+      "package_info": {
+        "package_code": "SEG325",
+        "package_body": "LFBGA325",
+        "package_size_mm": {
+          "x_mm": 15.0,
+          "y_mm": 15.0
+        },
+        "ball_pitch_mm": 0.8
+      },
+      "resources": {
+        "luts": 115776,
+        "dffs": 128640,
+        "distributed_ram_kbits": 1680,
+        "eram_20k_blocks": 272,
+        "eram_total_kbits": 5440,
+        "dsp_blocks": 240,
+        "pll_blocks": 12
+      },
+      "package_summary": {
+        "serdes_channels": 4,
+        "serdes_rate_gbps": 10.3125,
+        "ddr_rate_mbps": 1066,
+        "ddr_width_bits": 40,
+        "mipi_io_count": 20,
+        "user_io_count": 180,
+        "package_body": "LFBGA325",
+        "package_size_mm": {
+          "x_mm": 15.0,
+          "y_mm": 15.0
+        },
+        "ball_pitch_mm": 0.8
+      },
+      "package_io_banks": {
+        "hr_banks": null,
+        "hp_banks": null,
+        "notes": [
+          "Official product page provides user IO count, but the current local raw bundle does not contain a package-bank map for this package."
+        ],
+        "evidence_level": "web_only",
+        "source": "official_product_page"
+      },
+      "capability_blocks": {
+        "memory_interface": {
+          "present": true,
+          "hard_ppc": true,
+          "supported_standards": [
+            "DDR3",
+            "DDR3L",
+            "DDR4"
+          ],
+          "max_rate_mbps": 1066,
+          "max_data_width_bits": 40,
+          "evidence_level": "product_page_plus_family_manual",
+          "source": "official_product_page+UG915",
+          "notes": [
+            "UG915 confirms DDR3/DDR4 support for PH1A90/PH1A180/PH1A400 families; exact package-bank ownership should still be frozen in TD IO planning."
+          ]
+        },
+        "mipi_phy": {
+          "present": true,
+          "directions": [
+            "rx"
+          ],
+          "mipi_io_count": 20,
+          "group_count": null,
+          "max_data_lanes_per_group": null,
+          "evidence_level": "web_only",
+          "source": "official_product_page",
+          "notes": [
+            "Current Chinese product page lists MIPI IO on this package, but the local raw hardware guide does not yet cover this package name."
+          ]
+        },
+        "high_speed_serial": {
+          "present": true,
+          "channel_pairs": 4,
+          "serdes_dual_count": 2,
+          "package_rate_ceiling_gbps": 10.3125,
+          "supported_protocols": [
+            "1000BASE-KX",
+            "10GBASE-KR",
+            "10GBASE-KX4",
+            "CEI",
+            "CPRI",
+            "JESD204B",
+            "PCI Express",
+            "QSGMII",
+            "RXAUI",
+            "SGMII",
+            "SRIO",
+            "XAUI"
+          ],
+          "protocol_matrix": {
+            "PCI Express": {
+              "variants": [
+                "Gen1",
+                "Gen2",
+                "Gen3"
+              ],
+              "lane_widths": [
+                1,
+                2,
+                4
+              ]
+            },
+            "1000BASE-KX": {
+              "supported": true
+            },
+            "SGMII": {
+              "supported": true
+            },
+            "QSGMII": {
+              "supported": true
+            },
+            "XAUI": {
+              "supported": true
+            },
+            "RXAUI": {
+              "supported": true
+            },
+            "10GBASE-KX4": {
+              "supported": true
+            },
+            "10GBASE-KR": {
+              "supported": true
+            },
+            "CEI": {
+              "line_rates_gbps": [
+                6.0,
+                11.0
+              ]
+            },
+            "CPRI": {
+              "line_rates_gbps": [
+                2.4576,
+                4.9152,
+                6.144,
+                9.8304
+              ]
+            },
+            "JESD204B": {
+              "line_rates_gbps": [
+                1.25,
+                2.5,
+                5.0,
+                6.25,
+                12.5
+              ]
+            },
+            "SRIO": {
+              "line_rates_gbps": [
+                1.25,
+                2.5,
+                3.125,
+                5.0,
+                6.25
+              ]
+            }
+          },
+          "evidence_level": "package_verified",
+          "source": "official_product_page+UG909",
+          "notes": [
+            "UG909 documents bidirectional adjacent-DUAL refclk sharing on PH1A90/PH1A180."
+          ]
+        },
+        "pcie": {
+          "present": null,
+          "max_link_width": null,
+          "generations": [],
+          "hardcore": null,
+          "phy_banks": [],
+          "evidence_level": "web_gap",
+          "source": "official_product_page",
+          "notes": [
+            "Current local PCIe manual covers PH1A90SEG324 but not this package name; do not freeze PCIe ownership without package-specific confirmation.",
+            "Official locale pages disagree on some package-level parameters for this device."
+          ]
+        }
+      },
+      "source_conflicts": [
+        {
+          "field": "serdes_rate_gbps",
+          "observations": {
+            "zh-CN": 10.3125,
+            "en": 6.25,
+            "jp": 6.25
+          }
+        },
+        {
+          "field": "ddr_width_bits",
+          "observations": {
+            "zh-CN": 40,
+            "en": 40,
+            "jp": 32
+          }
+        }
+      ],
+      "source_traceability": {
+        "official_product_page": {
+          "primary_locale": "zh-CN",
+          "locales_observed": [
+            "en",
+            "jp",
+            "zh-CN"
+          ],
+          "source_url": "https://www.anlogic.com/product/fpga/phoenix/ph1a",
+          "product_name": "PH1A90SEG325"
+        },
+        "package_bank_distribution": {
+          "source_file": "UG911_安路科技PH1A系列FPGA IO用户手册.pdf",
+          "source_path": "data/raw/fpga/anlogic_ph1a/UG911_安路科技PH1A系列FPGA IO用户手册.pdf",
+          "source_version": null
+        },
+        "serdes": {
+          "source_file": "UG909_安路科技PH1A系列FPGA SERDES用户手册.pdf",
+          "source_path": "data/raw/fpga/anlogic_ph1a/UG909_安路科技PH1A系列FPGA SERDES用户手册.pdf",
+          "source_version": null
+        },
+        "pcie": {
+          "source_file": "UG913_安路科技PH1A系列FPGA PCIE用户手册.pdf",
+          "source_path": "data/raw/fpga/anlogic_ph1a/UG913_安路科技PH1A系列FPGA PCIE用户手册.pdf",
+          "source_version": null
+        },
+        "ddr": {
+          "source_file": "UG915_安路科技PH1A系列FPGA DDR3_4高速接口用户手册.pdf",
+          "source_path": "data/raw/fpga/anlogic_ph1a/UG915_安路科技PH1A系列FPGA DDR3_4高速接口用户手册.pdf",
+          "source_version": null
+        },
+        "mipi_and_hardware": {
+          "source_file": "UG907_安路科技PH1A系列FPGA 硬件设计指南.pdf",
+          "source_path": "data/raw/fpga/anlogic_ph1a/UG907_安路科技PH1A系列FPGA 硬件设计指南.pdf",
+          "source_version": null
+        }
+      }
+    },
+    {
+      "_schema_version": "1.0",
+      "_type": "fpga_package_capability",
+      "_vendor": "Anlogic",
+      "_family": "SALPHOENIX 1A",
+      "_series": "PH1A",
+      "_base_device": "PH1A180",
+      "device": "PH1A180SFG676",
+      "package": "SFG676",
+      "ordering_suffix": null,
+      "device_identity": {
+        "vendor": "Anlogic",
+        "family": "SALPHOENIX 1A",
+        "series": "PH1A",
+        "base_device": "PH1A180",
+        "device": "PH1A180SFG676",
+        "package": "SFG676"
+      },
+      "package_info": {
+        "package_code": "SFG676",
+        "package_body": "FCBGA676",
+        "package_size_mm": {
+          "x_mm": 27.0,
+          "y_mm": 27.0
+        },
+        "ball_pitch_mm": 1.0
+      },
+      "resources": {
+        "luts": 210240,
+        "dffs": 233600,
+        "distributed_ram_kbits": 3300,
+        "eram_20k_blocks": 646,
+        "eram_total_kbits": 12920,
+        "dsp_blocks": 600,
+        "pll_blocks": 16
+      },
+      "package_summary": {
+        "serdes_channels": 8,
+        "serdes_rate_gbps": 12.5,
+        "ddr_rate_mbps": 1866,
+        "ddr_width_bits": 72,
+        "mipi_io_count": 20,
+        "user_io_count": 396,
+        "package_body": "FCBGA676",
+        "package_size_mm": {
+          "x_mm": 27.0,
+          "y_mm": 27.0
+        },
+        "ball_pitch_mm": 1.0
+      },
+      "package_io_banks": {
+        "hr_banks": [
+          0,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "hp_banks": [
+          31,
+          32,
+          33
+        ],
+        "notes": [
+          "bank0 主要分布配置相关 I/O"
+        ],
+        "evidence_level": "package_verified",
+        "source": "UG911"
+      },
+      "capability_blocks": {
+        "memory_interface": {
+          "present": true,
+          "hard_ppc": true,
+          "supported_standards": [
+            "DDR3",
+            "DDR3L",
+            "DDR4"
+          ],
+          "max_rate_mbps": 1866,
+          "max_data_width_bits": 72,
+          "evidence_level": "product_page_plus_family_manual",
+          "source": "official_product_page+UG915",
+          "notes": [
+            "UG915 confirms DDR3/DDR4 support for PH1A90/PH1A180/PH1A400 families; exact package-bank ownership should still be frozen in TD IO planning."
+          ]
+        },
+        "mipi_phy": {
+          "present": true,
+          "directions": [
+            "rx"
+          ],
+          "mipi_io_count": 20,
+          "group_count": null,
+          "max_data_lanes_per_group": null,
+          "evidence_level": "package_verified",
+          "source": "UG907",
+          "notes": []
+        },
+        "high_speed_serial": {
+          "present": true,
+          "channel_pairs": 8,
+          "serdes_dual_count": 4,
+          "package_rate_ceiling_gbps": 12.5,
+          "supported_protocols": [
+            "1000BASE-KX",
+            "10GBASE-KR",
+            "10GBASE-KX4",
+            "CEI",
+            "CPRI",
+            "JESD204B",
+            "PCI Express",
+            "QSGMII",
+            "RXAUI",
+            "SGMII",
+            "SRIO",
+            "XAUI"
+          ],
+          "protocol_matrix": {
+            "PCI Express": {
+              "variants": [
+                "Gen1",
+                "Gen2",
+                "Gen3"
+              ],
+              "lane_widths": [
+                1,
+                2,
+                4
+              ]
+            },
+            "1000BASE-KX": {
+              "supported": true
+            },
+            "SGMII": {
+              "supported": true
+            },
+            "QSGMII": {
+              "supported": true
+            },
+            "XAUI": {
+              "supported": true
+            },
+            "RXAUI": {
+              "supported": true
+            },
+            "10GBASE-KX4": {
+              "supported": true
+            },
+            "10GBASE-KR": {
+              "supported": true
+            },
+            "CEI": {
+              "line_rates_gbps": [
+                6.0,
+                11.0
+              ]
+            },
+            "CPRI": {
+              "line_rates_gbps": [
+                2.4576,
+                4.9152,
+                6.144,
+                9.8304
+              ]
+            },
+            "JESD204B": {
+              "line_rates_gbps": [
+                1.25,
+                2.5,
+                5.0,
+                6.25,
+                12.5
+              ]
+            },
+            "SRIO": {
+              "line_rates_gbps": [
+                1.25,
+                2.5,
+                3.125,
+                5.0,
+                6.25
+              ]
+            }
+          },
+          "evidence_level": "package_verified",
+          "source": "official_product_page+UG909",
+          "notes": [
+            "UG909 documents bidirectional adjacent-DUAL refclk sharing on PH1A90/PH1A180."
+          ]
+        },
+        "pcie": {
+          "present": true,
+          "max_link_width": 4,
+          "generations": [
+            "Gen1",
+            "Gen2",
+            "Gen3"
+          ],
+          "hardcore": true,
+          "phy_banks": [
+            80,
+            81
+          ],
+          "evidence_level": "package_verified",
+          "source": "UG913",
+          "notes": []
+        }
+      },
+      "source_conflicts": [],
+      "source_traceability": {
+        "official_product_page": {
+          "primary_locale": "zh-CN",
+          "locales_observed": [
+            "en",
+            "jp",
+            "zh-CN"
+          ],
+          "source_url": "https://www.anlogic.com/product/fpga/phoenix/ph1a",
+          "product_name": "PH1A180SFG676"
+        },
+        "package_bank_distribution": {
+          "source_file": "UG911_安路科技PH1A系列FPGA IO用户手册.pdf",
+          "source_path": "data/raw/fpga/anlogic_ph1a/UG911_安路科技PH1A系列FPGA IO用户手册.pdf",
+          "source_version": null
+        },
+        "serdes": {
+          "source_file": "UG909_安路科技PH1A系列FPGA SERDES用户手册.pdf",
+          "source_path": "data/raw/fpga/anlogic_ph1a/UG909_安路科技PH1A系列FPGA SERDES用户手册.pdf",
+          "source_version": null
+        },
+        "pcie": {
+          "source_file": "UG913_安路科技PH1A系列FPGA PCIE用户手册.pdf",
+          "source_path": "data/raw/fpga/anlogic_ph1a/UG913_安路科技PH1A系列FPGA PCIE用户手册.pdf",
+          "source_version": null
+        },
+        "ddr": {
+          "source_file": "UG915_安路科技PH1A系列FPGA DDR3_4高速接口用户手册.pdf",
+          "source_path": "data/raw/fpga/anlogic_ph1a/UG915_安路科技PH1A系列FPGA DDR3_4高速接口用户手册.pdf",
+          "source_version": null
+        },
+        "mipi_and_hardware": {
+          "source_file": "UG907_安路科技PH1A系列FPGA 硬件设计指南.pdf",
+          "source_path": "data/raw/fpga/anlogic_ph1a/UG907_安路科技PH1A系列FPGA 硬件设计指南.pdf",
+          "source_version": null
+        }
+      }
+    },
+    {
+      "_schema_version": "1.0",
+      "_type": "fpga_package_capability",
+      "_vendor": "Anlogic",
+      "_family": "SALPHOENIX 1A",
+      "_series": "PH1A",
+      "_base_device": "PH1A400",
+      "device": "PH1A400SFG676",
+      "package": "SFG676",
+      "ordering_suffix": null,
+      "device_identity": {
+        "vendor": "Anlogic",
+        "family": "SALPHOENIX 1A",
+        "series": "PH1A",
+        "base_device": "PH1A400",
+        "device": "PH1A400SFG676",
+        "package": "SFG676"
+      },
+      "package_info": {
+        "package_code": "SFG676",
+        "package_body": "FCBGA676",
+        "package_size_mm": {
+          "x_mm": 27.0,
+          "y_mm": 27.0
+        },
+        "ball_pitch_mm": 1.0
+      },
+      "resources": {
+        "luts": 417024,
+        "dffs": 463360,
+        "distributed_ram_kbits": 5500,
+        "eram_20k_blocks": 914,
+        "eram_total_kbits": 18280,
+        "dsp_blocks": 840,
+        "pll_blocks": 20
+      },
+      "package_summary": {
+        "serdes_channels": 8,
+        "serdes_rate_gbps": 12.5,
+        "ddr_rate_mbps": 1866,
+        "ddr_width_bits": 72,
+        "mipi_io_count": null,
+        "user_io_count": 400,
+        "package_body": "FCBGA676",
+        "package_size_mm": {
+          "x_mm": 27.0,
+          "y_mm": 27.0
+        },
+        "ball_pitch_mm": 1.0
+      },
+      "package_io_banks": {
+        "hr_banks": [
+          0,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "hp_banks": [
+          31,
+          32,
+          33
+        ],
+        "notes": [
+          "bank0 主要分布配置相关 I/O;HR 的两个单端 I/O 分布在 bank 的上端和下端"
+        ],
+        "evidence_level": "package_verified",
+        "source": "UG911"
+      },
+      "capability_blocks": {
+        "memory_interface": {
+          "present": true,
+          "hard_ppc": true,
+          "supported_standards": [
+            "DDR3",
+            "DDR3L",
+            "DDR4"
+          ],
+          "max_rate_mbps": 1866,
+          "max_data_width_bits": 72,
+          "evidence_level": "package_verified",
+          "source": "official_product_page+UG915",
+          "notes": [
+            "UG907 validates DDR3/DDR4 placement on HPIO banks 31/32/33 and up to 72-bit width."
+          ]
+        },
+        "mipi_phy": {
+          "present": false,
+          "directions": [],
+          "mipi_io_count": null,
+          "group_count": null,
+          "max_data_lanes_per_group": null,
+          "evidence_level": "package_verified",
+          "source": "UG907",
+          "notes": []
+        },
+        "high_speed_serial": {
+          "present": true,
+          "channel_pairs": 8,
+          "serdes_dual_count": 4,
+          "package_rate_ceiling_gbps": 12.5,
+          "supported_protocols": [
+            "1000BASE-KX",
+            "10GBASE-KR",
+            "10GBASE-KX4",
+            "CEI",
+            "CPRI",
+            "JESD204B",
+            "PCI Express",
+            "QSGMII",
+            "RXAUI",
+            "SGMII",
+            "SRIO",
+            "XAUI"
+          ],
+          "protocol_matrix": {
+            "PCI Express": {
+              "variants": [
+                "Gen1",
+                "Gen2",
+                "Gen3"
+              ],
+              "lane_widths": [
+                1,
+                2,
+                4
+              ]
+            },
+            "1000BASE-KX": {
+              "supported": true
+            },
+            "SGMII": {
+              "supported": true
+            },
+            "QSGMII": {
+              "supported": true
+            },
+            "XAUI": {
+              "supported": true
+            },
+            "RXAUI": {
+              "supported": true
+            },
+            "10GBASE-KX4": {
+              "supported": true
+            },
+            "10GBASE-KR": {
+              "supported": true
+            },
+            "CEI": {
+              "line_rates_gbps": [
+                6.0,
+                11.0
+              ]
+            },
+            "CPRI": {
+              "line_rates_gbps": [
+                2.4576,
+                4.9152,
+                6.144,
+                9.8304
+              ]
+            },
+            "JESD204B": {
+              "line_rates_gbps": [
+                1.25,
+                2.5,
+                5.0,
+                6.25,
+                12.5
+              ]
+            },
+            "SRIO": {
+              "line_rates_gbps": [
+                1.25,
+                2.5,
+                3.125,
+                5.0,
+                6.25
+              ]
+            }
+          },
+          "evidence_level": "package_verified",
+          "source": "official_product_page+UG909",
+          "notes": [
+            "UG909 documents single-direction adjacent-DUAL refclk sharing on PH1A400."
+          ]
+        },
+        "pcie": {
+          "present": true,
+          "max_link_width": 4,
+          "generations": [
+            "Gen1",
+            "Gen2",
+            "Gen3"
+          ],
+          "hardcore": true,
+          "phy_banks": [
+            82,
+            83
+          ],
+          "evidence_level": "package_verified",
+          "source": "UG913",
+          "notes": []
+        }
+      },
+      "source_conflicts": [],
+      "source_traceability": {
+        "official_product_page": {
+          "primary_locale": "zh-CN",
+          "locales_observed": [
+            "en",
+            "jp",
+            "zh-CN"
+          ],
+          "source_url": "https://www.anlogic.com/product/fpga/phoenix/ph1a",
+          "product_name": "PH1A400SFG676"
+        },
+        "package_bank_distribution": {
+          "source_file": "UG911_安路科技PH1A系列FPGA IO用户手册.pdf",
+          "source_path": "data/raw/fpga/anlogic_ph1a/UG911_安路科技PH1A系列FPGA IO用户手册.pdf",
+          "source_version": null
+        },
+        "serdes": {
+          "source_file": "UG909_安路科技PH1A系列FPGA SERDES用户手册.pdf",
+          "source_path": "data/raw/fpga/anlogic_ph1a/UG909_安路科技PH1A系列FPGA SERDES用户手册.pdf",
+          "source_version": null
+        },
+        "pcie": {
+          "source_file": "UG913_安路科技PH1A系列FPGA PCIE用户手册.pdf",
+          "source_path": "data/raw/fpga/anlogic_ph1a/UG913_安路科技PH1A系列FPGA PCIE用户手册.pdf",
+          "source_version": null
+        },
+        "ddr": {
+          "source_file": "UG915_安路科技PH1A系列FPGA DDR3_4高速接口用户手册.pdf",
+          "source_path": "data/raw/fpga/anlogic_ph1a/UG915_安路科技PH1A系列FPGA DDR3_4高速接口用户手册.pdf",
+          "source_version": null
+        },
+        "mipi_and_hardware": {
+          "source_file": "UG907_安路科技PH1A系列FPGA 硬件设计指南.pdf",
+          "source_path": "data/raw/fpga/anlogic_ph1a/UG907_安路科技PH1A系列FPGA 硬件设计指南.pdf",
+          "source_version": null
+        }
+      }
+    },
+    {
+      "_schema_version": "1.0",
+      "_type": "fpga_package_capability",
+      "_vendor": "Anlogic",
+      "_family": "SALPHOENIX 1A",
+      "_series": "PH1A",
+      "_base_device": "PH1A400",
+      "device": "PH1A400SFG900",
+      "package": "SFG900",
+      "ordering_suffix": null,
+      "device_identity": {
+        "vendor": "Anlogic",
+        "family": "SALPHOENIX 1A",
+        "series": "PH1A",
+        "base_device": "PH1A400",
+        "device": "PH1A400SFG900",
+        "package": "SFG900"
+      },
+      "package_info": {
+        "package_code": "SFG900",
+        "package_body": "FCBGA900",
+        "package_size_mm": {
+          "x_mm": 31.0,
+          "y_mm": 31.0
+        },
+        "ball_pitch_mm": 1.0
+      },
+      "resources": {
+        "luts": 417024,
+        "dffs": 463360,
+        "distributed_ram_kbits": 5500,
+        "eram_20k_blocks": 914,
+        "eram_total_kbits": 18280,
+        "dsp_blocks": 840,
+        "pll_blocks": 20
+      },
+      "package_summary": {
+        "serdes_channels": 16,
+        "serdes_rate_gbps": 12.5,
+        "ddr_rate_mbps": 1866,
+        "ddr_width_bits": 72,
+        "mipi_io_count": null,
+        "user_io_count": 500,
+        "package_body": "FCBGA900",
+        "package_size_mm": {
+          "x_mm": 31.0,
+          "y_mm": 31.0
+        },
+        "ball_pitch_mm": 1.0
+      },
+      "package_io_banks": {
+        "hr_banks": [
+          0,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17
+        ],
+        "hp_banks": [
+          31,
+          32,
+          33
+        ],
+        "notes": [],
+        "evidence_level": "package_verified",
+        "source": "UG911"
+      },
+      "capability_blocks": {
+        "memory_interface": {
+          "present": true,
+          "hard_ppc": true,
+          "supported_standards": [
+            "DDR3",
+            "DDR3L",
+            "DDR4"
+          ],
+          "max_rate_mbps": 1866,
+          "max_data_width_bits": 72,
+          "evidence_level": "package_verified",
+          "source": "official_product_page+UG915",
+          "notes": [
+            "UG907 validates DDR3/DDR4 placement on HPIO banks 31/32/33 and up to 72-bit width."
+          ]
+        },
+        "mipi_phy": {
+          "present": false,
+          "directions": [],
+          "mipi_io_count": null,
+          "group_count": null,
+          "max_data_lanes_per_group": null,
+          "evidence_level": "package_verified",
+          "source": "UG907",
+          "notes": []
+        },
+        "high_speed_serial": {
+          "present": true,
+          "channel_pairs": 16,
+          "serdes_dual_count": 8,
+          "package_rate_ceiling_gbps": 12.5,
+          "supported_protocols": [
+            "1000BASE-KX",
+            "10GBASE-KR",
+            "10GBASE-KX4",
+            "CEI",
+            "CPRI",
+            "JESD204B",
+            "PCI Express",
+            "QSGMII",
+            "RXAUI",
+            "SGMII",
+            "SRIO",
+            "XAUI"
+          ],
+          "protocol_matrix": {
+            "PCI Express": {
+              "variants": [
+                "Gen1",
+                "Gen2",
+                "Gen3"
+              ],
+              "lane_widths": [
+                1,
+                2,
+                4
+              ]
+            },
+            "1000BASE-KX": {
+              "supported": true
+            },
+            "SGMII": {
+              "supported": true
+            },
+            "QSGMII": {
+              "supported": true
+            },
+            "XAUI": {
+              "supported": true
+            },
+            "RXAUI": {
+              "supported": true
+            },
+            "10GBASE-KX4": {
+              "supported": true
+            },
+            "10GBASE-KR": {
+              "supported": true
+            },
+            "CEI": {
+              "line_rates_gbps": [
+                6.0,
+                11.0
+              ]
+            },
+            "CPRI": {
+              "line_rates_gbps": [
+                2.4576,
+                4.9152,
+                6.144,
+                9.8304
+              ]
+            },
+            "JESD204B": {
+              "line_rates_gbps": [
+                1.25,
+                2.5,
+                5.0,
+                6.25,
+                12.5
+              ]
+            },
+            "SRIO": {
+              "line_rates_gbps": [
+                1.25,
+                2.5,
+                3.125,
+                5.0,
+                6.25
+              ]
+            }
+          },
+          "evidence_level": "package_verified",
+          "source": "official_product_page+UG909",
+          "notes": [
+            "UG909 adds a package-specific note: only Bank 80 and Bank 84 expose dedicated recovered-clock output pins.",
+            "UG909 documents single-direction adjacent-DUAL refclk sharing on PH1A400."
+          ]
+        },
+        "pcie": {
+          "present": true,
+          "max_link_width": 4,
+          "generations": [
+            "Gen1",
+            "Gen2",
+            "Gen3"
+          ],
+          "hardcore": true,
+          "phy_banks": [
+            82,
+            83
+          ],
+          "evidence_level": "package_verified",
+          "source": "UG913",
+          "notes": []
+        }
+      },
+      "source_conflicts": [],
+      "source_traceability": {
+        "official_product_page": {
+          "primary_locale": "zh-CN",
+          "locales_observed": [
+            "en",
+            "jp",
+            "zh-CN"
+          ],
+          "source_url": "https://www.anlogic.com/product/fpga/phoenix/ph1a",
+          "product_name": "PH1A400SFG900"
+        },
+        "package_bank_distribution": {
+          "source_file": "UG911_安路科技PH1A系列FPGA IO用户手册.pdf",
+          "source_path": "data/raw/fpga/anlogic_ph1a/UG911_安路科技PH1A系列FPGA IO用户手册.pdf",
+          "source_version": null
+        },
+        "serdes": {
+          "source_file": "UG909_安路科技PH1A系列FPGA SERDES用户手册.pdf",
+          "source_path": "data/raw/fpga/anlogic_ph1a/UG909_安路科技PH1A系列FPGA SERDES用户手册.pdf",
+          "source_version": null
+        },
+        "pcie": {
+          "source_file": "UG913_安路科技PH1A系列FPGA PCIE用户手册.pdf",
+          "source_path": "data/raw/fpga/anlogic_ph1a/UG913_安路科技PH1A系列FPGA PCIE用户手册.pdf",
+          "source_version": null
+        },
+        "ddr": {
+          "source_file": "UG915_安路科技PH1A系列FPGA DDR3_4高速接口用户手册.pdf",
+          "source_path": "data/raw/fpga/anlogic_ph1a/UG915_安路科技PH1A系列FPGA DDR3_4高速接口用户手册.pdf",
+          "source_version": null
+        },
+        "mipi_and_hardware": {
+          "source_file": "UG907_安路科技PH1A系列FPGA 硬件设计指南.pdf",
+          "source_path": "data/raw/fpga/anlogic_ph1a/UG907_安路科技PH1A系列FPGA 硬件设计指南.pdf",
+          "source_version": null
+        }
+      }
+    }
+  ]
+}
