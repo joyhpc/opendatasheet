@@ -1,21 +1,16 @@
 #!/usr/bin/env python3
-"""Export Anlogic PH1A package-capability parses to sch-review FPGA JSON.
-
-This exporter intentionally works from package-level capability parses rather
-than pretending that full ball-map pinouts already exist. It emits synthetic
-package anchors so downstream tooling can consume review rules without
-mislabeling them as real package pins.
-"""
+"""Export Anlogic PH1A pinout parses to sch-review FPGA JSON."""
 
 from __future__ import annotations
 
 import json
+import re
 from pathlib import Path
 
 from build_fpga_catalog import build_catalog
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-INPUT_DIR = REPO_ROOT / "data" / "extracted_v2" / "fpga" / "anlogic_ph1a"
+INPUT_DIR = REPO_ROOT / "data" / "extracted_v2" / "fpga" / "pinout"
 OUTPUT_DIR = REPO_ROOT / "data" / "sch_review_export"
 CATALOG_PATH = OUTPUT_DIR / "_fpga_catalog.json"
 SCHEMA_VERSION = "sch-review-device/1.1"
@@ -73,87 +68,6 @@ def _normalize_protocol_refclk_profiles(protocols: list[str] | None) -> dict:
     return profiles
 
 
-def _package_banks(record: dict) -> dict:
-    package_bank_data = record.get("package_io_banks", {}) or {}
-    banks = {}
-    for bank_id in package_bank_data.get("hr_banks") or []:
-        banks[str(bank_id)] = {
-            "bank": str(bank_id),
-            "bank_type": "HRIO",
-            "source": package_bank_data.get("source"),
-            "evidence_level": package_bank_data.get("evidence_level"),
-            "total_pins": 0,
-            "io_pins": 0,
-        }
-    for bank_id in package_bank_data.get("hp_banks") or []:
-        banks[str(bank_id)] = {
-            "bank": str(bank_id),
-            "bank_type": "HPIO",
-            "source": package_bank_data.get("source"),
-            "evidence_level": package_bank_data.get("evidence_level"),
-            "total_pins": 0,
-            "io_pins": 0,
-        }
-    return banks
-
-
-def _anchor_pins(record: dict) -> list[dict]:
-    package_bank_data = record.get("package_io_banks", {}) or {}
-    capability_blocks = record.get("capability_blocks", {}) or {}
-    pins: list[dict] = []
-
-    for bank_id in package_bank_data.get("hr_banks") or []:
-        pins.append({
-            "pin": f"BANK{bank_id}_ANCHOR",
-            "name": f"BANK{bank_id}_HRIO_ANCHOR",
-            "function": "SPECIAL",
-            "bank": str(bank_id),
-            "drc": {"must_review": True},
-            "attrs": {"synthetic": True, "scope": "package_level_bank", "bank_type": "HRIO"},
-        })
-    for bank_id in package_bank_data.get("hp_banks") or []:
-        pins.append({
-            "pin": f"BANK{bank_id}_ANCHOR",
-            "name": f"BANK{bank_id}_HPIO_ANCHOR",
-            "function": "SPECIAL",
-            "bank": str(bank_id),
-            "drc": {"must_review": True},
-            "attrs": {"synthetic": True, "scope": "package_level_bank", "bank_type": "HPIO"},
-        })
-
-    for capability_name in ("memory_interface", "mipi_phy", "high_speed_serial", "pcie"):
-        block = capability_blocks.get(capability_name, {}) or {}
-        present = block.get("present", True)
-        if present is False:
-            continue
-        pins.append({
-            "pin": f"{capability_name.upper()}_ANCHOR",
-            "name": f"{capability_name.upper()}_ANCHOR",
-            "function": "SPECIAL",
-            "bank": None,
-            "drc": {"must_review": True},
-            "attrs": {"synthetic": True, "scope": "package_level_capability", "capability": capability_name},
-        })
-
-    if not pins:
-        pins.append({
-            "pin": "PACKAGE_CAPABILITY_ANCHOR",
-            "name": "PACKAGE_CAPABILITY_ANCHOR",
-            "function": "SPECIAL",
-            "bank": None,
-            "drc": {"must_review": True},
-            "attrs": {"synthetic": True, "scope": "package_level_capability"},
-        })
-    return pins
-
-
-def _lookup_from_pins(pins: list[dict]) -> dict:
-    return {
-        "by_pin": {pin["pin"]: pin["name"] for pin in pins if pin.get("pin") and pin.get("name")},
-        "by_name": {pin["name"]: pin["pin"] for pin in pins if pin.get("pin") and pin.get("name")},
-    }
-
-
 def _capability_blocks(record: dict) -> dict:
     blocks = json.loads(json.dumps(record.get("capability_blocks", {}) or {}))
     defaults = {
@@ -173,44 +87,207 @@ def _capability_blocks(record: dict) -> dict:
     return blocks
 
 
+def _normalize_pins_for_export(pins: list[dict]) -> list[dict]:
+    function_map = {
+        "MIPI": "IO",
+        "SERDES_RX": "GT",
+        "SERDES_TX": "GT",
+        "SERDES_REFCLK": "GT",
+    }
+    normalized = []
+    for pin in pins or []:
+        entry = json.loads(json.dumps(pin))
+        raw_function = entry.get("function")
+        entry["function"] = function_map.get(raw_function, raw_function)
+        attrs = entry.setdefault("attrs", {})
+        if raw_function != entry.get("function"):
+            attrs.setdefault("raw_function", raw_function)
+        normalized.append(entry)
+    return normalized
+
+
+def _refclk_pairs(record: dict, protocols: list[str], pcie: dict) -> list[dict]:
+    pairs = []
+    for pair in record.get("diff_pairs", []) or []:
+        pair_type = pair.get("type")
+        if pair_type not in {"SERDES_REFCLK", "GT_REFCLK", "REFCLK"}:
+            continue
+        refclk_pair = {
+            "type": "REFCLK",
+            "pair_name": pair.get("pair_name"),
+            "p_pin": pair.get("p_pin"),
+            "n_pin": pair.get("n_pin"),
+            "p_name": pair.get("p_name"),
+            "n_name": pair.get("n_name"),
+            "bank": pair.get("bank"),
+            "source": "official_pinlist",
+            "package_level_only": False,
+            "candidate_protocols": protocols,
+        }
+        refclk_pair.update(_protocol_bundle_context(protocols))
+        if pcie.get("phy_banks"):
+            refclk_pair["review_banks"] = pcie.get("phy_banks", [])
+        pairs.append(refclk_pair)
+    return pairs
+
+
+def _lane_index(pair_name: str | None) -> int | None:
+    text = pair_name or ""
+    match = None
+    for pattern in (r"^[RT]X(\d+)_\d+$", r"^REFCLK_(\d+)$", r"^DPHY\d+_D(\d+)$"):
+        match = re.match(pattern, text)
+        if match:
+            return int(match.group(1))
+    return None
+
+
+def _lane_group_mappings(record: dict, refclk_pairs: list[dict], protocols: list[str], protocol_matrix: dict | None) -> tuple[list[dict], list[dict]]:
+    protocol_matrix = protocol_matrix or {}
+    groups: dict[str, dict] = {}
+    for pair in record.get("diff_pairs", []) or []:
+        pair_type = pair.get("type")
+        bank = pair.get("bank")
+        if pair_type not in {"SERDES_RX", "SERDES_TX", "GT_RX", "GT_TX"} or not bank:
+            continue
+        group_id = str(bank)
+        entry = groups.setdefault(
+            group_id,
+            {
+                "group_id": group_id,
+                "group_type": "bank",
+                "bank": str(bank),
+                "rx_pair_names": [],
+                "tx_pair_names": [],
+                "lane_indices": [],
+                "refclk_pair_names": [],
+                "refclk_indices": [],
+                "source": "bank_level_pinout_inference",
+            },
+        )
+        if pair_type in {"SERDES_RX", "GT_RX"} and pair.get("pair_name"):
+            entry["rx_pair_names"].append(pair["pair_name"])
+        if pair_type in {"SERDES_TX", "GT_TX"} and pair.get("pair_name"):
+            entry["tx_pair_names"].append(pair["pair_name"])
+        lane_index = _lane_index(pair.get("pair_name"))
+        if lane_index is not None:
+            entry["lane_indices"].append(lane_index)
+
+    enriched_refclk_pairs = []
+    for pair in refclk_pairs:
+        entry = dict(pair)
+        bank = str(pair.get("bank")) if pair.get("bank") is not None else None
+        if bank and bank in groups:
+            entry["group_id"] = bank
+            entry["mapped_lane_groups"] = [bank]
+            groups[bank]["refclk_pair_names"].append(pair.get("pair_name"))
+            refclk_index = _lane_index(pair.get("pair_name"))
+            if refclk_index is not None:
+                entry["refclk_index"] = refclk_index
+                groups[bank]["refclk_indices"].append(refclk_index)
+        enriched_refclk_pairs.append(entry)
+
+    lane_group_mappings = []
+    for group_id in sorted(groups):
+        entry = dict(groups[group_id])
+        entry["rx_pair_names"] = sorted(set(entry["rx_pair_names"]))
+        entry["tx_pair_names"] = sorted(set(entry["tx_pair_names"]))
+        entry["lane_indices"] = sorted(set(entry["lane_indices"]))
+        entry["refclk_pair_names"] = sorted(set(entry["refclk_pair_names"]))
+        entry["refclk_indices"] = sorted(set(entry["refclk_indices"]))
+        max_lane_pairs = min(len(entry["rx_pair_names"]), len(entry["tx_pair_names"])) or max(len(entry["rx_pair_names"]), len(entry["tx_pair_names"]))
+        entry["max_lane_pairs"] = max_lane_pairs
+        candidate_protocols = []
+        protocol_lane_widths = {}
+        for protocol, meta in protocol_matrix.items():
+            lane_widths = [width for width in (meta or {}).get("lane_widths", []) if isinstance(width, int) and width <= max_lane_pairs]
+            if lane_widths:
+                candidate_protocols.append(protocol)
+                protocol_lane_widths[protocol] = lane_widths
+        if not candidate_protocols:
+            candidate_protocols = list(protocols)
+        entry["candidate_protocols"] = candidate_protocols
+        if protocol_lane_widths:
+            entry["protocol_lane_widths"] = protocol_lane_widths
+        entry["selection_required"] = bool(candidate_protocols)
+        if candidate_protocols:
+            entry["selection_note"] = "Freeze the protocol/IP assignment for this bank-level lane group and bind it to one of the mapped refclk pairs before schematic sign-off."
+            entry.update(_protocol_bundle_context(candidate_protocols))
+        lane_group_mappings.append(entry)
+
+    group_map = {group["group_id"]: group for group in lane_group_mappings}
+    final_refclk_pairs = []
+    for pair in enriched_refclk_pairs:
+        entry = dict(pair)
+        protocols_for_pair = []
+        protocol_lane_widths = {}
+        for group_id in entry.get("mapped_lane_groups", []) or []:
+            group = group_map.get(group_id, {})
+            for protocol in group.get("candidate_protocols", []) or []:
+                if protocol not in protocols_for_pair:
+                    protocols_for_pair.append(protocol)
+            for protocol, widths in (group.get("protocol_lane_widths", {}) or {}).items():
+                protocol_lane_widths.setdefault(protocol, [])
+                protocol_lane_widths[protocol] = sorted(set(protocol_lane_widths[protocol]) | set(widths))
+        if protocols_for_pair:
+            entry["candidate_protocols"] = protocols_for_pair
+            entry.update(_protocol_bundle_context(protocols_for_pair))
+        if protocol_lane_widths:
+            entry["protocol_lane_widths"] = protocol_lane_widths
+        final_refclk_pairs.append(entry)
+    return final_refclk_pairs, lane_group_mappings
+
+
 def _constraint_blocks(record: dict, capability_blocks: dict) -> dict:
     blocks = {}
     hs = capability_blocks.get("high_speed_serial", {}) or {}
     if hs.get("present"):
         protocols = hs.get("supported_protocols", []) or []
-        refclk_pair = {
-            "type": "REFCLK",
-            "pair_name": "PACKAGE_REFCLK_ANCHOR",
-            "p_pin": "REFCLK_P_ANCHOR",
-            "n_pin": "REFCLK_N_ANCHOR",
-            "p_name": "REFCLK_P_ANCHOR",
-            "n_name": "REFCLK_N_ANCHOR",
-            "package_level_only": True,
-            "candidate_protocols": protocols,
-            "source": hs.get("source"),
-        }
-        refclk_pair.update(_protocol_bundle_context(protocols))
         pcie = capability_blocks.get("pcie", {}) or {}
-        if pcie.get("phy_banks"):
-            refclk_pair["bank"] = "/".join(str(bank) for bank in pcie.get("phy_banks", []))
-            refclk_pair["review_banks"] = pcie.get("phy_banks", [])
+        refclk_pairs = _refclk_pairs(record, protocols, pcie)
+        lane_group_mappings = []
+        package_level_only = not bool(refclk_pairs)
+        if refclk_pairs:
+            refclk_pairs, lane_group_mappings = _lane_group_mappings(record, refclk_pairs, protocols, hs.get("protocol_matrix"))
+        if not refclk_pairs:
+            refclk_pair = {
+                "type": "REFCLK",
+                "pair_name": "PACKAGE_REFCLK_ANCHOR",
+                "p_pin": "REFCLK_P_ANCHOR",
+                "n_pin": "REFCLK_N_ANCHOR",
+                "p_name": "REFCLK_P_ANCHOR",
+                "n_name": "REFCLK_N_ANCHOR",
+                "package_level_only": True,
+                "candidate_protocols": protocols,
+                "source": hs.get("source"),
+            }
+            refclk_pair.update(_protocol_bundle_context(protocols))
+            if pcie.get("phy_banks"):
+                refclk_pair["bank"] = "/".join(str(bank) for bank in pcie.get("phy_banks", []))
+                refclk_pair["review_banks"] = pcie.get("phy_banks", [])
+            refclk_pairs = [refclk_pair]
         blocks["refclk_requirements"] = {
             "class": "clocking",
             "required": True,
             "selection_required": True,
             "review_required": True,
-            "package_level_only": True,
+            "package_level_only": package_level_only,
             "source": hs.get("source"),
-            "refclk_pair_count": 1,
-            "refclk_pairs": [refclk_pair],
+            "refclk_pair_count": len(refclk_pairs),
+            "refclk_pairs": refclk_pairs,
             "supported_protocols": protocols,
             "protocol_refclk_profiles": _normalize_protocol_refclk_profiles(protocols),
             "protocol_matrix": hs.get("protocol_matrix", {}),
             "package_rate_ceiling_gbps": hs.get("package_rate_ceiling_gbps"),
-            "selection_note": "Current export is package-level only: freeze refclk owner, adjacent-DUAL sharing direction, and protocol-to-bank mapping before schematic sign-off.",
+            "selection_note": (
+                "Official pinlist exposes concrete REFCLK pairs; freeze refclk owner, bank ownership, and protocol mapping before schematic sign-off."
+                if not package_level_only
+                else "Current export is package-level only: freeze refclk owner, adjacent-DUAL sharing direction, and protocol-to-bank mapping before schematic sign-off."
+            ),
         }
         if hs.get("notes"):
             blocks["refclk_requirements"]["review_notes"] = hs.get("notes")
+        if lane_group_mappings:
+            blocks["refclk_requirements"]["lane_group_mappings"] = lane_group_mappings
 
     memory = capability_blocks.get("memory_interface", {}) or {}
     package_banks = record.get("package_io_banks", {}) or {}
@@ -265,7 +342,6 @@ def _constraint_blocks(record: dict, capability_blocks: dict) -> dict:
 def _export_record(record: dict) -> dict:
     device = record["device"]
     package = record["package"]
-    pins = _anchor_pins(record)
     capability_blocks = _capability_blocks(record)
     result = {
         "_schema": SCHEMA_VERSION,
@@ -279,12 +355,12 @@ def _export_record(record: dict) -> dict:
         "supply_specs": {},
         "io_standard_specs": {},
         "thermal": {},
-        "power_rails": {},
-        "banks": _package_banks(record),
-        "diff_pairs": [],
-        "drc_rules": {},
-        "pins": pins,
-        "lookup": _lookup_from_pins(pins),
+        "power_rails": record.get("power_rails", {}),
+        "banks": record.get("banks", {}),
+        "diff_pairs": record.get("diff_pairs", []),
+        "drc_rules": record.get("drc_rules", {}),
+        "pins": _normalize_pins_for_export(record.get("pins", [])),
+        "lookup": record.get("lookup", {}),
         "summary": record.get("summary", {}),
         "resources": record.get("resources"),
         "package_info": record.get("package_info"),
@@ -303,7 +379,7 @@ def main() -> int:
     written = 0
     for path in sorted(INPUT_DIR.glob("*.json")):
         record = json.loads(path.read_text(encoding="utf-8"))
-        if record.get("_type") == "fpga_family_package_matrix":
+        if record.get("_vendor") != "Anlogic" or not str(record.get("device", "")).startswith("PH1A"):
             continue
         result = _export_record(record)
         out_path = OUTPUT_DIR / f"{result['mpn']}.json"

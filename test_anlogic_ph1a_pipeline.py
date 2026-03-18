@@ -10,6 +10,7 @@ from export_anlogic_ph1a_sch_review import _export_record
 
 
 ANLOGIC_EXTRACT_DIR = REPO_ROOT / "data" / "extracted_v2" / "fpga" / "anlogic_ph1a"
+ANLOGIC_PINOUT_DIR = REPO_ROOT / "data" / "extracted_v2" / "fpga" / "pinout"
 SCH_EXPORT_DIR = REPO_ROOT / "data" / "sch_review_export"
 
 
@@ -19,6 +20,10 @@ def _load_extract(name: str) -> dict:
 
 def _load_export(name: str) -> dict:
     return json.loads((SCH_EXPORT_DIR / name).read_text(encoding="utf-8"))
+
+
+def _load_pinout(name: str) -> dict:
+    return json.loads((ANLOGIC_PINOUT_DIR / name).read_text(encoding="utf-8"))
 
 
 def test_anlogic_family_extract_has_expected_summary_and_conflicts():
@@ -49,15 +54,17 @@ def test_anlogic_package_extract_preserves_package_level_rules():
     assert sfg900["capability_blocks"]["high_speed_serial"]["package_rate_ceiling_gbps"] == 12.5
 
 
-def test_anlogic_sch_review_export_uses_synthetic_package_anchors_and_review_blocks():
-    exported = _export_record(_load_extract("ph1a400sfg900.json"))
+def test_anlogic_sch_review_export_uses_real_pinout_and_refclk_pairs():
+    exported = _export_record(_load_pinout("ph1a400sfg900_pinout.json"))
 
     assert exported["device_identity"]["vendor"] == "Anlogic"
     assert exported["banks"]["31"]["bank_type"] == "HPIO"
     assert exported["pins"]
-    assert exported["pins"][0]["attrs"]["synthetic"] is True
-    assert exported["constraint_blocks"]["refclk_requirements"]["package_level_only"] is True
-    assert exported["constraint_blocks"]["refclk_requirements"]["refclk_pairs"][0]["pair_name"] == "PACKAGE_REFCLK_ANCHOR"
+    assert exported["pins"][0]["pin"] == "AB6"
+    assert "synthetic" not in exported["pins"][0].get("attrs", {})
+    assert exported["constraint_blocks"]["refclk_requirements"]["package_level_only"] is False
+    assert exported["constraint_blocks"]["refclk_requirements"]["refclk_pairs"][0]["pair_name"] == "REFCLK_80"
+    assert exported["constraint_blocks"]["refclk_requirements"]["refclk_pair_count"] == 8
 
 
 def test_anlogic_export_files_validate_catalog_presence():
@@ -66,6 +73,8 @@ def test_anlogic_export_files_validate_catalog_presence():
 
     assert exported["_type"] == "fpga"
     assert exported["constraint_blocks"]["source_consistency_review"]["review_required"] is True
+    assert exported["pins"][0]["pin"] == "A1"
+    assert exported["constraint_blocks"]["refclk_requirements"]["package_level_only"] is False
     anlogic_tree = catalog["tree"]["Anlogic"]["families"]["SALPHOENIX 1A"]["series"]["PH1A"]["base_devices"]
     assert "PH1A90" in anlogic_tree
     assert anlogic_tree["PH1A90"]["devices"]["PH1A90SEG325"]["packages"]["SEG325"]["file"] == "PH1A90SEG325.json"
