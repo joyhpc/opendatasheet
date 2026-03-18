@@ -13,11 +13,11 @@
 
 ## 电源与保护
 
-- TI: switching regulator layout 与 buck layout 应用笔记
-- TI: LDO stability / output capacitor 系列文档
-- TI: eFuse、hot-swap、inrush control 应用报告
-- TI: TVS / ESD layout 与接口保护应用笔记
-- ADI: MT-101 Decoupling Techniques
+- ADI: [`MT-101 Decoupling Techniques`](https://www.analog.com/media/en/training-seminars/tutorials/mt-101.pdf)
+- ADI: [`MT-093 Thermal Design Basics`](https://www.analog.com/media/en/training-seminars/tutorials/MT-093.pdf)
+- ADI: [`Practical Design Techniques for Power and Thermal Management`](https://www.analog.com/en/resources/technical-books/practical-design-techniques-power-thermal-management.html)
+- TI: 开关电源与 buck 布局指导，典型入口可从 [`LM2576HV datasheet` 的 Layout Guidelines](https://www.ti.com/lit/gpn/LM2576HV) 延伸到同类 regulator 应用笔记
+- TI: LDO 稳定性与输出电容行为，至少要回到具体 LDO datasheet 的 stability 条件，例如 [`TPS715-Q1`](https://www.ti.com/product/TPS715-Q1)
 
 映射文档：
 
@@ -34,11 +34,12 @@
 
 ## 接口与时钟
 
-- NXP: UM10204 I2C-bus specification
-- TI: RS-485 basics / fail-safe bias / termination 应用报告
-- Microchip: USB 2.0 hardware design guidelines
-- TI / PHY vendors: Ethernet PHY layout 与 strap 设计指南
-- AMD / Intel / TI: high-speed reference clock 与 jitter 相关文档
+- NXP: [`UM10204 I2C-bus specification and user manual`](https://www.nxp.com/docs/en/user-guide/UM10204.pdf)
+- TI: [`RS-485 Basics: Introduction`](https://www.ti.com/document-viewer/lit/html/ssztcs4)
+- TI: [`RS-485 Design Guide (SLLA272)`](https://e2e.ti.com/cfs-file/__key/communityserver-discussions-components-files/142/6683.RS485-Design-guide_5F00_slla272b.pdf)
+- Microchip: [`USB Device Design Checklist`](https://www.microchip.com/en-us/application-notes/an2621)
+- Microchip: [`USB333x Transceiver Layout Guidelines`](https://www.microchip.com/en-us/application-notes/an204)
+- Microchip: [`Implementation Guidelines for Microchip USB 2.0/3.1 Gen 1 Hub Devices`](https://ww1.microchip.com/downloads/aemDocuments/documents/UNG/ApplicationNotes/ApplicationNotes/AN26.2-Application-Note-DS00001876.pdf)
 
 映射文档：
 
@@ -55,10 +56,14 @@
 
 ## FPGA 与高速设计
 
-- AMD/Xilinx: PCB Design Guide, IO and Clock Planning, GTY/GTH Transceiver User Guide
-- Intel: FPGA PCB Design Guidelines
-- Micron: DDR layout 与 power delivery 指南
-- 高速连接器厂家与板厂 stackup/impedance 工艺约束
+- AMD/Xilinx: `UG899 Vivado Design Suite User Guide: I/O and Clock Planning`
+- AMD/Xilinx: `UG578 UltraScale Architecture GTY Transceivers User Guide`
+- Intel: [`PCB Design Guidelines (HSSI, EMIF, MIPI, True Differential, PDN) User Guide: Agilex 5`](https://www.intel.com/content/www/us/en/docs/programmable/821801/current/power-distribution-network-design-guidelines-01408.html)
+- Intel: [`F-Tile PCB Design Guidelines`](https://www.intel.com/content/www/us/en/docs/programmable/683864/current/f-tile-pcb-design-guidelines.html)
+- Intel: [`Agilex 7 Power Distribution Network Design Guidelines`](https://www.intel.com/content/www/us/en/docs/programmable/683393/current/board-power-delivery-network-simulations.html)
+- Intel: [`AN 875: Intel Stratix 10 E-Tile PCB Design Guidelines`](https://www.intel.com/content/www/us/en/docs/programmable/683262/current/fpga-pcb-design.html)
+- Intel: [`DDR5 Board Design Guidelines`](https://www.intel.com/content/www/us/en/docs/programmable/772538/25-1/ddr5-board-design-guidelines.html)
+- Intel: `AN 754: MIPI D-PHY Solution with Passive Resistor Networks in Intel Low-Cost FPGAs`
 
 映射文档：
 
@@ -75,9 +80,13 @@
 
 ## 模拟、采样与热
 
-- ADI: MT-031 Grounding, MT-093 Thermal Design, MT-101 Decoupling
-- TI Precision Labs: ADC front-end, thermistor, comparator hysteresis
-- 常见 DAC / op amp 官方应用笔记
+- ADI: [`MT-031 Grounding Data Converters and Solving the Mystery of AGND and DGND`](https://www.analog.com/media/en/training-seminars/tutorials/MT-031.pdf)
+- ADI: [`MT-093 Thermal Design Basics`](https://www.analog.com/media/en/training-seminars/tutorials/MT-093.pdf)
+- ADI: [`MT-101 Decoupling Techniques`](https://www.analog.com/media/en/training-seminars/tutorials/mt-101.pdf)
+- ADI: [`CN0314 4-20 mA Loop Powered Transmitter/Receiver`](https://www.analog.com/en/resources/reference-designs/circuits-from-the-lab/cn0314.html)
+- ADI: [`CN0201 multiplexed data acquisition system`](https://www.analog.com/en/resources/reference-designs/circuits-from-the-lab/cn0201.html)
+- TI: [`Comparator with and without hysteresis`](https://www.ti.com/tool/CIRCUIT060073)
+- TI: [`Comparator with Hysteresis Reference Design`](https://www.ti.com/tool/TIPD144)
 
 映射文档：
 
