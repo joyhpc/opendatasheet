@@ -1,6 +1,9 @@
 import json
 from pathlib import Path
+import shutil
+import subprocess
 import sys
+import tempfile
 
 REPO_ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(REPO_ROOT / "scripts"))
@@ -55,3 +58,32 @@ def test_common_export_supports_package_level_anlogic_records():
     assert exported["constraint_blocks"]["pcie_review"]["present"] is None
     assert exported["constraint_blocks"]["source_consistency_review"]["review_required"] is True
     assert exported["package_summary"]["user_io_count"] == 180
+
+
+def test_common_export_main_writes_non_duplicated_anlogic_filename():
+    with tempfile.TemporaryDirectory() as tmpdir:
+        tmp_root = Path(tmpdir)
+        extracted_dir = tmp_root / "extracted"
+        pinout_dir = tmp_root / "pinout"
+        output_dir = tmp_root / "out"
+        (extracted_dir / "fpga").mkdir(parents=True)
+        pinout_dir.mkdir()
+        output_dir.mkdir()
+
+        shutil.copy2(PINOUT_DIR / "ph1a90seg325_pinout.json", pinout_dir / "ph1a90seg325_pinout.json")
+
+        subprocess.run(
+            [
+                sys.executable,
+                str(REPO_ROOT / "scripts" / "export_for_sch_review.py"),
+                str(extracted_dir),
+                str(pinout_dir),
+                str(output_dir),
+            ],
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+
+        assert (output_dir / "PH1A90SEG325.json").exists()
+        assert not (output_dir / "PH1A90SEG325_SEG325.json").exists()
