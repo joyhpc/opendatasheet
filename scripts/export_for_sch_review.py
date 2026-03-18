@@ -11,6 +11,7 @@ Usage:
     python export_for_sch_review.py  # uses default paths
 """
 
+import copy
 import json
 import re
 import sys
@@ -1011,6 +1012,14 @@ def _infer_fpga_device_identity(manufacturer: str, pinout_data: dict, descriptio
         family = family or "Agilex 5"
         series = series or "E-Series"
         base_device = pinout_data.get("_base_device") or _intel_agilex5_base_device(device or "") or device
+    elif manufacturer == "Anlogic":
+        device_upper = _safe_upper(device)
+        if device_upper.startswith("PH1A"):
+            family = family or "SALPHOENIX 1A"
+            series = series or "PH1A"
+            if not pinout_data.get("_base_device"):
+                match = re.match(r"^(PH1A\d+)", device_upper)
+                base_device = match.group(1) if match else device
 
     return {
         "vendor": manufacturer,
@@ -1025,7 +1034,7 @@ def _infer_fpga_device_identity(manufacturer: str, pinout_data: dict, descriptio
 def _canonical_fpga_vendor(vendor: str | None, fallback: str | None = None) -> str | None:
     if vendor in ("Intel/Altera", "Intel", "Altera"):
         return "Intel/Altera"
-    if vendor in ("AMD", "Gowin", "Lattice"):
+    if vendor in ("AMD", "Gowin", "Lattice", "Anlogic"):
         return vendor
     return fallback
 
@@ -1579,25 +1588,25 @@ def _generic_fpga_capability_blocks(pinout_data: dict, device_identity: dict, di
     pins = pinout_data.get("pins", [])
     vendor = device_identity.get("vendor", "")
     device = device_identity.get("device") or pinout_data.get("device") or ""
-    package = device_identity.get("package") or pinout_data.get("package") or ""
     family = device_identity.get("family")
     config_summary = _config_signal_summary(pins)
     gt_counts = _gt_pair_counts(diff_pairs)
-    blocks = {}
+    raw_blocks = pinout_data.get("capability_blocks", {})
+    blocks = copy.deepcopy(raw_blocks) if isinstance(raw_blocks, dict) else {}
 
     if any(config_summary.values()):
-        blocks["configuration"] = {
+        blocks["configuration"] = _deep_merge_dict(blocks.get("configuration", {}), {
             "class": "boot_configuration",
             "interfaces": config_summary["interfaces"],
             "mode_signals": config_summary["mode_signals"],
             "status_signals": config_summary["status_signals"],
             "jtag_signals": config_summary["jtag_signals"],
             "source": "pinout_inference",
-        }
+        })
 
     if any(gt_counts.values()):
         quad_count = gt_counts["rx"] // 4 if gt_counts["rx"] and gt_counts["rx"] % 4 == 0 else None
-        blocks["high_speed_serial"] = {
+        inferred_hs = {
             "class": "high_speed_serial",
             "rx_lane_pairs": gt_counts["rx"],
             "tx_lane_pairs": gt_counts["tx"],
@@ -1605,9 +1614,10 @@ def _generic_fpga_capability_blocks(pinout_data: dict, device_identity: dict, di
             "quad_count": quad_count,
             "source": "pinout_inference",
         }
-        blocks["high_speed_serial"].update(_fpga_family_high_speed_metadata(vendor, device, family, blocks["high_speed_serial"]))
+        inferred_hs.update(_fpga_family_high_speed_metadata(vendor, device, family, inferred_hs))
+        blocks["high_speed_serial"] = _deep_merge_dict(blocks.get("high_speed_serial", {}), inferred_hs)
 
-    if by_function.get("MIPI", 0) > 0:
+    if by_function.get("MIPI", 0) > 0 and "mipi_phy" not in blocks:
         blocks["mipi_phy"] = {
             "class": "mipi_phy",
             "signal_count": by_function.get("MIPI", 0),
@@ -1629,7 +1639,133 @@ def _generic_fpga_capability_blocks(pinout_data: dict, device_identity: dict, di
                 }
             blocks["legacy_ip_blocks"] = gowin_ip
 
+    class_defaults = {
+        "configuration": "boot_configuration",
+        "memory_interface": "memory_interface",
+        "mipi_phy": "mipi_phy",
+        "high_speed_serial": "high_speed_serial",
+        "pcie": "pcie",
+    }
+    for block_name, class_name in class_defaults.items():
+        if isinstance(blocks.get(block_name), dict) and "class" not in blocks[block_name]:
+            blocks[block_name]["class"] = class_name
+
+    hs_serial = blocks.get("high_speed_serial")
+    if isinstance(hs_serial, dict):
+        lane_pairs = hs_serial.get("channel_pairs")
+        if lane_pairs is not None:
+            hs_serial.setdefault("rx_lane_pairs", lane_pairs)
+            hs_serial.setdefault("tx_lane_pairs", lane_pairs)
+
     return blocks
+
+
+def _package_level_bank_overlay(pinout_data: dict) -> dict:
+    package_bank_data = pinout_data.get("package_io_banks", {})
+    if not isinstance(package_bank_data, dict):
+        return {}
+    result = {}
+    for bank_id in package_bank_data.get("hr_banks") or []:
+        result[str(bank_id)] = {
+            "bank": str(bank_id),
+            "bank_type": "HRIO",
+            "source": package_bank_data.get("source"),
+            "evidence_level": package_bank_data.get("evidence_level"),
+        }
+    for bank_id in package_bank_data.get("hp_banks") or []:
+        result[str(bank_id)] = {
+            "bank": str(bank_id),
+            "bank_type": "HPIO",
+            "source": package_bank_data.get("source"),
+            "evidence_level": package_bank_data.get("evidence_level"),
+        }
+    return result
+
+
+def _package_anchor_pins(pinout_data: dict, capability_blocks: dict) -> list[dict]:
+    anchors = []
+    package_banks = pinout_data.get("package_io_banks", {}) if isinstance(pinout_data.get("package_io_banks"), dict) else {}
+    for bank_id in package_banks.get("hr_banks") or []:
+        anchors.append({
+            "pin": f"BANK{bank_id}_ANCHOR",
+            "name": f"BANK{bank_id}_HRIO_ANCHOR",
+            "function": "SPECIAL",
+            "bank": str(bank_id),
+            "drc": {"must_review": True},
+            "attrs": {
+                "synthetic": True,
+                "scope": "package_level_bank",
+                "bank_type": "HRIO",
+            },
+        })
+    for bank_id in package_banks.get("hp_banks") or []:
+        anchors.append({
+            "pin": f"BANK{bank_id}_ANCHOR",
+            "name": f"BANK{bank_id}_HPIO_ANCHOR",
+            "function": "SPECIAL",
+            "bank": str(bank_id),
+            "drc": {"must_review": True},
+            "attrs": {
+                "synthetic": True,
+                "scope": "package_level_bank",
+                "bank_type": "HPIO",
+            },
+        })
+
+    if capability_blocks.get("memory_interface", {}).get("present"):
+        anchors.append({
+            "pin": "DDR_INTERFACE_ANCHOR",
+            "name": "DDR_INTERFACE_ANCHOR",
+            "function": "SPECIAL",
+            "bank": None,
+            "drc": {"must_review": True},
+            "attrs": {"synthetic": True, "scope": "package_level_capability", "capability": "memory_interface"},
+        })
+    if capability_blocks.get("mipi_phy", {}).get("present"):
+        anchors.append({
+            "pin": "MIPI_PHY_ANCHOR",
+            "name": "MIPI_PHY_ANCHOR",
+            "function": "SPECIAL",
+            "bank": None,
+            "drc": {"must_review": True},
+            "attrs": {"synthetic": True, "scope": "package_level_capability", "capability": "mipi_phy"},
+        })
+    hs_serial = capability_blocks.get("high_speed_serial", {})
+    if hs_serial.get("present"):
+        anchors.append({
+            "pin": "SERDES_FABRIC_ANCHOR",
+            "name": "SERDES_FABRIC_ANCHOR",
+            "function": "SPECIAL",
+            "bank": None,
+            "drc": {"must_review": True},
+            "attrs": {"synthetic": True, "scope": "package_level_capability", "capability": "high_speed_serial"},
+        })
+    pcie = capability_blocks.get("pcie", {})
+    if pcie.get("present") is not False:
+        anchors.append({
+            "pin": "PCIE_CAPABILITY_ANCHOR",
+            "name": "PCIE_CAPABILITY_ANCHOR",
+            "function": "SPECIAL",
+            "bank": None,
+            "drc": {"must_review": True},
+            "attrs": {
+                "synthetic": True,
+                "scope": "package_level_capability",
+                "capability": "pcie",
+                "phy_banks": pcie.get("phy_banks", []),
+            },
+        })
+
+    if not anchors:
+        anchors.append({
+            "pin": "PACKAGE_CAPABILITY_ANCHOR",
+            "name": "PACKAGE_CAPABILITY_ANCHOR",
+            "function": "SPECIAL",
+            "bank": None,
+            "drc": {"must_review": True},
+            "attrs": {"synthetic": True, "scope": "package_level_capability"},
+        })
+    return anchors
 
 
 def _generic_fpga_constraint_blocks(pinout_data: dict, device_identity: dict, capability_blocks: dict, diff_pairs: list[dict]) -> dict:
@@ -1645,8 +1781,14 @@ def _generic_fpga_constraint_blocks(pinout_data: dict, device_identity: dict, ca
         }
 
     hs_serial = capability_blocks.get("high_speed_serial")
+    hs_present = bool(hs_serial and hs_serial.get("present", True) and (
+        hs_serial.get("rx_lane_pairs")
+        or hs_serial.get("tx_lane_pairs")
+        or hs_serial.get("channel_pairs")
+        or hs_serial.get("serdes_dual_count")
+    ))
     refclk_pairs = _collect_refclk_pairs(diff_pairs, pinout_data.get("pins", []))
-    if hs_serial and refclk_pairs:
+    if hs_present and refclk_pairs:
         protocol_profiles = _normalize_protocol_refclk_profiles(hs_serial.get("supported_protocols") or [])
         protocol_candidates = sorted({freq for profile in protocol_profiles.values() for freq in profile.get("frequencies_mhz", [])})
         enriched_refclk_pairs, lane_group_mappings = _high_speed_topology(diff_pairs, refclk_pairs)
@@ -1676,6 +1818,46 @@ def _generic_fpga_constraint_blocks(pinout_data: dict, device_identity: dict, ca
         package_note = _package_rate_note(device_identity.get("vendor", ""), device_identity.get("package", ""), hs_serial)
         if package_note:
             blocks["refclk_requirements"]["package_rate_note"] = package_note
+    elif hs_present:
+        protocol_profiles = _normalize_protocol_refclk_profiles(hs_serial.get("supported_protocols") or [])
+        synthetic_pair = {
+            "type": "REFCLK",
+            "pair_name": "PACKAGE_REFCLK_ANCHOR",
+            "p_pin": "REFCLK_P_ANCHOR",
+            "n_pin": "REFCLK_N_ANCHOR",
+            "p_name": "REFCLK_P_ANCHOR",
+            "n_name": "REFCLK_N_ANCHOR",
+            "package_level_only": True,
+            "source": hs_serial.get("source"),
+        }
+        pcie = capability_blocks.get("pcie", {})
+        if pcie.get("phy_banks"):
+            synthetic_pair["bank"] = "/".join(str(bank) for bank in pcie.get("phy_banks", []))
+            synthetic_pair["review_banks"] = pcie.get("phy_banks", [])
+        if hs_serial.get("supported_protocols"):
+            synthetic_pair["candidate_protocols"] = hs_serial.get("supported_protocols")
+            synthetic_pair.update(_protocol_bundle_context(hs_serial.get("supported_protocols")))
+        blocks["refclk_requirements"] = {
+            "class": "clocking",
+            "required": True,
+            "selection_required": True,
+            "review_required": True,
+            "package_level_only": True,
+            "source": hs_serial.get("source"),
+            "source_url": hs_serial.get("source_url"),
+            "refclk_pair_count": 1,
+            "refclk_pairs": [synthetic_pair],
+            "selection_note": "Current export is package-level only: freeze refclk owner, adjacent-DUAL sharing direction, and protocol-to-bank mapping before schematic sign-off.",
+        }
+        if hs_serial.get("supported_protocols"):
+            blocks["refclk_requirements"]["supported_protocols"] = hs_serial.get("supported_protocols")
+            blocks["refclk_requirements"]["protocol_refclk_profiles"] = protocol_profiles
+        if hs_serial.get("protocol_matrix"):
+            blocks["refclk_requirements"]["protocol_matrix"] = hs_serial.get("protocol_matrix")
+        if hs_serial.get("package_rate_ceiling_gbps") is not None:
+            blocks["refclk_requirements"]["package_rate_ceiling_gbps"] = hs_serial.get("package_rate_ceiling_gbps")
+        if hs_serial.get("notes"):
+            blocks["refclk_requirements"]["review_notes"] = hs_serial.get("notes")
 
     mipi = capability_blocks.get("mipi_phy")
     if mipi:
@@ -1684,6 +1866,46 @@ def _generic_fpga_constraint_blocks(pinout_data: dict, device_identity: dict, ca
             "review_required": bool(mipi.get("present", True)),
             "directions": mipi.get("directions", []),
             "source": mipi.get("source"),
+        }
+
+    memory = capability_blocks.get("memory_interface")
+    package_banks = pinout_data.get("package_io_banks", {}) if isinstance(pinout_data.get("package_io_banks"), dict) else {}
+    if memory and memory.get("present"):
+        blocks["memory_interface_review"] = {
+            "class": "memory_interface",
+            "required": True,
+            "review_required": True,
+            "source": memory.get("source"),
+            "supported_standards": memory.get("supported_standards", []),
+            "max_rate_mbps": memory.get("max_rate_mbps"),
+            "max_data_width_bits": memory.get("max_data_width_bits"),
+            "preferred_hp_banks": package_banks.get("hp_banks"),
+            "selection_note": "Freeze DDR bank ownership, byte-group placement, and VREF strategy against the exact package before schematic sign-off.",
+        }
+        if memory.get("notes"):
+            blocks["memory_interface_review"]["review_notes"] = memory.get("notes")
+
+    pcie = capability_blocks.get("pcie")
+    if pcie:
+        blocks["pcie_review"] = {
+            "class": "high_speed_serial",
+            "review_required": pcie.get("present") is not False,
+            "present": pcie.get("present"),
+            "phy_banks": pcie.get("phy_banks", []),
+            "max_link_width": pcie.get("max_link_width"),
+            "generations": pcie.get("generations", []),
+            "source": pcie.get("source"),
+        }
+        if pcie.get("notes"):
+            blocks["pcie_review"]["review_notes"] = pcie.get("notes")
+
+    source_conflicts = pinout_data.get("source_conflicts")
+    if source_conflicts:
+        blocks["source_consistency_review"] = {
+            "class": "source_consistency",
+            "review_required": True,
+            "conflicts": source_conflicts,
+            "selection_note": "Package-level facts disagree across official locales; do not freeze board assumptions until the exact package capability is re-confirmed.",
         }
     return blocks
 
@@ -2608,8 +2830,14 @@ def export_fpga(dc_data: dict, pinout_data: dict, gowin_dc: dict = None, lattice
     thermal = _extract_thermal(raw_elec=raw_elec, raw_abs=raw_abs)
 
     normalized_diff_pairs = _normalize_diff_pairs(pinout_data.get("diff_pairs", []))
+    capability_blocks = _generic_fpga_capability_blocks(pinout_data, device_identity, normalized_diff_pairs)
     normalized_pins = _normalize_pins(pinout_data.get("pins", []))
+    if not normalized_pins:
+        normalized_pins = _package_anchor_pins(pinout_data, capability_blocks)
     source_traceability = _pinout_source_traceability(pinout_data)
+    normalized_banks = _normalize_banks(pinout_data.get("banks", {}))
+    if not normalized_banks:
+        normalized_banks = _normalize_banks(_package_level_bank_overlay(pinout_data))
     result = {
         "_schema": SCHEMA_VERSION,
         "_type": "fpga",
@@ -2627,7 +2855,7 @@ def export_fpga(dc_data: dict, pinout_data: dict, gowin_dc: dict = None, lattice
 
         # From pinout (L1-L5)
         "power_rails": pinout_data.get("power_rails", {}),
-        "banks": _normalize_banks(pinout_data.get("banks", {})),
+        "banks": normalized_banks,
         "diff_pairs": normalized_diff_pairs,
         "drc_rules": _normalize_drc_rules(pinout_data.get("drc_rules", {})),
 
@@ -2638,9 +2866,11 @@ def export_fpga(dc_data: dict, pinout_data: dict, gowin_dc: dict = None, lattice
         # Summary
         "summary": pinout_data.get("summary", {}),
     }
+    for key in ("resources", "package_info", "package_summary", "package_io_banks", "source_conflicts"):
+        if key in pinout_data and pinout_data.get(key) is not None:
+            result[key] = copy.deepcopy(pinout_data.get(key))
     if source_traceability:
         result["source_traceability"] = source_traceability
-    capability_blocks = _generic_fpga_capability_blocks(pinout_data, device_identity, normalized_diff_pairs)
     constraint_blocks = _generic_fpga_constraint_blocks(pinout_data, device_identity, capability_blocks, normalized_diff_pairs)
     guide_data = _load_gowin_family_design_guide(device, package, pinout_data, gowin_dc=gowin_dc) if vendor == "Gowin" else {}
     if guide_data.get("constraint_overlays"):
@@ -2790,7 +3020,7 @@ def main():
                 dc_data = {"extraction": {"component": {}}}
 
             result = export_fpga(dc_data, pinout_data, gowin_dc=gowin_dc, lattice_dc=lattice_dc)
-            safe_name = f"{device}_{package}"
+            safe_name = device if _safe_upper(device).endswith(_safe_upper(package)) else f"{device}_{package}"
             out_path = output_dir / f"{safe_name}.json"
             with open(out_path, "w") as fp:
                 json.dump(result, fp, indent=2, ensure_ascii=False)
