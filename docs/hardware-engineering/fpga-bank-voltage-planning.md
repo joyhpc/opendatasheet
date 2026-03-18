@@ -2,25 +2,81 @@
 
 ## 适用场景
 
-适用于 FPGA pin planning、IO 标准分组、板级接口映射和原理图早期约束。
+适用于：
 
-## 关键规则
+- FPGA pin planning
+- IO 标准分组
+- 原理图阶段的 bank / package 资源分配
+- 高速接口、DDR、MIPI、LVDS、普通 GPIO 混合设计
 
-- Bank 电压规划必须先于原理图冻结，否则后续会在接口兼容性和走线难度之间反复返工。
-- 同一 bank 内的 IO 标准、电压容差、参考电压和差分资源必须兼容。
-- 高速接口、MIPI、LVDS、普通 GPIO 不应仅因“球位够用”就混放。
-- 预留未来变型时，优先预留 bank，而不是把所有 bank 都塞满。
+## 不适用场景
 
-## 评审清单
+不适用于已经完成 pin assignment、bank 电压已锁死的后期修补阶段。本文是前期约束文档。
 
-- 每个 bank 的目标 VCCIO 是否明确，并与接口电平匹配。
-- 差分对、VREF、时钟专用脚和配置脚是否被提前锁定。
-- MIPI、DDR、LVDS、普通 GPIO 是否被错误混在约束冲突的 bank。
-- 跨 bank 总线是否会增加时序、同步或 SI 风险。
-- 包装变体下的 bank 可迁移性是否评估过。
+## 典型失效症状
+
+Bank 规划做错，后果通常不是“完全不能用”，而是：
+
+- pin 数足够，但 IO 标准不兼容
+- 某个接口能接进去，但把另一类接口逼到不可用 bank
+- 后期发现 DDR、MIPI、LVDS、GPIO 在同一 bank 互相冲突
+- 包装变体切换时，bank 资源完全不可迁移
+- bring-up 阶段出现电平不兼容、VREF 不足、差分资源不够
+
+## 先看什么
+
+先做三件事：
+
+1. 列出所有接口和它们要求的电压域、差分资源、VREF、时钟资源。
+2. 列出每个 bank 的可用能力，而不是只列球位数量。
+3. 先画 bank 分配草图，再开始详细原理图连接。
+
+## 必查顺序
+
+### 1. 接口需求
+
+- 每个接口需要的 `VCCIO`、IO 标准、单端/差分、时钟资源是否明确。
+- 哪些接口必须同 bank，哪些接口必须隔离 bank。
+
+### 2. bank 资源
+
+- 每个 bank 的目标电压是否明确。
+- 差分对、VREF、专用时钟脚、配置脚是否提前锁定。
+- 是否存在“球位够，但资源类型不对”的假象。
+
+### 3. 包装与迁移
+
+- 当前封装和潜在替代封装的 bank 资源是否兼容。
+- 未来变型时是预留 bank，还是把所有 bank 都塞满。
+- debug、strap、量产 IO 是否分层，而不是随意混放。
+
+### 4. 风险交叉检查
+
+- DDR、MIPI、LVDS、普通 GPIO 是否被错误混在同一 bank。
+- 跨 bank 总线是否会引入同步、延迟或 SI 风险。
+- 是否因为一个接口的临时方便，牺牲了整体电压规划。
+
+## 硬规则
+
+- Bank 电压规划必须在原理图冻结前完成。
+- 不能只看球位数量，必须同时看 `VCCIO`、差分资源、VREF、专用脚。
+- 高速接口不允许只因为“刚好有空 pin”就塞进某个 bank。
+- 未来变型和 debug 需求必须在 bank 规划阶段预留，而不是后补。
+- 如果一个 bank 的目标电压说不清，这个 bank 就不该开始连线。
 
 ## 常见失误
 
-- 原理图阶段不做 bank 规划，寄希望于后期约束工具自动解决。
-- 只看功能引脚数量，不看 VCCIO 和专用资源。
-- 把 debug IO、strap IO、量产 IO 混放，后期状态机与量产逻辑互相影响。
+- 原理图阶段不做 bank 规划，寄希望于后期工具自动解决。
+- 只按 pin 数量分配接口，不看专用资源。
+- 把 debug IO、strap IO、量产功能 IO 混放，后期状态互相干扰。
+
+## 仓库入口
+
+- 硬件文档总入口：[`index.md`](index.md)
+- 上游电源主题：[`fpga-power-rail-planning.md`](fpga-power-rail-planning.md)
+- 来源矩阵：[`best-practice-reference-matrix.md`](best-practice-reference-matrix.md)
+
+## 官方参考
+
+- AMD/Xilinx: `UG899 Vivado Design Suite User Guide: I/O and Clock Planning`
+- Intel 各 family 的 bank / IO standard / package planning 手册
