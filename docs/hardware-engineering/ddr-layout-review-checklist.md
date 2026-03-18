@@ -2,25 +2,84 @@
 
 ## 适用场景
 
-适用于 SoC/FPGA 到 DDR 存储器的板级走线、拓扑和 SI/PI 联合评审。
+适用于：
 
-## 关键规则
+- SoC / FPGA 到 DDR3 / DDR4 / DDR5 的板级走线评审
+- 原理图后期到布局前的约束复核
+- post-layout 的 SI/PI 联合检查
 
-- DDR 评审必须同时看拓扑、长度匹配、参考平面、过孔结构和电源噪声。
-- 时钟、地址命令、控制、数据、DQS、DM/DBI 是不同规则集，不要混为一类。
-- Fly-by 和 T-branch 拓扑的约束完全不同，必须按控制器和代际规则选择。
-- 走线规则不应只写“等长”，应明确到 byte lane、strobe、address group。
+## 不适用场景
 
-## 评审清单
+不适用于只看控制器寄存器配置或 training 软件问题。本文讨论的是板级拓扑、长度、回流和布线质量。
 
-- 时钟对、DQS 对、DQ 组内的长度匹配是否符合控制器手册。
-- byte lane 是否保持完整、清晰且便于回流。
-- 关键过孔是否回钻或至少控制 stub 长度。
-- DDR 参考平面是否连续，是否跨过分割或大开槽。
-- 控制器、终端、电源去耦和 DRAM 摆位是否服务于拓扑要求。
+## 典型失效症状
+
+DDR 板级问题常见表现是：
+
+- training 偶发通过、偶发失败
+- 某些温度、某些频率、某些 DIMM / 器件组合才出错
+- 读写错误集中在某个 byte lane
+- 某些板子稳定，批量一致性差
+- 电源和时钟看似都对，但数据裕量很差
+
+## 先看什么
+
+不要先盯“等长”数字。先看：
+
+1. 拓扑是否选对。
+2. byte lane / DQS / clock / address-command 是否被分组管理。
+3. 返回路径是否连续。
+4. 过孔 stub 和层切换是否可控。
+
+## 必查顺序
+
+### 1. 拓扑
+
+- Fly-by、T-branch、点对点是否与控制器和代际要求一致。
+- DIMM、离散颗粒、PoP 的规则是否被混用。
+- 终端方案、ODT 策略是否与拓扑匹配。
+
+### 2. 分组
+
+- 时钟对、地址命令、控制、DQ、DQS、DM/DBI 是否按不同规则集处理。
+- byte lane 是否完整，不混交，不跨不必要区域。
+- 原理图网络命名和 layout 约束是否一一对应。
+
+### 3. 长度与回流
+
+- 长度匹配是否符合控制器和器件手册，而不是只按经验值。
+- 参考平面是否连续。
+- 是否存在跨分割、长开槽、参考切换不连续的问题。
+
+### 4. 过孔与细节
+
+- 关键网络是否控制了过孔 stub，必要时是否回钻。
+- 时钟和 DQS 对是否避免不对称层切换。
+- 终端、电源去耦和 DRAM 摆位是否服务于拓扑，而不是只服务器件摆放美观。
+
+## 硬规则
+
+- DDR 不能只看“等长”，必须同时看拓扑、分组、回流和过孔。
+- 时钟、DQS、DQ、地址命令不是同一规则集。
+- 原理图如果没有清晰分组，layout 阶段几乎必然出错。
+- 如果没有仿真结果，就必须更保守地遵守器件与控制器手册的默认约束。
+- 频率越高，回流和过孔问题通常比肉眼看到的线长问题更早爆炸。
 
 ## 常见失误
 
 - 只追求线长匹配，忽略返回路径和过孔 stub。
-- 多个 byte lane 混交导致调试困难。
-- 原理图没有明确网络分组，layout 阶段只能人工猜测规则。
+- 多个 byte lane 混交，bring-up 难以定位。
+- 原理图没有明确 lane / strobe 分组，layout 只能人工猜。
+- 以为样板能 train 就说明布局没问题。
+
+## 仓库入口
+
+- 硬件文档总入口：[`index.md`](index.md)
+- 相关高速主题：[`differential-pair-routing.md`](differential-pair-routing.md)
+- 来源矩阵：[`best-practice-reference-matrix.md`](best-practice-reference-matrix.md)
+
+## 官方参考
+
+- Intel: [`Guidelines: Board Design Requirement for DDR2, DDR3, and LPDDR2`](https://www.intel.com/content/www/us/en/docs/programmable/683572/current/guidelines-board-design-requirement.html)
+- Intel: [`DDR4 Board Design Guidelines`](https://www.intel.com/content/www/us/en/docs/programmable/683216/22-2-2-6-1/ddr4-board-design-guidelines.html)
+- Intel: [`DDR5 Board Design Guidelines`](https://www.intel.com/content/www/us/en/docs/programmable/772538/25-1/ddr5-board-design-guidelines.html)
