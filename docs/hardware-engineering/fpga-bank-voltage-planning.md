@@ -70,6 +70,22 @@ Bank 规划做错，后果通常不是“完全不能用”，而是：
 - 只按 pin 数量分配接口，不看专用资源。
 - 把 debug IO、strap IO、量产功能 IO 混放，后期状态互相干扰。
 
+## 评审示例
+
+例子：
+
+- 一个 bank 里同时想放 LVDS、普通 3.3 V GPIO、调试 strap 和未来扩展接口
+- 当前封装球位看起来够用
+- 但 `VCCIO` 目标、电平、VREF 和差分资源并未先锁定
+
+正式 review 时，应直接给出：
+
+- `ERROR`: bank 目标电压未锁定前，不应冻结该 bank 连线。
+- `ERROR`: 把高速接口、普通 GPIO、strap 混放在同一未约束 bank，不应放行。
+- `WARNING`: 若未来封装迁移未评估，当前 pin planning 不具备变型韧性。
+
+这种问题如果拖到 layout 或 pin assignment 工具里，返工成本通常最高。
+
 ## 仓库入口
 
 - 硬件文档总入口：[`index.md`](index.md)

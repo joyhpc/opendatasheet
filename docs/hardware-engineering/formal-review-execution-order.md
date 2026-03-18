@@ -51,6 +51,8 @@
 - [`adc-reference-and-input-drive.md`](adc-reference-and-input-drive.md)
 - [`power-up-debug-sequence.md`](power-up-debug-sequence.md)
 
+如果你要直接组织一次完整评审，而不是先读样板，配套打开 [`review-record-template.md`](review-record-template.md)。
+
 ## Phase 1: 系统供电与保护
 
 先看：
@@ -147,6 +149,7 @@
 - 必须在 layout 前关闭的问题
 - 必须在打样前关闭的问题
 - bring-up 前必须准备的观测点和工装
+- 一份按 phase 填写完成的 [`review-record-template.md`](review-record-template.md)
 
 ## 常见错误顺序
 
@@ -160,5 +163,6 @@
 ## 建议用法
 
 - 开正式评审时，把这页当 agenda。
+- 同时开着 [`review-record-template.md`](review-record-template.md) 逐段记录，不要会后补写。
 - 每个阶段只引用对应文档，不把 15 篇一次性展开。
 - 一个阶段没过，就不要跳到下一个阶段装作继续推进。
