@@ -14,6 +14,8 @@
 
 配套来源见 [`best-practice-reference-matrix.md`](best-practice-reference-matrix.md)。
 
+正式评审顺序见 [`formal-review-execution-order.md`](formal-review-execution-order.md)。
+
 ## 最先看这 5 篇
 
 - [`power-tree-review-checklist.md`](power-tree-review-checklist.md)  
@@ -28,6 +30,10 @@
   新板首电和故障板排查的实际执行顺序。
 
 ## 核心主题
+
+### 先排议程
+
+- [`formal-review-execution-order.md`](formal-review-execution-order.md)
 
 ### 电源与保护
 
