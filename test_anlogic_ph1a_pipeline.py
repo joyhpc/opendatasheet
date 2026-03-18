@@ -7,6 +7,7 @@ sys.path.insert(0, str(REPO_ROOT / "scripts"))
 
 from build_fpga_catalog import build_catalog
 from export_anlogic_ph1a_sch_review import _export_record
+from export_for_sch_review import export_fpga
 
 
 ANLOGIC_EXTRACT_DIR = REPO_ROOT / "data" / "extracted_v2" / "fpga" / "anlogic_ph1a"
@@ -62,9 +63,22 @@ def test_anlogic_sch_review_export_uses_real_pinout_and_refclk_pairs():
     assert exported["pins"]
     assert exported["pins"][0]["pin"] == "AB6"
     assert "synthetic" not in exported["pins"][0].get("attrs", {})
-    assert exported["constraint_blocks"]["refclk_requirements"]["package_level_only"] is False
+    assert exported["constraint_blocks"]["configuration_boot"]["class"] == "boot_configuration"
+    assert exported["constraint_blocks"]["refclk_requirements"].get("package_level_only") is not True
     assert exported["constraint_blocks"]["refclk_requirements"]["refclk_pairs"][0]["pair_name"] == "REFCLK_80"
     assert exported["constraint_blocks"]["refclk_requirements"]["refclk_pair_count"] == 8
+
+
+def test_anlogic_standalone_export_delegates_to_common_export():
+    pinout = _load_pinout("ph1a90seg325_pinout.json")
+
+    standalone = _export_record(pinout)
+    common = export_fpga(
+        {"extraction": {"component": {"manufacturer": "Anlogic", "description": "PH1A"}}},
+        pinout,
+    )
+
+    assert standalone == common
 
 
 def test_anlogic_export_files_validate_catalog_presence():
@@ -74,7 +88,7 @@ def test_anlogic_export_files_validate_catalog_presence():
     assert exported["_type"] == "fpga"
     assert exported["constraint_blocks"]["source_consistency_review"]["review_required"] is True
     assert exported["pins"][0]["pin"] == "A1"
-    assert exported["constraint_blocks"]["refclk_requirements"]["package_level_only"] is False
+    assert exported["constraint_blocks"]["refclk_requirements"].get("package_level_only") is not True
     anlogic_tree = catalog["tree"]["Anlogic"]["families"]["SALPHOENIX 1A"]["series"]["PH1A"]["base_devices"]
     assert "PH1A90" in anlogic_tree
     assert anlogic_tree["PH1A90"]["devices"]["PH1A90SEG325"]["packages"]["SEG325"]["file"] == "PH1A90SEG325.json"
