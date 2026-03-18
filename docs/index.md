@@ -6,6 +6,7 @@
 
 - [`../README.md`](../README.md) — Repository overview, setup, checks, CI, contribution/security/support entry points. **Best for:** first-time readers, contributors, reviewers.
 - [`../GUIDE.md`](../GUIDE.md) — Reading guide across data, architecture, code, and workflow. **Best for:** anyone trying to understand the repo quickly.
+- [`top-10-entry-points.md`](top-10-entry-points.md) — Compressed high-value navigation across the most useful docs. **Best for:** readers who want the shortest path to the right document.
 - [`first-30-minutes.md`](first-30-minutes.md) — Fast orientation for contributors and reviewers in their first half hour. **Best for:** new collaborators, reviewers, drive-by contributors.
 - [`local-setup-playbook.md`](local-setup-playbook.md) — Practical environment setup and minimum local validation loop. **Best for:** anyone bringing up a fresh checkout.
 - [`maintenance.md`](maintenance.md) — Validation, regeneration, migration, and maintainer guardrails. **Best for:** maintainers, release owners, parallel contributors.

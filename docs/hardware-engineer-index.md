@@ -4,6 +4,7 @@
 
 ## Start Here
 
+- `top-10-entry-points.md`
 - `hardware-best-practice-source-basis.md`
 - `schematic-freeze-checklist.md`
 - `bring-up-closure-checklist.md`
