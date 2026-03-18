@@ -41,6 +41,16 @@
 - 再看接口、电平、链路和高频约束
 - 最后才看制造和 bring-up 交付
 
+## 推荐示例入口
+
+如果你要先看几篇“既有规则、又有真实评审示例”的样板，优先从下面 5 篇开始：
+
+- [`power-tree-review-checklist.md`](power-tree-review-checklist.md)
+- [`buck-converter-schematic-review.md`](buck-converter-schematic-review.md)
+- [`differential-pair-routing.md`](differential-pair-routing.md)
+- [`adc-reference-and-input-drive.md`](adc-reference-and-input-drive.md)
+- [`power-up-debug-sequence.md`](power-up-debug-sequence.md)
+
 ## Phase 1: 系统供电与保护
 
 先看：

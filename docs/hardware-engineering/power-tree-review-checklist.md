@@ -74,6 +74,23 @@
 - 把 PMIC/PG/EN 全连上了，但没有形成真实的顺序控制。
 - 把 FPGA、DDR、SerDes 的 rail 规划推迟到 layout 或 bring-up 阶段。
 
+## 评审示例
+
+例子：
+
+- 输入 12 V
+- 先降到 5 V
+- 再从 5 V 分出 FPGA 1.0 V 核心、3.3 V IO、2.5 V DDR 相关 rail
+- 同时把 ADC 参考和时钟缓冲也挂在 5 V 派生的同一颗 LDO 上
+
+正式 review 时，应该立刻给出三个结论：
+
+- `WARNING`: ADC 参考和时钟缓冲不应只因电流小就共用同一“方便的” 5 V 后级 LDO，需要重新看噪声隔离。
+- `ERROR`: 若 FPGA 核心和 DDR rail 的启动先后依赖 PMIC / PG，而图上看不出控制链，不能放行。
+- `WARNING`: 如果 12 V 入口没有明确浪涌和反接策略，后级所有 rail 都建立在不稳输入上。
+
+这个例子的重点不是具体电压值，而是：电源树 review 要先抓结构性问题，而不是先争某颗 10 uF 电容值。
+
 ## 仓库入口
 
 - 硬件文档总入口：[`index.md`](index.md)
