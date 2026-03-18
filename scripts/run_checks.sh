@@ -5,12 +5,18 @@ python3 -m py_compile \
   pipeline.py \
   pipeline_v2.py \
   scripts/build_raw_source_manifest.py \
+  scripts/parse_anlogic_ph1a.py \
+  scripts/parse_anlogic_ph1a_pinout.py \
+  scripts/export_anlogic_ph1a_sch_review.py \
+  scripts/refresh_anlogic_ph1a.py \
   scripts/export_for_sch_review.py \
   scripts/validate_design_extraction.py \
   scripts/validate_exports.py \
   test_regression.py \
   test_pin_extraction.py \
   test_drc_hints_v2.py \
+  test_anlogic_ph1a_pipeline.py \
+  test_anlogic_ph1a_pinout.py \
   test_raw_source_manifest.py \
   test_validate_design_extraction_manifest.py \
   extractors/__init__.py \
