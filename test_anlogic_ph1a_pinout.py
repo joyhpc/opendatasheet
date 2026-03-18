@@ -48,6 +48,8 @@ def test_anlogic_pinout_parser_keeps_package_overlay_rules_and_conflicts():
     parsed = _parse("PH1A400SFG676", "ph1a400sfg676.json", "PH1A400SFG676_PINLIST.xlsx")
 
     assert parsed["capability_blocks"]["pcie"]["phy_banks"] == [82, 83]
+    assert parsed["capability_blocks"]["clock_distribution"]["right_half_serdes_clock_regions"] == 4
+    assert parsed["capability_blocks"]["io_sso"]["bank_pair_budgets"]["31"]["vccio_gnd_pairs"] == 18
     assert parsed["package_io_banks"]["hp_banks"] == [31, 32, 33]
     assert any(conflict["field"] == "package_pinlist_download_url" for conflict in parsed["source_conflicts"])
     assert parsed["source_traceability"]["package_pinout"]["source_download_id"] == 1012

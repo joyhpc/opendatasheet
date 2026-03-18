@@ -57,10 +57,12 @@ HEADER_ALIASES = {
 
 SOURCE_FILES = {
     "io_user_manual": "UG911_安路科技PH1A系列FPGA IO用户手册.pdf",
+    "clock_user_manual": "UG912_安路科技PH1A系列FPGA 时钟资源用户手册.pdf",
     "serdes_user_manual": "UG909_安路科技PH1A系列FPGA SERDES用户手册.pdf",
     "pcie_user_manual": "UG913_安路科技PH1A系列FPGA PCIE用户手册.pdf",
     "ddr_user_manual": "UG915_安路科技PH1A系列FPGA DDR3_4高速接口用户手册.pdf",
     "hardware_design_guide": "UG907_安路科技PH1A系列FPGA 硬件设计指南.pdf",
+    "sso_rules_report": "TR901_安路科技PH1A系列 FPGA SSO限制规则说明.pdf",
 }
 
 SERDES_PROTOCOLS = {
@@ -136,6 +138,127 @@ MIPI_DOC_RULES = {
     "PH1A90SBG484": {"present": True, "directions": ["rx"], "evidence_level": "package_verified"},
     "PH1A90SEG324": {"present": False, "directions": [], "evidence_level": "package_verified"},
     "PH1A60GEG324": {"present": False, "directions": [], "evidence_level": "package_verified"},
+}
+
+CLOCK_DEVICE_PROFILES = {
+    "PH1A400": {"clock_regions_per_half": 7, "right_half_serdes_clock_regions": 4},
+    "PH1A180": {"clock_regions_per_half": 7, "right_half_serdes_clock_regions": 4},
+    "PH1A90": {"clock_regions_per_half": 4, "right_half_serdes_clock_regions": 2},
+    "PH1A60": {"clock_regions_per_half": 3, "right_half_serdes_clock_regions": 0},
+}
+
+SSO_BANK_PAIR_BUDGETS = {
+    "PH1A400SFG900": {
+        "11": {"user_ios": 50, "vccio_gnd_pairs": 7},
+        "12": {"user_ios": 50, "vccio_gnd_pairs": 7},
+        "13": {"user_ios": 50, "vccio_gnd_pairs": 7},
+        "14": {"user_ios": 50, "vccio_gnd_pairs": 7},
+        "15": {"user_ios": 50, "vccio_gnd_pairs": 7},
+        "16": {"user_ios": 50, "vccio_gnd_pairs": 7},
+        "17": {"user_ios": 50, "vccio_gnd_pairs": 7},
+        "31": {"user_ios": 50, "vccio_gnd_pairs": 18},
+        "32": {"user_ios": 50, "vccio_gnd_pairs": 18},
+        "33": {"user_ios": 50, "vccio_gnd_pairs": 18},
+    },
+    "PH1A400SFG676": {
+        "11": {"user_ios": 50, "vccio_gnd_pairs": 7},
+        "12": {"user_ios": 50, "vccio_gnd_pairs": 7},
+        "13": {"user_ios": 50, "vccio_gnd_pairs": 7},
+        "14": {"user_ios": 50, "vccio_gnd_pairs": 7},
+        "15": {"user_ios": 50, "vccio_gnd_pairs": 7},
+        "16": {"user_ios": 50, "vccio_gnd_pairs": 7},
+        "17": {"user_ios": 50, "vccio_gnd_pairs": 7},
+        "31": {"user_ios": 50, "vccio_gnd_pairs": 18},
+        "32": {"user_ios": 50, "vccio_gnd_pairs": 18},
+        "33": {"user_ios": 50, "vccio_gnd_pairs": 18},
+    },
+    "PH1A60GEG324": {
+        "11": {"user_ios": 50, "vccio_gnd_pairs": 8},
+        "12": {"user_ios": 50, "vccio_gnd_pairs": 6},
+        "13": {"user_ios": 50, "vccio_gnd_pairs": 6},
+        "31": {"user_ios": 50, "vccio_gnd_pairs": 8},
+        "32": {"user_ios": 50, "vccio_gnd_pairs": 6},
+        "33": {"user_ios": 50, "vccio_gnd_pairs": 6},
+    },
+    "PH1A90SBG484": {
+        "11": {"user_ios": 34, "vccio_gnd_pairs": 4},
+        "12": {"user_ios": 50, "vccio_gnd_pairs": 6},
+        "13": {"user_ios": 50, "vccio_gnd_pairs": 6},
+        "14": {"user_ios": 35, "vccio_gnd_pairs": 4},
+        "31": {"user_ios": 40, "vccio_gnd_pairs": 6},
+        "32": {"user_ios": 50, "vccio_gnd_pairs": 6},
+    },
+    "PH1A90SEG324": {
+        "12": {"user_ios": 50, "vccio_gnd_pairs": 6},
+        "13": {"user_ios": 47, "vccio_gnd_pairs": 5},
+        "32": {"user_ios": 50, "vccio_gnd_pairs": 6},
+    },
+    "PH1A180SFG676": {
+        "11": {"user_ios": 25, "vccio_gnd_pairs": 3},
+        "12": {"user_ios": 50, "vccio_gnd_pairs": 6},
+        "13": {"user_ios": 50, "vccio_gnd_pairs": 6},
+        "14": {"user_ios": 50, "vccio_gnd_pairs": 6},
+        "15": {"user_ios": 50, "vccio_gnd_pairs": 7},
+        "31": {"user_ios": 50, "vccio_gnd_pairs": 6},
+        "32": {"user_ios": 50, "vccio_gnd_pairs": 6},
+        "33": {"user_ios": 50, "vccio_gnd_pairs": 6},
+    },
+}
+
+SSO_VCCIO_STANDARDS = {
+    "HRIO": {"3.3V": "LVCMOS33", "2.5V": "LVCMOS25", "1.8V": "LVCMOS18", "1.5V": "LVCMOS15"},
+    "HPIO": {"1.8V": "LVCMOS18", "1.5V": "LVCMOS15", "1.2V": "LVCMOS12"},
+}
+
+SSO_LIMIT_VALUES = {
+    "PH1A400": {
+        "HRIO": {
+            "3.3V": {4: 15, 8: 15, 12: 8, 16: 4},
+            "2.5V": {4: 15, 8: 15, 12: 10, 16: 5},
+            "1.8V": {4: 15, 8: 15, 12: 12, 16: 6},
+            "1.5V": {4: 15, 8: 15, 12: 12, 16: 11},
+        },
+        "HPIO": {
+            "1.8V": {4: 17, 8: 17, 12: 17},
+            "1.5V": {4: 17, 8: 17, 12: 17},
+            "1.2V": {4: 17, 8: 17, 12: 17},
+        },
+    },
+    "PH1A60": {
+        "HRIO": {
+            "3.3V": {4: 15, 8: 15, 12: 8, 16: 4},
+            "2.5V": {4: 15, 8: 15, 12: 10, 16: 5},
+            "1.8V": {4: 15, 8: 15, 12: 12, 16: 6},
+            "1.5V": {4: 15, 8: 15, 12: 12, 16: 11},
+        },
+        "HPIO": {},
+    },
+    "PH1A90": {
+        "HRIO": {
+            "3.3V": {4: 12, 8: 12, 12: 5, 16: 4},
+            "2.5V": {4: 12, 8: 12, 12: 6, 16: 5},
+            "1.8V": {4: 12, 8: 12, 12: 6, 16: 5},
+            "1.5V": {4: 12, 8: 12, 12: 6, 16: 5},
+        },
+        "HPIO": {
+            "1.8V": {4: 17, 8: 17, 12: 17},
+            "1.5V": {4: 17, 8: 17, 12: 17},
+            "1.2V": {4: 17, 8: 17, 12: 17},
+        },
+    },
+    "PH1A180": {
+        "HRIO": {
+            "3.3V": {4: 15, 8: 15, 12: 8, 16: 4},
+            "2.5V": {4: 15, 8: 15, 12: 10, 16: 5},
+            "1.8V": {4: 15, 8: 15, 12: 12, 16: 6},
+            "1.5V": {4: 15, 8: 15, 12: 12, 16: 11},
+        },
+        "HPIO": {
+            "1.8V": {4: 15, 8: 15, 12: 15},
+            "1.5V": {4: 15, 8: 15, 12: 15},
+            "1.2V": {4: 15, 8: 15, 12: 15},
+        },
+    },
 }
 
 
@@ -407,6 +530,123 @@ def _package_io_block(device: str, web_entry: dict[str, Any], bank_info: dict[st
     return block
 
 
+def _base_device_family(device: str) -> str:
+    match = re.match(r"^(PH1A\d+)", device)
+    if not match:
+        raise ValueError(f"unexpected PH1A device naming: {device!r}")
+    return match.group(1)
+
+
+def _clock_distribution_block(device: str) -> dict[str, Any]:
+    family = _base_device_family(device)
+    profile = CLOCK_DEVICE_PROFILES[family]
+    sources = ["dedicated_clock_pins", "pll_outputs", "internal_logic_via_bufg"]
+    notes = [
+        "Dedicated clock pins support differential and single-ended inputs; single-ended clocks only enter the global clock network through the P-side pin.",
+        "Internal logic can drive BUFG, but clock quality is not controlled and should be reviewed before sign-off.",
+    ]
+    if profile["right_half_serdes_clock_regions"] > 0:
+        sources.insert(2, "serdes_clock_outputs")
+        notes.append("Right-half upper clock regions include SerDes clocking resources and can source high-speed interface clocks.")
+    else:
+        notes.append("PH1A60 does not include SerDes clock regions.")
+    return {
+        "class": "clocking_topology",
+        "present": True,
+        "global_clock_lines": 32,
+        "clock_region_height_plb": 40,
+        "clock_regions_per_half": profile["clock_regions_per_half"],
+        "right_half_serdes_clock_regions": profile["right_half_serdes_clock_regions"],
+        "pll_per_clock_region": 2,
+        "mlclk_per_clock_region": 2,
+        "lclk_per_clock_region": 4,
+        "hr_ioclk_per_clock_region": 2,
+        "hp_ioclk_per_clock_region": 4,
+        "lclk_supported_dividers": [1, 2, 3, 4, 5, 6, 7, 8, 3.5],
+        "global_clock_input_sources": sources,
+        "dedicated_clock_input": {
+            "differential_supported": True,
+            "single_ended_supported": True,
+            "single_ended_global_clock_entry_pin": "P",
+        },
+        "evidence_level": "family_manual",
+        "source": "UG912",
+        "notes": notes,
+    }
+
+
+def _sso_limit_tables(device: str) -> dict[str, Any]:
+    family = _base_device_family(device)
+    family_limits = SSO_LIMIT_VALUES[family]
+    result: dict[str, Any] = {}
+    for bank_type, voltage_map in family_limits.items():
+        if not voltage_map:
+            continue
+        result[bank_type] = {}
+        for vccio, drive_map in voltage_map.items():
+            result[bank_type][vccio] = {
+                "standard": SSO_VCCIO_STANDARDS[bank_type][vccio],
+                "drive_strength_mA": {
+                    str(drive): {"fast": limit, "med": limit, "slow": limit}
+                    for drive, limit in drive_map.items()
+                },
+            }
+    return result
+
+
+def _sso_bank_pair_budgets(device: str, package_io_banks: dict[str, Any]) -> tuple[dict[str, Any], str]:
+    budgets = SSO_BANK_PAIR_BUDGETS.get(device)
+    if budgets:
+        hr_banks = {str(bank) for bank in (package_io_banks.get("hr_banks") or [])}
+        hp_banks = {str(bank) for bank in (package_io_banks.get("hp_banks") or [])}
+        result = {}
+        for bank, budget in budgets.items():
+            entry = {
+                "bank": bank,
+                "user_ios": budget["user_ios"],
+                "vccio_gnd_pairs": budget["vccio_gnd_pairs"],
+            }
+            if bank in hr_banks:
+                entry["bank_type"] = "HRIO"
+            elif bank in hp_banks:
+                entry["bank_type"] = "HPIO"
+            result[bank] = entry
+        return result, "package_verified"
+
+    if device == "PH1A90SEG325":
+        return {}, "package_alias_inference"
+    return {}, "family_manual_only"
+
+
+def _io_sso_block(device: str, package_io_banks: dict[str, Any]) -> dict[str, Any]:
+    bank_pair_budgets, evidence_level = _sso_bank_pair_budgets(device, package_io_banks)
+    notes = [
+        "SSO calculation applies only to single-ended output signals.",
+        "For mixed drive or slew settings in one bank, sum the per-output weights 1/limit_per_pair and keep the total no greater than the bank VCCIO/GND pair count.",
+    ]
+    if device == "PH1A90SEG325":
+        notes.append("TR901 publishes PH1A90 SBG484 and SEG324 bank budgets, but does not name SEG325 explicitly; reuse the PH1A90 per-pair limits only, and re-confirm bank-level budgets before schematic freeze.")
+    return {
+        "class": "io_signal_integrity",
+        "present": True,
+        "applies_to": "single_ended_outputs_only",
+        "bank_pair_budgets": bank_pair_budgets,
+        "limit_tables": _sso_limit_tables(device),
+        "weighted_sum_rule": {
+            "formula": "sum(io_count / limit_per_pair) <= vccio_gnd_pairs",
+            "mixed_setting_weighting": "Each output contributes 1 / limit_per_pair for its own VCCIO, standard, drive strength, and slew setting.",
+        },
+        "mitigations": [
+            "Use bank power isolation, careful PCB design, and adequate decoupling on VCCIO rails.",
+            "Add pull-up protection on noise-sensitive signals such as PROGRAMN.",
+            "Reduce simultaneous startup switching by delaying output enable after configuration.",
+        ],
+        "evidence_level": evidence_level,
+        "source": "TR901",
+        "notes": notes,
+    }
+
+
 def _memory_interface_block(device: str, web_entry: dict[str, Any]) -> dict[str, Any]:
     ddr_rate = web_entry["package_summary"]["ddr_rate_mbps"]
     ddr_width = web_entry["package_summary"]["ddr_width_bits"]
@@ -573,6 +813,7 @@ def build_dataset() -> dict[str, Any]:
         web_entry = primary_rows[device]
         conflicts = locale_conflicts.get(device, [])
         package_summary = web_entry["package_summary"]
+        package_io_banks = _package_io_block(device, web_entry, bank_info)
         device_record = {
             "_schema_version": "1.0",
             "_type": "fpga_package_capability",
@@ -599,8 +840,10 @@ def build_dataset() -> dict[str, Any]:
             },
             "resources": web_entry["resources"],
             "package_summary": package_summary,
-            "package_io_banks": _package_io_block(device, web_entry, bank_info),
+            "package_io_banks": package_io_banks,
             "capability_blocks": {
+                "clock_distribution": _clock_distribution_block(device),
+                "io_sso": _io_sso_block(device, package_io_banks),
                 "memory_interface": _memory_interface_block(device, web_entry),
                 "mipi_phy": _mipi_phy_block(device, web_entry),
                 "high_speed_serial": _high_speed_serial_block(device, web_entry),
@@ -615,9 +858,11 @@ def build_dataset() -> dict[str, Any]:
                     "product_name": web_entry["product_name"],
                 },
                 "package_bank_distribution": traceability["io_user_manual"],
+                "clock_resources": traceability["clock_user_manual"],
                 "serdes": traceability["serdes_user_manual"],
                 "pcie": traceability["pcie_user_manual"],
                 "ddr": traceability["ddr_user_manual"],
+                "sso_rules": traceability["sso_rules_report"],
                 "mipi_and_hardware": traceability["hardware_design_guide"],
             },
         }

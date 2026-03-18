@@ -24322,6 +24322,11 @@
       "source_path": "data/raw/fpga/anlogic_ph1a/UG911_安路科技PH1A系列FPGA IO用户手册.pdf",
       "source_version": null
     },
+    "clock_resources": {
+      "source_file": "UG912_安路科技PH1A系列FPGA 时钟资源用户手册.pdf",
+      "source_path": "data/raw/fpga/anlogic_ph1a/UG912_安路科技PH1A系列FPGA 时钟资源用户手册.pdf",
+      "source_version": null
+    },
     "serdes": {
       "source_file": "UG909_安路科技PH1A系列FPGA SERDES用户手册.pdf",
       "source_path": "data/raw/fpga/anlogic_ph1a/UG909_安路科技PH1A系列FPGA SERDES用户手册.pdf",
@@ -24337,6 +24342,11 @@
       "source_path": "data/raw/fpga/anlogic_ph1a/UG915_安路科技PH1A系列FPGA DDR3_4高速接口用户手册.pdf",
       "source_version": null
     },
+    "sso_rules": {
+      "source_file": "TR901_安路科技PH1A系列 FPGA SSO限制规则说明.pdf",
+      "source_path": "data/raw/fpga/anlogic_ph1a/TR901_安路科技PH1A系列 FPGA SSO限制规则说明.pdf",
+      "source_version": null
+    },
     "mipi_and_hardware": {
       "source_file": "UG907_安路科技PH1A系列FPGA 硬件设计指南.pdf",
       "source_path": "data/raw/fpga/anlogic_ph1a/UG907_安路科技PH1A系列FPGA 硬件设计指南.pdf",
@@ -24344,6 +24354,294 @@
     }
   },
   "capability_blocks": {
+    "clock_distribution": {
+      "class": "clocking_topology",
+      "present": true,
+      "global_clock_lines": 32,
+      "clock_region_height_plb": 40,
+      "clock_regions_per_half": 7,
+      "right_half_serdes_clock_regions": 4,
+      "pll_per_clock_region": 2,
+      "mlclk_per_clock_region": 2,
+      "lclk_per_clock_region": 4,
+      "hr_ioclk_per_clock_region": 2,
+      "hp_ioclk_per_clock_region": 4,
+      "lclk_supported_dividers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        3.5
+      ],
+      "global_clock_input_sources": [
+        "dedicated_clock_pins",
+        "pll_outputs",
+        "serdes_clock_outputs",
+        "internal_logic_via_bufg"
+      ],
+      "dedicated_clock_input": {
+        "differential_supported": true,
+        "single_ended_supported": true,
+        "single_ended_global_clock_entry_pin": "P"
+      },
+      "evidence_level": "family_manual",
+      "source": "UG912",
+      "notes": [
+        "Dedicated clock pins support differential and single-ended inputs; single-ended clocks only enter the global clock network through the P-side pin.",
+        "Internal logic can drive BUFG, but clock quality is not controlled and should be reviewed before sign-off.",
+        "Right-half upper clock regions include SerDes clocking resources and can source high-speed interface clocks."
+      ]
+    },
+    "io_sso": {
+      "class": "io_signal_integrity",
+      "present": true,
+      "applies_to": "single_ended_outputs_only",
+      "bank_pair_budgets": {
+        "11": {
+          "bank": "11",
+          "user_ios": 50,
+          "vccio_gnd_pairs": 7,
+          "bank_type": "HRIO"
+        },
+        "12": {
+          "bank": "12",
+          "user_ios": 50,
+          "vccio_gnd_pairs": 7,
+          "bank_type": "HRIO"
+        },
+        "13": {
+          "bank": "13",
+          "user_ios": 50,
+          "vccio_gnd_pairs": 7,
+          "bank_type": "HRIO"
+        },
+        "14": {
+          "bank": "14",
+          "user_ios": 50,
+          "vccio_gnd_pairs": 7,
+          "bank_type": "HRIO"
+        },
+        "15": {
+          "bank": "15",
+          "user_ios": 50,
+          "vccio_gnd_pairs": 7,
+          "bank_type": "HRIO"
+        },
+        "16": {
+          "bank": "16",
+          "user_ios": 50,
+          "vccio_gnd_pairs": 7
+        },
+        "17": {
+          "bank": "17",
+          "user_ios": 50,
+          "vccio_gnd_pairs": 7
+        },
+        "31": {
+          "bank": "31",
+          "user_ios": 50,
+          "vccio_gnd_pairs": 18,
+          "bank_type": "HPIO"
+        },
+        "32": {
+          "bank": "32",
+          "user_ios": 50,
+          "vccio_gnd_pairs": 18,
+          "bank_type": "HPIO"
+        },
+        "33": {
+          "bank": "33",
+          "user_ios": 50,
+          "vccio_gnd_pairs": 18,
+          "bank_type": "HPIO"
+        }
+      },
+      "limit_tables": {
+        "HRIO": {
+          "3.3V": {
+            "standard": "LVCMOS33",
+            "drive_strength_mA": {
+              "4": {
+                "fast": 15,
+                "med": 15,
+                "slow": 15
+              },
+              "8": {
+                "fast": 15,
+                "med": 15,
+                "slow": 15
+              },
+              "12": {
+                "fast": 8,
+                "med": 8,
+                "slow": 8
+              },
+              "16": {
+                "fast": 4,
+                "med": 4,
+                "slow": 4
+              }
+            }
+          },
+          "2.5V": {
+            "standard": "LVCMOS25",
+            "drive_strength_mA": {
+              "4": {
+                "fast": 15,
+                "med": 15,
+                "slow": 15
+              },
+              "8": {
+                "fast": 15,
+                "med": 15,
+                "slow": 15
+              },
+              "12": {
+                "fast": 10,
+                "med": 10,
+                "slow": 10
+              },
+              "16": {
+                "fast": 5,
+                "med": 5,
+                "slow": 5
+              }
+            }
+          },
+          "1.8V": {
+            "standard": "LVCMOS18",
+            "drive_strength_mA": {
+              "4": {
+                "fast": 15,
+                "med": 15,
+                "slow": 15
+              },
+              "8": {
+                "fast": 15,
+                "med": 15,
+                "slow": 15
+              },
+              "12": {
+                "fast": 12,
+                "med": 12,
+                "slow": 12
+              },
+              "16": {
+                "fast": 6,
+                "med": 6,
+                "slow": 6
+              }
+            }
+          },
+          "1.5V": {
+            "standard": "LVCMOS15",
+            "drive_strength_mA": {
+              "4": {
+                "fast": 15,
+                "med": 15,
+                "slow": 15
+              },
+              "8": {
+                "fast": 15,
+                "med": 15,
+                "slow": 15
+              },
+              "12": {
+                "fast": 12,
+                "med": 12,
+                "slow": 12
+              },
+              "16": {
+                "fast": 11,
+                "med": 11,
+                "slow": 11
+              }
+            }
+          }
+        },
+        "HPIO": {
+          "1.8V": {
+            "standard": "LVCMOS18",
+            "drive_strength_mA": {
+              "4": {
+                "fast": 17,
+                "med": 17,
+                "slow": 17
+              },
+              "8": {
+                "fast": 17,
+                "med": 17,
+                "slow": 17
+              },
+              "12": {
+                "fast": 17,
+                "med": 17,
+                "slow": 17
+              }
+            }
+          },
+          "1.5V": {
+            "standard": "LVCMOS15",
+            "drive_strength_mA": {
+              "4": {
+                "fast": 17,
+                "med": 17,
+                "slow": 17
+              },
+              "8": {
+                "fast": 17,
+                "med": 17,
+                "slow": 17
+              },
+              "12": {
+                "fast": 17,
+                "med": 17,
+                "slow": 17
+              }
+            }
+          },
+          "1.2V": {
+            "standard": "LVCMOS12",
+            "drive_strength_mA": {
+              "4": {
+                "fast": 17,
+                "med": 17,
+                "slow": 17
+              },
+              "8": {
+                "fast": 17,
+                "med": 17,
+                "slow": 17
+              },
+              "12": {
+                "fast": 17,
+                "med": 17,
+                "slow": 17
+              }
+            }
+          }
+        }
+      },
+      "weighted_sum_rule": {
+        "formula": "sum(io_count / limit_per_pair) <= vccio_gnd_pairs",
+        "mixed_setting_weighting": "Each output contributes 1 / limit_per_pair for its own VCCIO, standard, drive strength, and slew setting."
+      },
+      "mitigations": [
+        "Use bank power isolation, careful PCB design, and adequate decoupling on VCCIO rails.",
+        "Add pull-up protection on noise-sensitive signals such as PROGRAMN.",
+        "Reduce simultaneous startup switching by delaying output enable after configuration."
+      ],
+      "evidence_level": "package_verified",
+      "source": "TR901",
+      "notes": [
+        "SSO calculation applies only to single-ended output signals.",
+        "For mixed drive or slew settings in one bank, sum the per-output weights 1/limit_per_pair and keep the total no greater than the bank VCCIO/GND pair count."
+      ]
+    },
     "memory_interface": {
       "present": true,
       "hard_ppc": true,

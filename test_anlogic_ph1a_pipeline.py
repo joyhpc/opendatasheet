@@ -51,7 +51,12 @@ def test_anlogic_package_extract_preserves_package_level_rules():
 
     assert seg325["capability_blocks"]["pcie"]["present"] is None
     assert seg325["source_conflicts"]
+    assert seg325["capability_blocks"]["clock_distribution"]["global_clock_lines"] == 32
+    assert seg325["capability_blocks"]["clock_distribution"]["right_half_serdes_clock_regions"] == 2
+    assert seg325["capability_blocks"]["io_sso"]["evidence_level"] == "package_alias_inference"
+    assert seg325["capability_blocks"]["io_sso"]["limit_tables"]["HRIO"]["3.3V"]["drive_strength_mA"]["16"]["fast"] == 4
     assert sfg900["package_io_banks"]["hp_banks"] == [31, 32, 33]
+    assert sfg900["capability_blocks"]["io_sso"]["bank_pair_budgets"]["31"]["vccio_gnd_pairs"] == 18
     assert sfg900["capability_blocks"]["high_speed_serial"]["package_rate_ceiling_gbps"] == 12.5
 
 
@@ -67,6 +72,8 @@ def test_anlogic_sch_review_export_uses_real_pinout_and_refclk_pairs():
     assert exported["constraint_blocks"]["refclk_requirements"].get("package_level_only") is not True
     assert exported["constraint_blocks"]["refclk_requirements"]["refclk_pairs"][0]["pair_name"] == "REFCLK_80"
     assert exported["constraint_blocks"]["refclk_requirements"]["refclk_pair_count"] == 8
+    assert exported["capability_blocks"]["clock_distribution"]["source"] == "UG912"
+    assert exported["capability_blocks"]["io_sso"]["source"] == "TR901"
 
 
 def test_anlogic_standalone_export_delegates_to_common_export():
