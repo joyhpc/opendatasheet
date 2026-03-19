@@ -56,6 +56,8 @@ HEADER_ALIASES = {
 }
 
 SOURCE_FILES = {
+    "configuration_user_manual": "UG905_安路科技PH1A系列FPGA 配置用户手册.pdf",
+    "pll_user_manual": "UG906_安路科技PH1A系列FPGA PLL用户手册.pdf",
     "io_user_manual": "UG911_安路科技PH1A系列FPGA IO用户手册.pdf",
     "clock_user_manual": "UG912_安路科技PH1A系列FPGA 时钟资源用户手册.pdf",
     "serdes_user_manual": "UG909_安路科技PH1A系列FPGA SERDES用户手册.pdf",
@@ -260,6 +262,33 @@ SSO_LIMIT_VALUES = {
         },
     },
 }
+
+CONFIGURATION_MODE_MATRIX = [
+    {
+        "mode": "master_spi",
+        "mode_pins": "001",
+        "data_widths": [1, 2, 4],
+        "cclk_direction": "output",
+    },
+    {
+        "mode": "slave_parallel",
+        "mode_pins": "110",
+        "data_widths": [8, 16, 32],
+        "cclk_direction": "input",
+    },
+    {
+        "mode": "slave_serial",
+        "mode_pins": "111",
+        "data_widths": [1],
+        "cclk_direction": "input",
+    },
+    {
+        "mode": "jtag",
+        "mode_pins": None,
+        "data_widths": [],
+        "cclk_direction": None,
+    },
+]
 
 
 def _strip_tags(text: str) -> str:
@@ -575,6 +604,203 @@ def _clock_distribution_block(device: str) -> dict[str, Any]:
     }
 
 
+def _configuration_modes_block() -> dict[str, Any]:
+    return {
+        "class": "boot_and_configuration",
+        "present": True,
+        "supported_modes": CONFIGURATION_MODE_MATRIX,
+        "dedicated_pin_requirements": {
+            "HSWAPEN": {
+                "kind": "strap",
+                "logic_0_behavior": "user_io_weak_pullup_during_configuration",
+                "logic_1_behavior": "user_io_high_impedance_during_configuration",
+            },
+            "TRSTN": {
+                "kind": "strap",
+                "logic_0_behavior": "jtag_connected_to_configuration_controller",
+                "logic_1_behavior": "jtag_connected_to_serdes_jtag_chain",
+            },
+            "TCK": {
+                "kind": "dedicated_jtag",
+                "recommended_pullup_ohms": 4700,
+            },
+            "TMS": {
+                "kind": "dedicated_jtag",
+                "recommended_pullup_ohms": 4700,
+            },
+            "PROGRAMN": {
+                "kind": "dedicated_configuration_reset",
+                "polarity": "active_low",
+                "recommended_pullup_ohms": 4700,
+                "pullup_rail": "VCCIO_0",
+            },
+            "INITN": {
+                "kind": "bidirectional_open_drain_status",
+                "polarity": "active_high",
+                "recommended_pullup_ohms": 4700,
+                "pullup_rail": "VCCIO",
+            },
+            "DONE": {
+                "kind": "bidirectional_open_drain_status",
+                "polarity": "active_high",
+                "recommended_pullup_ohms": 4700,
+                "pullup_rail": "VCCIO",
+            },
+        },
+        "initialization_flow": {
+            "default_clock_hz": 2_000_000,
+            "clock_source": "on_chip_oscillator_divided_from_133mhz_by_64",
+            "steps": [
+                {"name": "cfg_por", "delay_cycles": 2**14},
+                {"name": "mdelay", "delay_cycles": 2**16},
+                {"name": "load_spi_id", "master_spi_only": True},
+                {"name": "load_feature", "master_spi_only": True},
+                {"name": "auto_clear"},
+                {"name": "load_efuse", "efuse_payload_bits": 2048},
+                {"name": "init_ok"},
+            ],
+            "programn_can_trigger_hot_reset": True,
+            "bitstream_load_starts_after_initn_high": True,
+        },
+        "bitstream_load_flow": [
+            {"name": "parallel_width_pattern", "slave_parallel_only": True},
+            {"name": "syncwords", "jtag_skips": True},
+            {"name": "idcode_check"},
+            {"name": "load_bitstream"},
+            {"name": "startup"},
+        ],
+        "startup_wakeup": {
+            "domain": "independent_wakeup_clk",
+            "signal_order": ["DONE", "GOE", "GSRN", "GWE", "WAKEUP"],
+            "wakeup_always_last": True,
+        },
+        "resiliency_features": {
+            "dual_boot": True,
+            "multi_boot": True,
+            "dna_bits": 64,
+        },
+        "security_features": {
+            "security_bit_can_disable_jtag_pcm_readback": True,
+            "readback_requires_ecc_stop_o_high_when_ecc_enabled": True,
+        },
+        "jtag_behavior": {
+            "can_interrupt_other_configuration_modes": True,
+            "supports_daisy_chain": True,
+        },
+        "notes": [
+            "When INITN is held low externally, initialization is delayed and bitstream loading does not start.",
+            "When PH1_LOGIC_MBOOT is instantiated, MULTI BOOT images should be burned with the dedicated MULTI BOOT download flow rather than plain JTAG image placement.",
+        ],
+        "evidence_level": "family_manual",
+        "source": "UG905",
+    }
+
+
+def _pll_resources_block(device: str, web_entry: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "class": "pll_resources",
+        "present": True,
+        "package_pll_blocks": web_entry["resources"]["pll_blocks"],
+        "per_pll_capabilities": {
+            "clock_outputs": 7,
+            "inverted_clock_outputs_supported": True,
+            "fractional_output_paths": 7,
+            "dynamic_phase_adjustment": {
+                "fine_adjust_supported": True,
+                "fine_step": "1/8_vco_period",
+                "coarse_adjust_supported": True,
+                "coarse_step": "1_vco_period",
+            },
+            "dynamic_reconfiguration": True,
+            "spread_spectrum_clocking": True,
+            "duty_cycle_adjustment": True,
+            "lock_output": True,
+            "cascade_supported": True,
+        },
+        "divider_ranges": {
+            "reference_divider_n": {"min": 1, "max": 128},
+            "feedback_divider_m": {"min": 1, "max": 128},
+            "output_dividers_c0_to_c6": {"min": 1, "max": 128},
+        },
+        "bandwidth_modes": ["HIGH", "LOW", "MEDIUM"],
+        "feedback_modes": [
+            "source_synchronous",
+            "no_compensation",
+            "normal",
+            "zero_delay_buffer",
+        ],
+        "zero_delay_buffer_constraints": {
+            "feedback_path_requires_bidirectional_single_ended_io": True,
+            "prefer_global_clock_pin": True,
+            "avoid_pcb_trace_on_feedback_path": True,
+            "refclk_below_50mhz_min_output_drive_mA": 8,
+            "refclk_50_to_100mhz_min_output_drive_mA": 16,
+            "input_and_output_same_bank_required_below_100mhz": True,
+            "m_equals_n_required": True,
+        },
+        "notes": [
+            "No-compensation mode uses internal self-feedback and prioritizes jitter performance over network-delay compensation.",
+            "Zero-delay-buffer mode aligns the output clock pin phase to the PLL reference clock pin phase and should be treated as a board-level timing ownership decision.",
+        ],
+        "evidence_level": "family_manual",
+        "source": "UG906",
+    }
+
+
+def _serdes_reference_clock_block(web_entry: dict[str, Any]) -> dict[str, Any]:
+    present = bool(web_entry["package_summary"]["serdes_channels"])
+    notes = [
+        "SERDES reference clock P/N pins do not include internal termination; place the termination network externally.",
+        "For PCIe, the 100 nF AC-coupling capacitor belongs on the transmitter side.",
+    ]
+    if not present:
+        notes.append("This package does not expose SERDES channels in the official product table, so the refclk network guidance is not package-applicable.")
+    return {
+        "class": "serdes_reference_clocking",
+        "present": present,
+        "internal_differential_termination": False,
+        "external_differential_termination_ohms": 100,
+        "source_interfaces": ["LVDS", "LVPECL25", "LVPECL33"],
+        "lvpecl_source_side_to_gnd_ohms": {
+            "LVPECL25": 82,
+            "LVPECL33": 150,
+        },
+        "evidence_level": "family_manual",
+        "source": "UG907",
+        "notes": notes,
+    }
+
+
+def _serdes_power_integrity_block(web_entry: dict[str, Any]) -> dict[str, Any]:
+    present = bool(web_entry["package_summary"]["serdes_channels"])
+    notes = [
+        "Place the SERDES supply regulator close to the SERDES ground reference plane to minimize loop impedance.",
+        "Shield SERDES supplies from board noise sources and place several small bypass capacitors close to the FPGA power pins, with larger capacitors farther away.",
+        "Use ferrite-bead isolation between SERDES supply domains to reduce mutual interference.",
+    ]
+    if not present:
+        notes.append("This package does not expose SERDES channels in the official product table, so SERDES supply guidance is not package-applicable.")
+    return {
+        "class": "power_integrity",
+        "present": present,
+        "rail_recommendations": {
+            "VPHYVCCA": {
+                "preferred_supply": "ldo_or_low_noise_dcdc",
+                "max_ripple_mV": 30,
+                "allow_dcdc_preregulation_before_ldo": True,
+            },
+            "VPHYVCCT": {
+                "preferred_supply": "ldo_or_low_noise_dcdc",
+                "max_ripple_mV": 30,
+                "allow_dcdc_preregulation_before_ldo": True,
+            },
+        },
+        "evidence_level": "family_manual",
+        "source": "UG907",
+        "notes": notes,
+    }
+
+
 def _sso_limit_tables(device: str) -> dict[str, Any]:
     family = _base_device_family(device)
     family_limits = SSO_LIMIT_VALUES[family]
@@ -842,8 +1068,12 @@ def build_dataset() -> dict[str, Any]:
             "package_summary": package_summary,
             "package_io_banks": package_io_banks,
             "capability_blocks": {
+                "configuration_modes": _configuration_modes_block(),
                 "clock_distribution": _clock_distribution_block(device),
+                "pll_resources": _pll_resources_block(device, web_entry),
                 "io_sso": _io_sso_block(device, package_io_banks),
+                "serdes_reference_clocking": _serdes_reference_clock_block(web_entry),
+                "serdes_power_integrity": _serdes_power_integrity_block(web_entry),
                 "memory_interface": _memory_interface_block(device, web_entry),
                 "mipi_phy": _mipi_phy_block(device, web_entry),
                 "high_speed_serial": _high_speed_serial_block(device, web_entry),
@@ -857,6 +1087,8 @@ def build_dataset() -> dict[str, Any]:
                     "source_url": PRODUCT_PAGES[PRIMARY_LOCALE],
                     "product_name": web_entry["product_name"],
                 },
+                "configuration": traceability["configuration_user_manual"],
+                "pll": traceability["pll_user_manual"],
                 "package_bank_distribution": traceability["io_user_manual"],
                 "clock_resources": traceability["clock_user_manual"],
                 "serdes": traceability["serdes_user_manual"],

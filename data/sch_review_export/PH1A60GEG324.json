@@ -10046,6 +10046,16 @@
       "source_url": "https://www.anlogic.com/product/fpga/phoenix/ph1a",
       "product_name": "PH1A60GEG324/C"
     },
+    "configuration": {
+      "source_file": "UG905_安路科技PH1A系列FPGA 配置用户手册.pdf",
+      "source_path": "data/raw/fpga/anlogic_ph1a/UG905_安路科技PH1A系列FPGA 配置用户手册.pdf",
+      "source_version": null
+    },
+    "pll": {
+      "source_file": "UG906_安路科技PH1A系列FPGA PLL用户手册.pdf",
+      "source_path": "data/raw/fpga/anlogic_ph1a/UG906_安路科技PH1A系列FPGA PLL用户手册.pdf",
+      "source_version": null
+    },
     "package_bank_distribution": {
       "source_file": "UG911_安路科技PH1A系列FPGA IO用户手册.pdf",
       "source_path": "data/raw/fpga/anlogic_ph1a/UG911_安路科技PH1A系列FPGA IO用户手册.pdf",
@@ -10083,6 +10093,167 @@
     }
   },
   "capability_blocks": {
+    "configuration_modes": {
+      "class": "boot_and_configuration",
+      "present": true,
+      "supported_modes": [
+        {
+          "mode": "master_spi",
+          "mode_pins": "001",
+          "data_widths": [
+            1,
+            2,
+            4
+          ],
+          "cclk_direction": "output"
+        },
+        {
+          "mode": "slave_parallel",
+          "mode_pins": "110",
+          "data_widths": [
+            8,
+            16,
+            32
+          ],
+          "cclk_direction": "input"
+        },
+        {
+          "mode": "slave_serial",
+          "mode_pins": "111",
+          "data_widths": [
+            1
+          ],
+          "cclk_direction": "input"
+        },
+        {
+          "mode": "jtag",
+          "mode_pins": null,
+          "data_widths": [],
+          "cclk_direction": null
+        }
+      ],
+      "dedicated_pin_requirements": {
+        "HSWAPEN": {
+          "kind": "strap",
+          "logic_0_behavior": "user_io_weak_pullup_during_configuration",
+          "logic_1_behavior": "user_io_high_impedance_during_configuration"
+        },
+        "TRSTN": {
+          "kind": "strap",
+          "logic_0_behavior": "jtag_connected_to_configuration_controller",
+          "logic_1_behavior": "jtag_connected_to_serdes_jtag_chain"
+        },
+        "TCK": {
+          "kind": "dedicated_jtag",
+          "recommended_pullup_ohms": 4700
+        },
+        "TMS": {
+          "kind": "dedicated_jtag",
+          "recommended_pullup_ohms": 4700
+        },
+        "PROGRAMN": {
+          "kind": "dedicated_configuration_reset",
+          "polarity": "active_low",
+          "recommended_pullup_ohms": 4700,
+          "pullup_rail": "VCCIO_0"
+        },
+        "INITN": {
+          "kind": "bidirectional_open_drain_status",
+          "polarity": "active_high",
+          "recommended_pullup_ohms": 4700,
+          "pullup_rail": "VCCIO"
+        },
+        "DONE": {
+          "kind": "bidirectional_open_drain_status",
+          "polarity": "active_high",
+          "recommended_pullup_ohms": 4700,
+          "pullup_rail": "VCCIO"
+        }
+      },
+      "initialization_flow": {
+        "default_clock_hz": 2000000,
+        "clock_source": "on_chip_oscillator_divided_from_133mhz_by_64",
+        "steps": [
+          {
+            "name": "cfg_por",
+            "delay_cycles": 16384
+          },
+          {
+            "name": "mdelay",
+            "delay_cycles": 65536
+          },
+          {
+            "name": "load_spi_id",
+            "master_spi_only": true
+          },
+          {
+            "name": "load_feature",
+            "master_spi_only": true
+          },
+          {
+            "name": "auto_clear"
+          },
+          {
+            "name": "load_efuse",
+            "efuse_payload_bits": 2048
+          },
+          {
+            "name": "init_ok"
+          }
+        ],
+        "programn_can_trigger_hot_reset": true,
+        "bitstream_load_starts_after_initn_high": true
+      },
+      "bitstream_load_flow": [
+        {
+          "name": "parallel_width_pattern",
+          "slave_parallel_only": true
+        },
+        {
+          "name": "syncwords",
+          "jtag_skips": true
+        },
+        {
+          "name": "idcode_check"
+        },
+        {
+          "name": "load_bitstream"
+        },
+        {
+          "name": "startup"
+        }
+      ],
+      "startup_wakeup": {
+        "domain": "independent_wakeup_clk",
+        "signal_order": [
+          "DONE",
+          "GOE",
+          "GSRN",
+          "GWE",
+          "WAKEUP"
+        ],
+        "wakeup_always_last": true
+      },
+      "resiliency_features": {
+        "dual_boot": true,
+        "multi_boot": true,
+        "dna_bits": 64
+      },
+      "security_features": {
+        "security_bit_can_disable_jtag_pcm_readback": true,
+        "readback_requires_ecc_stop_o_high_when_ecc_enabled": true
+      },
+      "jtag_behavior": {
+        "can_interrupt_other_configuration_modes": true,
+        "supports_daisy_chain": true
+      },
+      "notes": [
+        "When INITN is held low externally, initialization is delayed and bitstream loading does not start.",
+        "When PH1_LOGIC_MBOOT is instantiated, MULTI BOOT images should be burned with the dedicated MULTI BOOT download flow rather than plain JTAG image placement."
+      ],
+      "evidence_level": "family_manual",
+      "source": "UG905"
+    },
     "clock_distribution": {
       "class": "clocking_topology",
       "present": true,
@@ -10123,6 +10294,67 @@
         "Internal logic can drive BUFG, but clock quality is not controlled and should be reviewed before sign-off.",
         "PH1A60 does not include SerDes clock regions."
       ]
+    },
+    "pll_resources": {
+      "class": "pll_resources",
+      "present": true,
+      "package_pll_blocks": 12,
+      "per_pll_capabilities": {
+        "clock_outputs": 7,
+        "inverted_clock_outputs_supported": true,
+        "fractional_output_paths": 7,
+        "dynamic_phase_adjustment": {
+          "fine_adjust_supported": true,
+          "fine_step": "1/8_vco_period",
+          "coarse_adjust_supported": true,
+          "coarse_step": "1_vco_period"
+        },
+        "dynamic_reconfiguration": true,
+        "spread_spectrum_clocking": true,
+        "duty_cycle_adjustment": true,
+        "lock_output": true,
+        "cascade_supported": true
+      },
+      "divider_ranges": {
+        "reference_divider_n": {
+          "min": 1,
+          "max": 128
+        },
+        "feedback_divider_m": {
+          "min": 1,
+          "max": 128
+        },
+        "output_dividers_c0_to_c6": {
+          "min": 1,
+          "max": 128
+        }
+      },
+      "bandwidth_modes": [
+        "HIGH",
+        "LOW",
+        "MEDIUM"
+      ],
+      "feedback_modes": [
+        "source_synchronous",
+        "no_compensation",
+        "normal",
+        "zero_delay_buffer"
+      ],
+      "zero_delay_buffer_constraints": {
+        "feedback_path_requires_bidirectional_single_ended_io": true,
+        "prefer_global_clock_pin": true,
+        "avoid_pcb_trace_on_feedback_path": true,
+        "refclk_below_50mhz_min_output_drive_mA": 8,
+        "refclk_50_to_100mhz_min_output_drive_mA": 16,
+        "input_and_output_same_bank_required_below_100mhz": true,
+        "m_equals_n_required": true
+      },
+      "notes": [
+        "No-compensation mode uses internal self-feedback and prioritizes jitter performance over network-delay compensation.",
+        "Zero-delay-buffer mode aligns the output clock pin phase to the PLL reference clock pin phase and should be treated as a board-level timing ownership decision."
+      ],
+      "evidence_level": "family_manual",
+      "source": "UG906"
     },
     "io_sso": {
       "class": "io_signal_integrity",
@@ -10283,6 +10515,52 @@
       "notes": [
         "SSO calculation applies only to single-ended output signals.",
         "For mixed drive or slew settings in one bank, sum the per-output weights 1/limit_per_pair and keep the total no greater than the bank VCCIO/GND pair count."
+      ]
+    },
+    "serdes_reference_clocking": {
+      "class": "serdes_reference_clocking",
+      "present": false,
+      "internal_differential_termination": false,
+      "external_differential_termination_ohms": 100,
+      "source_interfaces": [
+        "LVDS",
+        "LVPECL25",
+        "LVPECL33"
+      ],
+      "lvpecl_source_side_to_gnd_ohms": {
+        "LVPECL25": 82,
+        "LVPECL33": 150
+      },
+      "evidence_level": "family_manual",
+      "source": "UG907",
+      "notes": [
+        "SERDES reference clock P/N pins do not include internal termination; place the termination network externally.",
+        "For PCIe, the 100 nF AC-coupling capacitor belongs on the transmitter side.",
+        "This package does not expose SERDES channels in the official product table, so the refclk network guidance is not package-applicable."
+      ]
+    },
+    "serdes_power_integrity": {
+      "class": "power_integrity",
+      "present": false,
+      "rail_recommendations": {
+        "VPHYVCCA": {
+          "preferred_supply": "ldo_or_low_noise_dcdc",
+          "max_ripple_mV": 30,
+          "allow_dcdc_preregulation_before_ldo": true
+        },
+        "VPHYVCCT": {
+          "preferred_supply": "ldo_or_low_noise_dcdc",
+          "max_ripple_mV": 30,
+          "allow_dcdc_preregulation_before_ldo": true
+        }
+      },
+      "evidence_level": "family_manual",
+      "source": "UG907",
+      "notes": [
+        "Place the SERDES supply regulator close to the SERDES ground reference plane to minimize loop impedance.",
+        "Shield SERDES supplies from board noise sources and place several small bypass capacitors close to the FPGA power pins, with larger capacitors farther away.",
+        "Use ferrite-bead isolation between SERDES supply domains to reduce mutual interference.",
+        "This package does not expose SERDES channels in the official product table, so SERDES supply guidance is not package-applicable."
       ]
     },
     "memory_interface": {

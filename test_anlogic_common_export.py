@@ -38,6 +38,14 @@ def test_common_export_uses_real_anlogic_pinout_data():
     assert exported["constraint_blocks"]["refclk_requirements"].get("package_level_only") is not True
     assert exported["constraint_blocks"]["refclk_requirements"]["refclk_pairs"][0]["pair_name"] == "REFCLK_82"
     assert exported["constraint_blocks"]["source_consistency_review"]["review_required"] is True
+    assert exported["capability_blocks"]["configuration_modes"]["jtag_behavior"]["can_interrupt_other_configuration_modes"] is True
+    assert exported["capability_blocks"]["pll_resources"]["feedback_modes"] == [
+        "source_synchronous",
+        "no_compensation",
+        "normal",
+        "zero_delay_buffer",
+    ]
+    assert exported["capability_blocks"]["serdes_reference_clocking"]["external_differential_termination_ohms"] == 100
     assert exported["source_conflicts"]
 
 
@@ -57,6 +65,8 @@ def test_common_export_supports_package_level_anlogic_records():
     assert exported["constraint_blocks"]["memory_interface_review"]["required"] is True
     assert exported["constraint_blocks"]["pcie_review"]["present"] is None
     assert exported["constraint_blocks"]["source_consistency_review"]["review_required"] is True
+    assert exported["capability_blocks"]["configuration_modes"]["security_features"]["security_bit_can_disable_jtag_pcm_readback"] is True
+    assert exported["capability_blocks"]["serdes_reference_clocking"]["present"] is True
     assert exported["package_summary"]["user_io_count"] == 180
 
 

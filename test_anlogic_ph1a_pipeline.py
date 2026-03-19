@@ -48,16 +48,25 @@ def test_anlogic_family_extract_has_expected_summary_and_conflicts():
 def test_anlogic_package_extract_preserves_package_level_rules():
     seg325 = _load_extract("ph1a90seg325.json")
     sfg900 = _load_extract("ph1a400sfg900.json")
+    geg324 = _load_extract("ph1a60geg324.json")
 
     assert seg325["capability_blocks"]["pcie"]["present"] is None
     assert seg325["source_conflicts"]
+    assert len(seg325["capability_blocks"]["configuration_modes"]["supported_modes"]) == 4
+    assert seg325["capability_blocks"]["configuration_modes"]["initialization_flow"]["steps"][0]["delay_cycles"] == 16384
     assert seg325["capability_blocks"]["clock_distribution"]["global_clock_lines"] == 32
+    assert seg325["capability_blocks"]["pll_resources"]["package_pll_blocks"] == 12
+    assert seg325["capability_blocks"]["pll_resources"]["zero_delay_buffer_constraints"]["m_equals_n_required"] is True
     assert seg325["capability_blocks"]["clock_distribution"]["right_half_serdes_clock_regions"] == 2
     assert seg325["capability_blocks"]["io_sso"]["evidence_level"] == "package_alias_inference"
     assert seg325["capability_blocks"]["io_sso"]["limit_tables"]["HRIO"]["3.3V"]["drive_strength_mA"]["16"]["fast"] == 4
+    assert seg325["capability_blocks"]["serdes_reference_clocking"]["external_differential_termination_ohms"] == 100
+    assert seg325["capability_blocks"]["serdes_power_integrity"]["rail_recommendations"]["VPHYVCCA"]["max_ripple_mV"] == 30
     assert sfg900["package_io_banks"]["hp_banks"] == [31, 32, 33]
     assert sfg900["capability_blocks"]["io_sso"]["bank_pair_budgets"]["31"]["vccio_gnd_pairs"] == 18
     assert sfg900["capability_blocks"]["high_speed_serial"]["package_rate_ceiling_gbps"] == 12.5
+    assert geg324["capability_blocks"]["serdes_reference_clocking"]["present"] is False
+    assert geg324["capability_blocks"]["serdes_power_integrity"]["present"] is False
 
 
 def test_anlogic_sch_review_export_uses_real_pinout_and_refclk_pairs():
@@ -72,8 +81,12 @@ def test_anlogic_sch_review_export_uses_real_pinout_and_refclk_pairs():
     assert exported["constraint_blocks"]["refclk_requirements"].get("package_level_only") is not True
     assert exported["constraint_blocks"]["refclk_requirements"]["refclk_pairs"][0]["pair_name"] == "REFCLK_80"
     assert exported["constraint_blocks"]["refclk_requirements"]["refclk_pair_count"] == 8
+    assert exported["capability_blocks"]["configuration_modes"]["source"] == "UG905"
     assert exported["capability_blocks"]["clock_distribution"]["source"] == "UG912"
+    assert exported["capability_blocks"]["pll_resources"]["source"] == "UG906"
     assert exported["capability_blocks"]["io_sso"]["source"] == "TR901"
+    assert exported["capability_blocks"]["serdes_reference_clocking"]["source"] == "UG907"
+    assert exported["capability_blocks"]["serdes_power_integrity"]["source"] == "UG907"
 
 
 def test_anlogic_standalone_export_delegates_to_common_export():
