@@ -19,6 +19,7 @@
 ## Validation
 
 - [ ] `./scripts/run_checks.sh`
+- [ ] If `docs/hardware-engineering/` changed: `python3 scripts/check_markdown_links.py docs/hardware-engineering && python3 scripts/check_hardware_doc_structure.py`
 - [ ] `python3 scripts/validate_exports.py --summary`
 - [ ] `python3 test_regression.py`
 - [ ] `python3 -m pytest -q`
