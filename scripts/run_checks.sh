@@ -9,6 +9,7 @@ python3 -m py_compile \
   scripts/parse_anlogic_ph1a_pinout.py \
   scripts/export_anlogic_ph1a_sch_review.py \
   scripts/refresh_anlogic_ph1a.py \
+  scripts/check_hardware_doc_structure.py \
   scripts/export_for_sch_review.py \
   scripts/validate_design_extraction.py \
   scripts/validate_exports.py \
@@ -37,6 +38,7 @@ if ! python3 scripts/build_raw_source_manifest.py --check; then
 fi
 
 python3 scripts/check_markdown_links.py
+python3 scripts/check_hardware_doc_structure.py
 python3 scripts/validate_exports.py --summary
 python3 scripts/validate_design_extraction.py --strict
 python3 test_regression.py

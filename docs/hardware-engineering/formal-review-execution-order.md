@@ -53,6 +53,8 @@
 
 如果你要直接组织一次完整评审，而不是先读样板，配套打开 [`review-record-template.md`](review-record-template.md)。
 
+如果你要在会前先判断哪些问题会直接阻塞放行，先扫一遍 [`review-gate-matrix.md`](review-gate-matrix.md)。
+
 ## Phase 1: 系统供电与保护
 
 先看：
@@ -163,6 +165,7 @@
 ## 建议用法
 
 - 开正式评审时，把这页当 agenda。
+- 会前先用 [`review-gate-matrix.md`](review-gate-matrix.md) 预判阻塞项，不要在会上才第一次发现硬冲突。
 - 同时开着 [`review-record-template.md`](review-record-template.md) 逐段记录，不要会后补写。
 - 每个阶段只引用对应文档，不把 15 篇一次性展开。
 - 一个阶段没过，就不要跳到下一个阶段装作继续推进。

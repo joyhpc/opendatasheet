@@ -18,6 +18,8 @@
 
 会议记录模板见 [`review-record-template.md`](review-record-template.md)。
 
+放行门槛速查见 [`review-gate-matrix.md`](review-gate-matrix.md)。
+
 ## 最先看这 5 篇
 
 - [`power-tree-review-checklist.md`](power-tree-review-checklist.md)  
@@ -36,6 +38,7 @@
 ### 先排议程
 
 - [`formal-review-execution-order.md`](formal-review-execution-order.md)
+- [`review-gate-matrix.md`](review-gate-matrix.md)
 - [`review-record-template.md`](review-record-template.md)
 
 ### 电源与保护
@@ -71,6 +74,7 @@
 ## 使用建议
 
 - 需要快速 review，就只看这一页列出的文档。
+- 需要先判断“这板能不能继续往前走”，先看 [`review-gate-matrix.md`](review-gate-matrix.md)。
 - 需要把评审结论真正落到会后执行，就同时打开 [`review-record-template.md`](review-record-template.md)。
 - 需要追溯官方来源，就看 [`best-practice-reference-matrix.md`](best-practice-reference-matrix.md)。
 - 需要查旧主题或泛化材料，再去 [`archive/`](archive/)。
