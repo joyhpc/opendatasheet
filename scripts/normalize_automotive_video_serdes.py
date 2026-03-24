@@ -67,16 +67,23 @@ def _selection_features(profile: dict) -> list[str]:
         features.append(f"system_path:{system_path}")
     for family in bridge.get("link_families", []) or []:
         features.append(f"link_family:{family.lower()}")
-    video_output = bridge.get("video_output", {})
-    protocol = video_output.get("protocol")
-    if protocol:
-        features.append(f"video_output:{protocol.lower().replace(' ', '_')}")
-    for phy in video_output.get("phy_types", []) or []:
-        features.append(f"phy:{phy.lower()}")
+    for field_name in ("video_input", "video_output"):
+        video_block = bridge.get(field_name, {})
+        protocol = video_block.get("protocol")
+        if protocol:
+            features.append(f"{field_name}:{protocol.lower().replace(' ', '_')}")
+        for phy in video_block.get("phy_types", []) or []:
+            features.append(f"phy:{phy.lower()}")
     return features
 
 
-def _system_path_review_items(system_path: str | None) -> list[str]:
+def _system_path_review_items(system_path: str | None, device_role: str | None) -> list[str]:
+    if system_path == "camera_module_to_domain_controller" and device_role == "serializer":
+        return [
+            "Freeze sensor-side CSI-2 lane mapping, reference-clock ownership, and frame-sync strategy before schematic sign-off.",
+            "Freeze coax vs STP assumptions, connector ownership, and PoC policy for the selected HSMT link.",
+            "Verify remote deserializer compatibility, control-channel tunneling, and sideband GPIO usage.",
+        ]
     if system_path == "camera_module_to_domain_controller":
         return [
             "Freeze coax vs STP assumptions, connector ownership, and PoC policy for the selected serial link.",
@@ -96,28 +103,40 @@ def _system_path_review_items(system_path: str | None) -> list[str]:
     ]
 
 
+def _serial_video_selection_note(bridge: dict) -> str:
+    device_role = bridge.get("device_role")
+    if device_role == "serializer":
+        return "Freeze sensor-side CSI-2 PHY mode, serial-link family, transport media, and remote deserializer compatibility before schematic sign-off."
+    return "Freeze serial-link family, transport media, CSI-2 PHY mode, and downstream receiver compatibility before schematic sign-off."
+
+
 def _build_serial_video_bridge_constraint(profile: dict) -> dict:
     bridge = profile["serial_video_bridge"]
+    video_input = bridge.get("video_input", {})
     video_output = bridge.get("video_output", {})
     system_path = bridge.get("system_path")
+    device_role = bridge.get("device_role")
     return {
         "class": "interface",
         "review_required": True,
-        "device_role": bridge.get("device_role"),
+        "device_role": device_role,
         "system_path": system_path,
         "link_families": bridge.get("link_families", []),
+        "video_input_protocol": video_input.get("protocol"),
         "video_protocol": video_output.get("protocol"),
+        "video_output_protocol": video_output.get("protocol"),
+        "video_input_phy_types": video_input.get("phy_types", []),
         "phy_types": video_output.get("phy_types", []),
-        "selection_note": "Freeze serial-link family, transport media, CSI-2 PHY mode, and downstream receiver compatibility before schematic sign-off.",
-        "review_items": _system_path_review_items(system_path),
+        "selection_note": _serial_video_selection_note(bridge),
+        "review_items": _system_path_review_items(system_path, device_role),
         "source": bridge.get("source_basis", "manual_profile"),
     }
 
 
 def _derive_mipi_phy_from_bridge(profile: dict) -> dict | None:
     bridge = profile.get("serial_video_bridge", {})
-    video_output = bridge.get("video_output", {})
-    phy_types = video_output.get("phy_types", [])
+    video_block = bridge.get("video_output") or bridge.get("video_input") or {}
+    phy_types = video_block.get("phy_types", [])
     if not phy_types:
         return None
 
@@ -125,23 +144,23 @@ def _derive_mipi_phy_from_bridge(profile: dict) -> dict | None:
         "class": "mipi_phy",
         "present": True,
         "phy_types": list(phy_types),
-        "directions": [video_output.get("direction", "TX")],
-        "transport": video_output.get("protocol"),
+        "directions": [video_block.get("direction", "TX")],
+        "transport": video_block.get("protocol"),
         "source": bridge.get("source_basis", "manual_profile"),
     }
 
-    dphy = video_output.get("dphy")
+    dphy = video_block.get("dphy")
     if isinstance(dphy, dict) and dphy:
         block["dphy"] = copy.deepcopy(dphy)
-        block["dphy"]["port_count"] = video_output.get("port_count")
+        block["dphy"]["port_count"] = video_block.get("port_count")
 
-    cphy = video_output.get("cphy")
+    cphy = video_block.get("cphy")
     if isinstance(cphy, dict) and cphy:
         block["cphy"] = copy.deepcopy(cphy)
-        block["cphy"]["port_count"] = video_output.get("port_count")
+        block["cphy"]["port_count"] = video_block.get("port_count")
 
     source_pages = []
-    for section in (video_output, dphy or {}, cphy or {}):
+    for section in (video_block, dphy or {}, cphy or {}):
         if isinstance(section, dict):
             for page in section.get("source_pages", []) or []:
                 if isinstance(page, int) and page not in source_pages:

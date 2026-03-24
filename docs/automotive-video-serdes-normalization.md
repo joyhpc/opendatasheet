@@ -50,8 +50,9 @@
 它表达的不是品牌，而是系统角色：
 
 - 是不是 serializer / deserializer / aggregator
+- 是处在 camera ingress 还是 display egress 路径
 - 串行侧用什么链路家族
-- 视频侧输出什么协议
+- 视频侧是输入还是输出、是什么协议
 - 控制面怎么进来
 
 ## 3. 标准结构
@@ -67,8 +68,9 @@
   "system_path": "camera_module_to_domain_controller",
   "link_families": ["GVIF3"],
   "link_direction": "serial_in_to_video_out",
-  "serial_links": {},
+  "video_input": {},
   "video_output": {},
+  "serial_links": {},
   "control_plane": {},
   "source_basis": "primary_pdf_manual_profile"
 }
@@ -87,10 +89,12 @@
     - `domain_controller_to_display`
 - `link_families`
   - 例如 `GVIF3`、`GMSL2`、`GMSL1`、`FPD-Link III`、`FPD-Link IV`、`HSMT`
+- `video_input`
+  - 主要用于 serializer 侧，例如 camera 模组送进来的 `MIPI CSI-2`
+- `video_output`
+  - 主要用于 deserializer / bridge 侧，例如输出到 SoC 的 `MIPI CSI-2`
 - `serial_links`
   - 串行侧媒介、链路数量、是否支持控制通道
-- `video_output`
-  - 例如 `MIPI CSI-2`、`D-PHY` / `C-PHY`
 - `control_plane`
   - I2C / GPIO / reset / strap / lock status
 
@@ -99,6 +103,7 @@
 - 不再只靠 `application_domain` 推断使用场景
 - 用 `system_path` 显式区分 camera ingress 和 display egress
 - `link_families` 现在正式收纳 `HSMT`
+- serializer 现在不再被硬塞成 deserializer 变体，而是用 `device_role + video_input`
 
 ## 4. 这次已经归一到什么程度
 
@@ -106,6 +111,8 @@
 
 - `CXD4984ER-W`
 - `MAX96718A`
+- `NS6012`
+- `NS6603`
 
 它们现在都具备：
 
@@ -116,6 +123,8 @@
 
 - `CXD4984ER-W` 还保留了更完整的 `domains.protocol` 与 `capability_blocks.mipi_phy`
 - `MAX96718A` 则通过 profile 补齐了可消费的统一能力结构
+- `NS6012` 代表 camera-side HSMT serializer
+- `NS6603` 代表 HSMT deserializer / quad camera aggregator
 
 另外已经纳入同一注册表、但当前处于待补档状态的器件有：
 
@@ -124,20 +133,12 @@
 - `DS90UB960WRTDRQ1`
 - `DS90UB962WRTDTQ1`
 - `DS90UB9702-Q1`
-- `NS6603`
 
 这些器件当前被标记为：
 
 - `DS90UB*`: `pending_source_reintake`
-- `NS6603`: `pending_source_intake`
 
 原因不是它们不属于同类，而是当前工作区没有它们可安全更新的正式 `extracted/export/selection` 文件。
-
-其中 `NS6603` 当前只完成了“家族登记”：
-
-- 已知链路家族：`HSMT`
-- 未知且未 source-backed 的字段暂不猜测
-- 等正式 source intake 后再激活 profile
 
 ## 5. 为什么不用只改 category
 
@@ -151,6 +152,7 @@
 - 有没有 `C-PHY`
 - 控制面是 I2C 还是别的
 - 这颗器件是在 `camera -> domain controller` 还是 `domain controller -> display`
+- 它是“加串”的 serializer，还是“解串/聚合”的 deserializer
 
 这些问题都不应该靠 `description` 字符串匹配。
 
@@ -159,14 +161,20 @@
 推荐下游按下面顺序判断：
 
 1. 先看 `category == Automotive Video SerDes`
-2. 再看 `capability_blocks.serial_video_bridge.system_path`
-3. 最后看 `link_families`、`video_output`、`control_plane`
+2. 再看 `capability_blocks.serial_video_bridge.device_role`
+3. 再看 `capability_blocks.serial_video_bridge.system_path`
+4. 最后看 `link_families`、`video_input` / `video_output`、`control_plane`
 
 一个简单决策表：
 
+- `device_role = serializer`
+  - 把它当作 camera-side 加串器件处理
+  - 重点看 `video_input`，确认 sensor 侧 `MIPI CSI-2`、lane map、时钟和帧同步
 - `system_path = camera_module_to_domain_controller`
+  - 再结合 `device_role`
   - 把它当作 sensor ingress 器件处理
-  - 重点校验 serializer 配对、PoC、同轴/STP、CSI-2 接收端兼容
+  - `serializer` 重点校验 sensor 侧 CSI-2、PoC、同轴/STP、远端 deserializer 配对
+  - `deserializer` 重点校验聚合模式、PoC、同轴/STP、SoC CSI-2 接收端兼容
 - `system_path = domain_controller_to_display`
   - 把它当作 display egress 器件处理
   - 重点校验显示链路时序、bridge/panel 兼容、显示控制和失锁恢复
@@ -176,6 +184,12 @@
 - `application_domain = automotive_camera`
 
 因为它只能说明“属于哪个大类”，不能替代系统链路位置判断。
+
+也不要只看：
+
+- `device_role`
+
+因为 `serializer` 既可能出现在 camera ingress，也可能以后出现在 display egress。
 
 ## 7. 新同类芯片进来时怎么处理
 
@@ -203,6 +217,16 @@
 
 - `link_families`
 - `system_path`
+
+如果器件属于“加串”侧，还必须补：
+
+- `device_role = serializer`
+- `video_input`
+
+如果器件属于“解串/聚合”侧，还必须补：
+
+- `device_role = deserializer` 或 `aggregator`
+- `video_output`
 
 不要第一步就写成：
 
@@ -260,14 +284,20 @@ flowchart TD
     B -->|是| C[补 profile]
     B -->|否| D[走普通器件流程]
     C --> C1[写 link_families]
-    C1 --> C2[写 system_path]
-    C2 --> E[运行 normalize_automotive_video_serdes.py]
+    C1 --> C2[写 device_role]
+    C2 --> C3[写 system_path]
+    C3 --> C4[写 video_input 或 video_output]
+    C4 --> E[运行 normalize_automotive_video_serdes.py]
     E --> F[data/extracted_v2]
     E --> G[data/sch_review_export]
     E --> H[data/selection_profile]
-    G --> I{system_path?}
-    I -->|camera_module_to_domain_controller| J[按 camera ingress 评审]
-    I -->|domain_controller_to_display| K[按 display egress 评审]
+    G --> I{device_role?}
+    I -->|serializer| J[按加串器件评审]
+    I -->|deserializer/aggregator| K[按解串或聚合器件评审]
+    J --> L{system_path?}
+    K --> L
+    L -->|camera_module_to_domain_controller| M[按 camera ingress 闭环]
+    L -->|domain_controller_to_display| N[按 display egress 闭环]
 ```
 
 ## 9. 当前边界和自治保障
@@ -311,5 +341,6 @@ flowchart TD
 如果下游只需要一句规则：
 
 - 先用 `category` 找到车载视频 SerDes
+- 再用 `device_role` 判断它是加串还是解串/聚合
 - 再用 `system_path` 决定它属于 camera ingress 还是 display egress
-- 再用 `link_families` 和 `video_output` 做兼容性和原理图闭环
+- 再用 `link_families` 和 `video_input` / `video_output` 做兼容性和原理图闭环

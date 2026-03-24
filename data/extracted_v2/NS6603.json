@@ -1,0 +1,128 @@
+{
+  "pdf_name": "NS6603 Datasheet-v0.13.pdf",
+  "model": "manual_profile",
+  "mode": "manual",
+  "is_fpga": false,
+  "extraction": {
+    "component": {
+      "mpn": "NS6603",
+      "manufacturer": "Norel Systems",
+      "category": "Automotive Video SerDes",
+      "description": "Automotive HSMT deserializer"
+    }
+  },
+  "domains": {
+    "protocol": {
+      "interfaces": [
+        {
+          "protocol_type": "MIPI",
+          "role": null,
+          "instance_name": "CSI2_TX_DPHY",
+          "i2c_config": null,
+          "spi_config": null,
+          "uart_config": null,
+          "signals": [],
+          "timing_constraints": [],
+          "command_set": [],
+          "notes": "Features list states D-PHY output topologies up to 2x4-lane or 4x2-lane.",
+          "mipi_config": {
+            "transport": "CSI-2",
+            "direction": "TX",
+            "phy_type": "D-PHY",
+            "port_count": 4,
+            "source_pages": [
+              6,
+              8,
+              18,
+              19,
+              22,
+              23
+            ]
+          }
+        },
+        {
+          "protocol_type": "MIPI",
+          "role": null,
+          "instance_name": "CSI2_TX_CPHY",
+          "i2c_config": null,
+          "spi_config": null,
+          "uart_config": null,
+          "signals": [],
+          "timing_constraints": [],
+          "command_set": [],
+          "notes": "Features list states C-PHY output topologies up to 2x4-trio or 4x2-trio.",
+          "mipi_config": {
+            "transport": "CSI-2",
+            "direction": "TX",
+            "phy_type": "C-PHY",
+            "port_count": 4,
+            "source_pages": [
+              6,
+              8,
+              18,
+              19,
+              24
+            ]
+          }
+        },
+        {
+          "protocol_type": "I2C",
+          "role": "both",
+          "instance_name": "CTRL_I2C",
+          "i2c_config": {
+            "slave_address_hex": null,
+            "address_configurable": true,
+            "address_pins": [],
+            "address_bits": 7,
+            "max_clock_hz": 1000000,
+            "supports_clock_stretching": null,
+            "supports_repeated_start": null
+          },
+          "spi_config": null,
+          "uart_config": null,
+          "signals": [],
+          "timing_constraints": [],
+          "command_set": [],
+          "notes": "Feature list states I2C master up to 833Kbps and slave up to 1Mbps, with eight hardware-selectable device addresses."
+        },
+        {
+          "protocol_type": "SPI",
+          "role": "both",
+          "instance_name": "CTRL_SPI",
+          "i2c_config": null,
+          "spi_config": {
+            "mode": null,
+            "max_clock_hz": 50000000
+          },
+          "uart_config": null,
+          "signals": [],
+          "timing_constraints": [],
+          "command_set": [],
+          "notes": "Feature list states SPI master/slave support up to 50Mbps."
+        },
+        {
+          "protocol_type": "UART",
+          "role": "both",
+          "instance_name": "TUNNELED_UART",
+          "i2c_config": null,
+          "spi_config": null,
+          "uart_config": {
+            "baud_rates": [],
+            "flow_control": null
+          },
+          "signals": [],
+          "timing_constraints": [],
+          "command_set": [],
+          "notes": "Feature list confirms tunneled UART support."
+        }
+      ],
+      "protocol_summary": {
+        "total_interfaces": 5,
+        "has_i2c": true,
+        "has_spi": true,
+        "has_uart": true,
+        "primary_interface": "MIPI"
+      }
+    }
+  }
+}

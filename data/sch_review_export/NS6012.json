@@ -1,0 +1,248 @@
+{
+  "_schema": "device-knowledge/2.0",
+  "_type": "normal_ic",
+  "_layers": [
+    "L0_skeleton"
+  ],
+  "mpn": "NS6012",
+  "manufacturer": "Norel Systems",
+  "category": "Automotive Video SerDes",
+  "description": "Automotive HSMT Serializer",
+  "packages": {
+    "QFN-32": {
+      "pin_count": 32,
+      "pins": {}
+    }
+  },
+  "capability_blocks": {
+    "serial_video_bridge": {
+      "class": "serial_video_bridge",
+      "present": true,
+      "device_role": "serializer",
+      "application_domain": "automotive_camera",
+      "system_path": "camera_module_to_domain_controller",
+      "link_families": [
+        "HSMT"
+      ],
+      "link_direction": "video_in_to_serial_out",
+      "serial_links": {
+        "port_count": 1,
+        "media": [
+          "coax",
+          "stp"
+        ],
+        "power_over_cable_supported": true,
+        "control_channel_present": true,
+        "max_forward_rate_gbps": 6.4,
+        "max_backward_rate_mbps": 100,
+        "source_pages": [
+          6,
+          8,
+          15,
+          18,
+          19
+        ],
+        "notes": [
+          "Datasheet states one HSMT link output.",
+          "Supports PoC over 16m coax or 10m STP with inline connectors."
+        ]
+      },
+      "video_input": {
+        "protocol": "MIPI CSI-2",
+        "phy_types": [
+          "D-PHY"
+        ],
+        "port_count": 1,
+        "direction": "RX",
+        "dphy": {
+          "data_lanes_per_port": 4,
+          "clock_lanes_per_port": 1,
+          "phy_version": "1.2",
+          "source_pages": [
+            6,
+            8,
+            15,
+            18,
+            19
+          ]
+        }
+      },
+      "control_plane": {
+        "protocols": [
+          "I2C",
+          "SPI",
+          "UART",
+          "GPIO"
+        ],
+        "gpio_count": 9,
+        "source_pages": [
+          6,
+          8,
+          19,
+          20,
+          21
+        ]
+      },
+      "source_basis": "primary_pdf_manual_profile"
+    },
+    "mipi_phy": {
+      "class": "mipi_phy",
+      "present": true,
+      "phy_types": [
+        "D-PHY"
+      ],
+      "directions": [
+        "RX"
+      ],
+      "transport": "MIPI CSI-2",
+      "source": "primary_pdf_manual_profile",
+      "dphy": {
+        "data_lanes_per_port": 4,
+        "clock_lanes_per_port": 1,
+        "phy_version": "1.2",
+        "source_pages": [
+          6,
+          8,
+          15,
+          18,
+          19
+        ],
+        "port_count": 1
+      },
+      "source_pages": [
+        6,
+        8,
+        15,
+        18,
+        19
+      ]
+    }
+  },
+  "constraint_blocks": {
+    "serial_video_bridge": {
+      "class": "interface",
+      "review_required": true,
+      "device_role": "serializer",
+      "system_path": "camera_module_to_domain_controller",
+      "link_families": [
+        "HSMT"
+      ],
+      "video_input_protocol": "MIPI CSI-2",
+      "video_protocol": null,
+      "video_output_protocol": null,
+      "video_input_phy_types": [
+        "D-PHY"
+      ],
+      "phy_types": [],
+      "selection_note": "Freeze sensor-side CSI-2 PHY mode, serial-link family, transport media, and remote deserializer compatibility before schematic sign-off.",
+      "review_items": [
+        "Freeze sensor-side CSI-2 lane mapping, reference-clock ownership, and frame-sync strategy before schematic sign-off.",
+        "Freeze coax vs STP assumptions, connector ownership, and PoC policy for the selected HSMT link.",
+        "Verify remote deserializer compatibility, control-channel tunneling, and sideband GPIO usage."
+      ],
+      "source": "primary_pdf_manual_profile"
+    },
+    "mipi_phy": {
+      "class": "clocking",
+      "review_required": true,
+      "directions": [
+        "RX"
+      ],
+      "phy_types": [
+        "D-PHY"
+      ],
+      "source": "primary_pdf_manual_profile"
+    }
+  },
+  "domains": {
+    "protocol": {
+      "interfaces": [
+        {
+          "protocol_type": "MIPI",
+          "role": null,
+          "instance_name": "CSI2_RX",
+          "i2c_config": null,
+          "spi_config": null,
+          "uart_config": null,
+          "signals": [],
+          "timing_constraints": [],
+          "command_set": [],
+          "notes": "Introduction and features confirm one four-lane MIPI CSI-2 D-PHY camera-side input.",
+          "mipi_config": {
+            "transport": "CSI-2",
+            "direction": "RX",
+            "phy_type": "D-PHY",
+            "port_count": 1,
+            "data_lanes_per_port": 4,
+            "clock_lanes_per_port": 1,
+            "phy_version": "1.2",
+            "source_pages": [
+              6,
+              8,
+              15,
+              18,
+              19
+            ]
+          }
+        },
+        {
+          "protocol_type": "I2C",
+          "role": "both",
+          "instance_name": "CTRL_I2C",
+          "i2c_config": {
+            "slave_address_hex": null,
+            "address_configurable": null,
+            "address_pins": [],
+            "address_bits": 7,
+            "max_clock_hz": 1000000,
+            "supports_clock_stretching": null,
+            "supports_repeated_start": null
+          },
+          "spi_config": null,
+          "uart_config": null,
+          "signals": [],
+          "timing_constraints": [],
+          "command_set": [],
+          "notes": "Datasheet states one I2C master up to 833Kbps and two I2C slaves up to 1Mbps."
+        },
+        {
+          "protocol_type": "SPI",
+          "role": "both",
+          "instance_name": "CTRL_SPI",
+          "i2c_config": null,
+          "spi_config": {
+            "mode": null,
+            "max_clock_hz": 50000000
+          },
+          "uart_config": null,
+          "signals": [],
+          "timing_constraints": [],
+          "command_set": [],
+          "notes": "Feature list states SPI master/slave support up to 50Mbps."
+        },
+        {
+          "protocol_type": "UART",
+          "role": "both",
+          "instance_name": "TUNNELED_UART",
+          "i2c_config": null,
+          "spi_config": null,
+          "uart_config": {
+            "baud_rates": [],
+            "flow_control": null
+          },
+          "signals": [],
+          "timing_constraints": [],
+          "command_set": [],
+          "notes": "Feature list confirms tunneled UART support."
+        }
+      ],
+      "protocol_summary": {
+        "total_interfaces": 4,
+        "has_i2c": true,
+        "has_spi": true,
+        "has_uart": true,
+        "primary_interface": "MIPI"
+      }
+    }
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "_schema": "automotive-video-serdes-profile/1.1",
+  "_schema": "automotive-video-serdes-profile/1.2",
   "devices": {
     "CXD4984ER-W": {
       "status": "active",
@@ -327,6 +327,172 @@
         "source_basis": "primary_pdf_manual_profile"
       }
     },
+    "NS6012": {
+      "status": "active",
+      "extracted_file": "NS6012.json",
+      "export_file": "NS6012.json",
+      "selection_file": "NS6012.json",
+      "category": "Automotive Video SerDes",
+      "protocol_domain": {
+        "interfaces": [
+          {
+            "protocol_type": "MIPI",
+            "role": null,
+            "instance_name": "CSI2_RX",
+            "i2c_config": null,
+            "spi_config": null,
+            "uart_config": null,
+            "signals": [],
+            "timing_constraints": [],
+            "command_set": [],
+            "notes": "Introduction and features confirm one four-lane MIPI CSI-2 D-PHY camera-side input.",
+            "mipi_config": {
+              "transport": "CSI-2",
+              "direction": "RX",
+              "phy_type": "D-PHY",
+              "port_count": 1,
+              "data_lanes_per_port": 4,
+              "clock_lanes_per_port": 1,
+              "phy_version": "1.2",
+              "source_pages": [
+                6,
+                8,
+                15,
+                18,
+                19
+              ]
+            }
+          },
+          {
+            "protocol_type": "I2C",
+            "role": "both",
+            "instance_name": "CTRL_I2C",
+            "i2c_config": {
+              "slave_address_hex": null,
+              "address_configurable": null,
+              "address_pins": [],
+              "address_bits": 7,
+              "max_clock_hz": 1000000,
+              "supports_clock_stretching": null,
+              "supports_repeated_start": null
+            },
+            "spi_config": null,
+            "uart_config": null,
+            "signals": [],
+            "timing_constraints": [],
+            "command_set": [],
+            "notes": "Datasheet states one I2C master up to 833Kbps and two I2C slaves up to 1Mbps."
+          },
+          {
+            "protocol_type": "SPI",
+            "role": "both",
+            "instance_name": "CTRL_SPI",
+            "i2c_config": null,
+            "spi_config": {
+              "mode": null,
+              "max_clock_hz": 50000000
+            },
+            "uart_config": null,
+            "signals": [],
+            "timing_constraints": [],
+            "command_set": [],
+            "notes": "Feature list states SPI master/slave support up to 50Mbps."
+          },
+          {
+            "protocol_type": "UART",
+            "role": "both",
+            "instance_name": "TUNNELED_UART",
+            "i2c_config": null,
+            "spi_config": null,
+            "uart_config": {
+              "baud_rates": [],
+              "flow_control": null
+            },
+            "signals": [],
+            "timing_constraints": [],
+            "command_set": [],
+            "notes": "Feature list confirms tunneled UART support."
+          }
+        ],
+        "protocol_summary": {
+          "total_interfaces": 4,
+          "has_i2c": true,
+          "has_spi": true,
+          "has_uart": true,
+          "primary_interface": "MIPI"
+        }
+      },
+      "serial_video_bridge": {
+        "class": "serial_video_bridge",
+        "present": true,
+        "device_role": "serializer",
+        "application_domain": "automotive_camera",
+        "system_path": "camera_module_to_domain_controller",
+        "link_families": [
+          "HSMT"
+        ],
+        "link_direction": "video_in_to_serial_out",
+        "serial_links": {
+          "port_count": 1,
+          "media": [
+            "coax",
+            "stp"
+          ],
+          "power_over_cable_supported": true,
+          "control_channel_present": true,
+          "max_forward_rate_gbps": 6.4,
+          "max_backward_rate_mbps": 100,
+          "source_pages": [
+            6,
+            8,
+            15,
+            18,
+            19
+          ],
+          "notes": [
+            "Datasheet states one HSMT link output.",
+            "Supports PoC over 16m coax or 10m STP with inline connectors."
+          ]
+        },
+        "video_input": {
+          "protocol": "MIPI CSI-2",
+          "phy_types": [
+            "D-PHY"
+          ],
+          "port_count": 1,
+          "direction": "RX",
+          "dphy": {
+            "data_lanes_per_port": 4,
+            "clock_lanes_per_port": 1,
+            "phy_version": "1.2",
+            "source_pages": [
+              6,
+              8,
+              15,
+              18,
+              19
+            ]
+          }
+        },
+        "control_plane": {
+          "protocols": [
+            "I2C",
+            "SPI",
+            "UART",
+            "GPIO"
+          ],
+          "gpio_count": 9,
+          "source_pages": [
+            6,
+            8,
+            19,
+            20,
+            21
+          ]
+        },
+        "source_basis": "primary_pdf_manual_profile"
+      }
+    },
     "DS90UB934TRGZRQ1": {
       "status": "pending_source_reintake",
       "category": "Automotive Video SerDes",
@@ -456,22 +622,219 @@
       }
     },
     "NS6603": {
-      "status": "pending_source_intake",
+      "status": "active",
+      "extracted_file": "NS6603.json",
+      "export_file": "NS6603.json",
+      "selection_file": "NS6603.json",
       "category": "Automotive Video SerDes",
+      "protocol_domain": {
+        "interfaces": [
+          {
+            "protocol_type": "MIPI",
+            "role": null,
+            "instance_name": "CSI2_TX_DPHY",
+            "i2c_config": null,
+            "spi_config": null,
+            "uart_config": null,
+            "signals": [],
+            "timing_constraints": [],
+            "command_set": [],
+            "notes": "Features list states D-PHY output topologies up to 2x4-lane or 4x2-lane.",
+            "mipi_config": {
+              "transport": "CSI-2",
+              "direction": "TX",
+              "phy_type": "D-PHY",
+              "port_count": 4,
+              "source_pages": [
+                6,
+                8,
+                18,
+                19,
+                22,
+                23
+              ]
+            }
+          },
+          {
+            "protocol_type": "MIPI",
+            "role": null,
+            "instance_name": "CSI2_TX_CPHY",
+            "i2c_config": null,
+            "spi_config": null,
+            "uart_config": null,
+            "signals": [],
+            "timing_constraints": [],
+            "command_set": [],
+            "notes": "Features list states C-PHY output topologies up to 2x4-trio or 4x2-trio.",
+            "mipi_config": {
+              "transport": "CSI-2",
+              "direction": "TX",
+              "phy_type": "C-PHY",
+              "port_count": 4,
+              "source_pages": [
+                6,
+                8,
+                18,
+                19,
+                24
+              ]
+            }
+          },
+          {
+            "protocol_type": "I2C",
+            "role": "both",
+            "instance_name": "CTRL_I2C",
+            "i2c_config": {
+              "slave_address_hex": null,
+              "address_configurable": true,
+              "address_pins": [],
+              "address_bits": 7,
+              "max_clock_hz": 1000000,
+              "supports_clock_stretching": null,
+              "supports_repeated_start": null
+            },
+            "spi_config": null,
+            "uart_config": null,
+            "signals": [],
+            "timing_constraints": [],
+            "command_set": [],
+            "notes": "Feature list states I2C master up to 833Kbps and slave up to 1Mbps, with eight hardware-selectable device addresses."
+          },
+          {
+            "protocol_type": "SPI",
+            "role": "both",
+            "instance_name": "CTRL_SPI",
+            "i2c_config": null,
+            "spi_config": {
+              "mode": null,
+              "max_clock_hz": 50000000
+            },
+            "uart_config": null,
+            "signals": [],
+            "timing_constraints": [],
+            "command_set": [],
+            "notes": "Feature list states SPI master/slave support up to 50Mbps."
+          },
+          {
+            "protocol_type": "UART",
+            "role": "both",
+            "instance_name": "TUNNELED_UART",
+            "i2c_config": null,
+            "spi_config": null,
+            "uart_config": {
+              "baud_rates": [],
+              "flow_control": null
+            },
+            "signals": [],
+            "timing_constraints": [],
+            "command_set": [],
+            "notes": "Feature list confirms tunneled UART support."
+          }
+        ],
+        "protocol_summary": {
+          "total_interfaces": 5,
+          "has_i2c": true,
+          "has_spi": true,
+          "has_uart": true,
+          "primary_interface": "MIPI"
+        }
+      },
       "serial_video_bridge": {
         "class": "serial_video_bridge",
         "present": true,
-        "application_domain": "automotive_video",
+        "device_role": "deserializer",
+        "application_domain": "automotive_camera",
+        "system_path": "camera_module_to_domain_controller",
         "link_families": [
           "HSMT"
         ],
-        "source_basis": "user_report_pending_source"
-      },
-      "availability": {
-        "extracted_present": false,
-        "export_present": false,
-        "selection_present": false,
-        "reason": "Registered from user-provided family mapping only. Formal source intake is still required before activating the device profile."
+        "link_direction": "serial_in_to_video_out",
+        "serial_links": {
+          "port_count": 4,
+          "media": [
+            "coax",
+            "stp"
+          ],
+          "power_over_cable_supported": true,
+          "control_channel_present": true,
+          "max_forward_rate_gbps": 6.4,
+          "max_backward_rate_mbps": 100,
+          "source_pages": [
+            6,
+            8,
+            18,
+            19,
+            24
+          ],
+          "notes": [
+            "Quad-receiving device for up to four remotely located sensors.",
+            "Supports 16m coax or 10m STP with inline connectors."
+          ]
+        },
+        "video_output": {
+          "protocol": "MIPI CSI-2",
+          "phy_types": [
+            "D-PHY",
+            "C-PHY"
+          ],
+          "port_count": 4,
+          "direction": "TX",
+          "dphy": {
+            "supported_lanes_per_port": [
+              2,
+              4
+            ],
+            "rate_gbps_per_lane": {
+              "max": 2.5
+            },
+            "phy_version": "1.2",
+            "source_pages": [
+              8,
+              19,
+              22,
+              23
+            ],
+            "notes": [
+              "Supports 2x4-lane, 1x4-lane plus 2x2-lane, and 4x2-lane D-PHY output topologies."
+            ]
+          },
+          "cphy": {
+            "supported_trios_per_port": [
+              2,
+              4
+            ],
+            "symbol_rate_gsps": {
+              "max": 5.7
+            },
+            "phy_version": "1.0",
+            "source_pages": [
+              8,
+              19,
+              24
+            ],
+            "notes": [
+              "Supports 2x4-trio, 1x4-trio plus 2x2-trio, and 4x2-trio C-PHY output topologies."
+            ]
+          }
+        },
+        "control_plane": {
+          "protocols": [
+            "I2C",
+            "SPI",
+            "UART",
+            "GPIO"
+          ],
+          "gpio_count": 16,
+          "address_select_count": 8,
+          "source_pages": [
+            6,
+            8,
+            24,
+            25,
+            26
+          ]
+        },
+        "source_basis": "primary_pdf_manual_profile"
       }
     }
   }
