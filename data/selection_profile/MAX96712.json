@@ -1,36 +1,33 @@
 {
   "_schema": "selection-profile/1.0",
-  "mpn": "DS90UB9702-Q1",
-  "manufacturer": "Texas Instruments",
+  "mpn": "MAX96712",
+  "manufacturer": "Maxim Integrated",
   "category": "Automotive Video SerDes",
-  "description": "FPD-Link IV camera ingress hub aggregating up to four sensors into MIPI CSI-2 D-PHY outputs.",
+  "description": "Quad GMSL2/GMSL1 camera ingress aggregator to MIPI CSI-2 D-PHY or C-PHY.",
   "key_specs": {
     "forward_link_rate": {
-      "max": 7.55,
+      "max": 6.0,
       "unit": "Gbps"
     },
     "backward_link_rate": {
-      "max": 47.1875,
+      "max": 187.5,
       "unit": "Mbps"
     }
   },
-  "operating_conditions": {
-    "temp_range_c": [
-      -40,
-      105
-    ]
-  },
+  "operating_conditions": {},
   "packages": [
-    "VQFNP-88"
+    "TQFN-64"
   ],
-  "pin_count": 88,
+  "pin_count": 64,
   "thermal": {},
   "features": [
     "function:automotive_video_serdes",
     "role:aggregator",
     "system_path:camera_module_to_domain_controller",
-    "link_family:fpd-link iv",
+    "link_family:gmsl2",
+    "link_family:gmsl1",
     "video_output:mipi_csi-2",
-    "phy:d-phy"
+    "phy:d-phy",
+    "phy:c-phy"
   ]
 }

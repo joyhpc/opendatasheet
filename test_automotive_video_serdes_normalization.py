@@ -49,6 +49,23 @@ def test_hsmt_serializer_and_deserializer_are_normalized_as_distinct_roles():
     assert ns6603["capability_blocks"]["mipi_phy"]["directions"] == ["TX"]
 
 
+def test_gmsl_and_fpdlink_hubs_are_normalized_as_aggregators():
+    max96712 = _load_json(REPO_ROOT / "data" / "sch_review_export" / "MAX96712.json")
+    ub9702 = _load_json(REPO_ROOT / "data" / "sch_review_export" / "DS90UB9702-Q1.json")
+
+    max_bridge = max96712["capability_blocks"]["serial_video_bridge"]
+    assert max_bridge["device_role"] == "aggregator"
+    assert max_bridge["link_families"] == ["GMSL2", "GMSL1"]
+    assert max_bridge["serial_links"]["port_count"] == 4
+    assert max_bridge["video_output"]["phy_types"] == ["D-PHY", "C-PHY"]
+
+    ti_bridge = ub9702["capability_blocks"]["serial_video_bridge"]
+    assert ti_bridge["device_role"] == "aggregator"
+    assert ti_bridge["link_families"] == ["FPD-Link IV"]
+    assert ti_bridge["serial_links"]["port_count"] == 4
+    assert ti_bridge["video_output"]["phy_types"] == ["D-PHY"]
+
+
 def test_automotive_video_serdes_selection_profiles_expose_normalized_tags():
     cxd = _load_json(REPO_ROOT / "data" / "selection_profile" / "CXD4984ER-W.json")
     max96718 = _load_json(REPO_ROOT / "data" / "selection_profile" / "MAX96718A.json")
@@ -61,6 +78,20 @@ def test_automotive_video_serdes_selection_profiles_expose_normalized_tags():
 
     assert "link_family:gvif3" in cxd["features"]
     assert "link_family:gmsl2" in max96718["features"]
+
+
+def test_aggregator_selection_profiles_expose_role_and_link_tags():
+    max96712 = _load_json(REPO_ROOT / "data" / "selection_profile" / "MAX96712.json")
+    ub9702 = _load_json(REPO_ROOT / "data" / "selection_profile" / "DS90UB9702-Q1.json")
+
+    assert "role:aggregator" in max96712["features"]
+    assert "link_family:gmsl2" in max96712["features"]
+    assert "link_family:gmsl1" in max96712["features"]
+    assert "video_output:mipi_csi-2" in max96712["features"]
+
+    assert "role:aggregator" in ub9702["features"]
+    assert "link_family:fpd-link iv" in ub9702["features"]
+    assert "video_output:mipi_csi-2" in ub9702["features"]
 
 
 def test_hsmt_selection_profiles_expose_serializer_and_deserializer_tags():
@@ -98,6 +129,17 @@ def test_hsmt_extracted_payloads_are_recategorized_and_protocol_enriched():
     assert ns6603["domains"]["protocol"]["protocol_summary"]["has_uart"] is True
 
 
+def test_aggregator_extracted_payloads_are_recategorized_and_protocol_enriched():
+    max96712 = _load_json(REPO_ROOT / "data" / "extracted_v2" / "MAX96712.json")
+    ub9702 = _load_json(REPO_ROOT / "data" / "extracted_v2" / "DS90UB9702-Q1.json")
+
+    assert max96712["extraction"]["component"]["category"] == "Automotive Video SerDes"
+    assert max96712["domains"]["protocol"]["protocol_summary"]["has_spi"] is True
+    assert max96712["domains"]["protocol"]["protocol_summary"]["has_uart"] is True
+    assert ub9702["extraction"]["component"]["category"] == "Automotive Video SerDes"
+    assert ub9702["domains"]["protocol"]["protocol_summary"]["has_i2c"] is True
+
+
 def test_automotive_video_serdes_registry_tracks_pending_ds90ub_family_members():
     registry = _load_json(REPO_ROOT / "data" / "normalization" / "automotive_video_serdes_profiles.json")
 
@@ -106,7 +148,6 @@ def test_automotive_video_serdes_registry_tracks_pending_ds90ub_family_members()
         "DS90UB954TRGZRQ1",
         "DS90UB960WRTDRQ1",
         "DS90UB962WRTDTQ1",
-        "DS90UB9702-Q1",
     ):
         entry = registry["devices"][mpn]
         assert entry["status"] == "pending_source_reintake"
@@ -129,3 +170,20 @@ def test_automotive_video_serdes_registry_includes_source_backed_hsmt_profiles()
     assert ns6603["serial_video_bridge"]["device_role"] == "deserializer"
     assert ns6603["serial_video_bridge"]["link_families"] == ["HSMT"]
     assert ns6603["serial_video_bridge"]["source_basis"] == "primary_pdf_manual_profile"
+
+
+def test_automotive_video_serdes_registry_includes_source_backed_aggregators_and_repair_queue():
+    registry = _load_json(REPO_ROOT / "data" / "normalization" / "automotive_video_serdes_profiles.json")
+
+    max96712 = registry["devices"]["MAX96712"]
+    assert max96712["status"] == "active"
+    assert max96712["serial_video_bridge"]["device_role"] == "aggregator"
+    assert max96712["serial_video_bridge"]["link_families"] == ["GMSL2", "GMSL1"]
+
+    ub9702 = registry["devices"]["DS90UB9702-Q1"]
+    assert ub9702["status"] == "active"
+    assert ub9702["serial_video_bridge"]["device_role"] == "aggregator"
+    assert ub9702["serial_video_bridge"]["link_families"] == ["FPD-Link IV"]
+
+    max96792 = registry["devices"]["MAX96792A"]
+    assert max96792["status"] == "pending_source_repair"

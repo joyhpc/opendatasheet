@@ -111,8 +111,10 @@
 
 - `CXD4984ER-W`
 - `MAX96718A`
+- `MAX96712`
 - `NS6012`
 - `NS6603`
+- `DS90UB9702-Q1`
 
 它们现在都具备：
 
@@ -123,8 +125,10 @@
 
 - `CXD4984ER-W` 还保留了更完整的 `domains.protocol` 与 `capability_blocks.mipi_phy`
 - `MAX96718A` 则通过 profile 补齐了可消费的统一能力结构
+- `MAX96712` 代表 GMSL camera ingress aggregator / hub
 - `NS6012` 代表 camera-side HSMT serializer
 - `NS6603` 代表 HSMT deserializer / quad camera aggregator
+- `DS90UB9702-Q1` 代表 FPD-Link IV camera ingress aggregator / hub
 
 另外已经纳入同一注册表、但当前处于待补档状态的器件有：
 
@@ -132,13 +136,14 @@
 - `DS90UB954TRGZRQ1`
 - `DS90UB960WRTDRQ1`
 - `DS90UB962WRTDTQ1`
-- `DS90UB9702-Q1`
+- `MAX96792A`
 
 这些器件当前被标记为：
 
-- `DS90UB*`: `pending_source_reintake`
+- `DS90UB934/954/960/962`: `pending_source_reintake`
+- `MAX96792A`: `pending_source_repair`
 
-原因不是它们不属于同类，而是当前工作区没有它们可安全更新的正式 `extracted/export/selection` 文件。
+原因不是它们不属于同类，而是当前工作区里要么没有它们可安全更新的正式 `extracted/export/selection` 文件，要么 raw source 当前损坏不可解析。
 
 ## 5. 为什么不用只改 category
 
@@ -147,6 +152,7 @@
 因为下游真正关心的问题是：
 
 - 这是 serializer 还是 deserializer
+- 它是不是 multi-camera aggregator / hub
 - 串行侧是 `GVIF3` 还是 `GMSL`
 - 视频侧是不是 `CSI-2`
 - 有没有 `C-PHY`
@@ -170,11 +176,14 @@
 - `device_role = serializer`
   - 把它当作 camera-side 加串器件处理
   - 重点看 `video_input`，确认 sensor 侧 `MIPI CSI-2`、lane map、时钟和帧同步
+- `device_role = aggregator`
+  - 把它当作 multi-camera ingress hub 处理
+  - 重点看 `serial_links.port_count`、聚合/复制能力、虚拟通道、下游 CSI-2 端口拓扑
 - `system_path = camera_module_to_domain_controller`
   - 再结合 `device_role`
   - 把它当作 sensor ingress 器件处理
   - `serializer` 重点校验 sensor 侧 CSI-2、PoC、同轴/STP、远端 deserializer 配对
-  - `deserializer` 重点校验聚合模式、PoC、同轴/STP、SoC CSI-2 接收端兼容
+  - `deserializer/aggregator` 重点校验聚合模式、PoC、同轴/STP、SoC CSI-2 接收端兼容
 - `system_path = domain_controller_to_display`
   - 把它当作 display egress 器件处理
   - 重点校验显示链路时序、bridge/panel 兼容、显示控制和失锁恢复
@@ -317,7 +326,8 @@ flowchart TD
 这也意味着：
 
 - 对 `CXD4984ER-W`、`MAX96718A` 这种已有正式数据的器件，可以直接归一
-- 对 `DS90UB*` 这种当前缺正式文件的器件，先登记到注册表，等 source 回流后再激活
+- 对 `DS90UB934/954/960/962` 这种当前缺正式文件的器件，先登记到注册表，等 source 回流后再激活
+- 对 `MAX96792A` 这种 raw source 已存在但文件损坏的器件，先标记 `pending_source_repair`
 
 我现在确保自治的方法就是这 4 条：
 
@@ -326,7 +336,31 @@ flowchart TD
 3. 归一化脚本遇到缺文件或 pending 状态会自动跳过，不会伪造导出结果
 4. 用回归测试锁住 `category`、`link_families`、`system_path` 和关键 capability block
 
-## 10. 实际消费建议
+## 10. 当前 intake roadmap
+
+这部分是当前能看到的扩展队列，不等同于都已经激活：
+
+- 已激活:
+  - `NS6012` serializer
+  - `NS6603` deserializer
+  - `MAX96712` aggregator
+  - `DS90UB9702-Q1` aggregator
+- 待 source reintake:
+  - `DS90UB934TRGZRQ1`
+  - `DS90UB954TRGZRQ1`
+  - `DS90UB960WRTDRQ1`
+  - `DS90UB962WRTDTQ1`
+- 待 source repair:
+  - `MAX96792A`
+
+如果后续 `sch-review` 的 board roadmap 继续引入新的 camera-side serializer、deserializer hub、或者 display-side bridge，处理方法不变：
+
+- 先登记到 profile
+- 明确 `device_role`
+- 明确 `system_path`
+- 有正式 source 再激活
+
+## 11. 实际消费建议
 
 下游读取这类器件时，建议优先顺序：
 

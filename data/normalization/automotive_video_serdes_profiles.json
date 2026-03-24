@@ -594,31 +594,146 @@
       }
     },
     "DS90UB9702-Q1": {
-      "status": "pending_source_reintake",
+      "status": "active",
+      "extracted_file": "DS90UB9702-Q1.json",
+      "export_file": "DS90UB9702-Q1.json",
+      "selection_file": "DS90UB9702-Q1.json",
       "category": "Automotive Video SerDes",
+      "protocol_domain": {
+        "interfaces": [
+          {
+            "protocol_type": "MIPI",
+            "role": null,
+            "instance_name": "CSI2_TX",
+            "i2c_config": null,
+            "spi_config": null,
+            "uart_config": null,
+            "signals": [],
+            "timing_constraints": [],
+            "command_set": [],
+            "notes": "Description states up to 2 MIPI CSI-2 output ports and 1 replication port, D-PHY v2.1 compatible.",
+            "mipi_config": {
+              "transport": "CSI-2",
+              "direction": "TX",
+              "phy_type": "D-PHY",
+              "port_count": 3,
+              "source_pages": [
+                1,
+                2,
+                3
+              ]
+            }
+          },
+          {
+            "protocol_type": "I2C",
+            "role": "both",
+            "instance_name": "CTRL_I2C",
+            "i2c_config": {
+              "slave_address_hex": null,
+              "address_configurable": null,
+              "address_pins": [],
+              "address_bits": 7,
+              "max_clock_hz": null,
+              "supports_clock_stretching": null,
+              "supports_repeated_start": null
+            },
+            "spi_config": null,
+            "uart_config": null,
+            "signals": [],
+            "timing_constraints": [],
+            "command_set": [],
+            "notes": "Description states dual I2C ports."
+          },
+          {
+            "protocol_type": "SPI",
+            "role": "both",
+            "instance_name": "CTRL_SPI",
+            "i2c_config": null,
+            "spi_config": {
+              "mode": null,
+              "max_clock_hz": null
+            },
+            "uart_config": null,
+            "signals": [],
+            "timing_constraints": [],
+            "command_set": [],
+            "notes": "System diagram shows SPI connection to downstream SoC."
+          }
+        ],
+        "protocol_summary": {
+          "total_interfaces": 3,
+          "has_i2c": true,
+          "has_spi": true,
+          "has_uart": false,
+          "primary_interface": "MIPI"
+        }
+      },
       "serial_video_bridge": {
         "class": "serial_video_bridge",
         "present": true,
-        "device_role": "deserializer",
+        "device_role": "aggregator",
         "application_domain": "automotive_camera",
         "system_path": "camera_module_to_domain_controller",
         "link_families": [
           "FPD-Link IV"
         ],
         "link_direction": "serial_in_to_video_out",
+        "serial_links": {
+          "port_count": 4,
+          "media": [
+            "coax",
+            "stp"
+          ],
+          "power_over_cable_supported": true,
+          "control_channel_present": true,
+          "max_forward_rate_gbps": 7.55,
+          "max_backward_rate_mbps": 47.1875,
+          "source_pages": [
+            1,
+            2,
+            3
+          ],
+          "notes": [
+            "Deserializer hub aggregates data from up to 4 sensors simultaneously.",
+            "Supports automotive coaxial or STP links with PoC."
+          ]
+        },
         "video_output": {
           "protocol": "MIPI CSI-2",
           "phy_types": [
             "D-PHY"
+          ],
+          "port_count": 3,
+          "direction": "TX",
+          "dphy": {
+            "data_lanes_per_port": 4,
+            "clock_lanes_per_port": 2,
+            "rate_gbps_per_lane": {
+              "max": 2.5
+            },
+            "phy_version": "2.1",
+            "source_pages": [
+              1,
+              2,
+              3
+            ]
+          }
+        },
+        "control_plane": {
+          "protocols": [
+            "I2C",
+            "SPI",
+            "GPIO"
+          ],
+          "gpio_count": 10,
+          "i2c_port_count": 2,
+          "source_pages": [
+            1,
+            2,
+            3
           ]
         },
-        "source_basis": "historical_export_stub"
-      },
-      "availability": {
-        "extracted_present": false,
-        "export_present": false,
-        "selection_present": false,
-        "reason": "Current worktree no longer contains active DS90UB9702 source/extracted/export artifacts."
+        "source_basis": "primary_pdf_manual_profile"
       }
     },
     "NS6603": {
@@ -835,6 +950,214 @@
           ]
         },
         "source_basis": "primary_pdf_manual_profile"
+      }
+    },
+    "MAX96712": {
+      "status": "active",
+      "extracted_file": "MAX96712.json",
+      "export_file": "MAX96712.json",
+      "selection_file": "MAX96712.json",
+      "category": "Automotive Video SerDes",
+      "protocol_domain": {
+        "interfaces": [
+          {
+            "protocol_type": "MIPI",
+            "role": null,
+            "instance_name": "CSI2_TX",
+            "i2c_config": null,
+            "spi_config": null,
+            "uart_config": null,
+            "signals": [],
+            "timing_constraints": [],
+            "command_set": [],
+            "notes": "General description states CSI-2 output supports both 2x4-lane and 4x2-lane configurations using either D-PHY or C-PHY.",
+            "mipi_config": {
+              "transport": "CSI-2",
+              "direction": "TX",
+              "phy_type": "D-PHY",
+              "port_count": 4,
+              "source_pages": [
+                1,
+                2,
+                42,
+                46,
+                48,
+                49
+              ]
+            }
+          },
+          {
+            "protocol_type": "MIPI",
+            "role": null,
+            "instance_name": "CSI2_TX_CPHY",
+            "i2c_config": null,
+            "spi_config": null,
+            "uart_config": null,
+            "signals": [],
+            "timing_constraints": [],
+            "command_set": [],
+            "notes": "General description states CSI-2 output supports either D-PHY or C-PHY.",
+            "mipi_config": {
+              "transport": "CSI-2",
+              "direction": "TX",
+              "phy_type": "C-PHY",
+              "port_count": 4,
+              "source_pages": [
+                1,
+                2,
+                44,
+                46,
+                48,
+                49
+              ]
+            }
+          },
+          {
+            "protocol_type": "I2C",
+            "role": "both",
+            "instance_name": "CTRL_I2C_UART",
+            "i2c_config": {
+              "slave_address_hex": null,
+              "address_configurable": null,
+              "address_pins": [],
+              "address_bits": 7,
+              "max_clock_hz": null,
+              "supports_clock_stretching": null,
+              "supports_repeated_start": null
+            },
+            "spi_config": null,
+            "uart_config": null,
+            "signals": [],
+            "timing_constraints": [],
+            "command_set": [],
+            "notes": "Feature list states 3x I2C/UART ports."
+          },
+          {
+            "protocol_type": "SPI",
+            "role": "both",
+            "instance_name": "CTRL_SPI",
+            "i2c_config": null,
+            "spi_config": {
+              "mode": null,
+              "max_clock_hz": null
+            },
+            "uart_config": null,
+            "signals": [],
+            "timing_constraints": [],
+            "command_set": [],
+            "notes": "Feature list states 2x SPI ports."
+          }
+        ],
+        "protocol_summary": {
+          "total_interfaces": 4,
+          "has_i2c": true,
+          "has_spi": true,
+          "has_uart": true,
+          "primary_interface": "MIPI"
+        }
+      },
+      "serial_video_bridge": {
+        "class": "serial_video_bridge",
+        "present": true,
+        "device_role": "aggregator",
+        "application_domain": "automotive_camera",
+        "system_path": "camera_module_to_domain_controller",
+        "link_families": [
+          "GMSL2",
+          "GMSL1"
+        ],
+        "link_direction": "serial_in_to_video_out",
+        "serial_links": {
+          "port_count": 4,
+          "media": [
+            "coax",
+            "stp"
+          ],
+          "control_channel_present": true,
+          "max_forward_rate_gbps": 6.0,
+          "max_backward_rate_mbps": 187.5,
+          "source_pages": [
+            1,
+            2,
+            46,
+            48,
+            49,
+            71
+          ],
+          "notes": [
+            "Quad GMSL inputs with independently configurable GMSL1/GMSL2 operation.",
+            "Supports aggregation and replication of multiple remote sensor streams."
+          ]
+        },
+        "video_output": {
+          "protocol": "MIPI CSI-2",
+          "phy_types": [
+            "D-PHY",
+            "C-PHY"
+          ],
+          "port_count": 4,
+          "direction": "TX",
+          "dphy": {
+            "supported_lanes_per_port": [
+              2,
+              4
+            ],
+            "rate_gbps_per_lane": {
+              "min": 0.08,
+              "max": 2.5
+            },
+            "phy_version": "1.2",
+            "source_pages": [
+              1,
+              42,
+              46,
+              48,
+              49
+            ]
+          },
+          "cphy": {
+            "symbol_rate_gsps": {
+              "min": 0.182,
+              "max": 5.7
+            },
+            "phy_version": "1.0",
+            "source_pages": [
+              1,
+              44,
+              46,
+              48,
+              49
+            ]
+          }
+        },
+        "control_plane": {
+          "protocols": [
+            "I2C",
+            "SPI",
+            "UART",
+            "GPIO"
+          ],
+          "gpio_count": 17,
+          "i2c_uart_port_count": 3,
+          "spi_port_count": 2,
+          "source_pages": [
+            1,
+            2,
+            49,
+            71
+          ]
+        },
+        "source_basis": "primary_pdf_manual_profile"
+      }
+    },
+    "MAX96792A": {
+      "status": "pending_source_repair",
+      "category": "Automotive Video SerDes",
+      "availability": {
+        "extracted_present": false,
+        "export_present": false,
+        "selection_present": false,
+        "reason": "A raw source file exists in data/raw/datasheet_PDF, but the current MAX96792A PDF is unreadable by pdfinfo and pdftotext and must be replaced or repaired before activation."
       }
     }
   }

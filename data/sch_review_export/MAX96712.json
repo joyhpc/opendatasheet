@@ -4,13 +4,13 @@
   "_layers": [
     "L0_skeleton"
   ],
-  "mpn": "DS90UB9702-Q1",
-  "manufacturer": "Texas Instruments",
+  "mpn": "MAX96712",
+  "manufacturer": "Maxim Integrated",
   "category": "Automotive Video SerDes",
-  "description": "Automotive FPD-Link IV Deserializer Hub With D-PHY CSI-2 Output",
+  "description": "Quad GMSL2 to CSI-2 Deserializer with GMSL1 Compatibility",
   "packages": {
-    "VQFNP-88": {
-      "pin_count": 88,
+    "TQFN-64": {
+      "pin_count": 64,
       "pins": {}
     }
   },
@@ -22,7 +22,8 @@
       "application_domain": "automotive_camera",
       "system_path": "camera_module_to_domain_controller",
       "link_families": [
-        "FPD-Link IV"
+        "GMSL2",
+        "GMSL1"
       ],
       "link_direction": "serial_in_to_video_out",
       "serial_links": {
@@ -31,38 +32,60 @@
           "coax",
           "stp"
         ],
-        "power_over_cable_supported": true,
         "control_channel_present": true,
-        "max_forward_rate_gbps": 7.55,
-        "max_backward_rate_mbps": 47.1875,
+        "max_forward_rate_gbps": 6.0,
+        "max_backward_rate_mbps": 187.5,
         "source_pages": [
           1,
           2,
-          3
+          46,
+          48,
+          49,
+          71
         ],
         "notes": [
-          "Deserializer hub aggregates data from up to 4 sensors simultaneously.",
-          "Supports automotive coaxial or STP links with PoC."
+          "Quad GMSL inputs with independently configurable GMSL1/GMSL2 operation.",
+          "Supports aggregation and replication of multiple remote sensor streams."
         ]
       },
       "video_output": {
         "protocol": "MIPI CSI-2",
         "phy_types": [
-          "D-PHY"
+          "D-PHY",
+          "C-PHY"
         ],
-        "port_count": 3,
+        "port_count": 4,
         "direction": "TX",
         "dphy": {
-          "data_lanes_per_port": 4,
-          "clock_lanes_per_port": 2,
+          "supported_lanes_per_port": [
+            2,
+            4
+          ],
           "rate_gbps_per_lane": {
+            "min": 0.08,
             "max": 2.5
           },
-          "phy_version": "2.1",
+          "phy_version": "1.2",
           "source_pages": [
             1,
-            2,
-            3
+            42,
+            46,
+            48,
+            49
+          ]
+        },
+        "cphy": {
+          "symbol_rate_gsps": {
+            "min": 0.182,
+            "max": 5.7
+          },
+          "phy_version": "1.0",
+          "source_pages": [
+            1,
+            44,
+            46,
+            48,
+            49
           ]
         }
       },
@@ -70,14 +93,17 @@
         "protocols": [
           "I2C",
           "SPI",
+          "UART",
           "GPIO"
         ],
-        "gpio_count": 10,
-        "i2c_port_count": 2,
+        "gpio_count": 17,
+        "i2c_uart_port_count": 3,
+        "spi_port_count": 2,
         "source_pages": [
           1,
           2,
-          3
+          49,
+          71
         ]
       },
       "source_basis": "primary_pdf_manual_profile"
@@ -86,7 +112,8 @@
       "class": "mipi_phy",
       "present": true,
       "phy_types": [
-        "D-PHY"
+        "D-PHY",
+        "C-PHY"
       ],
       "directions": [
         "TX"
@@ -94,23 +121,46 @@
       "transport": "MIPI CSI-2",
       "source": "primary_pdf_manual_profile",
       "dphy": {
-        "data_lanes_per_port": 4,
-        "clock_lanes_per_port": 2,
+        "supported_lanes_per_port": [
+          2,
+          4
+        ],
         "rate_gbps_per_lane": {
+          "min": 0.08,
           "max": 2.5
         },
-        "phy_version": "2.1",
+        "phy_version": "1.2",
         "source_pages": [
           1,
-          2,
-          3
+          42,
+          46,
+          48,
+          49
         ],
-        "port_count": 3
+        "port_count": 4
+      },
+      "cphy": {
+        "symbol_rate_gsps": {
+          "min": 0.182,
+          "max": 5.7
+        },
+        "phy_version": "1.0",
+        "source_pages": [
+          1,
+          44,
+          46,
+          48,
+          49
+        ],
+        "port_count": 4
       },
       "source_pages": [
         1,
-        2,
-        3
+        42,
+        46,
+        48,
+        49,
+        44
       ]
     }
   },
@@ -121,14 +171,16 @@
       "device_role": "aggregator",
       "system_path": "camera_module_to_domain_controller",
       "link_families": [
-        "FPD-Link IV"
+        "GMSL2",
+        "GMSL1"
       ],
       "video_input_protocol": null,
       "video_protocol": "MIPI CSI-2",
       "video_output_protocol": "MIPI CSI-2",
       "video_input_phy_types": [],
       "phy_types": [
-        "D-PHY"
+        "D-PHY",
+        "C-PHY"
       ],
       "selection_note": "Freeze serial-link family, transport media, CSI-2 PHY mode, and downstream receiver compatibility before schematic sign-off.",
       "review_items": [
@@ -145,7 +197,8 @@
         "TX"
       ],
       "phy_types": [
-        "D-PHY"
+        "D-PHY",
+        "C-PHY"
       ],
       "source": "primary_pdf_manual_profile"
     }
@@ -163,23 +216,52 @@
           "signals": [],
           "timing_constraints": [],
           "command_set": [],
-          "notes": "Description states up to 2 MIPI CSI-2 output ports and 1 replication port, D-PHY v2.1 compatible.",
+          "notes": "General description states CSI-2 output supports both 2x4-lane and 4x2-lane configurations using either D-PHY or C-PHY.",
           "mipi_config": {
             "transport": "CSI-2",
             "direction": "TX",
             "phy_type": "D-PHY",
-            "port_count": 3,
+            "port_count": 4,
             "source_pages": [
               1,
               2,
-              3
+              42,
+              46,
+              48,
+              49
+            ]
+          }
+        },
+        {
+          "protocol_type": "MIPI",
+          "role": null,
+          "instance_name": "CSI2_TX_CPHY",
+          "i2c_config": null,
+          "spi_config": null,
+          "uart_config": null,
+          "signals": [],
+          "timing_constraints": [],
+          "command_set": [],
+          "notes": "General description states CSI-2 output supports either D-PHY or C-PHY.",
+          "mipi_config": {
+            "transport": "CSI-2",
+            "direction": "TX",
+            "phy_type": "C-PHY",
+            "port_count": 4,
+            "source_pages": [
+              1,
+              2,
+              44,
+              46,
+              48,
+              49
             ]
           }
         },
         {
           "protocol_type": "I2C",
           "role": "both",
-          "instance_name": "CTRL_I2C",
+          "instance_name": "CTRL_I2C_UART",
           "i2c_config": {
             "slave_address_hex": null,
             "address_configurable": null,
@@ -194,7 +276,7 @@
           "signals": [],
           "timing_constraints": [],
           "command_set": [],
-          "notes": "Description states dual I2C ports."
+          "notes": "Feature list states 3x I2C/UART ports."
         },
         {
           "protocol_type": "SPI",
@@ -209,14 +291,14 @@
           "signals": [],
           "timing_constraints": [],
           "command_set": [],
-          "notes": "System diagram shows SPI connection to downstream SoC."
+          "notes": "Feature list states 2x SPI ports."
         }
       ],
       "protocol_summary": {
-        "total_interfaces": 3,
+        "total_interfaces": 4,
         "has_i2c": true,
         "has_spi": true,
-        "has_uart": false,
+        "has_uart": true,
         "primary_interface": "MIPI"
       }
     }
