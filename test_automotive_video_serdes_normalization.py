@@ -44,3 +44,19 @@ def test_automotive_video_serdes_extracted_payloads_are_recategorized():
     assert cxd["extraction"]["component"]["category"] == "Automotive Video SerDes"
     assert max96718["extraction"]["component"]["category"] == "Automotive Video SerDes"
     assert max96718["domains"]["protocol"]["protocol_summary"]["primary_interface"] == "MIPI"
+
+
+def test_automotive_video_serdes_registry_tracks_pending_ds90ub_family_members():
+    registry = _load_json(REPO_ROOT / "data" / "normalization" / "automotive_video_serdes_profiles.json")
+
+    for mpn in (
+        "DS90UB934TRGZRQ1",
+        "DS90UB954TRGZRQ1",
+        "DS90UB960WRTDRQ1",
+        "DS90UB962WRTDTQ1",
+        "DS90UB9702-Q1",
+    ):
+        entry = registry["devices"][mpn]
+        assert entry["status"] == "pending_source_reintake"
+        assert entry["category"] == "Automotive Video SerDes"
+        assert entry["serial_video_bridge"]["device_role"] == "deserializer"

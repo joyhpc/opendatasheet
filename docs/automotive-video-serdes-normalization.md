@@ -105,6 +105,20 @@
 - `CXD4984ER-W` 还保留了更完整的 `domains.protocol` 与 `capability_blocks.mipi_phy`
 - `MAX96718A` 则通过 profile 补齐了可消费的统一能力结构
 
+另外已经纳入同一注册表、但当前处于待补档状态的器件有：
+
+- `DS90UB934TRGZRQ1`
+- `DS90UB954TRGZRQ1`
+- `DS90UB960WRTDRQ1`
+- `DS90UB962WRTDTQ1`
+- `DS90UB9702-Q1`
+
+这些器件当前被标记为：
+
+- `pending_source_reintake`
+
+原因不是它们不属于同类，而是当前工作区没有它们可安全更新的正式 `extracted/export/selection` 文件。
+
 ## 5. 为什么不用只改 category
 
 只改 `category` 不够。
@@ -176,6 +190,8 @@ python3 scripts/normalize_automotive_video_serdes.py
 - `data/sch_review_export/`
 - `data/selection_profile/`
 
+如果 profile 的状态不是 `active`，或者对应文件不存在，脚本会自动跳过并打印原因，不会伪造新数据。
+
 ### Step 5: 加回归测试
 
 至少锁住：
@@ -213,6 +229,11 @@ flowchart TD
 
 - 先把同类器件拉齐
 - 再逐步把规则抽象回通用 exporter
+
+这也意味着：
+
+- 对 `CXD4984ER-W`、`MAX96718A` 这种已有正式数据的器件，可以直接归一
+- 对 `DS90UB*` 这种当前缺正式文件的器件，先登记到注册表，等 source 回流后再激活
 
 ## 9. 实际消费建议
 

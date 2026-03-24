@@ -193,9 +193,19 @@ def apply_profiles(
 ) -> list[str]:
     written = []
     for mpn, profile in profiles.items():
+        status = profile.get("status", "active")
+        if status != "active":
+            print(f"skip {mpn}: status={status}")
+            continue
+
         extracted_path = extracted_dir / profile["extracted_file"]
         export_path = export_dir / profile["export_file"]
         selection_path = selection_dir / profile["selection_file"]
+
+        missing = [str(path) for path in (extracted_path, export_path, selection_path) if not path.exists()]
+        if missing:
+            print(f"skip {mpn}: missing files {', '.join(missing)}")
+            continue
 
         extracted = normalize_extracted(_load_json(extracted_path), profile)
         exported = normalize_export(_load_json(export_path), profile)
