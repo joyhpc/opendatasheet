@@ -78,6 +78,7 @@
 ## Workflows
 
 - [`adding-normal-ic-datasheet.md`](adding-normal-ic-datasheet.md) — Intake-to-export workflow for a new normal IC datasheet. **Best for:** data curators, extraction contributors.
+- [`cxd4984-closure-note.md`](cxd4984-closure-note.md) — `CXD4984ER-W` 从 Google Drive 资料到正式 raw/extracted/export/selection 数据的闭环说明，包含下游消费建议和 Mermaid 图。 **Best for:** issue 跟进者、下游 integrator、维护者复盘具体闭环案例。
 - [`batch-processing-runbook.md`](batch-processing-runbook.md) — Safe batch-processing patterns for `batch_all.py`. **Best for:** extraction operators, maintainers.
 - [`gemini-api-operations.md`](gemini-api-operations.md) — Separating key failures, hangs, and structured extraction problems in Gemini-backed flows. **Best for:** extraction operators and maintainers.
 - [`invalid-pdf-triage.md`](invalid-pdf-triage.md) — How to identify fake PDFs and treat them as raw-source defects instead of parser bugs. **Best for:** corpus maintainers and batch triage.
