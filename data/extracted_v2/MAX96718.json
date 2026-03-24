@@ -3047,7 +3047,7 @@
     "component": {
       "mpn": "MAX96718A",
       "manufacturer": "Maxim Integrated",
-      "category": "Other",
+      "category": "Automotive Video SerDes",
       "description": "Dual GMSL2/GMSL1 to CSI-2 Deserializer"
     },
     "absolute_maximum_ratings": [
@@ -5770,5 +5770,136 @@
     "l0_classify_s": 0.644,
     "l1a_extract_s": 146.146,
     "l1b_pin_s": 87.45
+  },
+  "domains": {
+    "protocol": {
+      "interfaces": [
+        {
+          "protocol_type": "MIPI",
+          "role": null,
+          "instance_name": "CSI2_TX",
+          "i2c_config": null,
+          "spi_config": null,
+          "uart_config": null,
+          "signals": [
+            {
+              "name": "DA0P",
+              "direction": "output",
+              "description": "CSI-2 Port A Data Lane 0 output"
+            },
+            {
+              "name": "CKAP",
+              "direction": "output",
+              "description": "CSI-2 Port A Clock Lane output"
+            },
+            {
+              "name": "DB0P",
+              "direction": "output",
+              "description": "CSI-2 Port B Data Lane 0 output"
+            },
+            {
+              "name": "CKBP",
+              "direction": "output",
+              "description": "CSI-2 Port B Clock Lane output"
+            }
+          ],
+          "timing_constraints": [],
+          "command_set": [],
+          "notes": "General description and pin tables show dual CSI-2 output with both D-PHY and C-PHY support.",
+          "mipi_config": {
+            "transport": "CSI-2",
+            "direction": "TX",
+            "phy_type": "D-PHY",
+            "port_count": 2,
+            "data_lanes_per_port": 4,
+            "clock_lanes_per_port": 1,
+            "protocol_version": "1.3",
+            "source_pages": [
+              0,
+              1,
+              25,
+              41,
+              46,
+              48
+            ]
+          }
+        },
+        {
+          "protocol_type": "MIPI",
+          "role": null,
+          "instance_name": "CSI2_TX_CPHY",
+          "i2c_config": null,
+          "spi_config": null,
+          "uart_config": null,
+          "signals": [
+            {
+              "name": "DA0A",
+              "direction": "output",
+              "description": "CSI-2 Port A C-PHY A-output"
+            },
+            {
+              "name": "DB0A",
+              "direction": "output",
+              "description": "CSI-2 Port B C-PHY A-output"
+            }
+          ],
+          "timing_constraints": [],
+          "command_set": [],
+          "notes": "Pin tables and C-PHY sections confirm C-PHY transmit support; trio count is not yet normalized from the source.",
+          "mipi_config": {
+            "transport": "CSI-2",
+            "direction": "TX",
+            "phy_type": "C-PHY",
+            "port_count": 2,
+            "source_pages": [
+              25,
+              36,
+              37,
+              43,
+              46,
+              48
+            ]
+          }
+        },
+        {
+          "protocol_type": "I2C",
+          "role": "both",
+          "instance_name": "CTRL_I2C",
+          "i2c_config": {
+            "slave_address_hex": null,
+            "address_configurable": false,
+            "address_pins": [],
+            "address_bits": 7,
+            "max_clock_hz": null,
+            "supports_clock_stretching": true,
+            "supports_repeated_start": null
+          },
+          "spi_config": null,
+          "uart_config": null,
+          "signals": [
+            {
+              "name": "SDA",
+              "direction": "bidirectional",
+              "description": "I2C pass-through / control data"
+            },
+            {
+              "name": "SCL",
+              "direction": "bidirectional",
+              "description": "I2C pass-through / control clock"
+            }
+          ],
+          "timing_constraints": [],
+          "command_set": [],
+          "notes": "Control and side-channel text confirms bidirectional I2C transport across the GMSL links."
+        }
+      ],
+      "protocol_summary": {
+        "total_interfaces": 3,
+        "has_i2c": true,
+        "has_spi": false,
+        "has_uart": false,
+        "primary_interface": "MIPI"
+      }
+    }
   }
 }

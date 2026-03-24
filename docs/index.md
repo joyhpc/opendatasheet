@@ -78,6 +78,7 @@
 ## Workflows
 
 - [`adding-normal-ic-datasheet.md`](adding-normal-ic-datasheet.md) — Intake-to-export workflow for a new normal IC datasheet. **Best for:** data curators, extraction contributors.
+- [`automotive-video-serdes-normalization.md`](automotive-video-serdes-normalization.md) — 车载视频 serializer / deserializer / bridge 的统一能力模型、profile 机制，以及新同类芯片进入仓库时的处理流程。 **Best for:** 维护者、下游 integrator、同类器件扩展贡献者。
 - [`cxd4984-closure-note.md`](cxd4984-closure-note.md) — `CXD4984ER-W` 从 Google Drive 资料到正式 raw/extracted/export/selection 数据的闭环说明，包含下游消费建议和 Mermaid 图。 **Best for:** issue 跟进者、下游 integrator、维护者复盘具体闭环案例。
 - [`batch-processing-runbook.md`](batch-processing-runbook.md) — Safe batch-processing patterns for `batch_all.py`. **Best for:** extraction operators, maintainers.
 - [`gemini-api-operations.md`](gemini-api-operations.md) — Separating key failures, hangs, and structured extraction problems in Gemini-backed flows. **Best for:** extraction operators and maintainers.

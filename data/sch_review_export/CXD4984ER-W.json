@@ -7,7 +7,7 @@
   ],
   "mpn": "CXD4984ER-W",
   "manufacturer": "Sony",
-  "category": "Other",
+  "category": "Automotive Video SerDes",
   "description": "GVIF3 (Gigabit Video InterFace 3) deserializer IC for automotive camera systems.",
   "packages": {
     "VQFN-64": {
@@ -954,6 +954,95 @@
         "Two CSI-2 output ports, each configurable for 4 data lanes plus 1 clock lane in D-PHY mode.",
         "The same CSI-2 output ports can instead operate as 3 C-PHY trios per port."
       ]
+    },
+    "serial_video_bridge": {
+      "class": "serial_video_bridge",
+      "present": true,
+      "device_role": "deserializer",
+      "application_domain": "automotive_camera",
+      "link_families": [
+        "GVIF3"
+      ],
+      "link_direction": "serial_in_to_video_out",
+      "serial_links": {
+        "media": [
+          "coax",
+          "stp"
+        ],
+        "control_channel_present": true,
+        "source_pages": [
+          24,
+          34,
+          488
+        ],
+        "notes": [
+          "Application figures show both STP and coax usage.",
+          "The datasheet describes serializer and deserializer sync/control signal transport over GVIF3."
+        ]
+      },
+      "video_output": {
+        "protocol": "MIPI CSI-2",
+        "phy_types": [
+          "D-PHY",
+          "C-PHY"
+        ],
+        "port_count": 2,
+        "direction": "TX",
+        "dphy": {
+          "data_lanes_per_port": 4,
+          "clock_lanes_per_port": 1,
+          "rate_gbps_per_lane": {
+            "min": 0.26,
+            "max": 4.5
+          },
+          "phy_version": "2.1",
+          "protocol_version": "2.1",
+          "source_pages": [
+            24,
+            41,
+            42
+          ]
+        },
+        "cphy": {
+          "trios_per_port": 3,
+          "symbol_rate_gsps": {
+            "min": 0.3,
+            "max": 4.5
+          },
+          "phy_version": "1.2",
+          "protocol_version": "2.1",
+          "source_pages": [
+            46,
+            47,
+            49,
+            54
+          ]
+        }
+      },
+      "control_plane": {
+        "protocols": [
+          "I2C",
+          "GPIO"
+        ],
+        "reset_pin": "CE",
+        "address_select_pin": "I2CADR",
+        "gpio_pins": [
+          "GENERAL_IO0",
+          "GENERAL_IO1",
+          "GENERAL_IO2",
+          "GENERAL_IO3",
+          "GENERAL_IO4"
+        ],
+        "source_pages": [
+          17,
+          24,
+          36,
+          37,
+          38,
+          40
+        ]
+      },
+      "source_basis": "primary_pdf_manual_profile"
     }
   },
   "constraint_blocks": {
@@ -978,6 +1067,26 @@
         49,
         54
       ]
+    },
+    "serial_video_bridge": {
+      "class": "interface",
+      "review_required": true,
+      "device_role": "deserializer",
+      "link_families": [
+        "GVIF3"
+      ],
+      "video_protocol": "MIPI CSI-2",
+      "phy_types": [
+        "D-PHY",
+        "C-PHY"
+      ],
+      "selection_note": "Freeze serial-link family, transport media, CSI-2 PHY mode, and downstream receiver compatibility before schematic sign-off.",
+      "review_items": [
+        "Freeze coax vs STP assumptions, connector ownership, and PoC policy for the selected serial link.",
+        "Freeze D-PHY vs C-PHY mode and lane/trio allocation against the downstream SoC or bridge.",
+        "Verify reset, control-channel ownership, lock status observability, and sideband GPIO usage."
+      ],
+      "source": "primary_pdf_manual_profile"
     }
   },
   "domains": {
