@@ -360,6 +360,58 @@ flowchart TD
 - 明确 `system_path`
 - 有正式 source 再激活
 
+除此之外，现在还有一层单独的 roadmap watchlist：
+
+- 文件位置:
+  - `data/normalization/automotive_video_serdes_roadmap_watchlist.json`
+- 当前已吸收的 Drive 路线图来源:
+  - `FPD-Link_Automotive_Roadmap_NDA_Sales.pdf`
+  - `IVI_GMSL_Roadmap_Oct2024.pptx`
+
+这层 watchlist 只做 3 件事：
+
+1. 记录路线图里出现过的器件
+2. 先判定它属于 `camera_module_to_domain_controller` 还是 `domain_controller_to_display`
+3. 先判定它更像 `serializer`、`deserializer` 还是 `aggregator`
+
+这层 watchlist 明确不做的事：
+
+- 不把 roadmap 当作 datasheet
+- 不从 roadmap 直接生成 active 导出
+- 不从 roadmap 猜具体电气规格细节
+
+当前从路线图里已经抽出的重点方向：
+
+- TI FPD-Link camera ingress:
+  - `DS90UB971-Q1`
+  - `DS90UB9722-Q1`
+  - `DS90UB9724-Q1`
+  - `DS90UB9742-Q1`
+  - `DS90UB633A-Q1`
+  - `DS90UB662-Q1`
+  - `DS90UB635-Q1`
+  - `DS90UB638-Q1`
+- TI FPD-Link display egress:
+  - `DS90UH981-Q1`
+  - `DS90UH983-Q1`
+  - `DS90UH984-Q1`
+  - `DS90UH988-Q1`
+  - `DS90UB681-Q1`
+  - `DS90UB688-Q1`
+- ADI GMSL IVI display egress:
+  - `MAX96781`
+  - `MAX96783`
+  - `MAX96751`
+  - `MAX96753`
+  - `MAX96755`
+  - `MAX96757`
+  - `MAX96772`
+  - `MAX96774`
+  - `MAX96756`
+  - `MAX96758`
+  - `MAX96752`
+  - `MAX96754`
+
 ## 11. 实际消费建议
 
 下游读取这类器件时，建议优先顺序：
@@ -378,3 +430,9 @@ flowchart TD
 - 再用 `device_role` 判断它是加串还是解串/聚合
 - 再用 `system_path` 决定它属于 camera ingress 还是 display egress
 - 再用 `link_families` 和 `video_input` / `video_output` 做兼容性和原理图闭环
+
+如果你要处理 roadmap-only 器件，先读：
+
+1. `data/normalization/automotive_video_serdes_roadmap_watchlist.json`
+2. 看它是否已经有正式 datasheet source
+3. 没有正式 source 就保持 `pending_roadmap_validation`

@@ -187,3 +187,27 @@ def test_automotive_video_serdes_registry_includes_source_backed_aggregators_and
 
     max96792 = registry["devices"]["MAX96792A"]
     assert max96792["status"] == "pending_source_repair"
+
+
+def test_automotive_video_serdes_roadmap_watchlist_tracks_camera_and_display_paths():
+    watchlist = _load_json(REPO_ROOT / "data" / "normalization" / "automotive_video_serdes_roadmap_watchlist.json")
+
+    assert "ti_fpdlink_automotive_roadmap_2026q1_copy" in watchlist["sources"]
+    assert "adi_gmsl_ivi_roadmap_oct2024" in watchlist["sources"]
+
+    ti_camera = watchlist["devices"]["DS90UB971-Q1"]
+    assert ti_camera["status"] == "pending_roadmap_validation"
+    assert ti_camera["serial_video_bridge"]["device_role"] == "serializer"
+    assert ti_camera["serial_video_bridge"]["system_path"] == "camera_module_to_domain_controller"
+
+    ti_display = watchlist["devices"]["DS90UH981-Q1"]
+    assert ti_display["serial_video_bridge"]["system_path"] == "domain_controller_to_display"
+    assert ti_display["serial_video_bridge"]["video_input"]["protocol"] == "MIPI DSI"
+
+    adi_display_ser = watchlist["devices"]["MAX96781"]
+    assert adi_display_ser["serial_video_bridge"]["device_role"] == "serializer"
+    assert adi_display_ser["serial_video_bridge"]["system_path"] == "domain_controller_to_display"
+
+    adi_display_des = watchlist["devices"]["MAX96772"]
+    assert adi_display_des["serial_video_bridge"]["device_role"] == "deserializer"
+    assert adi_display_des["serial_video_bridge"]["video_output"]["protocol"] == "eDP/DisplayPort"
