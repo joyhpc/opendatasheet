@@ -64,6 +64,7 @@
   "present": true,
   "device_role": "deserializer",
   "application_domain": "automotive_camera",
+  "system_path": "camera_module_to_domain_controller",
   "link_families": ["GVIF3"],
   "link_direction": "serial_in_to_video_out",
   "serial_links": {},
@@ -78,15 +79,26 @@
 - `device_role`
   - `serializer` / `deserializer` / `aggregator` / `bridge`
 - `application_domain`
-  - 当前优先用 `automotive_camera`
+  - 表示大类应用域，例如 `automotive_camera`、`automotive_display`、`automotive_video`
+- `system_path`
+  - 明确器件所在系统路径
+  - 当前优先使用：
+    - `camera_module_to_domain_controller`
+    - `domain_controller_to_display`
 - `link_families`
-  - 例如 `GVIF3`、`GMSL2`、`GMSL1`
+  - 例如 `GVIF3`、`GMSL2`、`GMSL1`、`FPD-Link III`、`FPD-Link IV`、`HSMT`
 - `serial_links`
   - 串行侧媒介、链路数量、是否支持控制通道
 - `video_output`
   - 例如 `MIPI CSI-2`、`D-PHY` / `C-PHY`
 - `control_plane`
   - I2C / GPIO / reset / strap / lock status
+
+这次补上的关键点是：
+
+- 不再只靠 `application_domain` 推断使用场景
+- 用 `system_path` 显式区分 camera ingress 和 display egress
+- `link_families` 现在正式收纳 `HSMT`
 
 ## 4. 这次已经归一到什么程度
 
@@ -112,12 +124,20 @@
 - `DS90UB960WRTDRQ1`
 - `DS90UB962WRTDTQ1`
 - `DS90UB9702-Q1`
+- `NS6603`
 
 这些器件当前被标记为：
 
-- `pending_source_reintake`
+- `DS90UB*`: `pending_source_reintake`
+- `NS6603`: `pending_source_intake`
 
 原因不是它们不属于同类，而是当前工作区没有它们可安全更新的正式 `extracted/export/selection` 文件。
+
+其中 `NS6603` 当前只完成了“家族登记”：
+
+- 已知链路家族：`HSMT`
+- 未知且未 source-backed 的字段暂不猜测
+- 等正式 source intake 后再激活 profile
 
 ## 5. 为什么不用只改 category
 
@@ -130,10 +150,34 @@
 - 视频侧是不是 `CSI-2`
 - 有没有 `C-PHY`
 - 控制面是 I2C 还是别的
+- 这颗器件是在 `camera -> domain controller` 还是 `domain controller -> display`
 
 这些问题都不应该靠 `description` 字符串匹配。
 
-## 6. 新同类芯片进来时怎么处理
+## 6. 下游怎么用这两个关键字段
+
+推荐下游按下面顺序判断：
+
+1. 先看 `category == Automotive Video SerDes`
+2. 再看 `capability_blocks.serial_video_bridge.system_path`
+3. 最后看 `link_families`、`video_output`、`control_plane`
+
+一个简单决策表：
+
+- `system_path = camera_module_to_domain_controller`
+  - 把它当作 sensor ingress 器件处理
+  - 重点校验 serializer 配对、PoC、同轴/STP、CSI-2 接收端兼容
+- `system_path = domain_controller_to_display`
+  - 把它当作 display egress 器件处理
+  - 重点校验显示链路时序、bridge/panel 兼容、显示控制和失锁恢复
+
+不要只看：
+
+- `application_domain = automotive_camera`
+
+因为它只能说明“属于哪个大类”，不能替代系统链路位置判断。
+
+## 7. 新同类芯片进来时怎么处理
 
 新器件进入时，按下面流程处理。
 
@@ -142,7 +186,7 @@
 满足任意一组强信号，就进入 `Automotive Video SerDes` 流程：
 
 - 描述里包含 `serializer` / `deserializer` / `aggregator`
-- 出现 `GMSL` / `GVIF` / `FPD-Link` / `A-PHY`
+- 出现 `GMSL` / `GVIF` / `FPD-Link` / `A-PHY` / `HSMT`
 - 一侧是高速串行链路，另一侧是 `CSI-2` 或视频输出
 - 文档里明确提到 control channel / sideband / pass-through I2C / lock
 
@@ -154,6 +198,11 @@
 - 视频输出侧
 - 控制面
 - 复位 / 状态 / strap
+
+并且强制补两个决策字段：
+
+- `link_families`
+- `system_path`
 
 不要第一步就写成：
 
@@ -200,23 +249,28 @@ python3 scripts/normalize_automotive_video_serdes.py
 - `capability_blocks.serial_video_bridge`
 - `device_role`
 - `link_families`
+- `system_path`
 - 视频输出协议
 
-## 7. Mermaid 图看流程
+## 8. Mermaid 图看流程
 
 ```mermaid
 flowchart TD
     A[新车载视频芯片] --> B{是否属于 SerDes / Bridge 族}
     B -->|是| C[补 profile]
     B -->|否| D[走普通器件流程]
-    C --> E[运行 normalize_automotive_video_serdes.py]
+    C --> C1[写 link_families]
+    C1 --> C2[写 system_path]
+    C2 --> E[运行 normalize_automotive_video_serdes.py]
     E --> F[data/extracted_v2]
     E --> G[data/sch_review_export]
     E --> H[data/selection_profile]
-    G --> I[下游统一消费 serial_video_bridge]
+    G --> I{system_path?}
+    I -->|camera_module_to_domain_controller| J[按 camera ingress 评审]
+    I -->|domain_controller_to_display| K[按 display egress 评审]
 ```
 
-## 8. 当前边界
+## 9. 当前边界和自治保障
 
 当前这套归一化是“旁路增强”，不是 exporter 主干的一部分。
 
@@ -235,7 +289,14 @@ flowchart TD
 - 对 `CXD4984ER-W`、`MAX96718A` 这种已有正式数据的器件，可以直接归一
 - 对 `DS90UB*` 这种当前缺正式文件的器件，先登记到注册表，等 source 回流后再激活
 
-## 9. 实际消费建议
+我现在确保自治的方法就是这 4 条：
+
+1. 用 sidecar profile 驱动归一，不直接改动脏状态下的主 exporter
+2. `active` 与 `pending_source_*` 分层，未 intake 的器件只登记，不激活
+3. 归一化脚本遇到缺文件或 pending 状态会自动跳过，不会伪造导出结果
+4. 用回归测试锁住 `category`、`link_families`、`system_path` 和关键 capability block
+
+## 10. 实际消费建议
 
 下游读取这类器件时，建议优先顺序：
 
@@ -246,3 +307,9 @@ flowchart TD
 5. `packages` / `electrical_parameters`
 
 这能让“同类筛选”和“具体接线/评审”分层进行，而不是混在一起。
+
+如果下游只需要一句规则：
+
+- 先用 `category` 找到车载视频 SerDes
+- 再用 `system_path` 决定它属于 camera ingress 还是 display egress
+- 再用 `link_families` 和 `video_output` 做兼容性和原理图闭环

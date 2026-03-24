@@ -62,6 +62,9 @@ def _selection_features(profile: dict) -> list[str]:
     role = bridge.get("device_role")
     if role:
         features.append(f"role:{role}")
+    system_path = bridge.get("system_path")
+    if system_path:
+        features.append(f"system_path:{system_path}")
     for family in bridge.get("link_families", []) or []:
         features.append(f"link_family:{family.lower()}")
     video_output = bridge.get("video_output", {})
@@ -73,22 +76,40 @@ def _selection_features(profile: dict) -> list[str]:
     return features
 
 
+def _system_path_review_items(system_path: str | None) -> list[str]:
+    if system_path == "camera_module_to_domain_controller":
+        return [
+            "Freeze coax vs STP assumptions, connector ownership, and PoC policy for the selected serial link.",
+            "Freeze D-PHY vs C-PHY mode and lane/trio allocation against the downstream SoC or bridge.",
+            "Verify sensor-control tunneling, lock observability, frame-sync ownership, and sideband GPIO usage.",
+        ]
+    if system_path == "domain_controller_to_display":
+        return [
+            "Freeze serial-link family, cable topology, display connector ownership, and any PoC or remote-power policy.",
+            "Freeze display-side timing, bridge or panel compatibility, and video-format mapping before schematic sign-off.",
+            "Verify blanking, reset, lock-loss recovery, and sideband control behavior for the display path.",
+        ]
+    return [
+        "Freeze link family, transport media, connector ownership, and power-delivery assumptions for the selected serial link.",
+        "Freeze downstream protocol mode, PHY allocation, and sink compatibility before schematic sign-off.",
+        "Verify reset, control-channel ownership, lock status observability, and sideband GPIO usage.",
+    ]
+
+
 def _build_serial_video_bridge_constraint(profile: dict) -> dict:
     bridge = profile["serial_video_bridge"]
     video_output = bridge.get("video_output", {})
+    system_path = bridge.get("system_path")
     return {
         "class": "interface",
         "review_required": True,
         "device_role": bridge.get("device_role"),
+        "system_path": system_path,
         "link_families": bridge.get("link_families", []),
         "video_protocol": video_output.get("protocol"),
         "phy_types": video_output.get("phy_types", []),
         "selection_note": "Freeze serial-link family, transport media, CSI-2 PHY mode, and downstream receiver compatibility before schematic sign-off.",
-        "review_items": [
-            "Freeze coax vs STP assumptions, connector ownership, and PoC policy for the selected serial link.",
-            "Freeze D-PHY vs C-PHY mode and lane/trio allocation against the downstream SoC or bridge.",
-            "Verify reset, control-channel ownership, lock status observability, and sideband GPIO usage.",
-        ],
+        "review_items": _system_path_review_items(system_path),
         "source": bridge.get("source_basis", "manual_profile"),
     }
 

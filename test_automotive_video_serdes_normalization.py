@@ -18,6 +18,8 @@ def test_automotive_video_serdes_exports_share_common_category_and_capability_bl
         assert payload["category"] == "Automotive Video SerDes"
         assert payload["capability_blocks"]["serial_video_bridge"]["device_role"] == "deserializer"
         assert payload["capability_blocks"]["serial_video_bridge"]["application_domain"] == "automotive_camera"
+        assert payload["capability_blocks"]["serial_video_bridge"]["system_path"] == "camera_module_to_domain_controller"
+        assert payload["constraint_blocks"]["serial_video_bridge"]["system_path"] == "camera_module_to_domain_controller"
         assert payload["constraint_blocks"]["serial_video_bridge"]["review_required"] is True
 
     assert cxd["capability_blocks"]["serial_video_bridge"]["link_families"] == ["GVIF3"]
@@ -32,6 +34,7 @@ def test_automotive_video_serdes_selection_profiles_expose_normalized_tags():
         assert payload["category"] == "Automotive Video SerDes"
         assert "function:automotive_video_serdes" in payload["features"]
         assert "role:deserializer" in payload["features"]
+        assert "system_path:camera_module_to_domain_controller" in payload["features"]
 
     assert "link_family:gvif3" in cxd["features"]
     assert "link_family:gmsl2" in max96718["features"]
@@ -60,3 +63,14 @@ def test_automotive_video_serdes_registry_tracks_pending_ds90ub_family_members()
         assert entry["status"] == "pending_source_reintake"
         assert entry["category"] == "Automotive Video SerDes"
         assert entry["serial_video_bridge"]["device_role"] == "deserializer"
+        assert entry["serial_video_bridge"]["system_path"] == "camera_module_to_domain_controller"
+
+
+def test_automotive_video_serdes_registry_includes_hsmt_family_placeholder():
+    registry = _load_json(REPO_ROOT / "data" / "normalization" / "automotive_video_serdes_profiles.json")
+
+    ns6603 = registry["devices"]["NS6603"]
+    assert ns6603["status"] == "pending_source_intake"
+    assert ns6603["category"] == "Automotive Video SerDes"
+    assert ns6603["serial_video_bridge"]["link_families"] == ["HSMT"]
+    assert ns6603["serial_video_bridge"]["source_basis"] == "user_report_pending_source"
