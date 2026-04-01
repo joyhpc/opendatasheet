@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -229,6 +229,396 @@
       "unit": "°C/W",
       "conditions": null,
       "source": "absolute_maximum_ratings"
+    }
+  },
+  "domains": {
+    "electrical": {
+      "absolute_maximum_ratings": {
+        "VIN": {
+          "parameter": "IN Voltage",
+          "min": -0.3,
+          "max": 42,
+          "unit": "V",
+          "conditions": null
+        },
+        "VSW, VEN": {
+          "parameter": "SW, EN Voltage",
+          "min": -0.3,
+          "max": null,
+          "unit": "V",
+          "conditions": "max is VIN+0.3V"
+        },
+        "VBST": {
+          "parameter": "BST Voltage",
+          "min": -0.3,
+          "max": null,
+          "unit": "V",
+          "conditions": "max is SW+6V"
+        },
+        "VFB": {
+          "parameter": "FB Voltage",
+          "min": -0.3,
+          "max": 6,
+          "unit": "V",
+          "conditions": null
+        },
+        "TA": {
+          "parameter": "Operating Temperature Range",
+          "min": -40,
+          "max": 85,
+          "unit": "°C",
+          "conditions": null
+        },
+        "TSTG": {
+          "parameter": "Storage Temperature Range",
+          "min": -55,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        },
+        "θJA": {
+          "parameter": "Thermal Resistance (Theta JA)",
+          "min": null,
+          "max": null,
+          "unit": "°C/W",
+          "conditions": null
+        },
+        "θJC": {
+          "parameter": "Thermal Resistance (Theta JC)",
+          "min": null,
+          "max": null,
+          "unit": "°C/W",
+          "conditions": null
+        }
+      },
+      "electrical_parameters": {
+        "VIN": {
+          "parameter": "Input Voltage Range",
+          "min": 4,
+          "typ": null,
+          "max": 38,
+          "unit": "V",
+          "conditions": "VIN = 12V, TA = 25°C"
+        },
+        "IIN": {
+          "parameter": "Input Supply Current",
+          "min": null,
+          "typ": 0.6,
+          "max": null,
+          "unit": "mA",
+          "conditions": "VFB=0.85V, VIN = 12V, TA = 25°C"
+        },
+        "ISHDN": {
+          "parameter": "Input Shutdown Current",
+          "min": null,
+          "typ": 6,
+          "max": null,
+          "unit": "µA",
+          "conditions": "VIN = 12V, TA = 25°C"
+        },
+        "VFB": {
+          "parameter": "FB Feedback Voltage",
+          "min": null,
+          "typ": 0.8,
+          "max": null,
+          "unit": "V",
+          "conditions": "VIN = 12V, TA = 25°C"
+        },
+        "IFB": {
+          "parameter": "FB Input Current",
+          "min": null,
+          "typ": 0.01,
+          "max": null,
+          "unit": "µA",
+          "conditions": "VIN = 12V, TA = 25°C"
+        },
+        "fSW": {
+          "parameter": "Switching Frequency",
+          "min": null,
+          "typ": 650,
+          "max": null,
+          "unit": "KHz",
+          "conditions": "VIN = 12V, TA = 25°C"
+        },
+        "DMAX": {
+          "parameter": "Maximum Duty Cycle",
+          "min": 90,
+          "typ": null,
+          "max": null,
+          "unit": "%",
+          "conditions": "VIN = 12V, TA = 25°C"
+        },
+        "RDS(ON)": {
+          "parameter": "High side Switch On Resistance",
+          "min": null,
+          "typ": 300,
+          "max": null,
+          "unit": "mΩ",
+          "conditions": "ISW = 200mA, VIN = 12V, TA = 25°C"
+        },
+        "ILIM": {
+          "parameter": "High side Switch Current Limit",
+          "min": null,
+          "typ": 2.5,
+          "max": null,
+          "unit": "A",
+          "conditions": "VIN = 12V, TA = 25°C"
+        },
+        "ISW_LKG": {
+          "parameter": "SW Leakage Current",
+          "min": null,
+          "typ": null,
+          "max": 10,
+          "unit": "µA",
+          "conditions": "VIN=12V, VSW=0, EN=GND, TA = 25°C"
+        },
+        "IEN": {
+          "parameter": "EN Input Current",
+          "min": null,
+          "typ": 1,
+          "max": 5,
+          "unit": "µA",
+          "conditions": "VIN=12V, VEN=5V, TA = 25°C"
+        },
+        "VEN_LOW": {
+          "parameter": "EN Input Low Voltage",
+          "min": 0.8,
+          "typ": 1.1,
+          "max": 1.4,
+          "unit": "V",
+          "conditions": "Rising, Hysteresis=100mV, VIN = 12V, TA = 25°C"
+        },
+        "TSD": {
+          "parameter": "Thermal Shutdown",
+          "min": null,
+          "typ": 150,
+          "max": null,
+          "unit": "°C",
+          "conditions": "Hysteresis=40°C, VIN = 12V, TA = 25°C"
+        }
+      },
+      "drc_hints": {
+        "vin_abs_max": {
+          "value": 42,
+          "unit": "V"
+        },
+        "vin_operating": {
+          "min": 4,
+          "max": 38,
+          "unit": "V"
+        },
+        "vref": {
+          "typ": 0.8,
+          "unit": "V"
+        },
+        "enable_threshold": {
+          "min": 0.8,
+          "typ": 1.1,
+          "max": 1.4,
+          "unit": "V"
+        },
+        "iout_max": {
+          "typ": 2.5,
+          "unit": "A"
+        },
+        "fsw": {
+          "typ": 650,
+          "unit": "KHz"
+        },
+        "thermal_shutdown": {
+          "typ": 150,
+          "unit": "°C"
+        }
+      }
+    },
+    "thermal": {
+      "theta_ja": {
+        "parameter": "Thermal Resistance (Theta JA)",
+        "symbol": "θJA",
+        "min": null,
+        "typ": 220,
+        "max": null,
+        "value": null,
+        "unit": "°C/W",
+        "conditions": null,
+        "source": "absolute_maximum_ratings"
+      },
+      "theta_jc": {
+        "parameter": "Thermal Resistance (Theta JC)",
+        "symbol": "θJC",
+        "min": null,
+        "typ": 110,
+        "max": null,
+        "value": null,
+        "unit": "°C/W",
+        "conditions": null,
+        "source": "absolute_maximum_ratings"
+      }
+    },
+    "design_context": {
+      "recommended_external_components": [
+        {
+          "role": "output_capacitor",
+          "source_page": 5,
+          "value_hint": "22 μF",
+          "value_hints": [
+            "15 μH",
+            "22 μF"
+          ],
+          "snippet": "HM2459"
+        },
+        {
+          "role": "inductor",
+          "source_page": 5,
+          "value_hint": "15 μH",
+          "value_hints": [
+            "15 μH",
+            "22 μF"
+          ],
+          "snippet": "HM2459"
+        },
+        {
+          "role": "output_capacitor",
+          "source_page": 5,
+          "value_hint": "22 μF",
+          "value_hints": [
+            "15 μH",
+            "22 μF"
+          ],
+          "snippet": "APPLICATION INFORMATION FC= = 8.7Khz"
+        },
+        {
+          "role": "inductor",
+          "source_page": 5,
+          "value_hint": "15 μH",
+          "value_hints": [
+            "15 μH",
+            "22 μF"
+          ],
+          "snippet": "APPLICATION INFORMATION FC= = 8.7Khz"
+        },
+        {
+          "role": "input_capacitor",
+          "source_page": 5,
+          "value_hint": "22 μF",
+          "value_hints": [
+            "15 μH",
+            "22 μF"
+          ],
+          "snippet": "tantalum capacitors are suitable, with ceramic exhibiting the"
+        },
+        {
+          "role": "input_capacitor",
+          "source_page": 5,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "Inductor Selection lowest ESR and high-frequency impedance. Output ripple with a"
+        }
+      ],
+      "component_value_hints": [
+        {
+          "values": [
+            "22 μF",
+            "15 μH"
+          ],
+          "source_page": 5,
+          "snippet": "HM2459 APPLICATION INFORMATION FC= = 8.7Khz Setting Output Voltages For example, for VOUT=5V, L=15μH, COUT=22μF. Output voltages are set by external resistors. The FB threshold The output capacitor keeps output ripple sm"
+        },
+        {
+          "values": [
+            "13 μH"
+          ],
+          "source_page": 5,
+          "snippet": "Inductor Selection lowest ESR and high-frequency impedance. Output ripple with a The peak-to-peak ripple is limited to 30% of the maximum ceramic output capacitor is approximately as follows: output current. This places "
+        },
+        {
+          "values": [
+            "13 μH",
+            "10 μH",
+            "15 μH"
+          ],
+          "source_page": 5,
+          "snippet": "The peak-to-peak ripple is limited to 30% of the maximum ceramic output capacitor is approximately as follows: output current. This places the peak current far enough VRIPPLE = IL(PEAK)[1 / (2π x fOSC x COUT)] from the m"
+        },
+        {
+          "values": [
+            "13 μH",
+            "10 μH",
+            "15 μH",
+            "9.2 μH"
+          ],
+          "source_page": 5,
+          "snippet": "from the minimum overcurrent trip level to ensure reliable If the capacitor has significant ESR, the output ripple operation while providing enough current ripples for the component due to capacitor ESR is as follows: cu"
+        },
+        {
+          "values": [
+            "22 μF",
+            "13 μH",
+            "10 μH",
+            "15 μH",
+            "9.2 μH"
+          ],
+          "source_page": 5,
+          "snippet": "current is 500 mA. The inductor size is estimated as following equation: The input capacitor in a DC-to-DC converter reduces current LIDEAL=(VIN(MAX)-VOUT)/IRIPPLE*DMIN*(1/FOSC) peaks drawn from the battery or other inpu"
+        },
+        {
+          "values": [
+            "22 μF",
+            "9.2 μH",
+            "10 μH",
+            "15 μH"
+          ],
+          "source_page": 5,
+          "snippet": "Chose 10μH or 15μH that of the input source so high-frequency switching currents For VOUT =3.3V, do not pass through the input source. The output capacitor The inductor values is calculated to be L = 9.2μH. keeps output "
+        },
+        {
+          "values": [
+            "22 μF",
+            "9.2 μH",
+            "10 μH"
+          ],
+          "source_page": 5,
+          "snippet": "For VOUT =3.3V, do not pass through the input source. The output capacitor The inductor values is calculated to be L = 9.2μH. keeps output ripple small and ensures control-loop stability. Chose 10μH ComponentsSelection V"
+        },
+        {
+          "values": [
+            "22 μF",
+            "10 μH"
+          ],
+          "source_page": 5,
+          "snippet": "Chose 10μH ComponentsSelection VOUT (V) COUT (μF) L (μH) Output Capacitor Selection 8 22 15 to 22 5 22 10 to 15For most applications a nominal 22μF or larger capacitor is 3.3 22 6.8 to 10suitable. The HM2459 internal com"
+        }
+      ],
+      "design_equation_hints": [
+        {
+          "equation": "RTOP = RBOTTOM x [(VOUT / 0.8) - 1] impedance at the switching frequency. Ceramic, polymer, and",
+          "source_page": 5
+        },
+        {
+          "equation": "LIDEAL = (VIN(MAX)-VOUT)/IRIPPLE*DMIN*(1/FOSC) peaks drawn from the battery or other input power source and",
+          "source_page": 5
+        }
+      ],
+      "topology_hints": [
+        {
+          "hint": "APPLICATION INFORMATION FC= = 8.7Khz",
+          "source_page": 5
+        },
+        {
+          "hint": "5 22 10 to 15For most applications a nominal 22μF or larger capacitor is",
+          "source_page": 5
+        }
+      ],
+      "design_pages": {
+        "pages": [
+          {
+            "page": 5,
+            "title": null,
+            "content_type": "application"
+          }
+        ],
+        "total_pages": 1
+      }
     }
   }
 }

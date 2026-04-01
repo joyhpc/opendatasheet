@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -451,6 +451,849 @@
       "unit": "°C/W",
       "conditions": "JEDEC standard",
       "source": "electrical_characteristics"
+    }
+  },
+  "domains": {
+    "pin": {
+      "packages": {
+        "SOP-8 (Exposed Pad)": {
+          "pin_count": 9,
+          "pins": {
+            "1": {
+              "name": "BOOT",
+              "direction": "PASSIVE",
+              "signal_type": "POWER",
+              "description": "Bootstrap capacitor connection node to supply the high-side gate driver. Connect a 0.1μF ceramic capacitor between this pin and the SW pin.",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "VIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power input. The input voltage range is from 4V to 60V. Connect a suitable input capacitor between this pin and GND.",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "EN",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Enable control pin with internal pull-up current source. Float or provide a logic-high (≥ 1.2V) enables the converter; a logic-low forces the device into shutdown mode.",
+              "unused_treatment": "FLOAT"
+            },
+            "4": {
+              "name": "RT/SYNC",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Frequency setting and external synchronous signal input. Connect a resistor from this pin to GND to set the switching frequency. Tie to a clock source for synchronization to an external frequency.",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "FB",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Output voltage sense. Sense the output voltage at the FB pin through a resistive divider. The feedback reference voltage is 0.8V typically.",
+              "unused_treatment": null
+            },
+            "6": {
+              "name": "COMP",
+              "direction": "OUTPUT",
+              "signal_type": "ANALOG",
+              "description": "Compensation node. Connect external compensation elements to this pin to stabilize the control loop.",
+              "unused_treatment": null
+            },
+            "7": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground. Provide the ground return path for the control circuitry.",
+              "unused_treatment": null
+            },
+            "8": {
+              "name": "SW",
+              "direction": "OUTPUT",
+              "signal_type": "POWER",
+              "description": "Switch node. SW is the switching node that supplies power to the output. Connect the output LC filter from SW to the output load.",
+              "unused_treatment": null
+            },
+            "9": {
+              "name": "PAD",
+              "direction": "PASSIVE",
+              "signal_type": "NONE",
+              "description": "Exposed pad. The exposed pad is internally unconnected and must be soldered to a large PCB copper area for maximum power dissipation.",
+              "unused_treatment": null
+            }
+          }
+        },
+        "WDFN-10L 4x4": {
+          "pin_count": 11,
+          "pins": {
+            "1": {
+              "name": "BOOT",
+              "direction": "PASSIVE",
+              "signal_type": "POWER",
+              "description": "Bootstrap capacitor connection node to supply the high-side gate driver. Connect a 0.1μF ceramic capacitor between this pin and the SW pin.",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "VIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power input. The input voltage range is from 4V to 60V. Connect a suitable input capacitor between this pin and GND.",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "EN",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Enable control pin with internal pull-up current source. Float or provide a logic-high (≥ 1.2V) enables the converter; a logic-low forces the device into shutdown mode.",
+              "unused_treatment": "FLOAT"
+            },
+            "4": {
+              "name": "SS/TR",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Soft-start and tracking control input. Connect a capacitor from SS to GND to set the soft-start period. Do Not leave this pin floating to avoid inrush current during power up.",
+              "unused_treatment": "CUSTOM"
+            },
+            "5": {
+              "name": "RT/SYNC",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Frequency setting and external synchronous signal input. Connect a resistor from this pin to GND to set the switching frequency. Tie to a clock source for synchronization to an external frequency.",
+              "unused_treatment": null
+            },
+            "6": {
+              "name": "FB",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Output voltage sense. Sense the output voltage at the FB pin through a resistive divider. The feedback reference voltage is 0.8V typically.",
+              "unused_treatment": null
+            },
+            "7": {
+              "name": "COMP",
+              "direction": "OUTPUT",
+              "signal_type": "ANALOG",
+              "description": "Compensation node. Connect external compensation elements to this pin to stabilize the control loop.",
+              "unused_treatment": null
+            },
+            "8": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground. Provide the ground return path for the control circuitry.",
+              "unused_treatment": null
+            },
+            "9": {
+              "name": "SW",
+              "direction": "OUTPUT",
+              "signal_type": "POWER",
+              "description": "Switch node. SW is the switching node that supplies power to the output. Connect the output LC filter from SW to the output load.",
+              "unused_treatment": null
+            },
+            "10": {
+              "name": "PGOOD",
+              "direction": "OUTPUT",
+              "signal_type": "DIGITAL",
+              "description": "Open-drain power-good indication output. Once being started-up, PGOOD will be pulled low to GND if any internal protection is triggered.",
+              "unused_treatment": null
+            },
+            "11": {
+              "name": "PAD",
+              "direction": "PASSIVE",
+              "signal_type": "NONE",
+              "description": "Exposed pad. The exposed pad is internally unconnected and must be soldered to a large PCB copper area for maximum power dissipation.",
+              "unused_treatment": null
+            }
+          }
+        }
+      }
+    },
+    "electrical": {
+      "absolute_maximum_ratings": {
+        "VIN": {
+          "parameter": "Supply Voltage",
+          "min": -0.3,
+          "max": 65,
+          "unit": "V",
+          "conditions": null
+        },
+        "EN": {
+          "parameter": "Enable Voltage",
+          "min": -0.3,
+          "max": 65,
+          "unit": "V",
+          "conditions": null
+        },
+        "SW": {
+          "parameter": "Switch Voltage",
+          "min": -0.6,
+          "max": 65,
+          "unit": "V",
+          "conditions": null
+        },
+        "SW_t___100ns": {
+          "parameter": "Switch Voltage (Transient)",
+          "min": -5,
+          "max": 70,
+          "unit": "V",
+          "conditions": "t ≤ 100ns"
+        },
+        "PGOOD": {
+          "parameter": "Power Good Voltage",
+          "min": -0.3,
+          "max": 65,
+          "unit": "V",
+          "conditions": null
+        },
+        "BOOT-SW": {
+          "parameter": "BOOT to SW Voltage",
+          "min": -0.3,
+          "max": 6,
+          "unit": "V",
+          "conditions": null
+        },
+        "TJ": {
+          "parameter": "Junction Temperature",
+          "min": null,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        },
+        "Tstg": {
+          "parameter": "Storage Temperature Range",
+          "min": -65,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        }
+      },
+      "electrical_parameters": {
+        "VIN": {
+          "parameter": "Input Operating Voltage",
+          "min": 4,
+          "typ": null,
+          "max": 60,
+          "unit": "V",
+          "conditions": "After soft-start is finished"
+        },
+        "VUVLOH": {
+          "parameter": "VIN Under-Voltage Lockout Threshold Rising",
+          "min": 4.1,
+          "typ": 4.3,
+          "max": 4.5,
+          "unit": "V",
+          "conditions": "VIN rising"
+        },
+        "VUVLOL": {
+          "parameter": "VIN Under-Voltage Lockout Threshold Falling",
+          "min": 3.8,
+          "typ": 3.9,
+          "max": 4,
+          "unit": "V",
+          "conditions": "VIN falling"
+        },
+        "ISHDN": {
+          "parameter": "Shutdown Current",
+          "min": null,
+          "typ": 2.25,
+          "max": 5,
+          "unit": "µA",
+          "conditions": "VEN = 0V"
+        },
+        "IQ": {
+          "parameter": "Quiescent Current",
+          "min": null,
+          "typ": 100,
+          "max": 135,
+          "unit": "µA",
+          "conditions": "VEN = 2V, VFB = 0.83V, not switching"
+        },
+        "VTH_EN": {
+          "parameter": "Enable Threshold Voltage",
+          "min": 1.1,
+          "typ": 1.2,
+          "max": 1.3,
+          "unit": "V",
+          "conditions": null
+        },
+        "IEN": {
+          "parameter": "Pull-Up Current (High)",
+          "min": null,
+          "typ": 4.6,
+          "max": null,
+          "unit": "µA",
+          "conditions": "VTH_EN + 50mV"
+        },
+        "IEN_VTH_EN___50mV": {
+          "parameter": "Pull-Up Current (Low)",
+          "min": 0.58,
+          "typ": 1.2,
+          "max": 1.8,
+          "unit": "µA",
+          "conditions": "VTH_EN - 50mV"
+        },
+        "IEN_Hys": {
+          "parameter": "Hysteresis Current",
+          "min": 2.2,
+          "typ": 3.4,
+          "max": 4.5,
+          "unit": "µA",
+          "conditions": null
+        },
+        "VREF": {
+          "parameter": "Reference Voltage",
+          "min": 0.792,
+          "typ": 0.8,
+          "max": 0.808,
+          "unit": "V",
+          "conditions": null
+        },
+        "RDS(ON)_H": {
+          "parameter": "High-Side Switch On-Resistance",
+          "min": null,
+          "typ": 70,
+          "max": 140,
+          "unit": "mΩ",
+          "conditions": "VIN = 12V, VBOOT - VSW = 5V"
+        },
+        "gm": {
+          "parameter": "Error Amplifier Trans-Conductance (Normal)",
+          "min": null,
+          "typ": 440,
+          "max": null,
+          "unit": "µA/V",
+          "conditions": "Normal operation, -2µA < ICOMP < 2µA, VCOMP = 1V"
+        },
+        "gm_During_SS___2_A___ICOMP___2_A": {
+          "parameter": "Error Amplifier Trans-Conductance (SS)",
+          "min": null,
+          "typ": 77,
+          "max": null,
+          "unit": "µA/V",
+          "conditions": "During SS, -2µA < ICOMP < 2µA, VCOMP = 1V, VFB = 0.4V"
+        },
+        "gm_cs": {
+          "parameter": "COMP to Current Sense Trans-Conductance",
+          "min": null,
+          "typ": 17,
+          "max": null,
+          "unit": "A/V",
+          "conditions": null
+        },
+        "ILIM": {
+          "parameter": "Current Limit",
+          "min": 6.375,
+          "typ": 7.5,
+          "max": 8.625,
+          "unit": "A",
+          "conditions": "fSW = 500kHz, VOUT = 5V"
+        },
+        "TSD": {
+          "parameter": "Thermal Shutdown",
+          "min": null,
+          "typ": 175,
+          "max": null,
+          "unit": "°C",
+          "conditions": null
+        },
+        "ΔTSD": {
+          "parameter": "Thermal Shutdown Hysteresis",
+          "min": null,
+          "typ": 15,
+          "max": null,
+          "unit": "°C",
+          "conditions": null
+        },
+        "VUVP": {
+          "parameter": "UVP Trip Threshold",
+          "min": null,
+          "typ": 0.4,
+          "max": null,
+          "unit": "V",
+          "conditions": "UVP detect"
+        },
+        "θJA": {
+          "parameter": "Junction-to-ambient thermal resistance (WDFN)",
+          "min": null,
+          "typ": 31.7,
+          "max": null,
+          "unit": "°C/W",
+          "conditions": "JEDEC standard"
+        },
+        "θJA_JEDEC_standard": {
+          "parameter": "Junction-to-ambient thermal resistance (SOP-8)",
+          "min": null,
+          "typ": 30.4,
+          "max": null,
+          "unit": "°C/W",
+          "conditions": "JEDEC standard"
+        }
+      },
+      "drc_hints": {
+        "vin_abs_max": {
+          "value": 65,
+          "unit": "V"
+        },
+        "vin_operating": {
+          "min": 4,
+          "max": 60,
+          "unit": "V"
+        },
+        "vref": {
+          "min": 0.792,
+          "typ": 0.8,
+          "max": 0.808,
+          "unit": "V"
+        },
+        "enable_threshold": {
+          "min": 1.1,
+          "typ": 1.2,
+          "max": 1.3,
+          "unit": "V"
+        },
+        "iout_max": {
+          "min": 6.375,
+          "typ": 7.5,
+          "max": 8.625,
+          "unit": "A"
+        },
+        "iq": {
+          "typ": 100,
+          "max": 135,
+          "unit": "µA"
+        },
+        "thermal_shutdown": {
+          "typ": 175,
+          "unit": "°C"
+        },
+        "thermal_resistance": {
+          "typ": 31.7,
+          "unit": "°C/W"
+        },
+        "uvlo": {
+          "min": 4.1,
+          "typ": 4.3,
+          "max": 4.5,
+          "unit": "V"
+        }
+      }
+    },
+    "thermal": {
+      "theta_ja": {
+        "parameter": "Junction-to-ambient thermal resistance (WDFN)",
+        "symbol": "θJA",
+        "min": null,
+        "typ": 31.7,
+        "max": null,
+        "value": null,
+        "unit": "°C/W",
+        "conditions": "JEDEC standard",
+        "source": "electrical_characteristics"
+      },
+      "theta_ja_JEDEC_standard": {
+        "parameter": "Junction-to-ambient thermal resistance (SOP-8)",
+        "symbol": "θJA",
+        "min": null,
+        "typ": 30.4,
+        "max": null,
+        "value": null,
+        "unit": "°C/W",
+        "conditions": "JEDEC standard",
+        "source": "electrical_characteristics"
+      }
+    },
+    "design_context": {
+      "recommended_external_components": [
+        {
+          "role": "inductor",
+          "source_page": 13,
+          "value_hint": "7.8 µH",
+          "value_hints": [
+            "0.1 µF",
+            "7.8 µH"
+          ],
+          "snippet": "RT6365"
+        },
+        {
+          "role": "bootstrap_capacitor",
+          "source_page": 13,
+          "value_hint": "0.1 µF",
+          "value_hints": [
+            "0.1 µF",
+            "7.8 µH"
+          ],
+          "snippet": "RT6365"
+        },
+        {
+          "role": "inductor",
+          "source_page": 13,
+          "value_hint": "7.8 µH",
+          "value_hints": [
+            "0.1 µF",
+            "7.8 µH",
+            "2.2 µF"
+          ],
+          "snippet": "Typical Application Circuit"
+        },
+        {
+          "role": "bootstrap_capacitor",
+          "source_page": 13,
+          "value_hint": "0.1 µF",
+          "value_hints": [
+            "0.1 µF",
+            "7.8 µH",
+            "2.2 µF"
+          ],
+          "snippet": "Typical Application Circuit"
+        },
+        {
+          "role": "feedback_divider",
+          "source_page": 13,
+          "value_hint": null,
+          "value_hints": [
+            "0.1 µF",
+            "7.8 µH",
+            "2.2 µF",
+            "47 µF"
+          ],
+          "snippet": "RT6365GSP 0.1µF"
+        },
+        {
+          "role": "feedback_divider",
+          "source_page": 13,
+          "value_hint": null,
+          "value_hints": [
+            "0.1 µF",
+            "7.8 µH",
+            "2.2 µF",
+            "47 µF",
+            "10 nF"
+          ],
+          "snippet": "VIN 2 1 L1 VIN BOOT"
+        },
+        {
+          "role": "input_capacitor",
+          "source_page": 20,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "RT6365"
+        },
+        {
+          "role": "output_capacitor",
+          "source_page": 20,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "RT6365"
+        },
+        {
+          "role": "input_capacitor",
+          "source_page": 20,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "Application Information"
+        },
+        {
+          "role": "output_capacitor",
+          "source_page": 20,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "Application Information"
+        },
+        {
+          "role": "soft_start_capacitor",
+          "source_page": 20,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "  VIN_MIN   IOUT_MAX  RDS(ON)_H   VD  RRT/SYNC. Next, the inductor L, the input capacitor CIN, t OFF_MIN "
+        },
+        {
+          "role": "soft_start_capacitor",
+          "source_page": 20,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "fSWthe output capacitor COUT and freewheel diode are chosen."
+        }
+      ],
+      "component_value_hints": [
+        {
+          "values": [
+            "7.8 µH",
+            "0.1 µF"
+          ],
+          "source_page": 13,
+          "snippet": "RT6365 Typical Application Circuit 300kHz, 3.3V, 5A Step-Down Converter CBOOT RT6365GSP 0.1µF VIN 2 1 L1 VIN BOOT 4.5V to 60V 7.8µH 8 VOUT C1 C2 C3 C4 SW"
+        },
+        {
+          "values": [
+            "7.8 µH",
+            "0.1 µF",
+            "2.2 µF"
+          ],
+          "source_page": 13,
+          "snippet": "RT6365 Typical Application Circuit 300kHz, 3.3V, 5A Step-Down Converter CBOOT RT6365GSP 0.1µF VIN 2 1 L1 VIN BOOT 4.5V to 60V 7.8µH 8 VOUT C1 C2 C3 C4 SW 2.2µF 2.2µF 2.2µF 2.2µF 3.3V/5A"
+        },
+        {
+          "values": [
+            "7.8 µH",
+            "0.1 µF",
+            "2.2 µF",
+            "47 µF"
+          ],
+          "source_page": 13,
+          "snippet": "RT6365 Typical Application Circuit 300kHz, 3.3V, 5A Step-Down Converter CBOOT RT6365GSP 0.1µF VIN 2 1 L1 VIN BOOT 4.5V to 60V 7.8µH 8 VOUT C1 C2 C3 C4 SW 2.2µF 2.2µF 2.2µF 2.2µF 3.3V/5A D1 R1 3 C7 C8 C9 EN SS5P6 Enable S"
+        },
+        {
+          "values": [
+            "7.8 µH",
+            "0.1 µF",
+            "2.2 µF",
+            "47 µF",
+            "10 nF"
+          ],
+          "source_page": 13,
+          "snippet": "Typical Application Circuit 300kHz, 3.3V, 5A Step-Down Converter CBOOT RT6365GSP 0.1µF VIN 2 1 L1 VIN BOOT 4.5V to 60V 7.8µH 8 VOUT C1 C2 C3 C4 SW 2.2µF 2.2µF 2.2µF 2.2µF 3.3V/5A D1 R1 3 C7 C8 C9 EN SS5P6 Enable Signal 3"
+        },
+        {
+          "values": [
+            "7.8 µH",
+            "0.1 µF",
+            "2.2 µF",
+            "47 µF",
+            "10 nF",
+            "220 pF"
+          ],
+          "source_page": 13,
+          "snippet": "RT6365GSP 0.1µF VIN 2 1 L1 VIN BOOT 4.5V to 60V 7.8µH 8 VOUT C1 C2 C3 C4 SW 2.2µF 2.2µF 2.2µF 2.2µF 3.3V/5A D1 R1 3 C7 C8 C9 EN SS5P6 Enable Signal 31.6k 5 47µF 47µF 47µF FB C5 R3 R2 10nF 5.36k 10k 6 COMP C6 RRT 220pF"
+        },
+        {
+          "values": [
+            "7.8 µH",
+            "2.2 µF",
+            "47 µF",
+            "10 nF",
+            "220 pF"
+          ],
+          "source_page": 13,
+          "snippet": "VIN 2 1 L1 VIN BOOT 4.5V to 60V 7.8µH 8 VOUT C1 C2 C3 C4 SW 2.2µF 2.2µF 2.2µF 2.2µF 3.3V/5A D1 R1 3 C7 C8 C9 EN SS5P6 Enable Signal 31.6k 5 47µF 47µF 47µF FB C5 R3 R2 10nF 5.36k 10k 6 COMP C6 RRT 220pF 332k 4"
+        },
+        {
+          "values": [
+            "2.2 µF",
+            "47 µF",
+            "10 nF",
+            "220 pF"
+          ],
+          "source_page": 13,
+          "snippet": "8 VOUT C1 C2 C3 C4 SW 2.2µF 2.2µF 2.2µF 2.2µF 3.3V/5A D1 R1 3 C7 C8 C9 EN SS5P6 Enable Signal 31.6k 5 47µF 47µF 47µF FB C5 R3 R2 10nF 5.36k 10k 6 COMP C6 RRT 220pF 332k 4 RT/SYNC GND PAD"
+        },
+        {
+          "values": [
+            "47 µF",
+            "10 nF",
+            "220 pF"
+          ],
+          "source_page": 13,
+          "snippet": "D1 R1 3 C7 C8 C9 EN SS5P6 Enable Signal 31.6k 5 47µF 47µF 47µF FB C5 R3 R2 10nF 5.36k 10k 6 COMP C6 RRT 220pF 332k 4 RT/SYNC GND PAD 7 9 (Exposed pad) fSW = 300kHz"
+        }
+      ],
+      "design_equation_hints": [
+        {
+          "equation": "fSW = 400kHz 7 9 (Exposed pad)",
+          "source_page": 13
+        },
+        {
+          "equation": "VOUT )L = Input Capacitor Selection",
+          "source_page": 21
+        },
+        {
+          "equation": "VCIN = D  IOUT  + ESR  IOUT",
+          "source_page": 21
+        },
+        {
+          "equation": "CIN_MIN = IOUT_MAX  VCIN_MAX  fSWoutput current (5A).",
+          "source_page": 21
+        },
+        {
+          "equation": "VESR = IOUT x ESR",
+          "source_page": 21
+        },
+        {
+          "equation": "IL_PEAK = IOUT_MAX +  IL D x tSW (1-D) x tSW",
+          "source_page": 21
+        },
+        {
+          "equation": "VOUT = IL  ESR +   8  fSW  COUT the input capacitors. The maximum ripple voltage usually",
+          "source_page": 22
+        },
+        {
+          "equation": "VFB = 42mV, typically) during power-up period.",
+          "source_page": 26
+        },
+        {
+          "equation": "t SS = CSS/TR ",
+          "source_page": 26
+        }
+      ],
+      "layout_hints": [
+        {
+          "hint": "ESR and must be rated to handle the worst-case RMS be placed close to the part and the capacitor should be",
+          "source_page": 22
+        },
+        {
+          "hint": "The input capacitor should be placed as close as possible",
+          "source_page": 22
+        },
+        {
+          "hint": "protect the device during momentary overload conditions. close to the IC as possible because to the RT/SYNC",
+          "source_page": 28
+        },
+        {
+          "hint": "Four-layer or six-layer PCB with maximum ground plane",
+          "source_page": 28
+        },
+        {
+          "hint": "Place bootstrap capacitor, CBOOT, as close to the IC as",
+          "source_page": 28
+        },
+        {
+          "hint": "possible. Routing the trace with width of 20mil or wider.",
+          "source_page": 28
+        },
+        {
+          "hint": "as possible. Add thermal vias under and near the",
+          "source_page": 28
+        },
+        {
+          "hint": "RT6365 to additional ground planes within the circuit",
+          "source_page": 28
+        },
+        {
+          "hint": "as close to the device as possible. The exposed pad must be soldered to a large",
+          "source_page": 29
+        },
+        {
+          "hint": "GND plane and add 6 thermal vias with",
+          "source_page": 29
+        }
+      ],
+      "supply_recommendations": [
+        {
+          "hint": "where VIN_MAX is the maximum operating input voltage. RRT/SYNC 400",
+          "source_page": 20
+        },
+        {
+          "hint": "frequency, input voltage, output voltage, and selected",
+          "source_page": 21
+        },
+        {
+          "hint": "transient response. This results in additional phase lag in in input voltage. The peak-to-peak voltage ripple on input",
+          "source_page": 21
+        },
+        {
+          "hint": "can be determined by the input voltage (VIN), output voltage for best performance across temperature and input voltage",
+          "source_page": 22
+        },
+        {
+          "hint": "common to use the worse IRMS ≅ 0.5 x IOUT_MAX at VIN = 2 The highest output ripple is at maximum input voltage",
+          "source_page": 22
+        },
+        {
+          "hint": "x VOUT for design. Note that ripple current ratings from since ΔIL increases with input voltage. Multiple capacitors",
+          "source_page": 22
+        },
+        {
+          "hint": "input voltage applications, sufficient bulk input capacitance frequency factor at PWM, and can be calculated from",
+          "source_page": 22
+        },
+        {
+          "hint": "performance across temperature and input voltagecombined with trace or cable inductance forms a high",
+          "source_page": 22
+        }
+      ],
+      "topology_hints": [
+        {
+          "hint": "Typical Application Circuit",
+          "source_page": 13
+        },
+        {
+          "hint": "300kHz, 3.3V, 5A Step-Down Converter",
+          "source_page": 13
+        },
+        {
+          "hint": "400kHz, 5V, 5A Step-Down Converter",
+          "source_page": 13
+        },
+        {
+          "hint": "400kHz, 12V, 5A Step-Down Converter",
+          "source_page": 13
+        },
+        {
+          "hint": "Application Information",
+          "source_page": 20
+        },
+        {
+          "hint": "A general RT6365 application circuit is shown in typical shows minimum off-time calculation with loss terms",
+          "source_page": 20
+        },
+        {
+          "hint": "application circuit section. External component selection consideration :",
+          "source_page": 20
+        },
+        {
+          "hint": "input voltage applications, sufficient bulk input capacitance frequency factor at PWM, and can be calculated from",
+          "source_page": 22
+        }
+      ],
+      "design_pages": {
+        "pages": [
+          {
+            "page": 13,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 20,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 21,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 22,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 24,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 26,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 28,
+            "title": null,
+            "content_type": "layout"
+          },
+          {
+            "page": 29,
+            "title": null,
+            "content_type": "layout"
+          },
+          {
+            "page": 30,
+            "title": null,
+            "content_type": "layout"
+          }
+        ],
+        "total_pages": 9
+      }
     }
   }
 }

@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -450,5 +450,837 @@
       "unit": "V"
     }
   },
-  "thermal": {}
+  "thermal": {},
+  "domains": {
+    "pin": {
+      "packages": {
+        "QFN-16": {
+          "pin_count": 17,
+          "pins": {
+            "1": {
+              "name": "VIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Input supply voltage: 2.95 V to 6 V",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "VIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Input supply voltage: 2.95 V to 6 V",
+              "unused_treatment": null
+            },
+            "16": {
+              "name": "VIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Input supply voltage: 2.95 V to 6 V",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power Ground. This pin should be electrically connected directly to the power pad under the IC.",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power Ground. This pin should be electrically connected directly to the power pad under the IC.",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "AGND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Analog Ground should be electrically connected to GND close to the device.",
+              "unused_treatment": null
+            },
+            "6": {
+              "name": "VSENSE",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Inverting node of the transconductance (gm) error amplifier",
+              "unused_treatment": null
+            },
+            "7": {
+              "name": "COMP",
+              "direction": "OUTPUT",
+              "signal_type": "ANALOG",
+              "description": "Error amplifier output and input to the output switch current comparator. Connect frequency compensation components to this pin.",
+              "unused_treatment": null
+            },
+            "8": {
+              "name": "RT",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Resistor timing",
+              "unused_treatment": null
+            },
+            "9": {
+              "name": "SS/TR",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "ANALOG",
+              "description": "Slow start. An external capacitor connected to this pin sets the output voltage rise time. This pin can also be used for tracking.",
+              "unused_treatment": null
+            },
+            "10": {
+              "name": "PH",
+              "direction": "OUTPUT",
+              "signal_type": "POWER",
+              "description": "The source of the internal high-side power MOSFET and drain of the internal low-side (synchronous) rectifier MOSFET.",
+              "unused_treatment": null
+            },
+            "11": {
+              "name": "PH",
+              "direction": "OUTPUT",
+              "signal_type": "POWER",
+              "description": "The source of the internal high-side power MOSFET and drain of the internal low-side (synchronous) rectifier MOSFET.",
+              "unused_treatment": null
+            },
+            "12": {
+              "name": "PH",
+              "direction": "OUTPUT",
+              "signal_type": "POWER",
+              "description": "The source of the internal high-side power MOSFET and drain of the internal low-side (synchronous) rectifier MOSFET.",
+              "unused_treatment": null
+            },
+            "13": {
+              "name": "BOOT",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "A bootstrap capacitor is required between BOOT and PH.",
+              "unused_treatment": null
+            },
+            "14": {
+              "name": "PWRGD",
+              "direction": "OUTPUT",
+              "signal_type": "DIGITAL",
+              "description": "An open-drain output. Asserts low if output voltage is low due to thermal shutdown, overcurrent, overvoltage/undervoltage, or EN shut down.",
+              "unused_treatment": null
+            },
+            "15": {
+              "name": "EN",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Enable pin, internal pullup current source. Pull below 1.18 V to disable. Float to enable.",
+              "unused_treatment": "FLOAT"
+            },
+            "17": {
+              "name": "PowerPAD",
+              "direction": "PASSIVE",
+              "signal_type": "POWER",
+              "description": "GND pin should be connected to the exposed power pad for proper operation. This thermal pad should be connected to any internal PCB ground plane using multiple vias for good thermal performance.",
+              "unused_treatment": null
+            }
+          }
+        }
+      }
+    },
+    "electrical": {
+      "absolute_maximum_ratings": {
+        "VIN": {
+          "parameter": "Input voltage VIN",
+          "min": -0.3,
+          "max": 7,
+          "unit": "V",
+          "conditions": null
+        },
+        "EN": {
+          "parameter": "Input voltage EN",
+          "min": -0.3,
+          "max": 7,
+          "unit": "V",
+          "conditions": null
+        },
+        "BOOT": {
+          "parameter": "Input voltage BOOT",
+          "min": null,
+          "max": null,
+          "unit": "V",
+          "conditions": "PH + 8"
+        },
+        "VSENSE": {
+          "parameter": "Input voltage VSENSE",
+          "min": -0.3,
+          "max": 3,
+          "unit": "V",
+          "conditions": null
+        },
+        "COMP": {
+          "parameter": "Input voltage COMP",
+          "min": -0.3,
+          "max": 3,
+          "unit": "V",
+          "conditions": null
+        },
+        "PWRGD": {
+          "parameter": "Input voltage PWRGD",
+          "min": -0.3,
+          "max": 7,
+          "unit": "V",
+          "conditions": null
+        },
+        "SS/TR": {
+          "parameter": "Input voltage SS/TR",
+          "min": -0.3,
+          "max": 3,
+          "unit": "V",
+          "conditions": null
+        },
+        "RT": {
+          "parameter": "Input voltage RT",
+          "min": -0.3,
+          "max": 6,
+          "unit": "V",
+          "conditions": null
+        },
+        "BOOT-PH": {
+          "parameter": "Output voltage BOOT-PH",
+          "min": null,
+          "max": 8,
+          "unit": "V",
+          "conditions": null
+        },
+        "PH": {
+          "parameter": "Output voltage PH",
+          "min": -0.6,
+          "max": 7,
+          "unit": "V",
+          "conditions": null
+        },
+        "PH_10_ns_Transient": {
+          "parameter": "Output voltage PH 10 ns Transient",
+          "min": -2,
+          "max": 7,
+          "unit": "V",
+          "conditions": "10 ns Transient"
+        },
+        "IEN": {
+          "parameter": "Source current EN",
+          "min": null,
+          "max": 100,
+          "unit": "μA",
+          "conditions": null
+        },
+        "IRT": {
+          "parameter": "Source current RT",
+          "min": null,
+          "max": 100,
+          "unit": "μA",
+          "conditions": null
+        },
+        "ICOMP": {
+          "parameter": "Sink current COMP",
+          "min": null,
+          "max": 100,
+          "unit": "μA",
+          "conditions": null
+        },
+        "IPWRGD": {
+          "parameter": "Sink current PWRGD",
+          "min": null,
+          "max": 10,
+          "unit": "mA",
+          "conditions": null
+        },
+        "ISS/TR": {
+          "parameter": "Sink current SS/TR",
+          "min": null,
+          "max": 100,
+          "unit": "μA",
+          "conditions": null
+        },
+        "Tj": {
+          "parameter": "Operating Junction temperature",
+          "min": -40,
+          "max": 140,
+          "unit": "°C",
+          "conditions": null
+        },
+        "Tstg": {
+          "parameter": "Storage temperature",
+          "min": -65,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        }
+      },
+      "electrical_parameters": {
+        "VIN": {
+          "parameter": "Operating input voltage",
+          "min": 2.95,
+          "typ": null,
+          "max": 6,
+          "unit": "V",
+          "conditions": null
+        },
+        "VUVLO": {
+          "parameter": "Internal undervoltage lockout threshold",
+          "min": null,
+          "typ": 2.4,
+          "max": 2.8,
+          "unit": "V",
+          "conditions": "Rising VIN"
+        },
+        "ISD": {
+          "parameter": "Shutdown supply current",
+          "min": null,
+          "typ": 1,
+          "max": 5,
+          "unit": "μA",
+          "conditions": "EN = 0 V, 2.95 V ≤ VIN ≤ 6 V"
+        },
+        "Iq": {
+          "parameter": "Quiescent current",
+          "min": null,
+          "typ": 455,
+          "max": 550,
+          "unit": "μA",
+          "conditions": "VSENSE = 620 mV, RT = 84 kΩ"
+        },
+        "VEN_RISE": {
+          "parameter": "Enable threshold (Rising)",
+          "min": 1.16,
+          "typ": 1.25,
+          "max": 1.37,
+          "unit": "V",
+          "conditions": "Rising"
+        },
+        "VEN_FALL": {
+          "parameter": "Enable threshold (Falling)",
+          "min": null,
+          "typ": 1.18,
+          "max": null,
+          "unit": "V",
+          "conditions": "Falling"
+        },
+        "IEN": {
+          "parameter": "Input current (Enable threshold + 50 mV)",
+          "min": null,
+          "typ": -3.6,
+          "max": null,
+          "unit": "μA",
+          "conditions": "Enable threshold + 50 mV"
+        },
+        "IEN_Enable_threshold___50_mV": {
+          "parameter": "Input current (Enable threshold - 50 mV)",
+          "min": null,
+          "typ": -0.7,
+          "max": null,
+          "unit": "μA",
+          "conditions": "Enable threshold - 50 mV"
+        },
+        "VREF": {
+          "parameter": "Voltage reference (Full Temp)",
+          "min": 0.591,
+          "typ": 0.6,
+          "max": 0.609,
+          "unit": "V",
+          "conditions": "2.95 V ≤ VIN ≤ 6 V, - 40°C < TJ < 140°C"
+        },
+        "VREF_25_C": {
+          "parameter": "Voltage reference (25C)",
+          "min": 0.594,
+          "typ": 0.6,
+          "max": 0.606,
+          "unit": "V",
+          "conditions": "25°C"
+        },
+        "RDS(on)": {
+          "parameter": "High-side switch resistance (5V)",
+          "min": null,
+          "typ": 26,
+          "max": 60,
+          "unit": "mΩ",
+          "conditions": "BOOT-PH = 5 V; TJ = 25°C"
+        },
+        "RDS(on)_BOOT_PH___2_95_V__TJ___25_C": {
+          "parameter": "High-side switch resistance (2.95V)",
+          "min": null,
+          "typ": 35,
+          "max": 70,
+          "unit": "mΩ",
+          "conditions": "BOOT-PH = 2.95 V; TJ = 25°C"
+        },
+        "RDS(on)_VIN___5_V__TJ___25_C": {
+          "parameter": "Low-side switch resistance (5V)",
+          "min": null,
+          "typ": 26,
+          "max": 60,
+          "unit": "mΩ",
+          "conditions": "VIN = 5 V; TJ = 25°C"
+        },
+        "RDS(on)_VIN___2_95_V__TJ___25_C": {
+          "parameter": "Low-side switch resistance (2.95V)",
+          "min": null,
+          "typ": 35,
+          "max": 70,
+          "unit": "mΩ",
+          "conditions": "VIN = 2.95 V; TJ = 25°C"
+        },
+        "IIB": {
+          "parameter": "Error amplifier input current",
+          "min": null,
+          "typ": 50,
+          "max": null,
+          "unit": "nA",
+          "conditions": null
+        },
+        "gm": {
+          "parameter": "Error amplifier transconductance (gm)",
+          "min": null,
+          "typ": 250,
+          "max": null,
+          "unit": "μmhos",
+          "conditions": "- 2 μA < I(COMP) < 2 μA, V(COMP) = 1 V"
+        },
+        "gm_ss": {
+          "parameter": "Error amplifier transconductance (gm) during slow start",
+          "min": null,
+          "typ": 85,
+          "max": null,
+          "unit": "μmhos",
+          "conditions": "- 2 μA < I(COMP) < 2 μA, V(COMP) = 0.9 V, Vsense = 0.3 V"
+        },
+        "IEA": {
+          "parameter": "Error amplifier source/sink",
+          "min": null,
+          "typ": 20,
+          "max": null,
+          "unit": "μA",
+          "conditions": "V(COMP) = 1 V, 100 mV overdrive"
+        },
+        "Gps": {
+          "parameter": "COMP to Iswitch gm",
+          "min": null,
+          "typ": 25,
+          "max": null,
+          "unit": "A/V",
+          "conditions": null
+        }
+      },
+      "drc_hints": {
+        "vin_abs_max": {
+          "value": 7,
+          "unit": "V"
+        },
+        "vin_operating": {
+          "min": 2.95,
+          "max": 6,
+          "unit": "V"
+        },
+        "vref": {
+          "min": 0.591,
+          "typ": 0.6,
+          "max": 0.609,
+          "unit": "V"
+        },
+        "enable_threshold": {
+          "min": 1.16,
+          "typ": 1.25,
+          "max": 1.37,
+          "unit": "V"
+        },
+        "iq": {
+          "typ": 455,
+          "max": 550,
+          "unit": "μA"
+        },
+        "uvlo": {
+          "typ": 2.4,
+          "max": 2.8,
+          "unit": "V"
+        }
+      }
+    },
+    "design_context": {
+      "recommended_external_components": [
+        {
+          "role": "bootstrap_capacitor",
+          "source_page": 4,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "Input current μA"
+        },
+        {
+          "role": "bootstrap_capacitor",
+          "source_page": 4,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "Enable threshold – 50 mV -0.7"
+        },
+        {
+          "role": "soft_start_capacitor",
+          "source_page": 12,
+          "value_hint": "0.1 μF",
+          "value_hints": [
+            "0.1 μF"
+          ],
+          "snippet": "To improve dropout, the TPS54719 is designed to operate at 100% duty cycle as long as the BOOT to PH pin"
+        },
+        {
+          "role": "soft_start_capacitor",
+          "source_page": 12,
+          "value_hint": "0.1 μF",
+          "value_hints": [
+            "0.1 μF"
+          ],
+          "snippet": "voltage is greater than 2.1 V, typically. The high-side MOSFET is turned off using an UVLO circuit, allowing for"
+        },
+        {
+          "role": "feedback_divider",
+          "source_page": 12,
+          "value_hint": "100 kΩ",
+          "value_hints": [
+            "100 kΩ"
+          ],
+          "snippet": "7.3.5 Voltage Reference"
+        },
+        {
+          "role": "feedback_divider",
+          "source_page": 12,
+          "value_hint": "100 kΩ",
+          "value_hints": [
+            "100 kΩ"
+          ],
+          "snippet": "The voltage reference system produces a precise ±1.5% voltage reference over temperature by scaling the"
+        },
+        {
+          "role": "uvlo_divider",
+          "source_page": 12,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "VSENSE"
+        },
+        {
+          "role": "uvlo_divider",
+          "source_page": 12,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "R2"
+        },
+        {
+          "role": "output_capacitor",
+          "source_page": 17,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "PH"
+        },
+        {
+          "role": "output_capacitor",
+          "source_page": 17,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "Power Stage VO"
+        },
+        {
+          "role": "inductor",
+          "source_page": 20,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "器件是否适用于其应用。客户应验证并测试其设计，以确保系统功能。"
+        },
+        {
+          "role": "inductor",
+          "source_page": 20,
+          "value_hint": "1.5 uH",
+          "value_hints": [
+            "1.5 uH"
+          ],
+          "snippet": "8.1 Application Information"
+        }
+      ],
+      "component_value_hints": [
+        {
+          "values": [
+            "0.1 μF"
+          ],
+          "source_page": 12,
+          "snippet": "TPS54719 www.ti.com.cn ZHCS990C – JUNE 2012 – REVISED SEPTEMBER 2021 7.3.3 Bootstrap Voltage (Boot) And Low Dropout Operation The TPS54719 has an integrated boot regulator and requires a small ceramic capacitor between t"
+        },
+        {
+          "values": [
+            "100 kΩ"
+          ],
+          "source_page": 12,
+          "snippet": "The TPS54719 has a transconductance amplifier. The error amplifier compares the VSENSE voltage to the lower of the SS/TR pin voltage or the internal 0.6-V voltage reference. The transconductance of the error amplifier is"
+        },
+        {
+          "values": [
+            "5 pF"
+          ],
+          "source_page": 18,
+          "snippet": "¦ z = COUT ´ RESR ´ 2 p (13) 7.4.10 Small Signal Model For Frequency Compensation The TPS54719 uses a transconductance amplifier for the error amplifier and readily supports two of the commonly used frequency compensatio"
+        },
+        {
+          "values": [
+            "1.5 uH"
+          ],
+          "source_page": 20,
+          "snippet": "8 Application and Implementation Note 以下应用部分中的信息不属于TI 器件规格的范围，TI 不担保其准确性和完整性。TI 的客 户应负责确定 器件是否适用于其应用。客户应验证并测试其设计，以确保系统功能。 8.1 Application Information This example details the design of a high frequency switching regulato"
+        },
+        {
+          "values": [
+            "0.1 uF",
+            "1.5 uH"
+          ],
+          "source_page": 20,
+          "snippet": "This example details the design of a high frequency switching regulator design using ceramic output capacitors. This design is available as the PWR037-002 evaluation module (EVM). A few parameters must be known in order "
+        },
+        {
+          "values": [
+            "1.5 uH",
+            "0.1 uF",
+            "10 uF",
+            "22 uF"
+          ],
+          "source_page": 20,
+          "snippet": "This design is available as the PWR037-002 evaluation module (EVM). A few parameters must be known in order to start the design process. These parameters are typically determined on the system level. 8.2 Typical Applicat"
+        },
+        {
+          "values": [
+            "0.1 uF",
+            "1.5 uH",
+            "10 uF",
+            "22 uF"
+          ],
+          "source_page": 20,
+          "snippet": "VIN= 3-6V VIN TPS54719 1.5uH VOUT= 1.8V , IOUT = 7 A max VIN 16 VIN PH 10 VOUT 1 11 C8 VIN PH R1 C1 C2 C3 C9 C10 R5 2 12 0.1uF VIN PH 10uF 0.1uF 10uF 51.1 22uF 22uF 14.3k 15 13 EN BOOT VSNS 6 VSNS PWRGD 14 PWRGD EN 7 COM"
+        },
+        {
+          "values": [
+            "0.1 uF",
+            "10 uF",
+            "22 uF",
+            "220 pF",
+            "270 pF"
+          ],
+          "source_page": 20,
+          "snippet": "VIN 16 VIN PH 10 VOUT 1 11 C8 VIN PH R1 C1 C2 C3 C9 C10 R5 2 12 0.1uF VIN PH 10uF 0.1uF 10uF 51.1 22uF 22uF 14.3k 15 13 EN BOOT VSNS 6 VSNS PWRGD 14 PWRGD EN 7 COMP GND 3 8 R2 C4 C11 R6 RT/CLK GND 4 R3 5 9 220pF 11.5k 20"
+        }
+      ],
+      "design_range_hints": [
+        {
+          "name": "VIN",
+          "min": 2.95,
+          "max": 6.0,
+          "unit": "V",
+          "source_page": 4,
+          "snippet": "TJ = –40°C to 140°C, VIN = 2.95 to 6 V (unless otherwise noted)"
+        },
+        {
+          "name": "VIN",
+          "min": 3.0,
+          "max": 6.0,
+          "unit": "V",
+          "source_page": 20,
+          "snippet": "VIN= 3-6V VIN TPS54719 1.5uH VOUT= 1.8V , IOUT = 7 A max"
+        }
+      ],
+      "design_equation_hints": [
+        {
+          "equation": "ILpeak = Iout +",
+          "source_page": 21
+        },
+        {
+          "equation": "t DEAD VOUT(MIN) = VIN ç ÷ - IOUT (RDS + RL ) - (0.7V - (IOUT ´ RDS ))",
+          "source_page": 23
+        },
+        {
+          "equation": "VOUT(MIN) = minimum achievable output voltage",
+          "source_page": 24
+        },
+        {
+          "equation": "tS = 1/fSW (switching frequency)",
+          "source_page": 24
+        },
+        {
+          "equation": "VIN = maximum input voltage",
+          "source_page": 24
+        },
+        {
+          "equation": "t DEAD VOUT(MAX) = VIN ç 1 - ÷ - IOUT (R DS + R L ) - (VIN + 0.7V - (IOUT ´ R DS ))",
+          "source_page": 24
+        },
+        {
+          "equation": "VOUT(MAX) = maximum achievable output voltage",
+          "source_page": 24
+        },
+        {
+          "equation": "VIN = minimum input voltage",
+          "source_page": 24
+        }
+      ],
+      "layout_hints": [
+        {
+          "hint": "c. 2 oz. copper ground planes on the 2 internal layers and bottom layer",
+          "source_page": 4
+        },
+        {
+          "hint": "d. 4 thermal vias (10mil) located under the device package",
+          "source_page": 4
+        },
+        {
+          "hint": "5 9 220pF 11.5k 20k 270pF AGND SS/TR",
+          "source_page": 20
+        },
+        {
+          "hint": "or degrade the power supplies performance. Care should be taken to minimize the loop area formed by the",
+          "source_page": 29
+        },
+        {
+          "hint": "AGND pin should be tied directly to the power pad under the IC. The power pad should be connected to any",
+          "source_page": 29
+        },
+        {
+          "hint": "internal PCB ground planes using multiple vias directly under the IC. Additional vias can be used to connect the",
+          "source_page": 29
+        },
+        {
+          "hint": "the top side ground area along with any additional internal ground planes must provide adequate heat",
+          "source_page": 29
+        },
+        {
+          "hint": "Locate the input bypass capacitor as close to the IC as possible. The PH pin should be routed to the output",
+          "source_page": 29
+        },
+        {
+          "hint": "inductor. Since the PH connection is the switching node, the output inductor should be located very close to the",
+          "source_page": 29
+        },
+        {
+          "hint": "capacitor must also be located close to the device. The sensitive analog ground connections for the feedback",
+          "source_page": 29
+        }
+      ],
+      "supply_recommendations": [
+        {
+          "hint": "SUPPLY VOLTAGE (VIN PIN)",
+          "source_page": 4
+        },
+        {
+          "hint": "Operating input voltage 2.95 6 V",
+          "source_page": 4
+        },
+        {
+          "hint": "Internal UVLO hysteresis 0.2 V",
+          "source_page": 4
+        },
+        {
+          "hint": "Shutdown supply current EN = 0 V, 2.95 V ≤ VIN ≤ 6 V 1 5 μA",
+          "source_page": 4
+        },
+        {
+          "hint": "ENABLE AND UVLO (EN PIN)",
+          "source_page": 4
+        },
+        {
+          "hint": "voltage is greater than 2.1 V, typically. The high-side MOSFET is turned off using an UVLO circuit, allowing for",
+          "source_page": 12
+        },
+        {
+          "hint": "the low-side MOSFET to conduct when the voltage from BOOT to PH drops below 2.1 V. Since the supply",
+          "source_page": 12
+        },
+        {
+          "hint": "undervoltage lockout (UVLO), use the EN pin as shown in 图 7-2 to adjust the input voltage UVLO by using two",
+          "source_page": 12
+        }
+      ],
+      "topology_hints": [
+        {
+          "hint": "distortion starts to substantially increase. See power dissipation estimate in the application section of this data sheet for more",
+          "source_page": 4
+        },
+        {
+          "hint": "The TPS54719 is disabled when the VIN pin voltage falls below 2.2 V. If an application requires a higher",
+          "source_page": 12
+        },
+        {
+          "hint": "8 Application and Implementation",
+          "source_page": 20
+        },
+        {
+          "hint": "8.1 Application Information",
+          "source_page": 20
+        },
+        {
+          "hint": "8.2 Typical Application",
+          "source_page": 20
+        },
+        {
+          "hint": "the discretion of the designer; however, KIND is normally from 0.1 to 0.3 for the majority of applications.",
+          "source_page": 21
+        },
+        {
+          "hint": "8.2.4 Application Curves",
+          "source_page": 26
+        }
+      ],
+      "design_pages": {
+        "pages": [
+          {
+            "page": 4,
+            "title": null,
+            "content_type": "layout"
+          },
+          {
+            "page": 12,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 17,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 18,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 20,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 21,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 23,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 24,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 26,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 29,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 30,
+            "title": null,
+            "content_type": "layout"
+          }
+        ],
+        "total_pages": 11
+      }
+    }
+  }
 }

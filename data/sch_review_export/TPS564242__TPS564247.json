@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -181,5 +181,446 @@
       "unit": "ms"
     }
   },
-  "thermal": {}
+  "thermal": {},
+  "domains": {
+    "pin": {
+      "packages": {
+        "SOT-563": {
+          "pin_count": 6,
+          "pins": {
+            "1": {
+              "name": "VIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power supply input voltage pin",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "SW",
+              "direction": "OUTPUT",
+              "signal_type": "POWER",
+              "description": "Switching node output to the inductor",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power ground pin",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "AGND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Analog ground pin",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "EN",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Enable input pin",
+              "unused_treatment": null
+            },
+            "6": {
+              "name": "FB",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Feedback input pin for output voltage regulation",
+              "unused_treatment": null
+            }
+          }
+        }
+      }
+    },
+    "electrical": {
+      "absolute_maximum_ratings": {},
+      "electrical_parameters": {
+        "VIN": {
+          "parameter": "Input voltage range",
+          "min": 3,
+          "typ": null,
+          "max": 16,
+          "unit": "V",
+          "conditions": null
+        },
+        "VOUT": {
+          "parameter": "Output voltage range",
+          "min": 0.6,
+          "typ": null,
+          "max": 7,
+          "unit": "V",
+          "conditions": null
+        },
+        "VREF": {
+          "parameter": "Reference voltage",
+          "min": null,
+          "typ": 0.6,
+          "max": null,
+          "unit": "V",
+          "conditions": null
+        },
+        "VREF_ACC": {
+          "parameter": "Reference accuracy",
+          "min": -1.5,
+          "typ": null,
+          "max": 1.5,
+          "unit": "%",
+          "conditions": null
+        },
+        "RDS(ON)H": {
+          "parameter": "High-side FET on-resistance",
+          "min": null,
+          "typ": 28.8,
+          "max": null,
+          "unit": "mΩ",
+          "conditions": null
+        },
+        "RDS(ON)L": {
+          "parameter": "Low-side FET on-resistance",
+          "min": null,
+          "typ": 15.4,
+          "max": null,
+          "unit": "mΩ",
+          "conditions": null
+        },
+        "IQ": {
+          "parameter": "Quiescent current",
+          "min": null,
+          "typ": 120,
+          "max": null,
+          "unit": "µA",
+          "conditions": null
+        },
+        "fSW": {
+          "parameter": "Switching frequency",
+          "min": null,
+          "typ": 1.2,
+          "max": null,
+          "unit": "MHz",
+          "conditions": null
+        },
+        "DMAX": {
+          "parameter": "Maximum duty cycle",
+          "min": null,
+          "typ": null,
+          "max": 95,
+          "unit": "%",
+          "conditions": null
+        },
+        "tSS": {
+          "parameter": "Fixed soft-start time",
+          "min": null,
+          "typ": 1.39,
+          "max": null,
+          "unit": "ms",
+          "conditions": "典型值"
+        },
+        "IOUT": {
+          "parameter": "Continuous output current",
+          "min": null,
+          "typ": null,
+          "max": 4,
+          "unit": "A",
+          "conditions": null
+        }
+      },
+      "drc_hints": {
+        "vin_operating": {
+          "min": 3,
+          "max": 16,
+          "unit": "V"
+        },
+        "vref": {
+          "typ": 0.6,
+          "unit": "V"
+        },
+        "vout": {
+          "min": 0.6,
+          "max": 7,
+          "unit": "V"
+        },
+        "iout_max": {
+          "max": 4,
+          "unit": "A"
+        },
+        "iq": {
+          "typ": 120,
+          "unit": "µA"
+        },
+        "fsw": {
+          "typ": 1.2,
+          "unit": "MHz"
+        },
+        "soft_start": {
+          "typ": 1.39,
+          "unit": "ms"
+        }
+      }
+    },
+    "design_context": {
+      "recommended_external_components": [
+        {
+          "role": "input_capacitor",
+          "source_page": 0,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "• WLAN/Wi-Fi 接入点、调制解调器（电缆/DSL/"
+        },
+        {
+          "role": "output_capacitor",
+          "source_page": 0,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "• WLAN/Wi-Fi 接入点、调制解调器（电缆/DSL/"
+        },
+        {
+          "role": "input_capacitor",
+          "source_page": 0,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "GFAST）、固态硬盘"
+        },
+        {
+          "role": "output_capacitor",
+          "source_page": 0,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "GFAST）、固态硬盘"
+        },
+        {
+          "role": "feedback_divider",
+          "source_page": 12,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "设计过程。"
+        },
+        {
+          "role": "feedback_divider",
+          "source_page": 12,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "图 8-1 显示了 TPS56424x 12V 输入、1.05V 输出转换器原理图。"
+        },
+        {
+          "role": "inductor",
+          "source_page": 12,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "2 5"
+        },
+        {
+          "role": "inductor",
+          "source_page": 12,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "SW EN R2"
+        }
+      ],
+      "component_value_hints": [
+        {
+          "values": [
+            "28.8mΩ",
+            "15.4mΩ"
+          ],
+          "source_page": 0,
+          "snippet": "TPS564242, TPS564247 ZHCSOJ2 – APRIL 2022 TPS56424x 采用 SOT-563 封装、具有 3V 至 16V 输入电压的 4A 同步降压转换器 1 特性 3 说明 • 广泛地为各种应用配置 TPS56424x 是一款简单易用、高效同步降压转换器， – 3V 至 16V 输入电压范围 具有高功率密度。该器件采用 SOT-563 封装，并支持 – 0.6V 至 7V 输出电压范围 3V 至 16"
+        },
+        {
+          "values": [
+            "28.8 mΩ",
+            "30.5 mΩ"
+          ],
+          "source_page": 4,
+          "snippet": "开关，FCCM 版本 IINSDN VIN 关断电流 无负载，VEN = 0V 2 µA UVLO UVLO VIN 欠压锁定 唤醒 VIN 电压 2.75 2.92 3 V UVLO VIN 欠压锁定 关断 VIN 电压 2.6 2.72 2.9 V UVLO VIN 欠压锁定 迟滞 VIN 电压 200 mV 反馈电压 VREF FB 电压 TJ = 25°C 594 600 606 mV VREF FB 电压 TJ = –40°C"
+        },
+        {
+          "values": [
+            "28.8 mΩ",
+            "30.5 mΩ",
+            "15.4 mΩ"
+          ],
+          "source_page": 4,
+          "snippet": "IINSDN VIN 关断电流 无负载，VEN = 0V 2 µA UVLO UVLO VIN 欠压锁定 唤醒 VIN 电压 2.75 2.92 3 V UVLO VIN 欠压锁定 关断 VIN 电压 2.6 2.72 2.9 V UVLO VIN 欠压锁定 迟滞 VIN 电压 200 mV 反馈电压 VREF FB 电压 TJ = 25°C 594 600 606 mV VREF FB 电压 TJ = –40°C 至 125°C 59"
+        },
+        {
+          "values": [
+            "28.8 mΩ",
+            "30.5 mΩ",
+            "15.4 mΩ",
+            "16.3 mΩ"
+          ],
+          "source_page": 4,
+          "snippet": "UVLO UVLO VIN 欠压锁定 唤醒 VIN 电压 2.75 2.92 3 V UVLO VIN 欠压锁定 关断 VIN 电压 2.6 2.72 2.9 V UVLO VIN 欠压锁定 迟滞 VIN 电压 200 mV 反馈电压 VREF FB 电压 TJ = 25°C 594 600 606 mV VREF FB 电压 TJ = –40°C 至 125°C 591 600 609 mV MOSFET 高侧 MOSFET RDS("
+        },
+        {
+          "values": [
+            "30.5 mΩ",
+            "15.4 mΩ",
+            "16.3 mΩ"
+          ],
+          "source_page": 4,
+          "snippet": "高侧 MOSFET RDS(ON) TJ = 25°C，VVIN = 3V 30.5 mΩ RDS (ON)LO 低侧 MOSFET RDS(ON) TJ = 25°C，VVIN ≥ 5V 15.4 mΩ RDS (ON)LO 低侧 MOSFET RDS(ON) TJ = 25°C，VVIN = 3V 16.3 mΩ IOCL_LS 过流阈值 谷值电流设定点 4.5 6 7.5 A INOCL 负过流阈值 1.5 2.5 3.5 A 占"
+        },
+        {
+          "values": [
+            "15.4 mΩ",
+            "16.3 mΩ"
+          ],
+          "source_page": 4,
+          "snippet": "RDS (ON)LO 低侧 MOSFET RDS(ON) TJ = 25°C，VVIN ≥ 5V 15.4 mΩ RDS (ON)LO 低侧 MOSFET RDS(ON) TJ = 25°C，VVIN = 3V 16.3 mΩ IOCL_LS 过流阈值 谷值电流设定点 4.5 6 7.5 A INOCL 负过流阈值 1.5 2.5 3.5 A 占空比和频率控制 FSW 开关频率 TJ = 25°C，VVOUT = 3.3V 1200 k"
+        },
+        {
+          "values": [
+            "16.3 mΩ",
+            "2 MΩ"
+          ],
+          "source_page": 4,
+          "snippet": "RDS (ON)LO 低侧 MOSFET RDS(ON) TJ = 25°C，VVIN = 3V 16.3 mΩ IOCL_LS 过流阈值 谷值电流设定点 4.5 6 7.5 A INOCL 负过流阈值 1.5 2.5 3.5 A 占空比和频率控制 FSW 开关频率 TJ = 25°C，VVOUT = 3.3V 1200 kHz TON(MIN) (1) 最短导通时间 TJ = 25°C 50 ns TOFF(MIN) (1) 最短关断"
+        },
+        {
+          "values": [
+            "10kΩ"
+          ],
+          "source_page": 13,
+          "snippet": "WEBENCH Power Designer 提供了定制原理图，并罗列了实时价格和元件供货情况的物料清单。 在多数情况下，可执行以下操作： • 运行电气仿真，观察重要波形以及电路性能 • 运行热性能仿真，了解电路板热性能 • 将定制原理图和布局方案以常用 CAD 格式导出 • 打印 PDF 格式的设计报告并与同事共享 有关 WEBENCH 工具的详细信息，请访问 www.ti.com/WEBENCH。 8.2.2.2 输出电压电阻器选型"
+        }
+      ],
+      "design_range_hints": [
+        {
+          "name": "VIN",
+          "min": 3.0,
+          "max": 16.0,
+          "unit": "V",
+          "source_page": 12,
+          "snippet": "VIN = 3 V to 16 V"
+        }
+      ],
+      "design_equation_hints": [
+        {
+          "equation": "Vout = 1.05V",
+          "source_page": 0
+        },
+        {
+          "equation": "Vout = 3.3V",
+          "source_page": 0
+        },
+        {
+          "equation": "TJ = 25°C 594 600 606 mV",
+          "source_page": 4
+        },
+        {
+          "equation": "TJ = –40°C 至 125°C 591 600 609 mV",
+          "source_page": 4
+        },
+        {
+          "equation": "MOSFET RDS(ON) TJ = 25°C，VVIN ≥ 5V 28.8 mΩ (1) RDS (ON)HI",
+          "source_page": 4
+        },
+        {
+          "equation": "MOSFET RDS(ON) TJ = 25°C，VVIN ≥ 5V 15.4 mΩ",
+          "source_page": 4
+        },
+        {
+          "equation": "VOUT = 1.05 V L1 R3 20 k",
+          "source_page": 12
+        }
+      ],
+      "layout_hints": [
+        {
+          "hint": "±1.5% GND 和 AGND 两个接地端，将其连接在一起可获得最",
+          "source_page": 0
+        },
+        {
+          "hint": "– 集成式 28.8mΩ 和 15.4mΩ RDSON FET 优热性能。AGND 还提供良好的负载和线路调节。该",
+          "source_page": 0
+        },
+        {
+          "hint": "EN 5 EN AGND 4 60%",
+          "source_page": 0
+        },
+        {
+          "hint": "GND AGND Not Installed",
+          "source_page": 12
+        },
+        {
+          "hint": "GND AGND",
+          "source_page": 18
+        }
+      ],
+      "supply_recommendations": [
+        {
+          "hint": "• 解决方案尺寸小巧且易于使用 该器件通过 OVP、OCP、UVLO、OTP 和 UVP（断续",
+          "source_page": 0
+        },
+        {
+          "hint": "– 非锁存 OV/OT/UVLO 保护 SOT-563 (6) 1.60mm × 1.60mm",
+          "source_page": 0
+        },
+        {
+          "hint": "UVLO VIN 欠压锁定 唤醒 VIN 电压 2.75 2.92 3 V",
+          "source_page": 4
+        },
+        {
+          "hint": "UVLO VIN 欠压锁定 关断 VIN 电压 2.6 2.72 2.9 V",
+          "source_page": 4
+        },
+        {
+          "hint": "UVLO VIN 欠压锁定 迟滞 VIN 电压 200 mV",
+          "source_page": 4
+        }
+      ],
+      "design_pages": {
+        "pages": [
+          {
+            "page": 0,
+            "title": null,
+            "content_type": "power_supply"
+          },
+          {
+            "page": 1,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 4,
+            "title": null,
+            "content_type": "power_supply"
+          },
+          {
+            "page": 10,
+            "title": null,
+            "content_type": "power_supply"
+          },
+          {
+            "page": 12,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 13,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 14,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 17,
+            "title": null,
+            "content_type": "power_supply"
+          },
+          {
+            "page": 18,
+            "title": null,
+            "content_type": "layout"
+          }
+        ],
+        "total_pages": 9
+      }
+    }
+  }
 }

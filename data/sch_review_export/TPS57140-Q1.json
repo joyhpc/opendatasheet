@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -363,5 +363,672 @@
       "unit": "V"
     }
   },
-  "thermal": {}
+  "thermal": {},
+  "domains": {
+    "pin": {
+      "packages": {
+        "MSOP-PowerPAD (10)": {
+          "pin_count": 11,
+          "pins": {
+            "1": {
+              "name": "BOOT",
+              "direction": "OUTPUT",
+              "signal_type": "POWER",
+              "description": "A bootstrap capacitor is required between BOOT and PH pins. If the voltage on this capacitor is below the minimum required by the device, the output is forced to switch off until the capacitor is refreshed.",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "VIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "The VIN pin is the input supply voltage which is from 3.5 to 42 V.",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "EN",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Enable pin, internal pullup current source. Pull below 1.2 V to disable. Float to enable. Adjust the input undervoltage lockout with two resistors.",
+              "unused_treatment": "FLOAT"
+            },
+            "4": {
+              "name": "SS/TR",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Slow-start and tracking. An external capacitor connected to this pin sets the output rise time. The voltage on this pin overrides the internal reference, allowing use of the pin for tracking and sequencing.",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "RT/CLK",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Resistor timing and external clock. An internal amplifier holds this pin at a fixed voltage when using an external resistor to ground to set the switching frequency. Pulling the pin above the PLL upper threshold causes a mode change whereby the pin becomes a synchronization input.",
+              "unused_treatment": null
+            },
+            "6": {
+              "name": "PWRGD",
+              "direction": "OUTPUT",
+              "signal_type": "DIGITAL",
+              "description": "An open-drain output, asserts low if output voltage is low due to thermal shutdown, dropout, overvoltage, or EN shutdown.",
+              "unused_treatment": null
+            },
+            "7": {
+              "name": "VSENSE",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "The VSENSE pin is the inverting node of the transconductance (gm) error amplifier.",
+              "unused_treatment": null
+            },
+            "8": {
+              "name": "COMP",
+              "direction": "OUTPUT",
+              "signal_type": "ANALOG",
+              "description": "Error-amplifier output and input to the output-switch current comparator. Connect frequency-compensation components to this pin.",
+              "unused_treatment": null
+            },
+            "9": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "The GND pin is the ground pin.",
+              "unused_treatment": null
+            },
+            "10": {
+              "name": "PH",
+              "direction": "OUTPUT",
+              "signal_type": "POWER",
+              "description": "The PH pin is the source of the internal high-side power MOSFET.",
+              "unused_treatment": null
+            },
+            "EP": {
+              "name": "Thermal pad",
+              "direction": "PASSIVE",
+              "signal_type": "POWER",
+              "description": "GND pin must have an electrical connection to the exposed pad on the printed-circuit board for proper operation.",
+              "unused_treatment": null
+            }
+          }
+        },
+        "VSON (10)": {
+          "pin_count": 11,
+          "pins": {
+            "1": {
+              "name": "BOOT",
+              "direction": "OUTPUT",
+              "signal_type": "POWER",
+              "description": "A bootstrap capacitor is required between BOOT and PH pins. If the voltage on this capacitor is below the minimum required by the device, the output is forced to switch off until the capacitor is refreshed.",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "VIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "The VIN pin is the input supply voltage which is from 3.5 to 42 V.",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "EN",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Enable pin, internal pullup current source. Pull below 1.2 V to disable. Float to enable. Adjust the input undervoltage lockout with two resistors.",
+              "unused_treatment": "FLOAT"
+            },
+            "4": {
+              "name": "SS/TR",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Slow-start and tracking. An external capacitor connected to this pin sets the output rise time. The voltage on this pin overrides the internal reference, allowing use of the pin for tracking and sequencing.",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "RT/CLK",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Resistor timing and external clock. An internal amplifier holds this pin at a fixed voltage when using an external resistor to ground to set the switching frequency. Pulling the pin above the PLL upper threshold causes a mode change whereby the pin becomes a synchronization input.",
+              "unused_treatment": null
+            },
+            "6": {
+              "name": "PWRGD",
+              "direction": "OUTPUT",
+              "signal_type": "DIGITAL",
+              "description": "An open-drain output, asserts low if output voltage is low due to thermal shutdown, dropout, overvoltage, or EN shutdown.",
+              "unused_treatment": null
+            },
+            "7": {
+              "name": "VSENSE",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "The VSENSE pin is the inverting node of the transconductance (gm) error amplifier.",
+              "unused_treatment": null
+            },
+            "8": {
+              "name": "COMP",
+              "direction": "OUTPUT",
+              "signal_type": "ANALOG",
+              "description": "Error-amplifier output and input to the output-switch current comparator. Connect frequency-compensation components to this pin.",
+              "unused_treatment": null
+            },
+            "9": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "The GND pin is the ground pin.",
+              "unused_treatment": null
+            },
+            "10": {
+              "name": "PH",
+              "direction": "OUTPUT",
+              "signal_type": "POWER",
+              "description": "The PH pin is the source of the internal high-side power MOSFET.",
+              "unused_treatment": null
+            },
+            "EP": {
+              "name": "Thermal pad",
+              "direction": "PASSIVE",
+              "signal_type": "POWER",
+              "description": "GND pin must have an electrical connection to the exposed pad on the printed-circuit board for proper operation.",
+              "unused_treatment": null
+            }
+          }
+        }
+      }
+    },
+    "electrical": {
+      "absolute_maximum_ratings": {
+        "VIN": {
+          "parameter": "Input voltage",
+          "min": -0.3,
+          "max": 47,
+          "unit": "V",
+          "conditions": null
+        },
+        "EN": {
+          "parameter": "Enable voltage",
+          "min": -0.3,
+          "max": 5,
+          "unit": "V",
+          "conditions": null
+        },
+        "BOOT": {
+          "parameter": "Bootstrap voltage",
+          "min": null,
+          "max": 55,
+          "unit": "V",
+          "conditions": null
+        },
+        "VSENSE": {
+          "parameter": "Voltage sense voltage",
+          "min": -0.3,
+          "max": 3,
+          "unit": "V",
+          "conditions": null
+        },
+        "COMP": {
+          "parameter": "Compensation voltage",
+          "min": -0.3,
+          "max": 3,
+          "unit": "V",
+          "conditions": null
+        },
+        "PWRGD": {
+          "parameter": "Power good voltage",
+          "min": -0.3,
+          "max": 6,
+          "unit": "V",
+          "conditions": null
+        },
+        "SS/TR": {
+          "parameter": "Soft start / tracking voltage",
+          "min": -0.3,
+          "max": 3,
+          "unit": "V",
+          "conditions": null
+        },
+        "RT/CLK": {
+          "parameter": "RT/CLK voltage",
+          "min": -0.3,
+          "max": 3.6,
+          "unit": "V",
+          "conditions": null
+        },
+        "PH": {
+          "parameter": "PH DC voltage",
+          "min": -0.6,
+          "max": 47,
+          "unit": "V",
+          "conditions": "DC voltage"
+        },
+        "PH_200_ns": {
+          "parameter": "PH transient voltage (200 ns)",
+          "min": -1,
+          "max": 47,
+          "unit": "V",
+          "conditions": "200 ns"
+        },
+        "PH_30_ns": {
+          "parameter": "PH transient voltage (30 ns)",
+          "min": -2,
+          "max": 47,
+          "unit": "V",
+          "conditions": "30 ns"
+        },
+        "PH_DC_voltage__TJ____40_C": {
+          "parameter": "PH DC voltage at low temperature",
+          "min": -0.85,
+          "max": 47,
+          "unit": "V",
+          "conditions": "DC voltage, TJ = -40°C"
+        },
+        "VDIFF": {
+          "parameter": "Differential voltage PAD to GND",
+          "min": -200,
+          "max": 200,
+          "unit": "mV",
+          "conditions": null
+        },
+        "ISOURCE": {
+          "parameter": "RT/CLK source current",
+          "min": null,
+          "max": 100,
+          "unit": "µA",
+          "conditions": null
+        },
+        "ISINK": {
+          "parameter": "SS/TR sink current",
+          "min": null,
+          "max": 200,
+          "unit": "µA",
+          "conditions": null
+        },
+        "TJ": {
+          "parameter": "Operating junction temperature",
+          "min": -40,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        },
+        "Tstg": {
+          "parameter": "Storage temperature",
+          "min": -65,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        }
+      },
+      "electrical_parameters": {
+        "fSW": {
+          "parameter": "Switching frequency",
+          "min": 450,
+          "typ": 581,
+          "max": 720,
+          "unit": "kHz",
+          "conditions": "VIN = 12 V, RT = 200 kΩ"
+        },
+        "PWRGDTH": {
+          "parameter": "PWRGD switching threshold (falling fault)",
+          "min": null,
+          "typ": 92,
+          "max": null,
+          "unit": "% of VSENSE",
+          "conditions": "VSENSE falling (fault)"
+        },
+        "PWRGDTH_VSENSE_rising__good": {
+          "parameter": "PWRGD switching threshold (rising good)",
+          "min": null,
+          "typ": 94,
+          "max": null,
+          "unit": "% of VSENSE",
+          "conditions": "VSENSE rising (good)"
+        },
+        "PWRGDTH_VSENSE_rising__fault": {
+          "parameter": "PWRGD switching threshold (rising fault)",
+          "min": null,
+          "typ": 109,
+          "max": null,
+          "unit": "% of VSENSE",
+          "conditions": "VSENSE rising (fault)"
+        },
+        "PWRGDTH_VSENSE_falling__good": {
+          "parameter": "PWRGD switching threshold (falling good)",
+          "min": null,
+          "typ": 107,
+          "max": null,
+          "unit": "% of VSENSE",
+          "conditions": "VSENSE falling (good)"
+        }
+      },
+      "drc_hints": {
+        "vin_abs_max": {
+          "value": 47,
+          "unit": "V"
+        },
+        "enable_threshold": {
+          "min": 1.15,
+          "typ": 1.25,
+          "max": 1.36,
+          "unit": "V"
+        },
+        "fsw": {
+          "min": 100,
+          "max": 2500,
+          "unit": "kHz"
+        },
+        "thermal_shutdown": {
+          "typ": 182,
+          "unit": "°C"
+        },
+        "uvlo": {
+          "typ": 2.5,
+          "unit": "V"
+        }
+      }
+    },
+    "design_context": {
+      "recommended_external_components": [
+        {
+          "role": "bootstrap_capacitor",
+          "source_page": 0,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "• Industrial DC Power Systems"
+        },
+        {
+          "role": "bootstrap_capacitor",
+          "source_page": 0,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "Simplified Schematic Efficiency vs Load Current"
+        },
+        {
+          "role": "soft_start_capacitor",
+          "source_page": 0,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "VIN PWRGD 85"
+        },
+        {
+          "role": "soft_start_capacitor",
+          "source_page": 0,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "80"
+        },
+        {
+          "role": "feedback_divider",
+          "source_page": 13,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "7.3.6 Adjusting the Output Voltage"
+        },
+        {
+          "role": "feedback_divider",
+          "source_page": 13,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "A resistor divider from the output node to the VSENSE pin sets the output voltage. TI recommends to use 1%"
+        },
+        {
+          "role": "uvlo_divider",
+          "source_page": 13,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "tolerance or better divider resistors. Refer to the schematic in Figure 40 or Figure 51, start with 10 kΩfor the R2"
+        },
+        {
+          "role": "uvlo_divider",
+          "source_page": 13,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "resistor and use Equation 1 to calculate R1. To improve efficiency at very light loads, consider using larger-value"
+        },
+        {
+          "role": "output_capacitor",
+          "source_page": 22,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "TPS57140-Q1"
+        },
+        {
+          "role": "output_capacitor",
+          "source_page": 22,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "www.ti.com SLVSAP3D –DECEMBER 2010–REVISED FEBRUARY 2016"
+        },
+        {
+          "role": "inductor",
+          "source_page": 28,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "high efficiencies and helps keep the junction temperature low at high output currents. The compensation"
+        },
+        {
+          "role": "inductor",
+          "source_page": 28,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "components are external to the integrated circuit (IC), and an external divider allows for an adjustable output"
+        }
+      ],
+      "component_value_hints": [
+        {
+          "values": [
+            "6.8 pF"
+          ],
+          "source_page": 28,
+          "snippet": "system level. L1 10 m H C1 0.1 m F 3.3 V at 1.5 A U1 D1 + COUT TPS57140QDGQRQ1 B220A 1 10 47 m F/6.3 V 8 - 18 V BOOT PH 2 VIN GND 9 C2 C3 C4 R3 3 EN COMP 8 4 7 R1 CF RC 2.2 m F 2.2 m F 0.1 m F 332 kW 6 31.6 kW 5 RT/CLK S"
+        },
+        {
+          "values": [
+            "6.8 pF",
+            "2700 pF"
+          ],
+          "source_page": 28,
+          "snippet": "U1 D1 + COUT TPS57140QDGQRQ1 B220A 1 10 47 m F/6.3 V 8 - 18 V BOOT PH 2 VIN GND 9 C2 C3 C4 R3 3 EN COMP 8 4 7 R1 CF RC 2.2 m F 2.2 m F 0.1 m F 332 kW 6 31.6 kW 5 RT/CLK SS/TR PwPdPWRGDVSNS kW 6.8 pF 76.8 CSS RT R4 CC R2 "
+        },
+        {
+          "values": [
+            "2700 pF"
+          ],
+          "source_page": 28,
+          "snippet": "CSS RT R4 CC R2 0.01 m F 90.9 kW 61.9 kW 2700 pF 10 kW Figure 51. High-Frequency, 3.3-V Output Power-Supply Design With Adjusted UVLO 8.2.1 Design Requirements For this example, start with the known parameters listed in "
+        },
+        {
+          "values": [
+            "47 μF"
+          ],
+          "source_page": 33,
+          "snippet": "TPS57140-Q1 SLVSAP3D –DECEMBER 2010–REVISED FEBRUARY 2016 www.ti.com The slow start time must be long enough to allow the regulator to charge the output capacitor up to the output voltage without drawing excessive curren"
+        },
+        {
+          "values": [
+            "31.25 kΩ"
+          ],
+          "source_page": 33,
+          "snippet": "8.2.2.8 Undervoltage Lockout (UVLO) Set Point The UVLO can be adjusted using an external voltage divider on the EN pin of the TPS57140-Q1. The UVLO has two thresholds, one for power up when the input voltage is rising an"
+        },
+        {
+          "values": [
+            "31.25 kΩ",
+            "31.6 kΩ"
+          ],
+          "source_page": 33,
+          "snippet": "The UVLO can be adjusted using an external voltage divider on the EN pin of the TPS57140-Q1. The UVLO has two thresholds, one for power up when the input voltage is rising and one for power down or brown outs when the in"
+        },
+        {
+          "values": [
+            "31.25 kΩ",
+            "31.6 kΩ",
+            "800 kΩ"
+          ],
+          "source_page": 33,
+          "snippet": "the input voltage is falling. For the example design, the supply should turn on and start switching once the input voltage increases above 7.25 V (enabled). After the regulator starts switching, it should continue to do "
+        },
+        {
+          "values": [
+            "31.6 kΩ",
+            "800 kΩ"
+          ],
+          "source_page": 33,
+          "snippet": "nearest standard 1% resistor is 31.6 kΩ. Due to current leakage of the VSENSE pin, the current flowing through the feedback network should be greater than 1 μA to maintain the output voltage accuracy. This requirement ma"
+        }
+      ],
+      "layout_hints": [
+        {
+          "hint": "• Adjustable Undervoltage Lockout Voltage and enhanced MSOP-PowerPAD™package (DGQ) and",
+          "source_page": 0
+        },
+        {
+          "hint": "MSOP-PowerPAD (10) 3.00 mm × 3.00 mm",
+          "source_page": 0
+        },
+        {
+          "hint": "• Providing a low-inductance, low-impedance ground path is critical. Therefore, use wide and short traces for",
+          "source_page": 38
+        },
+        {
+          "hint": "• Care should be taken to minimize the loop area formed by the input bypass capacitor, VIN pin, PH pin, catch",
+          "source_page": 38
+        },
+        {
+          "hint": "• The thermal pad should be connected to any internal PCB ground planes using multiple vias directly under",
+          "source_page": 38
+        },
+        {
+          "hint": "connection is the switching node, the catch diode and output inductor should be located close to the PH pins,",
+          "source_page": 38
+        },
+        {
+          "hint": "• The RT/CLK pin is sensitive to noise so the RT resistor should be located as close as possible to the device",
+          "source_page": 38
+        },
+        {
+          "hint": "• The bootstrap capacitor must be placed as close as possible to the IC pin.",
+          "source_page": 38
+        },
+        {
+          "hint": "Frequency Thermal VIA",
+          "source_page": 39
+        }
+      ],
+      "supply_recommendations": [
+        {
+          "hint": "– Device HBM ESD Classification Level 2 regulated output supply current to 116 μA. When the",
+          "source_page": 0
+        },
+        {
+          "hint": "• 3.5-V to 42-V Input Voltage Range",
+          "source_page": 0
+        },
+        {
+          "hint": "7.3.7 Enable and Adjusting Undervoltage Lockout (UVLO)",
+          "source_page": 13
+        },
+        {
+          "hint": "UVLO, use the EN pin as shown in Figure 27 to adjust the input-voltage UVLO by using two external resistors.",
+          "source_page": 13
+        },
+        {
+          "hint": "Though it is not necessary to use the UVLO adjust resistors, for operation TI highly recommends providing",
+          "source_page": 13
+        },
+        {
+          "hint": "Use Equation 2 to set the external hysteresis for the input voltage. Use Equation 3 to set the input start voltage.",
+          "source_page": 13
+        },
+        {
+          "hint": "Figure 27. Adjustable UVLO",
+          "source_page": 13
+        },
+        {
+          "hint": "Type 1. Type 2 circuits are most likely used in high-bandwidth power-supply designs using low-ESR output",
+          "source_page": 22
+        }
+      ],
+      "topology_hints": [
+        {
+          "hint": "TPS57140-Q1 1.5-A 42-V Step-Down DC-DC Converter With Eco-mode™Control",
+          "source_page": 0
+        },
+        {
+          "hint": "1• Qualified for Automotive Applications The TPS57140-Q1 device is a 42-V, 1.5-A step-down",
+          "source_page": 0
+        },
+        {
+          "hint": "2 Applications TPS57140-Q1 VSON (10) 3.00 mm × 3.00 mm",
+          "source_page": 0
+        },
+        {
+          "hint": "• Automotive Body Applications, HVAC, Wireless",
+          "source_page": 0
+        },
+        {
+          "hint": "An IMPORTANT NOTICE at the end of this data sheet addresses availability, warranty, changes, use in safety-critical applications,",
+          "source_page": 0
+        },
+        {
+          "hint": "The VIN pin voltage falling below 2.5 V disables the TPS57140-Q1 device. If an application requires a higher",
+          "source_page": 13
+        },
+        {
+          "hint": "Figure 40. See Application and Implementation for a design example using a Type 2A network with a low-ESR",
+          "source_page": 22
+        },
+        {
+          "hint": "methods. Those who prefer to use a prescribed method must use the method outlined in Application and",
+          "source_page": 22
+        }
+      ],
+      "design_pages": {
+        "pages": [
+          {
+            "page": 0,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 13,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 22,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 23,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 25,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 28,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 33,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 38,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 39,
+            "title": null,
+            "content_type": "layout"
+          }
+        ],
+        "total_pages": 9
+      }
+    }
+  }
 }

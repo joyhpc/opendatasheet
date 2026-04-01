@@ -21,11 +21,33 @@ from collections import defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
 
+from device_export_view import (
+    get_export_absolute_maximum_ratings,
+    get_export_drc_hints,
+    get_export_electrical_parameters,
+    get_export_packages,
+    get_export_register_domain,
+    get_export_thermal,
+)
+
 DEFAULT_EXPORT_DIR = Path(__file__).resolve().parent.parent / "data/sch_review_export"
 DEFAULT_OUTPUT_DIR = Path(__file__).resolve().parent.parent / "data/selection_profile"
 
 SCHEMA_VERSION = "selection-profile/1.0"
 INDEX_SCHEMA_VERSION = "selection-index/1.0"
+
+
+def _remove_stale_selection_profiles(output_dir: Path, expected_files: set[str]) -> list[str]:
+    """Delete profile JSONs no longer generated from the current export set."""
+    removed = []
+    for path in sorted(output_dir.glob("*.json")):
+        if path.name == "_index.json":
+            continue
+        if path.name in expected_files:
+            continue
+        path.unlink()
+        removed.append(path.name)
+    return removed
 
 
 # ─── Parameter Classification ────────────────────────────────────────
@@ -57,6 +79,7 @@ SPEC_PATTERNS = [
         [r"output\s+current", r"load\s+current", r"current\s+limit",
          r"source\s+current\s+limit"],
         ("A", "mA"),
+        [r"\bILIM5\b", r"LDO\s+output\s+current\s+limit"],
     ),
     (
         "quiescent_current",
@@ -377,6 +400,26 @@ def _extract_temp_range(abs_max_ratings: dict, elec_params: dict) -> dict:
     return result
 
 
+def _extract_output_current_from_abs_max(abs_max_ratings: dict) -> dict | None:
+    """Use absolute-maximum output current as a last-resort selection hint."""
+    for key, entry in abs_max_ratings.items():
+        if not isinstance(entry, dict):
+            continue
+        param_name = entry.get("parameter", "")
+        if not (_match_symbol(key, [r"^I[_\(]?OUT", r"^I[_\(]?LOAD"]) or _match_param(param_name, [r"output\s+current", r"load\s+current"])):
+            continue
+        record: dict = {}
+        for vk in ("min", "typ", "max"):
+            v = _safe_numeric(entry.get(vk))
+            if v is not None:
+                record[vk] = v
+        if entry.get("unit"):
+            record["unit"] = entry["unit"]
+        if record:
+            return record
+    return None
+
+
 def _extract_thermal(thermal_data: dict) -> dict:
     """Extract thermal resistance data from the thermal dict."""
     result: dict = {}
@@ -419,7 +462,7 @@ def _extract_features(device_data: dict) -> list[str]:
     """Extract notable feature flags from device data."""
     features: list[str] = []
 
-    hints = device_data.get("drc_hints", {})
+    hints = get_export_drc_hints(device_data)
 
     # Topology
     topo = hints.get("topology")
@@ -446,8 +489,7 @@ def _extract_features(device_data: dict) -> list[str]:
         features.append("external_mosfet")
 
     # Register domains (I2C / SPI programmable)
-    domains = device_data.get("domains", {})
-    if isinstance(domains, dict) and "register" in domains:
+    if get_export_register_domain(device_data):
         features.append("register_interface")
 
     return features
@@ -469,11 +511,11 @@ def build_selection_card(device_data: dict) -> dict | None:
     manufacturer = device_data.get("manufacturer")
     description = device_data.get("description")
 
-    elec_params = device_data.get("electrical_parameters", {})
-    abs_max = device_data.get("absolute_maximum_ratings", {})
-    hints = device_data.get("drc_hints", {})
-    thermal_data = device_data.get("thermal", {})
-    packages_data = device_data.get("packages", {})
+    elec_params = get_export_electrical_parameters(device_data)
+    abs_max = get_export_absolute_maximum_ratings(device_data)
+    hints = get_export_drc_hints(device_data)
+    thermal_data = get_export_thermal(device_data)
+    packages_data = get_export_packages(device_data)
 
     # --- Key specs: merge from electrical params and drc_hints ---
     key_specs = _extract_specs_from_params(elec_params)
@@ -492,6 +534,11 @@ def build_selection_card(device_data: dict) -> dict | None:
                 "max": _safe_numeric(vin_abs["value"]),
                 "unit": vin_abs.get("unit", "V"),
             }
+
+    if "output_current" not in key_specs:
+        output_current_abs_max = _extract_output_current_from_abs_max(abs_max)
+        if output_current_abs_max:
+            key_specs["output_current"] = output_current_abs_max
 
     # --- Operating conditions ---
     operating: dict = {}
@@ -636,6 +683,7 @@ def main():
     cards: list[dict] = []
     skipped = 0
     errors = 0
+    written_files: set[str] = set()
 
     export_files = sorted(args.export_dir.glob("*.json"))
     if not export_files:
@@ -672,8 +720,10 @@ def main():
             json.dumps(card, indent=2, ensure_ascii=False) + "\n",
             encoding="utf-8",
         )
+        written_files.add(out_path.name)
 
     # Build and write comparative index
+    removed_files = _remove_stale_selection_profiles(args.output_dir, written_files)
     index = build_index(cards)
     index_path = args.output_dir / "_index.json"
     index_path.write_text(
@@ -687,6 +737,8 @@ def main():
         print(f"  Total devices exported: {len(cards)}")
         print(f"  Skipped: {skipped}")
         print(f"  Errors: {errors}")
+        if removed_files:
+            print(f"  Removed stale profiles: {len(removed_files)}")
         for cat, mpns in sorted(index["categories"].items()):
             print(f"  {cat}: {len(mpns)} devices")
 

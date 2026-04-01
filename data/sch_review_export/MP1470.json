@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -305,6 +305,618 @@
       "unit": "W",
       "conditions": "TA = +25°C",
       "source": "absolute_maximum_ratings"
+    }
+  },
+  "domains": {
+    "pin": {
+      "packages": {
+        "TSOT-23-6": {
+          "pin_count": 6,
+          "pins": {
+            "1": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "System Ground. Reference ground of the regulated output voltage.",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "SW",
+              "direction": "OUTPUT",
+              "signal_type": "POWER",
+              "description": "Switch Output. Connect using a wide PCB trace.",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "IN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Supply Voltage. 4.7V-to-16V input rail. Requires decoupling capacitor.",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "FB",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Feedback. Connect to an external resistor divider to set the output voltage.",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "EN",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Enable. EN=HIGH to enable the device. Connect to VIN via 100kΩ resistor for auto start-up.",
+              "unused_treatment": null
+            },
+            "6": {
+              "name": "BST",
+              "direction": "PASSIVE",
+              "signal_type": "POWER",
+              "description": "Bootstrap. Connect a capacitor between SW and BST pins to form a floating supply.",
+              "unused_treatment": null
+            }
+          }
+        }
+      }
+    },
+    "electrical": {
+      "absolute_maximum_ratings": {
+        "VIN": {
+          "parameter": "Supply Voltage",
+          "min": -0.3,
+          "max": 17.0,
+          "unit": "V",
+          "conditions": null
+        },
+        "VSW": {
+          "parameter": "Switch Voltage",
+          "min": -0.3,
+          "max": 17.0,
+          "unit": "V",
+          "conditions": "Normal operation"
+        },
+        "VSW_10ns": {
+          "parameter": "Switch Voltage (Transient)",
+          "min": -5.0,
+          "max": 19.0,
+          "unit": "V",
+          "conditions": "<10ns"
+        },
+        "VBS": {
+          "parameter": "Bootstrap Voltage",
+          "min": null,
+          "max": null,
+          "unit": "V",
+          "conditions": "VSW + 6V"
+        },
+        "VIN_Recommended_Operating_Conditio": {
+          "parameter": "Recommended Supply Voltage",
+          "min": 4.7,
+          "max": 16.0,
+          "unit": "V",
+          "conditions": "Recommended Operating Conditions"
+        },
+        "VOUT": {
+          "parameter": "Recommended Output Voltage",
+          "min": 0.8,
+          "max": null,
+          "unit": "V",
+          "conditions": "0.8V to 0.9VIN"
+        },
+        "TJ": {
+          "parameter": "Recommended Operating Junction Temp",
+          "min": -40.0,
+          "max": 125.0,
+          "unit": "°C",
+          "conditions": "Recommended Operating Conditions"
+        }
+      },
+      "electrical_parameters": {
+        "IIN": {
+          "parameter": "Supply Current (Shutdown)",
+          "min": null,
+          "typ": null,
+          "max": 1.0,
+          "unit": "µA",
+          "conditions": "VEN = 0V"
+        },
+        "Iq": {
+          "parameter": "Supply Current (Quiescent)",
+          "min": null,
+          "typ": 0.83,
+          "max": null,
+          "unit": "mA",
+          "conditions": "VEN = 2V, VFB = 1V"
+        },
+        "HSRDS-ON": {
+          "parameter": "HS Switch-On Resistance",
+          "min": null,
+          "typ": 163.0,
+          "max": null,
+          "unit": "mΩ",
+          "conditions": "VBST-SW=5V"
+        },
+        "LSRDS-ON": {
+          "parameter": "LS Switch-On Resistance",
+          "min": null,
+          "typ": 86.0,
+          "max": null,
+          "unit": "mΩ",
+          "conditions": "VCC=5V"
+        },
+        "SWLKG": {
+          "parameter": "Switch Leakage",
+          "min": null,
+          "typ": null,
+          "max": 1.0,
+          "unit": "µA",
+          "conditions": "VEN = 0V, VSW = 12V"
+        },
+        "ILIMIT": {
+          "parameter": "Current Limit",
+          "min": 3.0,
+          "typ": 3.7,
+          "max": null,
+          "unit": "A",
+          "conditions": null
+        },
+        "fSW": {
+          "parameter": "Oscillator Frequency",
+          "min": 400.0,
+          "typ": 490.0,
+          "max": 580.0,
+          "unit": "kHz",
+          "conditions": "VFB=0.75V"
+        },
+        "DMAX": {
+          "parameter": "Maximum Duty Cycle",
+          "min": 88.0,
+          "typ": 92.0,
+          "max": null,
+          "unit": "%",
+          "conditions": "VFB=700mV"
+        },
+        "TON_MIN": {
+          "parameter": "Minimum On Time",
+          "min": null,
+          "typ": 90.0,
+          "max": null,
+          "unit": "ns",
+          "conditions": null
+        },
+        "VFB": {
+          "parameter": "Feedback Voltage",
+          "min": 776.0,
+          "typ": 800.0,
+          "max": 824.0,
+          "unit": "mV",
+          "conditions": null
+        },
+        "VEN_RISING": {
+          "parameter": "EN Rising Threshold",
+          "min": 1.4,
+          "typ": 1.5,
+          "max": 1.6,
+          "unit": "V",
+          "conditions": null
+        },
+        "VEN_FALLING": {
+          "parameter": "EN Falling Threshold",
+          "min": 1.23,
+          "typ": 1.32,
+          "max": 1.41,
+          "unit": "V",
+          "conditions": null
+        },
+        "IEN": {
+          "parameter": "EN Input Current",
+          "min": null,
+          "typ": 1.6,
+          "max": null,
+          "unit": "µA",
+          "conditions": "VEN=2V"
+        },
+        "IEN_VEN_0": {
+          "parameter": "EN Input Current",
+          "min": null,
+          "typ": 0.0,
+          "max": null,
+          "unit": "µA",
+          "conditions": "VEN=0"
+        },
+        "INUVVth": {
+          "parameter": "VIN Under-Voltage Lockout Threshold—Rising",
+          "min": 3.85,
+          "typ": 4.2,
+          "max": 4.55,
+          "unit": "V",
+          "conditions": null
+        },
+        "INUVHYS": {
+          "parameter": "VIN Under-Voltage Lockout Threshold Hysteresis",
+          "min": null,
+          "typ": 340.0,
+          "max": null,
+          "unit": "mV",
+          "conditions": null
+        },
+        "TSS": {
+          "parameter": "Soft-Start Period",
+          "min": null,
+          "typ": 1.0,
+          "max": null,
+          "unit": "ms",
+          "conditions": null
+        }
+      },
+      "drc_hints": {
+        "vin_abs_max": {
+          "value": 17.0,
+          "unit": "V"
+        },
+        "vref": {
+          "min": 776.0,
+          "typ": 800.0,
+          "max": 824.0,
+          "unit": "mV"
+        },
+        "enable_threshold": {
+          "min": 1.4,
+          "typ": 1.5,
+          "max": 1.6,
+          "unit": "V"
+        },
+        "iout_max": {
+          "min": 3.0,
+          "typ": 3.7,
+          "unit": "A"
+        },
+        "iq": {
+          "typ": 0.83,
+          "unit": "mA"
+        },
+        "fsw": {
+          "min": 400.0,
+          "typ": 490.0,
+          "max": 580.0,
+          "unit": "kHz"
+        },
+        "soft_start": {
+          "typ": 1.0,
+          "unit": "ms"
+        },
+        "thermal_shutdown": {
+          "typ": 150.0,
+          "unit": "°C"
+        },
+        "uvlo": {
+          "min": 3.85,
+          "typ": 4.2,
+          "max": 4.55,
+          "unit": "V"
+        }
+      }
+    },
+    "thermal": {
+      "power_dissipation": {
+        "parameter": "Continuous Power Dissipation",
+        "symbol": null,
+        "min": null,
+        "typ": null,
+        "max": 1.25,
+        "value": null,
+        "unit": "W",
+        "conditions": "TA = +25°C",
+        "source": "absolute_maximum_ratings"
+      }
+    },
+    "design_context": {
+      "recommended_external_components": [
+        {
+          "role": "bootstrap_capacitor",
+          "source_page": 9,
+          "value_hint": null,
+          "value_hints": [
+            "55kΩ"
+          ],
+          "snippet": "RPULLUP≥ (12V-6.5V) ÷100μA =55kΩ Thermal Shutdown"
+        },
+        {
+          "role": "bootstrap_capacitor",
+          "source_page": 9,
+          "value_hint": null,
+          "value_hints": [
+            "55kΩ"
+          ],
+          "snippet": "Thermal shutdown prevents the chip from Connecting the EN pin directly to a voltage"
+        },
+        {
+          "role": "uvlo_divider",
+          "source_page": 9,
+          "value_hint": "55kΩ",
+          "value_hints": [
+            "55kΩ"
+          ],
+          "snippet": "Thermal shutdown prevents the chip from Connecting the EN pin directly to a voltage"
+        },
+        {
+          "role": "uvlo_divider",
+          "source_page": 9,
+          "value_hint": "55kΩ",
+          "value_hints": [
+            "55kΩ"
+          ],
+          "snippet": "operating at exceedingly high temperatures. source without any pullup resistor requires"
+        },
+        {
+          "role": "inductor",
+          "source_page": 9,
+          "value_hint": null,
+          "value_hints": [
+            "55kΩ"
+          ],
+          "snippet": "150°C, it shuts down the whole chip. When the 6V to prevent damage to the Zener diode."
+        },
+        {
+          "role": "inductor",
+          "source_page": 9,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "temperature falls below its lower threshold (typically 130°C) theFORchip is enabled again."
+        },
+        {
+          "role": "soft_start_capacitor",
+          "source_page": 9,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "will regulate M1 to maintain a 5V BST voltage Under-voltage lockout (UVLO) protects the chip"
+        },
+        {
+          "role": "soft_start_capacitor",
+          "source_page": 9,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "across C4. from operating at an insufficient supply voltage."
+        },
+        {
+          "role": "input_capacitor",
+          "source_page": 10,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "MP1470 – SYNCHRONOUS, STEP-DOWN CONVERTER WITH INTERNAL MOSFETS"
+        },
+        {
+          "role": "input_capacitor",
+          "source_page": 10,
+          "value_hint": null,
+          "value_hints": [
+            "10kΩ"
+          ],
+          "snippet": "Δ I L APPLICATION INFORMATION I L ( MAX ) = I LOAD +"
+        },
+        {
+          "role": "feedback_divider",
+          "source_page": 10,
+          "value_hint": "10kΩ",
+          "value_hints": [
+            "10kΩ"
+          ],
+          "snippet": "2"
+        },
+        {
+          "role": "feedback_divider",
+          "source_page": 10,
+          "value_hint": "10kΩ",
+          "value_hints": [
+            "10kΩ"
+          ],
+          "snippet": "Setting the Output Voltage"
+        }
+      ],
+      "component_value_hints": [
+        {
+          "values": [
+            "55kΩ"
+          ],
+          "source_page": 9,
+          "snippet": "MP1470 – SYNCHRONOUS, STEP-DOWN CONVERTER WITH INTERNAL MOSFETS resistor to the VIN voltage limits the EN input issues and to protect the regulator. The current to less than 100μA. MP1470 exits hiccup mode once the over-"
+        },
+        {
+          "values": [
+            "10kΩ"
+          ],
+          "source_page": 10,
+          "snippet": "MP1470 – SYNCHRONOUS, STEP-DOWN CONVERTER WITH INTERNAL MOSFETS Δ I L APPLICATION INFORMATION I L ( MAX ) = I LOAD + 2 Setting the Output Voltage Under light-load conditions (below 100mA), use The external resistor divid"
+        },
+        {
+          "values": [
+            "22 µF",
+            "10kΩ"
+          ],
+          "source_page": 10,
+          "snippet": "2 Setting the Output Voltage Under light-load conditions (below 100mA), use The external resistor divider sets the output a larger inductor to improve efficiency. voltage. The feedback resistor R1 also sets the feedback-"
+        },
+        {
+          "values": [
+            "22 µF"
+          ],
+          "source_page": 10,
+          "snippet": "and R2with: capacitor to both supply the AC current to the R1 step-down converterFORand maintain the DC input R2 = voltage. For the best performance, use low VOUT − 1 ESR capacitors, such as ceramic capacitors 0.8V with "
+        },
+        {
+          "values": [
+            "0.1 μF"
+          ],
+          "source_page": 10,
+          "snippet": "Figure 6: T-Type Network ⎛ ⎞ V V OUT OUT ⎜ ⎟ × 1− I C1 = I LOAD × ⎜ ⎟ Table 1 lists the recommended T-type resistors V V IN IN ⎝ ⎠ value for common output voltages. The worst-case condition occurs at VIN = 2VOUT, Table 1"
+        },
+        {
+          "values": [
+            "0.1 μF",
+            "1 µH",
+            "10 µH"
+          ],
+          "source_page": 10,
+          "snippet": "The worst-case condition occurs at VIN = 2VOUT, Table 1: Resistor Selection for Common Output where: Voltages VOUT (V) R1 (kΩ) R2 (kΩ) Rt (kΩ) I LOAD I C1 = 1.05 10(1%) 32.4(1%) 300(1%) 2 1.2 20.5(1%) 41.2(1%) 249(1%) Fo"
+        },
+        {
+          "values": [
+            "0.1 μF",
+            "1 µH",
+            "10 µH",
+            "15mΩ"
+          ],
+          "source_page": 10,
+          "snippet": "1.05 10(1%) 32.4(1%) 300(1%) 2 1.2 20.5(1%) 41.2(1%) 249(1%) For simplification,MP1476choose an input capacitor 1.8 40.2(1%) 32.4(1%) 120(1%) with an RMS current rating greater than half the DESIGNS 2.5 40.2(1%) 19.1(1%)"
+        },
+        {
+          "values": [
+            "1 µH",
+            "10 µH",
+            "15mΩ"
+          ],
+          "source_page": 10,
+          "snippet": "Selecting the Inductor when using electrolytic or tantalum capacitors. RECOMMENDED Use a 1µH-to-10µH inductor with a DC current When using ceramic capacitors, make sure that rating of at least 25% percent higher than the"
+        }
+      ],
+      "design_equation_hints": [
+        {
+          "equation": "Δ VIN = × × ⎜ 1 − ⎟ following equation. fS × C1 V IN ⎝ VIN ⎠NOT",
+          "source_page": 10
+        },
+        {
+          "equation": "VOUT ) L1 = Selecting the Output Capacitor VIN ×REFERΔIL × fOSC",
+          "source_page": 10
+        },
+        {
+          "equation": "ΔVOUT = × ⎜ 1 − ⎟ × ⎜ RESR + ⎟ external BST diode is IN4148, and a 1µF",
+          "source_page": 11
+        },
+        {
+          "equation": "ΔVOUT = 2 × ⎜ 1 − ⎟ capacitor and IN pin as short and wide as",
+          "source_page": 11
+        },
+        {
+          "equation": "ΔVOUT = × R ESR such as FB. × ⎜ ⎟ fS × L1 ⎝ V IN ⎠",
+          "source_page": 11
+        }
+      ],
+      "layout_hints": [
+        {
+          "hint": "capacitor (0.1μF) as close to the IC as possible",
+          "source_page": 10
+        },
+        {
+          "hint": "1) Keep the connection between the input frequency and causes most of the output FOR ground and GND pin as short and wide as voltage ripple. For simplification, estimate the",
+          "source_page": 11
+        },
+        {
+          "hint": "ΔVOUT = 2 × ⎜ 1 − ⎟ capacitor and IN pin as short and wide as",
+          "source_page": 11
+        },
+        {
+          "hint": "frequency. For simplification, the output ripple components as close to the chip as possible.",
+          "source_page": 11
+        }
+      ],
+      "supply_recommendations": [
+        {
+          "hint": "driver has its own UVLO protection, with a GND",
+          "source_page": 9
+        },
+        {
+          "hint": "Under-Voltage Lockout (UVLO) and C2 (Figure 5). If (VIN-VSW) exceeds 5V, U2",
+          "source_page": 9
+        },
+        {
+          "hint": "will regulate M1 to maintain a 5V BST voltage Under-voltage lockout (UVLO) protects the chip",
+          "source_page": 9
+        },
+        {
+          "hint": "across C4. from operating at an insufficient supply voltage.",
+          "source_page": 9
+        },
+        {
+          "hint": "The MP1470 UVLO comparator monitors the D1",
+          "source_page": 9
+        },
+        {
+          "hint": "The UVLO rising threshold is about 4.2V while U2",
+          "source_page": 9
+        },
+        {
+          "hint": "enabled. The regulator provides a stable supply The MP1470 has a cycle-by-cycle over-current",
+          "source_page": 9
+        },
+        {
+          "hint": "(typically 140mV) to trigger a UV event, the signaling path to avoid any fault triggering. The MP1470 enters hiccupREFERmode to periodically COMP voltage and the internal supply rail are",
+          "source_page": 9
+        }
+      ],
+      "topology_hints": [
+        {
+          "hint": "MP1470 – SYNCHRONOUS, STEP-DOWN CONVERTER WITH INTERNAL MOSFETS",
+          "source_page": 9
+        },
+        {
+          "hint": "MP1470 – SYNCHRONOUS, STEP-DOWN CONVERTER WITH INTERNAL MOSFETS",
+          "source_page": 10
+        },
+        {
+          "hint": "Δ I L APPLICATION INFORMATION I L ( MAX ) = I LOAD +",
+          "source_page": 10
+        },
+        {
+          "hint": "compensation capacitor (see the Typical The input current to the step-down converter is",
+          "source_page": 10
+        },
+        {
+          "hint": "Application circuit). Choose R1 around 10kΩ, discontinuous, and therefore requires a",
+          "source_page": 10
+        },
+        {
+          "hint": "and R2with: capacitor to both supply the AC current to the R1 step-down converterFORand maintain the DC input R2 = voltage. For the best performance, use low VOUT",
+          "source_page": 10
+        },
+        {
+          "hint": "RT R1 sufficient for most applications.",
+          "source_page": 10
+        },
+        {
+          "hint": "rating of at least 25% percent higher than the they have enough capacitance to provide NEW maximum load current for most applications. sufficient charge to prevent excessive input",
+          "source_page": 10
+        }
+      ],
+      "design_pages": {
+        "pages": [
+          {
+            "page": 9,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 10,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 11,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 13,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 14,
+            "title": null,
+            "content_type": "application"
+          }
+        ],
+        "total_pages": 5
+      }
     }
   }
 }

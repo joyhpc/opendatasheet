@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -575,5 +575,962 @@
       "unit": "V"
     }
   },
-  "thermal": {}
+  "thermal": {},
+  "domains": {
+    "pin": {
+      "packages": {
+        "VQFN-HR-26": {
+          "pin_count": 27,
+          "pins": {
+            "1": {
+              "name": "FB_B2",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Output voltage feedback (positive) for the BUCK2 converter",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "EN3",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "DIGITAL",
+              "description": "Programmable enable signal for the buck regulators (can be also configured to select between two buck output-voltage levels). This pin functions alternatively as GPIO3.",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "CLKIN",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "External clock input. Connect this pin to ground if the external clock is not used.",
+              "unused_treatment": "GND"
+            },
+            "4": {
+              "name": "AGND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Analog ground",
+              "unused_treatment": null
+            },
+            "17": {
+              "name": "AGND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Analog ground",
+              "unused_treatment": null
+            },
+            "Thermal Pad": {
+              "name": "AGND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Analog ground",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "SCL",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Serial interface clock input for I2C access. Connect this pin to a pullup resistor.",
+              "unused_treatment": null
+            },
+            "6": {
+              "name": "SDA",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "DIGITAL",
+              "description": "Serial interface data input and output for I2C access. Connect this pin to a pullup resistor.",
+              "unused_treatment": null
+            },
+            "7": {
+              "name": "EN1",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "DIGITAL",
+              "description": "Programmable enable signal for the buck regulators (can be also configured to select between two buck output-voltage levels). This pin functions alternatively as GPIO1.",
+              "unused_treatment": null
+            },
+            "8": {
+              "name": "FB_B0",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Output voltage feedback (positive) for the BUCK0 converter",
+              "unused_treatment": null
+            },
+            "9": {
+              "name": "VIN_B0",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Input for the BUCK0 converter",
+              "unused_treatment": null
+            },
+            "10": {
+              "name": "SW_B0",
+              "direction": "OUTPUT",
+              "signal_type": "POWER",
+              "description": "BUCK0 switch node",
+              "unused_treatment": null
+            },
+            "11": {
+              "name": "PGND_B01",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power ground for the BUCK0 and BUCK1 converters",
+              "unused_treatment": null
+            },
+            "12": {
+              "name": "SW_B1",
+              "direction": "OUTPUT",
+              "signal_type": "POWER",
+              "description": "BUCK1 switch node",
+              "unused_treatment": null
+            },
+            "13": {
+              "name": "VIN_B1",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Input for the BUCK1 converter",
+              "unused_treatment": null
+            },
+            "14": {
+              "name": "FB_B1",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Output voltage feedback (positive) for the BUCK1 converter. This pin functions alternatively as the output ground feedback (negative) for the BUCK0 converter.",
+              "unused_treatment": null
+            },
+            "15": {
+              "name": "EN2",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "DIGITAL",
+              "description": "Programmable enable signal for the buck regulators (can be also configured to select between two buck output-voltage levels). This pin functions alternatively as GPIO2.",
+              "unused_treatment": null
+            },
+            "16": {
+              "name": "PGOOD",
+              "direction": "OUTPUT",
+              "signal_type": "DIGITAL",
+              "description": "Power-good indication signal",
+              "unused_treatment": null
+            },
+            "18": {
+              "name": "VANA",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Supply voltage for the analog and digital blocks. This pin must be connected to the same node as VIN_Bx.",
+              "unused_treatment": null
+            },
+            "19": {
+              "name": "nINT",
+              "direction": "OUTPUT",
+              "signal_type": "DIGITAL",
+              "description": "Open-drain interrupt output. This pin is active low.",
+              "unused_treatment": null
+            },
+            "20": {
+              "name": "NRST",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Reset signal for the device",
+              "unused_treatment": null
+            },
+            "21": {
+              "name": "FB_B3",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Output voltage feedback (positive) for the BUCK3 converter. This pin functions alternatively as the output ground feedback (negative) for the BUCK2 converter.",
+              "unused_treatment": null
+            },
+            "22": {
+              "name": "VIN_B3",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Input for the BUCK3 converter",
+              "unused_treatment": null
+            },
+            "23": {
+              "name": "SW_B3",
+              "direction": "OUTPUT",
+              "signal_type": "POWER",
+              "description": "BUCK3 switch node",
+              "unused_treatment": null
+            },
+            "24": {
+              "name": "PGND_B23",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power ground for the BUCK2 and BUCK3 converters",
+              "unused_treatment": null
+            },
+            "25": {
+              "name": "SW_B2",
+              "direction": "OUTPUT",
+              "signal_type": "POWER",
+              "description": "BUCK2 switch node",
+              "unused_treatment": null
+            },
+            "26": {
+              "name": "VIN_B2",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Input for the BUCK2 converter",
+              "unused_treatment": null
+            }
+          }
+        }
+      }
+    },
+    "electrical": {
+      "absolute_maximum_ratings": {
+        "VIN_Bx, VANA": {
+          "parameter": "Voltage on power connections",
+          "min": -0.3,
+          "max": 6,
+          "unit": "V",
+          "conditions": null
+        },
+        "SW_Bx": {
+          "parameter": "Voltage on buck switch nodes",
+          "min": -0.3,
+          "max": 6,
+          "unit": "V",
+          "conditions": "VIN_Bx + 0.3 V with 6 V maximum"
+        },
+        "FB_Bx": {
+          "parameter": "Voltage on buck voltage sense nodes",
+          "min": -0.3,
+          "max": 6,
+          "unit": "V",
+          "conditions": "VANA + 0.3 V with 6 V maximum"
+        },
+        "NRST": {
+          "parameter": "Voltage on NRST input",
+          "min": -0.3,
+          "max": 6,
+          "unit": "V",
+          "conditions": null
+        },
+        "SDA, SCL, nINT, CLKIN": {
+          "parameter": "Voltage on logic pins (input or output pins)",
+          "min": -0.3,
+          "max": 6,
+          "unit": "V",
+          "conditions": null
+        },
+        "EN1 (GPIO1), EN2 (GPIO2), EN3 (GPIO3), PGOOD": {
+          "parameter": "Voltage on logic pins (input or output pins)",
+          "min": -0.3,
+          "max": 6,
+          "unit": "V",
+          "conditions": "VANA + 0.3 V with 6 V maximum"
+        },
+        "TJ-MAX": {
+          "parameter": "Junction temperature",
+          "min": -40,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        },
+        "Tstg": {
+          "parameter": "Storage temperature",
+          "min": -65,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        }
+      },
+      "electrical_parameters": {
+        "CIN": {
+          "parameter": "Input filtering capacitance",
+          "min": 1.9,
+          "typ": 10,
+          "max": null,
+          "unit": "µF",
+          "conditions": "Connected from VIN_Bx to PGND_Bx"
+        },
+        "COUT": {
+          "parameter": "Output filtering capacitance per phase, local",
+          "min": 10,
+          "typ": 22,
+          "max": null,
+          "unit": "µF",
+          "conditions": null
+        },
+        "CPOL": {
+          "parameter": "Optional point-of-load (POL) capacitance per phase",
+          "min": null,
+          "typ": 22,
+          "max": null,
+          "unit": "µF",
+          "conditions": null
+        },
+        "COUT-TOTAL": {
+          "parameter": "Total output capacitance (local and POL)",
+          "min": null,
+          "typ": null,
+          "max": 1000,
+          "unit": "µF",
+          "conditions": "4-phase output, Output voltage slew-rate ≤ 3.8 mV/µs"
+        },
+        "COUT-TOTAL_3_phase_output__Output_voltage": {
+          "parameter": "Total output capacitance (local and POL)",
+          "min": null,
+          "typ": null,
+          "max": 750,
+          "unit": "µF",
+          "conditions": "3-phase output, Output voltage slew-rate ≤ 3.8 mV/µs"
+        },
+        "COUT-TOTAL_2_phase_output__Output_voltage": {
+          "parameter": "Total output capacitance (local and POL)",
+          "min": null,
+          "typ": null,
+          "max": 500,
+          "unit": "µF",
+          "conditions": "2-phase output, Output voltage slew-rate ≤ 3.8 mV/µs"
+        },
+        "COUT-TOTAL_1_phase_output__Output_voltage": {
+          "parameter": "Total output capacitance (local and POL)",
+          "min": null,
+          "typ": null,
+          "max": 250,
+          "unit": "µF",
+          "conditions": "1-phase output, Output voltage slew-rate ≤ 3.8 mV/µs"
+        },
+        "ESRC": {
+          "parameter": "ESR of the input and output capacitor",
+          "min": null,
+          "typ": 2,
+          "max": 10,
+          "unit": "mΩ",
+          "conditions": "1 MHz ≤ f ≤ 10 MHz"
+        },
+        "L": {
+          "parameter": "Inductance of the inductor",
+          "min": null,
+          "typ": 0.47,
+          "max": null,
+          "unit": "µH",
+          "conditions": "Tolerance -30% to 30%"
+        },
+        "DCRL": {
+          "parameter": "Inductor DCR",
+          "min": null,
+          "typ": 25,
+          "max": null,
+          "unit": "mΩ",
+          "conditions": null
+        },
+        "VVIN_Bx": {
+          "parameter": "Input voltage range",
+          "min": 2.8,
+          "typ": 3.7,
+          "max": 5.5,
+          "unit": "V",
+          "conditions": null
+        },
+        "VVOUT_Bx": {
+          "parameter": "Programmable output voltage range",
+          "min": 0.6,
+          "typ": null,
+          "max": 3.36,
+          "unit": "V",
+          "conditions": null
+        },
+        "IOUT": {
+          "parameter": "Output current (4-phase)",
+          "min": null,
+          "typ": null,
+          "max": 10,
+          "unit": "A",
+          "conditions": "4-phase output, VIN ≥ 3 V"
+        },
+        "IOUT_4_phase_output__2_8_V___VIN": {
+          "parameter": "Output current (4-phase)",
+          "min": null,
+          "typ": null,
+          "max": 7.2,
+          "unit": "A",
+          "conditions": "4-phase output, 2.8 V ≤ VIN < 3 V"
+        },
+        "IOUT_3_phase_output__VIN___3_V": {
+          "parameter": "Output current (3-phase)",
+          "min": null,
+          "typ": null,
+          "max": 9,
+          "unit": "A",
+          "conditions": "3-phase output, VIN ≥ 3 V"
+        },
+        "IOUT_3_phase_output__2_8_V___VIN": {
+          "parameter": "Output current (3-phase)",
+          "min": null,
+          "typ": null,
+          "max": 6.5,
+          "unit": "A",
+          "conditions": "3-phase output, 2.8 V ≤ VIN < 3 V"
+        },
+        "IOUT_2_phase_output__VIN___3_V": {
+          "parameter": "Output current (2-phase)",
+          "min": null,
+          "typ": null,
+          "max": 8,
+          "unit": "A",
+          "conditions": "2-phase output, VIN ≥ 3 V"
+        },
+        "IOUT_2_phase_output__2_8_V___VIN": {
+          "parameter": "Output current (2-phase)",
+          "min": null,
+          "typ": null,
+          "max": 6,
+          "unit": "A",
+          "conditions": "2-phase output, 2.8 V ≤ VIN < 3 V"
+        },
+        "IOUT_1_phase_output__VIN___3_V": {
+          "parameter": "Output current (1-phase)",
+          "min": null,
+          "typ": null,
+          "max": 4,
+          "unit": "A",
+          "conditions": "1-phase output, VIN ≥ 3 V"
+        },
+        "IOUT_1_phase_output__2_8_V___VIN": {
+          "parameter": "Output current (1-phase)",
+          "min": null,
+          "typ": null,
+          "max": 3,
+          "unit": "A",
+          "conditions": "1-phase output, 2.8 V ≤ VIN < 3 V"
+        },
+        "VVOUT_DC": {
+          "parameter": "DC output voltage accuracy (PWM, <1V)",
+          "min": -20,
+          "typ": null,
+          "max": 20,
+          "unit": "mV",
+          "conditions": "VOUT < 1 V, PWM mode"
+        },
+        "VVOUT_DC_VOUT___1_V__PWM_mode": {
+          "parameter": "DC output voltage accuracy (PWM, ≥1V)",
+          "min": -2,
+          "typ": null,
+          "max": 2,
+          "unit": "%",
+          "conditions": "VOUT ≥ 1 V, PWM mode"
+        },
+        "VVOUT_DC_VOUT___1_V__PFM_mode": {
+          "parameter": "DC output voltage accuracy (PFM, <1V)",
+          "min": -20,
+          "typ": null,
+          "max": 40,
+          "unit": "mV",
+          "conditions": "VOUT < 1 V, PFM mode"
+        },
+        "VVOUT_DC_VOUT___1_V__PFM_mode__max_is_2": {
+          "parameter": "DC output voltage accuracy (PFM, ≥1V)",
+          "min": -2,
+          "typ": null,
+          "max": null,
+          "unit": "%",
+          "conditions": "VOUT ≥ 1 V, PFM mode, max is 2% + 20 mV"
+        },
+        "ILIM FWD": {
+          "parameter": "Forward current limit (peak)",
+          "min": 1.5,
+          "typ": null,
+          "max": 5,
+          "unit": "A",
+          "conditions": "Programmable range"
+        },
+        "ILIM NEG": {
+          "parameter": "Negative current limit per phase (peak)",
+          "min": 1.6,
+          "typ": 2,
+          "max": 2.4,
+          "unit": "A",
+          "conditions": null
+        },
+        "RDS(ON) HS FET": {
+          "parameter": "On-resistance, high-side FET",
+          "min": null,
+          "typ": 29,
+          "max": 65,
+          "unit": "mΩ",
+          "conditions": "Each phase, between VIN_Bx and SW_Bx pins, I = 1 A"
+        },
+        "RDS(ON) LS FET": {
+          "parameter": "On-resistance, low-side FET",
+          "min": null,
+          "typ": 17,
+          "max": 35,
+          "unit": "mΩ",
+          "conditions": "Each phase, between SW_Bx and PGND_Bx pins, I = 1 A"
+        },
+        "fSW": {
+          "parameter": "Switching frequency, PWM mode",
+          "min": 1.8,
+          "typ": 2,
+          "max": 2.2,
+          "unit": "MHz",
+          "conditions": null
+        },
+        "VANAOVP": {
+          "parameter": "VANA overvoltage",
+          "min": 5.6,
+          "typ": 5.8,
+          "max": 6.1,
+          "unit": "V",
+          "conditions": "Voltage rising"
+        },
+        "VANAUVLO": {
+          "parameter": "VANA undervoltage lockout",
+          "min": 2.51,
+          "typ": 2.63,
+          "max": 2.75,
+          "unit": "V",
+          "conditions": "Voltage rising"
+        },
+        "VIL": {
+          "parameter": "Input low level",
+          "min": null,
+          "typ": null,
+          "max": 0.4,
+          "unit": "V",
+          "conditions": "All digital input signals"
+        },
+        "VIH": {
+          "parameter": "Input high level",
+          "min": 1.2,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": "All digital input signals"
+        },
+        "VOL": {
+          "parameter": "Output low level",
+          "min": null,
+          "typ": null,
+          "max": 0.4,
+          "unit": "V",
+          "conditions": "ISOURCE = 2 mA (nINT, PGOOD, GPIOx)"
+        }
+      },
+      "drc_hints": {
+        "vin_abs_max": {
+          "value": 6,
+          "unit": "V"
+        },
+        "vin_operating": {
+          "min": 2.8,
+          "typ": 3.7,
+          "max": 5.5,
+          "unit": "V"
+        },
+        "enable_threshold": {
+          "max": 0.4,
+          "unit": "V"
+        },
+        "iout_max": {
+          "max": 10,
+          "unit": "A"
+        },
+        "fsw": {
+          "min": 1.8,
+          "typ": 2,
+          "max": 2.2,
+          "unit": "MHz"
+        },
+        "thermal_shutdown": {
+          "min": 140,
+          "typ": 150,
+          "max": 160,
+          "unit": "°C"
+        },
+        "uvlo": {
+          "min": 2.51,
+          "typ": 2.63,
+          "max": 2.75,
+          "unit": "V"
+        }
+      }
+    },
+    "design_context": {
+      "recommended_external_components": [
+        {
+          "role": "sense_resistor",
+          "source_page": 0,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "output and the point-of-load (POL) improving the• I2C-Compatible Interface That Supports Standard"
+        },
+        {
+          "role": "sense_resistor",
+          "source_page": 0,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "accuracy of the output voltage. The switching clock"
+        },
+        {
+          "role": "ovp_divider",
+          "source_page": 0,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "High-Speed (3.4 MHz) Modes to an external clock to minimize the disturbances."
+        },
+        {
+          "role": "uvlo_divider",
+          "source_page": 0,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "• Interrupt Function With Programmable Masking"
+        },
+        {
+          "role": "ovp_divider",
+          "source_page": 0,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "• Interrupt Function With Programmable Masking"
+        },
+        {
+          "role": "uvlo_divider",
+          "source_page": 0,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "The LP8752x-Q1 device supports load-current"
+        },
+        {
+          "role": "inductor",
+          "source_page": 62,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "R0"
+        },
+        {
+          "role": "inductor",
+          "source_page": 62,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "VIN C0 L0"
+        },
+        {
+          "role": "feedback_divider",
+          "source_page": 62,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "CIN0 CIN1 CIN2 CIN3"
+        },
+        {
+          "role": "feedback_divider",
+          "source_page": 62,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "VIN_B1"
+        },
+        {
+          "role": "input_capacitor",
+          "source_page": 65,
+          "value_hint": null,
+          "value_hints": [
+            "0.47 µH"
+          ],
+          "snippet": "RATED DC CURRENT, DCR typical /"
+        },
+        {
+          "role": "input_capacitor",
+          "source_page": 65,
+          "value_hint": null,
+          "value_hints": [
+            "0.47 µH"
+          ],
+          "snippet": "DIMENSIONS"
+        }
+      ],
+      "component_value_hints": [
+        {
+          "values": [
+            "0.22 μH"
+          ],
+          "source_page": 65,
+          "snippet": "LP87521-Q1 LP87522-Q1, LP87523-Q1, LP87524-Q1, LP87525-Q1 SNVSB23 –MARCH 2018 www.ti.com Typical Applications (continued) 9.2.1 Design Requirements 9.2.1.1 Inductor Selection The inductors are L0, L1, L2, and L3 are show"
+        },
+        {
+          "values": [
+            "0.22 μH",
+            "0.47 µH"
+          ],
+          "source_page": 65,
+          "snippet": "saturation current is higher than the peak current limit and the temperature rise current is higher than the maximum expected rms output current. The minimum effective inductance to make sure performance is good is 0.22 "
+        },
+        {
+          "values": [
+            "0.47 µH"
+          ],
+          "source_page": 65,
+          "snippet": "must be less than 0.05 Ωfor good efficiency at high-current condition. The inductor AC loss (resistance) also affects conversion efficiency. Higher Q factor at switching frequency usually gives better efficiency at light"
+        },
+        {
+          "values": [
+            "10 μF",
+            "0.47 µH"
+          ],
+          "source_page": 65,
+          "snippet": "middle load. Shielded inductors are preferred as they radiate less noise. Table 10. Recommended Inductors RATED DC CURRENT, DCR typical / DIMENSIONS MANUFACTURER PART NUMBER VALUE ISAT maximum (typical) / ITEMP maximum L"
+        },
+        {
+          "values": [
+            "10 μF",
+            "0.47 µH",
+            "1.9 μF"
+          ],
+          "source_page": 65,
+          "snippet": "DIMENSIONS MANUFACTURER PART NUMBER VALUE ISAT maximum (typical) / ITEMP maximum L × W × H (mm) maximum (typical) (A) (mΩ) TOKO DFE252012PD-R47M 0.47 µH (20%) 2.5 × 2 × 1.2 5.2 (–) / 4 (–)(1) - / 27 Vishay IHLP1616AB-1A "
+        },
+        {
+          "values": [
+            "10 μF",
+            "0.47 µH",
+            "1.9 μF",
+            "22 μF"
+          ],
+          "source_page": 65,
+          "snippet": "maximum (typical) (A) (mΩ) TOKO DFE252012PD-R47M 0.47 µH (20%) 2.5 × 2 × 1.2 5.2 (–) / 4 (–)(1) - / 27 Vishay IHLP1616AB-1A 0.47 µH (20%) 4.1 × 4.5 × 1.2 – (6 ) / – (6 )(1) 19 / 21 (1) Operating temperature range is up t"
+        },
+        {
+          "values": [
+            "10 μF",
+            "1.9 μF",
+            "22 μF"
+          ],
+          "source_page": 65,
+          "snippet": "(1) Operating temperature range is up to 125°C including self temperature rise. 9.2.1.2 Input Capacitor Selection The input capacitors CIN0, CIN1, CIN2, and CIN3 are shown in the Typical Applications. A ceramic input byp"
+        },
+        {
+          "values": [
+            "1.9 μF",
+            "22 μF"
+          ],
+          "source_page": 65,
+          "snippet": "the VIN_Bx pin and PGND_Bx pin of the device. A larger value or higher voltage rating improves the input voltage filtering. Use X7R type of capacitors, not Y5V or F. DC bias characteristics capacitors must be considered."
+        }
+      ],
+      "layout_hints": [
+        {
+          "hint": "capacitor of 10 μF is required for each phase of the regulator. Place the input capacitor as close as possible to",
+          "source_page": 65
+        },
+        {
+          "hint": "the VIN_Bx pin and PGND_Bx pin of the device. A larger value or higher voltage rating improves the input",
+          "source_page": 65
+        },
+        {
+          "hint": "• Place CIN as close as possible to the VIN_Bx pin and the PGND_Bxx pin. Route the VIN trace wide and thick",
+          "source_page": 82
+        },
+        {
+          "hint": "LP8752x-Q1, as well as the trace between the negative node of the input capacitor and power PGND_Bxx",
+          "source_page": 82
+        },
+        {
+          "hint": "device operation. The parasitic inductance can be decreased by using a ground plane as close as possible to",
+          "source_page": 82
+        },
+        {
+          "hint": "top layer by using thin dielectric layer between top layer and ground plane.",
+          "source_page": 82
+        },
+        {
+          "hint": "voltage. It must be placed as close as possible to the device keeping the switch node small, for best EMI",
+          "source_page": 82
+        },
+        {
+          "hint": "• Input for analog blocks (VANA and AGND) must be isolated from noisy signals. Connect VANA directly to a",
+          "source_page": 82
+        },
+        {
+          "hint": "quiet system voltage node and AGND to a quiet ground point where no IR drop occurs. Place the decoupling",
+          "source_page": 82
+        },
+        {
+          "hint": "capacitor as close as possible to the VANA pin.",
+          "source_page": 82
+        }
+      ],
+      "supply_recommendations": [
+        {
+          "hint": "• Input Voltage: 2.8 V to 5.5 V is controlled by an I2C-compatible serial interface and",
+          "source_page": 0
+        },
+        {
+          "hint": "Lockout (UVLO) external regulators, load switches, and processor",
+          "source_page": 0
+        },
+        {
+          "hint": "input at the maximum input voltage including tolerances and ambient temperature range. This value assumes",
+          "source_page": 65
+        },
+        {
+          "hint": "of the input voltage spikes due to this rapidly changing current. Select an input filter capacitor with sufficient",
+          "source_page": 65
+        },
+        {
+          "hint": "operation. This can increase the input voltage if the load current is small and the output capacitor is large. Below",
+          "source_page": 66
+        },
+        {
+          "hint": "If the input voltage for the regulators is above 4 V, snubber components are needed at the switching nodes to",
+          "source_page": 66
+        },
+        {
+          "hint": "9.2.1.5 Supply Filtering Components",
+          "source_page": 66
+        },
+        {
+          "hint": "The VANA input is used to supply analog and digital circuits in the device. See Table 14 for recommended",
+          "source_page": 66
+        }
+      ],
+      "topology_hints": [
+        {
+          "hint": "LP8752x-Q1 10-A Buck Converter With Integrated Switches",
+          "source_page": 0
+        },
+        {
+          "hint": "1• Qualified for Automotive Applications The LP8752x-Q1 device is designed to meet the",
+          "source_page": 0
+        },
+        {
+          "hint": "– Device Temperature Grade 1: –40°C to power applications. The device contains four step-",
+          "source_page": 0
+        },
+        {
+          "hint": "• Four High-Efficiency Step-Down DC/DC Converter The automatic pulse-width-modulation (PWM) to",
+          "source_page": 0
+        },
+        {
+          "hint": "2 Applications controls the output slew rate to minimize output-",
+          "source_page": 0
+        },
+        {
+          "hint": "Camera Power Applications",
+          "source_page": 0
+        },
+        {
+          "hint": "An IMPORTANT NOTICE at the end of this data sheet addresses availability, warranty, changes, use in safety-critical applications,",
+          "source_page": 0
+        },
+        {
+          "hint": "9 Application and Implementation",
+          "source_page": 62
+        }
+      ],
+      "design_pages": {
+        "pages": [
+          {
+            "page": 0,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 62,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 63,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 64,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 65,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 66,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 68,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 69,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 70,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 71,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 72,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 73,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 74,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 75,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 76,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 77,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 78,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 79,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 80,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 81,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 82,
+            "title": null,
+            "content_type": "layout"
+          },
+          {
+            "page": 83,
+            "title": null,
+            "content_type": "application"
+          }
+        ],
+        "total_pages": 22
+      }
+    }
+  }
 }

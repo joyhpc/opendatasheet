@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -312,5 +312,651 @@
       "unit": "V"
     }
   },
-  "thermal": {}
+  "thermal": {},
+  "domains": {
+    "pin": {
+      "packages": {
+        "WQFN-24": {
+          "pin_count": 25,
+          "pins": {
+            "1": {
+              "name": "AGND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground of internal analog circuitry. AGND must be connected to PGND for proper operation.",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "VIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Input voltage supply pin. Power for the internal circuit and the connection to drain of high-side MOSFET.",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "VIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Input voltage supply pin. Power for the internal circuit and the connection to drain of high-side MOSFET.",
+              "unused_treatment": null
+            },
+            "16": {
+              "name": "VIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Input voltage supply pin. Power for the internal circuit and the connection to drain of high-side MOSFET.",
+              "unused_treatment": null
+            },
+            "17": {
+              "name": "VIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Input voltage supply pin. Power for the internal circuit and the connection to drain of high-side MOSFET.",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "PGND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground return for low-side power MOSFET and its drivers.",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "PGND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground return for low-side power MOSFET and its drivers.",
+              "unused_treatment": null
+            },
+            "6": {
+              "name": "PGND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground return for low-side power MOSFET and its drivers.",
+              "unused_treatment": null
+            },
+            "7": {
+              "name": "PGND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground return for low-side power MOSFET and its drivers.",
+              "unused_treatment": null
+            },
+            "12": {
+              "name": "PGND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground return for low-side power MOSFET and its drivers.",
+              "unused_treatment": null
+            },
+            "13": {
+              "name": "PGND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground return for low-side power MOSFET and its drivers.",
+              "unused_treatment": null
+            },
+            "14": {
+              "name": "PGND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground return for low-side power MOSFET and its drivers.",
+              "unused_treatment": null
+            },
+            "15": {
+              "name": "PGND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground return for low-side power MOSFET and its drivers.",
+              "unused_treatment": null
+            },
+            "8": {
+              "name": "SW",
+              "direction": "OUTPUT",
+              "signal_type": "POWER",
+              "description": "Switching node. Connected to the source of the high-side MOSFET and drain of the low-side MOSFET.",
+              "unused_treatment": null
+            },
+            "9": {
+              "name": "SW",
+              "direction": "OUTPUT",
+              "signal_type": "POWER",
+              "description": "Switching node. Connected to the source of the high-side MOSFET and drain of the low-side MOSFET.",
+              "unused_treatment": null
+            },
+            "10": {
+              "name": "SW",
+              "direction": "OUTPUT",
+              "signal_type": "POWER",
+              "description": "Switching node. Connected to the source of the high-side MOSFET and drain of the low-side MOSFET.",
+              "unused_treatment": null
+            },
+            "11": {
+              "name": "SW",
+              "direction": "OUTPUT",
+              "signal_type": "POWER",
+              "description": "Switching node. Connected to the source of the high-side MOSFET and drain of the low-side MOSFET.",
+              "unused_treatment": null
+            },
+            "18": {
+              "name": "BOOT",
+              "direction": "INPUT",
+              "signal_type": "POWER",
+              "description": "Floating supply voltage for high-side MOSFET gate drive circuit. Connect a 0.1-μF ceramic capacitor between BOOT and SW pins.",
+              "unused_treatment": null
+            },
+            "19": {
+              "name": "PGOOD",
+              "direction": "OUTPUT",
+              "signal_type": "DIGITAL",
+              "description": "Open-drain power good indicator. It is asserted low if output voltage is outside if the PGOOD thresholds.",
+              "unused_treatment": null
+            },
+            "20": {
+              "name": "EN",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Enable pin. Float or pull high to enable the device. Connect a resistor divider to this pin to implement adjustable UVLO.",
+              "unused_treatment": "FLOAT"
+            },
+            "21": {
+              "name": "SS/TRK",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Soft-start and tracking pin. Connecting an external capacitor sets the soft-start time.",
+              "unused_treatment": null
+            },
+            "22": {
+              "name": "COMP",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Error amplifier output and input to the PWM modulator. Connect loop compensation to this pin.",
+              "unused_treatment": null
+            },
+            "23": {
+              "name": "FB",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Converter feedback input. Connect to the output voltage with a resistor divider.",
+              "unused_treatment": null
+            },
+            "24": {
+              "name": "RT/CLK",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Switching frequency setting pin. In RT mode, an external timing resistor adjusts the switching frequency. In CLK mode, the device synchronizes to an external clock input.",
+              "unused_treatment": null
+            },
+            "EP": {
+              "name": "Thermal PAD",
+              "direction": "PASSIVE",
+              "signal_type": "POWER",
+              "description": "Exposed thermal pad. Connect to PGND pins and to internal ground planes using multiple vias for good thermal performance.",
+              "unused_treatment": null
+            }
+          }
+        }
+      }
+    },
+    "electrical": {
+      "absolute_maximum_ratings": {
+        "VIN": {
+          "parameter": "Input voltage",
+          "min": -0.3,
+          "max": 19,
+          "unit": "V",
+          "conditions": null
+        },
+        "BOOT": {
+          "parameter": "Bootstrap voltage (10 ns transient)",
+          "min": -0.3,
+          "max": 30,
+          "unit": "V",
+          "conditions": null
+        },
+        "BOOT-SW": {
+          "parameter": "Bootstrap voltage relative to SW",
+          "min": -0.3,
+          "max": 7,
+          "unit": "V",
+          "conditions": null
+        },
+        "SW": {
+          "parameter": "Switch node voltage (10 ns transient)",
+          "min": -3,
+          "max": 23,
+          "unit": "V",
+          "conditions": null
+        },
+        "TJ": {
+          "parameter": "Operating junction temperature",
+          "min": -40,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        },
+        "TSTG": {
+          "parameter": "Storage temperature",
+          "min": -55,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        }
+      },
+      "electrical_parameters": {
+        "VFB": {
+          "parameter": "Regulated FB voltage",
+          "min": 596,
+          "typ": 600,
+          "max": 604,
+          "unit": "mV",
+          "conditions": "TJ = 25°C"
+        },
+        "VFB_TJ____40_C_to_150_C": {
+          "parameter": "Regulated FB voltage",
+          "min": 595,
+          "typ": 600,
+          "max": 605,
+          "unit": "mV",
+          "conditions": "TJ = -40°C to 150°C"
+        },
+        "VIH": {
+          "parameter": "Logic high input voltage",
+          "min": 2,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": "RT/CLK pin"
+        },
+        "VIL": {
+          "parameter": "Logic low input voltage",
+          "min": null,
+          "typ": null,
+          "max": 0.8,
+          "unit": "V",
+          "conditions": "RT/CLK pin"
+        },
+        "TTRIP": {
+          "parameter": "Thermal protection trip point",
+          "min": null,
+          "typ": 170,
+          "max": null,
+          "unit": "°C",
+          "conditions": "Temperature rising"
+        },
+        "THYST": {
+          "parameter": "Thermal protection hysteresis",
+          "min": null,
+          "typ": 15,
+          "max": null,
+          "unit": "°C",
+          "conditions": null
+        }
+      },
+      "drc_hints": {
+        "vin_abs_max": {
+          "value": 19,
+          "unit": "V"
+        },
+        "vref": {
+          "min": 596,
+          "typ": 600,
+          "max": 604,
+          "unit": "mV"
+        },
+        "enable_threshold": {
+          "min": 2,
+          "unit": "V"
+        },
+        "iout_max": {
+          "min": 13.4,
+          "typ": 14.6,
+          "max": 15.8,
+          "unit": "A"
+        },
+        "uvlo": {
+          "typ": 4.1,
+          "max": 4.3,
+          "unit": "V"
+        }
+      }
+    },
+    "design_context": {
+      "recommended_external_components": [
+        {
+          "role": "bootstrap_capacitor",
+          "source_page": 20,
+          "value_hint": "0.1 μF",
+          "value_hints": [
+            "0.1 μF"
+          ],
+          "snippet": "TPS54A24"
+        },
+        {
+          "role": "bootstrap_capacitor",
+          "source_page": 20,
+          "value_hint": "0.1 μF",
+          "value_hints": [
+            "0.1 μF"
+          ],
+          "snippet": "www.ti.com.cn ZHCSJP6 –MAY 2019"
+        },
+        {
+          "role": "inductor",
+          "source_page": 20,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "decreases the BOOT to SW capacitor is not recharged as often so the BOOT to SW voltage will start to"
+        },
+        {
+          "role": "inductor",
+          "source_page": 20,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "decrease. If the voltage from BOOT to SW drops below 2.2 V, the high-side MOSFET is turned off due to BOOT"
+        },
+        {
+          "role": "output_capacitor",
+          "source_page": 22,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "注"
+        },
+        {
+          "role": "output_capacitor",
+          "source_page": 22,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "Information in the following applications sections is not part of the TI component"
+        },
+        {
+          "role": "input_capacitor",
+          "source_page": 26,
+          "value_hint": "14 μF",
+          "value_hints": [
+            "14 µF",
+            "14 μF"
+          ],
+          "snippet": "maximum input voltage. Two 10-µF, 1210, X7R, 25-V and two 0.1-μF, 0603, X7R 25-V capacitors in parallel has"
+        },
+        {
+          "role": "input_capacitor",
+          "source_page": 26,
+          "value_hint": "14 μF",
+          "value_hints": [
+            "14 µF",
+            "14 μF"
+          ],
+          "snippet": "been selected to be placed on both sides of the TPS54A24 near both VIN pins to PGND pins. Based on the"
+        },
+        {
+          "role": "soft_start_capacitor",
+          "source_page": 26,
+          "value_hint": null,
+          "value_hints": [
+            "6.04kΩ",
+            "12.08kΩ",
+            "12.1kΩ"
+          ],
+          "snippet": "8.2.2.6 Output Voltage Resistors Selection"
+        },
+        {
+          "role": "soft_start_capacitor",
+          "source_page": 26,
+          "value_hint": null,
+          "value_hints": [
+            "6.04kΩ",
+            "12.08kΩ",
+            "12.1kΩ"
+          ],
+          "snippet": "The output voltage is set with a resistor divider created by R8 (RFBT) and R6 (RFBB) from the output node to the"
+        },
+        {
+          "role": "uvlo_divider",
+          "source_page": 26,
+          "value_hint": null,
+          "value_hints": [
+            "100 μF"
+          ],
+          "snippet": "capacitor value of 3 × 100 μF does not require much current to charge to 1.8 V. The example circuit has the soft-"
+        },
+        {
+          "role": "uvlo_divider",
+          "source_page": 26,
+          "value_hint": null,
+          "value_hints": [
+            "100 μF"
+          ],
+          "snippet": "start time set to an arbitrary value of 1.2 ms, which requires a 0.01-µF capacitor. With this soft-start time the"
+        }
+      ],
+      "component_value_hints": [
+        {
+          "values": [
+            "0.1 μF"
+          ],
+          "source_page": 20,
+          "snippet": "TPS54A24 www.ti.com.cn ZHCSJP6 –MAY 2019 Feature Description (接下页) 7.3.13 Bootstrap Voltage and 100% Duty Cycle Operation (BOOT) The device provides an integrated bootstrap-voltage regulator. A small capacitor between th"
+        },
+        {
+          "values": [
+            "14 µF"
+          ],
+          "source_page": 26,
+          "snippet": "TPS54A24 www.ti.com.cn ZHCSJP6 –MAY 2019 For this example design, a ceramic capacitor with at least a 25-V voltage rating is required to support the maximum input voltage. Two 10-µF, 1210, X7R, 25-V and two 0.1-μF, 0603,"
+        },
+        {
+          "values": [
+            "14 μF",
+            "14 µF"
+          ],
+          "source_page": 26,
+          "snippet": "TPS54A24 www.ti.com.cn ZHCSJP6 –MAY 2019 For this example design, a ceramic capacitor with at least a 25-V voltage rating is required to support the maximum input voltage. Two 10-µF, 1210, X7R, 25-V and two 0.1-μF, 0603,"
+        },
+        {
+          "values": [
+            "14 μF"
+          ],
+          "source_page": 26,
+          "snippet": "voltage of 12 V. A 100-µF bulk capacitance is also used in this circuit to bypass long leads when connected a lab bench top power supply. The input capacitance value determines the input ripple voltage of the regulator. "
+        },
+        {
+          "values": [
+            "6.04kΩ"
+          ],
+          "source_page": 26,
+          "snippet": "the 12 V nominal input is 150 mV and the RMS input ripple current with the 4.5 V minimum input is 4.9 A. Vout (Vinmin - Vout ) Icirms = Iout ´ ´ Vinmin Vinmin (23) vertical spacer § Vout · Vout Ioutmaxu ¨ 1 ¸ u © Vin ¹ V"
+        },
+        {
+          "values": [
+            "6.04kΩ",
+            "12.08kΩ",
+            "12.1kΩ"
+          ],
+          "source_page": 26,
+          "snippet": "Vout (Vinmin - Vout ) Icirms = Iout ´ ´ Vinmin Vinmin (23) vertical spacer § Vout · Vout Ioutmaxu ¨ 1 ¸ u © Vin ¹ Vin 'Vin Cin u fSW (24) 8.2.2.6 Output Voltage Resistors Selection The output voltage is set with a resist"
+        },
+        {
+          "values": [
+            "12.08kΩ",
+            "12.1kΩ"
+          ],
+          "source_page": 26,
+          "snippet": "selected for R8. Using 公式25, R6 is calculated as 12.08 kΩ. The nearest standard 1% resistor is 12.1 kΩ. § · VOUT ¨ ¸ 1 RFBT RFBB u © VREF ¹ (25) 8.2.2.7 Soft-Start Capacitor Selection The soft-start capacitor (CSS = C16)"
+        },
+        {
+          "values": [
+            "100 μF"
+          ],
+          "source_page": 26,
+          "snippet": "§ · VOUT ¨ ¸ 1 RFBT RFBB u © VREF ¹ (25) 8.2.2.7 Soft-Start Capacitor Selection The soft-start capacitor (CSS = C16) determines the amount of time it takes for the output voltage to reach its nominal programmed value dur"
+        }
+      ],
+      "design_equation_hints": [
+        {
+          "equation": "soft-start capacitor (CSS = C16) determines the amount of time it takes for the output voltage to reach its",
+          "source_page": 26
+        },
+        {
+          "equation": "VOUT = 1.8 V",
+          "source_page": 27
+        }
+      ],
+      "layout_hints": [
+        {
+          "hint": "been selected to be placed on both sides of the TPS54A24 near both VIN pins to PGND pins. Based on the",
+          "source_page": 26
+        },
+        {
+          "hint": "• VIN and PGND traces must be as wide as possible to reduce trace impedance and improve heat dissipation.",
+          "source_page": 33
+        },
+        {
+          "hint": "possible to the IC. The input capacitors must connect directly to the adjacent PGND pins.",
+          "source_page": 33
+        },
+        {
+          "hint": "• Connect the PGND pins on both sides of the IC to the thermal pad with a trace as wide as possible to reduce",
+          "source_page": 33
+        },
+        {
+          "hint": "• The PGND trace between the output capacitor and the PGND pin must be as wide as possible to minimize its",
+          "source_page": 33
+        },
+        {
+          "hint": "• Keep the SW trace as physically short and wide as practical to minimize radiated emissions.",
+          "source_page": 33
+        },
+        {
+          "hint": "• Place components connected to the RT/CLK, FB, COMP and SS/TRK pins as close to the IC as possible and",
+          "source_page": 33
+        },
+        {
+          "hint": "• AGND must be connected to PGND on the PCB. Connect AGND to PGND in a region away from switching",
+          "source_page": 33
+        },
+        {
+          "hint": "• The top layer has all components and the main traces for VIN, SW, VOUT and PGND. Both VIN pins are",
+          "source_page": 33
+        },
+        {
+          "hint": "bypassed with two input capacitors placed as close as possible to the IC and are connected directly to the",
+          "source_page": 33
+        }
+      ],
+      "supply_recommendations": [
+        {
+          "hint": "9 Power Supply Recommendations...................... 34 6 Specifications......................................................... 4",
+          "source_page": 1
+        },
+        {
+          "hint": "used to estimate the input voltage the switching frequency begins to decrease. When the switching frequency",
+          "source_page": 20
+        },
+        {
+          "hint": "UVLO and the low-side MOSFET pulls SW low to recharge the BOOT capacitor. When operating at 100% duty",
+          "source_page": 20
+        },
+        {
+          "hint": "Input voltage range (VIN) 4.5 to 17 V, 12 V nominal",
+          "source_page": 22
+        },
+        {
+          "hint": "maximum input voltage. Two 10-µF, 1210, X7R, 25-V and two 0.1-μF, 0603, X7R 25-V capacitors in parallel has",
+          "source_page": 26
+        },
+        {
+          "hint": "bench top power supply.",
+          "source_page": 26
+        },
+        {
+          "hint": "The input capacitance value determines the input ripple voltage of the regulator. The input voltage ripple can be",
+          "source_page": 26
+        },
+        {
+          "hint": "nominal design example values of Ioutmax = 10 A, CIN = 14 μF, and fSW = 500 kHz, the input voltage ripple with",
+          "source_page": 26
+        }
+      ],
+      "topology_hints": [
+        {
+          "hint": "3 说明.......................................................................... 1 8 Application and Implementation ........................ 23",
+          "source_page": 1
+        },
+        {
+          "hint": "4 修订历史记录........................................................... 2 8.1 Application Information............................................ 23",
+          "source_page": 1
+        },
+        {
+          "hint": "8.2 Typical Application ................................................. 23 5 Pin Configuration and Functions......................... 3",
+          "source_page": 1
+        },
+        {
+          "hint": "8 Application and Implementation",
+          "source_page": 22
+        },
+        {
+          "hint": "Information in the following applications sections is not part of the TI component",
+          "source_page": 22
+        },
+        {
+          "hint": "8.1 Application Information",
+          "source_page": 22
+        },
+        {
+          "hint": "The TPS54A24 is a synchronous buck converter designed for 4.5 V to 17 V input and 10-A load. This procedure",
+          "source_page": 22
+        },
+        {
+          "hint": "8.2 Typical Application",
+          "source_page": 22
+        }
+      ],
+      "design_pages": {
+        "pages": [
+          {
+            "page": 1,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 20,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 22,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 26,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 27,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 28,
+            "title": null,
+            "content_type": "layout"
+          },
+          {
+            "page": 33,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 34,
+            "title": null,
+            "content_type": "layout"
+          }
+        ],
+        "total_pages": 8
+      }
+    }
+  }
 }

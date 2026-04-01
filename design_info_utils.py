@@ -24,6 +24,14 @@ APPLICATION_PATTERN_STRINGS = (
     r"(?i)bandpass\s+filter",
     r"(?i)snubber\s+network",
     r"(?i)voltage\s+follower",
+    r"应用和实现",
+    r"应用信息",
+    r"典型应用",
+    r"详细设计过程",
+    r"设计参数",
+    r"建议的元件值",
+    r"输出电压电阻器选型",
+    r"输出滤波器选型",
 )
 
 LAYOUT_PATTERN_STRINGS = (
@@ -34,6 +42,9 @@ LAYOUT_PATTERN_STRINGS = (
     r"(?i)minimi[sz]e.*loop",
     r"(?i)ground\s+plane",
     r"(?i)thermal\s+via",
+    r"布局指南",
+    r"布局示例",
+    r"建议的布局",
 )
 
 POWER_SUPPLY_PATTERN_STRINGS = (
@@ -41,6 +52,8 @@ POWER_SUPPLY_PATTERN_STRINGS = (
     r"(?i)input\s+voltage\s+supply\s+range",
     r"(?i)designed\s+to\s+operate\s+from",
     r"(?i)operate\s+from\s+an?\s+input\s+voltage",
+    r"电源相关建议",
+    r"输入电压范围",
 )
 
 TEST_CIRCUIT_PATTERN_STRINGS = (

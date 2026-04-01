@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -397,5 +397,712 @@
       "unit": "V"
     }
   },
-  "thermal": {}
+  "thermal": {},
+  "domains": {
+    "pin": {
+      "packages": {
+        "SOT-23-5": {
+          "pin_count": 5,
+          "pins": {
+            "1": {
+              "name": "VIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "VIN power supply pin.",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "GND supply pin.",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "EN",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Enable pin. Pulling this pin to low forces the device into shutdown mode. Pulling this pin to high enables the device. This pin must be terminated.",
+              "unused_treatment": "CUSTOM"
+            },
+            "4": {
+              "name": "FB",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Feedback pin for the internal regulation loop. Connect the external resistor divider to this pin. In case of fixed output voltage option, connect this pin directly to the output capacitor.",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "SW",
+              "direction": "OUTPUT",
+              "signal_type": "POWER",
+              "description": "Switch pin and is connected to the internal MOSFET switches. Connect the external inductor between this terminal and the output capacitor.",
+              "unused_treatment": null
+            }
+          }
+        },
+        "WSON-6": {
+          "pin_count": 7,
+          "pins": {
+            "5": {
+              "name": "VIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "VIN power supply pin.",
+              "unused_treatment": null
+            },
+            "6": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "GND supply pin.",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "EN",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Enable pin. Pulling this pin to low forces the device into shutdown mode. Pulling this pin to high enables the device. This pin must be terminated.",
+              "unused_treatment": "CUSTOM"
+            },
+            "3": {
+              "name": "FB",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Feedback pin for the internal regulation loop. Connect the external resistor divider to this pin. In case of fixed output voltage option, connect this pin directly to the output capacitor.",
+              "unused_treatment": null
+            },
+            "1": {
+              "name": "SW",
+              "direction": "OUTPUT",
+              "signal_type": "POWER",
+              "description": "Switch pin and is connected to the internal MOSFET switches. Connect the external inductor between this terminal and the output capacitor.",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "MODE",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Mode selection pin. MODE pin = High forces the device to operate in fixed frequency PWM mode. MODE pin = Low enables the power save mode with automatic transition from PFM mode to fixed frequency PWM mode. Only available on WSON package.",
+              "unused_treatment": null
+            },
+            "EP": {
+              "name": "Power PAD",
+              "direction": "PASSIVE",
+              "signal_type": "POWER",
+              "description": "Exposed thermal pad on WSON package. Typically connected to GND.",
+              "unused_treatment": null
+            }
+          }
+        }
+      }
+    },
+    "electrical": {
+      "absolute_maximum_ratings": {
+        "VIN": {
+          "parameter": "Input voltage",
+          "min": -0.3,
+          "max": 7.0,
+          "unit": "V",
+          "conditions": null
+        },
+        "TJ": {
+          "parameter": "Maximum operating junction temperature",
+          "min": -40.0,
+          "max": 125.0,
+          "unit": "°C",
+          "conditions": null
+        },
+        "Tstg": {
+          "parameter": "Storage temperature",
+          "min": -65.0,
+          "max": 150.0,
+          "unit": "°C",
+          "conditions": null
+        },
+        "V(ESD)": {
+          "parameter": "Electrostatic discharge (HBM)",
+          "min": -2000.0,
+          "max": 2000.0,
+          "unit": "V",
+          "conditions": "per ANSI/ESDA/JEDEC JS-001, all pins"
+        },
+        "V(ESD)_per_JEDEC_specification_JESD22": {
+          "parameter": "Electrostatic discharge (CDM)",
+          "min": -1000.0,
+          "max": 1000.0,
+          "unit": "V",
+          "conditions": "per JEDEC specification JESD22-C101, all pins"
+        }
+      },
+      "electrical_parameters": {
+        "VIN": {
+          "parameter": "Input voltage range",
+          "min": 2.3,
+          "typ": null,
+          "max": 6.0,
+          "unit": "V",
+          "conditions": null
+        },
+        "IOUT": {
+          "parameter": "Output current",
+          "min": null,
+          "typ": null,
+          "max": 600.0,
+          "unit": "mA",
+          "conditions": "VIN 2.5 V to 6 V"
+        },
+        "IOUT_VIN_2_3_V_to_2_5_V": {
+          "parameter": "Output current",
+          "min": null,
+          "typ": null,
+          "max": 300.0,
+          "unit": "mA",
+          "conditions": "VIN 2.3 V to 2.5 V"
+        },
+        "IOUT_VIN_2_V_to_2_3_V": {
+          "parameter": "Output current",
+          "min": null,
+          "typ": null,
+          "max": 150.0,
+          "unit": "mA",
+          "conditions": "VIN 2 V to 2.3 V"
+        },
+        "IQ": {
+          "parameter": "Operating quiescent current",
+          "min": null,
+          "typ": 15.0,
+          "max": null,
+          "unit": "µA",
+          "conditions": "IOUT = 0 mA, PFM mode enabled (MODE = GND) device not switching"
+        },
+        "IQ_IOUT___0_mA__PFM_mode_enabled": {
+          "parameter": "Operating quiescent current",
+          "min": null,
+          "typ": 18.5,
+          "max": null,
+          "unit": "µA",
+          "conditions": "IOUT = 0 mA, PFM mode enabled (MODE = GND) device switching, VOUT = 1.8 V"
+        },
+        "IQ_IOUT___0_mA__switching_with_no": {
+          "parameter": "Operating quiescent current",
+          "min": null,
+          "typ": 3.8,
+          "max": null,
+          "unit": "mA",
+          "conditions": "IOUT = 0 mA, switching with no load (MODE = VIN), PWM operation, VOUT = 1.8 V, VIN = 3 V"
+        },
+        "ISD": {
+          "parameter": "Shutdown current",
+          "min": null,
+          "typ": 0.1,
+          "max": 1.0,
+          "unit": "µA",
+          "conditions": "EN = GND"
+        },
+        "UVLO": {
+          "parameter": "Undervoltage lockout threshold (Falling)",
+          "min": null,
+          "typ": 1.85,
+          "max": null,
+          "unit": "V",
+          "conditions": "Falling"
+        },
+        "UVLO_Rising": {
+          "parameter": "Undervoltage lockout threshold (Rising)",
+          "min": null,
+          "typ": 1.95,
+          "max": null,
+          "unit": "V",
+          "conditions": "Rising"
+        },
+        "VIH": {
+          "parameter": "High level input voltage, EN, MODE",
+          "min": 1.0,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": "2 V ≤ VIN ≤ 6 V"
+        },
+        "VIL": {
+          "parameter": "Low level input voltage, EN, MODE",
+          "min": 0.0,
+          "typ": null,
+          "max": 0.4,
+          "unit": "V",
+          "conditions": "2 V ≤ VIN ≤ 6 V"
+        },
+        "IIN": {
+          "parameter": "Input bias current, EN, MODE",
+          "min": null,
+          "typ": 0.01,
+          "max": 1.0,
+          "unit": "µA",
+          "conditions": "EN, MODE = GND or VIN"
+        },
+        "RDS(on)": {
+          "parameter": "High side MOSFET on-resistance",
+          "min": null,
+          "typ": 240.0,
+          "max": 480.0,
+          "unit": "mΩ",
+          "conditions": "VIN = VGS = 3.6 V, TA = 25°C"
+        },
+        "RDS(on)_VIN___VGS___3_6_V__TA___25_C": {
+          "parameter": "Low side MOSFET on-resistance",
+          "min": null,
+          "typ": 185.0,
+          "max": 380.0,
+          "unit": "mΩ",
+          "conditions": "VIN = VGS = 3.6 V, TA = 25°C"
+        },
+        "ILIMF": {
+          "parameter": "Forward current limit MOSFET high side and low side",
+          "min": 0.8,
+          "typ": 1.0,
+          "max": 1.2,
+          "unit": "A",
+          "conditions": "VIN = VGS = 3.6 V"
+        },
+        "TSD": {
+          "parameter": "Thermal shutdown",
+          "min": null,
+          "typ": 140.0,
+          "max": null,
+          "unit": "°C",
+          "conditions": "Increasing junction temperature"
+        },
+        "TSD_Decreasing_junction_temperatur": {
+          "parameter": "Thermal shutdown hysteresis",
+          "min": null,
+          "typ": 20.0,
+          "max": null,
+          "unit": "°C",
+          "conditions": "Decreasing junction temperature"
+        },
+        "fSW": {
+          "parameter": "Oscillator frequency",
+          "min": 2.0,
+          "typ": 2.25,
+          "max": 2.5,
+          "unit": "MHz",
+          "conditions": "2 V ≤ VIN ≤ 6 V"
+        },
+        "VOUT": {
+          "parameter": "Adjustable output voltage range",
+          "min": 0.6,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": null
+        },
+        "VREF": {
+          "parameter": "Reference voltage",
+          "min": null,
+          "typ": 600.0,
+          "max": null,
+          "unit": "mV",
+          "conditions": null
+        },
+        "VFB": {
+          "parameter": "Feedback voltage PWM mode",
+          "min": -1.5,
+          "typ": 0.0,
+          "max": 1.5,
+          "unit": "%",
+          "conditions": "MODE = VIN, PWM operation, for fixed output voltage versions VFB = VOUT, 2.5 V ≤ VIN ≤ 6 V, 0 mA ≤ IOUT ≤ 600 mA"
+        },
+        "VFB_MODE___GND__device_in_PFM_mode": {
+          "parameter": "Feedback voltage PFM mode",
+          "min": null,
+          "typ": 1.0,
+          "max": null,
+          "unit": "%",
+          "conditions": "MODE = GND, device in PFM mode, voltage positioning active"
+        },
+        "tStart Up": {
+          "parameter": "Start-up time",
+          "min": null,
+          "typ": 500.0,
+          "max": null,
+          "unit": "µs",
+          "conditions": "Time from active EN to reach 95% of VOUT nominal"
+        },
+        "tRamp": {
+          "parameter": "VOUT ramp-up time",
+          "min": null,
+          "typ": 250.0,
+          "max": null,
+          "unit": "µs",
+          "conditions": "Time to ramp from 5% to 95% of VOUT"
+        },
+        "Ilkg": {
+          "parameter": "Leakage current into SW pin",
+          "min": null,
+          "typ": 0.1,
+          "max": 1.0,
+          "unit": "µA",
+          "conditions": "VIN = 3.6 V, VIN = VOUT = VSW, EN = GND"
+        }
+      },
+      "drc_hints": {
+        "vin_abs_max": {
+          "value": 7.0,
+          "unit": "V"
+        },
+        "vin_operating": {
+          "min": 2.3,
+          "max": 6.0,
+          "unit": "V"
+        },
+        "vref": {
+          "typ": 600.0,
+          "unit": "mV"
+        },
+        "vout": {
+          "min": 0.6,
+          "unit": "V"
+        },
+        "enable_threshold": {
+          "min": 1.0,
+          "unit": "V"
+        },
+        "iout_max": {
+          "max": 600.0,
+          "unit": "mA"
+        },
+        "iq": {
+          "typ": 15.0,
+          "unit": "µA"
+        },
+        "fsw": {
+          "min": 2.0,
+          "typ": 2.25,
+          "max": 2.5,
+          "unit": "MHz"
+        },
+        "thermal_shutdown": {
+          "typ": 140.0,
+          "unit": "°C"
+        },
+        "uvlo": {
+          "typ": 1.85,
+          "unit": "V"
+        }
+      }
+    },
+    "design_context": {
+      "recommended_external_components": [
+        {
+          "role": "feedback_divider",
+          "source_page": 10,
+          "value_hint": null,
+          "value_hints": [
+            "22 pF"
+          ],
+          "snippet": "GND"
+        },
+        {
+          "role": "feedback_divider",
+          "source_page": 10,
+          "value_hint": null,
+          "value_hints": [
+            "22 pF"
+          ],
+          "snippet": "R 2"
+        },
+        {
+          "role": "input_capacitor",
+          "source_page": 10,
+          "value_hint": "4.7 μF",
+          "value_hints": [
+            "4.7 μF"
+          ],
+          "snippet": "Figure 6. TPS62260DRV Adjustable 1.2-V Output"
+        },
+        {
+          "role": "input_capacitor",
+          "source_page": 10,
+          "value_hint": "4.7 μF",
+          "value_hints": [
+            "4.7 μF",
+            "10 μF"
+          ],
+          "snippet": "9.2.1 Design Requirements"
+        },
+        {
+          "role": "output_capacitor",
+          "source_page": 10,
+          "value_hint": "10 μF",
+          "value_hints": [
+            "4.7 μF",
+            "10 μF"
+          ],
+          "snippet": "9.2.1 Design Requirements"
+        },
+        {
+          "role": "output_capacitor",
+          "source_page": 10,
+          "value_hint": "10 μF",
+          "value_hints": [
+            "4.7 μF",
+            "10 μF",
+            "22 pF"
+          ],
+          "snippet": "The device operates over an input voltage range from 2 V to 6 V. The output voltage is adjustable using an"
+        },
+        {
+          "role": "inductor",
+          "source_page": 10,
+          "value_hint": "2.2 μH",
+          "value_hints": [
+            "4.7 μF",
+            "10 μF",
+            "22 pF",
+            "2.2 μH",
+            "110 mΩ"
+          ],
+          "snippet": "external feedback divider."
+        },
+        {
+          "role": "inductor",
+          "source_page": 10,
+          "value_hint": "2.2 μH",
+          "value_hints": [
+            "4.7 μF",
+            "10 μF",
+            "22 pF",
+            "2.2 μH",
+            "110 mΩ"
+          ],
+          "snippet": "9.2.2 Detailed Design Procedure"
+        }
+      ],
+      "component_value_hints": [
+        {
+          "values": [
+            "22 pF"
+          ],
+          "source_page": 10,
+          "snippet": "VIN SW R 1 C 1 C OUT C IN EN 360 k W 22 pF 10 m F 4.7 m F FB GND R 2 360 k W MODE Figure 6. TPS62260DRV Adjustable 1.2-V Output 9.2.1 Design Requirements The device operates over an input voltage range from 2 V to 6 V. T"
+        },
+        {
+          "values": [
+            "4.7 μF"
+          ],
+          "source_page": 10,
+          "snippet": "GND R 2 360 k W MODE Figure 6. TPS62260DRV Adjustable 1.2-V Output 9.2.1 Design Requirements The device operates over an input voltage range from 2 V to 6 V. The output voltage is adjustable using an external feedback di"
+        },
+        {
+          "values": [
+            "4.7 μF",
+            "10 μF"
+          ],
+          "source_page": 10,
+          "snippet": "R 2 360 k W MODE Figure 6. TPS62260DRV Adjustable 1.2-V Output 9.2.1 Design Requirements The device operates over an input voltage range from 2 V to 6 V. The output voltage is adjustable using an external feedback divide"
+        },
+        {
+          "values": [
+            "4.7 μF",
+            "10 μF",
+            "22 pF"
+          ],
+          "source_page": 10,
+          "snippet": "360 k W MODE Figure 6. TPS62260DRV Adjustable 1.2-V Output 9.2.1 Design Requirements The device operates over an input voltage range from 2 V to 6 V. The output voltage is adjustable using an external feedback divider. 9"
+        },
+        {
+          "values": [
+            "4.7 μF",
+            "10 μF",
+            "2.2 μH",
+            "110 mΩ",
+            "22 pF"
+          ],
+          "source_page": 10,
+          "snippet": "MODE Figure 6. TPS62260DRV Adjustable 1.2-V Output 9.2.1 Design Requirements The device operates over an input voltage range from 2 V to 6 V. The output voltage is adjustable using an external feedback divider. 9.2.2 Det"
+        },
+        {
+          "values": [
+            "4.7 μF",
+            "10 μF",
+            "2.2 μH",
+            "110 mΩ",
+            "22 pF",
+            "360 kΩ"
+          ],
+          "source_page": 10,
+          "snippet": "COMPONENT REFERENCE PART NUMBER MANUFACTURER VALUE CIN GRM188R60J475K Murata 4.7 μF, 6.3 V. X5R Ceramic COUT GRM188R60J106M Murata 10 μF, 6.3 V. X5R Ceramic C1 Murata 22 pF, COG Ceramic L1 LPS3015 Coilcraft 2.2 μH, 110 m"
+        },
+        {
+          "values": [
+            "10 μF",
+            "2.2 μH",
+            "110 mΩ",
+            "22 pF",
+            "360 kΩ",
+            "1 MΩ"
+          ],
+          "source_page": 10,
+          "snippet": "COUT GRM188R60J106M Murata 10 μF, 6.3 V. X5R Ceramic C1 Murata 22 pF, COG Ceramic L1 LPS3015 Coilcraft 2.2 μH, 110 mΩ R1, R2 Values depending on the programmed output voltage 9.2.2.1 Output Voltage Setting The output vol"
+        },
+        {
+          "values": [
+            "2.2 μH",
+            "110 mΩ",
+            "22 pF",
+            "360 kΩ",
+            "1 MΩ",
+            "33 pF"
+          ],
+          "source_page": 10,
+          "snippet": "C1 Murata 22 pF, COG Ceramic L1 LPS3015 Coilcraft 2.2 μH, 110 mΩ R1, R2 Values depending on the programmed output voltage 9.2.2.1 Output Voltage Setting The output voltage can be calculated to: æ R1 ö VOUT = VREF ´ ç 1 +"
+        }
+      ],
+      "design_range_hints": [
+        {
+          "name": "VIN",
+          "min": 2.0,
+          "max": 6.0,
+          "unit": "V",
+          "source_page": 18,
+          "snippet": "VIN = 2 V to 6 V 2.2 m H Up to 600 mA"
+        }
+      ],
+      "design_equation_hints": [
+        {
+          "equation": "VOUT = VREF ´ ç 1 + ÷",
+          "source_page": 10
+        },
+        {
+          "equation": "VIN DIL = VOUT ´ L ´ ƒ",
+          "source_page": 11
+        },
+        {
+          "equation": "IL max = IOUT max +",
+          "source_page": 11
+        },
+        {
+          "equation": "IRMSC OUT = VOUT ´ ƒ L ´ 2 ´ 3 (4)",
+          "source_page": 12
+        },
+        {
+          "equation": "D VOUT = VOUT ´ ´ ç + ESR ÷",
+          "source_page": 12
+        }
+      ],
+      "layout_hints": [
+        {
+          "hint": "wide and short traces for the main current paths. The input capacitor should be placed as close as possible to",
+          "source_page": 19
+        },
+        {
+          "hint": "Connect the GND pin of the device to the PowerPAD™land of the PCB and use this pad as a star point. Use a",
+          "source_page": 19
+        },
+        {
+          "hint": "Connect these ground nodes together to the PowerPAD land (star point) underneath the IC. Keep the common",
+          "source_page": 19
+        }
+      ],
+      "supply_recommendations": [
+        {
+          "hint": "The device operates over an input voltage range from 2 V to 6 V. The output voltage is adjustable using an",
+          "source_page": 10
+        },
+        {
+          "hint": "An input capacitor is required for best input voltage filtering, and minimizing the interference with other circuits",
+          "source_page": 12
+        },
+        {
+          "hint": "caused by high input voltage spikes. For most applications, a 4.7-μF to 10-μF ceramic capacitor is",
+          "source_page": 12
+        },
+        {
+          "hint": "that 10-μF input capacitors be used for input voltages >4.5 V. The input capacitor can be increased without any",
+          "source_page": 12
+        },
+        {
+          "hint": "limit for better input voltage filtering. Take care when using only small ceramic input capacitors. When a ceramic",
+          "source_page": 12
+        },
+        {
+          "hint": "10 Power Supply Recommendations",
+          "source_page": 19
+        },
+        {
+          "hint": "The TPS6226x device has no special requirements for its input power supply. The input power supply output",
+          "source_page": 19
+        },
+        {
+          "hint": "current must be rated according to the supply voltage, output voltage, and output current of the TPS6226x.",
+          "source_page": 19
+        }
+      ],
+      "topology_hints": [
+        {
+          "hint": "9 Application and Implementation",
+          "source_page": 10
+        },
+        {
+          "hint": "Information in the following applications sections is not part of the TI component",
+          "source_page": 10
+        },
+        {
+          "hint": "9.1 Application Information",
+          "source_page": 10
+        },
+        {
+          "hint": "The TPS6226x device is a high-efficiency synchronous step-down DC/DC converter featuring power save mode",
+          "source_page": 10
+        },
+        {
+          "hint": "9.2 Typical Application",
+          "source_page": 10
+        },
+        {
+          "hint": "caused by high input voltage spikes. For most applications, a 4.7-μF to 10-μF ceramic capacitor is",
+          "source_page": 12
+        },
+        {
+          "hint": "Table 1 shows the list of components for the Application Curves.",
+          "source_page": 12
+        }
+      ],
+      "design_pages": {
+        "pages": [
+          {
+            "page": 10,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 11,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 12,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 18,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 19,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 20,
+            "title": null,
+            "content_type": "layout"
+          }
+        ],
+        "total_pages": 6
+      }
+    }
+  }
 }

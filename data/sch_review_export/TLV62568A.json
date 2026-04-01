@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -325,5 +325,564 @@
       "unit": "V"
     }
   },
-  "thermal": {}
+  "thermal": {},
+  "domains": {
+    "pin": {
+      "packages": {
+        "SOT563": {
+          "pin_count": 6,
+          "pins": {
+            "1": {
+              "name": "VIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power supply input",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "SW",
+              "direction": "OUTPUT",
+              "signal_type": "POWER",
+              "description": "Switch node output",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "FB",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Feedback input",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "EN",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Enable input",
+              "unused_treatment": null
+            },
+            "6": {
+              "name": "PG",
+              "direction": "OUTPUT",
+              "signal_type": "DIGITAL",
+              "description": "Power Good output (also: NC — No internal connection)",
+              "unused_treatment": null
+            }
+          }
+        }
+      }
+    },
+    "electrical": {
+      "absolute_maximum_ratings": {
+        "VIN, EN, PG": {
+          "parameter": "Input Voltage",
+          "min": -0.3,
+          "max": 6,
+          "unit": "V",
+          "conditions": null
+        },
+        "SW": {
+          "parameter": "Switch Voltage (DC)",
+          "min": -0.3,
+          "max": null,
+          "unit": "V",
+          "conditions": "max is VIN + 0.3"
+        },
+        "SW_less_than_10ns": {
+          "parameter": "Switch Voltage (AC, less than 10ns)",
+          "min": -3,
+          "max": 9,
+          "unit": "V",
+          "conditions": "less than 10ns"
+        },
+        "FB": {
+          "parameter": "Feedback Voltage",
+          "min": -0.3,
+          "max": 3,
+          "unit": "V",
+          "conditions": null
+        },
+        "TJ": {
+          "parameter": "Junction temperature",
+          "min": -40,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        },
+        "Tstg": {
+          "parameter": "Storage temperature",
+          "min": -65,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        },
+        "V(ESD)": {
+          "parameter": "Electrostatic discharge (HBM)",
+          "min": null,
+          "max": 2000,
+          "unit": "V",
+          "conditions": "per ANSI/ESDA/JEDEC JS-001, all pins"
+        },
+        "V(ESD)_per_JEDEC_specification_JESD22": {
+          "parameter": "Electrostatic discharge (CDM)",
+          "min": null,
+          "max": 500,
+          "unit": "V",
+          "conditions": "per JEDEC specification JESD22-C101, all pins"
+        }
+      },
+      "electrical_parameters": {
+        "VIN": {
+          "parameter": "Input voltage",
+          "min": 2.5,
+          "typ": null,
+          "max": 5.5,
+          "unit": "V",
+          "conditions": "Recommended Operating Conditions"
+        },
+        "VOUT": {
+          "parameter": "Output voltage",
+          "min": 0.6,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": "Recommended Operating Conditions, max is VIN"
+        },
+        "IOUT": {
+          "parameter": "Output current",
+          "min": 0,
+          "typ": null,
+          "max": 2,
+          "unit": "A",
+          "conditions": "Recommended Operating Conditions"
+        },
+        "TJ": {
+          "parameter": "Junction temperature",
+          "min": -40,
+          "typ": null,
+          "max": 125,
+          "unit": "°C",
+          "conditions": "Recommended Operating Conditions"
+        },
+        "ISD": {
+          "parameter": "Shutdown current into VIN pin",
+          "min": null,
+          "typ": 0.01,
+          "max": 2,
+          "unit": "µA",
+          "conditions": "EN = 0 V"
+        },
+        "VUVLO": {
+          "parameter": "Under voltage lock out",
+          "min": 2.3,
+          "typ": null,
+          "max": 2.45,
+          "unit": "V",
+          "conditions": "VIN falling"
+        },
+        "TJSD": {
+          "parameter": "Thermal shutdown",
+          "min": null,
+          "typ": 150,
+          "max": null,
+          "unit": "°C",
+          "conditions": "TJ rising"
+        },
+        "VIH": {
+          "parameter": "High-level input voltage at EN pin",
+          "min": 1.2,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": "2.5 ≤ VIN ≤ 5.5"
+        },
+        "VIL": {
+          "parameter": "Low-level input voltage at EN pin",
+          "min": null,
+          "typ": null,
+          "max": 0.4,
+          "unit": "V",
+          "conditions": "2.5 ≤ VIN ≤ 5.5"
+        },
+        "tSS": {
+          "parameter": "Soft startup time",
+          "min": null,
+          "typ": 0.9,
+          "max": null,
+          "unit": "ms",
+          "conditions": "From EN high to 95% of VOUT nominal"
+        },
+        "VPG": {
+          "parameter": "Power good threshold (rising)",
+          "min": null,
+          "typ": 95,
+          "max": null,
+          "unit": "%",
+          "conditions": "VFB rising, referenced to VFB nominal"
+        },
+        "VPG_VFB_falling__referenced_to_VFB": {
+          "parameter": "Power good threshold (falling)",
+          "min": null,
+          "typ": 90,
+          "max": null,
+          "unit": "%",
+          "conditions": "VFB falling, referenced to VFB nominal"
+        },
+        "VPG,OL": {
+          "parameter": "Low-level output voltage at PG pin",
+          "min": null,
+          "typ": null,
+          "max": 0.4,
+          "unit": "V",
+          "conditions": "ISINK = 1 mA"
+        },
+        "IPG,LKG": {
+          "parameter": "Input leakage current into PG pin",
+          "min": null,
+          "typ": null,
+          "max": 100,
+          "unit": "nA",
+          "conditions": "VPG = 5 V"
+        },
+        "tPG,DLY": {
+          "parameter": "Power good delay time",
+          "min": null,
+          "typ": 40,
+          "max": null,
+          "unit": "µs",
+          "conditions": "VFB falling"
+        },
+        "VFB": {
+          "parameter": "Feedback regulation voltage",
+          "min": 0.588,
+          "typ": 0.6,
+          "max": 0.612,
+          "unit": "V",
+          "conditions": null
+        },
+        "IFB": {
+          "parameter": "Input leakage current into FB pin",
+          "min": null,
+          "typ": 10,
+          "max": null,
+          "unit": "nA",
+          "conditions": "VFB = 0.6 V"
+        },
+        "RDS(on)": {
+          "parameter": "Low-side FET on resistance",
+          "min": null,
+          "typ": 60,
+          "max": null,
+          "unit": "mΩ",
+          "conditions": null
+        },
+        "ILIM": {
+          "parameter": "High-side FET current limit",
+          "min": 2,
+          "typ": null,
+          "max": null,
+          "unit": "A",
+          "conditions": null
+        },
+        "fSW": {
+          "parameter": "Switching frequency",
+          "min": null,
+          "typ": 1.5,
+          "max": null,
+          "unit": "MHz",
+          "conditions": null
+        }
+      },
+      "drc_hints": {
+        "vin_abs_max": {
+          "value": 6,
+          "unit": "V"
+        },
+        "vin_operating": {
+          "min": 2.5,
+          "max": 5.5,
+          "unit": "V"
+        },
+        "vref": {
+          "min": 0.588,
+          "typ": 0.6,
+          "max": 0.612,
+          "unit": "V"
+        },
+        "vout": {
+          "min": 0.6,
+          "unit": "V"
+        },
+        "enable_threshold": {
+          "min": 1.2,
+          "unit": "V"
+        },
+        "iout_max": {
+          "min": 0,
+          "max": 2,
+          "unit": "A"
+        },
+        "fsw": {
+          "typ": 1.5,
+          "unit": "MHz"
+        },
+        "soft_start": {
+          "typ": 0.9,
+          "unit": "ms"
+        },
+        "thermal_shutdown": {
+          "typ": 150,
+          "unit": "°C"
+        },
+        "uvlo": {
+          "min": 2.3,
+          "max": 2.45,
+          "unit": "V"
+        }
+      }
+    },
+    "design_context": {
+      "recommended_external_components": [
+        {
+          "role": "output_capacitor",
+          "source_page": 8,
+          "value_hint": null,
+          "value_hints": [
+            "200kΩ"
+          ],
+          "snippet": "current consumption."
+        },
+        {
+          "role": "output_capacitor",
+          "source_page": 8,
+          "value_hint": null,
+          "value_hints": [
+            "200kΩ"
+          ],
+          "snippet": "æ R1 ö æ R1 ö"
+        },
+        {
+          "role": "input_capacitor",
+          "source_page": 9,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "IL,MAX. In addition, DC resistance and size should also be taken into account when selecting an appropriate"
+        },
+        {
+          "role": "input_capacitor",
+          "source_page": 9,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "inductor."
+        }
+      ],
+      "component_value_hints": [
+        {
+          "values": [
+            "100mΩ",
+            "60mΩ"
+          ],
+          "source_page": 0,
+          "snippet": "Product Order Technical Tools & Support & Folder Now Documents Software Community TLV62568A, TLV62569A ZHCSI23B –APRIL 2018–REVISED MARCH 2020 采用SOT563 封装并具有强制PWM 的TLV6256xA 1A、2A 降压转换器 1 特性 3 说明 1• 强制PWM 模式可减少输出电压纹波 TLV"
+        },
+        {
+          "values": [
+            "1.0 µH"
+          ],
+          "source_page": 0,
+          "snippet": "• STB 和DVR 器件比较 • IP 网络摄像头 器件型号 输出电流 功能 • 无线路由器 TLV62568ADRL - 1A • 固态硬盘(SSD) – 企业级 TLV62568APDRL 电源正常 TLV62569ADRL - 2A TLV62569APDRL 电源正常 sp sp sp sp典型应用原理图 sp在5V 输入电压下的效率 VIN TLV62569A L1 VOUT 100 2.5 V to 5.5 V 1.0 µ"
+        },
+        {
+          "values": [
+            "1.0 µH",
+            "4.7 µF",
+            "22 µF"
+          ],
+          "source_page": 0,
+          "snippet": "• 固态硬盘(SSD) – 企业级 TLV62568APDRL 电源正常 TLV62569ADRL - 2A TLV62569APDRL 电源正常 sp sp sp sp典型应用原理图 sp在5V 输入电压下的效率 VIN TLV62569A L1 VOUT 100 2.5 V to 5.5 V 1.0 µH 1.8 V / 2.0 A VIN SW 95 C1 C2 C3* 4.7 µF 22 µF R1 90"
+        },
+        {
+          "values": [
+            "4.7 µF",
+            "22 µF"
+          ],
+          "source_page": 0,
+          "snippet": "VIN SW 95 C1 C2 C3* 4.7 µF 22 µF R1 90 EN 200 k (%) 85 GND FB 80 R2 C3: Optional 100 k Efficiency 75 70 VOUT = 1.2 V Copyright Ú 2016, Texas Instruments Incorporated VOUT = 1.8 V 65 VOUT = 2.5 V"
+        },
+        {
+          "values": [
+            "1.0 µH"
+          ],
+          "source_page": 7,
+          "snippet": "8 Application and Implementation 注 Information in the following applications sections is not part of the TI component specification, and TI does not warrant its accuracy or completeness. TI’s customers are responsible fo"
+        },
+        {
+          "values": [
+            "1.0 µH",
+            "4.7 µF",
+            "22 µF"
+          ],
+          "source_page": 7,
+          "snippet": "specification, and TI does not warrant its accuracy or completeness. TI’s customers are responsible for determining suitability of components for their purposes. Customers should validate and test their design implementa"
+        },
+        {
+          "values": [
+            "4.7 µF",
+            "22 µF"
+          ],
+          "source_page": 7,
+          "snippet": "VIN SW C1 C2 C3* 4.7 µF 22 µF R1 EN 200 k GND FB R2 C3: Optional 100 k Copyright Ú 2016, Texas Instruments Incorporated 图6. TLV62569A 1.8-V Output Application 8.2.1 Design Requirements For this design example, use the pa"
+        },
+        {
+          "values": [
+            "4.7 µF"
+          ],
+          "source_page": 7,
+          "snippet": "图6. TLV62569A 1.8-V Output Application 8.2.1 Design Requirements For this design example, use the parameters listed in 表2 as the input parameters. 表2. Design Parameters DESIGN PARAMETER EXAMPLE VALUE Input voltage 2.5 V "
+        }
+      ],
+      "design_equation_hints": [
+        {
+          "equation": "VOUT = 1.8 V",
+          "source_page": 0
+        },
+        {
+          "equation": "VOUT = 2.5 V",
+          "source_page": 0
+        },
+        {
+          "equation": "VOUT = 3.3 V",
+          "source_page": 0
+        },
+        {
+          "equation": "VOUT = 0.6 V",
+          "source_page": 9
+        }
+      ],
+      "layout_hints": [
+        {
+          "hint": "• The input/output capacitors and the inductor should be placed as close as possible to the IC. This keeps the",
+          "source_page": 12
+        },
+        {
+          "hint": "power traces short. Routing these power traces direct and wide results in low trace resistance and low",
+          "source_page": 12
+        }
+      ],
+      "supply_recommendations": [
+        {
+          "hint": "4 修订历史记录........................................................... 2 9 Power Supply Recommendations...................... 13",
+          "source_page": 1
+        },
+        {
+          "hint": "The following section discusses the design of the external components to complete the power supply design for",
+          "source_page": 7
+        },
+        {
+          "hint": "Input voltage 2.5 V to 5.5 V",
+          "source_page": 7
+        },
+        {
+          "hint": "1. Start by entering the input voltage (VIN), output voltage (VOUT), and output current (IOUT) requirements.",
+          "source_page": 8
+        },
+        {
+          "hint": "capacitance is sufficient; a larger value reduces input voltage ripple.",
+          "source_page": 9
+        },
+        {
+          "hint": "Input Voltage (V) D001 Load (A) D005",
+          "source_page": 9
+        },
+        {
+          "hint": "9 Power Supply Recommendations",
+          "source_page": 12
+        },
+        {
+          "hint": "The power supply to the TLV62569A must have a current rating according to the supply voltage, output voltage",
+          "source_page": 12
+        }
+      ],
+      "topology_hints": [
+        {
+          "hint": "1 特性.......................................................................... 1 8 Application and Implementation .......................... 8",
+          "source_page": 1
+        },
+        {
+          "hint": "2 应用.......................................................................... 1 8.1 Application Information.............................................. 8",
+          "source_page": 1
+        },
+        {
+          "hint": "3 说明.......................................................................... 1 8.2 Typical Application .................................................... 8",
+          "source_page": 1
+        },
+        {
+          "hint": "8 Application and Implementation",
+          "source_page": 7
+        },
+        {
+          "hint": "Information in the following applications sections is not part of the TI component",
+          "source_page": 7
+        },
+        {
+          "hint": "8.1 Application Information",
+          "source_page": 7
+        },
+        {
+          "hint": "several input and output voltage options by using typical applications as a reference.",
+          "source_page": 7
+        },
+        {
+          "hint": "8.2 Typical Application",
+          "source_page": 7
+        }
+      ],
+      "design_pages": {
+        "pages": [
+          {
+            "page": 0,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 1,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 7,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 8,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 9,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 12,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 13,
+            "title": null,
+            "content_type": "application"
+          }
+        ],
+        "total_pages": 7
+      }
+    }
+  }
 }

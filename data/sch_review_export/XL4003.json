@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -279,6 +279,470 @@
       "unit": "°C/W",
       "conditions": "No Heatsink, Free Air",
       "source": "absolute_maximum_ratings"
+    }
+  },
+  "domains": {
+    "pin": {
+      "packages": {
+        "TO252-5L": {
+          "pin_count": 6,
+          "pins": {
+            "1": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground Pin. Should be placed outside of the Schottky Diode to output capacitor ground path to prevent noise induction.",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "FB",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Feedback Pin (FB). Senses the output voltage through an external resistor divider for regulation. Threshold is 0.8V.",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "SW",
+              "direction": "OUTPUT",
+              "signal_type": "POWER",
+              "description": "Power Switch Output Pin (SW). The switch node that supplies power to the output.",
+              "unused_treatment": null
+            },
+            "TAB": {
+              "name": "SW",
+              "direction": "OUTPUT",
+              "signal_type": "POWER",
+              "description": "Power Switch Output Pin (SW). The switch node that supplies power to the output.",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "EN",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Enable Pin. Drive high to turn on the device, drive low to turn it off.",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "VIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Supply Voltage Input Pin. Operates from 5V to 32V. Requires bypass capacitor to GND.",
+              "unused_treatment": null
+            }
+          }
+        }
+      }
+    },
+    "electrical": {
+      "absolute_maximum_ratings": {
+        "Vin": {
+          "parameter": "Input Voltage",
+          "min": -0.3,
+          "max": 35.0,
+          "unit": "V",
+          "conditions": null
+        },
+        "VFB": {
+          "parameter": "Feedback Pin Voltage",
+          "min": -0.3,
+          "max": null,
+          "unit": "V",
+          "conditions": "Max is Vin"
+        },
+        "VEN": {
+          "parameter": "EN Pin Voltage",
+          "min": -0.3,
+          "max": null,
+          "unit": "V",
+          "conditions": "Max is Vin"
+        },
+        "VOutput": {
+          "parameter": "Output Switch Pin Voltage",
+          "min": -0.3,
+          "max": null,
+          "unit": "V",
+          "conditions": "Max is Vin"
+        },
+        "PD": {
+          "parameter": "Power Dissipation",
+          "min": null,
+          "max": null,
+          "unit": "mW",
+          "conditions": "Internally limited"
+        },
+        "RJA": {
+          "parameter": "Thermal Resistance (TO252)",
+          "min": null,
+          "max": null,
+          "unit": "°C/W",
+          "conditions": "No Heatsink, Free Air"
+        },
+        "TJ": {
+          "parameter": "Operating Junction Temperature",
+          "min": -40.0,
+          "max": 125.0,
+          "unit": "°C",
+          "conditions": null
+        },
+        "TSTG": {
+          "parameter": "Storage Temperature",
+          "min": -65.0,
+          "max": 150.0,
+          "unit": "°C",
+          "conditions": null
+        },
+        "TLEAD": {
+          "parameter": "Lead Temperature (Soldering, 10 sec)",
+          "min": null,
+          "max": null,
+          "unit": "°C",
+          "conditions": null
+        }
+      },
+      "electrical_parameters": {
+        "VFB": {
+          "parameter": "Feedback Voltage",
+          "min": 0.776,
+          "typ": 0.8,
+          "max": 0.824,
+          "unit": "V",
+          "conditions": "Vin = 7V to 32V, Vout=5V, Iload=0.3A to 4A"
+        },
+        "η": {
+          "parameter": "Efficiency",
+          "min": null,
+          "typ": 90.0,
+          "max": null,
+          "unit": "%",
+          "conditions": "Vin=12V, Vout=5V, Iout=4A"
+        },
+        "Vin": {
+          "parameter": "Input operation voltage",
+          "min": 5.0,
+          "typ": null,
+          "max": 32.0,
+          "unit": "V",
+          "conditions": null
+        },
+        "ISTBY": {
+          "parameter": "Shutdown Supply Current",
+          "min": null,
+          "typ": 60.0,
+          "max": 200.0,
+          "unit": "uA",
+          "conditions": "VEN=0V"
+        },
+        "Iq": {
+          "parameter": "Quiescent Supply Current",
+          "min": null,
+          "typ": 3.0,
+          "max": 5.0,
+          "unit": "mA",
+          "conditions": "VEN=2V, VFB=Vin"
+        },
+        "Fosc": {
+          "parameter": "Oscillator Frequency",
+          "min": 240.0,
+          "typ": 300.0,
+          "max": 360.0,
+          "unit": "Khz",
+          "conditions": null
+        },
+        "IL": {
+          "parameter": "Switch Current Limit",
+          "min": null,
+          "typ": 6.0,
+          "max": null,
+          "unit": "A",
+          "conditions": "VFB=0"
+        },
+        "VEN": {
+          "parameter": "EN Pin Threshold High",
+          "min": null,
+          "typ": 1.4,
+          "max": null,
+          "unit": "V",
+          "conditions": "High (Regulator ON)"
+        },
+        "VEN_Low__Regulator_OFF": {
+          "parameter": "EN Pin Threshold Low",
+          "min": null,
+          "typ": 0.8,
+          "max": null,
+          "unit": "V",
+          "conditions": "Low (Regulator OFF)"
+        },
+        "IH": {
+          "parameter": "EN Pin Input Leakage Current (High)",
+          "min": null,
+          "typ": 1.0,
+          "max": 15.0,
+          "unit": "uA",
+          "conditions": "VEN=2V (ON)"
+        },
+        "IL_VEN_0V__OFF": {
+          "parameter": "EN Pin Input Leakage Current (Low)",
+          "min": null,
+          "typ": 1.0,
+          "max": 15.0,
+          "unit": "uA",
+          "conditions": "VEN=0V (OFF)"
+        },
+        "DMAX": {
+          "parameter": "Max. Duty Cycle",
+          "min": null,
+          "typ": 100.0,
+          "max": null,
+          "unit": "%",
+          "conditions": "VFB=0V"
+        }
+      },
+      "drc_hints": {
+        "vin_abs_max": {
+          "value": 35.0,
+          "unit": "V"
+        },
+        "vin_operating": {
+          "min": 5.0,
+          "max": 32.0,
+          "unit": "V"
+        },
+        "vref": {
+          "min": 0.776,
+          "typ": 0.8,
+          "max": 0.824,
+          "unit": "V"
+        },
+        "enable_threshold": {
+          "typ": 1.4,
+          "unit": "V"
+        },
+        "iout_max": {
+          "typ": 6.0,
+          "unit": "A"
+        },
+        "iq": {
+          "typ": 3.0,
+          "max": 5.0,
+          "unit": "mA"
+        },
+        "fsw": {
+          "min": 240.0,
+          "typ": 300.0,
+          "max": 360.0,
+          "unit": "Khz"
+        }
+      }
+    },
+    "thermal": {
+      "power_dissipation": {
+        "parameter": "Power Dissipation",
+        "symbol": "PD",
+        "min": null,
+        "typ": null,
+        "max": null,
+        "value": null,
+        "unit": "mW",
+        "conditions": "Internally limited",
+        "source": "absolute_maximum_ratings"
+      },
+      "theta_ja": {
+        "parameter": "Thermal Resistance (TO252)",
+        "symbol": "RJA",
+        "min": null,
+        "typ": 50.0,
+        "max": null,
+        "value": null,
+        "unit": "°C/W",
+        "conditions": "No Heatsink, Free Air",
+        "source": "absolute_maximum_ratings"
+      }
+    },
+    "design_context": {
+      "recommended_external_components": [
+        {
+          "role": "feedback_divider",
+          "source_page": 2,
+          "value_hint": null,
+          "value_hints": [
+            "33uh"
+          ],
+          "snippet": "Datasheet"
+        },
+        {
+          "role": "feedback_divider",
+          "source_page": 2,
+          "value_hint": null,
+          "value_hints": [
+            "33uh"
+          ],
+          "snippet": "4A 300KHz 32V Buck DC to DC Converter XL4003"
+        },
+        {
+          "role": "input_capacitor",
+          "source_page": 2,
+          "value_hint": "220uf",
+          "value_hints": [
+            "33uh",
+            "220uf"
+          ],
+          "snippet": "R1 R2"
+        },
+        {
+          "role": "output_capacitor",
+          "source_page": 2,
+          "value_hint": "220uf",
+          "value_hints": [
+            "33uh",
+            "220uf"
+          ],
+          "snippet": "R1 R2"
+        },
+        {
+          "role": "input_capacitor",
+          "source_page": 2,
+          "value_hint": "220uf",
+          "value_hints": [
+            "33uh",
+            "220uf"
+          ],
+          "snippet": "2K 10.5K FB L 33uh/4A"
+        },
+        {
+          "role": "output_capacitor",
+          "source_page": 2,
+          "value_hint": "220uf",
+          "value_hints": [
+            "33uh",
+            "220uf"
+          ],
+          "snippet": "2K 10.5K FB L 33uh/4A"
+        }
+      ],
+      "component_value_hints": [
+        {
+          "values": [
+            "33uh"
+          ],
+          "source_page": 2,
+          "snippet": "Datasheet 4A 300KHz 32V Buck DC to DC Converter XL4003 Function Block Figure3. Function Block Diagram of XL4003 Typical Application Circuit CFF 33n R1 R2 2K 10.5K FB L 33uh/4A"
+        },
+        {
+          "values": [
+            "220uf",
+            "33uh"
+          ],
+          "source_page": 2,
+          "snippet": "Function Block Figure3. Function Block Diagram of XL4003 Typical Application Circuit CFF 33n R1 R2 2K 10.5K FB L 33uh/4A 2 VIN SW VOUT 5V/4A 5 XL4003 3 4 1 EN GND COUT LOAD +24V CIN C1 D1 1N5824 220uf/50V"
+        },
+        {
+          "values": [
+            "220uf"
+          ],
+          "source_page": 2,
+          "snippet": "2 VIN SW VOUT 5V/4A 5 XL4003 3 4 1 EN GND COUT LOAD +24V CIN C1 D1 1N5824 220uf/50V 220uf/50V 105 24V ~ 5V/4A VOUT=0.8*(1+R2/R1) Figure4. XL4003 Typical Application Circuit 24V~5V/4A Rev 2.3 www.xlsemi.com 3"
+        },
+        {
+          "values": [
+            "100 pf",
+            "33 nf"
+          ],
+          "source_page": 5,
+          "snippet": "Datasheet 4A 300KHz 32V Buck DC to DC Converter XL4003 Test Circuit and Layout guidelines Figure5. Standard Test Circuits and Layout Guides Select R1 to be approximately 2K, use a 1% resistor for best stability. C1 and C"
+        },
+        {
+          "values": [
+            "33uh"
+          ],
+          "source_page": 7,
+          "snippet": "Datasheet 4A 300KHz 32V Buck DC to DC Converter XL4003 Typical System Application for 24V ~ 12V/3A Version CFF 33n R1 R2 2K 28K FB L 33uh/4A 2 VIN SW VOUT 12V/3A"
+        },
+        {
+          "values": [
+            "220uf",
+            "33uh"
+          ],
+          "source_page": 7,
+          "snippet": "4A 300KHz 32V Buck DC to DC Converter XL4003 Typical System Application for 24V ~ 12V/3A Version CFF 33n R1 R2 2K 28K FB L 33uh/4A 2 VIN SW VOUT 12V/3A 5 XL4003 3 4 1 EN GND COUT LOAD +24V CIN C1 D1 1N5824 220uf/50V"
+        },
+        {
+          "values": [
+            "220uf"
+          ],
+          "source_page": 7,
+          "snippet": "2 VIN SW VOUT 12V/3A 5 XL4003 3 4 1 EN GND COUT LOAD +24V CIN C1 D1 1N5824 220uf/50V 220uf/50V 105 24V ~ 12V/3A VOUT=0.8*(1+R2/R1) Figure6. XL4003 System Parameters Test Circuit (24V ~ 12V/3A) Typical System Application "
+        }
+      ],
+      "design_equation_hints": [
+        {
+          "equation": "VOUT = 0.8*(1+R2/R1)",
+          "source_page": 2
+        },
+        {
+          "equation": "CFF = 1/(31*1000*R2); This capacitor type can be ceramic, plastic, silver mica, etc. (Because of",
+          "source_page": 5
+        },
+        {
+          "equation": "VOUT = 0.8*(1+R2/R1)",
+          "source_page": 7
+        }
+      ],
+      "layout_hints": [
+        {
+          "hint": "Datasheet 4A 300KHz 32V Buck DC to DC Converter XL4003 Test Circuit and Layout guidelines Figure5. Standard Test Circuits and Layout Guides Select R1 to be approximately 2K, use a 1% resistor for best stability. C1 and C",
+          "source_page": 5
+        }
+      ],
+      "topology_hints": [
+        {
+          "hint": "4A 300KHz 32V Buck DC to DC Converter XL4003",
+          "source_page": 2
+        },
+        {
+          "hint": "Typical Application Circuit",
+          "source_page": 2
+        },
+        {
+          "hint": "Figure4. XL4003 Typical Application Circuit 24V~5V/4A",
+          "source_page": 2
+        },
+        {
+          "hint": "4A 300KHz 32V Buck DC to DC Converter XL4003",
+          "source_page": 5
+        },
+        {
+          "hint": "4A 300KHz 32V Buck DC to DC Converter XL4003",
+          "source_page": 7
+        },
+        {
+          "hint": "Typical System Application for 24V ~ 12V/3A Version",
+          "source_page": 7
+        },
+        {
+          "hint": "Typical System Application for 24V ~ 5V/4A",
+          "source_page": 7
+        }
+      ],
+      "design_pages": {
+        "pages": [
+          {
+            "page": 2,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 5,
+            "title": null,
+            "content_type": "layout"
+          },
+          {
+            "page": 7,
+            "title": null,
+            "content_type": "application"
+          }
+        ],
+        "total_pages": 3
+      }
     }
   }
 }

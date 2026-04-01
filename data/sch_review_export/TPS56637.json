@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -386,5 +386,702 @@
       "unit": "%"
     }
   },
-  "thermal": {}
+  "thermal": {},
+  "domains": {
+    "pin": {
+      "packages": {
+        "VQFN-HR (10)": {
+          "pin_count": 10,
+          "pins": {
+            "1": {
+              "name": "EN",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Enable input control. Driving EN high or leaving this pin floating enables the converter. A resistor divider can be used to imply an UVLO function.",
+              "unused_treatment": "FLOAT"
+            },
+            "2": {
+              "name": "FB",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Output feedback. Connect FB to the tap of an external resistor divider from the output to GND to set the output voltage.",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "AGND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground of internal analog circuitry. Connect AGND to PGND plane at a single point.",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "PG",
+              "direction": "OUTPUT",
+              "signal_type": "DIGITAL",
+              "description": "Open Drain Power Good Indicator, it is asserted low if output voltage is out of PG threshold due to over-voltage, under-voltage, thermal shutdown, EN shutdown or during soft-start.",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "NC",
+              "direction": "NC",
+              "signal_type": "NONE",
+              "description": "Not Connected, keep this pin floating.",
+              "unused_treatment": "FLOAT"
+            },
+            "6": {
+              "name": "SW",
+              "direction": "OUTPUT",
+              "signal_type": "POWER",
+              "description": "Switching node terminal. Connect the output inductor to this pin with wide and short tracks",
+              "unused_treatment": null
+            },
+            "7": {
+              "name": "BOOT",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Supply input for the gate drive voltage of the high-side MOSFET. Connect a 0.1-μF bootstrap capacitor between BOOT and SW.",
+              "unused_treatment": null
+            },
+            "8": {
+              "name": "VIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Input voltage supply pin. Drain terminal of high-side MOSFET. Connect the input decoupling capacitors between VIN and GND.",
+              "unused_treatment": null
+            },
+            "9": {
+              "name": "PGND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power GND terminal. Source terminal of low side MOSFET.",
+              "unused_treatment": null
+            },
+            "10": {
+              "name": "MODE",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Operation mode selection pin. Leaving this pin floating(≥500 kΩ) forces the TPS56637 into FCCM. Connecting this pin to GND(≤10 kΩ) forces the TPS56637 into Eco-mode™ under light load.",
+              "unused_treatment": "FLOAT"
+            }
+          }
+        }
+      }
+    },
+    "electrical": {
+      "absolute_maximum_ratings": {
+        "VIN": {
+          "parameter": "Input voltage",
+          "min": -0.3,
+          "max": 32,
+          "unit": "V",
+          "conditions": null
+        },
+        "BOOT": {
+          "parameter": "Input voltage",
+          "min": -0.3,
+          "max": null,
+          "unit": "V",
+          "conditions": "Max is SW+6"
+        },
+        "BOOT-SW": {
+          "parameter": "Input voltage",
+          "min": -0.3,
+          "max": 6.0,
+          "unit": "V",
+          "conditions": null
+        },
+        "SW": {
+          "parameter": "Output voltage",
+          "min": -4,
+          "max": 32.5,
+          "unit": "V",
+          "conditions": null
+        },
+        "PG": {
+          "parameter": "Output voltage",
+          "min": -0.3,
+          "max": 6,
+          "unit": "V",
+          "conditions": null
+        },
+        "TJ": {
+          "parameter": "Operating junction temperature",
+          "min": -40,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        },
+        "Tstg": {
+          "parameter": "Storage temperature",
+          "min": -65,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        }
+      },
+      "electrical_parameters": {
+        "IQ": {
+          "parameter": "Quiescent current",
+          "min": null,
+          "typ": 140,
+          "max": null,
+          "unit": "µA",
+          "conditions": "Operating at ULQ mode"
+        },
+        "ISD": {
+          "parameter": "Shutdown supply current",
+          "min": null,
+          "typ": 2,
+          "max": null,
+          "unit": "µA",
+          "conditions": "TJ=25°C, VEN=0 V"
+        },
+        "UVLO": {
+          "parameter": "Wake up VIN voltage",
+          "min": 4.0,
+          "typ": 4.2,
+          "max": 4.4,
+          "unit": "V",
+          "conditions": "VIN Under-Voltage Lockout"
+        },
+        "UVLO_VIN_Under_Voltage_Lockout": {
+          "parameter": "Hysteresis VIN voltage",
+          "min": null,
+          "typ": 500,
+          "max": null,
+          "unit": "mV",
+          "conditions": "VIN Under-Voltage Lockout"
+        },
+        "IEN_INPUT": {
+          "parameter": "Input current",
+          "min": null,
+          "typ": 1,
+          "max": null,
+          "unit": "µA",
+          "conditions": "VEN = 1.1V"
+        },
+        "IEN_HYS": {
+          "parameter": "Hysteresis current",
+          "min": null,
+          "typ": 4,
+          "max": null,
+          "unit": "µA",
+          "conditions": "VEN = 1.3V"
+        },
+        "VEN(ON)": {
+          "parameter": "Enable threshold rising",
+          "min": null,
+          "typ": 1.18,
+          "max": 1.26,
+          "unit": "V",
+          "conditions": "EN rising"
+        },
+        "VEN(OFF)": {
+          "parameter": "Enable threshold falling",
+          "min": 1.04,
+          "typ": 1.12,
+          "max": null,
+          "unit": "V",
+          "conditions": "EN falling"
+        },
+        "VFB": {
+          "parameter": "Feedback voltage",
+          "min": 0.594,
+          "typ": 0.6,
+          "max": 0.606,
+          "unit": "V",
+          "conditions": "VOUT = 5V, continuous mode operation, TJ=25°C"
+        },
+        "VFB_VOUT___5V__continuous_mode_ope": {
+          "parameter": "Feedback voltage",
+          "min": 0.591,
+          "typ": 0.6,
+          "max": 0.609,
+          "unit": "V",
+          "conditions": "VOUT = 5V, continuous mode operation, TJ=-40°C to 150°C"
+        },
+        "RDS(on)h": {
+          "parameter": "High side switch resistance",
+          "min": null,
+          "typ": 26,
+          "max": null,
+          "unit": "mΩ",
+          "conditions": "TJ = 25°C, VBST - VSW = 5 V"
+        },
+        "RDS(on)l": {
+          "parameter": "Low side switch resistance",
+          "min": null,
+          "typ": 12,
+          "max": null,
+          "unit": "mΩ",
+          "conditions": "TJ = 25°C"
+        },
+        "IOCL": {
+          "parameter": "Valley current limit",
+          "min": 6.3,
+          "typ": 7.5,
+          "max": 8.6,
+          "unit": "A",
+          "conditions": null
+        },
+        "IOC_REV": {
+          "parameter": "Reverse current limit for FCCM Mode",
+          "min": 2.3,
+          "typ": 3,
+          "max": 3.7,
+          "unit": "A",
+          "conditions": null
+        },
+        "VPGTH": {
+          "parameter": "PG lower threshold - falling",
+          "min": null,
+          "typ": 85,
+          "max": null,
+          "unit": "%",
+          "conditions": "% of VFB"
+        },
+        "VPGTH_of_VFB": {
+          "parameter": "PG upper threshold - rising",
+          "min": null,
+          "typ": 115,
+          "max": null,
+          "unit": "%",
+          "conditions": "% of VFB"
+        },
+        "IPGSINK": {
+          "parameter": "PG sink current",
+          "min": null,
+          "typ": 1.5,
+          "max": null,
+          "unit": "mA",
+          "conditions": "VFB = 0.5V, VPG = 0.5V"
+        },
+        "IPGLK": {
+          "parameter": "PG leakage current",
+          "min": -1,
+          "typ": null,
+          "max": 1,
+          "unit": "µA",
+          "conditions": "VPG = 5.5V"
+        },
+        "FSW": {
+          "parameter": "Switching frequency",
+          "min": null,
+          "typ": 500,
+          "max": null,
+          "unit": "kHz",
+          "conditions": "VOUT =5V, continuous mode operation"
+        },
+        "VOVP": {
+          "parameter": "Output OVP threshold",
+          "min": null,
+          "typ": 125,
+          "max": null,
+          "unit": "%",
+          "conditions": "OVP detect(L>H)"
+        },
+        "VOVP_OVP_hysteresis": {
+          "parameter": "Output OVP threshold hysteresis",
+          "min": null,
+          "typ": 5,
+          "max": null,
+          "unit": "%",
+          "conditions": "OVP hysteresis"
+        },
+        "VUVP": {
+          "parameter": "Output UVP threshold",
+          "min": null,
+          "typ": 65,
+          "max": null,
+          "unit": "%",
+          "conditions": "Hiccup detect(H>L)"
+        },
+        "VUVP_UVP_hysteresis": {
+          "parameter": "Output UVP threshold hysteresis",
+          "min": null,
+          "typ": 5,
+          "max": null,
+          "unit": "%",
+          "conditions": "UVP hysteresis"
+        },
+        "TSDN": {
+          "parameter": "Thermal shutdown threshold rising",
+          "min": null,
+          "typ": 165,
+          "max": null,
+          "unit": "°C",
+          "conditions": "Thermal shutdown threshold"
+        },
+        "TSDN_Thermal_shutdown_hysteresis": {
+          "parameter": "Thermal shutdown threshold hysteresis",
+          "min": null,
+          "typ": 30,
+          "max": null,
+          "unit": "°C",
+          "conditions": "Thermal shutdown hysteresis"
+        },
+        "RDISCHG": {
+          "parameter": "VOUT discharge resistance",
+          "min": null,
+          "typ": 200,
+          "max": null,
+          "unit": "Ω",
+          "conditions": "VEN=0, VSW=0.5V, TJ=25°C"
+        }
+      },
+      "drc_hints": {
+        "vin_abs_max": {
+          "value": 32,
+          "unit": "V"
+        },
+        "vref": {
+          "min": 0.594,
+          "typ": 0.6,
+          "max": 0.606,
+          "unit": "V"
+        },
+        "enable_threshold": {
+          "typ": 1.18,
+          "max": 1.26,
+          "unit": "V"
+        },
+        "iout_max": {
+          "min": 6.3,
+          "typ": 7.5,
+          "max": 8.6,
+          "unit": "A"
+        },
+        "iq": {
+          "typ": 140,
+          "unit": "µA"
+        },
+        "fsw": {
+          "typ": 500,
+          "unit": "kHz"
+        },
+        "thermal_shutdown": {
+          "typ": 165,
+          "unit": "°C"
+        },
+        "uvlo": {
+          "typ": 65,
+          "unit": "%"
+        }
+      }
+    },
+    "design_context": {
+      "recommended_external_components": [
+        {
+          "role": "bootstrap_capacitor",
+          "source_page": 0,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "机驱动 器件信息(1)"
+        },
+        {
+          "role": "bootstrap_capacitor",
+          "source_page": 0,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "• 通用12V、19V、24V 总线电源 器件型号 封装 封装尺寸（标称值）"
+        },
+        {
+          "role": "input_capacitor",
+          "source_page": 0,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "TPS56637 VQFN-HR (10) 3.00mm × 3.00mm"
+        },
+        {
+          "role": "input_capacitor",
+          "source_page": 0,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "(1) 如需了解所有可用封装，请参阅数据表末尾的可订购产品附"
+        },
+        {
+          "role": "output_capacitor",
+          "source_page": 0,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "VIN VIN BOOT"
+        },
+        {
+          "role": "output_capacitor",
+          "source_page": 0,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "100"
+        },
+        {
+          "role": "pullup_resistor",
+          "source_page": 13,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "TPS56637"
+        },
+        {
+          "role": "pullup_resistor",
+          "source_page": 13,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "ZHCSIH1A –JULY 2018–REVISED SEPTEMBER 2019 www.ti.com.cn"
+        },
+        {
+          "role": "uvlo_divider",
+          "source_page": 13,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "hysteresis of 500 mV."
+        },
+        {
+          "role": "uvlo_divider",
+          "source_page": 13,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "If an application requires a higher UVLO threshold on the VIN pin, then the EN pin can be configured as shown"
+        },
+        {
+          "role": "gain_resistor",
+          "source_page": 18,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "VOUT 0.6 u ¨ 1 ¸"
+        },
+        {
+          "role": "gain_resistor",
+          "source_page": 18,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "© R7 ¹ (5)"
+        }
+      ],
+      "component_value_hints": [
+        {
+          "values": [
+            "3.3 uH"
+          ],
+          "source_page": 17,
+          "snippet": "responsible for determining suitability of components for their purposes. Customers should validate and test their design implementation to confirm system functionality. 8.1 Application Information The schematic of 图17 s"
+        },
+        {
+          "values": [
+            "0.1 uF",
+            "3.3 uH"
+          ],
+          "source_page": 17,
+          "snippet": "validate and test their design implementation to confirm system functionality. 8.1 Application Information The schematic of 图17 shows a typical application for TPS56637. This design converts an input voltage range of 8V "
+        },
+        {
+          "values": [
+            "0.1 uF",
+            "3.3 uH",
+            "22 uF",
+            "10 uF"
+          ],
+          "source_page": 17,
+          "snippet": "The schematic of 图17 shows a typical application for TPS56637. This design converts an input voltage range of 8V to 28V down to 5V with a maximum output current of 6 A. 8.2 Typical Application The application schematic i"
+        },
+        {
+          "values": [
+            "0.1 uF",
+            "3.3 uH",
+            "22 uF",
+            "10 uF",
+            "100 pF"
+          ],
+          "source_page": 17,
+          "snippet": "the requirements for 6-A output. This circuit is available as the evaluation module (EVM). The sections provide the design procedure. U1 VIN 8 VIN BOOT 7 R4 C4 SW L1 VOUT J1 0 3.3uH 0.1uF DNP 1 2 DNP 1 EN R5 C2 C3 C5 C6 "
+        },
+        {
+          "values": [
+            "3.3 uH",
+            "0.1 uF",
+            "22 uF",
+            "10 uF",
+            "100 pF"
+          ],
+          "source_page": 17,
+          "snippet": "J1 0 3.3uH 0.1uF DNP 1 2 DNP 1 EN R5 C2 C3 C5 C6 C7 C8 2 C1 1 J2 6 R1 VCC SW 22uF 22uF 22uF 22uF 49.9 10uF 10uF 0.1uF 169k R8 4 R9 PG 100k 20.0k R6 5 NC FB 2 C9 PGND 100pF 73.2k PGND R2 PGND 9 FB R7 36.1k 10 MODE AGND 3 "
+        },
+        {
+          "values": [
+            "0.1 uF",
+            "22 uF",
+            "10 uF",
+            "100 pF"
+          ],
+          "source_page": 17,
+          "snippet": "0.1uF DNP 1 2 DNP 1 EN R5 C2 C3 C5 C6 C7 C8 2 C1 1 J2 6 R1 VCC SW 22uF 22uF 22uF 22uF 49.9 10uF 10uF 0.1uF 169k R8 4 R9 PG 100k 20.0k R6 5 NC FB 2 C9 PGND 100pF 73.2k PGND R2 PGND 9 FB R7 36.1k 10 MODE AGND 3 10.0k PGND "
+        },
+        {
+          "values": [
+            "22 uF",
+            "10 uF",
+            "0.1 uF",
+            "100 pF"
+          ],
+          "source_page": 17,
+          "snippet": "R5 C2 C3 C5 C6 C7 C8 2 C1 1 J2 6 R1 VCC SW 22uF 22uF 22uF 22uF 49.9 10uF 10uF 0.1uF 169k R8 4 R9 PG 100k 20.0k R6 5 NC FB 2 C9 PGND 100pF 73.2k PGND R2 PGND 9 FB R7 36.1k 10 MODE AGND 3 10.0k PGND TPS56637 AGND AGND AGND"
+        },
+        {
+          "values": [
+            "100 pF"
+          ],
+          "source_page": 17,
+          "snippet": "R8 4 R9 PG 100k 20.0k R6 5 NC FB 2 C9 PGND 100pF 73.2k PGND R2 PGND 9 FB R7 36.1k 10 MODE AGND 3 10.0k PGND TPS56637 AGND AGND AGND PGND AGND Copyright © 2017, Texas Instruments Incorporated 图17. TPS56637 5-V, 6-A Refere"
+        }
+      ],
+      "layout_hints": [
+        {
+          "hint": "AGND PGND 88 RFBB Efficiency",
+          "source_page": 0
+        },
+        {
+          "hint": "PGND 100pF 73.2k PGND",
+          "source_page": 17
+        },
+        {
+          "hint": "R2 PGND 9 FB",
+          "source_page": 17
+        },
+        {
+          "hint": "R7 36.1k 10 MODE AGND 3",
+          "source_page": 17
+        },
+        {
+          "hint": "10.0k PGND",
+          "source_page": 17
+        },
+        {
+          "hint": "AGND AGND PGND AGND",
+          "source_page": 17
+        },
+        {
+          "hint": "1. Recommend a four-layer PCB for good thermal performance and with maximum ground plane.",
+          "source_page": 23
+        },
+        {
+          "hint": "3. Putting at least two vias for VIN and GND traces, and as close as possible to the pins.",
+          "source_page": 23
+        },
+        {
+          "hint": "4. The input capacitor and output capacitor should be placed as close to the device as possible to minimize",
+          "source_page": 23
+        },
+        {
+          "hint": "6. Keep the SW trace as physically short and wide as practical to minimize radiated emissions.",
+          "source_page": 23
+        }
+      ],
+      "supply_recommendations": [
+        {
+          "hint": "• 非闭锁UV、OV、OT 和UVLO 保护 择。要在轻负载条件下实现高效率，可以选择Eco-",
+          "source_page": 0
+        },
+        {
+          "hint": "• 可使用WEBENCH® 电源设计器创建定制设计方案 压）、OC（过流）、OT（过热）以及UVLO（欠压锁",
+          "source_page": 0
+        },
+        {
+          "hint": "5 Pin Configuration and Functions......................... 3 9 Power Supply Recommendations...................... 24",
+          "source_page": 1
+        },
+        {
+          "hint": "The TPS56637 implements internal undervoltage-lockout (UVLO) circuitry on the VIN pin. The device is disabled",
+          "source_page": 13
+        },
+        {
+          "hint": "when the VIN pin voltage falls below the internal VIN UVLO threshold. The internal VIN UVLO threshold has a",
+          "source_page": 13
+        },
+        {
+          "hint": "If an application requires a higher UVLO threshold on the VIN pin, then the EN pin can be configured as shown",
+          "source_page": 13
+        },
+        {
+          "hint": "in 图16. When using the external UVLO function, setting the hysteresis at a value greater than 500 mV is",
+          "source_page": 13
+        },
+        {
+          "hint": "components are connected. The pull-up current is also used to control the voltage hysteresis for the UVLO",
+          "source_page": 13
+        }
+      ],
+      "topology_hints": [
+        {
+          "hint": "2 应用.......................................................................... 1 8 Application and Implementation ........................ 18",
+          "source_page": 1
+        },
+        {
+          "hint": "3 说明.......................................................................... 1 8.1 Application Information............................................ 18",
+          "source_page": 1
+        },
+        {
+          "hint": "4 修订历史记录........................................................... 2 8.2 Typical Application ................................................. 18",
+          "source_page": 1
+        },
+        {
+          "hint": "If an application requires control of the EN pin, open-drain or open-collector output logic can be used to interface",
+          "source_page": 13
+        },
+        {
+          "hint": "If an application requires a higher UVLO threshold on the VIN pin, then the EN pin can be configured as shown",
+          "source_page": 13
+        },
+        {
+          "hint": "8 Application and Implementation",
+          "source_page": 17
+        },
+        {
+          "hint": "Information in the following applications sections is not part of the TI component",
+          "source_page": 17
+        },
+        {
+          "hint": "8.1 Application Information",
+          "source_page": 17
+        }
+      ],
+      "design_pages": {
+        "pages": [
+          {
+            "page": 0,
+            "title": null,
+            "content_type": "power_supply"
+          },
+          {
+            "page": 1,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 13,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 17,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 18,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 23,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 24,
+            "title": null,
+            "content_type": "layout"
+          }
+        ],
+        "total_pages": 7
+      }
+    }
+  }
 }

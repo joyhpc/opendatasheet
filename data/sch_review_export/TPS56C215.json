@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -525,10 +525,10 @@
       "unit": "V"
     },
     "iout_max": {
-      "min": 100,
-      "typ": 150,
-      "max": 200,
-      "unit": "mA"
+      "min": 9.775,
+      "typ": 11.5,
+      "max": 13.225,
+      "unit": "A"
     },
     "soft_start": {
       "min": 4.9,
@@ -607,6 +607,1540 @@
       "unit": "°C/W",
       "conditions": "RNN PACKAGE, 18 PINS",
       "source": "electrical_characteristics"
+    }
+  },
+  "domains": {
+    "pin": {
+      "packages": {
+        "VQFN-18": {
+          "pin_count": 18,
+          "pins": {
+            "1": {
+              "name": "BOOT",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Supply input for the gate drive voltage of the high-side MOSFET",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "VIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Input voltage supply pin for the control circuitry",
+              "unused_treatment": null
+            },
+            "11": {
+              "name": "VIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Input voltage supply pin for the control circuitry",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "PGND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power GND terminal for the controller circuit and the internal circuitry",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "PGND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power GND terminal for the controller circuit and the internal circuitry",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "PGND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power GND terminal for the controller circuit and the internal circuitry",
+              "unused_treatment": null
+            },
+            "8": {
+              "name": "PGND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power GND terminal for the controller circuit and the internal circuitry",
+              "unused_treatment": null
+            },
+            "9": {
+              "name": "PGND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power GND terminal for the controller circuit and the internal circuitry",
+              "unused_treatment": null
+            },
+            "10": {
+              "name": "PGND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power GND terminal for the controller circuit and the internal circuitry",
+              "unused_treatment": null
+            },
+            "6": {
+              "name": "SW",
+              "direction": "OUTPUT",
+              "signal_type": "POWER",
+              "description": "Switch node terminal. Connect the output inductor to this pin",
+              "unused_treatment": null
+            },
+            "7": {
+              "name": "SW",
+              "direction": "OUTPUT",
+              "signal_type": "POWER",
+              "description": "Switch node terminal. Connect the output inductor to this pin",
+              "unused_treatment": null
+            },
+            "12": {
+              "name": "AGND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground of internal analog circuitry",
+              "unused_treatment": null
+            },
+            "13": {
+              "name": "FB",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Converter feedback input",
+              "unused_treatment": null
+            },
+            "14": {
+              "name": "SS",
+              "direction": "OUTPUT",
+              "signal_type": "ANALOG",
+              "description": "Soft-Start time selection pin",
+              "unused_treatment": null
+            },
+            "15": {
+              "name": "EN",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Enable input control",
+              "unused_treatment": "FLOAT"
+            },
+            "16": {
+              "name": "PGOOD",
+              "direction": "OUTPUT",
+              "signal_type": "DIGITAL",
+              "description": "Open-drain power good indicator",
+              "unused_treatment": null
+            },
+            "17": {
+              "name": "VREG5",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "POWER",
+              "description": "4.7-V internal LDO output which can also be driven externally",
+              "unused_treatment": null
+            },
+            "18": {
+              "name": "MODE",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Switching frequency, current limit selection and light load operation mode selection pin",
+              "unused_treatment": null
+            }
+          }
+        }
+      }
+    },
+    "electrical": {
+      "absolute_maximum_ratings": {
+        "VIN": {
+          "parameter": "Input Voltage",
+          "min": -0.3,
+          "max": 20,
+          "unit": "V",
+          "conditions": null
+        },
+        "SW": {
+          "parameter": "Switch Node Voltage (10-ns transient)",
+          "min": -5,
+          "max": 25,
+          "unit": "V",
+          "conditions": null
+        },
+        "VIN-SW": {
+          "parameter": "VIN to SW Voltage (10-ns transient)",
+          "min": null,
+          "max": 25,
+          "unit": "V",
+          "conditions": null
+        },
+        "EN": {
+          "parameter": "Enable Voltage",
+          "min": -0.3,
+          "max": 6.5,
+          "unit": "V",
+          "conditions": null
+        },
+        "BOOT - SW": {
+          "parameter": "BOOT to SW Voltage (10 ns transient)",
+          "min": -0.3,
+          "max": 7.5,
+          "unit": "V",
+          "conditions": null
+        },
+        "BOOT": {
+          "parameter": "Bootstrap Voltage",
+          "min": -0.3,
+          "max": 25.5,
+          "unit": "V",
+          "conditions": null
+        },
+        "SS, MODE, FB": {
+          "parameter": "Control Pin Voltage",
+          "min": -0.3,
+          "max": 6.5,
+          "unit": "V",
+          "conditions": null
+        },
+        "VREG5": {
+          "parameter": "LDO Output Voltage",
+          "min": -0.3,
+          "max": 6,
+          "unit": "V",
+          "conditions": null
+        },
+        "PGOOD": {
+          "parameter": "Power Good Voltage",
+          "min": -0.3,
+          "max": 6.5,
+          "unit": "V",
+          "conditions": null
+        },
+        "IOUT": {
+          "parameter": "Output Current",
+          "min": null,
+          "max": 14,
+          "unit": "A",
+          "conditions": null
+        },
+        "TJ": {
+          "parameter": "Operating junction temperature",
+          "min": -40,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        },
+        "Tstg": {
+          "parameter": "Storage temperature",
+          "min": -55,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        }
+      },
+      "electrical_parameters": {
+        "IIN": {
+          "parameter": "VIN supply current",
+          "min": null,
+          "typ": 600,
+          "max": 700,
+          "unit": "µA",
+          "conditions": "TJ = 25°C, VEN=5 V, non switching"
+        },
+        "IVINSDN": {
+          "parameter": "VIN shutdown current",
+          "min": null,
+          "typ": 7,
+          "max": null,
+          "unit": "µA",
+          "conditions": "TJ = 25°C, VEN=0 V"
+        },
+        "VENH": {
+          "parameter": "EN H-level threshold voltage",
+          "min": 1.175,
+          "typ": 1.225,
+          "max": 1.3,
+          "unit": "V",
+          "conditions": null
+        },
+        "VENL": {
+          "parameter": "EN L-level threshold voltage",
+          "min": 1.025,
+          "typ": 1.104,
+          "max": 1.15,
+          "unit": "V",
+          "conditions": null
+        },
+        "VENHYS": {
+          "parameter": "EN hysteresis",
+          "min": null,
+          "typ": 0.121,
+          "max": null,
+          "unit": "V",
+          "conditions": null
+        },
+        "IENp1": {
+          "parameter": "EN pull-up current",
+          "min": 0.35,
+          "typ": 1.91,
+          "max": 2.95,
+          "unit": "µA",
+          "conditions": "VEN = 1.0 V"
+        },
+        "IENp2": {
+          "parameter": "EN pull-up current",
+          "min": 3,
+          "typ": 4.197,
+          "max": 5.5,
+          "unit": "µA",
+          "conditions": "VEN = 1.3 V"
+        },
+        "VFB": {
+          "parameter": "FB voltage",
+          "min": 598,
+          "typ": 600,
+          "max": 602,
+          "unit": "mV",
+          "conditions": "TJ = 25°C"
+        },
+        "VFB_TJ___0_C_to_85_C": {
+          "parameter": "FB voltage",
+          "min": 597.5,
+          "typ": 600,
+          "max": 602.5,
+          "unit": "mV",
+          "conditions": "TJ = 0°C to 85°C"
+        },
+        "VFB_TJ____40_C_to_85_C": {
+          "parameter": "FB voltage",
+          "min": 594,
+          "typ": 600,
+          "max": 602.5,
+          "unit": "mV",
+          "conditions": "TJ = -40°C to 85°C"
+        },
+        "VFB_TJ____40_C_to_150_C": {
+          "parameter": "FB voltage",
+          "min": 594,
+          "typ": 600,
+          "max": 606,
+          "unit": "mV",
+          "conditions": "TJ = -40°C to 150°C"
+        },
+        "VREG5": {
+          "parameter": "LDO Output voltage",
+          "min": 4.58,
+          "typ": 4.7,
+          "max": 4.83,
+          "unit": "V",
+          "conditions": "TJ = -40°C to 150°C"
+        },
+        "ILIM5": {
+          "parameter": "LDO Output Current limit",
+          "min": 100,
+          "typ": 150,
+          "max": 200,
+          "unit": "mA",
+          "conditions": "TJ = -40°C to 150°C"
+        },
+        "RDS(on)H": {
+          "parameter": "High side switch resistance",
+          "min": null,
+          "typ": 13.5,
+          "max": null,
+          "unit": "mΩ",
+          "conditions": "TJ = 25°C, VVREG5 = 4.7 V"
+        },
+        "RDS(on)L": {
+          "parameter": "Low side switch resistance",
+          "min": null,
+          "typ": 4.5,
+          "max": null,
+          "unit": "mΩ",
+          "conditions": "TJ = 25°C, VVREG5 = 4.7 V"
+        },
+        "ISS": {
+          "parameter": "Soft start charge current",
+          "min": 4.9,
+          "typ": 6,
+          "max": 7.1,
+          "unit": "µA",
+          "conditions": "TJ = -40°C to 150°C"
+        },
+        "IOCL": {
+          "parameter": "Current Limit (Low side sourcing)",
+          "min": 9.775,
+          "typ": 11.5,
+          "max": 13.225,
+          "unit": "A",
+          "conditions": "ILIM-1 option, Valley Current"
+        },
+        "IOCL_ILIM_option__Valley_Current": {
+          "parameter": "Current Limit (Low side sourcing)",
+          "min": 11.73,
+          "typ": 13.8,
+          "max": 15.87,
+          "unit": "A",
+          "conditions": "ILIM option, Valley Current"
+        },
+        "VPGOODTH": {
+          "parameter": "PGOOD threshold",
+          "min": null,
+          "typ": 84,
+          "max": null,
+          "unit": "%",
+          "conditions": "VFB falling (fault)"
+        },
+        "VPGOODTH_VFB_rising__good": {
+          "parameter": "PGOOD threshold",
+          "min": null,
+          "typ": 93,
+          "max": null,
+          "unit": "%",
+          "conditions": "VFB rising (good)"
+        },
+        "VPGOODTH_VFB_rising__fault": {
+          "parameter": "PGOOD threshold",
+          "min": null,
+          "typ": 116,
+          "max": null,
+          "unit": "%",
+          "conditions": "VFB rising (fault)"
+        },
+        "VPGOODTH_VFB_falling__good": {
+          "parameter": "PGOOD threshold",
+          "min": null,
+          "typ": 107,
+          "max": null,
+          "unit": "%",
+          "conditions": "VFB falling (good)"
+        },
+        "VIN": {
+          "parameter": "Input Voltage",
+          "min": 3.8,
+          "typ": null,
+          "max": 17,
+          "unit": "V",
+          "conditions": "Recommended Operating Conditions"
+        },
+        "SW": {
+          "parameter": "Switch Node Voltage",
+          "min": -1.8,
+          "typ": null,
+          "max": 17,
+          "unit": "V",
+          "conditions": "Recommended Operating Conditions"
+        },
+        "BOOT": {
+          "parameter": "Bootstrap Voltage",
+          "min": -0.1,
+          "typ": null,
+          "max": 23.5,
+          "unit": "V",
+          "conditions": "Recommended Operating Conditions"
+        },
+        "VREG5_Recommended_Operating_Conditio": {
+          "parameter": "LDO Output Voltage",
+          "min": -0.1,
+          "typ": null,
+          "max": 5.2,
+          "unit": "V",
+          "conditions": "Recommended Operating Conditions"
+        },
+        "ILOAD": {
+          "parameter": "Output Current",
+          "min": 0,
+          "typ": null,
+          "max": 12,
+          "unit": "A",
+          "conditions": "Recommended Operating Conditions"
+        },
+        "TJ": {
+          "parameter": "Operating junction temperature",
+          "min": -40,
+          "typ": null,
+          "max": 150,
+          "unit": "°C",
+          "conditions": "Recommended Operating Conditions"
+        },
+        "RθJA": {
+          "parameter": "Junction-to-ambient thermal resistance",
+          "min": null,
+          "typ": 29.5,
+          "max": null,
+          "unit": "°C/W",
+          "conditions": "RNN PACKAGE, 18 PINS"
+        },
+        "RθJC(top)": {
+          "parameter": "Junction-to-case (top) thermal resistance",
+          "min": null,
+          "typ": 17.0,
+          "max": null,
+          "unit": "°C/W",
+          "conditions": "RNN PACKAGE, 18 PINS"
+        },
+        "RθJB": {
+          "parameter": "Junction-to-board thermal resistance",
+          "min": null,
+          "typ": 8.6,
+          "max": null,
+          "unit": "°C/W",
+          "conditions": "RNN PACKAGE, 18 PINS"
+        },
+        "ψJT": {
+          "parameter": "Junction-to-top characterization parameter",
+          "min": null,
+          "typ": 0.4,
+          "max": null,
+          "unit": "°C/W",
+          "conditions": "RNN PACKAGE, 18 PINS"
+        },
+        "ψJB": {
+          "parameter": "Junction-to-board characterization parameter",
+          "min": null,
+          "typ": 8.6,
+          "max": null,
+          "unit": "°C/W",
+          "conditions": "RNN PACKAGE, 18 PINS"
+        },
+        "RθJC(bot)": {
+          "parameter": "Junction-to-case (bottom) thermal resistance",
+          "min": null,
+          "typ": 0.5,
+          "max": null,
+          "unit": "°C/W",
+          "conditions": "RNN PACKAGE, 18 PINS"
+        }
+      },
+      "drc_hints": {
+        "vin_abs_max": {
+          "value": 20,
+          "unit": "V"
+        },
+        "vin_operating": {
+          "min": 3.8,
+          "max": 17,
+          "unit": "V"
+        },
+        "vref": {
+          "min": 598,
+          "typ": 600,
+          "max": 602,
+          "unit": "mV"
+        },
+        "enable_threshold": {
+          "min": 1.175,
+          "typ": 1.225,
+          "max": 1.3,
+          "unit": "V"
+        },
+        "iout_max": {
+          "min": 9.775,
+          "typ": 11.5,
+          "max": 13.225,
+          "unit": "A"
+        },
+        "soft_start": {
+          "min": 4.9,
+          "typ": 6,
+          "max": 7.1,
+          "unit": "µA"
+        },
+        "thermal_resistance": {
+          "typ": 29.5,
+          "unit": "°C/W"
+        }
+      }
+    },
+    "thermal": {
+      "theta_ja": {
+        "parameter": "Junction-to-ambient thermal resistance",
+        "symbol": "RθJA",
+        "min": null,
+        "typ": 29.5,
+        "max": null,
+        "value": null,
+        "unit": "°C/W",
+        "conditions": "RNN PACKAGE, 18 PINS",
+        "source": "electrical_characteristics"
+      },
+      "theta_jc_top": {
+        "parameter": "Junction-to-case (top) thermal resistance",
+        "symbol": "RθJC(top)",
+        "min": null,
+        "typ": 17.0,
+        "max": null,
+        "value": null,
+        "unit": "°C/W",
+        "conditions": "RNN PACKAGE, 18 PINS",
+        "source": "electrical_characteristics"
+      },
+      "theta_jb": {
+        "parameter": "Junction-to-board thermal resistance",
+        "symbol": "RθJB",
+        "min": null,
+        "typ": 8.6,
+        "max": null,
+        "value": null,
+        "unit": "°C/W",
+        "conditions": "RNN PACKAGE, 18 PINS",
+        "source": "electrical_characteristics"
+      },
+      "psi_jt": {
+        "parameter": "Junction-to-top characterization parameter",
+        "symbol": "ψJT",
+        "min": null,
+        "typ": 0.4,
+        "max": null,
+        "value": null,
+        "unit": "°C/W",
+        "conditions": "RNN PACKAGE, 18 PINS",
+        "source": "electrical_characteristics"
+      },
+      "psi_jb": {
+        "parameter": "Junction-to-board characterization parameter",
+        "symbol": "ψJB",
+        "min": null,
+        "typ": 8.6,
+        "max": null,
+        "value": null,
+        "unit": "°C/W",
+        "conditions": "RNN PACKAGE, 18 PINS",
+        "source": "electrical_characteristics"
+      },
+      "theta_jc_bottom": {
+        "parameter": "Junction-to-case (bottom) thermal resistance",
+        "symbol": "RθJC(bot)",
+        "min": null,
+        "typ": 0.5,
+        "max": null,
+        "value": null,
+        "unit": "°C/W",
+        "conditions": "RNN PACKAGE, 18 PINS",
+        "source": "electrical_characteristics"
+      }
+    },
+    "design_context": {
+      "recommended_external_components": [
+        {
+          "role": "bootstrap_capacitor",
+          "source_page": 19,
+          "value_hint": "0.1 µF",
+          "value_hints": [
+            "0.1 µF",
+            "22 µF"
+          ],
+          "snippet": "8.2 Typical Application"
+        },
+        {
+          "role": "bootstrap_capacitor",
+          "source_page": 19,
+          "value_hint": "0.1 µF",
+          "value_hints": [
+            "0.1 µF",
+            "22 µF"
+          ],
+          "snippet": "VIN = 4.5 V - 17 V"
+        },
+        {
+          "role": "feedback_divider",
+          "source_page": 19,
+          "value_hint": null,
+          "value_hints": [
+            "0.1 µF",
+            "47 µF",
+            "0.047 µF",
+            "56 pF"
+          ],
+          "snippet": "C7 15 3 C10 EN PGND 0.047µF EN 4"
+        },
+        {
+          "role": "feedback_divider",
+          "source_page": 19,
+          "value_hint": null,
+          "value_hints": [
+            "0.1 µF",
+            "47 µF",
+            "0.047 µF",
+            "56 pF"
+          ],
+          "snippet": "PGND R1 PGOOD 16 5"
+        },
+        {
+          "role": "inductor",
+          "source_page": 20,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "8.2.2.1.2 Switching Frequency and MODE Selection"
+        },
+        {
+          "role": "output_capacitor",
+          "source_page": 20,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "Switching Frequency, current limit, and switching mode (DCM or FCCM) are set by a voltage divider from"
+        },
+        {
+          "role": "inductor",
+          "source_page": 20,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "Switching Frequency, current limit, and switching mode (DCM or FCCM) are set by a voltage divider from"
+        },
+        {
+          "role": "output_capacitor",
+          "source_page": 20,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "VREG5 to GND connected to the MODE pin. See 表 7-3 for possible MODE pin configurations. Switching"
+        },
+        {
+          "role": "input_capacitor",
+          "source_page": 21,
+          "value_hint": "40 µF",
+          "value_hints": [
+            "40 µF"
+          ],
+          "snippet": "TPS56C215"
+        },
+        {
+          "role": "input_capacitor",
+          "source_page": 21,
+          "value_hint": "40 µF",
+          "value_hints": [
+            "40 µF"
+          ],
+          "snippet": "ZHCSEU8D – MARCH 2016 – REVISED FEBRUARY 2021 www.ti.com.cn"
+        },
+        {
+          "role": "feedback_divider",
+          "snippet": "For adjustable output voltage, keep the lower leg from Table 7-2 and change only the upper feedback resistor using Equation 6.",
+          "source_page": 22
+        },
+        {
+          "role": "inductor",
+          "snippet": "Use Table 7-2 inductor values instead of a generic ripple-current heuristic when selecting operating points for TPS56C215.",
+          "source_page": 22
+        },
+        {
+          "role": "output_capacitor",
+          "snippet": "Use the Table 7-2 output-capacitance window for D-CAP3 stability and transient performance.",
+          "source_page": 22
+        }
+      ],
+      "component_value_hints": [
+        {
+          "values": [
+            "0.1 µF",
+            "22 µF"
+          ],
+          "source_page": 19,
+          "snippet": "does not warrant its accuracy or completeness. TI’s customers are responsible for determining suitability of components for their purposes, as well as validating and testing their design implementation to confirm system "
+        },
+        {
+          "values": [
+            "0.1 µF",
+            "22 µF",
+            "47 µF"
+          ],
+          "source_page": 19,
+          "snippet": "of 4.5 V to 17 V down to 1.2 V with a maximum output current of 12 A. 8.2 Typical Application VIN = 4.5 V - 17 V VIN U1 TPS56C215 C1 C2 C3 C4 C5 C6 LOUT 0.1µF 0.1µF 22µF 22µF 22µF 22µF C9 VOUT = 1.2 V, 12 A 2 VIN BOOT 1 "
+        },
+        {
+          "values": [
+            "0.1 µF",
+            "22 µF",
+            "47 µF",
+            "0.047 µF"
+          ],
+          "source_page": 19,
+          "snippet": "8.2 Typical Application VIN = 4.5 V - 17 V VIN U1 TPS56C215 C1 C2 C3 C4 C5 C6 LOUT 0.1µF 0.1µF 22µF 22µF 22µF 22µF C9 VOUT = 1.2 V, 12 A 2 VIN BOOT 1 VOUT 11 470nH VIN SW 6 0.1µF C11 C12 C13 C14 7 SW 47µF 47µF 47µF 47µF "
+        },
+        {
+          "values": [
+            "0.1 µF",
+            "22 µF",
+            "47 µF",
+            "0.047 µF",
+            "56 pF"
+          ],
+          "source_page": 19,
+          "snippet": "TPS56C215 C1 C2 C3 C4 C5 C6 LOUT 0.1µF 0.1µF 22µF 22µF 22µF 22µF C9 VOUT = 1.2 V, 12 A 2 VIN BOOT 1 VOUT 11 470nH VIN SW 6 0.1µF C11 C12 C13 C14 7 SW 47µF 47µF 47µF 47µF 13 R4 10.0k 14 SS FB C7 15 3 C10 EN PGND 0.047µF E"
+        },
+        {
+          "values": [
+            "0.1 µF",
+            "47 µF",
+            "0.047 µF",
+            "56 pF"
+          ],
+          "source_page": 19,
+          "snippet": "VOUT = 1.2 V, 12 A 2 VIN BOOT 1 VOUT 11 470nH VIN SW 6 0.1µF C11 C12 C13 C14 7 SW 47µF 47µF 47µF 47µF 13 R4 10.0k 14 SS FB C7 15 3 C10 EN PGND 0.047µF EN 4 PGND R1 PGOOD 16 5 PGOOD PGND 10.0k PGND 8 56pF 17 9 VREG5 PGND "
+        },
+        {
+          "values": [
+            "47 µF",
+            "0.047 µF",
+            "56 pF",
+            "4.7 µF"
+          ],
+          "source_page": 19,
+          "snippet": "C11 C12 C13 C14 7 SW 47µF 47µF 47µF 47µF 13 R4 10.0k 14 SS FB C7 15 3 C10 EN PGND 0.047µF EN 4 PGND R1 PGOOD 16 5 PGOOD PGND 10.0k PGND 8 56pF 17 9 VREG5 PGND 10 R5 PGND 10.0k R2 18 MODE 52.3k C8 AGND 12 4.7µF R3"
+        },
+        {
+          "values": [
+            "0.047 µF",
+            "56 pF",
+            "4.7 µF"
+          ],
+          "source_page": 19,
+          "snippet": "C7 15 3 C10 EN PGND 0.047µF EN 4 PGND R1 PGOOD 16 5 PGOOD PGND 10.0k PGND 8 56pF 17 9 VREG5 PGND 10 R5 PGND 10.0k R2 18 MODE 52.3k C8 AGND 12 4.7µF R3 49.9k 图 8-1. Application Schematic"
+        },
+        {
+          "values": [
+            "56 pF",
+            "4.7 µF"
+          ],
+          "source_page": 19,
+          "snippet": "PGND R1 PGOOD 16 5 PGOOD PGND 10.0k PGND 8 56pF 17 9 VREG5 PGND 10 R5 PGND 10.0k R2 18 MODE 52.3k C8 AGND 12 4.7µF R3 49.9k 图 8-1. Application Schematic 8.2.1 Design Requirements"
+        },
+        {
+          "values": [
+            "470 nH",
+            "4x47 uF",
+            "4x22 uF",
+            "4.7 uF",
+            "56 pF",
+            "51 kOhm / 51 kOhm"
+          ],
+          "source_page": 21,
+          "snippet": "Typical 1.2-V, 12-A application schematic shows the reference inductor, capacitor bank, VREG5 bypass, and MODE divider values."
+        }
+      ],
+      "design_range_hints": [
+        {
+          "name": "VIN",
+          "min": 4.5,
+          "max": 17.0,
+          "unit": "V",
+          "source_page": 19,
+          "snippet": "VIN = 4.5 V - 17 V"
+        },
+        {
+          "name": "VIN",
+          "min": 4.5,
+          "max": 17.0,
+          "unit": "V",
+          "source_page": 21,
+          "snippet": "Typical application input range"
+        },
+        {
+          "name": "VOUT",
+          "min": 1.2,
+          "max": 1.2,
+          "unit": "V",
+          "source_page": 21,
+          "snippet": "Typical application output set point"
+        },
+        {
+          "name": "IOUT",
+          "min": 12.0,
+          "max": 12.0,
+          "unit": "A",
+          "source_page": 21,
+          "snippet": "Typical application output current target"
+        },
+        {
+          "name": "FSW",
+          "min": 1200.0,
+          "max": 1200.0,
+          "unit": "kHz",
+          "source_page": 21,
+          "snippet": "Typical application switching frequency"
+        }
+      ],
+      "design_equation_hints": [
+        {
+          "equation": "VIN = 4.5 V - 17 V",
+          "source_page": 19
+        },
+        {
+          "equation": "VOUT = 0.6 ´ ç 1 + ÷",
+          "source_page": 20
+        },
+        {
+          "equation": "I L(rms) = × ç I OUT + ç ÷ ç ÷ 12 VIN(max) × L OUT × FSW ç ÷ è ø è ø (7)",
+          "source_page": 20
+        },
+        {
+          "equation": "IL(peak) = IOUT +",
+          "source_page": 20
+        }
+      ],
+      "layout_hints": [
+        {
+          "hint": "C7 15 3 C10 EN PGND 0.047µF EN 4",
+          "source_page": 19
+        },
+        {
+          "hint": "PGND R1 PGOOD 16 5",
+          "source_page": 19
+        },
+        {
+          "hint": "PGOOD PGND",
+          "source_page": 19
+        },
+        {
+          "hint": "10.0k PGND 8 56pF",
+          "source_page": 19
+        },
+        {
+          "hint": "VREG5 PGND",
+          "source_page": 19
+        },
+        {
+          "hint": "10 R5 PGND",
+          "source_page": 19
+        },
+        {
+          "hint": "52.3k C8 AGND 12",
+          "source_page": 19
+        },
+        {
+          "hint": "• Recommend a four-layer or six-layer PCB for good thermal performance and with maximum ground plane. 3\"",
+          "source_page": 25
+        },
+        {
+          "hint": "• Recommend having equal caps on each side of the IC. Place them right across VIN as close as possible.",
+          "source_page": 25
+        },
+        {
+          "hint": "• Inner layer 1 will be ground with the PGND to AGND net tie",
+          "source_page": 25
+        }
+      ],
+      "supply_recommendations": [
+        {
+          "hint": "The schematic of 图 8-1 shows a typical application for TPS56C215. This design converts an input voltage range",
+          "source_page": 19
+        },
+        {
+          "hint": "VIN Input voltage 4.5 12 17 V",
+          "source_page": 19
+        },
+        {
+          "hint": "Start input voltage Input voltage rising V",
+          "source_page": 19
+        },
+        {
+          "hint": "Stop input voltage Input voltage falling V",
+          "source_page": 19
+        },
+        {
+          "hint": "TI recommends using a high quality X5R or X7R input decoupling capacitors of 40 µF on the input voltage pin.",
+          "source_page": 21
+        },
+        {
+          "hint": "The voltage rating on the input capacitor must be greater than the maximum input voltage. The capacitor must",
+          "source_page": 21
+        },
+        {
+          "hint": "9 Power Supply Recommendations",
+          "source_page": 24
+        },
+        {
+          "hint": "The TPS56C215 is intended to be powered by a well regulated dc voltage. The input voltage range is 3.8 to 17",
+          "source_page": 24
+        }
+      ],
+      "topology_hints": [
+        {
+          "hint": "8 Application and Implementation",
+          "source_page": 19
+        },
+        {
+          "hint": "Information in the following applications sections is not part of the TI component specification, and TI",
+          "source_page": 19
+        },
+        {
+          "hint": "8.1 Application Information",
+          "source_page": 19
+        },
+        {
+          "hint": "The schematic of 图 8-1 shows a typical application for TPS56C215. This design converts an input voltage range",
+          "source_page": 19
+        },
+        {
+          "hint": "8.2 Typical Application",
+          "source_page": 19
+        },
+        {
+          "hint": "图 8-1. Application Schematic",
+          "source_page": 19
+        },
+        {
+          "hint": "To change the output voltage of the application, it is necessary to change the value of the upper feedback",
+          "source_page": 19
+        },
+        {
+          "hint": "also have a ripple current rating greater than the maximum input current ripple of the application. The input ripple",
+          "source_page": 21
+        }
+      ],
+      "configuration_mappings": [
+        {
+          "pin": "MODE",
+          "source_page": 17,
+          "source_table": "Table 6-3",
+          "resistor_divider": {
+            "top_resistor_kohm": 300,
+            "bottom_resistor_kohm": 5.1,
+            "reference_rail": "VREG5",
+            "reference_ground": "AGND",
+            "tolerance": "1%"
+          },
+          "behavior": {
+            "light_load_operation": "FCCM",
+            "current_limit_option": "ILIM-1",
+            "switching_frequency_khz": 400,
+            "supported_output_current_a": 10,
+            "low_side_valley_current_limit": {
+              "min": 9.775,
+              "typ": 11.5,
+              "max": 13.225,
+              "unit": "A"
+            }
+          },
+          "source": {
+            "document_id": "SLVSD05H",
+            "revision": "Rev. H",
+            "url": "https://www.ti.com/lit/ds/symlink/tps56c215.pdf"
+          }
+        },
+        {
+          "pin": "MODE",
+          "source_page": 17,
+          "source_table": "Table 6-3",
+          "resistor_divider": {
+            "top_resistor_kohm": 200,
+            "bottom_resistor_kohm": 10,
+            "reference_rail": "VREG5",
+            "reference_ground": "AGND",
+            "tolerance": "1%"
+          },
+          "behavior": {
+            "light_load_operation": "FCCM",
+            "current_limit_option": "ILIM",
+            "switching_frequency_khz": 400,
+            "supported_output_current_a": 12,
+            "low_side_valley_current_limit": {
+              "min": 11.73,
+              "typ": 13.8,
+              "max": 15.87,
+              "unit": "A"
+            }
+          },
+          "source": {
+            "document_id": "SLVSD05H",
+            "revision": "Rev. H",
+            "url": "https://www.ti.com/lit/ds/symlink/tps56c215.pdf"
+          }
+        },
+        {
+          "pin": "MODE",
+          "source_page": 17,
+          "source_table": "Table 6-3",
+          "resistor_divider": {
+            "top_resistor_kohm": 160,
+            "bottom_resistor_kohm": 20,
+            "reference_rail": "VREG5",
+            "reference_ground": "AGND",
+            "tolerance": "1%"
+          },
+          "behavior": {
+            "light_load_operation": "FCCM",
+            "current_limit_option": "ILIM-1",
+            "switching_frequency_khz": 800,
+            "supported_output_current_a": 10,
+            "low_side_valley_current_limit": {
+              "min": 9.775,
+              "typ": 11.5,
+              "max": 13.225,
+              "unit": "A"
+            }
+          },
+          "source": {
+            "document_id": "SLVSD05H",
+            "revision": "Rev. H",
+            "url": "https://www.ti.com/lit/ds/symlink/tps56c215.pdf"
+          }
+        },
+        {
+          "pin": "MODE",
+          "source_page": 17,
+          "source_table": "Table 6-3",
+          "resistor_divider": {
+            "top_resistor_kohm": 120,
+            "bottom_resistor_kohm": 20,
+            "reference_rail": "VREG5",
+            "reference_ground": "AGND",
+            "tolerance": "1%"
+          },
+          "behavior": {
+            "light_load_operation": "FCCM",
+            "current_limit_option": "ILIM",
+            "switching_frequency_khz": 800,
+            "supported_output_current_a": 12,
+            "low_side_valley_current_limit": {
+              "min": 11.73,
+              "typ": 13.8,
+              "max": 15.87,
+              "unit": "A"
+            }
+          },
+          "source": {
+            "document_id": "SLVSD05H",
+            "revision": "Rev. H",
+            "url": "https://www.ti.com/lit/ds/symlink/tps56c215.pdf"
+          }
+        },
+        {
+          "pin": "MODE",
+          "source_page": 17,
+          "source_table": "Table 6-3",
+          "resistor_divider": {
+            "top_resistor_kohm": 200,
+            "bottom_resistor_kohm": 51,
+            "reference_rail": "VREG5",
+            "reference_ground": "AGND",
+            "tolerance": "1%"
+          },
+          "behavior": {
+            "light_load_operation": "FCCM",
+            "current_limit_option": "ILIM-1",
+            "switching_frequency_khz": 1200,
+            "supported_output_current_a": 10,
+            "low_side_valley_current_limit": {
+              "min": 9.775,
+              "typ": 11.5,
+              "max": 13.225,
+              "unit": "A"
+            }
+          },
+          "source": {
+            "document_id": "SLVSD05H",
+            "revision": "Rev. H",
+            "url": "https://www.ti.com/lit/ds/symlink/tps56c215.pdf"
+          }
+        },
+        {
+          "pin": "MODE",
+          "source_page": 17,
+          "source_table": "Table 6-3",
+          "resistor_divider": {
+            "top_resistor_kohm": 180,
+            "bottom_resistor_kohm": 51,
+            "reference_rail": "VREG5",
+            "reference_ground": "AGND",
+            "tolerance": "1%"
+          },
+          "behavior": {
+            "light_load_operation": "FCCM",
+            "current_limit_option": "ILIM",
+            "switching_frequency_khz": 1200,
+            "supported_output_current_a": 12,
+            "low_side_valley_current_limit": {
+              "min": 11.73,
+              "typ": 13.8,
+              "max": 15.87,
+              "unit": "A"
+            }
+          },
+          "source": {
+            "document_id": "SLVSD05H",
+            "revision": "Rev. H",
+            "url": "https://www.ti.com/lit/ds/symlink/tps56c215.pdf"
+          }
+        },
+        {
+          "pin": "MODE",
+          "source_page": 17,
+          "source_table": "Table 6-3",
+          "resistor_divider": {
+            "top_resistor_kohm": 150,
+            "bottom_resistor_kohm": 51,
+            "reference_rail": "VREG5",
+            "reference_ground": "AGND",
+            "tolerance": "1%"
+          },
+          "behavior": {
+            "light_load_operation": "DCM",
+            "current_limit_option": "ILIM-1",
+            "switching_frequency_khz": 400,
+            "supported_output_current_a": 10,
+            "low_side_valley_current_limit": {
+              "min": 9.775,
+              "typ": 11.5,
+              "max": 13.225,
+              "unit": "A"
+            }
+          },
+          "source": {
+            "document_id": "SLVSD05H",
+            "revision": "Rev. H",
+            "url": "https://www.ti.com/lit/ds/symlink/tps56c215.pdf"
+          }
+        },
+        {
+          "pin": "MODE",
+          "source_page": 17,
+          "source_table": "Table 6-3",
+          "resistor_divider": {
+            "top_resistor_kohm": 120,
+            "bottom_resistor_kohm": 51,
+            "reference_rail": "VREG5",
+            "reference_ground": "AGND",
+            "tolerance": "1%"
+          },
+          "behavior": {
+            "light_load_operation": "DCM",
+            "current_limit_option": "ILIM",
+            "switching_frequency_khz": 400,
+            "supported_output_current_a": 12,
+            "low_side_valley_current_limit": {
+              "min": 11.73,
+              "typ": 13.8,
+              "max": 15.87,
+              "unit": "A"
+            }
+          },
+          "source": {
+            "document_id": "SLVSD05H",
+            "revision": "Rev. H",
+            "url": "https://www.ti.com/lit/ds/symlink/tps56c215.pdf"
+          }
+        },
+        {
+          "pin": "MODE",
+          "source_page": 17,
+          "source_table": "Table 6-3",
+          "resistor_divider": {
+            "top_resistor_kohm": 91,
+            "bottom_resistor_kohm": 51,
+            "reference_rail": "VREG5",
+            "reference_ground": "AGND",
+            "tolerance": "1%"
+          },
+          "behavior": {
+            "light_load_operation": "DCM",
+            "current_limit_option": "ILIM-1",
+            "switching_frequency_khz": 800,
+            "supported_output_current_a": 10,
+            "low_side_valley_current_limit": {
+              "min": 9.775,
+              "typ": 11.5,
+              "max": 13.225,
+              "unit": "A"
+            }
+          },
+          "source": {
+            "document_id": "SLVSD05H",
+            "revision": "Rev. H",
+            "url": "https://www.ti.com/lit/ds/symlink/tps56c215.pdf"
+          }
+        },
+        {
+          "pin": "MODE",
+          "source_page": 17,
+          "source_table": "Table 6-3",
+          "resistor_divider": {
+            "top_resistor_kohm": 82,
+            "bottom_resistor_kohm": 51,
+            "reference_rail": "VREG5",
+            "reference_ground": "AGND",
+            "tolerance": "1%"
+          },
+          "behavior": {
+            "light_load_operation": "DCM",
+            "current_limit_option": "ILIM",
+            "switching_frequency_khz": 800,
+            "supported_output_current_a": 12,
+            "low_side_valley_current_limit": {
+              "min": 11.73,
+              "typ": 13.8,
+              "max": 15.87,
+              "unit": "A"
+            }
+          },
+          "source": {
+            "document_id": "SLVSD05H",
+            "revision": "Rev. H",
+            "url": "https://www.ti.com/lit/ds/symlink/tps56c215.pdf"
+          }
+        },
+        {
+          "pin": "MODE",
+          "source_page": 17,
+          "source_table": "Table 6-3",
+          "resistor_divider": {
+            "top_resistor_kohm": 62,
+            "bottom_resistor_kohm": 51,
+            "reference_rail": "VREG5",
+            "reference_ground": "AGND",
+            "tolerance": "1%"
+          },
+          "behavior": {
+            "light_load_operation": "DCM",
+            "current_limit_option": "ILIM-1",
+            "switching_frequency_khz": 1200,
+            "supported_output_current_a": 10,
+            "low_side_valley_current_limit": {
+              "min": 9.775,
+              "typ": 11.5,
+              "max": 13.225,
+              "unit": "A"
+            }
+          },
+          "source": {
+            "document_id": "SLVSD05H",
+            "revision": "Rev. H",
+            "url": "https://www.ti.com/lit/ds/symlink/tps56c215.pdf"
+          }
+        },
+        {
+          "pin": "MODE",
+          "source_page": 17,
+          "source_table": "Table 6-3",
+          "resistor_divider": {
+            "top_resistor_kohm": 51,
+            "bottom_resistor_kohm": 51,
+            "reference_rail": "VREG5",
+            "reference_ground": "AGND",
+            "tolerance": "1%"
+          },
+          "behavior": {
+            "light_load_operation": "DCM",
+            "current_limit_option": "ILIM",
+            "switching_frequency_khz": 1200,
+            "supported_output_current_a": 12,
+            "low_side_valley_current_limit": {
+              "min": 11.73,
+              "typ": 13.8,
+              "max": 15.87,
+              "unit": "A"
+            }
+          },
+          "source": {
+            "document_id": "SLVSD05H",
+            "revision": "Rev. H",
+            "url": "https://www.ti.com/lit/ds/symlink/tps56c215.pdf"
+          }
+        }
+      ],
+      "design_recommendations": [
+        {
+          "topic": "mode_pin_configuration",
+          "pin": "MODE",
+          "source_page": 17,
+          "source_table": "Table 6-3",
+          "rule": "MODE must be derived from the VREG5 rail through a resistor divider to AGND, is sampled during startup, and only resets after VIN power cycling.",
+          "source": {
+            "document_id": "SLVSD05H",
+            "revision": "Rev. H",
+            "url": "https://www.ti.com/lit/ds/symlink/tps56c215.pdf"
+          }
+        },
+        {
+          "topic": "recommended_component_values",
+          "source_page": 23,
+          "source_table": "Table 7-2",
+          "entries": [
+            {
+              "vout_v": 0.6,
+              "r_lower_kohm": 10,
+              "r_upper_kohm": 0,
+              "fsw_khz": 400,
+              "lout_uh": 0.68,
+              "cout_min_uf": 300,
+              "cout_max_uf": 500,
+              "cff_pf": null
+            },
+            {
+              "vout_v": 0.6,
+              "r_lower_kohm": 10,
+              "r_upper_kohm": 0,
+              "fsw_khz": 800,
+              "lout_uh": 0.47,
+              "cout_min_uf": 100,
+              "cout_max_uf": 500,
+              "cff_pf": null
+            },
+            {
+              "vout_v": 0.6,
+              "r_lower_kohm": 10,
+              "r_upper_kohm": 0,
+              "fsw_khz": 1200,
+              "lout_uh": 0.33,
+              "cout_min_uf": 88,
+              "cout_max_uf": 500,
+              "cff_pf": null
+            },
+            {
+              "vout_v": 1.2,
+              "r_lower_kohm": 10,
+              "r_upper_kohm": 10,
+              "fsw_khz": 400,
+              "lout_uh": 1.2,
+              "cout_min_uf": 100,
+              "cout_max_uf": 500,
+              "cff_pf": null
+            },
+            {
+              "vout_v": 1.2,
+              "r_lower_kohm": 10,
+              "r_upper_kohm": 10,
+              "fsw_khz": 800,
+              "lout_uh": 0.68,
+              "cout_min_uf": 88,
+              "cout_max_uf": 500,
+              "cff_pf": null
+            },
+            {
+              "vout_v": 1.2,
+              "r_lower_kohm": 10,
+              "r_upper_kohm": 10,
+              "fsw_khz": 1200,
+              "lout_uh": 0.47,
+              "cout_min_uf": 88,
+              "cout_max_uf": 500,
+              "cff_pf": null
+            },
+            {
+              "vout_v": 3.3,
+              "r_lower_kohm": 10,
+              "r_upper_kohm": 45.3,
+              "fsw_khz": 400,
+              "lout_uh": 2.4,
+              "cout_min_uf": 88,
+              "cout_max_uf": 500,
+              "cff_pf": "100-220"
+            },
+            {
+              "vout_v": 3.3,
+              "r_lower_kohm": 10,
+              "r_upper_kohm": 45.3,
+              "fsw_khz": 800,
+              "lout_uh": 1.5,
+              "cout_min_uf": 88,
+              "cout_max_uf": 500,
+              "cff_pf": "100-220"
+            },
+            {
+              "vout_v": 3.3,
+              "r_lower_kohm": 10,
+              "r_upper_kohm": 45.3,
+              "fsw_khz": 1200,
+              "lout_uh": 1.2,
+              "cout_min_uf": 88,
+              "cout_max_uf": 500,
+              "cff_pf": "100-220"
+            },
+            {
+              "vout_v": 5.5,
+              "r_lower_kohm": 10,
+              "r_upper_kohm": 82.5,
+              "fsw_khz": 400,
+              "lout_uh": 3.3,
+              "cout_min_uf": 88,
+              "cout_max_uf": 500,
+              "cff_pf": "100-220"
+            },
+            {
+              "vout_v": 5.5,
+              "r_lower_kohm": 10,
+              "r_upper_kohm": 82.5,
+              "fsw_khz": 800,
+              "lout_uh": 2.4,
+              "cout_min_uf": 88,
+              "cout_max_uf": 500,
+              "cff_pf": "100-220"
+            },
+            {
+              "vout_v": 5.5,
+              "r_lower_kohm": 10,
+              "r_upper_kohm": 82.5,
+              "fsw_khz": 1200,
+              "lout_uh": 1.5,
+              "cout_min_uf": 88,
+              "cout_max_uf": 700,
+              "cff_pf": "100-220"
+            }
+          ],
+          "source": {
+            "document_id": "SLVSD05H",
+            "revision": "Rev. H",
+            "url": "https://www.ti.com/lit/ds/symlink/tps56c215.pdf"
+          }
+        },
+        {
+          "topic": "feedback_divider_bias",
+          "source_page": 22,
+          "source_table": "Table 7-2",
+          "equation": "RUPPER = RLOWER * (VOUT / 0.6 - 1)",
+          "adjust_only": "RUPPER",
+          "recommended_r_lower_kohm": 10,
+          "note": "Latest TI datasheet examples in Rev. H use a 10-kOhm lower feedback resistor across the Table 7-2 operating points.",
+          "source": {
+            "document_id": "SLVSD05H",
+            "revision": "Rev. H",
+            "url": "https://www.ti.com/lit/ds/symlink/tps56c215.pdf"
+          }
+        }
+      ],
+      "design_pages": {
+        "pages": [
+          {
+            "page": 19,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 20,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 21,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 24,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 25,
+            "title": null,
+            "content_type": "layout"
+          },
+          {
+            "page": 17,
+            "title": "MODE Pin Resistor Settings",
+            "content_type": "application"
+          },
+          {
+            "page": 21,
+            "title": "Typical Application",
+            "content_type": "application"
+          },
+          {
+            "page": 22,
+            "title": "External Component Selection",
+            "content_type": "application"
+          },
+          {
+            "page": 23,
+            "title": "Recommended Component Values",
+            "content_type": "application"
+          }
+        ],
+        "total_pages": 9
+      }
     }
   }
 }

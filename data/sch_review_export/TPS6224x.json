@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -381,5 +381,681 @@
       "unit": "V"
     }
   },
-  "thermal": {}
+  "thermal": {},
+  "domains": {
+    "pin": {
+      "packages": {
+        "WSON-6": {
+          "pin_count": 7,
+          "pins": {
+            "5": {
+              "name": "VIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "VIN power supply pin.",
+              "unused_treatment": null
+            },
+            "1": {
+              "name": "SW",
+              "direction": "OUTPUT",
+              "signal_type": "POWER",
+              "description": "Switch pin connected to the internal MOSFET switches. Connect the inductor to this terminal.",
+              "unused_treatment": null
+            },
+            "6": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "GND supply pin.",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "FB",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Feedback pin for the internal regulation loop.",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "EN",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Enable pin. Pulling low forces shutdown, pulling high enables device. Must be terminated.",
+              "unused_treatment": "CUSTOM"
+            },
+            "2": {
+              "name": "MODE",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Mode selection pin. High forces fixed-frequency PWM mode; Low enables power save mode. Only available in WSON package.",
+              "unused_treatment": null
+            },
+            "EP": {
+              "name": "Power PAD",
+              "direction": "PASSIVE",
+              "signal_type": "POWER",
+              "description": "Exposed thermal pad for heat dissipation.",
+              "unused_treatment": null
+            }
+          }
+        },
+        "SOT-5": {
+          "pin_count": 5,
+          "pins": {
+            "1": {
+              "name": "VIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "VIN power supply pin.",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "SW",
+              "direction": "OUTPUT",
+              "signal_type": "POWER",
+              "description": "Switch pin connected to the internal MOSFET switches. Connect the inductor to this terminal.",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "GND supply pin.",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "FB",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Feedback pin for the internal regulation loop.",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "EN",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Enable pin. Pulling low forces shutdown, pulling high enables device. Must be terminated.",
+              "unused_treatment": "CUSTOM"
+            }
+          }
+        }
+      }
+    },
+    "electrical": {
+      "absolute_maximum_ratings": {
+        "VIN": {
+          "parameter": "Input voltage",
+          "min": -0.3,
+          "max": 7.0,
+          "unit": "V",
+          "conditions": null
+        },
+        "TJ": {
+          "parameter": "Maximum operating junction temperature",
+          "min": -40,
+          "max": 125,
+          "unit": "°C",
+          "conditions": null
+        },
+        "Tstg": {
+          "parameter": "Storage temperature",
+          "min": -65,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        },
+        "V(ESD)": {
+          "parameter": "Electrostatic discharge (HBM)",
+          "min": -2000,
+          "max": 2000,
+          "unit": "V",
+          "conditions": "Human body model (HBM), per ANSI/ESDA/JEDEC JS-001, all pins"
+        },
+        "V(ESD)_Charged_device_model__CDM___pe": {
+          "parameter": "Electrostatic discharge (CDM)",
+          "min": -1000,
+          "max": 1000,
+          "unit": "V",
+          "conditions": "Charged device model (CDM), per JEDEC specification JESD22-C101, all pins"
+        }
+      },
+      "electrical_parameters": {
+        "VIN": {
+          "parameter": "Input voltage range",
+          "min": 2.0,
+          "typ": null,
+          "max": 6.0,
+          "unit": "V",
+          "conditions": null
+        },
+        "IOUT": {
+          "parameter": "Output current",
+          "min": null,
+          "typ": null,
+          "max": 300,
+          "unit": "mA",
+          "conditions": "2.3 V <= VIN <= 6 V"
+        },
+        "IOUT_2_V____VIN____2_3_V": {
+          "parameter": "Output current",
+          "min": null,
+          "typ": null,
+          "max": 150,
+          "unit": "mA",
+          "conditions": "2 V <= VIN <= 2.3 V"
+        },
+        "IQ": {
+          "parameter": "Operating quiescent current",
+          "min": null,
+          "typ": 15.0,
+          "max": null,
+          "unit": "µA",
+          "conditions": "IOUT = 0 mA. PFM mode enabled (MODE = GND) device not switching"
+        },
+        "IQ_IOUT___0_mA__PFM_mode_enabled": {
+          "parameter": "Operating quiescent current",
+          "min": null,
+          "typ": 18.5,
+          "max": null,
+          "unit": "µA",
+          "conditions": "IOUT = 0 mA. PFM mode enabled (MODE = GND) device switching, VOUT = 1.8 V"
+        },
+        "IQ_IOUT___0_mA__PWM_mode_enabled": {
+          "parameter": "Operating quiescent current",
+          "min": null,
+          "typ": 3.8,
+          "max": null,
+          "unit": "mA",
+          "conditions": "IOUT = 0 mA, PWM mode enabled (MODE = VIN), PWM operation, VOUT = 1.8 V, VIN = 3 V"
+        },
+        "ISD": {
+          "parameter": "Shutdown current",
+          "min": null,
+          "typ": 0.1,
+          "max": 1.0,
+          "unit": "µA",
+          "conditions": "EN = GND"
+        },
+        "UVLO": {
+          "parameter": "Undervoltage lockout threshold",
+          "min": null,
+          "typ": 1.85,
+          "max": null,
+          "unit": "V",
+          "conditions": "Falling"
+        },
+        "UVLO_Rising": {
+          "parameter": "Undervoltage lockout threshold",
+          "min": null,
+          "typ": 1.95,
+          "max": null,
+          "unit": "V",
+          "conditions": "Rising"
+        },
+        "VIH": {
+          "parameter": "High level input voltage, EN, MODE",
+          "min": 1.0,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": "2 V <= VIN <= 6 V"
+        },
+        "VIL": {
+          "parameter": "Low level input voltage, EN, MODE",
+          "min": null,
+          "typ": null,
+          "max": 0.4,
+          "unit": "V",
+          "conditions": "2 V <= VIN <= 6 V"
+        },
+        "IIN": {
+          "parameter": "Input bias current, EN, MODE",
+          "min": null,
+          "typ": 0.01,
+          "max": 1.0,
+          "unit": "µA",
+          "conditions": "EN, MODE = GND or VIN"
+        },
+        "RDS(on)": {
+          "parameter": "High-side MOSFET ON-resistance",
+          "min": null,
+          "typ": 240.0,
+          "max": 480.0,
+          "unit": "mΩ",
+          "conditions": "VIN = VGS = 3.6 V, TA = 25°C"
+        },
+        "RDS(on)_VIN___VGS___3_6_V__TA___25_C": {
+          "parameter": "Low-side MOSFET ON-resistance",
+          "min": null,
+          "typ": 180.0,
+          "max": 380.0,
+          "unit": "mΩ",
+          "conditions": "VIN = VGS = 3.6 V, TA = 25°C"
+        },
+        "ILIMF": {
+          "parameter": "Forward current-limit MOSFET high-side and low-side",
+          "min": 0.56,
+          "typ": 0.7,
+          "max": 0.84,
+          "unit": "A",
+          "conditions": "VIN = VGS = 3.6 V"
+        },
+        "TSD": {
+          "parameter": "Thermal shutdown",
+          "min": null,
+          "typ": 140.0,
+          "max": null,
+          "unit": "°C",
+          "conditions": "Increasing junction temperature"
+        },
+        "fSW": {
+          "parameter": "Oscillator frequency",
+          "min": 2.0,
+          "typ": 2.25,
+          "max": 2.5,
+          "unit": "MHz",
+          "conditions": "2 V <= VIN <= 6 V"
+        },
+        "VOUT": {
+          "parameter": "Adjustable output voltage range",
+          "min": 0.6,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": "max is VIN"
+        },
+        "VREF": {
+          "parameter": "Reference voltage",
+          "min": null,
+          "typ": 600.0,
+          "max": null,
+          "unit": "mV",
+          "conditions": null
+        },
+        "VFB": {
+          "parameter": "Feedback voltage",
+          "min": -1.5,
+          "typ": 0.0,
+          "max": 1.5,
+          "unit": "%",
+          "conditions": "MODE = VIN, PWM operation, 2 V <= VIN <= 6 V, in fixed output voltage versions VFB = VOUT"
+        },
+        "VFB_MODE___GND__device_in_PFM_mode": {
+          "parameter": "Feedback voltage PFM mode",
+          "min": null,
+          "typ": 0.0,
+          "max": null,
+          "unit": "%",
+          "conditions": "MODE = GND, device in PFM mode"
+        },
+        "tStart Up": {
+          "parameter": "Start-up Time",
+          "min": null,
+          "typ": 500.0,
+          "max": null,
+          "unit": "µs",
+          "conditions": "Time from active EN to reach 95% of VOUT nominal"
+        },
+        "tRamp": {
+          "parameter": "VOUT ramp-up time",
+          "min": null,
+          "typ": 250.0,
+          "max": null,
+          "unit": "µs",
+          "conditions": "Time to ramp from 5% to 95% of VOUT"
+        },
+        "Ilkg": {
+          "parameter": "Leakage current into SW pin",
+          "min": null,
+          "typ": 0.1,
+          "max": 1.0,
+          "unit": "µA",
+          "conditions": "VIN = 3.6 V, VIN = VOUT = VSW, EN = GND"
+        }
+      },
+      "drc_hints": {
+        "vin_abs_max": {
+          "value": 7.0,
+          "unit": "V"
+        },
+        "vin_operating": {
+          "min": 2.0,
+          "max": 6.0,
+          "unit": "V"
+        },
+        "vref": {
+          "typ": 600.0,
+          "unit": "mV"
+        },
+        "vout": {
+          "min": 0.6,
+          "unit": "V"
+        },
+        "enable_threshold": {
+          "min": 1.0,
+          "unit": "V"
+        },
+        "iout_max": {
+          "max": 300,
+          "unit": "mA"
+        },
+        "iq": {
+          "typ": 15.0,
+          "unit": "µA"
+        },
+        "fsw": {
+          "min": 2.0,
+          "typ": 2.25,
+          "max": 2.5,
+          "unit": "MHz"
+        },
+        "thermal_shutdown": {
+          "typ": 140.0,
+          "unit": "°C"
+        },
+        "uvlo": {
+          "typ": 1.85,
+          "unit": "V"
+        }
+      }
+    },
+    "design_context": {
+      "recommended_external_components": [
+        {
+          "role": "inductor",
+          "source_page": 9,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "specification, and TI does not warrant its accuracy or completeness. TI’s customers are"
+        },
+        {
+          "role": "inductor",
+          "source_page": 9,
+          "value_hint": "2.2 µH",
+          "value_hints": [
+            "2.2 µH"
+          ],
+          "snippet": "responsible for determining suitability of components for their purposes. Customers should"
+        },
+        {
+          "role": "input_capacitor",
+          "source_page": 9,
+          "value_hint": "33 pF",
+          "value_hints": [
+            "2.2 µH",
+            "360kΩ",
+            "33 pF"
+          ],
+          "snippet": "or 2.25-MHz fixed-frequency operation."
+        },
+        {
+          "role": "input_capacitor",
+          "source_page": 9,
+          "value_hint": "33 pF",
+          "value_hints": [
+            "2.2 µH",
+            "360kΩ",
+            "33 pF",
+            "4.7 µF"
+          ],
+          "snippet": "9.2 Typical Application"
+        },
+        {
+          "role": "output_capacitor",
+          "source_page": 9,
+          "value_hint": "33 pF",
+          "value_hints": [
+            "2.2 µH",
+            "360kΩ",
+            "33 pF",
+            "4.7 µF"
+          ],
+          "snippet": "9.2 Typical Application"
+        },
+        {
+          "role": "output_capacitor",
+          "source_page": 9,
+          "value_hint": "10 µF",
+          "value_hints": [
+            "2.2 µH",
+            "360kΩ",
+            "33 pF",
+            "4.7 µF",
+            "10 µF"
+          ],
+          "snippet": "L1 TPS62240DRV"
+        },
+        {
+          "role": "feedback_divider",
+          "source_page": 9,
+          "value_hint": "360kΩ",
+          "value_hints": [
+            "2.2 µH",
+            "360kΩ",
+            "33 pF",
+            "4.7 µF",
+            "10 µF"
+          ],
+          "snippet": "VIN 2.0V to 6.3V 2.2µH"
+        },
+        {
+          "role": "feedback_divider",
+          "source_page": 9,
+          "value_hint": "360kΩ",
+          "value_hints": [
+            "2.2 µH",
+            "360kΩ",
+            "33 pF",
+            "4.7 µF",
+            "10 µF"
+          ],
+          "snippet": "VOUT 1.2V"
+        }
+      ],
+      "component_value_hints": [
+        {
+          "values": [
+            "2.2 µH"
+          ],
+          "source_page": 9,
+          "snippet": "9 Application and Implementation NOTE Information in the following applications sections is not part of the TI component specification, and TI does not warrant its accuracy or completeness. TI’s customers are responsible"
+        },
+        {
+          "values": [
+            "33 pF",
+            "2.2 µH",
+            "360kΩ"
+          ],
+          "source_page": 9,
+          "snippet": "responsible for determining suitability of components for their purposes. Customers should validate and test their design implementation to confirm system functionality. 9.1 Application Information The TPS6224x device is"
+        },
+        {
+          "values": [
+            "33 pF",
+            "2.2 µH",
+            "360kΩ",
+            "4.7 µF"
+          ],
+          "source_page": 9,
+          "snippet": "validate and test their design implementation to confirm system functionality. 9.1 Application Information The TPS6224x device is a high-efficiency synchronous step-down DC-DC converter featuring power save mode or 2.25-"
+        },
+        {
+          "values": [
+            "33 pF",
+            "10 µF",
+            "2.2 µH",
+            "360kΩ",
+            "4.7 µF"
+          ],
+          "source_page": 9,
+          "snippet": "9.1 Application Information The TPS6224x device is a high-efficiency synchronous step-down DC-DC converter featuring power save mode or 2.25-MHz fixed-frequency operation. 9.2 Typical Application L1 TPS62240DRV VIN 2.0V "
+        },
+        {
+          "values": [
+            "33 pF",
+            "10 µF",
+            "360kΩ",
+            "2.2 µH",
+            "4.7 µF"
+          ],
+          "source_page": 9,
+          "snippet": "VIN 2.0V to 6.3V 2.2µH VOUT 1.2V VIN SW R1 C1 Up to 300mA CIN EN 360 kΩ 33pF 4.7µF COUT FB GND 10 µF R2 MODE 360 kΩ Figure 6. TPS62240DRV Adjustable 1.2 V 9.2.1 Design Requirements The device operates over an input volta"
+        },
+        {
+          "values": [
+            "33 pF",
+            "10 µF",
+            "360kΩ",
+            "4.7 µF"
+          ],
+          "source_page": 9,
+          "snippet": "VOUT 1.2V VIN SW R1 C1 Up to 300mA CIN EN 360 kΩ 33pF 4.7µF COUT FB GND 10 µF R2 MODE 360 kΩ Figure 6. TPS62240DRV Adjustable 1.2 V 9.2.1 Design Requirements The device operates over an input voltage range from 2 V to 6 "
+        },
+        {
+          "values": [
+            "10 µF",
+            "360kΩ",
+            "4.7 µF"
+          ],
+          "source_page": 9,
+          "snippet": "4.7µF COUT FB GND 10 µF R2 MODE 360 kΩ Figure 6. TPS62240DRV Adjustable 1.2 V 9.2.1 Design Requirements The device operates over an input voltage range from 2 V to 6 V. The output voltage is adjustable using an external "
+        },
+        {
+          "values": [
+            "4.7 μF",
+            "360kΩ",
+            "10 µF"
+          ],
+          "source_page": 9,
+          "snippet": "FB GND 10 µF R2 MODE 360 kΩ Figure 6. TPS62240DRV Adjustable 1.2 V 9.2.1 Design Requirements The device operates over an input voltage range from 2 V to 6 V. The output voltage is adjustable using an external feedback di"
+        }
+      ],
+      "design_equation_hints": [
+        {
+          "equation": "VOUT = VREF ´ ç 1 + ÷",
+          "source_page": 9
+        },
+        {
+          "equation": "ILmax = IOUTmax +",
+          "source_page": 10
+        },
+        {
+          "equation": "IRMSC OUT = VOUT ´ ƒ L ´ 2 ´ 3 (5)",
+          "source_page": 11
+        },
+        {
+          "equation": "D VOUT = VOUT ´ ´ ç + ESR ÷",
+          "source_page": 11
+        }
+      ],
+      "layout_hints": [
+        {
+          "hint": "wide and short traces for the main current paths. The input capacitor should be placed as close as possible to",
+          "source_page": 17
+        },
+        {
+          "hint": "Connect the GND pin of the device to the PowerPAD™land of the PCB and use this pad as a star point. Use a",
+          "source_page": 17
+        },
+        {
+          "hint": "Connect these ground nodes together to the PowerPAD land (star point) underneath the IC. Keep the common",
+          "source_page": 17
+        }
+      ],
+      "supply_recommendations": [
+        {
+          "hint": "The device operates over an input voltage range from 2 V to 6 V. The output voltage is adjustable using an",
+          "source_page": 9
+        },
+        {
+          "hint": "input voltage filtering, and minimizing the interference with other circuits caused by high input voltage spikes. For",
+          "source_page": 11
+        },
+        {
+          "hint": "80% of their initial capacitance at 5 V, it is recommended that a 10-μF input capacitor be used for input voltages",
+          "source_page": 11
+        },
+        {
+          "hint": "greater than 4.5 V. The input capacitor can be increased without any limit for better input voltage filtering.",
+          "source_page": 11
+        },
+        {
+          "hint": "10 Power Supply Recommendations",
+          "source_page": 16
+        },
+        {
+          "hint": "The TPS6224x device has no special requirements for its input power supply. The input power supply output",
+          "source_page": 16
+        },
+        {
+          "hint": "current must be rated according to the supply voltage, output voltage, and output current of the TPS6224x.",
+          "source_page": 16
+        }
+      ],
+      "topology_hints": [
+        {
+          "hint": "9 Application and Implementation",
+          "source_page": 9
+        },
+        {
+          "hint": "Information in the following applications sections is not part of the TI component",
+          "source_page": 9
+        },
+        {
+          "hint": "9.1 Application Information",
+          "source_page": 9
+        },
+        {
+          "hint": "The TPS6224x device is a high-efficiency synchronous step-down DC-DC converter featuring power save mode",
+          "source_page": 9
+        },
+        {
+          "hint": "9.2 Typical Application",
+          "source_page": 9
+        },
+        {
+          "hint": "Table 1 shows the list of components for the Application Curves.",
+          "source_page": 9
+        },
+        {
+          "hint": "The buck converter has a natural pulsating input current; therefore, a low ESR input capacitor is required for best",
+          "source_page": 11
+        },
+        {
+          "hint": "most applications, a 4.7-μF to 10-μF ceramic capacitor is recommended. Because ceramic capacitors lose up to",
+          "source_page": 11
+        }
+      ],
+      "design_pages": {
+        "pages": [
+          {
+            "page": 9,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 10,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 11,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 16,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 17,
+            "title": null,
+            "content_type": "layout"
+          }
+        ],
+        "total_pages": 5
+      }
+    }
+  }
 }

@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -332,6 +332,516 @@
       "unit": "°C/W",
       "conditions": null,
       "source": "absolute_maximum_ratings"
+    }
+  },
+  "domains": {
+    "pin": {
+      "packages": {
+        "SOT23-6": {
+          "pin_count": 6,
+          "pins": {
+            "1": {
+              "name": "BS",
+              "direction": "PASSIVE",
+              "signal_type": "ANALOG",
+              "description": "Bootstrap pin for high-side gate drive. Connect a capacitor between BS and SW pins.",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground connection",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "FB",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Feedback input for output voltage regulation. Connect to the tap of an external resistor divider.",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "EN",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Enable control input. Drive high to turn on the device, low to turn it off.",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "VIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power supply input voltage",
+              "unused_treatment": null
+            },
+            "6": {
+              "name": "SW",
+              "direction": "OUTPUT",
+              "signal_type": "POWER",
+              "description": "Power switching node. Connect to the output inductor.",
+              "unused_treatment": null
+            }
+          }
+        }
+      }
+    },
+    "electrical": {
+      "absolute_maximum_ratings": {
+        "VIN": {
+          "parameter": "Input Supply Voltage",
+          "min": -0.3,
+          "max": 22,
+          "unit": "V",
+          "conditions": null
+        },
+        "VEN": {
+          "parameter": "EN Voltages",
+          "min": -0.3,
+          "max": 6,
+          "unit": "V",
+          "conditions": null
+        },
+        "VFB": {
+          "parameter": "FB Voltages",
+          "min": -0.3,
+          "max": 6,
+          "unit": "V",
+          "conditions": null
+        },
+        "VSW": {
+          "parameter": "SW Voltage",
+          "min": -0.3,
+          "max": null,
+          "unit": "V",
+          "conditions": "to (VIN + 0.5V)"
+        },
+        "VBS": {
+          "parameter": "BS Voltage",
+          "min": null,
+          "max": null,
+          "unit": "V",
+          "conditions": "(VSW - 0.3V) to (VSW + 5V)"
+        },
+        "PD": {
+          "parameter": "Power Dissipation",
+          "min": null,
+          "max": 0.6,
+          "unit": "W",
+          "conditions": null
+        },
+        "θJC": {
+          "parameter": "Thermal Resistance θJC",
+          "min": null,
+          "max": null,
+          "unit": "°C/W",
+          "conditions": null
+        },
+        "θJA": {
+          "parameter": "Thermal Resistance θJA",
+          "min": null,
+          "max": null,
+          "unit": "°C/W",
+          "conditions": null
+        },
+        "TJ": {
+          "parameter": "Junction Temperature",
+          "min": null,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        },
+        "TOPR": {
+          "parameter": "Operating Temperature Range",
+          "min": -40,
+          "max": 85,
+          "unit": "°C",
+          "conditions": null
+        },
+        "TSTG": {
+          "parameter": "Storage Temperature Range",
+          "min": -65,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        }
+      },
+      "electrical_parameters": {
+        "VIN": {
+          "parameter": "Input Voltage Range",
+          "min": 4.5,
+          "typ": null,
+          "max": 21,
+          "unit": "V",
+          "conditions": null
+        },
+        "IIN": {
+          "parameter": "Supply Current in Operation",
+          "min": null,
+          "typ": 0.6,
+          "max": 0.8,
+          "unit": "mA",
+          "conditions": "VEN=3.0V, VFB=2V"
+        },
+        "ISHDN": {
+          "parameter": "Supply Current in Shutdown",
+          "min": null,
+          "typ": 1,
+          "max": null,
+          "unit": "µA",
+          "conditions": "VEN =0 or EN = GND"
+        },
+        "VFB": {
+          "parameter": "Regulated Feedback Voltage",
+          "min": 0.776,
+          "typ": 0.8,
+          "max": 0.824,
+          "unit": "V",
+          "conditions": "TA = 25°C, 4.5V <= VIN <= 20V"
+        },
+        "RDS(ON)H": {
+          "parameter": "High-Side Switch On-Resistance",
+          "min": null,
+          "typ": 90,
+          "max": null,
+          "unit": "mΩ",
+          "conditions": null
+        },
+        "RDS(ON)L": {
+          "parameter": "Low-Side Switch On-Resistance",
+          "min": null,
+          "typ": 70,
+          "max": null,
+          "unit": "mΩ",
+          "conditions": null
+        },
+        "ILEAK_H": {
+          "parameter": "High-Side Switch Leakage Current",
+          "min": null,
+          "typ": null,
+          "max": 1,
+          "unit": "µA",
+          "conditions": "VEN=0V, VSW=0V"
+        },
+        "ILEAK_L": {
+          "parameter": "Low-Side Switch Leakage Current",
+          "min": null,
+          "typ": null,
+          "max": 1,
+          "unit": "µA",
+          "conditions": "VEN=0V, VSW=12V"
+        },
+        "ILIM": {
+          "parameter": "Upper Switch Current Limit",
+          "min": null,
+          "typ": 4.5,
+          "max": null,
+          "unit": "A",
+          "conditions": "Minimum Duty Cycle"
+        },
+        "VOVP": {
+          "parameter": "OVP",
+          "min": null,
+          "typ": 22,
+          "max": null,
+          "unit": "V",
+          "conditions": null
+        },
+        "fOSC": {
+          "parameter": "Oscillation Frequency",
+          "min": 400,
+          "typ": 500,
+          "max": 580,
+          "unit": "KHz",
+          "conditions": null
+        },
+        "DMAX": {
+          "parameter": "Maximum Duty Cycle",
+          "min": null,
+          "typ": 92,
+          "max": null,
+          "unit": "%",
+          "conditions": "VFB=0.7V"
+        },
+        "tON_MIN": {
+          "parameter": "Minimum On-Time",
+          "min": null,
+          "typ": 60,
+          "max": null,
+          "unit": "nS",
+          "conditions": null
+        },
+        "Tss": {
+          "parameter": "Soft-start Time",
+          "min": null,
+          "typ": 2,
+          "max": null,
+          "unit": "mS",
+          "conditions": null
+        },
+        "TSD": {
+          "parameter": "Thermal Shutdown",
+          "min": null,
+          "typ": 180,
+          "max": null,
+          "unit": "°C",
+          "conditions": null
+        }
+      },
+      "drc_hints": {
+        "vin_abs_max": {
+          "value": 22,
+          "unit": "V"
+        },
+        "vin_operating": {
+          "min": 4.5,
+          "max": 21,
+          "unit": "V"
+        },
+        "vref": {
+          "min": 0.776,
+          "typ": 0.8,
+          "max": 0.824,
+          "unit": "V"
+        },
+        "iout_max": {
+          "typ": 4.5,
+          "unit": "A"
+        },
+        "iq": {
+          "typ": 0.6,
+          "max": 0.8,
+          "unit": "mA"
+        },
+        "fsw": {
+          "min": 400,
+          "typ": 500,
+          "max": 580,
+          "unit": "KHz"
+        },
+        "soft_start": {
+          "typ": 2,
+          "unit": "mS"
+        },
+        "thermal_shutdown": {
+          "typ": 180,
+          "unit": "°C"
+        }
+      }
+    },
+    "thermal": {
+      "power_dissipation": {
+        "parameter": "Power Dissipation",
+        "symbol": "PD",
+        "min": null,
+        "typ": null,
+        "max": 0.6,
+        "value": null,
+        "unit": "W",
+        "conditions": null,
+        "source": "absolute_maximum_ratings"
+      },
+      "theta_jc": {
+        "parameter": "Thermal Resistance θJC",
+        "symbol": "θJC",
+        "min": null,
+        "typ": 130,
+        "max": null,
+        "value": null,
+        "unit": "°C/W",
+        "conditions": null,
+        "source": "absolute_maximum_ratings"
+      },
+      "theta_ja": {
+        "parameter": "Thermal Resistance θJA",
+        "symbol": "θJA",
+        "min": null,
+        "typ": 170,
+        "max": null,
+        "value": null,
+        "unit": "°C/W",
+        "conditions": null,
+        "source": "absolute_maximum_ratings"
+      }
+    },
+    "design_context": {
+      "recommended_external_components": [
+        {
+          "role": "input_capacitor",
+          "source_page": 6,
+          "value_hint": null,
+          "value_hints": [
+            "100kΩ"
+          ],
+          "snippet": "HM1470B"
+        },
+        {
+          "role": "input_capacitor",
+          "source_page": 6,
+          "value_hint": null,
+          "value_hints": [
+            "100kΩ"
+          ],
+          "snippet": "APPLICATIONS INFORMATION"
+        },
+        {
+          "role": "feedback_divider",
+          "source_page": 6,
+          "value_hint": "100kΩ",
+          "value_hints": [
+            "100kΩ"
+          ],
+          "snippet": "APPLICATIONS INFORMATION"
+        },
+        {
+          "role": "feedback_divider",
+          "source_page": 6,
+          "value_hint": "100kΩ",
+          "value_hints": [
+            "100kΩ"
+          ],
+          "snippet": "Setting the Output Voltage Input Capacitor Selection"
+        },
+        {
+          "role": "output_capacitor",
+          "source_page": 6,
+          "value_hint": "22 µF",
+          "value_hints": [
+            "100kΩ",
+            "22 µF"
+          ],
+          "snippet": "R2  RMS current must be used. Ceramic capacitors"
+        },
+        {
+          "role": "output_capacitor",
+          "source_page": 6,
+          "value_hint": "22 µF",
+          "value_hints": [
+            "22 µF"
+          ],
+          "snippet": "VOUT  1 with X5R or X7R dielectrics are highly"
+        },
+        {
+          "role": "inductor",
+          "source_page": 6,
+          "value_hint": null,
+          "value_hints": [
+            "22 µF"
+          ],
+          "snippet": "for common output voltages. large value may be used for improved input"
+        },
+        {
+          "role": "inductor",
+          "source_page": 6,
+          "value_hint": "4.7 μH",
+          "value_hints": [
+            "22 µF",
+            "4.7 μH",
+            "22 μH"
+          ],
+          "snippet": "voltage filtering."
+        }
+      ],
+      "component_value_hints": [
+        {
+          "values": [
+            "100kΩ"
+          ],
+          "source_page": 6,
+          "snippet": "HM1470B APPLICATIONS INFORMATION Setting the Output Voltage Input Capacitor Selection The external resistor divider is used to set the The input capacitor reduces the surge current output voltage drawn from the input and"
+        },
+        {
+          "values": [
+            "22 µF",
+            "100kΩ"
+          ],
+          "source_page": 6,
+          "snippet": "The external resistor divider is used to set the The input capacitor reduces the surge current output voltage drawn from the input and switching noise from the device. The input capacitor impedance at . The feedback resi"
+        },
+        {
+          "values": [
+            "22 µF"
+          ],
+          "source_page": 6,
+          "snippet": "frequency switching current passing to the input.optimal transient response. R2 is then given by: A low ESR input capacitor sized for maximum R1 R2  RMS current must be used. Ceramic capacitors VOUT  1 with X5R or X7R "
+        },
+        {
+          "values": [
+            "22 µF",
+            "4.7 μH",
+            "22 μH"
+          ],
+          "source_page": 6,
+          "snippet": "VFB recommended because of their low ESR and small temperature coefficients. A 22µF ceramic Table 1 lists the recommended T-type resistors value capacitor for most applications is sufficient. A for common output voltages"
+        },
+        {
+          "values": [
+            "4.7 μH",
+            "22 μH"
+          ],
+          "source_page": 6,
+          "snippet": "Table 1 lists the recommended T-type resistors value capacitor for most applications is sufficient. A for common output voltages. large value may be used for improved input voltage filtering. Output Capacitor Selection T"
+        },
+        {
+          "values": [
+            "4.7 μH",
+            "22 μH",
+            "15mΩ"
+          ],
+          "source_page": 6,
+          "snippet": "for common output voltages. large value may be used for improved input voltage filtering. Output Capacitor Selection The output capacitor (COUT) is required to maintain the DC output voltage. Ceramic, tantalum, or low ES"
+        },
+        {
+          "values": [
+            "15mΩ"
+          ],
+          "source_page": 6,
+          "snippet": "rating of at least 25% percent higher than the VOUT  (VIN  VOUT )  1  maximum load current is recommended for most ΔVOUT    R ESR   VIN  fOSC  L  8  fOSC  C OUT applications. For highest efficiency, the "
+        }
+      ],
+      "layout_hints": [
+        {
+          "hint": "The characteristics of the output capacitor also be put close to the VIN Pin.",
+          "source_page": 7
+        },
+        {
+          "hint": "compensation components as close to the",
+          "source_page": 7
+        },
+        {
+          "hint": " An example of 2-layer PCB layout is shown minimize the loop area formed by Input",
+          "source_page": 7
+        }
+      ],
+      "topology_hints": [
+        {
+          "hint": "APPLICATIONS INFORMATION",
+          "source_page": 6
+        },
+        {
+          "hint": "Table 1 lists the recommended T-type resistors value capacitor for most applications is sufficient. A",
+          "source_page": 6
+        },
+        {
+          "hint": "maximum load current is recommended for most ΔVOUT    R ESR   VIN  fOSC  L  8  fOSC  C OUT applications. For highest efficiency, the inductor",
+          "source_page": 6
+        }
+      ],
+      "design_pages": {
+        "pages": [
+          {
+            "page": 6,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 7,
+            "title": null,
+            "content_type": "layout"
+          }
+        ],
+        "total_pages": 2
+      }
     }
   }
 }

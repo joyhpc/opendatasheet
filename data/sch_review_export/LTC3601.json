@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -657,5 +657,1032 @@
       "unit": "V"
     }
   },
-  "thermal": {}
+  "thermal": {},
+  "domains": {
+    "pin": {
+      "packages": {
+        "QFN-16": {
+          "pin_count": 17,
+          "pins": {
+            "1": {
+              "name": "MODE/SYNC",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Mode Selection and External Synchronization Input Pin. Tie to GND for forced continuous mode, float or tie to INTVCC for Burst Mode. Can be driven by an external clock.",
+              "unused_treatment": "FLOAT"
+            },
+            "2": {
+              "name": "PGOOD",
+              "direction": "OUTPUT",
+              "signal_type": "DIGITAL",
+              "description": "Open-Drain Power Good Output Pin. Pulled to ground when FB is not within +/-8% of reference.",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "SW",
+              "direction": "OUTPUT",
+              "signal_type": "POWER",
+              "description": "Switch Node Output Pin. Connect to the external inductor.",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "SW",
+              "direction": "OUTPUT",
+              "signal_type": "POWER",
+              "description": "Switch Node Output Pin. Connect to the external inductor.",
+              "unused_treatment": null
+            },
+            "6": {
+              "name": "BOOST",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Boosted Floating Driver Supply Pin. Connect a bootstrap capacitor between this pin and SW.",
+              "unused_treatment": null
+            },
+            "7": {
+              "name": "INTVCC",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Internal 3.3V Regulator Output Pin. Decouple with a low ESR ceramic capacitor to PGND.",
+              "unused_treatment": null
+            },
+            "8": {
+              "name": "VON",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "On-Time Voltage Input Pin. Sets the voltage trip point for the on-time comparator.",
+              "unused_treatment": null
+            },
+            "9": {
+              "name": "SGND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Signal Ground Pin. Reference ground for feedback, compensation, and RT resistor. In MSE package, this is the exposed pad.",
+              "unused_treatment": null
+            },
+            "10": {
+              "name": "RT",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Oscillator Frequency Program Pin. Connect a resistor to SGND to set frequency, or tie to INTVCC for 2MHz.",
+              "unused_treatment": "CUSTOM"
+            },
+            "11": {
+              "name": "FB",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Output Voltage Feedback Pin. Connect to resistor divider to program output voltage.",
+              "unused_treatment": null
+            },
+            "12": {
+              "name": "ITH",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "ANALOG",
+              "description": "Error Amplifier Output and Switching Regulator Compensation Pin. Tie to INTVCC for internal compensation.",
+              "unused_treatment": "CUSTOM"
+            },
+            "13": {
+              "name": "TRACK",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Output Voltage Tracking and Soft-Start Input Pin. Internal 1.4uA pull-up current.",
+              "unused_treatment": null
+            },
+            "14": {
+              "name": "RUN",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Regulator Enable Pin. Above 1.25V enables, below 1V shuts down. Do not float.",
+              "unused_treatment": "CUSTOM"
+            },
+            "15": {
+              "name": "VIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Main Power Supply Input Pins. Decouple to PGND with low ESR capacitor.",
+              "unused_treatment": null
+            },
+            "16": {
+              "name": "VIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Main Power Supply Input Pins. Decouple to PGND with low ESR capacitor.",
+              "unused_treatment": null
+            },
+            "17": {
+              "name": "PGND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power Ground Pin. Connect to input and output bypass capacitors. In QFN package, this is the exposed pad.",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "NC",
+              "direction": "NC",
+              "signal_type": "NONE",
+              "description": "No internal connection.",
+              "unused_treatment": "FLOAT"
+            }
+          }
+        },
+        "MSE-16": {
+          "pin_count": 17,
+          "pins": {
+            "15": {
+              "name": "MODE/SYNC",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Mode Selection and External Synchronization Input Pin. Tie to GND for forced continuous mode, float or tie to INTVCC for Burst Mode. Can be driven by an external clock.",
+              "unused_treatment": "FLOAT"
+            },
+            "16": {
+              "name": "PGOOD",
+              "direction": "OUTPUT",
+              "signal_type": "DIGITAL",
+              "description": "Open-Drain Power Good Output Pin. Pulled to ground when FB is not within +/-8% of reference.",
+              "unused_treatment": null
+            },
+            "1": {
+              "name": "SW",
+              "direction": "OUTPUT",
+              "signal_type": "POWER",
+              "description": "Switch Node Output Pin. Connect to the external inductor.",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "SW",
+              "direction": "OUTPUT",
+              "signal_type": "POWER",
+              "description": "Switch Node Output Pin. Connect to the external inductor.",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "BOOST",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Boosted Floating Driver Supply Pin. Connect a bootstrap capacitor between this pin and SW.",
+              "unused_treatment": null
+            },
+            "6": {
+              "name": "INTVCC",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Internal 3.3V Regulator Output Pin. Decouple with a low ESR ceramic capacitor to PGND.",
+              "unused_treatment": null
+            },
+            "7": {
+              "name": "VON",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "On-Time Voltage Input Pin. Sets the voltage trip point for the on-time comparator.",
+              "unused_treatment": null
+            },
+            "17": {
+              "name": "SGND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Signal Ground Pin. Reference ground for feedback, compensation, and RT resistor. In MSE package, this is the exposed pad.",
+              "unused_treatment": null
+            },
+            "8": {
+              "name": "RT",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Oscillator Frequency Program Pin. Connect a resistor to SGND to set frequency, or tie to INTVCC for 2MHz.",
+              "unused_treatment": "CUSTOM"
+            },
+            "9": {
+              "name": "FB",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Output Voltage Feedback Pin. Connect to resistor divider to program output voltage.",
+              "unused_treatment": null
+            },
+            "10": {
+              "name": "ITH",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "ANALOG",
+              "description": "Error Amplifier Output and Switching Regulator Compensation Pin. Tie to INTVCC for internal compensation.",
+              "unused_treatment": "CUSTOM"
+            },
+            "11": {
+              "name": "TRACK",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Output Voltage Tracking and Soft-Start Input Pin. Internal 1.4uA pull-up current.",
+              "unused_treatment": null
+            },
+            "12": {
+              "name": "RUN",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Regulator Enable Pin. Above 1.25V enables, below 1V shuts down. Do not float.",
+              "unused_treatment": "CUSTOM"
+            },
+            "13": {
+              "name": "VIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Main Power Supply Input Pins. Decouple to PGND with low ESR capacitor.",
+              "unused_treatment": null
+            },
+            "14": {
+              "name": "VIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Main Power Supply Input Pins. Decouple to PGND with low ESR capacitor.",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "PGND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power Ground Pin. Connect to input and output bypass capacitors. In QFN package, this is the exposed pad.",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "PGND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power Ground Pin. Connect to input and output bypass capacitors. In QFN package, this is the exposed pad.",
+              "unused_treatment": null
+            }
+          }
+        }
+      }
+    },
+    "electrical": {
+      "absolute_maximum_ratings": {
+        "VIN": {
+          "parameter": "Input Transient Voltage",
+          "min": null,
+          "max": 18,
+          "unit": "V",
+          "conditions": null
+        },
+        "BOOST": {
+          "parameter": "BOOST Voltage",
+          "min": -0.3,
+          "max": 18.6,
+          "unit": "V",
+          "conditions": null
+        },
+        "BOOST-SW": {
+          "parameter": "BOOST to SW Voltage",
+          "min": -0.3,
+          "max": 3.6,
+          "unit": "V",
+          "conditions": null
+        },
+        "INTVCC": {
+          "parameter": "Internal Regulator Voltage",
+          "min": -0.3,
+          "max": 3.6,
+          "unit": "V",
+          "conditions": null
+        },
+        "ITH, RT": {
+          "parameter": "ITH, RT Pin Voltage",
+          "min": -0.3,
+          "max": null,
+          "unit": "V",
+          "conditions": "INTVCC + 0.3V"
+        },
+        "MODE/SYNC, FB": {
+          "parameter": "MODE/SYNC, FB Pin Voltage",
+          "min": -0.3,
+          "max": null,
+          "unit": "V",
+          "conditions": "INTVCC + 0.3V"
+        },
+        "TRACK": {
+          "parameter": "TRACK Pin Voltage",
+          "min": -0.3,
+          "max": null,
+          "unit": "V",
+          "conditions": "INTVCC + 0.3V"
+        },
+        "PGOOD, VON": {
+          "parameter": "PGOOD, VON Pin Voltage",
+          "min": -0.3,
+          "max": 16,
+          "unit": "V",
+          "conditions": null
+        },
+        "SW, RUN": {
+          "parameter": "SW, RUN Pin Voltage",
+          "min": -0.3,
+          "max": null,
+          "unit": "V",
+          "conditions": "VIN + 0.3V"
+        },
+        "TJ": {
+          "parameter": "Operating Junction Temperature Range",
+          "min": -40,
+          "max": 125,
+          "unit": "°C",
+          "conditions": null
+        },
+        "TSTG": {
+          "parameter": "Storage Temperature Range",
+          "min": -65,
+          "max": 125,
+          "unit": "°C",
+          "conditions": null
+        }
+      },
+      "electrical_parameters": {
+        "VVIN": {
+          "parameter": "Input Supply Range",
+          "min": 4,
+          "typ": null,
+          "max": 15,
+          "unit": "V",
+          "conditions": null
+        },
+        "IQ": {
+          "parameter": "Input DC Supply Current Forced Continuous",
+          "min": null,
+          "typ": 700,
+          "max": 1000,
+          "unit": "µA",
+          "conditions": "MODE = 0V"
+        },
+        "IQ_MODE___INTVCC__VFB___0_6V": {
+          "parameter": "Input DC Supply Current Sleep Current",
+          "min": null,
+          "typ": 300,
+          "max": 500,
+          "unit": "µA",
+          "conditions": "MODE = INTVCC, VFB > 0.6V"
+        },
+        "IQ_RUN___0V": {
+          "parameter": "Input DC Supply Current Shutdown",
+          "min": null,
+          "typ": 14,
+          "max": 25,
+          "unit": "µA",
+          "conditions": "RUN = 0V"
+        },
+        "VFB": {
+          "parameter": "Feedback Reference Voltage",
+          "min": 0.594,
+          "typ": 0.6,
+          "max": 0.606,
+          "unit": "V",
+          "conditions": null
+        },
+        "ΔVLINEREG": {
+          "parameter": "Reference Voltage Line Regulation",
+          "min": null,
+          "typ": 0.01,
+          "max": null,
+          "unit": "%/V",
+          "conditions": "VVIN = 4V to 15V"
+        },
+        "ΔVLOADREG": {
+          "parameter": "Output Voltage Load Regulation",
+          "min": null,
+          "typ": 0.1,
+          "max": null,
+          "unit": "%",
+          "conditions": "ITH = 0.6V to 1.6V"
+        },
+        "IFB": {
+          "parameter": "Feedback Pin Input Current",
+          "min": null,
+          "typ": null,
+          "max": 30,
+          "unit": "nA",
+          "conditions": "VFB = 0.6V"
+        },
+        "gm(EA)": {
+          "parameter": "Error Amplifier Transconductance",
+          "min": null,
+          "typ": 2.0,
+          "max": null,
+          "unit": "mS",
+          "conditions": "ITH = 1.2V"
+        },
+        "tON(MIN)": {
+          "parameter": "Minimum On-Time",
+          "min": null,
+          "typ": 20,
+          "max": null,
+          "unit": "ns",
+          "conditions": "VON = 1V, VIN = 4V"
+        },
+        "tOFF(MIN)": {
+          "parameter": "Minimum Off-Time",
+          "min": null,
+          "typ": 40,
+          "max": 60,
+          "unit": "ns",
+          "conditions": "VIN = 6V"
+        },
+        "ILIM": {
+          "parameter": "Negative Valley Switch Current Limit",
+          "min": null,
+          "typ": -1.2,
+          "max": null,
+          "unit": "A",
+          "conditions": null
+        },
+        "fOSC": {
+          "parameter": "Oscillator Frequency (VRT=INTVCC)",
+          "min": 1.4,
+          "typ": 2,
+          "max": 2.6,
+          "unit": "MHz",
+          "conditions": "VRT = INTVCC"
+        },
+        "fOSC_RRT___160k": {
+          "parameter": "Oscillator Frequency (RRT=160k)",
+          "min": 1.7,
+          "typ": 2,
+          "max": 2.3,
+          "unit": "MHz",
+          "conditions": "RRT = 160k"
+        },
+        "fOSC_RRT___80k": {
+          "parameter": "Oscillator Frequency (RRT=80k)",
+          "min": 3.4,
+          "typ": 4,
+          "max": 4.6,
+          "unit": "MHz",
+          "conditions": "RRT = 80k"
+        },
+        "RDS(ON)": {
+          "parameter": "Bottom Switch On-Resistance",
+          "min": null,
+          "typ": 100,
+          "max": null,
+          "unit": "mΩ",
+          "conditions": null
+        },
+        "VVIN-OV": {
+          "parameter": "VIN Overvoltage Lockout Threshold Falling",
+          "min": 15.8,
+          "typ": 16.5,
+          "max": 17,
+          "unit": "V",
+          "conditions": null
+        },
+        "VINTVCC": {
+          "parameter": "INTVCC Voltage",
+          "min": 3.15,
+          "typ": 3.3,
+          "max": 3.45,
+          "unit": "V",
+          "conditions": "4V < VIN < 15V"
+        },
+        "ΔINTVCC": {
+          "parameter": "INTVCC Load Regulation",
+          "min": null,
+          "typ": 0.6,
+          "max": null,
+          "unit": "%",
+          "conditions": "IINTVCC = 0mA to 20mA"
+        },
+        "VUVLO": {
+          "parameter": "INTVCC Undervoltage Lockout Threshold Rising",
+          "min": 2.75,
+          "typ": null,
+          "max": 2.9,
+          "unit": "V",
+          "conditions": "VIN = INTVCC"
+        },
+        "VUVLO_VIN___INTVCC": {
+          "parameter": "INTVCC Undervoltage Lockout Threshold Falling",
+          "min": null,
+          "typ": 2.45,
+          "max": null,
+          "unit": "V",
+          "conditions": "VIN = INTVCC"
+        },
+        "VRUN": {
+          "parameter": "RUN Threshold Falling",
+          "min": 0.97,
+          "typ": 1.0,
+          "max": 1.03,
+          "unit": "V",
+          "conditions": null
+        },
+        "IRUN(LKG)": {
+          "parameter": "RUN Leakage Current",
+          "min": 0,
+          "typ": null,
+          "max": 3,
+          "unit": "µA",
+          "conditions": "VVIN = 15V"
+        },
+        "VFB_GB": {
+          "parameter": "PGOOD Good-to-Bad Threshold Falling",
+          "min": null,
+          "typ": -8,
+          "max": -10,
+          "unit": "%",
+          "conditions": null
+        },
+        "VFB_BG": {
+          "parameter": "PGOOD Bad-to-Good Threshold Falling",
+          "min": 3,
+          "typ": 5,
+          "max": null,
+          "unit": "%",
+          "conditions": null
+        },
+        "tPGOOD": {
+          "parameter": "Power Good Filter Time",
+          "min": 20,
+          "typ": 40,
+          "max": null,
+          "unit": "µs",
+          "conditions": null
+        },
+        "RPGOOD": {
+          "parameter": "PGOOD Pull-Down Resistance",
+          "min": null,
+          "typ": 15,
+          "max": null,
+          "unit": "Ω",
+          "conditions": "10mA Load"
+        },
+        "ISW(LKG)": {
+          "parameter": "Switch Leakage Current",
+          "min": null,
+          "typ": 0.01,
+          "max": 1,
+          "unit": "µA",
+          "conditions": "VRUN = 0V"
+        },
+        "tSS": {
+          "parameter": "Internal Soft-Start Time",
+          "min": null,
+          "typ": 400,
+          "max": 700,
+          "unit": "µs",
+          "conditions": "VFB from 10% to 90% Full Scale"
+        },
+        "VFB_TRACK": {
+          "parameter": "TRACK Pin Voltage",
+          "min": 0.28,
+          "typ": 0.3,
+          "max": 0.315,
+          "unit": "V",
+          "conditions": "TRACK = 0.3V"
+        },
+        "ITRACK": {
+          "parameter": "TRACK Pull-Up Current",
+          "min": null,
+          "typ": 1.4,
+          "max": null,
+          "unit": "µA",
+          "conditions": null
+        },
+        "VMODE/SYNC": {
+          "parameter": "SYNC Threshold Voltage VIH",
+          "min": 0.95,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": null
+        },
+        "IMODE": {
+          "parameter": "MODE Input Current (MODE=0V)",
+          "min": null,
+          "typ": -1.5,
+          "max": null,
+          "unit": "µA",
+          "conditions": "MODE = 0V"
+        },
+        "IMODE_MODE___INTVCC": {
+          "parameter": "MODE Input Current (MODE=INTVCC)",
+          "min": null,
+          "typ": 1.5,
+          "max": null,
+          "unit": "µA",
+          "conditions": "MODE = INTVCC"
+        }
+      },
+      "drc_hints": {
+        "vin_abs_max": {
+          "value": 16,
+          "unit": "V"
+        },
+        "vin_operating": {
+          "min": 3.15,
+          "typ": 3.3,
+          "max": 3.45,
+          "unit": "V"
+        },
+        "vref": {
+          "min": 0.594,
+          "typ": 0.6,
+          "max": 0.606,
+          "unit": "V"
+        },
+        "iout_max": {
+          "min": 1.7,
+          "typ": 2.2,
+          "max": 2.8,
+          "unit": "A"
+        },
+        "iq": {
+          "typ": 700,
+          "max": 1000,
+          "unit": "µA"
+        },
+        "fsw": {
+          "min": 1.4,
+          "typ": 2,
+          "max": 2.6,
+          "unit": "MHz"
+        },
+        "soft_start": {
+          "typ": 400,
+          "max": 700,
+          "unit": "µs"
+        },
+        "uvlo": {
+          "min": 2.75,
+          "max": 2.9,
+          "unit": "V"
+        }
+      }
+    },
+    "design_context": {
+      "recommended_external_components": [
+        {
+          "role": "soft_start_capacitor",
+          "source_page": 0,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "nn Current Mode Operation for Excellent Line and Load The operating frequency is programmable from 800kHz to"
+        },
+        {
+          "role": "soft_start_capacitor",
+          "source_page": 0,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "Transient Response"
+        },
+        {
+          "role": "input_capacitor",
+          "source_page": 9,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "LTC3601"
+        },
+        {
+          "role": "output_capacitor",
+          "source_page": 9,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "LTC3601"
+        },
+        {
+          "role": "inductor",
+          "source_page": 9,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "LTC3601"
+        },
+        {
+          "role": "input_capacitor",
+          "source_page": 9,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "APPLICATIONS INFORMATION"
+        },
+        {
+          "role": "output_capacitor",
+          "source_page": 9,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "APPLICATIONS INFORMATION"
+        },
+        {
+          "role": "inductor",
+          "source_page": 9,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "APPLICATIONS INFORMATION"
+        },
+        {
+          "role": "feedback_divider",
+          "source_page": 11,
+          "value_hint": null,
+          "value_hints": [
+            "0.1 µF"
+          ],
+          "snippet": "3.3V. For most applications a 0.1µF ceramic capacitor willand low ESR make them ideal for switching regulator"
+        },
+        {
+          "role": "feedback_divider",
+          "source_page": 11,
+          "value_hint": null,
+          "value_hints": [
+            "0.1 µF"
+          ],
+          "snippet": "provide adequate performance.applications. However, due to the self-resonant and high-Q"
+        },
+        {
+          "role": "pullup_resistor",
+          "source_page": 13,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "demonstrate the actual overall supply performance. For voltage to that seen at the TRACK pin. When the voltage"
+        },
+        {
+          "role": "pullup_resistor",
+          "source_page": 13,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "a detailed explanation of optimizing the compensation at the TRACK pin rises above 0.6V, tracking is disabled"
+        }
+      ],
+      "component_value_hints": [
+        {
+          "values": [
+            "22 µF",
+            "0.1 µF",
+            "2.2 µH"
+          ],
+          "source_page": 0,
+          "snippet": "nn to optimize output voltage ripple, noise, and light load Distributed Power Systems nn efficiency for a given application. Maximum light load Lithium-Ion Battery-Powered Instruments nn efficiency is achieved with the s"
+        },
+        {
+          "values": [
+            "22 µF",
+            "0.1 µF",
+            "2.2 µH",
+            "10 pF",
+            "2.2 µF"
+          ],
+          "source_page": 0,
+          "snippet": "nn efficiency for a given application. Maximum light load Lithium-Ion Battery-Powered Instruments nn efficiency is achieved with the selection of Burst Mode Point-of-Load Power Supply operation while forced continuous mo"
+        },
+        {
+          "values": [
+            "10 pF",
+            "22 µF",
+            "2.2 µF"
+          ],
+          "source_page": 0,
+          "snippet": "TRACK VON 1.5A 50 180k 10pF 22µF LOSS LTC3601 40 EFFICIENCY INTVCC FB 10 (mW) 30 2.2µF ITH 40k RT 20 MODE/SYNC 3601 TA01a SGND PGND 10 VIN = 5V VIN = 12V 0 1 0.001 0.01 0.1 1 10 LOAD CURRENT (A) 3601 TA01b 3601fc For mor"
+        },
+        {
+          "values": [
+            "1 µF"
+          ],
+          "source_page": 11,
+          "snippet": "LTC3601 APPLICATIONS INFORMATION voltage ripple and load step transients. The output ripple, INTVCC Regulator Bypass Capacitor ∆VOUT, is determined by: An internal low dropout (LDO) regulator produces a   3.3V supply v"
+        },
+        {
+          "values": [
+            "0.1 µF"
+          ],
+          "source_page": 11,
+          "snippet": "to regulate large transient or AC behavior this may impactto only use types that have been surge tested for use in LTC3601 operation.switching power supplies. Aluminum electrolytic capacitors have significantly higher ES"
+        },
+        {
+          "values": [
+            "47 µF"
+          ],
+          "source_page": 12,
+          "snippet": "FB Selection show, high switching frequencies allow the use LTC3601 R2 of smaller board components, thus reducing the footprint SGND of the application circuit. 3601 F02 Internal/External Loop Compensation Figure 2. Opti"
+        },
+        {
+          "values": [
+            "47 µF",
+            "13kΩ"
+          ],
+          "source_page": 12,
+          "snippet": "The LTC3601 provides the option to use a fixed internal Minimum Off-Time/On-Time Considerations loop compensation network to reduce both the required The minimum off-time is the smallest amount of time that external comp"
+        },
+        {
+          "values": [
+            "47 µF",
+            "13kΩ",
+            "10 pF"
+          ],
+          "source_page": 12,
+          "snippet": "The minimum off-time is the smallest amount of time that external component count and design time. The internal the LTC3601 can turn on the bottom power MOSFET, trip loop compensation network can be selected by connect- "
+        }
+      ],
+      "design_equation_hints": [
+        {
+          "equation": "IRMS = IOUT(MAX) sufficient bulk input capacitance is needed to minimize VIN",
+          "source_page": 10
+        },
+        {
+          "equation": "where IRMS = IOUT/2. This simple worst-case condition transients do not pose an overvoltage hazard to the part.",
+          "source_page": 10
+        },
+        {
+          "equation": "tSS = 430,000 × CTRACK",
+          "source_page": 14
+        },
+        {
+          "equation": "PLDO = (IGATECHG + IQ) • VIN The temperature rise is given by:",
+          "source_page": 15
+        },
+        {
+          "equation": "VIN = 15V TRACK BOOST 60 L1",
+          "source_page": 25
+        }
+      ],
+      "layout_hints": [
+        {
+          "hint": "SGND PGND 10 VIN = 5V",
+          "source_page": 0
+        },
+        {
+          "hint": "and PGND pins to provide the transient currents requiredand RMS current handling requirements. Dry tantalum,",
+          "source_page": 11
+        },
+        {
+          "hint": "curves. Thus to obtain I2R loss: metal (PGND pin on the QFN, SGND pin on the MSOP",
+          "source_page": 15
+        },
+        {
+          "hint": "Therefore, the total power dissipation due to resistive of COUT should be closely connected to PGND and the",
+          "source_page": 16
+        },
+        {
+          "hint": "Board Layout Considerations 5. A ground plane is preferred, but if not available the",
+          "source_page": 16
+        },
+        {
+          "hint": "When laying out the printed circuit board, the following signal and power grounds should be segregated with",
+          "source_page": 16
+        },
+        {
+          "hint": "VIN and VOUT bypass capacitors are connected makes a1. Do the capacitors CIN connect to VIN and PGND as close good, low noise reference point. The connection to the to the pins as possible? These capacitors provide the A",
+          "source_page": 16
+        },
+        {
+          "hint": "(–) plate of CIN should be closely connected to PGND",
+          "source_page": 16
+        },
+        {
+          "hint": "PGND GROUND",
+          "source_page": 17
+        },
+        {
+          "hint": "VIAS TO 5 6 7 8 PGND",
+          "source_page": 17
+        }
+      ],
+      "supply_recommendations": [
+        {
+          "hint": "nn 4V to 15V Operating Input Voltage Range The LTC®3601 is a high efficiency, monolithic synchronous",
+          "source_page": 0
+        },
+        {
+          "hint": "nn Up to 96% Efficiency current mode architecture capable of supplying up to 1.5A",
+          "source_page": 0
+        },
+        {
+          "hint": "nn Very Low Duty Cycle Operation: 5% at 2.25MHz of output current. The operating supply voltage range is",
+          "source_page": 0
+        },
+        {
+          "hint": "nn External Frequency Synchronization power supply applications.",
+          "source_page": 0
+        },
+        {
+          "hint": "nn efficiency is achieved with the selection of Burst Mode Point-of-Load Power Supply operation while forced continuous mode provides minimum",
+          "source_page": 0
+        },
+        {
+          "hint": "VOUT ( VIN – VOUT ) ments of the design. For low input voltage applications",
+          "source_page": 10
+        },
+        {
+          "hint": "current. This formula has a maximum at VIN = 2VOUT , circuit, care must always be taken to ensure input voltage",
+          "source_page": 10
+        },
+        {
+          "hint": "  3.3V supply voltage used to power much of the internal 1",
+          "source_page": 11
+        }
+      ],
+      "topology_hints": [
+        {
+          "hint": "Synchronous Step-Down",
+          "source_page": 0
+        },
+        {
+          "hint": "nn 1.5A Output Current buck regulator using a phase-lockable controlled on-time,",
+          "source_page": 0
+        },
+        {
+          "hint": "nn External Frequency Synchronization power supply applications.",
+          "source_page": 0
+        },
+        {
+          "hint": "nn applications, the LTC3601 can be externally synchronized 0.6V Reference Allows Low Output Voltages",
+          "source_page": 0
+        },
+        {
+          "hint": "nn controlled on-time architecture is ideal for high step-down Power Good Status Output",
+          "source_page": 0
+        },
+        {
+          "hint": "nn ratio applications that demand high switching frequencies Available in Small, Thermally Enhanced 16-Pin QFN and fast transient response.",
+          "source_page": 0
+        },
+        {
+          "hint": "APPLICATIONS operation and forced continuous mode to allow the user",
+          "source_page": 0
+        },
+        {
+          "hint": "nn efficiency for a given application. Maximum light load Lithium-Ion Battery-Powered Instruments",
+          "source_page": 0
+        }
+      ],
+      "design_pages": {
+        "pages": [
+          {
+            "page": 0,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 9,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 10,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 11,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 12,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 13,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 14,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 15,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 16,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 17,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 18,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 19,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 20,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 21,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 25,
+            "title": null,
+            "content_type": "application"
+          }
+        ],
+        "total_pages": 15
+      }
+    }
+  }
 }

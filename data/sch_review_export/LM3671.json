@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -345,5 +345,655 @@
       "unit": "MHz"
     }
   },
-  "thermal": {}
+  "thermal": {},
+  "domains": {
+    "pin": {
+      "packages": {
+        "SOT-23": {
+          "pin_count": 5,
+          "pins": {
+            "1": {
+              "name": "VIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power supply input. Connect to the input filter capacitor.",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground pin.",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "EN",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Enable pin. The device is in shutdown mode when voltage to this pin is < 0.4 V and enabled when > 1 V. Do not leave this pin floating.",
+              "unused_treatment": "CUSTOM"
+            },
+            "4": {
+              "name": "FB",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Feedback analog input. Connect directly to the output filter capacitor for fixed voltage versions. For adjustable version external resistor dividers are required.",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "SW",
+              "direction": "OUTPUT",
+              "signal_type": "ANALOG",
+              "description": "Switching node connection to the internal PFET switch and NFET synchronous rectifier.",
+              "unused_treatment": null
+            }
+          }
+        },
+        "DSBGA": {
+          "pin_count": 5,
+          "pins": {
+            "A1": {
+              "name": "VIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power supply input. Connect to the input filter capacitor.",
+              "unused_treatment": null
+            },
+            "A3": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground pin.",
+              "unused_treatment": null
+            },
+            "C1": {
+              "name": "EN",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Enable pin. The device is in shutdown mode when voltage to this pin is < 0.4 V and enabled when > 1 V. Do not leave this pin floating.",
+              "unused_treatment": "CUSTOM"
+            },
+            "C3": {
+              "name": "FB",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Feedback analog input. Connect directly to the output filter capacitor for fixed voltage versions. For adjustable version external resistor dividers are required.",
+              "unused_treatment": null
+            },
+            "B2": {
+              "name": "SW",
+              "direction": "OUTPUT",
+              "signal_type": "ANALOG",
+              "description": "Switching node connection to the internal PFET switch and NFET synchronous rectifier.",
+              "unused_treatment": null
+            }
+          }
+        },
+        "USON": {
+          "pin_count": 6,
+          "pins": {
+            "3": {
+              "name": "VIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power supply input. Connect to the input filter capacitor.",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground pin.",
+              "unused_treatment": null
+            },
+            "1": {
+              "name": "EN",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Enable pin. The device is in shutdown mode when voltage to this pin is < 0.4 V and enabled when > 1 V. Do not leave this pin floating.",
+              "unused_treatment": "CUSTOM"
+            },
+            "6": {
+              "name": "FB",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Feedback analog input. Connect directly to the output filter capacitor for fixed voltage versions. For adjustable version external resistor dividers are required.",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "SW",
+              "direction": "OUTPUT",
+              "signal_type": "ANALOG",
+              "description": "Switching node connection to the internal PFET switch and NFET synchronous rectifier.",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "SGND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Signal ground (feedback ground).",
+              "unused_treatment": null
+            }
+          }
+        }
+      }
+    },
+    "electrical": {
+      "absolute_maximum_ratings": {
+        "VIN": {
+          "parameter": "Input Voltage",
+          "min": -0.2,
+          "max": 6.0,
+          "unit": "V",
+          "conditions": null
+        },
+        "TJ-MAX": {
+          "parameter": "Junction temperature",
+          "min": null,
+          "max": 125,
+          "unit": "°C",
+          "conditions": null
+        },
+        "Tstg": {
+          "parameter": "Storage temperature",
+          "min": -65,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        },
+        "V(ESD)": {
+          "parameter": "ESD HBM",
+          "min": -2000,
+          "max": 2000,
+          "unit": "V",
+          "conditions": "LM3671"
+        },
+        "V(ESD)_LM3671": {
+          "parameter": "ESD CDM",
+          "min": -500,
+          "max": 500,
+          "unit": "V",
+          "conditions": "LM3671"
+        }
+      },
+      "electrical_parameters": {
+        "VIN": {
+          "parameter": "Input voltage",
+          "min": 2.7,
+          "typ": null,
+          "max": 5.5,
+          "unit": "V",
+          "conditions": null
+        },
+        "VFB": {
+          "parameter": "Feedback voltage (fixed) MF",
+          "min": -4,
+          "typ": null,
+          "max": 4,
+          "unit": "%",
+          "conditions": "PWM mode"
+        },
+        "VFB_PWM_mode": {
+          "parameter": "Feedback voltage (ADJ) TL",
+          "min": -2.5,
+          "typ": null,
+          "max": 2.5,
+          "unit": "%",
+          "conditions": "PWM mode"
+        },
+        "VREF": {
+          "parameter": "Internal reference voltage",
+          "min": null,
+          "typ": 0.5,
+          "max": null,
+          "unit": "V",
+          "conditions": "ADJ version"
+        },
+        "ISHDN": {
+          "parameter": "Shutdown supply current",
+          "min": null,
+          "typ": 0.01,
+          "max": null,
+          "unit": "µA",
+          "conditions": "EN = 0 V"
+        },
+        "ISHDN_EN___0_V": {
+          "parameter": "Shutdown supply current",
+          "min": null,
+          "typ": null,
+          "max": 1,
+          "unit": "µA",
+          "conditions": "EN = 0 V"
+        },
+        "IQ": {
+          "parameter": "DC bias current into VIN",
+          "min": null,
+          "typ": 16,
+          "max": null,
+          "unit": "µA",
+          "conditions": "No load, device is not switching"
+        },
+        "IQ_No_load__device_is_not_switchi": {
+          "parameter": "DC bias current into VIN",
+          "min": null,
+          "typ": null,
+          "max": 35,
+          "unit": "µA",
+          "conditions": "No load, device is not switching"
+        },
+        "RDSON (P)": {
+          "parameter": "Pin-pin resistance for PFET",
+          "min": null,
+          "typ": 380,
+          "max": 500,
+          "unit": "mΩ",
+          "conditions": "VIN = VGS = 3.6 V"
+        },
+        "RDSON (N)": {
+          "parameter": "Pin-pin resistance for NFET",
+          "min": null,
+          "typ": 250,
+          "max": 400,
+          "unit": "mΩ",
+          "conditions": "VIN = VGS = 3.6 V"
+        },
+        "ILIM": {
+          "parameter": "Switch peak current limit",
+          "min": null,
+          "typ": 1020,
+          "max": null,
+          "unit": "mA",
+          "conditions": "Open loop"
+        },
+        "ILIM_Open_loop": {
+          "parameter": "Switch peak current limit",
+          "min": 830,
+          "typ": null,
+          "max": 1150,
+          "unit": "mA",
+          "conditions": "Open loop"
+        },
+        "VIH": {
+          "parameter": "Logic high input",
+          "min": 1,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": null
+        },
+        "VIL": {
+          "parameter": "Logic low input",
+          "min": null,
+          "typ": null,
+          "max": 0.4,
+          "unit": "V",
+          "conditions": null
+        },
+        "IEN": {
+          "parameter": "Enable (EN) input current",
+          "min": null,
+          "typ": null,
+          "max": 1,
+          "unit": "µA",
+          "conditions": null
+        },
+        "fOSC": {
+          "parameter": "Internal oscillator frequency",
+          "min": null,
+          "typ": 2,
+          "max": null,
+          "unit": "MHz",
+          "conditions": "PWM Mode"
+        },
+        "fOSC_PWM_Mode": {
+          "parameter": "Internal oscillator frequency",
+          "min": 1.6,
+          "typ": null,
+          "max": 2.6,
+          "unit": "MHz",
+          "conditions": "PWM Mode"
+        }
+      },
+      "drc_hints": {
+        "vin_abs_max": {
+          "value": 6.0,
+          "unit": "V"
+        },
+        "vin_operating": {
+          "min": 2.7,
+          "max": 5.5,
+          "unit": "V"
+        },
+        "vref": {
+          "min": -4,
+          "max": 4,
+          "unit": "%"
+        },
+        "enable_threshold": {
+          "min": 1,
+          "unit": "V"
+        },
+        "iout_max": {
+          "typ": 1020,
+          "unit": "mA"
+        },
+        "iq": {
+          "typ": 16,
+          "unit": "µA"
+        },
+        "fsw": {
+          "typ": 2,
+          "unit": "MHz"
+        }
+      }
+    },
+    "design_context": {
+      "recommended_external_components": [
+        {
+          "role": "inductor",
+          "source_page": 0,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "LM3671-Q1 DSBGA (5) 1.413mm x 1.083mm（最大"
+        },
+        {
+          "role": "input_capacitor",
+          "source_page": 0,
+          "value_hint": "10 PF",
+          "value_hints": [
+            "10 PF",
+            "4.7 PF"
+          ],
+          "snippet": "• 便携式硬盘驱动 值）"
+        },
+        {
+          "role": "output_capacitor",
+          "source_page": 0,
+          "value_hint": "10 PF",
+          "value_hints": [
+            "10 PF",
+            "4.7 PF"
+          ],
+          "snippet": "• 便携式硬盘驱动 值）"
+        },
+        {
+          "role": "inductor",
+          "source_page": 0,
+          "value_hint": null,
+          "value_hints": [
+            "10 PF",
+            "4.7 PF"
+          ],
+          "snippet": "• 便携式硬盘驱动 值）"
+        },
+        {
+          "role": "input_capacitor",
+          "source_page": 0,
+          "value_hint": "10 PF",
+          "value_hints": [
+            "10 PF",
+            "4.7 PF"
+          ],
+          "snippet": "• 汽车 (1) 如需了解所有可用封装，请见数据表末尾的可订购产品附录。"
+        },
+        {
+          "role": "output_capacitor",
+          "source_page": 0,
+          "value_hint": "10 PF",
+          "value_hints": [
+            "10 PF",
+            "4.7 PF"
+          ],
+          "snippet": "• 汽车 (1) 如需了解所有可用封装，请见数据表末尾的可订购产品附录。"
+        },
+        {
+          "role": "feedback_divider",
+          "source_page": 0,
+          "value_hint": null,
+          "value_hints": [
+            "10 PF",
+            "4.7 PF"
+          ],
+          "snippet": "• 汽车 (1) 如需了解所有可用封装，请见数据表末尾的可订购产品附录。"
+        },
+        {
+          "role": "feedback_divider",
+          "source_page": 0,
+          "value_hint": null,
+          "value_hints": [
+            "10 PF",
+            "4.7 PF"
+          ],
+          "snippet": "• 便携式医疗设备"
+        }
+      ],
+      "component_value_hints": [
+        {
+          "values": [
+            "10 PF",
+            "4.7 PF"
+          ],
+          "source_page": 0,
+          "snippet": "• 便携式仪器 SOT-23 (5) 2.90mm x 1.60mm（标称值） • 数码相机 LM3671 LM3671-Q1 DSBGA (5) 1.413mm x 1.083mm（最大 • 便携式硬盘驱动 值） • 汽车 (1) 如需了解所有可用封装，请见数据表末尾的可订购产品附录。 • 便携式医疗设备 • 手持式交易终端 • 无线家庭自动化设备 典型应用电路：固定电压 典型应用电路：ADJ VIN VIN L1: 2.2 PH L"
+        },
+        {
+          "values": [
+            "10 PF",
+            "4.7 PF"
+          ],
+          "source_page": 15,
+          "snippet": "validate and test their design implementation to confirm system functionality. 8.1 Application Information The external control of this device is very easy. First make sure the correct voltage been applied at VIN pin, th"
+        },
+        {
+          "values": [
+            "1.76 µH"
+          ],
+          "source_page": 15,
+          "snippet": "Figure 32. LM3671 Fixed-Voltage Typical Application Circuit 8.2.1.1 Design Requirements Two ceramic capacitors and one inductor required for this application. These three external components need to be selected very care"
+        },
+        {
+          "values": [
+            "4.7 µF"
+          ],
+          "source_page": 16,
+          "snippet": "• VOUT: output voltage (2) 8.2.1.2.1.2 Method 2 A more conservative and recommended approach is to choose an inductor that has a saturation current rating greater than the maximum current limit of 1150 mA. A 2.2-µH induc"
+        },
+        {
+          "values": [
+            "4.7 µF",
+            "2.2 µF"
+          ],
+          "source_page": 16,
+          "snippet": "greater than the maximum current limit of 1150 mA. A 2.2-µH inductor with a saturation current rating of at least 1150 mA is recommended for most applications. Inductor resistance should be less than 0.3 Ωfor good effici"
+        },
+        {
+          "values": [
+            "4.7 µF",
+            "2.2 µF",
+            "1.5 µF"
+          ],
+          "source_page": 16,
+          "snippet": "A 2.2-µH inductor with a saturation current rating of at least 1150 mA is recommended for most applications. Inductor resistance should be less than 0.3 Ωfor good efficiency. Table 1 lists suggested inductors and supplie"
+        },
+        {
+          "values": [
+            "2.2 µF",
+            "1.5 µF"
+          ],
+          "source_page": 16,
+          "snippet": "possible to the VIN pin of the device. A larger value may be used for improved input voltage filtering. Use X7R or X5R types; do not use Y5V. DC bias characteristics of ceramic capacitors must be considered when selectin"
+        },
+        {
+          "values": [
+            "1.5 µF"
+          ],
+          "source_page": 16,
+          "snippet": "bias; 1.5 µF at 5-V DC bias including tolerances and over ambient temperature range. The input filter capacitor supplies current to the PFET switch of the LM3671 in the first half of each cycle and reduces voltage ripple"
+        }
+      ],
+      "design_equation_hints": [
+        {
+          "equation": "where IRIPPLE = ¨© 2 L ¸¹ ¨© VIN ¸¹ ¨© f ¸¹",
+          "source_page": 15
+        },
+        {
+          "equation": "IRMS = IOUTMAX 1 - + VIN ¨© VIN 12 ¸¹",
+          "source_page": 16
+        },
+        {
+          "equation": "VPP-RMS = VPP-C2 + VPP-ESR2",
+          "source_page": 17
+        },
+        {
+          "equation": "R1 VOUT = VFB 1 + ©§ R2 ¹·",
+          "source_page": 18
+        }
+      ],
+      "layout_hints": [
+        {
+          "hint": "Pgnd 2 5 Sgnd",
+          "source_page": 2
+        },
+        {
+          "hint": "reduces radiated noise. Special care must be given to place the input filter capacitor very close to the VIN",
+          "source_page": 20
+        },
+        {
+          "hint": "ground forming a second current loop. Routing these loops so the current curls in the same direction",
+          "source_page": 20
+        },
+        {
+          "hint": "copper fill as a pseudo-ground plane. Then, connect this to the ground-plane (if one is used) with several",
+          "source_page": 20
+        },
+        {
+          "hint": "ground plane. It also reduces ground bounce at the LM3671 by giving it a low-impedance ground connection.",
+          "source_page": 20
+        },
+        {
+          "hint": "components. The voltage feedback trace must remain close to the LM3671 circuit and should be direct but",
+          "source_page": 20
+        }
+      ],
+      "supply_recommendations": [
+        {
+          "hint": "5 Pin Configuration and Functions......................... 3 9 Power Supply Recommendations...................... 20",
+          "source_page": 1
+        },
+        {
+          "hint": "1 A1 3 VIN Power Power supply input. Connect to the input filter capacitor (see Input Capacitor",
+          "source_page": 2
+        },
+        {
+          "hint": "• VIN: maximum input voltage in application",
+          "source_page": 16
+        },
+        {
+          "hint": "possible to the VIN pin of the device. A larger value may be used for improved input voltage filtering. Use X7R or",
+          "source_page": 16
+        },
+        {
+          "hint": "Input voltage range 2.7 V to 5.5 V",
+          "source_page": 18
+        },
+        {
+          "hint": "9 Power Supply Recommendations",
+          "source_page": 19
+        },
+        {
+          "hint": "The LM3671 is designed to operate from a stable input supply range of 2.7 V to 5.5 V.",
+          "source_page": 19
+        }
+      ],
+      "topology_hints": [
+        {
+          "hint": "An IMPORTANT NOTICE at the end of this data sheet addresses availability, warranty, changes, use in safety-critical applications,",
+          "source_page": 0
+        },
+        {
+          "hint": "2 应用范围................................................................... 1 8 Application and Implementation ........................ 16",
+          "source_page": 1
+        },
+        {
+          "hint": "3 说明.......................................................................... 1 8.1 Application Information............................................ 16",
+          "source_page": 1
+        },
+        {
+          "hint": "4 修订历史记录........................................................... 2 8.2 Typical Application .................................................. 16",
+          "source_page": 1
+        },
+        {
+          "hint": "required (see Typical Application: ADJ Version). The internal resistor dividers",
+          "source_page": 2
+        },
+        {
+          "hint": "8 Application and Implementation",
+          "source_page": 15
+        },
+        {
+          "hint": "Information in the following applications sections is not part of the TI component",
+          "source_page": 15
+        },
+        {
+          "hint": "8.1 Application Information",
+          "source_page": 15
+        }
+      ],
+      "design_pages": {
+        "pages": [
+          {
+            "page": 0,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 1,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 2,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 15,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 16,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 17,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 18,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 19,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 20,
+            "title": null,
+            "content_type": "layout"
+          },
+          {
+            "page": 21,
+            "title": null,
+            "content_type": "layout"
+          }
+        ],
+        "total_pages": 10
+      }
+    }
+  }
 }

@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -393,5 +393,662 @@
       "unit": "V"
     }
   },
-  "thermal": {}
+  "thermal": {},
+  "domains": {
+    "pin": {
+      "packages": {
+        "QFN 3x3-20": {
+          "pin_count": 21,
+          "pins": {
+            "1": {
+              "name": "GND3",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power ground for Channel 3",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "FB3",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Feedback input for Channel 3",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "FB2",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Feedback input for Channel 2",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "GND2",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power ground for Channel 2",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "GND2",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power ground for Channel 2",
+              "unused_treatment": null
+            },
+            "6": {
+              "name": "LX2",
+              "direction": "OUTPUT",
+              "signal_type": "POWER",
+              "description": "Switching node for Channel 2",
+              "unused_treatment": null
+            },
+            "7": {
+              "name": "VIN2",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power supply input for Channel 2",
+              "unused_treatment": null
+            },
+            "8": {
+              "name": "EN2",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Enable control input for Channel 2",
+              "unused_treatment": null
+            },
+            "9": {
+              "name": "EN1",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Enable control input for Channel 1",
+              "unused_treatment": null
+            },
+            "10": {
+              "name": "VIN1",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power supply input for Channel 1",
+              "unused_treatment": null
+            },
+            "11": {
+              "name": "LX1",
+              "direction": "OUTPUT",
+              "signal_type": "POWER",
+              "description": "Switching node for Channel 1",
+              "unused_treatment": null
+            },
+            "12": {
+              "name": "GND1",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power ground for Channel 1",
+              "unused_treatment": null
+            },
+            "13": {
+              "name": "GND1",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power ground for Channel 1",
+              "unused_treatment": null
+            },
+            "14": {
+              "name": "FB1",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Feedback input for Channel 1",
+              "unused_treatment": null
+            },
+            "15": {
+              "name": "AGND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Analog ground",
+              "unused_treatment": null
+            },
+            "17": {
+              "name": "AGND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Analog ground",
+              "unused_treatment": null
+            },
+            "16": {
+              "name": "VCC",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Internal control circuit power supply",
+              "unused_treatment": null
+            },
+            "18": {
+              "name": "EN3",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Enable control input for Channel 3",
+              "unused_treatment": null
+            },
+            "19": {
+              "name": "VIN3",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power supply input for Channel 3",
+              "unused_treatment": null
+            },
+            "20": {
+              "name": "LX3",
+              "direction": "OUTPUT",
+              "signal_type": "POWER",
+              "description": "Switching node for Channel 3",
+              "unused_treatment": null
+            },
+            "21": {
+              "name": "EP",
+              "direction": "PASSIVE",
+              "signal_type": "POWER",
+              "description": "Exposed pad for thermal dissipation, connect to ground",
+              "unused_treatment": "GND"
+            }
+          }
+        }
+      }
+    },
+    "electrical": {
+      "absolute_maximum_ratings": {
+        "VVIN1, VVIN2, VVIN3, VVCC": {
+          "parameter": "Input Voltage",
+          "min": -0.3,
+          "max": 6.5,
+          "unit": "V",
+          "conditions": null
+        },
+        "VLX1, VLX2, VLX3": {
+          "parameter": "SW Pin Voltage",
+          "min": -0.3,
+          "max": null,
+          "unit": "V",
+          "conditions": "VVINX + 0.3V"
+        },
+        "TA": {
+          "parameter": "Ambient Temperature operating Range",
+          "min": -40,
+          "max": 85,
+          "unit": "°C",
+          "conditions": null
+        },
+        "TJmax": {
+          "parameter": "Maximum Junction Temperature",
+          "min": null,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        },
+        "TS": {
+          "parameter": "Storage Temperature Range",
+          "min": -65,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        }
+      },
+      "electrical_parameters": {
+        "VINX": {
+          "parameter": "Input Voltage",
+          "min": 2.7,
+          "typ": null,
+          "max": 5.5,
+          "unit": "V",
+          "conditions": null
+        },
+        "VVCC": {
+          "parameter": "Control Circuit Input Voltage",
+          "min": 2.7,
+          "typ": null,
+          "max": 5.5,
+          "unit": "V",
+          "conditions": null
+        },
+        "ISD": {
+          "parameter": "Shutdown Supply Current",
+          "min": null,
+          "typ": 0.1,
+          "max": 1,
+          "unit": "uA",
+          "conditions": "VEN = 0V"
+        },
+        "IQ": {
+          "parameter": "Quiescent Current",
+          "min": null,
+          "typ": 40,
+          "max": 80,
+          "unit": "uA",
+          "conditions": "Non-switching, No Load"
+        },
+        "VUVLO": {
+          "parameter": "UVLO Threshold",
+          "min": 1.7,
+          "typ": 1.9,
+          "max": 2.1,
+          "unit": "V",
+          "conditions": "VVIN Rising"
+        },
+        "VUV-HYST": {
+          "parameter": "UVLO Hysteresis",
+          "min": null,
+          "typ": 0.1,
+          "max": null,
+          "unit": "V",
+          "conditions": null
+        },
+        "ILOAD": {
+          "parameter": "Output Load Current",
+          "min": null,
+          "typ": 1,
+          "max": 1.5,
+          "unit": "A",
+          "conditions": null
+        },
+        "VREF": {
+          "parameter": "Reference Voltage",
+          "min": 0.588,
+          "typ": 0.6,
+          "max": 0.612,
+          "unit": "V",
+          "conditions": null
+        },
+        "FSW": {
+          "parameter": "Switching Frequency",
+          "min": 1,
+          "typ": 1.5,
+          "max": 2,
+          "unit": "MHz",
+          "conditions": "ILOAD = 100mA"
+        },
+        "FSW-SHORT": {
+          "parameter": "Short Frequency",
+          "min": null,
+          "typ": 300,
+          "max": null,
+          "unit": "KHz",
+          "conditions": "VOUT = 0V"
+        },
+        "ILIM-P": {
+          "parameter": "PMOS Current Limit",
+          "min": 1.7,
+          "typ": 2.2,
+          "max": null,
+          "unit": "A",
+          "conditions": null
+        },
+        "RDS(ON)-P": {
+          "parameter": "PMOS On-Resistance",
+          "min": null,
+          "typ": 120,
+          "max": null,
+          "unit": "mΩ",
+          "conditions": "ILOAD = 100mA"
+        },
+        "RDS(ON)-N": {
+          "parameter": "NMOS On-Resistance",
+          "min": null,
+          "typ": 110,
+          "max": null,
+          "unit": "mΩ",
+          "conditions": "ILOAD = 100mA"
+        },
+        "VEN-L": {
+          "parameter": "Enable Pin Input Low Voltage",
+          "min": null,
+          "typ": null,
+          "max": 0.4,
+          "unit": "V",
+          "conditions": null
+        },
+        "VEN-H": {
+          "parameter": "Enable Pin Input High Voltage",
+          "min": 2,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": null
+        },
+        "DMAX": {
+          "parameter": "Maximum Duty Cycle",
+          "min": null,
+          "typ": 100,
+          "max": null,
+          "unit": "%",
+          "conditions": null
+        },
+        "TOTP": {
+          "parameter": "Thermal Shutdown Threshold",
+          "min": null,
+          "typ": 165,
+          "max": null,
+          "unit": "°C",
+          "conditions": null
+        },
+        "THYST": {
+          "parameter": "Thermal Shutdown Hysteresis",
+          "min": null,
+          "typ": 30,
+          "max": null,
+          "unit": "°C",
+          "conditions": null
+        }
+      },
+      "drc_hints": {
+        "vin_abs_max": {
+          "value": 6.5,
+          "unit": "V"
+        },
+        "vin_operating": {
+          "min": 2.7,
+          "max": 5.5,
+          "unit": "V"
+        },
+        "vref": {
+          "min": 0.588,
+          "typ": 0.6,
+          "max": 0.612,
+          "unit": "V"
+        },
+        "enable_threshold": {
+          "max": 0.4,
+          "unit": "V"
+        },
+        "iout_max": {
+          "typ": 1,
+          "max": 1.5,
+          "unit": "A"
+        },
+        "iq": {
+          "typ": 40,
+          "max": 80,
+          "unit": "uA"
+        },
+        "fsw": {
+          "min": 1,
+          "typ": 1.5,
+          "max": 2,
+          "unit": "MHz"
+        },
+        "thermal_shutdown": {
+          "typ": 165,
+          "unit": "°C"
+        },
+        "uvlo": {
+          "min": 1.7,
+          "typ": 1.9,
+          "max": 2.1,
+          "unit": "V"
+        }
+      }
+    },
+    "design_context": {
+      "recommended_external_components": [
+        {
+          "role": "inductor",
+          "source_page": 4,
+          "value_hint": "1.5 uH",
+          "value_hints": [
+            "1.5 uH",
+            "10 uF",
+            "100KΩ",
+            "220 pF"
+          ],
+          "snippet": "A4003C 3CH DC/DCAEROSEMI"
+        },
+        {
+          "role": "inductor",
+          "source_page": 4,
+          "value_hint": "1.5 uH",
+          "value_hints": [
+            "1.5 uH",
+            "10 uF",
+            "100KΩ",
+            "220 pF"
+          ],
+          "snippet": "APPLICATION CIRCUIT DIAGRAM"
+        },
+        {
+          "role": "feedback_divider",
+          "source_page": 4,
+          "value_hint": "100KΩ",
+          "value_hints": [
+            "1.5 uH",
+            "10 uF",
+            "100KΩ",
+            "220 pF"
+          ],
+          "snippet": "APPLICATION CIRCUIT DIAGRAM"
+        },
+        {
+          "role": "feedback_divider",
+          "source_page": 4,
+          "value_hint": "100KΩ",
+          "value_hints": [
+            "1.5 uH",
+            "10 uF",
+            "100KΩ",
+            "220 pF"
+          ],
+          "snippet": "L1"
+        },
+        {
+          "role": "output_capacitor",
+          "source_page": 8,
+          "value_hint": "220 pF",
+          "value_hints": [
+            "100KΩ",
+            "220 pF",
+            "510KΩ",
+            "110KΩ",
+            "200KΩ",
+            "150KΩ"
+          ],
+          "snippet": "The following table lists common output voltage and the corresponding R1, R2 resistance value for"
+        },
+        {
+          "role": "input_capacitor",
+          "source_page": 8,
+          "value_hint": null,
+          "value_hints": [
+            "100KΩ",
+            "510KΩ",
+            "110KΩ",
+            "200KΩ",
+            "150KΩ"
+          ],
+          "snippet": "reference."
+        },
+        {
+          "role": "output_capacitor",
+          "source_page": 8,
+          "value_hint": null,
+          "value_hints": [
+            "100KΩ",
+            "510KΩ",
+            "110KΩ",
+            "200KΩ",
+            "150KΩ"
+          ],
+          "snippet": "reference."
+        },
+        {
+          "role": "input_capacitor",
+          "source_page": 8,
+          "value_hint": null,
+          "value_hints": [
+            "100KΩ",
+            "510KΩ",
+            "110KΩ",
+            "200KΩ",
+            "150KΩ"
+          ],
+          "snippet": "Output Voltage R1 Resistance R2 Resistance Tolerance"
+        }
+      ],
+      "component_value_hints": [
+        {
+          "values": [
+            "1.5 uH",
+            "10 uF",
+            "100KΩ",
+            "220 pF"
+          ],
+          "source_page": 4,
+          "snippet": "A4003C 3CH DC/DCAEROSEMI APPLICATION CIRCUIT DIAGRAM L1 1.5uH VIN1 VIN VOUT1 LX1 C1 5V 1.2V 10uF R1 C8 C5 100KΩ 10uF 220pF VIN2 FB1"
+        },
+        {
+          "values": [
+            "1.5 uH",
+            "100KΩ",
+            "10 uF",
+            "220 pF"
+          ],
+          "source_page": 4,
+          "snippet": "A4003C 3CH DC/DCAEROSEMI APPLICATION CIRCUIT DIAGRAM L1 1.5uH VIN1 VIN VOUT1 LX1 C1 5V 1.2V 10uF R1 C8 C5 100KΩ 10uF 220pF VIN2 FB1 R2 C2"
+        },
+        {
+          "values": [
+            "100KΩ",
+            "1.5 uH",
+            "10 uF",
+            "220 pF",
+            "150KΩ"
+          ],
+          "source_page": 4,
+          "snippet": "1.5uH VIN1 VIN VOUT1 LX1 C1 5V 1.2V 10uF R1 C8 C5 100KΩ 10uF 220pF VIN2 FB1 R2 C2 100KΩ 10uF L2 1.5uH VIN3 VOUT2 LX2 C3 1.5V R3 C9 10uF C6 150KΩ 220pF 10uF VCC FB2"
+        },
+        {
+          "values": [
+            "100KΩ",
+            "10 uF",
+            "220 pF",
+            "1.5 uH",
+            "150KΩ"
+          ],
+          "source_page": 4,
+          "snippet": "VOUT1 LX1 C1 5V 1.2V 10uF R1 C8 C5 100KΩ 10uF 220pF VIN2 FB1 R2 C2 100KΩ 10uF L2 1.5uH VIN3 VOUT2 LX2 C3 1.5V R3 C9 10uF C6 150KΩ 220pF 10uF VCC FB2 R4 C4"
+        },
+        {
+          "values": [
+            "100KΩ",
+            "10 uF",
+            "220 pF",
+            "1.5 uH",
+            "150KΩ",
+            "1 uF"
+          ],
+          "source_page": 4,
+          "snippet": "1.2V 10uF R1 C8 C5 100KΩ 10uF 220pF VIN2 FB1 R2 C2 100KΩ 10uF L2 1.5uH VIN3 VOUT2 LX2 C3 1.5V R3 C9 10uF C6 150KΩ 220pF 10uF VCC FB2 R4 C4 100KΩ 1uF L3"
+        },
+        {
+          "values": [
+            "10 uF",
+            "220 pF",
+            "100KΩ",
+            "1.5 uH",
+            "150KΩ",
+            "1 uF"
+          ],
+          "source_page": 4,
+          "snippet": "10uF 220pF VIN2 FB1 R2 C2 100KΩ 10uF L2 1.5uH VIN3 VOUT2 LX2 C3 1.5V R3 C9 10uF C6 150KΩ 220pF 10uF VCC FB2 R4 C4 100KΩ 1uF L3 1.5uH VOUT3 LX3 EN1 ON OFF"
+        },
+        {
+          "values": [
+            "100KΩ",
+            "10 uF",
+            "1.5 uH",
+            "150KΩ",
+            "220 pF",
+            "1 uF"
+          ],
+          "source_page": 4,
+          "snippet": "R2 C2 100KΩ 10uF L2 1.5uH VIN3 VOUT2 LX2 C3 1.5V R3 C9 10uF C6 150KΩ 220pF 10uF VCC FB2 R4 C4 100KΩ 1uF L3 1.5uH VOUT3 LX3 EN1 ON OFF 3.3V R5 C10 C7"
+        },
+        {
+          "values": [
+            "1.5 uH",
+            "10 uF",
+            "150KΩ",
+            "220 pF",
+            "100KΩ",
+            "1 uF"
+          ],
+          "source_page": 4,
+          "snippet": "L2 1.5uH VIN3 VOUT2 LX2 C3 1.5V R3 C9 10uF C6 150KΩ 220pF 10uF VCC FB2 R4 C4 100KΩ 1uF L3 1.5uH VOUT3 LX3 EN1 ON OFF 3.3V R5 C10 C7 10uF 510KΩ 220pF EN2 ON OFF FB3"
+        }
+      ],
+      "layout_hints": [
+        {
+          "hint": " The top layer SMD input and output capacitors ground plane should be connected to the internal",
+          "source_page": 9
+        },
+        {
+          "hint": "ground layer and bottom ground plane individually by using vias.",
+          "source_page": 9
+        },
+        {
+          "hint": " The AGND should be connected to inner ground layer directly by using via.",
+          "source_page": 9
+        },
+        {
+          "hint": " Place the input capacitors as close as possible to the VINx pin to reduce noise interference.",
+          "source_page": 9
+        },
+        {
+          "hint": "current noise node. Complete the layout by using short and wide traces.",
+          "source_page": 9
+        },
+        {
+          "hint": " The top layer exposed pad ground plane should be connected to the internal ground layer and bottom",
+          "source_page": 9
+        },
+        {
+          "hint": "ground plane by using a number of vias to improve thermal performance.",
+          "source_page": 9
+        }
+      ],
+      "supply_recommendations": [
+        {
+          "hint": "The input capacitors are used to suppress the noise amplitude of the input voltage and provide a stable",
+          "source_page": 8
+        }
+      ],
+      "topology_hints": [
+        {
+          "hint": "APPLICATION CIRCUIT DIAGRAM",
+          "source_page": 4
+        },
+        {
+          "hint": "Figure 1. Typical application circuit diagram",
+          "source_page": 4
+        },
+        {
+          "hint": "For most applications, 1.0uH to 2.2uH inductors are suitable for A4003C.",
+          "source_page": 9
+        }
+      ],
+      "design_pages": {
+        "pages": [
+          {
+            "page": 4,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 8,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 9,
+            "title": null,
+            "content_type": "application"
+          }
+        ],
+        "total_pages": 3
+      }
+    }
+  }
 }

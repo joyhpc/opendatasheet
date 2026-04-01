@@ -20,6 +20,9 @@ from pathlib import Path
 
 from build_fpga_catalog import build_catalog
 from design_guide_domain import load_gowin_design_guide_bundle, resolve_gowin_design_guide_source_path
+from normal_ic_design_context_loader import load_design_context_for_export_record, should_auto_extract_design_context
+from normal_ic_design_overrides import get_normal_ic_design_context_override, merge_design_context
+from normal_ic_contract import build_normal_ic_record, normal_ic_record_to_export
 
 SCHEMA_VERSION = "sch-review-device/1.1"
 SCHEMA_VERSION_V2 = "device-knowledge/2.0"
@@ -27,7 +30,56 @@ SCHEMA_VERSION_V2 = "device-knowledge/2.0"
 DEFAULT_EXTRACTED_DIR = Path(__file__).parent.parent / "data/extracted_v2"
 DEFAULT_FPGA_PINOUT_DIR = Path(__file__).parent.parent / "data/extracted_v2/fpga/pinout"
 DEFAULT_OUTPUT_DIR = Path(__file__).parent.parent / "data/sch_review_export"
+
+
+def _remove_stale_managed_exports(output_dir: Path, expected_files: set[str]) -> list[str]:
+    """Delete checked-in device JSONs no longer produced by the current inputs."""
+    removed = []
+    for path in sorted(output_dir.glob("*.json")):
+        if path.name.startswith("_"):
+            continue
+        if path.name in expected_files:
+            continue
+        path.unlink()
+        removed.append(path.name)
+    return removed
+
+
+def _canonical_schema_version(domains: dict) -> str:
+    """Canonical internal exports use v2 whenever a domains view exists."""
+    return SCHEMA_VERSION_V2 if domains else SCHEMA_VERSION
+
+
 # ─── Format Detection & Accessors ──────────────────────────────────
+
+
+def _build_fpga_domains(
+    *,
+    normalized_pins: list,
+    normalized_banks: dict,
+    normalized_diff_pairs: list,
+    lookup: dict,
+    thermal: dict,
+    guide_domains: dict,
+) -> dict:
+    """Build the canonical domains block for FPGA exports."""
+    domains = {
+        "pin": {
+            "pins": copy.deepcopy(normalized_pins),
+            "banks": copy.deepcopy(normalized_banks),
+            "diff_pairs": copy.deepcopy(normalized_diff_pairs),
+            "lookup": copy.deepcopy(lookup),
+        } if normalized_pins else {},
+        "thermal": copy.deepcopy(thermal) if thermal else {},
+    }
+    if guide_domains:
+        domains.update(copy.deepcopy(guide_domains))
+    filtered = {}
+    for key, value in domains.items():
+        if value in ({}, [], None):
+            continue
+        filtered[key] = value
+    return filtered
 
 
 def detect_input_format(data: dict) -> str:
@@ -60,8 +112,44 @@ def get_pin_index(data: dict) -> dict:
     fmt = detect_input_format(data)
     if fmt == "domains":
         pin = data["domains"].get("pin", {})
-        return pin.get("pin_index", pin)
+        pin_index = pin.get("pin_index")
+        if isinstance(pin_index, dict) and pin_index.get("packages"):
+            return pin_index
+        logical_pins = pin.get("logical_pins", [])
+        if isinstance(logical_pins, list) and logical_pins:
+            return _logical_pins_to_pin_index(logical_pins)
+        root_pin_index = data.get("pin_index", {})
+        if isinstance(root_pin_index, dict):
+            return root_pin_index
+        return {}
     return data.get("pin_index", {})
+
+
+def _logical_pins_to_pin_index(logical_pins: list[dict]) -> dict:
+    """Build package-indexed pins from logical_pins when pin_index is absent."""
+    packages: dict[str, dict[str, dict]] = {}
+
+    for pin in logical_pins:
+        pkg_map = pin.get("packages", {})
+        if not isinstance(pkg_map, dict):
+            continue
+        entry = {
+            "name": pin.get("name"),
+            "direction": pin.get("direction"),
+            "signal_type": pin.get("signal_type"),
+            "description": pin.get("description"),
+            "unused_treatment": pin.get("unused_treatment"),
+        }
+        for pkg_name, pin_nums in pkg_map.items():
+            if not isinstance(pin_nums, list):
+                continue
+            pkg_pins = packages.setdefault(pkg_name, {})
+            for pin_num in pin_nums:
+                pin_key = str(pin_num)
+                if pin_key not in pkg_pins:
+                    pkg_pins[pin_key] = dict(entry)
+
+    return {"packages": packages}
 
 
 def get_thermal_data(data: dict) -> dict:
@@ -76,8 +164,13 @@ def get_design_context(data: dict) -> dict:
     """Get design context from either format."""
     fmt = detect_input_format(data)
     if fmt == "domains":
-        return data["domains"].get("design_context", {})
-    return data.get("design_extraction", {})
+        base = data["domains"].get("design_context", {})
+    else:
+        base = data.get("design_extraction", {})
+    component = get_extraction(data).get("component", {})
+    if not base and should_auto_extract_design_context(component.get("category")):
+        base = load_design_context_for_export_record(data)
+    return merge_design_context(base, get_normal_ic_design_context_override(component.get("mpn")))
 
 
 def get_register_data(data: dict) -> dict:
@@ -229,60 +322,39 @@ def export_normal_ic(data: dict) -> dict | None:
     # --- Check for package data ---
     package_data = get_package_data(data)
 
-    # --- Determine schema version ---
-    # Upgrade to 2.0 if any domain data is present
-    schema_version = SCHEMA_VERSION_V2 if (register_data or timing_data or power_seq_data or parametric_data or protocol_data or package_data) else SCHEMA_VERSION
-
-    # --- Determine layers ---
-    layers = ["L0_skeleton"]
-    if elec_params or abs_max:
-        layers.append("L1_electrical")
-
-    result = {
-        "_schema": schema_version,
-        "_type": "normal_ic",
-        "_layers": layers,
-        "mpn": mpn,
-        "manufacturer": comp.get("manufacturer"),
-        "category": category,
-        "description": comp.get("description"),
-        "packages": packages,
-        "absolute_maximum_ratings": abs_max,
-        "electrical_parameters": elec_params,
-        "drc_hints": drc_hints,
-        "thermal": thermal,
-    }
-    capability_blocks = _infer_normal_ic_capability_blocks(
+    design_context = get_design_context(data)
+    record = build_normal_ic_record(
         mpn=mpn,
         manufacturer=comp.get("manufacturer"),
         category=category,
         description=comp.get("description"),
         packages=packages,
+        abs_max=abs_max,
+        elec_params=elec_params,
+        drc_hints=drc_hints,
+        thermal=thermal,
+        design_context=design_context,
+        register_data=register_data,
+        timing_data=timing_data,
+        power_seq_data=power_seq_data,
+        parametric_data=parametric_data,
+        protocol_data=protocol_data,
+        package_data=package_data,
+    )
+    capability_blocks = _infer_normal_ic_capability_blocks(
+        mpn=record.mpn,
+        manufacturer=record.manufacturer,
+        category=record.category,
+        description=record.description,
+        packages=record.packages,
+        protocol_data=protocol_data,
     )
     constraint_blocks = _infer_normal_ic_constraint_blocks(capability_blocks)
-    if capability_blocks:
-        result["capability_blocks"] = capability_blocks
-    if constraint_blocks:
-        result["constraint_blocks"] = constraint_blocks
-
-    # Include new domains if present
-    if register_data or timing_data or power_seq_data or parametric_data or protocol_data or package_data:
-        domains_block = {}
-        if register_data:
-            domains_block["register"] = register_data
-        if timing_data:
-            domains_block["timing"] = timing_data
-        if power_seq_data:
-            domains_block["power_sequence"] = power_seq_data
-        if parametric_data:
-            domains_block["parametric"] = parametric_data
-        if protocol_data:
-            domains_block["protocol"] = protocol_data
-        if package_data:
-            domains_block["package"] = package_data
-        result["domains"] = domains_block
-
-    return result
+    return normal_ic_record_to_export(
+        record,
+        capability_blocks=capability_blocks,
+        constraint_blocks=constraint_blocks,
+    )
 
 
 def _thermal_record(item: dict, source: str) -> dict:
@@ -360,11 +432,14 @@ def _extract_drc_hints(category: str, abs_max: dict, elec_params: dict,
     elec_list = raw_elec or []
     abs_list = raw_abs or []
 
-    def _find(source_list, sym_pats=None, desc_pats=None):
+    def _find(source_list, sym_pats=None, desc_pats=None, exclude_pats=None):
         """Fuzzy match on symbol or parameter description."""
         for p in source_list:
             sym = p.get('symbol') or ''
             desc = p.get('parameter') or ''
+            haystack = f"{sym} {desc}"
+            if exclude_pats and any(re.search(pat, haystack, re.IGNORECASE) for pat in exclude_pats):
+                continue
             if sym_pats:
                 for pat in sym_pats:
                     if re.match(pat, sym, re.IGNORECASE):
@@ -416,9 +491,16 @@ def _extract_drc_hints(category: str, abs_max: dict, elec_params: dict,
     # --- iout_max ---
     p = _find(elec_list,
               sym_pats=[r'^I[_\(]?LIM', r'^I[_\(]?OUT', r'^I[_\(]?LOAD', r'^I[_\(]?OCL'],
-              desc_pats=[r'current\s+limit', r'output\s+current', r'load\s+current', r'source\s+current\s+limit'])
+              desc_pats=[r'current\s+limit', r'output\s+current', r'load\s+current', r'source\s+current\s+limit'],
+              exclude_pats=[r'\bILIM5\b', r'LDO\s+Output\s+Current\s+limit'])
     if p:
         hints['iout_max'] = _hint(p)
+    else:
+        p = _find(abs_list,
+                  sym_pats=[r'^I[_\(]?OUT', r'^I[_\(]?LOAD'],
+                  desc_pats=[r'output\s+current', r'load\s+current'])
+        if p:
+            hints['iout_max'] = _hint(p, keys=('min', 'max', 'unit'))
 
     # --- iq ---
     p = _find(elec_list,
@@ -556,9 +638,135 @@ def _mcu_like_device(mpn: str, manufacturer: str | None, category: str | None, d
     return mpn.upper().startswith(prefixes) or any(token in haystack for token in ("CORTEX-M", "MICROCONTROLLER", "MCU", "SOC"))
 
 
-def _infer_normal_ic_capability_blocks(mpn: str, manufacturer: str | None, category: str | None, description: str | None, packages: dict) -> dict:
-    if not _mcu_like_device(mpn, manufacturer, category, description):
+def _coerce_float(value) -> float | None:
+    if value is None:
+        return None
+    if isinstance(value, (int, float)):
+        return float(value)
+    if isinstance(value, str):
+        try:
+            return float(value)
+        except ValueError:
+            return None
+    return None
+
+
+def _infer_normal_ic_mipi_capability(protocol_data: dict | None) -> dict:
+    if not isinstance(protocol_data, dict):
         return {}
+
+    interfaces = protocol_data.get("interfaces", [])
+    if not isinstance(interfaces, list):
+        return {}
+
+    mipi_interfaces = [
+        iface for iface in interfaces
+        if isinstance(iface, dict) and iface.get("protocol_type") == "MIPI"
+    ]
+    if not mipi_interfaces:
+        return {}
+
+    phy_types: set[str] = set()
+    directions: set[str] = set()
+    source_pages: set[int] = set()
+    notes: list[str] = []
+    dphy: dict = {}
+    cphy: dict = {}
+    transport = None
+
+    for iface in mipi_interfaces:
+        config = iface.get("mipi_config", {})
+        if not isinstance(config, dict):
+            config = {}
+
+        phy_type = config.get("phy_type")
+        if phy_type in {"D-PHY", "C-PHY"}:
+            phy_types.add(phy_type)
+
+        direction = config.get("direction")
+        if isinstance(direction, str) and direction:
+            directions.add(direction)
+
+        if transport is None and config.get("transport"):
+            transport = config.get("transport")
+
+        for page in config.get("source_pages", []):
+            if isinstance(page, int):
+                source_pages.add(page)
+
+        note = iface.get("notes")
+        if isinstance(note, str) and note and note not in notes:
+            notes.append(note)
+
+        if phy_type == "D-PHY":
+            if config.get("port_count") is not None:
+                dphy["port_count"] = config.get("port_count")
+            if config.get("data_lanes_per_port") is not None:
+                dphy["max_data_lanes"] = config.get("data_lanes_per_port")
+            if config.get("clock_lanes_per_port") is not None:
+                dphy["max_clock_lanes"] = config.get("clock_lanes_per_port")
+            min_rate = _coerce_float(config.get("min_rate_mbps_per_lane"))
+            max_rate = _coerce_float(config.get("max_rate_mbps_per_lane"))
+            if min_rate is not None:
+                dphy["min_rate_gbps_per_lane"] = round(min_rate / 1000.0, 3)
+            if max_rate is not None:
+                dphy["max_rate_gbps_per_lane"] = round(max_rate / 1000.0, 3)
+            if config.get("phy_version"):
+                dphy["phy_version"] = config.get("phy_version")
+            if config.get("protocol_version"):
+                dphy["protocol_version"] = config.get("protocol_version")
+
+        if phy_type == "C-PHY":
+            if config.get("port_count") is not None:
+                cphy["port_count"] = config.get("port_count")
+            if config.get("trios_per_port") is not None:
+                cphy["max_trios"] = config.get("trios_per_port")
+            min_rate = _coerce_float(config.get("min_symbol_rate_msps"))
+            max_rate = _coerce_float(config.get("max_symbol_rate_msps"))
+            if min_rate is not None:
+                cphy["min_symbol_rate_gsps"] = round(min_rate / 1000.0, 3)
+            if max_rate is not None:
+                cphy["max_symbol_rate_gsps"] = round(max_rate / 1000.0, 3)
+            if config.get("phy_version"):
+                cphy["phy_version"] = config.get("phy_version")
+            if config.get("protocol_version"):
+                cphy["protocol_version"] = config.get("protocol_version")
+
+    capability = {
+        "class": "mipi_phy",
+        "present": True,
+        "phy_types": sorted(phy_types),
+        "directions": sorted(directions) if directions else ["TX"],
+        "source": "protocol_domain",
+    }
+    if dphy:
+        capability["dphy"] = dphy
+    if cphy:
+        capability["cphy"] = cphy
+    if transport:
+        capability["transport"] = transport
+    if source_pages:
+        capability["source_pages"] = sorted(source_pages)
+    if notes:
+        capability["notes"] = notes
+    return capability
+
+
+def _infer_normal_ic_capability_blocks(
+    mpn: str,
+    manufacturer: str | None,
+    category: str | None,
+    description: str | None,
+    packages: dict,
+    protocol_data: dict | None = None,
+) -> dict:
+    blocks = {}
+    mipi_capability = _infer_normal_ic_mipi_capability(protocol_data)
+    if mipi_capability:
+        blocks["mipi_phy"] = mipi_capability
+
+    if not _mcu_like_device(mpn, manufacturer, category, description):
+        return blocks
 
     pin_records = _flatten_package_pins(packages)
     debug_signals = _signal_groups(pin_records, lambda name, desc: any(token in name for token in ("SWDIO", "SWCLK", "SWO", "JTMS", "JTCK", "JTDI", "JTDO", "TRACESWO")))
@@ -605,7 +813,6 @@ def _infer_normal_ic_capability_blocks(mpn: str, manufacturer: str | None, categ
         **{f"d{idx}": (lambda idx: (lambda name, desc: any(token in f"{name} {desc}" for token in (f"SDMMC_D{idx}", f"SDIO_D{idx}"))))(idx) for idx in range(8)},
     })
 
-    blocks = {}
     if debug_signals:
         interfaces = []
         debug_names = {item["name"].upper() for item in debug_signals}
@@ -688,6 +895,18 @@ def _infer_normal_ic_capability_blocks(mpn: str, manufacturer: str | None, categ
 
 def _infer_normal_ic_constraint_blocks(capability_blocks: dict) -> dict:
     blocks = {}
+    mipi = capability_blocks.get("mipi_phy")
+    if mipi:
+        blocks["mipi_phy"] = {
+            "class": "clocking",
+            "review_required": bool(mipi.get("present", True)),
+            "directions": mipi.get("directions", []),
+            "phy_types": mipi.get("phy_types", []),
+            "source": mipi.get("source"),
+            "selection_note": "Freeze D-PHY vs C-PHY mode, lane or trio ownership, and downstream receiver compatibility before schematic sign-off.",
+        }
+        if mipi.get("source_pages"):
+            blocks["mipi_phy"]["source_pages"] = mipi.get("source_pages")
     debug = capability_blocks.get("debug_access")
     if debug:
         blocks["debug_access"] = {
@@ -1786,6 +2005,9 @@ def _generic_fpga_constraint_blocks(pinout_data: dict, device_identity: dict, ca
         or hs_serial.get("tx_lane_pairs")
         or hs_serial.get("channel_pairs")
         or hs_serial.get("serdes_dual_count")
+        or hs_serial.get("transceiver_count")
+        or hs_serial.get("transceiver_channel_count")
+        or hs_serial.get("refclk_pair_count")
     ))
     refclk_pairs = _collect_refclk_pairs(diff_pairs, pinout_data.get("pins", []))
     if hs_present and refclk_pairs:
@@ -2838,8 +3060,19 @@ def export_fpga(dc_data: dict, pinout_data: dict, gowin_dc: dict = None, lattice
     normalized_banks = _normalize_banks(pinout_data.get("banks", {}))
     if not normalized_banks:
         normalized_banks = _normalize_banks(_package_level_bank_overlay(pinout_data))
+    guide_data = _load_gowin_family_design_guide(device, package, pinout_data, gowin_dc=gowin_dc) if vendor == "Gowin" else {}
+    lookup = _normalize_lookup(pinout_data)
+    domains_block = _build_fpga_domains(
+        normalized_pins=normalized_pins,
+        normalized_banks=normalized_banks,
+        normalized_diff_pairs=normalized_diff_pairs,
+        lookup=lookup,
+        thermal=thermal,
+        guide_domains=guide_data.get("domains", {}),
+    )
+
     result = {
-        "_schema": SCHEMA_VERSION,
+        "_schema": _canonical_schema_version(domains_block),
         "_type": "fpga",
         "mpn": device,
         "manufacturer": manufacturer,
@@ -2861,7 +3094,7 @@ def export_fpga(dc_data: dict, pinout_data: dict, gowin_dc: dict = None, lattice
 
         # Pin data — full list + normalized lookup
         "pins": normalized_pins,
-        "lookup": _normalize_lookup(pinout_data),
+        "lookup": lookup,
 
         # Summary
         "summary": pinout_data.get("summary", {}),
@@ -2872,7 +3105,6 @@ def export_fpga(dc_data: dict, pinout_data: dict, gowin_dc: dict = None, lattice
     if source_traceability:
         result["source_traceability"] = source_traceability
     constraint_blocks = _generic_fpga_constraint_blocks(pinout_data, device_identity, capability_blocks, normalized_diff_pairs)
-    guide_data = _load_gowin_family_design_guide(device, package, pinout_data, gowin_dc=gowin_dc) if vendor == "Gowin" else {}
     if guide_data.get("constraint_overlays"):
         constraint_blocks = _deep_merge_dict(constraint_blocks, guide_data["constraint_overlays"])
     if capability_blocks:
@@ -2882,8 +3114,8 @@ def export_fpga(dc_data: dict, pinout_data: dict, gowin_dc: dict = None, lattice
     legacy_ip_blocks = capability_blocks.get("legacy_ip_blocks") if capability_blocks else None
     if legacy_ip_blocks:
         result["ip_blocks"] = legacy_ip_blocks
-    if guide_data.get("domains"):
-        result["domains"] = guide_data["domains"]
+    if domains_block:
+        result["domains"] = domains_block
 
     # Add absolute maximum ratings if available
     if gowin_dc or lattice_dc:
@@ -2912,6 +3144,7 @@ def main():
 
     exported = 0
     errors = 0
+    written_files: set[str] = set()
 
     # --- Export normal ICs ---
     print("=== Normal ICs ===")
@@ -2928,6 +3161,7 @@ def main():
             with open(out_path, "w") as fp:
                 json.dump(result, fp, indent=2, ensure_ascii=False)
                 fp.write("\n")
+            written_files.add(out_path.name)
             pkg_count = len(result["packages"])
             pin_total = sum(p["pin_count"] for p in result["packages"].values())
             hints = len(result["drc_hints"])
@@ -3025,6 +3259,7 @@ def main():
             with open(out_path, "w") as fp:
                 json.dump(result, fp, indent=2, ensure_ascii=False)
                 fp.write("\n")
+            written_files.add(out_path.name)
 
             n_pins = len(result["pins"])
             n_pairs = len(result["diff_pairs"])
@@ -3036,8 +3271,12 @@ def main():
             print(f"  ERROR {pinout_file.name}: {e}")
             errors += 1
 
+    removed_files = _remove_stale_managed_exports(output_dir, written_files)
+
     print(f"\n{'='*60}")
     print(f"Exported: {exported}, Errors: {errors}")
+    if removed_files:
+        print(f"Removed stale device exports: {len(removed_files)}")
     print(f"Output: {output_dir}")
 
     # Generate manifest

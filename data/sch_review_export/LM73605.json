@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -591,5 +591,858 @@
       "unit": "V"
     }
   },
-  "thermal": {}
+  "thermal": {},
+  "domains": {
+    "pin": {
+      "packages": {
+        "WQFN-30": {
+          "pin_count": 31,
+          "pins": {
+            "1": {
+              "name": "SW",
+              "direction": "OUTPUT",
+              "signal_type": "POWER",
+              "description": "Switching output of the regulator. Internally connected to source of the HS FET and drain of the LS FET.",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "SW",
+              "direction": "OUTPUT",
+              "signal_type": "POWER",
+              "description": "Switching output of the regulator. Internally connected to source of the HS FET and drain of the LS FET.",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "SW",
+              "direction": "OUTPUT",
+              "signal_type": "POWER",
+              "description": "Switching output of the regulator. Internally connected to source of the HS FET and drain of the LS FET.",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "SW",
+              "direction": "OUTPUT",
+              "signal_type": "POWER",
+              "description": "Switching output of the regulator. Internally connected to source of the HS FET and drain of the LS FET.",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "SW",
+              "direction": "OUTPUT",
+              "signal_type": "POWER",
+              "description": "Switching output of the regulator. Internally connected to source of the HS FET and drain of the LS FET.",
+              "unused_treatment": null
+            },
+            "6": {
+              "name": "CBOOT",
+              "direction": "PASSIVE",
+              "signal_type": "ANALOG",
+              "description": "Bootstrap capacitor connection for HS FET driver. Connect a high-quality 470-nF capacitor from this pin to the SW pin.",
+              "unused_treatment": null
+            },
+            "7": {
+              "name": "VCC",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Output of internal bias supply. Used as supply to internal control circuits and drivers.",
+              "unused_treatment": null
+            },
+            "8": {
+              "name": "BIAS",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Optional BIAS LDO supply input. Tie to ground when not in use.",
+              "unused_treatment": "GND"
+            },
+            "9": {
+              "name": "RT",
+              "direction": "PASSIVE",
+              "signal_type": "ANALOG",
+              "description": "Switching frequency setting pin. Place a resistor from this pin to ground to set the switching frequency. If floating, the default switching frequency is 500 kHz.",
+              "unused_treatment": "FLOAT"
+            },
+            "10": {
+              "name": "SS/TRK",
+              "direction": "PASSIVE",
+              "signal_type": "ANALOG",
+              "description": "Soft-start control pin. Leave this pin floating for a 5-ms internal soft-start ramp. An external capacitor can be connected from this pin to ground to extend the soft start time.",
+              "unused_treatment": "FLOAT"
+            },
+            "11": {
+              "name": "FB",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Feedback input for output voltage regulation. Connect a resistor divider to set the output voltage.",
+              "unused_treatment": null
+            },
+            "12": {
+              "name": "NC",
+              "direction": "NC",
+              "signal_type": "NONE",
+              "description": "No internal connection. Connect to ground net and copper to improve heat sinking and board-level reliability.",
+              "unused_treatment": "GND"
+            },
+            "13": {
+              "name": "NC",
+              "direction": "NC",
+              "signal_type": "NONE",
+              "description": "No internal connection. Connect to ground net and copper to improve heat sinking and board-level reliability.",
+              "unused_treatment": "GND"
+            },
+            "14": {
+              "name": "NC",
+              "direction": "NC",
+              "signal_type": "NONE",
+              "description": "No internal connection. Connect to ground net and copper to improve heat sinking and board-level reliability.",
+              "unused_treatment": "GND"
+            },
+            "15": {
+              "name": "NC",
+              "direction": "NC",
+              "signal_type": "NONE",
+              "description": "No internal connection. Connect to ground net and copper to improve heat sinking and board-level reliability.",
+              "unused_treatment": "GND"
+            },
+            "27": {
+              "name": "NC",
+              "direction": "NC",
+              "signal_type": "NONE",
+              "description": "No internal connection. Connect to ground net and copper to improve heat sinking and board-level reliability.",
+              "unused_treatment": "GND"
+            },
+            "28": {
+              "name": "NC",
+              "direction": "NC",
+              "signal_type": "NONE",
+              "description": "No internal connection. Connect to ground net and copper to improve heat sinking and board-level reliability.",
+              "unused_treatment": "GND"
+            },
+            "29": {
+              "name": "NC",
+              "direction": "NC",
+              "signal_type": "NONE",
+              "description": "No internal connection. Connect to ground net and copper to improve heat sinking and board-level reliability.",
+              "unused_treatment": "GND"
+            },
+            "30": {
+              "name": "NC",
+              "direction": "NC",
+              "signal_type": "NONE",
+              "description": "No internal connection. Connect to ground net and copper to improve heat sinking and board-level reliability.",
+              "unused_treatment": "GND"
+            },
+            "16": {
+              "name": "PGOOD",
+              "direction": "OUTPUT",
+              "signal_type": "DIGITAL",
+              "description": "Open drain power-good flag output. Connect to suitable voltage supply through a current limiting resistor.",
+              "unused_treatment": null
+            },
+            "17": {
+              "name": "SYNC/MODE",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Synchronization input and mode setting pin. Do not float. Tie to ground if not used.",
+              "unused_treatment": "GND"
+            },
+            "18": {
+              "name": "EN",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Enable input to regulator. Do not float. High = ON, Low = OFF.",
+              "unused_treatment": "CUSTOM"
+            },
+            "19": {
+              "name": "AGND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Analog ground. Ground reference for internal circuitry.",
+              "unused_treatment": null
+            },
+            "20": {
+              "name": "PVIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Supply input to internal bias LDO and HS FET.",
+              "unused_treatment": null
+            },
+            "21": {
+              "name": "PVIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Supply input to internal bias LDO and HS FET.",
+              "unused_treatment": null
+            },
+            "22": {
+              "name": "PVIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Supply input to internal bias LDO and HS FET.",
+              "unused_treatment": null
+            },
+            "23": {
+              "name": "PGND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power ground, connected to the source of LS FET internally.",
+              "unused_treatment": null
+            },
+            "24": {
+              "name": "PGND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power ground, connected to the source of LS FET internally.",
+              "unused_treatment": null
+            },
+            "25": {
+              "name": "PGND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power ground, connected to the source of LS FET internally.",
+              "unused_treatment": null
+            },
+            "26": {
+              "name": "PGND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power ground, connected to the source of LS FET internally.",
+              "unused_treatment": null
+            },
+            "EP": {
+              "name": "DAP",
+              "direction": "PASSIVE",
+              "signal_type": "POWER",
+              "description": "Low impedance connection to AGND. Connect to system ground on PCB. Major heat dissipation path for the device.",
+              "unused_treatment": "GND"
+            }
+          }
+        }
+      }
+    },
+    "electrical": {
+      "absolute_maximum_ratings": {
+        "TJ": {
+          "parameter": "Operating junction temperature",
+          "min": -40,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        },
+        "Tstg": {
+          "parameter": "Storage temperature",
+          "min": -65,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        }
+      },
+      "electrical_parameters": {
+        "VIN": {
+          "parameter": "Operating input voltage range",
+          "min": 3.5,
+          "typ": null,
+          "max": 36,
+          "unit": "V",
+          "conditions": null
+        },
+        "ISD": {
+          "parameter": "Shutdown quiescent current",
+          "min": null,
+          "typ": 0.8,
+          "max": 10,
+          "unit": "µA",
+          "conditions": "VEN = 0 V, TJ = 25°C"
+        },
+        "IQ_NONSW": {
+          "parameter": "Operating quiescent current from VIN (non-switching)",
+          "min": null,
+          "typ": 0.6,
+          "max": 12,
+          "unit": "µA",
+          "conditions": "VEN = 2 V, VFB = 1.5 V, VBIAS = 3.3 V external"
+        },
+        "VEN_VCC_H": {
+          "parameter": "Enable input high level for VCC output",
+          "min": null,
+          "typ": null,
+          "max": 1.15,
+          "unit": "V",
+          "conditions": "VEN rising"
+        },
+        "VEN_VCC_L": {
+          "parameter": "Enable input low level for VCC output",
+          "min": 0.3,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": "VEN falling"
+        },
+        "VEN_VOUT_H": {
+          "parameter": "Enable input high level for VOUT",
+          "min": 1.14,
+          "typ": 1.196,
+          "max": 1.25,
+          "unit": "V",
+          "conditions": "VEN rising"
+        },
+        "VEN_VOUT_HYS": {
+          "parameter": "Enable input hysteresis for VOUT",
+          "min": null,
+          "typ": -100,
+          "max": null,
+          "unit": "mV",
+          "conditions": "VEN falling hysteresis"
+        },
+        "ILKG_EN": {
+          "parameter": "Enable input leakage current",
+          "min": null,
+          "typ": 1.4,
+          "max": 200,
+          "unit": "nA",
+          "conditions": "VEN = 2 V"
+        },
+        "VCC": {
+          "parameter": "Internal VCC voltage (PWM)",
+          "min": null,
+          "typ": 3.27,
+          "max": null,
+          "unit": "V",
+          "conditions": "PWM operation"
+        },
+        "VCC_PFM_operation": {
+          "parameter": "Internal VCC voltage (PFM)",
+          "min": null,
+          "typ": 3.1,
+          "max": null,
+          "unit": "V",
+          "conditions": "PFM operation"
+        },
+        "VCC_UVLO": {
+          "parameter": "Internal VCC undervoltage lockout (rising)",
+          "min": 2.96,
+          "typ": 3.14,
+          "max": 3.27,
+          "unit": "V",
+          "conditions": "VCC rising"
+        },
+        "VCC_UVLO_VCC_falling_hysteresis": {
+          "parameter": "Internal VCC undervoltage lockout (hysteresis)",
+          "min": null,
+          "typ": -605,
+          "max": null,
+          "unit": "mV",
+          "conditions": "VCC falling hysteresis"
+        },
+        "VBIAS_ON": {
+          "parameter": "Input changeover (rising)",
+          "min": null,
+          "typ": 3.09,
+          "max": 3.25,
+          "unit": "V",
+          "conditions": "VBIAS rising"
+        },
+        "VBIAS_ON_VBIAS_falling_hysteresis": {
+          "parameter": "Input changeover (hysteresis)",
+          "min": null,
+          "typ": -63,
+          "max": null,
+          "unit": "mV",
+          "conditions": "VBIAS falling hysteresis"
+        },
+        "IBIAS_NONSW": {
+          "parameter": "Operating quiescent current from external VBIAS (non-switching)",
+          "min": null,
+          "typ": 21,
+          "max": 50,
+          "unit": "µA",
+          "conditions": "VEN = 2 V, VFB = 1.5 V, VBIAS = 3.3 V external"
+        },
+        "VFB": {
+          "parameter": "Feedback voltage",
+          "min": 0.987,
+          "typ": 1.006,
+          "max": 1.017,
+          "unit": "V",
+          "conditions": "PWM mode"
+        },
+        "ILKG_FB": {
+          "parameter": "Input leakage current at FB pin",
+          "min": null,
+          "typ": 0.2,
+          "max": 60,
+          "unit": "nA",
+          "conditions": "VFB = 1 V"
+        },
+        "VCBOOT_UVLO": {
+          "parameter": "CBOOT - SW undervoltage lockout",
+          "min": 1.6,
+          "typ": 2.2,
+          "max": 2.7,
+          "unit": "V",
+          "conditions": null
+        },
+        "IHS_LIMIT": {
+          "parameter": "Short-circuit, high-side current limit",
+          "min": 7.4,
+          "typ": 8.7,
+          "max": 9.85,
+          "unit": "A",
+          "conditions": null
+        },
+        "ILS_LIMIT": {
+          "parameter": "Low-side current limit",
+          "min": 5.8,
+          "typ": 6.6,
+          "max": 7.25,
+          "unit": "A",
+          "conditions": null
+        },
+        "INEG_LIMIT": {
+          "parameter": "Negative current limit",
+          "min": null,
+          "typ": -6,
+          "max": null,
+          "unit": "A",
+          "conditions": null
+        },
+        "VHICCUP": {
+          "parameter": "Hiccup threshold on FB pin",
+          "min": 0.36,
+          "typ": 0.4,
+          "max": 0.44,
+          "unit": "V",
+          "conditions": null
+        },
+        "IL_ZC": {
+          "parameter": "Zero cross-current limit",
+          "min": null,
+          "typ": 0.06,
+          "max": null,
+          "unit": "A",
+          "conditions": null
+        },
+        "ISSC": {
+          "parameter": "Soft-start charge current",
+          "min": 1.8,
+          "typ": 2,
+          "max": 2.2,
+          "unit": "µA",
+          "conditions": null
+        },
+        "RSSD": {
+          "parameter": "Soft-start discharge resistance",
+          "min": null,
+          "typ": 1,
+          "max": null,
+          "unit": "kΩ",
+          "conditions": "UVLO, TSD, OCP, or EN = 0"
+        },
+        "VPGOOD_OV": {
+          "parameter": "Power-good overvoltage threshold",
+          "min": 106,
+          "typ": 110,
+          "max": 113,
+          "unit": "%",
+          "conditions": "% of FB voltage"
+        },
+        "VPGOOD_UV": {
+          "parameter": "Power-good undervoltage threshold",
+          "min": 86,
+          "typ": 90,
+          "max": 93,
+          "unit": "%",
+          "conditions": "% of FB voltage"
+        },
+        "VPGOOD_HYS": {
+          "parameter": "Power-good hysteresis",
+          "min": null,
+          "typ": 1.2,
+          "max": null,
+          "unit": "%",
+          "conditions": "% of FB voltage"
+        },
+        "VPGOOD_VALID": {
+          "parameter": "Minimum input voltage for proper PGOOD function",
+          "min": null,
+          "typ": 1.3,
+          "max": 2,
+          "unit": "V",
+          "conditions": "50-µA pullup to PGOOD pin, VEN = 0 V, TJ = 25°C"
+        },
+        "RPGOOD": {
+          "parameter": "Power-good ON-resistance (VEN=2.5V)",
+          "min": null,
+          "typ": 40,
+          "max": 100,
+          "unit": "Ω",
+          "conditions": "VEN = 2.5V"
+        },
+        "RPGOOD_VEN___0V": {
+          "parameter": "Power-good ON-resistance (VEN=0V)",
+          "min": null,
+          "typ": 30,
+          "max": 90,
+          "unit": "Ω",
+          "conditions": "VEN = 0V"
+        },
+        "RDS_ON_HS": {
+          "parameter": "High-side MOSFET ON-resistance",
+          "min": null,
+          "typ": 53,
+          "max": 90,
+          "unit": "mΩ",
+          "conditions": "IOUT = 1 A, VBIAS = VOUT = 3.3 V"
+        },
+        "RDS_ON_LS": {
+          "parameter": "Low-side MOSFET ON-resistance",
+          "min": null,
+          "typ": 31,
+          "max": 55,
+          "unit": "mΩ",
+          "conditions": "IOUT = 1 A, VBIAS = VOUT = 3.3 V"
+        },
+        "TSD": {
+          "parameter": "Thermal shutdown threshold",
+          "min": null,
+          "typ": 160,
+          "max": null,
+          "unit": "°C",
+          "conditions": "Shutdown threshold"
+        },
+        "TSD_Recovery_threshold": {
+          "parameter": "Thermal shutdown recovery threshold",
+          "min": null,
+          "typ": 135,
+          "max": null,
+          "unit": "°C",
+          "conditions": "Recovery threshold"
+        },
+        "NOC": {
+          "parameter": "Number of switching cycles before hiccup is tripped",
+          "min": null,
+          "typ": 128,
+          "max": null,
+          "unit": "Cycles",
+          "conditions": null
+        },
+        "tOC": {
+          "parameter": "Overcurrent hiccup retry delay time",
+          "min": null,
+          "typ": 46,
+          "max": null,
+          "unit": "ms",
+          "conditions": null
+        }
+      },
+      "drc_hints": {
+        "vin_operating": {
+          "min": 3.5,
+          "max": 36,
+          "unit": "V"
+        },
+        "vref": {
+          "min": 0.987,
+          "typ": 1.006,
+          "max": 1.017,
+          "unit": "V"
+        },
+        "enable_threshold": {
+          "max": 1.15,
+          "unit": "V"
+        },
+        "iout_max": {
+          "min": 6,
+          "typ": 7.3,
+          "max": 8.35,
+          "unit": "A"
+        },
+        "iq": {
+          "typ": 0.8,
+          "max": 10,
+          "unit": "µA"
+        },
+        "soft_start": {
+          "min": 1.8,
+          "typ": 2,
+          "max": 2.2,
+          "unit": "µA"
+        },
+        "thermal_shutdown": {
+          "typ": 160,
+          "unit": "°C"
+        },
+        "uvlo": {
+          "min": 2.96,
+          "typ": 3.14,
+          "max": 3.27,
+          "unit": "V"
+        }
+      }
+    },
+    "design_context": {
+      "recommended_external_components": [
+        {
+          "role": "input_capacitor",
+          "source_page": 25,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "comprehensive database of components when generating a design (see Custom Design With WEBENCH®"
+        },
+        {
+          "role": "output_capacitor",
+          "source_page": 25,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "comprehensive database of components when generating a design (see Custom Design With WEBENCH®"
+        },
+        {
+          "role": "input_capacitor",
+          "source_page": 25,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "Tools). This section presents a simplified discussion of the design process."
+        },
+        {
+          "role": "output_capacitor",
+          "source_page": 25,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "Tools). This section presents a simplified discussion of the design process."
+        },
+        {
+          "role": "soft_start_capacitor",
+          "source_page": 25,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "MODE FB"
+        },
+        {
+          "role": "soft_start_capacitor",
+          "source_page": 25,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "RFBB"
+        },
+        {
+          "role": "inductor",
+          "source_page": 28,
+          "value_hint": null,
+          "value_hints": [
+            "0.47 µF"
+          ],
+          "snippet": "capacitance, and a capacitor with a value of 0.47 µF for high-frequency filtering."
+        },
+        {
+          "role": "inductor",
+          "source_page": 28,
+          "value_hint": null,
+          "value_hints": [
+            "0.47 µF"
+          ],
+          "snippet": "注"
+        }
+      ],
+      "component_value_hints": [
+        {
+          "values": [
+            "0.1 µF",
+            "1 µF",
+            "10 µF",
+            "22 µF"
+          ],
+          "source_page": 28,
+          "snippet": "LM73605, LM73606 www.ti.com.cn ZHCSH36 –SEPTEMBER 2017 RT pin is floating and SYNC/MODE pin is tied to ground in this design. 8.2.2.4 Input Capacitors The LM73605/6 device requires high-frequency ceramic input decoupling"
+        },
+        {
+          "values": [
+            "0.47 µF"
+          ],
+          "source_page": 28,
+          "snippet": "It is very important in buck regulator to place the small decoupling capacitor right next to the PVIN and PGND pins. This capacitor is used to bypass the high frequency switching noise by providing a return path of the n"
+        }
+      ],
+      "design_equation_hints": [
+        {
+          "equation": "RENB = RENT VIN_ON_H VEN_VOUT_H",
+          "source_page": 15
+        },
+        {
+          "equation": "PLOSS_LDO = ILDO × (VIN_LDO – VOUT_LDO) (11)",
+          "source_page": 15
+        },
+        {
+          "equation": "D = VOUT / VIN (26)",
+          "source_page": 28
+        },
+        {
+          "equation": "TJ = PIC_LOSS × RθJA + TA",
+          "source_page": 41
+        },
+        {
+          "equation": "PIC_LOSS = VIN × IIN × (1 −Efficiency) −1.1 × IOUT × DCR",
+          "source_page": 41
+        }
+      ],
+      "layout_hints": [
+        {
+          "hint": "The VCC pin must have a 1-µF to 4.7-µF bypass capacitor placed as close as possible to the pin and properly",
+          "source_page": 15
+        },
+        {
+          "hint": "CVCC AGND",
+          "source_page": 25
+        },
+        {
+          "hint": "PGND CBOOT",
+          "source_page": 26
+        },
+        {
+          "hint": "It is very important in buck regulator to place the small decoupling capacitor right next to the PVIN and PGND",
+          "source_page": 28
+        },
+        {
+          "hint": "pins. This capacitor is used to bypass the high frequency switching noise by providing a return path of the noise.",
+          "source_page": 28
+        },
+        {
+          "hint": "as close as possible to the PVIN and PGND pins.",
+          "source_page": 28
+        },
+        {
+          "hint": "input capacitance with ESR close to the characteristic impedance of the LC filter formed by your input inductance",
+          "source_page": 28
+        },
+        {
+          "hint": "1. Place ceramic high frequency bypass capacitors as close as possible to the PVIN and PGND pins, which are",
+          "source_page": 39
+        },
+        {
+          "hint": "2. Use short and wide traces, or localized IC layer planes, for high current paths, such as VIN, VOUT, SW and",
+          "source_page": 39
+        },
+        {
+          "hint": "GND connections. Short and wide copper traces reduce power loss and noise due to low parasitic resistance",
+          "source_page": 39
+        }
+      ],
+      "supply_recommendations": [
+        {
+          "hint": "5 Pin Configuration and Functions......................... 3 9 Power Supply Recommendations...................... 40",
+          "source_page": 1
+        },
+        {
+          "hint": "• VIN_ON_H is the desired supply voltage threshold to turn on this device (10)",
+          "source_page": 15
+        },
+        {
+          "hint": "Note that the divider adds to supply quiescent current by VIN / (RENT + RENB). Small RENT and RENB values add",
+          "source_page": 15
+        },
+        {
+          "hint": "7.3.6 Internal LDO, VCC_UVLO, and BIAS Input",
+          "source_page": 15
+        },
+        {
+          "hint": "The UVLO on VCC voltage, VCC_UVLO, turns off the regulation when VCC voltage is too low. It prevents the",
+          "source_page": 15
+        },
+        {
+          "hint": "LM73605/6 from operating until the VCC voltage is enough for the internal circuitry. Hysteresis on VCC_UVLO",
+          "source_page": 15
+        },
+        {
+          "hint": "generates VCC voltage from one of the two inputs: the supply voltage VIN, or the BIAS input. When BIAS is tied",
+          "source_page": 15
+        },
+        {
+          "hint": "The higher the difference between the input and output voltages of the LDO, the more loss occurs to supply the",
+          "source_page": 15
+        }
+      ],
+      "topology_hints": [
+        {
+          "hint": "2 应用.......................................................................... 1 8 Application and Implementation ........................ 26",
+          "source_page": 1
+        },
+        {
+          "hint": "3 说明.......................................................................... 1 8.1 Application Information............................................ 26",
+          "source_page": 1
+        },
+        {
+          "hint": "4 修订历史记录........................................................... 2 8.2 Typical Application ................................................. 26",
+          "source_page": 1
+        },
+        {
+          "hint": "7.3.6 Internal LDO, VCC_UVLO, and BIAS Input",
+          "source_page": 15
+        },
+        {
+          "hint": "The LM73605/6 integrates an internal LDO, generating VCC voltage for control circuitry and MOSFET drivers.",
+          "source_page": 15
+        },
+        {
+          "hint": "prevents the part from turning off during power up if VIN droops due to input current demands. The LDO",
+          "source_page": 15
+        },
+        {
+          "hint": "to ground, the LDO input is VIN. When BIAS is tied to a voltage higher than 3.3 V, the LDO input is VBIAS. BIAS",
+          "source_page": 15
+        },
+        {
+          "hint": "The BIAS input is designed to reduce the LDO power loss. The LDO power loss is:",
+          "source_page": 15
+        }
+      ],
+      "design_pages": {
+        "pages": [
+          {
+            "page": 1,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 15,
+            "title": null,
+            "content_type": "layout"
+          },
+          {
+            "page": 25,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 26,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 28,
+            "title": null,
+            "content_type": "layout"
+          },
+          {
+            "page": 39,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 40,
+            "title": null,
+            "content_type": "layout"
+          },
+          {
+            "page": 41,
+            "title": null,
+            "content_type": "layout"
+          },
+          {
+            "page": 42,
+            "title": null,
+            "content_type": "layout"
+          }
+        ],
+        "total_pages": 9
+      }
+    }
+  }
 }

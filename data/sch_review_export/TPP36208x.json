@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -473,6 +473,658 @@
       "unit": "°C/W",
       "conditions": "TSOT23-6 package",
       "source": "electrical_characteristics"
+    }
+  },
+  "domains": {
+    "pin": {
+      "packages": {
+        "TSOT23-6": {
+          "pin_count": 6,
+          "pins": {
+            "1": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground pin. Power and controller circuit ground.",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "SW",
+              "direction": "OUTPUT",
+              "signal_type": "POWER",
+              "description": "Switching node pin. Voltage switching between high-side FET and low-side FET.",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "VIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Supply input pin.",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "VFB",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Voltage feedback pin. Connect to output voltage with a feedback resistor divider.",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "EN",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Enable input. Active high. Internally weak pulled up.",
+              "unused_treatment": "FLOAT"
+            },
+            "6": {
+              "name": "VBST",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "High-side MOSFET gate supply pin. Connect 0.1-μF between VBST and SW pins.",
+              "unused_treatment": null
+            }
+          }
+        }
+      }
+    },
+    "electrical": {
+      "absolute_maximum_ratings": {
+        "VIN": {
+          "parameter": "Supply Voltage",
+          "min": -0.3,
+          "max": 42,
+          "unit": "V",
+          "conditions": null
+        },
+        "SW": {
+          "parameter": "Switching Node Voltage (20 ns)",
+          "min": -5,
+          "max": 42,
+          "unit": "V",
+          "conditions": null
+        },
+        "VBST-SW": {
+          "parameter": "Bootstrap Voltage",
+          "min": -0.3,
+          "max": 6,
+          "unit": "V",
+          "conditions": null
+        },
+        "FB": {
+          "parameter": "Feedback Voltage",
+          "min": -0.3,
+          "max": 6,
+          "unit": "V",
+          "conditions": null
+        },
+        "EN": {
+          "parameter": "Enable Input",
+          "min": -0.3,
+          "max": 42,
+          "unit": "V",
+          "conditions": null
+        },
+        "TJ": {
+          "parameter": "Maximum Junction Temperature",
+          "min": -40,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        },
+        "TA": {
+          "parameter": "Operating Temperature Range",
+          "min": -40,
+          "max": 125,
+          "unit": "°C",
+          "conditions": null
+        },
+        "TSTG": {
+          "parameter": "Storage Temperature Range",
+          "min": -65,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        },
+        "TL": {
+          "parameter": "Lead Temperature (Soldering 10 sec)",
+          "min": null,
+          "max": 260,
+          "unit": "°C",
+          "conditions": null
+        },
+        "HBM": {
+          "parameter": "Human Body Model ESD",
+          "min": 2,
+          "max": null,
+          "unit": "kV",
+          "conditions": "ANSI/ESDA/JEDEC JS-001"
+        },
+        "CDM": {
+          "parameter": "Charged Device Model ESD",
+          "min": 1.5,
+          "max": null,
+          "unit": "kV",
+          "conditions": "ANSI/ESDA/JEDEC JS-002"
+        }
+      },
+      "electrical_parameters": {
+        "VIN": {
+          "parameter": "Supply Voltage Range",
+          "min": 4.5,
+          "typ": null,
+          "max": 36,
+          "unit": "V",
+          "conditions": null
+        },
+        "IQ": {
+          "parameter": "Operating Supply Current",
+          "min": null,
+          "typ": 70,
+          "max": null,
+          "unit": "µA",
+          "conditions": "Non-switching, EN = 5 V, VFB = 1 V"
+        },
+        "IQSD": {
+          "parameter": "Shut Down Supply Current",
+          "min": null,
+          "typ": 2,
+          "max": null,
+          "unit": "µA",
+          "conditions": "EN = GND"
+        },
+        "VUVLO_rising": {
+          "parameter": "UVLO Rising Threshold",
+          "min": 3.9,
+          "typ": 4.3,
+          "max": 4.5,
+          "unit": "V",
+          "conditions": null
+        },
+        "VUVLO_falling": {
+          "parameter": "UVLO Falling Threshold",
+          "min": 3.7,
+          "typ": 3.9,
+          "max": 4.1,
+          "unit": "V",
+          "conditions": null
+        },
+        "VENH": {
+          "parameter": "EN Input Rising Threshold",
+          "min": null,
+          "typ": 1.28,
+          "max": 1.35,
+          "unit": "V",
+          "conditions": null
+        },
+        "VENL": {
+          "parameter": "EN Input Falling Threshold",
+          "min": 1,
+          "typ": 1.17,
+          "max": null,
+          "unit": "V",
+          "conditions": null
+        },
+        "VFB": {
+          "parameter": "VFB Feedback Voltage",
+          "min": 588,
+          "typ": 600,
+          "max": 612,
+          "unit": "mV",
+          "conditions": null
+        },
+        "Rds(on)_HSD": {
+          "parameter": "High-side FET On-Resistance",
+          "min": null,
+          "typ": 180,
+          "max": null,
+          "unit": "mΩ",
+          "conditions": "ISW = 1 A"
+        },
+        "Rds(on)_LSD": {
+          "parameter": "Low-side FET On-Resistance",
+          "min": null,
+          "typ": 90,
+          "max": null,
+          "unit": "mΩ",
+          "conditions": "ISW = 1 A"
+        },
+        "fSW": {
+          "parameter": "Switching Frequency",
+          "min": null,
+          "typ": 2.2,
+          "max": null,
+          "unit": "MHz",
+          "conditions": null
+        },
+        "tss": {
+          "parameter": "Soft-Start Time",
+          "min": null,
+          "typ": 2,
+          "max": null,
+          "unit": "ms",
+          "conditions": null
+        },
+        "Iskip": {
+          "parameter": "Pulse-Skip Mode Peak Inductor Current Threshold",
+          "min": null,
+          "typ": 300,
+          "max": null,
+          "unit": "mA",
+          "conditions": "VIN = 12 V, VOUT = 5 V, L = 15 µH"
+        },
+        "ILimit_HS": {
+          "parameter": "High-side Current Limit",
+          "min": 2.5,
+          "typ": 3.2,
+          "max": 3.9,
+          "unit": "A",
+          "conditions": "Inductor peak current"
+        },
+        "ILimit_LS": {
+          "parameter": "Low-side Current Limit",
+          "min": null,
+          "typ": 2.5,
+          "max": null,
+          "unit": "A",
+          "conditions": "Inductor valley current"
+        },
+        "ILimit_LS_neg": {
+          "parameter": "Negative Low-side Current Limit",
+          "min": null,
+          "typ": 0.9,
+          "max": null,
+          "unit": "A",
+          "conditions": null
+        },
+        "VFB_UVP_rising": {
+          "parameter": "FB Hiccup Protection Rising Ratio",
+          "min": null,
+          "typ": 33,
+          "max": null,
+          "unit": "%",
+          "conditions": null
+        },
+        "VFB_UVP_falling": {
+          "parameter": "FB Hiccup Protection Falling Ratio",
+          "min": null,
+          "typ": 40,
+          "max": null,
+          "unit": "%",
+          "conditions": null
+        },
+        "VFB_OVP_rising": {
+          "parameter": "FB Over-Voltage Protection Rising Ratio",
+          "min": null,
+          "typ": 108,
+          "max": null,
+          "unit": "%",
+          "conditions": null
+        },
+        "VFB_OVP_falling": {
+          "parameter": "FB Over-Voltage Protection Falling Ratio",
+          "min": null,
+          "typ": 107,
+          "max": null,
+          "unit": "%",
+          "conditions": null
+        },
+        "tHIC_wait": {
+          "parameter": "Hiccup Protection Wait Time",
+          "min": null,
+          "typ": 128,
+          "max": null,
+          "unit": "Cycles",
+          "conditions": null
+        },
+        "tHIC_restart": {
+          "parameter": "Hiccup Protection Restart Time",
+          "min": null,
+          "typ": 60,
+          "max": null,
+          "unit": "ms",
+          "conditions": null
+        },
+        "TSD": {
+          "parameter": "Thermal Shut Down Temperature",
+          "min": null,
+          "typ": 160,
+          "max": null,
+          "unit": "°C",
+          "conditions": null
+        },
+        "TSD_hys": {
+          "parameter": "Thermal Hysteresis",
+          "min": null,
+          "typ": 10,
+          "max": null,
+          "unit": "°C",
+          "conditions": null
+        },
+        "VIN_Recommended_Operating_Conditio": {
+          "parameter": "Supply Input Voltage Range",
+          "min": 4.5,
+          "typ": null,
+          "max": 36,
+          "unit": "V",
+          "conditions": "Recommended Operating Condition"
+        },
+        "EN": {
+          "parameter": "EN Input Voltage Range",
+          "min": 0,
+          "typ": null,
+          "max": 5.5,
+          "unit": "V",
+          "conditions": "Recommended Operating Condition"
+        },
+        "FB": {
+          "parameter": "FB Input Voltage Range",
+          "min": 0,
+          "typ": null,
+          "max": 5.5,
+          "unit": "V",
+          "conditions": "Recommended Operating Condition"
+        },
+        "BOOT – SW": {
+          "parameter": "BOOT Voltage Range",
+          "min": 0,
+          "typ": null,
+          "max": 5.5,
+          "unit": "V",
+          "conditions": "Recommended Operating Condition"
+        },
+        "SW": {
+          "parameter": "SW Voltage Range",
+          "min": 0,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": "Recommended Operating Condition; Max = VIN"
+        },
+        "TJ": {
+          "parameter": "Operating Junction Temperature",
+          "min": -40,
+          "typ": null,
+          "max": 150,
+          "unit": "°C",
+          "conditions": "Recommended Operating Condition"
+        },
+        "θJA": {
+          "parameter": "Junction-to-ambient thermal resistance",
+          "min": null,
+          "typ": 100,
+          "max": null,
+          "unit": "°C/W",
+          "conditions": "TSOT23-6 package"
+        },
+        "θJC": {
+          "parameter": "Junction-to-case thermal resistance",
+          "min": null,
+          "typ": 67,
+          "max": null,
+          "unit": "°C/W",
+          "conditions": "TSOT23-6 package"
+        }
+      },
+      "drc_hints": {
+        "vin_abs_max": {
+          "value": 42,
+          "unit": "V"
+        },
+        "vin_operating": {
+          "min": 4.5,
+          "max": 36,
+          "unit": "V"
+        },
+        "vref": {
+          "min": 588,
+          "typ": 600,
+          "max": 612,
+          "unit": "mV"
+        },
+        "enable_threshold": {
+          "typ": 1.28,
+          "max": 1.35,
+          "unit": "V"
+        },
+        "iout_max": {
+          "min": 2.5,
+          "typ": 3.2,
+          "max": 3.9,
+          "unit": "A"
+        },
+        "iq": {
+          "typ": 70,
+          "unit": "µA"
+        },
+        "fsw": {
+          "min": 390,
+          "typ": 500,
+          "max": 590,
+          "unit": "kHz"
+        },
+        "soft_start": {
+          "typ": 2,
+          "unit": "ms"
+        },
+        "thermal_shutdown": {
+          "typ": 160,
+          "unit": "°C"
+        },
+        "thermal_resistance": {
+          "typ": 100,
+          "unit": "°C/W"
+        },
+        "uvlo": {
+          "min": 3.9,
+          "typ": 4.3,
+          "max": 4.5,
+          "unit": "V"
+        }
+      }
+    },
+    "thermal": {
+      "theta_ja": {
+        "parameter": "Junction-to-ambient thermal resistance",
+        "symbol": "θJA",
+        "min": null,
+        "typ": 100,
+        "max": null,
+        "value": null,
+        "unit": "°C/W",
+        "conditions": "TSOT23-6 package",
+        "source": "electrical_characteristics"
+      },
+      "theta_jc": {
+        "parameter": "Junction-to-case thermal resistance",
+        "symbol": "θJC",
+        "min": null,
+        "typ": 67,
+        "max": null,
+        "value": null,
+        "unit": "°C/W",
+        "conditions": "TSOT23-6 package",
+        "source": "electrical_characteristics"
+      }
+    },
+    "design_context": {
+      "recommended_external_components": [
+        {
+          "role": "soft_start_capacitor",
+          "source_page": 0,
+          "value_hint": null,
+          "value_hints": [
+            "180 mΩ",
+            "90 mΩ"
+          ],
+          "snippet": "• Wide Supply Voltage: 4.5 V to 36 V The TPP36208x series is a simple, easy-to-use, 2-"
+        },
+        {
+          "role": "soft_start_capacitor",
+          "source_page": 0,
+          "value_hint": null,
+          "value_hints": [
+            "180 mΩ",
+            "90 mΩ"
+          ],
+          "snippet": "• Internal Power FET: 180 mΩ and 90 mΩ A output, synchronous, step-down, and switch-mode"
+        },
+        {
+          "role": "bootstrap_capacitor",
+          "source_page": 0,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "Applications"
+        },
+        {
+          "role": "bootstrap_capacitor",
+          "source_page": 0,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "• 12-V, 24-V Distributed Power Supply"
+        },
+        {
+          "role": "output_capacitor",
+          "source_page": 0,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "CBST"
+        },
+        {
+          "role": "input_capacitor",
+          "source_page": 0,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "1 6"
+        },
+        {
+          "role": "output_capacitor",
+          "source_page": 0,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "1 6"
+        },
+        {
+          "role": "input_capacitor",
+          "source_page": 0,
+          "value_hint": null,
+          "value_hints": [],
+          "snippet": "GND BOOT"
+        }
+      ],
+      "component_value_hints": [
+        {
+          "values": [
+            "180 mΩ",
+            "90 mΩ"
+          ],
+          "source_page": 0,
+          "snippet": "TPP36208x 36-V Input, 2-A Synchronous Step-Down Voltage Regulator Features Description • Wide Supply Voltage: 4.5 V to 36 V The TPP36208x series is a simple, easy-to-use, 2- • Internal Power FET: 180 mΩ and 90 mΩ A outpu"
+        },
+        {
+          "values": [
+            "100 nF"
+          ],
+          "source_page": 13,
+          "snippet": "In most 12-V systems, lower voltage rail such as 5 V/3.3 V is a typical need for microcontrollers, I/Os, and other low voltage components. The below application lists the typical schematic for a 5-V buck regulator. Figur"
+        },
+        {
+          "values": [
+            "100 nF",
+            "10 μF"
+          ],
+          "source_page": 13,
+          "snippet": "Component Selection EVM: Fsw = 500 kHz, MODE = Pulse-Skip, IOUT = 2 A, tSS = 2 ms, VOUT = 5 V Designator Value Quantity Part No. Package Manufacturer Description TPP362080- Buck Converter, 36 V, U1 TPP362080 1 SOT23-6 3P"
+        },
+        {
+          "values": [
+            "10 μF"
+          ],
+          "source_page": 13,
+          "snippet": "4KA02 50VDC, X7R, ±15% GCM32EC71H10 Capacitor, 10 μF, C4 10 μF 1 1210 muRata 6MA03L 50VDC, X7S, ±22% Resistor, 510 K, ±1%, R1 510 K 1 ARG03FTC5103 0603 Viking 0.1 W C5 NC 0 www.3peakic.com.cn 14 / 20 EA20220903A3"
+        }
+      ],
+      "layout_hints": [
+        {
+          "hint": "• Both input capacitors and output capacitors must be placed to the device pins as close as possible.",
+          "source_page": 15
+        },
+        {
+          "hint": "• Exposed pad must be connected to the PCB ground plane directly, the copper area must be as large as possible.",
+          "source_page": 15
+        }
+      ],
+      "supply_recommendations": [
+        {
+          "hint": "• Wide Supply Voltage: 4.5 V to 36 V The TPP36208x series is a simple, easy-to-use, 2-",
+          "source_page": 0
+        },
+        {
+          "hint": "– 2.2 MHz (TPP362081/3) 2-A continuous output current over a wide input supply",
+          "source_page": 0
+        },
+        {
+          "hint": "• 12-V, 24-V Distributed Power Supply",
+          "source_page": 0
+        },
+        {
+          "hint": "input voltage to the desired output voltage set by the VFB resistor divider. The maximum output current is 2 A. The below",
+          "source_page": 13
+        }
+      ],
+      "topology_hints": [
+        {
+          "hint": "36-V Input, 2-A Synchronous Step-Down Voltage Regulator",
+          "source_page": 0
+        },
+        {
+          "hint": "• Internal Power FET: 180 mΩ and 90 mΩ A output, synchronous, step-down, and switch-mode",
+          "source_page": 0
+        },
+        {
+          "hint": "Applications",
+          "source_page": 0
+        },
+        {
+          "hint": "• Industrial Applications",
+          "source_page": 0
+        },
+        {
+          "hint": "Typical Application Circuit",
+          "source_page": 0
+        },
+        {
+          "hint": "36-V Input, 2-A Synchronous Step-Down Voltage Regulator",
+          "source_page": 13
+        },
+        {
+          "hint": "Application and Implementation",
+          "source_page": 13
+        },
+        {
+          "hint": "Information in the following application sections is not part of the 3PEAK’s component specification and 3PEAK does not",
+          "source_page": 13
+        }
+      ],
+      "design_pages": {
+        "pages": [
+          {
+            "page": 0,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 13,
+            "title": null,
+            "content_type": "application"
+          },
+          {
+            "page": 15,
+            "title": null,
+            "content_type": "layout"
+          }
+        ],
+        "total_pages": 3
+      }
     }
   }
 }
