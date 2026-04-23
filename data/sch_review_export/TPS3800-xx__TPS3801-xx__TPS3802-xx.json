@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -276,5 +276,278 @@
       "unit": "V"
     }
   },
-  "thermal": {}
+  "thermal": {},
+  "domains": {
+    "pin": {
+      "packages": {
+        "SC-70": {
+          "pin_count": 5,
+          "pins": {
+            "1": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground connection",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground connection",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "RESET",
+              "direction": "OUTPUT",
+              "signal_type": "DIGITAL",
+              "description": "Active-low push-pull reset output",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "VDD",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Supply voltage input and fixed-threshold monitor input",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "MR",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Manual-reset input, active low (also: SENSE — Sense input for adjustable voltage monitoring)",
+              "unused_treatment": null
+            }
+          }
+        }
+      }
+    },
+    "electrical": {
+      "absolute_maximum_ratings": {
+        "VDD": {
+          "parameter": "Supply voltage",
+          "min": null,
+          "max": 7,
+          "unit": "V",
+          "conditions": null
+        },
+        "MR": {
+          "parameter": "Manual reset input voltage",
+          "min": -0.3,
+          "max": null,
+          "unit": "V",
+          "conditions": "max is VDD + 0.3 V"
+        },
+        "RESET": {
+          "parameter": "Reset output voltage",
+          "min": -0.3,
+          "max": null,
+          "unit": "V",
+          "conditions": "max is VDD + 0.3 V"
+        },
+        "IOL": {
+          "parameter": "Maximum low-output current",
+          "min": null,
+          "max": 5,
+          "unit": "mA",
+          "conditions": null
+        },
+        "IOH": {
+          "parameter": "Maximum high-output current",
+          "min": null,
+          "max": -5,
+          "unit": "mA",
+          "conditions": null
+        },
+        "IIK": {
+          "parameter": "Input-clamp current",
+          "min": -20,
+          "max": 20,
+          "unit": "mA",
+          "conditions": "VI < 0 or VI > VDD"
+        },
+        "IOK": {
+          "parameter": "Output-clamp current",
+          "min": -20,
+          "max": 20,
+          "unit": "mA",
+          "conditions": "VO < 0 or VO > VDD"
+        },
+        "TJ": {
+          "parameter": "Operating junction temperature range",
+          "min": -40,
+          "max": 85,
+          "unit": "°C",
+          "conditions": null
+        },
+        "Tstg": {
+          "parameter": "Storage temperature range",
+          "min": -65,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        }
+      },
+      "electrical_parameters": {
+        "VOH": {
+          "parameter": "High-level output voltage",
+          "min": null,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": "VDD = 1.6 V to 6 V, IOH = -500 µA, min is VDD - 0.2"
+        },
+        "VOH_VDD___3_3_V__IOH____2_mA__min": {
+          "parameter": "High-level output voltage",
+          "min": null,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": "VDD = 3.3 V, IOH = -2 mA, min is VDD - 0.4"
+        },
+        "VOH_VDD___6_V__IOH____4_mA__min_is": {
+          "parameter": "High-level output voltage",
+          "min": null,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": "VDD = 6 V, IOH = -4 mA, min is VDD - 0.4"
+        },
+        "VOL": {
+          "parameter": "Low-level output voltage",
+          "min": null,
+          "typ": null,
+          "max": 0.2,
+          "unit": "V",
+          "conditions": "VDD = 1.6 V to 6 V, IOL = 500 µA"
+        },
+        "VOL_VDD___3_3_V__IOL___2_mA": {
+          "parameter": "Low-level output voltage",
+          "min": null,
+          "typ": null,
+          "max": 0.4,
+          "unit": "V",
+          "conditions": "VDD = 3.3 V, IOL = 2 mA"
+        },
+        "VOL_VDD___6_V__IOL___4_mA": {
+          "parameter": "Low-level output voltage",
+          "min": null,
+          "typ": null,
+          "max": 0.4,
+          "unit": "V",
+          "conditions": "VDD = 6 V, IOL = 4 mA"
+        },
+        "VIT-": {
+          "parameter": "Negative-going input threshold voltage",
+          "min": 1.117,
+          "typ": 1.14,
+          "max": 1.163,
+          "unit": "V",
+          "conditions": "TA = -40°C to 85°C"
+        },
+        "VIT-_TA____40_C_to_85_C": {
+          "parameter": "Negative-going input threshold voltage",
+          "min": 3.92,
+          "typ": 4,
+          "max": 4.08,
+          "unit": "V",
+          "conditions": "TA = -40°C to 85°C"
+        },
+        "Vhys": {
+          "parameter": "Threshold hysteresis",
+          "min": null,
+          "typ": 60,
+          "max": null,
+          "unit": "mV",
+          "conditions": null
+        },
+        "IIH": {
+          "parameter": "High-level input current (MR)",
+          "min": -40,
+          "typ": -60,
+          "max": -100,
+          "unit": "µA",
+          "conditions": "MR = 0.7 × VDD, VDD = 6 V"
+        },
+        "IIL": {
+          "parameter": "Low-level input current (MR)",
+          "min": -130,
+          "typ": -200,
+          "max": -340,
+          "unit": "µA",
+          "conditions": "MR = 0 V, VDD = 6 V"
+        },
+        "II": {
+          "parameter": "Input current (SENSE)",
+          "min": -25,
+          "typ": null,
+          "max": 25,
+          "unit": "nA",
+          "conditions": null
+        },
+        "IDD": {
+          "parameter": "Supply current",
+          "min": null,
+          "typ": 9,
+          "max": 12,
+          "unit": "µA",
+          "conditions": "VDD = 2 V, MR and output unconnected"
+        },
+        "IDD_VDD___6_V__MR_and_output_uncon": {
+          "parameter": "Supply current",
+          "min": null,
+          "typ": 20,
+          "max": 25,
+          "unit": "µA",
+          "conditions": "VDD = 6 V, MR and output unconnected"
+        },
+        "IDD_VDD___1_6_V__SENSE___0_V_to_VD": {
+          "parameter": "Supply current",
+          "min": null,
+          "typ": 7,
+          "max": 10,
+          "unit": "µA",
+          "conditions": "VDD = 1.6 V, SENSE = 0 V to VDD, output unconnected"
+        },
+        "IDD_VDD___4_V__SENSE___0_V_to_VDD": {
+          "parameter": "Supply current",
+          "min": null,
+          "typ": 9,
+          "max": 12,
+          "unit": "µA",
+          "conditions": "VDD = 4 V, SENSE = 0 V to VDD, output unconnected"
+        },
+        "IDD_VDD___1_6_V__MR_and_output_unc": {
+          "parameter": "Supply current",
+          "min": null,
+          "typ": 8,
+          "max": 11,
+          "unit": "µA",
+          "conditions": "VDD = 1.6 V, MR and output unconnected"
+        },
+        "IDD_VDD___4_V__MR_and_output_uncon": {
+          "parameter": "Supply current",
+          "min": null,
+          "typ": 13,
+          "max": 18,
+          "unit": "µA",
+          "conditions": "VDD = 4 V, MR and output unconnected"
+        },
+        "Ci": {
+          "parameter": "Input capacitance",
+          "min": null,
+          "typ": 5,
+          "max": null,
+          "unit": "pF",
+          "conditions": "VI = 0 V to VDD"
+        }
+      },
+      "drc_hints": {
+        "vin_abs_max": {
+          "value": 7,
+          "unit": "V"
+        }
+      }
+    }
+  }
 }

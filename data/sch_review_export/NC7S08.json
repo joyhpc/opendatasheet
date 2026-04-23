@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -387,6 +387,392 @@
       "unit": "mW",
       "conditions": "MicroPak-6",
       "source": "absolute_maximum_ratings"
+    }
+  },
+  "domains": {
+    "pin": {
+      "packages": {
+        "SC-88A": {
+          "pin_count": 5,
+          "pins": {
+            "1": {
+              "name": "BASE",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Base terminal of a transistor (also: ANODE — Anode terminal of a diode) (also: CATHODE — Cathode terminal of a diode) (also: ANODE 1 — Anode terminal 1) (also: SOURCE 1 — Source terminal 1) (also: EMITTER 2 — Emitter terminal 2)",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "BASE",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Base terminal of a transistor (also: ANODE — Anode terminal of a diode) (also: ANODE 2 — Anode terminal 2) (also: CATHODE 2 — Cathode terminal 2) (also: SOURCE 1 — Source terminal 1) (also: EMITTER 1 — Emitter terminal 1) (also: N/C — No internal connection)",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "BASE",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Base terminal of a transistor (also: COLLECTOR — Collector terminal of a transistor) (also: ANODE — Anode terminal of a diode) (also: CATHODE 2 — Cathode terminal 2) (also: CATHODE 3 — Cathode terminal 3) (also: GATE 1 — Gate terminal 1)",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "EMITTER",
+              "direction": "PASSIVE",
+              "signal_type": "ANALOG",
+              "description": "Emitter terminal of a transistor (also: COLLECTOR — Collector terminal of a transistor) (also: CATHODE — Cathode terminal of a diode) (also: COMMON ANODE — Common anode terminal) (also: DRAIN 1/2 — Common drain terminal 1 and 2) (also: BASE 2 — Base terminal 2) (also: N/C — No internal connection)",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "EMITTER",
+              "direction": "PASSIVE",
+              "signal_type": "ANALOG",
+              "description": "Emitter terminal of a transistor (also: COLLECTOR — Collector terminal of a transistor) (also: ANODE — Anode terminal of a diode) (also: CATHODE — Cathode terminal of a diode) (also: CATHODE 1 — Cathode terminal 1) (also: CATHODE 4 — Cathode terminal 4) (also: GATE 2 — Gate terminal 2) (also: COLLECTOR 2/BASE 1 — Common collector terminal 2 and base terminal 1)",
+              "unused_treatment": null
+            }
+          }
+        }
+      }
+    },
+    "electrical": {
+      "absolute_maximum_ratings": {
+        "VCC": {
+          "parameter": "Supply Voltage",
+          "min": -0.5,
+          "max": 6.5,
+          "unit": "V",
+          "conditions": null
+        },
+        "IIK": {
+          "parameter": "DC Input Diode Current",
+          "min": null,
+          "max": -20,
+          "unit": "mA",
+          "conditions": "VIN < 0 V"
+        },
+        "IIK_VIN___VCC": {
+          "parameter": "DC Input Diode Current",
+          "min": null,
+          "max": 20,
+          "unit": "mA",
+          "conditions": "VIN > VCC"
+        },
+        "VIN": {
+          "parameter": "DC Input Voltage",
+          "min": -0.5,
+          "max": null,
+          "unit": "V",
+          "conditions": "Max is VCC + 0.5V"
+        },
+        "IOK": {
+          "parameter": "DC Output Diode Current",
+          "min": null,
+          "max": -20,
+          "unit": "mA",
+          "conditions": "VOUT < 0 V"
+        },
+        "IOK_VOUT___VCC": {
+          "parameter": "DC Output Diode Current",
+          "min": null,
+          "max": 20,
+          "unit": "mA",
+          "conditions": "VOUT > VCC"
+        },
+        "VOUT": {
+          "parameter": "DC Output Voltage",
+          "min": -0.5,
+          "max": null,
+          "unit": "V",
+          "conditions": "Max is VCC + 0.5V"
+        },
+        "IOUT": {
+          "parameter": "DC Output Source or Sink Current",
+          "min": -12.5,
+          "max": 12.5,
+          "unit": "mA",
+          "conditions": null
+        },
+        "ICC or IGND": {
+          "parameter": "DC VCC or Ground Current per Output Pin",
+          "min": -25,
+          "max": 25,
+          "unit": "mA",
+          "conditions": null
+        },
+        "TSTG": {
+          "parameter": "Storage Temperature",
+          "min": -65,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        },
+        "TJ": {
+          "parameter": "Junction Temperature",
+          "min": null,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        },
+        "TL": {
+          "parameter": "Lead Temperature",
+          "min": null,
+          "max": 260,
+          "unit": "°C",
+          "conditions": "Soldering, 10 Seconds"
+        },
+        "PD": {
+          "parameter": "Power Dissipation in Still Air",
+          "min": null,
+          "max": 390,
+          "unit": "mW",
+          "conditions": "SC-74A"
+        },
+        "PD_SC_88A": {
+          "parameter": "Power Dissipation in Still Air",
+          "min": null,
+          "max": 332,
+          "unit": "mW",
+          "conditions": "SC-88A"
+        },
+        "PD_MicroPak_6": {
+          "parameter": "Power Dissipation in Still Air",
+          "min": null,
+          "max": 812,
+          "unit": "mW",
+          "conditions": "MicroPak-6"
+        }
+      },
+      "electrical_parameters": {
+        "VIH": {
+          "parameter": "HIGH Level Input Voltage",
+          "min": 1.5,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": "VCC = 2.0V"
+        },
+        "VIH_VCC___2_0V": {
+          "parameter": "HIGH Level Input Voltage",
+          "min": 1.5,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": "VCC = 2.0V"
+        },
+        "VIH_VCC___3_0___6_0V__Min___0_7_x": {
+          "parameter": "HIGH Level Input Voltage",
+          "min": null,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": "VCC = 3.0 - 6.0V, Min = 0.7 x VCC"
+        },
+        "VIL": {
+          "parameter": "LOW Level Input Voltage",
+          "min": null,
+          "typ": null,
+          "max": 0.5,
+          "unit": "V",
+          "conditions": "VCC = 2.0V"
+        },
+        "VIL_VCC___2_0V": {
+          "parameter": "LOW Level Input Voltage",
+          "min": null,
+          "typ": null,
+          "max": 0.5,
+          "unit": "V",
+          "conditions": "VCC = 2.0V"
+        },
+        "VIL_VCC___3_0___6_0V__Max___0_3_x": {
+          "parameter": "LOW Level Input Voltage",
+          "min": null,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": "VCC = 3.0 - 6.0V, Max = 0.3 x VCC"
+        },
+        "VOH": {
+          "parameter": "HIGH Level Output Voltage",
+          "min": 1.9,
+          "typ": 2.0,
+          "max": null,
+          "unit": "V",
+          "conditions": "VCC = 2.0V, IOH = -20 uA, VIN = VIH or VIL"
+        },
+        "VOH_VCC___2_0V__IOH____20_uA__VIN": {
+          "parameter": "HIGH Level Output Voltage",
+          "min": 1.9,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": "VCC = 2.0V, IOH = -20 uA, VIN = VIH or VIL"
+        },
+        "VOH_VCC___3_0V__IOH____1_3_mA__VIN": {
+          "parameter": "HIGH Level Output Voltage",
+          "min": 2.63,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": "VCC = 3.0V, IOH = -1.3 mA, VIN = VIH or VIL"
+        },
+        "VOL": {
+          "parameter": "LOW Level Output Voltage",
+          "min": null,
+          "typ": 0.0,
+          "max": 0.1,
+          "unit": "V",
+          "conditions": "VCC = 2.0V, IOL = 20 uA, VIN = VIH or VIL"
+        },
+        "VOL_VCC___2_0V__IOL___20_uA__VIN": {
+          "parameter": "LOW Level Output Voltage",
+          "min": null,
+          "typ": null,
+          "max": 0.1,
+          "unit": "V",
+          "conditions": "VCC = 2.0V, IOL = 20 uA, VIN = VIH or VIL"
+        },
+        "VOL_VCC___3_0V__IOL___1_3_mA__VIN": {
+          "parameter": "LOW Level Output Voltage",
+          "min": null,
+          "typ": null,
+          "max": 0.33,
+          "unit": "V",
+          "conditions": "VCC = 3.0V, IOL = 1.3 mA, VIN = VIH or VIL"
+        },
+        "IIN": {
+          "parameter": "Input Leakage Current",
+          "min": null,
+          "typ": null,
+          "max": 0.1,
+          "unit": "uA",
+          "conditions": "VCC = 6.0V, VIN = VCC or GND"
+        },
+        "IIN_VCC___6_0V__VIN___VCC_or_GND": {
+          "parameter": "Input Leakage Current",
+          "min": null,
+          "typ": null,
+          "max": 1.0,
+          "unit": "uA",
+          "conditions": "VCC = 6.0V, VIN = VCC or GND"
+        },
+        "ICC": {
+          "parameter": "Quiescent Supply Current",
+          "min": null,
+          "typ": null,
+          "max": 1.0,
+          "unit": "uA",
+          "conditions": "VCC = 6.0V, VIN = VCC or GND"
+        },
+        "ICC_VCC___6_0V__VIN___VCC_or_GND": {
+          "parameter": "Quiescent Supply Current",
+          "min": null,
+          "typ": null,
+          "max": 10.0,
+          "unit": "uA",
+          "conditions": "VCC = 6.0V, VIN = VCC or GND"
+        },
+        "tPLH, tPHL": {
+          "parameter": "Propagation Delay",
+          "min": null,
+          "typ": 3.5,
+          "max": 15,
+          "unit": "ns",
+          "conditions": "VCC = 5.0V, CL = 15 pF"
+        },
+        "tPLH, tPHL_VCC___5_0V__CL___15_pF": {
+          "parameter": "Propagation Delay",
+          "min": null,
+          "typ": null,
+          "max": 15,
+          "unit": "ns",
+          "conditions": "VCC = 5.0V, CL = 15 pF"
+        },
+        "tPLH, tPHL_VCC___4_5V__CL___50_pF": {
+          "parameter": "Propagation Delay",
+          "min": null,
+          "typ": null,
+          "max": 25,
+          "unit": "ns",
+          "conditions": "VCC = 4.5V, CL = 50 pF"
+        },
+        "tTLH, tTHL": {
+          "parameter": "Output Transition Time",
+          "min": null,
+          "typ": 3.0,
+          "max": 10,
+          "unit": "ns",
+          "conditions": "VCC = 5.0V, CL = 15 pF"
+        },
+        "tTLH, tTHL_VCC___4_5V__CL___50_pF": {
+          "parameter": "Output Transition Time",
+          "min": null,
+          "typ": null,
+          "max": 31,
+          "unit": "ns",
+          "conditions": "VCC = 4.5V, CL = 50 pF"
+        },
+        "CIN": {
+          "parameter": "Input Capacitance",
+          "min": null,
+          "typ": 2,
+          "max": 10,
+          "unit": "pF",
+          "conditions": "VCC = Open"
+        },
+        "CPD": {
+          "parameter": "Power Dissipation Capacitance",
+          "min": null,
+          "typ": 6,
+          "max": null,
+          "unit": "pF",
+          "conditions": "VCC = 5.0V"
+        }
+      },
+      "drc_hints": {
+        "vin_abs_max": {
+          "value": 6.5,
+          "unit": "V"
+        },
+        "enable_threshold": {
+          "min": 1.5,
+          "unit": "V"
+        }
+      }
+    },
+    "thermal": {
+      "power_dissipation": {
+        "parameter": "Power Dissipation in Still Air",
+        "symbol": "PD",
+        "min": null,
+        "typ": null,
+        "max": 390,
+        "value": null,
+        "unit": "mW",
+        "conditions": "SC-74A",
+        "source": "absolute_maximum_ratings"
+      },
+      "power_dissipation_SC_88A": {
+        "parameter": "Power Dissipation in Still Air",
+        "symbol": "PD",
+        "min": null,
+        "typ": null,
+        "max": 332,
+        "value": null,
+        "unit": "mW",
+        "conditions": "SC-88A",
+        "source": "absolute_maximum_ratings"
+      },
+      "power_dissipation_MicroPak_6": {
+        "parameter": "Power Dissipation in Still Air",
+        "symbol": "PD",
+        "min": null,
+        "typ": null,
+        "max": 812,
+        "value": null,
+        "unit": "mW",
+        "conditions": "MicroPak-6",
+        "source": "absolute_maximum_ratings"
+      }
     }
   }
 }

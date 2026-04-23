@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -317,6 +317,322 @@
       "unit": "mW",
       "conditions": "Ta=25°C, 40mm x 40mm Standard board",
       "source": "absolute_maximum_ratings"
+    }
+  },
+  "domains": {
+    "pin": {
+      "packages": {
+        "SOT-23": {
+          "pin_count": 3,
+          "pins": {
+            "1": {
+              "name": "VSS",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground pin",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "VOUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Voltage output pin",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "VIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power supply input pin",
+              "unused_treatment": null
+            }
+          }
+        }
+      }
+    },
+    "electrical": {
+      "absolute_maximum_ratings": {
+        "VIN": {
+          "parameter": "Input Voltage",
+          "min": -0.3,
+          "max": 7.0,
+          "unit": "V",
+          "conditions": "Ta=25°C"
+        },
+        "IOUT": {
+          "parameter": "Output Current",
+          "min": null,
+          "max": 500,
+          "unit": "mA",
+          "conditions": "Ta=25°C"
+        },
+        "VOUT": {
+          "parameter": "Output Voltage",
+          "min": -0.3,
+          "max": null,
+          "unit": "V",
+          "conditions": "Ta=25°C, max is VIN + 0.3"
+        },
+        "Pd": {
+          "parameter": "Power Dissipation (SOT-23)",
+          "min": null,
+          "max": 250,
+          "unit": "mW",
+          "conditions": "Ta=25°C"
+        },
+        "Pd_Ta_25_C__40mm_x_40mm_Standard": {
+          "parameter": "Power Dissipation (USP-6B, Standard board)",
+          "min": null,
+          "max": 1000,
+          "unit": "mW",
+          "conditions": "Ta=25°C, 40mm x 40mm Standard board"
+        },
+        "Pd_Ta_25_C": {
+          "parameter": "Power Dissipation (USP-6B)",
+          "min": null,
+          "max": 120,
+          "unit": "mW",
+          "conditions": "Ta=25°C"
+        },
+        "Topr": {
+          "parameter": "Operating Ambient Temperature",
+          "min": -40,
+          "max": 85,
+          "unit": "°C",
+          "conditions": null
+        },
+        "Tstg": {
+          "parameter": "Storage Temperature",
+          "min": -55,
+          "max": 125,
+          "unit": "°C",
+          "conditions": null
+        }
+      },
+      "electrical_parameters": {
+        "VOUT(E)": {
+          "parameter": "Output Voltage (Standard, <1.5V)",
+          "min": null,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": "IOUT=30mA, VOUT(T)<1.5V, Min=VOUT(T)-0.03, Max=VOUT(T)+0.03"
+        },
+        "VOUT(E)_IOUT_30mA__VOUT_T___1_5V__Min": {
+          "parameter": "Output Voltage (Standard, >=1.5V)",
+          "min": null,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": "IOUT=30mA, VOUT(T)>=1.5V, Min=VOUT(T)*0.98, Max=VOUT(T)*1.02"
+        },
+        "VOUT(E)_IOUT_30mA__VOUT_T___2_0V__Min": {
+          "parameter": "Output Voltage (High Accuracy, >=2.0V)",
+          "min": null,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": "IOUT=30mA, VOUT(T)>=2.0V, Min=VOUT(T)*0.99, Max=VOUT(T)*1.01"
+        },
+        "IDD": {
+          "parameter": "Supply Current",
+          "min": null,
+          "typ": 1.0,
+          "max": 3.0,
+          "unit": "µA",
+          "conditions": "VIN=VOUT(T)+1.0V"
+        },
+        "ΔVOUT / (ΔVIN · VOUT)": {
+          "parameter": "Line Regulation",
+          "min": null,
+          "typ": 0.05,
+          "max": 0.25,
+          "unit": "%/V",
+          "conditions": "IOUT=30mA, VOUT(T)+1.0V <= VIN <= 6.0V (for VOUT(T)<4.5V) or 5.5V <= VIN <= 6.0V (for VOUT(T)>=4.5V)"
+        },
+        "VIN": {
+          "parameter": "Input Voltage",
+          "min": 1.8,
+          "typ": null,
+          "max": 6.0,
+          "unit": "V",
+          "conditions": null
+        },
+        "ΔVOUT / (ΔTopr · VOUT)": {
+          "parameter": "Output Voltage Temperature Characteristics",
+          "min": null,
+          "typ": 100,
+          "max": null,
+          "unit": "ppm/°C",
+          "conditions": "IOUT=30mA, -40°C <= Topr <= 85°C"
+        },
+        "ΔVOUT": {
+          "parameter": "Load Regulation (1.2V)",
+          "min": null,
+          "typ": null,
+          "max": 40,
+          "unit": "mV",
+          "conditions": "1mA <= IOUT <= 50mA"
+        },
+        "Vdif1": {
+          "parameter": "Dropout Voltage 1 (1.2V)",
+          "min": null,
+          "typ": 460,
+          "max": 760,
+          "unit": "mV",
+          "conditions": "IOUT=30mA"
+        },
+        "Vdif2": {
+          "parameter": "Dropout Voltage 2 (1.2V)",
+          "min": null,
+          "typ": 700,
+          "max": 960,
+          "unit": "mV",
+          "conditions": "IOUT=60mA"
+        },
+        "IOUTMAX": {
+          "parameter": "Maximum Output Current (1.2V)",
+          "min": 60,
+          "typ": null,
+          "max": null,
+          "unit": "mA",
+          "conditions": "VOUT >= VOUT(E) * 0.9"
+        },
+        "ISHORT": {
+          "parameter": "Short Circuit Current (1.2V)",
+          "min": null,
+          "typ": 180,
+          "max": null,
+          "unit": "mA",
+          "conditions": "VOUT=VSS"
+        },
+        "ΔVOUT_1mA____IOUT____100mA": {
+          "parameter": "Load Regulation (5.0V)",
+          "min": null,
+          "typ": null,
+          "max": 80,
+          "unit": "mV",
+          "conditions": "1mA <= IOUT <= 100mA"
+        },
+        "Vdif1_IOUT_30mA": {
+          "parameter": "Dropout Voltage 1 (5.0V)",
+          "min": null,
+          "typ": 50,
+          "max": 290,
+          "unit": "mV",
+          "conditions": "IOUT=30mA"
+        },
+        "Vdif2_IOUT_100mA": {
+          "parameter": "Dropout Voltage 2 (5.0V)",
+          "min": null,
+          "typ": 175,
+          "max": 600,
+          "unit": "mV",
+          "conditions": "IOUT=100mA"
+        },
+        "IOUTMAX_VOUT____VOUT_E____0_9": {
+          "parameter": "Maximum Output Current (5.0V)",
+          "min": 250,
+          "typ": null,
+          "max": null,
+          "unit": "mA",
+          "conditions": "VOUT >= VOUT(E) * 0.9"
+        },
+        "ISHORT_VOUT_VSS": {
+          "parameter": "Short Circuit Current (5.0V)",
+          "min": null,
+          "typ": 100,
+          "max": null,
+          "unit": "mA",
+          "conditions": "VOUT=VSS"
+        }
+      },
+      "drc_hints": {
+        "vin_abs_max": {
+          "value": 7.0,
+          "unit": "V"
+        },
+        "vin_operating": {
+          "min": 1.8,
+          "max": 6.0,
+          "unit": "V"
+        },
+        "vout": {
+          "unit": "V"
+        },
+        "iout_max": {
+          "min": 60,
+          "unit": "mA"
+        }
+      }
+    },
+    "thermal": {
+      "power_dissipation": {
+        "parameter": "Power Dissipation (SOT-23)",
+        "symbol": "Pd",
+        "min": null,
+        "typ": null,
+        "max": 250,
+        "value": null,
+        "unit": "mW",
+        "conditions": "Ta=25°C",
+        "source": "absolute_maximum_ratings"
+      },
+      "power_dissipation_Ta_25_C__40mm_x_40mm_Standard": {
+        "parameter": "Power Dissipation (SOT-23, Standard board)",
+        "symbol": "Pd",
+        "min": null,
+        "typ": null,
+        "max": 500,
+        "value": null,
+        "unit": "mW",
+        "conditions": "Ta=25°C, 40mm x 40mm Standard board",
+        "source": "absolute_maximum_ratings"
+      },
+      "power_dissipation_Ta_25_C": {
+        "parameter": "Power Dissipation (SOT-89)",
+        "symbol": "Pd",
+        "min": null,
+        "typ": null,
+        "max": 500,
+        "value": null,
+        "unit": "mW",
+        "conditions": "Ta=25°C",
+        "source": "absolute_maximum_ratings"
+      },
+      "power_dissipation_Ta_25_C__40mm_x_40mm_Standard_dup": {
+        "parameter": "Power Dissipation (SOT-89, Standard board)",
+        "symbol": "Pd",
+        "min": null,
+        "typ": null,
+        "max": 1000,
+        "value": null,
+        "unit": "mW",
+        "conditions": "Ta=25°C, 40mm x 40mm Standard board",
+        "source": "absolute_maximum_ratings"
+      },
+      "power_dissipation_Ta_25_C_dup": {
+        "parameter": "Power Dissipation (USP-6B)",
+        "symbol": "Pd",
+        "min": null,
+        "typ": null,
+        "max": 120,
+        "value": null,
+        "unit": "mW",
+        "conditions": "Ta=25°C",
+        "source": "absolute_maximum_ratings"
+      },
+      "power_dissipation_Ta_25_C__40mm_x_40mm_Standard_dup_dup": {
+        "parameter": "Power Dissipation (USP-6B, Standard board)",
+        "symbol": "Pd",
+        "min": null,
+        "typ": null,
+        "max": 1000,
+        "value": null,
+        "unit": "mW",
+        "conditions": "Ta=25°C, 40mm x 40mm Standard board",
+        "source": "absolute_maximum_ratings"
+      }
     }
   }
 }

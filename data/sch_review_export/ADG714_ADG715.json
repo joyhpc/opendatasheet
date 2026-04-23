@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -529,6 +529,534 @@
       "unit": "°C/W",
       "conditions": "CP-24-10 package",
       "source": "electrical_characteristics"
+    }
+  },
+  "domains": {
+    "pin": {
+      "packages": {
+        "24-lead TSSOP": {
+          "pin_count": 24,
+          "pins": {
+            "1": {
+              "name": "SCLK",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Serial Clock Input (ADG714) (also: SCL — Serial Clock Line (ADG715))",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "VDD",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Positive Analog Supply Voltage",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "DIN",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Serial Data Input (ADG714) (also: SDA — Serial Data Line, bidirectional open-drain (ADG715))",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground (0 V) Reference",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "S1",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "ANALOG",
+              "description": "Source terminal of switch 1",
+              "unused_treatment": null
+            },
+            "6": {
+              "name": "D1",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "ANALOG",
+              "description": "Drain terminal of switch 1",
+              "unused_treatment": null
+            },
+            "7": {
+              "name": "S2",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "ANALOG",
+              "description": "Source terminal of switch 2",
+              "unused_treatment": null
+            },
+            "8": {
+              "name": "D2",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "ANALOG",
+              "description": "Drain terminal of switch 2",
+              "unused_treatment": null
+            },
+            "9": {
+              "name": "S3",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "ANALOG",
+              "description": "Source terminal of switch 3",
+              "unused_treatment": null
+            },
+            "10": {
+              "name": "D3",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "ANALOG",
+              "description": "Drain terminal of switch 3",
+              "unused_treatment": null
+            },
+            "11": {
+              "name": "S4",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "ANALOG",
+              "description": "Source terminal of switch 4",
+              "unused_treatment": null
+            },
+            "12": {
+              "name": "D4",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "ANALOG",
+              "description": "Drain terminal of switch 4",
+              "unused_treatment": null
+            },
+            "13": {
+              "name": "D5",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "ANALOG",
+              "description": "Drain terminal of switch 5",
+              "unused_treatment": null
+            },
+            "14": {
+              "name": "S5",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "ANALOG",
+              "description": "Source terminal of switch 5",
+              "unused_treatment": null
+            },
+            "15": {
+              "name": "D6",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "ANALOG",
+              "description": "Drain terminal of switch 6",
+              "unused_treatment": null
+            },
+            "16": {
+              "name": "S6",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "ANALOG",
+              "description": "Source terminal of switch 6",
+              "unused_treatment": null
+            },
+            "17": {
+              "name": "D7",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "ANALOG",
+              "description": "Drain terminal of switch 7",
+              "unused_treatment": null
+            },
+            "18": {
+              "name": "S7",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "ANALOG",
+              "description": "Source terminal of switch 7",
+              "unused_treatment": null
+            },
+            "19": {
+              "name": "D8",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "ANALOG",
+              "description": "Drain terminal of switch 8",
+              "unused_treatment": null
+            },
+            "20": {
+              "name": "S8",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "ANALOG",
+              "description": "Source terminal of switch 8",
+              "unused_treatment": null
+            },
+            "21": {
+              "name": "VSS",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Negative Analog Supply Voltage. Tie to GND for single-supply operation.",
+              "unused_treatment": null
+            },
+            "22": {
+              "name": "DOUT",
+              "direction": "OUTPUT",
+              "signal_type": "DIGITAL",
+              "description": "Serial Data Output, open-drain (ADG714) (also: A1 — Address Input 1 (ADG715))",
+              "unused_treatment": null
+            },
+            "23": {
+              "name": "RESET",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Active Low Control Input. Clears input register and turns all switches off.",
+              "unused_treatment": null
+            },
+            "24": {
+              "name": "SYNC",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Active Low Control Input. Frame synchronization signal (ADG714) (also: A0 — Address Input 0 (ADG715))",
+              "unused_treatment": null
+            }
+          }
+        },
+        "24-lead LFCSP": {
+          "pin_count": 25,
+          "pins": {
+            "22": {
+              "name": "SCLK",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Serial Clock Input (ADG714)",
+              "unused_treatment": null
+            },
+            "23": {
+              "name": "VDD",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Positive Analog Supply Voltage",
+              "unused_treatment": null
+            },
+            "24": {
+              "name": "DIN",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Serial Data Input (ADG714)",
+              "unused_treatment": null
+            },
+            "1": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground (0 V) Reference",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "S1",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "ANALOG",
+              "description": "Source terminal of switch 1",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "D1",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "ANALOG",
+              "description": "Drain terminal of switch 1",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "S2",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "ANALOG",
+              "description": "Source terminal of switch 2",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "D2",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "ANALOG",
+              "description": "Drain terminal of switch 2",
+              "unused_treatment": null
+            },
+            "6": {
+              "name": "S3",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "ANALOG",
+              "description": "Source terminal of switch 3",
+              "unused_treatment": null
+            },
+            "7": {
+              "name": "D3",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "ANALOG",
+              "description": "Drain terminal of switch 3",
+              "unused_treatment": null
+            },
+            "8": {
+              "name": "S4",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "ANALOG",
+              "description": "Source terminal of switch 4",
+              "unused_treatment": null
+            },
+            "9": {
+              "name": "D4",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "ANALOG",
+              "description": "Drain terminal of switch 4",
+              "unused_treatment": null
+            },
+            "10": {
+              "name": "D5",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "ANALOG",
+              "description": "Drain terminal of switch 5",
+              "unused_treatment": null
+            },
+            "11": {
+              "name": "S5",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "ANALOG",
+              "description": "Source terminal of switch 5",
+              "unused_treatment": null
+            },
+            "12": {
+              "name": "D6",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "ANALOG",
+              "description": "Drain terminal of switch 6",
+              "unused_treatment": null
+            },
+            "13": {
+              "name": "S6",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "ANALOG",
+              "description": "Source terminal of switch 6",
+              "unused_treatment": null
+            },
+            "14": {
+              "name": "D7",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "ANALOG",
+              "description": "Drain terminal of switch 7",
+              "unused_treatment": null
+            },
+            "15": {
+              "name": "S7",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "ANALOG",
+              "description": "Source terminal of switch 7",
+              "unused_treatment": null
+            },
+            "16": {
+              "name": "D8",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "ANALOG",
+              "description": "Drain terminal of switch 8",
+              "unused_treatment": null
+            },
+            "17": {
+              "name": "S8",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "ANALOG",
+              "description": "Source terminal of switch 8",
+              "unused_treatment": null
+            },
+            "18": {
+              "name": "VSS",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Negative Analog Supply Voltage. Tie to GND for single-supply operation.",
+              "unused_treatment": null
+            },
+            "19": {
+              "name": "DOUT",
+              "direction": "OUTPUT",
+              "signal_type": "DIGITAL",
+              "description": "Serial Data Output, open-drain (ADG714)",
+              "unused_treatment": null
+            },
+            "20": {
+              "name": "RESET",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Active Low Control Input. Clears input register and turns all switches off.",
+              "unused_treatment": null
+            },
+            "21": {
+              "name": "SYNC",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Active Low Control Input. Frame synchronization signal (ADG714)",
+              "unused_treatment": null
+            },
+            "EP": {
+              "name": "EP",
+              "direction": "PASSIVE",
+              "signal_type": "POWER",
+              "description": "Exposed Pad tied to VSS",
+              "unused_treatment": null
+            }
+          }
+        }
+      }
+    },
+    "electrical": {
+      "absolute_maximum_ratings": {
+        "VDD-VSS": {
+          "parameter": "Supply Voltage (VDD to VSS)",
+          "min": null,
+          "max": 7,
+          "unit": "V",
+          "conditions": null
+        },
+        "VDD": {
+          "parameter": "Supply Voltage (VDD to GND)",
+          "min": -0.3,
+          "max": 7,
+          "unit": "V",
+          "conditions": null
+        },
+        "VSS": {
+          "parameter": "Supply Voltage (VSS to GND)",
+          "min": -3.5,
+          "max": 0.3,
+          "unit": "V",
+          "conditions": null
+        },
+        "TA": {
+          "parameter": "Operating Temperature Range",
+          "min": -40,
+          "max": 85,
+          "unit": "°C",
+          "conditions": null
+        },
+        "TJ": {
+          "parameter": "Junction Temperature",
+          "min": null,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        }
+      },
+      "electrical_parameters": {
+        "RON": {
+          "parameter": "On Resistance",
+          "min": null,
+          "typ": 2.5,
+          "max": null,
+          "unit": "Ω",
+          "conditions": null
+        },
+        "IS(OFF), ID(OFF), ID(ON)": {
+          "parameter": "Leakage Currents",
+          "min": null,
+          "typ": 0.1,
+          "max": null,
+          "unit": "nA",
+          "conditions": null
+        },
+        "θJA": {
+          "parameter": "Thermal Resistance Junction-to-Ambient",
+          "min": null,
+          "typ": 128,
+          "max": null,
+          "unit": "°C/W",
+          "conditions": "RU-24 package"
+        },
+        "θJC": {
+          "parameter": "Thermal Resistance Junction-to-Case",
+          "min": null,
+          "typ": 42,
+          "max": null,
+          "unit": "°C/W",
+          "conditions": "RU-24 package"
+        },
+        "θJA_CP_24_10_package": {
+          "parameter": "Thermal Resistance Junction-to-Ambient",
+          "min": null,
+          "typ": 127.99,
+          "max": null,
+          "unit": "°C/W",
+          "conditions": "CP-24-10 package"
+        },
+        "θJC_CP_24_10_package": {
+          "parameter": "Thermal Resistance Junction-to-Case",
+          "min": null,
+          "typ": 15.38,
+          "max": null,
+          "unit": "°C/W",
+          "conditions": "CP-24-10 package"
+        },
+        "fSCLK": {
+          "parameter": "Serial Clock Rate",
+          "min": null,
+          "typ": null,
+          "max": 30,
+          "unit": "MHz",
+          "conditions": "ADG714 TSSOP"
+        },
+        "fSCLK_ADG714_LFCSP": {
+          "parameter": "Serial Clock Rate",
+          "min": null,
+          "typ": null,
+          "max": 50,
+          "unit": "MHz",
+          "conditions": "ADG714 LFCSP"
+        },
+        "fSCL": {
+          "parameter": "Serial Clock Rate",
+          "min": null,
+          "typ": null,
+          "max": 400,
+          "unit": "kbps",
+          "conditions": "ADG715"
+        }
+      },
+      "drc_hints": {
+        "vin_abs_max": {
+          "value": 7,
+          "unit": "V"
+        },
+        "thermal_resistance": {
+          "typ": 128,
+          "unit": "°C/W"
+        }
+      }
+    },
+    "thermal": {
+      "theta_ja": {
+        "parameter": "Thermal Resistance Junction-to-Ambient",
+        "symbol": "θJA",
+        "min": null,
+        "typ": 128,
+        "max": null,
+        "value": null,
+        "unit": "°C/W",
+        "conditions": "RU-24 package",
+        "source": "electrical_characteristics"
+      },
+      "theta_jc": {
+        "parameter": "Thermal Resistance Junction-to-Case",
+        "symbol": "θJC",
+        "min": null,
+        "typ": 42,
+        "max": null,
+        "value": null,
+        "unit": "°C/W",
+        "conditions": "RU-24 package",
+        "source": "electrical_characteristics"
+      },
+      "theta_ja_CP_24_10_package": {
+        "parameter": "Thermal Resistance Junction-to-Ambient",
+        "symbol": "θJA",
+        "min": null,
+        "typ": 127.99,
+        "max": null,
+        "value": null,
+        "unit": "°C/W",
+        "conditions": "CP-24-10 package",
+        "source": "electrical_characteristics"
+      },
+      "theta_jc_CP_24_10_package": {
+        "parameter": "Thermal Resistance Junction-to-Case",
+        "symbol": "θJC",
+        "min": null,
+        "typ": 15.38,
+        "max": null,
+        "value": null,
+        "unit": "°C/W",
+        "conditions": "CP-24-10 package",
+        "source": "electrical_characteristics"
+      }
     }
   }
 }

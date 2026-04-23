@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -349,6 +349,354 @@
       "unit": "°C/W",
       "conditions": null,
       "source": "absolute_maximum_ratings"
+    }
+  },
+  "domains": {
+    "pin": {
+      "packages": {
+        "SOT-223": {
+          "pin_count": 3,
+          "pins": {
+            "1": {
+              "name": "GND/ADJ",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground or adjust pin. Ground for fixed voltage versions, adjust for adjustable versions.",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "VOUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Regulated output voltage.",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "VIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Input voltage supply.",
+              "unused_treatment": null
+            }
+          }
+        },
+        "TO-252": {
+          "pin_count": 4,
+          "pins": {
+            "1": {
+              "name": "GND/ADJ",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground or adjust pin. Ground for fixed voltage versions, adjust for adjustable versions.",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "VOUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Regulated output voltage.",
+              "unused_treatment": null
+            },
+            "TAB": {
+              "name": "VOUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Regulated output voltage.",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "VIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Input voltage supply.",
+              "unused_treatment": null
+            }
+          }
+        },
+        "8L SOIC": {
+          "pin_count": 8,
+          "pins": {
+            "1": {
+              "name": "GND/ADJ",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground or adjust pin. Ground for fixed voltage versions, adjust for adjustable versions.",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "VOUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Regulated output voltage.",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "VOUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Regulated output voltage.",
+              "unused_treatment": null
+            },
+            "6": {
+              "name": "VOUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Regulated output voltage.",
+              "unused_treatment": null
+            },
+            "7": {
+              "name": "VOUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Regulated output voltage.",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "VIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Input voltage supply.",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "NC",
+              "direction": "NC",
+              "signal_type": "NONE",
+              "description": "No internal connection.",
+              "unused_treatment": null
+            },
+            "8": {
+              "name": "NC",
+              "direction": "NC",
+              "signal_type": "NONE",
+              "description": "No internal connection.",
+              "unused_treatment": null
+            }
+          }
+        }
+      }
+    },
+    "electrical": {
+      "absolute_maximum_ratings": {
+        "VIN": {
+          "parameter": "Input Voltage",
+          "min": null,
+          "max": 15,
+          "unit": "V",
+          "conditions": null
+        },
+        "TJ": {
+          "parameter": "Operating Junction Temperature (Power Transistor)",
+          "min": -40,
+          "max": 125,
+          "unit": "°C",
+          "conditions": null
+        },
+        "TSTG": {
+          "parameter": "Storage temperature",
+          "min": -65,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        },
+        "φJA": {
+          "parameter": "Thermal Resistance SOT-223 package",
+          "min": null,
+          "max": null,
+          "unit": "°C/W",
+          "conditions": null
+        }
+      },
+      "electrical_parameters": {
+        "VREF": {
+          "parameter": "Reference Voltage",
+          "min": 1.232,
+          "typ": 1.25,
+          "max": 1.268,
+          "unit": "V",
+          "conditions": "IOUT = 10 mA, 1.5V ≤ (VIN - VOUT) ≤ 12V"
+        },
+        "VREF_IOUT___10_mA__1_5V____VIN___VO": {
+          "parameter": "Reference Voltage",
+          "min": 1.2125,
+          "typ": 1.25,
+          "max": 1.2875,
+          "unit": "V",
+          "conditions": "IOUT = 10 mA, 1.5V ≤ (VIN - VOUT) ≤ 12V"
+        },
+        "VOUT": {
+          "parameter": "Output Voltage",
+          "min": 1.478,
+          "typ": 1.5,
+          "max": 1.522,
+          "unit": "V",
+          "conditions": "VIN = 3V"
+        },
+        "VOUT_VIN___3V": {
+          "parameter": "Output Voltage",
+          "min": 1.455,
+          "typ": 1.5,
+          "max": 1.545,
+          "unit": "V",
+          "conditions": "VIN = 3V"
+        },
+        "VOUT_VIN___3_3V": {
+          "parameter": "Output Voltage",
+          "min": 1.746,
+          "typ": 1.8,
+          "max": 1.854,
+          "unit": "V",
+          "conditions": "VIN = 3.3V"
+        },
+        "VOUT_VIN___4V": {
+          "parameter": "Output Voltage",
+          "min": 2.425,
+          "typ": 2.5,
+          "max": 2.575,
+          "unit": "V",
+          "conditions": "VIN = 4V"
+        },
+        "VOUT_VIN___4_35V": {
+          "parameter": "Output Voltage",
+          "min": 2.7645,
+          "typ": 2.85,
+          "max": 2.9355,
+          "unit": "V",
+          "conditions": "VIN = 4.35V"
+        },
+        "VOUT_VIN___4_8V": {
+          "parameter": "Output Voltage",
+          "min": 3.201,
+          "typ": 3.3,
+          "max": 3.399,
+          "unit": "V",
+          "conditions": "VIN = 4.8V"
+        },
+        "VOUT_VIN___6_5V": {
+          "parameter": "Output Voltage",
+          "min": 4.85,
+          "typ": 5.0,
+          "max": 5.15,
+          "unit": "V",
+          "conditions": "VIN = 6.5V"
+        },
+        "VIN - VOUT": {
+          "parameter": "Dropout Voltage",
+          "min": null,
+          "typ": 1.1,
+          "max": 1.3,
+          "unit": "V",
+          "conditions": "ΔVOUT, ΔVREF = 1%, IOUT = 0.8A"
+        },
+        "IADJ": {
+          "parameter": "Adjust Pin Current",
+          "min": null,
+          "typ": 55,
+          "max": null,
+          "unit": "μA",
+          "conditions": "IOUT =10mA , 1.5V≤ (VIN - VOUT) ≤ 12V"
+        },
+        "IADJ_IOUT__10mA___1_5V___VIN___VOUT": {
+          "parameter": "Adjust Pin Current",
+          "min": null,
+          "typ": null,
+          "max": 120,
+          "unit": "μA",
+          "conditions": "IOUT =10mA , 1.5V≤ (VIN - VOUT) ≤ 12V"
+        },
+        "ΔIADJ": {
+          "parameter": "Adjust Pin Current Change",
+          "min": null,
+          "typ": 0.2,
+          "max": 5,
+          "unit": "μA",
+          "conditions": "IOUT =10mA, 1.5V≤ (VIN - VOUT) ≤ 12V"
+        }
+      },
+      "drc_hints": {
+        "vin_abs_max": {
+          "value": 15,
+          "unit": "V"
+        },
+        "vin_operating": {
+          "typ": 1.1,
+          "max": 1.3,
+          "unit": "V"
+        },
+        "vref": {
+          "min": 1.232,
+          "typ": 1.25,
+          "max": 1.268,
+          "unit": "V"
+        },
+        "vout": {
+          "min": 1.478,
+          "typ": 1.5,
+          "max": 1.522,
+          "unit": "V"
+        },
+        "iout_max": {
+          "min": 900,
+          "typ": 1100,
+          "max": 1500,
+          "unit": "mA"
+        },
+        "iq": {
+          "typ": 5,
+          "max": 11,
+          "unit": "mA"
+        },
+        "thermal_resistance": {
+          "max": 15,
+          "unit": "°C/W"
+        }
+      }
+    },
+    "thermal": {
+      "theta_jc": {
+        "parameter": "Thermal Resistance Junction-to-Case",
+        "symbol": null,
+        "min": null,
+        "typ": null,
+        "max": 15,
+        "value": null,
+        "unit": "°C/W",
+        "conditions": "All packages",
+        "source": "electrical_characteristics"
+      },
+      "theta_ja": {
+        "parameter": "Thermal Resistance SO-8 package",
+        "symbol": "φJA",
+        "min": null,
+        "typ": 160,
+        "max": null,
+        "value": null,
+        "unit": "°C/W",
+        "conditions": null,
+        "source": "absolute_maximum_ratings"
+      },
+      "theta_ja_Thermal_Resistance_TO_252_pack": {
+        "parameter": "Thermal Resistance TO-252 package",
+        "symbol": "φJA",
+        "min": null,
+        "typ": 80,
+        "max": null,
+        "value": null,
+        "unit": "°C/W",
+        "conditions": null,
+        "source": "absolute_maximum_ratings"
+      },
+      "theta_ja_Thermal_Resistance_SOT_223_pac": {
+        "parameter": "Thermal Resistance SOT-223 package",
+        "symbol": "φJA",
+        "min": null,
+        "typ": 90,
+        "max": null,
+        "value": null,
+        "unit": "°C/W",
+        "conditions": null,
+        "source": "absolute_maximum_ratings"
+      }
     }
   }
 }

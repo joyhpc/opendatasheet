@@ -9,7 +9,10 @@ The checked-in schema accepts:
 - `sch-review-device/1.1`
 - `device-knowledge/2.0`
 
-That means the repo is in a migration phase, not a hard cutover.
+That means the validator is in a compatibility phase.
+
+For new export generation, treat `device-knowledge/2.0` as the canonical internal contract.
+Keep flat `sch-review-device/1.1` fields only as a compatibility surface for downstream consumers and checked-in historical artifacts.
 
 ## What `device-knowledge/2.0` adds
 
@@ -40,9 +43,10 @@ This makes it easier to:
 
 ## Practical guardrails
 
-- Do not assume every export already uses `device-knowledge/2.0`.
+- Do not assume every checked-in export already uses `device-knowledge/2.0`.
 - Do not delete flat-field compatibility casually.
-- If a field exists in both flat and domain forms, document which one is canonical for new work.
+- If a field exists in both flat and domain forms, the `domains` representation is canonical for new generation logic.
+- Flat fields should be derived compatibility output, not the primary design surface for new domains.
 
 ## When to use domain language in docs or code reviews
 

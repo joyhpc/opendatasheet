@@ -146,22 +146,22 @@ def test_decoder_component_values_capture_split_table_entries():
     assert any(token in value_snippets for token in ["0.1 μF", "49.9 Ω", "42.2kΩ", "48.7kΩ"])
 
 
-def test_ds90ub_raw_pdf_fallback_captures_design_pages():
+def test_current_decoder_design_contexts_capture_design_pages():
     devices = _load_devices()
     index = _index_extracted_records(EXTRACTED_DIR)
 
-    for mpn in ("DS90UB934TRGZRQ1", "DS90UB954TRGZRQ1", "DS90UB962WRTDTQ1"):
-        ctx = _load_datasheet_design_context(devices[mpn], index, PDF_DIR)
-        assert ctx.get("source_mode") == "raw_pdf_scan"
-        assert ctx.get("design_page_candidates"), mpn
-        assert ctx.get("recommended_external_components"), mpn
+    tp2860 = _load_datasheet_design_context(devices["TP2860"], index, PDF_DIR)
+    assert tp2860.get("source_mode") == "pdf_text"
+    assert tp2860.get("design_page_candidates")
+
+    max96718a = _load_datasheet_design_context(devices["MAX96718A"], index, PDF_DIR)
+    assert max96718a.get("source_mode") == "pdf_text"
+    assert max96718a.get("design_page_candidates")
+    assert max96718a.get("recommended_external_components")
 
 
-def test_ds90ub_repaired_pdfs_scan_successfully():
+def test_removed_ds90ub_exports_are_absent_from_checked_in_device_index():
     devices = _load_devices()
-    index = _index_extracted_records(EXTRACTED_DIR)
 
-    for mpn in ("DS90UB960WRTDRQ1", "DS90UB9702-Q1"):
-        ctx = _load_datasheet_design_context(devices[mpn], index, PDF_DIR)
-        assert ctx.get("source_mode") == "raw_pdf_scan"
-        assert ctx.get("pdf_name")
+    for mpn in ("DS90UB934TRGZRQ1", "DS90UB954TRGZRQ1", "DS90UB962WRTDTQ1", "DS90UB960WRTDRQ1", "DS90UB9702-Q1"):
+        assert mpn not in devices

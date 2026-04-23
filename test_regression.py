@@ -204,7 +204,7 @@ def t2_2():
     
     failures = []
     for f in sorted(EXPORT_DIR.glob("*.json")):
-        if f.name == "_manifest.json":
+        if f.name.startswith("_"):
             continue
         with open(f) as fp:
             data = json.load(fp)
@@ -215,6 +215,21 @@ def t2_2():
     if failures:
         detail = "; ".join(f"{n}({c})" for n, c, _ in failures[:5])
         raise AssertionError(f"{len(failures)} files failed: {detail}")
+
+
+@case("T2.3 Checked-in device exports are all canonical v2")
+def t2_3():
+    legacy = []
+    for f in sorted(EXPORT_DIR.glob("*.json")):
+        if f.name.startswith("_"):
+            continue
+        with open(f) as fp:
+            data = json.load(fp)
+        if data.get("_schema") != "device-knowledge/2.0":
+            legacy.append(f"{f.name}:{data.get('_schema')}")
+
+    if legacy:
+        raise AssertionError(f"Found legacy device exports: {', '.join(legacy[:10])}")
 
 
 # ─── T3: Export Data Quality ────────────────────────────────────────
@@ -291,7 +306,7 @@ def t3_4():
 @case("T3.5 FPGA pin functions are all valid enum values")
 def t3_5():
     for f in sorted(EXPORT_DIR.glob("*.json")):
-        if f.name == "_manifest.json":
+        if f.name.startswith("_"):
             continue
         with open(f) as fp:
             d = json.load(fp)
@@ -305,7 +320,7 @@ def t3_5():
 @case("T3.6 FPGA DRC rule severities are valid")
 def t3_6():
     for f in sorted(EXPORT_DIR.glob("*.json")):
-        if f.name == "_manifest.json":
+        if f.name.startswith("_"):
             continue
         with open(f) as fp:
             d = json.load(fp)
@@ -319,7 +334,7 @@ def t3_6():
 @case("T3.7 FPGA diff pairs have p_pin and n_pin")
 def t3_7():
     for f in sorted(EXPORT_DIR.glob("*.json")):
-        if f.name == "_manifest.json":
+        if f.name.startswith("_"):
             continue
         with open(f) as fp:
             d = json.load(fp)
@@ -333,7 +348,7 @@ def t3_7():
 @case("T3.8 FPGA diff pair pins exist in pin list")
 def t3_8():
     for f in sorted(EXPORT_DIR.glob("*.json")):
-        if f.name == "_manifest.json":
+        if f.name.startswith("_"):
             continue
         with open(f) as fp:
             d = json.load(fp)
@@ -350,7 +365,7 @@ def t3_8():
 @case("T3.9 FPGA lookup consistency — every pin in lookup")
 def t3_9():
     for f in sorted(EXPORT_DIR.glob("*.json")):
-        if f.name == "_manifest.json":
+        if f.name.startswith("_"):
             continue
         with open(f) as fp:
             d = json.load(fp)
@@ -366,7 +381,7 @@ def t3_9():
 @case("T3.10 FPGA banks have required fields")
 def t3_10():
     for f in sorted(EXPORT_DIR.glob("*.json")):
-        if f.name == "_manifest.json":
+        if f.name.startswith("_"):
             continue
         with open(f) as fp:
             d = json.load(fp)
@@ -379,7 +394,7 @@ def t3_10():
 @case("T3.11 FPGA must_connect is boolean")
 def t3_11():
     for f in sorted(EXPORT_DIR.glob("*.json")):
-        if f.name == "_manifest.json":
+        if f.name.startswith("_"):
             continue
         with open(f) as fp:
             d = json.load(fp)
@@ -452,7 +467,7 @@ def t4_2():
 @case("T4.3 All FPGA exports have power + ground pins")
 def t4_3():
     for f in sorted(EXPORT_DIR.glob("*.json")):
-        if f.name == "_manifest.json":
+        if f.name.startswith("_"):
             continue
         with open(f) as fp:
             d = json.load(fp)
@@ -469,7 +484,7 @@ def t4_3():
 @case("T4.4 All FPGA exports have IO pins")
 def t4_4():
     for f in sorted(EXPORT_DIR.glob("*.json")):
-        if f.name == "_manifest.json":
+        if f.name.startswith("_"):
             continue
         with open(f) as fp:
             d = json.load(fp)
@@ -482,7 +497,7 @@ def t4_4():
 @case("T4.5 FPGA high-speed and MIPI exports expose capability_blocks")
 def t4_5():
     for f in sorted(EXPORT_DIR.glob("*.json")):
-        if f.name == "_manifest.json":
+        if f.name.startswith("_"):
             continue
         with open(f) as fp:
             d = json.load(fp)
@@ -505,7 +520,7 @@ def t4_5():
 @case("T4.6 FPGA refclk pairs expose refclk_requirements constraints")
 def t4_6():
     for f in sorted(EXPORT_DIR.glob("*.json")):
-        if f.name == "_manifest.json":
+        if f.name.startswith("_"):
             continue
         with open(f) as fp:
             d = json.load(fp)
@@ -549,7 +564,7 @@ def t5_1():
     with open(manifest_path) as f:
         manifest = json.load(f)
     manifest_files = {d["file"] for d in manifest.get("devices", [])}
-    actual_files = {f.name for f in EXPORT_DIR.glob("*.json") if f.name not in ("_manifest.json",)}
+    actual_files = {f.name for f in EXPORT_DIR.glob("*.json") if not f.name.startswith("_")}
     # Exclude reference/ subdirectory files
     actual_files -= {f.name for f in EXPORT_DIR.glob("reference/*.json")}
     missing = actual_files - manifest_files

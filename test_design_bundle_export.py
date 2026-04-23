@@ -622,11 +622,11 @@ def test_opamp_bundle_export_generalizes_to_other_families(tmp_path):
             sys.executable,
             "scripts/export_design_bundle.py",
             "--device",
-            "SGM8554",
+            "AD8541/AD8542/AD8544",
             "--device",
-            "ADA4522-1/ADA4522-2/ADA4522-4",
+            "AD8571/AD8572/AD8574",
             "--device",
-            "LMV321, LMV358, LMV324",
+            "LM358",
             "--output-dir",
             str(output_dir),
         ],
@@ -636,25 +636,27 @@ def test_opamp_bundle_export_generalizes_to_other_families(tmp_path):
         check=True,
     )
 
-    sgm8554_template = json.loads((output_dir / "SGM8554" / "L3_module_template.json").read_text(encoding="utf-8"))
-    sgm8554_context = sgm8554_template["opamp_device_context"]
-    assert sgm8554_context["channel_count"] == 4
-    assert {item["symbol_unit"] for item in sgm8554_context["channel_units"]} == {"U1A", "U1B", "U1C", "U1D"}
-    assert sgm8554_context["shared_power_pins"]["positive"][0]["pin"] == "4"
-    assert sgm8554_context["shared_power_pins"]["negative"][0]["pin"] == "11"
+    ad8541_template = json.loads((output_dir / "AD8541_AD8542_AD8544" / "L3_module_template.json").read_text(encoding="utf-8"))
+    ad8541_context = ad8541_template["opamp_device_context"]
+    assert ad8541_context["channel_count"] == 1
+    assert ad8541_context["shared_power_pins"]["positive"][0]["pin"] == "5"
+    assert ad8541_context["shared_power_pins"]["negative"][0]["pin"] == "2"
+    assert any(item["package_name"].startswith("SOIC-14") and item["channel_count"] == 4 for item in ad8541_context["package_variants"])
 
-    ada4522_template = json.loads((output_dir / "ADA4522-1_ADA4522-2_ADA4522-4" / "L3_module_template.json").read_text(encoding="utf-8"))
-    ada4522_context = ada4522_template["opamp_device_context"]
-    assert ada4522_context["shared_power_pins"]["positive"][0]["name"] == "V+"
-    assert ada4522_context["shared_power_pins"]["positive"][0]["pin"] == "7"
-    assert any(item["package_name"].startswith("14-lead") and item["channel_count"] == 4 for item in ada4522_context["package_variants"])
+    ad8571_template = json.loads((output_dir / "AD8571_AD8572_AD8574" / "L3_module_template.json").read_text(encoding="utf-8"))
+    ad8571_context = ad8571_template["opamp_device_context"]
+    assert ad8571_context["shared_power_pins"]["positive"][0]["name"] == "V+"
+    assert ad8571_context["shared_power_pins"]["positive"][0]["pin"] == "7"
+    assert any(item["package_name"].startswith("14-Lead") and item["channel_count"] == 4 for item in ad8571_context["package_variants"])
 
-    lmv_template = json.loads((output_dir / "LMV321_LMV358_LMV324" / "L3_module_template.json").read_text(encoding="utf-8"))
-    lmv_quickstart = (output_dir / "LMV321_LMV358_LMV324" / "L2_quickstart.md").read_text(encoding="utf-8")
-    lmv_context = lmv_template["opamp_device_context"]
-    assert lmv_context["shared_power_pins"]["negative"][0]["pin"] == "2"
-    assert any(item["package_name"] == "SO14/TSSOP14" and item["channel_count"] == 4 for item in lmv_context["package_variants"])
-    assert "Alternate package variants" in lmv_quickstart
+    lm358_template = json.loads((output_dir / "LM358" / "L3_module_template.json").read_text(encoding="utf-8"))
+    lm358_quickstart = (output_dir / "LM358" / "L2_quickstart.md").read_text(encoding="utf-8")
+    lm358_context = lm358_template["opamp_device_context"]
+    assert lm358_context["channel_count"] == 2
+    assert lm358_context["shared_power_pins"]["positive"][0]["pin"] == "8"
+    assert lm358_context["shared_power_pins"]["negative"][0]["pin"] == "4"
+    assert any(item["package_name"] == "SOIC-8" and item["channel_count"] == 2 for item in lm358_context["package_variants"])
+    assert "Alternate package variants" in lm358_quickstart
 
 
 def test_decoder_bundle_export_builds_schematic_scaffold(tmp_path):
@@ -707,9 +709,9 @@ def test_decoder_bundle_export_builds_schematic_scaffold(tmp_path):
     assert "Start here:" in max_quickstart
 
 
-def test_ds90ub_bundle_export_supports_raw_pdf_and_parallel_outputs(tmp_path):
+def test_legacy_ds90ub_bundle_export_targets_are_absent_after_cleanup(tmp_path):
     output_dir = tmp_path / "bundles"
-    subprocess.run(
+    result = subprocess.run(
         [
             sys.executable,
             "scripts/export_design_bundle.py",
@@ -729,48 +731,10 @@ def test_ds90ub_bundle_export_supports_raw_pdf_and_parallel_outputs(tmp_path):
         cwd=REPO_ROOT,
         capture_output=True,
         text=True,
-        check=True,
+        check=False,
     )
-
-    ds934_dir = output_dir / "DS90UB934TRGZRQ1"
-    ds934_intent = json.loads((ds934_dir / "L1_design_intent.json").read_text(encoding="utf-8"))
-    ds934_template = json.loads((ds934_dir / "L3_module_template.json").read_text(encoding="utf-8"))
-    ds934_roles = {item["role"] for item in ds934_intent["external_components"]}
-    ds934_nets = {item["name"] for item in ds934_intent["starter_nets"]}
-    assert ds934_intent["datasheet_design_context"]["source_mode"] == "raw_pdf_scan"
-    assert ds934_template["default_decoder_template"] == "serial_deserializer_to_parallel"
-    assert {item["name"] for item in ds934_template["decoder_templates"]} == {"serial_deserializer_to_parallel"}
-    assert {"SER_LINK", "PIX_OUT", "REFCLK"}.issubset(ds934_nets)
-    assert {"pixel_breakout", "link_connector", "clock_source_or_crystal"}.issubset(ds934_roles)
-
-    ds954_dir = output_dir / "DS90UB954TRGZRQ1"
-    ds954_intent = json.loads((ds954_dir / "L1_design_intent.json").read_text(encoding="utf-8"))
-    ds954_template = json.loads((ds954_dir / "L3_module_template.json").read_text(encoding="utf-8"))
-    ds954_roles = {item["role"] for item in ds954_intent["external_components"]}
-    assert ds954_intent["datasheet_design_context"]["source_mode"] == "raw_pdf_scan"
-    assert ds954_template["default_decoder_template"] == "serial_deserializer_to_csi"
-    assert "serial_deserializer_to_csi" in {item["name"] for item in ds954_template["decoder_templates"]}
-    assert {"csi_breakout", "link_connector", "poc_filter_network"}.issubset(ds954_roles)
-
-    ds962_dir = output_dir / "DS90UB962WRTDTQ1"
-    ds962_intent = json.loads((ds962_dir / "L1_design_intent.json").read_text(encoding="utf-8"))
-    ds962_template = json.loads((ds962_dir / "L3_module_template.json").read_text(encoding="utf-8"))
-    assert ds962_intent["datasheet_design_context"]["source_mode"] == "raw_pdf_scan"
-    assert ds962_template["default_decoder_template"] == "serial_deserializer_to_csi"
-
-    ds960_dir = output_dir / "DS90UB960WRTDRQ1"
-    ds960_intent = json.loads((ds960_dir / "L1_design_intent.json").read_text(encoding="utf-8"))
-    ds960_template = json.loads((ds960_dir / "L3_module_template.json").read_text(encoding="utf-8"))
-    ds960_roles = {item["role"] for item in ds960_intent["external_components"]}
-    assert ds960_intent["datasheet_design_context"]["source_mode"] == "raw_pdf_scan"
-    assert ds960_template["default_decoder_template"] == "serial_deserializer_to_csi"
-    assert {"link_connector", "csi_breakout", "poc_filter_network", "reset_bias"}.issubset(ds960_roles)
-
-    ds9702_dir = output_dir / "DS90UB9702-Q1"
-    ds9702_intent = json.loads((ds9702_dir / "L1_design_intent.json").read_text(encoding="utf-8"))
-    ds9702_template = json.loads((ds9702_dir / "L3_module_template.json").read_text(encoding="utf-8"))
-    assert ds9702_intent["datasheet_design_context"]["source_mode"] == "raw_pdf_scan"
-    assert ds9702_template["default_decoder_template"] == "serial_deserializer_to_csi"
+    assert result.returncode != 0
+    assert "No matching device exports found." in result.stdout
 
 
 def test_gowin_fpga_bundle_export_includes_customer_scenarios(tmp_path):

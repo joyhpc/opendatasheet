@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "fpga",
   "mpn": "GW5AT-15",
   "manufacturer": "Gowin",
@@ -274,7 +274,6 @@
   },
   "banks": {
     "1": {
-      "bank": "1",
       "pins": [
         "D2",
         "E4",
@@ -307,11 +306,45 @@
         "N2"
       ],
       "io_count": 29,
+      "bank": "1",
       "total_pins": 29,
-      "io_pins": 29
+      "io_pins": 29,
+      "attrs": {
+        "pins": [
+          "D2",
+          "E4",
+          "E3",
+          "F3",
+          "G3",
+          "E2",
+          "E1",
+          "H3",
+          "J3",
+          "F2",
+          "F1",
+          "G2",
+          "G1",
+          "H2",
+          "H1",
+          "L4",
+          "N3",
+          "M3",
+          "K3",
+          "L3",
+          "J2",
+          "J1",
+          "K2",
+          "K1",
+          "L2",
+          "M1",
+          "N1",
+          "M2",
+          "N2"
+        ],
+        "io_count": 29
+      }
     },
     "2": {
-      "bank": "2",
       "pins": [
         "G5",
         "G4",
@@ -322,11 +355,23 @@
         "K5"
       ],
       "io_count": 7,
+      "bank": "2",
       "total_pins": 7,
-      "io_pins": 7
+      "io_pins": 7,
+      "attrs": {
+        "pins": [
+          "G5",
+          "G4",
+          "H5",
+          "H4",
+          "J4",
+          "K4",
+          "K5"
+        ],
+        "io_count": 7
+      }
     },
     "4": {
-      "bank": "4",
       "pins": [
         "E8",
         "E7",
@@ -338,11 +383,24 @@
         "J7"
       ],
       "io_count": 8,
+      "bank": "4",
       "total_pins": 8,
-      "io_pins": 8
+      "io_pins": 8,
+      "attrs": {
+        "pins": [
+          "E8",
+          "E7",
+          "F8",
+          "F7",
+          "H8",
+          "H7",
+          "J8",
+          "J7"
+        ],
+        "io_count": 8
+      }
     },
     "3": {
-      "bank": "3",
       "pins": [
         "K7",
         "K6",
@@ -353,202 +411,479 @@
         "F4"
       ],
       "io_count": 7,
+      "bank": "3",
       "total_pins": 7,
-      "io_pins": 7
+      "io_pins": 7,
+      "attrs": {
+        "pins": [
+          "K7",
+          "K6",
+          "G6",
+          "D4",
+          "D3",
+          "F5",
+          "F4"
+        ],
+        "io_count": 7
+      }
     }
   },
   "diff_pairs": [
     {
       "type": "IO",
+      "true_name": "IOB12A",
+      "comp_name": "IOB12B",
+      "true_pin": "E4",
+      "comp_pin": "E3",
       "bank": "1",
       "p_pin": "E4",
       "n_pin": "E3",
       "p_name": "IOB12A",
-      "n_name": "IOB12B"
+      "n_name": "IOB12B",
+      "pair_name": "IOB12A",
+      "attrs": {
+        "true_name": "IOB12A",
+        "comp_name": "IOB12B",
+        "true_pin": "E4",
+        "comp_pin": "E3"
+      }
     },
     {
       "type": "IO",
+      "true_name": "IOB14A/D15",
+      "comp_name": "IOB14B",
+      "true_pin": "F3",
+      "comp_pin": "G3",
       "bank": "1",
       "p_pin": "F3",
       "n_pin": "G3",
       "p_name": "IOB14A/D15",
-      "n_name": "IOB14B"
+      "n_name": "IOB14B",
+      "pair_name": "IOB14A/D15",
+      "attrs": {
+        "true_name": "IOB14A/D15",
+        "comp_name": "IOB14B",
+        "true_pin": "F3",
+        "comp_pin": "G3"
+      }
     },
     {
       "type": "IO",
+      "true_name": "IOB16A",
+      "comp_name": "IOB16B",
+      "true_pin": "E2",
+      "comp_pin": "E1",
       "bank": "1",
       "p_pin": "E2",
       "n_pin": "E1",
       "p_name": "IOB16A",
-      "n_name": "IOB16B"
+      "n_name": "IOB16B",
+      "pair_name": "IOB16A",
+      "attrs": {
+        "true_name": "IOB16A",
+        "comp_name": "IOB16B",
+        "true_pin": "E2",
+        "comp_pin": "E1"
+      }
     },
     {
       "type": "IO",
+      "true_name": "IOB18A/D13",
+      "comp_name": "IOB18B",
+      "true_pin": "H3",
+      "comp_pin": "J3",
       "bank": "1",
       "p_pin": "H3",
       "n_pin": "J3",
       "p_name": "IOB18A/D13",
-      "n_name": "IOB18B"
+      "n_name": "IOB18B",
+      "pair_name": "IOB18A/D13",
+      "attrs": {
+        "true_name": "IOB18A/D13",
+        "comp_name": "IOB18B",
+        "true_pin": "H3",
+        "comp_pin": "J3"
+      }
     },
     {
       "type": "IO",
+      "true_name": "IOB20A",
+      "comp_name": "IOB20B",
+      "true_pin": "F2",
+      "comp_pin": "F1",
       "bank": "1",
       "p_pin": "F2",
       "n_pin": "F1",
       "p_name": "IOB20A",
-      "n_name": "IOB20B"
+      "n_name": "IOB20B",
+      "pair_name": "IOB20A",
+      "attrs": {
+        "true_name": "IOB20A",
+        "comp_name": "IOB20B",
+        "true_pin": "F2",
+        "comp_pin": "F1"
+      }
     },
     {
       "type": "IO",
+      "true_name": "IOB22A/GCLKT_3",
+      "comp_name": "IOB22B",
+      "true_pin": "G2",
+      "comp_pin": "G1",
       "bank": "1",
       "p_pin": "G2",
       "n_pin": "G1",
       "p_name": "IOB22A/GCLKT_3",
-      "n_name": "IOB22B"
+      "n_name": "IOB22B",
+      "pair_name": "IOB22A/GCLKT_3",
+      "attrs": {
+        "true_name": "IOB22A/GCLKT_3",
+        "comp_name": "IOB22B",
+        "true_pin": "G2",
+        "comp_pin": "G1"
+      }
     },
     {
       "type": "IO",
+      "true_name": "IOB24A/GCLKT_2/BPLL_T_I/N0/BPLL_T_FB1",
+      "comp_name": "IOB24B",
+      "true_pin": "H2",
+      "comp_pin": "H1",
       "bank": "1",
       "p_pin": "H2",
       "n_pin": "H1",
       "p_name": "IOB24A/GCLKT_2/BPLL_T_I/N0/BPLL_T_FB1",
-      "n_name": "IOB24B"
+      "n_name": "IOB24B",
+      "pair_name": "IOB24A/GCLKT_2/BPLL_T_I/N0/BPLL_T_FB1",
+      "attrs": {
+        "true_name": "IOB24A/GCLKT_2/BPLL_T_I/N0/BPLL_T_FB1",
+        "comp_name": "IOB24B",
+        "true_pin": "H2",
+        "comp_pin": "H1"
+      }
     },
     {
       "type": "IO",
+      "true_name": "IOB32A/GCLKT_1/BPLL_T_I/N1/BPLL_T_FB0",
+      "comp_name": "IOB32B",
+      "true_pin": "N3",
+      "comp_pin": "M3",
       "bank": "1",
       "p_pin": "N3",
       "n_pin": "M3",
       "p_name": "IOB32A/GCLKT_1/BPLL_T_I/N1/BPLL_T_FB0",
-      "n_name": "IOB32B"
+      "n_name": "IOB32B",
+      "pair_name": "IOB32A/GCLKT_1/BPLL_T_I/N1/BPLL_T_FB0",
+      "attrs": {
+        "true_name": "IOB32A/GCLKT_1/BPLL_T_I/N1/BPLL_T_FB0",
+        "comp_name": "IOB32B",
+        "true_pin": "N3",
+        "comp_pin": "M3"
+      }
     },
     {
       "type": "IO",
+      "true_name": "IOB34A/GCLKT_0",
+      "comp_name": "IOB34B",
+      "true_pin": "K3",
+      "comp_pin": "L3",
       "bank": "1",
       "p_pin": "K3",
       "n_pin": "L3",
       "p_name": "IOB34A/GCLKT_0",
-      "n_name": "IOB34B"
+      "n_name": "IOB34B",
+      "pair_name": "IOB34A/GCLKT_0",
+      "attrs": {
+        "true_name": "IOB34A/GCLKT_0",
+        "comp_name": "IOB34B",
+        "true_pin": "K3",
+        "comp_pin": "L3"
+      }
     },
     {
       "type": "IO",
+      "true_name": "IOB36A",
+      "comp_name": "IOB36B",
+      "true_pin": "J2",
+      "comp_pin": "J1",
       "bank": "1",
       "p_pin": "J2",
       "n_pin": "J1",
       "p_name": "IOB36A",
-      "n_name": "IOB36B"
+      "n_name": "IOB36B",
+      "pair_name": "IOB36A",
+      "attrs": {
+        "true_name": "IOB36A",
+        "comp_name": "IOB36B",
+        "true_pin": "J2",
+        "comp_pin": "J1"
+      }
     },
     {
       "type": "IO",
+      "true_name": "IOB39A/D11",
+      "comp_name": "IOB39B",
+      "true_pin": "K2",
+      "comp_pin": "K1",
       "bank": "1",
       "p_pin": "K2",
       "n_pin": "K1",
       "p_name": "IOB39A/D11",
-      "n_name": "IOB39B"
+      "n_name": "IOB39B",
+      "pair_name": "IOB39A/D11",
+      "attrs": {
+        "true_name": "IOB39A/D11",
+        "comp_name": "IOB39B",
+        "true_pin": "K2",
+        "comp_pin": "K1"
+      }
     },
     {
       "type": "IO",
+      "true_name": "IOB3A/D02/MI2",
+      "comp_name": "IOB3B",
+      "true_pin": "G5",
+      "comp_pin": "G4",
       "bank": "2",
       "p_pin": "G5",
       "n_pin": "G4",
       "p_name": "IOB3A/D02/MI2",
-      "n_name": "IOB3B"
+      "n_name": "IOB3B",
+      "pair_name": "IOB3A/D02/MI2",
+      "attrs": {
+        "true_name": "IOB3A/D02/MI2",
+        "comp_name": "IOB3B",
+        "true_pin": "G5",
+        "comp_pin": "G4"
+      }
     },
     {
       "type": "IO",
+      "true_name": "IOB43A/D09",
+      "comp_name": "IOB43B",
+      "true_pin": "M1",
+      "comp_pin": "N1",
       "bank": "1",
       "p_pin": "M1",
       "n_pin": "N1",
       "p_name": "IOB43A/D09",
-      "n_name": "IOB43B"
+      "n_name": "IOB43B",
+      "pair_name": "IOB43A/D09",
+      "attrs": {
+        "true_name": "IOB43A/D09",
+        "comp_name": "IOB43B",
+        "true_pin": "M1",
+        "comp_pin": "N1"
+      }
     },
     {
       "type": "IO",
+      "true_name": "IOB45A",
+      "comp_name": "IOB45B",
+      "true_pin": "M2",
+      "comp_pin": "N2",
       "bank": "1",
       "p_pin": "M2",
       "n_pin": "N2",
       "p_name": "IOB45A",
-      "n_name": "IOB45B"
+      "n_name": "IOB45B",
+      "pair_name": "IOB45A",
+      "attrs": {
+        "true_name": "IOB45A",
+        "comp_name": "IOB45B",
+        "true_pin": "M2",
+        "comp_pin": "N2"
+      }
     },
     {
       "type": "IO",
+      "true_name": "IOB5A/CCLK",
+      "comp_name": "IOB5B",
+      "true_pin": "H5",
+      "comp_pin": "H4",
       "bank": "2",
       "p_pin": "H5",
       "n_pin": "H4",
       "p_name": "IOB5A/CCLK",
-      "n_name": "IOB5B"
+      "n_name": "IOB5B",
+      "pair_name": "IOB5A/CCLK",
+      "attrs": {
+        "true_name": "IOB5A/CCLK",
+        "comp_name": "IOB5B",
+        "true_pin": "H5",
+        "comp_pin": "H4"
+      }
     },
     {
       "type": "IO",
+      "true_name": "IOB7A/D03/MI3",
+      "comp_name": "IOB7B",
+      "true_pin": "J4",
+      "comp_pin": "K4",
       "bank": "2",
       "p_pin": "J4",
       "n_pin": "K4",
       "p_name": "IOB7A/D03/MI3",
-      "n_name": "IOB7B"
+      "n_name": "IOB7B",
+      "pair_name": "IOB7A/D03/MI3",
+      "attrs": {
+        "true_name": "IOB7A/D03/MI3",
+        "comp_name": "IOB7B",
+        "true_pin": "J4",
+        "comp_pin": "K4"
+      }
     },
     {
       "type": "IO",
+      "true_name": "IOL20A/TCK",
+      "comp_name": "IOL20B",
+      "true_pin": "E8",
+      "comp_pin": "E7",
       "bank": "4",
       "p_pin": "E8",
       "n_pin": "E7",
       "p_name": "IOL20A/TCK",
-      "n_name": "IOL20B"
+      "n_name": "IOL20B",
+      "pair_name": "IOL20A/TCK",
+      "attrs": {
+        "true_name": "IOL20A/TCK",
+        "comp_name": "IOL20B",
+        "true_pin": "E8",
+        "comp_pin": "E7"
+      }
     },
     {
       "type": "IO",
+      "true_name": "IOL22A/GCLKT_7/Q0REF_T_/IN0/SSPI_CLK",
+      "comp_name": "IOL22B",
+      "true_pin": "F8",
+      "comp_pin": "F7",
       "bank": "4",
       "p_pin": "F8",
       "n_pin": "F7",
       "p_name": "IOL22A/GCLKT_7/Q0REF_T_/IN0/SSPI_CLK",
-      "n_name": "IOL22B"
+      "n_name": "IOL22B",
+      "pair_name": "IOL22A/GCLKT_7/Q0REF_T_/IN0/SSPI_CLK",
+      "attrs": {
+        "true_name": "IOL22A/GCLKT_7/Q0REF_T_/IN0/SSPI_CLK",
+        "comp_name": "IOL22B",
+        "true_pin": "F8",
+        "comp_pin": "F7"
+      }
     },
     {
       "type": "IO",
+      "true_name": "IOL24A/TDI",
+      "comp_name": "IOL24B",
+      "true_pin": "H8",
+      "comp_pin": "H7",
       "bank": "4",
       "p_pin": "H8",
       "n_pin": "H7",
       "p_name": "IOL24A/TDI",
-      "n_name": "IOL24B"
+      "n_name": "IOL24B",
+      "pair_name": "IOL24A/TDI",
+      "attrs": {
+        "true_name": "IOL24A/TDI",
+        "comp_name": "IOL24B",
+        "true_pin": "H8",
+        "comp_pin": "H7"
+      }
     },
     {
       "type": "IO",
+      "true_name": "IOL26A/GCLKT_6/LPLL_T_IN/0/LPLL_T_FB1/Q0REF_T_IN/1/D06/CLKHOLD_N/SSI3",
+      "comp_name": "IOL26B",
+      "true_pin": "J8",
+      "comp_pin": "J7",
       "bank": "4",
       "p_pin": "J8",
       "n_pin": "J7",
       "p_name": "IOL26A/GCLKT_6/LPLL_T_IN/0/LPLL_T_FB1/Q0REF_T_IN/1/D06/CLKHOLD_N/SSI3",
-      "n_name": "IOL26B"
+      "n_name": "IOL26B",
+      "pair_name": "IOL26A/GCLKT_6/LPLL_T_IN/0/LPLL_T_FB1/Q0REF_T_IN/1/D06/CLKHOLD_N/SSI3",
+      "attrs": {
+        "true_name": "IOL26A/GCLKT_6/LPLL_T_IN/0/LPLL_T_FB1/Q0REF_T_IN/1/D06/CLKHOLD_N/SSI3",
+        "comp_name": "IOL26B",
+        "true_pin": "J8",
+        "comp_pin": "J7"
+      }
     },
     {
       "type": "IO",
+      "true_name": "IOL29A/DONE",
+      "comp_name": "IOL29B",
+      "true_pin": "K7",
+      "comp_pin": "K6",
       "bank": "3",
       "p_pin": "K7",
       "n_pin": "K6",
       "p_name": "IOL29A/DONE",
-      "n_name": "IOL29B"
+      "n_name": "IOL29B",
+      "pair_name": "IOL29A/DONE",
+      "attrs": {
+        "true_name": "IOL29A/DONE",
+        "comp_name": "IOL29B",
+        "true_pin": "K7",
+        "comp_pin": "K6"
+      }
     },
     {
       "type": "IO",
+      "true_name": "IOL31A/GCLKT_5/MODE1",
+      "comp_name": "IOL31B",
+      "true_pin": "G6",
+      "comp_pin": "",
       "bank": "3",
       "p_pin": "G6",
       "n_pin": "",
       "p_name": "IOL31A/GCLKT_5/MODE1",
-      "n_name": "IOL31B"
+      "n_name": "IOL31B",
+      "pair_name": "IOL31A/GCLKT_5/MODE1",
+      "attrs": {
+        "true_name": "IOL31A/GCLKT_5/MODE1",
+        "comp_name": "IOL31B",
+        "true_pin": "G6",
+        "comp_pin": ""
+      }
     },
     {
       "type": "IO",
+      "true_name": "IOL33A/GCLKT_4/LPLL_T_IN/1/LPLL_T_FB0/CSO_B/DOUT//SCL",
+      "comp_name": "IOL33B",
+      "true_pin": "D4",
+      "comp_pin": "D3",
       "bank": "3",
       "p_pin": "D4",
       "n_pin": "D3",
       "p_name": "IOL33A/GCLKT_4/LPLL_T_IN/1/LPLL_T_FB0/CSO_B/DOUT//SCL",
-      "n_name": "IOL33B"
+      "n_name": "IOL33B",
+      "pair_name": "IOL33A/GCLKT_4/LPLL_T_IN/1/LPLL_T_FB0/CSO_B/DOUT//SCL",
+      "attrs": {
+        "true_name": "IOL33A/GCLKT_4/LPLL_T_IN/1/LPLL_T_FB0/CSO_B/DOUT//SCL",
+        "comp_name": "IOL33B",
+        "true_pin": "D4",
+        "comp_pin": "D3"
+      }
     },
     {
       "type": "IO",
+      "true_name": "IOL35A/D04/SI/SSI0",
+      "comp_name": "IOL35B",
+      "true_pin": "F5",
+      "comp_pin": "F4",
       "bank": "3",
       "p_pin": "F5",
       "n_pin": "F4",
       "p_name": "IOL35A/D04/SI/SSI0",
-      "n_name": "IOL35B"
+      "n_name": "IOL35B",
+      "pair_name": "IOL35A/D04/SI/SSI0",
+      "attrs": {
+        "true_name": "IOL35A/D04/SI/SSI0",
+        "comp_name": "IOL35B",
+        "true_pin": "F5",
+        "comp_pin": "F4"
+      }
     }
   ],
   "drc_rules": {
@@ -588,7 +923,15 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "none",
-      "pull_state": "pull down"
+      "pull_state": "pull down",
+      "attrs": {
+        "category": "IO",
+        "dqs_group": "DQ2",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "none",
+        "pull_state": "pull down"
+      }
     },
     {
       "pin": "E4",
@@ -600,7 +943,15 @@
       "config_function": "",
       "diff_pair": "True_of_IOB12B",
       "lvds": "True",
-      "pull_state": "pull down"
+      "pull_state": "pull down",
+      "attrs": {
+        "category": "IO",
+        "dqs_group": "DQ2",
+        "config_function": "",
+        "diff_pair": "True_of_IOB12B",
+        "lvds": "True",
+        "pull_state": "pull down"
+      }
     },
     {
       "pin": "E3",
@@ -612,7 +963,15 @@
       "config_function": "",
       "diff_pair": "Comp_of_IOB12A",
       "lvds": "True",
-      "pull_state": "pull down"
+      "pull_state": "pull down",
+      "attrs": {
+        "category": "IO",
+        "dqs_group": "DQ2",
+        "config_function": "",
+        "diff_pair": "Comp_of_IOB12A",
+        "lvds": "True",
+        "pull_state": "pull down"
+      }
     },
     {
       "pin": "F3",
@@ -624,7 +983,15 @@
       "config_function": "D15",
       "diff_pair": "True_of_IOB14B",
       "lvds": "True",
-      "pull_state": "pull down"
+      "pull_state": "pull down",
+      "attrs": {
+        "category": "IO",
+        "dqs_group": "DQ2",
+        "config_function": "D15",
+        "diff_pair": "True_of_IOB14B",
+        "lvds": "True",
+        "pull_state": "pull down"
+      }
     },
     {
       "pin": "G3",
@@ -636,7 +1003,15 @@
       "config_function": "D14",
       "diff_pair": "Comp_of_IOB14A",
       "lvds": "True",
-      "pull_state": "pull down"
+      "pull_state": "pull down",
+      "attrs": {
+        "category": "IO",
+        "dqs_group": "DQ2",
+        "config_function": "D14",
+        "diff_pair": "Comp_of_IOB14A",
+        "lvds": "True",
+        "pull_state": "pull down"
+      }
     },
     {
       "pin": "E2",
@@ -648,7 +1023,15 @@
       "config_function": "",
       "diff_pair": "True_of_IOB16B",
       "lvds": "True",
-      "pull_state": "pull down"
+      "pull_state": "pull down",
+      "attrs": {
+        "category": "IO",
+        "dqs_group": "DQ2",
+        "config_function": "",
+        "diff_pair": "True_of_IOB16B",
+        "lvds": "True",
+        "pull_state": "pull down"
+      }
     },
     {
       "pin": "E1",
@@ -660,7 +1043,15 @@
       "config_function": "",
       "diff_pair": "Comp_of_IOB16A",
       "lvds": "True",
-      "pull_state": "pull down"
+      "pull_state": "pull down",
+      "attrs": {
+        "category": "IO",
+        "dqs_group": "DQ2",
+        "config_function": "",
+        "diff_pair": "Comp_of_IOB16A",
+        "lvds": "True",
+        "pull_state": "pull down"
+      }
     },
     {
       "pin": "H3",
@@ -672,7 +1063,15 @@
       "config_function": "D13",
       "diff_pair": "True_of_IOB18B",
       "lvds": "True",
-      "pull_state": "pull down"
+      "pull_state": "pull down",
+      "attrs": {
+        "category": "IO",
+        "dqs_group": "DQ2",
+        "config_function": "D13",
+        "diff_pair": "True_of_IOB18B",
+        "lvds": "True",
+        "pull_state": "pull down"
+      }
     },
     {
       "pin": "J3",
@@ -684,7 +1083,15 @@
       "config_function": "D12",
       "diff_pair": "Comp_of_IOB18A",
       "lvds": "True",
-      "pull_state": "pull down"
+      "pull_state": "pull down",
+      "attrs": {
+        "category": "IO",
+        "dqs_group": "DQ2",
+        "config_function": "D12",
+        "diff_pair": "Comp_of_IOB18A",
+        "lvds": "True",
+        "pull_state": "pull down"
+      }
     },
     {
       "pin": "F2",
@@ -696,7 +1103,15 @@
       "config_function": "",
       "diff_pair": "True_of_IOB20B",
       "lvds": "True",
-      "pull_state": "pull down"
+      "pull_state": "pull down",
+      "attrs": {
+        "category": "IO",
+        "dqs_group": "DQS2",
+        "config_function": "",
+        "diff_pair": "True_of_IOB20B",
+        "lvds": "True",
+        "pull_state": "pull down"
+      }
     },
     {
       "pin": "F1",
@@ -708,7 +1123,15 @@
       "config_function": "",
       "diff_pair": "Comp_of_IOB20A",
       "lvds": "True",
-      "pull_state": "pull down"
+      "pull_state": "pull down",
+      "attrs": {
+        "category": "IO",
+        "dqs_group": "DQS2",
+        "config_function": "",
+        "diff_pair": "Comp_of_IOB20A",
+        "lvds": "True",
+        "pull_state": "pull down"
+      }
     },
     {
       "pin": "G2",
@@ -720,7 +1143,15 @@
       "config_function": "GCLKT_3",
       "diff_pair": "True_of_IOB22B",
       "lvds": "True",
-      "pull_state": "pull down"
+      "pull_state": "pull down",
+      "attrs": {
+        "category": "IO",
+        "dqs_group": "DQ2",
+        "config_function": "GCLKT_3",
+        "diff_pair": "True_of_IOB22B",
+        "lvds": "True",
+        "pull_state": "pull down"
+      }
     },
     {
       "pin": "G1",
@@ -732,7 +1163,15 @@
       "config_function": "GCLKC_3",
       "diff_pair": "Comp_of_IOB22A",
       "lvds": "True",
-      "pull_state": "pull down"
+      "pull_state": "pull down",
+      "attrs": {
+        "category": "IO",
+        "dqs_group": "DQ2",
+        "config_function": "GCLKC_3",
+        "diff_pair": "Comp_of_IOB22A",
+        "lvds": "True",
+        "pull_state": "pull down"
+      }
     },
     {
       "pin": "H2",
@@ -744,7 +1183,15 @@
       "config_function": "GCLKT_2/BPLL_T_IN0/BPL/L_T_FB1",
       "diff_pair": "True_of_IOB24B",
       "lvds": "True",
-      "pull_state": "pull down"
+      "pull_state": "pull down",
+      "attrs": {
+        "category": "IO",
+        "dqs_group": "bus1",
+        "config_function": "GCLKT_2/BPLL_T_IN0/BPL/L_T_FB1",
+        "diff_pair": "True_of_IOB24B",
+        "lvds": "True",
+        "pull_state": "pull down"
+      }
     },
     {
       "pin": "H1",
@@ -756,7 +1203,15 @@
       "config_function": "GCLKC_2/BPLL_C_IN0/BPL/L_C_FB1",
       "diff_pair": "Comp_of_IOB24A",
       "lvds": "True",
-      "pull_state": "pull down"
+      "pull_state": "pull down",
+      "attrs": {
+        "category": "IO",
+        "dqs_group": "bus1",
+        "config_function": "GCLKC_2/BPLL_C_IN0/BPL/L_C_FB1",
+        "diff_pair": "Comp_of_IOB24A",
+        "lvds": "True",
+        "pull_state": "pull down"
+      }
     },
     {
       "pin": "L4",
@@ -768,7 +1223,15 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "none",
-      "pull_state": "pull down"
+      "pull_state": "pull down",
+      "attrs": {
+        "category": "IO",
+        "dqs_group": "DQ1",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "none",
+        "pull_state": "pull down"
+      }
     },
     {
       "pin": "N3",
@@ -780,7 +1243,15 @@
       "config_function": "GCLKT_1/BPLL_T_IN1/BPL/L_T_FB0",
       "diff_pair": "True_of_IOB32B",
       "lvds": "True",
-      "pull_state": "pull down"
+      "pull_state": "pull down",
+      "attrs": {
+        "category": "IO",
+        "dqs_group": "bus1",
+        "config_function": "GCLKT_1/BPLL_T_IN1/BPL/L_T_FB0",
+        "diff_pair": "True_of_IOB32B",
+        "lvds": "True",
+        "pull_state": "pull down"
+      }
     },
     {
       "pin": "M3",
@@ -792,7 +1263,15 @@
       "config_function": "GCLKC_1/BPLL_C_IN1/BPL/L_C_FB0",
       "diff_pair": "Comp_of_IOB32A",
       "lvds": "True",
-      "pull_state": "pull down"
+      "pull_state": "pull down",
+      "attrs": {
+        "category": "IO",
+        "dqs_group": "bus1",
+        "config_function": "GCLKC_1/BPLL_C_IN1/BPL/L_C_FB0",
+        "diff_pair": "Comp_of_IOB32A",
+        "lvds": "True",
+        "pull_state": "pull down"
+      }
     },
     {
       "pin": "K3",
@@ -804,7 +1283,15 @@
       "config_function": "GCLKT_0",
       "diff_pair": "True_of_IOB34B",
       "lvds": "True",
-      "pull_state": "pull down"
+      "pull_state": "pull down",
+      "attrs": {
+        "category": "IO",
+        "dqs_group": "DQ1",
+        "config_function": "GCLKT_0",
+        "diff_pair": "True_of_IOB34B",
+        "lvds": "True",
+        "pull_state": "pull down"
+      }
     },
     {
       "pin": "L3",
@@ -816,7 +1303,15 @@
       "config_function": "GCLKC_0",
       "diff_pair": "Comp_of_IOB34A",
       "lvds": "True",
-      "pull_state": "pull down"
+      "pull_state": "pull down",
+      "attrs": {
+        "category": "IO",
+        "dqs_group": "DQ1",
+        "config_function": "GCLKC_0",
+        "diff_pair": "Comp_of_IOB34A",
+        "lvds": "True",
+        "pull_state": "pull down"
+      }
     },
     {
       "pin": "J2",
@@ -828,7 +1323,15 @@
       "config_function": "",
       "diff_pair": "True_of_IOB36B",
       "lvds": "True",
-      "pull_state": "pull down"
+      "pull_state": "pull down",
+      "attrs": {
+        "category": "IO",
+        "dqs_group": "DQ1",
+        "config_function": "",
+        "diff_pair": "True_of_IOB36B",
+        "lvds": "True",
+        "pull_state": "pull down"
+      }
     },
     {
       "pin": "J1",
@@ -840,7 +1343,15 @@
       "config_function": "",
       "diff_pair": "Comp_of_IOB36A",
       "lvds": "True",
-      "pull_state": "pull down"
+      "pull_state": "pull down",
+      "attrs": {
+        "category": "IO",
+        "dqs_group": "DQ1",
+        "config_function": "",
+        "diff_pair": "Comp_of_IOB36A",
+        "lvds": "True",
+        "pull_state": "pull down"
+      }
     },
     {
       "pin": "K2",
@@ -852,7 +1363,15 @@
       "config_function": "D11",
       "diff_pair": "True_of_IOB39B",
       "lvds": "True",
-      "pull_state": "pull down"
+      "pull_state": "pull down",
+      "attrs": {
+        "category": "IO",
+        "dqs_group": "DQ1",
+        "config_function": "D11",
+        "diff_pair": "True_of_IOB39B",
+        "lvds": "True",
+        "pull_state": "pull down"
+      }
     },
     {
       "pin": "K1",
@@ -864,7 +1383,15 @@
       "config_function": "D10",
       "diff_pair": "Comp_of_IOB39A",
       "lvds": "True",
-      "pull_state": "pull down"
+      "pull_state": "pull down",
+      "attrs": {
+        "category": "IO",
+        "dqs_group": "DQ1",
+        "config_function": "D10",
+        "diff_pair": "Comp_of_IOB39A",
+        "lvds": "True",
+        "pull_state": "pull down"
+      }
     },
     {
       "pin": "G5",
@@ -876,7 +1403,15 @@
       "config_function": "D02/MI2",
       "diff_pair": "True_of_IOB3B",
       "lvds": "True",
-      "pull_state": "pull down"
+      "pull_state": "pull down",
+      "attrs": {
+        "category": "IO",
+        "dqs_group": "bus1",
+        "config_function": "D02/MI2",
+        "diff_pair": "True_of_IOB3B",
+        "lvds": "True",
+        "pull_state": "pull down"
+      }
     },
     {
       "pin": "G4",
@@ -888,7 +1423,15 @@
       "config_function": "D01/DIN/MISO/MI1",
       "diff_pair": "Comp_of_IOB3A",
       "lvds": "True",
-      "pull_state": "pull down"
+      "pull_state": "pull down",
+      "attrs": {
+        "category": "IO",
+        "dqs_group": "bus1",
+        "config_function": "D01/DIN/MISO/MI1",
+        "diff_pair": "Comp_of_IOB3A",
+        "lvds": "True",
+        "pull_state": "pull down"
+      }
     },
     {
       "pin": "L2",
@@ -900,7 +1443,15 @@
       "config_function": "",
       "diff_pair": "Comp_of_IOB41A",
       "lvds": "True",
-      "pull_state": "pull down"
+      "pull_state": "pull down",
+      "attrs": {
+        "category": "IO",
+        "dqs_group": "DQS1",
+        "config_function": "",
+        "diff_pair": "Comp_of_IOB41A",
+        "lvds": "True",
+        "pull_state": "pull down"
+      }
     },
     {
       "pin": "M1",
@@ -912,7 +1463,15 @@
       "config_function": "D09",
       "diff_pair": "True_of_IOB43B",
       "lvds": "True",
-      "pull_state": "pull down"
+      "pull_state": "pull down",
+      "attrs": {
+        "category": "IO",
+        "dqs_group": "DQ1",
+        "config_function": "D09",
+        "diff_pair": "True_of_IOB43B",
+        "lvds": "True",
+        "pull_state": "pull down"
+      }
     },
     {
       "pin": "N1",
@@ -924,7 +1483,15 @@
       "config_function": "D08",
       "diff_pair": "Comp_of_IOB43A",
       "lvds": "True",
-      "pull_state": "pull down"
+      "pull_state": "pull down",
+      "attrs": {
+        "category": "IO",
+        "dqs_group": "DQ1",
+        "config_function": "D08",
+        "diff_pair": "Comp_of_IOB43A",
+        "lvds": "True",
+        "pull_state": "pull down"
+      }
     },
     {
       "pin": "M2",
@@ -936,7 +1503,15 @@
       "config_function": "",
       "diff_pair": "True_of_IOB45B",
       "lvds": "True",
-      "pull_state": "pull down"
+      "pull_state": "pull down",
+      "attrs": {
+        "category": "IO",
+        "dqs_group": "DQ1",
+        "config_function": "",
+        "diff_pair": "True_of_IOB45B",
+        "lvds": "True",
+        "pull_state": "pull down"
+      }
     },
     {
       "pin": "N2",
@@ -948,7 +1523,15 @@
       "config_function": "EMCCLK",
       "diff_pair": "Comp_of_IOB45A",
       "lvds": "True",
-      "pull_state": "pull down"
+      "pull_state": "pull down",
+      "attrs": {
+        "category": "IO",
+        "dqs_group": "DQ1",
+        "config_function": "EMCCLK",
+        "diff_pair": "Comp_of_IOB45A",
+        "lvds": "True",
+        "pull_state": "pull down"
+      }
     },
     {
       "pin": "H5",
@@ -960,7 +1543,15 @@
       "config_function": "CCLK",
       "diff_pair": "True_of_IOB5B",
       "lvds": "True",
-      "pull_state": "pull down"
+      "pull_state": "pull down",
+      "attrs": {
+        "category": "IO",
+        "dqs_group": "bus1",
+        "config_function": "CCLK",
+        "diff_pair": "True_of_IOB5B",
+        "lvds": "True",
+        "pull_state": "pull down"
+      }
     },
     {
       "pin": "H4",
@@ -972,7 +1563,16 @@
       "config_function": "MCS_N",
       "diff_pair": "Comp_of_IOB5A",
       "lvds": "True",
-      "pull_state": "pull down"
+      "pull_state": "pull down",
+      "polarity": "N",
+      "attrs": {
+        "category": "IO",
+        "dqs_group": "bus1",
+        "config_function": "MCS_N",
+        "diff_pair": "Comp_of_IOB5A",
+        "lvds": "True",
+        "pull_state": "pull down"
+      }
     },
     {
       "pin": "J4",
@@ -984,7 +1584,15 @@
       "config_function": "D03/MI3",
       "diff_pair": "True_of_IOB7B",
       "lvds": "True",
-      "pull_state": "pull down"
+      "pull_state": "pull down",
+      "attrs": {
+        "category": "IO",
+        "dqs_group": "bus1",
+        "config_function": "D03/MI3",
+        "diff_pair": "True_of_IOB7B",
+        "lvds": "True",
+        "pull_state": "pull down"
+      }
     },
     {
       "pin": "K4",
@@ -996,7 +1604,15 @@
       "config_function": "D00/MOSI/MI0",
       "diff_pair": "Comp_of_IOB7A",
       "lvds": "True",
-      "pull_state": "pull down"
+      "pull_state": "pull down",
+      "attrs": {
+        "category": "IO",
+        "dqs_group": "bus1",
+        "config_function": "D00/MOSI/MI0",
+        "diff_pair": "Comp_of_IOB7A",
+        "lvds": "True",
+        "pull_state": "pull down"
+      }
     },
     {
       "pin": "K5",
@@ -1008,7 +1624,15 @@
       "config_function": "READY",
       "diff_pair": "",
       "lvds": "none",
-      "pull_state": "pull-up"
+      "pull_state": "pull-up",
+      "attrs": {
+        "category": "IO",
+        "dqs_group": "bus1",
+        "config_function": "READY",
+        "diff_pair": "",
+        "lvds": "none",
+        "pull_state": "pull-up"
+      }
     },
     {
       "pin": "E8",
@@ -1020,7 +1644,15 @@
       "config_function": "TCK",
       "diff_pair": "True_of_IOL20B",
       "lvds": "True",
-      "pull_state": "pull-up"
+      "pull_state": "pull-up",
+      "attrs": {
+        "category": "IO",
+        "dqs_group": "",
+        "config_function": "TCK",
+        "diff_pair": "True_of_IOL20B",
+        "lvds": "True",
+        "pull_state": "pull-up"
+      }
     },
     {
       "pin": "E7",
@@ -1032,7 +1664,15 @@
       "config_function": "TMS",
       "diff_pair": "Comp_of_IOL20A",
       "lvds": "True",
-      "pull_state": "pull-up"
+      "pull_state": "pull-up",
+      "attrs": {
+        "category": "IO",
+        "dqs_group": "",
+        "config_function": "TMS",
+        "diff_pair": "Comp_of_IOL20A",
+        "lvds": "True",
+        "pull_state": "pull-up"
+      }
     },
     {
       "pin": "F8",
@@ -1044,7 +1684,15 @@
       "config_function": "GCLKT_7/Q0REF_T_IN0/SS/PI_CLK",
       "diff_pair": "True_of_IOL22B",
       "lvds": "True",
-      "pull_state": "pull down"
+      "pull_state": "pull down",
+      "attrs": {
+        "category": "IO",
+        "dqs_group": "bus0",
+        "config_function": "GCLKT_7/Q0REF_T_IN0/SS/PI_CLK",
+        "diff_pair": "True_of_IOL22B",
+        "lvds": "True",
+        "pull_state": "pull down"
+      }
     },
     {
       "pin": "F7",
@@ -1056,7 +1704,16 @@
       "config_function": "GCLKC_7/Q0REF_C_IN0/R/DWR_B/SO/SSI1/PCIE_HO/ST_RSTN",
       "diff_pair": "Comp_of_IOL22A",
       "lvds": "True",
-      "pull_state": "pull down"
+      "pull_state": "pull down",
+      "polarity": "N",
+      "attrs": {
+        "category": "IO",
+        "dqs_group": "bus0",
+        "config_function": "GCLKC_7/Q0REF_C_IN0/R/DWR_B/SO/SSI1/PCIE_HO/ST_RSTN",
+        "diff_pair": "Comp_of_IOL22A",
+        "lvds": "True",
+        "pull_state": "pull down"
+      }
     },
     {
       "pin": "H8",
@@ -1068,7 +1725,15 @@
       "config_function": "TDI",
       "diff_pair": "True_of_IOL24B",
       "lvds": "True",
-      "pull_state": "pull-up"
+      "pull_state": "pull-up",
+      "attrs": {
+        "category": "IO",
+        "dqs_group": "bus0",
+        "config_function": "TDI",
+        "diff_pair": "True_of_IOL24B",
+        "lvds": "True",
+        "pull_state": "pull-up"
+      }
     },
     {
       "pin": "H7",
@@ -1080,7 +1745,15 @@
       "config_function": "TDO",
       "diff_pair": "Comp_of_IOL24A",
       "lvds": "True",
-      "pull_state": "pull-up"
+      "pull_state": "pull-up",
+      "attrs": {
+        "category": "IO",
+        "dqs_group": "bus0",
+        "config_function": "TDO",
+        "diff_pair": "Comp_of_IOL24A",
+        "lvds": "True",
+        "pull_state": "pull-up"
+      }
     },
     {
       "pin": "J8",
@@ -1092,7 +1765,15 @@
       "config_function": "GCLKT_6/LPLL_T_IN0/LPLL/_T_FB1/Q0REF_T_IN1/D06//CLKHOLD_N/SSI3",
       "diff_pair": "True_of_IOL26B",
       "lvds": "True",
-      "pull_state": "pull down"
+      "pull_state": "pull down",
+      "attrs": {
+        "category": "IO",
+        "dqs_group": "bus0",
+        "config_function": "GCLKT_6/LPLL_T_IN0/LPLL/_T_FB1/Q0REF_T_IN1/D06//CLKHOLD_N/SSI3",
+        "diff_pair": "True_of_IOL26B",
+        "lvds": "True",
+        "pull_state": "pull down"
+      }
     },
     {
       "pin": "J7",
@@ -1104,7 +1785,15 @@
       "config_function": "GCLKC_6/LPLL_C_IN0/LPL/L_C_FB1/Q0REF_C_IN1/D0/7/SSPI_WPN/SSI2",
       "diff_pair": "Comp_of_IOL26A",
       "lvds": "True",
-      "pull_state": "pull down"
+      "pull_state": "pull down",
+      "attrs": {
+        "category": "IO",
+        "dqs_group": "bus0",
+        "config_function": "GCLKC_6/LPLL_C_IN0/LPL/L_C_FB1/Q0REF_C_IN1/D0/7/SSPI_WPN/SSI2",
+        "diff_pair": "Comp_of_IOL26A",
+        "lvds": "True",
+        "pull_state": "pull down"
+      }
     },
     {
       "pin": "K7",
@@ -1116,7 +1805,15 @@
       "config_function": "DONE",
       "diff_pair": "True_of_IOL29B",
       "lvds": "True",
-      "pull_state": "pull-up"
+      "pull_state": "pull-up",
+      "attrs": {
+        "category": "IO",
+        "dqs_group": "bus0",
+        "config_function": "DONE",
+        "diff_pair": "True_of_IOL29B",
+        "lvds": "True",
+        "pull_state": "pull-up"
+      }
     },
     {
       "pin": "K6",
@@ -1128,7 +1825,16 @@
       "config_function": "RECONFIG_N",
       "diff_pair": "Comp_of_IOL29A",
       "lvds": "True",
-      "pull_state": "pull-up"
+      "pull_state": "pull-up",
+      "polarity": "N",
+      "attrs": {
+        "category": "IO",
+        "dqs_group": "bus0",
+        "config_function": "RECONFIG_N",
+        "diff_pair": "Comp_of_IOL29A",
+        "lvds": "True",
+        "pull_state": "pull-up"
+      }
     },
     {
       "pin": "G6",
@@ -1140,7 +1846,15 @@
       "config_function": "GCLKT_5/MODE1",
       "diff_pair": "True_of_IOL31B",
       "lvds": "True",
-      "pull_state": "pull-up"
+      "pull_state": "pull-up",
+      "attrs": {
+        "category": "IO",
+        "dqs_group": "",
+        "config_function": "GCLKT_5/MODE1",
+        "diff_pair": "True_of_IOL31B",
+        "lvds": "True",
+        "pull_state": "pull-up"
+      }
     },
     {
       "pin": "D4",
@@ -1152,7 +1866,15 @@
       "config_function": "GCLKT_4/LPLL_T_IN1/LPLL/_T_FB0/CSO_B/DOUT/SCL",
       "diff_pair": "True_of_IOL33B",
       "lvds": "True",
-      "pull_state": "pull down"
+      "pull_state": "pull down",
+      "attrs": {
+        "category": "IO",
+        "dqs_group": "bus0",
+        "config_function": "GCLKT_4/LPLL_T_IN1/LPLL/_T_FB0/CSO_B/DOUT/SCL",
+        "diff_pair": "True_of_IOL33B",
+        "lvds": "True",
+        "pull_state": "pull down"
+      }
     },
     {
       "pin": "D3",
@@ -1164,7 +1886,15 @@
       "config_function": "GCLKC_4/LPLL_C_IN1/LPL/L_C_FB0/CSI_B/SDA",
       "diff_pair": "Comp_of_IOL33A",
       "lvds": "True",
-      "pull_state": "pull down"
+      "pull_state": "pull down",
+      "attrs": {
+        "category": "IO",
+        "dqs_group": "bus0",
+        "config_function": "GCLKC_4/LPLL_C_IN1/LPL/L_C_FB0/CSI_B/SDA",
+        "diff_pair": "Comp_of_IOL33A",
+        "lvds": "True",
+        "pull_state": "pull down"
+      }
     },
     {
       "pin": "F5",
@@ -1176,7 +1906,15 @@
       "config_function": "D04/SI/SSI0",
       "diff_pair": "True_of_IOL35B",
       "lvds": "True",
-      "pull_state": "pull down"
+      "pull_state": "pull down",
+      "attrs": {
+        "category": "IO",
+        "dqs_group": "bus0",
+        "config_function": "D04/SI/SSI0",
+        "diff_pair": "True_of_IOL35B",
+        "lvds": "True",
+        "pull_state": "pull down"
+      }
     },
     {
       "pin": "F4",
@@ -1188,7 +1926,16 @@
       "config_function": "D05/SSPI_CS_N",
       "diff_pair": "Comp_of_IOL35A",
       "lvds": "True",
-      "pull_state": "pull down"
+      "pull_state": "pull down",
+      "polarity": "N",
+      "attrs": {
+        "category": "IO",
+        "dqs_group": "bus0",
+        "config_function": "D05/SSPI_CS_N",
+        "diff_pair": "Comp_of_IOL35A",
+        "lvds": "True",
+        "pull_state": "pull down"
+      }
     },
     {
       "pin": "M8",
@@ -1200,7 +1947,16 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "none",
-      "pull_state": ""
+      "pull_state": "",
+      "polarity": "N",
+      "attrs": {
+        "category": "MIPI",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "none",
+        "pull_state": ""
+      }
     },
     {
       "pin": "N8",
@@ -1212,7 +1968,16 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "none",
-      "pull_state": ""
+      "pull_state": "",
+      "polarity": "P",
+      "attrs": {
+        "category": "MIPI",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "none",
+        "pull_state": ""
+      }
     },
     {
       "pin": "N9",
@@ -1224,7 +1989,16 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "none",
-      "pull_state": ""
+      "pull_state": "",
+      "polarity": "N",
+      "attrs": {
+        "category": "MIPI",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "none",
+        "pull_state": ""
+      }
     },
     {
       "pin": "N10",
@@ -1236,7 +2010,16 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "none",
-      "pull_state": ""
+      "pull_state": "",
+      "polarity": "P",
+      "attrs": {
+        "category": "MIPI",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "none",
+        "pull_state": ""
+      }
     },
     {
       "pin": "M7",
@@ -1248,7 +2031,16 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "none",
-      "pull_state": ""
+      "pull_state": "",
+      "polarity": "N",
+      "attrs": {
+        "category": "MIPI",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "none",
+        "pull_state": ""
+      }
     },
     {
       "pin": "N7",
@@ -1260,7 +2052,16 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "none",
-      "pull_state": ""
+      "pull_state": "",
+      "polarity": "P",
+      "attrs": {
+        "category": "MIPI",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "none",
+        "pull_state": ""
+      }
     },
     {
       "pin": "M6",
@@ -1272,7 +2073,16 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "none",
-      "pull_state": ""
+      "pull_state": "",
+      "polarity": "N",
+      "attrs": {
+        "category": "MIPI",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "none",
+        "pull_state": ""
+      }
     },
     {
       "pin": "N6",
@@ -1284,7 +2094,16 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "none",
-      "pull_state": ""
+      "pull_state": "",
+      "polarity": "P",
+      "attrs": {
+        "category": "MIPI",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "none",
+        "pull_state": ""
+      }
     },
     {
       "pin": "M5",
@@ -1296,7 +2115,16 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "none",
-      "pull_state": ""
+      "pull_state": "",
+      "polarity": "N",
+      "attrs": {
+        "category": "MIPI",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "none",
+        "pull_state": ""
+      }
     },
     {
       "pin": "N5",
@@ -1308,7 +2136,15 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "none",
-      "pull_state": ""
+      "pull_state": "",
+      "attrs": {
+        "category": "MIPI",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "none",
+        "pull_state": ""
+      }
     },
     {
       "pin": "B10",
@@ -1320,7 +2156,15 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "none",
-      "pull_state": ""
+      "pull_state": "",
+      "attrs": {
+        "category": "SERDES_RX",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "none",
+        "pull_state": ""
+      }
     },
     {
       "pin": "A10",
@@ -1332,7 +2176,15 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "none",
-      "pull_state": ""
+      "pull_state": "",
+      "attrs": {
+        "category": "SERDES_RX",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "none",
+        "pull_state": ""
+      }
     },
     {
       "pin": "B4",
@@ -1344,7 +2196,15 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "none",
-      "pull_state": ""
+      "pull_state": "",
+      "attrs": {
+        "category": "SERDES_TX",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "none",
+        "pull_state": ""
+      }
     },
     {
       "pin": "A4",
@@ -1356,7 +2216,15 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "none",
-      "pull_state": ""
+      "pull_state": "",
+      "attrs": {
+        "category": "SERDES_TX",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "none",
+        "pull_state": ""
+      }
     },
     {
       "pin": "A9",
@@ -1368,7 +2236,15 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "none",
-      "pull_state": ""
+      "pull_state": "",
+      "attrs": {
+        "category": "SERDES_RX",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "none",
+        "pull_state": ""
+      }
     },
     {
       "pin": "B3",
@@ -1380,7 +2256,15 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "none",
-      "pull_state": ""
+      "pull_state": "",
+      "attrs": {
+        "category": "SERDES_TX",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "none",
+        "pull_state": ""
+      }
     },
     {
       "pin": "A3",
@@ -1392,7 +2276,15 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "none",
-      "pull_state": ""
+      "pull_state": "",
+      "attrs": {
+        "category": "SERDES_TX",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "none",
+        "pull_state": ""
+      }
     },
     {
       "pin": "B8",
@@ -1404,7 +2296,15 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "none",
-      "pull_state": ""
+      "pull_state": "",
+      "attrs": {
+        "category": "SERDES_RX",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "none",
+        "pull_state": ""
+      }
     },
     {
       "pin": "A8",
@@ -1416,7 +2316,15 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "none",
-      "pull_state": ""
+      "pull_state": "",
+      "attrs": {
+        "category": "SERDES_RX",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "none",
+        "pull_state": ""
+      }
     },
     {
       "pin": "B2",
@@ -1428,7 +2336,15 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "none",
-      "pull_state": ""
+      "pull_state": "",
+      "attrs": {
+        "category": "SERDES_TX",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "none",
+        "pull_state": ""
+      }
     },
     {
       "pin": "A2",
@@ -1440,7 +2356,15 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "none",
-      "pull_state": ""
+      "pull_state": "",
+      "attrs": {
+        "category": "SERDES_TX",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "none",
+        "pull_state": ""
+      }
     },
     {
       "pin": "B7",
@@ -1452,7 +2376,15 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "none",
-      "pull_state": ""
+      "pull_state": "",
+      "attrs": {
+        "category": "SERDES_RX",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "none",
+        "pull_state": ""
+      }
     },
     {
       "pin": "A7",
@@ -1464,7 +2396,15 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "none",
-      "pull_state": ""
+      "pull_state": "",
+      "attrs": {
+        "category": "SERDES_RX",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "none",
+        "pull_state": ""
+      }
     },
     {
       "pin": "B1",
@@ -1476,7 +2416,15 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "none",
-      "pull_state": ""
+      "pull_state": "",
+      "attrs": {
+        "category": "SERDES_TX",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "none",
+        "pull_state": ""
+      }
     },
     {
       "pin": "A1",
@@ -1488,7 +2436,15 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "none",
-      "pull_state": ""
+      "pull_state": "",
+      "attrs": {
+        "category": "SERDES_TX",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "none",
+        "pull_state": ""
+      }
     },
     {
       "pin": "B6",
@@ -1500,7 +2456,15 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "none",
-      "pull_state": ""
+      "pull_state": "",
+      "attrs": {
+        "category": "SERDES_REFCLK",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "none",
+        "pull_state": ""
+      }
     },
     {
       "pin": "B5",
@@ -1512,7 +2476,15 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "none",
-      "pull_state": ""
+      "pull_state": "",
+      "attrs": {
+        "category": "SERDES_REFCLK",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "none",
+        "pull_state": ""
+      }
     },
     {
       "pin": "A6",
@@ -1524,7 +2496,15 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "none",
-      "pull_state": ""
+      "pull_state": "",
+      "attrs": {
+        "category": "SERDES_REFCLK",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "none",
+        "pull_state": ""
+      }
     },
     {
       "pin": "A5",
@@ -1536,7 +2516,15 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "none",
-      "pull_state": ""
+      "pull_state": "",
+      "attrs": {
+        "category": "SERDES_REFCLK",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "none",
+        "pull_state": ""
+      }
     },
     {
       "pin": "C5",
@@ -1548,7 +2536,15 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "none",
-      "pull_state": ""
+      "pull_state": "",
+      "attrs": {
+        "category": "SERDES",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "none",
+        "pull_state": ""
+      }
     },
     {
       "pin": "F6",
@@ -1560,7 +2556,15 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "",
-      "pull_state": ""
+      "pull_state": "",
+      "attrs": {
+        "category": "POWER",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "",
+        "pull_state": ""
+      }
     },
     {
       "pin": "E5",
@@ -1572,7 +2576,15 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "",
-      "pull_state": ""
+      "pull_state": "",
+      "attrs": {
+        "category": "POWER",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "",
+        "pull_state": ""
+      }
     },
     {
       "pin": "E6",
@@ -1584,7 +2596,15 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "",
-      "pull_state": ""
+      "pull_state": "",
+      "attrs": {
+        "category": "POWER",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "",
+        "pull_state": ""
+      }
     },
     {
       "pin": "D5",
@@ -1596,7 +2616,15 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "",
-      "pull_state": ""
+      "pull_state": "",
+      "attrs": {
+        "category": "POWER",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "",
+        "pull_state": ""
+      }
     },
     {
       "pin": "D1",
@@ -1608,7 +2636,15 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "",
-      "pull_state": ""
+      "pull_state": "",
+      "attrs": {
+        "category": "POWER",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "",
+        "pull_state": ""
+      }
     },
     {
       "pin": "C3",
@@ -1620,7 +2656,15 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "",
-      "pull_state": ""
+      "pull_state": "",
+      "attrs": {
+        "category": "POWER",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "",
+        "pull_state": ""
+      }
     },
     {
       "pin": "M4",
@@ -1632,7 +2676,15 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "",
-      "pull_state": ""
+      "pull_state": "",
+      "attrs": {
+        "category": "POWER",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "",
+        "pull_state": ""
+      }
     },
     {
       "pin": "J5",
@@ -1644,7 +2696,15 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "",
-      "pull_state": ""
+      "pull_state": "",
+      "attrs": {
+        "category": "POWER",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "",
+        "pull_state": ""
+      }
     },
     {
       "pin": "G7",
@@ -1656,7 +2716,15 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "",
-      "pull_state": ""
+      "pull_state": "",
+      "attrs": {
+        "category": "POWER",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "",
+        "pull_state": ""
+      }
     },
     {
       "pin": "F9",
@@ -1668,7 +2736,16 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "",
-      "pull_state": ""
+      "pull_state": "",
+      "polarity": "N",
+      "attrs": {
+        "category": "POWER",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "",
+        "pull_state": ""
+      }
     },
     {
       "pin": "L8",
@@ -1680,7 +2757,16 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "",
-      "pull_state": ""
+      "pull_state": "",
+      "polarity": "N",
+      "attrs": {
+        "category": "POWER",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "",
+        "pull_state": ""
+      }
     },
     {
       "pin": "J9",
@@ -1692,7 +2778,16 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "",
-      "pull_state": ""
+      "pull_state": "",
+      "polarity": "N",
+      "attrs": {
+        "category": "POWER",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "",
+        "pull_state": ""
+      }
     },
     {
       "pin": "L9",
@@ -1704,7 +2799,16 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "",
-      "pull_state": ""
+      "pull_state": "",
+      "polarity": "N",
+      "attrs": {
+        "category": "POWER",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "",
+        "pull_state": ""
+      }
     },
     {
       "pin": "F10",
@@ -1716,7 +2820,16 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "",
-      "pull_state": ""
+      "pull_state": "",
+      "polarity": "N",
+      "attrs": {
+        "category": "POWER",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "",
+        "pull_state": ""
+      }
     },
     {
       "pin": "M9",
@@ -1728,7 +2841,16 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "",
-      "pull_state": ""
+      "pull_state": "",
+      "polarity": "N",
+      "attrs": {
+        "category": "POWER",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "",
+        "pull_state": ""
+      }
     },
     {
       "pin": "H9",
@@ -1740,7 +2862,16 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "",
-      "pull_state": ""
+      "pull_state": "",
+      "polarity": "N",
+      "attrs": {
+        "category": "POWER",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "",
+        "pull_state": ""
+      }
     },
     {
       "pin": "C2",
@@ -1752,7 +2883,15 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "",
-      "pull_state": ""
+      "pull_state": "",
+      "attrs": {
+        "category": "POWER",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "",
+        "pull_state": ""
+      }
     },
     {
       "pin": "C6",
@@ -1764,7 +2903,15 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "",
-      "pull_state": ""
+      "pull_state": "",
+      "attrs": {
+        "category": "POWER",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "",
+        "pull_state": ""
+      }
     },
     {
       "pin": "C10",
@@ -1776,7 +2923,15 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "",
-      "pull_state": ""
+      "pull_state": "",
+      "attrs": {
+        "category": "POWER",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "",
+        "pull_state": ""
+      }
     },
     {
       "pin": "D6",
@@ -1788,7 +2943,15 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "",
-      "pull_state": ""
+      "pull_state": "",
+      "attrs": {
+        "category": "POWER",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "",
+        "pull_state": ""
+      }
     },
     {
       "pin": "D7",
@@ -1800,7 +2963,15 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "",
-      "pull_state": ""
+      "pull_state": "",
+      "attrs": {
+        "category": "POWER",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "",
+        "pull_state": ""
+      }
     },
     {
       "pin": "C8",
@@ -1812,7 +2983,15 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "",
-      "pull_state": ""
+      "pull_state": "",
+      "attrs": {
+        "category": "POWER",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "",
+        "pull_state": ""
+      }
     },
     {
       "pin": "C4",
@@ -1824,7 +3003,15 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "",
-      "pull_state": ""
+      "pull_state": "",
+      "attrs": {
+        "category": "POWER",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "",
+        "pull_state": ""
+      }
     },
     {
       "pin": "J10",
@@ -1836,7 +3023,15 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "",
-      "pull_state": ""
+      "pull_state": "",
+      "attrs": {
+        "category": "GROUND",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "",
+        "pull_state": ""
+      }
     },
     {
       "pin": "M10",
@@ -1848,7 +3043,15 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "",
-      "pull_state": ""
+      "pull_state": "",
+      "attrs": {
+        "category": "GROUND",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "",
+        "pull_state": ""
+      }
     },
     {
       "pin": "E9",
@@ -1860,7 +3063,15 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "",
-      "pull_state": ""
+      "pull_state": "",
+      "attrs": {
+        "category": "GROUND",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "",
+        "pull_state": ""
+      }
     },
     {
       "pin": "D8",
@@ -1872,7 +3083,15 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "",
-      "pull_state": ""
+      "pull_state": "",
+      "attrs": {
+        "category": "GROUND",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "",
+        "pull_state": ""
+      }
     },
     {
       "pin": "G8",
@@ -1884,7 +3103,15 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "",
-      "pull_state": ""
+      "pull_state": "",
+      "attrs": {
+        "category": "GROUND",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "",
+        "pull_state": ""
+      }
     },
     {
       "pin": "L7",
@@ -1896,7 +3123,15 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "",
-      "pull_state": ""
+      "pull_state": "",
+      "attrs": {
+        "category": "GROUND",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "",
+        "pull_state": ""
+      }
     },
     {
       "pin": "J6",
@@ -1908,7 +3143,15 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "",
-      "pull_state": ""
+      "pull_state": "",
+      "attrs": {
+        "category": "GROUND",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "",
+        "pull_state": ""
+      }
     },
     {
       "pin": "N4",
@@ -1920,7 +3163,15 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "",
-      "pull_state": ""
+      "pull_state": "",
+      "attrs": {
+        "category": "GROUND",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "",
+        "pull_state": ""
+      }
     },
     {
       "pin": "C9",
@@ -1932,7 +3183,15 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "",
-      "pull_state": ""
+      "pull_state": "",
+      "attrs": {
+        "category": "GROUND",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "",
+        "pull_state": ""
+      }
     },
     {
       "pin": "C7",
@@ -1944,7 +3203,15 @@
       "config_function": "",
       "diff_pair": "",
       "lvds": "",
-      "pull_state": ""
+      "pull_state": "",
+      "attrs": {
+        "category": "GROUND",
+        "dqs_group": "",
+        "config_function": "",
+        "diff_pair": "",
+        "lvds": "",
+        "pull_state": ""
+      }
     },
     {
       "pin": "C1",
@@ -1956,7 +3223,15 @@
       "config_function": "UG1224-1.2",
       "diff_pair": "",
       "lvds": "",
-      "pull_state": ""
+      "pull_state": "",
+      "attrs": {
+        "category": "GROUND",
+        "dqs_group": "",
+        "config_function": "UG1224-1.2",
+        "diff_pair": "",
+        "lvds": "",
+        "pull_state": ""
+      }
     }
   ],
   "lookup": {
@@ -3070,6 +4345,3159 @@
     }
   },
   "domains": {
+    "pin": {
+      "pins": [
+        {
+          "pin": "D2",
+          "name": "IOB11A",
+          "function": "IO",
+          "category": "IO",
+          "bank": "1",
+          "dqs_group": "DQ2",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "none",
+          "pull_state": "pull down",
+          "attrs": {
+            "category": "IO",
+            "dqs_group": "DQ2",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "none",
+            "pull_state": "pull down"
+          }
+        },
+        {
+          "pin": "E4",
+          "name": "IOB12A",
+          "function": "IO",
+          "category": "IO",
+          "bank": "1",
+          "dqs_group": "DQ2",
+          "config_function": "",
+          "diff_pair": "True_of_IOB12B",
+          "lvds": "True",
+          "pull_state": "pull down",
+          "attrs": {
+            "category": "IO",
+            "dqs_group": "DQ2",
+            "config_function": "",
+            "diff_pair": "True_of_IOB12B",
+            "lvds": "True",
+            "pull_state": "pull down"
+          }
+        },
+        {
+          "pin": "E3",
+          "name": "IOB12B",
+          "function": "IO",
+          "category": "IO",
+          "bank": "1",
+          "dqs_group": "DQ2",
+          "config_function": "",
+          "diff_pair": "Comp_of_IOB12A",
+          "lvds": "True",
+          "pull_state": "pull down",
+          "attrs": {
+            "category": "IO",
+            "dqs_group": "DQ2",
+            "config_function": "",
+            "diff_pair": "Comp_of_IOB12A",
+            "lvds": "True",
+            "pull_state": "pull down"
+          }
+        },
+        {
+          "pin": "F3",
+          "name": "IOB14A/D15",
+          "function": "IO",
+          "category": "IO",
+          "bank": "1",
+          "dqs_group": "DQ2",
+          "config_function": "D15",
+          "diff_pair": "True_of_IOB14B",
+          "lvds": "True",
+          "pull_state": "pull down",
+          "attrs": {
+            "category": "IO",
+            "dqs_group": "DQ2",
+            "config_function": "D15",
+            "diff_pair": "True_of_IOB14B",
+            "lvds": "True",
+            "pull_state": "pull down"
+          }
+        },
+        {
+          "pin": "G3",
+          "name": "IOB14B/D14",
+          "function": "IO",
+          "category": "IO",
+          "bank": "1",
+          "dqs_group": "DQ2",
+          "config_function": "D14",
+          "diff_pair": "Comp_of_IOB14A",
+          "lvds": "True",
+          "pull_state": "pull down",
+          "attrs": {
+            "category": "IO",
+            "dqs_group": "DQ2",
+            "config_function": "D14",
+            "diff_pair": "Comp_of_IOB14A",
+            "lvds": "True",
+            "pull_state": "pull down"
+          }
+        },
+        {
+          "pin": "E2",
+          "name": "IOB16A",
+          "function": "IO",
+          "category": "IO",
+          "bank": "1",
+          "dqs_group": "DQ2",
+          "config_function": "",
+          "diff_pair": "True_of_IOB16B",
+          "lvds": "True",
+          "pull_state": "pull down",
+          "attrs": {
+            "category": "IO",
+            "dqs_group": "DQ2",
+            "config_function": "",
+            "diff_pair": "True_of_IOB16B",
+            "lvds": "True",
+            "pull_state": "pull down"
+          }
+        },
+        {
+          "pin": "E1",
+          "name": "IOB16B",
+          "function": "IO",
+          "category": "IO",
+          "bank": "1",
+          "dqs_group": "DQ2",
+          "config_function": "",
+          "diff_pair": "Comp_of_IOB16A",
+          "lvds": "True",
+          "pull_state": "pull down",
+          "attrs": {
+            "category": "IO",
+            "dqs_group": "DQ2",
+            "config_function": "",
+            "diff_pair": "Comp_of_IOB16A",
+            "lvds": "True",
+            "pull_state": "pull down"
+          }
+        },
+        {
+          "pin": "H3",
+          "name": "IOB18A/D13",
+          "function": "IO",
+          "category": "IO",
+          "bank": "1",
+          "dqs_group": "DQ2",
+          "config_function": "D13",
+          "diff_pair": "True_of_IOB18B",
+          "lvds": "True",
+          "pull_state": "pull down",
+          "attrs": {
+            "category": "IO",
+            "dqs_group": "DQ2",
+            "config_function": "D13",
+            "diff_pair": "True_of_IOB18B",
+            "lvds": "True",
+            "pull_state": "pull down"
+          }
+        },
+        {
+          "pin": "J3",
+          "name": "IOB18B/D12",
+          "function": "IO",
+          "category": "IO",
+          "bank": "1",
+          "dqs_group": "DQ2",
+          "config_function": "D12",
+          "diff_pair": "Comp_of_IOB18A",
+          "lvds": "True",
+          "pull_state": "pull down",
+          "attrs": {
+            "category": "IO",
+            "dqs_group": "DQ2",
+            "config_function": "D12",
+            "diff_pair": "Comp_of_IOB18A",
+            "lvds": "True",
+            "pull_state": "pull down"
+          }
+        },
+        {
+          "pin": "F2",
+          "name": "IOB20A",
+          "function": "IO",
+          "category": "IO",
+          "bank": "1",
+          "dqs_group": "DQS2",
+          "config_function": "",
+          "diff_pair": "True_of_IOB20B",
+          "lvds": "True",
+          "pull_state": "pull down",
+          "attrs": {
+            "category": "IO",
+            "dqs_group": "DQS2",
+            "config_function": "",
+            "diff_pair": "True_of_IOB20B",
+            "lvds": "True",
+            "pull_state": "pull down"
+          }
+        },
+        {
+          "pin": "F1",
+          "name": "IOB20B",
+          "function": "IO",
+          "category": "IO",
+          "bank": "1",
+          "dqs_group": "DQS2",
+          "config_function": "",
+          "diff_pair": "Comp_of_IOB20A",
+          "lvds": "True",
+          "pull_state": "pull down",
+          "attrs": {
+            "category": "IO",
+            "dqs_group": "DQS2",
+            "config_function": "",
+            "diff_pair": "Comp_of_IOB20A",
+            "lvds": "True",
+            "pull_state": "pull down"
+          }
+        },
+        {
+          "pin": "G2",
+          "name": "IOB22A/GCLKT_3",
+          "function": "IO",
+          "category": "IO",
+          "bank": "1",
+          "dqs_group": "DQ2",
+          "config_function": "GCLKT_3",
+          "diff_pair": "True_of_IOB22B",
+          "lvds": "True",
+          "pull_state": "pull down",
+          "attrs": {
+            "category": "IO",
+            "dqs_group": "DQ2",
+            "config_function": "GCLKT_3",
+            "diff_pair": "True_of_IOB22B",
+            "lvds": "True",
+            "pull_state": "pull down"
+          }
+        },
+        {
+          "pin": "G1",
+          "name": "IOB22B/GCLKC_3",
+          "function": "IO",
+          "category": "IO",
+          "bank": "1",
+          "dqs_group": "DQ2",
+          "config_function": "GCLKC_3",
+          "diff_pair": "Comp_of_IOB22A",
+          "lvds": "True",
+          "pull_state": "pull down",
+          "attrs": {
+            "category": "IO",
+            "dqs_group": "DQ2",
+            "config_function": "GCLKC_3",
+            "diff_pair": "Comp_of_IOB22A",
+            "lvds": "True",
+            "pull_state": "pull down"
+          }
+        },
+        {
+          "pin": "H2",
+          "name": "IOB24A/GCLKT_2/BPLL_T_I/N0/BPLL_T_FB1",
+          "function": "IO",
+          "category": "IO",
+          "bank": "1",
+          "dqs_group": "bus1",
+          "config_function": "GCLKT_2/BPLL_T_IN0/BPL/L_T_FB1",
+          "diff_pair": "True_of_IOB24B",
+          "lvds": "True",
+          "pull_state": "pull down",
+          "attrs": {
+            "category": "IO",
+            "dqs_group": "bus1",
+            "config_function": "GCLKT_2/BPLL_T_IN0/BPL/L_T_FB1",
+            "diff_pair": "True_of_IOB24B",
+            "lvds": "True",
+            "pull_state": "pull down"
+          }
+        },
+        {
+          "pin": "H1",
+          "name": "IOB24B/GCLKC_2/BPLL_C_I/N0/BPLL_C_FB1",
+          "function": "IO",
+          "category": "IO",
+          "bank": "1",
+          "dqs_group": "bus1",
+          "config_function": "GCLKC_2/BPLL_C_IN0/BPL/L_C_FB1",
+          "diff_pair": "Comp_of_IOB24A",
+          "lvds": "True",
+          "pull_state": "pull down",
+          "attrs": {
+            "category": "IO",
+            "dqs_group": "bus1",
+            "config_function": "GCLKC_2/BPLL_C_IN0/BPL/L_C_FB1",
+            "diff_pair": "Comp_of_IOB24A",
+            "lvds": "True",
+            "pull_state": "pull down"
+          }
+        },
+        {
+          "pin": "L4",
+          "name": "IOB31A",
+          "function": "IO",
+          "category": "IO",
+          "bank": "1",
+          "dqs_group": "DQ1",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "none",
+          "pull_state": "pull down",
+          "attrs": {
+            "category": "IO",
+            "dqs_group": "DQ1",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "none",
+            "pull_state": "pull down"
+          }
+        },
+        {
+          "pin": "N3",
+          "name": "IOB32A/GCLKT_1/BPLL_T_I/N1/BPLL_T_FB0",
+          "function": "IO",
+          "category": "IO",
+          "bank": "1",
+          "dqs_group": "bus1",
+          "config_function": "GCLKT_1/BPLL_T_IN1/BPL/L_T_FB0",
+          "diff_pair": "True_of_IOB32B",
+          "lvds": "True",
+          "pull_state": "pull down",
+          "attrs": {
+            "category": "IO",
+            "dqs_group": "bus1",
+            "config_function": "GCLKT_1/BPLL_T_IN1/BPL/L_T_FB0",
+            "diff_pair": "True_of_IOB32B",
+            "lvds": "True",
+            "pull_state": "pull down"
+          }
+        },
+        {
+          "pin": "M3",
+          "name": "IOB32B/GCLKC_1/BPLL_C_I/N1/BPLL_C_FB0",
+          "function": "IO",
+          "category": "IO",
+          "bank": "1",
+          "dqs_group": "bus1",
+          "config_function": "GCLKC_1/BPLL_C_IN1/BPL/L_C_FB0",
+          "diff_pair": "Comp_of_IOB32A",
+          "lvds": "True",
+          "pull_state": "pull down",
+          "attrs": {
+            "category": "IO",
+            "dqs_group": "bus1",
+            "config_function": "GCLKC_1/BPLL_C_IN1/BPL/L_C_FB0",
+            "diff_pair": "Comp_of_IOB32A",
+            "lvds": "True",
+            "pull_state": "pull down"
+          }
+        },
+        {
+          "pin": "K3",
+          "name": "IOB34A/GCLKT_0",
+          "function": "IO",
+          "category": "IO",
+          "bank": "1",
+          "dqs_group": "DQ1",
+          "config_function": "GCLKT_0",
+          "diff_pair": "True_of_IOB34B",
+          "lvds": "True",
+          "pull_state": "pull down",
+          "attrs": {
+            "category": "IO",
+            "dqs_group": "DQ1",
+            "config_function": "GCLKT_0",
+            "diff_pair": "True_of_IOB34B",
+            "lvds": "True",
+            "pull_state": "pull down"
+          }
+        },
+        {
+          "pin": "L3",
+          "name": "IOB34B/GCLKC_0",
+          "function": "IO",
+          "category": "IO",
+          "bank": "1",
+          "dqs_group": "DQ1",
+          "config_function": "GCLKC_0",
+          "diff_pair": "Comp_of_IOB34A",
+          "lvds": "True",
+          "pull_state": "pull down",
+          "attrs": {
+            "category": "IO",
+            "dqs_group": "DQ1",
+            "config_function": "GCLKC_0",
+            "diff_pair": "Comp_of_IOB34A",
+            "lvds": "True",
+            "pull_state": "pull down"
+          }
+        },
+        {
+          "pin": "J2",
+          "name": "IOB36A",
+          "function": "IO",
+          "category": "IO",
+          "bank": "1",
+          "dqs_group": "DQ1",
+          "config_function": "",
+          "diff_pair": "True_of_IOB36B",
+          "lvds": "True",
+          "pull_state": "pull down",
+          "attrs": {
+            "category": "IO",
+            "dqs_group": "DQ1",
+            "config_function": "",
+            "diff_pair": "True_of_IOB36B",
+            "lvds": "True",
+            "pull_state": "pull down"
+          }
+        },
+        {
+          "pin": "J1",
+          "name": "IOB36B",
+          "function": "IO",
+          "category": "IO",
+          "bank": "1",
+          "dqs_group": "DQ1",
+          "config_function": "",
+          "diff_pair": "Comp_of_IOB36A",
+          "lvds": "True",
+          "pull_state": "pull down",
+          "attrs": {
+            "category": "IO",
+            "dqs_group": "DQ1",
+            "config_function": "",
+            "diff_pair": "Comp_of_IOB36A",
+            "lvds": "True",
+            "pull_state": "pull down"
+          }
+        },
+        {
+          "pin": "K2",
+          "name": "IOB39A/D11",
+          "function": "IO",
+          "category": "IO",
+          "bank": "1",
+          "dqs_group": "DQ1",
+          "config_function": "D11",
+          "diff_pair": "True_of_IOB39B",
+          "lvds": "True",
+          "pull_state": "pull down",
+          "attrs": {
+            "category": "IO",
+            "dqs_group": "DQ1",
+            "config_function": "D11",
+            "diff_pair": "True_of_IOB39B",
+            "lvds": "True",
+            "pull_state": "pull down"
+          }
+        },
+        {
+          "pin": "K1",
+          "name": "IOB39B/D10",
+          "function": "IO",
+          "category": "IO",
+          "bank": "1",
+          "dqs_group": "DQ1",
+          "config_function": "D10",
+          "diff_pair": "Comp_of_IOB39A",
+          "lvds": "True",
+          "pull_state": "pull down",
+          "attrs": {
+            "category": "IO",
+            "dqs_group": "DQ1",
+            "config_function": "D10",
+            "diff_pair": "Comp_of_IOB39A",
+            "lvds": "True",
+            "pull_state": "pull down"
+          }
+        },
+        {
+          "pin": "G5",
+          "name": "IOB3A/D02/MI2",
+          "function": "IO",
+          "category": "IO",
+          "bank": "2",
+          "dqs_group": "bus1",
+          "config_function": "D02/MI2",
+          "diff_pair": "True_of_IOB3B",
+          "lvds": "True",
+          "pull_state": "pull down",
+          "attrs": {
+            "category": "IO",
+            "dqs_group": "bus1",
+            "config_function": "D02/MI2",
+            "diff_pair": "True_of_IOB3B",
+            "lvds": "True",
+            "pull_state": "pull down"
+          }
+        },
+        {
+          "pin": "G4",
+          "name": "IOB3B/D01/DIN/MISO/MI1",
+          "function": "IO",
+          "category": "IO",
+          "bank": "2",
+          "dqs_group": "bus1",
+          "config_function": "D01/DIN/MISO/MI1",
+          "diff_pair": "Comp_of_IOB3A",
+          "lvds": "True",
+          "pull_state": "pull down",
+          "attrs": {
+            "category": "IO",
+            "dqs_group": "bus1",
+            "config_function": "D01/DIN/MISO/MI1",
+            "diff_pair": "Comp_of_IOB3A",
+            "lvds": "True",
+            "pull_state": "pull down"
+          }
+        },
+        {
+          "pin": "L2",
+          "name": "IOB41B",
+          "function": "IO",
+          "category": "IO",
+          "bank": "1",
+          "dqs_group": "DQS1",
+          "config_function": "",
+          "diff_pair": "Comp_of_IOB41A",
+          "lvds": "True",
+          "pull_state": "pull down",
+          "attrs": {
+            "category": "IO",
+            "dqs_group": "DQS1",
+            "config_function": "",
+            "diff_pair": "Comp_of_IOB41A",
+            "lvds": "True",
+            "pull_state": "pull down"
+          }
+        },
+        {
+          "pin": "M1",
+          "name": "IOB43A/D09",
+          "function": "IO",
+          "category": "IO",
+          "bank": "1",
+          "dqs_group": "DQ1",
+          "config_function": "D09",
+          "diff_pair": "True_of_IOB43B",
+          "lvds": "True",
+          "pull_state": "pull down",
+          "attrs": {
+            "category": "IO",
+            "dqs_group": "DQ1",
+            "config_function": "D09",
+            "diff_pair": "True_of_IOB43B",
+            "lvds": "True",
+            "pull_state": "pull down"
+          }
+        },
+        {
+          "pin": "N1",
+          "name": "IOB43B/D08",
+          "function": "IO",
+          "category": "IO",
+          "bank": "1",
+          "dqs_group": "DQ1",
+          "config_function": "D08",
+          "diff_pair": "Comp_of_IOB43A",
+          "lvds": "True",
+          "pull_state": "pull down",
+          "attrs": {
+            "category": "IO",
+            "dqs_group": "DQ1",
+            "config_function": "D08",
+            "diff_pair": "Comp_of_IOB43A",
+            "lvds": "True",
+            "pull_state": "pull down"
+          }
+        },
+        {
+          "pin": "M2",
+          "name": "IOB45A",
+          "function": "IO",
+          "category": "IO",
+          "bank": "1",
+          "dqs_group": "DQ1",
+          "config_function": "",
+          "diff_pair": "True_of_IOB45B",
+          "lvds": "True",
+          "pull_state": "pull down",
+          "attrs": {
+            "category": "IO",
+            "dqs_group": "DQ1",
+            "config_function": "",
+            "diff_pair": "True_of_IOB45B",
+            "lvds": "True",
+            "pull_state": "pull down"
+          }
+        },
+        {
+          "pin": "N2",
+          "name": "IOB45B/EMCCLK",
+          "function": "IO",
+          "category": "IO",
+          "bank": "1",
+          "dqs_group": "DQ1",
+          "config_function": "EMCCLK",
+          "diff_pair": "Comp_of_IOB45A",
+          "lvds": "True",
+          "pull_state": "pull down",
+          "attrs": {
+            "category": "IO",
+            "dqs_group": "DQ1",
+            "config_function": "EMCCLK",
+            "diff_pair": "Comp_of_IOB45A",
+            "lvds": "True",
+            "pull_state": "pull down"
+          }
+        },
+        {
+          "pin": "H5",
+          "name": "IOB5A/CCLK",
+          "function": "IO",
+          "category": "IO",
+          "bank": "2",
+          "dqs_group": "bus1",
+          "config_function": "CCLK",
+          "diff_pair": "True_of_IOB5B",
+          "lvds": "True",
+          "pull_state": "pull down",
+          "attrs": {
+            "category": "IO",
+            "dqs_group": "bus1",
+            "config_function": "CCLK",
+            "diff_pair": "True_of_IOB5B",
+            "lvds": "True",
+            "pull_state": "pull down"
+          }
+        },
+        {
+          "pin": "H4",
+          "name": "IOB5B/MCS_N",
+          "function": "IO",
+          "category": "IO",
+          "bank": "2",
+          "dqs_group": "bus1",
+          "config_function": "MCS_N",
+          "diff_pair": "Comp_of_IOB5A",
+          "lvds": "True",
+          "pull_state": "pull down",
+          "polarity": "N",
+          "attrs": {
+            "category": "IO",
+            "dqs_group": "bus1",
+            "config_function": "MCS_N",
+            "diff_pair": "Comp_of_IOB5A",
+            "lvds": "True",
+            "pull_state": "pull down"
+          }
+        },
+        {
+          "pin": "J4",
+          "name": "IOB7A/D03/MI3",
+          "function": "IO",
+          "category": "IO",
+          "bank": "2",
+          "dqs_group": "bus1",
+          "config_function": "D03/MI3",
+          "diff_pair": "True_of_IOB7B",
+          "lvds": "True",
+          "pull_state": "pull down",
+          "attrs": {
+            "category": "IO",
+            "dqs_group": "bus1",
+            "config_function": "D03/MI3",
+            "diff_pair": "True_of_IOB7B",
+            "lvds": "True",
+            "pull_state": "pull down"
+          }
+        },
+        {
+          "pin": "K4",
+          "name": "IOB7B/D00/MOSI/MI0",
+          "function": "IO",
+          "category": "IO",
+          "bank": "2",
+          "dqs_group": "bus1",
+          "config_function": "D00/MOSI/MI0",
+          "diff_pair": "Comp_of_IOB7A",
+          "lvds": "True",
+          "pull_state": "pull down",
+          "attrs": {
+            "category": "IO",
+            "dqs_group": "bus1",
+            "config_function": "D00/MOSI/MI0",
+            "diff_pair": "Comp_of_IOB7A",
+            "lvds": "True",
+            "pull_state": "pull down"
+          }
+        },
+        {
+          "pin": "K5",
+          "name": "IOB9A/READY",
+          "function": "IO",
+          "category": "IO",
+          "bank": "2",
+          "dqs_group": "bus1",
+          "config_function": "READY",
+          "diff_pair": "",
+          "lvds": "none",
+          "pull_state": "pull-up",
+          "attrs": {
+            "category": "IO",
+            "dqs_group": "bus1",
+            "config_function": "READY",
+            "diff_pair": "",
+            "lvds": "none",
+            "pull_state": "pull-up"
+          }
+        },
+        {
+          "pin": "E8",
+          "name": "IOL20A/TCK",
+          "function": "IO",
+          "category": "IO",
+          "bank": "4",
+          "dqs_group": "",
+          "config_function": "TCK",
+          "diff_pair": "True_of_IOL20B",
+          "lvds": "True",
+          "pull_state": "pull-up",
+          "attrs": {
+            "category": "IO",
+            "dqs_group": "",
+            "config_function": "TCK",
+            "diff_pair": "True_of_IOL20B",
+            "lvds": "True",
+            "pull_state": "pull-up"
+          }
+        },
+        {
+          "pin": "E7",
+          "name": "IOL20B/TMS",
+          "function": "IO",
+          "category": "IO",
+          "bank": "4",
+          "dqs_group": "",
+          "config_function": "TMS",
+          "diff_pair": "Comp_of_IOL20A",
+          "lvds": "True",
+          "pull_state": "pull-up",
+          "attrs": {
+            "category": "IO",
+            "dqs_group": "",
+            "config_function": "TMS",
+            "diff_pair": "Comp_of_IOL20A",
+            "lvds": "True",
+            "pull_state": "pull-up"
+          }
+        },
+        {
+          "pin": "F8",
+          "name": "IOL22A/GCLKT_7/Q0REF_T_/IN0/SSPI_CLK",
+          "function": "IO",
+          "category": "IO",
+          "bank": "4",
+          "dqs_group": "bus0",
+          "config_function": "GCLKT_7/Q0REF_T_IN0/SS/PI_CLK",
+          "diff_pair": "True_of_IOL22B",
+          "lvds": "True",
+          "pull_state": "pull down",
+          "attrs": {
+            "category": "IO",
+            "dqs_group": "bus0",
+            "config_function": "GCLKT_7/Q0REF_T_IN0/SS/PI_CLK",
+            "diff_pair": "True_of_IOL22B",
+            "lvds": "True",
+            "pull_state": "pull down"
+          }
+        },
+        {
+          "pin": "F7",
+          "name": "IOL22B/GCLKC_7/Q0REF_C/_IN0/RDWR_B/SO/SSI1/PCIE/_HOST_RSTN",
+          "function": "IO",
+          "category": "IO",
+          "bank": "4",
+          "dqs_group": "bus0",
+          "config_function": "GCLKC_7/Q0REF_C_IN0/R/DWR_B/SO/SSI1/PCIE_HO/ST_RSTN",
+          "diff_pair": "Comp_of_IOL22A",
+          "lvds": "True",
+          "pull_state": "pull down",
+          "polarity": "N",
+          "attrs": {
+            "category": "IO",
+            "dqs_group": "bus0",
+            "config_function": "GCLKC_7/Q0REF_C_IN0/R/DWR_B/SO/SSI1/PCIE_HO/ST_RSTN",
+            "diff_pair": "Comp_of_IOL22A",
+            "lvds": "True",
+            "pull_state": "pull down"
+          }
+        },
+        {
+          "pin": "H8",
+          "name": "IOL24A/TDI",
+          "function": "IO",
+          "category": "IO",
+          "bank": "4",
+          "dqs_group": "bus0",
+          "config_function": "TDI",
+          "diff_pair": "True_of_IOL24B",
+          "lvds": "True",
+          "pull_state": "pull-up",
+          "attrs": {
+            "category": "IO",
+            "dqs_group": "bus0",
+            "config_function": "TDI",
+            "diff_pair": "True_of_IOL24B",
+            "lvds": "True",
+            "pull_state": "pull-up"
+          }
+        },
+        {
+          "pin": "H7",
+          "name": "IOL24B/TDO",
+          "function": "IO",
+          "category": "IO",
+          "bank": "4",
+          "dqs_group": "bus0",
+          "config_function": "TDO",
+          "diff_pair": "Comp_of_IOL24A",
+          "lvds": "True",
+          "pull_state": "pull-up",
+          "attrs": {
+            "category": "IO",
+            "dqs_group": "bus0",
+            "config_function": "TDO",
+            "diff_pair": "Comp_of_IOL24A",
+            "lvds": "True",
+            "pull_state": "pull-up"
+          }
+        },
+        {
+          "pin": "J8",
+          "name": "IOL26A/GCLKT_6/LPLL_T_IN/0/LPLL_T_FB1/Q0REF_T_IN/1/D06/CLKHOLD_N/SSI3",
+          "function": "IO",
+          "category": "IO",
+          "bank": "4",
+          "dqs_group": "bus0",
+          "config_function": "GCLKT_6/LPLL_T_IN0/LPLL/_T_FB1/Q0REF_T_IN1/D06//CLKHOLD_N/SSI3",
+          "diff_pair": "True_of_IOL26B",
+          "lvds": "True",
+          "pull_state": "pull down",
+          "attrs": {
+            "category": "IO",
+            "dqs_group": "bus0",
+            "config_function": "GCLKT_6/LPLL_T_IN0/LPLL/_T_FB1/Q0REF_T_IN1/D06//CLKHOLD_N/SSI3",
+            "diff_pair": "True_of_IOL26B",
+            "lvds": "True",
+            "pull_state": "pull down"
+          }
+        },
+        {
+          "pin": "J7",
+          "name": "IOL26B/GCLKC_6/LPLL_C_I/N0/LPLL_C_FB1/Q0REF_C_I/N1/D07/SSPI_WPN/SSI2",
+          "function": "IO",
+          "category": "IO",
+          "bank": "4",
+          "dqs_group": "bus0",
+          "config_function": "GCLKC_6/LPLL_C_IN0/LPL/L_C_FB1/Q0REF_C_IN1/D0/7/SSPI_WPN/SSI2",
+          "diff_pair": "Comp_of_IOL26A",
+          "lvds": "True",
+          "pull_state": "pull down",
+          "attrs": {
+            "category": "IO",
+            "dqs_group": "bus0",
+            "config_function": "GCLKC_6/LPLL_C_IN0/LPL/L_C_FB1/Q0REF_C_IN1/D0/7/SSPI_WPN/SSI2",
+            "diff_pair": "Comp_of_IOL26A",
+            "lvds": "True",
+            "pull_state": "pull down"
+          }
+        },
+        {
+          "pin": "K7",
+          "name": "IOL29A/DONE",
+          "function": "IO",
+          "category": "IO",
+          "bank": "3",
+          "dqs_group": "bus0",
+          "config_function": "DONE",
+          "diff_pair": "True_of_IOL29B",
+          "lvds": "True",
+          "pull_state": "pull-up",
+          "attrs": {
+            "category": "IO",
+            "dqs_group": "bus0",
+            "config_function": "DONE",
+            "diff_pair": "True_of_IOL29B",
+            "lvds": "True",
+            "pull_state": "pull-up"
+          }
+        },
+        {
+          "pin": "K6",
+          "name": "IOL29B/RECONFIG_N",
+          "function": "IO",
+          "category": "IO",
+          "bank": "3",
+          "dqs_group": "bus0",
+          "config_function": "RECONFIG_N",
+          "diff_pair": "Comp_of_IOL29A",
+          "lvds": "True",
+          "pull_state": "pull-up",
+          "polarity": "N",
+          "attrs": {
+            "category": "IO",
+            "dqs_group": "bus0",
+            "config_function": "RECONFIG_N",
+            "diff_pair": "Comp_of_IOL29A",
+            "lvds": "True",
+            "pull_state": "pull-up"
+          }
+        },
+        {
+          "pin": "G6",
+          "name": "IOL31A/GCLKT_5/MODE1",
+          "function": "IO",
+          "category": "IO",
+          "bank": "3",
+          "dqs_group": "",
+          "config_function": "GCLKT_5/MODE1",
+          "diff_pair": "True_of_IOL31B",
+          "lvds": "True",
+          "pull_state": "pull-up",
+          "attrs": {
+            "category": "IO",
+            "dqs_group": "",
+            "config_function": "GCLKT_5/MODE1",
+            "diff_pair": "True_of_IOL31B",
+            "lvds": "True",
+            "pull_state": "pull-up"
+          }
+        },
+        {
+          "pin": "D4",
+          "name": "IOL33A/GCLKT_4/LPLL_T_IN/1/LPLL_T_FB0/CSO_B/DOUT//SCL",
+          "function": "IO",
+          "category": "IO",
+          "bank": "3",
+          "dqs_group": "bus0",
+          "config_function": "GCLKT_4/LPLL_T_IN1/LPLL/_T_FB0/CSO_B/DOUT/SCL",
+          "diff_pair": "True_of_IOL33B",
+          "lvds": "True",
+          "pull_state": "pull down",
+          "attrs": {
+            "category": "IO",
+            "dqs_group": "bus0",
+            "config_function": "GCLKT_4/LPLL_T_IN1/LPLL/_T_FB0/CSO_B/DOUT/SCL",
+            "diff_pair": "True_of_IOL33B",
+            "lvds": "True",
+            "pull_state": "pull down"
+          }
+        },
+        {
+          "pin": "D3",
+          "name": "IOL33B/GCLKC_4/LPLL_C_I/N1/LPLL_C_FB0/CSI_B/SDA",
+          "function": "IO",
+          "category": "IO",
+          "bank": "3",
+          "dqs_group": "bus0",
+          "config_function": "GCLKC_4/LPLL_C_IN1/LPL/L_C_FB0/CSI_B/SDA",
+          "diff_pair": "Comp_of_IOL33A",
+          "lvds": "True",
+          "pull_state": "pull down",
+          "attrs": {
+            "category": "IO",
+            "dqs_group": "bus0",
+            "config_function": "GCLKC_4/LPLL_C_IN1/LPL/L_C_FB0/CSI_B/SDA",
+            "diff_pair": "Comp_of_IOL33A",
+            "lvds": "True",
+            "pull_state": "pull down"
+          }
+        },
+        {
+          "pin": "F5",
+          "name": "IOL35A/D04/SI/SSI0",
+          "function": "IO",
+          "category": "IO",
+          "bank": "3",
+          "dqs_group": "bus0",
+          "config_function": "D04/SI/SSI0",
+          "diff_pair": "True_of_IOL35B",
+          "lvds": "True",
+          "pull_state": "pull down",
+          "attrs": {
+            "category": "IO",
+            "dqs_group": "bus0",
+            "config_function": "D04/SI/SSI0",
+            "diff_pair": "True_of_IOL35B",
+            "lvds": "True",
+            "pull_state": "pull down"
+          }
+        },
+        {
+          "pin": "F4",
+          "name": "IOL35B/D05/SSPI_CS_N",
+          "function": "IO",
+          "category": "IO",
+          "bank": "3",
+          "dqs_group": "bus0",
+          "config_function": "D05/SSPI_CS_N",
+          "diff_pair": "Comp_of_IOL35A",
+          "lvds": "True",
+          "pull_state": "pull down",
+          "polarity": "N",
+          "attrs": {
+            "category": "IO",
+            "dqs_group": "bus0",
+            "config_function": "D05/SSPI_CS_N",
+            "diff_pair": "Comp_of_IOL35A",
+            "lvds": "True",
+            "pull_state": "pull down"
+          }
+        },
+        {
+          "pin": "M8",
+          "name": "M0_CKN",
+          "function": "IO",
+          "category": "MIPI",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "none",
+          "pull_state": "",
+          "polarity": "N",
+          "attrs": {
+            "category": "MIPI",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "none",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "N8",
+          "name": "M0_CKP",
+          "function": "IO",
+          "category": "MIPI",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "none",
+          "pull_state": "",
+          "polarity": "P",
+          "attrs": {
+            "category": "MIPI",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "none",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "N9",
+          "name": "M0_D0N",
+          "function": "IO",
+          "category": "MIPI",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "none",
+          "pull_state": "",
+          "polarity": "N",
+          "attrs": {
+            "category": "MIPI",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "none",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "N10",
+          "name": "M0_D0P",
+          "function": "IO",
+          "category": "MIPI",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "none",
+          "pull_state": "",
+          "polarity": "P",
+          "attrs": {
+            "category": "MIPI",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "none",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "M7",
+          "name": "M0_D1N",
+          "function": "IO",
+          "category": "MIPI",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "none",
+          "pull_state": "",
+          "polarity": "N",
+          "attrs": {
+            "category": "MIPI",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "none",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "N7",
+          "name": "M0_D1P",
+          "function": "IO",
+          "category": "MIPI",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "none",
+          "pull_state": "",
+          "polarity": "P",
+          "attrs": {
+            "category": "MIPI",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "none",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "M6",
+          "name": "M0_D2N",
+          "function": "IO",
+          "category": "MIPI",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "none",
+          "pull_state": "",
+          "polarity": "N",
+          "attrs": {
+            "category": "MIPI",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "none",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "N6",
+          "name": "M0_D2P",
+          "function": "IO",
+          "category": "MIPI",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "none",
+          "pull_state": "",
+          "polarity": "P",
+          "attrs": {
+            "category": "MIPI",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "none",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "M5",
+          "name": "M0_D3N",
+          "function": "IO",
+          "category": "MIPI",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "none",
+          "pull_state": "",
+          "polarity": "N",
+          "attrs": {
+            "category": "MIPI",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "none",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "N5",
+          "name": "M0_D3P/M1_D0A/M1_D0B/M1_D0C/M1_D1A/M1_D1B/M1_D1C/M1_D2A/M1_D2B/M1_D2C",
+          "function": "IO",
+          "category": "MIPI",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "none",
+          "pull_state": "",
+          "attrs": {
+            "category": "MIPI",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "none",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "B10",
+          "name": "Q0_LN0_RXM_I",
+          "function": "IO",
+          "category": "SERDES_RX",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "none",
+          "pull_state": "",
+          "attrs": {
+            "category": "SERDES_RX",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "none",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "A10",
+          "name": "Q0_LN0_RXP_I",
+          "function": "IO",
+          "category": "SERDES_RX",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "none",
+          "pull_state": "",
+          "attrs": {
+            "category": "SERDES_RX",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "none",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "B4",
+          "name": "Q0_LN0_TXM_O",
+          "function": "IO",
+          "category": "SERDES_TX",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "none",
+          "pull_state": "",
+          "attrs": {
+            "category": "SERDES_TX",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "none",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "A4",
+          "name": "Q0_LN0_TXP_O",
+          "function": "IO",
+          "category": "SERDES_TX",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "none",
+          "pull_state": "",
+          "attrs": {
+            "category": "SERDES_TX",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "none",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "A9",
+          "name": "Q0_LN1_RXP_I",
+          "function": "IO",
+          "category": "SERDES_RX",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "none",
+          "pull_state": "",
+          "attrs": {
+            "category": "SERDES_RX",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "none",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "B3",
+          "name": "Q0_LN1_TXM_O",
+          "function": "IO",
+          "category": "SERDES_TX",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "none",
+          "pull_state": "",
+          "attrs": {
+            "category": "SERDES_TX",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "none",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "A3",
+          "name": "Q0_LN1_TXP_O",
+          "function": "IO",
+          "category": "SERDES_TX",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "none",
+          "pull_state": "",
+          "attrs": {
+            "category": "SERDES_TX",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "none",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "B8",
+          "name": "Q0_LN2_RXM_I",
+          "function": "IO",
+          "category": "SERDES_RX",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "none",
+          "pull_state": "",
+          "attrs": {
+            "category": "SERDES_RX",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "none",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "A8",
+          "name": "Q0_LN2_RXP_I",
+          "function": "IO",
+          "category": "SERDES_RX",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "none",
+          "pull_state": "",
+          "attrs": {
+            "category": "SERDES_RX",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "none",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "B2",
+          "name": "Q0_LN2_TXM_O",
+          "function": "IO",
+          "category": "SERDES_TX",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "none",
+          "pull_state": "",
+          "attrs": {
+            "category": "SERDES_TX",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "none",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "A2",
+          "name": "Q0_LN2_TXP_O",
+          "function": "IO",
+          "category": "SERDES_TX",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "none",
+          "pull_state": "",
+          "attrs": {
+            "category": "SERDES_TX",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "none",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "B7",
+          "name": "Q0_LN3_RXM_I",
+          "function": "IO",
+          "category": "SERDES_RX",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "none",
+          "pull_state": "",
+          "attrs": {
+            "category": "SERDES_RX",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "none",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "A7",
+          "name": "Q0_LN3_RXP_I",
+          "function": "IO",
+          "category": "SERDES_RX",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "none",
+          "pull_state": "",
+          "attrs": {
+            "category": "SERDES_RX",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "none",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "B1",
+          "name": "Q0_LN3_TXM_O",
+          "function": "IO",
+          "category": "SERDES_TX",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "none",
+          "pull_state": "",
+          "attrs": {
+            "category": "SERDES_TX",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "none",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "A1",
+          "name": "Q0_LN3_TXP_O",
+          "function": "IO",
+          "category": "SERDES_TX",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "none",
+          "pull_state": "",
+          "attrs": {
+            "category": "SERDES_TX",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "none",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "B6",
+          "name": "Q0_REFCLKM_0",
+          "function": "IO",
+          "category": "SERDES_REFCLK",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "none",
+          "pull_state": "",
+          "attrs": {
+            "category": "SERDES_REFCLK",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "none",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "B5",
+          "name": "Q0_REFCLKM_1",
+          "function": "IO",
+          "category": "SERDES_REFCLK",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "none",
+          "pull_state": "",
+          "attrs": {
+            "category": "SERDES_REFCLK",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "none",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "A6",
+          "name": "Q0_REFCLKP_0",
+          "function": "IO",
+          "category": "SERDES_REFCLK",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "none",
+          "pull_state": "",
+          "attrs": {
+            "category": "SERDES_REFCLK",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "none",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "A5",
+          "name": "Q0_REFCLKP_1",
+          "function": "IO",
+          "category": "SERDES_REFCLK",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "none",
+          "pull_state": "",
+          "attrs": {
+            "category": "SERDES_REFCLK",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "none",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "C5",
+          "name": "Q0_REFRES_I/VEFUSE",
+          "function": "IO",
+          "category": "SERDES",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "none",
+          "pull_state": "",
+          "attrs": {
+            "category": "SERDES",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "none",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "F6",
+          "name": "VCC",
+          "function": "POWER",
+          "category": "POWER",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "",
+          "pull_state": "",
+          "attrs": {
+            "category": "POWER",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "E5",
+          "name": "VCC",
+          "function": "POWER",
+          "category": "POWER",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "",
+          "pull_state": "",
+          "attrs": {
+            "category": "POWER",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "E6",
+          "name": "VCC",
+          "function": "POWER",
+          "category": "POWER",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "",
+          "pull_state": "",
+          "attrs": {
+            "category": "POWER",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "D5",
+          "name": "VCC",
+          "function": "POWER",
+          "category": "POWER",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "",
+          "pull_state": "",
+          "attrs": {
+            "category": "POWER",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "D1",
+          "name": "VCCIO1",
+          "function": "POWER",
+          "category": "POWER",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "",
+          "pull_state": "",
+          "attrs": {
+            "category": "POWER",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "C3",
+          "name": "VCCIO1",
+          "function": "POWER",
+          "category": "POWER",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "",
+          "pull_state": "",
+          "attrs": {
+            "category": "POWER",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "M4",
+          "name": "VCCIO2",
+          "function": "POWER",
+          "category": "POWER",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "",
+          "pull_state": "",
+          "attrs": {
+            "category": "POWER",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "J5",
+          "name": "VCCIO3",
+          "function": "POWER",
+          "category": "POWER",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "",
+          "pull_state": "",
+          "attrs": {
+            "category": "POWER",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "G7",
+          "name": "VCCIO4",
+          "function": "POWER",
+          "category": "POWER",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "",
+          "pull_state": "",
+          "attrs": {
+            "category": "POWER",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "F9",
+          "name": "VCCX_VCCLDO_VDDXM",
+          "function": "POWER",
+          "category": "POWER",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "",
+          "pull_state": "",
+          "polarity": "N",
+          "attrs": {
+            "category": "POWER",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "L8",
+          "name": "VCCX_VCCLDO_VDDXM",
+          "function": "POWER",
+          "category": "POWER",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "",
+          "pull_state": "",
+          "polarity": "N",
+          "attrs": {
+            "category": "POWER",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "J9",
+          "name": "VCCX_VCCLDO_VDDXM/VDD12M",
+          "function": "POWER",
+          "category": "POWER",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "",
+          "pull_state": "",
+          "polarity": "N",
+          "attrs": {
+            "category": "POWER",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "L9",
+          "name": "VDDAM",
+          "function": "POWER",
+          "category": "POWER",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "",
+          "pull_state": "",
+          "polarity": "N",
+          "attrs": {
+            "category": "POWER",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "F10",
+          "name": "VDDAM",
+          "function": "POWER",
+          "category": "POWER",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "",
+          "pull_state": "",
+          "polarity": "N",
+          "attrs": {
+            "category": "POWER",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "M9",
+          "name": "VDDAM",
+          "function": "POWER",
+          "category": "POWER",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "",
+          "pull_state": "",
+          "polarity": "N",
+          "attrs": {
+            "category": "POWER",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "H9",
+          "name": "VDDAM",
+          "function": "POWER",
+          "category": "POWER",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "",
+          "pull_state": "",
+          "polarity": "N",
+          "attrs": {
+            "category": "POWER",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "C2",
+          "name": "VDDAQ0",
+          "function": "POWER",
+          "category": "POWER",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "",
+          "pull_state": "",
+          "attrs": {
+            "category": "POWER",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "C6",
+          "name": "VDDAQ0",
+          "function": "POWER",
+          "category": "POWER",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "",
+          "pull_state": "",
+          "attrs": {
+            "category": "POWER",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "C10",
+          "name": "VDDAQ0",
+          "function": "POWER",
+          "category": "POWER",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "",
+          "pull_state": "",
+          "attrs": {
+            "category": "POWER",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "D6",
+          "name": "VDDHAQ0",
+          "function": "POWER",
+          "category": "POWER",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "",
+          "pull_state": "",
+          "attrs": {
+            "category": "POWER",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "D7",
+          "name": "VDDHAQ0",
+          "function": "POWER",
+          "category": "POWER",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "",
+          "pull_state": "",
+          "attrs": {
+            "category": "POWER",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "C8",
+          "name": "VDDTQ0",
+          "function": "POWER",
+          "category": "POWER",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "",
+          "pull_state": "",
+          "attrs": {
+            "category": "POWER",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "C4",
+          "name": "VDDTQ0",
+          "function": "POWER",
+          "category": "POWER",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "",
+          "pull_state": "",
+          "attrs": {
+            "category": "POWER",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "J10",
+          "name": "VSS",
+          "function": "GROUND",
+          "category": "GROUND",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "",
+          "pull_state": "",
+          "attrs": {
+            "category": "GROUND",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "M10",
+          "name": "VSS",
+          "function": "GROUND",
+          "category": "GROUND",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "",
+          "pull_state": "",
+          "attrs": {
+            "category": "GROUND",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "E9",
+          "name": "VSS",
+          "function": "GROUND",
+          "category": "GROUND",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "",
+          "pull_state": "",
+          "attrs": {
+            "category": "GROUND",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "D8",
+          "name": "VSS",
+          "function": "GROUND",
+          "category": "GROUND",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "",
+          "pull_state": "",
+          "attrs": {
+            "category": "GROUND",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "G8",
+          "name": "VSS",
+          "function": "GROUND",
+          "category": "GROUND",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "",
+          "pull_state": "",
+          "attrs": {
+            "category": "GROUND",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "L7",
+          "name": "VSS",
+          "function": "GROUND",
+          "category": "GROUND",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "",
+          "pull_state": "",
+          "attrs": {
+            "category": "GROUND",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "J6",
+          "name": "VSS",
+          "function": "GROUND",
+          "category": "GROUND",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "",
+          "pull_state": "",
+          "attrs": {
+            "category": "GROUND",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "N4",
+          "name": "VSS",
+          "function": "GROUND",
+          "category": "GROUND",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "",
+          "pull_state": "",
+          "attrs": {
+            "category": "GROUND",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "C9",
+          "name": "VSS",
+          "function": "GROUND",
+          "category": "GROUND",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "",
+          "pull_state": "",
+          "attrs": {
+            "category": "GROUND",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "C7",
+          "name": "VSS",
+          "function": "GROUND",
+          "category": "GROUND",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "",
+          "diff_pair": "",
+          "lvds": "",
+          "pull_state": "",
+          "attrs": {
+            "category": "GROUND",
+            "dqs_group": "",
+            "config_function": "",
+            "diff_pair": "",
+            "lvds": "",
+            "pull_state": ""
+          }
+        },
+        {
+          "pin": "C1",
+          "name": "VSS/© 2025 GOWINSEMI",
+          "function": "GROUND",
+          "category": "GROUND",
+          "bank": "",
+          "dqs_group": "",
+          "config_function": "UG1224-1.2",
+          "diff_pair": "",
+          "lvds": "",
+          "pull_state": "",
+          "attrs": {
+            "category": "GROUND",
+            "dqs_group": "",
+            "config_function": "UG1224-1.2",
+            "diff_pair": "",
+            "lvds": "",
+            "pull_state": ""
+          }
+        }
+      ],
+      "banks": {
+        "1": {
+          "pins": [
+            "D2",
+            "E4",
+            "E3",
+            "F3",
+            "G3",
+            "E2",
+            "E1",
+            "H3",
+            "J3",
+            "F2",
+            "F1",
+            "G2",
+            "G1",
+            "H2",
+            "H1",
+            "L4",
+            "N3",
+            "M3",
+            "K3",
+            "L3",
+            "J2",
+            "J1",
+            "K2",
+            "K1",
+            "L2",
+            "M1",
+            "N1",
+            "M2",
+            "N2"
+          ],
+          "io_count": 29,
+          "bank": "1",
+          "total_pins": 29,
+          "io_pins": 29,
+          "attrs": {
+            "pins": [
+              "D2",
+              "E4",
+              "E3",
+              "F3",
+              "G3",
+              "E2",
+              "E1",
+              "H3",
+              "J3",
+              "F2",
+              "F1",
+              "G2",
+              "G1",
+              "H2",
+              "H1",
+              "L4",
+              "N3",
+              "M3",
+              "K3",
+              "L3",
+              "J2",
+              "J1",
+              "K2",
+              "K1",
+              "L2",
+              "M1",
+              "N1",
+              "M2",
+              "N2"
+            ],
+            "io_count": 29
+          }
+        },
+        "2": {
+          "pins": [
+            "G5",
+            "G4",
+            "H5",
+            "H4",
+            "J4",
+            "K4",
+            "K5"
+          ],
+          "io_count": 7,
+          "bank": "2",
+          "total_pins": 7,
+          "io_pins": 7,
+          "attrs": {
+            "pins": [
+              "G5",
+              "G4",
+              "H5",
+              "H4",
+              "J4",
+              "K4",
+              "K5"
+            ],
+            "io_count": 7
+          }
+        },
+        "4": {
+          "pins": [
+            "E8",
+            "E7",
+            "F8",
+            "F7",
+            "H8",
+            "H7",
+            "J8",
+            "J7"
+          ],
+          "io_count": 8,
+          "bank": "4",
+          "total_pins": 8,
+          "io_pins": 8,
+          "attrs": {
+            "pins": [
+              "E8",
+              "E7",
+              "F8",
+              "F7",
+              "H8",
+              "H7",
+              "J8",
+              "J7"
+            ],
+            "io_count": 8
+          }
+        },
+        "3": {
+          "pins": [
+            "K7",
+            "K6",
+            "G6",
+            "D4",
+            "D3",
+            "F5",
+            "F4"
+          ],
+          "io_count": 7,
+          "bank": "3",
+          "total_pins": 7,
+          "io_pins": 7,
+          "attrs": {
+            "pins": [
+              "K7",
+              "K6",
+              "G6",
+              "D4",
+              "D3",
+              "F5",
+              "F4"
+            ],
+            "io_count": 7
+          }
+        }
+      },
+      "diff_pairs": [
+        {
+          "type": "IO",
+          "true_name": "IOB12A",
+          "comp_name": "IOB12B",
+          "true_pin": "E4",
+          "comp_pin": "E3",
+          "bank": "1",
+          "p_pin": "E4",
+          "n_pin": "E3",
+          "p_name": "IOB12A",
+          "n_name": "IOB12B",
+          "pair_name": "IOB12A",
+          "attrs": {
+            "true_name": "IOB12A",
+            "comp_name": "IOB12B",
+            "true_pin": "E4",
+            "comp_pin": "E3"
+          }
+        },
+        {
+          "type": "IO",
+          "true_name": "IOB14A/D15",
+          "comp_name": "IOB14B",
+          "true_pin": "F3",
+          "comp_pin": "G3",
+          "bank": "1",
+          "p_pin": "F3",
+          "n_pin": "G3",
+          "p_name": "IOB14A/D15",
+          "n_name": "IOB14B",
+          "pair_name": "IOB14A/D15",
+          "attrs": {
+            "true_name": "IOB14A/D15",
+            "comp_name": "IOB14B",
+            "true_pin": "F3",
+            "comp_pin": "G3"
+          }
+        },
+        {
+          "type": "IO",
+          "true_name": "IOB16A",
+          "comp_name": "IOB16B",
+          "true_pin": "E2",
+          "comp_pin": "E1",
+          "bank": "1",
+          "p_pin": "E2",
+          "n_pin": "E1",
+          "p_name": "IOB16A",
+          "n_name": "IOB16B",
+          "pair_name": "IOB16A",
+          "attrs": {
+            "true_name": "IOB16A",
+            "comp_name": "IOB16B",
+            "true_pin": "E2",
+            "comp_pin": "E1"
+          }
+        },
+        {
+          "type": "IO",
+          "true_name": "IOB18A/D13",
+          "comp_name": "IOB18B",
+          "true_pin": "H3",
+          "comp_pin": "J3",
+          "bank": "1",
+          "p_pin": "H3",
+          "n_pin": "J3",
+          "p_name": "IOB18A/D13",
+          "n_name": "IOB18B",
+          "pair_name": "IOB18A/D13",
+          "attrs": {
+            "true_name": "IOB18A/D13",
+            "comp_name": "IOB18B",
+            "true_pin": "H3",
+            "comp_pin": "J3"
+          }
+        },
+        {
+          "type": "IO",
+          "true_name": "IOB20A",
+          "comp_name": "IOB20B",
+          "true_pin": "F2",
+          "comp_pin": "F1",
+          "bank": "1",
+          "p_pin": "F2",
+          "n_pin": "F1",
+          "p_name": "IOB20A",
+          "n_name": "IOB20B",
+          "pair_name": "IOB20A",
+          "attrs": {
+            "true_name": "IOB20A",
+            "comp_name": "IOB20B",
+            "true_pin": "F2",
+            "comp_pin": "F1"
+          }
+        },
+        {
+          "type": "IO",
+          "true_name": "IOB22A/GCLKT_3",
+          "comp_name": "IOB22B",
+          "true_pin": "G2",
+          "comp_pin": "G1",
+          "bank": "1",
+          "p_pin": "G2",
+          "n_pin": "G1",
+          "p_name": "IOB22A/GCLKT_3",
+          "n_name": "IOB22B",
+          "pair_name": "IOB22A/GCLKT_3",
+          "attrs": {
+            "true_name": "IOB22A/GCLKT_3",
+            "comp_name": "IOB22B",
+            "true_pin": "G2",
+            "comp_pin": "G1"
+          }
+        },
+        {
+          "type": "IO",
+          "true_name": "IOB24A/GCLKT_2/BPLL_T_I/N0/BPLL_T_FB1",
+          "comp_name": "IOB24B",
+          "true_pin": "H2",
+          "comp_pin": "H1",
+          "bank": "1",
+          "p_pin": "H2",
+          "n_pin": "H1",
+          "p_name": "IOB24A/GCLKT_2/BPLL_T_I/N0/BPLL_T_FB1",
+          "n_name": "IOB24B",
+          "pair_name": "IOB24A/GCLKT_2/BPLL_T_I/N0/BPLL_T_FB1",
+          "attrs": {
+            "true_name": "IOB24A/GCLKT_2/BPLL_T_I/N0/BPLL_T_FB1",
+            "comp_name": "IOB24B",
+            "true_pin": "H2",
+            "comp_pin": "H1"
+          }
+        },
+        {
+          "type": "IO",
+          "true_name": "IOB32A/GCLKT_1/BPLL_T_I/N1/BPLL_T_FB0",
+          "comp_name": "IOB32B",
+          "true_pin": "N3",
+          "comp_pin": "M3",
+          "bank": "1",
+          "p_pin": "N3",
+          "n_pin": "M3",
+          "p_name": "IOB32A/GCLKT_1/BPLL_T_I/N1/BPLL_T_FB0",
+          "n_name": "IOB32B",
+          "pair_name": "IOB32A/GCLKT_1/BPLL_T_I/N1/BPLL_T_FB0",
+          "attrs": {
+            "true_name": "IOB32A/GCLKT_1/BPLL_T_I/N1/BPLL_T_FB0",
+            "comp_name": "IOB32B",
+            "true_pin": "N3",
+            "comp_pin": "M3"
+          }
+        },
+        {
+          "type": "IO",
+          "true_name": "IOB34A/GCLKT_0",
+          "comp_name": "IOB34B",
+          "true_pin": "K3",
+          "comp_pin": "L3",
+          "bank": "1",
+          "p_pin": "K3",
+          "n_pin": "L3",
+          "p_name": "IOB34A/GCLKT_0",
+          "n_name": "IOB34B",
+          "pair_name": "IOB34A/GCLKT_0",
+          "attrs": {
+            "true_name": "IOB34A/GCLKT_0",
+            "comp_name": "IOB34B",
+            "true_pin": "K3",
+            "comp_pin": "L3"
+          }
+        },
+        {
+          "type": "IO",
+          "true_name": "IOB36A",
+          "comp_name": "IOB36B",
+          "true_pin": "J2",
+          "comp_pin": "J1",
+          "bank": "1",
+          "p_pin": "J2",
+          "n_pin": "J1",
+          "p_name": "IOB36A",
+          "n_name": "IOB36B",
+          "pair_name": "IOB36A",
+          "attrs": {
+            "true_name": "IOB36A",
+            "comp_name": "IOB36B",
+            "true_pin": "J2",
+            "comp_pin": "J1"
+          }
+        },
+        {
+          "type": "IO",
+          "true_name": "IOB39A/D11",
+          "comp_name": "IOB39B",
+          "true_pin": "K2",
+          "comp_pin": "K1",
+          "bank": "1",
+          "p_pin": "K2",
+          "n_pin": "K1",
+          "p_name": "IOB39A/D11",
+          "n_name": "IOB39B",
+          "pair_name": "IOB39A/D11",
+          "attrs": {
+            "true_name": "IOB39A/D11",
+            "comp_name": "IOB39B",
+            "true_pin": "K2",
+            "comp_pin": "K1"
+          }
+        },
+        {
+          "type": "IO",
+          "true_name": "IOB3A/D02/MI2",
+          "comp_name": "IOB3B",
+          "true_pin": "G5",
+          "comp_pin": "G4",
+          "bank": "2",
+          "p_pin": "G5",
+          "n_pin": "G4",
+          "p_name": "IOB3A/D02/MI2",
+          "n_name": "IOB3B",
+          "pair_name": "IOB3A/D02/MI2",
+          "attrs": {
+            "true_name": "IOB3A/D02/MI2",
+            "comp_name": "IOB3B",
+            "true_pin": "G5",
+            "comp_pin": "G4"
+          }
+        },
+        {
+          "type": "IO",
+          "true_name": "IOB43A/D09",
+          "comp_name": "IOB43B",
+          "true_pin": "M1",
+          "comp_pin": "N1",
+          "bank": "1",
+          "p_pin": "M1",
+          "n_pin": "N1",
+          "p_name": "IOB43A/D09",
+          "n_name": "IOB43B",
+          "pair_name": "IOB43A/D09",
+          "attrs": {
+            "true_name": "IOB43A/D09",
+            "comp_name": "IOB43B",
+            "true_pin": "M1",
+            "comp_pin": "N1"
+          }
+        },
+        {
+          "type": "IO",
+          "true_name": "IOB45A",
+          "comp_name": "IOB45B",
+          "true_pin": "M2",
+          "comp_pin": "N2",
+          "bank": "1",
+          "p_pin": "M2",
+          "n_pin": "N2",
+          "p_name": "IOB45A",
+          "n_name": "IOB45B",
+          "pair_name": "IOB45A",
+          "attrs": {
+            "true_name": "IOB45A",
+            "comp_name": "IOB45B",
+            "true_pin": "M2",
+            "comp_pin": "N2"
+          }
+        },
+        {
+          "type": "IO",
+          "true_name": "IOB5A/CCLK",
+          "comp_name": "IOB5B",
+          "true_pin": "H5",
+          "comp_pin": "H4",
+          "bank": "2",
+          "p_pin": "H5",
+          "n_pin": "H4",
+          "p_name": "IOB5A/CCLK",
+          "n_name": "IOB5B",
+          "pair_name": "IOB5A/CCLK",
+          "attrs": {
+            "true_name": "IOB5A/CCLK",
+            "comp_name": "IOB5B",
+            "true_pin": "H5",
+            "comp_pin": "H4"
+          }
+        },
+        {
+          "type": "IO",
+          "true_name": "IOB7A/D03/MI3",
+          "comp_name": "IOB7B",
+          "true_pin": "J4",
+          "comp_pin": "K4",
+          "bank": "2",
+          "p_pin": "J4",
+          "n_pin": "K4",
+          "p_name": "IOB7A/D03/MI3",
+          "n_name": "IOB7B",
+          "pair_name": "IOB7A/D03/MI3",
+          "attrs": {
+            "true_name": "IOB7A/D03/MI3",
+            "comp_name": "IOB7B",
+            "true_pin": "J4",
+            "comp_pin": "K4"
+          }
+        },
+        {
+          "type": "IO",
+          "true_name": "IOL20A/TCK",
+          "comp_name": "IOL20B",
+          "true_pin": "E8",
+          "comp_pin": "E7",
+          "bank": "4",
+          "p_pin": "E8",
+          "n_pin": "E7",
+          "p_name": "IOL20A/TCK",
+          "n_name": "IOL20B",
+          "pair_name": "IOL20A/TCK",
+          "attrs": {
+            "true_name": "IOL20A/TCK",
+            "comp_name": "IOL20B",
+            "true_pin": "E8",
+            "comp_pin": "E7"
+          }
+        },
+        {
+          "type": "IO",
+          "true_name": "IOL22A/GCLKT_7/Q0REF_T_/IN0/SSPI_CLK",
+          "comp_name": "IOL22B",
+          "true_pin": "F8",
+          "comp_pin": "F7",
+          "bank": "4",
+          "p_pin": "F8",
+          "n_pin": "F7",
+          "p_name": "IOL22A/GCLKT_7/Q0REF_T_/IN0/SSPI_CLK",
+          "n_name": "IOL22B",
+          "pair_name": "IOL22A/GCLKT_7/Q0REF_T_/IN0/SSPI_CLK",
+          "attrs": {
+            "true_name": "IOL22A/GCLKT_7/Q0REF_T_/IN0/SSPI_CLK",
+            "comp_name": "IOL22B",
+            "true_pin": "F8",
+            "comp_pin": "F7"
+          }
+        },
+        {
+          "type": "IO",
+          "true_name": "IOL24A/TDI",
+          "comp_name": "IOL24B",
+          "true_pin": "H8",
+          "comp_pin": "H7",
+          "bank": "4",
+          "p_pin": "H8",
+          "n_pin": "H7",
+          "p_name": "IOL24A/TDI",
+          "n_name": "IOL24B",
+          "pair_name": "IOL24A/TDI",
+          "attrs": {
+            "true_name": "IOL24A/TDI",
+            "comp_name": "IOL24B",
+            "true_pin": "H8",
+            "comp_pin": "H7"
+          }
+        },
+        {
+          "type": "IO",
+          "true_name": "IOL26A/GCLKT_6/LPLL_T_IN/0/LPLL_T_FB1/Q0REF_T_IN/1/D06/CLKHOLD_N/SSI3",
+          "comp_name": "IOL26B",
+          "true_pin": "J8",
+          "comp_pin": "J7",
+          "bank": "4",
+          "p_pin": "J8",
+          "n_pin": "J7",
+          "p_name": "IOL26A/GCLKT_6/LPLL_T_IN/0/LPLL_T_FB1/Q0REF_T_IN/1/D06/CLKHOLD_N/SSI3",
+          "n_name": "IOL26B",
+          "pair_name": "IOL26A/GCLKT_6/LPLL_T_IN/0/LPLL_T_FB1/Q0REF_T_IN/1/D06/CLKHOLD_N/SSI3",
+          "attrs": {
+            "true_name": "IOL26A/GCLKT_6/LPLL_T_IN/0/LPLL_T_FB1/Q0REF_T_IN/1/D06/CLKHOLD_N/SSI3",
+            "comp_name": "IOL26B",
+            "true_pin": "J8",
+            "comp_pin": "J7"
+          }
+        },
+        {
+          "type": "IO",
+          "true_name": "IOL29A/DONE",
+          "comp_name": "IOL29B",
+          "true_pin": "K7",
+          "comp_pin": "K6",
+          "bank": "3",
+          "p_pin": "K7",
+          "n_pin": "K6",
+          "p_name": "IOL29A/DONE",
+          "n_name": "IOL29B",
+          "pair_name": "IOL29A/DONE",
+          "attrs": {
+            "true_name": "IOL29A/DONE",
+            "comp_name": "IOL29B",
+            "true_pin": "K7",
+            "comp_pin": "K6"
+          }
+        },
+        {
+          "type": "IO",
+          "true_name": "IOL31A/GCLKT_5/MODE1",
+          "comp_name": "IOL31B",
+          "true_pin": "G6",
+          "comp_pin": "",
+          "bank": "3",
+          "p_pin": "G6",
+          "n_pin": "",
+          "p_name": "IOL31A/GCLKT_5/MODE1",
+          "n_name": "IOL31B",
+          "pair_name": "IOL31A/GCLKT_5/MODE1",
+          "attrs": {
+            "true_name": "IOL31A/GCLKT_5/MODE1",
+            "comp_name": "IOL31B",
+            "true_pin": "G6",
+            "comp_pin": ""
+          }
+        },
+        {
+          "type": "IO",
+          "true_name": "IOL33A/GCLKT_4/LPLL_T_IN/1/LPLL_T_FB0/CSO_B/DOUT//SCL",
+          "comp_name": "IOL33B",
+          "true_pin": "D4",
+          "comp_pin": "D3",
+          "bank": "3",
+          "p_pin": "D4",
+          "n_pin": "D3",
+          "p_name": "IOL33A/GCLKT_4/LPLL_T_IN/1/LPLL_T_FB0/CSO_B/DOUT//SCL",
+          "n_name": "IOL33B",
+          "pair_name": "IOL33A/GCLKT_4/LPLL_T_IN/1/LPLL_T_FB0/CSO_B/DOUT//SCL",
+          "attrs": {
+            "true_name": "IOL33A/GCLKT_4/LPLL_T_IN/1/LPLL_T_FB0/CSO_B/DOUT//SCL",
+            "comp_name": "IOL33B",
+            "true_pin": "D4",
+            "comp_pin": "D3"
+          }
+        },
+        {
+          "type": "IO",
+          "true_name": "IOL35A/D04/SI/SSI0",
+          "comp_name": "IOL35B",
+          "true_pin": "F5",
+          "comp_pin": "F4",
+          "bank": "3",
+          "p_pin": "F5",
+          "n_pin": "F4",
+          "p_name": "IOL35A/D04/SI/SSI0",
+          "n_name": "IOL35B",
+          "pair_name": "IOL35A/D04/SI/SSI0",
+          "attrs": {
+            "true_name": "IOL35A/D04/SI/SSI0",
+            "comp_name": "IOL35B",
+            "true_pin": "F5",
+            "comp_pin": "F4"
+          }
+        }
+      ],
+      "lookup": {
+        "by_pin": {
+          "D2": "IOB11A",
+          "E4": "IOB12A",
+          "E3": "IOB12B",
+          "F3": "IOB14A/D15",
+          "G3": "IOB14B/D14",
+          "E2": "IOB16A",
+          "E1": "IOB16B",
+          "H3": "IOB18A/D13",
+          "J3": "IOB18B/D12",
+          "F2": "IOB20A",
+          "F1": "IOB20B",
+          "G2": "IOB22A/GCLKT_3",
+          "G1": "IOB22B/GCLKC_3",
+          "H2": "IOB24A/GCLKT_2/BPLL_T_I/N0/BPLL_T_FB1",
+          "H1": "IOB24B/GCLKC_2/BPLL_C_I/N0/BPLL_C_FB1",
+          "L4": "IOB31A",
+          "N3": "IOB32A/GCLKT_1/BPLL_T_I/N1/BPLL_T_FB0",
+          "M3": "IOB32B/GCLKC_1/BPLL_C_I/N1/BPLL_C_FB0",
+          "K3": "IOB34A/GCLKT_0",
+          "L3": "IOB34B/GCLKC_0",
+          "J2": "IOB36A",
+          "J1": "IOB36B",
+          "K2": "IOB39A/D11",
+          "K1": "IOB39B/D10",
+          "G5": "IOB3A/D02/MI2",
+          "G4": "IOB3B/D01/DIN/MISO/MI1",
+          "L2": "IOB41B",
+          "M1": "IOB43A/D09",
+          "N1": "IOB43B/D08",
+          "M2": "IOB45A",
+          "N2": "IOB45B/EMCCLK",
+          "H5": "IOB5A/CCLK",
+          "H4": "IOB5B/MCS_N",
+          "J4": "IOB7A/D03/MI3",
+          "K4": "IOB7B/D00/MOSI/MI0",
+          "K5": "IOB9A/READY",
+          "E8": "IOL20A/TCK",
+          "E7": "IOL20B/TMS",
+          "F8": "IOL22A/GCLKT_7/Q0REF_T_/IN0/SSPI_CLK",
+          "F7": "IOL22B/GCLKC_7/Q0REF_C/_IN0/RDWR_B/SO/SSI1/PCIE/_HOST_RSTN",
+          "H8": "IOL24A/TDI",
+          "H7": "IOL24B/TDO",
+          "J8": "IOL26A/GCLKT_6/LPLL_T_IN/0/LPLL_T_FB1/Q0REF_T_IN/1/D06/CLKHOLD_N/SSI3",
+          "J7": "IOL26B/GCLKC_6/LPLL_C_I/N0/LPLL_C_FB1/Q0REF_C_I/N1/D07/SSPI_WPN/SSI2",
+          "K7": "IOL29A/DONE",
+          "K6": "IOL29B/RECONFIG_N",
+          "G6": "IOL31A/GCLKT_5/MODE1",
+          "D4": "IOL33A/GCLKT_4/LPLL_T_IN/1/LPLL_T_FB0/CSO_B/DOUT//SCL",
+          "D3": "IOL33B/GCLKC_4/LPLL_C_I/N1/LPLL_C_FB0/CSI_B/SDA",
+          "F5": "IOL35A/D04/SI/SSI0",
+          "F4": "IOL35B/D05/SSPI_CS_N",
+          "M8": "M0_CKN",
+          "N8": "M0_CKP",
+          "N9": "M0_D0N",
+          "N10": "M0_D0P",
+          "M7": "M0_D1N",
+          "N7": "M0_D1P",
+          "M6": "M0_D2N",
+          "N6": "M0_D2P",
+          "M5": "M0_D3N",
+          "N5": "M0_D3P/M1_D0A/M1_D0B/M1_D0C/M1_D1A/M1_D1B/M1_D1C/M1_D2A/M1_D2B/M1_D2C",
+          "B10": "Q0_LN0_RXM_I",
+          "A10": "Q0_LN0_RXP_I",
+          "B4": "Q0_LN0_TXM_O",
+          "A4": "Q0_LN0_TXP_O",
+          "A9": "Q0_LN1_RXP_I",
+          "B3": "Q0_LN1_TXM_O",
+          "A3": "Q0_LN1_TXP_O",
+          "B8": "Q0_LN2_RXM_I",
+          "A8": "Q0_LN2_RXP_I",
+          "B2": "Q0_LN2_TXM_O",
+          "A2": "Q0_LN2_TXP_O",
+          "B7": "Q0_LN3_RXM_I",
+          "A7": "Q0_LN3_RXP_I",
+          "B1": "Q0_LN3_TXM_O",
+          "A1": "Q0_LN3_TXP_O",
+          "B6": "Q0_REFCLKM_0",
+          "B5": "Q0_REFCLKM_1",
+          "A6": "Q0_REFCLKP_0",
+          "A5": "Q0_REFCLKP_1",
+          "C5": "Q0_REFRES_I/VEFUSE",
+          "F6": "VCC",
+          "E5": "VCC",
+          "E6": "VCC",
+          "D5": "VCC",
+          "D1": "VCCIO1",
+          "C3": "VCCIO1",
+          "M4": "VCCIO2",
+          "J5": "VCCIO3",
+          "G7": "VCCIO4",
+          "F9": "VCCX_VCCLDO_VDDXM",
+          "L8": "VCCX_VCCLDO_VDDXM",
+          "J9": "VCCX_VCCLDO_VDDXM/VDD12M",
+          "L9": "VDDAM",
+          "F10": "VDDAM",
+          "M9": "VDDAM",
+          "H9": "VDDAM",
+          "C2": "VDDAQ0",
+          "C6": "VDDAQ0",
+          "C10": "VDDAQ0",
+          "D6": "VDDHAQ0",
+          "D7": "VDDHAQ0",
+          "C8": "VDDTQ0",
+          "C4": "VDDTQ0",
+          "J10": "VSS",
+          "M10": "VSS",
+          "E9": "VSS",
+          "D8": "VSS",
+          "G8": "VSS",
+          "L7": "VSS",
+          "J6": "VSS",
+          "N4": "VSS",
+          "C9": "VSS",
+          "C7": "VSS",
+          "C1": "VSS/© 2025 GOWINSEMI"
+        },
+        "by_name": {
+          "IOB11A": "D2",
+          "IOB12A": "E4",
+          "IOB12B": "E3",
+          "IOB14A/D15": "F3",
+          "IOB14B/D14": "G3",
+          "IOB16A": "E2",
+          "IOB16B": "E1",
+          "IOB18A/D13": "H3",
+          "IOB18B/D12": "J3",
+          "IOB20A": "F2",
+          "IOB20B": "F1",
+          "IOB22A/GCLKT_3": "G2",
+          "IOB22B/GCLKC_3": "G1",
+          "IOB24A/GCLKT_2/BPLL_T_I/N0/BPLL_T_FB1": "H2",
+          "IOB24B/GCLKC_2/BPLL_C_I/N0/BPLL_C_FB1": "H1",
+          "IOB31A": "L4",
+          "IOB32A/GCLKT_1/BPLL_T_I/N1/BPLL_T_FB0": "N3",
+          "IOB32B/GCLKC_1/BPLL_C_I/N1/BPLL_C_FB0": "M3",
+          "IOB34A/GCLKT_0": "K3",
+          "IOB34B/GCLKC_0": "L3",
+          "IOB36A": "J2",
+          "IOB36B": "J1",
+          "IOB39A/D11": "K2",
+          "IOB39B/D10": "K1",
+          "IOB3A/D02/MI2": "G5",
+          "IOB3B/D01/DIN/MISO/MI1": "G4",
+          "IOB41B": "L2",
+          "IOB43A/D09": "M1",
+          "IOB43B/D08": "N1",
+          "IOB45A": "M2",
+          "IOB45B/EMCCLK": "N2",
+          "IOB5A/CCLK": "H5",
+          "IOB5B/MCS_N": "H4",
+          "IOB7A/D03/MI3": "J4",
+          "IOB7B/D00/MOSI/MI0": "K4",
+          "IOB9A/READY": "K5",
+          "IOL20A/TCK": "E8",
+          "IOL20B/TMS": "E7",
+          "IOL22A/GCLKT_7/Q0REF_T_/IN0/SSPI_CLK": "F8",
+          "IOL22B/GCLKC_7/Q0REF_C/_IN0/RDWR_B/SO/SSI1/PCIE/_HOST_RSTN": "F7",
+          "IOL24A/TDI": "H8",
+          "IOL24B/TDO": "H7",
+          "IOL26A/GCLKT_6/LPLL_T_IN/0/LPLL_T_FB1/Q0REF_T_IN/1/D06/CLKHOLD_N/SSI3": "J8",
+          "IOL26B/GCLKC_6/LPLL_C_I/N0/LPLL_C_FB1/Q0REF_C_I/N1/D07/SSPI_WPN/SSI2": "J7",
+          "IOL29A/DONE": "K7",
+          "IOL29B/RECONFIG_N": "K6",
+          "IOL31A/GCLKT_5/MODE1": "G6",
+          "IOL33A/GCLKT_4/LPLL_T_IN/1/LPLL_T_FB0/CSO_B/DOUT//SCL": "D4",
+          "IOL33B/GCLKC_4/LPLL_C_I/N1/LPLL_C_FB0/CSI_B/SDA": "D3",
+          "IOL35A/D04/SI/SSI0": "F5",
+          "IOL35B/D05/SSPI_CS_N": "F4",
+          "M0_CKN": "M8",
+          "M0_CKP": "N8",
+          "M0_D0N": "N9",
+          "M0_D0P": "N10",
+          "M0_D1N": "M7",
+          "M0_D1P": "N7",
+          "M0_D2N": "M6",
+          "M0_D2P": "N6",
+          "M0_D3N": "M5",
+          "M0_D3P/M1_D0A/M1_D0B/M1_D0C/M1_D1A/M1_D1B/M1_D1C/M1_D2A/M1_D2B/M1_D2C": "N5",
+          "Q0_LN0_RXM_I": "B10",
+          "Q0_LN0_RXP_I": "A10",
+          "Q0_LN0_TXM_O": "B4",
+          "Q0_LN0_TXP_O": "A4",
+          "Q0_LN1_RXP_I": "A9",
+          "Q0_LN1_TXM_O": "B3",
+          "Q0_LN1_TXP_O": "A3",
+          "Q0_LN2_RXM_I": "B8",
+          "Q0_LN2_RXP_I": "A8",
+          "Q0_LN2_TXM_O": "B2",
+          "Q0_LN2_TXP_O": "A2",
+          "Q0_LN3_RXM_I": "B7",
+          "Q0_LN3_RXP_I": "A7",
+          "Q0_LN3_TXM_O": "B1",
+          "Q0_LN3_TXP_O": "A1",
+          "Q0_REFCLKM_0": "B6",
+          "Q0_REFCLKM_1": "B5",
+          "Q0_REFCLKP_0": "A6",
+          "Q0_REFCLKP_1": "A5",
+          "Q0_REFRES_I/VEFUSE": "C5",
+          "VCC": "D5",
+          "VCCIO1": "C3",
+          "VCCIO2": "M4",
+          "VCCIO3": "J5",
+          "VCCIO4": "G7",
+          "VCCX_VCCLDO_VDDXM": "L8",
+          "VCCX_VCCLDO_VDDXM/VDD12M": "J9",
+          "VDDAM": "H9",
+          "VDDAQ0": "C10",
+          "VDDHAQ0": "D7",
+          "VDDTQ0": "C4",
+          "VSS": "C7",
+          "VSS/© 2025 GOWINSEMI": "C1"
+        }
+      }
+    },
     "design_guide": {
       "source_document": {
         "title": "GW5AT & GW5AST FPGA Schematic Design Guide",

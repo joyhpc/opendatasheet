@@ -5,13 +5,10 @@ propagation delays, setup/hold times, rise/fall times, clock specifications,
 and switching characteristics. Identifies AC timing pages and extracts
 structured timing data via Gemini Vision API.
 """
-import json
 import re
-import time
-
-from google.genai import types
 
 from extractors.base import BaseExtractor
+from extractors.gemini_json import call_gemini_json_response
 
 
 # ============================================
@@ -158,54 +155,23 @@ VALID_TIMING_UNITS = {
 
 def _call_gemini_vision(client, model, images, prompt, max_retries=2):
     """Call Gemini Vision API with retry logic. Returns parsed dict or error dict."""
-    contents = [prompt]
-    for img in images:
-        contents.append(types.Part.from_bytes(data=img, mime_type='image/png'))
-
-    for attempt in range(max_retries + 1):
-        try:
-            response = client.models.generate_content(
-                model=model, contents=contents, config={"temperature": 0.1}
-            )
-            raw = response.text
-            # Clean markdown wrapping
-            if "```json" in raw:
-                raw = raw.split("```json")[1].split("```")[0]
-            elif "```" in raw:
-                raw = raw.split("```")[1].split("```")[0]
-            # Find JSON boundaries
-            start = raw.find('{')
-            end = raw.rfind('}')
-            if start >= 0 and end > start:
-                raw = raw[start:end+1]
-            result = json.loads(raw.strip())
-            if isinstance(result, list):
-                result = result[0] if result else {"error": "Empty list"}
-            if not isinstance(result, dict):
-                return {"error": f"Unexpected type: {type(result).__name__}"}
-            # Normalize key names — the model might use alternate keys
-            if "timing_parameters" not in result:
-                for key in ["timingParameters", "timing_specs", "timing_data",
-                            "parameters", "timing"]:
-                    if key in result:
-                        result["timing_parameters"] = result.pop(key)
-                        break
-            if "timing_summary" not in result:
-                for key in ["summary", "timingSummary", "timing_summary_info"]:
-                    if key in result:
-                        result["timing_summary"] = result.pop(key)
-                        break
-            return result
-        except json.JSONDecodeError as e:
-            if attempt < max_retries:
-                time.sleep(3)
-                continue
-            return {"error": f"JSON parse failed: {str(e)}", "raw": raw[:500] if 'raw' in dir() else ""}
-        except Exception as e:
-            if attempt < max_retries and ("503" in str(e) or "429" in str(e) or "504" in str(e) or "timeout" in str(e).lower() or "ReadTimeout" in str(type(e).__name__) or "ConnectTimeout" in str(type(e).__name__)):
-                time.sleep(10)
-                continue
-            return {"error": str(e)}
+    return call_gemini_json_response(
+        client,
+        model,
+        images,
+        prompt,
+        max_retries=max_retries,
+        key_aliases={
+            "timing_parameters": (
+                "timingParameters",
+                "timing_specs",
+                "timing_data",
+                "parameters",
+                "timing",
+            ),
+            "timing_summary": ("summary", "timingSummary", "timing_summary_info"),
+        },
+    )
 
 
 # ============================================

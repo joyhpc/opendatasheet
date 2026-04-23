@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -347,6 +347,352 @@
       "unit": null,
       "conditions": "Internally Limited",
       "source": "absolute_maximum_ratings"
+    }
+  },
+  "domains": {
+    "pin": {
+      "packages": {
+        "SOT-23-5": {
+          "pin_count": 5,
+          "pins": {
+            "1": {
+              "name": "IN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Input voltage",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Common ground (device substrate)",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "ON/OFF",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Logic high enable input",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "BYPASS",
+              "direction": "PASSIVE",
+              "signal_type": "ANALOG",
+              "description": "Bypass capacitor for low noise operation",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "OUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Regulated output voltage",
+              "unused_treatment": null
+            }
+          }
+        }
+      }
+    },
+    "electrical": {
+      "absolute_maximum_ratings": {
+        "Tstg": {
+          "parameter": "Storage temperature",
+          "min": -65,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        },
+        "V(ESD)": {
+          "parameter": "Electrostatic discharge (HBM)",
+          "min": -1000,
+          "max": 1000,
+          "unit": "V",
+          "conditions": "Pins 3 and 4"
+        },
+        "V(ESD)_Pins_1__2__and_5": {
+          "parameter": "Electrostatic discharge (HBM)",
+          "min": -2000,
+          "max": 2000,
+          "unit": "V",
+          "conditions": "Pins 1, 2, and 5"
+        }
+      },
+      "electrical_parameters": {
+        "ΔVO": {
+          "parameter": "Output voltage tolerance",
+          "min": -1,
+          "typ": null,
+          "max": 1,
+          "unit": "%VNOM",
+          "conditions": "IL = 1 mA"
+        },
+        "ΔVO_IL___1_mA": {
+          "parameter": "Output voltage tolerance",
+          "min": -1.5,
+          "typ": null,
+          "max": 1.5,
+          "unit": "%VNOM",
+          "conditions": "IL = 1 mA"
+        },
+        "ΔVO_1_mA___IL___50_mA": {
+          "parameter": "Output voltage tolerance",
+          "min": -3.5,
+          "typ": null,
+          "max": 3.5,
+          "unit": "%VNOM",
+          "conditions": "1 mA ≤ IL ≤ 50 mA"
+        },
+        "ΔVO_1_mA___IL___150_mA": {
+          "parameter": "Output voltage tolerance",
+          "min": -4,
+          "typ": null,
+          "max": 4,
+          "unit": "%VNOM",
+          "conditions": "1 mA ≤ IL ≤ 150 mA"
+        },
+        "ΔVO/ΔVIN": {
+          "parameter": "Output voltage Line regulation",
+          "min": null,
+          "typ": 0.007,
+          "max": 0.014,
+          "unit": "%/V",
+          "conditions": "VO(NOM)+1 V ≤ VIN ≤ 16 V"
+        },
+        "ΔVO/ΔVIN_VO_NOM__1_V___VIN___16_V": {
+          "parameter": "Output voltage Line regulation",
+          "min": null,
+          "typ": null,
+          "max": 0.032,
+          "unit": "%/V",
+          "conditions": "VO(NOM)+1 V ≤ VIN ≤ 16 V"
+        },
+        "VIN-VO": {
+          "parameter": "Dropout voltage",
+          "min": null,
+          "typ": 1,
+          "max": 3,
+          "unit": "mV",
+          "conditions": "IL = 0 mA"
+        },
+        "VIN-VO_IL___0_mA": {
+          "parameter": "Dropout voltage",
+          "min": null,
+          "typ": null,
+          "max": 5,
+          "unit": "mV",
+          "conditions": "IL = 0 mA"
+        },
+        "VIN-VO_IL___1_mA": {
+          "parameter": "Dropout voltage",
+          "min": null,
+          "typ": null,
+          "max": 15,
+          "unit": "mV",
+          "conditions": "IL = 1 mA"
+        },
+        "VIN-VO_IL___10_mA": {
+          "parameter": "Dropout voltage",
+          "min": null,
+          "typ": null,
+          "max": 90,
+          "unit": "mV",
+          "conditions": "IL = 10 mA"
+        },
+        "VIN-VO_IL___50_mA": {
+          "parameter": "Dropout voltage",
+          "min": null,
+          "typ": null,
+          "max": 225,
+          "unit": "mV",
+          "conditions": "IL = 50 mA"
+        },
+        "VIN-VO_IL___150_mA": {
+          "parameter": "Dropout voltage",
+          "min": null,
+          "typ": null,
+          "max": 575,
+          "unit": "mV",
+          "conditions": "IL = 150 mA"
+        },
+        "IGND": {
+          "parameter": "Ground pin current",
+          "min": null,
+          "typ": 65,
+          "max": 95,
+          "unit": "μA",
+          "conditions": "IL = 0 mA"
+        },
+        "IGND_IL___0_mA": {
+          "parameter": "Ground pin current",
+          "min": null,
+          "typ": null,
+          "max": 125,
+          "unit": "μA",
+          "conditions": "IL = 0 mA"
+        },
+        "IGND_IL___1_mA": {
+          "parameter": "Ground pin current",
+          "min": null,
+          "typ": null,
+          "max": 170,
+          "unit": "μA",
+          "conditions": "IL = 1 mA"
+        },
+        "IGND_IL___10_mA": {
+          "parameter": "Ground pin current",
+          "min": null,
+          "typ": null,
+          "max": 400,
+          "unit": "μA",
+          "conditions": "IL = 10 mA"
+        },
+        "IGND_IL___50_mA": {
+          "parameter": "Ground pin current",
+          "min": null,
+          "typ": null,
+          "max": 1000,
+          "unit": "μA",
+          "conditions": "IL = 50 mA"
+        },
+        "IGND_IL___150_mA": {
+          "parameter": "Ground pin current",
+          "min": null,
+          "typ": null,
+          "max": 2500,
+          "unit": "μA",
+          "conditions": "IL = 150 mA"
+        },
+        "IGND_VON_OFF___0_3_V": {
+          "parameter": "Ground pin current (shutdown)",
+          "min": null,
+          "typ": 0.01,
+          "max": 0.8,
+          "unit": "μA",
+          "conditions": "VON/OFF < 0.3 V"
+        },
+        "IGND_VON_OFF___0_15_V": {
+          "parameter": "Ground pin current (shutdown)",
+          "min": null,
+          "typ": 0.05,
+          "max": 2,
+          "unit": "μA",
+          "conditions": "VON/OFF < 0.15 V"
+        },
+        "VON/OFF": {
+          "parameter": "ON/OFF input voltage (High)",
+          "min": null,
+          "typ": 1.4,
+          "max": null,
+          "unit": "V",
+          "conditions": "High = O/P ON"
+        },
+        "VON/OFF_High___O_P_ON": {
+          "parameter": "ON/OFF input voltage (High)",
+          "min": 1.6,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": "High = O/P ON"
+        },
+        "VON/OFF_Low___O_P_OFF": {
+          "parameter": "ON/OFF input voltage (Low)",
+          "min": null,
+          "typ": null,
+          "max": 0.15,
+          "unit": "V",
+          "conditions": "Low = O/P OFF"
+        },
+        "ION/OFF": {
+          "parameter": "ON/OFF input current",
+          "min": null,
+          "typ": 0.01,
+          "max": null,
+          "unit": "μA",
+          "conditions": "VON/OFF = 0 V"
+        },
+        "ION/OFF_VON_OFF___0_V": {
+          "parameter": "ON/OFF input current",
+          "min": -2,
+          "typ": null,
+          "max": null,
+          "unit": "μA",
+          "conditions": "VON/OFF = 0 V"
+        },
+        "ION/OFF_VON_OFF___5_V": {
+          "parameter": "ON/OFF input current",
+          "min": null,
+          "typ": null,
+          "max": 15,
+          "unit": "μA",
+          "conditions": "VON/OFF = 5 V"
+        },
+        "en": {
+          "parameter": "Output noise voltage (RMS)",
+          "min": null,
+          "typ": 30,
+          "max": null,
+          "unit": "μV",
+          "conditions": "BW = 300 Hz to 50 kHz, COUT = 10 μF, CBYPASS = 10 nF"
+        },
+        "ΔVO/ΔVIN_f___1_kHz__CBYPASS___10_nF__CO": {
+          "parameter": "Ripple rejection",
+          "min": null,
+          "typ": 45,
+          "max": null,
+          "unit": "dB",
+          "conditions": "f = 1 kHz, CBYPASS = 10 nF, COUT = 10 μF"
+        },
+        "IO(SC)": {
+          "parameter": "Short circuit current",
+          "min": null,
+          "typ": 400,
+          "max": null,
+          "unit": "mA",
+          "conditions": "RL = 0 Ω (steady state)"
+        },
+        "IO(PK)": {
+          "parameter": "Peak output current",
+          "min": null,
+          "typ": 350,
+          "max": null,
+          "unit": "mA",
+          "conditions": "VOUT ≥ VO(NOM) -5%"
+        }
+      },
+      "drc_hints": {
+        "vin_abs_max": {
+          "value": 16,
+          "unit": "V"
+        },
+        "vin_operating": {
+          "typ": 1,
+          "max": 3,
+          "unit": "mV"
+        },
+        "iout_max": {
+          "typ": 350,
+          "unit": "mA"
+        },
+        "iq": {
+          "typ": 65,
+          "max": 95,
+          "unit": "μA"
+        }
+      }
+    },
+    "thermal": {
+      "power_dissipation": {
+        "parameter": "Power dissipation",
+        "symbol": null,
+        "min": null,
+        "typ": null,
+        "max": null,
+        "value": null,
+        "unit": null,
+        "conditions": "Internally Limited",
+        "source": "absolute_maximum_ratings"
+      }
     }
   }
 }

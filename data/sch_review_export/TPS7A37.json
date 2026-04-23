@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -389,5 +389,391 @@
       "unit": "°C"
     }
   },
-  "thermal": {}
+  "thermal": {},
+  "domains": {
+    "pin": {
+      "packages": {
+        "WSON (6)": {
+          "pin_count": 7,
+          "pins": {
+            "6": {
+              "name": "IN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Input supply voltage",
+              "unused_treatment": null
+            },
+            "1": {
+              "name": "OUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Regulated output voltage",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "EN",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Enable input. Drive high to turn on the regulator; drive low to put it into shutdown mode.",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "FB",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Feedback input for the adjustable voltage version. (also: NC — No internal connection)",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "NC",
+              "direction": "NC",
+              "signal_type": "NONE",
+              "description": "No internal connection",
+              "unused_treatment": "FLOAT"
+            },
+            "EP": {
+              "name": "Thermal Pad",
+              "direction": "PASSIVE",
+              "signal_type": "POWER",
+              "description": "Exposed thermal pad; connect to GND for improved thermal performance.",
+              "unused_treatment": "GND"
+            }
+          }
+        }
+      }
+    },
+    "electrical": {
+      "absolute_maximum_ratings": {
+        "VIN": {
+          "parameter": "Input Voltage",
+          "min": -0.3,
+          "max": 6,
+          "unit": "V",
+          "conditions": null
+        },
+        "VEN": {
+          "parameter": "Enable Voltage",
+          "min": -0.3,
+          "max": 6,
+          "unit": "V",
+          "conditions": null
+        },
+        "VOUT": {
+          "parameter": "Output Voltage",
+          "min": -0.3,
+          "max": 5.5,
+          "unit": "V",
+          "conditions": null
+        },
+        "VNR, VFB": {
+          "parameter": "NR, FB Voltage",
+          "min": -0.3,
+          "max": 6,
+          "unit": "V",
+          "conditions": null
+        },
+        "TJ": {
+          "parameter": "Operating junction temperature",
+          "min": -55,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        },
+        "Tstg": {
+          "parameter": "Storage temperature",
+          "min": -65,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        }
+      },
+      "electrical_parameters": {
+        "V(ESD)": {
+          "parameter": "Electrostatic discharge (HBM)",
+          "min": -2000,
+          "typ": null,
+          "max": 2000,
+          "unit": "V",
+          "conditions": "per ANSI/ESDA/JEDEC JS-001"
+        },
+        "V(ESD)_per_JEDEC_specification_JESD22": {
+          "parameter": "Electrostatic discharge (CDM)",
+          "min": -500,
+          "typ": null,
+          "max": 500,
+          "unit": "V",
+          "conditions": "per JEDEC specification JESD22-C101"
+        },
+        "VIN": {
+          "parameter": "Input voltage range",
+          "min": 2.2,
+          "typ": null,
+          "max": 5.5,
+          "unit": "V",
+          "conditions": "Minimum VIN = VOUT + VDO or 2.2 V, whichever is greater"
+        },
+        "VFB": {
+          "parameter": "Internal reference",
+          "min": 1.192,
+          "typ": 1.204,
+          "max": 1.216,
+          "unit": "V",
+          "conditions": "TJ = 25°C"
+        },
+        "VOUT": {
+          "parameter": "Output voltage range",
+          "min": null,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": "VFB to 5.5 - VDO"
+        },
+        "VOUT_TJ___25_C": {
+          "parameter": "Output Voltage Accuracy (Nominal)",
+          "min": null,
+          "typ": 0.23,
+          "max": null,
+          "unit": "%",
+          "conditions": "TJ = 25°C"
+        },
+        "VOUT_over_VIN__IOUT__and_TJ____40_C": {
+          "parameter": "Output Voltage Accuracy",
+          "min": -1,
+          "typ": null,
+          "max": 1,
+          "unit": "%",
+          "conditions": "over VIN, IOUT, and TJ = -40°C to 125°C; 10 mA <= IOUT <= 1 A; VOUT + 0.5 V <= VIN <= 5.5 V"
+        },
+        "ΔVOUT(ΔVIN)": {
+          "parameter": "Line regulation",
+          "min": null,
+          "typ": 0.01,
+          "max": 0.03,
+          "unit": "%/V",
+          "conditions": "VOUT(nom) + 0.5 V <= VIN <= 5.5 V"
+        },
+        "ΔVOUT(ΔIOUT)": {
+          "parameter": "Load regulation",
+          "min": null,
+          "typ": 0.25,
+          "max": 0.35,
+          "unit": "%",
+          "conditions": "0.1 mA <= IOUT <= 300 mA"
+        },
+        "ΔVOUT(ΔIOUT)_0_1_mA____IOUT____300_mA": {
+          "parameter": "Load regulation",
+          "min": null,
+          "typ": 3,
+          "max": 5,
+          "unit": "mV",
+          "conditions": "0.1 mA <= IOUT <= 300 mA"
+        },
+        "ΔVOUT(ΔIOUT)_10_mA____IOUT____1_A": {
+          "parameter": "Load regulation",
+          "min": null,
+          "typ": 0.5,
+          "max": null,
+          "unit": "%",
+          "conditions": "10 mA <= IOUT <= 1 A"
+        },
+        "VDO": {
+          "parameter": "Dropout voltage",
+          "min": null,
+          "typ": 130,
+          "max": 200,
+          "unit": "mV",
+          "conditions": "IOUT = 1 A; (VIN = VOUT(nom) - 0.1 V)"
+        },
+        "ZO(DO)": {
+          "parameter": "Output impedance in dropout",
+          "min": null,
+          "typ": 0.25,
+          "max": null,
+          "unit": "Ω",
+          "conditions": "2.2 V <= VIN <= VOUT + VDO"
+        },
+        "ICL": {
+          "parameter": "Output current limit",
+          "min": 1.05,
+          "typ": 1.6,
+          "max": 2.2,
+          "unit": "A",
+          "conditions": "VOUT = 0.9 x VOUT(nom)"
+        },
+        "ISC": {
+          "parameter": "Short-circuit current",
+          "min": null,
+          "typ": 450,
+          "max": null,
+          "unit": "mA",
+          "conditions": "VOUT = 0 V"
+        },
+        "IREV": {
+          "parameter": "Reverse leakage current",
+          "min": null,
+          "typ": 0.1,
+          "max": null,
+          "unit": "μA",
+          "conditions": "VEN <= 0.5 V, 0 V <= VIN <= VOUT"
+        },
+        "IGND": {
+          "parameter": "GND pin current (Iq)",
+          "min": null,
+          "typ": 400,
+          "max": null,
+          "unit": "μA",
+          "conditions": "IOUT = 10 mA (IQ)"
+        },
+        "IGND_IOUT___1_A": {
+          "parameter": "GND pin current",
+          "min": null,
+          "typ": 1300,
+          "max": null,
+          "unit": "μA",
+          "conditions": "IOUT = 1 A"
+        },
+        "ISHDN": {
+          "parameter": "Shutdown current",
+          "min": null,
+          "typ": 20,
+          "max": null,
+          "unit": "nA",
+          "conditions": "VEN <= 0.5 V, VOUT <= VIN <= 5.5 V"
+        },
+        "IFB": {
+          "parameter": "FB pin current",
+          "min": null,
+          "typ": 0.1,
+          "max": 0.6,
+          "unit": "μA",
+          "conditions": null
+        },
+        "PSRR": {
+          "parameter": "Power-supply rejection ratio (100 Hz)",
+          "min": null,
+          "typ": 58,
+          "max": null,
+          "unit": "dB",
+          "conditions": "f = 100 Hz, IOUT = 1 A"
+        },
+        "PSRR_f___10_kHz__IOUT___1_A": {
+          "parameter": "Power-supply rejection ratio (10 kHz)",
+          "min": null,
+          "typ": 37,
+          "max": null,
+          "unit": "dB",
+          "conditions": "f = 10 kHz, IOUT = 1 A"
+        },
+        "VN": {
+          "parameter": "Output noise voltage",
+          "min": null,
+          "typ": null,
+          "max": null,
+          "unit": "μVRMS",
+          "conditions": "COUT = 10 μF, BW = 10 Hz to 100 kHz, Typ = 27 x VOUT"
+        },
+        "tSTR": {
+          "parameter": "Startup time",
+          "min": null,
+          "typ": 600,
+          "max": null,
+          "unit": "μs",
+          "conditions": "VOUT = 3 V, RL = 30 Ω, COUT = 1 μF"
+        },
+        "VEN(HI)": {
+          "parameter": "EN pin high (enabled)",
+          "min": 1.7,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": "max = VIN"
+        },
+        "VEN(LO)": {
+          "parameter": "EN pin low (shutdown)",
+          "min": 0,
+          "typ": null,
+          "max": 0.5,
+          "unit": "V",
+          "conditions": null
+        },
+        "IEN(HI)": {
+          "parameter": "EN pin current (enabled)",
+          "min": null,
+          "typ": 20,
+          "max": null,
+          "unit": "nA",
+          "conditions": "VEN = 5.5 V"
+        },
+        "TSD": {
+          "parameter": "Thermal shutdown temperature (increasing)",
+          "min": null,
+          "typ": 160,
+          "max": null,
+          "unit": "°C",
+          "conditions": "Shutdown, temperature increasing"
+        },
+        "TSD_Reset__temperature_decreasing": {
+          "parameter": "Thermal shutdown temperature (decreasing)",
+          "min": null,
+          "typ": 140,
+          "max": null,
+          "unit": "°C",
+          "conditions": "Reset, temperature decreasing"
+        },
+        "TJ": {
+          "parameter": "Operating junction temperature",
+          "min": -40,
+          "typ": null,
+          "max": 125,
+          "unit": "°C",
+          "conditions": null
+        }
+      },
+      "drc_hints": {
+        "vin_abs_max": {
+          "value": 6,
+          "unit": "V"
+        },
+        "vin_operating": {
+          "min": 2.2,
+          "max": 5.5,
+          "unit": "V"
+        },
+        "vref": {
+          "min": 1.192,
+          "typ": 1.204,
+          "max": 1.216,
+          "unit": "V"
+        },
+        "vout": {
+          "unit": "V"
+        },
+        "enable_threshold": {
+          "min": 1.7,
+          "unit": "V"
+        },
+        "iout_max": {
+          "min": 1.05,
+          "typ": 1.6,
+          "max": 2.2,
+          "unit": "A"
+        },
+        "iq": {
+          "typ": 400,
+          "unit": "μA"
+        },
+        "thermal_shutdown": {
+          "typ": 160,
+          "unit": "°C"
+        }
+      }
+    }
+  }
 }

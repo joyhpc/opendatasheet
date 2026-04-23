@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -583,5 +583,585 @@
       "unit": "V"
     }
   },
-  "thermal": {}
+  "thermal": {},
+  "domains": {
+    "pin": {
+      "packages": {
+        "VQFN-24": {
+          "pin_count": 25,
+          "pins": {
+            "1": {
+              "name": "IN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power input. Connects to the DRAIN of the internal FET.",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "IN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power input. Connects to the DRAIN of the internal FET.",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "B_GATE",
+              "direction": "OUTPUT",
+              "signal_type": "ANALOG",
+              "description": "Blocking FET gate driver output. Connect B_GATE to GATE of the external NFET.",
+              "unused_treatment": "FLOAT"
+            },
+            "4": {
+              "name": "DRV",
+              "direction": "OUTPUT",
+              "signal_type": "ANALOG",
+              "description": "Blocking FET fast pulldown switch drive. Connect DRV to the GATE of external pulldown switch.",
+              "unused_treatment": "FLOAT"
+            },
+            "5": {
+              "name": "IN_SYS",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power input and supply voltage of the device. Short to IN if blocking FET is not used.",
+              "unused_treatment": "CUSTOM"
+            },
+            "6": {
+              "name": "UVLO",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Input for setting the programmable undervoltage lockout threshold. Connect to GND for default.",
+              "unused_treatment": "CUSTOM"
+            },
+            "7": {
+              "name": "OVP",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Input for setting the programmable overvoltage protection threshold. Connect to GND for default. (also: PLIM — Input for setting the programmable output power limiting threshold. Connect to GND if not used.)",
+              "unused_treatment": "CUSTOM"
+            },
+            "8": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Connect GND to system ground.",
+              "unused_treatment": null
+            },
+            "9": {
+              "name": "dVdT",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "ANALOG",
+              "description": "A capacitor from this pin to GND sets output voltage slew rate.",
+              "unused_treatment": null
+            },
+            "10": {
+              "name": "ILIM",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "ANALOG",
+              "description": "A resistor from this pin to GND sets the overload and short-circuit current limit.",
+              "unused_treatment": null
+            },
+            "11": {
+              "name": "MODE",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Mode selection pin for overload fault response.",
+              "unused_treatment": null
+            },
+            "12": {
+              "name": "SHDN",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Shutdown pin. Pulling SHDN low makes the device to enter into low power shutdown mode.",
+              "unused_treatment": null
+            },
+            "13": {
+              "name": "IMON",
+              "direction": "OUTPUT",
+              "signal_type": "ANALOG",
+              "description": "Analog current monitor output. If unused, leave this pin floating.",
+              "unused_treatment": "FLOAT"
+            },
+            "14": {
+              "name": "FLT",
+              "direction": "OUTPUT",
+              "signal_type": "DIGITAL",
+              "description": "Fault event indicator. Open drain output. If unused, leave floating or connect to GND.",
+              "unused_treatment": "CUSTOM"
+            },
+            "15": {
+              "name": "PGTH",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "PGOOD comparator input.",
+              "unused_treatment": null
+            },
+            "16": {
+              "name": "PGOOD",
+              "direction": "OUTPUT",
+              "signal_type": "DIGITAL",
+              "description": "Active High power good indicator. If unused, connect to GND or leave floating.",
+              "unused_treatment": "CUSTOM"
+            },
+            "17": {
+              "name": "OUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Power output of the device.",
+              "unused_treatment": null
+            },
+            "18": {
+              "name": "OUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Power output of the device.",
+              "unused_treatment": null
+            },
+            "19": {
+              "name": "NC",
+              "direction": "NC",
+              "signal_type": "NONE",
+              "description": "No connect.",
+              "unused_treatment": "FLOAT"
+            },
+            "20": {
+              "name": "NC",
+              "direction": "NC",
+              "signal_type": "NONE",
+              "description": "No connect.",
+              "unused_treatment": "FLOAT"
+            },
+            "21": {
+              "name": "NC",
+              "direction": "NC",
+              "signal_type": "NONE",
+              "description": "No connect.",
+              "unused_treatment": "FLOAT"
+            },
+            "22": {
+              "name": "NC",
+              "direction": "NC",
+              "signal_type": "NONE",
+              "description": "No connect.",
+              "unused_treatment": "FLOAT"
+            },
+            "23": {
+              "name": "NC",
+              "direction": "NC",
+              "signal_type": "NONE",
+              "description": "No connect.",
+              "unused_treatment": "FLOAT"
+            },
+            "24": {
+              "name": "NC",
+              "direction": "NC",
+              "signal_type": "NONE",
+              "description": "No connect.",
+              "unused_treatment": "FLOAT"
+            },
+            "EP": {
+              "name": "PowerPAD",
+              "direction": "PASSIVE",
+              "signal_type": "POWER",
+              "description": "Connect PowerPAD integrated circuit package to GND plane for heat sinking.",
+              "unused_treatment": null
+            }
+          }
+        },
+        "HTSSOP-20": {
+          "pin_count": 21,
+          "pins": {
+            "1": {
+              "name": "IN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power input. Connects to the DRAIN of the internal FET.",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "IN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power input. Connects to the DRAIN of the internal FET.",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "IN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power input. Connects to the DRAIN of the internal FET.",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "B_GATE",
+              "direction": "OUTPUT",
+              "signal_type": "ANALOG",
+              "description": "Blocking FET gate driver output. Connect B_GATE to GATE of the external NFET.",
+              "unused_treatment": "FLOAT"
+            },
+            "5": {
+              "name": "DRV",
+              "direction": "OUTPUT",
+              "signal_type": "ANALOG",
+              "description": "Blocking FET fast pulldown switch drive. Connect DRV to the GATE of external pulldown switch.",
+              "unused_treatment": "FLOAT"
+            },
+            "6": {
+              "name": "IN_SYS",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power input and supply voltage of the device. Short to IN if blocking FET is not used.",
+              "unused_treatment": "CUSTOM"
+            },
+            "7": {
+              "name": "UVLO",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Input for setting the programmable undervoltage lockout threshold. Connect to GND for default.",
+              "unused_treatment": "CUSTOM"
+            },
+            "8": {
+              "name": "OVP",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Input for setting the programmable overvoltage protection threshold. Connect to GND for default. (also: PLIM — Input for setting the programmable output power limiting threshold. Connect to GND if not used.)",
+              "unused_treatment": "CUSTOM"
+            },
+            "9": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Connect GND to system ground.",
+              "unused_treatment": null
+            },
+            "10": {
+              "name": "dVdT",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "ANALOG",
+              "description": "A capacitor from this pin to GND sets output voltage slew rate.",
+              "unused_treatment": null
+            },
+            "11": {
+              "name": "ILIM",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "ANALOG",
+              "description": "A resistor from this pin to GND sets the overload and short-circuit current limit.",
+              "unused_treatment": null
+            },
+            "12": {
+              "name": "MODE",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Mode selection pin for overload fault response.",
+              "unused_treatment": null
+            },
+            "13": {
+              "name": "SHDN",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Shutdown pin. Pulling SHDN low makes the device to enter into low power shutdown mode.",
+              "unused_treatment": null
+            },
+            "14": {
+              "name": "IMON",
+              "direction": "OUTPUT",
+              "signal_type": "ANALOG",
+              "description": "Analog current monitor output. If unused, leave this pin floating.",
+              "unused_treatment": "FLOAT"
+            },
+            "15": {
+              "name": "FLT",
+              "direction": "OUTPUT",
+              "signal_type": "DIGITAL",
+              "description": "Fault event indicator. Open drain output. If unused, leave floating or connect to GND.",
+              "unused_treatment": "CUSTOM"
+            },
+            "16": {
+              "name": "PGTH",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "PGOOD comparator input.",
+              "unused_treatment": null
+            },
+            "17": {
+              "name": "PGOOD",
+              "direction": "OUTPUT",
+              "signal_type": "DIGITAL",
+              "description": "Active High power good indicator. If unused, connect to GND or leave floating.",
+              "unused_treatment": "CUSTOM"
+            },
+            "18": {
+              "name": "OUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Power output of the device.",
+              "unused_treatment": null
+            },
+            "19": {
+              "name": "OUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Power output of the device.",
+              "unused_treatment": null
+            },
+            "20": {
+              "name": "OUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Power output of the device.",
+              "unused_treatment": null
+            },
+            "EP": {
+              "name": "PowerPAD",
+              "direction": "PASSIVE",
+              "signal_type": "POWER",
+              "description": "Connect PowerPAD integrated circuit package to GND plane for heat sinking.",
+              "unused_treatment": null
+            }
+          }
+        }
+      }
+    },
+    "electrical": {
+      "absolute_maximum_ratings": {
+        "IN_SYS": {
+          "parameter": "Input Voltage",
+          "min": -60,
+          "max": 67,
+          "unit": "V",
+          "conditions": null
+        },
+        "IN_SYS_10ms_transient__TA___25__C": {
+          "parameter": "Input Voltage",
+          "min": -60,
+          "max": 75,
+          "unit": "V",
+          "conditions": "10ms transient, TA = 25 °C"
+        },
+        "IN": {
+          "parameter": "Input Voltage",
+          "min": -0.3,
+          "max": 75,
+          "unit": "V",
+          "conditions": "10ms transient, TA = 25 °C"
+        },
+        "BGATE": {
+          "parameter": "Input Voltage",
+          "min": -60,
+          "max": 81,
+          "unit": "V",
+          "conditions": null
+        },
+        "DRV": {
+          "parameter": "Input Voltage",
+          "min": -60,
+          "max": 72,
+          "unit": "V",
+          "conditions": null
+        },
+        "IFLT, IdVdT, IPGOOD": {
+          "parameter": "Sink current",
+          "min": null,
+          "max": 10,
+          "unit": "mA",
+          "conditions": null
+        },
+        "IdVdT, IILIM, IPLIM, IMODE, ISHDN": {
+          "parameter": "Source current",
+          "min": null,
+          "max": null,
+          "unit": null,
+          "conditions": "Internally limited"
+        },
+        "TJ": {
+          "parameter": "Operating Junction temperature",
+          "min": -40,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        },
+        "TJ_Max_is_T_TSD": {
+          "parameter": "Transient junction temperature",
+          "min": -65,
+          "max": null,
+          "unit": "°C",
+          "conditions": "Max is T(TSD)"
+        },
+        "Tstg": {
+          "parameter": "Storage temperature",
+          "min": -65,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        }
+      },
+      "electrical_parameters": {
+        "V(IN_SYS)": {
+          "parameter": "Operating input voltage",
+          "min": 4.5,
+          "typ": null,
+          "max": 60,
+          "unit": "V",
+          "conditions": null
+        },
+        "IQ(ON)": {
+          "parameter": "Supply current",
+          "min": null,
+          "typ": 1.38,
+          "max": 1.7,
+          "unit": "mA",
+          "conditions": "Enabled: V(SHDN) = 2 V"
+        },
+        "IQ(OFF)": {
+          "parameter": "Supply current",
+          "min": null,
+          "typ": 21,
+          "max": 60,
+          "unit": "µA",
+          "conditions": "V(SHDN) = 0 V"
+        },
+        "I(GND)": {
+          "parameter": "Ground current during reverse polarity",
+          "min": null,
+          "typ": 144,
+          "max": 200,
+          "unit": "µA",
+          "conditions": "V(IN_SYS) = -24V, V(IN) = Floating, V(OUT) = 0 V"
+        },
+        "V(OVC)": {
+          "parameter": "Over voltage clamp",
+          "min": 32,
+          "typ": 32.8,
+          "max": 35,
+          "unit": "V",
+          "conditions": "V(IN_SYS) > 35 V, I(OUT) = 1 mA"
+        },
+        "V(OVC)_V_IN_SYS____40_V__I_OUT____1_m": {
+          "parameter": "Over voltage clamp",
+          "min": 35.7,
+          "typ": 36.6,
+          "max": 39,
+          "unit": "V",
+          "conditions": "V(IN_SYS) > 40 V, I(OUT) = 1 mA"
+        },
+        "V(INSYS_UVLO)": {
+          "parameter": "Factory set V(IN_SYS) undervoltage trip level",
+          "min": 15.1,
+          "typ": 15.46,
+          "max": 15.9,
+          "unit": "V",
+          "conditions": "V(IN_SYS) rising, V(UVLO) = 0 V"
+        },
+        "V(INSYS_UVLO)_V_IN_SYS__falling__V_UVLO____0": {
+          "parameter": "Factory set V(IN_SYS) undervoltage trip level",
+          "min": 14,
+          "typ": 14.47,
+          "max": 15.1,
+          "unit": "V",
+          "conditions": "V(IN_SYS) falling, V(UVLO) = 0 V"
+        },
+        "V(SEL_UVLO)": {
+          "parameter": "Internal UVLO select threshold",
+          "min": 180,
+          "typ": 210,
+          "max": 240,
+          "unit": "mV",
+          "conditions": null
+        },
+        "V(UVLOR)": {
+          "parameter": "UVLO threshold voltage, rising",
+          "min": 1.176,
+          "typ": 1.2,
+          "max": 1.224,
+          "unit": "V",
+          "conditions": null
+        },
+        "V(UVLOF)": {
+          "parameter": "UVLO threshold voltage, falling",
+          "min": 1.09,
+          "typ": 1.122,
+          "max": 1.15,
+          "unit": "V",
+          "conditions": null
+        },
+        "I(UVLO)": {
+          "parameter": "UVLO Input leakage current",
+          "min": -150,
+          "typ": 8,
+          "max": 150,
+          "unit": "nA",
+          "conditions": "0 V <= V(UVLO) <= 60 V"
+        },
+        "V(IN_SYS_OVP)": {
+          "parameter": "Factory set V(IN_SYS) overvoltage trip level",
+          "min": 33.2,
+          "typ": 34.33,
+          "max": 35.4,
+          "unit": "V",
+          "conditions": "V(IN_SYS) rising, V(OVP) = 0 V"
+        },
+        "V(IN_SYS_OVP)_V_IN_SYS__falling__V_OVP____0": {
+          "parameter": "Factory set V(IN_SYS) overvoltage trip level",
+          "min": 32.7,
+          "typ": 33.89,
+          "max": 35,
+          "unit": "V",
+          "conditions": "V(IN_SYS) falling, V(OVP) = 0 V"
+        },
+        "V(SEL_OVP)": {
+          "parameter": "Internal OVP select threshold",
+          "min": 180,
+          "typ": 210,
+          "max": 240,
+          "unit": "mV",
+          "conditions": null
+        },
+        "V(OVPR)": {
+          "parameter": "over-voltage threshold voltage, rising",
+          "min": 1.176,
+          "typ": 1.2,
+          "max": 1.224,
+          "unit": "V",
+          "conditions": null
+        },
+        "V(OVPF)": {
+          "parameter": "over-voltage threshold voltage, falling",
+          "min": 1.09,
+          "typ": 1.122,
+          "max": 1.15,
+          "unit": "V",
+          "conditions": null
+        },
+        "I(OVP)": {
+          "parameter": "OVP Input leakage current",
+          "min": -150,
+          "typ": 0,
+          "max": 150,
+          "unit": "nA",
+          "conditions": "0 V <= V(OVP) <= 4 V"
+        }
+      },
+      "drc_hints": {
+        "vin_abs_max": {
+          "value": 67,
+          "unit": "V"
+        },
+        "vin_operating": {
+          "min": 4.5,
+          "max": 60,
+          "unit": "V"
+        },
+        "iq": {
+          "typ": 1.38,
+          "max": 1.7,
+          "unit": "mA"
+        },
+        "uvlo": {
+          "min": 15.1,
+          "typ": 15.46,
+          "max": 15.9,
+          "unit": "V"
+        }
+      }
+    }
+  }
 }

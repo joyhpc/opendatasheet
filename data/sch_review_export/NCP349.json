@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -386,6 +386,391 @@
       "unit": "°C/W",
       "conditions": null,
       "source": "absolute_maximum_ratings"
+    }
+  },
+  "domains": {
+    "pin": {
+      "packages": {
+        "DFN6": {
+          "pin_count": 7,
+          "pins": {
+            "1": {
+              "name": "IN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Positive overvoltage protection input and device power supply",
+              "unused_treatment": null
+            },
+            "EP": {
+              "name": "IN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Positive overvoltage protection input and device power supply",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground connection",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "FLAG",
+              "direction": "OUTPUT",
+              "signal_type": "DIGITAL",
+              "description": "Fault alert output, active low (open-drain)",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "OUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Protected output voltage to the system",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "OUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Protected output voltage to the system",
+              "unused_treatment": null
+            },
+            "6": {
+              "name": "EN",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Enable input, active low. Device is enabled when EN is pulled low.",
+              "unused_treatment": null
+            }
+          }
+        }
+      }
+    },
+    "electrical": {
+      "absolute_maximum_ratings": {
+        "Vminin": {
+          "parameter": "Minimum Voltage (IN to GND)",
+          "min": -0.3,
+          "max": null,
+          "unit": "V",
+          "conditions": null
+        },
+        "Vmin": {
+          "parameter": "Minimum Voltage (All others to GND)",
+          "min": -0.3,
+          "max": null,
+          "unit": "V",
+          "conditions": null
+        },
+        "Vmaxin": {
+          "parameter": "Maximum Voltage (IN to GND)",
+          "min": null,
+          "max": 30,
+          "unit": "V",
+          "conditions": null
+        },
+        "Vmax": {
+          "parameter": "Maximum Voltage (All others to GND)",
+          "min": null,
+          "max": 7.0,
+          "unit": "V",
+          "conditions": null
+        },
+        "Imax": {
+          "parameter": "Maximum Current",
+          "min": null,
+          "max": 2.0,
+          "unit": "A",
+          "conditions": "UVLO < VIN < OVLO"
+        },
+        "Imaxpeak": {
+          "parameter": "Maximum Peak Current",
+          "min": null,
+          "max": 4.0,
+          "unit": "A",
+          "conditions": "t ≤ 1 ms, TA = 85°C"
+        },
+        "RθJA": {
+          "parameter": "Thermal Resistance, Junction-to-Air",
+          "min": null,
+          "max": null,
+          "unit": "°C/W",
+          "conditions": null
+        },
+        "TA": {
+          "parameter": "Operating Ambient Temperature Range",
+          "min": -40,
+          "max": 85,
+          "unit": "°C",
+          "conditions": null
+        },
+        "Tstg": {
+          "parameter": "Storage Temperature Range",
+          "min": -65,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        },
+        "TJ": {
+          "parameter": "Junction Operating Temperature",
+          "min": null,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        },
+        "Vesd": {
+          "parameter": "ESD Machine Model",
+          "min": null,
+          "max": null,
+          "unit": "V",
+          "conditions": null
+        },
+        "Vesd_Contact": {
+          "parameter": "ESD Withstand Voltage (IEC 61000-4-2) Contact",
+          "min": null,
+          "max": null,
+          "unit": "kV",
+          "conditions": "Contact"
+        }
+      },
+      "electrical_parameters": {
+        "Vin": {
+          "parameter": "Input Voltage Range",
+          "min": 1.2,
+          "typ": null,
+          "max": 28,
+          "unit": "V",
+          "conditions": null
+        },
+        "UVLO": {
+          "parameter": "Undervoltage Lockout Threshold",
+          "min": 2.8,
+          "typ": 2.95,
+          "max": 3.1,
+          "unit": "V",
+          "conditions": "Vin falls below UVLO threshold from 5 V to 2.7 V"
+        },
+        "UVLO_Vin_falls_below_UVLO_threshold": {
+          "parameter": "Undervoltage Lockout Threshold",
+          "min": 3.0,
+          "typ": 3.25,
+          "max": 3.5,
+          "unit": "V",
+          "conditions": "Vin falls below UVLO threshold from 5 V to 2.7 V"
+        },
+        "UVLOhyst": {
+          "parameter": "Undervoltage Lockout Hysteresis",
+          "min": 30,
+          "typ": 60,
+          "max": 90,
+          "unit": "mV",
+          "conditions": "Vin rises above UVLO + UVLOhyst"
+        },
+        "OVLO": {
+          "parameter": "Overvoltage Lockout Threshold",
+          "min": 5.53,
+          "typ": 5.68,
+          "max": 5.83,
+          "unit": "V",
+          "conditions": "Vin rises above OVLO threshold"
+        },
+        "OVLO_Vin_rises_above_OVLO_threshold": {
+          "parameter": "Overvoltage Lockout Threshold",
+          "min": 6.8,
+          "typ": 7.2,
+          "max": 7.6,
+          "unit": "V",
+          "conditions": "Vin rises above OVLO threshold"
+        },
+        "OVLOhyst": {
+          "parameter": "Overvoltage Lockout Hysteresis",
+          "min": 30,
+          "typ": 60,
+          "max": 90,
+          "unit": "mV",
+          "conditions": "Vin falls below OVLO + OVLOhyst"
+        },
+        "OVLOhyst_Vin_falls_below_OVLO___OVLOhys": {
+          "parameter": "Overvoltage Lockout Hysteresis",
+          "min": 50,
+          "typ": 70,
+          "max": 100,
+          "unit": "mV",
+          "conditions": "Vin falls below OVLO + OVLOhyst"
+        },
+        "RDS(on)": {
+          "parameter": "Vin versus Vout Resistance",
+          "min": null,
+          "typ": 65,
+          "max": 110,
+          "unit": "mΩ",
+          "conditions": "Vin = 5.0 V, EN = GND, Load connected to Vout"
+        },
+        "Idd": {
+          "parameter": "Supply Quiescent Current",
+          "min": null,
+          "typ": 70,
+          "max": 150,
+          "unit": "μA",
+          "conditions": "No load. EN = 5.0 V"
+        },
+        "Idd_No_load__EN___Gnd": {
+          "parameter": "Supply Quiescent Current",
+          "min": null,
+          "typ": 140,
+          "max": 250,
+          "unit": "μA",
+          "conditions": "No load. EN = Gnd"
+        },
+        "Idduvlo": {
+          "parameter": "UVLO Supply Current",
+          "min": null,
+          "typ": 60,
+          "max": null,
+          "unit": "μA",
+          "conditions": "VIN = 2.7 V"
+        },
+        "Volflag": {
+          "parameter": "FLAG Output Low Voltage",
+          "min": null,
+          "typ": 20,
+          "max": 400,
+          "unit": "mV",
+          "conditions": "1.2 V < VIN < UVLO, Sink 50 μA on FLAG pin"
+        },
+        "Volflag_VIN___OVLO__Sink_1_0_mA_on_FLA": {
+          "parameter": "FLAG Output Low Voltage",
+          "min": null,
+          "typ": null,
+          "max": 400,
+          "unit": "mV",
+          "conditions": "VIN > OVLO, Sink 1.0 mA on FLAG pin"
+        },
+        "FLAGleak": {
+          "parameter": "FLAG Leakage Current",
+          "min": null,
+          "typ": 1.0,
+          "max": null,
+          "unit": "nA",
+          "conditions": "FLAG level = 5.0 V"
+        },
+        "Vih": {
+          "parameter": "EN Voltage High",
+          "min": 1.2,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": null
+        },
+        "Vol": {
+          "parameter": "EN Voltage Low",
+          "min": null,
+          "typ": null,
+          "max": 0.4,
+          "unit": "V",
+          "conditions": null
+        },
+        "ENleak": {
+          "parameter": "EN Leakage Current",
+          "min": null,
+          "typ": 1.0,
+          "max": null,
+          "unit": "nA",
+          "conditions": "EN = 5.0 V or GND"
+        },
+        "ton": {
+          "parameter": "Startup Delay",
+          "min": 1.0,
+          "typ": 1.8,
+          "max": 2.7,
+          "unit": "ms",
+          "conditions": "From Vin > UVLO to Vout = 0.3 V"
+        },
+        "ton_From_Vin___UVLO_to_Vout___0_3": {
+          "parameter": "Startup Delay",
+          "min": 30,
+          "typ": 55,
+          "max": 70,
+          "unit": "ms",
+          "conditions": "From Vin > UVLO to Vout = 0.3 V"
+        },
+        "tstart": {
+          "parameter": "FLAG Going Up Delay",
+          "min": 0.4,
+          "typ": 1.2,
+          "max": 2.1,
+          "unit": "ms",
+          "conditions": "From Vout = 0.3 V to FLAG = 1.2 V"
+        },
+        "tstart_From_Vout___0_3_V_to_FLAG___1": {
+          "parameter": "FLAG Going Up Delay",
+          "min": 30,
+          "typ": 55,
+          "max": 70,
+          "unit": "ms",
+          "conditions": "From Vout = 0.3 V to FLAG = 1.2 V"
+        },
+        "toff": {
+          "parameter": "Output Turn Off Time",
+          "min": null,
+          "typ": 1.5,
+          "max": 5.0,
+          "unit": "μs",
+          "conditions": "From Vin > OVLO to Vout <= 0.3 V, Vin increasing from 5.0 V to 8.0 V at 3.0 V/μs, Rload connected on Vout"
+        },
+        "tstop": {
+          "parameter": "Alert Delay",
+          "min": null,
+          "typ": 1.0,
+          "max": null,
+          "unit": "μs",
+          "conditions": "From Vin > OVLO to FLAG <= 0.4 V, Vin increasing from 5.0 V to 8.0 V at 3.0 V/μs, Rload connected on Vout"
+        },
+        "tdis": {
+          "parameter": "Disable Time",
+          "min": null,
+          "typ": 1.0,
+          "max": 5.0,
+          "unit": "μs",
+          "conditions": "From EN >= 1.2 V to Vout < 0.3 V, Rload = 5.0 Ω"
+        }
+      },
+      "drc_hints": {
+        "vin_operating": {
+          "min": 1.2,
+          "max": 28,
+          "unit": "V"
+        },
+        "enable_threshold": {
+          "min": 1.2,
+          "unit": "V"
+        },
+        "iq": {
+          "typ": 70,
+          "max": 150,
+          "unit": "μA"
+        },
+        "uvlo": {
+          "min": 2.8,
+          "typ": 2.95,
+          "max": 3.1,
+          "unit": "V"
+        }
+      }
+    },
+    "thermal": {
+      "theta_ja": {
+        "parameter": "Thermal Resistance, Junction-to-Air",
+        "symbol": "RθJA",
+        "min": null,
+        "typ": 180,
+        "max": null,
+        "value": null,
+        "unit": "°C/W",
+        "conditions": null,
+        "source": "absolute_maximum_ratings"
+      }
     }
   }
 }

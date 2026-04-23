@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -383,5 +383,385 @@
       "unit": "µA"
     }
   },
-  "thermal": {}
+  "thermal": {},
+  "domains": {
+    "pin": {
+      "packages": {
+        "5-Lead TSOT": {
+          "pin_count": 5,
+          "pins": {
+            "1": {
+              "name": "NIC",
+              "direction": "NC",
+              "signal_type": "NONE",
+              "description": "Not Internally Connected. This pin is not connected internally.",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground.",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "VIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Input Voltage Connection.",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "VOUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Output Voltage.",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "TRIM",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Output Voltage Trim.",
+              "unused_treatment": null
+            }
+          }
+        }
+      }
+    },
+    "electrical": {
+      "absolute_maximum_ratings": {},
+      "electrical_parameters": {
+        "VOUT": {
+          "parameter": "Output Voltage",
+          "min": 2.042,
+          "typ": 2.048,
+          "max": 2.054,
+          "unit": "V",
+          "conditions": "A grade"
+        },
+        "VOUT_B_grade": {
+          "parameter": "Output Voltage",
+          "min": 3.296,
+          "typ": 3.3,
+          "max": 3.304,
+          "unit": "V",
+          "conditions": "B grade"
+        },
+        "VOUTERR": {
+          "parameter": "Initial Accuracy",
+          "min": -6,
+          "typ": null,
+          "max": 6,
+          "unit": "mV",
+          "conditions": "A grade"
+        },
+        "VOUTERR_A_grade": {
+          "parameter": "Initial Accuracy",
+          "min": -0.25,
+          "typ": null,
+          "max": 0.25,
+          "unit": "%",
+          "conditions": "A grade"
+        },
+        "VOUTERR_B_grade": {
+          "parameter": "Initial Accuracy",
+          "min": -0.125,
+          "typ": null,
+          "max": 0.125,
+          "unit": "%",
+          "conditions": "B grade"
+        },
+        "TCVOUT": {
+          "parameter": "Temperature Coefficient",
+          "min": null,
+          "typ": null,
+          "max": 25,
+          "unit": "ppm/°C",
+          "conditions": "A grade, -40°C < TA < +125°C"
+        },
+        "TCVOUT_B_grade___40_C___TA____125_C": {
+          "parameter": "Temperature Coefficient",
+          "min": null,
+          "typ": null,
+          "max": 9,
+          "unit": "ppm/°C",
+          "conditions": "B grade, -40°C < TA < +125°C"
+        },
+        "VIN - VOUT": {
+          "parameter": "Dropout Voltage",
+          "min": 300,
+          "typ": null,
+          "max": null,
+          "unit": "mV",
+          "conditions": null
+        },
+        "ΔVOUT/ΔVIN": {
+          "parameter": "Line Regulation",
+          "min": null,
+          "typ": null,
+          "max": 0.105,
+          "unit": "mV/V",
+          "conditions": "VIN = 2.45 V to 15 V, -40°C < TA < +125°C"
+        },
+        "ΔVOUT/ΔILOAD": {
+          "parameter": "Load Regulation",
+          "min": null,
+          "typ": null,
+          "max": 0.37,
+          "unit": "mV/mA",
+          "conditions": "Sourcing, ILOAD = 0 mA to 5 mA, -40°C < TA < +125°C, VIN = 3 V"
+        },
+        "ΔVOUT/ΔILOAD_Sinking__ILOAD____1_mA_to_0_mA": {
+          "parameter": "Load Regulation",
+          "min": null,
+          "typ": null,
+          "max": 1.35,
+          "unit": "mV/mA",
+          "conditions": "Sinking, ILOAD = -1 mA to 0 mA, -40°C < TA < +125°C, VIN = 4.2 V"
+        },
+        "IIN": {
+          "parameter": "Quiescent Current",
+          "min": null,
+          "typ": 150,
+          "max": 190,
+          "unit": "µA",
+          "conditions": "-40°C < TA < +125°C"
+        },
+        "IOUT": {
+          "parameter": "Output Current Sinking",
+          "min": -1,
+          "typ": null,
+          "max": null,
+          "unit": "mA",
+          "conditions": null
+        },
+        "en p-p": {
+          "parameter": "Voltage Noise",
+          "min": null,
+          "typ": 6.8,
+          "max": null,
+          "unit": "µV p-p",
+          "conditions": "Frequency = 0.1 Hz to 10 Hz"
+        },
+        "tR": {
+          "parameter": "Turn On Settling Time",
+          "min": null,
+          "typ": 25,
+          "max": null,
+          "unit": "µs",
+          "conditions": null
+        },
+        "ΔVOUT": {
+          "parameter": "Long-Term Stability",
+          "min": null,
+          "typ": 50,
+          "max": null,
+          "unit": "ppm",
+          "conditions": "1000 hours"
+        },
+        "ΔVOUT_HYS": {
+          "parameter": "Output Voltage Hysteresis",
+          "min": null,
+          "typ": 100,
+          "max": null,
+          "unit": "ppm",
+          "conditions": null
+        },
+        "RRR": {
+          "parameter": "Ripple Rejection Ratio",
+          "min": null,
+          "typ": -70,
+          "max": null,
+          "unit": "dB",
+          "conditions": "Input frequency (fIN) = 60 Hz"
+        },
+        "ISC": {
+          "parameter": "Short-Circuit to GND",
+          "min": null,
+          "typ": 25,
+          "max": null,
+          "unit": "mA",
+          "conditions": "VIN = 5 V"
+        },
+        "ISC_VIN___15_V": {
+          "parameter": "Short-Circuit to GND",
+          "min": null,
+          "typ": 30,
+          "max": null,
+          "unit": "mA",
+          "conditions": "VIN = 15 V"
+        },
+        "VOUT_A_grade": {
+          "parameter": "Output Voltage",
+          "min": 3.292,
+          "typ": 3.3,
+          "max": 3.308,
+          "unit": "V",
+          "conditions": "A grade"
+        },
+        "TCVOUT_A_grade___40_C___TA____125_C": {
+          "parameter": "Temperature Coefficient",
+          "min": null,
+          "typ": null,
+          "max": 25,
+          "unit": "ppm/°C",
+          "conditions": "A grade, -40°C < TA < +125°C"
+        },
+        "ΔVOUT/ΔVIN_VIN___2_8_V_to_15_V___40_C___T": {
+          "parameter": "Line Regulation",
+          "min": null,
+          "typ": null,
+          "max": 0.125,
+          "unit": "mV/V",
+          "conditions": "VIN = 2.8 V to 15 V, -40°C < TA < +125°C"
+        },
+        "ΔVOUT/ΔILOAD_Sourcing__ILOAD___0_mA_to_5_mA": {
+          "parameter": "Load Regulation",
+          "min": null,
+          "typ": null,
+          "max": 0.6,
+          "unit": "mV/mA",
+          "conditions": "Sourcing, ILOAD = 0 mA to 5 mA, -40°C < TA < +125°C, VIN = 4.2 V"
+        },
+        "IIN_40_C___TA____125_C": {
+          "parameter": "Quiescent Current",
+          "min": null,
+          "typ": 150,
+          "max": 190,
+          "unit": "µA",
+          "conditions": "-40°C < TA < +125°C"
+        },
+        "en p-p_Frequency___0_1_Hz_to_10_Hz": {
+          "parameter": "Voltage Noise",
+          "min": null,
+          "typ": 9.3,
+          "max": null,
+          "unit": "µV p-p",
+          "conditions": "Frequency = 0.1 Hz to 10 Hz"
+        },
+        "ΔVOUT_1000_hours": {
+          "parameter": "Long-Term Stability",
+          "min": null,
+          "typ": 50,
+          "max": null,
+          "unit": "ppm",
+          "conditions": "1000 hours"
+        },
+        "RRR_fIN___60_Hz": {
+          "parameter": "Ripple Rejection Ratio",
+          "min": null,
+          "typ": -70,
+          "max": null,
+          "unit": "dB",
+          "conditions": "fIN = 60 Hz"
+        },
+        "ISC_VIN___5_V": {
+          "parameter": "Short-Circuit to GND",
+          "min": null,
+          "typ": 25,
+          "max": null,
+          "unit": "mA",
+          "conditions": "VIN = 5 V"
+        },
+        "ΔVOUT/ΔVIN_VIN___3_3_V_to_15_V___40_C___T": {
+          "parameter": "Line Regulation",
+          "min": null,
+          "typ": null,
+          "max": 0.15,
+          "unit": "mV/V",
+          "conditions": "VIN = 3.3 V to 15 V, -40°C < TA < +125°C"
+        },
+        "ΔVOUT/ΔVIN_VIN___4_4_V_to_15_V___40_C___T": {
+          "parameter": "Line Regulation",
+          "min": null,
+          "typ": null,
+          "max": 0.205,
+          "unit": "mV/V",
+          "conditions": "VIN = 4.4 V to 15 V, -40°C < TA < +125°C"
+        },
+        "VOUT_H_grade": {
+          "parameter": "Output Voltage",
+          "min": 4.992,
+          "typ": 5.0,
+          "max": 5.008,
+          "unit": "V",
+          "conditions": "H grade"
+        },
+        "VOUTERR_H_grade": {
+          "parameter": "Initial Accuracy",
+          "min": -0.16,
+          "typ": null,
+          "max": 0.16,
+          "unit": "%",
+          "conditions": "H grade"
+        },
+        "TCVOUT_H_grade___40_C___TA____150_C": {
+          "parameter": "Temperature Coefficient",
+          "min": null,
+          "typ": null,
+          "max": 25,
+          "unit": "ppm/°C",
+          "conditions": "H grade, -40°C < TA < +150°C"
+        },
+        "ΔVOUT/ΔVIN_VIN___5_3_V_to_15_V___40_C___T": {
+          "parameter": "Line Regulation",
+          "min": null,
+          "typ": null,
+          "max": 1.8,
+          "unit": "mV/V",
+          "conditions": "VIN = 5.3 V to 15 V, -40°C < TA < +150°C (H grade only)"
+        },
+        "IIN_40_C___TA____150_C__H_grade_o": {
+          "parameter": "Quiescent Current",
+          "min": null,
+          "typ": 150,
+          "max": 190,
+          "unit": "µA",
+          "conditions": "-40°C < TA < +150°C (H grade only)"
+        },
+        "ΔVOUT/ΔVIN_VIN___3_6_V_to_15_V___40_C___T": {
+          "parameter": "Line Regulation",
+          "min": null,
+          "typ": null,
+          "max": 0.165,
+          "unit": "mV/V",
+          "conditions": "VIN = 3.6 V to 15 V, -40°C < TA < +125°C"
+        },
+        "ΔVOUT/ΔILOAD_Sourcing__ILOAD___0_mA_to_8_mA": {
+          "parameter": "Load Regulation",
+          "min": null,
+          "typ": null,
+          "max": 0.6,
+          "unit": "mV/mA",
+          "conditions": "Sourcing, ILOAD = 0 mA to 8 mA, -40°C < TA < +125°C, VIN >= 4.75 V"
+        }
+      },
+      "drc_hints": {
+        "vin_abs_max": {
+          "value": 18,
+          "unit": "V"
+        },
+        "vin_operating": {
+          "min": 300,
+          "unit": "mV"
+        },
+        "vout": {
+          "min": 2.042,
+          "typ": 2.048,
+          "max": 2.054,
+          "unit": "V"
+        },
+        "iout_max": {
+          "min": 5,
+          "unit": "mA"
+        },
+        "iq": {
+          "typ": 150,
+          "max": 190,
+          "unit": "µA"
+        }
+      }
+    }
+  }
 }

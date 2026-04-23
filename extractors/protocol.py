@@ -6,13 +6,10 @@ protocols. Identifies protocol description pages and extracts structured
 data via Gemini Vision API covering interface configuration, signal
 definitions, timing constraints, and command sets.
 """
-import json
 import re
-import time
-
-from google.genai import types
 
 from extractors.base import BaseExtractor
+from extractors.gemini_json import call_gemini_json_response
 
 
 # ============================================
@@ -238,60 +235,22 @@ PROTOCOL_PAGE_MATCH_THRESHOLD = 2
 
 def _call_gemini_vision(client, model, images, prompt, max_retries=2):
     """Call Gemini Vision API with retry logic. Returns parsed dict or error dict."""
-    contents = [prompt]
-    for img in images:
-        contents.append(types.Part.from_bytes(data=img, mime_type='image/png'))
-
-    for attempt in range(max_retries + 1):
-        try:
-            response = client.models.generate_content(
-                model=model, contents=contents, config={"temperature": 0.1}
-            )
-            raw = response.text
-            # Clean markdown wrapping
-            if "```json" in raw:
-                raw = raw.split("```json")[1].split("```")[0]
-            elif "```" in raw:
-                raw = raw.split("```")[1].split("```")[0]
-            # Find JSON boundaries
-            start = raw.find('{')
-            end = raw.rfind('}')
-            if start >= 0 and end > start:
-                raw = raw[start:end+1]
-            result = json.loads(raw.strip())
-            if isinstance(result, list):
-                result = result[0] if result else {"error": "Empty list"}
-            if not isinstance(result, dict):
-                return {"error": f"Unexpected type: {type(result).__name__}"}
-            # Normalize key names — the model might use alternate keys
-            if "interfaces" not in result:
-                for key in ["communication_interfaces", "protocols",
-                            "protocol_interfaces", "interface_list"]:
-                    if key in result:
-                        result["interfaces"] = result.pop(key)
-                        break
-            if "protocol_summary" not in result:
-                for key in ["summary", "protocolSummary", "protocol_info"]:
-                    if key in result:
-                        result["protocol_summary"] = result.pop(key)
-                        break
-            return result
-        except json.JSONDecodeError as e:
-            if attempt < max_retries:
-                time.sleep(3)
-                continue
-            return {"error": f"JSON parse failed: {str(e)}",
-                    "raw": raw[:500] if 'raw' in dir() else ""}
-        except Exception as e:
-            if attempt < max_retries and (
-                "503" in str(e) or "429" in str(e) or "504" in str(e)
-                or "timeout" in str(e).lower()
-                or "ReadTimeout" in str(type(e).__name__)
-                or "ConnectTimeout" in str(type(e).__name__)
-            ):
-                time.sleep(10)
-                continue
-            return {"error": str(e)}
+    return call_gemini_json_response(
+        client,
+        model,
+        images,
+        prompt,
+        max_retries=max_retries,
+        key_aliases={
+            "interfaces": (
+                "communication_interfaces",
+                "protocols",
+                "protocol_interfaces",
+                "interface_list",
+            ),
+            "protocol_summary": ("summary", "protocolSummary", "protocol_info"),
+        },
+    )
 
 
 # ============================================

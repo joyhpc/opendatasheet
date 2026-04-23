@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -292,5 +292,294 @@
       "unit": "V"
     }
   },
-  "thermal": {}
+  "thermal": {},
+  "domains": {
+    "pin": {
+      "packages": {
+        "USON-6": {
+          "pin_count": 6,
+          "pins": {
+            "5": {
+              "name": "CT",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Capacitor-adjustable delay input. Connecting this pin to a ground referenced capacitor sets the delay time.",
+              "unused_treatment": null
+            },
+            "1": {
+              "name": "ENABLE",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Active high enable input. Driving ENABLE low immediately makes SENSE_OUT go low. (also: ENABLE_BAR — Active low enable input. Driving ENABLE_BAR high immediately makes SENSE_OUT_BAR go high.)",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground connection.",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "SENSE",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Input pin connected to the voltage that is monitored with the use of an external resistor.",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "SENSE_OUT",
+              "direction": "OUTPUT",
+              "signal_type": "DIGITAL",
+              "description": "Active high sense output. Open-drain or push-pull output that is driven low when SENSE falls below threshold. (also: SENSE_OUT_BAR — Active low sense output. Open-drain or push-pull output that is driven high when SENSE falls below threshold.)",
+              "unused_treatment": null
+            },
+            "6": {
+              "name": "VCC",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Supply voltage input (1.7 V to 6.5 V).",
+              "unused_treatment": null
+            }
+          }
+        }
+      }
+    },
+    "electrical": {
+      "absolute_maximum_ratings": {
+        "VCC": {
+          "parameter": "Supply Voltage",
+          "min": -0.3,
+          "max": 7,
+          "unit": "V",
+          "conditions": null
+        },
+        "CT": {
+          "parameter": "CT Pin Voltage",
+          "min": -0.3,
+          "max": null,
+          "unit": "V",
+          "conditions": "VCC + 0.3V"
+        },
+        "TJ": {
+          "parameter": "Operating junction temperature",
+          "min": -40,
+          "max": 125,
+          "unit": "°C",
+          "conditions": null
+        },
+        "Tstg": {
+          "parameter": "Storage temperature",
+          "min": -65,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        },
+        "V(ESD)": {
+          "parameter": "Electrostatic discharge (HBM)",
+          "min": -2000,
+          "max": 2000,
+          "unit": "V",
+          "conditions": "per ANSI/ESDA/JEDEC JS-001, all pins"
+        },
+        "V(ESD)_per_JEDEC_specification_JESD22": {
+          "parameter": "Electrostatic discharge (CDM)",
+          "min": -500,
+          "max": 500,
+          "unit": "V",
+          "conditions": "per JEDEC specification JESD22-C101, all pins"
+        }
+      },
+      "electrical_parameters": {
+        "VCC": {
+          "parameter": "Supply voltage range",
+          "min": 1.7,
+          "typ": null,
+          "max": 6.5,
+          "unit": "V",
+          "conditions": "TJ = -40°C to 125°C"
+        },
+        "VCC_TJ___0_C_to_85_C": {
+          "parameter": "Supply voltage range",
+          "min": 1.65,
+          "typ": null,
+          "max": 6.5,
+          "unit": "V",
+          "conditions": "TJ = 0°C to 85°C"
+        },
+        "V(POR)": {
+          "parameter": "Power-on reset voltage",
+          "min": null,
+          "typ": null,
+          "max": 0.8,
+          "unit": "V",
+          "conditions": "VOL (max) = 0.2 V, I(SENSE_OUT) = 15 µA"
+        },
+        "ICC": {
+          "parameter": "Supply current",
+          "min": null,
+          "typ": 6,
+          "max": 12,
+          "unit": "µA",
+          "conditions": "VCC = 3.3 V, no load"
+        },
+        "ICC_VCC___6_5_V__no_load": {
+          "parameter": "Supply current",
+          "min": null,
+          "typ": 7,
+          "max": 12,
+          "unit": "µA",
+          "conditions": "VCC = 6.5 V, no load"
+        },
+        "VIT+": {
+          "parameter": "Positive-going input threshold voltage",
+          "min": 0.495,
+          "typ": 0.5,
+          "max": 0.505,
+          "unit": "V",
+          "conditions": "V(SENSE) rising"
+        },
+        "Vhys": {
+          "parameter": "Hysteresis voltage",
+          "min": null,
+          "typ": 5,
+          "max": null,
+          "unit": "mV",
+          "conditions": "V(SENSE) falling"
+        },
+        "I(SENSE)": {
+          "parameter": "Input current",
+          "min": -15,
+          "typ": null,
+          "max": 15,
+          "unit": "nA",
+          "conditions": "V(SENSE) = 0 V or VCC"
+        },
+        "I(CT)": {
+          "parameter": "CT pin charge current",
+          "min": 260,
+          "typ": 310,
+          "max": 360,
+          "unit": "nA",
+          "conditions": null
+        },
+        "V(CT)": {
+          "parameter": "CT pin comparator threshold voltage",
+          "min": 1.18,
+          "typ": 1.238,
+          "max": 1.299,
+          "unit": "V",
+          "conditions": null
+        },
+        "R(CT)": {
+          "parameter": "CT pin pulldown resistance",
+          "min": null,
+          "typ": 200,
+          "max": null,
+          "unit": "Ω",
+          "conditions": null
+        },
+        "VIL": {
+          "parameter": "Low-level input voltage (ENABLE pin)",
+          "min": null,
+          "typ": null,
+          "max": 0.4,
+          "unit": "V",
+          "conditions": null
+        },
+        "VIH": {
+          "parameter": "High-level input voltage (ENABLE pin)",
+          "min": 1.4,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": null
+        },
+        "UVLO": {
+          "parameter": "Undervoltage lockout",
+          "min": 1.3,
+          "typ": null,
+          "max": 1.7,
+          "unit": "V",
+          "conditions": "VCC falling"
+        },
+        "Ilkg": {
+          "parameter": "Leakage current",
+          "min": -100,
+          "typ": null,
+          "max": 100,
+          "unit": "nA",
+          "conditions": "ENABLE = VCC or GND"
+        },
+        "VOL": {
+          "parameter": "Low-level output voltage",
+          "min": null,
+          "typ": null,
+          "max": 0.3,
+          "unit": "V",
+          "conditions": "VCC ≥ 1.2 V, ISINK = 90 µA"
+        },
+        "VOL_VCC___2_25_V__ISINK___0_5_mA": {
+          "parameter": "Low-level output voltage",
+          "min": null,
+          "typ": null,
+          "max": 0.3,
+          "unit": "V",
+          "conditions": "VCC ≥ 2.25 V, ISINK = 0.5 mA"
+        },
+        "VOL_VCC___4_5_V__ISINK___1_mA": {
+          "parameter": "Low-level output voltage",
+          "min": null,
+          "typ": null,
+          "max": 0.4,
+          "unit": "V",
+          "conditions": "VCC ≥ 4.5 V, ISINK = 1 mA"
+        },
+        "VOH": {
+          "parameter": "High-level output voltage (push-pull)",
+          "min": null,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": "VCC ≥ 2.25 V, ISOURCE = 0.5 mA; Min = 0.8VCC"
+        },
+        "VOH_VCC___4_5_V__ISOURCE___1_mA__M": {
+          "parameter": "High-level output voltage (push-pull)",
+          "min": null,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": "VCC ≥ 4.5 V, ISOURCE = 1 mA; Min = 0.8VCC"
+        },
+        "Ilkg(OD)": {
+          "parameter": "Open-drain output leakage current",
+          "min": null,
+          "typ": null,
+          "max": 300,
+          "unit": "nA",
+          "conditions": "V(SENSE_OUT) high impedance = 18 V"
+        }
+      },
+      "drc_hints": {
+        "vin_abs_max": {
+          "value": 7,
+          "unit": "V"
+        },
+        "vin_operating": {
+          "min": 1.7,
+          "max": 6.5,
+          "unit": "V"
+        },
+        "enable_threshold": {
+          "max": 0.4,
+          "unit": "V"
+        },
+        "uvlo": {
+          "min": 1.3,
+          "max": 1.7,
+          "unit": "V"
+        }
+      }
+    }
+  }
 }

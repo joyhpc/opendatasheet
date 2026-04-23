@@ -1,0 +1,149 @@
+{
+  "_schema": "automotive-video-serdes-intake-queue/1.0",
+  "batches": [
+    {
+      "id": "display_egress_ti_priority_1",
+      "status": "queued",
+      "priority": 1,
+      "objective": "Build the first source-backed TI FPD-Link display egress lane from serializer to display deserializer.",
+      "acceptance_criteria": [
+        "Each device has a formal datasheet source, not just roadmap evidence.",
+        "Each device is modeled with system_path=domain_controller_to_display.",
+        "Serializer and deserializer roles are represented explicitly.",
+        "Display-side video protocols are source-backed before activation."
+      ],
+      "devices": [
+        {
+          "mpn": "DS90UH981-Q1",
+          "role": "serializer",
+          "reason": "DSI to FPD-Link display egress entry point; useful anchor for DSI-based display path."
+        },
+        {
+          "mpn": "DS90UH983-Q1",
+          "role": "serializer",
+          "reason": "DisplayPort to FPD-Link serializer; key high-bandwidth display egress variant."
+        },
+        {
+          "mpn": "DS90UH984-Q1",
+          "role": "deserializer",
+          "reason": "FPD-Link to eDP/DP deserializer; natural pair with UH983."
+        },
+        {
+          "mpn": "DS90UH988-Q1",
+          "role": "deserializer",
+          "reason": "FPD-Link to oLDI deserializer; covers legacy and panel-facing display path."
+        }
+      ],
+      "blocking_dependencies": [
+        "Formal datasheet PDFs are not yet present in the local raw source set.",
+        "No source-backed extracted/export/selection files exist yet."
+      ],
+      "source_expectation": "datasheet_required"
+    },
+    {
+      "id": "display_egress_adi_priority_2",
+      "status": "queued",
+      "priority": 2,
+      "objective": "Build the first source-backed ADI GMSL IVI display egress lane around DP/eDP parts.",
+      "acceptance_criteria": [
+        "At least one serializer and one deserializer are promoted from roadmap watchlist to active profile.",
+        "DisplayPort/eDP protocols are modeled as display egress, not camera ingress.",
+        "Roadmap-only assumptions are replaced by source-backed facts."
+      ],
+      "devices": [
+        {
+          "mpn": "MAX96781",
+          "role": "serializer",
+          "reason": "DisplayPort serializer family anchor from IVI roadmap."
+        },
+        {
+          "mpn": "MAX96783",
+          "role": "serializer",
+          "reason": "Companion DP serializer variant on the same roadmap."
+        },
+        {
+          "mpn": "MAX96772",
+          "role": "deserializer",
+          "reason": "eDP/DP deserializer family anchor from IVI roadmap."
+        },
+        {
+          "mpn": "MAX96774",
+          "role": "deserializer",
+          "reason": "Companion eDP/DP deserializer variant on the same roadmap."
+        }
+      ],
+      "blocking_dependencies": [
+        "Formal datasheet PDFs are not yet present in the local raw source set.",
+        "No source-backed extracted/export/selection files exist yet."
+      ],
+      "source_expectation": "datasheet_required"
+    },
+    {
+      "id": "display_egress_broadening_priority_3",
+      "status": "queued",
+      "priority": 3,
+      "objective": "Broaden display egress coverage after the first TI and ADI lanes are source-backed.",
+      "acceptance_criteria": [
+        "At least one HDMI path, one DSI path, and one display CSI or oLDI path are represented.",
+        "Path-specific protocol blocks remain source-backed.",
+        "No roadmap-only device is activated without formal source intake."
+      ],
+      "devices": [
+        {
+          "mpn": "MAX96751",
+          "role": "serializer",
+          "reason": "HDMI serializer branch."
+        },
+        {
+          "mpn": "MAX96753",
+          "role": "serializer",
+          "reason": "HDMI serializer branch companion."
+        },
+        {
+          "mpn": "MAX96755",
+          "role": "serializer",
+          "reason": "DSI serializer branch."
+        },
+        {
+          "mpn": "MAX96757",
+          "role": "serializer",
+          "reason": "DSI serializer branch companion."
+        },
+        {
+          "mpn": "MAX96756",
+          "role": "deserializer",
+          "reason": "Display CSI deserializer branch."
+        },
+        {
+          "mpn": "MAX96758",
+          "role": "deserializer",
+          "reason": "Display CSI deserializer branch companion."
+        },
+        {
+          "mpn": "MAX96752",
+          "role": "deserializer",
+          "reason": "oLDI deserializer branch."
+        },
+        {
+          "mpn": "MAX96754",
+          "role": "deserializer",
+          "reason": "oLDI deserializer branch companion."
+        },
+        {
+          "mpn": "DS90UB681-Q1",
+          "role": "serializer",
+          "reason": "TI DSI-based display egress branch."
+        },
+        {
+          "mpn": "DS90UB688-Q1",
+          "role": "deserializer",
+          "reason": "TI oLDI display sink branch."
+        }
+      ],
+      "blocking_dependencies": [
+        "Depends on completion of the priority-1 and priority-2 display egress source intake."
+      ],
+      "source_expectation": "datasheet_required"
+    }
+  ]
+}

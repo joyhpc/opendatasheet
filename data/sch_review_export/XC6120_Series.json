@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -417,6 +417,422 @@
       "unit": "mW",
       "conditions": "40mm x 40mm Standard board",
       "source": "absolute_maximum_ratings"
+    }
+  },
+  "domains": {
+    "pin": {
+      "packages": {
+        "USP-3": {
+          "pin_count": 3,
+          "pins": {
+            "1": {
+              "name": "VIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power supply input",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "VSS",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "VOUT",
+              "direction": "OUTPUT",
+              "signal_type": "DIGITAL",
+              "description": "Output (Detect 'Low')",
+              "unused_treatment": null
+            }
+          }
+        },
+        "SSOT-24": {
+          "pin_count": 4,
+          "pins": {
+            "4": {
+              "name": "VIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power supply input",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "VSS",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "VOUT",
+              "direction": "OUTPUT",
+              "signal_type": "DIGITAL",
+              "description": "Output (Detect 'Low')",
+              "unused_treatment": null
+            },
+            "1": {
+              "name": "NC",
+              "direction": "NC",
+              "signal_type": "NONE",
+              "description": "No internal connection",
+              "unused_treatment": null
+            }
+          }
+        },
+        "SOT-25": {
+          "pin_count": 5,
+          "pins": {
+            "2": {
+              "name": "VIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power supply input",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "VSS",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground",
+              "unused_treatment": null
+            },
+            "1": {
+              "name": "VOUT",
+              "direction": "OUTPUT",
+              "signal_type": "DIGITAL",
+              "description": "Output (Detect 'Low')",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "NC",
+              "direction": "NC",
+              "signal_type": "NONE",
+              "description": "No internal connection",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "NC",
+              "direction": "NC",
+              "signal_type": "NONE",
+              "description": "No internal connection",
+              "unused_treatment": null
+            }
+          }
+        }
+      }
+    },
+    "electrical": {
+      "absolute_maximum_ratings": {
+        "VIN": {
+          "parameter": "Input Voltage",
+          "min": null,
+          "max": 7.0,
+          "unit": "V",
+          "conditions": "VSS-0.3 to 7.0V"
+        },
+        "IOUT": {
+          "parameter": "Output Current",
+          "min": null,
+          "max": 10,
+          "unit": "mA",
+          "conditions": null
+        },
+        "VOUT": {
+          "parameter": "Output Voltage (CMOS Output)",
+          "min": null,
+          "max": null,
+          "unit": "V",
+          "conditions": "VSS-0.3 to VIN+0.3V"
+        },
+        "VOUT_VSS_0_3_to_7_0V": {
+          "parameter": "Output Voltage (N-ch Open Drain Output)",
+          "min": null,
+          "max": 7.0,
+          "unit": "V",
+          "conditions": "VSS-0.3 to 7.0V"
+        },
+        "Pd": {
+          "parameter": "Power Dissipation (SOT-25)",
+          "min": null,
+          "max": 250,
+          "unit": "mW",
+          "conditions": null
+        },
+        "Pd_40mm_x_40mm_Standard_board": {
+          "parameter": "Power Dissipation (SOT-25, Standard board)",
+          "min": null,
+          "max": 600,
+          "unit": "mW",
+          "conditions": "40mm x 40mm Standard board"
+        },
+        "Topr": {
+          "parameter": "Operating Temperature Range",
+          "min": -40,
+          "max": 85,
+          "unit": "°C",
+          "conditions": null
+        },
+        "Tstg": {
+          "parameter": "Storage Temperature Range",
+          "min": -55,
+          "max": 125,
+          "unit": "°C",
+          "conditions": null
+        }
+      },
+      "electrical_parameters": {
+        "VIN": {
+          "parameter": "Operating Voltage",
+          "min": 0.7,
+          "typ": null,
+          "max": 6.0,
+          "unit": "V",
+          "conditions": "VDF(T)=1.0~5.0V"
+        },
+        "VHYS": {
+          "parameter": "Hysteresis Width",
+          "min": null,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": "VDF(T)=1.0V~5.0V, Min: VDFx0.03, Typ: VDFx0.05, Max: VDFx0.07"
+        },
+        "IOUTN": {
+          "parameter": "Output Current (N-ch)",
+          "min": 0.09,
+          "typ": 0.57,
+          "max": null,
+          "unit": "mA",
+          "conditions": "VIN=0.7V, VOUT=0.5V"
+        },
+        "IOUTN_VIN_0_7V__VOUT_0_3V": {
+          "parameter": "Output Current (N-ch)",
+          "min": 0.08,
+          "typ": 0.56,
+          "max": null,
+          "unit": "mA",
+          "conditions": "VIN=0.7V, VOUT=0.3V"
+        },
+        "IOUTN_VIN_0_7V__VOUT_0_1V": {
+          "parameter": "Output Current (N-ch)",
+          "min": 0.05,
+          "typ": 0.3,
+          "max": null,
+          "unit": "mA",
+          "conditions": "VIN=0.7V, VOUT=0.1V"
+        },
+        "IOUTN_VIN_1_0V__VOUT_0_1V__VDF_T__1": {
+          "parameter": "Output Current (N-ch)",
+          "min": 0.46,
+          "typ": 0.71,
+          "max": null,
+          "unit": "mA",
+          "conditions": "VIN=1.0V, VOUT=0.1V, VDF(T)>1.0V"
+        },
+        "IOUTN_VIN_2_0V__VOUT_0_1V__VDF_T__2": {
+          "parameter": "Output Current (N-ch)",
+          "min": 1.15,
+          "typ": 1.41,
+          "max": null,
+          "unit": "mA",
+          "conditions": "VIN=2.0V, VOUT=0.1V, VDF(T)>2.0V"
+        },
+        "IOUTN_VIN_3_0V__VOUT_0_1V__VDF_T__3": {
+          "parameter": "Output Current (N-ch)",
+          "min": 1.44,
+          "typ": 1.77,
+          "max": null,
+          "unit": "mA",
+          "conditions": "VIN=3.0V, VOUT=0.1V, VDF(T)>3.0V"
+        },
+        "IOUTN_VIN_4_0V__VOUT_0_1V__VDF_T__4": {
+          "parameter": "Output Current (N-ch)",
+          "min": 1.61,
+          "typ": 1.96,
+          "max": null,
+          "unit": "mA",
+          "conditions": "VIN=4.0V, VOUT=0.1V, VDF(T)>4.0V"
+        },
+        "IOUTP": {
+          "parameter": "Output Current (P-ch)",
+          "min": null,
+          "typ": -0.95,
+          "max": -0.6,
+          "unit": "mA",
+          "conditions": "VIN=6.0V, VOUT=5.5V"
+        },
+        "ILEAK": {
+          "parameter": "Leakage Current (CMOS Output)",
+          "min": null,
+          "typ": -0.001,
+          "max": null,
+          "unit": "uA",
+          "conditions": "VIN=VDFx0.9, VOUT=0V"
+        },
+        "ILEAK_VIN_6_0V__VOUT_6_0V": {
+          "parameter": "Leakage Current (N-ch Open Drain)",
+          "min": null,
+          "typ": 0.001,
+          "max": 0.1,
+          "unit": "uA",
+          "conditions": "VIN=6.0V, VOUT=6.0V"
+        },
+        "ΔVDF/(ΔTopr·VDF)": {
+          "parameter": "Temperature Characteristics",
+          "min": null,
+          "typ": 100,
+          "max": null,
+          "unit": "ppm/°C",
+          "conditions": "-40°C <= Topr <= 85°C"
+        },
+        "tDF": {
+          "parameter": "Detect Delay Time",
+          "min": null,
+          "typ": 30,
+          "max": 100,
+          "unit": "us",
+          "conditions": "VIN=6.0V->0.7V, VIN=VDF to VOUT=0.5V"
+        },
+        "tDR": {
+          "parameter": "Release Delay Time",
+          "min": null,
+          "typ": 20,
+          "max": 100,
+          "unit": "us",
+          "conditions": "VIN=0.7V->6.0V, VIN=VDR to VOUT=VDR"
+        },
+        "VDF": {
+          "parameter": "Detect Voltage (5.0V Variant)",
+          "min": 4.9,
+          "typ": null,
+          "max": 5.1,
+          "unit": "V",
+          "conditions": null
+        },
+        "ISS1": {
+          "parameter": "Supply Current 1 (1.0V-1.9V Variants)",
+          "min": null,
+          "typ": 0.5,
+          "max": 1.4,
+          "unit": "uA",
+          "conditions": "VIN=VDF(T)x1.1"
+        },
+        "ISS2": {
+          "parameter": "Supply Current 2 (1.0V-1.9V Variants)",
+          "min": null,
+          "typ": 0.4,
+          "max": 1.35,
+          "unit": "uA",
+          "conditions": "VIN=VDF(T)x0.9"
+        },
+        "ISS1_VIN_VDF_T_x1_1": {
+          "parameter": "Supply Current 1 (3.8V-5.0V Variants)",
+          "min": null,
+          "typ": 0.7,
+          "max": 1.9,
+          "unit": "uA",
+          "conditions": "VIN=VDF(T)x1.1"
+        },
+        "ISS2_VIN_VDF_T_x0_9": {
+          "parameter": "Supply Current 2 (3.8V-5.0V Variants)",
+          "min": null,
+          "typ": 0.6,
+          "max": 1.8,
+          "unit": "uA",
+          "conditions": "VIN=VDF(T)x0.9"
+        }
+      },
+      "drc_hints": {
+        "vin_abs_max": {
+          "value": 7.0,
+          "unit": "V"
+        },
+        "vin_operating": {
+          "min": 0.7,
+          "max": 6.0,
+          "unit": "V"
+        },
+        "iout_max": {
+          "min": 0.09,
+          "typ": 0.57,
+          "unit": "mA"
+        },
+        "soft_start": {
+          "typ": 0.5,
+          "max": 1.4,
+          "unit": "uA"
+        }
+      }
+    },
+    "thermal": {
+      "power_dissipation": {
+        "parameter": "Power Dissipation (USP-3)",
+        "symbol": "Pd",
+        "min": null,
+        "typ": null,
+        "max": 120,
+        "value": null,
+        "unit": "mW",
+        "conditions": null,
+        "source": "absolute_maximum_ratings"
+      },
+      "power_dissipation_40mm_x_40mm_Standard_board": {
+        "parameter": "Power Dissipation (USP-3, Standard board)",
+        "symbol": "Pd",
+        "min": null,
+        "typ": null,
+        "max": 1000,
+        "value": null,
+        "unit": "mW",
+        "conditions": "40mm x 40mm Standard board",
+        "source": "absolute_maximum_ratings"
+      },
+      "power_dissipation_Power_Dissipation__SSOT_24": {
+        "parameter": "Power Dissipation (SSOT-24)",
+        "symbol": "Pd",
+        "min": null,
+        "typ": null,
+        "max": 150,
+        "value": null,
+        "unit": "mW",
+        "conditions": null,
+        "source": "absolute_maximum_ratings"
+      },
+      "power_dissipation_40mm_x_40mm_Standard_board_dup": {
+        "parameter": "Power Dissipation (SSOT-24, Standard board)",
+        "symbol": "Pd",
+        "min": null,
+        "typ": null,
+        "max": 500,
+        "value": null,
+        "unit": "mW",
+        "conditions": "40mm x 40mm Standard board",
+        "source": "absolute_maximum_ratings"
+      },
+      "power_dissipation_Power_Dissipation__SOT_25": {
+        "parameter": "Power Dissipation (SOT-25)",
+        "symbol": "Pd",
+        "min": null,
+        "typ": null,
+        "max": 250,
+        "value": null,
+        "unit": "mW",
+        "conditions": null,
+        "source": "absolute_maximum_ratings"
+      },
+      "power_dissipation_40mm_x_40mm_Standard_board_dup_dup": {
+        "parameter": "Power Dissipation (SOT-25, Standard board)",
+        "symbol": "Pd",
+        "min": null,
+        "typ": null,
+        "max": 600,
+        "value": null,
+        "unit": "mW",
+        "conditions": "40mm x 40mm Standard board",
+        "source": "absolute_maximum_ratings"
+      }
     }
   }
 }

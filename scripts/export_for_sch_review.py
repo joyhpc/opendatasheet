@@ -168,7 +168,7 @@ def get_design_context(data: dict) -> dict:
     else:
         base = data.get("design_extraction", {})
     component = get_extraction(data).get("component", {})
-    if not base and should_auto_extract_design_context(component.get("category")):
+    if not base and should_auto_extract_design_context(component.get("category"), component):
         base = load_design_context_for_export_record(data)
     return merge_design_context(base, get_normal_ic_design_context_override(component.get("mpn")))
 
@@ -265,6 +265,7 @@ def export_normal_ic(data: dict) -> dict | None:
             key = f"{sym}_{_sanitize(item['conditions'])}"
         abs_max[key] = {
             "parameter": item["parameter"],
+            "symbol": sym,
             "min": item.get("min"),
             "max": item.get("max"),
             "unit": item.get("unit"),
@@ -283,6 +284,7 @@ def export_normal_ic(data: dict) -> dict | None:
             key = f"{sym}_{_sanitize(cond)}"
         elec_params[key] = {
             "parameter": item["parameter"],
+            "symbol": sym,
             "min": item.get("min"),
             "typ": item.get("typ"),
             "max": item.get("max"),

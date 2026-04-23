@@ -28,14 +28,36 @@ SCHEMA_PATH = SCHEMA_DIR / "sch-review-device.schema.json"
 DEFAULT_EXPORT_DIR = Path(__file__).parent.parent / "data/sch_review_export"
 
 
+def _schema_store() -> dict[str, dict]:
+    """Build a local schema registry for offline validation."""
+    store = {}
+    for schema_path in sorted(SCHEMA_DIR.rglob("*.json")):
+        with open(schema_path) as f:
+            schema = json.load(f)
+
+        relative_path = schema_path.relative_to(SCHEMA_DIR).as_posix()
+        file_uri = schema_path.resolve().as_uri()
+
+        store[file_uri] = schema
+        store[f"https://opendatasheet.dev/schemas/{relative_path}"] = schema
+        store[f"https://opendatasheet.dev/schemas/sch-review-device/{relative_path}"] = schema
+
+        schema_id = schema.get("$id")
+        if isinstance(schema_id, str) and schema_id:
+            store[schema_id] = schema
+    return store
+
+
 def load_schema():
     with open(SCHEMA_PATH) as f:
         schema = json.load(f)
     Draft202012Validator.check_schema(schema)
-    # Set up a RefResolver that can resolve $ref to domain sub-schemas
+
+    # Keep validation fully offline even when schema $id values are remote URLs.
     resolver = jsonschema.RefResolver(
-        base_uri=f"file://{SCHEMA_DIR}/",
+        base_uri=SCHEMA_DIR.resolve().as_uri() + "/",
         referrer=schema,
+        store=_schema_store(),
     )
     return Draft202012Validator(schema, resolver=resolver)
 
@@ -142,7 +164,7 @@ def main():
         files = [Path(a) for a in args]
     else:
         files = sorted(DEFAULT_EXPORT_DIR.glob("*.json"))
-        files = [f for f in files if f.name != "_manifest.json"]
+        files = [f for f in files if not f.name.startswith("_")]
 
     total = 0
     passed = 0

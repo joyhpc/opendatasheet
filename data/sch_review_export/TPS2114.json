@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -245,5 +245,247 @@
       "unit": "°C"
     }
   },
-  "thermal": {}
+  "thermal": {},
+  "domains": {
+    "pin": {
+      "packages": {
+        "TSSOP-8": {
+          "pin_count": 8,
+          "pins": {
+            "1": {
+              "name": "STAT",
+              "direction": "OUTPUT",
+              "signal_type": "DIGITAL",
+              "description": "Open-drain output; Hi-Z if IN2 switch is ON, pulls low if IN1 switch is ON or if OUT is Hi-Z.",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "D0",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "TTL and CMOS compatible input pin with internal 1-µA pullup resistor.",
+              "unused_treatment": "FLOAT"
+            },
+            "3": {
+              "name": "D1",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "TTL and CMOS compatible input pin with internal 1-µA pullup resistor.",
+              "unused_treatment": "FLOAT"
+            },
+            "4": {
+              "name": "ILIM",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Current limit programming pin; a resistor to GND sets the current limit.",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground",
+              "unused_treatment": null
+            },
+            "6": {
+              "name": "IN2",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Secondary power switch input.",
+              "unused_treatment": null
+            },
+            "7": {
+              "name": "OUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Power switch output",
+              "unused_treatment": null
+            },
+            "8": {
+              "name": "IN1",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Primary power switch input.",
+              "unused_treatment": null
+            }
+          }
+        }
+      }
+    },
+    "electrical": {
+      "absolute_maximum_ratings": {
+        "VI": {
+          "parameter": "Input voltage range",
+          "min": -0.3,
+          "max": 6.0,
+          "unit": "V",
+          "conditions": "IN1, IN2, D0, D1, ILIM"
+        },
+        "VO": {
+          "parameter": "Output voltage range",
+          "min": -0.3,
+          "max": 6.0,
+          "unit": "V",
+          "conditions": "OUT, STAT"
+        },
+        "IO": {
+          "parameter": "Output sink current",
+          "min": null,
+          "max": 5.0,
+          "unit": "mA",
+          "conditions": "STAT"
+        },
+        "IO_TPS2114": {
+          "parameter": "Continuous output current",
+          "min": null,
+          "max": 0.9,
+          "unit": "A",
+          "conditions": "TPS2114"
+        },
+        "IO_TPS2115": {
+          "parameter": "Continuous output current",
+          "min": null,
+          "max": 1.5,
+          "unit": "A",
+          "conditions": "TPS2115"
+        },
+        "TJ": {
+          "parameter": "Operating virtual junction temperature range",
+          "min": -40,
+          "max": 125,
+          "unit": "°C",
+          "conditions": null
+        },
+        "Tstg": {
+          "parameter": "Storage temperature range",
+          "min": -65,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        }
+      },
+      "electrical_parameters": {
+        "VI": {
+          "parameter": "Input voltage at D0, D1",
+          "min": 0,
+          "typ": null,
+          "max": 5.5,
+          "unit": "V",
+          "conditions": null
+        },
+        "VI_VI_IN2____2_8_V": {
+          "parameter": "Input voltage at IN1",
+          "min": 2.8,
+          "typ": null,
+          "max": 5.5,
+          "unit": "V",
+          "conditions": "VI(IN2) < 2.8 V"
+        },
+        "VI_VI_IN1_____2_8_V": {
+          "parameter": "Input voltage at IN2",
+          "min": 1.5,
+          "typ": null,
+          "max": 5.5,
+          "unit": "V",
+          "conditions": "VI(IN1) >= 2.8 V"
+        },
+        "VI_VI_IN1____2_8_V": {
+          "parameter": "Input voltage at IN2",
+          "min": 2.8,
+          "typ": null,
+          "max": 5.5,
+          "unit": "V",
+          "conditions": "VI(IN1) < 2.8 V"
+        },
+        "IO(OUT)": {
+          "parameter": "Current limit adjustment range",
+          "min": 0.63,
+          "typ": null,
+          "max": 1.25,
+          "unit": "A",
+          "conditions": null
+        },
+        "rDS(on)": {
+          "parameter": "Drain-source on-state resistance (INx-OUT)",
+          "min": null,
+          "typ": 120,
+          "max": 140,
+          "unit": "mΩ",
+          "conditions": "TJ = 25°C, IL = 500 mA, VI(IN1) = VI(IN2) = 5.0 V / 3.3 V / 2.8 V"
+        },
+        "rDS(on)_TJ___125_C__IL___500_mA__VI_IN": {
+          "parameter": "Drain-source on-state resistance (INx-OUT)",
+          "min": null,
+          "typ": 150,
+          "max": null,
+          "unit": "mΩ",
+          "conditions": "TJ = 125°C, IL = 500 mA, VI(IN1) = VI(IN2) = 5.0 V / 3.3 V / 2.8 V"
+        },
+        "rDS(on)_TJ___25_C__IL___500_mA__VI_IN1": {
+          "parameter": "Drain-source on-state resistance (INx-OUT)",
+          "min": null,
+          "typ": 84,
+          "max": 110,
+          "unit": "mΩ",
+          "conditions": "TJ = 25°C, IL = 500 mA, VI(IN1) = VI(IN2) = 5.0 V / 3.3 V / 2.8 V"
+        },
+        "VIH": {
+          "parameter": "High-level input voltage",
+          "min": 2,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": "D0 and D1"
+        },
+        "VIL": {
+          "parameter": "Low-level input voltage",
+          "min": null,
+          "typ": null,
+          "max": 0.7,
+          "unit": "V",
+          "conditions": "D0 and D1"
+        },
+        "td": {
+          "parameter": "Current limit settling time",
+          "min": null,
+          "typ": 1,
+          "max": null,
+          "unit": "ms",
+          "conditions": "Time for short-circuit output current to settle within 10% of its steady state value"
+        },
+        "ΔVO(I_block)": {
+          "parameter": "Minimum output-to-input voltage difference to block switching",
+          "min": 80,
+          "typ": 100,
+          "max": 120,
+          "unit": "mV",
+          "conditions": "D0 = D1 = high, VI(INx) = 3.3 V. Connect OUT to a 5 V supply through a series 1-kΩ resistor."
+        }
+      },
+      "drc_hints": {
+        "vin_abs_max": {
+          "value": 6.0,
+          "unit": "V"
+        },
+        "enable_threshold": {
+          "min": 2,
+          "unit": "V"
+        },
+        "iout_max": {
+          "min": 0.31,
+          "max": 0.75,
+          "unit": "A"
+        },
+        "iq": {
+          "typ": 55,
+          "max": 90,
+          "unit": "µA"
+        },
+        "thermal_shutdown": {
+          "typ": 135,
+          "unit": "°C"
+        }
+      }
+    }
+  }
 }

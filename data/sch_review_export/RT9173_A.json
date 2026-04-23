@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -470,6 +470,475 @@
       "unit": "°C/W",
       "conditions": "SOP-8",
       "source": "absolute_maximum_ratings"
+    }
+  },
+  "domains": {
+    "pin": {
+      "packages": {
+        "TO-263-5": {
+          "pin_count": 6,
+          "pins": {
+            "1": {
+              "name": "VIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power input voltage.",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground.",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "VCNTL",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Gate drive voltage.",
+              "unused_treatment": null
+            },
+            "TAB": {
+              "name": "VCNTL",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Gate drive voltage.",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "REFEN",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Reference voltage input and chip enable.",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "VOUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Output voltage.",
+              "unused_treatment": null
+            }
+          }
+        },
+        "TO-252-5": {
+          "pin_count": 6,
+          "pins": {
+            "1": {
+              "name": "VIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power input voltage.",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground.",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "VCNTL",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Gate drive voltage.",
+              "unused_treatment": null
+            },
+            "TAB": {
+              "name": "VCNTL",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Gate drive voltage.",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "REFEN",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Reference voltage input and chip enable.",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "VOUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Output voltage.",
+              "unused_treatment": null
+            }
+          }
+        },
+        "SOP-8": {
+          "pin_count": 8,
+          "pins": {
+            "1": {
+              "name": "VIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power input voltage.",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground.",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "VCNTL",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Gate drive voltage.",
+              "unused_treatment": null
+            },
+            "6": {
+              "name": "VCNTL",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Gate drive voltage.",
+              "unused_treatment": null
+            },
+            "7": {
+              "name": "VCNTL",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Gate drive voltage.",
+              "unused_treatment": null
+            },
+            "8": {
+              "name": "VCNTL",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Gate drive voltage.",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "REFEN",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Reference voltage input and chip enable.",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "VOUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Output voltage.",
+              "unused_treatment": null
+            }
+          }
+        }
+      }
+    },
+    "electrical": {
+      "absolute_maximum_ratings": {
+        "VIN": {
+          "parameter": "Input Voltage",
+          "min": null,
+          "max": 7,
+          "unit": "V",
+          "conditions": null
+        },
+        "Tstg": {
+          "parameter": "Storage Temperature Range",
+          "min": -65,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        },
+        "PD": {
+          "parameter": "Power Dissipation",
+          "min": null,
+          "max": 1.923,
+          "unit": "W",
+          "conditions": "TO-263-5"
+        },
+        "PD_TO_252_5": {
+          "parameter": "Power Dissipation",
+          "min": null,
+          "max": 1.471,
+          "unit": "W",
+          "conditions": "TO-252-5"
+        },
+        "PD_SOP_8": {
+          "parameter": "Power Dissipation",
+          "min": null,
+          "max": 0.625,
+          "unit": "W",
+          "conditions": "SOP-8"
+        },
+        "θJC": {
+          "parameter": "Package Thermal Resistance",
+          "min": null,
+          "max": null,
+          "unit": "°C/W",
+          "conditions": "TO-263-5"
+        },
+        "θJC_TO_252_5": {
+          "parameter": "Package Thermal Resistance",
+          "min": null,
+          "max": null,
+          "unit": "°C/W",
+          "conditions": "TO-252-5"
+        },
+        "θJC_SOP_8": {
+          "parameter": "Package Thermal Resistance",
+          "min": null,
+          "max": null,
+          "unit": "°C/W",
+          "conditions": "SOP-8"
+        },
+        "θJA": {
+          "parameter": "Package Thermal Resistance",
+          "min": null,
+          "max": null,
+          "unit": "°C/W",
+          "conditions": "TO-263-5"
+        },
+        "θJA_TO_252_5": {
+          "parameter": "Package Thermal Resistance",
+          "min": null,
+          "max": null,
+          "unit": "°C/W",
+          "conditions": "TO-252-5"
+        },
+        "θJA_SOP_8": {
+          "parameter": "Package Thermal Resistance",
+          "min": null,
+          "max": null,
+          "unit": "°C/W",
+          "conditions": "SOP-8"
+        }
+      },
+      "electrical_parameters": {
+        "VOS": {
+          "parameter": "Output Offset Voltage",
+          "min": -20,
+          "typ": 0,
+          "max": 20,
+          "unit": "mV",
+          "conditions": "IOUT = 0A, Figure 1"
+        },
+        "ΔVLOAD": {
+          "parameter": "Load Regulation (Sourcing)",
+          "min": null,
+          "typ": 0.8,
+          "max": 2,
+          "unit": "%",
+          "conditions": "IL : 0A -> 1.5A, Figure 1"
+        },
+        "ΔVLOAD_IL___0A____1_5A__Figure_1": {
+          "parameter": "Load Regulation (Sourcing)",
+          "min": null,
+          "typ": 1.2,
+          "max": 3,
+          "unit": "%",
+          "conditions": "IL : 0A -> 1.5A, Figure 1"
+        },
+        "ΔVLOAD_IL___0A_____1_5A": {
+          "parameter": "Load Regulation (Sinking)",
+          "min": null,
+          "typ": 1.2,
+          "max": 3,
+          "unit": "%",
+          "conditions": "IL : 0A -> -1.5A"
+        },
+        "VIN": {
+          "parameter": "Input Voltage Range",
+          "min": 1.6,
+          "typ": 2.5,
+          "max": null,
+          "unit": "V",
+          "conditions": "Keep VCNTL >= VIN on operation power on and power off sequences"
+        },
+        "VIN_Keep_VCNTL____VIN_on_operation": {
+          "parameter": "Input Voltage Range",
+          "min": 1.6,
+          "typ": 1.8,
+          "max": null,
+          "unit": "V",
+          "conditions": "Keep VCNTL >= VIN on operation power on and power off sequences"
+        },
+        "VCNTL": {
+          "parameter": "Control Voltage Range",
+          "min": null,
+          "typ": 3.3,
+          "max": 6,
+          "unit": "V",
+          "conditions": "Keep VCNTL >= VIN on operation power on and power off sequences"
+        },
+        "ICNTL": {
+          "parameter": "Operating Current of VCNTL",
+          "min": null,
+          "typ": 6.5,
+          "max": 10,
+          "unit": "mA",
+          "conditions": "No Load"
+        },
+        "ISHDN": {
+          "parameter": "Current In Shutdown Mode",
+          "min": null,
+          "typ": 50,
+          "max": 90,
+          "unit": "µA",
+          "conditions": "VREFEN < 0.2V, RL = 180Ω, Figure 2"
+        },
+        "ILIMIT": {
+          "parameter": "Current limit",
+          "min": 3.0,
+          "typ": null,
+          "max": null,
+          "unit": "A",
+          "conditions": "Figure 3, 4"
+        },
+        "TSD": {
+          "parameter": "Thermal Shutdown Temperature",
+          "min": 125,
+          "typ": 150,
+          "max": null,
+          "unit": "°C",
+          "conditions": "3.3V <= VCNTL <= 5V"
+        },
+        "VTRIGGER": {
+          "parameter": "Shutdown Threshold Trigger (High)",
+          "min": 0.8,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": "Output = High, Figure 5"
+        },
+        "VTRIGGER_Output___Low__Figure_5": {
+          "parameter": "Shutdown Threshold Trigger (Low)",
+          "min": null,
+          "typ": null,
+          "max": 0.2,
+          "unit": "V",
+          "conditions": "Output = Low, Figure 5"
+        }
+      },
+      "drc_hints": {
+        "vin_abs_max": {
+          "value": 7,
+          "unit": "V"
+        },
+        "vin_operating": {
+          "min": 1.6,
+          "typ": 2.5,
+          "unit": "V"
+        },
+        "iout_max": {
+          "min": 3.0,
+          "unit": "A"
+        },
+        "thermal_shutdown": {
+          "min": 125,
+          "typ": 150,
+          "unit": "°C"
+        }
+      }
+    },
+    "thermal": {
+      "power_dissipation": {
+        "parameter": "Power Dissipation",
+        "symbol": "PD",
+        "min": null,
+        "typ": null,
+        "max": 1.923,
+        "value": null,
+        "unit": "W",
+        "conditions": "TO-263-5",
+        "source": "absolute_maximum_ratings"
+      },
+      "power_dissipation_TO_252_5": {
+        "parameter": "Power Dissipation",
+        "symbol": "PD",
+        "min": null,
+        "typ": null,
+        "max": 1.471,
+        "value": null,
+        "unit": "W",
+        "conditions": "TO-252-5",
+        "source": "absolute_maximum_ratings"
+      },
+      "power_dissipation_SOP_8": {
+        "parameter": "Power Dissipation",
+        "symbol": "PD",
+        "min": null,
+        "typ": null,
+        "max": 0.625,
+        "value": null,
+        "unit": "W",
+        "conditions": "SOP-8",
+        "source": "absolute_maximum_ratings"
+      },
+      "theta_jc": {
+        "parameter": "Package Thermal Resistance",
+        "symbol": "θJC",
+        "min": null,
+        "typ": 7.7,
+        "max": null,
+        "value": null,
+        "unit": "°C/W",
+        "conditions": "TO-263-5",
+        "source": "absolute_maximum_ratings"
+      },
+      "theta_jc_TO_252_5": {
+        "parameter": "Package Thermal Resistance",
+        "symbol": "θJC",
+        "min": null,
+        "typ": 8,
+        "max": null,
+        "value": null,
+        "unit": "°C/W",
+        "conditions": "TO-252-5",
+        "source": "absolute_maximum_ratings"
+      },
+      "theta_jc_SOP_8": {
+        "parameter": "Package Thermal Resistance",
+        "symbol": "θJC",
+        "min": null,
+        "typ": 23.2,
+        "max": null,
+        "value": null,
+        "unit": "°C/W",
+        "conditions": "SOP-8",
+        "source": "absolute_maximum_ratings"
+      },
+      "theta_ja": {
+        "parameter": "Package Thermal Resistance",
+        "symbol": "θJA",
+        "min": null,
+        "typ": 52,
+        "max": null,
+        "value": null,
+        "unit": "°C/W",
+        "conditions": "TO-263-5",
+        "source": "absolute_maximum_ratings"
+      },
+      "theta_ja_TO_252_5": {
+        "parameter": "Package Thermal Resistance",
+        "symbol": "θJA",
+        "min": null,
+        "typ": 68,
+        "max": null,
+        "value": null,
+        "unit": "°C/W",
+        "conditions": "TO-252-5",
+        "source": "absolute_maximum_ratings"
+      },
+      "theta_ja_SOP_8": {
+        "parameter": "Package Thermal Resistance",
+        "symbol": "θJA",
+        "min": null,
+        "typ": 160,
+        "max": null,
+        "value": null,
+        "unit": "°C/W",
+        "conditions": "SOP-8",
+        "source": "absolute_maximum_ratings"
+      }
     }
   }
 }

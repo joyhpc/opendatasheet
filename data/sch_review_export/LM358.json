@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -356,5 +356,358 @@
       "unit": "V"
     }
   },
-  "thermal": {}
+  "thermal": {},
+  "domains": {
+    "pin": {
+      "packages": {
+        "PDIP-8": {
+          "pin_count": 8,
+          "pins": {
+            "1": {
+              "name": "Output A",
+              "direction": "OUTPUT",
+              "signal_type": "ANALOG",
+              "description": "Amplifier A output",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "Inverting Input A",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Amplifier A inverting input",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "Non-inverting Input A",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Amplifier A non-inverting input",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "VEE/Gnd",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Negative power supply or ground",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "Non-inverting Input B",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Amplifier B non-inverting input",
+              "unused_treatment": null
+            },
+            "6": {
+              "name": "Inverting Input B",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Amplifier B inverting input",
+              "unused_treatment": null
+            },
+            "7": {
+              "name": "Output B",
+              "direction": "OUTPUT",
+              "signal_type": "ANALOG",
+              "description": "Amplifier B output",
+              "unused_treatment": null
+            },
+            "8": {
+              "name": "VCC",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Positive power supply",
+              "unused_treatment": null
+            }
+          }
+        },
+        "SOIC-8": {
+          "pin_count": 8,
+          "pins": {
+            "1": {
+              "name": "Output A",
+              "direction": "OUTPUT",
+              "signal_type": "ANALOG",
+              "description": "Amplifier A output",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "Inverting Input A",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Amplifier A inverting input",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "Non-inverting Input A",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Amplifier A non-inverting input",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "VEE/Gnd",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Negative power supply or ground",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "Non-inverting Input B",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Amplifier B non-inverting input",
+              "unused_treatment": null
+            },
+            "6": {
+              "name": "Inverting Input B",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Amplifier B inverting input",
+              "unused_treatment": null
+            },
+            "7": {
+              "name": "Output B",
+              "direction": "OUTPUT",
+              "signal_type": "ANALOG",
+              "description": "Amplifier B output",
+              "unused_treatment": null
+            },
+            "8": {
+              "name": "VCC",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Positive power supply",
+              "unused_treatment": null
+            }
+          }
+        },
+        "Micro8": {
+          "pin_count": 8,
+          "pins": {
+            "1": {
+              "name": "Output A",
+              "direction": "OUTPUT",
+              "signal_type": "ANALOG",
+              "description": "Amplifier A output",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "Inverting Input A",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Amplifier A inverting input",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "Non-inverting Input A",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Amplifier A non-inverting input",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "VEE/Gnd",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Negative power supply or ground",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "Non-inverting Input B",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Amplifier B non-inverting input",
+              "unused_treatment": null
+            },
+            "6": {
+              "name": "Inverting Input B",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Amplifier B inverting input",
+              "unused_treatment": null
+            },
+            "7": {
+              "name": "Output B",
+              "direction": "OUTPUT",
+              "signal_type": "ANALOG",
+              "description": "Amplifier B output",
+              "unused_treatment": null
+            },
+            "8": {
+              "name": "VCC",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Positive power supply",
+              "unused_treatment": null
+            }
+          }
+        }
+      }
+    },
+    "electrical": {
+      "absolute_maximum_ratings": {},
+      "electrical_parameters": {
+        "VIO": {
+          "parameter": "Input Offset Voltage",
+          "min": null,
+          "typ": 2.0,
+          "max": 5.0,
+          "unit": "mV",
+          "conditions": "VCC = 5.0 V to 30 V, VIC = 0 V to VCC -1.7 V, VO = 1.4 V, RS = 0 Ω"
+        },
+        "VIO_VCC___5_0_V_to_30_V__VIC___0_V": {
+          "parameter": "Input Offset Voltage",
+          "min": null,
+          "typ": null,
+          "max": 13,
+          "unit": "mV",
+          "conditions": "VCC = 5.0 V to 30 V, VIC = 0 V to VCC -1.7 V, VO = 1.4 V, RS = 0 Ω, TA = Thigh or Tlow"
+        },
+        "ΔVIO/ΔT": {
+          "parameter": "Average Temperature Coefficient of Input Offset Voltage",
+          "min": null,
+          "typ": 7.0,
+          "max": null,
+          "unit": "μV/°C",
+          "conditions": "TA = Thigh to Tlow"
+        },
+        "IIO": {
+          "parameter": "Input Offset Current",
+          "min": null,
+          "typ": 3.0,
+          "max": 30,
+          "unit": "nA",
+          "conditions": "TA = 25°C"
+        },
+        "IIO_TA___Thigh_to_Tlow": {
+          "parameter": "Input Offset Current",
+          "min": null,
+          "typ": null,
+          "max": 100,
+          "unit": "nA",
+          "conditions": "TA = Thigh to Tlow"
+        },
+        "IIB": {
+          "parameter": "Input Bias Current",
+          "min": null,
+          "typ": -45,
+          "max": -150,
+          "unit": "nA",
+          "conditions": "TA = 25°C"
+        },
+        "IIB_TA___Thigh_to_Tlow": {
+          "parameter": "Input Bias Current",
+          "min": null,
+          "typ": null,
+          "max": -300,
+          "unit": "nA",
+          "conditions": "TA = Thigh to Tlow"
+        },
+        "VICR": {
+          "parameter": "Input Common Mode Voltage Range",
+          "min": 0,
+          "typ": null,
+          "max": 28.3,
+          "unit": "V",
+          "conditions": "VCC = 30 V, TA = 25°C"
+        },
+        "VICR_VCC___30_V__TA___Thigh_to_Tlow": {
+          "parameter": "Input Common Mode Voltage Range",
+          "min": 0,
+          "typ": null,
+          "max": 28,
+          "unit": "V",
+          "conditions": "VCC = 30 V, TA = Thigh to Tlow"
+        },
+        "AVOL": {
+          "parameter": "Large Signal Open Loop Voltage Gain",
+          "min": 50,
+          "typ": 100,
+          "max": null,
+          "unit": "V/mV",
+          "conditions": "RL = 2.0 kΩ, VCC = 15 V, For Large VO Swing, TA = 25°C"
+        },
+        "AVOL_RL___2_0_k___VCC___15_V__For_L": {
+          "parameter": "Large Signal Open Loop Voltage Gain",
+          "min": 25,
+          "typ": null,
+          "max": null,
+          "unit": "V/mV",
+          "conditions": "RL = 2.0 kΩ, VCC = 15 V, For Large VO Swing, TA = Thigh to Tlow"
+        },
+        "CMR": {
+          "parameter": "Common Mode Rejection",
+          "min": 70,
+          "typ": 85,
+          "max": null,
+          "unit": "dB",
+          "conditions": "RS ≤ 10 kΩ"
+        },
+        "PSR": {
+          "parameter": "Power Supply Rejection",
+          "min": 65,
+          "typ": 100,
+          "max": null,
+          "unit": "dB",
+          "conditions": null
+        },
+        "VOH": {
+          "parameter": "Output Voltage-High Limit",
+          "min": 3.3,
+          "typ": 3.5,
+          "max": null,
+          "unit": "V",
+          "conditions": "VCC = 5.0 V, RL = 2.0 kΩ, TA = 25°C"
+        },
+        "VOL": {
+          "parameter": "Output Voltage-Low Limit",
+          "min": null,
+          "typ": 5.0,
+          "max": 20,
+          "unit": "mV",
+          "conditions": "VCC = 5.0 V, RL = 10 kΩ, TA = 25°C"
+        },
+        "IO+": {
+          "parameter": "Output Source Current",
+          "min": 20,
+          "typ": 40,
+          "max": null,
+          "unit": "mA",
+          "conditions": "VID = +1.0 V, VCC = 15 V, TA = 25°C"
+        },
+        "IO-": {
+          "parameter": "Output Sink Current",
+          "min": 10,
+          "typ": 20,
+          "max": null,
+          "unit": "mA",
+          "conditions": "VID = -1.0 V, VCC = 15 V, TA = 25°C"
+        },
+        "ISC": {
+          "parameter": "Output Short Circuit to Ground",
+          "min": null,
+          "typ": 40,
+          "max": 60,
+          "unit": "mA",
+          "conditions": null
+        },
+        "ICC": {
+          "parameter": "Power Supply Current (Total Device)",
+          "min": null,
+          "typ": 1.5,
+          "max": 3.0,
+          "unit": "mA",
+          "conditions": "VCC = 30 V, VO = 0 V, RL = ∞, TA = 25°C"
+        }
+      },
+      "drc_hints": {
+        "vin_operating": {
+          "min": 0,
+          "max": 28.3,
+          "unit": "V"
+        }
+      }
+    }
+  }
 }

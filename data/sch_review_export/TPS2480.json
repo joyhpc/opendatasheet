@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -596,5 +596,598 @@
       "unit": "mA"
     }
   },
-  "thermal": {}
+  "thermal": {},
+  "domains": {
+    "pin": {
+      "packages": {
+        "20-Pin TSSOP": {
+          "pin_count": 20,
+          "pins": {
+            "1": {
+              "name": "SDA",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "DIGITAL",
+              "description": "I2C Data Line",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "SCL",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "I2C Clock",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "NC",
+              "direction": "NC",
+              "signal_type": "NONE",
+              "description": "No connection, tie to GND or float",
+              "unused_treatment": "FLOAT"
+            },
+            "5": {
+              "name": "NC",
+              "direction": "NC",
+              "signal_type": "NONE",
+              "description": "No connection, tie to GND or float",
+              "unused_treatment": "FLOAT"
+            },
+            "4": {
+              "name": "VS",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power input to the I2C block, 3.3 V to 5 V",
+              "unused_treatment": null
+            },
+            "6": {
+              "name": "EN",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Device enable",
+              "unused_treatment": null
+            },
+            "7": {
+              "name": "VREF",
+              "direction": "POWER_OUT",
+              "signal_type": "ANALOG",
+              "description": "Reference voltage output, used to set power threshold on PROG pin",
+              "unused_treatment": null
+            },
+            "8": {
+              "name": "PROG",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Power-limit setting input",
+              "unused_treatment": null
+            },
+            "9": {
+              "name": "TIMER",
+              "direction": "PASSIVE",
+              "signal_type": "ANALOG",
+              "description": "Fault timing capacitor",
+              "unused_treatment": null
+            },
+            "10": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground",
+              "unused_treatment": null
+            },
+            "16": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground",
+              "unused_treatment": null
+            },
+            "11": {
+              "name": "PG",
+              "direction": "OUTPUT",
+              "signal_type": "DIGITAL",
+              "description": "Power good reporting output, open-drain",
+              "unused_treatment": null
+            },
+            "12": {
+              "name": "OUT",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Output voltage feedback",
+              "unused_treatment": null
+            },
+            "13": {
+              "name": "GATE",
+              "direction": "OUTPUT",
+              "signal_type": "ANALOG",
+              "description": "Gate output",
+              "unused_treatment": null
+            },
+            "14": {
+              "name": "SENSE",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Current-limit sense input",
+              "unused_treatment": null
+            },
+            "15": {
+              "name": "VCC",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Main power supply input to device and FET",
+              "unused_treatment": null
+            },
+            "17": {
+              "name": "VINP",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Positive differential shunt voltage. Connect to positive side of shunt resistor",
+              "unused_treatment": null
+            },
+            "18": {
+              "name": "VINM",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Negative differential shunt voltage. Connect to negative side of shunt resistor. Bus voltage is measured from this pin to GND",
+              "unused_treatment": null
+            },
+            "19": {
+              "name": "A1",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Address pin for setting the I2C address",
+              "unused_treatment": null
+            },
+            "20": {
+              "name": "A0",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Address pin for setting the I2C address",
+              "unused_treatment": null
+            }
+          }
+        }
+      }
+    },
+    "electrical": {
+      "absolute_maximum_ratings": {
+        "VCC, Sense, Enable, OUT": {
+          "parameter": "Input voltage range",
+          "min": -0.3,
+          "max": 100,
+          "unit": "V",
+          "conditions": null
+        },
+        "VS": {
+          "parameter": "Supply voltage",
+          "min": -0.3,
+          "max": 6,
+          "unit": "V",
+          "conditions": "with respect to GND"
+        },
+        "VINP, VINM": {
+          "parameter": "Input voltage, differential",
+          "min": -26,
+          "max": 26,
+          "unit": "V",
+          "conditions": null
+        },
+        "PROG": {
+          "parameter": "Sink current",
+          "min": null,
+          "max": 2,
+          "unit": "mA",
+          "conditions": null
+        },
+        "GATE, PG": {
+          "parameter": "Output voltage range",
+          "min": -0.3,
+          "max": 100,
+          "unit": "V",
+          "conditions": null
+        },
+        "TIMER, VREF": {
+          "parameter": "Output voltage range",
+          "min": -0.3,
+          "max": 6,
+          "unit": "V",
+          "conditions": null
+        },
+        "PG": {
+          "parameter": "Sink current",
+          "min": null,
+          "max": 10,
+          "unit": "mA",
+          "conditions": null
+        },
+        "VREF": {
+          "parameter": "Source current",
+          "min": 0,
+          "max": 2,
+          "unit": "mA",
+          "conditions": null
+        },
+        "SDA": {
+          "parameter": "SDA voltage",
+          "min": -0.3,
+          "max": 6.0,
+          "unit": "V",
+          "conditions": "with respect to GND"
+        },
+        "SCL": {
+          "parameter": "SCL voltage",
+          "min": -0.3,
+          "max": null,
+          "unit": "V",
+          "conditions": "max is VS + 0.3"
+        },
+        "TJ": {
+          "parameter": "Operating junction temperature range",
+          "min": -40,
+          "max": 125,
+          "unit": "°C",
+          "conditions": null
+        },
+        "Tstg": {
+          "parameter": "Storage temperature range",
+          "min": -40,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        }
+      },
+      "electrical_parameters": {
+        "IVCC": {
+          "parameter": "Supply Current (VCC) Enabled",
+          "min": null,
+          "typ": 450,
+          "max": 1000,
+          "unit": "µA",
+          "conditions": "VEN = Hi VSENSE = VOUT = VVCC"
+        },
+        "IVCC_VEN___Lo_VSENSE___VVCC___VOUT": {
+          "parameter": "Supply Current (VCC) Disabled",
+          "min": null,
+          "typ": 90,
+          "max": 250,
+          "unit": "µA",
+          "conditions": "VEN = Lo VSENSE = VVCC = VOUT = 0"
+        },
+        "IVS": {
+          "parameter": "Quiescent current (VS)",
+          "min": null,
+          "typ": 0.7,
+          "max": 1.0,
+          "unit": "mA",
+          "conditions": "operating"
+        },
+        "IVS_Power_down_mode": {
+          "parameter": "Quiescent current (VS) Power down",
+          "min": null,
+          "typ": 6,
+          "max": 15,
+          "unit": "µA",
+          "conditions": "Power down mode"
+        },
+        "VPOR": {
+          "parameter": "Power On reset threshold",
+          "min": null,
+          "typ": 2,
+          "max": null,
+          "unit": "V",
+          "conditions": null
+        },
+        "ISENSE": {
+          "parameter": "Input bias current (SENSE)",
+          "min": null,
+          "typ": 7.5,
+          "max": 20,
+          "unit": "µA",
+          "conditions": "VSENSE = VVCC VOUT = VVCC"
+        },
+        "VREF": {
+          "parameter": "Reference voltage",
+          "min": 3.9,
+          "typ": 4,
+          "max": 4.1,
+          "unit": "V",
+          "conditions": "0 < IVREF < 1 mA"
+        },
+        "IPROG": {
+          "parameter": "Input bias current (PROG)",
+          "min": null,
+          "typ": null,
+          "max": 5,
+          "unit": "µA",
+          "conditions": "0 < VPROG < 4 V VEN = 48 V"
+        },
+        "RPROG": {
+          "parameter": "Pulldown resistance (PROG)",
+          "min": null,
+          "typ": 375,
+          "max": 600,
+          "unit": "Ω",
+          "conditions": "IPROG = 200 µA; VEN = 0 V"
+        },
+        "VCL": {
+          "parameter": "Current sense threshold with power limiting",
+          "min": 17,
+          "typ": 25,
+          "max": 33,
+          "unit": "mV",
+          "conditions": "VPROG = 2.4 V; VOUT = 0 V or VPROG = 0.9 V; VOUT = 30 V; VVCC = 48 V"
+        },
+        "VSENSE": {
+          "parameter": "Current sense threshold without power limiting",
+          "min": 45,
+          "typ": 50,
+          "max": 55,
+          "unit": "mV",
+          "conditions": "VPROG = 4 V; VSENSE = VOUT"
+        },
+        "tF_TRIP": {
+          "parameter": "Large overload response time",
+          "min": null,
+          "typ": null,
+          "max": 1.2,
+          "unit": "µs",
+          "conditions": "VPROG = 4 V; VOUT = VSENSE; V(VCC-SENSE): 0 rising to 200 mV; C(GATE-OUT) = 2 nF; V(GATE-OUT) = 1 V"
+        },
+        "ISOURCE": {
+          "parameter": "Charge current (sourcing)",
+          "min": 15.0,
+          "typ": 25.0,
+          "max": 34.0,
+          "unit": "µA",
+          "conditions": "VTIMER = 0 V"
+        },
+        "ISOURCE_VTIMER___0_V__TJ___25_C": {
+          "parameter": "Charge current (sourcing) 25C",
+          "min": 20.0,
+          "typ": 25.0,
+          "max": 30.0,
+          "unit": "µA",
+          "conditions": "VTIMER = 0 V; TJ = 25°C"
+        },
+        "ISINK": {
+          "parameter": "Discharge current (sinking)",
+          "min": 1.5,
+          "typ": 2.5,
+          "max": 3.7,
+          "unit": "µA",
+          "conditions": "VTIMER = 5 V"
+        },
+        "ISINK_VTIMER___5_V__TJ___25_C": {
+          "parameter": "Discharge current (sinking) 25C",
+          "min": 2.1,
+          "typ": 2.5,
+          "max": 3.1,
+          "unit": "µA",
+          "conditions": "VTIMER = 5 V; TJ = 25°C"
+        },
+        "DRETRY": {
+          "parameter": "Fault retry duty cycle",
+          "min": 0.5,
+          "typ": 0.75,
+          "max": 1.0,
+          "unit": "%",
+          "conditions": "TPS2481 only"
+        },
+        "IGATE": {
+          "parameter": "GATE sourcing current",
+          "min": 15,
+          "typ": 22,
+          "max": 35,
+          "unit": "µA",
+          "conditions": "VSENSE = VVCC; V(GATE-OUT) = 7 V; VEN = Hi"
+        },
+        "IGATE_VEN___Lo__VGATE___VVCC": {
+          "parameter": "GATE sinking current (EN Lo)",
+          "min": 1.8,
+          "typ": 2.4,
+          "max": 2.8,
+          "unit": "mA",
+          "conditions": "VEN = Lo; VGATE = VVCC"
+        },
+        "IGATE_VEN___Hi__VGATE___VVCC__V_VCC": {
+          "parameter": "GATE sinking current (Overload)",
+          "min": 75,
+          "typ": 125,
+          "max": 250,
+          "unit": "mA",
+          "conditions": "VEN = Hi; VGATE = VVCC; V(VCC-SENSE) > 200 mV"
+        },
+        "VGATE-OUT": {
+          "parameter": "GATE output voltage",
+          "min": 12,
+          "typ": null,
+          "max": 16,
+          "unit": "V",
+          "conditions": null
+        },
+        "tD_ON": {
+          "parameter": "Propagation delay EN true to GATE high",
+          "min": null,
+          "typ": 25,
+          "max": 40,
+          "unit": "µs",
+          "conditions": "VEN = 0 -> 2.5 V, 50% of VEN to 50% of VGATE, VOUT = VVCC, R(GATE-OUT) = 1 MOhm"
+        },
+        "tD_OFF": {
+          "parameter": "Propagation delay EN false to GATE low",
+          "min": null,
+          "typ": 0.5,
+          "max": 1,
+          "unit": "µs",
+          "conditions": "VEN = 2.5 V -> 0 V, 50% of VEN to 50% of VGATE, VOUT = VVCC, R(GATE-OUT) = 1 MΩ, tFALL < 0.1 µs"
+        },
+        "VPG_L": {
+          "parameter": "PG Low voltage (2mA)",
+          "min": null,
+          "typ": 0.1,
+          "max": 0.25,
+          "unit": "V",
+          "conditions": "IPG = 2 mA"
+        },
+        "VPG_L_IPG___4_mA": {
+          "parameter": "PG Low voltage (4mA)",
+          "min": null,
+          "typ": 0.25,
+          "max": 0.5,
+          "unit": "V",
+          "conditions": "IPG = 4 mA"
+        },
+        "VPGTL": {
+          "parameter": "PG threshold voltage rising",
+          "min": 0.8,
+          "typ": 1.25,
+          "max": 1.7,
+          "unit": "V",
+          "conditions": "VSENSE = VVCC; measure V(VCC-OUT)"
+        },
+        "VPGTH": {
+          "parameter": "PG threshold voltage falling",
+          "min": 2.2,
+          "typ": 2.7,
+          "max": 3.2,
+          "unit": "V",
+          "conditions": "VSENSE = VVCC; measure V(VCC-OUT)"
+        },
+        "VHYST_PG": {
+          "parameter": "PG threshold hysteresis voltage",
+          "min": null,
+          "typ": 1.4,
+          "max": null,
+          "unit": "V",
+          "conditions": "VSENSE = VVCC"
+        },
+        "tDPG": {
+          "parameter": "PG deglitch delay",
+          "min": 5,
+          "typ": 9,
+          "max": 15,
+          "unit": "ms",
+          "conditions": "VSENSE = VVCC"
+        },
+        "IOUT": {
+          "parameter": "OUT Bias current (sinking)",
+          "min": null,
+          "typ": 8,
+          "max": 20,
+          "unit": "µA",
+          "conditions": "VOUT = VVCC, VEN = Hi; sinking"
+        },
+        "IOUT_VOUT___GND__VEN___Lo__sourcing": {
+          "parameter": "OUT Bias current (sourcing)",
+          "min": null,
+          "typ": 18,
+          "max": 40,
+          "unit": "µA",
+          "conditions": "VOUT = GND; VEN = Lo; sourcing"
+        },
+        "VEN_H": {
+          "parameter": "Threshold VEN going high",
+          "min": 1.32,
+          "typ": 1.35,
+          "max": 1.38,
+          "unit": "V",
+          "conditions": null
+        },
+        "VEN_L": {
+          "parameter": "Threshold VEN going low",
+          "min": 1.2,
+          "typ": 1.25,
+          "max": 1.3,
+          "unit": "V",
+          "conditions": null
+        },
+        "CIN": {
+          "parameter": "Input capacitance (Digital)",
+          "min": null,
+          "typ": 3,
+          "max": null,
+          "unit": "pF",
+          "conditions": null
+        },
+        "ILEAKAGE": {
+          "parameter": "Input leakage current (Digital)",
+          "min": null,
+          "typ": 0.1,
+          "max": 1,
+          "unit": "µA",
+          "conditions": "0 < VIN < VS"
+        },
+        "VIN HI": {
+          "parameter": "Logic Hi input level",
+          "min": null,
+          "typ": null,
+          "max": 6,
+          "unit": "V",
+          "conditions": "min is 0.7(VS)"
+        },
+        "VINLO": {
+          "parameter": "Logic low input level",
+          "min": -0.3,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": "max is 0.3(VS)"
+        },
+        "VLO": {
+          "parameter": "SDA Low Output",
+          "min": null,
+          "typ": 0.15,
+          "max": 0.4,
+          "unit": "V",
+          "conditions": "Sinking 5 mA"
+        },
+        "VOS": {
+          "parameter": "Input offset (PGA=x1)",
+          "min": null,
+          "typ": 10,
+          "max": 100,
+          "unit": "µV",
+          "conditions": "PGA = x 1"
+        },
+        "TCONV": {
+          "parameter": "Conversion time (12 Bit)",
+          "min": null,
+          "typ": 532,
+          "max": 586,
+          "unit": "µs",
+          "conditions": "12 Bit"
+        }
+      },
+      "drc_hints": {
+        "vin_abs_max": {
+          "value": 100,
+          "unit": "V"
+        },
+        "vin_operating": {
+          "max": 6,
+          "unit": "V"
+        },
+        "vref": {
+          "min": 3.9,
+          "typ": 4,
+          "max": 4.1,
+          "unit": "V"
+        },
+        "enable_threshold": {
+          "min": 45,
+          "typ": 50,
+          "max": 55,
+          "unit": "mV"
+        },
+        "iout_max": {
+          "typ": 8,
+          "max": 20,
+          "unit": "µA"
+        },
+        "iq": {
+          "typ": 0.7,
+          "max": 1.0,
+          "unit": "mA"
+        }
+      }
+    }
+  }
 }

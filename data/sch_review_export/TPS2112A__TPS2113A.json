@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -262,5 +262,264 @@
       "unit": "μA"
     }
   },
-  "thermal": {}
+  "thermal": {},
+  "domains": {
+    "pin": {
+      "packages": {
+        "TSSOP-8": {
+          "pin_count": 8,
+          "pins": {
+            "1": {
+              "name": "STAT",
+              "direction": "OUTPUT",
+              "signal_type": "DIGITAL",
+              "description": "Open-drain output that is Hi-Z if the IN2 switch is ON. STAT pulls low if the IN1 switch is ON or if OUT is Hi-Z.",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "EN",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Active-low enable input. TTL- and CMOS-compatible with an internal 1-µA pull-up.",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "VSNS",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Voltage sense input. Connects OUT to IN1 if VSNS > 0.8 V; otherwise connects OUT to the higher of IN1 and IN2.",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "ILIM",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Current limit set pin. A resistor from ILIM to GND sets the current limit.",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground",
+              "unused_treatment": null
+            },
+            "6": {
+              "name": "IN2",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Secondary power switch input.",
+              "unused_treatment": null
+            },
+            "7": {
+              "name": "OUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Power switch output",
+              "unused_treatment": null
+            },
+            "8": {
+              "name": "IN1",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Primary power switch input.",
+              "unused_treatment": null
+            }
+          }
+        },
+        "SON-8": {
+          "pin_count": 9,
+          "pins": {
+            "1": {
+              "name": "STAT",
+              "direction": "OUTPUT",
+              "signal_type": "DIGITAL",
+              "description": "Open-drain output that is Hi-Z if the IN2 switch is ON. STAT pulls low if the IN1 switch is ON or if OUT is Hi-Z.",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "EN",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Active-low enable input. TTL- and CMOS-compatible with an internal 1-µA pull-up.",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "VSNS",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Voltage sense input. Connects OUT to IN1 if VSNS > 0.8 V; otherwise connects OUT to the higher of IN1 and IN2.",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "ILIM",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Current limit set pin. A resistor from ILIM to GND sets the current limit.",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground",
+              "unused_treatment": null
+            },
+            "6": {
+              "name": "IN2",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Secondary power switch input.",
+              "unused_treatment": null
+            },
+            "7": {
+              "name": "OUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Power switch output",
+              "unused_treatment": null
+            },
+            "8": {
+              "name": "IN1",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Primary power switch input.",
+              "unused_treatment": null
+            },
+            "EP": {
+              "name": "Pad",
+              "direction": "PASSIVE",
+              "signal_type": "POWER",
+              "description": "Exposed thermal pad (SON-8 package only). Must be connected to GND and a large copper area for heat dissipation.",
+              "unused_treatment": null
+            }
+          }
+        }
+      }
+    },
+    "electrical": {
+      "absolute_maximum_ratings": {
+        "V_I": {
+          "parameter": "Input voltage range",
+          "min": -0.3,
+          "max": 6,
+          "unit": "V",
+          "conditions": null
+        },
+        "V_O": {
+          "parameter": "Output voltage range",
+          "min": -0.3,
+          "max": 6,
+          "unit": "V",
+          "conditions": null
+        },
+        "I_O(STAT)": {
+          "parameter": "Output sink current",
+          "min": null,
+          "max": 5,
+          "unit": "mA",
+          "conditions": null
+        },
+        "I_O": {
+          "parameter": "Continuous output current",
+          "min": null,
+          "max": 0.9,
+          "unit": "A",
+          "conditions": "TPS2112APW"
+        },
+        "I_O_TPS2113APW": {
+          "parameter": "Continuous output current",
+          "min": null,
+          "max": 1.5,
+          "unit": "A",
+          "conditions": "TPS2113APW"
+        },
+        "I_O_TPS2113ADRB__TJ____105_C": {
+          "parameter": "Continuous output current",
+          "min": null,
+          "max": 2.5,
+          "unit": "A",
+          "conditions": "TPS2113ADRB, TJ <= 105°C"
+        },
+        "ESD": {
+          "parameter": "Electrostatic discharge",
+          "min": null,
+          "max": 500,
+          "unit": "V",
+          "conditions": null
+        }
+      },
+      "electrical_parameters": {
+        "rDS(on)": {
+          "parameter": "Drain-source on-state resistance",
+          "min": null,
+          "typ": 120,
+          "max": 140,
+          "unit": "mΩ",
+          "conditions": "VI(IN1) = VI(IN2) = 5.0 V, IL = 500 mA"
+        },
+        "rDS(on)_VI_IN1____VI_IN2____3_3_V__IL": {
+          "parameter": "Drain-source on-state resistance",
+          "min": null,
+          "typ": null,
+          "max": 150,
+          "unit": "mΩ",
+          "conditions": "VI(IN1) = VI(IN2) = 3.3 V, IL = 500 mA"
+        },
+        "rDS(on)_VI_IN1____VI_IN2____2_8_V__IL": {
+          "parameter": "Drain-source on-state resistance",
+          "min": null,
+          "typ": null,
+          "max": 150,
+          "unit": "mΩ",
+          "conditions": "VI(IN1) = VI(IN2) = 2.8 V, IL = 500 mA"
+        },
+        "rDS(on)_VI_IN1____VI_IN2____5_0_V__IL": {
+          "parameter": "Drain-source on-state resistance",
+          "min": null,
+          "typ": null,
+          "max": 150,
+          "unit": "mΩ",
+          "conditions": "VI(IN1) = VI(IN2) = 5.0 V, IL = 500 mA"
+        },
+        "VIH": {
+          "parameter": "High-level input voltage",
+          "min": 2,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": null
+        },
+        "VIL": {
+          "parameter": "Low-level input voltage",
+          "min": null,
+          "typ": null,
+          "max": 0.7,
+          "unit": "V",
+          "conditions": null
+        }
+      },
+      "drc_hints": {
+        "vin_abs_max": {
+          "value": 6,
+          "unit": "V"
+        },
+        "enable_threshold": {
+          "min": 2,
+          "unit": "V"
+        },
+        "iout_max": {
+          "min": 0.51,
+          "typ": 0.63,
+          "max": 0.8,
+          "unit": "A"
+        },
+        "iq": {
+          "typ": 55,
+          "max": 90,
+          "unit": "μA"
+        }
+      }
+    }
+  }
 }

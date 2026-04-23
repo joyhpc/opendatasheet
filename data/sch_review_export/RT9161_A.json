@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -463,6 +463,468 @@
       "unit": "°C/W",
       "conditions": "TO-92",
       "source": "absolute_maximum_ratings"
+    }
+  },
+  "domains": {
+    "pin": {
+      "packages": {
+        "SOT-23-3": {
+          "pin_count": 3,
+          "pins": {
+            "3": {
+              "name": "VIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power supply input",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "VOUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Output voltage",
+              "unused_treatment": null
+            },
+            "1": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground",
+              "unused_treatment": null
+            }
+          }
+        },
+        "SOT-89": {
+          "pin_count": 4,
+          "pins": {
+            "2": {
+              "name": "VIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power supply input",
+              "unused_treatment": null
+            },
+            "TAB": {
+              "name": "VIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power supply input",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "VOUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Output voltage",
+              "unused_treatment": null
+            },
+            "1": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground",
+              "unused_treatment": null
+            }
+          }
+        },
+        "SOT-223": {
+          "pin_count": 4,
+          "pins": {
+            "2": {
+              "name": "VIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power supply input",
+              "unused_treatment": null
+            },
+            "TAB": {
+              "name": "VIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power supply input",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "VOUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Output voltage",
+              "unused_treatment": null
+            },
+            "1": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground",
+              "unused_treatment": null
+            }
+          }
+        },
+        "TO-92 (L-Type)": {
+          "pin_count": 3,
+          "pins": {
+            "1": {
+              "name": "VIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power supply input",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "VOUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Output voltage",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground",
+              "unused_treatment": null
+            }
+          }
+        },
+        "TO-92 (T-Type)": {
+          "pin_count": 3,
+          "pins": {
+            "2": {
+              "name": "VIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power supply input",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "VOUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Output voltage",
+              "unused_treatment": null
+            },
+            "1": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground",
+              "unused_treatment": null
+            }
+          }
+        }
+      }
+    },
+    "electrical": {
+      "absolute_maximum_ratings": {
+        "PD": {
+          "parameter": "Power Dissipation",
+          "min": null,
+          "max": 0.4,
+          "unit": "W",
+          "conditions": "SOT-23-3, TA = 25°C"
+        },
+        "PD_SOT_89__TA___25_C": {
+          "parameter": "Power Dissipation",
+          "min": null,
+          "max": 0.571,
+          "unit": "W",
+          "conditions": "SOT-89, TA = 25°C"
+        },
+        "PD_SOT_223__TA___25_C": {
+          "parameter": "Power Dissipation",
+          "min": null,
+          "max": 0.741,
+          "unit": "W",
+          "conditions": "SOT-223, TA = 25°C"
+        },
+        "PD_TO_92__TA___25_C": {
+          "parameter": "Power Dissipation",
+          "min": null,
+          "max": 0.625,
+          "unit": "W",
+          "conditions": "TO-92, TA = 25°C"
+        },
+        "θJA": {
+          "parameter": "Package Thermal Resistance",
+          "min": null,
+          "max": 250,
+          "unit": "°C/W",
+          "conditions": "SOT-23-3"
+        },
+        "θJC": {
+          "parameter": "Package Thermal Resistance",
+          "min": null,
+          "max": 140,
+          "unit": "°C/W",
+          "conditions": "SOT-23-3"
+        },
+        "θJA_SOT_89": {
+          "parameter": "Package Thermal Resistance",
+          "min": null,
+          "max": 175,
+          "unit": "°C/W",
+          "conditions": "SOT-89"
+        },
+        "θJC_SOT_89": {
+          "parameter": "Package Thermal Resistance",
+          "min": null,
+          "max": 100,
+          "unit": "°C/W",
+          "conditions": "SOT-89"
+        },
+        "θJA_SOT_223": {
+          "parameter": "Package Thermal Resistance",
+          "min": null,
+          "max": 135,
+          "unit": "°C/W",
+          "conditions": "SOT-223"
+        },
+        "θJC_SOT_223": {
+          "parameter": "Package Thermal Resistance",
+          "min": null,
+          "max": 15,
+          "unit": "°C/W",
+          "conditions": "SOT-223"
+        },
+        "θJA_TO_92": {
+          "parameter": "Package Thermal Resistance",
+          "min": null,
+          "max": 160,
+          "unit": "°C/W",
+          "conditions": "TO-92"
+        },
+        "θJC_TO_92": {
+          "parameter": "Package Thermal Resistance",
+          "min": null,
+          "max": 125,
+          "unit": "°C/W",
+          "conditions": "TO-92"
+        }
+      },
+      "electrical_parameters": {
+        "ΔVOUT": {
+          "parameter": "Output Voltage Accuracy",
+          "min": -2,
+          "typ": null,
+          "max": 2,
+          "unit": "%",
+          "conditions": "IL = 1mA, VIN = 5V"
+        },
+        "ΔVLINE": {
+          "parameter": "Line Regulation",
+          "min": null,
+          "typ": 2,
+          "max": 3,
+          "unit": "%VOUT",
+          "conditions": "IL = 1mA, VIN = 4.5 to 12V"
+        },
+        "ΔVLOAD": {
+          "parameter": "Load Regulation",
+          "min": null,
+          "typ": 1,
+          "max": 30,
+          "unit": "mV",
+          "conditions": "IL = 1mA to 300mA, VIN = 5V"
+        },
+        "ΔVLOAD_IL___1mA_to_500mA__VIN___5V": {
+          "parameter": "Load Regulation",
+          "min": null,
+          "typ": 1,
+          "max": 50,
+          "unit": "mV",
+          "conditions": "IL = 1mA to 500mA, VIN = 5V"
+        },
+        "ILIM": {
+          "parameter": "Current Limit",
+          "min": 350,
+          "typ": 580,
+          "max": null,
+          "unit": "mA",
+          "conditions": "VIN = 5V, VOUT = 0V"
+        },
+        "ILIM_VIN___5V__VOUT___0V": {
+          "parameter": "Current Limit",
+          "min": 500,
+          "typ": 900,
+          "max": null,
+          "unit": "mA",
+          "conditions": "VIN = 5V, VOUT = 0V"
+        },
+        "VDROP": {
+          "parameter": "Dropout Voltage",
+          "min": null,
+          "typ": 450,
+          "max": 600,
+          "unit": "mV",
+          "conditions": "IL = 300mA"
+        },
+        "VDROP_IL___500mA": {
+          "parameter": "Dropout Voltage",
+          "min": null,
+          "typ": 750,
+          "max": 1000,
+          "unit": "mV",
+          "conditions": "IL = 500mA"
+        },
+        "ISTANDBY": {
+          "parameter": "Standby Current",
+          "min": null,
+          "typ": 110,
+          "max": 180,
+          "unit": "μA",
+          "conditions": "IL = 0, VIN = 12V"
+        }
+      },
+      "drc_hints": {
+        "vin_abs_max": {
+          "value": 14,
+          "unit": "V"
+        },
+        "vout": {
+          "min": -2,
+          "max": 2,
+          "unit": "%"
+        },
+        "iout_max": {
+          "min": 350,
+          "typ": 580,
+          "unit": "mA"
+        }
+      }
+    },
+    "thermal": {
+      "power_dissipation": {
+        "parameter": "Power Dissipation",
+        "symbol": "PD",
+        "min": null,
+        "typ": null,
+        "max": 0.4,
+        "value": null,
+        "unit": "W",
+        "conditions": "SOT-23-3, TA = 25°C",
+        "source": "absolute_maximum_ratings"
+      },
+      "power_dissipation_SOT_89__TA___25_C": {
+        "parameter": "Power Dissipation",
+        "symbol": "PD",
+        "min": null,
+        "typ": null,
+        "max": 0.571,
+        "value": null,
+        "unit": "W",
+        "conditions": "SOT-89, TA = 25°C",
+        "source": "absolute_maximum_ratings"
+      },
+      "power_dissipation_SOT_223__TA___25_C": {
+        "parameter": "Power Dissipation",
+        "symbol": "PD",
+        "min": null,
+        "typ": null,
+        "max": 0.741,
+        "value": null,
+        "unit": "W",
+        "conditions": "SOT-223, TA = 25°C",
+        "source": "absolute_maximum_ratings"
+      },
+      "power_dissipation_TO_92__TA___25_C": {
+        "parameter": "Power Dissipation",
+        "symbol": "PD",
+        "min": null,
+        "typ": null,
+        "max": 0.625,
+        "value": null,
+        "unit": "W",
+        "conditions": "TO-92, TA = 25°C",
+        "source": "absolute_maximum_ratings"
+      },
+      "theta_ja": {
+        "parameter": "Package Thermal Resistance",
+        "symbol": "θJA",
+        "min": null,
+        "typ": null,
+        "max": 250,
+        "value": null,
+        "unit": "°C/W",
+        "conditions": "SOT-23-3",
+        "source": "absolute_maximum_ratings"
+      },
+      "theta_jc": {
+        "parameter": "Package Thermal Resistance",
+        "symbol": "θJC",
+        "min": null,
+        "typ": null,
+        "max": 140,
+        "value": null,
+        "unit": "°C/W",
+        "conditions": "SOT-23-3",
+        "source": "absolute_maximum_ratings"
+      },
+      "theta_ja_SOT_89": {
+        "parameter": "Package Thermal Resistance",
+        "symbol": "θJA",
+        "min": null,
+        "typ": null,
+        "max": 175,
+        "value": null,
+        "unit": "°C/W",
+        "conditions": "SOT-89",
+        "source": "absolute_maximum_ratings"
+      },
+      "theta_jc_SOT_89": {
+        "parameter": "Package Thermal Resistance",
+        "symbol": "θJC",
+        "min": null,
+        "typ": null,
+        "max": 100,
+        "value": null,
+        "unit": "°C/W",
+        "conditions": "SOT-89",
+        "source": "absolute_maximum_ratings"
+      },
+      "theta_ja_SOT_223": {
+        "parameter": "Package Thermal Resistance",
+        "symbol": "θJA",
+        "min": null,
+        "typ": null,
+        "max": 135,
+        "value": null,
+        "unit": "°C/W",
+        "conditions": "SOT-223",
+        "source": "absolute_maximum_ratings"
+      },
+      "theta_jc_SOT_223": {
+        "parameter": "Package Thermal Resistance",
+        "symbol": "θJC",
+        "min": null,
+        "typ": null,
+        "max": 15,
+        "value": null,
+        "unit": "°C/W",
+        "conditions": "SOT-223",
+        "source": "absolute_maximum_ratings"
+      },
+      "theta_ja_TO_92": {
+        "parameter": "Package Thermal Resistance",
+        "symbol": "θJA",
+        "min": null,
+        "typ": null,
+        "max": 160,
+        "value": null,
+        "unit": "°C/W",
+        "conditions": "TO-92",
+        "source": "absolute_maximum_ratings"
+      },
+      "theta_jc_TO_92": {
+        "parameter": "Package Thermal Resistance",
+        "symbol": "θJC",
+        "min": null,
+        "typ": null,
+        "max": 125,
+        "value": null,
+        "unit": "°C/W",
+        "conditions": "TO-92",
+        "source": "absolute_maximum_ratings"
+      }
     }
   }
 }

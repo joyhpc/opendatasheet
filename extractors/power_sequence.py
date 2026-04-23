@@ -3,13 +3,10 @@
 Handles extraction of power-up/down sequencing, soft-start, inrush current,
 enable/shutdown timing, UVLO thresholds, and power rail ordering from datasheets.
 """
-import json
 import re
-import time
-
-from google.genai import types
 
 from extractors.base import BaseExtractor
+from extractors.gemini_json import call_gemini_json_response
 
 
 # ============================================
@@ -193,73 +190,33 @@ VALID_SEQUENCING_TYPES = {"fixed", "configurable", "independent", "simultaneous"
 
 def _call_gemini_vision(client, model, images, prompt, max_retries=2):
     """Call Gemini Vision API with retry logic. Returns parsed dict or error dict."""
-    contents = [prompt]
-    for img in images:
-        contents.append(types.Part.from_bytes(data=img, mime_type='image/png'))
-
-    for attempt in range(max_retries + 1):
-        try:
-            response = client.models.generate_content(
-                model=model, contents=contents, config={"temperature": 0.1}
-            )
-            raw = response.text
-            # Clean markdown wrapping
-            if "```json" in raw:
-                raw = raw.split("```json")[1].split("```")[0]
-            elif "```" in raw:
-                raw = raw.split("```")[1].split("```")[0]
-            # Find JSON boundaries
-            start = raw.find('{')
-            end = raw.rfind('}')
-            if start >= 0 and end > start:
-                raw = raw[start:end+1]
-            result = json.loads(raw.strip())
-            if isinstance(result, list):
-                result = result[0] if result else {"error": "Empty list"}
-            if not isinstance(result, dict):
-                return {"error": f"Unexpected type: {type(result).__name__}"}
-            # Normalize key names — the model might use alternate keys
-            if "power_stages" not in result:
-                for key in ["powerStages", "stages", "power_up_stages"]:
-                    if key in result:
-                        result["power_stages"] = result.pop(key)
-                        break
-            if "power_rails" not in result:
-                for key in ["powerRails", "rails", "supply_rails"]:
-                    if key in result:
-                        result["power_rails"] = result.pop(key)
-                        break
-            if "startup_parameters" not in result:
-                for key in ["startupParameters", "startup_params", "timing_parameters"]:
-                    if key in result:
-                        result["startup_parameters"] = result.pop(key)
-                        break
-            if "protection_thresholds" not in result:
-                for key in ["protectionThresholds", "thresholds", "protection"]:
-                    if key in result:
-                        result["protection_thresholds"] = result.pop(key)
-                        break
-            if "sequencing_rules" not in result:
-                for key in ["sequencingRules", "rules", "ordering_rules"]:
-                    if key in result:
-                        result["sequencing_rules"] = result.pop(key)
-                        break
-            if "power_sequence_summary" not in result:
-                for key in ["summary", "powerSequenceSummary", "sequence_summary"]:
-                    if key in result:
-                        result["power_sequence_summary"] = result.pop(key)
-                        break
-            return result
-        except json.JSONDecodeError as e:
-            if attempt < max_retries:
-                time.sleep(3)
-                continue
-            return {"error": f"JSON parse failed: {str(e)}", "raw": raw[:500] if 'raw' in dir() else ""}
-        except Exception as e:
-            if attempt < max_retries and ("503" in str(e) or "429" in str(e) or "504" in str(e) or "timeout" in str(e).lower() or "ReadTimeout" in str(type(e).__name__) or "ConnectTimeout" in str(type(e).__name__)):
-                time.sleep(10)
-                continue
-            return {"error": str(e)}
+    return call_gemini_json_response(
+        client,
+        model,
+        images,
+        prompt,
+        max_retries=max_retries,
+        key_aliases={
+            "power_stages": ("powerStages", "stages", "power_up_stages"),
+            "power_rails": ("powerRails", "rails", "supply_rails"),
+            "startup_parameters": (
+                "startupParameters",
+                "startup_params",
+                "timing_parameters",
+            ),
+            "protection_thresholds": (
+                "protectionThresholds",
+                "thresholds",
+                "protection",
+            ),
+            "sequencing_rules": ("sequencingRules", "rules", "ordering_rules"),
+            "power_sequence_summary": (
+                "summary",
+                "powerSequenceSummary",
+                "sequence_summary",
+            ),
+        },
+    )
 
 
 # ============================================

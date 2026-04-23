@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -156,6 +156,158 @@
       "unit": "°C/W",
       "conditions": null,
       "source": "absolute_maximum_ratings"
+    }
+  },
+  "domains": {
+    "electrical": {
+      "absolute_maximum_ratings": {
+        "VKA": {
+          "parameter": "Cathode Voltage",
+          "min": null,
+          "max": 18,
+          "unit": "V",
+          "conditions": null
+        },
+        "IKA": {
+          "parameter": "Cathode Current Range (continuous)",
+          "min": null,
+          "max": 100,
+          "unit": "mA",
+          "conditions": null
+        },
+        "Iref": {
+          "parameter": "Reference Input Current Range",
+          "min": null,
+          "max": 6,
+          "unit": "µA",
+          "conditions": null
+        },
+        "PD": {
+          "parameter": "Power Dissipation",
+          "min": null,
+          "max": 350,
+          "unit": "mW",
+          "conditions": null
+        },
+        "RθJA": {
+          "parameter": "Thermal Resistance from Junction to Ambient",
+          "min": null,
+          "max": 357,
+          "unit": "°C/W",
+          "conditions": null
+        },
+        "TJ": {
+          "parameter": "Operating Junction Temperature Range",
+          "min": -40,
+          "max": 125,
+          "unit": "°C",
+          "conditions": null
+        },
+        "Tstg": {
+          "parameter": "Storage Temperature Range",
+          "min": -65,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        }
+      },
+      "electrical_parameters": {
+        "Vref": {
+          "parameter": "Reference input voltage",
+          "min": 1.2276,
+          "typ": null,
+          "max": 1.2524,
+          "unit": "V",
+          "conditions": "VKA=VREF, IKA=10mA"
+        },
+        "Vref_VKA_VREF__IKA_10mA": {
+          "parameter": "Reference input voltage",
+          "min": 1.2214,
+          "typ": null,
+          "max": 1.2586,
+          "unit": "V",
+          "conditions": "VKA=VREF, IKA=10mA"
+        },
+        "ΔVref(DEV)": {
+          "parameter": "Deviation of reference voltage over full temperature range",
+          "min": null,
+          "typ": null,
+          "max": 16,
+          "unit": "mV",
+          "conditions": "VKA=VREF, IKA=10mA, 0°C≤Ta≤70°C"
+        },
+        "ΔVref/ΔVKA": {
+          "parameter": "Ratio of change in reference input voltage to the change in cathode voltage",
+          "min": null,
+          "typ": null,
+          "max": 2.4,
+          "unit": "mV/V",
+          "conditions": "IKA=10mA, ΔVKA=1.25V~15V"
+        },
+        "ΔIref/ΔT": {
+          "parameter": "Deviation of reference input current over full temperature range",
+          "min": null,
+          "typ": null,
+          "max": 0.6,
+          "unit": "µA",
+          "conditions": "IKA=10mA, R1=10kΩ, R2=∞, 0°C≤Ta≤70°C"
+        },
+        "IKA(min)": {
+          "parameter": "Minimum cathode current for regulation",
+          "min": null,
+          "typ": null,
+          "max": 0.1,
+          "unit": "mA",
+          "conditions": "VKA=VREF"
+        },
+        "Ioff": {
+          "parameter": "Off-state cathode current",
+          "min": null,
+          "typ": null,
+          "max": 0.5,
+          "unit": "µA",
+          "conditions": "VKA=15V, VREF=0"
+        },
+        "ZKA": {
+          "parameter": "Dynamic impedance",
+          "min": null,
+          "typ": null,
+          "max": 0.5,
+          "unit": "Ω",
+          "conditions": "VKA=VREF, IKA=0.1 ~20mA, f≤1.0kHz"
+        }
+      },
+      "drc_hints": {
+        "vref": {
+          "min": 1.2276,
+          "max": 1.2524,
+          "unit": "V"
+        }
+      }
+    },
+    "thermal": {
+      "power_dissipation": {
+        "parameter": "Power Dissipation",
+        "symbol": "PD",
+        "min": null,
+        "typ": null,
+        "max": 350,
+        "value": null,
+        "unit": "mW",
+        "conditions": null,
+        "source": "absolute_maximum_ratings"
+      },
+      "theta_ja": {
+        "parameter": "Thermal Resistance from Junction to Ambient",
+        "symbol": "RθJA",
+        "min": null,
+        "typ": null,
+        "max": 357,
+        "value": null,
+        "unit": "°C/W",
+        "conditions": null,
+        "source": "absolute_maximum_ratings"
+      }
     }
   }
 }

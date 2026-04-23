@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -165,5 +165,167 @@
       "unit": "mA"
     }
   },
-  "thermal": {}
+  "thermal": {},
+  "domains": {
+    "pin": {
+      "packages": {
+        "TO-220": {
+          "pin_count": 4,
+          "pins": {
+            "1": {
+              "name": "ADJUSTMENT",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Adjustment pin for the output voltage. Connect two external resistors to adjust the output voltage.",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "INPUT",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Input voltage. The input voltage and current will be designated VI and II respectively. The package tab is also connected to this pin.",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "INPUT",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Input voltage. The input voltage and current will be designated VI and II respectively. The package tab is also connected to this pin.",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "OUTPUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Output voltage. The output voltage and current will be designated VO and IO respectively.",
+              "unused_treatment": null
+            }
+          }
+        },
+        "TO-263": {
+          "pin_count": 4,
+          "pins": {
+            "1": {
+              "name": "ADJUSTMENT",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Adjustment pin for the output voltage. Connect two external resistors to adjust the output voltage.",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "INPUT",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Input voltage. The input voltage and current will be designated VI and II respectively. The package tab is also connected to this pin.",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "INPUT",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Input voltage. The input voltage and current will be designated VI and II respectively. The package tab is also connected to this pin.",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "OUTPUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Output voltage. The output voltage and current will be designated VO and IO respectively.",
+              "unused_treatment": null
+            }
+          }
+        },
+        "TO-252": {
+          "pin_count": 4,
+          "pins": {
+            "1": {
+              "name": "ADJUSTMENT",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Adjustment pin for the output voltage. Connect two external resistors to adjust the output voltage.",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "INPUT",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Input voltage. The input voltage and current will be designated VI and II respectively. The package tab is also connected to this pin.",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "INPUT",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Input voltage. The input voltage and current will be designated VI and II respectively. The package tab is also connected to this pin.",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "OUTPUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Output voltage. The output voltage and current will be designated VO and IO respectively.",
+              "unused_treatment": null
+            }
+          }
+        }
+      }
+    },
+    "electrical": {
+      "absolute_maximum_ratings": {
+        "VI – VO": {
+          "parameter": "Input-to-output differential voltage",
+          "min": null,
+          "max": -40,
+          "unit": "V",
+          "conditions": null
+        },
+        "TJ": {
+          "parameter": "Operating virtual junction temperature",
+          "min": null,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        },
+        "Tstg": {
+          "parameter": "Storage temperature range",
+          "min": -65,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        },
+        "V(ESD)": {
+          "parameter": "Electrostatic discharge (HBM)",
+          "min": null,
+          "max": null,
+          "unit": "V",
+          "conditions": "Human body model (HBM), per ANSI/ESDA/JEDEC JS-001, all pins"
+        },
+        "V(ESD)_Charged_device_model__CDM___pe": {
+          "parameter": "Electrostatic discharge (CDM)",
+          "min": null,
+          "max": null,
+          "unit": "V",
+          "conditions": "Charged device model (CDM), per JEDEC specification JESD22-C101, all pins"
+        }
+      },
+      "electrical_parameters": {},
+      "drc_hints": {
+        "vin_abs_max": {
+          "value": -40,
+          "unit": "V"
+        },
+        "vref": {
+          "min": -1.225,
+          "typ": -1.25,
+          "max": -1.275,
+          "unit": "V"
+        },
+        "iout_max": {
+          "typ": 2.5,
+          "max": 10,
+          "unit": "mA"
+        }
+      }
+    }
+  }
 }

@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -517,5 +517,519 @@
       "unit": "V"
     }
   },
-  "thermal": {}
+  "thermal": {},
+  "domains": {
+    "pin": {
+      "packages": {
+        "VSSOP-10": {
+          "pin_count": 10,
+          "pins": {
+            "1": {
+              "name": "VCC",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Positive supply input; connect to system ground through a resistor",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "UVLO/EN",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Under-voltage lockout and enable input",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "OVLO",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Overvoltage lockout input",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "PWR",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Power limit set input; sets maximum power dissipation in the external MOSFET",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "VEE",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Negative supply input; connect to system negative supply voltage",
+              "unused_treatment": null
+            },
+            "6": {
+              "name": "TIMER",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "ANALOG",
+              "description": "Timing capacitor connection for insertion delay and fault timeout",
+              "unused_treatment": null
+            },
+            "7": {
+              "name": "SENSE",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Current sense input; measures voltage across the current sense resistor",
+              "unused_treatment": null
+            },
+            "8": {
+              "name": "GATE",
+              "direction": "OUTPUT",
+              "signal_type": "ANALOG",
+              "description": "Gate drive output for the external N-channel MOSFET",
+              "unused_treatment": null
+            },
+            "9": {
+              "name": "OUT",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Output feedback; connect to external MOSFET's drain for power limiting and PGD control",
+              "unused_treatment": null
+            },
+            "10": {
+              "name": "PGD",
+              "direction": "OUTPUT",
+              "signal_type": "DIGITAL",
+              "description": "Power Good indicator; open drain output",
+              "unused_treatment": null
+            }
+          }
+        },
+        "SOIC-14": {
+          "pin_count": 14,
+          "pins": {
+            "1": {
+              "name": "VCC",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Positive supply input; connect to system ground through a resistor",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "UVLO/EN",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Under-voltage lockout and enable input",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "OVLO",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Overvoltage lockout input",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "PWR",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Power limit set input; sets maximum power dissipation in the external MOSFET",
+              "unused_treatment": null
+            },
+            "6": {
+              "name": "VEE",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Negative supply input; connect to system negative supply voltage",
+              "unused_treatment": null
+            },
+            "8": {
+              "name": "TIMER",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "ANALOG",
+              "description": "Timing capacitor connection for insertion delay and fault timeout",
+              "unused_treatment": null
+            },
+            "9": {
+              "name": "SENSE",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Current sense input; measures voltage across the current sense resistor",
+              "unused_treatment": null
+            },
+            "10": {
+              "name": "GATE",
+              "direction": "OUTPUT",
+              "signal_type": "ANALOG",
+              "description": "Gate drive output for the external N-channel MOSFET",
+              "unused_treatment": null
+            },
+            "12": {
+              "name": "OUT",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Output feedback; connect to external MOSFET's drain for power limiting and PGD control",
+              "unused_treatment": null
+            },
+            "14": {
+              "name": "PGD",
+              "direction": "OUTPUT",
+              "signal_type": "DIGITAL",
+              "description": "Power Good indicator; open drain output",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "NC",
+              "direction": "NC",
+              "signal_type": "NONE",
+              "description": "No internal connection",
+              "unused_treatment": "FLOAT"
+            },
+            "7": {
+              "name": "NC",
+              "direction": "NC",
+              "signal_type": "NONE",
+              "description": "No internal connection",
+              "unused_treatment": "FLOAT"
+            },
+            "11": {
+              "name": "NC",
+              "direction": "NC",
+              "signal_type": "NONE",
+              "description": "No internal connection",
+              "unused_treatment": "FLOAT"
+            },
+            "13": {
+              "name": "NC",
+              "direction": "NC",
+              "signal_type": "NONE",
+              "description": "No internal connection",
+              "unused_treatment": "FLOAT"
+            }
+          }
+        }
+      }
+    },
+    "electrical": {
+      "absolute_maximum_ratings": {
+        "Tstg": {
+          "parameter": "Storage temperature",
+          "min": -65,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        },
+        "V(ESD)": {
+          "parameter": "Electrostatic discharge",
+          "min": null,
+          "max": 500,
+          "unit": "V",
+          "conditions": null
+        }
+      },
+      "electrical_parameters": {
+        "VZ": {
+          "parameter": "Operating voltage, VCC – VEE",
+          "min": null,
+          "typ": 13,
+          "max": null,
+          "unit": "V",
+          "conditions": "ICC = 2 mA, UVLO = 5V"
+        },
+        "VZ_ICC___2_mA__UVLO___5V": {
+          "parameter": "Operating voltage, VCC – VEE",
+          "min": 12.35,
+          "typ": 13,
+          "max": 13.65,
+          "unit": "V",
+          "conditions": "ICC = 2 mA, UVLO = 5V"
+        },
+        "ICC-EN": {
+          "parameter": "Internal operating current, enabled",
+          "min": null,
+          "typ": 0.8,
+          "max": null,
+          "unit": "mA",
+          "conditions": "VCC-VEE = 11V, UVLO = 5V"
+        },
+        "ICC-EN_VCC_VEE___11V__UVLO___5V": {
+          "parameter": "Internal operating current, enabled",
+          "min": null,
+          "typ": null,
+          "max": 1,
+          "unit": "mA",
+          "conditions": "VCC-VEE = 11V, UVLO = 5V"
+        },
+        "ICC-DIS": {
+          "parameter": "Internal operating current, disabled",
+          "min": null,
+          "typ": 480,
+          "max": null,
+          "unit": "µA",
+          "conditions": "VCC-VEE = 11V, UVLO = 2V"
+        },
+        "ICC-DIS_VCC_VEE___11V__UVLO___2V": {
+          "parameter": "Internal operating current, disabled",
+          "min": null,
+          "typ": null,
+          "max": 660,
+          "unit": "µA",
+          "conditions": "VCC-VEE = 11V, UVLO = 2V"
+        },
+        "PORIT": {
+          "parameter": "Threshold voltage to start insertion timer",
+          "min": null,
+          "typ": 7.7,
+          "max": null,
+          "unit": "V",
+          "conditions": "VCC-VEE increasing"
+        },
+        "PORIT_VCC_VEE_increasing": {
+          "parameter": "Threshold voltage to start insertion timer",
+          "min": null,
+          "typ": null,
+          "max": 8.2,
+          "unit": "V",
+          "conditions": "VCC-VEE increasing"
+        },
+        "POREN": {
+          "parameter": "Threshold voltage to enable all functions",
+          "min": null,
+          "typ": 8.4,
+          "max": null,
+          "unit": "V",
+          "conditions": "VCC-VEE increasing"
+        },
+        "POREN_VCC_VEE_increasing": {
+          "parameter": "Threshold voltage to enable all functions",
+          "min": null,
+          "typ": null,
+          "max": 8.7,
+          "unit": "V",
+          "conditions": "VCC-VEE increasing"
+        },
+        "POREN-HYS": {
+          "parameter": "POREN hysteresis",
+          "min": null,
+          "typ": 125,
+          "max": null,
+          "unit": "mV",
+          "conditions": "VCC-VEE decreasing"
+        },
+        "UVLOTH": {
+          "parameter": "UVLO threshold",
+          "min": 2.45,
+          "typ": null,
+          "max": 2.55,
+          "unit": "V",
+          "conditions": null
+        },
+        "UVLOHYS": {
+          "parameter": "UVLO hysteresis current",
+          "min": null,
+          "typ": 22,
+          "max": null,
+          "unit": "µA",
+          "conditions": "UVLO = VEE + 2V"
+        },
+        "UVLOHYS_UVLO___VEE___2V": {
+          "parameter": "UVLO hysteresis current",
+          "min": 10,
+          "typ": null,
+          "max": 34,
+          "unit": "µA",
+          "conditions": "UVLO = VEE + 2V"
+        },
+        "UVLOBIAS": {
+          "parameter": "UVLO bias current",
+          "min": null,
+          "typ": null,
+          "max": 1,
+          "unit": "µA",
+          "conditions": "UVLO = VEE + 5V"
+        },
+        "OVLOTH": {
+          "parameter": "OVLO threshold",
+          "min": 2.43,
+          "typ": null,
+          "max": 2.57,
+          "unit": "V",
+          "conditions": null
+        },
+        "OVLOHYS": {
+          "parameter": "OVLO hysteresis current",
+          "min": null,
+          "typ": -22,
+          "max": null,
+          "unit": "µA",
+          "conditions": "OVLO = VEE+2.8V"
+        },
+        "OVLOHYS_OVLO___VEE_2_8V": {
+          "parameter": "OVLO hysteresis current",
+          "min": -34,
+          "typ": null,
+          "max": -10,
+          "unit": "µA",
+          "conditions": "OVLO = VEE+2.8V"
+        },
+        "OVLOBIAS": {
+          "parameter": "OVLO bias current",
+          "min": null,
+          "typ": null,
+          "max": 1,
+          "unit": "µA",
+          "conditions": "OVLO = VEE + 2.4V"
+        },
+        "IGATE": {
+          "parameter": "Source current",
+          "min": null,
+          "typ": -52,
+          "max": null,
+          "unit": "µA",
+          "conditions": "Normal Operation"
+        },
+        "IGATE_Normal_Operation": {
+          "parameter": "Source current",
+          "min": -72,
+          "typ": null,
+          "max": -32,
+          "unit": "µA",
+          "conditions": "Normal Operation"
+        },
+        "IGATE_UVLO___2_5V": {
+          "parameter": "Sink current",
+          "min": 1.9,
+          "typ": null,
+          "max": 2.68,
+          "unit": "mA",
+          "conditions": "UVLO < 2.5V"
+        },
+        "IGATE_SENSE___VEE__150_mV_or_VCC___V": {
+          "parameter": "Sink current",
+          "min": 45,
+          "typ": null,
+          "max": 200,
+          "unit": "mA",
+          "conditions": "SENSE - VEE =150 mV or VCC - VEE < PORIT, VGATE = 5V"
+        },
+        "VCL": {
+          "parameter": "Threshold voltage",
+          "min": null,
+          "typ": 50,
+          "max": null,
+          "unit": "mV",
+          "conditions": "SENSE - VEE voltage"
+        },
+        "VCL_SENSE___VEE_voltage": {
+          "parameter": "Threshold voltage",
+          "min": 44,
+          "typ": null,
+          "max": 56,
+          "unit": "mV",
+          "conditions": "SENSE - VEE voltage"
+        },
+        "VCB": {
+          "parameter": "Threshold voltage",
+          "min": null,
+          "typ": 100,
+          "max": null,
+          "unit": "mV",
+          "conditions": "SENSE - VEE voltage"
+        },
+        "VCB_SENSE___VEE_voltage": {
+          "parameter": "Threshold voltage",
+          "min": 70,
+          "typ": null,
+          "max": 130,
+          "unit": "mV",
+          "conditions": "SENSE - VEE voltage"
+        },
+        "PWRLIM": {
+          "parameter": "Power limit sense voltage (SENSE - VEE)",
+          "min": null,
+          "typ": 22,
+          "max": null,
+          "unit": "mV",
+          "conditions": "OUT - SENSE = 24V, RPWR = 75 kΩ"
+        },
+        "PWRLIM_OUT___SENSE___24V__RPWR___75_k": {
+          "parameter": "Power limit sense voltage (SENSE - VEE)",
+          "min": 16.5,
+          "typ": null,
+          "max": 27.5,
+          "unit": "mV",
+          "conditions": "OUT - SENSE = 24V, RPWR = 75 kΩ"
+        },
+        "VTMRH": {
+          "parameter": "Upper threshold",
+          "min": 3.76,
+          "typ": null,
+          "max": 4.16,
+          "unit": "V",
+          "conditions": null
+        },
+        "VTMRL": {
+          "parameter": "Lower threshold",
+          "min": null,
+          "typ": 1.25,
+          "max": null,
+          "unit": "V",
+          "conditions": "Restart cycles (LM5067-2)"
+        },
+        "VTMRL_Restart_cycles__LM5067_2": {
+          "parameter": "Lower threshold",
+          "min": 1.18,
+          "typ": null,
+          "max": 1.32,
+          "unit": "V",
+          "conditions": "Restart cycles (LM5067-2)"
+        },
+        "ITIMER": {
+          "parameter": "Insertion time current",
+          "min": null,
+          "typ": -6,
+          "max": null,
+          "unit": "µA",
+          "conditions": "TIMER pin = 2V"
+        },
+        "ITIMER_TIMER_pin___2V": {
+          "parameter": "Insertion time current",
+          "min": -9.5,
+          "typ": null,
+          "max": -2.5,
+          "unit": "µA",
+          "conditions": "TIMER pin = 2V"
+        },
+        "PGDTH": {
+          "parameter": "Threshold measured at OUT - SENSE",
+          "min": null,
+          "typ": 1.23,
+          "max": null,
+          "unit": "V",
+          "conditions": "Decreasing"
+        },
+        "PGDTH_Decreasing": {
+          "parameter": "Threshold measured at OUT - SENSE",
+          "min": 1.162,
+          "typ": null,
+          "max": 1.285,
+          "unit": "V",
+          "conditions": "Decreasing"
+        },
+        "PGDVOL": {
+          "parameter": "Output low voltage",
+          "min": null,
+          "typ": 60,
+          "max": null,
+          "unit": "mV",
+          "conditions": "ISINK = 2 mA"
+        },
+        "PGDVOL_ISINK___2_mA": {
+          "parameter": "Output low voltage",
+          "min": null,
+          "typ": null,
+          "max": 150,
+          "unit": "mV",
+          "conditions": "ISINK = 2 mA"
+        }
+      },
+      "drc_hints": {
+        "vin_abs_max": {
+          "value": 100,
+          "unit": "V"
+        }
+      }
+    }
+  }
 }

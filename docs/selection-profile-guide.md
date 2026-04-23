@@ -32,6 +32,7 @@ python3 scripts/export_selection_profile.py --export-dir data/sch_review_export
 The script writes:
 - one profile JSON per device
 - `_index.json` for comparative browsing
+- and removes stale top-level profile JSONs that no longer map to the current `sch_review_export` set
 
 Default location:
 - `data/selection_profile/`

@@ -9,10 +9,27 @@ from design_info_utils import detect_design_page_kind, extract_design_context
 
 DEFAULT_DATASHEET_PDF_DIR = Path(__file__).resolve().parent.parent / "data/raw/datasheet_PDF"
 DCDC_CATEGORIES = {"Buck", "Boost", "Buck-Boost", "SEPIC", "Flyback", "PMIC"}
+DESIGN_CONTEXT_CATEGORY_HINTS = {"Hot Swap", "Hot-Swap", "Protection", "eFuse", "Load Switch", "Power Switch", "Ideal Diode"}
+DESIGN_CONTEXT_DESCRIPTION_KEYWORDS = (
+    "hot-swap",
+    "hotswap",
+    "protection controller",
+    "efuse",
+    "e-fuse",
+    "surge stopper",
+    "load switch",
+    "ideal diode",
+)
 
 
-def should_auto_extract_design_context(category: str | None) -> bool:
-    return category in DCDC_CATEGORIES
+def should_auto_extract_design_context(category: str | None, component: dict | None = None) -> bool:
+    if category in DCDC_CATEGORIES or category in DESIGN_CONTEXT_CATEGORY_HINTS:
+        return True
+    description = " ".join(
+        str(component.get(field) or "")
+        for field in ("description", "category", "mpn")
+    ).lower() if isinstance(component, dict) else ""
+    return any(keyword in description for keyword in DESIGN_CONTEXT_DESCRIPTION_KEYWORDS)
 
 
 def _build_design_text_pages_from_pdf(extracted_record: dict, pdf_dir: Path) -> list[dict]:

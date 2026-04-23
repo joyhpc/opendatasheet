@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -497,6 +497,502 @@
       "unit": "mW",
       "conditions": "MicroPak",
       "source": "absolute_maximum_ratings"
+    }
+  },
+  "domains": {
+    "pin": {
+      "packages": {
+        "SC-88A": {
+          "pin_count": 5,
+          "pins": {
+            "1": {
+              "name": "OE",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Output Enable Input",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "A",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Data Input",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "Y",
+              "direction": "OUTPUT",
+              "signal_type": "DIGITAL",
+              "description": "Data Output",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "VCC",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Supply Voltage",
+              "unused_treatment": null
+            }
+          }
+        },
+        "MicroPak": {
+          "pin_count": 6,
+          "pins": {
+            "1": {
+              "name": "OE",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Output Enable Input",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "A",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Data Input",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "Y",
+              "direction": "OUTPUT",
+              "signal_type": "DIGITAL",
+              "description": "Data Output",
+              "unused_treatment": null
+            },
+            "6": {
+              "name": "VCC",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Supply Voltage",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "NC",
+              "direction": "NC",
+              "signal_type": "NONE",
+              "description": "No internal connection",
+              "unused_treatment": null
+            }
+          }
+        }
+      }
+    },
+    "electrical": {
+      "absolute_maximum_ratings": {
+        "VCC": {
+          "parameter": "DC Supply Voltage",
+          "min": -0.5,
+          "max": 4.3,
+          "unit": "V",
+          "conditions": null
+        },
+        "VIN": {
+          "parameter": "DC Input Voltage",
+          "min": -0.5,
+          "max": 4.3,
+          "unit": "V",
+          "conditions": null
+        },
+        "VOUT": {
+          "parameter": "DC Output Voltage (Active-Mode)",
+          "min": -0.5,
+          "max": null,
+          "unit": "V",
+          "conditions": "Active-Mode (High or Low State), max is VCC + 0.5"
+        },
+        "VOUT_Tri_State_Mode": {
+          "parameter": "DC Output Voltage (Tri-State Mode)",
+          "min": -0.5,
+          "max": 4.3,
+          "unit": "V",
+          "conditions": "Tri-State Mode"
+        },
+        "VOUT_Power_Down_Mode__VCC___0_V": {
+          "parameter": "DC Output Voltage (Power-Down Mode)",
+          "min": -0.5,
+          "max": 4.3,
+          "unit": "V",
+          "conditions": "Power-Down Mode (VCC = 0 V)"
+        },
+        "IIK": {
+          "parameter": "DC Input Diode Current",
+          "min": -50,
+          "max": null,
+          "unit": "mA",
+          "conditions": "VIN < GND"
+        },
+        "IOK": {
+          "parameter": "DC Output Diode Current",
+          "min": -50,
+          "max": null,
+          "unit": "mA",
+          "conditions": "VOUT < GND"
+        },
+        "IOUT": {
+          "parameter": "DC Output Source/Sink Current",
+          "min": -50,
+          "max": 50,
+          "unit": "mA",
+          "conditions": null
+        },
+        "ICC": {
+          "parameter": "DC Supply Current per Supply Pin or Ground Pin",
+          "min": -50,
+          "max": 50,
+          "unit": "mA",
+          "conditions": null
+        },
+        "TSTG": {
+          "parameter": "Storage Temperature Range",
+          "min": -65,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        },
+        "TL": {
+          "parameter": "Lead Temperature",
+          "min": null,
+          "max": 260,
+          "unit": "°C",
+          "conditions": "1 mm from Case for 10 Seconds"
+        },
+        "TJ": {
+          "parameter": "Junction Temperature Under Bias",
+          "min": null,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        },
+        "θJA": {
+          "parameter": "Thermal Resistance (SC-88A)",
+          "min": null,
+          "max": null,
+          "unit": "°C/W",
+          "conditions": "SC-88A"
+        },
+        "θJA_MicroPak": {
+          "parameter": "Thermal Resistance (MicroPak)",
+          "min": null,
+          "max": null,
+          "unit": "°C/W",
+          "conditions": "MicroPak"
+        },
+        "PD": {
+          "parameter": "Power Dissipation in Still Air (SC-88A)",
+          "min": null,
+          "max": null,
+          "unit": "mW",
+          "conditions": "SC-88A"
+        },
+        "PD_MicroPak": {
+          "parameter": "Power Dissipation in Still Air (MicroPak)",
+          "min": null,
+          "max": null,
+          "unit": "mW",
+          "conditions": "MicroPak"
+        },
+        "VESD": {
+          "parameter": "ESD Withstand Voltage (HBM)",
+          "min": 2000,
+          "max": null,
+          "unit": "V",
+          "conditions": "Human Body Model"
+        },
+        "VESD_Charged_Device_Model": {
+          "parameter": "ESD Withstand Voltage (CDM)",
+          "min": 1000,
+          "max": null,
+          "unit": "V",
+          "conditions": "Charged Device Model"
+        },
+        "ILatchup": {
+          "parameter": "Latchup Performance",
+          "min": -100,
+          "max": 100,
+          "unit": "mA",
+          "conditions": null
+        }
+      },
+      "electrical_parameters": {
+        "VIH": {
+          "parameter": "High-Level Input Voltage",
+          "min": null,
+          "typ": 0.5,
+          "max": null,
+          "unit": "V",
+          "conditions": "VCC = 0.9V"
+        },
+        "VIH_VCC___2_3V_to_2_7V": {
+          "parameter": "High-Level Input Voltage",
+          "min": 1.6,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": "VCC = 2.3V to 2.7V"
+        },
+        "VIH_VCC___2_7V_to_3_6V": {
+          "parameter": "High-Level Input Voltage",
+          "min": 2.0,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": "VCC = 2.7V to 3.6V"
+        },
+        "VIL": {
+          "parameter": "Low-Level Input Voltage",
+          "min": null,
+          "typ": 0.5,
+          "max": null,
+          "unit": "V",
+          "conditions": "VCC = 0.9V"
+        },
+        "VIL_VCC___2_3V_to_2_7V": {
+          "parameter": "Low-Level Input Voltage",
+          "min": null,
+          "typ": null,
+          "max": 0.7,
+          "unit": "V",
+          "conditions": "VCC = 2.3V to 2.7V"
+        },
+        "VIL_VCC___2_7V_to_3_6V": {
+          "parameter": "Low-Level Input Voltage",
+          "min": null,
+          "typ": null,
+          "max": 0.8,
+          "unit": "V",
+          "conditions": "VCC = 2.7V to 3.6V"
+        },
+        "VOH": {
+          "parameter": "High-Level Output Voltage",
+          "min": 1.25,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": "VIN = VIH or VIL, IOH = -6 mA, VCC = 1.65V to 1.95V"
+        },
+        "VOH_VIN___VIH_or_VIL__IOH____6_mA": {
+          "parameter": "High-Level Output Voltage",
+          "min": 1.25,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": "VIN = VIH or VIL, IOH = -6 mA, VCC = 1.65V to 1.95V"
+        },
+        "VOH_VIN___VIH_or_VIL__IOH____24_mA": {
+          "parameter": "High-Level Output Voltage",
+          "min": 2.2,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": "VIN = VIH or VIL, IOH = -24 mA, VCC = 2.7V to 3.6V"
+        },
+        "VOL": {
+          "parameter": "Low-Level Output Voltage",
+          "min": null,
+          "typ": 0.1,
+          "max": null,
+          "unit": "V",
+          "conditions": "VIN = VIH or VIL, IOL = 100 uA, VCC = 0.9V"
+        },
+        "VOL_VIN___VIH_or_VIL__IOL___6_mA": {
+          "parameter": "Low-Level Output Voltage",
+          "min": null,
+          "typ": null,
+          "max": 0.3,
+          "unit": "V",
+          "conditions": "VIN = VIH or VIL, IOL = 6 mA, VCC = 1.65V to 1.95V"
+        },
+        "VOL_VIN___VIH_or_VIL__IOL___24_mA": {
+          "parameter": "Low-Level Output Voltage",
+          "min": null,
+          "typ": null,
+          "max": 0.55,
+          "unit": "V",
+          "conditions": "VIN = VIH or VIL, IOL = 24 mA, VCC = 2.7V to 3.6V"
+        },
+        "IIN": {
+          "parameter": "Input Leakage Current",
+          "min": null,
+          "typ": null,
+          "max": 0.1,
+          "unit": "uA",
+          "conditions": "VIN = 3.6 V or GND, VCC = 0.9 to 3.6"
+        },
+        "IIN_VIN___3_6_V_or_GND__VCC___0_9": {
+          "parameter": "Input Leakage Current",
+          "min": null,
+          "typ": null,
+          "max": 0.5,
+          "unit": "uA",
+          "conditions": "VIN = 3.6 V or GND, VCC = 0.9 to 3.6"
+        },
+        "IOZ": {
+          "parameter": "3-State Output Leakage Current",
+          "min": null,
+          "typ": null,
+          "max": 0.5,
+          "unit": "uA",
+          "conditions": "VOUT = 0 V to 3.6 V, VCC = 0.9 to 3.6"
+        },
+        "IOZ_VOUT___0_V_to_3_6_V__VCC___0_9": {
+          "parameter": "3-State Output Leakage Current",
+          "min": null,
+          "typ": null,
+          "max": 0.5,
+          "unit": "uA",
+          "conditions": "VOUT = 0 V to 3.6 V, VCC = 0.9 to 3.6"
+        },
+        "IOFF": {
+          "parameter": "Power Off Leakage Current",
+          "min": null,
+          "typ": null,
+          "max": 0.5,
+          "unit": "uA",
+          "conditions": "VIN = 3.6 V or VOUT = 3.6 V, VCC = 0"
+        },
+        "IOFF_VIN___3_6_V_or_VOUT___3_6_V__V": {
+          "parameter": "Power Off Leakage Current",
+          "min": null,
+          "typ": null,
+          "max": 0.5,
+          "unit": "uA",
+          "conditions": "VIN = 3.6 V or VOUT = 3.6 V, VCC = 0"
+        },
+        "ICC": {
+          "parameter": "Quiescent Supply Current",
+          "min": null,
+          "typ": null,
+          "max": 0.9,
+          "unit": "uA",
+          "conditions": "VIN = VCC or GND, VCC = 0.9 to 3.6"
+        },
+        "ICC_VIN___VCC_or_GND__VCC___0_9_to": {
+          "parameter": "Quiescent Supply Current",
+          "min": null,
+          "typ": null,
+          "max": 0.9,
+          "unit": "uA",
+          "conditions": "VIN = VCC or GND, VCC = 0.9 to 3.6"
+        },
+        "tPD": {
+          "parameter": "Propagation Delay, A to Y",
+          "min": null,
+          "typ": 17.6,
+          "max": null,
+          "unit": "ns",
+          "conditions": "RL = 1 MOhm, CL = 15 pF, VCC = 0.9V"
+        },
+        "tPD_RL___2_kOhm__CL___15_pF__VCC": {
+          "parameter": "Propagation Delay, A to Y",
+          "min": null,
+          "typ": null,
+          "max": 14.9,
+          "unit": "ns",
+          "conditions": "RL = 2 kOhm, CL = 15 pF, VCC = 1.10V to 1.30V"
+        },
+        "tPD_RL___500_Ohm__CL___30_pF__VCC": {
+          "parameter": "Propagation Delay, A to Y",
+          "min": null,
+          "typ": null,
+          "max": 2.8,
+          "unit": "ns",
+          "conditions": "RL = 500 Ohm, CL = 30 pF, VCC = 2.7V to 3.6V"
+        },
+        "CIN": {
+          "parameter": "Input Capacitance",
+          "min": null,
+          "typ": 2.0,
+          "max": null,
+          "unit": "pF",
+          "conditions": "VCC = 0 V"
+        },
+        "COUT": {
+          "parameter": "Output Capacitance",
+          "min": null,
+          "typ": 4.5,
+          "max": null,
+          "unit": "pF",
+          "conditions": "VCC = 0 V"
+        },
+        "CPD": {
+          "parameter": "Power Dissipation Capacitance",
+          "min": null,
+          "typ": 20,
+          "max": null,
+          "unit": "pF",
+          "conditions": "10 MHz, VCC = 0.9 to 3.6 V, VIN = 0 V or VCC"
+        }
+      },
+      "drc_hints": {
+        "vin_abs_max": {
+          "value": 4.3,
+          "unit": "V"
+        },
+        "enable_threshold": {
+          "typ": 0.5,
+          "unit": "V"
+        }
+      }
+    },
+    "thermal": {
+      "theta_ja": {
+        "parameter": "Thermal Resistance (SC-88A)",
+        "symbol": "θJA",
+        "min": null,
+        "typ": 377,
+        "max": null,
+        "value": null,
+        "unit": "°C/W",
+        "conditions": "SC-88A",
+        "source": "absolute_maximum_ratings"
+      },
+      "theta_ja_MicroPak": {
+        "parameter": "Thermal Resistance (MicroPak)",
+        "symbol": "θJA",
+        "min": null,
+        "typ": 154,
+        "max": null,
+        "value": null,
+        "unit": "°C/W",
+        "conditions": "MicroPak",
+        "source": "absolute_maximum_ratings"
+      },
+      "power_dissipation": {
+        "parameter": "Power Dissipation in Still Air (SC-88A)",
+        "symbol": "PD",
+        "min": null,
+        "typ": 332,
+        "max": null,
+        "value": null,
+        "unit": "mW",
+        "conditions": "SC-88A",
+        "source": "absolute_maximum_ratings"
+      },
+      "power_dissipation_MicroPak": {
+        "parameter": "Power Dissipation in Still Air (MicroPak)",
+        "symbol": "PD",
+        "min": null,
+        "typ": 812,
+        "max": null,
+        "value": null,
+        "unit": "mW",
+        "conditions": "MicroPak",
+        "source": "absolute_maximum_ratings"
+      }
     }
   }
 }

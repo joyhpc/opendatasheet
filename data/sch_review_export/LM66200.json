@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -349,5 +349,351 @@
       "unit": "°C"
     }
   },
-  "thermal": {}
+  "thermal": {},
+  "domains": {
+    "pin": {
+      "packages": {
+        "SOT-8": {
+          "pin_count": 8,
+          "pins": {
+            "1": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Device ground",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Device ground",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "VOUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Output power",
+              "unused_treatment": null
+            },
+            "7": {
+              "name": "VOUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Output power",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "VIN1",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Channel 1 input power",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "ON",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Active low enable pin. Device is enabled when pulled low and disabled when pulled high.",
+              "unused_treatment": null
+            },
+            "6": {
+              "name": "VIN2",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Channel 2 input power",
+              "unused_treatment": null
+            },
+            "8": {
+              "name": "ST",
+              "direction": "OUTPUT",
+              "signal_type": "DIGITAL",
+              "description": "Status pin. Pulled high when VIN1 is used and pulled low when VIN2 is used.",
+              "unused_treatment": null
+            }
+          }
+        }
+      }
+    },
+    "electrical": {
+      "absolute_maximum_ratings": {
+        "VIN1, VIN2": {
+          "parameter": "Input Voltage",
+          "min": -0.3,
+          "max": 6,
+          "unit": "V",
+          "conditions": null
+        },
+        "VOUT": {
+          "parameter": "Output Voltage",
+          "min": -0.3,
+          "max": 6,
+          "unit": "V",
+          "conditions": null
+        },
+        "VST, VON": {
+          "parameter": "Control Pin Voltage",
+          "min": -0.3,
+          "max": 6,
+          "unit": "V",
+          "conditions": null
+        },
+        "IMAX": {
+          "parameter": "Maximum Current",
+          "min": null,
+          "max": 2.5,
+          "unit": "A",
+          "conditions": null
+        },
+        "IMAX,PLS": {
+          "parameter": "Maximum Pulsed Current",
+          "min": null,
+          "max": 4,
+          "unit": "A",
+          "conditions": "Max duration 1ms, Duty cycle of 2%"
+        },
+        "TJ": {
+          "parameter": "Junction temperature",
+          "min": null,
+          "max": null,
+          "unit": "°C",
+          "conditions": "Internally Limited"
+        },
+        "Tstg": {
+          "parameter": "Storage temperature",
+          "min": -65,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        },
+        "V(ESD)": {
+          "parameter": "Electrostatic discharge (HBM)",
+          "min": -2000,
+          "max": 2000,
+          "unit": "V",
+          "conditions": "per ANSI/ESDA/JEDEC JS-001, all pins"
+        },
+        "V(ESD)_per_ANSI_ESDA_JEDEC_JS_002__al": {
+          "parameter": "Electrostatic discharge (CDM)",
+          "min": -500,
+          "max": 500,
+          "unit": "V",
+          "conditions": "per ANSI/ESDA/JEDEC JS-002, all pins"
+        }
+      },
+      "electrical_parameters": {
+        "VIN1, VIN2": {
+          "parameter": "Input Voltage",
+          "min": 1.6,
+          "typ": null,
+          "max": 5.5,
+          "unit": "V",
+          "conditions": "Recommended Operating Conditions"
+        },
+        "VOUT": {
+          "parameter": "Output Voltage",
+          "min": 0,
+          "typ": null,
+          "max": 5.5,
+          "unit": "V",
+          "conditions": "Recommended Operating Conditions"
+        },
+        "VST, VON": {
+          "parameter": "Control Pin Voltage",
+          "min": 0,
+          "typ": null,
+          "max": 5.5,
+          "unit": "V",
+          "conditions": "Recommended Operating Conditions"
+        },
+        "TA": {
+          "parameter": "Ambient Temperature",
+          "min": -40,
+          "typ": null,
+          "max": 125,
+          "unit": "°C",
+          "conditions": "Recommended Operating Conditions"
+        },
+        "ISTBY, VIN1": {
+          "parameter": "VIN1 Standby Current",
+          "min": null,
+          "typ": 0.22,
+          "max": null,
+          "unit": "uA",
+          "conditions": "VIN2 powers VOUT, VIN2 > VIN1 + 0.2 V"
+        },
+        "ISTBY, VIN1_VIN2_powers_VOUT__VIN2___VIN1": {
+          "parameter": "VIN1 Standby Current",
+          "min": null,
+          "typ": null,
+          "max": 0.32,
+          "unit": "uA",
+          "conditions": "VIN2 powers VOUT, VIN2 > VIN1 + 0.2 V, TA = -40C to 105C"
+        },
+        "ISTBY, VIN2": {
+          "parameter": "VIN2 Standby Current",
+          "min": null,
+          "typ": 0.05,
+          "max": null,
+          "unit": "uA",
+          "conditions": "VIN1 powers VOUT, VIN1 > VIN2 + 0.1 V"
+        },
+        "ISTBY, VIN2_VIN1_powers_VOUT__VIN1___VIN2": {
+          "parameter": "VIN2 Standby Current",
+          "min": null,
+          "typ": null,
+          "max": 0.09,
+          "unit": "uA",
+          "conditions": "VIN1 powers VOUT, VIN1 > VIN2 + 0.1 V, TA = -40C to 105C"
+        },
+        "IQ, VIN1": {
+          "parameter": "VIN1 Quiescent Current",
+          "min": null,
+          "typ": 1.32,
+          "max": null,
+          "unit": "uA",
+          "conditions": "VIN1 powers VOUT, VIN1 > VIN2 + 0.1 V"
+        },
+        "IQ, VIN1_VIN1_powers_VOUT__VIN1___VIN2": {
+          "parameter": "VIN1 Quiescent Current",
+          "min": null,
+          "typ": null,
+          "max": 4.4,
+          "unit": "uA",
+          "conditions": "VIN1 powers VOUT, VIN1 > VIN2 + 0.1 V, TA = -40C to 105C"
+        },
+        "IQ, VIN2": {
+          "parameter": "VIN2 Quiescent Current",
+          "min": null,
+          "typ": 1.35,
+          "max": null,
+          "unit": "uA",
+          "conditions": "VIN2 powers VOUT, VIN2 > VIN1 + 0.2 V"
+        },
+        "IQ, VIN2_VIN2_powers_VOUT__VIN2___VIN1": {
+          "parameter": "VIN2 Quiescent Current",
+          "min": null,
+          "typ": null,
+          "max": 4.5,
+          "unit": "uA",
+          "conditions": "VIN2 powers VOUT, VIN2 > VIN1 + 0.2 V, TA = -40C to 105C"
+        },
+        "RON": {
+          "parameter": "On-Resistance",
+          "min": null,
+          "typ": 37,
+          "max": 46,
+          "unit": "mΩ",
+          "conditions": "VINx = 5 V, IOUT = 200 mA"
+        },
+        "RON_VINx___5_V__IOUT___200_mA__TA": {
+          "parameter": "On-Resistance",
+          "min": null,
+          "typ": null,
+          "max": 60,
+          "unit": "mΩ",
+          "conditions": "VINx = 5 V, IOUT = 200 mA, TA = -40C to 105C"
+        },
+        "RON_VINx___3_3_V__IOUT___200_mA": {
+          "parameter": "On-Resistance",
+          "min": null,
+          "typ": 40,
+          "max": 48,
+          "unit": "mΩ",
+          "conditions": "VINx = 3.3 V, IOUT = 200 mA"
+        },
+        "RON_VINx___3_3_V__IOUT___200_mA__T": {
+          "parameter": "On-Resistance",
+          "min": null,
+          "typ": null,
+          "max": 59,
+          "unit": "mΩ",
+          "conditions": "VINx = 3.3 V, IOUT = 200 mA, TA = -40C to 105C"
+        },
+        "VON": {
+          "parameter": "ON reference voltage",
+          "min": 0.8,
+          "typ": 1,
+          "max": 1.2,
+          "unit": "V",
+          "conditions": "1.6 V ≤ VINx ≤ 5.5 V"
+        },
+        "VRCB,R": {
+          "parameter": "Reverse current blocking rising threshold",
+          "min": null,
+          "typ": 42,
+          "max": 70,
+          "unit": "mV",
+          "conditions": "1.6 V ≤ VINx ≤ 5.5 V"
+        },
+        "TSD": {
+          "parameter": "Thermal shutdown",
+          "min": null,
+          "typ": 170,
+          "max": null,
+          "unit": "°C",
+          "conditions": null
+        },
+        "tSW": {
+          "parameter": "Switchover time",
+          "min": null,
+          "typ": 8,
+          "max": null,
+          "unit": "us",
+          "conditions": "VINx = 5 V, RL = 10Ω, CL = 10uF"
+        },
+        "tD": {
+          "parameter": "Delay time",
+          "min": null,
+          "typ": 1,
+          "max": null,
+          "unit": "ms",
+          "conditions": "VINx = 5 V, RL = 100Ω, CL = 10uF"
+        },
+        "tSS": {
+          "parameter": "Soft-start time",
+          "min": null,
+          "typ": 1.7,
+          "max": null,
+          "unit": "ms",
+          "conditions": "VINx = 5 V, RL = 100Ω, CL = 10uF"
+        }
+      },
+      "drc_hints": {
+        "vin_abs_max": {
+          "value": 6,
+          "unit": "V"
+        },
+        "vin_operating": {
+          "min": 1.6,
+          "max": 5.5,
+          "unit": "V"
+        },
+        "vref": {
+          "min": 0.8,
+          "typ": 1,
+          "max": 1.2,
+          "unit": "V"
+        },
+        "vout": {
+          "min": 0,
+          "max": 5.5,
+          "unit": "V"
+        },
+        "iq": {
+          "typ": 1.32,
+          "unit": "uA"
+        },
+        "soft_start": {
+          "typ": 1.7,
+          "unit": "ms"
+        },
+        "thermal_shutdown": {
+          "typ": 170,
+          "unit": "°C"
+        }
+      }
+    }
+  }
 }

@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -585,6 +585,590 @@
       "unit": "mW",
       "conditions": "Internally limited",
       "source": "absolute_maximum_ratings"
+    }
+  },
+  "domains": {
+    "pin": {
+      "packages": {
+        "SO-8": {
+          "pin_count": 8,
+          "pins": {
+            "1": {
+              "name": "VOUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Output voltage",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "VIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Input voltage",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "VIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Input voltage",
+              "unused_treatment": null
+            },
+            "6": {
+              "name": "VIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Input voltage",
+              "unused_treatment": null
+            },
+            "7": {
+              "name": "VIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Input voltage",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "NC",
+              "direction": "NC",
+              "signal_type": "NONE",
+              "description": "No internal connection",
+              "unused_treatment": null
+            },
+            "8": {
+              "name": "NC",
+              "direction": "NC",
+              "signal_type": "NONE",
+              "description": "No internal connection",
+              "unused_treatment": null
+            }
+          }
+        },
+        "SOT-89": {
+          "pin_count": 3,
+          "pins": {
+            "3": {
+              "name": "VOUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Output voltage",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "VIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Input voltage",
+              "unused_treatment": null
+            },
+            "1": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground",
+              "unused_treatment": null
+            }
+          }
+        },
+        "TO-92": {
+          "pin_count": 3,
+          "pins": {
+            "3": {
+              "name": "VOUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Output voltage",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "VIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Input voltage",
+              "unused_treatment": null
+            },
+            "1": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground",
+              "unused_treatment": null
+            }
+          }
+        }
+      }
+    },
+    "electrical": {
+      "absolute_maximum_ratings": {
+        "VI": {
+          "parameter": "DC input voltage",
+          "min": null,
+          "max": -30,
+          "unit": "V",
+          "conditions": "VO = -5 to -9 V"
+        },
+        "VI_VO____12_to__15_V": {
+          "parameter": "DC input voltage",
+          "min": null,
+          "max": -35,
+          "unit": "V",
+          "conditions": "VO = -12 to -15 V"
+        },
+        "IO": {
+          "parameter": "Output current",
+          "min": null,
+          "max": 100,
+          "unit": "mA",
+          "conditions": null
+        },
+        "PD": {
+          "parameter": "Power dissipation",
+          "min": null,
+          "max": null,
+          "unit": "mW",
+          "conditions": "Internally limited"
+        },
+        "TSTG": {
+          "parameter": "Storage temperature range",
+          "min": -40,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        },
+        "TOP": {
+          "parameter": "Operating junction temperature range",
+          "min": 0,
+          "max": 125,
+          "unit": "°C",
+          "conditions": "For L79LXXAC"
+        },
+        "TOP_For_L79LXXAB": {
+          "parameter": "Operating junction temperature range",
+          "min": -40,
+          "max": 125,
+          "unit": "°C",
+          "conditions": "For L79LXXAB"
+        }
+      },
+      "electrical_parameters": {
+        "VO": {
+          "parameter": "Output voltage",
+          "min": -4.8,
+          "typ": -5,
+          "max": -5.2,
+          "unit": "V",
+          "conditions": "TJ = 25 °C"
+        },
+        "VO_IO___1_to_40_mA__VI____7_to__2": {
+          "parameter": "Output voltage",
+          "min": -4.75,
+          "typ": null,
+          "max": -5.25,
+          "unit": "V",
+          "conditions": "IO = 1 to 40 mA, VI = -7 to -20 V"
+        },
+        "VO_IO___1_to_70_mA__VI____10_V": {
+          "parameter": "Output voltage",
+          "min": -4.75,
+          "typ": null,
+          "max": -5.25,
+          "unit": "V",
+          "conditions": "IO = 1 to 70 mA, VI = -10 V"
+        },
+        "ΔVO": {
+          "parameter": "Line regulation",
+          "min": null,
+          "typ": null,
+          "max": 150,
+          "unit": "mV",
+          "conditions": "VI = -7 to -20 V, TJ = 25 °C"
+        },
+        "ΔVO_VI____8_to__20_V__TJ___25__C": {
+          "parameter": "Line regulation",
+          "min": null,
+          "typ": null,
+          "max": 100,
+          "unit": "mV",
+          "conditions": "VI = -8 to -20 V, TJ = 25 °C"
+        },
+        "ΔVO_IO___1_to_100_mA__TJ___25__C": {
+          "parameter": "Load regulation",
+          "min": null,
+          "typ": null,
+          "max": 150,
+          "unit": "mV",
+          "conditions": "IO = 1 to 100 mA, TJ = 25 °C"
+        },
+        "ΔVO_IO___1_to_40_mA__TJ___25__C": {
+          "parameter": "Load regulation",
+          "min": null,
+          "typ": null,
+          "max": 75,
+          "unit": "mV",
+          "conditions": "IO = 1 to 40 mA, TJ = 25 °C"
+        },
+        "Id": {
+          "parameter": "Quiescent current",
+          "min": null,
+          "typ": null,
+          "max": 6,
+          "unit": "mA",
+          "conditions": "TJ = 25 °C"
+        },
+        "Id_TJ___125__C": {
+          "parameter": "Quiescent current",
+          "min": null,
+          "typ": null,
+          "max": 6,
+          "unit": "mA",
+          "conditions": "TJ = 125 °C"
+        },
+        "ΔId": {
+          "parameter": "Quiescent current change",
+          "min": null,
+          "typ": null,
+          "max": 0.1,
+          "unit": "mA",
+          "conditions": "IO = 1 to 40 mA"
+        },
+        "ΔId_VI____8_to__20_V": {
+          "parameter": "Quiescent current change",
+          "min": null,
+          "typ": null,
+          "max": 1.5,
+          "unit": "mA",
+          "conditions": "VI = -8 to -20 V"
+        },
+        "eN": {
+          "parameter": "Output noise voltage",
+          "min": null,
+          "typ": 40,
+          "max": null,
+          "unit": "µV",
+          "conditions": "B = 10 Hz to 100 kHz, TJ = 25 °C"
+        },
+        "SVR": {
+          "parameter": "Supply voltage rejection",
+          "min": 41,
+          "typ": 49,
+          "max": null,
+          "unit": "dB",
+          "conditions": "VI = -8 to -18 V, f = 120 Hz, IO = 40 mA, TJ = 25 °C"
+        },
+        "Vd": {
+          "parameter": "Dropout voltage",
+          "min": null,
+          "typ": 1.7,
+          "max": null,
+          "unit": "V",
+          "conditions": null
+        },
+        "VO_TJ___25__C": {
+          "parameter": "Output voltage",
+          "min": -14.4,
+          "typ": -15,
+          "max": -15.6,
+          "unit": "V",
+          "conditions": "TJ = 25 °C"
+        },
+        "VO_IO___1_to_40_mA__VI____10_5_to": {
+          "parameter": "Output voltage",
+          "min": -7.6,
+          "typ": null,
+          "max": -8.4,
+          "unit": "V",
+          "conditions": "IO = 1 to 40 mA, VI = -10.5 to -23 V"
+        },
+        "VO_IO___1_to_70_mA__VI____14_V": {
+          "parameter": "Output voltage",
+          "min": -7.6,
+          "typ": null,
+          "max": -8.4,
+          "unit": "V",
+          "conditions": "IO = 1 to 70 mA, VI = -14 V"
+        },
+        "ΔVO_VI____10_5_to__23_V__TJ___25": {
+          "parameter": "Line regulation",
+          "min": null,
+          "typ": null,
+          "max": 175,
+          "unit": "mV",
+          "conditions": "VI = -10.5 to -23 V, TJ = 25 °C"
+        },
+        "ΔVO_VI____11_to__23_V__TJ___25__C": {
+          "parameter": "Line regulation",
+          "min": null,
+          "typ": null,
+          "max": 125,
+          "unit": "mV",
+          "conditions": "VI = -11 to -23 V, TJ = 25 °C"
+        },
+        "Id_TJ___25__C": {
+          "parameter": "Quiescent current",
+          "min": null,
+          "typ": null,
+          "max": 6.5,
+          "unit": "mA",
+          "conditions": "TJ = 25 °C"
+        },
+        "ΔId_IO___1_to_40_mA": {
+          "parameter": "Quiescent current change",
+          "min": null,
+          "typ": null,
+          "max": 0.1,
+          "unit": "mA",
+          "conditions": "IO = 1 to 40 mA"
+        },
+        "ΔId_VI____11_to__23_V": {
+          "parameter": "Quiescent current change",
+          "min": null,
+          "typ": null,
+          "max": 1.5,
+          "unit": "mA",
+          "conditions": "VI = -11 to -23 V"
+        },
+        "eN_B___10_Hz_to_100_kHz__TJ___25": {
+          "parameter": "Output noise voltage",
+          "min": null,
+          "typ": 90,
+          "max": null,
+          "unit": "µV",
+          "conditions": "B = 10 Hz to 100 kHz, TJ = 25 °C"
+        },
+        "SVR_VI____12_to__23_V__f___120_Hz": {
+          "parameter": "Supply voltage rejection",
+          "min": 37,
+          "typ": 45,
+          "max": null,
+          "unit": "dB",
+          "conditions": "VI = -12 to -23 V, f = 120 Hz, IO = 40 mA, TJ = 25 °C"
+        },
+        "VO_IO___1_to_40_mA__VI____14_5_to": {
+          "parameter": "Output voltage",
+          "min": -11.4,
+          "typ": null,
+          "max": -12.6,
+          "unit": "V",
+          "conditions": "IO = 1 to 40 mA, VI = -14.5 to -27 V"
+        },
+        "VO_IO___1_to_70_mA__VI____19_V": {
+          "parameter": "Output voltage",
+          "min": -11.4,
+          "typ": null,
+          "max": -12.6,
+          "unit": "V",
+          "conditions": "IO = 1 to 70 mA, VI = -19 V"
+        },
+        "ΔVO_VI____14_5_to__27_V__TJ___25": {
+          "parameter": "Line regulation",
+          "min": null,
+          "typ": null,
+          "max": 250,
+          "unit": "mV",
+          "conditions": "VI = -14.5 to -27 V, TJ = 25 °C"
+        },
+        "ΔVO_VI____16_to__27_V__TJ___25__C": {
+          "parameter": "Line regulation",
+          "min": null,
+          "typ": null,
+          "max": 200,
+          "unit": "mV",
+          "conditions": "VI = -16 to -27 V, TJ = 25 °C"
+        },
+        "ΔId_VI____16_to__27_V": {
+          "parameter": "Quiescent current change",
+          "min": null,
+          "typ": null,
+          "max": 1.5,
+          "unit": "mA",
+          "conditions": "VI = -16 to -27 V"
+        },
+        "SVR_VI____15_to__25_V__f___120_Hz": {
+          "parameter": "Supply voltage rejection",
+          "min": 37,
+          "typ": 42,
+          "max": null,
+          "unit": "dB",
+          "conditions": "VI = -15 to -25 V, f = 120 Hz, IO = 40 mA, TJ = 25 °C"
+        },
+        "VO_IO___1_to_40_mA__VI____17_5_to": {
+          "parameter": "Output voltage",
+          "min": -14.25,
+          "typ": null,
+          "max": -15.75,
+          "unit": "V",
+          "conditions": "IO = 1 to 40 mA, VI = -17.5 to -30 V"
+        },
+        "VO_IO___1_to_70_mA__VI____23_V": {
+          "parameter": "Output voltage",
+          "min": -14.25,
+          "typ": null,
+          "max": -15.75,
+          "unit": "V",
+          "conditions": "IO = 1 to 70 mA, VI = -23 V"
+        },
+        "ΔVO_VI____17_5_to__30_V__TJ___25": {
+          "parameter": "Line regulation",
+          "min": null,
+          "typ": null,
+          "max": 300,
+          "unit": "mV",
+          "conditions": "VI = -17.5 to -30 V, TJ = 25 °C"
+        },
+        "ΔVO_VI____20_to__30_V__TJ___25__C": {
+          "parameter": "Line regulation",
+          "min": null,
+          "typ": null,
+          "max": 250,
+          "unit": "mV",
+          "conditions": "VI = -20 to -30 V, TJ = 25 °C"
+        },
+        "ΔId_VI____20_to__30_V": {
+          "parameter": "Quiescent current change",
+          "min": null,
+          "typ": null,
+          "max": 1.5,
+          "unit": "mA",
+          "conditions": "VI = -20 to -30 V"
+        },
+        "SVR_VI____18_5_to__28_5_V__f___120": {
+          "parameter": "Supply voltage rejection",
+          "min": 34,
+          "typ": 39,
+          "max": null,
+          "unit": "dB",
+          "conditions": "VI = -18.5 to -28.5 V, f = 120 Hz, IO = 40 mA, TJ = 25 °C"
+        },
+        "RthJC": {
+          "parameter": "Thermal resistance junction-case",
+          "min": null,
+          "typ": null,
+          "max": 20,
+          "unit": "°C/W",
+          "conditions": "SO-8 package"
+        },
+        "RthJC_SOT_89_package": {
+          "parameter": "Thermal resistance junction-case",
+          "min": null,
+          "typ": null,
+          "max": 15,
+          "unit": "°C/W",
+          "conditions": "SOT-89 package"
+        },
+        "RthJA": {
+          "parameter": "Thermal resistance junction-ambient",
+          "min": null,
+          "typ": null,
+          "max": 55,
+          "unit": "°C/W",
+          "conditions": "SO-8 package, considering 6 cm² of copper Board heat-sink"
+        },
+        "RthJA_TO_92_package": {
+          "parameter": "Thermal resistance junction-ambient",
+          "min": null,
+          "typ": null,
+          "max": 200,
+          "unit": "°C/W",
+          "conditions": "TO-92 package"
+        },
+        "RthJA_SOT_89_package": {
+          "parameter": "Thermal resistance junction-ambient",
+          "min": null,
+          "typ": null,
+          "max": 115,
+          "unit": "°C/W",
+          "conditions": "SOT-89 package"
+        }
+      },
+      "drc_hints": {
+        "vin_abs_max": {
+          "value": -30,
+          "unit": "V"
+        },
+        "iq": {
+          "max": 6,
+          "unit": "mA"
+        },
+        "thermal_resistance": {
+          "max": 20,
+          "unit": "°C/W"
+        }
+      }
+    },
+    "thermal": {
+      "theta_jc": {
+        "parameter": "Thermal resistance junction-case",
+        "symbol": "RthJC",
+        "min": null,
+        "typ": null,
+        "max": 20,
+        "value": null,
+        "unit": "°C/W",
+        "conditions": "SO-8 package",
+        "source": "electrical_characteristics"
+      },
+      "theta_jc_SOT_89_package": {
+        "parameter": "Thermal resistance junction-case",
+        "symbol": "RthJC",
+        "min": null,
+        "typ": null,
+        "max": 15,
+        "value": null,
+        "unit": "°C/W",
+        "conditions": "SOT-89 package",
+        "source": "electrical_characteristics"
+      },
+      "theta_ja": {
+        "parameter": "Thermal resistance junction-ambient",
+        "symbol": "RthJA",
+        "min": null,
+        "typ": null,
+        "max": 55,
+        "value": null,
+        "unit": "°C/W",
+        "conditions": "SO-8 package, considering 6 cm² of copper Board heat-sink",
+        "source": "electrical_characteristics"
+      },
+      "theta_ja_TO_92_package": {
+        "parameter": "Thermal resistance junction-ambient",
+        "symbol": "RthJA",
+        "min": null,
+        "typ": null,
+        "max": 200,
+        "value": null,
+        "unit": "°C/W",
+        "conditions": "TO-92 package",
+        "source": "electrical_characteristics"
+      },
+      "theta_ja_SOT_89_package": {
+        "parameter": "Thermal resistance junction-ambient",
+        "symbol": "RthJA",
+        "min": null,
+        "typ": null,
+        "max": 115,
+        "value": null,
+        "unit": "°C/W",
+        "conditions": "SOT-89 package",
+        "source": "electrical_characteristics"
+      },
+      "power_dissipation": {
+        "parameter": "Power dissipation",
+        "symbol": "PD",
+        "min": null,
+        "typ": null,
+        "max": null,
+        "value": null,
+        "unit": "mW",
+        "conditions": "Internally limited",
+        "source": "absolute_maximum_ratings"
+      }
     }
   }
 }

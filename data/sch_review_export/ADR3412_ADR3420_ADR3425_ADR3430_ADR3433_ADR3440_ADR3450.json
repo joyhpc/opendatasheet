@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -112,5 +112,114 @@
       "unit": "µA"
     }
   },
-  "thermal": {}
+  "thermal": {},
+  "domains": {
+    "pin": {
+      "packages": {
+        "SOT-23-6": {
+          "pin_count": 6,
+          "pins": {
+            "1": {
+              "name": "GND FORCE",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground force connection",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "GND SENSE",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground sense connection",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "ENABLE",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Enable input; active high",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "VIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Input voltage supply",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "VOUT SENSE",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Output voltage sense connection",
+              "unused_treatment": null
+            },
+            "6": {
+              "name": "VOUT FORCE",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Output voltage force connection",
+              "unused_treatment": null
+            }
+          }
+        }
+      }
+    },
+    "electrical": {
+      "absolute_maximum_ratings": {},
+      "electrical_parameters": {
+        "IOUT": {
+          "parameter": "Output Current (Sink)",
+          "min": null,
+          "typ": null,
+          "max": -3,
+          "unit": "mA",
+          "conditions": null
+        },
+        "IQ": {
+          "parameter": "Quiescent Current",
+          "min": null,
+          "typ": null,
+          "max": 100,
+          "unit": "µA",
+          "conditions": null
+        },
+        "VOUT": {
+          "parameter": "Output Voltage",
+          "min": null,
+          "typ": 5.0,
+          "max": null,
+          "unit": "V",
+          "conditions": null
+        },
+        "VIN": {
+          "parameter": "Input Voltage Range",
+          "min": 5.2,
+          "typ": null,
+          "max": 5.5,
+          "unit": "V",
+          "conditions": null
+        }
+      },
+      "drc_hints": {
+        "vin_operating": {
+          "min": 2.3,
+          "max": 5.5,
+          "unit": "V"
+        },
+        "vout": {
+          "typ": 1.2,
+          "unit": "V"
+        },
+        "iout_max": {
+          "max": 10,
+          "unit": "mA"
+        },
+        "iq": {
+          "max": 100,
+          "unit": "µA"
+        }
+      }
+    }
+  }
 }

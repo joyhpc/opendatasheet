@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -249,6 +249,254 @@
       "unit": "°C/W",
       "conditions": "Still air; assumes a minimum of nine thermal vias are connected to a 2 in² heat spreader plane for the package \"pad\" node (VNEG).",
       "source": "electrical_characteristics"
+    }
+  },
+  "domains": {
+    "pin": {
+      "packages": {
+        "5 x 5 mm QFN": {
+          "pin_count": 21,
+          "pins": {
+            "1": {
+              "name": "EROUT",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "ANALOG",
+              "description": "Error-amplifier output and PWM input; directly connected to opto-coupler in isolated application.",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "SSFT*",
+              "direction": "NC",
+              "signal_type": "NONE",
+              "description": "Not internally connected; legacy pin for compatibility.",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "VDD",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "5 V supply rail for switcher; provides drive for opto-coupler.",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "ISOSSFT*",
+              "direction": "NC",
+              "signal_type": "NONE",
+              "description": "Not internally connected; legacy pin for compatibility.",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "PLOSS",
+              "direction": "OUTPUT",
+              "signal_type": "DIGITAL",
+              "description": "Early power loss indicator; open drain output is pulled to VPOS when VPORT is applied.",
+              "unused_treatment": null
+            },
+            "6": {
+              "name": "RDET",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Input pin for external precision detection resistor; also used for establishing absolute current reference.",
+              "unused_treatment": null
+            },
+            "7": {
+              "name": "HSO",
+              "direction": "OUTPUT",
+              "signal_type": "POWER",
+              "description": "Hotswap switch output; connects to VNEG through hotswap switch.",
+              "unused_treatment": null
+            },
+            "8": {
+              "name": "RCL",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Input pin for external precision classification resistor.",
+              "unused_treatment": "FLOAT"
+            },
+            "9": {
+              "name": "VNEG",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Rectified high-voltage supply, negative rail. Must be connected to thermal PAD node.",
+              "unused_treatment": null
+            },
+            "EP": {
+              "name": "VNEG",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Rectified high-voltage supply, negative rail. Must be connected to thermal PAD node.",
+              "unused_treatment": null
+            },
+            "10": {
+              "name": "SP2",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "High-voltage supply input from spare pair; polarity-insensitive.",
+              "unused_treatment": null
+            },
+            "11": {
+              "name": "SP1",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "High-voltage supply input from spare pair; polarity-insensitive.",
+              "unused_treatment": null
+            },
+            "12": {
+              "name": "VPOSF",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Rectified high-voltage supply, positive rail (force node).",
+              "unused_treatment": null
+            },
+            "13": {
+              "name": "CT2",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "High-voltage supply input from center tap of Ethernet transformer; polarity-insensitive.",
+              "unused_treatment": null
+            },
+            "14": {
+              "name": "CT1",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "High-voltage supply input from center tap of Ethernet transformer; polarity-insensitive.",
+              "unused_treatment": null
+            },
+            "15": {
+              "name": "VSSA",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Analog ground. Internally connected to VSS2.",
+              "unused_treatment": "FLOAT"
+            },
+            "16": {
+              "name": "VPOSS*",
+              "direction": "NC",
+              "signal_type": "NONE",
+              "description": "Not internally connected; legacy pin for compatibility.",
+              "unused_treatment": null
+            },
+            "17": {
+              "name": "VSS1*",
+              "direction": "NC",
+              "signal_type": "NONE",
+              "description": "Not internally connected; legacy pin for compatibility.",
+              "unused_treatment": null
+            },
+            "18": {
+              "name": "SWO",
+              "direction": "OUTPUT",
+              "signal_type": "POWER",
+              "description": "Switching transistor output; drain of switching N-FET.",
+              "unused_treatment": null
+            },
+            "19": {
+              "name": "VSS2",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Negative supply rail for switcher; externally tied to HSO.",
+              "unused_treatment": null
+            },
+            "20": {
+              "name": "FB",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Regulated feedback input in non-isolated application.",
+              "unused_treatment": null
+            }
+          }
+        }
+      }
+    },
+    "electrical": {
+      "absolute_maximum_ratings": {},
+      "electrical_parameters": {
+        "VPORT": {
+          "parameter": "Integrated Transient Surge Clamp Voltage",
+          "min": null,
+          "typ": 100,
+          "max": null,
+          "unit": "V",
+          "conditions": null
+        },
+        "IPORT": {
+          "parameter": "IPORT Classification Class 3",
+          "min": 26,
+          "typ": null,
+          "max": 30,
+          "unit": "mA",
+          "conditions": null
+        },
+        "IPORT_37_V___VPORT___57_V": {
+          "parameter": "IPORT Operating Current",
+          "min": null,
+          "typ": 2,
+          "max": 3.1,
+          "unit": "mA",
+          "conditions": "37 V ≤ VPORT ≤ 57 V"
+        },
+        "θJA": {
+          "parameter": "Thermal Resistance",
+          "min": null,
+          "typ": 45.1,
+          "max": null,
+          "unit": "°C/W",
+          "conditions": "Still air; assumes a minimum of nine thermal vias are connected to a 2 in² heat spreader plane for the package \"pad\" node (VNEG)."
+        }
+      },
+      "drc_hints": {
+        "iout_max": {
+          "typ": 140,
+          "unit": "mA"
+        },
+        "fsw": {
+          "typ": 350,
+          "unit": "kHz"
+        },
+        "thermal_shutdown": {
+          "typ": 160,
+          "unit": "°C"
+        },
+        "thermal_resistance": {
+          "typ": 45.1,
+          "unit": "°C/W"
+        }
+      }
+    },
+    "thermal": {
+      "power_dissipation": {
+        "parameter": "Power Dissipation",
+        "symbol": null,
+        "min": null,
+        "typ": 1.2,
+        "max": null,
+        "value": null,
+        "unit": "W",
+        "conditions": "VPORT = 50 V, VOUT = 5 V, 2 A",
+        "source": "electrical_characteristics"
+      },
+      "power_dissipation_VPORT___50_V__VOUT___5_V__2_A": {
+        "parameter": "Power Dissipation (Bypassed)",
+        "symbol": null,
+        "min": null,
+        "typ": 0.7,
+        "max": null,
+        "value": null,
+        "unit": "W",
+        "conditions": "VPORT = 50 V, VOUT = 5 V, 2 A w/ diode bridges bypassed",
+        "source": "electrical_characteristics"
+      },
+      "theta_ja": {
+        "parameter": "Thermal Resistance",
+        "symbol": "θJA",
+        "min": null,
+        "typ": 45.1,
+        "max": null,
+        "value": null,
+        "unit": "°C/W",
+        "conditions": "Still air; assumes a minimum of nine thermal vias are connected to a 2 in² heat spreader plane for the package \"pad\" node (VNEG).",
+        "source": "electrical_characteristics"
+      }
     }
   }
 }

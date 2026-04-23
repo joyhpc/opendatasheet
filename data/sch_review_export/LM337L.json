@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -186,6 +186,191 @@
       "unit": null,
       "conditions": "Internally Limited",
       "source": "absolute_maximum_ratings"
+    }
+  },
+  "domains": {
+    "pin": {
+      "packages": {
+        "TO-92": {
+          "pin_count": 3,
+          "pins": {
+            "2": {
+              "name": "ADJ",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Adjustment pin for setting the output voltage",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "VIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Negative supply voltage input",
+              "unused_treatment": null
+            },
+            "1": {
+              "name": "VOUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Regulated negative output voltage",
+              "unused_treatment": null
+            }
+          }
+        },
+        "SOIC-8": {
+          "pin_count": 8,
+          "pins": {
+            "3": {
+              "name": "ADJ",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Adjustment pin for setting the output voltage",
+              "unused_treatment": null
+            },
+            "6": {
+              "name": "VIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Negative supply voltage input",
+              "unused_treatment": null
+            },
+            "1": {
+              "name": "VOUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Regulated negative output voltage",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "VOUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Regulated negative output voltage",
+              "unused_treatment": null
+            },
+            "7": {
+              "name": "VOUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Regulated negative output voltage",
+              "unused_treatment": null
+            },
+            "8": {
+              "name": "VOUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Regulated negative output voltage",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "NC",
+              "direction": "NC",
+              "signal_type": "NONE",
+              "description": "No internal connection",
+              "unused_treatment": "FLOAT"
+            },
+            "5": {
+              "name": "NC",
+              "direction": "NC",
+              "signal_type": "NONE",
+              "description": "No internal connection",
+              "unused_treatment": "FLOAT"
+            }
+          }
+        }
+      }
+    },
+    "electrical": {
+      "absolute_maximum_ratings": {
+        "Tstg": {
+          "parameter": "Storage temperature",
+          "min": -55,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        },
+        "V(ESD)": {
+          "parameter": "Electrostatic discharge (HBM)",
+          "min": null,
+          "max": null,
+          "unit": "V",
+          "conditions": "Human-body model (HBM), per ANSI/ESDA/JEDEC JS-001"
+        }
+      },
+      "electrical_parameters": {
+        "RθJA": {
+          "parameter": "Junction-to-ambient thermal resistance",
+          "min": null,
+          "typ": 111.3,
+          "max": null,
+          "unit": "°C/W",
+          "conditions": "D (SOIC) package"
+        },
+        "RθJA_LP__TO_92__package": {
+          "parameter": "Junction-to-ambient thermal resistance",
+          "min": null,
+          "typ": 156.9,
+          "max": null,
+          "unit": "°C/W",
+          "conditions": "LP (TO-92) package"
+        }
+      },
+      "drc_hints": {
+        "vin_abs_max": {
+          "value": 40,
+          "unit": "V"
+        },
+        "vref": {
+          "min": 1.2,
+          "typ": 1.25,
+          "max": 1.3,
+          "unit": "V"
+        },
+        "iout_max": {
+          "typ": 3.5,
+          "max": 5,
+          "unit": "mA"
+        },
+        "thermal_resistance": {
+          "typ": 111.3,
+          "unit": "°C/W"
+        }
+      }
+    },
+    "thermal": {
+      "theta_ja": {
+        "parameter": "Junction-to-ambient thermal resistance",
+        "symbol": "RθJA",
+        "min": null,
+        "typ": 111.3,
+        "max": null,
+        "value": null,
+        "unit": "°C/W",
+        "conditions": "D (SOIC) package",
+        "source": "electrical_characteristics"
+      },
+      "theta_ja_LP__TO_92__package": {
+        "parameter": "Junction-to-ambient thermal resistance",
+        "symbol": "RθJA",
+        "min": null,
+        "typ": 156.9,
+        "max": null,
+        "value": null,
+        "unit": "°C/W",
+        "conditions": "LP (TO-92) package",
+        "source": "electrical_characteristics"
+      },
+      "power_dissipation": {
+        "parameter": "Power dissipation",
+        "symbol": null,
+        "min": null,
+        "typ": null,
+        "max": null,
+        "value": null,
+        "unit": null,
+        "conditions": "Internally Limited",
+        "source": "absolute_maximum_ratings"
+      }
     }
   }
 }

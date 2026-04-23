@@ -10,6 +10,12 @@ TPS56C215_DATASHEET = {
     "document_id": "SLVSD05H",
     "url": "https://www.ti.com/lit/ds/symlink/tps56c215.pdf",
 }
+LM5060_DATASHEET = {
+    "title": "LM5060 High-Side Protection Controller With Low Quiescent Current datasheet",
+    "revision": "Rev. H",
+    "document_id": "SNVS628H",
+    "url": "https://www.ti.com/lit/ds/symlink/lm5060.pdf",
+}
 
 
 def _tps56c215_override() -> dict:
@@ -169,8 +175,224 @@ def _tps56c215_override() -> dict:
     }
 
 
+def _lm5060_override() -> dict:
+    source = {
+        "document_id": LM5060_DATASHEET["document_id"],
+        "revision": LM5060_DATASHEET["revision"],
+        "url": LM5060_DATASHEET["url"],
+    }
+    design_formulas = [
+        {
+            "name": "R8_OVP_resistor",
+            "formula": "R8 = R9 * (VIN_MAX - OVPTH) / OVPTH",
+            "formula_latex": "R_8 = R_9 \\times \\frac{V_{IN(max)} - V_{OVP}}{V_{OVP}}",
+            "variables": {
+                "R8": {"unit": "kOhm", "description": "OVP pull-up resistor", "is_output": True},
+                "R9": {"unit": "kOhm", "description": "OVP pull-down resistor", "typical": 10.0, "is_input": True},
+                "VIN_MAX": {"unit": "V", "description": "Maximum input voltage", "is_input": True},
+                "OVPTH": {"refers_to": "OVPTH"},
+            },
+            "source": {"page": 22, "section": "8.2.2.1"},
+            "purpose": "Set OVP trip voltage",
+            "category": "protection",
+        },
+        {
+            "name": "C_TIMER_fault_delay",
+            "formula": "C_TIMER = (t_delay * ITIMERH) / VTMRH",
+            "formula_latex": "C_{TIMER} = \\frac{t_{delay} \\times I_{TIMERH}}{V_{TMRH}}",
+            "variables": {
+                "C_TIMER": {"unit": "nF", "description": "TIMER capacitor", "is_output": True},
+                "t_delay": {"unit": "ms", "description": "Desired VDS fault delay", "is_input": True},
+                "ITIMERH": {"refers_to": "ITIMERH"},
+                "VTMRH": {"refers_to": "VTMRH"},
+            },
+            "source": {"page": 20, "section": "8.2.2.3"},
+            "purpose": "Set overcurrent protection delay",
+            "category": "timing",
+        },
+        {
+            "name": "RS_SENSE_threshold",
+            "formula": "RS = (VDSTH - VOFFSET - RO * IOUT_EN) / ISENSE",
+            "variables": {
+                "RS": {"unit": "Ohm", "description": "Sense-program resistor", "is_output": True},
+                "VDSTH": {"unit": "mV", "description": "Desired VDS fault threshold", "is_input": True},
+                "VOFFSET": {"refers_to": "VOFFSET"},
+                "RO": {"unit": "Ohm", "description": "OUT-pin series resistor", "is_input": True},
+                "IOUT_EN": {"refers_to": "IOUT-EN"},
+                "ISENSE": {"refers_to": "ISENSE"},
+            },
+            "source": {"page": 29, "section": "8.2.2.4"},
+            "purpose": "Program the current-sense threshold network",
+            "category": "protection",
+        },
+    ]
+    application_notes = [
+        {
+            "id": "AN-001",
+            "category": "component_selection",
+            "title": "R11 Fixed Value Recommendation",
+            "content": "Keep the UVLO divider bottom resistor at 10 kOhm and solve only the upper resistor for the target threshold.",
+            "rationale": "This keeps UVLO threshold error and UVLO bias-current sensitivity bounded across the operating range.",
+            "source": {"page": 22, "section": "8.2.2.2"},
+            "severity": "recommendation",
+        },
+        {
+            "id": "AN-002",
+            "category": "pcb_layout",
+            "title": "Sense Resistor Placement",
+            "content": "Keep the current-sense path short and route it away from high di/dt switching current loops.",
+            "rationale": "Noise on the SENSE and OUT path can corrupt the programmed VDS threshold.",
+            "consequence": "False overcurrent triggering or delayed fault response.",
+            "source": {"page": 31, "section": "10.2"},
+            "severity": "critical",
+        },
+        {
+            "id": "AN-003",
+            "category": "design_limits",
+            "title": "MOSFET RDS(ON) Selection",
+            "content": "Choose the pass MOSFET so the expected VDS drop at current limit stays above the comparator offset margin.",
+            "rationale": "The VOFFSET tolerance directly impacts the usable current-limit threshold window.",
+            "source": {"page": 29, "section": "8.2.2.4"},
+            "severity": "critical",
+            "related_parameters": ["VOFFSET", "ISENSE", "IOUT-EN"],
+        },
+    ]
+    return {
+        "design_page_candidates": [
+            {"page_num": 22, "heading": "OVP and UVLO Programming", "kind": "application"},
+            {"page_num": 20, "heading": "Fault Timer Programming", "kind": "application"},
+            {"page_num": 23, "heading": "Typical Application Circuit", "kind": "application"},
+            {"page_num": 31, "heading": "Layout Example", "kind": "layout"},
+        ],
+        "recommended_external_components": [
+            {
+                "role": "ovp_divider",
+                "designator": "R8",
+                "value_hint": "170 kOhm",
+                "purpose": "OVP threshold setting",
+                "related_formula": "R8_OVP_resistor",
+                "source_page": 23,
+                "snippet": "R8 sets the OVP threshold from VIN to OVP in the typical application.",
+            },
+            {
+                "role": "uvlo_divider",
+                "designator": "R10",
+                "value_hint": "46.3 kOhm",
+                "purpose": "UVLO threshold setting",
+                "source_page": 23,
+                "snippet": "R10 works with the fixed lower UVLO resistor to set turn-on voltage.",
+            },
+            {
+                "role": "sense_resistor",
+                "designator": "RS",
+                "value_hint": "9.38 Ohm",
+                "purpose": "Current sense programming",
+                "related_formula": "RS_SENSE_threshold",
+                "source_page": 23,
+                "snippet": "RS and RO program the VDS-based current limit network.",
+            },
+            {
+                "role": "pass_fet",
+                "designator": "Q1",
+                "type": "MOSFET",
+                "typical_value": "N-channel, 30 A, 60 V",
+                "purpose": "Main pass element",
+                "source_page": 23,
+                "snippet": "Q1 is the external high-side pass MOSFET in the hot-swap path.",
+            },
+            {
+                "role": "fault_timer_capacitor",
+                "designator": "C_TIMER",
+                "type": "capacitor",
+                "purpose": "Fault delay programming",
+                "related_formula": "C_TIMER_fault_delay",
+                "source_page": 20,
+                "snippet": "The TIMER capacitor sets startup and VDS fault delay behavior.",
+            },
+        ],
+        "component_value_hints": [
+            {
+                "values": ["170 kOhm", "46.3 kOhm", "10 kOhm", "9.38 Ohm", "22 uF", "68 nF"],
+                "source_page": 23,
+                "snippet": "Typical application component values for OVP, UVLO, sense resistor, and TIMER capacitor.",
+            }
+        ],
+        "design_range_hints": [
+            {"name": "VIN", "min": 9.0, "max": 36.0, "unit": "V", "source_page": 23, "snippet": "Typical hot-swap operating range"},
+            {"name": "IOUT", "min": 30.0, "max": 30.0, "unit": "A", "source_page": 23, "snippet": "Typical current limit target"},
+        ],
+        "design_equation_hints": [
+            {"name": "R8_OVP_resistor", "equation": "R8 = R9 * (VIN_MAX - OVPTH) / OVPTH", "source_page": 22},
+            {"name": "C_TIMER_fault_delay", "equation": "C_TIMER = (t_delay * ITIMERH) / VTMRH", "source_page": 20},
+            {"name": "RS_SENSE_threshold", "equation": "RS = (VDSTH - VOFFSET - RO * IOUT_EN) / ISENSE", "source_page": 29},
+        ],
+        "layout_hints": [
+            {"hint": "Keep the current-sense path short and away from switching nodes.", "source_page": 31}
+        ],
+        "design_recommendations": [
+            {
+                "topic": "feedback_divider_bias",
+                "source_page": 22,
+                "note": "Keep the lower UVLO resistor fixed at 10 kOhm to reduce bias-current induced threshold error.",
+                "source": copy.deepcopy(source),
+            },
+            {
+                "topic": "recommended_component_values",
+                "source_page": 23,
+                "note": "Use the typical application component values as a validation point for generated calculator outputs.",
+                "source": copy.deepcopy(source),
+            },
+        ],
+        "design_formulas": design_formulas,
+        "typical_application": {
+            "figure": "Figure 8-1",
+            "page": 23,
+            "title": "Typical Application Circuit",
+            "components": [
+                {
+                    "designator": "R8",
+                    "type": "resistor",
+                    "connection": ["VIN", "OVP"],
+                    "typical_value": "170 kOhm",
+                    "purpose": "OVP threshold setting",
+                    "related_formula": "R8_OVP_resistor",
+                },
+                {
+                    "designator": "R10",
+                    "type": "resistor",
+                    "connection": ["VIN", "UVLO"],
+                    "typical_value": "46.3 kOhm",
+                    "purpose": "UVLO threshold setting",
+                },
+                {
+                    "designator": "RS",
+                    "type": "resistor",
+                    "connection": ["SENSE", "OUT"],
+                    "typical_value": "9.38 Ohm",
+                    "purpose": "Current sense resistor",
+                    "related_formula": "RS_SENSE_threshold",
+                },
+                {
+                    "designator": "Q1",
+                    "type": "MOSFET",
+                    "connection": ["GATE", "VIN", "OUT"],
+                    "typical_value": "N-channel, 30 A, 60 V",
+                    "purpose": "Main pass element",
+                },
+            ],
+            "design_example": {
+                "vin_range": "9V to 36V",
+                "i_limit": "30A",
+                "ocp_delay": "12ms",
+            },
+        },
+        "application_notes": application_notes,
+    }
+
+
 NORMAL_IC_DESIGN_CONTEXT_OVERRIDES = {
     "TPS56C215": _tps56c215_override(),
+    "LM5060": _lm5060_override(),
 }
 
 
@@ -185,6 +407,8 @@ LIST_MERGE_KEYS = {
     "topology_hints",
     "configuration_mappings",
     "design_recommendations",
+    "design_formulas",
+    "application_notes",
 }
 
 

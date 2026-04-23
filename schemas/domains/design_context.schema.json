@@ -20,6 +20,38 @@
         "additionalProperties": true
       }
     },
+    "component_value_hints": {
+      "type": "array",
+      "description": "Captured value clusters from application pages.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "values": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "source_page": { "type": ["integer", "null"] },
+          "snippet": { "type": ["string", "null"] }
+        },
+        "additionalProperties": true
+      }
+    },
+    "design_range_hints": {
+      "type": "array",
+      "description": "Named operating ranges captured from design pages.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": ["string", "null"] },
+          "min": { "type": ["number", "null"] },
+          "max": { "type": ["number", "null"] },
+          "unit": { "type": ["string", "null"] },
+          "source_page": { "type": ["integer", "null"] },
+          "snippet": { "type": ["string", "null"] }
+        },
+        "additionalProperties": true
+      }
+    },
     "design_equation_hints": {
       "type": "array",
       "description": "Design equations and formulas for component selection.",
@@ -32,6 +64,93 @@
           "description": { "type": ["string", "null"] },
           "source": { "type": ["string", "null"] }
         },
+        "additionalProperties": true
+      }
+    },
+    "design_formulas": {
+      "type": "array",
+      "description": "Structured design formulas derived from application sections or overrides.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": ["string", "null"] },
+          "formula": { "type": "string" },
+          "formula_latex": { "type": ["string", "null"] },
+          "variables": { "type": "object", "additionalProperties": true },
+          "purpose": { "type": ["string", "null"] },
+          "category": { "type": ["string", "null"] },
+          "source": { "type": ["object", "null"], "additionalProperties": true }
+        },
+        "additionalProperties": true
+      }
+    },
+    "typical_application": {
+      "type": "object",
+      "description": "Structured typical application circuit summary.",
+      "properties": {
+        "figure": { "type": ["string", "null"] },
+        "page": { "type": ["integer", "null"] },
+        "title": { "type": ["string", "null"] },
+        "components": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "designator": { "type": ["string", "null"] },
+              "type": { "type": ["string", "null"] },
+              "connection": {
+                "type": "array",
+                "items": { "type": "string" }
+              },
+              "typical_value": { "type": ["string", "number", "null"] },
+              "purpose": { "type": ["string", "null"] },
+              "related_formula": { "type": ["string", "null"] }
+            },
+            "additionalProperties": true
+          }
+        },
+        "design_example": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    },
+    "application_notes": {
+      "type": "array",
+      "description": "Structured application notes, warnings, and design recommendations.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": ["string", "null"] },
+          "category": { "type": ["string", "null"] },
+          "title": { "type": ["string", "null"] },
+          "content": { "type": ["string", "null"] },
+          "rationale": { "type": ["string", "null"] },
+          "consequence": { "type": ["string", "null"] },
+          "severity": { "type": ["string", "null"] },
+          "related_parameters": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "source": { "type": ["object", "null"], "additionalProperties": true }
+        },
+        "additionalProperties": true
+      }
+    },
+    "configuration_mappings": {
+      "type": "array",
+      "description": "Configuration pin mappings and resistor-table encodings.",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    },
+    "design_recommendations": {
+      "type": "array",
+      "description": "Structured design recommendations and table-derived guidance.",
+      "items": {
+        "type": "object",
         "additionalProperties": true
       }
     },

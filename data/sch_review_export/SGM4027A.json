@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -166,6 +166,171 @@
       "unit": "°C/W",
       "conditions": null,
       "source": "absolute_maximum_ratings"
+    }
+  },
+  "domains": {
+    "pin": {
+      "packages": {
+        "SOT-23": {
+          "pin_count": 3,
+          "pins": {
+            "1": {
+              "name": "IN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power supply input",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "OUT",
+              "direction": "POWER_OUT",
+              "signal_type": "ANALOG",
+              "description": "Reference voltage output",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground",
+              "unused_treatment": null
+            }
+          }
+        }
+      }
+    },
+    "electrical": {
+      "absolute_maximum_ratings": {
+        "VIN": {
+          "parameter": "Supply Voltage",
+          "min": null,
+          "max": 6,
+          "unit": "V",
+          "conditions": null
+        },
+        "θJA": {
+          "parameter": "Package Thermal Resistance",
+          "min": null,
+          "max": null,
+          "unit": "°C/W",
+          "conditions": null
+        }
+      },
+      "electrical_parameters": {
+        "VOUT": {
+          "parameter": "Output Voltage",
+          "min": null,
+          "typ": 2.048,
+          "max": null,
+          "unit": "V",
+          "conditions": "TA = +25°C, VIN = 5V, ILOAD = 0mA"
+        },
+        "VOUT_TA____25_C__VIN___5V__ILOAD": {
+          "parameter": "Output Voltage",
+          "min": null,
+          "typ": 4.096,
+          "max": null,
+          "unit": "V",
+          "conditions": "TA = +25°C, VIN = 5V, ILOAD = 0mA"
+        },
+        "dVOUT/dT": {
+          "parameter": "Output Voltage Temperature Drift",
+          "min": null,
+          "typ": 10,
+          "max": 35,
+          "unit": "ppm/°C",
+          "conditions": "-40°C ≤ TA ≤ +125°C"
+        },
+        "ΔVO(ΔIL)": {
+          "parameter": "Load Regulation",
+          "min": null,
+          "typ": 5,
+          "max": 15,
+          "unit": "ppm/mA",
+          "conditions": "-10mA < ILOAD < 10mA"
+        },
+        "dT": {
+          "parameter": "Thermal Hysteresis",
+          "min": null,
+          "typ": 150,
+          "max": null,
+          "unit": "ppm",
+          "conditions": null
+        },
+        "VIN - VOUT": {
+          "parameter": "Dropout Voltage",
+          "min": null,
+          "typ": 5,
+          "max": 200,
+          "unit": "mV",
+          "conditions": null
+        },
+        "ISC": {
+          "parameter": "Short-Circuit Current",
+          "min": null,
+          "typ": 25,
+          "max": null,
+          "unit": "mA",
+          "conditions": null
+        },
+        "IQ": {
+          "parameter": "Quiescent Current",
+          "min": null,
+          "typ": 245,
+          "max": 320,
+          "unit": "μA",
+          "conditions": null
+        },
+        "IQ_40_C___TA____125_C": {
+          "parameter": "Quiescent Current",
+          "min": null,
+          "typ": null,
+          "max": 340,
+          "unit": "μA",
+          "conditions": "-40°C ≤ TA ≤ +125°C"
+        },
+        "VCC": {
+          "parameter": "Power Supply Range",
+          "min": 3,
+          "typ": null,
+          "max": 5.5,
+          "unit": "V",
+          "conditions": null
+        }
+      },
+      "drc_hints": {
+        "vin_abs_max": {
+          "value": 6,
+          "unit": "V"
+        },
+        "vin_operating": {
+          "typ": 5,
+          "max": 200,
+          "unit": "mV"
+        },
+        "vout": {
+          "typ": 2.048,
+          "unit": "V"
+        },
+        "iq": {
+          "typ": 245,
+          "max": 320,
+          "unit": "μA"
+        }
+      }
+    },
+    "thermal": {
+      "theta_ja": {
+        "parameter": "Package Thermal Resistance",
+        "symbol": "θJA",
+        "min": null,
+        "typ": 183.5,
+        "max": null,
+        "value": null,
+        "unit": "°C/W",
+        "conditions": null,
+        "source": "absolute_maximum_ratings"
+      }
     }
   }
 }

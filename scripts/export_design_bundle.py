@@ -20,6 +20,7 @@ import json
 import re
 import shutil
 import sys
+from dataclasses import dataclass
 from functools import lru_cache
 from pathlib import Path
 
@@ -30,6 +31,24 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT))
 
 from design_info_utils import detect_design_page_kind, extract_design_context
+try:
+    from scripts.device_export_view import normalize_normal_ic_export
+    from scripts.normal_ic_bundle_service import (
+        NormalIcBundleDeps,
+        NormalIcModuleTemplateDeps,
+        build_normal_ic_design_intent as build_normal_ic_design_intent_service,
+        build_normal_ic_module_template as build_normal_ic_module_template_service,
+        collect_normal_ic_constraints,
+    )
+except ImportError:
+    from device_export_view import normalize_normal_ic_export
+    from normal_ic_bundle_service import (
+        NormalIcBundleDeps,
+        NormalIcModuleTemplateDeps,
+        build_normal_ic_design_intent as build_normal_ic_design_intent_service,
+        build_normal_ic_module_template as build_normal_ic_module_template_service,
+        collect_normal_ic_constraints,
+    )
 
 DEFAULT_INPUT_DIR = REPO_ROOT / "data/sch_review_export"
 DEFAULT_EXTRACTED_DIR = REPO_ROOT / "data/extracted_v2"
@@ -63,6 +82,14 @@ OUTPUT_PIN_PATTERNS = (
 OPEN_DRAIN_HINTS = ("open drain", "open-drain", "open collector")
 
 
+@dataclass(frozen=True)
+class BundleArtifacts:
+    datasheet_design_context: dict
+    design_intent: dict
+    module_template: dict
+    quickstart_text: str
+
+
 def _sanitize_name(value: str) -> str:
     cleaned = re.sub(r"[^A-Za-z0-9._-]+", "_", value.strip())
     return cleaned.strip("_") or "unknown"
@@ -83,6 +110,7 @@ def _contains_any(value: str | None, fragments: tuple[str, ...]) -> bool:
 
 
 def _pick_preferred_package(device: dict) -> str | None:
+    device = normalize_normal_ic_export(device)
     packages = device.get("packages", {})
     if not packages:
         return None
@@ -207,192 +235,11 @@ def _best_constraint_match(
 
 
 def _collect_constraints(device: dict, datasheet_design_context: dict | None = None) -> dict:
-    abs_max = device.get("absolute_maximum_ratings", {})
-    electrical = device.get("electrical_parameters", {})
-
-    spec_map = {
-        "vin_abs_max": {
-            "source_kind": "absolute_maximum_ratings",
-            "source": abs_max,
-            "include": (r"^VIN\b", r"^VCC\b", r"^VDD\b", r"^VS\b", r"supply voltage", r"input voltage range"),
-            "exclude": (r"leakage", r"current", r"en pin", r"common mode", r"differential input"),
-            "prefer": (r"supply voltage", r"input voltage range"),
-            "prefer_keys": ("VIN", "VCC", "VDD", "VS"),
-            "unit_allow": ("V",),
-        },
-        "vin_operating": {
-            "source_kind": "electrical_parameters",
-            "source": electrical,
-            "include": (r"\bVIN\b", r"input voltage", r"supply voltage"),
-            "exclude": (r"uvlo", r"threshold", r"leakage", r"input current", r"en pin", r"high level", r"low level", r"logic", r"mode pin", r"fsel", r"\bVEN\b"),
-            "prefer": (r"^VIN\b", r"input voltage range", r"^input voltage$"),
-            "prefer_keys": ("VIN",),
-            "unit_allow": ("V",),
-        },
-        "vout_range": {
-            "source_kind": "electrical_parameters",
-            "source": electrical,
-            "include": (r"\bVOUT\b", r"output voltage"),
-            "exclude": (r"threshold", r"power good", r"tolerance", r"accuracy", r"noise", r"\bhigh\b", r"\blow\b", r"monitor", r"feedback"),
-            "prefer": (r"output voltage range", r"^VOUT\b"),
-            "prefer_keys": ("VOUT",),
-            "unit_allow": ("V",),
-        },
-        "feedback_reference": {
-            "source_kind": "electrical_parameters",
-            "source": electrical,
-            "include": (r"\bVFB\b", r"feedback voltage"),
-            "exclude": (r"accuracy", r"leakage"),
-            "prefer": (r"^feedback voltage$", r"^VFB\b"),
-            "prefer_keys": ("VFB",),
-            "unit_allow": ("V",),
-        },
-        "iout_max": {
-            "source_kind": "electrical_parameters",
-            "source": electrical,
-            "include": (r"\bILOAD\b", r"load current", r"output current", r"maximum load current"),
-            "exclude": (r"quiescent", r"leakage", r"input current", r"ground current", r"noise", r"transient"),
-            "prefer": (r"maximum load current", r"^load current$", r"^ILOAD\b"),
-            "prefer_keys": ("ILOAD", "IOUT"),
-            "unit_allow": ("A", "mA"),
-        },
-        "current_limit": {
-            "source_kind": "electrical_parameters",
-            "source": electrical,
-            "include": (r"current limit", r"short-circuit current", r"\bILIM"),
-            "exclude": (r"quiescent", r"leakage", r"threshold hysteresis"),
-            "prefer": (r"short-circuit current limit", r"current limit", r"^ILIM"),
-            "prefer_keys": ("ILIM", "ISC"),
-            "unit_allow": ("A", "mA"),
-        },
-        "fsw": {
-            "source_kind": "electrical_parameters",
-            "source": electrical,
-            "include": (r"switch.*freq", r"oscillat.*freq", r"\bFSW\b", r"\bFOSC\b"),
-            "prefer": (r"switching frequency", r"oscillator frequency"),
-            "prefer_keys": ("FSW", "FOSC"),
-            "unit_allow": ("kHz", "MHz", "Hz"),
-        },
-        "uvlo": {
-            "source_kind": "electrical_parameters",
-            "source": electrical,
-            "include": (r"UVLO", r"undervoltage"),
-            "prefer": (r"undervoltage lockout", r"\(rising\)"),
-            "prefer_keys": ("VUVLO", "UVLO"),
-            "unit_allow": ("V",),
-        },
-        "thermal_shutdown": {
-            "source_kind": "electrical_parameters",
-            "source": electrical,
-            "include": (r"thermal.*shut", r"over.?temp", r"\bTSD\b"),
-            "prefer": (r"thermal shutdown",),
-        },
-        "quiescent_current": {
-            "source_kind": "electrical_parameters",
-            "source": electrical,
-            "include": (r"quiescent current", r"\bIQ\b"),
-            "exclude": (r"disabled", r"shutdown current"),
-            "prefer": (r"^quiescent current$", r"operating quiescent current"),
-            "prefer_keys": ("IQ",),
-        },
-        "dropout_voltage": {
-            "source_kind": "electrical_parameters",
-            "source": electrical,
-            "include": (r"dropout voltage", r"\bVDROPOUT\b"),
-            "prefer": (r"dropout voltage",),
-            "prefer_keys": ("VDROPOUT",),
-            "unit_allow": ("V", "mV"),
-        },
-        "common_mode_range": {
-            "source_kind": "electrical_parameters",
-            "source": electrical,
-            "include": (r"common mode voltage range", r"\bVICR\b", r"\bVCM\b"),
-            "exclude": (r"rejection",),
-            "prefer": (r"common mode voltage range", r"\bVICR\b"),
-            "prefer_keys": ("VICR", "VCM"),
-            "unit_allow": ("V",),
-        },
-        "gain_bandwidth": {
-            "source_kind": "electrical_parameters",
-            "source": electrical,
-            "include": (r"gain bandwidth", r"gain bandwidth product", r"\bGBP\b", r"unity gain bandwidth"),
-            "prefer": (r"gain bandwidth", r"gain bandwidth product", r"\bGBP\b"),
-            "prefer_keys": ("GBP",),
-            "unit_allow": ("MHz", "kHz"),
-        },
-        "slew_rate": {
-            "source_kind": "electrical_parameters",
-            "source": electrical,
-            "include": (r"slew rate", r"\bSR\b"),
-            "prefer": (r"slew rate", r"\bSR\b"),
-            "prefer_keys": ("SR",),
-        },
-        "supply_current": {
-            "source_kind": "electrical_parameters",
-            "source": electrical,
-            "include": (r"supply current", r"power supply current", r"\bICC\b", r"\bISY\b"),
-            "exclude": (r"shutdown", r"disabled"),
-            "prefer": (r"supply current", r"power supply current", r"per amplifier"),
-            "prefer_keys": ("ICC", "ISY"),
-        },
-        "output_capacitance": {
-            "source_kind": "electrical_parameters",
-            "source": electrical,
-            "include": (r"output capacitance", r"\bCOUT\b", r"capacitance for stability"),
-            "exclude": (r"input capacitance",),
-            "prefer": (r"output capacitance", r"capacitance for stability"),
-            "prefer_keys": ("COUT",),
-            "unit_allow": ("pF", "nF", "µF", "μF", "uF", "mF"),
-        },
-        "output_cap_esr": {
-            "source_kind": "electrical_parameters",
-            "source": electrical,
-            "include": (r"\bESR\b", r"capacitance ESR"),
-            "prefer": (r"output/input capacitance esr", r"\bESR\b"),
-            "prefer_keys": ("ESR",),
-            "unit_allow": ("Ω", "mΩ", "kΩ"),
-        },
-    }
-
-    collected = {}
-    for name, spec in spec_map.items():
-        match = _best_constraint_match(
-            spec["source_kind"],
-            spec["source"],
-            include=spec["include"],
-            exclude=spec.get("exclude", ()),
-            prefer=spec.get("prefer", ()),
-            prefer_keys=spec.get("prefer_keys", ()),
-            unit_allow=spec.get("unit_allow", ()),
-        )
-        if match:
-            collected[name] = match
-
-    datasheet_design_context = datasheet_design_context or {}
-    range_map = {
-        "VIN": "vin_operating",
-        "VOUT": "vout_range",
-        "IOUT": "iout_max",
-        "FSW": "fsw",
-        "FOSC": "fsw",
-        "UVLO": "uvlo",
-    }
-    for hint in datasheet_design_context.get("design_range_hints", []):
-        target = range_map.get((hint.get("name") or "").upper())
-        if not target or target in collected:
-            continue
-        collected[target] = {
-            "source_kind": "datasheet_range_hint",
-            "source_key": hint.get("name"),
-            "source_page": hint.get("source_page"),
-            "parameter": f"{hint.get('name')} range",
-            "min": hint.get("min"),
-            "typ": None,
-            "max": hint.get("max"),
-            "unit": hint.get("unit"),
-            "conditions": hint.get("snippet"),
-        }
-    return collected
+    return collect_normal_ic_constraints(
+        device,
+        datasheet_design_context,
+        best_constraint_match=_best_constraint_match,
+    )
 
 
 
@@ -1226,114 +1073,38 @@ def _datasheet_component_entries(datasheet_design_context: dict) -> list[dict]:
     return results
 
 
+def _normal_ic_bundle_deps() -> NormalIcBundleDeps:
+    return NormalIcBundleDeps(
+        pick_preferred_package=_pick_preferred_package,
+        group_normal_ic_pins=_group_normal_ic_pins,
+        infer_mcu_traits=_infer_mcu_traits,
+        datasheet_component_entries=_datasheet_component_entries,
+        is_decoder_like=_is_decoder_like,
+        infer_decoder_traits=_infer_decoder_traits,
+        decoder_external_components=_decoder_external_components,
+        is_interface_switch_like=_is_interface_switch_like,
+        infer_interface_switch_traits=_infer_interface_switch_traits,
+        interface_switch_external_components=_interface_switch_external_components,
+        is_signal_switch_like=_is_signal_switch_like,
+        infer_switch_traits=_infer_switch_traits,
+        switch_external_components=_switch_external_components,
+        mcu_external_components=_mcu_external_components,
+        normal_ic_external_components=_normal_ic_external_components,
+        decoder_starter_nets=_decoder_starter_nets,
+        interface_switch_starter_nets=_interface_switch_starter_nets,
+        switch_starter_nets=_switch_starter_nets,
+        mcu_starter_nets=_mcu_starter_nets,
+        collect_constraints=_collect_constraints,
+    )
+
+
 def _build_normal_ic_design_intent(device: dict, datasheet_design_context: dict | None = None) -> dict:
-    preferred_package = _pick_preferred_package(device)
-    pin_groups, attention_items = _group_normal_ic_pins(device, preferred_package)
-    datasheet_design_context = datasheet_design_context or {}
-    constraints = _collect_constraints(device, datasheet_design_context=datasheet_design_context)
-    category = (device.get("category") or "").lower()
-    decoder_device_context = None
-    interface_switch_device_context = None
-    switch_device_context = None
-    mcu_device_context = _infer_mcu_traits(device, pin_groups, datasheet_context=datasheet_design_context)
-
-    datasheet_components = _datasheet_component_entries(datasheet_design_context)
-    if _is_decoder_like(device):
-        decoder_device_context = _infer_decoder_traits(device, pin_groups, datasheet_context=datasheet_design_context)
-        external_components = _decoder_external_components(decoder_device_context)
-        noisy_roles = {
-            "inductor",
-            "feedback_divider",
-            "bootstrap_capacitor",
-            "current_limit_resistor",
-            "dvdt_capacitor",
-            "uvlo_divider",
-            "ovp_divider",
-            "gain_resistor",
-            "sense_resistor",
-            "snubber_capacitor",
-            "snubber_resistor",
-            "filter_network",
-        }
-        datasheet_components = [item for item in datasheet_components if item.get("role") not in noisy_roles]
-    elif _is_interface_switch_like(device):
-        interface_switch_device_context = _infer_interface_switch_traits(device, datasheet_context=datasheet_design_context)
-        external_components = _interface_switch_external_components(interface_switch_device_context)
-        noisy_roles = {
-            "input_capacitor",
-            "output_capacitor",
-            "snubber_capacitor",
-            "snubber_resistor",
-            "filter_network",
-        }
-        datasheet_components = [item for item in datasheet_components if item.get("role") not in noisy_roles]
-    elif _is_signal_switch_like(device):
-        switch_device_context = _infer_switch_traits(device, datasheet_context=datasheet_design_context)
-        external_components = _switch_external_components(switch_device_context)
-        noisy_roles = {
-            "input_capacitor",
-            "output_capacitor",
-            "snubber_capacitor",
-            "snubber_resistor",
-            "filter_network",
-        }
-        datasheet_components = [item for item in datasheet_components if item.get("role") not in noisy_roles]
-    elif mcu_device_context:
-        external_components = _mcu_external_components(mcu_device_context)
-    else:
-        external_components = _normal_ic_external_components(device, pin_groups)
-    external_components.extend(datasheet_components)
-
-    if "opamp" in category or "amplifier" in category or "comparator" in category:
-        starter_nets = [
-            {"name": "V+", "purpose": "analog_positive_supply"},
-            {"name": "GND", "purpose": "module_ground"},
-            {"name": "VIN_SIG", "purpose": "analog_input_signal"},
-            {"name": "VOUT_ANA", "purpose": "analog_output_signal"},
-            {"name": "VREF", "purpose": "analog_reference_or_bias"},
-        ]
-    elif decoder_device_context:
-        starter_nets = _decoder_starter_nets(decoder_device_context)
-    elif interface_switch_device_context:
-        starter_nets = _interface_switch_starter_nets(interface_switch_device_context)
-    elif switch_device_context:
-        starter_nets = _switch_starter_nets(switch_device_context)
-    elif mcu_device_context:
-        starter_nets = _mcu_starter_nets(mcu_device_context)
-    else:
-        starter_nets = [
-            {"name": "VIN", "purpose": "primary_input_supply"},
-            {"name": "GND", "purpose": "module_ground"},
-        ]
-        if pin_groups["power_outputs"]:
-            starter_nets.append({"name": "VOUT", "purpose": "regulated_or_power_output"})
-        if pin_groups["control_inputs"]:
-            starter_nets.append({"name": "EN", "purpose": "enable_or_mode_control"})
-        if pin_groups["status_outputs"]:
-            starter_nets.append({"name": "PG", "purpose": "status_feedback"})
-
-    return {
-        "_schema": BUNDLE_SCHEMA,
-        "bundle_layer": "L1_design_intent",
-        "device_ref": {
-            "mpn": device.get("mpn"),
-            "type": device.get("_type"),
-            "category": device.get("category"),
-            "manufacturer": device.get("manufacturer"),
-            "preferred_package": preferred_package,
-            "packages": sorted(device.get("packages", {}).keys()),
-        },
-        "pin_groups": pin_groups,
-        "attention_items": attention_items,
-        "constraints": constraints,
-        "external_components": external_components,
-        "starter_nets": starter_nets,
-        "decoder_device_context": decoder_device_context,
-        "interface_switch_device_context": interface_switch_device_context,
-        "switch_device_context": switch_device_context,
-        "mcu_device_context": mcu_device_context,
-        "datasheet_design_context": datasheet_design_context,
-    }
+    return build_normal_ic_design_intent_service(
+        device,
+        datasheet_design_context,
+        bundle_schema=BUNDLE_SCHEMA,
+        deps=_normal_ic_bundle_deps(),
+    )
 
 
 def _fpga_high_speed_semantic_context(device: dict) -> dict:
@@ -2026,10 +1797,7 @@ def _fpga_standard_templates(device: dict, design_intent: dict, scenarios: list[
     return templates
 
 
-def build_design_intent(device: dict, datasheet_design_context: dict | None = None) -> dict:
-    if device.get("_type") == "fpga":
-        return _build_fpga_design_intent(device, datasheet_design_context=datasheet_design_context)
-    return _build_normal_ic_design_intent(device, datasheet_design_context=datasheet_design_context)
+
 
 
 def _append_net_once(nets: list[dict], name: str, purpose: str) -> None:
@@ -4352,7 +4120,28 @@ def _opamp_standard_templates(device: dict, design_intent: dict, topology_candid
     return templates
 
 
-def build_module_template(device: dict, design_intent: dict) -> dict:
+def _normal_ic_module_template_deps() -> NormalIcModuleTemplateDeps:
+    return NormalIcModuleTemplateDeps(
+        sanitize_name=_sanitize_name,
+        append_net_once=_append_net_once,
+        append_block_once=_append_block_once,
+        infer_opamp_traits=_infer_opamp_traits,
+        opamp_topology_candidates=_opamp_topology_candidates,
+        opamp_standard_templates=_opamp_standard_templates,
+        choose_default_opamp_template=_choose_default_opamp_template,
+        decoder_topology_candidates=_decoder_topology_candidates,
+        decoder_standard_templates=_decoder_standard_templates,
+        choose_default_decoder_template=_choose_default_decoder_template,
+        interface_switch_standard_templates=_interface_switch_standard_templates,
+        choose_default_interface_switch_template=_choose_default_interface_switch_template,
+        switch_standard_templates=_switch_standard_templates,
+        choose_default_switch_template=_choose_default_switch_template,
+        mcu_standard_templates=_mcu_standard_templates,
+        choose_default_mcu_template=_choose_default_mcu_template,
+    )
+
+
+def _build_fpga_module_template(device: dict, design_intent: dict) -> dict:
     module_name = _sanitize_name(device.get("mpn") or "device") + "_module"
     nets = list(design_intent.get("starter_nets", []))
     blocks = [
@@ -4375,123 +4164,22 @@ def build_module_template(device: dict, design_intent: dict) -> dict:
             }
         )
 
-    topology_candidates = []
-    opamp_templates = []
-    decoder_templates = []
-    interface_switch_templates = []
-    switch_templates = []
-    fpga_scenarios = []
-    fpga_templates = []
-    opamp_device_context = None
-    decoder_device_context = design_intent.get("decoder_device_context")
-    interface_switch_device_context = design_intent.get("interface_switch_device_context")
-    switch_device_context = design_intent.get("switch_device_context")
-    mcu_device_context = design_intent.get("mcu_device_context")
-    category = (device.get("category") or "").lower()
-    mcu_templates = []
-    default_mcu_template = None
-    default_opamp_template = None
-    default_decoder_template = None
-    default_interface_switch_template = None
-    default_switch_template = None
-    default_fpga_template = None
-    if device.get("_type") == "fpga":
-        fpga_scenarios = design_intent.get("customer_scenarios", [])
-        fpga_templates = _fpga_standard_templates(device, design_intent, fpga_scenarios)
-        default_fpga_template = _choose_default_fpga_template(fpga_templates)
-        for candidate in fpga_scenarios:
-            for net in candidate.get("nets", []):
-                _append_net_once(nets, net["name"], net["purpose"])
-            for block in candidate.get("blocks", []):
-                _append_block_once(blocks, block["ref"], block["type"], block["role"], scenario=candidate["name"])
-    elif "opamp" in category or "amplifier" in category:
-        opamp_device_context = _infer_opamp_traits(device, design_intent)
-        topology_candidates = _opamp_topology_candidates(design_intent)
-        opamp_templates = _opamp_standard_templates(device, design_intent, topology_candidates)
-        default_opamp_template = _choose_default_opamp_template(opamp_templates, topology_candidates)
-        for net_name, net_purpose in (
-            (opamp_device_context["suggested_power_nets"]["positive"], "analog_positive_supply"),
-            (opamp_device_context["suggested_power_nets"]["negative"], "analog_negative_supply_or_ground"),
-            (opamp_device_context["suggested_power_nets"]["reference"], "analog_reference_or_bias"),
-        ):
-            _append_net_once(nets, net_name, net_purpose)
-        for candidate in topology_candidates:
-            for net in candidate.get("nets", []):
-                _append_net_once(nets, net["name"], net["purpose"])
-            for block in candidate.get("blocks", []):
-                _append_block_once(
-                    blocks,
-                    block["ref"],
-                    block["type"],
-                    block["role"],
-                    topology=candidate["name"],
-                )
-    elif decoder_device_context:
-        topology_candidates = _decoder_topology_candidates(decoder_device_context)
-        decoder_templates = _decoder_standard_templates(device, decoder_device_context, topology_candidates)
-        default_decoder_template = _choose_default_decoder_template(decoder_templates, topology_candidates)
-        for candidate in topology_candidates:
-            for net in candidate.get("nets", []):
-                _append_net_once(nets, net["name"], net["purpose"])
-            for block in candidate.get("blocks", []):
-                _append_block_once(
-                    blocks,
-                    block["ref"],
-                    block["type"],
-                    block["role"],
-                    topology=candidate["name"],
-                )
-    elif interface_switch_device_context:
-        interface_switch_templates = _interface_switch_standard_templates(device, interface_switch_device_context)
-        default_interface_switch_template = _choose_default_interface_switch_template(interface_switch_templates)
-        for template in interface_switch_templates:
-            for net_name in template.get("nets", []):
-                _append_net_once(nets, net_name, "interface_switch_template_placeholder")
-            for block_name in template.get("blocks", []):
-                if block_name == "U1":
-                    continue
-                _append_block_once(blocks, block_name, "topology_block", "interface_switch_template_block", template=template["name"])
-    elif switch_device_context:
-        switch_templates = _switch_standard_templates(device, switch_device_context)
-        default_switch_template = _choose_default_switch_template(switch_templates)
-        for template in switch_templates:
-            for net_name in template.get("nets", []):
-                _append_net_once(nets, net_name, "switch_template_placeholder")
-            for block_name in template.get("blocks", []):
-                if block_name == "U1":
-                    continue
-                _append_block_once(blocks, block_name, "topology_block", "switch_template_block", template=template["name"])
-    elif mcu_device_context:
-        mcu_templates = _mcu_standard_templates(device, mcu_device_context)
-        default_mcu_template = _choose_default_mcu_template(mcu_templates)
-        for template in mcu_templates:
-            for net_name in template.get("nets", []):
-                _append_net_once(nets, net_name, "mcu_template_placeholder")
-            for block_name in template.get("blocks", []):
-                if block_name == "U1":
-                    continue
-                _append_block_once(blocks, block_name, "topology_block", "mcu_template_block", template=template["name"])
-            for net_name in template.get("nets", []):
-                _append_net_once(nets, net_name, "switch_template_placeholder")
-            for block_name in template.get("blocks", []):
-                if block_name == "U1":
-                    continue
-                _append_block_once(blocks, block_name, "topology_block", "switch_template_block", template=template["name"])
+    fpga_scenarios = design_intent.get("customer_scenarios", [])
+    fpga_templates = _fpga_standard_templates(device, design_intent, fpga_scenarios)
+    default_fpga_template = _choose_default_fpga_template(fpga_templates)
+    for candidate in fpga_scenarios:
+        for net in candidate.get("nets", []):
+            _append_net_once(nets, net["name"], net["purpose"])
+        for block in candidate.get("blocks", []):
+            _append_block_once(blocks, block["ref"], block["type"], block["role"], scenario=candidate["name"])
 
     todos = [
         "Confirm preferred package against footprint library and assembly constraints.",
         "Replace placeholder values with datasheet-approved component values.",
         "Review all attention_items before schematic release.",
+        "Map IO banks, configuration mode, and JTAG access before pin assignment freeze.",
     ]
-    if device.get("_type") == "fpga":
-        todos.append("Map IO banks, configuration mode, and JTAG access before pin assignment freeze.")
-        for candidate in fpga_scenarios:
-            for item in candidate.get("todo", []):
-                if item not in todos:
-                    todos.append(item)
-    else:
-        todos.append("Close the power loop layout early for power devices before PCB placement starts.")
-    for candidate in topology_candidates:
+    for candidate in fpga_scenarios:
         for item in candidate.get("todo", []):
             if item not in todos:
                 todos.append(item)
@@ -4507,78 +4195,41 @@ def build_module_template(device: dict, design_intent: dict) -> dict:
         },
         "nets": nets,
         "blocks": blocks,
-        "opamp_device_context": opamp_device_context,
-        "decoder_device_context": decoder_device_context,
-        "interface_switch_device_context": interface_switch_device_context,
-        "switch_device_context": switch_device_context,
-        "mcu_device_context": mcu_device_context,
-        "topology_candidates": topology_candidates,
-        "opamp_templates": opamp_templates,
-        "decoder_templates": decoder_templates,
-        "interface_switch_templates": interface_switch_templates,
-        "switch_templates": switch_templates,
-        "mcu_templates": mcu_templates,
+        "opamp_device_context": None,
+        "decoder_device_context": design_intent.get("decoder_device_context"),
+        "interface_switch_device_context": design_intent.get("interface_switch_device_context"),
+        "switch_device_context": design_intent.get("switch_device_context"),
+        "mcu_device_context": design_intent.get("mcu_device_context"),
+        "topology_candidates": [],
+        "opamp_templates": [],
+        "decoder_templates": [],
+        "interface_switch_templates": [],
+        "switch_templates": [],
+        "mcu_templates": [],
         "fpga_scenarios": fpga_scenarios,
         "fpga_templates": fpga_templates,
         "high_speed_semantic_context": design_intent.get("high_speed_semantic_context"),
-        "default_opamp_template": default_opamp_template,
-        "default_decoder_template": default_decoder_template,
-        "default_interface_switch_template": default_interface_switch_template,
-        "default_switch_template": default_switch_template,
-        "default_mcu_template": default_mcu_template,
+        "default_opamp_template": None,
+        "default_decoder_template": None,
+        "default_interface_switch_template": None,
+        "default_switch_template": None,
+        "default_mcu_template": None,
         "default_fpga_template": default_fpga_template,
         "todo": todos,
     }
 
 
-def build_quickstart_markdown(device: dict, design_intent: dict) -> str:
-    lines = [
-        f"# {device.get('mpn')} design quickstart",
-        "",
-        f"- Type: `{device.get('_type')}`",
-        f"- Category: `{device.get('category')}`",
-        f"- Manufacturer: `{device.get('manufacturer')}`",
-    ]
 
-    device_ref = design_intent.get("device_ref", {})
-    if device_ref.get("preferred_package"):
-        lines.append(f"- Preferred package: `{device_ref['preferred_package']}`")
-    if device_ref.get("package"):
-        lines.append(f"- Package: `{device_ref['package']}`")
 
-    lines.extend(["", "## First-pass checklist", ""])
 
-    for component in design_intent.get("external_components", []):
-        role = component.get("role")
-        status = component.get("status")
-        why = component.get("why")
-        lines.append(f"- Add `{component.get('designator')}` for `{role}` (`{status}`): {why}")
-
-    constraints = design_intent.get("constraints", {})
-    if constraints:
-        lines.extend(["", "## Key constraints", ""])
-        for name, entry in constraints.items():
-            value_bits = []
-            for key in ("min", "typ", "max"):
-                if entry.get(key) is not None:
-                    value_bits.append(f"{key}={entry[key]}")
-            if entry.get("unit"):
-                value_bits.append(f"unit={entry['unit']}")
-            lines.append(f"- `{name}`: {entry.get('parameter')} ({', '.join(value_bits)})")
-
-    attention_items = design_intent.get("attention_items", [])
-    if attention_items:
-        lines.extend(["", "## Attention items", ""])
-        for item in attention_items[:12]:
-            lines.append(f"- `{item.get('name')}` / pin `{item.get('pin')}`: {item.get('action')}")
-
-    customer_scenarios = design_intent.get("customer_scenarios", [])
+def _append_fpga_quickstart_sections(lines: list[str], design_intent: dict, module_template: dict) -> None:
+    customer_scenarios = module_template.get("fpga_scenarios") or design_intent.get("customer_scenarios", [])
     if customer_scenarios:
         lines.extend(["", "## Customer scenarios", ""])
         for scenario in customer_scenarios[:8]:
             lines.append(f"- `{scenario.get('label')}`: {scenario.get('why')}")
 
-        high_speed_context = design_intent.get("high_speed_semantic_context", {}) or {}
+        high_speed_context = module_template.get("high_speed_semantic_context", {}) or design_intent.get("high_speed_semantic_context", {}) or {}
         if high_speed_context:
             lines.extend(["", "## High-speed semantics", ""])
             if high_speed_context.get("protocol_candidates"):
@@ -4591,8 +4242,8 @@ def build_quickstart_markdown(device: dict, design_intent: dict) -> str:
                 lines.append(f"- Lane group `{group_id}` → protocols `{protocols}`; refclk `{refs}`")
 
         lines.extend(["", "## L3 Templates", ""])
-        default_name = _choose_default_fpga_template(_fpga_standard_templates(device, design_intent, customer_scenarios))
-        for template in _fpga_standard_templates(device, design_intent, customer_scenarios):
+        default_name = module_template.get("default_fpga_template")
+        for template in module_template.get("fpga_templates", []):
             prefix = "Start here: " if template.get("name") == default_name else ""
             semantic_suffix = ""
             if template.get("protocol_candidates"):
@@ -4621,53 +4272,24 @@ def build_quickstart_markdown(device: dict, design_intent: dict) -> str:
                 f"- `{asset.get('title')}` (`{asset.get('source_path')}`): {asset.get('summary')}{topic_suffix}"
             )
 
-    pin_groups = design_intent.get("pin_groups", {})
-    if pin_groups:
-        lines.extend(["", "## Pin groups", ""])
-        for group_name, pins in pin_groups.items():
-            if not pins:
-                continue
-            labels = []
-            for pin in pins[:10]:
-                pin_label = pin.get("name") or pin.get("pin")
-                if pin.get("pin"):
-                    pin_label = f"{pin_label}({pin['pin']})"
-                labels.append(pin_label)
-            suffix = " ..." if len(pins) > 10 else ""
-            lines.append(f"- `{group_name}`: {', '.join(labels)}{suffix}")
 
-    datasheet_context = design_intent.get("datasheet_design_context", {})
-    topology_candidates = []
-    opamp_templates = []
-    decoder_templates = []
-    interface_switch_templates = []
-    switch_templates = []
-    mcu_templates = []
-    opamp_device_context = None
-    decoder_device_context = design_intent.get("decoder_device_context")
-    interface_switch_device_context = design_intent.get("interface_switch_device_context")
-    switch_device_context = design_intent.get("switch_device_context")
-    mcu_device_context = design_intent.get("mcu_device_context")
-    category = (device.get("category") or "").lower()
-    if "opamp" in category or "amplifier" in category:
-        opamp_device_context = _infer_opamp_traits(device, design_intent)
-        topology_candidates = _opamp_topology_candidates(design_intent)
-        opamp_templates = _opamp_standard_templates(device, design_intent, topology_candidates)
-    elif decoder_device_context:
-        topology_candidates = _decoder_topology_candidates(decoder_device_context)
-        decoder_templates = _decoder_standard_templates(device, decoder_device_context, topology_candidates)
-    elif interface_switch_device_context:
-        interface_switch_templates = _interface_switch_standard_templates(device, interface_switch_device_context)
-    elif switch_device_context:
-        switch_templates = _switch_standard_templates(device, switch_device_context)
-    elif mcu_device_context:
-        mcu_templates = _mcu_standard_templates(device, mcu_device_context)
-
-    default_opamp_template = _choose_default_opamp_template(opamp_templates, topology_candidates)
-    default_decoder_template = _choose_default_decoder_template(decoder_templates, topology_candidates)
-    default_interface_switch_template = _choose_default_interface_switch_template(interface_switch_templates)
-    default_switch_template = _choose_default_switch_template(switch_templates)
-    default_mcu_template = _choose_default_mcu_template(mcu_templates)
+def _append_normal_ic_quickstart_sections(lines: list[str], design_intent: dict, module_template: dict) -> None:
+    topology_candidates = module_template.get("topology_candidates", [])
+    opamp_templates = module_template.get("opamp_templates", [])
+    decoder_templates = module_template.get("decoder_templates", [])
+    interface_switch_templates = module_template.get("interface_switch_templates", [])
+    switch_templates = module_template.get("switch_templates", [])
+    mcu_templates = module_template.get("mcu_templates", [])
+    opamp_device_context = module_template.get("opamp_device_context")
+    decoder_device_context = module_template.get("decoder_device_context")
+    interface_switch_device_context = module_template.get("interface_switch_device_context")
+    switch_device_context = module_template.get("switch_device_context")
+    mcu_device_context = module_template.get("mcu_device_context")
+    default_opamp_template = module_template.get("default_opamp_template")
+    default_decoder_template = module_template.get("default_decoder_template")
+    default_interface_switch_template = module_template.get("default_interface_switch_template")
+    default_switch_template = module_template.get("default_switch_template")
+    default_mcu_template = module_template.get("default_mcu_template")
 
     if opamp_device_context:
         lines.extend(["", "## OpAmp implementation notes", ""])
@@ -4736,7 +4358,6 @@ def build_quickstart_markdown(device: dict, design_intent: dict) -> str:
             lines.append(f"- Control pins: {' '.join(f'`{item}`' for item in control_bits)}")
 
     official_source_documents = design_intent.get("official_source_documents", [])
-
     if official_source_documents:
         lines.extend(["", "## Official source documents", ""])
         for item in official_source_documents[:6]:
@@ -4813,6 +4434,56 @@ def build_quickstart_markdown(device: dict, design_intent: dict) -> str:
             prefix = "Start here: " if template.get("name") == default_switch_template else ""
             lines.append(f"- {prefix}`{template.get('sheet_name')}` `{template.get('label')}`: {template.get('recommended_when')}")
 
+
+def _append_common_quickstart_sections(lines: list[str], design_intent: dict) -> None:
+    device_ref = design_intent.get("device_ref", {})
+    if device_ref.get("preferred_package"):
+        lines.append(f"- Preferred package: `{device_ref['preferred_package']}`")
+    if device_ref.get("package"):
+        lines.append(f"- Package: `{device_ref['package']}`")
+
+    lines.extend(["", "## First-pass checklist", ""])
+    for component in design_intent.get("external_components", []):
+        role = component.get("role")
+        status = component.get("status")
+        why = component.get("why")
+        lines.append(f"- Add `{component.get('designator')}` for `{role}` (`{status}`): {why}")
+
+    constraints = design_intent.get("constraints", {})
+    if constraints:
+        lines.extend(["", "## Key constraints", ""])
+        for name, entry in constraints.items():
+            value_bits = []
+            for key in ("min", "typ", "max"):
+                if entry.get(key) is not None:
+                    value_bits.append(f"{key}={entry[key]}")
+            if entry.get("unit"):
+                value_bits.append(f"unit={entry['unit']}")
+            lines.append(f"- `{name}`: {entry.get('parameter')} ({', '.join(value_bits)})")
+
+    attention_items = design_intent.get("attention_items", [])
+    if attention_items:
+        lines.extend(["", "## Attention items", ""])
+        for item in attention_items[:12]:
+            lines.append(f"- `{item.get('name')}` / pin `{item.get('pin')}`: {item.get('action')}")
+
+    pin_groups = design_intent.get("pin_groups", {})
+    if pin_groups:
+        lines.extend(["", "## Pin groups", ""])
+        for group_name, pins in pin_groups.items():
+            if not pins:
+                continue
+            labels = []
+            for pin in pins[:10]:
+                pin_label = pin.get("name") or pin.get("pin")
+                if pin.get("pin"):
+                    pin_label = f"{pin_label}({pin['pin']})"
+                labels.append(pin_label)
+            suffix = " ..." if len(pins) > 10 else ""
+            lines.append(f"- `{group_name}`: {', '.join(labels)}{suffix}")
+
+
+def _append_datasheet_quickstart_sections(lines: list[str], datasheet_context: dict) -> None:
     if datasheet_context.get("design_page_candidates"):
         lines.extend(["", "## Datasheet design pages", ""])
         for page in datasheet_context["design_page_candidates"][:8]:
@@ -4847,28 +4518,90 @@ def build_quickstart_markdown(device: dict, design_intent: dict) -> str:
         for item in datasheet_context["layout_hints"][:6]:
             lines.append(f"- Page `{item.get('source_page')}`: {item.get('hint')}")
 
-    lines.extend(["", "## Suggested next action", "", "- Open `L3_module_template.json`, replace placeholders, then draft the first schematic sheet around `U1`."])
-    return "\n".join(lines) + "\n"
+
+class DeviceBundlePipeline:
+    def build_design_intent(self, device: dict, datasheet_design_context: dict | None = None) -> dict:
+        raise NotImplementedError
+
+    def build_module_template(self, device: dict, design_intent: dict) -> dict:
+        raise NotImplementedError
+
+    def build_quickstart_markdown(self, device: dict, design_intent: dict, module_template: dict | None = None) -> str:
+        raise NotImplementedError
 
 
-def export_device_bundle(device_path: Path, output_dir: Path, extracted_index: dict[str, Path], pdf_dir: Path) -> Path:
-    device = json.loads(device_path.read_text(encoding="utf-8"))
-    bundle_key = device.get("mpn") or device_path.stem
-    if device.get("package"):
-        bundle_key = f"{bundle_key}_{device['package']}"
-    bundle_name = _sanitize_name(bundle_key)
-    bundle_dir = output_dir / bundle_name
-    bundle_dir.mkdir(parents=True, exist_ok=True)
+class FpgaBundlePipeline(DeviceBundlePipeline):
+    def build_design_intent(self, device: dict, datasheet_design_context: dict | None = None) -> dict:
+        return _build_fpga_design_intent(device, datasheet_design_context=datasheet_design_context)
 
-    l0_path = bundle_dir / "L0_device.json"
-    shutil.copyfile(device_path, l0_path)
+    def build_module_template(self, device: dict, design_intent: dict) -> dict:
+        return _build_fpga_module_template(device, design_intent)
 
-    datasheet_design_context = _load_datasheet_design_context(device, extracted_index, pdf_dir)
-    design_intent = build_design_intent(device, datasheet_design_context=datasheet_design_context)
-    design_intent["official_source_documents"] = _official_source_documents(datasheet_design_context)
-    module_template = build_module_template(device, design_intent)
-    quickstart_text = build_quickstart_markdown(device, design_intent)
+    def build_quickstart_markdown(self, device: dict, design_intent: dict, module_template: dict | None = None) -> str:
+        module_template = module_template or self.build_module_template(device, design_intent)
+        lines = [
+            f"# {device.get('mpn')} design quickstart",
+            "",
+            f"- Type: `{device.get('_type')}`",
+            f"- Category: `{device.get('category')}`",
+            f"- Manufacturer: `{device.get('manufacturer')}`",
+        ]
+        _append_common_quickstart_sections(lines, design_intent)
+        _append_fpga_quickstart_sections(lines, design_intent, module_template)
+        datasheet_context = design_intent.get("datasheet_design_context", {})
+        _append_datasheet_quickstart_sections(lines, datasheet_context)
+        lines.extend(["", "## Suggested next action", "", "- Open `L3_module_template.json`, replace placeholders, then draft the first schematic sheet around `U1`."])
+        return "\n".join(lines) + "\n"
 
+
+class NormalIcBundlePipeline(DeviceBundlePipeline):
+    def build_design_intent(self, device: dict, datasheet_design_context: dict | None = None) -> dict:
+        return _build_normal_ic_design_intent(device, datasheet_design_context=datasheet_design_context)
+
+    def build_module_template(self, device: dict, design_intent: dict) -> dict:
+        return build_normal_ic_module_template_service(
+            device,
+            design_intent,
+            bundle_schema=BUNDLE_SCHEMA,
+            deps=_normal_ic_module_template_deps(),
+        )
+
+    def build_quickstart_markdown(self, device: dict, design_intent: dict, module_template: dict | None = None) -> str:
+        module_template = module_template or self.build_module_template(device, design_intent)
+        lines = [
+            f"# {device.get('mpn')} design quickstart",
+            "",
+            f"- Type: `{device.get('_type')}`",
+            f"- Category: `{device.get('category')}`",
+            f"- Manufacturer: `{device.get('manufacturer')}`",
+        ]
+        _append_common_quickstart_sections(lines, design_intent)
+        _append_normal_ic_quickstart_sections(lines, design_intent, module_template)
+        datasheet_context = design_intent.get("datasheet_design_context", {})
+        _append_datasheet_quickstart_sections(lines, datasheet_context)
+        lines.extend(["", "## Suggested next action", "", "- Open `L3_module_template.json`, replace placeholders, then draft the first schematic sheet around `U1`."])
+        return "\n".join(lines) + "\n"
+
+
+def get_bundle_pipeline(device: dict) -> DeviceBundlePipeline:
+    if device.get("_type") == "fpga":
+        return FpgaBundlePipeline()
+    return NormalIcBundlePipeline()
+
+
+def build_design_intent(device: dict, datasheet_design_context: dict | None = None) -> dict:
+    return get_bundle_pipeline(device).build_design_intent(device, datasheet_design_context=datasheet_design_context)
+
+
+def build_module_template(device: dict, design_intent: dict) -> dict:
+    return get_bundle_pipeline(device).build_module_template(device, design_intent)
+
+
+def build_quickstart_markdown(device: dict, design_intent: dict, module_template: dict | None = None) -> str:
+    return get_bundle_pipeline(device).build_quickstart_markdown(device, design_intent, module_template=module_template)
+
+
+def _write_bundle_files(bundle_dir: Path, design_intent: dict, quickstart_text: str, module_template: dict) -> None:
     (bundle_dir / "L1_design_intent.json").write_text(
         json.dumps(design_intent, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
@@ -4879,7 +4612,9 @@ def export_device_bundle(device_path: Path, output_dir: Path, extracted_index: d
         encoding="utf-8",
     )
 
-    manifest = {
+
+def _bundle_manifest(device: dict, device_path: Path, datasheet_design_context: dict, design_intent: dict) -> dict:
+    return {
         "_schema": BUNDLE_SCHEMA,
         "bundle_layer": "manifest",
         "device": {
@@ -4899,6 +4634,37 @@ def export_device_bundle(device_path: Path, output_dir: Path, extracted_index: d
             "L3_module_template.json",
         ],
     }
+
+
+def _build_bundle_artifacts(device: dict, extracted_index: dict[str, Path], pdf_dir: Path) -> BundleArtifacts:
+    datasheet_design_context = _load_datasheet_design_context(device, extracted_index, pdf_dir)
+    design_intent = build_design_intent(device, datasheet_design_context=datasheet_design_context)
+    design_intent["official_source_documents"] = _official_source_documents(datasheet_design_context)
+    module_template = build_module_template(device, design_intent)
+    quickstart_text = build_quickstart_markdown(device, design_intent, module_template=module_template)
+    return BundleArtifacts(
+        datasheet_design_context=datasheet_design_context,
+        design_intent=design_intent,
+        module_template=module_template,
+        quickstart_text=quickstart_text,
+    )
+
+
+def export_device_bundle(device_path: Path, output_dir: Path, extracted_index: dict[str, Path], pdf_dir: Path) -> Path:
+    device = normalize_normal_ic_export(json.loads(device_path.read_text(encoding="utf-8")))
+    bundle_key = device.get("mpn") or device_path.stem
+    if device.get("package"):
+        bundle_key = f"{bundle_key}_{device['package']}"
+    bundle_name = _sanitize_name(bundle_key)
+    bundle_dir = output_dir / bundle_name
+    bundle_dir.mkdir(parents=True, exist_ok=True)
+
+    l0_path = bundle_dir / "L0_device.json"
+    shutil.copyfile(device_path, l0_path)
+
+    artifacts = _build_bundle_artifacts(device, extracted_index, pdf_dir)
+    _write_bundle_files(bundle_dir, artifacts.design_intent, artifacts.quickstart_text, artifacts.module_template)
+    manifest = _bundle_manifest(device, device_path, artifacts.datasheet_design_context, artifacts.design_intent)
     (bundle_dir / "bundle_manifest.json").write_text(
         json.dumps(manifest, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",

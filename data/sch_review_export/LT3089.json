@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -197,5 +197,199 @@
       "unit": "mA"
     }
   },
-  "thermal": {}
+  "thermal": {},
+  "domains": {
+    "pin": {
+      "packages": {
+        "12-Lead DFN": {
+          "pin_count": 5,
+          "pins": {
+            "1": {
+              "name": "OUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Power output of the device. Requires a 3mA minimum load current for proper regulation.",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "OUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Power output of the device. Requires a 3mA minimum load current for proper regulation.",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "OUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Power output of the device. Requires a 3mA minimum load current for proper regulation.",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "OUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Power output of the device. Requires a 3mA minimum load current for proper regulation.",
+              "unused_treatment": null
+            },
+            "EP": {
+              "name": "Exposed Pad/Tab",
+              "direction": "PASSIVE",
+              "signal_type": "POWER",
+              "description": "The exposed pad of the DF and FE packages and the tab of the R package are tied internally to OUT.",
+              "unused_treatment": null
+            }
+          }
+        },
+        "16-Lead TSSOP": {
+          "pin_count": 9,
+          "pins": {
+            "1": {
+              "name": "OUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Power output of the device. Requires a 3mA minimum load current for proper regulation.",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "OUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Power output of the device. Requires a 3mA minimum load current for proper regulation.",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "OUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Power output of the device. Requires a 3mA minimum load current for proper regulation.",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "OUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Power output of the device. Requires a 3mA minimum load current for proper regulation.",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "OUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Power output of the device. Requires a 3mA minimum load current for proper regulation.",
+              "unused_treatment": null
+            },
+            "8": {
+              "name": "OUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Power output of the device. Requires a 3mA minimum load current for proper regulation.",
+              "unused_treatment": null
+            },
+            "9": {
+              "name": "OUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Power output of the device. Requires a 3mA minimum load current for proper regulation.",
+              "unused_treatment": null
+            },
+            "16": {
+              "name": "OUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Power output of the device. Requires a 3mA minimum load current for proper regulation.",
+              "unused_treatment": null
+            },
+            "EP": {
+              "name": "Exposed Pad/Tab",
+              "direction": "PASSIVE",
+              "signal_type": "POWER",
+              "description": "The exposed pad of the DF and FE packages and the tab of the R package are tied internally to OUT.",
+              "unused_treatment": null
+            }
+          }
+        },
+        "7-Lead DD-Pak": {
+          "pin_count": 1,
+          "pins": {
+            "4": {
+              "name": "OUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Power output of the device. Requires a 3mA minimum load current for proper regulation. (also: Exposed Pad/Tab — The exposed pad of the DF and FE packages and the tab of the R package are tied internally to OUT.)",
+              "unused_treatment": null
+            }
+          }
+        }
+      }
+    },
+    "electrical": {
+      "absolute_maximum_ratings": {
+        "TJ": {
+          "parameter": "Operating Junction Temperature Range",
+          "min": -40,
+          "max": 125,
+          "unit": "°C",
+          "conditions": "E-, I-Grades"
+        }
+      },
+      "electrical_parameters": {
+        "ISET": {
+          "parameter": "SET Pin Current",
+          "min": 49.5,
+          "typ": 50,
+          "max": 50.5,
+          "unit": "µA",
+          "conditions": "VIN = 2V, ILOAD = 3mA"
+        },
+        "ISET_2V___VIN___36V__3mA___ILOAD": {
+          "parameter": "SET Pin Current",
+          "min": 48.75,
+          "typ": 50,
+          "max": 51.25,
+          "unit": "µA",
+          "conditions": "2V ≤ VIN ≤ 36V, 3mA ≤ ILOAD ≤ 800mA"
+        },
+        "VOS": {
+          "parameter": "Offset Voltage",
+          "min": -1.5,
+          "typ": 0,
+          "max": 1.5,
+          "unit": "mV",
+          "conditions": "VIN = 2V, ILOAD = 3mA"
+        },
+        "VOS_VIN___2V__ILOAD___3mA": {
+          "parameter": "Offset Voltage",
+          "min": -3.5,
+          "typ": 0,
+          "max": 3.5,
+          "unit": "mV",
+          "conditions": "VIN = 2V, ILOAD = 3mA"
+        },
+        "ΔISET": {
+          "parameter": "Line Regulation (ISET)",
+          "min": null,
+          "typ": 1.5,
+          "max": null,
+          "unit": "nA/V",
+          "conditions": "ΔVIN = 2V to 36V, ILOAD = 3mA"
+        },
+        "ΔVOS": {
+          "parameter": "Line Regulation (VOS)",
+          "min": null,
+          "typ": 0.001,
+          "max": null,
+          "unit": "mV/V",
+          "conditions": "ΔVIN = 2V to 36V, ILOAD = 3mA"
+        }
+      },
+      "drc_hints": {
+        "iout_max": {
+          "typ": 1.1,
+          "max": 3,
+          "unit": "mA"
+        }
+      }
+    }
+  }
 }

@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -513,6 +513,518 @@
       "unit": "mW",
       "conditions": "Internally limited",
       "source": "absolute_maximum_ratings"
+    }
+  },
+  "domains": {
+    "pin": {
+      "packages": {
+        "SOT23-5L": {
+          "pin_count": 5,
+          "pins": {
+            "1": {
+              "name": "IN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Input voltage of the LDO",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Common ground",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "EN",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Enable pin logic input: low = shutdown, high = active",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "ADJ/NC",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Adjustable pin on ADJ version, not connected on fixed version",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "OUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Output voltage of the LDO",
+              "unused_treatment": null
+            }
+          }
+        },
+        "SOT-89": {
+          "pin_count": 4,
+          "pins": {
+            "3": {
+              "name": "IN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Input voltage of the LDO",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Common ground",
+              "unused_treatment": null
+            },
+            "TAB": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Common ground",
+              "unused_treatment": null
+            },
+            "1": {
+              "name": "OUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Output voltage of the LDO",
+              "unused_treatment": null
+            }
+          }
+        },
+        "SOT-89 (D configuration)": {
+          "pin_count": 4,
+          "pins": {
+            "2": {
+              "name": "IN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Input voltage of the LDO",
+              "unused_treatment": null
+            },
+            "TAB": {
+              "name": "IN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Input voltage of the LDO",
+              "unused_treatment": null
+            },
+            "1": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Common ground",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "OUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Output voltage of the LDO",
+              "unused_treatment": null
+            }
+          }
+        }
+      }
+    },
+    "electrical": {
+      "absolute_maximum_ratings": {
+        "VIN": {
+          "parameter": "DC input voltage",
+          "min": -0.3,
+          "max": 20,
+          "unit": "V",
+          "conditions": null
+        },
+        "VOUT": {
+          "parameter": "DC output voltage",
+          "min": -0.3,
+          "max": null,
+          "unit": "V",
+          "conditions": "max is VI + 0.3"
+        },
+        "VEN": {
+          "parameter": "Enable input voltage",
+          "min": -0.3,
+          "max": null,
+          "unit": "V",
+          "conditions": "max is VI + 0.3"
+        },
+        "VADJ": {
+          "parameter": "ADJ pin voltage",
+          "min": -0.3,
+          "max": 2,
+          "unit": "V",
+          "conditions": null
+        },
+        "IOUT": {
+          "parameter": "Output current",
+          "min": null,
+          "max": null,
+          "unit": "mA",
+          "conditions": "Internally limited"
+        },
+        "PD": {
+          "parameter": "Power dissipation",
+          "min": null,
+          "max": null,
+          "unit": "mW",
+          "conditions": "Internally limited"
+        },
+        "TSTG": {
+          "parameter": "Storage temperature range",
+          "min": -65,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        },
+        "TOP": {
+          "parameter": "Operating junction temperature range",
+          "min": -40,
+          "max": 125,
+          "unit": "°C",
+          "conditions": null
+        }
+      },
+      "electrical_parameters": {
+        "VIN": {
+          "parameter": "Operating input voltage",
+          "min": 2.5,
+          "typ": null,
+          "max": 18,
+          "unit": "V",
+          "conditions": null
+        },
+        "VOUT": {
+          "parameter": "VOUT accuracy",
+          "min": -2,
+          "typ": null,
+          "max": 2,
+          "unit": "%",
+          "conditions": "TJ = 25 °C"
+        },
+        "VOUT_40__C___TJ___125__C": {
+          "parameter": "VOUT accuracy, LDK320A",
+          "min": -1.5,
+          "typ": null,
+          "max": 1.5,
+          "unit": "%",
+          "conditions": "-40 °C < TJ < 125 °C"
+        },
+        "VOUT_TJ___25__C": {
+          "parameter": "VOUT accuracy, LDK320A",
+          "min": -0.5,
+          "typ": null,
+          "max": 0.5,
+          "unit": "%",
+          "conditions": "TJ = 25 °C"
+        },
+        "ΔVOUT": {
+          "parameter": "Static line regulation",
+          "min": null,
+          "typ": 0.001,
+          "max": 0.05,
+          "unit": "%/V",
+          "conditions": "VOUT +1 V ≤ VIN ≤ 18 V"
+        },
+        "ΔVOUT_IOUT___1_mA_to_200_mA__VOUT": {
+          "parameter": "Static load regulation",
+          "min": null,
+          "typ": 0.001,
+          "max": 0.003,
+          "unit": "%/mA",
+          "conditions": "IOUT = 1 mA to 200 mA, VOUT > 2 V"
+        },
+        "VDROP": {
+          "parameter": "Dropout voltage",
+          "min": null,
+          "typ": 100,
+          "max": null,
+          "unit": "mV",
+          "conditions": "IOUT = 100 mA, VOUT = 3.3 V"
+        },
+        "VDROP_IOUT___200_mA__VOUT___3_3_V": {
+          "parameter": "Dropout voltage",
+          "min": null,
+          "typ": 200,
+          "max": 350,
+          "unit": "mV",
+          "conditions": "IOUT = 200 mA, VOUT = 3.3 V, -40 °C < TJ < 125 °C"
+        },
+        "eN": {
+          "parameter": "Output noise voltage",
+          "min": null,
+          "typ": 63,
+          "max": null,
+          "unit": "µVRMS/V",
+          "conditions": "10 Hz to 100 kHz, IOUT = 10 mA"
+        },
+        "SVR": {
+          "parameter": "Supply voltage rejection",
+          "min": null,
+          "typ": 88,
+          "max": null,
+          "unit": "dB",
+          "conditions": "f = 120 Hz, IOUT = 10 mA, VOUT = 3.3 V"
+        },
+        "SVR_f___1_kHz__IOUT___10_mA__VOUT": {
+          "parameter": "Supply voltage rejection",
+          "min": null,
+          "typ": 73,
+          "max": null,
+          "unit": "dB",
+          "conditions": "f = 1 kHz, IOUT = 10 mA, VOUT = VADJ"
+        },
+        "SVR_f___10_kHz__IOUT___10_mA__VOUT": {
+          "parameter": "Supply voltage rejection",
+          "min": null,
+          "typ": 58,
+          "max": null,
+          "unit": "dB",
+          "conditions": "f = 10 kHz, IOUT = 10 mA, VOUT = VADJ"
+        },
+        "IQ": {
+          "parameter": "Quiescent current",
+          "min": null,
+          "typ": 60,
+          "max": 90,
+          "unit": "µA",
+          "conditions": "VOUT +1 V ≤ VIN ≤ 18 V, IOUT = 0 mA, -40 °C < TJ < 125 °C"
+        },
+        "IQ_VIN___VOUT__1_V__IOUT___200_mA": {
+          "parameter": "Quiescent current",
+          "min": null,
+          "typ": 70,
+          "max": 100,
+          "unit": "µA",
+          "conditions": "VIN = VOUT +1 V, IOUT = 200 mA, -40 °C < TJ < 125 °C"
+        },
+        "IQ_VEN___GND__TJ___25__C": {
+          "parameter": "Quiescent current (OFF mode)",
+          "min": null,
+          "typ": 0.2,
+          "max": 1,
+          "unit": "µA",
+          "conditions": "VEN = GND, TJ = 25 °C"
+        },
+        "ISC": {
+          "parameter": "Short-circuit current",
+          "min": null,
+          "typ": 330,
+          "max": null,
+          "unit": "mA",
+          "conditions": "RL = 0"
+        },
+        "ISC_RL___0__VIN___16_V": {
+          "parameter": "Short-circuit current",
+          "min": null,
+          "typ": 200,
+          "max": null,
+          "unit": "mA",
+          "conditions": "RL = 0, VIN = 16 V"
+        },
+        "VEN": {
+          "parameter": "Enable input logic low",
+          "min": null,
+          "typ": null,
+          "max": 0.4,
+          "unit": "V",
+          "conditions": "VIN = 2.5 V to 18 V, -40 °C < TJ < 125 °C"
+        },
+        "VEN_VIN___2_5_V_to_18_V___40__C": {
+          "parameter": "Enable input logic high",
+          "min": 1.2,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": "VIN = 2.5 V to 18 V, -40 °C < TJ < 125 °C"
+        },
+        "IEN": {
+          "parameter": "Enable pin input current",
+          "min": null,
+          "typ": 0.1,
+          "max": 100,
+          "unit": "nA",
+          "conditions": "VEN = VIN"
+        },
+        "TSHDN": {
+          "parameter": "Thermal shutdown hysteresis",
+          "min": null,
+          "typ": 20,
+          "max": null,
+          "unit": "°C",
+          "conditions": null
+        },
+        "COUT": {
+          "parameter": "Output capacitor",
+          "min": 1,
+          "typ": null,
+          "max": 22,
+          "unit": "µF",
+          "conditions": "Capacitance"
+        },
+        "VADJ": {
+          "parameter": "Adjustable voltage",
+          "min": null,
+          "typ": 1.185,
+          "max": null,
+          "unit": "V",
+          "conditions": "TJ = 25 °C"
+        },
+        "VADJ_TJ___25__C": {
+          "parameter": "Adjustable voltage accuracy, LDK320A",
+          "min": -0.5,
+          "typ": null,
+          "max": 0.5,
+          "unit": "%",
+          "conditions": "TJ = 25 °C"
+        },
+        "VADJ_40__C___TJ___125__C": {
+          "parameter": "Adjustable voltage accuracy, LDK320A",
+          "min": -1.5,
+          "typ": null,
+          "max": 1.5,
+          "unit": "%",
+          "conditions": "40 °C < TJ < 125 °C"
+        },
+        "ΔVOUT_VOUT___1_V___VIN___18_V": {
+          "parameter": "Static line regulation",
+          "min": null,
+          "typ": 0.001,
+          "max": 0.05,
+          "unit": "%/V",
+          "conditions": "VOUT + 1 V ≤ VIN ≤ 18 V"
+        },
+        "ΔVOUT_IOUT___1_mA_to_200_mA": {
+          "parameter": "Static load regulation",
+          "min": null,
+          "typ": 0.0002,
+          "max": 0.003,
+          "unit": "%/mA",
+          "conditions": "IOUT = 1 mA to 200 mA"
+        },
+        "VDROP_IOUT___100_mA__VOUT___3_3_V": {
+          "parameter": "Dropout voltage",
+          "min": null,
+          "typ": 100,
+          "max": null,
+          "unit": "mV",
+          "conditions": "IOUT = 100 mA, VOUT = 3.3 V"
+        },
+        "VDROP_IOUT___200_mA__VOUT___3_3_V__4": {
+          "parameter": "Dropout voltage",
+          "min": null,
+          "typ": 200,
+          "max": 350,
+          "unit": "mV",
+          "conditions": "IOUT = 200 mA, VOUT = 3.3 V, 40 °C < TJ < 125 °C"
+        },
+        "eN_10_Hz_to_100_kHz__IOUT___10_mA": {
+          "parameter": "Output noise voltage",
+          "min": null,
+          "typ": 60,
+          "max": null,
+          "unit": "µVRMS",
+          "conditions": "10 Hz to 100 kHz, IOUT = 10 mA"
+        },
+        "IADJ": {
+          "parameter": "Adjust pin current",
+          "min": null,
+          "typ": null,
+          "max": 1,
+          "unit": "µA",
+          "conditions": null
+        },
+        "SVR_f___120_Hz__IOUT___10_mA__VOUT": {
+          "parameter": "Supply voltage rejection",
+          "min": null,
+          "typ": 83,
+          "max": null,
+          "unit": "dB",
+          "conditions": "f = 120 Hz, IOUT = 10 mA, VOUT = VADJ"
+        },
+        "IQ_VOUT__1_V___VIN___18_V__IOUT": {
+          "parameter": "Quiescent current",
+          "min": null,
+          "typ": 50,
+          "max": 90,
+          "unit": "µA",
+          "conditions": "VOUT +1 V ≤ VIN ≤ 18 V, IOUT = 0 mA, -40 °C < TJ < 125 °C"
+        },
+        "IQ_VIN___VOUT___1_V__IOUT___200_m": {
+          "parameter": "Quiescent current",
+          "min": null,
+          "typ": 60,
+          "max": 100,
+          "unit": "µA",
+          "conditions": "VIN = VOUT + 1 V, IOUT = 200 mA, -40 °C < TJ < 125 °C"
+        },
+        "ISC_RL___0": {
+          "parameter": "Short-circuit current",
+          "min": null,
+          "typ": 330,
+          "max": null,
+          "unit": "mA",
+          "conditions": "RL = 0"
+        },
+        "IEN_VEN___VIN": {
+          "parameter": "Enable pin input current",
+          "min": null,
+          "typ": 0.1,
+          "max": 100,
+          "unit": "nA",
+          "conditions": "VEN = VIN"
+        },
+        "COUT_Capacitance": {
+          "parameter": "Output capacitor",
+          "min": 1,
+          "typ": null,
+          "max": 22,
+          "unit": "µF",
+          "conditions": "Capacitance"
+        }
+      },
+      "drc_hints": {
+        "vin_abs_max": {
+          "value": 20,
+          "unit": "V"
+        },
+        "vin_operating": {
+          "min": 2.5,
+          "max": 18,
+          "unit": "V"
+        },
+        "vout": {
+          "min": -2,
+          "max": 2,
+          "unit": "%"
+        },
+        "enable_threshold": {
+          "max": 0.4,
+          "unit": "V"
+        },
+        "iq": {
+          "typ": 60,
+          "max": 90,
+          "unit": "µA"
+        },
+        "thermal_shutdown": {
+          "typ": 160,
+          "unit": "°C"
+        }
+      }
+    },
+    "thermal": {
+      "power_dissipation": {
+        "parameter": "Power dissipation",
+        "symbol": "PD",
+        "min": null,
+        "typ": null,
+        "max": null,
+        "value": null,
+        "unit": "mW",
+        "conditions": "Internally limited",
+        "source": "absolute_maximum_ratings"
+      }
     }
   }
 }

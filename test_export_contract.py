@@ -12,6 +12,7 @@ from export_for_sch_review import export_fpga, export_normal_ic, main as export_
 from export_selection_profile import main as export_selection_profile_main
 from export_selection_profile import build_selection_card
 from export_design_bundle import _collect_constraints, _pick_preferred_package
+from normal_ic_design_context_loader import should_auto_extract_design_context
 from normal_ic_contract import build_normal_ic_record, normal_ic_record_to_export
 
 
@@ -68,12 +69,25 @@ def test_export_normal_ic_emits_v2_with_canonical_domains_and_flat_compat():
                 {"page_num": 4, "heading": "Typical Application", "kind": "application"}
             ],
             "recommended_external_components": [
-                {"component": "input_capacitor", "value": "10uF"}
+                {"component": "input_capacitor", "value": "10uF", "purpose": "Input decoupling"}
             ],
-            "design_equation_hints": [],
+            "design_equation_hints": [
+                {
+                    "name": "VOUT_feedback",
+                    "equation": "VOUT = VREF * (1 + R1 / R2)",
+                    "source_page": 4,
+                }
+            ],
             "layout_hints": [],
             "supply_recommendations": [],
             "topology_hints": [],
+            "design_recommendations": [
+                {
+                    "topic": "feedback_divider_bias",
+                    "note": "Keep the lower feedback resistor at 10k for stable bias current error.",
+                    "source_page": 4,
+                }
+            ],
         },
     }
 
@@ -86,6 +100,9 @@ def test_export_normal_ic_emits_v2_with_canonical_domains_and_flat_compat():
     assert "thermal" not in exported["domains"]
     assert exported["thermal"] == {}
     assert exported["domains"]["design_context"]["design_pages"]["pages"][0]["page"] == 4
+    assert exported["domains"]["design_context"]["design_formulas"][0]["name"] == "VOUT_feedback"
+    assert exported["domains"]["design_context"]["typical_application"]["components"][0]["typical_value"] == "10uF"
+    assert exported["domains"]["design_context"]["application_notes"][0]["title"] == "Feedback Divider Bias"
     assert exported["packages"]["SOT-23-5"]["pins"]["1"]["name"] == "VIN"
 
 
@@ -380,6 +397,37 @@ def test_export_normal_ic_auto_extracts_chinese_buck_design_context_from_local_p
 
     assert design_context["design_pages"]["total_pages"] >= 1
     assert design_context["component_value_hints"]
+
+
+def test_auto_extract_design_context_supports_protection_controller_descriptions():
+    component = {
+        "mpn": "LM5060",
+        "category": "Other",
+        "description": "High-Side Protection Controller With Low Quiescent Current",
+    }
+
+    assert should_auto_extract_design_context(component["category"], component) is True
+
+
+def test_export_normal_ic_exposes_structured_lm5060_design_assets():
+    extracted = json.loads((REPO_ROOT / "data" / "extracted_v2" / "lm5060_ds.json").read_text())
+
+    exported = export_normal_ic(extracted)
+    design_context = exported["domains"]["design_context"]
+    formulas = {item["name"]: item for item in design_context["design_formulas"]}
+    components = {item["designator"]: item for item in design_context["typical_application"]["components"]}
+    notes = {item["id"]: item for item in design_context["application_notes"]}
+    electrical = exported["domains"]["electrical"]["electrical_parameters"]
+
+    assert "R8_OVP_resistor" in formulas
+    assert formulas["R8_OVP_resistor"]["variables"]["OVPTH"]["refers_to"] == "OVPTH"
+    assert "C_TIMER_fault_delay" in formulas
+    assert components["R8"]["related_formula"] == "R8_OVP_resistor"
+    assert components["Q1"]["type"] == "MOSFET"
+    assert notes["AN-002"]["category"] == "pcb_layout"
+    assert electrical["OVPTH"]["used_in_design"] is True
+    assert "R8_OVP_resistor" in electrical["OVPTH"]["used_in_formulas"]
+    assert electrical["ITIMERH"]["used_in_design"] is True
 
 
 def test_selection_profile_reads_domains_without_flat_fields():

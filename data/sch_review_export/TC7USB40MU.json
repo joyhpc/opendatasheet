@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -468,6 +468,473 @@
       "unit": "mW",
       "conditions": null,
       "source": "absolute_maximum_ratings"
+    }
+  },
+  "domains": {
+    "pin": {
+      "packages": {
+        "UQFN10B": {
+          "pin_count": 10,
+          "pins": {
+            "1": {
+              "name": "1D+",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "ANALOG",
+              "description": "USB data positive terminal 1",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "2D+",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "ANALOG",
+              "description": "USB data positive terminal 2",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "D+",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "ANALOG",
+              "description": "Common USB data positive terminal",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "D-",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "ANALOG",
+              "description": "Common USB data negative terminal",
+              "unused_treatment": null
+            },
+            "6": {
+              "name": "2D-",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "ANALOG",
+              "description": "USB data negative terminal 2",
+              "unused_treatment": null
+            },
+            "7": {
+              "name": "1D-",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "ANALOG",
+              "description": "USB data negative terminal 1",
+              "unused_treatment": null
+            },
+            "8": {
+              "name": "OE",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Output enable input (active low)",
+              "unused_treatment": null
+            },
+            "9": {
+              "name": "VCC",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power supply input",
+              "unused_treatment": null
+            },
+            "10": {
+              "name": "S",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Select input",
+              "unused_treatment": null
+            }
+          }
+        },
+        "UQFN10": {
+          "pin_count": 10,
+          "pins": {
+            "1": {
+              "name": "1D+",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "ANALOG",
+              "description": "USB data positive terminal 1",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "2D+",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "ANALOG",
+              "description": "USB data positive terminal 2",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "D+",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "ANALOG",
+              "description": "Common USB data positive terminal",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "D-",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "ANALOG",
+              "description": "Common USB data negative terminal",
+              "unused_treatment": null
+            },
+            "6": {
+              "name": "2D-",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "ANALOG",
+              "description": "USB data negative terminal 2",
+              "unused_treatment": null
+            },
+            "7": {
+              "name": "1D-",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "ANALOG",
+              "description": "USB data negative terminal 1",
+              "unused_treatment": null
+            },
+            "8": {
+              "name": "OE",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Output enable input (active low)",
+              "unused_treatment": null
+            },
+            "9": {
+              "name": "VCC",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power supply input",
+              "unused_treatment": null
+            },
+            "10": {
+              "name": "S",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Select input",
+              "unused_treatment": null
+            }
+          }
+        }
+      }
+    },
+    "electrical": {
+      "absolute_maximum_ratings": {
+        "VCC": {
+          "parameter": "Supply voltage",
+          "min": -0.5,
+          "max": 4.6,
+          "unit": "V",
+          "conditions": null
+        },
+        "VIN": {
+          "parameter": "Input voltage",
+          "min": -0.5,
+          "max": 4.6,
+          "unit": "V",
+          "conditions": null
+        },
+        "VS": {
+          "parameter": "Switch I/O voltage",
+          "min": -0.5,
+          "max": 4.6,
+          "unit": "V",
+          "conditions": "VCC = 0 V or Switch OFF"
+        },
+        "VS_Switch_ON__Max_is_VCC___0_5V": {
+          "parameter": "Switch I/O voltage",
+          "min": -0.5,
+          "max": null,
+          "unit": "V",
+          "conditions": "Switch ON. Max is VCC + 0.5V"
+        },
+        "IIK": {
+          "parameter": "Clamp diode current",
+          "min": -50,
+          "max": null,
+          "unit": "mA",
+          "conditions": "Control input"
+        },
+        "IIK_Switch": {
+          "parameter": "Clamp diode current",
+          "min": -50,
+          "max": 50,
+          "unit": "mA",
+          "conditions": "Switch"
+        },
+        "IS": {
+          "parameter": "Switch I/O current",
+          "min": null,
+          "max": 50,
+          "unit": "mA",
+          "conditions": null
+        },
+        "PD": {
+          "parameter": "Power dissipation",
+          "min": null,
+          "max": 200,
+          "unit": "mW",
+          "conditions": null
+        },
+        "ICC/IGND": {
+          "parameter": "VCC/ground current",
+          "min": -100,
+          "max": 100,
+          "unit": "mA",
+          "conditions": null
+        },
+        "Tstg": {
+          "parameter": "Storage temperature",
+          "min": -65,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        }
+      },
+      "electrical_parameters": {
+        "VCC": {
+          "parameter": "Supply voltage",
+          "min": 2.3,
+          "typ": null,
+          "max": 4.3,
+          "unit": "V",
+          "conditions": "Operating Range"
+        },
+        "VIN": {
+          "parameter": "Input voltage",
+          "min": 0,
+          "typ": null,
+          "max": 4.3,
+          "unit": "V",
+          "conditions": "Operating Range"
+        },
+        "VS": {
+          "parameter": "Switch I/O voltage",
+          "min": 0,
+          "typ": null,
+          "max": 4.3,
+          "unit": "V",
+          "conditions": "Operating Range, VCC = 0 V or Switch OFF"
+        },
+        "VS_Operating_Range__Switch_ON__Ma": {
+          "parameter": "Switch I/O voltage",
+          "min": 0,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": "Operating Range, Switch ON. Max is VCC"
+        },
+        "Topr": {
+          "parameter": "Operating temperature",
+          "min": -40,
+          "typ": null,
+          "max": 85,
+          "unit": "°C",
+          "conditions": "Operating Range"
+        },
+        "dt/dv": {
+          "parameter": "Input rise time",
+          "min": 0,
+          "typ": null,
+          "max": 10,
+          "unit": "ns/V",
+          "conditions": "Operating Range"
+        },
+        "dt/dv_Operating_Range": {
+          "parameter": "Input fall time",
+          "min": 0,
+          "typ": null,
+          "max": 10,
+          "unit": "ns/V",
+          "conditions": "Operating Range"
+        },
+        "VIH": {
+          "parameter": "High-level input voltage",
+          "min": null,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": "VCC = 2.3 to 3.0 V, Min = 0.50 x VCC"
+        },
+        "VIH_VCC___3_0_to_4_3_V__Min___0_46": {
+          "parameter": "High-level input voltage",
+          "min": null,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": "VCC = 3.0 to 4.3 V, Min = 0.46 x VCC"
+        },
+        "VIL": {
+          "parameter": "Low-level input voltage",
+          "min": null,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": "VCC = 2.3 to 4.3 V, Max = 0.25 x VCC"
+        },
+        "IIN": {
+          "parameter": "Input leakage current",
+          "min": -1,
+          "typ": null,
+          "max": 1,
+          "unit": "µA",
+          "conditions": "VIN = 0 to 4.3 V, VCC = 2.3 to 4.3 V"
+        },
+        "IOFF": {
+          "parameter": "Power-OFF leakage current",
+          "min": -2,
+          "typ": null,
+          "max": 2,
+          "unit": "µA",
+          "conditions": "VIN = VIS = 0 to 4.3 V, VCC = 0"
+        },
+        "ISZ": {
+          "parameter": "Switch OFF-state leakage current",
+          "min": -2,
+          "typ": null,
+          "max": 2,
+          "unit": "µA",
+          "conditions": "VIS = 0 to VCC, OE = VCC, VCC = 2.3 to 4.3 V"
+        },
+        "RON": {
+          "parameter": "ON-resistance",
+          "min": null,
+          "typ": 4.5,
+          "max": 6,
+          "unit": "Ω",
+          "conditions": "VIS = 0 V, IIS = 30 mA, VCC = 3.0 V"
+        },
+        "RON_VIS___0_4_V__IIS___30_mA__VCC": {
+          "parameter": "ON-resistance",
+          "min": null,
+          "typ": 4.8,
+          "max": 6.7,
+          "unit": "Ω",
+          "conditions": "VIS = 0.4 V, IIS = 30 mA, VCC = 3.0 V"
+        },
+        "RON_VIS___3_0_V__IIS___30_mA__VCC": {
+          "parameter": "ON-resistance",
+          "min": null,
+          "typ": 10,
+          "max": 14,
+          "unit": "Ω",
+          "conditions": "VIS = 3.0 V, IIS = 30 mA, VCC = 3.0 V"
+        },
+        "ΔRON": {
+          "parameter": "Difference of ON-resistance between switches",
+          "min": null,
+          "typ": 0.35,
+          "max": null,
+          "unit": "Ω",
+          "conditions": "VIS = 0.4 V, 1.0 V, IIS = 30 mA, VCC = 3.0 V"
+        },
+        "RON(flat)": {
+          "parameter": "ON-resistance flatness",
+          "min": null,
+          "typ": 1.3,
+          "max": null,
+          "unit": "Ω",
+          "conditions": "VIS = 0 V to 1.0 V, IIS = 30 mA, VCC = 3.0 V"
+        },
+        "ICC": {
+          "parameter": "Quiescent supply current",
+          "min": null,
+          "typ": null,
+          "max": 1,
+          "unit": "µA",
+          "conditions": "VIN = VCC or GND, IOUT = 0 A, VCC = 4.3 V"
+        },
+        "ΔICC": {
+          "parameter": "Quiescent supply current",
+          "min": null,
+          "typ": null,
+          "max": 40,
+          "unit": "µA",
+          "conditions": "VIN = 2.6 V (one input), VCC = 4.3 V"
+        },
+        "tPLH/tPHL": {
+          "parameter": "Propagation delay time",
+          "min": null,
+          "typ": 0.25,
+          "max": null,
+          "unit": "ns",
+          "conditions": "CL = 5 pF, VCC = 3.3 ± 0.3 V"
+        },
+        "ton": {
+          "parameter": "Turn-ON time",
+          "min": null,
+          "typ": 10,
+          "max": 20,
+          "unit": "ns",
+          "conditions": "RL = 50 Ω, CL = 5 pF, VCC = 3.3 ± 0.3 V"
+        },
+        "toff": {
+          "parameter": "Turn-OFF time",
+          "min": null,
+          "typ": 14,
+          "max": 24,
+          "unit": "ns",
+          "conditions": "RL = 50 Ω, CL = 5 pF, VCC = 3.3 ± 0.3 V"
+        },
+        "TBBM": {
+          "parameter": "Break before make",
+          "min": 2,
+          "typ": null,
+          "max": 7,
+          "unit": "ns",
+          "conditions": "RL = 50 Ω, CL = 5 pF, VCC = 3.3 ± 0.3 V"
+        },
+        "tSK(P)": {
+          "parameter": "Skew of opposite transitions of the same output",
+          "min": null,
+          "typ": 0.1,
+          "max": null,
+          "unit": "ns",
+          "conditions": "CL = 5 pF, VCC = 3.3 ± 0.3 V"
+        },
+        "tSK(O)": {
+          "parameter": "Output skew",
+          "min": null,
+          "typ": 0.1,
+          "max": null,
+          "unit": "ns",
+          "conditions": "CL = 5 pF, VCC = 3.3 ± 0.3 V"
+        }
+      },
+      "drc_hints": {
+        "vin_abs_max": {
+          "value": 4.6,
+          "unit": "V"
+        },
+        "vin_operating": {
+          "min": 2.3,
+          "max": 4.3,
+          "unit": "V"
+        },
+        "enable_threshold": {
+          "unit": "V"
+        }
+      }
+    },
+    "thermal": {
+      "power_dissipation": {
+        "parameter": "Power dissipation",
+        "symbol": "PD",
+        "min": null,
+        "typ": null,
+        "max": 200,
+        "value": null,
+        "unit": "mW",
+        "conditions": null,
+        "source": "absolute_maximum_ratings"
+      }
     }
   }
 }

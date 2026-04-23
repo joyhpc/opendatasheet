@@ -14,14 +14,12 @@ hybrid extraction to capture:
 - IO standard rules (LVDS, SSTL, HSTL)
 - Rail merge guidelines
 """
-import json
 import re
-import time
 
 import fitz
-from google.genai import types
 
 from extractors.base import BaseExtractor
+from extractors.gemini_json import call_gemini_json_response
 
 
 # ============================================
@@ -352,47 +350,13 @@ def _classify_design_guide_pages(doc):
 
 def _call_gemini_vision(client, model, images, prompt, max_retries=2):
     """Call Gemini Vision API with retry logic. Returns parsed dict or error dict."""
-    contents = [prompt]
-    for img in images:
-        contents.append(types.Part.from_bytes(data=img, mime_type='image/png'))
-
-    for attempt in range(max_retries + 1):
-        try:
-            response = client.models.generate_content(
-                model=model, contents=contents, config={"temperature": 0.1}
-            )
-            raw = response.text
-            # Clean markdown wrapping
-            if "```json" in raw:
-                raw = raw.split("```json")[1].split("```")[0]
-            elif "```" in raw:
-                raw = raw.split("```")[1].split("```")[0]
-            # Find JSON boundaries
-            start = raw.find('{')
-            end = raw.rfind('}')
-            if start >= 0 and end > start:
-                raw = raw[start:end+1]
-            result = json.loads(raw.strip())
-            if isinstance(result, list):
-                result = result[0] if result else {"error": "Empty list"}
-            if not isinstance(result, dict):
-                return {"error": f"Unexpected type: {type(result).__name__}"}
-            return result
-        except json.JSONDecodeError as e:
-            if attempt < max_retries:
-                time.sleep(3)
-                continue
-            return {"error": f"JSON parse failed: {str(e)}", "raw": raw[:500] if 'raw' in dir() else ""}
-        except Exception as e:
-            if attempt < max_retries and (
-                "503" in str(e) or "429" in str(e) or "504" in str(e) or
-                "timeout" in str(e).lower() or
-                "ReadTimeout" in type(e).__name__ or
-                "ConnectTimeout" in type(e).__name__
-            ):
-                time.sleep(10)
-                continue
-            return {"error": str(e)}
+    return call_gemini_json_response(
+        client,
+        model,
+        images,
+        prompt,
+        max_retries=max_retries,
+    )
 
 
 # ============================================

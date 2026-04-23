@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -394,5 +394,396 @@
       "unit": "mA"
     }
   },
-  "thermal": {}
+  "thermal": {},
+  "domains": {
+    "pin": {
+      "packages": {
+        "TSOT-23-5": {
+          "pin_count": 5,
+          "pins": {
+            "1": {
+              "name": "IN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Input. Power is supplied to the device through the IN pin.",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground.",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "SHDN",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Shutdown. Used to put the LT1761 regulators into a low power shutdown state. (also: BYP — Bypass. Used to bypass the reference of the LT1761 regulators to achieve low noise performance.)",
+              "unused_treatment": "VCC"
+            },
+            "4": {
+              "name": "BYP",
+              "direction": "PASSIVE",
+              "signal_type": "ANALOG",
+              "description": "Bypass. Used to bypass the reference of the LT1761 regulators to achieve low noise performance. (also: ADJ — Adjust Pin. Input to the error amplifier for adjustable versions.)",
+              "unused_treatment": "FLOAT"
+            },
+            "5": {
+              "name": "OUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Output. Supplies power to the load.",
+              "unused_treatment": null
+            }
+          }
+        }
+      }
+    },
+    "electrical": {
+      "absolute_maximum_ratings": {
+        "VIN": {
+          "parameter": "IN Pin Voltage",
+          "min": -20,
+          "max": 20,
+          "unit": "V",
+          "conditions": null
+        },
+        "VOUT": {
+          "parameter": "OUT Pin Voltage",
+          "min": -20,
+          "max": 20,
+          "unit": "V",
+          "conditions": null
+        },
+        "VADJ": {
+          "parameter": "ADJ Pin Voltage",
+          "min": -7,
+          "max": 7,
+          "unit": "V",
+          "conditions": null
+        },
+        "VBYP": {
+          "parameter": "BYP Pin Voltage",
+          "min": -0.6,
+          "max": 0.6,
+          "unit": "V",
+          "conditions": null
+        },
+        "VSHDN": {
+          "parameter": "SHDN Pin Voltage",
+          "min": -20,
+          "max": 20,
+          "unit": "V",
+          "conditions": null
+        },
+        "TJ": {
+          "parameter": "Operating Junction Temperature Range (MP Grade)",
+          "min": -55,
+          "max": 125,
+          "unit": "°C",
+          "conditions": null
+        },
+        "TSTG": {
+          "parameter": "Storage Temperature Range",
+          "min": -65,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        }
+      },
+      "electrical_parameters": {
+        "VIN(MIN)": {
+          "parameter": "Minimum Input Voltage",
+          "min": null,
+          "typ": 1.8,
+          "max": 2.3,
+          "unit": "V",
+          "conditions": "ILOAD = 100mA"
+        },
+        "VOUT": {
+          "parameter": "Regulated Output Voltage",
+          "min": 1.185,
+          "typ": 1.2,
+          "max": 1.215,
+          "unit": "V",
+          "conditions": "VIN = 2V, ILOAD = 1mA"
+        },
+        "VOUT_2_3V___VIN___20V__1mA___ILOAD": {
+          "parameter": "Regulated Output Voltage",
+          "min": 1.15,
+          "typ": 1.2,
+          "max": 1.24,
+          "unit": "V",
+          "conditions": "2.3V < VIN < 20V, 1mA < ILOAD < 100mA"
+        },
+        "VOUT_VIN___2V__ILOAD___1mA": {
+          "parameter": "Regulated Output Voltage",
+          "min": 1.478,
+          "typ": 1.5,
+          "max": 1.522,
+          "unit": "V",
+          "conditions": "VIN = 2V, ILOAD = 1mA"
+        },
+        "VOUT_2_5V___VIN___20V__1mA___ILOAD": {
+          "parameter": "Regulated Output Voltage",
+          "min": 1.436,
+          "typ": 1.5,
+          "max": 1.555,
+          "unit": "V",
+          "conditions": "2.5V < VIN < 20V, 1mA < ILOAD < 100mA"
+        },
+        "VOUT_VIN___2_3V__ILOAD___1mA": {
+          "parameter": "Regulated Output Voltage",
+          "min": 1.775,
+          "typ": 1.8,
+          "max": 1.825,
+          "unit": "V",
+          "conditions": "VIN = 2.3V, ILOAD = 1mA"
+        },
+        "VOUT_2_8V___VIN___20V__1mA___ILOAD": {
+          "parameter": "Regulated Output Voltage",
+          "min": 1.725,
+          "typ": 1.8,
+          "max": 1.86,
+          "unit": "V",
+          "conditions": "2.8V < VIN < 20V, 1mA < ILOAD < 100mA"
+        },
+        "VOUT_VIN___2_5V__ILOAD___1mA": {
+          "parameter": "Regulated Output Voltage",
+          "min": 1.97,
+          "typ": 2,
+          "max": 2.03,
+          "unit": "V",
+          "conditions": "VIN = 2.5V, ILOAD = 1mA"
+        },
+        "VOUT_3V___VIN___20V__1mA___ILOAD": {
+          "parameter": "Regulated Output Voltage",
+          "min": 1.92,
+          "typ": 2,
+          "max": 2.06,
+          "unit": "V",
+          "conditions": "3V < VIN < 20V, 1mA < ILOAD < 100mA"
+        },
+        "VOUT_VIN___3V__ILOAD___1mA": {
+          "parameter": "Regulated Output Voltage",
+          "min": 2.465,
+          "typ": 2.5,
+          "max": 2.535,
+          "unit": "V",
+          "conditions": "VIN = 3V, ILOAD = 1mA"
+        },
+        "VOUT_3_5V___VIN___20V__1mA___ILOAD": {
+          "parameter": "Regulated Output Voltage",
+          "min": 2.415,
+          "typ": 2.5,
+          "max": 2.575,
+          "unit": "V",
+          "conditions": "3.5V < VIN < 20V, 1mA < ILOAD < 100mA"
+        },
+        "VOUT_VIN___3_3V__ILOAD___1mA": {
+          "parameter": "Regulated Output Voltage",
+          "min": 2.762,
+          "typ": 2.8,
+          "max": 2.838,
+          "unit": "V",
+          "conditions": "VIN = 3.3V, ILOAD = 1mA"
+        },
+        "VOUT_3_8V___VIN___20V__1mA___ILOAD": {
+          "parameter": "Regulated Output Voltage",
+          "min": 2.706,
+          "typ": 2.8,
+          "max": 2.884,
+          "unit": "V",
+          "conditions": "3.8V < VIN < 20V, 1mA < ILOAD < 100mA"
+        },
+        "VOUT_VIN___3_5V__ILOAD___1mA": {
+          "parameter": "Regulated Output Voltage",
+          "min": 2.96,
+          "typ": 3,
+          "max": 3.04,
+          "unit": "V",
+          "conditions": "VIN = 3.5V, ILOAD = 1mA"
+        },
+        "VOUT_4V___VIN___20V__1mA___ILOAD": {
+          "parameter": "Regulated Output Voltage",
+          "min": 2.9,
+          "typ": 3,
+          "max": 3.09,
+          "unit": "V",
+          "conditions": "4V < VIN < 20V, 1mA < ILOAD < 100mA"
+        },
+        "VOUT_VIN___3_8V__ILOAD___1mA": {
+          "parameter": "Regulated Output Voltage",
+          "min": 3.25,
+          "typ": 3.3,
+          "max": 3.35,
+          "unit": "V",
+          "conditions": "VIN = 3.8V, ILOAD = 1mA"
+        },
+        "VOUT_4_3V___VIN___20V__1mA___ILOAD": {
+          "parameter": "Regulated Output Voltage",
+          "min": 3.19,
+          "typ": 3.3,
+          "max": 3.4,
+          "unit": "V",
+          "conditions": "4.3V < VIN < 20V, 1mA < ILOAD < 100mA"
+        },
+        "VOUT_VIN___5_5V__ILOAD___1mA": {
+          "parameter": "Regulated Output Voltage",
+          "min": 4.935,
+          "typ": 5,
+          "max": 5.065,
+          "unit": "V",
+          "conditions": "VIN = 5.5V, ILOAD = 1mA"
+        },
+        "VOUT_6V___VIN___20V__1mA___ILOAD": {
+          "parameter": "Regulated Output Voltage",
+          "min": 4.85,
+          "typ": 5,
+          "max": 5.12,
+          "unit": "V",
+          "conditions": "6V < VIN < 20V, 1mA < ILOAD < 100mA"
+        },
+        "VADJ": {
+          "parameter": "ADJ Pin Voltage",
+          "min": 1.205,
+          "typ": 1.22,
+          "max": 1.235,
+          "unit": "V",
+          "conditions": "VIN = 2V, ILOAD = 1mA"
+        },
+        "VADJ_2_3V___VIN___20V__1mA___ILOAD": {
+          "parameter": "ADJ Pin Voltage",
+          "min": 1.17,
+          "typ": 1.22,
+          "max": 1.26,
+          "unit": "V",
+          "conditions": "2.3V < VIN < 20V, 1mA < ILOAD < 100mA"
+        },
+        "ΔVOUT/ΔVIN": {
+          "parameter": "Line Regulation",
+          "min": null,
+          "typ": 1,
+          "max": 10,
+          "unit": "mV",
+          "conditions": "ΔVIN = 2V to 20V, ILOAD = 1mA"
+        },
+        "ΔVOUT/ΔILOAD": {
+          "parameter": "Load Regulation",
+          "min": null,
+          "typ": 1,
+          "max": 6,
+          "unit": "mV",
+          "conditions": "VIN = 2.3V, ΔILOAD = 1mA to 50mA"
+        },
+        "ΔVOUT/ΔILOAD_VIN___2_3V___ILOAD___1mA_to_50": {
+          "parameter": "Load Regulation",
+          "min": null,
+          "typ": 1,
+          "max": 12,
+          "unit": "mV",
+          "conditions": "VIN = 2.3V, ΔILOAD = 1mA to 50mA"
+        },
+        "VDO": {
+          "parameter": "Dropout Voltage",
+          "min": null,
+          "typ": 0.3,
+          "max": 0.35,
+          "unit": "V",
+          "conditions": "ILOAD = 100mA"
+        },
+        "VDO_ILOAD___100mA": {
+          "parameter": "Dropout Voltage",
+          "min": null,
+          "typ": 0.3,
+          "max": 0.45,
+          "unit": "V",
+          "conditions": "ILOAD = 100mA"
+        },
+        "IGND": {
+          "parameter": "GND Pin Current",
+          "min": null,
+          "typ": 2.2,
+          "max": 4,
+          "unit": "mA",
+          "conditions": "ILOAD = 100mA"
+        },
+        "IGND_ILOAD___100mA": {
+          "parameter": "GND Pin Current",
+          "min": null,
+          "typ": 2.2,
+          "max": 4,
+          "unit": "mA",
+          "conditions": "ILOAD = 100mA"
+        },
+        "eN": {
+          "parameter": "Output Voltage Noise",
+          "min": null,
+          "typ": 20,
+          "max": null,
+          "unit": "µVRMS",
+          "conditions": "COUT = 10µF, CBYP = 0.01µF, ILOAD = 100mA, BW = 10Hz to 100kHz"
+        },
+        "VSHDN(TH)": {
+          "parameter": "Shutdown Threshold",
+          "min": null,
+          "typ": 0.8,
+          "max": 2,
+          "unit": "V",
+          "conditions": "VOUT = Off to On"
+        },
+        "VSHDN(TH)_VOUT___On_to_Off": {
+          "parameter": "Shutdown Threshold",
+          "min": 0.25,
+          "typ": 0.65,
+          "max": null,
+          "unit": "V",
+          "conditions": "VOUT = On to Off"
+        },
+        "PSRR": {
+          "parameter": "Ripple Rejection",
+          "min": 55,
+          "typ": 65,
+          "max": null,
+          "unit": "dB",
+          "conditions": "VIN - VOUT = 1.5V (Avg), VRIPPLE = 0.5VP-P, fRIPPLE = 120Hz, ILOAD = 50mA"
+        },
+        "ILIM": {
+          "parameter": "Current Limit",
+          "min": 110,
+          "typ": null,
+          "max": null,
+          "unit": "mA",
+          "conditions": "VIN = VOUT(NOMINAL) + 1V or 2.3V (Note 12), ΔVOUT = -5%"
+        }
+      },
+      "drc_hints": {
+        "vin_abs_max": {
+          "value": 20,
+          "unit": "V"
+        },
+        "vin_operating": {
+          "typ": 1.8,
+          "max": 2.3,
+          "unit": "V"
+        },
+        "vout": {
+          "min": 1.185,
+          "typ": 1.2,
+          "max": 1.215,
+          "unit": "V"
+        },
+        "iout_max": {
+          "min": 110,
+          "unit": "mA"
+        },
+        "iq": {
+          "typ": 2.2,
+          "max": 4,
+          "unit": "mA"
+        }
+      }
+    }
+  }
 }

@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -163,5 +163,165 @@
       "unit": "MHz"
     }
   },
-  "thermal": {}
+  "thermal": {},
+  "domains": {
+    "pin": {
+      "packages": {
+        "DFN-10": {
+          "pin_count": 11,
+          "pins": {
+            "1": {
+              "name": "SW1",
+              "direction": "OUTPUT",
+              "signal_type": "POWER",
+              "description": "Switch node for channel 1",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "VIN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power supply input",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "SW2",
+              "direction": "OUTPUT",
+              "signal_type": "POWER",
+              "description": "Switch node for channel 2",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "FB2P",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Positive feedback input for channel 2",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "FB2N",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Negative feedback input for channel 2",
+              "unused_treatment": null
+            },
+            "6": {
+              "name": "VREF",
+              "direction": "POWER_OUT",
+              "signal_type": "ANALOG",
+              "description": "Reference voltage output",
+              "unused_treatment": null
+            },
+            "7": {
+              "name": "FB1N",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Negative feedback input for channel 1",
+              "unused_treatment": null
+            },
+            "8": {
+              "name": "FB1P",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Positive feedback input for channel 1",
+              "unused_treatment": null
+            },
+            "9": {
+              "name": "SHDN/SS2",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Shutdown and soft-start control for channel 2",
+              "unused_treatment": null
+            },
+            "10": {
+              "name": "SHDN/SS1",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Shutdown and soft-start control for channel 1",
+              "unused_treatment": null
+            },
+            "EP": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground connection (Exposed Pad)",
+              "unused_treatment": null
+            }
+          }
+        }
+      }
+    },
+    "electrical": {
+      "absolute_maximum_ratings": {},
+      "electrical_parameters": {
+        "fsw": {
+          "parameter": "Switching Frequency",
+          "min": null,
+          "typ": 1.2,
+          "max": null,
+          "unit": "MHz",
+          "conditions": null
+        },
+        "VCESAT": {
+          "parameter": "Switch Saturation Voltage",
+          "min": null,
+          "typ": 330,
+          "max": null,
+          "unit": "mV",
+          "conditions": "Isw = 1.3A"
+        },
+        "VOUT": {
+          "parameter": "Output Voltage",
+          "min": null,
+          "typ": null,
+          "max": 40,
+          "unit": "V",
+          "conditions": null
+        },
+        "VIN": {
+          "parameter": "Input Voltage Range",
+          "min": 2.4,
+          "typ": null,
+          "max": 16,
+          "unit": "V",
+          "conditions": null
+        },
+        "ISHDN": {
+          "parameter": "Shutdown Current",
+          "min": null,
+          "typ": null,
+          "max": 1,
+          "unit": "uA",
+          "conditions": null
+        },
+        "ISW": {
+          "parameter": "Switch Current Limit",
+          "min": null,
+          "typ": 1.3,
+          "max": null,
+          "unit": "A",
+          "conditions": null
+        }
+      },
+      "drc_hints": {
+        "vin_operating": {
+          "min": 2.4,
+          "max": 16,
+          "unit": "V"
+        },
+        "vout": {
+          "max": 40,
+          "unit": "V"
+        },
+        "iout_max": {
+          "typ": 1.3,
+          "unit": "A"
+        },
+        "fsw": {
+          "typ": 1.2,
+          "unit": "MHz"
+        }
+      }
+    }
+  }
 }

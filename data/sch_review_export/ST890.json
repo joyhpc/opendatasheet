@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -422,6 +422,427 @@
       "unit": "°C/W",
       "conditions": null,
       "source": "electrical_characteristics"
+    }
+  },
+  "domains": {
+    "pin": {
+      "packages": {
+        "SO8": {
+          "pin_count": 8,
+          "pins": {
+            "1": {
+              "name": "IN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Input P-channel MOSFET source. Bypass IN with a 1 µF capacitor to ground.",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "IN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Input P-channel MOSFET source. Bypass IN with a 1 µF capacitor to ground.",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "ON",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Active-low switch ON input. A logic low turns the switch ON.",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "SET",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Set current limit input. A resistor from SET to GND sets the current limit for the switch.",
+              "unused_treatment": null
+            },
+            "6": {
+              "name": "OUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Switch output. P-channel MOSFET drain. Bypass OUT with a 0.1 µF capacitor to ground.",
+              "unused_treatment": null
+            },
+            "7": {
+              "name": "OUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Switch output. P-channel MOSFET drain. Bypass OUT with a 0.1 µF capacitor to ground.",
+              "unused_treatment": null
+            },
+            "8": {
+              "name": "FAULT",
+              "direction": "OUTPUT",
+              "signal_type": "DIGITAL",
+              "description": "Fault indicator output. This open drain output goes low when in current limit or when the die temperature exceeds 135 °C.",
+              "unused_treatment": null
+            }
+          }
+        },
+        "DFN8L 3x3": {
+          "pin_count": 9,
+          "pins": {
+            "1": {
+              "name": "IN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Input P-channel MOSFET source. Bypass IN with a 1 µF capacitor to ground.",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "IN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Input P-channel MOSFET source. Bypass IN with a 1 µF capacitor to ground.",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "ON",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Active-low switch ON input. A logic low turns the switch ON.",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "SET",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Set current limit input. A resistor from SET to GND sets the current limit for the switch.",
+              "unused_treatment": null
+            },
+            "6": {
+              "name": "OUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Switch output. P-channel MOSFET drain. Bypass OUT with a 0.1 µF capacitor to ground.",
+              "unused_treatment": null
+            },
+            "7": {
+              "name": "OUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Switch output. P-channel MOSFET drain. Bypass OUT with a 0.1 µF capacitor to ground.",
+              "unused_treatment": null
+            },
+            "8": {
+              "name": "FAULT",
+              "direction": "OUTPUT",
+              "signal_type": "DIGITAL",
+              "description": "Fault indicator output. This open drain output goes low when in current limit or when the die temperature exceeds 135 °C.",
+              "unused_treatment": null
+            },
+            "EP": {
+              "name": "EP",
+              "direction": "PASSIVE",
+              "signal_type": "NONE",
+              "description": "Exposed pad. Not internally connected. Can be connected to the PCB groundplane for best thermal performance.",
+              "unused_treatment": "GND"
+            }
+          }
+        }
+      }
+    },
+    "electrical": {
+      "absolute_maximum_ratings": {
+        "VI": {
+          "parameter": "Voltage at IN pin",
+          "min": -0.5,
+          "max": 6.0,
+          "unit": "V",
+          "conditions": null
+        },
+        "VON": {
+          "parameter": "Input voltage at ON pin",
+          "min": -0.5,
+          "max": 6.0,
+          "unit": "V",
+          "conditions": null
+        },
+        "VFAULT_N": {
+          "parameter": "Input voltage at FAULT_N pin",
+          "min": -0.5,
+          "max": 6.0,
+          "unit": "V",
+          "conditions": null
+        },
+        "VSET": {
+          "parameter": "Voltage at SET pin",
+          "min": -0.5,
+          "max": null,
+          "unit": "V",
+          "conditions": "max is (VIN + 0.5)"
+        },
+        "IDS": {
+          "parameter": "Maximum continuous switching current",
+          "min": null,
+          "max": 1.5,
+          "unit": "A",
+          "conditions": null
+        },
+        "Tstg": {
+          "parameter": "Storage temperature",
+          "min": -65,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        }
+      },
+      "electrical_parameters": {
+        "VI": {
+          "parameter": "Operating voltage",
+          "min": 2.7,
+          "typ": null,
+          "max": 5.5,
+          "unit": "V",
+          "conditions": "ID = 1 mA"
+        },
+        "Toper": {
+          "parameter": "Operating free-air temperature range",
+          "min": -40,
+          "typ": null,
+          "max": 85,
+          "unit": "°C",
+          "conditions": null
+        },
+        "Rthj-amb": {
+          "parameter": "Thermal resistance junction-ambient",
+          "min": null,
+          "typ": 37.6,
+          "max": null,
+          "unit": "°C/W",
+          "conditions": null
+        },
+        "ICC": {
+          "parameter": "ON quiescent supply current",
+          "min": null,
+          "typ": 13,
+          "max": 25,
+          "unit": "µA",
+          "conditions": "VI = 5 V, ON_N = GND, Io = 0"
+        },
+        "ICCOFF": {
+          "parameter": "OFF quiescent supply current",
+          "min": null,
+          "typ": null,
+          "max": 1,
+          "unit": "µA",
+          "conditions": "ON_N = IN, VI = VOUT = 5.5 V"
+        },
+        "ICCOFF_ON_N___IN__VI___5_5_V__VO___0": {
+          "parameter": "OFF quiescent supply current",
+          "min": null,
+          "typ": null,
+          "max": 5,
+          "unit": "µA",
+          "conditions": "ON_N = IN, VI = 5.5 V, VO = 0"
+        },
+        "VULO": {
+          "parameter": "Undervoltage lockout",
+          "min": 2,
+          "typ": 2.4,
+          "max": 2.6,
+          "unit": "V",
+          "conditions": "Rising edge"
+        },
+        "VHYST": {
+          "parameter": "Undervoltage lockout hysteresis",
+          "min": null,
+          "typ": 100,
+          "max": null,
+          "unit": "mV",
+          "conditions": null
+        },
+        "RON": {
+          "parameter": "ON resistance",
+          "min": null,
+          "typ": 75,
+          "max": 120,
+          "unit": "mΩ",
+          "conditions": "VI = 4.5 V"
+        },
+        "RON_VI___3_V": {
+          "parameter": "ON resistance",
+          "min": null,
+          "typ": 90,
+          "max": 130,
+          "unit": "mΩ",
+          "conditions": "VI = 3 V"
+        },
+        "VSET": {
+          "parameter": "Reference voltage to turn the switch OFF",
+          "min": 1.178,
+          "typ": 1.24,
+          "max": 1.302,
+          "unit": "V",
+          "conditions": "Io = 100 mA, VSET rise until VI - VO > 0.8 V"
+        },
+        "IMAX": {
+          "parameter": "Maximum programmable output over current limit",
+          "min": null,
+          "typ": 1.2,
+          "max": null,
+          "unit": "A",
+          "conditions": null
+        },
+        "ISC": {
+          "parameter": "Short-circuit current limit",
+          "min": null,
+          "typ": null,
+          "max": null,
+          "unit": "A",
+          "conditions": "VI = 5 V, OUT connected to GND, device enabled into short-circuit; Typ = 1.2 * ILIM, Max = 1.5 * ILIM"
+        },
+        "ILIM/ISET": {
+          "parameter": "ILIM to ISET current ratio",
+          "min": 970,
+          "typ": 1110,
+          "max": 1300,
+          "unit": null,
+          "conditions": "Io = 500 mA, VO > 1.6 V"
+        },
+        "VIL": {
+          "parameter": "ON input low level voltage",
+          "min": null,
+          "typ": null,
+          "max": 0.8,
+          "unit": "V",
+          "conditions": "VI = 2.7 to 5.5 V"
+        },
+        "VIH": {
+          "parameter": "ON input high level voltage",
+          "min": 2,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": "VI = 2.7 to 3.6 V"
+        },
+        "VIH_VI___2_7_to_5_5_V": {
+          "parameter": "ON input high level voltage",
+          "min": 2.4,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": "VI = 2.7 to 5.5 V"
+        },
+        "II": {
+          "parameter": "ON input leakage current",
+          "min": null,
+          "typ": null,
+          "max": 1,
+          "unit": "µA",
+          "conditions": "VI = 5.5 V"
+        },
+        "ISET bias": {
+          "parameter": "ISET bias current",
+          "min": null,
+          "typ": 0.5,
+          "max": 3,
+          "unit": "µA",
+          "conditions": "VSET = 1.24 V, Io = 0, VI = VO"
+        },
+        "VOL": {
+          "parameter": "FAULT_N output low voltage",
+          "min": null,
+          "typ": 0.15,
+          "max": null,
+          "unit": "V",
+          "conditions": "ISINK = 1 mA, VSET = 1.4 V"
+        },
+        "IOH": {
+          "parameter": "FAULT_N output leakage current",
+          "min": null,
+          "typ": null,
+          "max": 1,
+          "unit": "µA",
+          "conditions": "VFAULT = 5.5 V, VSET = 1 V"
+        },
+        "TPROT": {
+          "parameter": "Thermal protection",
+          "min": null,
+          "typ": 130,
+          "max": null,
+          "unit": "°C",
+          "conditions": null
+        },
+        "THYST": {
+          "parameter": "Thermal hysteresis",
+          "min": null,
+          "typ": 15,
+          "max": null,
+          "unit": "°C",
+          "conditions": null
+        }
+      },
+      "drc_hints": {
+        "vin_abs_max": {
+          "value": 6.0,
+          "unit": "V"
+        },
+        "vref": {
+          "min": 1.178,
+          "typ": 1.24,
+          "max": 1.302,
+          "unit": "V"
+        },
+        "enable_threshold": {
+          "max": 0.8,
+          "unit": "V"
+        },
+        "iout_max": {
+          "typ": 1.2,
+          "unit": "A"
+        },
+        "thermal_resistance": {
+          "typ": 160,
+          "unit": "°C/W"
+        },
+        "uvlo": {
+          "min": 2,
+          "typ": 2.4,
+          "max": 2.6,
+          "unit": "V"
+        }
+      }
+    },
+    "thermal": {
+      "theta_ja": {
+        "parameter": "Thermal resistance junction-ambient",
+        "symbol": "Rthj-amb",
+        "min": null,
+        "typ": 160,
+        "max": null,
+        "value": null,
+        "unit": "°C/W",
+        "conditions": null,
+        "source": "electrical_characteristics"
+      },
+      "theta_ja_Thermal_resistance_junction_am": {
+        "parameter": "Thermal resistance junction-ambient",
+        "symbol": "Rthj-amb",
+        "min": null,
+        "typ": 37.6,
+        "max": null,
+        "value": null,
+        "unit": "°C/W",
+        "conditions": null,
+        "source": "electrical_characteristics"
+      }
     }
   }
 }

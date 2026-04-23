@@ -50,8 +50,9 @@ python3 scripts/validate_exports.py --summary
 
 Expected healthy state today:
 - all checked-in exports validate successfully
-- validator accepts both `sch-review-device/1.0` and `sch-review-device/1.1`
-- newly generated exports should target `sch-review-device/1.1`
+- validator accepts `sch-review-device/1.0`, `sch-review-device/1.1`, and `device-knowledge/2.0`
+- newly generated exports should target `device-knowledge/2.0`
+- flat `1.1` fields remain as compatibility output inside generated exports when needed
 
 If validation fails:
 1. identify whether the break is in generation logic, schema rules, or a one-off checked-in artifact
@@ -76,6 +77,11 @@ python3 scripts/validate_exports.py --summary
 python3 test_regression.py
 ```
 
+`scripts/export_for_sch_review.py` now treats `data/sch_review_export/` as a managed output set:
+- files produced from current `data/extracted_v2/` inputs are rewritten
+- stale top-level device JSONs that are no longer generated are removed automatically
+- `_manifest.json` and `_fpga_catalog.json` are regenerated after cleanup
+
 Do **not** re-export just because docs, CI, templates, or support files changed.
 
 ## 4. When not to re-export
@@ -91,13 +97,15 @@ This keeps diff size small and avoids unnecessary churn in generated artifacts.
 ## 5. Schema migration policy
 
 Current state:
-- checked-in schema document is `sch-review-device/1.1`
-- validator remains compatible with historical `1.0` artifacts during migration
-- export generation should emit `1.1`
+- checked-in schema document accepts `sch-review-device/1.0`, `sch-review-device/1.1`, and `device-knowledge/2.0`
+- validator remains compatible with historical `1.0` and `1.1` artifacts during migration
+- export generation should emit `device-knowledge/2.0`
+- checked-in device exports should now converge on `device-knowledge/2.0`; legacy `1.0`/`1.1` support exists only for validation/backward compatibility
 
 Maintainer rule of thumb:
-- **new output** → emit `1.1`
-- **historical checked-in output** → may remain `1.0` until there is a deliberate regeneration pass
+- **new output** → emit `device-knowledge/2.0`
+- **flat top-level fields** → keep them only for compatibility with current consumers
+- **historical checked-in output** → do not preserve it by accident; stale device files should disappear on regeneration
 - **manual compatibility notes** → must remain schema-compatible
 
 Before ending migration, confirm all of the following:

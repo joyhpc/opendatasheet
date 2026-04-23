@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -118,5 +118,120 @@
       "unit": "A"
     }
   },
-  "thermal": {}
+  "thermal": {},
+  "domains": {
+    "pin": {
+      "packages": {
+        "SOP8": {
+          "pin_count": 8,
+          "pins": {
+            "1": {
+              "name": "ISET",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "LED current setting pin; connect an external resistor to GND to set the current",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "VCC",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power supply input",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "VCC",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power supply input",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "LED",
+              "direction": "OUTPUT",
+              "signal_type": "POWER",
+              "description": "LED current sink output terminal",
+              "unused_treatment": null
+            },
+            "6": {
+              "name": "LED",
+              "direction": "OUTPUT",
+              "signal_type": "POWER",
+              "description": "LED current sink output terminal",
+              "unused_treatment": null
+            },
+            "7": {
+              "name": "NC",
+              "direction": "NC",
+              "signal_type": "NONE",
+              "description": "No internal connection",
+              "unused_treatment": null
+            },
+            "8": {
+              "name": "CE",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Chip enable input",
+              "unused_treatment": null
+            }
+          }
+        }
+      }
+    },
+    "electrical": {
+      "absolute_maximum_ratings": {},
+      "electrical_parameters": {
+        "VCC": {
+          "parameter": "Operating Voltage",
+          "min": 2.8,
+          "typ": null,
+          "max": 6.0,
+          "unit": "V",
+          "conditions": null
+        },
+        "ILED": {
+          "parameter": "LED Pin Output Current",
+          "min": null,
+          "typ": null,
+          "max": 1.5,
+          "unit": "A",
+          "conditions": null
+        },
+        "Ta": {
+          "parameter": "Operating Ambient Temperature Range",
+          "min": -40,
+          "typ": null,
+          "max": 85,
+          "unit": "°C",
+          "conditions": null
+        },
+        "ILED_Set_by_external_resistor": {
+          "parameter": "Current Regulation Range",
+          "min": 0.03,
+          "typ": null,
+          "max": 1.5,
+          "unit": "A",
+          "conditions": "Set by external resistor"
+        }
+      },
+      "drc_hints": {
+        "vin_operating": {
+          "min": 2.8,
+          "max": 6.0,
+          "unit": "V"
+        },
+        "iout_max": {
+          "max": 1.5,
+          "unit": "A"
+        }
+      }
+    }
+  }
 }

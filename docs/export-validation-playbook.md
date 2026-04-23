@@ -27,7 +27,10 @@ The validator accepts:
 - `device-knowledge/2.0`
 
 Current export generation target is:
-- `sch-review-device/1.1`
+- `device-knowledge/2.0`
+
+Compatibility expectation:
+- new exports may still carry flat `sch-review-device/1.1`-style fields alongside `domains`
 
 ## What semantic validation adds
 

@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -441,6 +441,446 @@
       "unit": "°C/W",
       "conditions": null,
       "source": "absolute_maximum_ratings"
+    }
+  },
+  "domains": {
+    "pin": {
+      "packages": {
+        "SOT-23-5": {
+          "pin_count": 5,
+          "pins": {
+            "1": {
+              "name": "IN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Input Voltage Supply Pin.",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground.",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "EN",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Enable Pin. Drive EN high to turn on the regulator. Drive EN low to turn off the regulator. The EN pin has an internal 0.2µA pull-down current source.",
+              "unused_treatment": "VCC"
+            },
+            "4": {
+              "name": "NC",
+              "direction": "NC",
+              "signal_type": "NONE",
+              "description": "Not Connected (fixed voltage version only). (also: ADJ — Feedback Input Pin (adjustable voltage version only). Connect this pin to the external resistor divider to adjust the output voltage.)",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "OUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Regulated Output Pin. It is recommended to use an output capacitor with effective capacitance in the range of 0.5µF to 10µF.",
+              "unused_treatment": null
+            }
+          }
+        },
+        "UTDFN-1×1-4AL": {
+          "pin_count": 4,
+          "pins": {
+            "4": {
+              "name": "IN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Input Voltage Supply Pin.",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground.",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "EN",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Enable Pin. Drive EN high to turn on the regulator. Drive EN low to turn off the regulator. The EN pin has an internal 0.2µA pull-down current source.",
+              "unused_treatment": "VCC"
+            },
+            "1": {
+              "name": "OUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Regulated Output Pin. It is recommended to use an output capacitor with effective capacitance in the range of 0.5µF to 10µF.",
+              "unused_treatment": null
+            }
+          }
+        }
+      }
+    },
+    "electrical": {
+      "absolute_maximum_ratings": {
+        "VIN, VEN": {
+          "parameter": "Input Voltage",
+          "min": -0.3,
+          "max": 6,
+          "unit": "V",
+          "conditions": null
+        },
+        "VOUT, VADJ": {
+          "parameter": "Output/Adjust Voltage",
+          "min": -0.3,
+          "max": null,
+          "unit": "V",
+          "conditions": "VIN + 0.3V"
+        },
+        "θJA": {
+          "parameter": "Package Thermal Resistance",
+          "min": null,
+          "max": null,
+          "unit": "°C/W",
+          "conditions": null
+        },
+        "TJ": {
+          "parameter": "Junction Temperature",
+          "min": null,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        },
+        "TSTG": {
+          "parameter": "Storage Temperature Range",
+          "min": -65,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        }
+      },
+      "electrical_parameters": {
+        "VIN": {
+          "parameter": "Operating Input Voltage Range",
+          "min": 1.8,
+          "typ": null,
+          "max": 5.5,
+          "unit": "V",
+          "conditions": null
+        },
+        "VFB": {
+          "parameter": "Feedback Voltage",
+          "min": 1.182,
+          "typ": null,
+          "max": 1.218,
+          "unit": "V",
+          "conditions": null
+        },
+        "VOUT": {
+          "parameter": "Output Voltage Accuracy",
+          "min": -1,
+          "typ": null,
+          "max": 1,
+          "unit": "%",
+          "conditions": "VIN = (VOUT(NOM) + 1.0V) to 5.5V"
+        },
+        "VOUT_VIN____VOUT_NOM____1_0V__to_5": {
+          "parameter": "Output Voltage Accuracy",
+          "min": -1.5,
+          "typ": null,
+          "max": 1.5,
+          "unit": "%",
+          "conditions": "VIN = (VOUT(NOM) + 1.0V) to 5.5V"
+        },
+        "ΔVOUT / (ΔVIN × VOUT)": {
+          "parameter": "Line Regulation",
+          "min": null,
+          "typ": 0.01,
+          "max": 0.12,
+          "unit": "%/V",
+          "conditions": "VIN = (VOUT(NOM) + 1.0V) to 5.5V, VOUT(NOM) ≤ 3.3V"
+        },
+        "ΔVOUT / (ΔVIN × VOUT)_VIN____VOUT_NOM____1_0V__to_5": {
+          "parameter": "Line Regulation",
+          "min": null,
+          "typ": 0.04,
+          "max": 0.36,
+          "unit": "%/V",
+          "conditions": "VIN = (VOUT(NOM) + 1.0V) to 5.5V, VOUT(NOM) = 4.2V"
+        },
+        "ΔVOUT": {
+          "parameter": "Load Regulation",
+          "min": null,
+          "typ": 3,
+          "max": null,
+          "unit": "mV",
+          "conditions": "IOUT = 0.1mA to 250mA, VOUT(NOM) ≤ 1.8V"
+        },
+        "ΔVOUT_IOUT___0_1mA_to_250mA__VOUT_NO": {
+          "parameter": "Load Regulation",
+          "min": null,
+          "typ": 7,
+          "max": null,
+          "unit": "mV",
+          "conditions": "IOUT = 0.1mA to 250mA, VOUT(NOM) > 1.8V"
+        },
+        "VDROP": {
+          "parameter": "Dropout Voltage",
+          "min": null,
+          "typ": 175,
+          "max": 265,
+          "unit": "mV",
+          "conditions": "IOUT = 250mA, 1.8V ≤ VOUT(NOM) < 2.8V"
+        },
+        "VDROP_IOUT___250mA__2_8V___VOUT_NOM": {
+          "parameter": "Dropout Voltage",
+          "min": null,
+          "typ": 85,
+          "max": 145,
+          "unit": "mV",
+          "conditions": "IOUT = 250mA, 2.8V ≤ VOUT(NOM) < 3.3V"
+        },
+        "VDROP_IOUT___250mA__3_3V___VOUT_NOM": {
+          "parameter": "Dropout Voltage",
+          "min": null,
+          "typ": 72,
+          "max": 125,
+          "unit": "mV",
+          "conditions": "IOUT = 250mA, 3.3V ≤ VOUT(NOM) < 4.2V"
+        },
+        "VDROP_IOUT___250mA__4_2V___VOUT_NOM": {
+          "parameter": "Dropout Voltage",
+          "min": null,
+          "typ": 62,
+          "max": 110,
+          "unit": "mV",
+          "conditions": "IOUT = 250mA, 4.2V ≤ VOUT(NOM) ≤ 5.0V"
+        },
+        "VDROP_IOUT___250mA__1_8V___VOUT_NOM": {
+          "parameter": "Dropout Voltage",
+          "min": null,
+          "typ": 145,
+          "max": 225,
+          "unit": "mV",
+          "conditions": "IOUT = 250mA, 1.8V ≤ VOUT(NOM) < 2.8V"
+        },
+        "ILIM": {
+          "parameter": "Output Current Limit",
+          "min": 260,
+          "typ": 500,
+          "max": null,
+          "unit": "mA",
+          "conditions": null
+        },
+        "ISC": {
+          "parameter": "Short Circuit Current",
+          "min": null,
+          "typ": 220,
+          "max": null,
+          "unit": "mA",
+          "conditions": "VOUT = 0V"
+        },
+        "IQ": {
+          "parameter": "Quiescent Current",
+          "min": null,
+          "typ": 13.5,
+          "max": 22,
+          "unit": "μA",
+          "conditions": "No load"
+        },
+        "ISHDN": {
+          "parameter": "Shutdown Current",
+          "min": null,
+          "typ": 0.1,
+          "max": 1,
+          "unit": "μA",
+          "conditions": "VEN = 0V, VIN = 5.5V"
+        },
+        "ISHDN_VEN___0V__VIN___5_5V": {
+          "parameter": "Shutdown Current",
+          "min": null,
+          "typ": null,
+          "max": 2.5,
+          "unit": "μA",
+          "conditions": "VEN = 0V, VIN = 5.5V"
+        },
+        "IFB": {
+          "parameter": "Feedback Current",
+          "min": null,
+          "typ": 1,
+          "max": null,
+          "unit": "nA",
+          "conditions": "VADJ = 1.3V"
+        },
+        "VIH": {
+          "parameter": "EN Pin Threshold Voltage High",
+          "min": 1.5,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": "EN input voltage high"
+        },
+        "VIL": {
+          "parameter": "EN Pin Threshold Voltage Low",
+          "min": null,
+          "typ": null,
+          "max": 0.4,
+          "unit": "V",
+          "conditions": "EN input voltage low"
+        },
+        "IEN": {
+          "parameter": "EN Pull-Down Current",
+          "min": null,
+          "typ": 0.2,
+          "max": 1,
+          "unit": "μA",
+          "conditions": "VEN = 5.5V"
+        },
+        "tON": {
+          "parameter": "Turn-On Time",
+          "min": null,
+          "typ": 120,
+          "max": null,
+          "unit": "μs",
+          "conditions": "From assertion of VEN to VOUT = 90% VOUT(NOM)"
+        },
+        "PSRR": {
+          "parameter": "Power Supply Rejection Ratio",
+          "min": null,
+          "typ": 84,
+          "max": null,
+          "unit": "dB",
+          "conditions": "f = 100Hz, IOUT = 20mA"
+        },
+        "PSRR_f___1kHz__IOUT___20mA": {
+          "parameter": "Power Supply Rejection Ratio",
+          "min": null,
+          "typ": 94,
+          "max": null,
+          "unit": "dB",
+          "conditions": "f = 1kHz, IOUT = 20mA"
+        },
+        "PSRR_f___10kHz__IOUT___20mA": {
+          "parameter": "Power Supply Rejection Ratio",
+          "min": null,
+          "typ": 73,
+          "max": null,
+          "unit": "dB",
+          "conditions": "f = 10kHz, IOUT = 20mA"
+        },
+        "PSRR_f___100kHz__IOUT___20mA": {
+          "parameter": "Power Supply Rejection Ratio",
+          "min": null,
+          "typ": 33,
+          "max": null,
+          "unit": "dB",
+          "conditions": "f = 100kHz, IOUT = 20mA"
+        },
+        "en": {
+          "parameter": "Output Voltage Noise",
+          "min": null,
+          "typ": 26,
+          "max": null,
+          "unit": "μVRMS",
+          "conditions": "f = 10Hz to 100kHz, VOUT = 2.8V, IOUT = 1mA"
+        },
+        "en_f___10Hz_to_100kHz__VOUT___2_8": {
+          "parameter": "Output Voltage Noise",
+          "min": null,
+          "typ": 20,
+          "max": null,
+          "unit": "μVRMS",
+          "conditions": "f = 10Hz to 100kHz, VOUT = 2.8V, IOUT = 250mA"
+        },
+        "RDISCH": {
+          "parameter": "Output Discharge Resistance",
+          "min": null,
+          "typ": 220,
+          "max": null,
+          "unit": "Ω",
+          "conditions": "VEN ≤ 0.4V, VIN = 5.0V"
+        },
+        "TSHDN": {
+          "parameter": "Thermal Shutdown Temperature",
+          "min": null,
+          "typ": 165,
+          "max": null,
+          "unit": "°C",
+          "conditions": null
+        },
+        "ΔTSHDN": {
+          "parameter": "Thermal Shutdown Hysteresis",
+          "min": null,
+          "typ": 20,
+          "max": null,
+          "unit": "°C",
+          "conditions": null
+        }
+      },
+      "drc_hints": {
+        "vin_abs_max": {
+          "value": 6,
+          "unit": "V"
+        },
+        "vin_operating": {
+          "min": 1.8,
+          "max": 5.5,
+          "unit": "V"
+        },
+        "vref": {
+          "min": 1.188,
+          "typ": 1.2,
+          "max": 1.212,
+          "unit": "V"
+        },
+        "vout": {
+          "min": -1,
+          "max": 1,
+          "unit": "%"
+        },
+        "enable_threshold": {
+          "min": 1.5,
+          "unit": "V"
+        },
+        "iout_max": {
+          "min": 260,
+          "typ": 500,
+          "unit": "mA"
+        },
+        "iq": {
+          "typ": 13.5,
+          "max": 22,
+          "unit": "μA"
+        },
+        "thermal_shutdown": {
+          "typ": 165,
+          "unit": "°C"
+        }
+      }
+    },
+    "thermal": {
+      "theta_ja": {
+        "parameter": "Package Thermal Resistance",
+        "symbol": "θJA",
+        "min": null,
+        "typ": 207,
+        "max": null,
+        "value": null,
+        "unit": "°C/W",
+        "conditions": null,
+        "source": "absolute_maximum_ratings"
+      },
+      "theta_ja_Package_Thermal_Resistance": {
+        "parameter": "Package Thermal Resistance",
+        "symbol": "θJA",
+        "min": null,
+        "typ": 238,
+        "max": null,
+        "value": null,
+        "unit": "°C/W",
+        "conditions": null,
+        "source": "absolute_maximum_ratings"
+      }
     }
   }
 }

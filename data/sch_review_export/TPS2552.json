@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -460,5 +460,462 @@
       "unit": "°C"
     }
   },
-  "thermal": {}
+  "thermal": {},
+  "domains": {
+    "pin": {
+      "packages": {
+        "SOT-23 (6)": {
+          "pin_count": 6,
+          "pins": {
+            "2": {
+              "name": "IN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Input voltage; connect a 0.1 µF or greater ceramic capacitor from IN to GND as close to the IC as possible.",
+              "unused_treatment": null
+            },
+            "6": {
+              "name": "OUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Power-switch output.",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "EN",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Enable input, logic high turns on power switch (TPS2553) or logic low turns on power switch (TPS2552).",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "FAULT",
+              "direction": "OUTPUT",
+              "signal_type": "DIGITAL",
+              "description": "Active-low, open-drain output, asserted during overcurrent or overtemperature conditions.",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "ILIM",
+              "direction": "PASSIVE",
+              "signal_type": "ANALOG",
+              "description": "External resistor used to set current-limit threshold.",
+              "unused_treatment": null
+            },
+            "1": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground connection.",
+              "unused_treatment": null
+            }
+          }
+        },
+        "WSON (6)": {
+          "pin_count": 7,
+          "pins": {
+            "1": {
+              "name": "IN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Input voltage; connect a 0.1 µF or greater ceramic capacitor from IN to GND as close to the IC as possible.",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "IN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Input voltage; connect a 0.1 µF or greater ceramic capacitor from IN to GND as close to the IC as possible.",
+              "unused_treatment": null
+            },
+            "6": {
+              "name": "OUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Power-switch output.",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "EN",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Enable input, logic high turns on power switch (TPS2553) or logic low turns on power switch (TPS2552).",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "FAULT",
+              "direction": "OUTPUT",
+              "signal_type": "DIGITAL",
+              "description": "Active-low, open-drain output, asserted during overcurrent or overtemperature conditions.",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "ILIM",
+              "direction": "PASSIVE",
+              "signal_type": "ANALOG",
+              "description": "External resistor used to set current-limit threshold.",
+              "unused_treatment": null
+            },
+            "EP": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground connection. (also: Power Pad — Exposed thermal pad. Internally connected to GND. Connect to GND plane for heat sinking.)",
+              "unused_treatment": null
+            }
+          }
+        }
+      }
+    },
+    "electrical": {
+      "absolute_maximum_ratings": {
+        "IO": {
+          "parameter": "Continuous output current",
+          "min": null,
+          "max": null,
+          "unit": "A",
+          "conditions": "Internally Limited"
+        },
+        "TJ": {
+          "parameter": "Maximum junction temperature",
+          "min": -40,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        },
+        "Tstg": {
+          "parameter": "Storage temperature",
+          "min": -65,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        },
+        "V(ESD)": {
+          "parameter": "Electrostatic discharge (IEC 61000-4-2 air-gap)",
+          "min": -15000,
+          "max": 15000,
+          "unit": "V",
+          "conditions": null
+        },
+        "V(ESD)_per_JEDEC_specification_JESD22": {
+          "parameter": "Electrostatic discharge (CDM)",
+          "min": -500,
+          "max": 500,
+          "unit": "V",
+          "conditions": "per JEDEC specification JESD22-C101"
+        }
+      },
+      "electrical_parameters": {
+        "VIN": {
+          "parameter": "Input voltage",
+          "min": 2.5,
+          "typ": null,
+          "max": 6.5,
+          "unit": "V",
+          "conditions": null
+        },
+        "VEN": {
+          "parameter": "Enable voltage",
+          "min": 0,
+          "typ": null,
+          "max": 6.5,
+          "unit": "V",
+          "conditions": null
+        },
+        "VIH": {
+          "parameter": "High-level input voltage",
+          "min": 1.1,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": null
+        },
+        "VIL": {
+          "parameter": "Low-level input voltage",
+          "min": null,
+          "typ": null,
+          "max": 0.66,
+          "unit": "V",
+          "conditions": null
+        },
+        "IOUT": {
+          "parameter": "Continuous output current",
+          "min": 0,
+          "typ": null,
+          "max": 1.2,
+          "unit": "A",
+          "conditions": "-40 °C ≤ TJ ≤ 125 °C"
+        },
+        "IOUT_40__C___TJ___105__C": {
+          "parameter": "Continuous output current",
+          "min": 0,
+          "typ": null,
+          "max": 1.5,
+          "unit": "A",
+          "conditions": "-40 °C ≤ TJ ≤ 105 °C"
+        },
+        "RILIM": {
+          "parameter": "Current-limit threshold resistor range",
+          "min": 15,
+          "typ": null,
+          "max": 232,
+          "unit": "kΩ",
+          "conditions": null
+        },
+        "IO": {
+          "parameter": "Continuous FAULT sink current",
+          "min": 0,
+          "typ": null,
+          "max": 10,
+          "unit": "mA",
+          "conditions": null
+        },
+        "TJ": {
+          "parameter": "Operating virtual junction temperature",
+          "min": -40,
+          "typ": null,
+          "max": 125,
+          "unit": "°C",
+          "conditions": "IOUT ≤ 1.2 A"
+        },
+        "TJ_IOUT___1_5_A": {
+          "parameter": "Operating virtual junction temperature",
+          "min": -40,
+          "typ": null,
+          "max": 105,
+          "unit": "°C",
+          "conditions": "IOUT ≤ 1.5 A"
+        },
+        "rDS(on)": {
+          "parameter": "Static drain-source on-state resistance",
+          "min": null,
+          "typ": 85,
+          "max": 95,
+          "unit": "mΩ",
+          "conditions": "DBV package, TJ = 25°C"
+        },
+        "rDS(on)_DBV_package___40_C___TJ___125": {
+          "parameter": "Static drain-source on-state resistance",
+          "min": null,
+          "typ": null,
+          "max": 135,
+          "unit": "mΩ",
+          "conditions": "DBV package, -40°C ≤ TJ ≤ 125°C"
+        },
+        "rDS(on)_DRV_package__TJ___25_C": {
+          "parameter": "Static drain-source on-state resistance",
+          "min": null,
+          "typ": 100,
+          "max": 115,
+          "unit": "mΩ",
+          "conditions": "DRV package, TJ = 25°C"
+        },
+        "rDS(on)_DRV_package___40_C___TJ___105": {
+          "parameter": "Static drain-source on-state resistance",
+          "min": null,
+          "typ": null,
+          "max": 140,
+          "unit": "mΩ",
+          "conditions": "DRV package, -40°C ≤ TJ ≤ 105°C"
+        },
+        "rDS(on)_DRV_package___40_C___TJ___125": {
+          "parameter": "Static drain-source on-state resistance",
+          "min": null,
+          "typ": null,
+          "max": 150,
+          "unit": "mΩ",
+          "conditions": "DRV package, -40°C ≤ TJ ≤ 125°C"
+        },
+        "tr": {
+          "parameter": "Rise time, output",
+          "min": null,
+          "typ": 1.1,
+          "max": 1.5,
+          "unit": "ms",
+          "conditions": "VIN = 6.5 V, CL = 1 µF, RL = 100 Ω"
+        },
+        "tr_VIN___2_5_V__CL___1__F__RL___1": {
+          "parameter": "Rise time, output",
+          "min": null,
+          "typ": 0.7,
+          "max": 1,
+          "unit": "ms",
+          "conditions": "VIN = 2.5 V, CL = 1 µF, RL = 100 Ω"
+        },
+        "tf": {
+          "parameter": "Fall time, output",
+          "min": null,
+          "typ": 0.2,
+          "max": 0.5,
+          "unit": "ms",
+          "conditions": "VIN = 6.5 V, CL = 1 µF, RL = 100 Ω"
+        },
+        "tf_VIN___2_5_V__CL___1__F__RL___1": {
+          "parameter": "Fall time, output",
+          "min": null,
+          "typ": 0.2,
+          "max": 0.5,
+          "unit": "ms",
+          "conditions": "VIN = 2.5 V, CL = 1 µF, RL = 100 Ω"
+        },
+        "IEN": {
+          "parameter": "Input current",
+          "min": -0.5,
+          "typ": 0,
+          "max": 0.5,
+          "unit": "µA",
+          "conditions": "VEN = 0 V or 6.5 V, VEN = 0 V or 6.5 V"
+        },
+        "ton": {
+          "parameter": "Turnon time",
+          "min": null,
+          "typ": 3,
+          "max": null,
+          "unit": "ms",
+          "conditions": "CL = 1 µF, RL = 100 Ω"
+        },
+        "toff": {
+          "parameter": "Turnoff time",
+          "min": null,
+          "typ": 3,
+          "max": null,
+          "unit": "ms",
+          "conditions": "CL = 1 µF, RL = 100 Ω"
+        },
+        "IOS": {
+          "parameter": "Current-limit threshold",
+          "min": 1610,
+          "typ": 1700,
+          "max": 1800,
+          "unit": "mA",
+          "conditions": "RILIM = 15 kΩ, -40°C ≤ TJ ≤ 105°C"
+        },
+        "IOS_RILIM___20_k___TJ___25_C": {
+          "parameter": "Current-limit threshold",
+          "min": 1215,
+          "typ": 1295,
+          "max": 1375,
+          "unit": "mA",
+          "conditions": "RILIM = 20 kΩ, TJ = 25°C"
+        },
+        "IOS_RILIM___20_k____40_C___TJ___12": {
+          "parameter": "Current-limit threshold",
+          "min": 1200,
+          "typ": 1295,
+          "max": 1375,
+          "unit": "mA",
+          "conditions": "RILIM = 20 kΩ, -40°C ≤ TJ ≤ 125°C"
+        },
+        "IOS_RILIM___49_9_k___TJ___25_C": {
+          "parameter": "Current-limit threshold",
+          "min": 490,
+          "typ": 520,
+          "max": 550,
+          "unit": "mA",
+          "conditions": "RILIM = 49.9 kΩ, TJ = 25°C"
+        },
+        "IOS_RILIM___49_9_k____40_C___TJ": {
+          "parameter": "Current-limit threshold",
+          "min": 475,
+          "typ": 520,
+          "max": 565,
+          "unit": "mA",
+          "conditions": "RILIM = 49.9 kΩ, -40°C ≤ TJ ≤ 125°C"
+        },
+        "IOS_RILIM___210_k": {
+          "parameter": "Current-limit threshold",
+          "min": 110,
+          "typ": 130,
+          "max": 150,
+          "unit": "mA",
+          "conditions": "RILIM = 210 kΩ"
+        },
+        "IOS_ILIM_shorted_to_IN": {
+          "parameter": "Current-limit threshold",
+          "min": 50,
+          "typ": 75,
+          "max": 100,
+          "unit": "mA",
+          "conditions": "ILIM shorted to IN"
+        },
+        "tIOS": {
+          "parameter": "Response time to short circuit",
+          "min": null,
+          "typ": 2,
+          "max": null,
+          "unit": "µs",
+          "conditions": "VIN = 5 V"
+        },
+        "IIN_off": {
+          "parameter": "Supply current, low-level output",
+          "min": null,
+          "typ": 0.1,
+          "max": 1,
+          "unit": "µA",
+          "conditions": "VIN = 6.5 V, No load on OUT, VEN = 6.5 V or VEN = 0 V"
+        },
+        "IIN_on": {
+          "parameter": "Supply current, high-level output",
+          "min": null,
+          "typ": 120,
+          "max": 140,
+          "unit": "µA",
+          "conditions": "VIN = 6.5 V, No load on OUT, RILIM = 20 kΩ"
+        },
+        "IIN_on_VIN___6_5_V__No_load_on_OUT__R": {
+          "parameter": "Supply current, high-level output",
+          "min": null,
+          "typ": 100,
+          "max": 120,
+          "unit": "µA",
+          "conditions": "VIN = 6.5 V, No load on OUT, RILIM = 210 kΩ"
+        },
+        "IREV": {
+          "parameter": "Reverse leakage current",
+          "min": null,
+          "typ": 0.01,
+          "max": 1,
+          "unit": "µA",
+          "conditions": "VOUT = 6.5 V, VIN = 0 V, TJ = 25 °C"
+        },
+        "UVLO": {
+          "parameter": "UVLO Low-level input voltage, IN",
+          "min": 2.35,
+          "typ": null,
+          "max": 2.45,
+          "unit": "V",
+          "conditions": "VIN rising"
+        },
+        "VOL": {
+          "parameter": "Output low voltage, FAULT",
+          "min": null,
+          "typ": null,
+          "max": 180,
+          "unit": "mV",
+          "conditions": "I/FAULT = 1 mA"
+        }
+      },
+      "drc_hints": {
+        "vin_operating": {
+          "min": 2.5,
+          "max": 6.5,
+          "unit": "V"
+        },
+        "enable_threshold": {
+          "min": 0,
+          "max": 6.5,
+          "unit": "V"
+        },
+        "iout_max": {
+          "min": 0,
+          "max": 1.2,
+          "unit": "A"
+        },
+        "thermal_shutdown": {
+          "typ": 155,
+          "unit": "°C"
+        }
+      }
+    }
+  }
 }

@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -305,5 +305,307 @@
       "unit": "°C"
     }
   },
-  "thermal": {}
+  "thermal": {},
+  "domains": {
+    "pin": {
+      "packages": {
+        "TSSOP (14)": {
+          "pin_count": 14,
+          "pins": {
+            "1": {
+              "name": "VDD",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Input power for the gate drive charge pump and internal controls. Must be connected to a supply voltage ≥ 3 V.",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "RSET",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Connect a resistor to ground to program the turn-off threshold.",
+              "unused_treatment": "FLOAT"
+            },
+            "3": {
+              "name": "STAT",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "DIGITAL",
+              "description": "Multifunction pin. High output indicates MOSFET gate is driven high. Overdriving STAT low shifts fast-turnoff threshold negative.",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "FLTB",
+              "direction": "OUTPUT",
+              "signal_type": "DIGITAL",
+              "description": "Open drain fault output. Active low for insufficient VDD, gate drive failure, or excessive forward voltage.",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "OV",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Overvoltage monitor input. Programmable via an external resistor divider.",
+              "unused_treatment": null
+            },
+            "6": {
+              "name": "UV",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Undervoltage monitor input. Programmable via an external resistor divider.",
+              "unused_treatment": null
+            },
+            "7": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Device ground.",
+              "unused_treatment": null
+            },
+            "8": {
+              "name": "GATE",
+              "direction": "OUTPUT",
+              "signal_type": "ANALOG",
+              "description": "Connect to the gate of the external MOSFET to emulate a low forward-voltage diode.",
+              "unused_treatment": null
+            },
+            "9": {
+              "name": "RSVD",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Reserved pin. This pin must be connected to GND.",
+              "unused_treatment": "GND"
+            },
+            "10": {
+              "name": "C",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Voltage sense input that connects to the simulated diode cathode (MOSFET drain).",
+              "unused_treatment": null
+            },
+            "11": {
+              "name": "A",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Voltage sense input that connects to the simulated diode anode (MOSFET source).",
+              "unused_treatment": null
+            },
+            "12": {
+              "name": "FLTR",
+              "direction": "PASSIVE",
+              "signal_type": "ANALOG",
+              "description": "Connect a capacitor from FLTR to A to filter the input to the fast comparator.",
+              "unused_treatment": "FLOAT"
+            },
+            "13": {
+              "name": "BYP",
+              "direction": "PASSIVE",
+              "signal_type": "ANALOG",
+              "description": "Connect a storage capacitor from BYP to A to filter the gate drive supply voltage.",
+              "unused_treatment": null
+            },
+            "14": {
+              "name": "PG",
+              "direction": "OUTPUT",
+              "signal_type": "DIGITAL",
+              "description": "Open-drain Power Good indicator. PG is open if UV/OV thresholds are met and internal UVLO is satisfied.",
+              "unused_treatment": null
+            }
+          }
+        },
+        "UQFN (14)": {
+          "pin_count": 14,
+          "pins": {
+            "3": {
+              "name": "VDD",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Input power for the gate drive charge pump and internal controls. Must be connected to a supply voltage ≥ 3 V.",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "RSET",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Connect a resistor to ground to program the turn-off threshold.",
+              "unused_treatment": "FLOAT"
+            },
+            "5": {
+              "name": "STAT",
+              "direction": "BIDIRECTIONAL",
+              "signal_type": "DIGITAL",
+              "description": "Multifunction pin. High output indicates MOSFET gate is driven high. Overdriving STAT low shifts fast-turnoff threshold negative.",
+              "unused_treatment": null
+            },
+            "6": {
+              "name": "FLTB",
+              "direction": "OUTPUT",
+              "signal_type": "DIGITAL",
+              "description": "Open drain fault output. Active low for insufficient VDD, gate drive failure, or excessive forward voltage.",
+              "unused_treatment": null
+            },
+            "7": {
+              "name": "OV",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Overvoltage monitor input. Programmable via an external resistor divider.",
+              "unused_treatment": null
+            },
+            "8": {
+              "name": "UV",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Undervoltage monitor input. Programmable via an external resistor divider.",
+              "unused_treatment": null
+            },
+            "9": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Device ground.",
+              "unused_treatment": null
+            },
+            "10": {
+              "name": "GATE",
+              "direction": "OUTPUT",
+              "signal_type": "ANALOG",
+              "description": "Connect to the gate of the external MOSFET to emulate a low forward-voltage diode.",
+              "unused_treatment": null
+            },
+            "11": {
+              "name": "RSVD",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Reserved pin. This pin must be connected to GND.",
+              "unused_treatment": "GND"
+            },
+            "12": {
+              "name": "C",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Voltage sense input that connects to the simulated diode cathode (MOSFET drain).",
+              "unused_treatment": null
+            },
+            "13": {
+              "name": "A",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Voltage sense input that connects to the simulated diode anode (MOSFET source).",
+              "unused_treatment": null
+            },
+            "14": {
+              "name": "FLTR",
+              "direction": "PASSIVE",
+              "signal_type": "ANALOG",
+              "description": "Connect a capacitor from FLTR to A to filter the input to the fast comparator.",
+              "unused_treatment": "FLOAT"
+            },
+            "1": {
+              "name": "BYP",
+              "direction": "PASSIVE",
+              "signal_type": "ANALOG",
+              "description": "Connect a storage capacitor from BYP to A to filter the gate drive supply voltage.",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "PG",
+              "direction": "OUTPUT",
+              "signal_type": "DIGITAL",
+              "description": "Open-drain Power Good indicator. PG is open if UV/OV thresholds are met and internal UVLO is satisfied.",
+              "unused_treatment": null
+            }
+          }
+        }
+      }
+    },
+    "electrical": {
+      "absolute_maximum_ratings": {
+        "TJ": {
+          "parameter": "Maximum junction temperature",
+          "min": null,
+          "max": null,
+          "unit": "°C",
+          "conditions": "Internally limited"
+        },
+        "Tstg": {
+          "parameter": "Storage temperature",
+          "min": -65,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        }
+      },
+      "electrical_parameters": {
+        "|I(A)|": {
+          "parameter": "A current",
+          "min": null,
+          "typ": 0.66,
+          "max": 1,
+          "unit": "mA",
+          "conditions": "Gate in active range"
+        },
+        "|I(A)|_Gate_saturated_high": {
+          "parameter": "A current",
+          "min": null,
+          "typ": 0.1,
+          "max": null,
+          "unit": "mA",
+          "conditions": "Gate saturated high"
+        },
+        "|I(C)|": {
+          "parameter": "C current",
+          "min": null,
+          "typ": null,
+          "max": 10,
+          "unit": "µA",
+          "conditions": "VAC <= 0.1 V"
+        },
+        "V(GATE-A)": {
+          "parameter": "Gate positive drive voltage",
+          "min": 6,
+          "typ": 7,
+          "max": 8,
+          "unit": "V",
+          "conditions": "VDD = 3 V, V(A-C) = 20 mV"
+        },
+        "V(GATE-A)_5_V____VDD____18_V__V_A_C____2": {
+          "parameter": "Gate positive drive voltage",
+          "min": 9,
+          "typ": 10.2,
+          "max": 12.5,
+          "unit": "V",
+          "conditions": "5 V <= VDD <= 18 V, V(A-C) = 20 mV"
+        },
+        "I(GATE)": {
+          "parameter": "Fast turn-off pulsed current",
+          "min": 1.75,
+          "typ": 2.35,
+          "max": null,
+          "unit": "A",
+          "conditions": "V(A-C) = -0.1 V, V(GATE) = 8 V"
+        },
+        "I(GATE)_V_A_C_____0_1_V__V_GATE____5_V": {
+          "parameter": "Fast turn-off pulsed current",
+          "min": 1.25,
+          "typ": 1.75,
+          "max": null,
+          "unit": "A",
+          "conditions": "V(A-C) = -0.1 V, V(GATE) = 5 V"
+        },
+        "I(GATE)_V_A_C_____0_1_V__V_C____VDD__3": {
+          "parameter": "Sustain turn-off current",
+          "min": 15,
+          "typ": 19.5,
+          "max": null,
+          "unit": "mA",
+          "conditions": "V(A-C) = -0.1 V, V(C) = VDD, 3 <= VDD <= 18 V, 2 V <= V(GATE) <= 18 V"
+        }
+      },
+      "drc_hints": {
+        "thermal_shutdown": {
+          "typ": 135,
+          "unit": "°C"
+        }
+      }
+    }
+  }
 }

@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -656,5 +656,658 @@
       "unit": "nA"
     }
   },
-  "thermal": {}
+  "thermal": {},
+  "domains": {
+    "pin": {
+      "packages": {
+        "HTSSOP-28": {
+          "pin_count": 29,
+          "pins": {
+            "1": {
+              "name": "VCC",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Positive supply input. Connect the VCC pin to the positive voltage rail.",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "VAUXH",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "High voltage auxiliary input. VCC with respect to VEE is measured by connecting the VAUXH pin to the VCC rail.",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "NC",
+              "direction": "NC",
+              "signal_type": "NONE",
+              "description": "No connect. This pin is not internally connected and should not be connected to any signal or power rail.",
+              "unused_treatment": "FLOAT"
+            },
+            "27": {
+              "name": "NC",
+              "direction": "NC",
+              "signal_type": "NONE",
+              "description": "No connect. This pin is not internally connected and should not be connected to any signal or power rail.",
+              "unused_treatment": "FLOAT"
+            },
+            "4": {
+              "name": "GATE",
+              "direction": "OUTPUT",
+              "signal_type": "ANALOG",
+              "description": "MOSFET gate control signal for fault control of the output. The GATE pin is clamped to VEE through a 12.6V internal zener diode.",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "UVLO/EN",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Under-voltage lockout threshold input. Connecting the UVLO pin to a resistor divider from VCC to VEE will set the under-voltage lockout threshold.",
+              "unused_treatment": null
+            },
+            "6": {
+              "name": "OVLO",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Over-voltage lockout threshold input. Connecting the OVLO pin to a resistor divider from VCC to VEE will set the over-voltage lockout threshold.",
+              "unused_treatment": null
+            },
+            "7": {
+              "name": "SENSE",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Current limit and power limit sense input. SENSE provides a direct connection to the MOSFET source and current sense resistor voltage.",
+              "unused_treatment": null
+            },
+            "8": {
+              "name": "SENSE_K",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Current telemetry Kelvin sense positive input. SENSE_K is the positive input to a precision differential current sense amplifier.",
+              "unused_treatment": null
+            },
+            "9": {
+              "name": "VEE_K",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Current telemetry Kelvin sense negative input. The VEE_K pin is the negative input to a precision differential current sense amplifier.",
+              "unused_treatment": null
+            },
+            "10": {
+              "name": "VEE",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Negative supply input. Connect the VEE pin to the negative voltage supply rail.",
+              "unused_treatment": null
+            },
+            "11": {
+              "name": "SDAI",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "SMBus data input. The SDAI pin is designed to read PMBus commands using the SMBus communication protocol.",
+              "unused_treatment": null
+            },
+            "12": {
+              "name": "SDAO",
+              "direction": "OUTPUT",
+              "signal_type": "DIGITAL",
+              "description": "SMBus data output. The SDAO pin is designed to transmit PMBus commands using the SMBus communication protocol.",
+              "unused_treatment": null
+            },
+            "13": {
+              "name": "SCL",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "SMBus clock input.",
+              "unused_treatment": null
+            },
+            "14": {
+              "name": "SMBA",
+              "direction": "OUTPUT",
+              "signal_type": "DIGITAL",
+              "description": "SMBus alert. Open drain MOSFET which pulls the pin to VEE if a fault is detected.",
+              "unused_treatment": null
+            },
+            "15": {
+              "name": "VREF",
+              "direction": "POWER_OUT",
+              "signal_type": "ANALOG",
+              "description": "Internal ADC reference output. Connect a 1 µF capacitor from the VREF pin to VEE.",
+              "unused_treatment": null
+            },
+            "16": {
+              "name": "DIODE",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Positive diode sense. Connected to the anode of an external diode for temperature monitoring.",
+              "unused_treatment": null
+            },
+            "17": {
+              "name": "VAUX",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Auxiliary pin allows voltage telemetry from an external source. Full scale input of 2.97V.",
+              "unused_treatment": null
+            },
+            "18": {
+              "name": "ADR2",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Address pin 2. Can be connected to VDD, VEE, or left open to set the PMBus address.",
+              "unused_treatment": "FLOAT"
+            },
+            "19": {
+              "name": "ADR1",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Address pin 1. Can be connected to VDD, VEE, or left open to set the PMBus address.",
+              "unused_treatment": "FLOAT"
+            },
+            "20": {
+              "name": "ADR0",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Address pin 0. Can be connected to VDD, VEE, or left open to set the PMBus address.",
+              "unused_treatment": "FLOAT"
+            },
+            "21": {
+              "name": "VDD",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Internal 4.9V sub-regulator output. Connect to VEE through a 1 µF ceramic bypass capacitor.",
+              "unused_treatment": null
+            },
+            "22": {
+              "name": "CL",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Current limit threshold input. Set to 26 mV by connecting to VDD and 50 mV when connected to VEE.",
+              "unused_treatment": null
+            },
+            "23": {
+              "name": "RETRY",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Retry selection pin. Connect to VDD for lockout or VEE for retry after a fault.",
+              "unused_treatment": null
+            },
+            "24": {
+              "name": "TIMER",
+              "direction": "PASSIVE",
+              "signal_type": "ANALOG",
+              "description": "Timing input. Set insertion time delay and fault timeout period by connecting a capacitor to VEE.",
+              "unused_treatment": null
+            },
+            "25": {
+              "name": "PWR",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Power limit input. Connecting a resistor from PWR to VEE sets the maximum power dissipation allowed in the external MOSFET.",
+              "unused_treatment": null
+            },
+            "26": {
+              "name": "OUT",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Output voltage sense input. Used to sense output voltage and calculate power across the MOSFET.",
+              "unused_treatment": null
+            },
+            "28": {
+              "name": "PGD",
+              "direction": "OUTPUT",
+              "signal_type": "DIGITAL",
+              "description": "Power good monitor output. Open-drain output pulls low during over-current, UVLO, and OVLO.",
+              "unused_treatment": null
+            },
+            "EP": {
+              "name": "EP",
+              "direction": "PASSIVE",
+              "signal_type": "POWER",
+              "description": "Exposed pad. Connect to PCB VEE plane using multiple thermal vias.",
+              "unused_treatment": null
+            }
+          }
+        }
+      }
+    },
+    "electrical": {
+      "absolute_maximum_ratings": {},
+      "electrical_parameters": {
+        "I_IN-EN": {
+          "parameter": "Input current, enabled",
+          "min": null,
+          "typ": 6,
+          "max": 8,
+          "unit": "mA",
+          "conditions": "VCC - VEE = 48V, UVLO/EN = 5V"
+        },
+        "POR_IT": {
+          "parameter": "Threshold voltage to start insertion timer",
+          "min": null,
+          "typ": 8,
+          "max": 9.2,
+          "unit": "V",
+          "conditions": "VCC - VEE increasing"
+        },
+        "POR_EN": {
+          "parameter": "Threshold voltage to enable all functions",
+          "min": null,
+          "typ": 8.7,
+          "max": 9.9,
+          "unit": "V",
+          "conditions": "VCC - VEE increasing"
+        },
+        "POR_EN-HYS": {
+          "parameter": "POR_EN hysteresis",
+          "min": null,
+          "typ": 170,
+          "max": null,
+          "unit": "mV",
+          "conditions": "VCC - VEE decreasing"
+        },
+        "I_OUT-EN": {
+          "parameter": "OUT bias current, enabled",
+          "min": null,
+          "typ": -100,
+          "max": null,
+          "unit": "nA",
+          "conditions": "Enabled, OUT = VEE"
+        },
+        "I_OUT-DIS": {
+          "parameter": "OUT bias current, disabled",
+          "min": null,
+          "typ": 135,
+          "max": null,
+          "unit": "µA",
+          "conditions": "Disabled, OUT = VEE + 48V"
+        },
+        "UVLO_TH": {
+          "parameter": "UVLO/EN threshold",
+          "min": 2.41,
+          "typ": 2.48,
+          "max": 2.55,
+          "unit": "V",
+          "conditions": "UVLO/EN Falling"
+        },
+        "UVLO_HYS": {
+          "parameter": "UVLO/EN hysteresis current",
+          "min": 13,
+          "typ": 20,
+          "max": 26,
+          "unit": "µA",
+          "conditions": "UVLO/EN = VEE + 2V"
+        },
+        "UVLO_DEL": {
+          "parameter": "UVLO delay to GATE high",
+          "min": null,
+          "typ": 9,
+          "max": null,
+          "unit": "µs",
+          "conditions": "Delay to GATE high"
+        },
+        "UVLO_DEL_Delay_to_GATE_low": {
+          "parameter": "UVLO delay to GATE low",
+          "min": null,
+          "typ": 12,
+          "max": null,
+          "unit": "µs",
+          "conditions": "Delay to GATE low"
+        },
+        "UVLO_BIAS": {
+          "parameter": "UVLO/EN bias current",
+          "min": null,
+          "typ": null,
+          "max": 1,
+          "unit": "µA",
+          "conditions": "UVLO/EN = VEE + 5V"
+        },
+        "OVLO_TH": {
+          "parameter": "OVLO threshold",
+          "min": 2.39,
+          "typ": 2.47,
+          "max": 2.53,
+          "unit": "V",
+          "conditions": null
+        },
+        "OVLO_HYS": {
+          "parameter": "OVLO hysteresis current",
+          "min": -26,
+          "typ": -21,
+          "max": -13,
+          "unit": "µA",
+          "conditions": "OVLO = VEE + 2.8V"
+        },
+        "OVLO_DEL": {
+          "parameter": "OVLO delay to GATE high",
+          "min": null,
+          "typ": 10,
+          "max": null,
+          "unit": "µs",
+          "conditions": "Delay to GATE high"
+        },
+        "OVLO_DEL_Delay_to_GATE_low": {
+          "parameter": "OVLO delay to GATE low",
+          "min": null,
+          "typ": 12,
+          "max": null,
+          "unit": "µs",
+          "conditions": "Delay to GATE low"
+        },
+        "OVLO_BIAS": {
+          "parameter": "OVLO bias current",
+          "min": null,
+          "typ": null,
+          "max": 1,
+          "unit": "µA",
+          "conditions": "OVLO = 2.3V"
+        },
+        "PWR_LIM-1": {
+          "parameter": "Power limit sense voltage (OUT-SENSE)",
+          "min": 19.5,
+          "typ": 24.5,
+          "max": 29.5,
+          "unit": "mV",
+          "conditions": "OUT - SENSE = 48V, RPWR = 145 kΩ"
+        },
+        "PWR_LIM-2": {
+          "parameter": "Power limit sense voltage (OUT-SENSE)",
+          "min": null,
+          "typ": 24.7,
+          "max": null,
+          "unit": "mV",
+          "conditions": "OUT - SENSE = 24V, RPWR = 75 kΩ"
+        },
+        "I_PWR": {
+          "parameter": "PWR pin current",
+          "min": null,
+          "typ": -18,
+          "max": null,
+          "unit": "µA",
+          "conditions": "VPWR = 2.5V"
+        },
+        "R_SAT(PWR)": {
+          "parameter": "PWR pin impedance when disabled",
+          "min": null,
+          "typ": 140,
+          "max": null,
+          "unit": "Ω",
+          "conditions": "UVLO/EN = 2.0V"
+        },
+        "I_GATE": {
+          "parameter": "Source current",
+          "min": -72,
+          "typ": -52,
+          "max": -32,
+          "unit": "µA",
+          "conditions": "Normal Operation"
+        },
+        "I_GATE_UVLO_EN___VEE_2V": {
+          "parameter": "Sink current (UVLO)",
+          "min": 3.4,
+          "typ": 4.1,
+          "max": 5.3,
+          "unit": "mA",
+          "conditions": "UVLO/EN < VEE+2V"
+        },
+        "I_GATE_SENSE___VEE__150_mV__VGATE__VE": {
+          "parameter": "Sink current (SENSE)",
+          "min": 50,
+          "typ": 111,
+          "max": 180,
+          "unit": "mA",
+          "conditions": "SENSE - VEE =150 mV, VGATE =VEE+5V"
+        },
+        "V_GATE": {
+          "parameter": "Gate output voltage in normal operation",
+          "min": null,
+          "typ": 12.6,
+          "max": null,
+          "unit": "V",
+          "conditions": "GATE-VEE Voltage"
+        },
+        "V_CL": {
+          "parameter": "Current limit threshold voltage (CL=VDD)",
+          "min": 23,
+          "typ": 26,
+          "max": 30,
+          "unit": "mV",
+          "conditions": "CL = VDD"
+        },
+        "V_CL_CL___VEE_or_FLOAT": {
+          "parameter": "Current limit threshold voltage (CL=VEE)",
+          "min": 47,
+          "typ": 50,
+          "max": 53,
+          "unit": "mV",
+          "conditions": "CL = VEE or FLOAT"
+        },
+        "t_CL": {
+          "parameter": "Response time",
+          "min": null,
+          "typ": 54,
+          "max": null,
+          "unit": "µs",
+          "conditions": "SENSE-VEE stepped from 0 mV to 80 mV"
+        },
+        "I_SENSE": {
+          "parameter": "SENSE input current (Enabled)",
+          "min": null,
+          "typ": -5,
+          "max": null,
+          "unit": "µA",
+          "conditions": "Enabled, OUT = VEE"
+        },
+        "I_SENSE_Disabled__OUT___VCC": {
+          "parameter": "SENSE input current (Disabled)",
+          "min": null,
+          "typ": -55,
+          "max": null,
+          "unit": "µA",
+          "conditions": "Disabled, OUT = VCC"
+        },
+        "I_SENSE_K": {
+          "parameter": "SENSE_K input current",
+          "min": null,
+          "typ": -10,
+          "max": null,
+          "unit": "µA",
+          "conditions": null
+        },
+        "I_VEE_K": {
+          "parameter": "VEE_K input current",
+          "min": null,
+          "typ": -10,
+          "max": null,
+          "unit": "µA",
+          "conditions": null
+        },
+        "RT_CB": {
+          "parameter": "Circuit breaker to current limit ratio (CB/CL=0, ILim=50mV)",
+          "min": 1.45,
+          "typ": 1.9,
+          "max": 2.22,
+          "unit": null,
+          "conditions": "CB/CL ratio bit = 0, ILim = 50 mV"
+        },
+        "RT_CB_CB_CL_ratio_bit___1__ILim___50": {
+          "parameter": "Circuit breaker to current limit ratio (CB/CL=1, ILim=50mV)",
+          "min": 2.8,
+          "typ": 3.7,
+          "max": 4.9,
+          "unit": null,
+          "conditions": "CB/CL ratio bit = 1, ILim = 50 mV"
+        },
+        "V_CB": {
+          "parameter": "Circuit breaker threshold voltage (CB/CL=0, ILim=50mV)",
+          "min": 72,
+          "typ": 93,
+          "max": 116,
+          "unit": "mV",
+          "conditions": "CB/CL ratio bit = 0, ILim = 50 mV"
+        },
+        "V_CB_CB_CL_ratio_bit___1__ILim___50": {
+          "parameter": "Circuit breaker threshold voltage (CB/CL=1, ILim=50mV)",
+          "min": 144,
+          "typ": 187,
+          "max": 230,
+          "unit": "mV",
+          "conditions": "CB/CL ratio bit = 1, ILim = 50 mV"
+        },
+        "t_CB": {
+          "parameter": "Circuit breaker response time",
+          "min": null,
+          "typ": 800,
+          "max": null,
+          "unit": "ns",
+          "conditions": "SENSE-VEE stepped from 0 mV to 150 mV, time to GATE = VEE"
+        },
+        "V_TMRH": {
+          "parameter": "TIMER Upper threshold",
+          "min": 3.74,
+          "typ": 3.9,
+          "max": 4.07,
+          "unit": "V",
+          "conditions": null
+        },
+        "V_TMRL": {
+          "parameter": "TIMER Lower threshold (Restart)",
+          "min": 1.09,
+          "typ": 1.2,
+          "max": 1.39,
+          "unit": "V",
+          "conditions": "Restart cycles"
+        },
+        "I_TIMER": {
+          "parameter": "Fault sink current",
+          "min": 1.7,
+          "typ": 2.4,
+          "max": 3.2,
+          "unit": "µA",
+          "conditions": null
+        },
+        "I_TIMER_TIMER_pin___VEE_2V": {
+          "parameter": "Sink current, end of insertion time",
+          "min": 1,
+          "typ": 1.5,
+          "max": 2,
+          "unit": "mA",
+          "conditions": "TIMER pin = VEE+2V"
+        },
+        "I_TIMER_SENSE_VEE_VCL": {
+          "parameter": "Fault detection current",
+          "min": -95,
+          "typ": -74,
+          "max": -50,
+          "unit": "µA",
+          "conditions": "SENSE-VEE=VCL"
+        },
+        "PGD_TH": {
+          "parameter": "PGD Threshold measured at OUT - SENSE (Decreasing)",
+          "min": 1.18,
+          "typ": 1.24,
+          "max": 1.31,
+          "unit": "V",
+          "conditions": "OUT – SENSE Decreasing"
+        },
+        "PGD_TH_OUT___SENSE_Increasing": {
+          "parameter": "PGD Threshold measured at OUT - SENSE (Increasing)",
+          "min": 2.44,
+          "typ": 2.5,
+          "max": 2.56,
+          "unit": "V",
+          "conditions": "OUT – SENSE Increasing"
+        },
+        "PGD_VOL": {
+          "parameter": "PGD Output low voltage",
+          "min": null,
+          "typ": 50,
+          "max": 150,
+          "unit": "mV",
+          "conditions": "ISINK = 2 mA"
+        },
+        "PGD_IOH": {
+          "parameter": "PGD Off leakage current",
+          "min": null,
+          "typ": null,
+          "max": 5,
+          "unit": "µA",
+          "conditions": "VPGD = 80V"
+        },
+        "INL": {
+          "parameter": "ADC Integral non-linearity",
+          "min": null,
+          "typ": 4,
+          "max": null,
+          "unit": "LSB",
+          "conditions": "ADC only"
+        },
+        "V_REF": {
+          "parameter": "Reference voltage",
+          "min": 2.93,
+          "typ": 2.97,
+          "max": 3.02,
+          "unit": "V",
+          "conditions": null
+        },
+        "I_IN-ACC": {
+          "parameter": "Input current accuracy",
+          "min": -3.0,
+          "typ": null,
+          "max": 3.0,
+          "unit": "%",
+          "conditions": "SENSE_K-VEE_K = 50 mV, CL = VEE"
+        },
+        "V_ACC": {
+          "parameter": "VAUX, VAUXH, OUT accuracy",
+          "min": -2.7,
+          "typ": null,
+          "max": 2.7,
+          "unit": "%",
+          "conditions": "VAUXH-VEE=48V, OUT - VEE= 48V, VAUX = 2.8V"
+        },
+        "P_IN-ACC": {
+          "parameter": "Input power accuracy",
+          "min": -4.5,
+          "typ": null,
+          "max": 4.5,
+          "unit": "%",
+          "conditions": "VCC-VEE = 48V, SENSE_K-VEE_K = 50 mV, CL = VDD"
+        },
+        "VDD_OUT": {
+          "parameter": "VDD regulated output",
+          "min": 4.6,
+          "typ": 4.9,
+          "max": 5.15,
+          "unit": "V",
+          "conditions": "IDD = 0 mA"
+        },
+        "VDD_ILIM": {
+          "parameter": "VDD current limit",
+          "min": -25,
+          "typ": -30,
+          "max": -42,
+          "unit": "mA",
+          "conditions": "VDD = 0V"
+        }
+      },
+      "drc_hints": {
+        "vin_operating": {
+          "min": 4.6,
+          "typ": 4.9,
+          "max": 5.15,
+          "unit": "V"
+        },
+        "vref": {
+          "min": 2.93,
+          "typ": 2.97,
+          "max": 3.02,
+          "unit": "V"
+        },
+        "iout_max": {
+          "typ": -100,
+          "unit": "nA"
+        }
+      }
+    }
+  }
 }

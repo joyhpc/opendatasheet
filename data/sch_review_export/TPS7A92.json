@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -387,5 +387,389 @@
       "unit": "V"
     }
   },
-  "thermal": {}
+  "thermal": {},
+  "domains": {
+    "pin": {
+      "packages": {
+        "WSON (10)": {
+          "pin_count": 11,
+          "pins": {
+            "9": {
+              "name": "IN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Input supply voltage",
+              "unused_treatment": null
+            },
+            "10": {
+              "name": "IN",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Input supply voltage",
+              "unused_treatment": null
+            },
+            "1": {
+              "name": "OUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Regulated output voltage",
+              "unused_treatment": null
+            },
+            "2": {
+              "name": "OUT",
+              "direction": "POWER_OUT",
+              "signal_type": "POWER",
+              "description": "Regulated output voltage",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "FB",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Feedback input for the adjustable voltage version",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "PG",
+              "direction": "OUTPUT",
+              "signal_type": "DIGITAL",
+              "description": "Power-good open-drain output",
+              "unused_treatment": "FLOAT"
+            },
+            "6": {
+              "name": "EN",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Enable input; drive high to turn on the regulator",
+              "unused_treatment": null
+            },
+            "7": {
+              "name": "NR/SS",
+              "direction": "PASSIVE",
+              "signal_type": "ANALOG",
+              "description": "Noise-reduction and soft-start pin; connect a capacitor to GND",
+              "unused_treatment": null
+            },
+            "8": {
+              "name": "SS_CTRL",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Soft-start control pin to select charging current",
+              "unused_treatment": null
+            },
+            "EP": {
+              "name": "EP",
+              "direction": "PASSIVE",
+              "signal_type": "POWER",
+              "description": "Exposed thermal pad; connect to GND",
+              "unused_treatment": "GND"
+            }
+          }
+        }
+      }
+    },
+    "electrical": {
+      "absolute_maximum_ratings": {
+        "TJ": {
+          "parameter": "Temperature",
+          "min": -55,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        },
+        "Tstg": {
+          "parameter": "Temperature",
+          "min": -55,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        }
+      },
+      "electrical_parameters": {
+        "VIN": {
+          "parameter": "Input supply voltage range",
+          "min": 1.4,
+          "typ": null,
+          "max": 6.5,
+          "unit": "V",
+          "conditions": null
+        },
+        "VREF": {
+          "parameter": "Reference voltage",
+          "min": null,
+          "typ": 0.8,
+          "max": null,
+          "unit": "V",
+          "conditions": null
+        },
+        "VUVLO": {
+          "parameter": "Input supply UVLO",
+          "min": null,
+          "typ": 1.31,
+          "max": 1.39,
+          "unit": "V",
+          "conditions": "VIN rising"
+        },
+        "VHYS": {
+          "parameter": "VUVLO hysteresis",
+          "min": null,
+          "typ": 290,
+          "max": null,
+          "unit": "mV",
+          "conditions": null
+        },
+        "VOUT": {
+          "parameter": "Output voltage range",
+          "min": null,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": "0.8 - 1.0% to 5.2 + 1.0%"
+        },
+        "VOUT_0_8_V___VOUT___5_V__5_mA___IOU": {
+          "parameter": "Output voltage accuracy",
+          "min": -1.0,
+          "typ": null,
+          "max": 1.0,
+          "unit": "%",
+          "conditions": "0.8 V ≤ VOUT ≤ 5 V, 5 mA ≤ IOUT ≤ 2 A"
+        },
+        "ΔVOUT(ΔVIN)": {
+          "parameter": "Line regulation",
+          "min": null,
+          "typ": 0.003,
+          "max": null,
+          "unit": "%/V",
+          "conditions": "IOUT = 5 mA, 1.4 V ≤ VIN ≤ 6.5 V"
+        },
+        "ΔVOUT(ΔIOUT)": {
+          "parameter": "Load regulation",
+          "min": null,
+          "typ": 0.03,
+          "max": null,
+          "unit": "%/A",
+          "conditions": "5 mA ≤ IOUT ≤ 2 A"
+        },
+        "VDO": {
+          "parameter": "Dropout voltage",
+          "min": null,
+          "typ": null,
+          "max": 400,
+          "unit": "mV",
+          "conditions": "VIN ≥ 1.4 V, 0.8 V ≤ VOUT ≤ 5.0 V, IOUT = 2 A, VFB = 0.8 V – 3%"
+        },
+        "ILIM": {
+          "parameter": "Output current limit",
+          "min": 2.3,
+          "typ": 2.6,
+          "max": 2.9,
+          "unit": "A",
+          "conditions": "VOUT forced at 0.9 × VOUT(TARGET), VIN = VOUT(TARGET) + 300 mV"
+        },
+        "IGND": {
+          "parameter": "GND pin current",
+          "min": null,
+          "typ": 2.1,
+          "max": 3.5,
+          "unit": "mA",
+          "conditions": "Both channels enabled, per channel, VIN = 6.5 V, IOUT = 5 mA"
+        },
+        "IGND_Both_channels_enabled__per_cha": {
+          "parameter": "GND pin current",
+          "min": null,
+          "typ": null,
+          "max": 4,
+          "unit": "mA",
+          "conditions": "Both channels enabled, per channel, VIN = 1.4 V, IOUT = 2 A"
+        },
+        "ISDN": {
+          "parameter": "Shutdown GND pin current",
+          "min": null,
+          "typ": 0.1,
+          "max": 15,
+          "unit": "µA",
+          "conditions": "Both channels shutdown, per channel, PGx = (open), VIN = 6.5 V, VEN = 0.5 V"
+        },
+        "IEN": {
+          "parameter": "EN pin current",
+          "min": -0.2,
+          "typ": null,
+          "max": 0.2,
+          "unit": "µA",
+          "conditions": "VIN = 6.5 V, 0 V ≤ VEN ≤ 6.5 V"
+        },
+        "VIL(EN)": {
+          "parameter": "EN pin low-level input voltage",
+          "min": 0,
+          "typ": null,
+          "max": 0.4,
+          "unit": "V",
+          "conditions": null
+        },
+        "VIH(EN)": {
+          "parameter": "EN pin high-level input voltage",
+          "min": 1.1,
+          "typ": null,
+          "max": 6.5,
+          "unit": "V",
+          "conditions": null
+        },
+        "ISS_CTRL": {
+          "parameter": "SS_CTRL pin current",
+          "min": -0.2,
+          "typ": null,
+          "max": 0.2,
+          "unit": "µA",
+          "conditions": "VIN = 6.5 V, 0 V ≤ VSS_CTRL ≤ 6.5 V"
+        },
+        "VIT(PG)": {
+          "parameter": "PG pin threshold",
+          "min": 82,
+          "typ": 88.9,
+          "max": 93,
+          "unit": "%",
+          "conditions": "For PG transitioning low with falling VOUT, expressed as a percentage of VOUT(TARGET)"
+        },
+        "Vhys(PG)": {
+          "parameter": "PG pin hysteresis",
+          "min": null,
+          "typ": 1,
+          "max": null,
+          "unit": "%",
+          "conditions": "For PG transitioning high with rising VOUT, expressed as a percentage of VOUT(TARGET)"
+        },
+        "VOL(PG)": {
+          "parameter": "PG pin low-level output voltage",
+          "min": null,
+          "typ": null,
+          "max": 0.4,
+          "unit": "V",
+          "conditions": "VOUT < VIT(PG), IPG = –1 mA (current into device)"
+        },
+        "Ilkg(PG)": {
+          "parameter": "PG pin leakage current",
+          "min": null,
+          "typ": null,
+          "max": 1,
+          "unit": "µA",
+          "conditions": "VOUT > VIT(PG), VPG = 6.5 V"
+        },
+        "INR/SS": {
+          "parameter": "NR/SS pin charging current",
+          "min": 4.0,
+          "typ": 6.2,
+          "max": 9.0,
+          "unit": "µA",
+          "conditions": "VNR/SS = GND, 1.4 V ≤ VIN ≤ 6.5 V, VSS_CTRL = GND"
+        },
+        "INR/SS_VNR_SS___GND__1_4_V___VIN___6": {
+          "parameter": "NR/SS pin charging current",
+          "min": 65,
+          "typ": 100,
+          "max": 150,
+          "unit": "µA",
+          "conditions": "VNR/SS = GND, 1.4 V ≤ VIN ≤ 6.5 V, VSS_CTRL = VIN"
+        },
+        "IFB": {
+          "parameter": "FB pin leakage current",
+          "min": -100,
+          "typ": null,
+          "max": 100,
+          "unit": "nA",
+          "conditions": "VIN = 6.5 V, VFB = 0.8 V"
+        },
+        "PSRR": {
+          "parameter": "Power-supply ripple rejection",
+          "min": null,
+          "typ": 40,
+          "max": null,
+          "unit": "dB",
+          "conditions": "f = 500 kHz, VINx = 2.0 V, VOUT = 1.2 V, IOUT = 2 A, CNR/SS = 10 nF, CFF = 10 nF"
+        },
+        "Vn": {
+          "parameter": "Output noise voltage",
+          "min": null,
+          "typ": 4.6,
+          "max": null,
+          "unit": "µVRMS",
+          "conditions": "BW = 10 Hz to 100 kHz, VIN = 1.8 V, VOUT = 0.8 V, IOUT = 2.0 A, CNR/SS = 10 nF, CFF = 10 nF"
+        },
+        "Rdiss": {
+          "parameter": "Output active discharge resistance",
+          "min": null,
+          "typ": 250,
+          "max": null,
+          "unit": "Ω",
+          "conditions": "VEN = GND"
+        },
+        "Tsd": {
+          "parameter": "Thermal shutdown temperature",
+          "min": null,
+          "typ": 160,
+          "max": null,
+          "unit": "°C",
+          "conditions": "Shutdown, temperature increasing"
+        },
+        "Tsd_Reset__temperature_decreasing": {
+          "parameter": "Thermal shutdown temperature",
+          "min": null,
+          "typ": 140,
+          "max": null,
+          "unit": "°C",
+          "conditions": "Reset, temperature decreasing"
+        }
+      },
+      "drc_hints": {
+        "vin_operating": {
+          "min": 1.4,
+          "max": 6.5,
+          "unit": "V"
+        },
+        "vref": {
+          "typ": 0.8,
+          "unit": "V"
+        },
+        "vout": {
+          "unit": "V"
+        },
+        "enable_threshold": {
+          "min": 0,
+          "max": 0.4,
+          "unit": "V"
+        },
+        "iout_max": {
+          "min": 2.3,
+          "typ": 2.6,
+          "max": 2.9,
+          "unit": "A"
+        },
+        "iq": {
+          "typ": 2.1,
+          "max": 3.5,
+          "unit": "mA"
+        },
+        "soft_start": {
+          "min": -0.2,
+          "max": 0.2,
+          "unit": "µA"
+        },
+        "thermal_shutdown": {
+          "typ": 160,
+          "unit": "°C"
+        },
+        "uvlo": {
+          "typ": 1.31,
+          "max": 1.39,
+          "unit": "V"
+        }
+      }
+    }
+  }
 }

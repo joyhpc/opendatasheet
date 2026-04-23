@@ -211,3 +211,32 @@ def test_automotive_video_serdes_roadmap_watchlist_tracks_camera_and_display_pat
     adi_display_des = watchlist["devices"]["MAX96772"]
     assert adi_display_des["serial_video_bridge"]["device_role"] == "deserializer"
     assert adi_display_des["serial_video_bridge"]["video_output"]["protocol"] == "eDP/DisplayPort"
+
+
+def test_automotive_video_serdes_intake_queue_prioritizes_display_egress_batches():
+    queue = _load_json(REPO_ROOT / "data" / "normalization" / "automotive_video_serdes_intake_queue.json")
+
+    assert [batch["priority"] for batch in queue["batches"]] == [1, 2, 3]
+
+    ti_batch = queue["batches"][0]
+    assert ti_batch["id"] == "display_egress_ti_priority_1"
+    assert {item["mpn"] for item in ti_batch["devices"]} == {
+        "DS90UH981-Q1",
+        "DS90UH983-Q1",
+        "DS90UH984-Q1",
+        "DS90UH988-Q1",
+    }
+
+    adi_batch = queue["batches"][1]
+    assert adi_batch["id"] == "display_egress_adi_priority_2"
+    assert {item["mpn"] for item in adi_batch["devices"]} == {
+        "MAX96781",
+        "MAX96783",
+        "MAX96772",
+        "MAX96774",
+    }
+
+    broaden_batch = queue["batches"][2]
+    assert broaden_batch["id"] == "display_egress_broadening_priority_3"
+    assert any(item["mpn"] == "MAX96755" for item in broaden_batch["devices"])
+    assert any(item["mpn"] == "DS90UB688-Q1" for item in broaden_batch["devices"])

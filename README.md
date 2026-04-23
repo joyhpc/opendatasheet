@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/joyhpc/opendatasheet/actions/workflows/ci.yml/badge.svg)](https://github.com/joyhpc/opendatasheet/actions/workflows/ci.yml)
 [![Schema](https://img.shields.io/badge/schema-sch--review--device%2F1.1-2f81f7)](schemas/sch-review-device.schema.json)
-[![Exports](https://img.shields.io/badge/exports-194%20files-8250df)](data/sch_review_export/)
+[![Exports](https://img.shields.io/badge/exports-250%20files-8250df)](data/sch_review_export/)
 [![Docs](https://img.shields.io/badge/docs-index-238636)](docs/index.md)
 
 AI-powered electronic component datasheet parameter extraction pipeline.
@@ -45,8 +45,8 @@ PDF datasheets → structured JSON for schematic review DRC engines.
 - [Hardware Engineer Index](docs/hardware-engineer-index.md) — Board-review and bring-up oriented hardware docs
 - [Extraction Methodology](docs/extraction-methodology.md) — How the Vision + Text hybrid pipeline works
 - [Schematic Review Integration](docs/sch-review-integration.md) — Data structures, examples, and Python code for consumers
-- [Schema](schemas/sch-review-device.schema.json) — `sch-review-device/1.1` JSON Schema (兼容已提交的 `1.0` 历史产物)
-- [Exported Data](data/sch_review_export/) — 194 device files ready for consumption
+- [Schema](schemas/sch-review-device.schema.json) — `sch-review-device/1.1` JSON Schema (生成输出已收敛到 `device-knowledge/2.0`)
+- [Exported Data](data/sch_review_export/) — 250 checked-in device files ready for consumption
 
 ## Pipeline
 
@@ -62,9 +62,9 @@ PDF → L0 Page Classification (PyMuPDF + regex)
 
 | Type | Count | Examples |
 |------|-------|---------|
-| Normal IC | 163 | LDO, Buck, OpAmp, Switch, ADC/DAC, Interface, SerDes |
-| FPGA | 31 | Xilinx UltraScale+, Gowin GW5AT/GW5AR, Lattice ECP5/CrossLink-NX |
-| **Total** | **194** | Batch processing 346 PDFs (in progress) |
+| Normal IC | 167 | LDO, Buck, OpAmp, Switch, ADC/DAC, Interface, SerDes |
+| FPGA | 83 | AMD UltraScale+, Gowin GW5AT/GW5AR/GW5AS, Lattice ECP5/CrossLink-NX, Intel Agilex 5 |
+| **Total** | **250** | Batch processing 346 PDFs (in progress) |
 
 ## Stack
 

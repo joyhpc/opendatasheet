@@ -1,5 +1,5 @@
 {
-  "_schema": "sch-review-device/1.1",
+  "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
     "L0_skeleton",
@@ -272,6 +272,277 @@
       "unit": "°C/W",
       "conditions": "16-Lead TSSOP",
       "source": "absolute_maximum_ratings"
+    }
+  },
+  "domains": {
+    "pin": {
+      "packages": {
+        "16-lead TSSOP": {
+          "pin_count": 16,
+          "pins": {
+            "1": {
+              "name": "LDAC",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Active low control input. Transfers the contents of the input registers to their respective DAC registers. Can be tied permanently low.",
+              "unused_treatment": "GND"
+            },
+            "2": {
+              "name": "SYNC",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Active Low Control Input. Frame synchronization signal for the input data.",
+              "unused_treatment": null
+            },
+            "3": {
+              "name": "VDD",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Power Supply Input. 2.5 V to 5.5 V.",
+              "unused_treatment": null
+            },
+            "4": {
+              "name": "VOUTA",
+              "direction": "OUTPUT",
+              "signal_type": "ANALOG",
+              "description": "Buffered Analog Output Voltage from DAC A.",
+              "unused_treatment": null
+            },
+            "5": {
+              "name": "VOUTB",
+              "direction": "OUTPUT",
+              "signal_type": "ANALOG",
+              "description": "Buffered Analog Output Voltage from DAC B.",
+              "unused_treatment": null
+            },
+            "6": {
+              "name": "VOUTC",
+              "direction": "OUTPUT",
+              "signal_type": "ANALOG",
+              "description": "Buffered Analog Output Voltage from DAC C.",
+              "unused_treatment": null
+            },
+            "7": {
+              "name": "VOUTD",
+              "direction": "OUTPUT",
+              "signal_type": "ANALOG",
+              "description": "Buffered Analog Output Voltage from DAC D.",
+              "unused_treatment": null
+            },
+            "8": {
+              "name": "VREFABCD",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Reference Input Pin for DACs A, B, C, and D.",
+              "unused_treatment": null
+            },
+            "9": {
+              "name": "VREFEFGH",
+              "direction": "INPUT",
+              "signal_type": "ANALOG",
+              "description": "Reference Input Pin for DACs E, F, G, and H.",
+              "unused_treatment": null
+            },
+            "10": {
+              "name": "VOUTE",
+              "direction": "OUTPUT",
+              "signal_type": "ANALOG",
+              "description": "Buffered Analog Output Voltage from DAC E.",
+              "unused_treatment": null
+            },
+            "11": {
+              "name": "VOUTF",
+              "direction": "OUTPUT",
+              "signal_type": "ANALOG",
+              "description": "Buffered Analog Output Voltage from DAC F.",
+              "unused_treatment": null
+            },
+            "12": {
+              "name": "VOUTG",
+              "direction": "OUTPUT",
+              "signal_type": "ANALOG",
+              "description": "Buffered Analog Output Voltage from DAC G.",
+              "unused_treatment": null
+            },
+            "13": {
+              "name": "VOUTH",
+              "direction": "OUTPUT",
+              "signal_type": "ANALOG",
+              "description": "Buffered Analog Output Voltage from DAC H.",
+              "unused_treatment": null
+            },
+            "14": {
+              "name": "GND",
+              "direction": "POWER_IN",
+              "signal_type": "POWER",
+              "description": "Ground Reference Point for All Circuitry on the Part.",
+              "unused_treatment": null
+            },
+            "15": {
+              "name": "DIN",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Serial Data Input. 16-bit shift register.",
+              "unused_treatment": null
+            },
+            "16": {
+              "name": "SCLK",
+              "direction": "INPUT",
+              "signal_type": "DIGITAL",
+              "description": "Serial Clock Input. Data is clocked into the input shift register on the falling edge.",
+              "unused_treatment": null
+            }
+          }
+        }
+      }
+    },
+    "electrical": {
+      "absolute_maximum_ratings": {
+        "VDD": {
+          "parameter": "Supply Voltage",
+          "min": -0.3,
+          "max": 7.0,
+          "unit": "V",
+          "conditions": null
+        },
+        "VOUT": {
+          "parameter": "Output Voltage",
+          "min": -0.3,
+          "max": null,
+          "unit": "V",
+          "conditions": "Max is VDD + 0.3 V"
+        },
+        "TA": {
+          "parameter": "Operating Temperature Range",
+          "min": -40,
+          "max": 125,
+          "unit": "°C",
+          "conditions": null
+        },
+        "Tstg": {
+          "parameter": "Storage Temperature Range",
+          "min": -65,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        },
+        "TJ": {
+          "parameter": "Junction Temperature",
+          "min": null,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        },
+        "θJA": {
+          "parameter": "Thermal Impedance",
+          "min": null,
+          "max": null,
+          "unit": "°C/W",
+          "conditions": "16-Lead TSSOP"
+        }
+      },
+      "electrical_parameters": {
+        "VIL": {
+          "parameter": "Input Low Voltage",
+          "min": null,
+          "typ": null,
+          "max": 0.8,
+          "unit": "V",
+          "conditions": "VDD = 5 V ± 10%"
+        },
+        "VIL_VDD___3_V___10": {
+          "parameter": "Input Low Voltage",
+          "min": null,
+          "typ": null,
+          "max": 0.8,
+          "unit": "V",
+          "conditions": "VDD = 3 V ± 10%"
+        },
+        "VIL_VDD___2_5_V": {
+          "parameter": "Input Low Voltage",
+          "min": null,
+          "typ": null,
+          "max": 0.7,
+          "unit": "V",
+          "conditions": "VDD = 2.5 V"
+        },
+        "VIH": {
+          "parameter": "Input High Voltage",
+          "min": 1.7,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": "VDD = 2.5 V to 5.5 V, TTL and CMOS compatible"
+        },
+        "VDD": {
+          "parameter": "Supply Voltage",
+          "min": 2.5,
+          "typ": null,
+          "max": 5.5,
+          "unit": "V",
+          "conditions": null
+        },
+        "IDD": {
+          "parameter": "Supply Current (Normal Mode)",
+          "min": null,
+          "typ": 1.0,
+          "max": 1.8,
+          "unit": "mA",
+          "conditions": "VDD = 4.5 V to 5.5 V, VIH = VDD and VIL = GND, All DACs in unbuffered mode"
+        },
+        "IDD_VDD___2_5_V_to_3_6_V__VIH___VD": {
+          "parameter": "Supply Current (Power-Down Mode)",
+          "min": null,
+          "typ": 0.12,
+          "max": 1.0,
+          "unit": "µA",
+          "conditions": "VDD = 2.5 V to 3.6 V, VIH = VDD and VIL = GND"
+        },
+        "IDD_VDD___4_5_V_to_5_5_V__VIH___VD": {
+          "parameter": "Supply Current (Power-Down Mode)",
+          "min": null,
+          "typ": 0.4,
+          "max": 1.0,
+          "unit": "µA",
+          "conditions": "VDD = 4.5 V to 5.5 V, VIH = VDD and VIL = GND"
+        },
+        "THD": {
+          "parameter": "Total Harmonic Distortion",
+          "min": null,
+          "typ": -70.0,
+          "max": null,
+          "unit": "dB",
+          "conditions": "VREF = 2.5 V ± 0.1 V p-p, frequency = 10 kHz"
+        }
+      },
+      "drc_hints": {
+        "vin_abs_max": {
+          "value": 7.0,
+          "unit": "V"
+        },
+        "vin_operating": {
+          "min": 2.5,
+          "max": 5.5,
+          "unit": "V"
+        },
+        "enable_threshold": {
+          "max": 0.8,
+          "unit": "V"
+        }
+      }
+    },
+    "thermal": {
+      "theta_ja": {
+        "parameter": "Thermal Impedance",
+        "symbol": "θJA",
+        "min": null,
+        "typ": 150.4,
+        "max": null,
+        "value": null,
+        "unit": "°C/W",
+        "conditions": "16-Lead TSSOP",
+        "source": "absolute_maximum_ratings"
+      }
     }
   }
 }

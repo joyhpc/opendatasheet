@@ -436,3 +436,41 @@ flowchart TD
 1. `data/normalization/automotive_video_serdes_roadmap_watchlist.json`
 2. 看它是否已经有正式 datasheet source
 3. 没有正式 source 就保持 `pending_roadmap_validation`
+
+如果你要真正开始做下一批补档，再读：
+
+1. `data/normalization/automotive_video_serdes_intake_queue.json`
+2. 先按 batch priority 执行，不要平铺所有 roadmap 器件
+
+当前 intake queue 的策略是：
+
+- Priority 1:
+  - 先打通 TI FPD-Link display egress 主链
+  - `DS90UH981-Q1`
+  - `DS90UH983-Q1`
+  - `DS90UH984-Q1`
+  - `DS90UH988-Q1`
+- Priority 2:
+  - 再打通 ADI GMSL IVI display egress 主链
+  - `MAX96781`
+  - `MAX96783`
+  - `MAX96772`
+  - `MAX96774`
+- Priority 3:
+  - 最后扩大到 HDMI / DSI / display CSI / oLDI 变体
+  - `MAX96751`
+  - `MAX96753`
+  - `MAX96755`
+  - `MAX96757`
+  - `MAX96756`
+  - `MAX96758`
+  - `MAX96752`
+  - `MAX96754`
+  - `DS90UB681-Q1`
+  - `DS90UB688-Q1`
+
+这么排的原因不是“谁更重要”的主观判断，而是：
+
+- 先补一条完整 serializer -> deserializer 的 display egress 主路径
+- 再补另一家厂商的等价主路径
+- 最后再做协议分支和派生 SKU 扩展
