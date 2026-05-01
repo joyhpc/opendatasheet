@@ -1,62 +1,135 @@
 #!/usr/bin/env python3
-"""Export selection profiles from sch_review_export data.
+"""Export Selection Profiles from extracted datasheet JSON.
 
-Generates per-device selection cards and a comparative index
-optimized for component selection and comparison.
+Generates per-device selection profile cards and a comparative index
+for component selection and comparison workflows.
 
-Each device gets a JSON file with normalized key specs, operating
-conditions, packages, and thermal data.  A comparative _index.json
-groups devices by category for quick filtering.
+Reads extracted JSON files (supporting both v1 flat and v2 domains-based
+formats) and produces:
+  - One selection card per device: {mpn}_selection.json
+  - One comparative index: selection_index.json
 
 Usage:
-    python3 scripts/export_selection_profile.py [--summary] [--output-dir DIR]
-    python3 scripts/export_selection_profile.py  # uses default paths
+    python3 scripts/export_selection_profile.py                     # process all
+    python3 scripts/export_selection_profile.py path/to/file.json   # single file
 """
 
-import argparse
 import json
 import re
 import sys
-from collections import defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
 
-from device_export_view import (
-    get_export_absolute_maximum_ratings,
-    get_export_drc_hints,
-    get_export_electrical_parameters,
-    get_export_packages,
-    get_export_register_domain,
-    get_export_thermal,
-)
-
-DEFAULT_EXPORT_DIR = Path(__file__).resolve().parent.parent / "data/sch_review_export"
-DEFAULT_OUTPUT_DIR = Path(__file__).resolve().parent.parent / "data/selection_profile"
+DEFAULT_EXTRACTED_DIR = Path(__file__).resolve().parent.parent / "data" / "extracted"
+DEFAULT_OUTPUT_DIR = Path(__file__).resolve().parent.parent / "data" / "selection_profile"
 
 SCHEMA_VERSION = "selection-profile/1.0"
 INDEX_SCHEMA_VERSION = "selection-index/1.0"
 
 
-def _remove_stale_selection_profiles(output_dir: Path, expected_files: set[str]) -> list[str]:
-    """Delete profile JSONs no longer generated from the current export set."""
-    removed = []
-    for path in sorted(output_dir.glob("*.json")):
-        if path.name == "_index.json":
-            continue
-        if path.name in expected_files:
-            continue
-        path.unlink()
-        removed.append(path.name)
-    return removed
+# ─── Format Detection & Accessors ──────────────────────────────────
 
 
-# ─── Parameter Classification ────────────────────────────────────────
-#
-# Each pattern tuple:  (spec_key, symbol_patterns, parameter_patterns, unit_hint)
-# symbol_patterns match against the electrical_parameters dict key / symbol.
-# parameter_patterns match against the "parameter" description field.
-# unit_hint is used to prefer certain units when available.
+def detect_input_format(data: dict) -> str:
+    """Detect whether input is flat (v1) or domains-based (v2).
+    Returns 'flat' or 'domains'.
+    """
+    if "domains" in data and isinstance(data["domains"], dict):
+        return "domains"
+    return "flat"
 
+
+def get_extraction(data: dict) -> dict:
+    """Get electrical extraction from either format."""
+    fmt = detect_input_format(data)
+    if fmt == "domains":
+        return data["domains"].get("electrical", {})
+    return data.get("extraction", {})
+
+
+def get_pin_data(data: dict) -> dict:
+    """Get pin extraction from either format."""
+    fmt = detect_input_format(data)
+    if fmt == "domains":
+        return data["domains"].get("pin", {})
+    return data.get("pin_extraction", {})
+
+
+def get_pin_index(data: dict) -> dict:
+    """Get pin index from either format."""
+    fmt = detect_input_format(data)
+    if fmt == "domains":
+        pin = data["domains"].get("pin", {})
+        return pin.get("pin_index", pin)
+    return data.get("pin_index", {})
+
+
+def get_thermal_data(data: dict) -> dict:
+    """Get thermal data from either format."""
+    fmt = detect_input_format(data)
+    if fmt == "domains":
+        return data["domains"].get("thermal", {})
+    return {}
+
+
+def get_design_context(data: dict) -> dict:
+    """Get design context from either format."""
+    fmt = detect_input_format(data)
+    if fmt == "domains":
+        return data["domains"].get("design_context", {})
+    return data.get("design_extraction", {})
+
+
+def get_register_data(data: dict) -> dict:
+    """Get register data (only available in domains format)."""
+    fmt = detect_input_format(data)
+    if fmt == "domains":
+        return data["domains"].get("register", {})
+    return {}
+
+
+def get_timing_data(data: dict) -> dict:
+    """Get timing data from either format."""
+    fmt = detect_input_format(data)
+    if fmt == "domains":
+        return data["domains"].get("timing", {})
+    return data.get("timing", {})
+
+
+def get_power_sequence_data(data: dict) -> dict:
+    """Get power sequence data (only available in domains format)."""
+    fmt = detect_input_format(data)
+    if fmt == "domains":
+        return data["domains"].get("power_sequence", {})
+    return {}
+
+
+def get_parametric_data(data: dict) -> dict:
+    """Get parametric data (only available in domains format)."""
+    fmt = detect_input_format(data)
+    if fmt == "domains":
+        return data["domains"].get("parametric", {})
+    return {}
+
+
+def get_component(data: dict) -> dict:
+    """Get component metadata from either format."""
+    fmt = detect_input_format(data)
+    if fmt == "domains":
+        elec = data["domains"].get("electrical", {})
+        comp = elec.get("component", {})
+        if not comp:
+            # Fallback: component may be at top level in some v2 extractions
+            comp = data.get("component", {})
+        return comp
+    ext = data.get("extraction", {})
+    return ext.get("component", {})
+
+
+# ─── Spec Extraction Helpers ────────────────────────────────────────
+
+
+# Pattern tuples: (spec_key, symbol_patterns, parameter_patterns, unit_hints, exclude_patterns)
 SPEC_PATTERNS = [
     (
         "input_voltage",
@@ -64,7 +137,7 @@ SPEC_PATTERNS = [
         [r"input.*volt.*range", r"input.*operat", r"supply.*volt.*range",
          r"^input\s+volt"],
         ("V",),
-        [r"dropout", r"VIN\s*-\s*V", r"VIN-VO"],  # exclude dropout entries
+        [r"dropout", r"VIN\s*-\s*V", r"VIN-VO"],
     ),
     (
         "output_voltage",
@@ -72,6 +145,7 @@ SPEC_PATTERNS = [
         [r"output\s+volt.*range", r"output\s+volt.*adjust",
          r"^output\s+volt"],
         ("V",),
+        [],
     ),
     (
         "output_current",
@@ -79,26 +153,29 @@ SPEC_PATTERNS = [
         [r"output\s+current", r"load\s+current", r"current\s+limit",
          r"source\s+current\s+limit"],
         ("A", "mA"),
-        [r"\bILIM5\b", r"LDO\s+output\s+current\s+limit"],
+        [],
     ),
     (
         "quiescent_current",
         [r"^I[_\(]?Q\b", r"^I[_\(]?GND\b", r"^I[_\(]?SUPPLY"],
         [r"quiescent\s+curr", r"supply\s+curr.*operat",
          r"VDD\s+supply\s+curr"],
-        ("uA", "µA", "μA", "mA"),
-    ),
-    (
-        "shutdown_current",
-        [r"^I[_\(]?SD", r"^I[_\(]?SHDN", r"^I[_\(]?STBY"],
-        [r"shutdown.*curr", r"standby.*curr"],
-        ("uA", "µA", "μA", "nA"),
+        ("uA", "\u00b5A", "\u03bcA", "mA"),
+        [],
     ),
     (
         "switching_frequency",
         [r"^f[_\(]?SW", r"^F[_\(]?OSC", r"^f[_\(]?CLK"],
         [r"switch.*freq", r"oscillat.*freq", r"PWM.*freq"],
         ("kHz", "MHz", "Hz"),
+        [],
+    ),
+    (
+        "dropout_voltage",
+        [r"^V[_\(]?DO\b", r"^VIN\-VO", r"^V[_\(]?DROP"],
+        [r"dropout\s+volt", r"drop.?out"],
+        ("V", "mV"),
+        [],
     ),
     (
         "reference_voltage",
@@ -106,70 +183,32 @@ SPEC_PATTERNS = [
         [r"reference\s+volt", r"feedback.*volt.*regul",
          r"feedback.*volt"],
         ("V", "mV"),
-    ),
-    (
-        "dropout_voltage",
-        [r"^V[_\(]?DO\b", r"^VIN\-VO", r"^V[_\(]?DROP"],
-        [r"dropout\s+volt", r"drop.?out"],
-        ("V", "mV"),
+        [],
     ),
     (
         "enable_threshold",
         [r"^V.*EN", r"^VTH.*EN", r"^VIH.*EN", r"^VIL.*EN"],
         [r"enable.*thresh", r"enable.*volt.*ris", r"enable.*high"],
         ("V",),
+        [],
     ),
     (
         "uvlo_threshold",
         [r"^V[_\(]?UVLO"],
         [r"UVLO\s+thresh", r"under.?volt.*lock"],
         ("V",),
-    ),
-    (
-        "line_regulation",
         [],
-        [r"line\s+regulat"],
-        ("%/V", "mV/V", "%"),
-    ),
-    (
-        "load_regulation",
-        [],
-        [r"load\s+regulat"],
-        ("%/mA", "mV/A", "%"),
-    ),
-    (
-        "efficiency",
-        [r"^EFF", r"^η"],
-        [r"^efficien"],
-        ("%",),
-    ),
-    (
-        "output_voltage_accuracy",
-        [r"^ΔVO$", r"^VOUT_ACC"],
-        [r"output\s+volt.*toler", r"output\s+volt.*accur"],
-        ("%", "%VNOM", "mV"),
-    ),
-    (
-        "power_good_threshold",
-        [r"^V[_\(]?PG", r"^V[_\(]?POK"],
-        [r"power.?good.*thresh"],
-        ("V", "%"),
-    ),
-    (
-        "soft_start_time",
-        [r"^t[_\(]?SS"],
-        [r"soft.?start\s+time"],
-        ("ms", "us", "µs"),
     ),
     (
         "thermal_shutdown",
         [r"^T[_\(]?SD", r"^TSDN"],
         [r"thermal\s+shut", r"over.?temp.*shut"],
-        ("°C", "C"),
+        ("\u00b0C", "C"),
+        [],
     ),
 ]
 
-# Patterns for absolute maximum ratings temperature extraction
+# Patterns for temperature range extraction from absolute maximum ratings
 TEMP_AMR_PATTERNS = [
     (
         "operating",
@@ -189,9 +228,24 @@ TEMP_AMR_PATTERNS = [
 ]
 
 
-def _match_symbol(key: str, patterns: list[str]) -> bool:
-    """Check if a dict key matches any of the symbol regex patterns."""
-    # Strip trailing condition suffixes added by deduplication (e.g. "VIN_VIN_rising")
+def _safe_numeric(value) -> float | int | None:
+    """Convert a value to a number, returning None on failure."""
+    if value is None:
+        return None
+    if isinstance(value, (int, float)):
+        return value
+    if isinstance(value, str):
+        try:
+            return float(value)
+        except ValueError:
+            return None
+    return None
+
+
+def _match_symbol(key: str | None, patterns: list[str]) -> bool:
+    """Check if a dict key matches any symbol regex patterns."""
+    if not key:
+        return False
     base_key = key.split("_")[0] if "_" in key else key
     for pat in patterns:
         if re.match(pat, base_key, re.IGNORECASE):
@@ -216,39 +270,49 @@ def _unit_ok(unit: str | None, allowed: tuple[str, ...]) -> bool:
     if not allowed:
         return True
     if not unit:
-        return True  # Missing unit is accepted (might still be correct)
-    normalized = unit.strip().replace("°", "").replace("℃", "C")
+        return True
+    normalized = unit.strip().replace("\u00b0", "").replace("\u2103", "C")
     for a in allowed:
-        a_norm = a.strip().replace("°", "").replace("℃", "C")
+        a_norm = a.strip().replace("\u00b0", "").replace("\u2103", "C")
         if normalized.lower() == a_norm.lower():
             return True
     return False
 
 
-def _safe_numeric(value) -> float | int | None:
-    """Convert a value to a number, returning None on failure."""
-    if value is None:
-        return None
-    if isinstance(value, (int, float)):
-        return value
-    if isinstance(value, str):
-        try:
-            return float(value)
-        except ValueError:
-            return None
+def _sanitize(s: str) -> str:
+    """Sanitize a string for use as a filename or dict key."""
+    return re.sub(r"[^a-zA-Z0-9_-]", "_", s)
+
+
+def _format_range(lo, hi, unit: str = "V") -> str | None:
+    """Format a min-max range as a string like '3.0-5.5V'."""
+    if lo is not None and hi is not None:
+        return f"{lo}-{hi}{unit}"
+    if hi is not None:
+        return f"<={hi}{unit}"
+    if lo is not None:
+        return f">={lo}{unit}"
     return None
 
 
-# ─── Spec Extraction ─────────────────────────────────────────────────
+def _format_value_unit(value, unit: str = "") -> str | None:
+    """Format a single value with its unit."""
+    if value is None:
+        return None
+    return f"{value}{unit}"
 
 
-def _extract_specs_from_params(params: dict) -> dict:
-    """Extract key specs from electrical_parameters dict.
+# ─── Key Spec Extraction from Raw Electrical Data ───────────────────
 
-    Returns dict of spec_key -> {min, typ, max, unit}.
-    For each spec type the first good match wins.
+
+def _extract_key_specs_from_raw(elec_chars: list, abs_max: list) -> list[dict]:
+    """Extract key specs from raw electrical_characteristics and
+    absolute_maximum_ratings lists (v1 flat format).
+
+    Returns a list of spec dicts with name, value, min, typ, max, unit.
     """
-    specs: dict[str, dict] = {}
+    specs = []
+    found_keys = set()
 
     for pattern_tuple in SPEC_PATTERNS:
         spec_key = pattern_tuple[0]
@@ -257,8 +321,81 @@ def _extract_specs_from_params(params: dict) -> dict:
         unit_hint = pattern_tuple[3]
         exclude_pats = pattern_tuple[4] if len(pattern_tuple) > 4 else []
 
-        if spec_key in specs:
+        if spec_key in found_keys:
             continue
+
+        best_entry = None
+        best_score = -1
+
+        for item in elec_chars:
+            if not isinstance(item, dict):
+                continue
+            sym = item.get("symbol", "")
+            param_name = item.get("parameter", "")
+            unit = item.get("unit", "")
+
+            # Check exclusion
+            if exclude_pats:
+                haystack = f"{sym} {param_name}"
+                if any(re.search(ep, haystack, re.IGNORECASE) for ep in exclude_pats):
+                    continue
+
+            sym_match = _match_symbol(sym, sym_pats) if sym_pats else False
+            param_match = _match_param(param_name, param_pats) if param_pats else False
+
+            if not sym_match and not param_match:
+                continue
+            if not _unit_ok(unit, unit_hint):
+                continue
+
+            score = 0
+            for vk in ("min", "typ", "max"):
+                if _safe_numeric(item.get(vk)) is not None:
+                    score += 1
+            if sym_match:
+                score += 3
+            if param_match:
+                score += 2
+
+            if score > best_score:
+                best_score = score
+                best_entry = item
+
+        if best_entry is not None:
+            spec = {"name": spec_key}
+            for vk in ("min", "typ", "max"):
+                v = _safe_numeric(best_entry.get(vk))
+                if v is not None:
+                    spec[vk] = v
+            if best_entry.get("unit"):
+                spec["unit"] = best_entry["unit"]
+            if best_entry.get("parameter"):
+                spec["parameter"] = best_entry["parameter"]
+            if spec.get("min") is not None or spec.get("typ") is not None or spec.get("max") is not None:
+                specs.append(spec)
+                found_keys.add(spec_key)
+
+    return specs
+
+
+def _extract_key_specs_from_params(params: dict) -> list[dict]:
+    """Extract key specs from electrical_parameters dict (keyed by symbol).
+
+    Returns a list of spec dicts with name, value, min, typ, max, unit.
+    """
+    specs = []
+    found_keys = set()
+
+    for pattern_tuple in SPEC_PATTERNS:
+        spec_key = pattern_tuple[0]
+        sym_pats = pattern_tuple[1]
+        param_pats = pattern_tuple[2]
+        unit_hint = pattern_tuple[3]
+        exclude_pats = pattern_tuple[4] if len(pattern_tuple) > 4 else []
+
+        if spec_key in found_keys:
+            continue
+
         best_entry = None
         best_score = -1
 
@@ -268,14 +405,9 @@ def _extract_specs_from_params(params: dict) -> dict:
             param_name = entry.get("parameter", "")
             unit = entry.get("unit", "")
 
-            # Check exclusion patterns against key and parameter name
             if exclude_pats:
                 haystack = f"{key} {param_name}"
-                excluded = any(
-                    re.search(ep, haystack, re.IGNORECASE)
-                    for ep in exclude_pats
-                )
-                if excluded:
+                if any(re.search(ep, haystack, re.IGNORECASE) for ep in exclude_pats):
                     continue
 
             sym_match = _match_symbol(key, sym_pats) if sym_pats else False
@@ -283,11 +415,9 @@ def _extract_specs_from_params(params: dict) -> dict:
 
             if not sym_match and not param_match:
                 continue
-
             if not _unit_ok(unit, unit_hint):
                 continue
 
-            # Score: prefer entries with more numeric values filled in
             score = 0
             for vk in ("min", "typ", "max"):
                 if _safe_numeric(entry.get(vk)) is not None:
@@ -296,7 +426,6 @@ def _extract_specs_from_params(params: dict) -> dict:
                 score += 3
             if param_match:
                 score += 2
-            # Prefer first occurrence (no condition suffix in key)
             if "_" not in key:
                 score += 1
 
@@ -305,446 +434,520 @@ def _extract_specs_from_params(params: dict) -> dict:
                 best_entry = entry
 
         if best_entry is not None:
-            spec_record: dict = {}
+            spec = {"name": spec_key}
             for vk in ("min", "typ", "max"):
                 v = _safe_numeric(best_entry.get(vk))
                 if v is not None:
-                    spec_record[vk] = v
+                    spec[vk] = v
             if best_entry.get("unit"):
-                spec_record["unit"] = best_entry["unit"]
-            if spec_record:
-                specs[spec_key] = spec_record
+                spec["unit"] = best_entry["unit"]
+            if best_entry.get("parameter"):
+                spec["parameter"] = best_entry["parameter"]
+            if spec.get("min") is not None or spec.get("typ") is not None or spec.get("max") is not None:
+                specs.append(spec)
+                found_keys.add(spec_key)
 
     return specs
 
 
-def _extract_specs_from_drc_hints(hints: dict) -> dict:
-    """Extract / supplement key specs from drc_hints.
+# ─── Operating Conditions Extraction ────────────────────────────────
 
-    drc_hints already has pre-extracted values like vin_operating, vout, etc.
+
+def _extract_operating_conditions(elec_chars, abs_max_ratings) -> dict:
+    """Extract operating conditions (temperature range, voltage range, etc.)
+    from raw lists or dicts of electrical characteristics and abs max ratings.
     """
-    mapping = {
-        "vin_operating": "input_voltage",
-        "vout": "output_voltage",
-        "iout_max": "output_current",
-        "iout_operating": "output_current",
-        "iq": "quiescent_current",
-        "fsw": "switching_frequency",
-        "vref": "reference_voltage",
-        "dropout": "dropout_voltage",
-        "enable_threshold": "enable_threshold",
-        "uvlo": "uvlo_threshold",
-        "soft_start": "soft_start_time",
-        "thermal_shutdown": "thermal_shutdown",
-    }
-    specs: dict[str, dict] = {}
-    for hint_key, spec_key in mapping.items():
-        hint = hints.get(hint_key)
-        if not isinstance(hint, dict):
-            continue
-        spec_record: dict = {}
-        for vk in ("min", "typ", "max"):
-            v = _safe_numeric(hint.get(vk))
-            if v is not None:
-                spec_record[vk] = v
-        # drc_hints vin_abs_max has "value" instead of min/typ/max
-        if "value" in hint:
-            v = _safe_numeric(hint["value"])
-            if v is not None:
-                spec_record["max"] = v
-        if hint.get("unit"):
-            spec_record["unit"] = hint["unit"]
-        if spec_record:
-            specs[spec_key] = spec_record
+    operating = {}
 
-    return specs
+    # Handle both list (v1) and dict (v2) formats for abs max
+    abs_items = []
+    if isinstance(abs_max_ratings, list):
+        abs_items = abs_max_ratings
+    elif isinstance(abs_max_ratings, dict):
+        abs_items = [
+            {**v, "symbol": k} for k, v in abs_max_ratings.items()
+            if isinstance(v, dict)
+        ]
 
+    elec_items = []
+    if isinstance(elec_chars, list):
+        elec_items = elec_chars
+    elif isinstance(elec_chars, dict):
+        elec_items = [
+            {**v, "symbol": k} for k, v in elec_chars.items()
+            if isinstance(v, dict)
+        ]
 
-def _extract_temp_range(abs_max_ratings: dict, elec_params: dict) -> dict:
-    """Extract operating temperature range from absolute maximum ratings
-    and electrical parameters."""
-    result: dict = {}
-
-    # Search absolute_maximum_ratings first
+    # Temperature range from absolute maximum ratings
     for temp_type, sym_pats, param_pats in TEMP_AMR_PATTERNS:
-        for key, entry in abs_max_ratings.items():
-            if not isinstance(entry, dict):
+        for item in abs_items:
+            if not isinstance(item, dict):
                 continue
-            param_name = entry.get("parameter", "")
-            if _match_symbol(key, sym_pats) or _match_param(param_name, param_pats):
-                t_min = _safe_numeric(entry.get("min"))
-                t_max = _safe_numeric(entry.get("max"))
-                if temp_type == "operating" and (t_min is not None or t_max is not None):
-                    if "temp_min" not in result and t_min is not None:
-                        result["temp_min"] = t_min
-                    if "temp_max" not in result and t_max is not None:
-                        result["temp_max"] = t_max
+            sym = item.get("symbol", "")
+            param_name = item.get("parameter", "")
+            if _match_symbol(sym, sym_pats) or _match_param(param_name, param_pats):
+                t_min = _safe_numeric(item.get("min"))
+                t_max = _safe_numeric(item.get("max"))
+                if temp_type == "operating":
+                    if t_min is not None:
+                        operating.setdefault("temp_min", t_min)
+                    if t_max is not None:
+                        operating.setdefault("temp_max", t_max)
                 elif temp_type == "junction" and t_max is not None:
-                    result["tj_max"] = t_max
+                    operating.setdefault("tj_max", t_max)
                 break
 
-    # Also search electrical_parameters for operating junction temperature
-    for key, entry in elec_params.items():
-        if not isinstance(entry, dict):
+    # VIN operating range
+    for item in elec_items:
+        if not isinstance(item, dict):
             continue
-        param_name = entry.get("parameter", "")
-        unit = entry.get("unit") or ""
-        if ("°" in unit or unit == "C") and _match_param(param_name, [r"operat.*junction.*temp", r"operat.*temp"]):
-            t_min = _safe_numeric(entry.get("min"))
-            t_max = _safe_numeric(entry.get("max"))
-            if t_min is not None and "temp_min" not in result:
-                result["temp_min"] = t_min
-            if t_max is not None and "temp_max" not in result:
-                result["temp_max"] = t_max
+        sym = item.get("symbol", "")
+        param_name = item.get("parameter", "")
+        if _match_symbol(sym, [r"^V[_\(]?IN", r"^VCC$", r"^VDD$"]) or \
+           _match_param(param_name, [r"input.*volt.*range", r"supply.*volt.*range"]):
+            # Skip dropout entries
+            haystack = f"{sym} {param_name}"
+            if re.search(r"dropout|VIN\s*-\s*V", haystack, re.IGNORECASE):
+                continue
+            vin_min = _safe_numeric(item.get("min"))
+            vin_max = _safe_numeric(item.get("max"))
+            if vin_min is not None or vin_max is not None:
+                operating.setdefault("vin_min", vin_min)
+                operating.setdefault("vin_max", vin_max)
+                break
 
-    return result
+    return operating
 
 
-def _extract_output_current_from_abs_max(abs_max_ratings: dict) -> dict | None:
-    """Use absolute-maximum output current as a last-resort selection hint."""
-    for key, entry in abs_max_ratings.items():
-        if not isinstance(entry, dict):
-            continue
-        param_name = entry.get("parameter", "")
-        if not (_match_symbol(key, [r"^I[_\(]?OUT", r"^I[_\(]?LOAD"]) or _match_param(param_name, [r"output\s+current", r"load\s+current"])):
-            continue
-        record: dict = {}
-        for vk in ("min", "typ", "max"):
-            v = _safe_numeric(entry.get(vk))
-            if v is not None:
-                record[vk] = v
-        if entry.get("unit"):
-            record["unit"] = entry["unit"]
-        if record:
-            return record
+# ─── Thermal Summary ────────────────────────────────────────────────
+
+
+def _classify_thermal_key(item: dict) -> str | None:
+    """Classify a thermal parameter into a normalized key."""
+    symbol = (item.get("symbol") or "").upper().replace(" ", "")
+    parameter = (item.get("parameter") or "").lower()
+    conditions = (item.get("conditions") or "").lower()
+    haystack = f"{symbol} {parameter} {conditions}"
+
+    if "power dissipation capacitance" in parameter:
+        return None
+    if "power dissipation" in parameter or re.match(r"^P[Dd]$", symbol):
+        return "power_dissipation"
+    if re.search(r"(PSI|\u03a8)\s*JT", symbol) or "junction-to-top" in parameter:
+        return "psi_jt"
+    if re.search(r"(PSI|\u03a8)\s*JB", symbol) or "junction-to-board characterization" in parameter:
+        return "psi_jb"
+    if re.search(r"(R|\u03b8|\u0398).*JC", symbol) or "junction-to-case" in parameter:
+        if "bottom" in haystack or "bot" in symbol:
+            return "theta_jc_bottom"
+        if "top" in haystack:
+            return "theta_jc_top"
+        return "theta_jc"
+    if re.search(r"(R|\u03b8|\u0398).*JB", symbol) or "junction-to-board" in parameter:
+        return "theta_jb"
+    if re.search(r"(R|\u03b8|\u0398).*JA", symbol) or "junction-to-ambient" in parameter:
+        return "theta_ja"
+    if "thermal resistance" in parameter:
+        return "theta_ja"
     return None
 
 
-def _extract_thermal(thermal_data: dict) -> dict:
-    """Extract thermal resistance data from the thermal dict."""
-    result: dict = {}
-    for key, entry in thermal_data.items():
-        if not isinstance(entry, dict):
-            continue
-        record: dict = {}
-        for vk in ("min", "typ", "max"):
-            v = _safe_numeric(entry.get(vk))
-            if v is not None:
-                record[vk] = v
-        # Some thermal entries use "value" instead of min/typ/max
-        if not record:
-            v = _safe_numeric(entry.get("value"))
-            if v is not None:
-                record["typ"] = v
-        if entry.get("unit"):
-            record["unit"] = entry["unit"]
-        if record:
-            # Normalize key: theta_ja, theta_jc, theta_jb, psi_jt, psi_jb, etc.
-            result[key] = record
+def _build_thermal_summary(raw_elec, raw_abs, thermal_domain: dict) -> dict:
+    """Build a thermal summary from raw electrical/abs-max lists and
+    thermal domain data.
+    """
+    thermal = {}
+
+    # Extract from raw lists (v1 format)
+    for source_items in (raw_elec or [], raw_abs or []):
+        items = source_items if isinstance(source_items, list) else []
+        for item in items:
+            if not isinstance(item, dict):
+                continue
+            key = _classify_thermal_key(item)
+            if key and key not in thermal:
+                record = {}
+                for vk in ("min", "typ", "max"):
+                    v = _safe_numeric(item.get(vk))
+                    if v is not None:
+                        record[vk] = v
+                if not record:
+                    v = _safe_numeric(item.get("value"))
+                    if v is not None:
+                        record["typ"] = v
+                if item.get("unit"):
+                    record["unit"] = item["unit"]
+                if record:
+                    thermal[key] = record
+
+    # Merge in thermal domain data (v2 format)
+    if isinstance(thermal_domain, dict):
+        for key, entry in thermal_domain.items():
+            if not isinstance(entry, dict):
+                continue
+            if key in thermal:
+                continue
+            record = {}
+            for vk in ("min", "typ", "max"):
+                v = _safe_numeric(entry.get(vk))
+                if v is not None:
+                    record[vk] = v
+            if not record:
+                v = _safe_numeric(entry.get("value"))
+                if v is not None:
+                    record["typ"] = v
+            if entry.get("unit"):
+                record["unit"] = entry["unit"]
+            if record:
+                thermal[key] = record
+
+    return thermal
+
+
+# ─── Register Summary ───────────────────────────────────────────────
+
+
+def _build_register_summary(register_data: dict) -> dict:
+    """Extract register summary: bus_type and register_count."""
+    if not register_data:
+        return {}
+
+    summary = register_data.get("register_map_summary", {})
+    registers = register_data.get("registers", [])
+
+    result = {}
+    bus_type = summary.get("bus_type")
+    if bus_type:
+        result["bus_type"] = bus_type
+
+    register_count = summary.get("total_registers")
+    if register_count is None and isinstance(registers, list):
+        register_count = len(registers)
+    if register_count is not None and register_count > 0:
+        result["register_count"] = register_count
+
+    addr_range = summary.get("address_range")
+    if addr_range:
+        result["address_range"] = addr_range
+
     return result
 
 
-def _extract_packages(packages_data: dict) -> tuple[list[str], int]:
-    """Extract package names and maximum pin count."""
-    if not isinstance(packages_data, dict):
-        return [], 0
-    names = sorted(packages_data.keys())
-    max_pin = 0
-    for _pkg_name, pkg_info in packages_data.items():
-        if isinstance(pkg_info, dict):
-            pc = pkg_info.get("pin_count", 0)
-            if isinstance(pc, int) and pc > max_pin:
-                max_pin = pc
-    return names, max_pin
+# ─── Package & Pin Count Extraction ─────────────────────────────────
 
 
-def _extract_features(device_data: dict) -> list[str]:
-    """Extract notable feature flags from device data."""
-    features: list[str] = []
+def _extract_packages_and_pin_count(pin_index: dict, design_ctx: dict) -> tuple[list[str], int]:
+    """Extract package names and pin count from pin index and design context."""
+    packages = []
+    pin_count = 0
 
-    hints = get_export_drc_hints(device_data)
+    # From pin_index (v1 and v2)
+    pkgs = pin_index.get("packages", {})
+    if isinstance(pkgs, dict):
+        for pkg_name, pkg_info in pkgs.items():
+            packages.append(pkg_name)
+            if isinstance(pkg_info, dict):
+                pc = pkg_info.get("pin_count")
+                if isinstance(pc, int) and pc > pin_count:
+                    pin_count = pc
 
-    # Topology
-    topo = hints.get("topology")
-    if topo:
-        features.append(f"topology:{topo}")
+                # If pin_count not present, check for nested "pins" dict (v2)
+                if not isinstance(pc, int) or pc == 0:
+                    pins = pkg_info.get("pins", {})
+                    if isinstance(pins, dict) and len(pins) > pin_count:
+                        pin_count = len(pins)
 
-    # Output type
-    ot = hints.get("output_type")
-    if ot:
-        features.append(f"output:{ot}")
+                # v1 flat format: pkg_info IS the pins dict directly
+                # (keyed by pin number like "1", "2", "3")
+                if not isinstance(pc, int) and "pins" not in pkg_info:
+                    # Check if the values look like pin entries (have "name" key)
+                    pin_entries = [
+                        v for v in pkg_info.values()
+                        if isinstance(v, dict) and "name" in v
+                    ]
+                    if pin_entries and len(pin_entries) > pin_count:
+                        pin_count = len(pin_entries)
 
-    # Fixed output voltage
-    fv = hints.get("output_voltage_fixed")
-    if isinstance(fv, dict) and fv.get("value") is not None:
-        features.append(f"fixed_vout:{fv['value']}{fv.get('unit', 'V')}")
+    # Supplement from design_context if no packages found
+    if not packages and isinstance(design_ctx, dict):
+        # design_context may have package info in supply_recommendations or topology
+        pass  # No standard location; leave empty
 
-    # Device function
-    df = hints.get("device_function")
-    if df:
-        features.append(f"function:{df}")
-
-    # Requires external MOSFET
-    if hints.get("requires_external_mosfet"):
-        features.append("external_mosfet")
-
-    # Register domains (I2C / SPI programmable)
-    if get_export_register_domain(device_data):
-        features.append("register_interface")
-
-    return features
+    return sorted(set(packages)), pin_count
 
 
-# ─── Selection Card Builder ──────────────────────────────────────────
+# ─── Selection Profile Card ────────────────────────────────────────
 
 
-def build_selection_card(device_data: dict) -> dict | None:
-    """Build a selection card from a sch_review_export device JSON.
+def build_selection_card(data: dict, source_file: str = "") -> dict | None:
+    """Build a selection profile card from extracted JSON data.
 
+    Handles both v1 (flat) and v2 (domains-based) input formats.
     Returns None if the device lacks a valid MPN.
     """
-    mpn = device_data.get("mpn")
+    fmt = detect_input_format(data)
+    comp = get_component(data)
+
+    mpn = comp.get("mpn")
     if not mpn:
         return None
 
-    category = device_data.get("category", "Other")
-    manufacturer = device_data.get("manufacturer")
-    description = device_data.get("description")
+    manufacturer = comp.get("manufacturer")
+    category = comp.get("category", "Unknown")
 
-    elec_params = get_export_electrical_parameters(device_data)
-    abs_max = get_export_absolute_maximum_ratings(device_data)
-    hints = get_export_drc_hints(device_data)
-    thermal_data = get_export_thermal(device_data)
-    packages_data = get_export_packages(device_data)
+    # --- Extract key specs ---
+    parametric = get_parametric_data(data)
+    key_specs = []
+    operating_conditions = {}
 
-    # --- Key specs: merge from electrical params and drc_hints ---
-    key_specs = _extract_specs_from_params(elec_params)
+    if parametric:
+        # Use parametric domain data if available (from Worker-9)
+        key_specs = parametric.get("key_specs", [])
+        operating_conditions = parametric.get("operating_conditions", {})
+    else:
+        # Fall back to extracting from raw electrical data
+        ext = get_extraction(data)
 
-    # Supplement with drc_hints (fills gaps only)
-    hint_specs = _extract_specs_from_drc_hints(hints)
-    for sk, sv in hint_specs.items():
-        if sk not in key_specs:
-            key_specs[sk] = sv
+        if fmt == "flat":
+            raw_elec = ext.get("electrical_characteristics", [])
+            raw_abs = ext.get("absolute_maximum_ratings", [])
+            key_specs = _extract_key_specs_from_raw(raw_elec, raw_abs)
+            operating_conditions = _extract_operating_conditions(raw_elec, raw_abs)
+        else:
+            # v2 domains format: electrical domain has dict-keyed params
+            elec_params = ext.get("electrical_parameters", {})
+            abs_max = ext.get("absolute_maximum_ratings", {})
+            key_specs = _extract_key_specs_from_params(elec_params)
+            operating_conditions = _extract_operating_conditions(elec_params, abs_max)
 
-    # Also pull input voltage abs max from drc_hints
-    vin_abs = hints.get("vin_abs_max")
-    if isinstance(vin_abs, dict) and vin_abs.get("value") is not None:
-        if "input_voltage_abs_max" not in key_specs:
-            key_specs["input_voltage_abs_max"] = {
-                "max": _safe_numeric(vin_abs["value"]),
-                "unit": vin_abs.get("unit", "V"),
-            }
+    # --- Pin count and packages ---
+    pin_index = get_pin_index(data)
+    design_ctx = get_design_context(data)
+    packages, pin_count = _extract_packages_and_pin_count(pin_index, design_ctx)
 
-    if "output_current" not in key_specs:
-        output_current_abs_max = _extract_output_current_from_abs_max(abs_max)
-        if output_current_abs_max:
-            key_specs["output_current"] = output_current_abs_max
+    # --- Thermal summary ---
+    ext = get_extraction(data)
+    thermal_domain = get_thermal_data(data)
+    if fmt == "flat":
+        raw_elec = ext.get("electrical_characteristics", [])
+        raw_abs = ext.get("absolute_maximum_ratings", [])
+    else:
+        raw_elec = []
+        raw_abs = []
+    thermal_summary = _build_thermal_summary(raw_elec, raw_abs, thermal_domain)
 
-    # --- Operating conditions ---
-    operating: dict = {}
-    iv = key_specs.get("input_voltage", {})
-    if iv.get("min") is not None or iv.get("max") is not None:
-        vin_range = [iv.get("min"), iv.get("max")]
-        if vin_range[0] is not None or vin_range[1] is not None:
-            operating["vin_range"] = vin_range
+    # --- Register summary ---
+    register_data = get_register_data(data)
+    register_summary = _build_register_summary(register_data)
 
-    ov = key_specs.get("output_voltage", {})
-    if ov.get("min") is not None or ov.get("max") is not None:
-        vout_range = [ov.get("min"), ov.get("max")]
-        if vout_range[0] is not None or vout_range[1] is not None:
-            operating["vout_range"] = vout_range
-    elif ov.get("typ") is not None:
-        operating["vout_typ"] = ov["typ"]
+    # --- Timing and power sequence presence ---
+    timing_data = get_timing_data(data)
+    has_timing_data = bool(timing_data) and bool(
+        timing_data.get("timing_parameters") or
+        timing_data.get("timing_summary")
+    )
 
-    oc = key_specs.get("output_current", {})
-    iout_max = oc.get("max") or oc.get("typ")
-    if iout_max is not None:
-        operating["iout_max"] = iout_max
-
-    temp = _extract_temp_range(abs_max, elec_params)
-    if temp.get("temp_min") is not None or temp.get("temp_max") is not None:
-        operating["temp_range"] = [temp.get("temp_min"), temp.get("temp_max")]
-        operating["temp_unit"] = "C"
-    if temp.get("tj_max") is not None:
-        operating["tj_max"] = temp["tj_max"]
-
-    # --- Packages ---
-    packages, pin_count = _extract_packages(packages_data)
-
-    # --- Thermal ---
-    thermal = _extract_thermal(thermal_data)
-
-    # --- Features ---
-    features = _extract_features(device_data)
+    power_seq_data = get_power_sequence_data(data)
+    has_power_sequence = bool(power_seq_data) and bool(
+        power_seq_data.get("power_stages") or
+        power_seq_data.get("power_rails") or
+        power_seq_data.get("power_sequence_summary")
+    )
 
     card = {
         "_schema": SCHEMA_VERSION,
         "mpn": mpn,
         "manufacturer": manufacturer,
         "category": category,
-        "description": description,
         "key_specs": key_specs,
-        "operating_conditions": operating,
-        "packages": packages,
+        "operating_conditions": operating_conditions,
         "pin_count": pin_count,
-        "thermal": thermal,
-        "features": features,
+        "packages": packages,
+        "thermal_summary": thermal_summary,
+        "register_summary": register_summary,
+        "has_timing_data": has_timing_data,
+        "has_power_sequence": has_power_sequence,
+        "extraction_date": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
+        "source_file": source_file or data.get("pdf_name", ""),
     }
+
     return card
 
 
-# ─── Comparative Index ───────────────────────────────────────────────
+# ─── Comparative Index ──────────────────────────────────────────────
 
 
-def build_index(cards: list[dict]) -> dict:
-    """Build the comparative index from all selection cards."""
-    categories: dict[str, list[str]] = defaultdict(list)
-    devices: list[dict] = []
+def build_selection_index(cards: list[dict]) -> dict:
+    """Build the comparative selection index from all cards."""
+    devices = []
 
     for card in cards:
         mpn = card["mpn"]
-        cat = card.get("category", "Other")
-        categories[cat].append(mpn)
+        category = card.get("category", "Unknown")
 
-        ks = card.get("key_specs", {})
+        # Extract vin_range string
+        vin_range = None
         oc = card.get("operating_conditions", {})
+        vin_min = oc.get("vin_min")
+        vin_max = oc.get("vin_max")
+        if vin_min is not None or vin_max is not None:
+            vin_range = _format_range(vin_min, vin_max, "V")
+        else:
+            # Try to find from key_specs
+            for spec in card.get("key_specs", []):
+                if isinstance(spec, dict) and spec.get("name") == "input_voltage":
+                    vin_range = _format_range(
+                        spec.get("min"), spec.get("max"),
+                        spec.get("unit", "V")
+                    )
+                    break
 
-        # Build compact index entry
-        vin_max = None
-        vin_range = oc.get("vin_range")
-        if isinstance(vin_range, list) and len(vin_range) >= 2:
-            vin_max = vin_range[1]
+        # Extract iout_max string
+        iout_max = None
+        iout_val = oc.get("iout_max")
+        if iout_val is not None:
+            iout_max = _format_value_unit(iout_val, "A")
+        else:
+            for spec in card.get("key_specs", []):
+                if isinstance(spec, dict) and spec.get("name") == "output_current":
+                    val = spec.get("max") or spec.get("typ")
+                    if val is not None:
+                        iout_max = _format_value_unit(val, spec.get("unit", "A"))
+                    break
 
-        vout_range_str = None
-        vout_range = oc.get("vout_range")
-        if isinstance(vout_range, list) and len(vout_range) >= 2:
-            parts = []
-            if vout_range[0] is not None:
-                parts.append(str(vout_range[0]))
-            if vout_range[1] is not None:
-                parts.append(str(vout_range[1]))
-            if parts:
-                vout_range_str = "-".join(parts) + "V"
-        elif oc.get("vout_typ") is not None:
-            vout_range_str = f"{oc['vout_typ']}V"
+        key_spec_count = len(card.get("key_specs", []))
+        safe_name = _sanitize(mpn)
 
         devices.append({
             "mpn": mpn,
-            "manufacturer": card.get("manufacturer"),
-            "category": cat,
-            "vin_max": vin_max,
-            "vout_range": vout_range_str,
-            "iout_max": oc.get("iout_max"),
-            "iq_typ": ks.get("quiescent_current", {}).get("typ"),
-            "packages": card.get("packages", []),
+            "category": category,
+            "vin_range": vin_range,
+            "iout_max": iout_max,
+            "key_spec_count": key_spec_count,
+            "profile_file": f"{safe_name}_selection.json",
         })
 
-    # Sort categories alphabetically, devices by category then MPN
+    # Sort by category then MPN
+    devices.sort(key=lambda d: (d.get("category", ""), d.get("mpn", "")))
+
     return {
         "_schema": INDEX_SCHEMA_VERSION,
-        "generated": datetime.now(timezone.utc).isoformat(),
-        "total_devices": len(cards),
-        "categories": dict(sorted(categories.items())),
-        "devices": sorted(
-            devices, key=lambda d: (d.get("category", ""), d.get("mpn", ""))
-        ),
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "device_count": len(cards),
+        "devices": devices,
     }
 
 
-# ─── Main ────────────────────────────────────────────────────────────
+# ─── File Processing ────────────────────────────────────────────────
+
+
+def process_file(path: Path) -> dict | None:
+    """Process a single extracted JSON file into a selection card."""
+    try:
+        with open(path, encoding="utf-8") as fp:
+            data = json.load(fp)
+    except (json.JSONDecodeError, OSError) as exc:
+        print(f"  ERROR reading {path.name}: {exc}")
+        return None
+
+    # Skip FPGA datasheets
+    if data.get("is_fpga"):
+        return None
+
+    card = build_selection_card(data, source_file=path.name)
+    return card
+
+
+# ─── Main ───────────────────────────────────────────────────────────
 
 
 def main():
-    parser = argparse.ArgumentParser(
-        description="Export selection profiles from sch_review_export data."
-    )
-    parser.add_argument(
-        "--export-dir",
-        type=Path,
-        default=DEFAULT_EXPORT_DIR,
-        help="Directory containing sch_review_export JSON files",
-    )
-    parser.add_argument(
-        "--output-dir",
-        type=Path,
-        default=DEFAULT_OUTPUT_DIR,
-        help="Directory to write selection profile JSON files",
-    )
-    parser.add_argument(
-        "--summary",
-        action="store_true",
-        help="Print a summary of exported devices by category",
-    )
-    args = parser.parse_args()
+    # Determine input: single file or directory
+    single_file = None
+    extracted_dir = DEFAULT_EXTRACTED_DIR
+    output_dir = DEFAULT_OUTPUT_DIR
 
-    args.output_dir.mkdir(parents=True, exist_ok=True)
+    if len(sys.argv) > 1:
+        arg = Path(sys.argv[1])
+        if arg.is_file():
+            single_file = arg
+        elif arg.is_dir():
+            extracted_dir = arg
+        else:
+            print(f"Error: {arg} is not a file or directory", file=sys.stderr)
+            sys.exit(1)
 
-    # Load and process all sch_review_export files
+    # If the default extracted dir does not exist, try extracted_v2
+    if single_file is None and not extracted_dir.exists():
+        alt_dir = extracted_dir.parent / "extracted_v2"
+        if alt_dir.exists():
+            extracted_dir = alt_dir
+
+    output_dir.mkdir(parents=True, exist_ok=True)
+
     cards: list[dict] = []
-    skipped = 0
     errors = 0
-    written_files: set[str] = set()
+    skipped = 0
 
-    export_files = sorted(args.export_dir.glob("*.json"))
-    if not export_files:
-        print(f"No JSON files found in {args.export_dir}", file=sys.stderr)
+    if single_file:
+        # Process single file
+        input_files = [single_file]
+    else:
+        input_files = sorted(extracted_dir.glob("*.json"))
+
+    if not input_files:
+        print(f"No JSON files found in {extracted_dir}", file=sys.stderr)
         sys.exit(1)
 
-    for path in export_files:
+    print(f"=== Selection Profile Export ===")
+    print(f"Input: {single_file or extracted_dir}")
+    print(f"Output: {output_dir}")
+    print()
+
+    for path in input_files:
         if path.name.startswith("_"):
             continue
-        try:
-            data = json.loads(path.read_text(encoding="utf-8"))
-        except (json.JSONDecodeError, OSError) as exc:
-            print(f"  WARN: skipping {path.name}: {exc}", file=sys.stderr)
-            errors += 1
-            continue
 
-        # Skip FPGA devices (selection profile targets ICs only for now)
-        if data.get("_type") == "fpga":
-            skipped += 1
-            continue
-
-        card = build_selection_card(data)
+        card = process_file(path)
         if card is None:
             skipped += 1
             continue
 
-        card["source_file"] = path.name
+        mpn = card["mpn"]
+        safe_name = _sanitize(mpn)
+        out_path = output_dir / f"{safe_name}_selection.json"
+
+        try:
+            with open(out_path, "w", encoding="utf-8") as fp:
+                json.dump(card, fp, indent=2, ensure_ascii=False)
+                fp.write("\n")
+        except OSError as exc:
+            print(f"  ERROR writing {out_path.name}: {exc}")
+            errors += 1
+            continue
+
+        n_specs = len(card.get("key_specs", []))
+        n_pkgs = len(card.get("packages", []))
+        print(f"  {mpn:25s} {card['category']:12s} {n_specs} specs, {n_pkgs} pkgs -> {out_path.name}")
         cards.append(card)
 
-        # Write per-device card
-        safe_name = re.sub(r"[^a-zA-Z0-9_-]", "_", card["mpn"])
-        out_path = args.output_dir / f"{safe_name}.json"
-        out_path.write_text(
-            json.dumps(card, indent=2, ensure_ascii=False) + "\n",
-            encoding="utf-8",
-        )
-        written_files.add(out_path.name)
-
     # Build and write comparative index
-    removed_files = _remove_stale_selection_profiles(args.output_dir, written_files)
-    index = build_index(cards)
-    index_path = args.output_dir / "_index.json"
-    index_path.write_text(
-        json.dumps(index, indent=2, ensure_ascii=False) + "\n",
-        encoding="utf-8",
-    )
+    index = build_selection_index(cards)
+    index_path = output_dir / "selection_index.json"
+    try:
+        with open(index_path, "w", encoding="utf-8") as fp:
+            json.dump(index, fp, indent=2, ensure_ascii=False)
+            fp.write("\n")
+    except OSError as exc:
+        print(f"  ERROR writing index: {exc}")
+        errors += 1
 
-    # Print summary
-    if args.summary:
-        print("Selection Profile Export")
-        print(f"  Total devices exported: {len(cards)}")
-        print(f"  Skipped: {skipped}")
-        print(f"  Errors: {errors}")
-        if removed_files:
-            print(f"  Removed stale profiles: {len(removed_files)}")
-        for cat, mpns in sorted(index["categories"].items()):
-            print(f"  {cat}: {len(mpns)} devices")
-
-    print(
-        f"\nExported {len(cards)} selection profiles to {args.output_dir}/"
-    )
+    # Summary
+    print()
+    print(f"{'=' * 60}")
+    print(f"Exported: {len(cards)}, Skipped: {skipped}, Errors: {errors}")
+    print(f"Selection profiles: {output_dir}")
+    print(f"Index: {index_path} ({index['device_count']} devices)")
 
 
 if __name__ == "__main__":
