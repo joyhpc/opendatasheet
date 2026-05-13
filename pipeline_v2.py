@@ -368,6 +368,28 @@ def render_pages_to_images(pdf_path: str, page_nums: list[int]) -> list[bytes]:
     return images
 
 
+def _build_domain_trace_record(
+    model_trace: dict,
+    *,
+    domain_name: str,
+    extractor,
+    selected_pages: list[int],
+    pdf_name: str,
+    is_fpga: bool,
+) -> dict:
+    """Add pipeline context around a model-call trace."""
+    trace_record = dict(model_trace)
+    trace_record.update({
+        "domain": domain_name,
+        "extractor": extractor.__class__.__name__,
+        "extractor_version": getattr(extractor, "EXTRACTOR_VERSION", "unversioned"),
+        "selected_pages": selected_pages,
+        "pdf_name": pdf_name,
+        "is_fpga": is_fpga,
+    })
+    return trace_record
+
+
 # ============================================
 # Pin transform / validation helpers (legacy flat output compatibility)
 # ============================================
@@ -886,6 +908,7 @@ def process_single_pdf(pdf_path: str, verbose: bool = True) -> dict:
     domains = {}
     domain_validations = {}
     domain_timings = {}
+    domain_traces = {}
 
     for ExtractorClass in EXTRACTOR_REGISTRY:
         extractor = ExtractorClass(
@@ -918,6 +941,16 @@ def process_single_pdf(pdf_path: str, verbose: bool = True) -> dict:
             validation = {}
 
         domain_timings[domain_name] = round(time.time() - t_domain, 3)
+        model_trace = getattr(result, "model_trace", None)
+        if model_trace:
+            domain_traces[domain_name] = _build_domain_trace_record(
+                model_trace,
+                domain_name=domain_name,
+                extractor=extractor,
+                selected_pages=selected_pages,
+                pdf_name=pdf_name,
+                is_fpga=is_fpga,
+            )
         domains[domain_name] = result
         domain_validations[domain_name] = validation
 
@@ -1130,6 +1163,7 @@ def process_single_pdf(pdf_path: str, verbose: bool = True) -> dict:
         "domains": {name: data for name, data in domains.items()},
         "domain_validations": {name: data for name, data in domain_validations.items()},
         "domain_timings": domain_timings,
+        "domain_traces": domain_traces,
     }
     return result
 

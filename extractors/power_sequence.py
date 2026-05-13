@@ -13,6 +13,9 @@ from extractors.gemini_json import call_gemini_json_response
 # Prompts
 # ============================================
 
+PROMPT_ID = "opendatasheet.power_sequence.vision"
+PROMPT_VERSION = "1.0.0"
+
 POWER_SEQUENCE_EXTRACTION_PROMPT = """You are an expert electronic component datasheet parser specializing in power sequencing.
 Analyze the provided datasheet page images and extract ALL power sequence related information into a structured JSON format.
 
@@ -188,7 +191,15 @@ VALID_SEQUENCING_TYPES = {"fixed", "configurable", "independent", "simultaneous"
 # Gemini API call helper
 # ============================================
 
-def _call_gemini_vision(client, model, images, prompt, max_retries=2):
+def _call_gemini_vision(
+    client,
+    model,
+    images,
+    prompt,
+    max_retries=2,
+    prompt_id=PROMPT_ID,
+    prompt_version=PROMPT_VERSION,
+):
     """Call Gemini Vision API with retry logic. Returns parsed dict or error dict."""
     return call_gemini_json_response(
         client,
@@ -196,6 +207,8 @@ def _call_gemini_vision(client, model, images, prompt, max_retries=2):
         images,
         prompt,
         max_retries=max_retries,
+        prompt_id=prompt_id,
+        prompt_version=prompt_version,
         key_aliases={
             "power_stages": ("powerStages", "stages", "power_up_stages"),
             "power_rails": ("powerRails", "rails", "supply_rails"),

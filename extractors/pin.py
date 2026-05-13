@@ -12,6 +12,11 @@ from extractors.gemini_json import call_gemini_json_response
 # Prompts
 # ============================================
 
+PIN_PROMPT_ID = "opendatasheet.pin.standard"
+FPGA_PIN_PROMPT_ID = "opendatasheet.pin.fpga"
+PIN_PROMPT_VERSION = "1.0.0"
+FPGA_PIN_PROMPT_VERSION = "1.0.0"
+
 PIN_EXTRACTION_PROMPT = """You are an expert electronic component datasheet parser specializing in pin definitions.
 Analyze the provided datasheet page images and extract ALL pin information into a structured JSON format.
 
@@ -126,7 +131,16 @@ VALID_FPGA_PIN_GROUPS = {"POWER_SUPPLY", "CONFIGURATION", "TRANSCEIVER", "SYSTEM
 # Gemini API call helpers
 # ============================================
 
-def _call_gemini_pin_vision(client, model, images, prompt, max_retries=2):
+def _call_gemini_pin_vision(
+    client,
+    model,
+    images,
+    prompt,
+    *,
+    prompt_id,
+    prompt_version,
+    max_retries=2,
+):
     """Call Gemini Vision API for pin extraction with retry logic."""
     return call_gemini_json_response(
         client,
@@ -134,6 +148,8 @@ def _call_gemini_pin_vision(client, model, images, prompt, max_retries=2):
         images,
         prompt,
         max_retries=max_retries,
+        prompt_id=prompt_id,
+        prompt_version=prompt_version,
         key_aliases={
             "logical_pins": ("pins", "pin_definitions", "logicalPins"),
         },
@@ -334,10 +350,21 @@ class PinExtractor(BaseExtractor):
 
         if self.is_fpga:
             prompt = FPGA_PIN_EXTRACTION_PROMPT
+            prompt_id = FPGA_PIN_PROMPT_ID
+            prompt_version = FPGA_PIN_PROMPT_VERSION
         else:
             prompt = PIN_EXTRACTION_PROMPT
+            prompt_id = PIN_PROMPT_ID
+            prompt_version = PIN_PROMPT_VERSION
 
-        return _call_gemini_pin_vision(self.client, self.model, images, prompt)
+        return _call_gemini_pin_vision(
+            self.client,
+            self.model,
+            images,
+            prompt,
+            prompt_id=prompt_id,
+            prompt_version=prompt_version,
+        )
 
     def validate(self, extraction_result: dict) -> dict:
         """Validate pin extraction results."""

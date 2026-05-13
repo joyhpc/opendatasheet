@@ -37,6 +37,9 @@ VALID_SIGNAL_DIRECTIONS = {"input", "output", "bidirectional", "power", "ground"
 # Prompts
 # ============================================
 
+PROMPT_ID = "opendatasheet.protocol.vision"
+PROMPT_VERSION = "1.0.0"
+
 PROTOCOL_EXTRACTION_PROMPT = """You are an expert electronic component datasheet parser specializing in communication interfaces and bus protocols.
 Analyze the provided datasheet page images and extract ALL communication interface definitions into a structured JSON format.
 
@@ -233,7 +236,15 @@ PROTOCOL_PAGE_MATCH_THRESHOLD = 2
 # Gemini API call helper
 # ============================================
 
-def _call_gemini_vision(client, model, images, prompt, max_retries=2):
+def _call_gemini_vision(
+    client,
+    model,
+    images,
+    prompt,
+    max_retries=2,
+    prompt_id=PROMPT_ID,
+    prompt_version=PROMPT_VERSION,
+):
     """Call Gemini Vision API with retry logic. Returns parsed dict or error dict."""
     return call_gemini_json_response(
         client,
@@ -241,6 +252,8 @@ def _call_gemini_vision(client, model, images, prompt, max_retries=2):
         images,
         prompt,
         max_retries=max_retries,
+        prompt_id=prompt_id,
+        prompt_version=prompt_version,
         key_aliases={
             "interfaces": (
                 "communication_interfaces",

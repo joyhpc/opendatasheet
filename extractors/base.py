@@ -13,6 +13,7 @@ class BaseExtractor(ABC):
 
     # Subclasses must set this to their domain name (e.g., "pin", "electrical")
     DOMAIN_NAME: str = ""
+    EXTRACTOR_VERSION: str = "1.0.0"
 
     def __init__(self, client, model, pdf_path, page_classification, is_fpga=False):
         """

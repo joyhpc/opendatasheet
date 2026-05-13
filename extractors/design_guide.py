@@ -19,7 +19,7 @@ import re
 import fitz
 
 from extractors.base import BaseExtractor
-from extractors.gemini_json import call_gemini_json_response
+from extractors.gemini_json import TraceableDict, call_gemini_json_response
 
 
 # ============================================
@@ -74,6 +74,9 @@ DESIGN_GUIDE_EXCLUDE_PATTERNS = [
 # ============================================
 # Vision extraction prompt
 # ============================================
+
+PROMPT_ID = "opendatasheet.design_guide.vision"
+PROMPT_VERSION = "1.0.0"
 
 DESIGN_GUIDE_EXTRACTION_PROMPT = """You are an expert FPGA/IC hardware design guide parser.
 Analyze the provided design guide page images and extract ALL hardware design rules and constraints into structured JSON.
@@ -348,7 +351,15 @@ def _classify_design_guide_pages(doc):
 # Gemini Vision call helper
 # ============================================
 
-def _call_gemini_vision(client, model, images, prompt, max_retries=2):
+def _call_gemini_vision(
+    client,
+    model,
+    images,
+    prompt,
+    max_retries=2,
+    prompt_id=PROMPT_ID,
+    prompt_version=PROMPT_VERSION,
+):
     """Call Gemini Vision API with retry logic. Returns parsed dict or error dict."""
     return call_gemini_json_response(
         client,
@@ -356,6 +367,8 @@ def _call_gemini_vision(client, model, images, prompt, max_retries=2):
         images,
         prompt,
         max_retries=max_retries,
+        prompt_id=prompt_id,
+        prompt_version=prompt_version,
     )
 
 
@@ -580,7 +593,10 @@ class DesignGuideExtractor(BaseExtractor):
                 if val:
                     empty_result[key] = val
             empty_result["_vision_error"] = vision_result["error"]
-            return empty_result
+            return TraceableDict(
+                empty_result,
+                model_trace=getattr(vision_result, "model_trace", {}),
+            )
 
         # Step 3: Merge text + vision results
         merged = _merge_text_and_vision(text_result, vision_result)
@@ -590,7 +606,10 @@ class DesignGuideExtractor(BaseExtractor):
             if key not in merged:
                 merged[key] = empty_result[key]
 
-        return merged
+        return TraceableDict(
+            merged,
+            model_trace=getattr(vision_result, "model_trace", {}),
+        )
 
     def validate(self, extraction_result: dict) -> dict:
         """Validate extracted design guide data.

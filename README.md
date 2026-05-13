@@ -63,6 +63,12 @@ PDF → L0 Page Classification (PyMuPDF + regex)
     → L3 Cross-Validation (extracted values vs PDF raw text, 95-100% coverage)
 ```
 
+## Model Audit Trace
+
+Gemini-backed extractors attach non-serialized `model_trace` metadata beside each model result. `process_single_pdf` collects those traces into `domain_traces`, keyed by domain, without inserting audit fields into the schema-validated domain payloads.
+
+Each trace records `prompt_id`, `prompt_version`, `prompt_sha256`, input image hashes, model/config, attempts, latency, token usage when available, and response hashes. This gives prompt/version comparison and replay inputs without changing existing extraction contracts.
+
 ## Coverage
 
 | Type | Count | Examples |

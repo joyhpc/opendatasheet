@@ -14,6 +14,9 @@ from extractors.gemini_json import call_gemini_json_response
 # Prompts
 # ============================================
 
+PROMPT_ID = "opendatasheet.electrical.vision"
+PROMPT_VERSION = "1.0.0"
+
 VISION_PROMPT = """You are an expert electronic component datasheet parser. These images show pages from an electronic component datasheet.
 
 CRITICAL RULES:
@@ -84,7 +87,15 @@ def get_physical_interval(min_val, max_val, mode):
 # Gemini API call helper
 # ============================================
 
-def _call_gemini_vision(client, model, images, prompt, max_retries=2):
+def _call_gemini_vision(
+    client,
+    model,
+    images,
+    prompt,
+    max_retries=2,
+    prompt_id=PROMPT_ID,
+    prompt_version=PROMPT_VERSION,
+):
     """Call Gemini Vision API and parse the result into canonical JSON."""
     return call_gemini_json_response(
         client,
@@ -92,6 +103,8 @@ def _call_gemini_vision(client, model, images, prompt, max_retries=2):
         images,
         prompt,
         max_retries=max_retries,
+        prompt_id=prompt_id,
+        prompt_version=prompt_version,
     )
 
 
