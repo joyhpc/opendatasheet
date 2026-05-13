@@ -7,8 +7,8 @@ device knowledge base that sch-review's DRC engine can consume.
 Output schema: one JSON file per device, keyed by MPN.
 
 Usage:
-    python export_for_sch_review.py [--extracted-dir DIR] [--fpga-pinout-dir DIR] [--output-dir DIR]
-    python export_for_sch_review.py  # uses default paths
+    python scripts/export_for_sch_review.py [EXTRACTED_DIR [FPGA_PINOUT_DIR [OUTPUT_DIR]]]
+    python scripts/export_for_sch_review.py  # uses default paths
 """
 
 import copy

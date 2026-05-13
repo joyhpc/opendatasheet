@@ -46,6 +46,7 @@ PDF datasheets → structured JSON for schematic review DRC engines.
 
 - [First 30 Minutes](docs/first-30-minutes.md) — Fast orientation for new contributors and reviewers
 - [Local Setup Playbook](docs/local-setup-playbook.md) — Practical environment bring-up and validation loop
+- [Architecture Map](docs/architecture.md) — Data flow, module boundaries, entry points, contracts, and validation gates
 - [Hardware Engineer Index](docs/hardware-engineer-index.md) — Board-review and bring-up oriented hardware docs
 - [Extraction Methodology](docs/extraction-methodology.md) — How the Vision + Text hybrid pipeline works
 - [Schematic Review Integration](docs/sch-review-integration.md) — Data structures, examples, and Python code for consumers

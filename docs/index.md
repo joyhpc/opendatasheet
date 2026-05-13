@@ -24,6 +24,7 @@
 
 ## Architecture
 
+- [`architecture.md`](architecture.md) — Boundary map for data flow, module responsibilities, CLI entry points, contracts, validation gates, and staged refactors. **Best for:** contributors deciding where a change belongs before editing code.
 - [`design-document.md`](design-document.md) — Project positioning, system architecture, data flow, and design rationale. **Best for:** architects, reviewers, downstream integrators.
 - [`extraction-methodology.md`](extraction-methodology.md) — End-to-end extraction method and why the pipeline uses hybrid Vision + Text. **Best for:** pipeline contributors, evaluators of extraction quality.
 - [`page-classification-and-routing.md`](page-classification-and-routing.md) — L0 routing model, page categories, and why narrow page selection is the primary cost-control layer. **Best for:** pipeline contributors tuning selectors or adding domains.
@@ -70,7 +71,7 @@
 - [`design-extraction-reporting.md`](design-extraction-reporting.md) — How to regenerate the human-readable design extraction report and samples. **Best for:** maintainers, extraction reviewers.
 - [`../schemas/sch-review-device.schema.json`](../schemas/sch-review-device.schema.json) — Formal schema definition for exported device knowledge. **Best for:** schema/tooling maintainers, downstream validators.
 
-## Hardware Engineering
+## Hardware Engineering Library
 
 - [`hardware-engineering/index.md`](hardware-engineering/index.md) — 50 篇面向硬件工程师的评审、选型、布局、bring-up 文档总索引。 **Best for:** schematic owners, bring-up engineers, board architects.
 - [`hardware-engineering/best-practice-reference-matrix.md`](hardware-engineering/best-practice-reference-matrix.md) — 这些硬件文档背后的官方最佳实践来源矩阵。 **Best for:** reviewers who want source-oriented traceability.
