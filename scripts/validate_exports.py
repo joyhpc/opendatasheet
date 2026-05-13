@@ -19,6 +19,7 @@ from pathlib import Path
 try:
     import jsonschema
     from jsonschema import Draft202012Validator
+    from referencing import Registry, Resource
 except ImportError:
     print("ERROR: pip install jsonschema  (requires jsonschema>=4.18)")
     sys.exit(1)
@@ -41,6 +42,9 @@ def _schema_store() -> dict[str, dict]:
         store[file_uri] = schema
         store[f"https://opendatasheet.dev/schemas/{relative_path}"] = schema
         store[f"https://opendatasheet.dev/schemas/sch-review-device/{relative_path}"] = schema
+        for depth in range(1, 6):
+            prefix = "domains/" * depth
+            store[f"https://opendatasheet.dev/schemas/sch-review-device/{prefix}{relative_path}"] = schema
 
         schema_id = schema.get("$id")
         if isinstance(schema_id, str) and schema_id:
@@ -48,22 +52,26 @@ def _schema_store() -> dict[str, dict]:
     return store
 
 
+def _schema_resources() -> list[tuple[str, Resource]]:
+    """Build a referencing registry resource list for offline validation."""
+    resources = []
+    for uri, schema in _schema_store().items():
+        resources.append((uri, Resource.from_contents(schema)))
+    return resources
+
+
 def load_schema():
-    with open(SCHEMA_PATH) as f:
+    with open(SCHEMA_PATH, encoding="utf-8") as f:
         schema = json.load(f)
     Draft202012Validator.check_schema(schema)
 
     # Keep validation fully offline even when schema $id values are remote URLs.
-    resolver = jsonschema.RefResolver(
-        base_uri=SCHEMA_DIR.resolve().as_uri() + "/",
-        referrer=schema,
-        store=_schema_store(),
-    )
-    return Draft202012Validator(schema, resolver=resolver)
+    registry = Registry().with_resources(_schema_resources())
+    return Draft202012Validator(schema, registry=registry)
 
 
 def load_json(path: Path) -> dict:
-    with open(path) as f:
+    with open(path, encoding="utf-8") as f:
         return json.load(f)
 
 
@@ -200,7 +208,7 @@ def main():
         print(f"Failed files: {', '.join(fail_details.keys())}")
         sys.exit(1)
     else:
-        print("All files valid ✓")
+        print("All files valid")
 
 
 if __name__ == "__main__":

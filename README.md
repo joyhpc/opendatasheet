@@ -8,6 +8,10 @@
 AI-powered electronic component datasheet parameter extraction pipeline.
 PDF datasheets → structured JSON for schematic review DRC engines.
 
+## Current Architecture
+
+![OpenDatasheet current architecture](docs/assets/opendatasheet-current-architecture.png)
+
 ## 📖 [Reading Guide](GUIDE.md) — Start here
 
 ## Quick Start

@@ -16,7 +16,6 @@ import sys
 import time
 import math
 import hashlib
-import fcntl
 import signal
 import concurrent.futures
 import argparse
@@ -25,6 +24,7 @@ from pathlib import Path
 from design_info_utils import APPLICATION_PATTERNS, detect_design_page_kind, extract_design_context
 
 from extractors import EXTRACTOR_REGISTRY
+from runtime._locking import try_exclusive_lock
 
 
 class GeminiTimeout(Exception):
@@ -38,7 +38,6 @@ from dataclasses import dataclass, field, asdict
 from typing import Optional, List, Union
 
 from google import genai
-from google.genai import types
 
 
 # ============================================
@@ -358,44 +357,6 @@ def classify_pages(pdf_path: str, is_fpga: bool = False) -> list[PageInfo]:
     return pages
 
 
-# ============================================
-# L1a: Vision 提取 (电气特性页面)
-# ============================================
-
-VISION_PROMPT = """You are an expert electronic component datasheet parser. These images show pages from an electronic component datasheet.
-
-CRITICAL RULES:
-1. Extract ALL electrical parameters with min/typ/max values and units
-2. Many datasheets have DUAL-ROW format: each parameter has TWO rows of min/typ/max
-   - One row for 25°C specs, another for full temperature range
-   - You MUST extract BOTH rows as separate entries
-3. If the datasheet covers MULTIPLE VARIANTS (e.g., different output voltages),
-   extract parameters for ALL variants separately
-4. Include test conditions for each parameter
-5. If a value is not specified, use null
-6. Extract pin definitions if visible
-7. Output ONLY valid JSON, no markdown, no code fences
-
-OUTPUT JSON SCHEMA:
-{
-  "component": {
-    "mpn": "string (main part number)",
-    "manufacturer": "string",
-    "category": "string (LDO/Buck/OpAmp/Switch/Logic/ADC/DAC/Interface/FPGA/CPLD/SoC/Other)",
-    "description": "string (one line)"
-  },
-  "absolute_maximum_ratings": [
-    {"parameter": "string", "raw_name": "string", "symbol": "string", "min": null or number, "typ": null or number, "max": null or number, "unit": "string", "conditions": "string or null"}
-  ],
-  "electrical_characteristics": [
-    {"parameter": "string", "raw_name": "string", "symbol": "string", "min": null or number, "typ": null or number, "max": null or number, "unit": "string", "conditions": "string or null", "device": "string (variant if applicable)", "temp_range": "25C or full or null"}
-  ],
-  "pin_definitions": [
-    {"pin_number": "string or number", "pin_name": "string", "type": "string", "description": "string"}
-  ]
-}"""
-
-
 def render_pages_to_images(pdf_path: str, page_nums: list[int]) -> list[bytes]:
     """渲染指定页面为 PNG 图片"""
     doc = fitz.open(pdf_path)
@@ -407,258 +368,14 @@ def render_pages_to_images(pdf_path: str, page_nums: list[int]) -> list[bytes]:
     return images
 
 
-def extract_with_vision(images: list[bytes], pdf_name: str, max_retries: int = 2) -> dict:
-    """L1a: 用 Gemini Vision 从页面图片提取参数"""
-    contents = [VISION_PROMPT]
-    for img in images:
-        contents.append(types.Part.from_bytes(data=img, mime_type='image/png'))
-
-    for attempt in range(max_retries + 1):
-        try:
-            response = gemini_generate(
-                model=GEMINI_MODEL,
-                contents=contents,
-                config={"temperature": 0.1},
-            )
-            raw = response.text
-            # 清理 markdown 包裹
-            if "```json" in raw:
-                raw = raw.split("```json")[1].split("```")[0]
-            elif "```" in raw:
-                raw = raw.split("```")[1].split("```")[0]
-            # 找 JSON 边界
-            start = raw.find('{')
-            end = raw.rfind('}')
-            if start >= 0 and end > start:
-                raw = raw[start:end+1]
-            result = json.loads(raw.strip())
-            if isinstance(result, list):
-                result = result[0] if result else {"error": "Empty list"}
-            if not isinstance(result, dict):
-                return {"error": f"Unexpected type: {type(result).__name__}"}
-            return result
-        except json.JSONDecodeError as e:
-            if attempt < max_retries:
-                time.sleep(3)
-                continue
-            return {"error": f"JSON parse failed: {str(e)}", "raw": raw[:500] if 'raw' in dir() else ""}
-        except Exception as e:
-            if attempt < max_retries and ("503" in str(e) or "429" in str(e) or "504" in str(e) or "timeout" in str(e).lower() or "ReadTimeout" in str(type(e).__name__) or "ConnectTimeout" in str(type(e).__name__)):
-                time.sleep(10)
-                continue
-            return {"error": str(e)}
-
-
 # ============================================
-# L1b: Pin Extraction (独立阶段)
+# Pin transform / validation helpers (legacy flat output compatibility)
 # ============================================
-
-PIN_EXTRACTION_PROMPT = """You are an expert electronic component datasheet parser specializing in pin definitions.
-Analyze the provided datasheet page images and extract ALL pin information into a structured JSON format.
-
-CRITICAL RULES:
-1. Extract every unique logical pin (by function name, not physical number)
-2. For each logical pin, map it to ALL packages shown in the datasheet
-3. If a logical pin appears on multiple physical pins in one package (e.g., multiple GND pads), list ALL pin numbers in the array
-4. Use ONLY the allowed enum values listed below — no variations, no abbreviations
-
-ALLOWED VALUES:
-
-direction (REQUIRED, exactly one of):
-  INPUT          — signal flows into the device
-  OUTPUT         — signal flows out of the device
-  BIDIRECTIONAL  — signal flows both ways (e.g., I2C SDA, GPIO)
-  POWER_IN       — power supply input (VCC, VDD, VIN)
-  POWER_OUT      — regulated/buffered power output (VOUT, LDO output)
-  PASSIVE        — passive connection (e.g., bypass cap pin, crystal, EP/thermal pad)
-  NC             — no internal connection
-
-signal_type (REQUIRED, exactly one of):
-  DIGITAL  — digital logic signal
-  ANALOG   — analog signal (feedback, sense, reference)
-  POWER    — power rail or ground
-  NONE     — no signal (NC pins, thermal pads with no electrical function)
-
-unused_treatment (one of, or null if datasheet does not specify):
-  FLOAT     — leave unconnected / floating is OK
-  GND       — connect to ground when unused
-  VCC       — connect to power supply when unused
-  PULL_UP   — connect through pull-up resistor when unused
-  PULL_DOWN — connect through pull-down resistor when unused
-  CUSTOM    — special handling described in description
-  null      — datasheet does not specify
-
-OUTPUT FORMAT — output ONLY valid JSON, no markdown, no code fences:
-{
-  "logical_pins": [
-    {
-      "name": "VIN",
-      "direction": "POWER_IN",
-      "signal_type": "POWER",
-      "description": "Power supply input",
-      "packages": {
-        "SOT-23-5": [1],
-        "WDFN-6L": [3]
-      },
-      "unused_treatment": null
-    }
-  ]
-}
-
-IMPORTANT:
-- Pin numbers should be integers when possible, strings only for special cases like "EP" (exposed pad)
-- "packages" must be a dict where keys are package names and values are arrays of pin numbers
-- If only one package is shown, still use the dict format
-- Include ALL pins: power, ground, signal, NC, exposed pad
-- For NC pins: direction="NC", signal_type="NONE"
-- For GND pins: direction="POWER_IN", signal_type="POWER"
-- For exposed/thermal pads: direction="PASSIVE", signal_type="POWER" (if connected to GND) or "NONE"
-- description should be concise but informative (from the pin description table or diagram labels)
-"""
 
 # Enum sets for validation
 VALID_DIRECTIONS = {"INPUT", "OUTPUT", "BIDIRECTIONAL", "POWER_IN", "POWER_OUT", "PASSIVE", "NC"}
 VALID_SIGNAL_TYPES = {"DIGITAL", "ANALOG", "POWER", "NONE"}
 VALID_UNUSED_TREATMENTS = {"FLOAT", "GND", "VCC", "PULL_UP", "PULL_DOWN", "CUSTOM", None}
-
-
-FPGA_PIN_EXTRACTION_PROMPT = """You are an expert FPGA datasheet parser. These images show pages from an FPGA DC/AC switching characteristics datasheet.
-
-FPGA datasheets do NOT have traditional pin definition tables like simple ICs. Instead, extract:
-
-1. POWER SUPPLY PINS — all supply rails with their voltage ranges and descriptions
-2. CONFIGURATION INTERFACE PINS — pins mentioned in configuration switching tables (CCLK, DONE, INIT_B, PROGRAM_B, M[2:0], D[31:00], etc.)
-3. TRANSCEIVER PINS — RXP/RXN, TXP/TXN and reference clock pins
-4. SYSTEM MONITOR PINS — VP/VN, VREFP/VREFN, DXP/DXN analog input pins
-
-For each pin/pin group, extract:
-- name: pin or bus name (e.g., "VCCINT", "D[31:00]", "RXP/RXN")
-- direction: INPUT/OUTPUT/BIDIRECTIONAL/POWER_IN/PASSIVE
-- signal_type: DIGITAL/ANALOG/POWER/NONE
-- description: what this pin does, include voltage range if it's a power pin
-- pin_group: one of "POWER_SUPPLY", "CONFIGURATION", "TRANSCEIVER", "SYSTEM_MONITOR", "CLOCK", "OTHER"
-- packages: {} (leave empty — FPGA pin mapping is in separate pinout documents)
-- unused_treatment: null (unless explicitly stated)
-
-CRITICAL RULES:
-- Do NOT invent pin numbers — FPGA pin numbers vary by package and are NOT in DC/AC datasheets
-- Extract ALL power supply rails mentioned (VCCINT, VCCBRAM, VCCAUX, VCCO, VMGTAVCC, VMGTAVTT, etc.)
-- For bus pins like D[31:00], keep the bus notation, don't expand individual bits
-- Include voltage specifications in the description (e.g., "Internal supply voltage, 0.85V typical")
-
-OUTPUT FORMAT — output ONLY valid JSON, no markdown, no code fences:
-{
-  "logical_pins": [
-    {
-      "name": "VCCINT",
-      "direction": "POWER_IN",
-      "signal_type": "POWER",
-      "description": "Internal supply voltage, 0.825-0.876V typical",
-      "pin_group": "POWER_SUPPLY",
-      "packages": {},
-      "unused_treatment": null
-    }
-  ]
-}
-"""
-
-
-def extract_fpga_pins_with_vision(images: list[bytes], pdf_name: str, max_retries: int = 2) -> dict:
-    """L1b-FPGA: Extract FPGA power/config/transceiver pin groups from DC/AC datasheet."""
-    contents = [FPGA_PIN_EXTRACTION_PROMPT]
-    for img in images:
-        contents.append(types.Part.from_bytes(data=img, mime_type='image/png'))
-
-    for attempt in range(max_retries + 1):
-        try:
-            response = gemini_generate(
-                model=GEMINI_MODEL,
-                contents=contents,
-                config={"temperature": 0.1},
-            )
-            raw = response.text
-            if "```json" in raw:
-                raw = raw.split("```json")[1].split("```")[0]
-            elif "```" in raw:
-                raw = raw.split("```")[1].split("```")[0]
-            start = raw.find('{')
-            end = raw.rfind('}')
-            if start >= 0 and end > start:
-                raw = raw[start:end+1]
-            result = json.loads(raw.strip())
-            if isinstance(result, list):
-                result = result[0] if result else {"error": "Empty list"}
-            if not isinstance(result, dict):
-                return {"error": f"Unexpected type: {type(result).__name__}"}
-            if "logical_pins" not in result:
-                for key in ["pins", "pin_definitions", "logicalPins"]:
-                    if key in result:
-                        result["logical_pins"] = result.pop(key)
-                        break
-                else:
-                    return {"error": "No logical_pins key in response", "raw": raw[:500]}
-            return result
-        except json.JSONDecodeError as e:
-            if attempt < max_retries:
-                time.sleep(3)
-                continue
-            return {"error": f"JSON parse failed: {str(e)}", "raw": raw[:500] if 'raw' in dir() else ""}
-        except Exception as e:
-            if attempt < max_retries and ("503" in str(e) or "429" in str(e) or "504" in str(e) or "timeout" in str(e).lower() or "ReadTimeout" in str(type(e).__name__) or "ConnectTimeout" in str(type(e).__name__)):
-                time.sleep(10)
-                continue
-            return {"error": str(e)}
-
-
-def extract_pins_with_vision(images: list[bytes], pdf_name: str, max_retries: int = 2) -> dict:
-    """L1b: 用 Gemini Vision 从 pin/cover 页面提取结构化 pin 定义"""
-    contents = [PIN_EXTRACTION_PROMPT]
-    for img in images:
-        contents.append(types.Part.from_bytes(data=img, mime_type='image/png'))
-
-    for attempt in range(max_retries + 1):
-        try:
-            response = gemini_generate(
-                model=GEMINI_MODEL,
-                contents=contents,
-                config={"temperature": 0.1},
-            )
-            raw = response.text
-            # 清理 markdown 包裹
-            if "```json" in raw:
-                raw = raw.split("```json")[1].split("```")[0]
-            elif "```" in raw:
-                raw = raw.split("```")[1].split("```")[0]
-            # 找 JSON 边界
-            start = raw.find('{')
-            end = raw.rfind('}')
-            if start >= 0 and end > start:
-                raw = raw[start:end+1]
-            result = json.loads(raw.strip())
-            if isinstance(result, list):
-                result = result[0] if result else {"error": "Empty list"}
-            if not isinstance(result, dict):
-                return {"error": f"Unexpected type: {type(result).__name__}"}
-            # 确保有 logical_pins key
-            if "logical_pins" not in result:
-                # 尝试从其他可能的 key 中恢复
-                for key in ["pins", "pin_definitions", "logicalPins"]:
-                    if key in result:
-                        result["logical_pins"] = result.pop(key)
-                        break
-                else:
-                    return {"error": "No logical_pins key in response", "raw": raw[:500]}
-            return result
-        except json.JSONDecodeError as e:
-            if attempt < max_retries:
-                time.sleep(3)
-                continue
-            return {"error": f"JSON parse failed: {str(e)}", "raw": raw[:500] if 'raw' in dir() else ""}
-        except Exception as e:
-            if attempt < max_retries and ("503" in str(e) or "429" in str(e) or "504" in str(e) or "timeout" in str(e).lower() or "ReadTimeout" in str(type(e).__name__) or "ConnectTimeout" in str(type(e).__name__)):
-                time.sleep(10)
-                continue
-            return {"error": str(e)}
 
 
 def transform_pins_to_package_indexed(logical_pins: list) -> dict:
@@ -1421,14 +1138,13 @@ def run_batch(limit: int = 5):
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
     lock_path = OUTPUT_DIR / ".pipeline.lock"
-    lock_fd = open(lock_path, 'w')
-    try:
-        fcntl.flock(lock_fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
-    except BlockingIOError:
+    lock = try_exclusive_lock(
+        lock_path,
+        metadata=f"pid={os.getpid()} started={time.strftime('%Y-%m-%d %H:%M:%S UTC', time.gmtime())}\n",
+    )
+    if lock is None:
         print("ERROR: Another pipeline instance is already running!")
         sys.exit(1)
-    lock_fd.write(f"pid={os.getpid()} started={time.strftime('%Y-%m-%d %H:%M:%S UTC', time.gmtime())}\n")
-    lock_fd.flush()
 
     pdf_files = sorted([f for f in DATA_DIR.iterdir() if f.suffix.lower() == '.pdf'])
     if limit:
@@ -1508,6 +1224,7 @@ def run_batch(limit: int = 5):
         }, f, ensure_ascii=False, indent=2)
 
     print(f"\nResults saved to: {OUTPUT_DIR}")
+    lock.release()
     return all_results
 
 

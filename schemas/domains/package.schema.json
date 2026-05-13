@@ -39,13 +39,21 @@
       },
       "additionalProperties": true
     },
+    "dim_value": {
+      "description": "Dimension value as either a scalar nominal number or min/nom/max range.",
+      "oneOf": [
+        { "type": "number" },
+        { "$ref": "#/$defs/dim_range" },
+        { "type": "null" }
+      ]
+    },
     "exposed_pad": {
       "type": "object",
       "description": "Exposed/thermal pad specification.",
       "properties": {
         "present": { "type": "boolean" },
-        "length_mm": { "$ref": "#/$defs/dim_range" },
-        "width_mm": { "$ref": "#/$defs/dim_range" },
+        "length_mm": { "$ref": "#/$defs/dim_value" },
+        "width_mm": { "$ref": "#/$defs/dim_value" },
         "is_ground": {
           "type": ["boolean", "null"],
           "description": "Whether the exposed pad is connected to ground."
@@ -183,7 +191,7 @@
           ]
         },
         "thermal_properties": {
-          "type": "object",
+          "type": ["object", "null"],
           "description": "Thermal resistance and power dissipation properties.",
           "properties": {
             "theta_ja": {

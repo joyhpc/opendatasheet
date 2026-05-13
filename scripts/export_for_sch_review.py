@@ -18,6 +18,10 @@ import sys
 from collections import defaultdict
 from pathlib import Path
 
+REPO_ROOT = Path(__file__).resolve().parent.parent
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
 from build_fpga_catalog import build_catalog
 from design_guide_domain import load_gowin_design_guide_bundle, resolve_gowin_design_guide_source_path
 from normal_ic_design_context_loader import load_design_context_for_export_record, should_auto_extract_design_context
@@ -3152,7 +3156,7 @@ def main():
     print("=== Normal ICs ===")
     for f in sorted(extracted_dir.glob("*.json")):
         try:
-            with open(f) as fp:
+            with open(f, encoding="utf-8") as fp:
                 data = json.load(fp)
             result = export_normal_ic(data)
             if result is None:
@@ -3160,7 +3164,7 @@ def main():
             mpn = result["mpn"]
             safe_name = re.sub(r"[^a-zA-Z0-9_-]", "_", mpn)
             out_path = output_dir / f"{safe_name}.json"
-            with open(out_path, "w") as fp:
+            with open(out_path, "w", encoding="utf-8") as fp:
                 json.dump(result, fp, indent=2, ensure_ascii=False)
                 fp.write("\n")
             written_files.add(out_path.name)
@@ -3183,7 +3187,7 @@ def main():
     gowin_dc_files = sorted((extracted_dir / "fpga").glob("gowin_*_dc.json"))
     gowin_dc_cache = {}
     for dc_file in gowin_dc_files:
-        with open(dc_file) as fp:
+        with open(dc_file, encoding="utf-8") as fp:
             data = json.load(fp)
         dev = data.get("device", "")
         gowin_dc_cache[dc_file.name] = data
@@ -3195,7 +3199,7 @@ def main():
     lattice_dc_files = sorted((extracted_dir / "fpga").glob("lattice_*_dc.json"))
     lattice_dc_cache = {}
     for dc_file in lattice_dc_files:
-        with open(dc_file) as fp:
+        with open(dc_file, encoding="utf-8") as fp:
             data = json.load(fp)
         family = data.get("family", "")
         device = data.get("device", "")
@@ -3209,7 +3213,7 @@ def main():
 
     for pinout_file in fpga_pinout_files:
         try:
-            with open(pinout_file) as fp:
+            with open(pinout_file, encoding="utf-8") as fp:
                 pinout_data = json.load(fp)
 
             device = pinout_data["device"]
@@ -3242,7 +3246,7 @@ def main():
             else:
                 # AMD: match by family
                 for dc_file in fpga_dc_files:
-                    with open(dc_file) as fp:
+                    with open(dc_file, encoding="utf-8") as fp:
                         candidate = json.load(fp)
                     if "kintex" in dc_file.name.lower() and "KU" in device:
                         dc_data = candidate
@@ -3258,7 +3262,7 @@ def main():
             result = export_fpga(dc_data, pinout_data, gowin_dc=gowin_dc, lattice_dc=lattice_dc)
             safe_name = device if _safe_upper(device).endswith(_safe_upper(package)) else f"{device}_{package}"
             out_path = output_dir / f"{safe_name}.json"
-            with open(out_path, "w") as fp:
+            with open(out_path, "w", encoding="utf-8") as fp:
                 json.dump(result, fp, indent=2, ensure_ascii=False)
                 fp.write("\n")
             written_files.add(out_path.name)
@@ -3286,7 +3290,7 @@ def main():
     for f in sorted(output_dir.glob("*.json")):
         if f.name in {"_manifest.json", "_fpga_catalog.json"}:
             continue
-        with open(f) as fp:
+        with open(f, encoding="utf-8") as fp:
             data = json.load(fp)
         manifest["devices"].append({
             "file": f.name,
@@ -3295,7 +3299,7 @@ def main():
             "manufacturer": data.get("manufacturer", ""),
         })
     manifest_path = output_dir / "_manifest.json"
-    with open(manifest_path, "w") as fp:
+    with open(manifest_path, "w", encoding="utf-8") as fp:
         json.dump(manifest, fp, indent=2)
         fp.write("\n")
     print(f"Manifest: {manifest_path} ({len(manifest['devices'])} devices)")

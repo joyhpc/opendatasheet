@@ -12,6 +12,7 @@ Usage:
 import json
 import sys
 import os
+import builtins
 from pathlib import Path
 from collections import Counter
 
@@ -34,6 +35,15 @@ passed = 0
 failed = 0
 errors = []
 
+_builtin_open = builtins.open
+
+
+def open(*args, **kwargs):
+    mode = args[1] if len(args) > 1 else kwargs.get("mode", "r")
+    if "b" not in mode and "encoding" not in kwargs:
+        kwargs["encoding"] = "utf-8"
+    return _builtin_open(*args, **kwargs)
+
 
 def case(name):
     """Decorator for test functions."""
@@ -51,15 +61,15 @@ def run_test(fn):
     try:
         fn()
         passed += 1
-        print(f"  ✓ {name}")
+        print(f"  OK {name}")
     except AssertionError as e:
         failed += 1
         errors.append((name, str(e)))
-        print(f"  ✗ {name}: {e}")
+        print(f"  FAIL {name}: {e}")
     except Exception as e:
         failed += 1
         errors.append((name, f"EXCEPTION: {e}"))
-        print(f"  ✗ {name}: EXCEPTION: {e}")
+        print(f"  FAIL {name}: EXCEPTION: {e}")
 
 
 def assert_eq(actual, expected, msg=""):
@@ -186,21 +196,9 @@ def t2_1():
 
 @case("T2.2 All exports pass schema validation")
 def t2_2():
-    from jsonschema import Draft202012Validator, RefResolver
+    from scripts.validate_exports import load_schema
 
-    schema_dir = SCHEMA_PATH.parent
-    with open(SCHEMA_PATH) as f:
-        schema = json.load(f)
-
-    store = {}
-    for domain_schema in (schema_dir / "domains").glob("*.schema.json"):
-        with open(domain_schema) as f:
-            domain = json.load(f)
-        store[f"https://opendatasheet.dev/schemas/sch-review-device/domains/{domain_schema.name}"] = domain
-        if "$id" in domain:
-            store[domain["$id"]] = domain
-    resolver = RefResolver.from_schema(schema, store=store)
-    validator = Draft202012Validator(schema, resolver=resolver)
+    validator = load_schema()
     
     failures = []
     for f in sorted(EXPORT_DIR.glob("*.json")):
@@ -1406,7 +1404,7 @@ def main():
     if errors:
         print(f"\nFailures:")
         for name, msg in errors:
-            print(f"  ✗ {name}")
+            print(f"  FAIL {name}")
             print(f"    {msg[:200]}")
 
     print(f"{'=' * 60}")

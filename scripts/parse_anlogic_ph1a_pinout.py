@@ -85,12 +85,13 @@ def _load_shared_strings(zf: ZipFile) -> list[str]:
 def _load_sheet_targets(zf: ZipFile) -> list[tuple[str, str]]:
     workbook = ET.fromstring(zf.read("xl/workbook.xml"))
     rels = ET.fromstring(zf.read("xl/_rels/workbook.xml.rels"))
+    rel_id_key = f"{{{NS['rel']}}}id"
     rid_to_target = {
         rel.attrib["Id"]: rel.attrib["Target"]
         for rel in rels.findall("pkg:Relationship", NS)
     }
     return [
-        (sheet.attrib["name"], f"xl/{rid_to_target[sheet.attrib[f'{{{NS['rel']}}}id']]}")
+        (sheet.attrib["name"], f"xl/{rid_to_target[sheet.attrib[rel_id_key]]}")
         for sheet in workbook.findall("sheet:sheets/sheet:sheet", NS)
     ]
 

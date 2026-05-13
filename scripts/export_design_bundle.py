@@ -4326,11 +4326,20 @@ def _append_normal_ic_quickstart_sections(lines: list[str], design_intent: dict,
         lines.extend(["", "## Decoder implementation notes", ""])
         lines.append(f"- Preferred package: `{decoder_device_context['preferred_package']}`")
         if decoder_device_context.get('power_rails'):
-            lines.append(f"- Power rails: {' '.join(f'`{item['name']}`' for item in decoder_device_context['power_rails'][:6])}")
+            power_rails = " ".join(
+                f"`{item['name']}`" for item in decoder_device_context['power_rails'][:6]
+            )
+            lines.append(f"- Power rails: {power_rails}")
         if decoder_device_context.get('reset_pins'):
-            lines.append(f"- Reset/powerdown pins: {' '.join(f'`{item['name']}({item['pin']})`' for item in decoder_device_context['reset_pins'][:4])}")
+            reset_pins = " ".join(
+                f"`{item['name']}({item['pin']})`" for item in decoder_device_context['reset_pins'][:4]
+            )
+            lines.append(f"- Reset/powerdown pins: {reset_pins}")
         if decoder_device_context.get('ref_clock_pins'):
-            lines.append(f"- Reference clock pins: {' '.join(f'`{item['name']}({item['pin']})`' for item in decoder_device_context['ref_clock_pins'][:4])}")
+            ref_clock_pins = " ".join(
+                f"`{item['name']}({item['pin']})`" for item in decoder_device_context['ref_clock_pins'][:4]
+            )
+            lines.append(f"- Reference clock pins: {ref_clock_pins}")
         interface_bits = []
         if decoder_device_context.get('analog_video_inputs'):
             interface_bits.append(f"analog_video={len(decoder_device_context['analog_video_inputs'])}")
@@ -4363,22 +4372,40 @@ def _append_normal_ic_quickstart_sections(lines: list[str], design_intent: dict,
         for item in official_source_documents[:6]:
             sha = item.get("sha256")
             sha_suffix = f" sha256=`{sha[:12]}`" if sha else ""
-            lines.append(f"- `{item.get("path")}` `{item.get("doc_type")}`{sha_suffix}")
+            lines.append(f"- `{item.get('path')}` `{item.get('doc_type')}`{sha_suffix}")
 
     if mcu_device_context:
         lines.extend(["", "## MCU implementation notes", ""])
         if mcu_device_context.get("reset_pins"):
-            lines.append(f"- Reset pins: {' '.join(f'`{item['name']}({item['pin']})`' for item in mcu_device_context['reset_pins'][:4])}")
+            reset_pins = " ".join(
+                f"`{item['name']}({item['pin']})`" for item in mcu_device_context['reset_pins'][:4]
+            )
+            lines.append(f"- Reset pins: {reset_pins}")
         if mcu_device_context.get("boot_pins"):
-            lines.append(f"- Boot straps: {' '.join(f'`{item['name']}({item['pin']})`' for item in mcu_device_context['boot_pins'][:4])}")
+            boot_pins = " ".join(
+                f"`{item['name']}({item['pin']})`" for item in mcu_device_context['boot_pins'][:4]
+            )
+            lines.append(f"- Boot straps: {boot_pins}")
         if mcu_device_context.get("debug_pins"):
-            lines.append(f"- Debug pins: {' '.join(f'`{item['name']}({item['pin']})`' for item in mcu_device_context['debug_pins'][:6])}")
+            debug_pins = " ".join(
+                f"`{item['name']}({item['pin']})`" for item in mcu_device_context['debug_pins'][:6]
+            )
+            lines.append(f"- Debug pins: {debug_pins}")
         if mcu_device_context.get("hse_pins"):
-            lines.append(f"- HSE clock pins: {' '.join(f'`{item['name']}({item['pin']})`' for item in mcu_device_context['hse_pins'][:4])}")
+            hse_pins = " ".join(
+                f"`{item['name']}({item['pin']})`" for item in mcu_device_context['hse_pins'][:4]
+            )
+            lines.append(f"- HSE clock pins: {hse_pins}")
         if mcu_device_context.get("analog_supply_pins"):
-            lines.append(f"- Analog rails: {' '.join(f'`{item['name']}({item['pin']})`' for item in mcu_device_context['analog_supply_pins'][:6])}")
+            analog_supply_pins = " ".join(
+                f"`{item['name']}({item['pin']})`" for item in mcu_device_context['analog_supply_pins'][:6]
+            )
+            lines.append(f"- Analog rails: {analog_supply_pins}")
         if mcu_device_context.get("vcap_pins"):
-            lines.append(f"- VCAP pins: {' '.join(f'`{item['name']}({item['pin']})`' for item in mcu_device_context['vcap_pins'][:4])}")
+            vcap_pins = " ".join(
+                f"`{item['name']}({item['pin']})`" for item in mcu_device_context['vcap_pins'][:4]
+            )
+            lines.append(f"- VCAP pins: {vcap_pins}")
 
     if switch_device_context:
         lines.extend(["", "## Analog switch implementation notes", ""])
@@ -4398,9 +4425,15 @@ def _append_normal_ic_quickstart_sections(lines: list[str], design_intent: dict,
         if control_modes:
             lines.append(f"- Control modes: {' '.join(f'`{item}`' for item in control_modes)}")
         if switch_device_context.get("address_pins"):
-            lines.append(f"- Address pins: {' '.join(f'`{item['name']}({item['pin']})`' for item in switch_device_context['address_pins'][:6])}")
+            address_pins = " ".join(
+                f"`{item['name']}({item['pin']})`" for item in switch_device_context['address_pins'][:6]
+            )
+            lines.append(f"- Address pins: {address_pins}")
         if switch_device_context.get("reset_pins"):
-            lines.append(f"- Reset pins: {' '.join(f'`{item['name']}({item['pin']})`' for item in switch_device_context['reset_pins'][:4])}")
+            reset_pins = " ".join(
+                f"`{item['name']}({item['pin']})`" for item in switch_device_context['reset_pins'][:4]
+            )
+            lines.append(f"- Reset pins: {reset_pins}")
 
     if topology_candidates:
         lines.extend(["", "## Suggested topologies", ""])

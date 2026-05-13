@@ -10,9 +10,9 @@ sys.path.insert(0, os.path.dirname(__file__))
 
 from pipeline_v2 import (
     classify_pages, render_pages_to_images,
-    extract_pins_with_vision, validate_pins,
-    DATA_DIR, OUTPUT_DIR
+    DATA_DIR, GEMINI_MODEL, OUTPUT_DIR, get_gemini_client
 )
+from extractors.pin import PinExtractor, validate_pins
 
 TEST_PDFS = [
     ("0130-00-00003_RT9193.pdf", "RT9193 — 多封装 (SC-70-5, SOT-23-5, WDFN-6L, MSOP-8)"),
@@ -31,12 +31,14 @@ def run_one(pdf_filename: str, label: str):
 
     # Classify pages
     pages = classify_pages(pdf_path)
-    pin_pages = [p for p in pages if p.category == "pin"]
-    cover_pages = [p for p in pages if p.category == "cover"]
-    pin_page_nums = sorted(set(
-        [p.page_num for p in pin_pages] +
-        [p.page_num for p in cover_pages]
-    ))
+    extractor = PinExtractor(
+        client=get_gemini_client(),
+        model=GEMINI_MODEL,
+        pdf_path=pdf_path,
+        page_classification=pages,
+        is_fpga=False,
+    )
+    pin_page_nums = extractor.select_pages()
 
     if not pin_page_nums:
         print(f"  ⚠️ No pin/cover pages found, skipping")
@@ -47,7 +49,7 @@ def run_one(pdf_filename: str, label: str):
     # Render and extract
     images = render_pages_to_images(pdf_path, pin_page_nums)
     t0 = time.time()
-    result = extract_pins_with_vision(images, pdf_filename)
+    result = extractor.extract(images)
     elapsed = time.time() - t0
 
     if "error" in result:

@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import importlib
 import os
+import platform
 import sys
 from pathlib import Path
 
@@ -45,6 +46,36 @@ def check_python() -> bool:
     need = ".".join(map(str, MIN_PYTHON))
     have = ".".join(map(str, current))
     return status("Python", current >= MIN_PYTHON, f"have {have}, need >= {need}")
+
+
+def check_platform() -> bool:
+    system = platform.system() or "unknown"
+    return status("Platform", True, f"{system} ({sys.platform})")
+
+
+def check_file_locking() -> bool:
+    if str(ROOT) not in sys.path:
+        sys.path.insert(0, str(ROOT))
+
+    try:
+        from runtime._locking import try_exclusive_lock
+
+        lock_path = ROOT / ".tmp" / "doctor.lock"
+        first = try_exclusive_lock(lock_path, metadata="doctor probe\n")
+        if first is None:
+            return status("File locking", False, "exclusive lock unavailable")
+        try:
+            second = try_exclusive_lock(lock_path)
+            if second is not None:
+                second.release()
+                return status("File locking", False, "second lock unexpectedly acquired")
+            backend = first.backend
+        finally:
+            first.release()
+    except Exception as exc:
+        return status("File locking", False, f"{exc.__class__.__name__}: {exc}")
+
+    return status("File locking", True, f"{backend} exclusive lock ok")
 
 
 
@@ -94,6 +125,8 @@ def main() -> int:
 
     checks = [
         check_python(),
+        check_platform(),
+        check_file_locking(),
         check_imports(include_dev=args.dev),
         check_paths(),
         check_gemini(strict_env=args.strict_env),
