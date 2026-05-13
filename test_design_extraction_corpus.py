@@ -1,12 +1,15 @@
 import json
 from pathlib import Path
 
+import pytest
+
 from scripts.export_design_bundle import (
     _index_extracted_records,
     _load_datasheet_design_context,
     build_design_intent,
     build_quickstart_markdown,
 )
+from scripts.validate_design_extraction import has_full_pdf_corpus
 
 REPO_ROOT = Path(__file__).resolve().parent
 EXPORT_DIR = REPO_ROOT / "data/sch_review_export"
@@ -30,6 +33,9 @@ def _load_devices():
 
 
 def test_design_extraction_curated_closed_loop():
+    if not has_full_pdf_corpus(PDF_DIR):
+        pytest.skip("full datasheet PDF corpus is not available")
+
     devices = _load_devices()
     extracted_index = _index_extracted_records(EXTRACTED_DIR)
 

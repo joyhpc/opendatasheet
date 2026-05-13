@@ -735,6 +735,39 @@ class TestSchemaCompliance:
             for req_field in pkg_info_required:
                 assert req_field in pkg, f"Required field '{req_field}' missing from package"
 
+    def test_schema_accepts_extractor_native_optional_package_fields(self, schema):
+        """Extractor output can use scalar exposed-pad dimensions and unknown thermal data."""
+        try:
+            import jsonschema
+        except ImportError:
+            pytest.skip("jsonschema not installed")
+
+        sample = {
+            "packages": [
+                {
+                    "package_type": "VQFN",
+                    "package_name": "VQFN-64P-641",
+                    "pin_count": 64,
+                    "exposed_pad": {
+                        "present": True,
+                        "length_mm": 6.8,
+                        "width_mm": 6.8,
+                        "description": "Exposed pad area",
+                    },
+                    "thermal_properties": None,
+                }
+            ],
+            "package_summary": {
+                "total_packages": 1,
+                "package_types": ["VQFN"],
+                "has_exposed_pad": True,
+                "has_land_pattern": False,
+                "has_reflow_profile": False,
+            },
+        }
+
+        jsonschema.validate(sample, schema)
+
 
 # ─── Full Validate Integration Tests ─────────────────────────────────
 

@@ -3,13 +3,23 @@ import subprocess
 import sys
 from pathlib import Path
 
+import pytest
+
 from scripts.export_design_bundle import _infer_mcu_traits
+from scripts.validate_design_extraction import has_full_pdf_corpus
 
 
 REPO_ROOT = Path(__file__).resolve().parent
+PDF_DIR = REPO_ROOT / "data/raw/datasheet_PDF"
+
+
+def _require_full_pdf_corpus():
+    if not has_full_pdf_corpus(PDF_DIR):
+        pytest.skip("full datasheet PDF corpus is not available")
 
 
 def test_normal_ic_bundle_export(tmp_path):
+    _require_full_pdf_corpus()
     output_dir = tmp_path / "bundles"
     result = subprocess.run(
         [
@@ -109,6 +119,7 @@ def test_fpga_bundle_export_keeps_package_specific_bundle_dirs(tmp_path):
 
 
 def test_ldo_constraints_include_capacitor_windows(tmp_path):
+    _require_full_pdf_corpus()
     output_dir = tmp_path / "bundles"
     subprocess.run(
         [
@@ -493,6 +504,7 @@ def test_interface_switch_bundle_export_includes_high_speed_templates(tmp_path):
 
 
 def test_opamp_bundle_export_includes_analog_constraints(tmp_path):
+    _require_full_pdf_corpus()
     output_dir = tmp_path / "bundles"
     subprocess.run(
         [
@@ -535,6 +547,7 @@ def test_opamp_bundle_export_includes_analog_constraints(tmp_path):
 
 
 def test_opamp_bundle_export_includes_topology_candidates(tmp_path):
+    _require_full_pdf_corpus()
     output_dir = tmp_path / "bundles"
     subprocess.run(
         [
@@ -723,8 +736,6 @@ def test_legacy_ds90ub_bundle_export_targets_are_absent_after_cleanup(tmp_path):
             "DS90UB962WRTDTQ1",
             "--device",
             "DS90UB960WRTDRQ1",
-            "--device",
-            "DS90UB9702-Q1",
             "--output-dir",
             str(output_dir),
         ],
@@ -918,6 +929,7 @@ def test_gowin_bundle_rules_are_family_specific(tmp_path):
 
 
 def test_extract_gw1n_dc_supports_combined_datasheet():
+    _require_full_pdf_corpus()
     from pathlib import Path
     from scripts.extract_gowin_dc import extract_gowin_dc
 

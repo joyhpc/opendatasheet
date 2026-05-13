@@ -17,9 +17,11 @@ Usage:
 import json
 import re
 import sys
+import argparse
 from datetime import datetime, timezone
 from pathlib import Path
 
+DEFAULT_EXPORT_DIR = Path(__file__).resolve().parent.parent / "data" / "sch_review_export"
 DEFAULT_EXTRACTED_DIR = Path(__file__).resolve().parent.parent / "data" / "extracted"
 DEFAULT_OUTPUT_DIR = Path(__file__).resolve().parent.parent / "data" / "selection_profile"
 
@@ -121,9 +123,24 @@ def get_component(data: dict) -> dict:
         if not comp:
             # Fallback: component may be at top level in some v2 extractions
             comp = data.get("component", {})
+        if not comp and data.get("mpn"):
+            comp = {
+                "mpn": data.get("mpn"),
+                "manufacturer": data.get("manufacturer"),
+                "category": data.get("category"),
+                "description": data.get("description"),
+            }
         return comp
     ext = data.get("extraction", {})
-    return ext.get("component", {})
+    comp = ext.get("component", {}) if isinstance(ext, dict) else {}
+    if not comp and data.get("mpn"):
+        comp = {
+            "mpn": data.get("mpn"),
+            "manufacturer": data.get("manufacturer"),
+            "category": data.get("category"),
+            "description": data.get("description"),
+        }
+    return comp
 
 
 # ─── Spec Extraction Helpers ────────────────────────────────────────
@@ -153,7 +170,7 @@ SPEC_PATTERNS = [
         [r"output\s+current", r"load\s+current", r"current\s+limit",
          r"source\s+current\s+limit"],
         ("A", "mA"),
-        [],
+        [r"\bLDO\b.*current\s+limit", r"current\s+limit.*\bLDO\b"],
     ),
     (
         "quiescent_current",
@@ -450,6 +467,81 @@ def _extract_key_specs_from_params(params: dict) -> list[dict]:
     return specs
 
 
+def _specs_to_map(specs: list[dict]) -> dict:
+    """Convert internal spec list into the checked-in selection-profile shape."""
+    result = {}
+    for spec in specs:
+        if not isinstance(spec, dict):
+            continue
+        name = spec.get("name")
+        if not name:
+            continue
+        record = {key: value for key, value in spec.items() if key != "name"}
+        if record:
+            result[name] = record
+    return result
+
+
+def _iter_param_dict_items(params: dict) -> list[dict]:
+    if not isinstance(params, dict):
+        return []
+    return [
+        {**entry, "symbol": key}
+        for key, entry in params.items()
+        if isinstance(entry, dict)
+    ]
+
+
+def _extract_abs_max_specs(abs_max: dict | list) -> dict:
+    """Extract selection specs that are naturally sourced from abs-max ratings."""
+    items = abs_max if isinstance(abs_max, list) else _iter_param_dict_items(abs_max)
+    specs = {}
+
+    for item in items:
+        if not isinstance(item, dict):
+            continue
+        symbol = item.get("symbol", "")
+        parameter = item.get("parameter", "")
+        unit = item.get("unit", "")
+        max_v = _safe_numeric(item.get("max"))
+        min_v = _safe_numeric(item.get("min"))
+
+        if max_v is None and min_v is None:
+            continue
+
+        if (
+            _unit_ok(unit, ("V",))
+            and (
+                _match_symbol(symbol, [r"^V[_\(]?IN", r"^VCC$", r"^VDD$", r"^VSUP"])
+                or _match_param(parameter, [r"input.*volt", r"supply.*volt"])
+            )
+        ):
+            record = {}
+            if min_v is not None:
+                record["min"] = min_v
+            if max_v is not None:
+                record["max"] = max_v
+            record["unit"] = unit or "V"
+            specs.setdefault("input_voltage_abs_max", record)
+
+        if (
+            _unit_ok(unit, ("A", "mA"))
+            and (
+                _match_symbol(symbol, [r"^I[_\(]?OUT", r"^I[_\(]?LOAD"])
+                or _match_param(parameter, [r"output\s+current", r"load\s+current"])
+            )
+        ):
+            record = {}
+            if min_v is not None:
+                record["min"] = min_v
+            if max_v is not None:
+                record["max"] = max_v
+            record["unit"] = unit or "A"
+            specs.setdefault("output_current", record)
+
+    return specs
+
+
 # ─── Operating Conditions Extraction ────────────────────────────────
 
 
@@ -697,12 +789,17 @@ def build_selection_card(data: dict, source_file: str = "") -> dict | None:
 
     # --- Extract key specs ---
     parametric = get_parametric_data(data)
-    key_specs = []
+    key_specs = {}
     operating_conditions = {}
 
     if parametric:
         # Use parametric domain data if available (from Worker-9)
-        key_specs = parametric.get("key_specs", [])
+        raw_key_specs = parametric.get("key_specs", {})
+        key_specs = (
+            raw_key_specs
+            if isinstance(raw_key_specs, dict)
+            else _specs_to_map(raw_key_specs)
+        )
         operating_conditions = parametric.get("operating_conditions", {})
     else:
         # Fall back to extracting from raw electrical data
@@ -711,14 +808,24 @@ def build_selection_card(data: dict, source_file: str = "") -> dict | None:
         if fmt == "flat":
             raw_elec = ext.get("electrical_characteristics", [])
             raw_abs = ext.get("absolute_maximum_ratings", [])
-            key_specs = _extract_key_specs_from_raw(raw_elec, raw_abs)
+            key_specs = _specs_to_map(_extract_key_specs_from_raw(raw_elec, raw_abs))
+            key_specs.update({k: v for k, v in _extract_abs_max_specs(raw_abs).items() if k not in key_specs})
             operating_conditions = _extract_operating_conditions(raw_elec, raw_abs)
         else:
             # v2 domains format: electrical domain has dict-keyed params
             elec_params = ext.get("electrical_parameters", {})
             abs_max = ext.get("absolute_maximum_ratings", {})
-            key_specs = _extract_key_specs_from_params(elec_params)
+            key_specs = _specs_to_map(_extract_key_specs_from_params(elec_params))
+            key_specs.update({k: v for k, v in _extract_abs_max_specs(abs_max).items() if k not in key_specs})
             operating_conditions = _extract_operating_conditions(elec_params, abs_max)
+
+    output_current = key_specs.get("output_current") if isinstance(key_specs, dict) else None
+    if isinstance(output_current, dict):
+        iout_max = output_current.get("max")
+        if iout_max is None:
+            iout_max = output_current.get("typ")
+        if iout_max is not None:
+            operating_conditions.setdefault("iout_max", iout_max)
 
     # --- Pin count and packages ---
     pin_index = get_pin_index(data)
@@ -739,6 +846,9 @@ def build_selection_card(data: dict, source_file: str = "") -> dict | None:
     # --- Register summary ---
     register_data = get_register_data(data)
     register_summary = _build_register_summary(register_data)
+    features = []
+    if register_data:
+        features.append("register_interface")
 
     # --- Timing and power sequence presence ---
     timing_data = get_timing_data(data)
@@ -759,12 +869,15 @@ def build_selection_card(data: dict, source_file: str = "") -> dict | None:
         "mpn": mpn,
         "manufacturer": manufacturer,
         "category": category,
+        "description": comp.get("description"),
         "key_specs": key_specs,
         "operating_conditions": operating_conditions,
         "pin_count": pin_count,
         "packages": packages,
+        "thermal": thermal_summary,
         "thermal_summary": thermal_summary,
         "register_summary": register_summary,
+        "features": features,
         "has_timing_data": has_timing_data,
         "has_power_sequence": has_power_sequence,
         "extraction_date": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
@@ -794,13 +907,22 @@ def build_selection_index(cards: list[dict]) -> dict:
             vin_range = _format_range(vin_min, vin_max, "V")
         else:
             # Try to find from key_specs
-            for spec in card.get("key_specs", []):
-                if isinstance(spec, dict) and spec.get("name") == "input_voltage":
+            key_specs = card.get("key_specs", {})
+            if isinstance(key_specs, dict):
+                spec = key_specs.get("input_voltage")
+                if isinstance(spec, dict):
                     vin_range = _format_range(
                         spec.get("min"), spec.get("max"),
                         spec.get("unit", "V")
                     )
-                    break
+            else:
+                for spec in key_specs:
+                    if isinstance(spec, dict) and spec.get("name") == "input_voltage":
+                        vin_range = _format_range(
+                            spec.get("min"), spec.get("max"),
+                            spec.get("unit", "V")
+                        )
+                        break
 
         # Extract iout_max string
         iout_max = None
@@ -808,14 +930,22 @@ def build_selection_index(cards: list[dict]) -> dict:
         if iout_val is not None:
             iout_max = _format_value_unit(iout_val, "A")
         else:
-            for spec in card.get("key_specs", []):
-                if isinstance(spec, dict) and spec.get("name") == "output_current":
+            key_specs = card.get("key_specs", {})
+            if isinstance(key_specs, dict):
+                spec = key_specs.get("output_current")
+                if isinstance(spec, dict):
                     val = spec.get("max") or spec.get("typ")
                     if val is not None:
                         iout_max = _format_value_unit(val, spec.get("unit", "A"))
-                    break
+            else:
+                for spec in key_specs:
+                    if isinstance(spec, dict) and spec.get("name") == "output_current":
+                        val = spec.get("max") or spec.get("typ")
+                        if val is not None:
+                            iout_max = _format_value_unit(val, spec.get("unit", "A"))
+                        break
 
-        key_spec_count = len(card.get("key_specs", []))
+        key_spec_count = len(card.get("key_specs", {}))
         safe_name = _sanitize(mpn)
 
         devices.append({
@@ -824,7 +954,7 @@ def build_selection_index(cards: list[dict]) -> dict:
             "vin_range": vin_range,
             "iout_max": iout_max,
             "key_spec_count": key_spec_count,
-            "profile_file": f"{safe_name}_selection.json",
+            "profile_file": f"{safe_name}.json",
         })
 
     # Sort by category then MPN
@@ -850,8 +980,8 @@ def process_file(path: Path) -> dict | None:
         print(f"  ERROR reading {path.name}: {exc}")
         return None
 
-    # Skip FPGA datasheets
-    if data.get("is_fpga"):
+    # Selection profiles are for normal IC comparison, not FPGA pinout bundles.
+    if data.get("is_fpga") or data.get("_type") == "fpga":
         return None
 
     card = build_selection_card(data, source_file=path.name)
@@ -861,46 +991,73 @@ def process_file(path: Path) -> dict | None:
 # ─── Main ───────────────────────────────────────────────────────────
 
 
-def main():
-    # Determine input: single file or directory
-    single_file = None
-    extracted_dir = DEFAULT_EXTRACTED_DIR
-    output_dir = DEFAULT_OUTPUT_DIR
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "input",
+        nargs="?",
+        type=Path,
+        help="Optional single JSON file or input directory.",
+    )
+    parser.add_argument(
+        "--export-dir",
+        type=Path,
+        default=DEFAULT_EXPORT_DIR,
+        help="Directory of sch-review/device-knowledge export JSON files.",
+    )
+    parser.add_argument(
+        "--output-dir",
+        type=Path,
+        default=DEFAULT_OUTPUT_DIR,
+        help="Directory for generated selection profile files.",
+    )
+    return parser.parse_args()
 
-    if len(sys.argv) > 1:
-        arg = Path(sys.argv[1])
+
+def main():
+    args = parse_args()
+    single_file = None
+    input_dir = args.export_dir
+    output_dir = args.output_dir
+
+    if args.input is not None:
+        arg = args.input
         if arg.is_file():
             single_file = arg
         elif arg.is_dir():
-            extracted_dir = arg
+            input_dir = arg
         else:
             print(f"Error: {arg} is not a file or directory", file=sys.stderr)
             sys.exit(1)
 
-    # If the default extracted dir does not exist, try extracted_v2
-    if single_file is None and not extracted_dir.exists():
-        alt_dir = extracted_dir.parent / "extracted_v2"
-        if alt_dir.exists():
-            extracted_dir = alt_dir
+    # Backward-compatible fallback for older checkouts without sch_review_export.
+    if single_file is None and not input_dir.exists():
+        if DEFAULT_EXTRACTED_DIR.exists():
+            input_dir = DEFAULT_EXTRACTED_DIR
+        else:
+            alt_dir = DEFAULT_EXTRACTED_DIR.parent / "extracted_v2"
+            if alt_dir.exists():
+                input_dir = alt_dir
 
     output_dir.mkdir(parents=True, exist_ok=True)
 
     cards: list[dict] = []
     errors = 0
     skipped = 0
+    written_files: set[str] = set()
 
     if single_file:
         # Process single file
         input_files = [single_file]
     else:
-        input_files = sorted(extracted_dir.glob("*.json"))
+        input_files = sorted(input_dir.glob("*.json"))
 
     if not input_files:
-        print(f"No JSON files found in {extracted_dir}", file=sys.stderr)
+        print(f"No JSON files found in {input_dir}", file=sys.stderr)
         sys.exit(1)
 
     print(f"=== Selection Profile Export ===")
-    print(f"Input: {single_file or extracted_dir}")
+    print(f"Input: {single_file or input_dir}")
     print(f"Output: {output_dir}")
     print()
 
@@ -915,7 +1072,7 @@ def main():
 
         mpn = card["mpn"]
         safe_name = _sanitize(mpn)
-        out_path = output_dir / f"{safe_name}_selection.json"
+        out_path = output_dir / f"{safe_name}.json"
 
         try:
             with open(out_path, "w", encoding="utf-8") as fp:
@@ -930,17 +1087,24 @@ def main():
         n_pkgs = len(card.get("packages", []))
         print(f"  {mpn:25s} {card['category']:12s} {n_specs} specs, {n_pkgs} pkgs -> {out_path.name}")
         cards.append(card)
+        written_files.add(out_path.name)
 
     # Build and write comparative index
     index = build_selection_index(cards)
-    index_path = output_dir / "selection_index.json"
+    index_path = output_dir / "_index.json"
     try:
         with open(index_path, "w", encoding="utf-8") as fp:
             json.dump(index, fp, indent=2, ensure_ascii=False)
             fp.write("\n")
+        written_files.add(index_path.name)
     except OSError as exc:
         print(f"  ERROR writing index: {exc}")
         errors += 1
+
+    if single_file is None:
+        for path in sorted(output_dir.glob("*.json")):
+            if path.name not in written_files:
+                path.unlink()
 
     # Summary
     print()

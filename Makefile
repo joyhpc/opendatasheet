@@ -19,6 +19,7 @@ pytest:
 	$(PYTHON) -m pytest -q
 
 compile:
-	$(PYTHON) -m py_compile pipeline.py pipeline_v2.py scripts/export_for_sch_review.py scripts/validate_exports.py test_regression.py test_pin_extraction.py test_drc_hints_v2.py
+	PYTHON=$(PYTHON) ./scripts/run_checks.sh --compile-only
 
-check: compile validate regression pytest
+check:
+	PYTHON=$(PYTHON) ./scripts/run_checks.sh

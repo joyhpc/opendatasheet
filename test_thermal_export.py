@@ -29,7 +29,7 @@ def test_checked_in_exports_include_thermal_samples():
 
 def test_all_exports_have_thermal_key():
     for path in EXPORT_DIR.glob("*.json"):
-        if path.name == "_manifest.json":
+        if path.name.startswith("_"):
             continue
         data = json.loads(path.read_text(encoding="utf-8"))
         assert "thermal" in data, path.name

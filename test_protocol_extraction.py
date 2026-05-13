@@ -660,6 +660,54 @@ class TestSchemaCompliance:
         # Should not raise
         jsonschema.validate(sample, schema)
 
+    def test_unknown_i2c_address_configurable_validates_against_schema(self):
+        """Unknown address configurability is represented as null in checked-in exports."""
+        try:
+            import jsonschema
+        except ImportError:
+            pytest.skip("jsonschema not installed")
+
+        schema_path = os.path.join(
+            os.path.dirname(__file__),
+            "schemas", "domains", "protocol.schema.json"
+        )
+        with open(schema_path) as f:
+            schema = json.load(f)
+
+        sample = {
+            "interfaces": [
+                {
+                    "protocol_type": "I2C",
+                    "role": "slave",
+                    "instance_name": "I2C",
+                    "i2c_config": {
+                        "slave_address_hex": None,
+                        "address_configurable": None,
+                        "address_pins": [],
+                        "address_bits": 7,
+                        "max_clock_hz": None,
+                        "supports_clock_stretching": None,
+                        "supports_repeated_start": None,
+                    },
+                    "spi_config": None,
+                    "uart_config": None,
+                    "signals": [],
+                    "timing_constraints": [],
+                    "command_set": [],
+                    "notes": None,
+                }
+            ],
+            "protocol_summary": {
+                "total_interfaces": 1,
+                "has_i2c": True,
+                "has_spi": False,
+                "has_uart": False,
+                "primary_interface": "I2C",
+            },
+        }
+
+        jsonschema.validate(sample, schema)
+
 
 # ─── Edge cases ─────────────────────────────────────────────────────
 
