@@ -89,6 +89,7 @@
   "absolute_maximum_ratings": {
     "VIN": {
       "parameter": "VIN to GND",
+      "symbol": "VIN",
       "min": -0.3,
       "max": 75,
       "unit": "V",
@@ -96,6 +97,7 @@
     },
     "Tstg": {
       "parameter": "Storage temperature",
+      "symbol": "Tstg",
       "min": -65,
       "max": 150,
       "unit": "°C",
@@ -105,6 +107,7 @@
   "electrical_parameters": {
     "IIN-EN": {
       "parameter": "Input current, enabled mode",
+      "symbol": "IIN-EN",
       "min": null,
       "typ": 1.4,
       "max": null,
@@ -113,6 +116,7 @@
     },
     "IIN-EN_TJ____40_C_to_125_C": {
       "parameter": "Input current, enabled mode",
+      "symbol": "IIN-EN",
       "min": null,
       "typ": null,
       "max": 1.7,
@@ -121,6 +125,7 @@
     },
     "IIN-DIS": {
       "parameter": "Input current, disabled mode",
+      "symbol": "IIN-DIS",
       "min": null,
       "typ": 9,
       "max": null,
@@ -129,6 +134,7 @@
     },
     "IIN-DIS_EN___0_50_V__TJ____40_C_to_125": {
       "parameter": "Input current, disabled mode",
+      "symbol": "IIN-DIS",
       "min": null,
       "typ": null,
       "max": 15,
@@ -137,6 +143,7 @@
     },
     "IIN-STB": {
       "parameter": "Input current, standby mode",
+      "symbol": "IIN-STB",
       "min": null,
       "typ": 0.56,
       "max": null,
@@ -145,6 +152,7 @@
     },
     "IIN-STB_UVLO___0_00_V__TJ____40_C_to_1": {
       "parameter": "Input current, standby mode",
+      "symbol": "IIN-STB",
       "min": null,
       "typ": null,
       "max": 0.8,
@@ -153,6 +161,7 @@
     },
     "POREN": {
       "parameter": "Power on reset threshold at VIN",
+      "symbol": "POREN",
       "min": null,
       "typ": 5.1,
       "max": null,
@@ -161,6 +170,7 @@
     },
     "POREN_VIN_rising__TJ____40_C_to_125": {
       "parameter": "Power on reset threshold at VIN",
+      "symbol": "POREN",
       "min": null,
       "typ": null,
       "max": 5.46,
@@ -169,6 +179,7 @@
     },
     "POREN-HYS": {
       "parameter": "POREN hysteresis",
+      "symbol": "POREN-HYS",
       "min": null,
       "typ": 500,
       "max": null,
@@ -177,22 +188,33 @@
     },
     "IOUT-EN": {
       "parameter": "OUT pin bias current, enabled",
+      "symbol": "IOUT-EN",
       "min": null,
       "typ": 8,
       "max": null,
       "unit": "µA",
-      "conditions": "OUT = VIN, normal operation, TJ = 25°C"
+      "conditions": "OUT = VIN, normal operation, TJ = 25°C",
+      "used_in_design": true,
+      "used_in_formulas": [
+        "RS_SENSE_threshold"
+      ]
     },
     "IOUT-EN_OUT___VIN__normal_operation__T": {
       "parameter": "OUT pin bias current, enabled",
+      "symbol": "IOUT-EN",
       "min": 5.0,
       "typ": null,
       "max": 11.0,
       "unit": "µA",
-      "conditions": "OUT = VIN, normal operation, TJ = -40°C to 125°C"
+      "conditions": "OUT = VIN, normal operation, TJ = -40°C to 125°C",
+      "used_in_design": true,
+      "used_in_formulas": [
+        "RS_SENSE_threshold"
+      ]
     },
     "IOUT-DIS": {
       "parameter": "OUT pin leakage current, disabled",
+      "symbol": "IOUT-DIS",
       "min": null,
       "typ": 0,
       "max": null,
@@ -201,38 +223,59 @@
     },
     "ISENSE": {
       "parameter": "Threshold programming current",
+      "symbol": "ISENSE",
       "min": null,
       "typ": 16,
       "max": null,
       "unit": "µA",
-      "conditions": "SENSE pin bias current, TJ = 25°C"
+      "conditions": "SENSE pin bias current, TJ = 25°C",
+      "used_in_design": true,
+      "used_in_formulas": [
+        "RS_SENSE_threshold"
+      ]
     },
     "ISENSE_SENSE_pin_bias_current__TJ": {
       "parameter": "Threshold programming current",
+      "symbol": "ISENSE",
       "min": 13.6,
       "typ": null,
       "max": 18.0,
       "unit": "µA",
-      "conditions": "SENSE pin bias current, TJ = -40°C to 125°C"
+      "conditions": "SENSE pin bias current, TJ = -40°C to 125°C",
+      "used_in_design": true,
+      "used_in_formulas": [
+        "RS_SENSE_threshold"
+      ]
     },
     "VOFFSET": {
       "parameter": "VDS comparator offset voltage",
+      "symbol": "VOFFSET",
       "min": null,
       "typ": 0,
       "max": null,
       "unit": "mV",
-      "conditions": "SENSE - OUT voltage for fault detection, TJ = 25°C"
+      "conditions": "SENSE - OUT voltage for fault detection, TJ = 25°C",
+      "used_in_design": true,
+      "used_in_formulas": [
+        "RS_SENSE_threshold"
+      ]
     },
     "VOFFSET_SENSE___OUT_voltage_for_fault": {
       "parameter": "VDS comparator offset voltage",
+      "symbol": "VOFFSET",
       "min": -7.0,
       "typ": null,
       "max": 7.0,
       "unit": "mV",
-      "conditions": "SENSE - OUT voltage for fault detection, TJ = -40°C to 125°C"
+      "conditions": "SENSE - OUT voltage for fault detection, TJ = -40°C to 125°C",
+      "used_in_design": true,
+      "used_in_formulas": [
+        "RS_SENSE_threshold"
+      ]
     },
     "IRATIO": {
       "parameter": "ISENSE and IOUT-EN current ratio",
+      "symbol": "IRATIO",
       "min": null,
       "typ": 2.0,
       "max": null,
@@ -241,6 +284,7 @@
     },
     "IRATIO_ISENSE___IOUT_EN__TJ____40_C_t": {
       "parameter": "ISENSE and IOUT-EN current ratio",
+      "symbol": "IRATIO",
       "min": 1.7,
       "typ": null,
       "max": 2.3,
@@ -249,22 +293,33 @@
     },
     "OVPTH": {
       "parameter": "OVP threshold",
+      "symbol": "OVPTH",
       "min": null,
       "typ": 2.0,
       "max": null,
       "unit": "V",
-      "conditions": "OVP pin threshold voltage rising, TJ = 25°C"
+      "conditions": "OVP pin threshold voltage rising, TJ = 25°C",
+      "used_in_design": true,
+      "used_in_formulas": [
+        "R8_OVP_resistor"
+      ]
     },
     "OVPTH_OVP_pin_threshold_voltage_risi": {
       "parameter": "OVP threshold",
+      "symbol": "OVPTH",
       "min": 1.88,
       "typ": null,
       "max": 2.12,
       "unit": "V",
-      "conditions": "OVP pin threshold voltage rising, TJ = -40°C to 125°C"
+      "conditions": "OVP pin threshold voltage rising, TJ = -40°C to 125°C",
+      "used_in_design": true,
+      "used_in_formulas": [
+        "R8_OVP_resistor"
+      ]
     },
     "OVPHYS": {
       "parameter": "OVP hysteresis",
+      "symbol": "OVPHYS",
       "min": null,
       "typ": 240,
       "max": null,
@@ -273,6 +328,7 @@
     },
     "OVPDEL": {
       "parameter": "OVP delay time",
+      "symbol": "OVPDEL",
       "min": null,
       "typ": 9.6,
       "max": null,
@@ -281,6 +337,7 @@
     },
     "OVPBIAS": {
       "parameter": "OVP pin bias current",
+      "symbol": "OVPBIAS",
       "min": null,
       "typ": 0,
       "max": null,
@@ -289,6 +346,7 @@
     },
     "OVPBIAS_OVP___1_9_V__TJ____40_C_to_125": {
       "parameter": "OVP pin bias current",
+      "symbol": "OVPBIAS",
       "min": null,
       "typ": null,
       "max": 0.5,
@@ -297,6 +355,7 @@
     },
     "UVLOTH": {
       "parameter": "UVLO threshold",
+      "symbol": "UVLOTH",
       "min": null,
       "typ": 1.6,
       "max": null,
@@ -305,6 +364,7 @@
     },
     "UVLOTH_UVLO_pin_threshold_voltage_ris": {
       "parameter": "UVLO threshold",
+      "symbol": "UVLOTH",
       "min": 1.45,
       "typ": null,
       "max": 1.75,
@@ -313,6 +373,7 @@
     },
     "UVLOHYS": {
       "parameter": "UVLO hysteresis",
+      "symbol": "UVLOHYS",
       "min": null,
       "typ": 180,
       "max": null,
@@ -321,6 +382,7 @@
     },
     "UVLOHYS_TJ____40_C_to_125_C": {
       "parameter": "UVLO hysteresis",
+      "symbol": "UVLOHYS",
       "min": 120,
       "typ": null,
       "max": 230,
@@ -329,6 +391,7 @@
     },
     "UVLOBIAS": {
       "parameter": "UVLO pin pull-down current",
+      "symbol": "UVLOBIAS",
       "min": null,
       "typ": 5.5,
       "max": null,
@@ -337,6 +400,7 @@
     },
     "UVLOBIAS_TJ____40_C_to_125_C": {
       "parameter": "UVLO pin pull-down current",
+      "symbol": "UVLOBIAS",
       "min": 3.8,
       "typ": null,
       "max": 7.2,
@@ -345,6 +409,7 @@
     },
     "ENTHH": {
       "parameter": "High-level input voltage",
+      "symbol": "ENTHH",
       "min": 2.0,
       "typ": null,
       "max": null,
@@ -353,6 +418,7 @@
     },
     "ENTHL": {
       "parameter": "Low-level input voltage",
+      "symbol": "ENTHL",
       "min": null,
       "typ": null,
       "max": 0.8,
@@ -361,6 +427,7 @@
     },
     "ENHYS": {
       "parameter": "EN threshold hysteresis",
+      "symbol": "ENHYS",
       "min": null,
       "typ": 200,
       "max": null,
@@ -369,6 +436,7 @@
     },
     "ENBIAS": {
       "parameter": "EN pin pull-down current",
+      "symbol": "ENBIAS",
       "min": null,
       "typ": 6,
       "max": null,
@@ -377,6 +445,7 @@
     },
     "ENBIAS_TJ____40_C_to_125_C": {
       "parameter": "EN pin pull-down current",
+      "symbol": "ENBIAS",
       "min": null,
       "typ": null,
       "max": 8.0,
@@ -385,6 +454,7 @@
     },
     "IGATE": {
       "parameter": "Gate charge (sourcing) current, on state",
+      "symbol": "IGATE",
       "min": null,
       "typ": 24,
       "max": null,
@@ -393,6 +463,7 @@
     },
     "IGATE_On_state__TJ____40_C_to_125_C": {
       "parameter": "Gate charge (sourcing) current, on state",
+      "symbol": "IGATE",
       "min": 17,
       "typ": null,
       "max": 31,
@@ -401,6 +472,7 @@
     },
     "IGATE-OFF": {
       "parameter": "Gate discharge (sinking) current, off state",
+      "symbol": "IGATE-OFF",
       "min": null,
       "typ": 2.2,
       "max": null,
@@ -409,6 +481,7 @@
     },
     "IGATE-FLT": {
       "parameter": "Gate discharge (sinking) current, fault state",
+      "symbol": "IGATE-FLT",
       "min": null,
       "typ": 80,
       "max": null,
@@ -417,6 +490,7 @@
     },
     "VGATE": {
       "parameter": "Gate output voltage in normal operation",
+      "symbol": "VGATE",
       "min": null,
       "typ": 12,
       "max": null,
@@ -425,6 +499,7 @@
     },
     "VGATE_GATE___VIN_voltage__GATE_pin_o": {
       "parameter": "Gate output voltage in normal operation",
+      "symbol": "VGATE",
       "min": 10,
       "typ": null,
       "max": 14,
@@ -433,6 +508,7 @@
     },
     "VGATE-TH": {
       "parameter": "VGS status comparator threshold voltage",
+      "symbol": "VGATE-TH",
       "min": null,
       "typ": 5,
       "max": null,
@@ -441,6 +517,7 @@
     },
     "VGATE-TH_GATE___OUT_threshold_voltage_f": {
       "parameter": "VGS status comparator threshold voltage",
+      "symbol": "VGATE-TH",
       "min": 3.5,
       "typ": null,
       "max": 6.5,
@@ -449,6 +526,7 @@
     },
     "VGATE-CLAMP": {
       "parameter": "Zener clamp between GATE pin and OUT pin",
+      "symbol": "VGATE-CLAMP",
       "min": null,
       "typ": 16.8,
       "max": null,
@@ -457,14 +535,20 @@
     },
     "VTMRH": {
       "parameter": "Timer fault threshold",
+      "symbol": "VTMRH",
       "min": null,
       "typ": 2.0,
       "max": null,
       "unit": "V",
-      "conditions": "TIMER pin voltage rising"
+      "conditions": "TIMER pin voltage rising",
+      "used_in_design": true,
+      "used_in_formulas": [
+        "C_TIMER_fault_delay"
+      ]
     },
     "VTMRL": {
       "parameter": "Timer re-enable threshold",
+      "symbol": "VTMRL",
       "min": null,
       "typ": 0.3,
       "max": null,
@@ -473,22 +557,33 @@
     },
     "ITIMERH": {
       "parameter": "Timer charge current for VDS fault",
+      "symbol": "ITIMERH",
       "min": null,
       "typ": 11,
       "max": null,
       "unit": "µA",
-      "conditions": "TIMER charge current after start-up, VGS = 6.5 V, TJ = 25°C"
+      "conditions": "TIMER charge current after start-up, VGS = 6.5 V, TJ = 25°C",
+      "used_in_design": true,
+      "used_in_formulas": [
+        "C_TIMER_fault_delay"
+      ]
     },
     "ITIMERH_TIMER_charge_current_after_sta": {
       "parameter": "Timer charge current for VDS fault",
+      "symbol": "ITIMERH",
       "min": 8.5,
       "typ": null,
       "max": 13.0,
       "unit": "µA",
-      "conditions": "TIMER charge current after start-up, VGS = 6.5 V, TJ = -40°C to 125°C"
+      "conditions": "TIMER charge current after start-up, VGS = 6.5 V, TJ = -40°C to 125°C",
+      "used_in_design": true,
+      "used_in_formulas": [
+        "C_TIMER_fault_delay"
+      ]
     },
     "ITIMERL": {
       "parameter": "Timer start-up charge current",
+      "symbol": "ITIMERL",
       "min": null,
       "typ": 6,
       "max": null,
@@ -497,6 +592,7 @@
     },
     "ITIMERL_TIMER_charge_current_during_st": {
       "parameter": "Timer start-up charge current",
+      "symbol": "ITIMERL",
       "min": 4.0,
       "typ": null,
       "max": 7.0,
@@ -505,6 +601,7 @@
     },
     "ITIMMERR": {
       "parameter": "Timer reset discharge current",
+      "symbol": "ITIMMERR",
       "min": null,
       "typ": 6,
       "max": null,
@@ -513,6 +610,7 @@
     },
     "ITIMMERR_TIMER_pin___1_5_V__TJ____40_C": {
       "parameter": "Timer reset discharge current",
+      "symbol": "ITIMMERR",
       "min": 4.4,
       "typ": null,
       "max": 8.2,
@@ -521,6 +619,7 @@
     },
     "tFAULT": {
       "parameter": "Fault to GATE low delay",
+      "symbol": "tFAULT",
       "min": null,
       "typ": 5,
       "max": null,
@@ -529,6 +628,7 @@
     },
     "PGDVOL": {
       "parameter": "Output low voltage",
+      "symbol": "PGDVOL",
       "min": null,
       "typ": 80,
       "max": null,
@@ -537,6 +637,7 @@
     },
     "PGDVOL_ISINK___2_mA__TJ____40_C_to_12": {
       "parameter": "Output low voltage",
+      "symbol": "PGDVOL",
       "min": null,
       "typ": null,
       "max": 205,
@@ -545,6 +646,7 @@
     },
     "PGDIOH": {
       "parameter": "Off leakage current",
+      "symbol": "PGDIOH",
       "min": null,
       "typ": 0.02,
       "max": null,
@@ -553,6 +655,7 @@
     },
     "PGDIOH_VnPGD___10_V__TJ____40_C_to_12": {
       "parameter": "Off leakage current",
+      "symbol": "PGDIOH",
       "min": null,
       "typ": null,
       "max": 1.0,
@@ -659,6 +762,7 @@
       "absolute_maximum_ratings": {
         "VIN": {
           "parameter": "VIN to GND",
+          "symbol": "VIN",
           "min": -0.3,
           "max": 75,
           "unit": "V",
@@ -666,6 +770,7 @@
         },
         "Tstg": {
           "parameter": "Storage temperature",
+          "symbol": "Tstg",
           "min": -65,
           "max": 150,
           "unit": "°C",
@@ -675,6 +780,7 @@
       "electrical_parameters": {
         "IIN-EN": {
           "parameter": "Input current, enabled mode",
+          "symbol": "IIN-EN",
           "min": null,
           "typ": 1.4,
           "max": null,
@@ -683,6 +789,7 @@
         },
         "IIN-EN_TJ____40_C_to_125_C": {
           "parameter": "Input current, enabled mode",
+          "symbol": "IIN-EN",
           "min": null,
           "typ": null,
           "max": 1.7,
@@ -691,6 +798,7 @@
         },
         "IIN-DIS": {
           "parameter": "Input current, disabled mode",
+          "symbol": "IIN-DIS",
           "min": null,
           "typ": 9,
           "max": null,
@@ -699,6 +807,7 @@
         },
         "IIN-DIS_EN___0_50_V__TJ____40_C_to_125": {
           "parameter": "Input current, disabled mode",
+          "symbol": "IIN-DIS",
           "min": null,
           "typ": null,
           "max": 15,
@@ -707,6 +816,7 @@
         },
         "IIN-STB": {
           "parameter": "Input current, standby mode",
+          "symbol": "IIN-STB",
           "min": null,
           "typ": 0.56,
           "max": null,
@@ -715,6 +825,7 @@
         },
         "IIN-STB_UVLO___0_00_V__TJ____40_C_to_1": {
           "parameter": "Input current, standby mode",
+          "symbol": "IIN-STB",
           "min": null,
           "typ": null,
           "max": 0.8,
@@ -723,6 +834,7 @@
         },
         "POREN": {
           "parameter": "Power on reset threshold at VIN",
+          "symbol": "POREN",
           "min": null,
           "typ": 5.1,
           "max": null,
@@ -731,6 +843,7 @@
         },
         "POREN_VIN_rising__TJ____40_C_to_125": {
           "parameter": "Power on reset threshold at VIN",
+          "symbol": "POREN",
           "min": null,
           "typ": null,
           "max": 5.46,
@@ -739,6 +852,7 @@
         },
         "POREN-HYS": {
           "parameter": "POREN hysteresis",
+          "symbol": "POREN-HYS",
           "min": null,
           "typ": 500,
           "max": null,
@@ -747,22 +861,33 @@
         },
         "IOUT-EN": {
           "parameter": "OUT pin bias current, enabled",
+          "symbol": "IOUT-EN",
           "min": null,
           "typ": 8,
           "max": null,
           "unit": "µA",
-          "conditions": "OUT = VIN, normal operation, TJ = 25°C"
+          "conditions": "OUT = VIN, normal operation, TJ = 25°C",
+          "used_in_design": true,
+          "used_in_formulas": [
+            "RS_SENSE_threshold"
+          ]
         },
         "IOUT-EN_OUT___VIN__normal_operation__T": {
           "parameter": "OUT pin bias current, enabled",
+          "symbol": "IOUT-EN",
           "min": 5.0,
           "typ": null,
           "max": 11.0,
           "unit": "µA",
-          "conditions": "OUT = VIN, normal operation, TJ = -40°C to 125°C"
+          "conditions": "OUT = VIN, normal operation, TJ = -40°C to 125°C",
+          "used_in_design": true,
+          "used_in_formulas": [
+            "RS_SENSE_threshold"
+          ]
         },
         "IOUT-DIS": {
           "parameter": "OUT pin leakage current, disabled",
+          "symbol": "IOUT-DIS",
           "min": null,
           "typ": 0,
           "max": null,
@@ -771,38 +896,59 @@
         },
         "ISENSE": {
           "parameter": "Threshold programming current",
+          "symbol": "ISENSE",
           "min": null,
           "typ": 16,
           "max": null,
           "unit": "µA",
-          "conditions": "SENSE pin bias current, TJ = 25°C"
+          "conditions": "SENSE pin bias current, TJ = 25°C",
+          "used_in_design": true,
+          "used_in_formulas": [
+            "RS_SENSE_threshold"
+          ]
         },
         "ISENSE_SENSE_pin_bias_current__TJ": {
           "parameter": "Threshold programming current",
+          "symbol": "ISENSE",
           "min": 13.6,
           "typ": null,
           "max": 18.0,
           "unit": "µA",
-          "conditions": "SENSE pin bias current, TJ = -40°C to 125°C"
+          "conditions": "SENSE pin bias current, TJ = -40°C to 125°C",
+          "used_in_design": true,
+          "used_in_formulas": [
+            "RS_SENSE_threshold"
+          ]
         },
         "VOFFSET": {
           "parameter": "VDS comparator offset voltage",
+          "symbol": "VOFFSET",
           "min": null,
           "typ": 0,
           "max": null,
           "unit": "mV",
-          "conditions": "SENSE - OUT voltage for fault detection, TJ = 25°C"
+          "conditions": "SENSE - OUT voltage for fault detection, TJ = 25°C",
+          "used_in_design": true,
+          "used_in_formulas": [
+            "RS_SENSE_threshold"
+          ]
         },
         "VOFFSET_SENSE___OUT_voltage_for_fault": {
           "parameter": "VDS comparator offset voltage",
+          "symbol": "VOFFSET",
           "min": -7.0,
           "typ": null,
           "max": 7.0,
           "unit": "mV",
-          "conditions": "SENSE - OUT voltage for fault detection, TJ = -40°C to 125°C"
+          "conditions": "SENSE - OUT voltage for fault detection, TJ = -40°C to 125°C",
+          "used_in_design": true,
+          "used_in_formulas": [
+            "RS_SENSE_threshold"
+          ]
         },
         "IRATIO": {
           "parameter": "ISENSE and IOUT-EN current ratio",
+          "symbol": "IRATIO",
           "min": null,
           "typ": 2.0,
           "max": null,
@@ -811,6 +957,7 @@
         },
         "IRATIO_ISENSE___IOUT_EN__TJ____40_C_t": {
           "parameter": "ISENSE and IOUT-EN current ratio",
+          "symbol": "IRATIO",
           "min": 1.7,
           "typ": null,
           "max": 2.3,
@@ -819,22 +966,33 @@
         },
         "OVPTH": {
           "parameter": "OVP threshold",
+          "symbol": "OVPTH",
           "min": null,
           "typ": 2.0,
           "max": null,
           "unit": "V",
-          "conditions": "OVP pin threshold voltage rising, TJ = 25°C"
+          "conditions": "OVP pin threshold voltage rising, TJ = 25°C",
+          "used_in_design": true,
+          "used_in_formulas": [
+            "R8_OVP_resistor"
+          ]
         },
         "OVPTH_OVP_pin_threshold_voltage_risi": {
           "parameter": "OVP threshold",
+          "symbol": "OVPTH",
           "min": 1.88,
           "typ": null,
           "max": 2.12,
           "unit": "V",
-          "conditions": "OVP pin threshold voltage rising, TJ = -40°C to 125°C"
+          "conditions": "OVP pin threshold voltage rising, TJ = -40°C to 125°C",
+          "used_in_design": true,
+          "used_in_formulas": [
+            "R8_OVP_resistor"
+          ]
         },
         "OVPHYS": {
           "parameter": "OVP hysteresis",
+          "symbol": "OVPHYS",
           "min": null,
           "typ": 240,
           "max": null,
@@ -843,6 +1001,7 @@
         },
         "OVPDEL": {
           "parameter": "OVP delay time",
+          "symbol": "OVPDEL",
           "min": null,
           "typ": 9.6,
           "max": null,
@@ -851,6 +1010,7 @@
         },
         "OVPBIAS": {
           "parameter": "OVP pin bias current",
+          "symbol": "OVPBIAS",
           "min": null,
           "typ": 0,
           "max": null,
@@ -859,6 +1019,7 @@
         },
         "OVPBIAS_OVP___1_9_V__TJ____40_C_to_125": {
           "parameter": "OVP pin bias current",
+          "symbol": "OVPBIAS",
           "min": null,
           "typ": null,
           "max": 0.5,
@@ -867,6 +1028,7 @@
         },
         "UVLOTH": {
           "parameter": "UVLO threshold",
+          "symbol": "UVLOTH",
           "min": null,
           "typ": 1.6,
           "max": null,
@@ -875,6 +1037,7 @@
         },
         "UVLOTH_UVLO_pin_threshold_voltage_ris": {
           "parameter": "UVLO threshold",
+          "symbol": "UVLOTH",
           "min": 1.45,
           "typ": null,
           "max": 1.75,
@@ -883,6 +1046,7 @@
         },
         "UVLOHYS": {
           "parameter": "UVLO hysteresis",
+          "symbol": "UVLOHYS",
           "min": null,
           "typ": 180,
           "max": null,
@@ -891,6 +1055,7 @@
         },
         "UVLOHYS_TJ____40_C_to_125_C": {
           "parameter": "UVLO hysteresis",
+          "symbol": "UVLOHYS",
           "min": 120,
           "typ": null,
           "max": 230,
@@ -899,6 +1064,7 @@
         },
         "UVLOBIAS": {
           "parameter": "UVLO pin pull-down current",
+          "symbol": "UVLOBIAS",
           "min": null,
           "typ": 5.5,
           "max": null,
@@ -907,6 +1073,7 @@
         },
         "UVLOBIAS_TJ____40_C_to_125_C": {
           "parameter": "UVLO pin pull-down current",
+          "symbol": "UVLOBIAS",
           "min": 3.8,
           "typ": null,
           "max": 7.2,
@@ -915,6 +1082,7 @@
         },
         "ENTHH": {
           "parameter": "High-level input voltage",
+          "symbol": "ENTHH",
           "min": 2.0,
           "typ": null,
           "max": null,
@@ -923,6 +1091,7 @@
         },
         "ENTHL": {
           "parameter": "Low-level input voltage",
+          "symbol": "ENTHL",
           "min": null,
           "typ": null,
           "max": 0.8,
@@ -931,6 +1100,7 @@
         },
         "ENHYS": {
           "parameter": "EN threshold hysteresis",
+          "symbol": "ENHYS",
           "min": null,
           "typ": 200,
           "max": null,
@@ -939,6 +1109,7 @@
         },
         "ENBIAS": {
           "parameter": "EN pin pull-down current",
+          "symbol": "ENBIAS",
           "min": null,
           "typ": 6,
           "max": null,
@@ -947,6 +1118,7 @@
         },
         "ENBIAS_TJ____40_C_to_125_C": {
           "parameter": "EN pin pull-down current",
+          "symbol": "ENBIAS",
           "min": null,
           "typ": null,
           "max": 8.0,
@@ -955,6 +1127,7 @@
         },
         "IGATE": {
           "parameter": "Gate charge (sourcing) current, on state",
+          "symbol": "IGATE",
           "min": null,
           "typ": 24,
           "max": null,
@@ -963,6 +1136,7 @@
         },
         "IGATE_On_state__TJ____40_C_to_125_C": {
           "parameter": "Gate charge (sourcing) current, on state",
+          "symbol": "IGATE",
           "min": 17,
           "typ": null,
           "max": 31,
@@ -971,6 +1145,7 @@
         },
         "IGATE-OFF": {
           "parameter": "Gate discharge (sinking) current, off state",
+          "symbol": "IGATE-OFF",
           "min": null,
           "typ": 2.2,
           "max": null,
@@ -979,6 +1154,7 @@
         },
         "IGATE-FLT": {
           "parameter": "Gate discharge (sinking) current, fault state",
+          "symbol": "IGATE-FLT",
           "min": null,
           "typ": 80,
           "max": null,
@@ -987,6 +1163,7 @@
         },
         "VGATE": {
           "parameter": "Gate output voltage in normal operation",
+          "symbol": "VGATE",
           "min": null,
           "typ": 12,
           "max": null,
@@ -995,6 +1172,7 @@
         },
         "VGATE_GATE___VIN_voltage__GATE_pin_o": {
           "parameter": "Gate output voltage in normal operation",
+          "symbol": "VGATE",
           "min": 10,
           "typ": null,
           "max": 14,
@@ -1003,6 +1181,7 @@
         },
         "VGATE-TH": {
           "parameter": "VGS status comparator threshold voltage",
+          "symbol": "VGATE-TH",
           "min": null,
           "typ": 5,
           "max": null,
@@ -1011,6 +1190,7 @@
         },
         "VGATE-TH_GATE___OUT_threshold_voltage_f": {
           "parameter": "VGS status comparator threshold voltage",
+          "symbol": "VGATE-TH",
           "min": 3.5,
           "typ": null,
           "max": 6.5,
@@ -1019,6 +1199,7 @@
         },
         "VGATE-CLAMP": {
           "parameter": "Zener clamp between GATE pin and OUT pin",
+          "symbol": "VGATE-CLAMP",
           "min": null,
           "typ": 16.8,
           "max": null,
@@ -1027,14 +1208,20 @@
         },
         "VTMRH": {
           "parameter": "Timer fault threshold",
+          "symbol": "VTMRH",
           "min": null,
           "typ": 2.0,
           "max": null,
           "unit": "V",
-          "conditions": "TIMER pin voltage rising"
+          "conditions": "TIMER pin voltage rising",
+          "used_in_design": true,
+          "used_in_formulas": [
+            "C_TIMER_fault_delay"
+          ]
         },
         "VTMRL": {
           "parameter": "Timer re-enable threshold",
+          "symbol": "VTMRL",
           "min": null,
           "typ": 0.3,
           "max": null,
@@ -1043,22 +1230,33 @@
         },
         "ITIMERH": {
           "parameter": "Timer charge current for VDS fault",
+          "symbol": "ITIMERH",
           "min": null,
           "typ": 11,
           "max": null,
           "unit": "µA",
-          "conditions": "TIMER charge current after start-up, VGS = 6.5 V, TJ = 25°C"
+          "conditions": "TIMER charge current after start-up, VGS = 6.5 V, TJ = 25°C",
+          "used_in_design": true,
+          "used_in_formulas": [
+            "C_TIMER_fault_delay"
+          ]
         },
         "ITIMERH_TIMER_charge_current_after_sta": {
           "parameter": "Timer charge current for VDS fault",
+          "symbol": "ITIMERH",
           "min": 8.5,
           "typ": null,
           "max": 13.0,
           "unit": "µA",
-          "conditions": "TIMER charge current after start-up, VGS = 6.5 V, TJ = -40°C to 125°C"
+          "conditions": "TIMER charge current after start-up, VGS = 6.5 V, TJ = -40°C to 125°C",
+          "used_in_design": true,
+          "used_in_formulas": [
+            "C_TIMER_fault_delay"
+          ]
         },
         "ITIMERL": {
           "parameter": "Timer start-up charge current",
+          "symbol": "ITIMERL",
           "min": null,
           "typ": 6,
           "max": null,
@@ -1067,6 +1265,7 @@
         },
         "ITIMERL_TIMER_charge_current_during_st": {
           "parameter": "Timer start-up charge current",
+          "symbol": "ITIMERL",
           "min": 4.0,
           "typ": null,
           "max": 7.0,
@@ -1075,6 +1274,7 @@
         },
         "ITIMMERR": {
           "parameter": "Timer reset discharge current",
+          "symbol": "ITIMMERR",
           "min": null,
           "typ": 6,
           "max": null,
@@ -1083,6 +1283,7 @@
         },
         "ITIMMERR_TIMER_pin___1_5_V__TJ____40_C": {
           "parameter": "Timer reset discharge current",
+          "symbol": "ITIMMERR",
           "min": 4.4,
           "typ": null,
           "max": 8.2,
@@ -1091,6 +1292,7 @@
         },
         "tFAULT": {
           "parameter": "Fault to GATE low delay",
+          "symbol": "tFAULT",
           "min": null,
           "typ": 5,
           "max": null,
@@ -1099,6 +1301,7 @@
         },
         "PGDVOL": {
           "parameter": "Output low voltage",
+          "symbol": "PGDVOL",
           "min": null,
           "typ": 80,
           "max": null,
@@ -1107,6 +1310,7 @@
         },
         "PGDVOL_ISINK___2_mA__TJ____40_C_to_12": {
           "parameter": "Output low voltage",
+          "symbol": "PGDVOL",
           "min": null,
           "typ": null,
           "max": 205,
@@ -1115,6 +1319,7 @@
         },
         "PGDIOH": {
           "parameter": "Off leakage current",
+          "symbol": "PGDIOH",
           "min": null,
           "typ": 0.02,
           "max": null,
@@ -1123,6 +1328,7 @@
         },
         "PGDIOH_VnPGD___10_V__TJ____40_C_to_12": {
           "parameter": "Off leakage current",
+          "symbol": "PGDIOH",
           "min": null,
           "typ": null,
           "max": 1.0,
@@ -1143,6 +1349,381 @@
           "typ": 8,
           "unit": "µA"
         }
+      }
+    },
+    "design_context": {
+      "recommended_external_components": [
+        {
+          "role": "ovp_divider",
+          "designator": "R8",
+          "value_hint": "170 kOhm",
+          "purpose": "OVP threshold setting",
+          "related_formula": "R8_OVP_resistor",
+          "source_page": 23,
+          "snippet": "R8 sets the OVP threshold from VIN to OVP in the typical application."
+        },
+        {
+          "role": "uvlo_divider",
+          "designator": "R10",
+          "value_hint": "46.3 kOhm",
+          "purpose": "UVLO threshold setting",
+          "source_page": 23,
+          "snippet": "R10 works with the fixed lower UVLO resistor to set turn-on voltage."
+        },
+        {
+          "role": "sense_resistor",
+          "designator": "RS",
+          "value_hint": "9.38 Ohm",
+          "purpose": "Current sense programming",
+          "related_formula": "RS_SENSE_threshold",
+          "source_page": 23,
+          "snippet": "RS and RO program the VDS-based current limit network."
+        },
+        {
+          "role": "pass_fet",
+          "designator": "Q1",
+          "type": "MOSFET",
+          "typical_value": "N-channel, 30 A, 60 V",
+          "purpose": "Main pass element",
+          "source_page": 23,
+          "snippet": "Q1 is the external high-side pass MOSFET in the hot-swap path."
+        },
+        {
+          "role": "fault_timer_capacitor",
+          "designator": "C_TIMER",
+          "type": "capacitor",
+          "purpose": "Fault delay programming",
+          "related_formula": "C_TIMER_fault_delay",
+          "source_page": 20,
+          "snippet": "The TIMER capacitor sets startup and VDS fault delay behavior."
+        }
+      ],
+      "component_value_hints": [
+        {
+          "values": [
+            "170 kOhm",
+            "46.3 kOhm",
+            "10 kOhm",
+            "9.38 Ohm",
+            "22 uF",
+            "68 nF"
+          ],
+          "source_page": 23,
+          "snippet": "Typical application component values for OVP, UVLO, sense resistor, and TIMER capacitor."
+        }
+      ],
+      "design_range_hints": [
+        {
+          "name": "VIN",
+          "min": 9.0,
+          "max": 36.0,
+          "unit": "V",
+          "source_page": 23,
+          "snippet": "Typical hot-swap operating range"
+        },
+        {
+          "name": "IOUT",
+          "min": 30.0,
+          "max": 30.0,
+          "unit": "A",
+          "source_page": 23,
+          "snippet": "Typical current limit target"
+        }
+      ],
+      "design_equation_hints": [
+        {
+          "name": "R8_OVP_resistor",
+          "equation": "R8 = R9 * (VIN_MAX - OVPTH) / OVPTH",
+          "source_page": 22
+        },
+        {
+          "name": "C_TIMER_fault_delay",
+          "equation": "C_TIMER = (t_delay * ITIMERH) / VTMRH",
+          "source_page": 20
+        },
+        {
+          "name": "RS_SENSE_threshold",
+          "equation": "RS = (VDSTH - VOFFSET - RO * IOUT_EN) / ISENSE",
+          "source_page": 29
+        }
+      ],
+      "layout_hints": [
+        {
+          "hint": "Keep the current-sense path short and away from switching nodes.",
+          "source_page": 31
+        }
+      ],
+      "design_recommendations": [
+        {
+          "topic": "feedback_divider_bias",
+          "source_page": 22,
+          "note": "Keep the lower UVLO resistor fixed at 10 kOhm to reduce bias-current induced threshold error.",
+          "source": {
+            "document_id": "SNVS628H",
+            "revision": "Rev. H",
+            "url": "https://www.ti.com/lit/ds/symlink/lm5060.pdf"
+          }
+        },
+        {
+          "topic": "recommended_component_values",
+          "source_page": 23,
+          "note": "Use the typical application component values as a validation point for generated calculator outputs.",
+          "source": {
+            "document_id": "SNVS628H",
+            "revision": "Rev. H",
+            "url": "https://www.ti.com/lit/ds/symlink/lm5060.pdf"
+          }
+        }
+      ],
+      "design_formulas": [
+        {
+          "name": "R8_OVP_resistor",
+          "formula": "R8 = R9 * (VIN_MAX - OVPTH) / OVPTH",
+          "variables": {
+            "R8": {
+              "is_output": true
+            },
+            "R9": {
+              "is_input": true
+            },
+            "VIN_MAX": {
+              "is_input": true
+            },
+            "OVPTH": {
+              "refers_to": "OVPTH",
+              "unit": "V",
+              "description": "OVP threshold",
+              "typical": 2.0
+            }
+          },
+          "source": {
+            "page": 22,
+            "section": "OVP and UVLO Programming"
+          },
+          "category": "derived_hint"
+        },
+        {
+          "name": "C_TIMER_fault_delay",
+          "formula": "C_TIMER = (t_delay * ITIMERH) / VTMRH",
+          "variables": {
+            "C_TIMER": {
+              "is_output": true
+            },
+            "t_delay": {
+              "is_input": true
+            },
+            "ITIMERH": {
+              "refers_to": "ITIMERH",
+              "unit": "µA",
+              "description": "Timer charge current for VDS fault",
+              "typical": 11
+            },
+            "VTMRH": {
+              "refers_to": "VTMRH",
+              "unit": "V",
+              "description": "Timer fault threshold",
+              "typical": 2.0
+            }
+          },
+          "source": {
+            "page": 20,
+            "section": "Fault Timer Programming"
+          },
+          "category": "derived_hint"
+        },
+        {
+          "name": "RS_SENSE_threshold",
+          "formula": "RS = (VDSTH - VOFFSET - RO * IOUT_EN) / ISENSE",
+          "variables": {
+            "RS": {
+              "is_output": true
+            },
+            "VDSTH": {
+              "is_input": true
+            },
+            "VOFFSET": {
+              "refers_to": "VOFFSET",
+              "unit": "mV",
+              "description": "VDS comparator offset voltage",
+              "typical": 0
+            },
+            "RO": {
+              "is_input": true
+            },
+            "IOUT_EN": {
+              "refers_to": "IOUT-EN",
+              "unit": "µA",
+              "description": "OUT pin bias current, enabled",
+              "typical": 8
+            },
+            "ISENSE": {
+              "refers_to": "ISENSE",
+              "unit": "µA",
+              "description": "Threshold programming current",
+              "typical": 16
+            }
+          },
+          "source": {
+            "page": 29
+          },
+          "category": "derived_hint"
+        }
+      ],
+      "typical_application": {
+        "figure": "Figure 8-1",
+        "page": 23,
+        "title": "Typical Application Circuit",
+        "components": [
+          {
+            "designator": "R8",
+            "type": "resistor",
+            "connection": [
+              "VIN",
+              "OVP"
+            ],
+            "typical_value": "170 kOhm",
+            "purpose": "OVP threshold setting",
+            "related_formula": "R8_OVP_resistor"
+          },
+          {
+            "designator": "R10",
+            "type": "resistor",
+            "connection": [
+              "VIN",
+              "UVLO"
+            ],
+            "typical_value": "46.3 kOhm",
+            "purpose": "UVLO threshold setting"
+          },
+          {
+            "designator": "RS",
+            "type": "resistor",
+            "connection": [
+              "SENSE",
+              "OUT"
+            ],
+            "typical_value": "9.38 Ohm",
+            "purpose": "Current sense resistor",
+            "related_formula": "RS_SENSE_threshold"
+          },
+          {
+            "designator": "Q1",
+            "type": "MOSFET",
+            "connection": [
+              "GATE",
+              "VIN",
+              "OUT"
+            ],
+            "typical_value": "N-channel, 30 A, 60 V",
+            "purpose": "Main pass element"
+          }
+        ],
+        "design_example": {
+          "vin_range": "9V to 36V",
+          "i_limit": "30A",
+          "ocp_delay": "12ms"
+        }
+      },
+      "application_notes": [
+        {
+          "id": "AN-001",
+          "category": "component_selection",
+          "title": "R11 Fixed Value Recommendation",
+          "content": "Keep the UVLO divider bottom resistor at 10 kOhm and solve only the upper resistor for the target threshold.",
+          "rationale": "This keeps UVLO threshold error and UVLO bias-current sensitivity bounded across the operating range.",
+          "source": {
+            "page": 22,
+            "section": "8.2.2.2"
+          },
+          "severity": "recommendation"
+        },
+        {
+          "id": "AN-002",
+          "category": "pcb_layout",
+          "title": "Sense Resistor Placement",
+          "content": "Keep the current-sense path short and route it away from high di/dt switching current loops.",
+          "rationale": "Noise on the SENSE and OUT path can corrupt the programmed VDS threshold.",
+          "consequence": "False overcurrent triggering or delayed fault response.",
+          "source": {
+            "page": 31,
+            "section": "10.2"
+          },
+          "severity": "critical"
+        },
+        {
+          "id": "AN-003",
+          "category": "design_limits",
+          "title": "MOSFET RDS(ON) Selection",
+          "content": "Choose the pass MOSFET so the expected VDS drop at current limit stays above the comparator offset margin.",
+          "rationale": "The VOFFSET tolerance directly impacts the usable current-limit threshold window.",
+          "source": {
+            "page": 29,
+            "section": "8.2.2.4"
+          },
+          "severity": "critical",
+          "related_parameters": [
+            "VOFFSET",
+            "ISENSE",
+            "IOUT-EN"
+          ]
+        },
+        {
+          "id": "AN-004",
+          "category": "component_selection",
+          "title": "Feedback Divider Bias",
+          "content": "Keep the lower UVLO resistor fixed at 10 kOhm to reduce bias-current induced threshold error.",
+          "source": {
+            "page": 22,
+            "section": null
+          },
+          "severity": "recommendation"
+        },
+        {
+          "id": "AN-005",
+          "category": "component_selection",
+          "title": "Recommended Component Values",
+          "content": "Use the typical application component values as a validation point for generated calculator outputs.",
+          "source": {
+            "page": 23,
+            "section": null
+          },
+          "severity": "recommendation"
+        },
+        {
+          "id": "AN-006",
+          "category": "pcb_layout",
+          "title": "Layout Guidance",
+          "content": "Keep the current-sense path short and away from switching nodes.",
+          "source": {
+            "page": 31
+          },
+          "severity": "recommendation"
+        }
+      ],
+      "design_pages": {
+        "pages": [
+          {
+            "page": 22,
+            "title": "OVP and UVLO Programming",
+            "content_type": "application"
+          },
+          {
+            "page": 20,
+            "title": "Fault Timer Programming",
+            "content_type": "application"
+          },
+          {
+            "page": 23,
+            "title": "Typical Application Circuit",
+            "content_type": "application"
+          },
+          {
+            "page": 31,
+            "title": "Layout Example",
+            "content_type": "layout"
+          }
+        ],
+        "total_pages": 4
       }
     }
   }

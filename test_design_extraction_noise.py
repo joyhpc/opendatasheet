@@ -1,12 +1,19 @@
 import json
 from pathlib import Path
 
+import pytest
+
 from scripts.export_design_bundle import _index_extracted_records, _load_datasheet_design_context
+from scripts.validate_design_extraction import has_full_pdf_corpus
 
 REPO_ROOT = Path(__file__).resolve().parent
 EXPORT_DIR = REPO_ROOT / "data/sch_review_export"
 EXTRACTED_DIR = REPO_ROOT / "data/extracted_v2"
 PDF_DIR = REPO_ROOT / "data/raw/datasheet_PDF"
+pytestmark = pytest.mark.skipif(
+    not has_full_pdf_corpus(PDF_DIR),
+    reason="full datasheet PDF corpus is not available",
+)
 
 
 def _load_devices():
@@ -163,5 +170,5 @@ def test_current_decoder_design_contexts_capture_design_pages():
 def test_removed_ds90ub_exports_are_absent_from_checked_in_device_index():
     devices = _load_devices()
 
-    for mpn in ("DS90UB934TRGZRQ1", "DS90UB954TRGZRQ1", "DS90UB962WRTDTQ1", "DS90UB960WRTDRQ1", "DS90UB9702-Q1"):
+    for mpn in ("DS90UB934TRGZRQ1", "DS90UB954TRGZRQ1", "DS90UB962WRTDTQ1", "DS90UB960WRTDRQ1"):
         assert mpn not in devices

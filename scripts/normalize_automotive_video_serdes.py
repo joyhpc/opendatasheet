@@ -185,6 +185,7 @@ def normalize_extracted(payload: dict, profile: dict) -> dict:
 def normalize_export(payload: dict, profile: dict) -> dict:
     normalized = copy.deepcopy(payload)
     normalized["category"] = profile["category"]
+    _ensure_dict(normalized, "thermal")
 
     capability_blocks = _ensure_dict(normalized, "capability_blocks")
     capability_blocks["serial_video_bridge"] = copy.deepcopy(profile["serial_video_bridge"])

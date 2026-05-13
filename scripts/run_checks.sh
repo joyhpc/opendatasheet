@@ -1,45 +1,65 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-python3 -m py_compile \
-  pipeline.py \
-  pipeline_v2.py \
-  scripts/build_raw_source_manifest.py \
-  scripts/parse_anlogic_ph1a.py \
-  scripts/parse_anlogic_ph1a_pinout.py \
-  scripts/export_anlogic_ph1a_sch_review.py \
-  scripts/refresh_anlogic_ph1a.py \
-  scripts/check_hardware_doc_structure.py \
-  scripts/export_for_sch_review.py \
-  scripts/validate_design_extraction.py \
-  scripts/validate_exports.py \
-  test_regression.py \
-  test_pin_extraction.py \
-  test_drc_hints_v2.py \
-  test_anlogic_ph1a_pipeline.py \
-  test_anlogic_ph1a_pinout.py \
-  test_raw_source_manifest.py \
-  test_validate_design_extraction_manifest.py \
-  extractors/__init__.py \
-  extractors/base.py \
-  extractors/register.py \
-  extractors/timing.py \
-  extractors/power_sequence.py \
-  extractors/parametric.py \
-  extractors/protocol.py \
-  extractors/package.py
+PYTHON="${PYTHON:-python3}"
+COMPILE_ONLY=false
 
-echo "=== Extractor Registry Check ==="
-python3 -c "from extractors import EXTRACTOR_REGISTRY; assert len(EXTRACTOR_REGISTRY) >= 10, 'Expected at least 10 extractors'; print(f'  {len(EXTRACTOR_REGISTRY)} extractors registered')"
+case "${1:-}" in
+  --compile-only)
+    COMPILE_ONLY=true
+    shift
+    ;;
+  "")
+    ;;
+  *)
+    echo "usage: $0 [--compile-only]" >&2
+    exit 2
+    ;;
+esac
 
-if ! python3 scripts/build_raw_source_manifest.py --check; then
-  echo "raw-source manifest is missing or stale; run: python3 scripts/build_raw_source_manifest.py" >&2
+if [[ "$#" -gt 0 ]]; then
+  echo "usage: $0 [--compile-only]" >&2
+  exit 2
+fi
+
+echo "=== Python Syntax Check ==="
+if command -v git >/dev/null 2>&1 && git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+  mapfile -t python_files < <(git ls-files '*.py')
+else
+  mapfile -t python_files < <(
+    find . -name '*.py' \
+      -not -path './.git/*' \
+      -not -path './.venv/*' \
+      -not -path './data/*' \
+      -not -path './.tmp/*' \
+      -not -path './__pycache__/*' \
+      -not -path './*/__pycache__/*' \
+      | sort
+  )
+fi
+
+if [[ "${#python_files[@]}" -eq 0 ]]; then
+  echo "no Python files found" >&2
   exit 1
 fi
 
-python3 scripts/check_markdown_links.py
-python3 scripts/check_hardware_doc_structure.py
-python3 scripts/validate_exports.py --summary
-python3 scripts/validate_design_extraction.py --strict
-python3 test_regression.py
-python3 -m pytest -q
+"$PYTHON" -m py_compile "${python_files[@]}"
+
+if [[ "$COMPILE_ONLY" == "true" ]]; then
+  exit 0
+fi
+
+echo "=== Extractor Registry Check ==="
+"$PYTHON" -c "from extractors import EXTRACTOR_REGISTRY; assert len(EXTRACTOR_REGISTRY) >= 10, 'Expected at least 10 extractors'; print(f'  {len(EXTRACTOR_REGISTRY)} extractors registered')"
+
+if ! "$PYTHON" scripts/build_raw_source_manifest.py --check; then
+  echo "raw-source manifest is missing or stale; run: $PYTHON scripts/build_raw_source_manifest.py" >&2
+  exit 1
+fi
+
+"$PYTHON" scripts/check_markdown_links.py
+"$PYTHON" scripts/check_hardware_doc_structure.py
+"$PYTHON" scripts/validate_exports.py --summary
+"$PYTHON" scripts/validate_design_extraction.py --strict
+"$PYTHON" test_regression.py
+"$PYTHON" -m pytest -q

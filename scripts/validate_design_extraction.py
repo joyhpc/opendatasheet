@@ -61,6 +61,7 @@ BASELINE_EXPECTATIONS = {
     "layout_min": 85,
     "equations_min": 40,
 }
+FULL_PDF_CORPUS_MIN = BASELINE_EXPECTATIONS["pdf_text_min"]
 
 CATEGORY_BASELINE_EXPECTATIONS = {
     "Buck": {
@@ -207,6 +208,16 @@ def validate_category_baselines(category_counts: dict[str, Counter]) -> list[str
     return failures
 
 
+def count_available_datasheet_pdfs(pdf_dir: Path) -> int:
+    if not pdf_dir.exists():
+        return 0
+    return sum(1 for path in pdf_dir.glob("*.pdf") if path.is_file())
+
+
+def has_full_pdf_corpus(pdf_dir: Path) -> bool:
+    return count_available_datasheet_pdfs(pdf_dir) >= FULL_PDF_CORPUS_MIN
+
+
 def validate_raw_source_manifest(raw_root: Path, strict: bool = False, manifest_path: Path | None = None) -> list[str]:
     failures: list[str] = []
     manifest_path = manifest_path or (raw_root / DEFAULT_RAW_MANIFEST.name)
@@ -255,12 +266,19 @@ def main() -> int:
     counts, contexts = summarize_corpus(devices, extracted_index, args.pdf_dir)
     category_counts = summarize_by_category(devices, contexts)
     raw_root = args.pdf_dir.parent if args.pdf_dir.name == "datasheet_PDF" else args.pdf_dir
-    failures = (
-        validate_raw_source_manifest(raw_root, strict=args.strict)
-        + validate_curated(devices, contexts)
-        + validate_baseline(counts)
-        + validate_category_baselines(category_counts)
-    )
+    failures = validate_raw_source_manifest(raw_root, strict=args.strict)
+    if has_full_pdf_corpus(args.pdf_dir):
+        failures += (
+            validate_curated(devices, contexts)
+            + validate_baseline(counts)
+            + validate_category_baselines(category_counts)
+        )
+    else:
+        print(
+            "pdf_corpus=partial "
+            f"({count_available_datasheet_pdfs(args.pdf_dir)} PDFs); "
+            "skipping PDF-dependent coverage baselines"
+        )
 
     print("counts", dict(counts))
     print("category_counts", {key: dict(value) for key, value in sorted(category_counts.items()) if key in CATEGORY_BASELINE_EXPECTATIONS})

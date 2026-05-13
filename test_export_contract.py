@@ -3,9 +3,12 @@ import json
 from pathlib import Path
 import sys
 
+import pytest
+
 
 REPO_ROOT = Path(__file__).resolve().parent
 PINOUT_DIR = REPO_ROOT / "data" / "extracted_v2" / "fpga" / "pinout"
+PDF_DIR = REPO_ROOT / "data" / "raw" / "datasheet_PDF"
 sys.path.insert(0, str(REPO_ROOT / "scripts"))
 
 from export_for_sch_review import export_fpga, export_normal_ic, main as export_for_sch_review_main
@@ -14,6 +17,7 @@ from export_selection_profile import build_selection_card
 from export_design_bundle import _collect_constraints, _pick_preferred_package
 from normal_ic_design_context_loader import should_auto_extract_design_context
 from normal_ic_contract import build_normal_ic_record, normal_ic_record_to_export
+from validate_design_extraction import has_full_pdf_corpus
 
 
 def _load_pinout(name: str) -> dict:
@@ -379,6 +383,9 @@ def test_export_normal_ic_applies_tps56c215_design_context_override():
 
 
 def test_export_normal_ic_auto_extracts_buck_design_context_from_local_pdf():
+    if not has_full_pdf_corpus(PDF_DIR):
+        pytest.skip("full datasheet PDF corpus is not available")
+
     extracted = json.loads((REPO_ROOT / "data" / "extracted_v2" / "0130-01-00003_TPS62040DRC.json").read_text())
 
     exported = export_normal_ic(extracted)
@@ -390,6 +397,9 @@ def test_export_normal_ic_auto_extracts_buck_design_context_from_local_pdf():
 
 
 def test_export_normal_ic_auto_extracts_chinese_buck_design_context_from_local_pdf():
+    if not has_full_pdf_corpus(PDF_DIR):
+        pytest.skip("full datasheet PDF corpus is not available")
+
     extracted = json.loads((REPO_ROOT / "data" / "extracted_v2" / "0130-01-00059_TPS564247DRLR.json").read_text())
 
     exported = export_normal_ic(extracted)
