@@ -13,7 +13,7 @@ from parse_fpga_pinout import parse_pinout_file
 
 
 def _load_pinout(name: str) -> dict:
-    return json.loads((PINOUT_DIR / name).read_text())
+    return json.loads((PINOUT_DIR / name).read_text(encoding="utf-8"))
 
 
 def test_parse_artix_ultrascale_plus_pinout_normalizes_identity():
@@ -31,7 +31,7 @@ def test_parse_artix_ultrascale_plus_pinout_normalizes_identity():
 
 def test_export_artix_ultrascale_plus_ffvb676_has_expected_identity():
     pinout = _load_pinout("xcau10pffvb676pkg.json")
-    dc = json.loads((REPO_ROOT / "data" / "extracted_v2" / "fpga" / "ds931-artix-ultrascale-plus.json").read_text())
+    dc = json.loads((REPO_ROOT / "data" / "extracted_v2" / "fpga" / "ds931-artix-ultrascale-plus.json").read_text(encoding="utf-8"))
 
     exported = export_fpga(dc, pinout)
 
@@ -51,7 +51,7 @@ def test_export_artix_ultrascale_plus_ffvb676_has_expected_identity():
 
 
 def test_catalog_lists_artix_ultrascale_plus_packages():
-    catalog = json.loads((EXPORT_DIR / "_fpga_catalog.json").read_text())
+    catalog = json.loads((EXPORT_DIR / "_fpga_catalog.json").read_text(encoding="utf-8"))
     artix = catalog["tree"]["AMD"]["families"]["Artix UltraScale+"]["series"]["Artix UltraScale+"]["base_devices"]
 
     assert sorted(artix) == ["XCAU10P", "XCAU15P", "XCAU20P", "XCAU25P", "XCAU7P"]

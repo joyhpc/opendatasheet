@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/joyhpc/opendatasheet/actions/workflows/ci.yml/badge.svg)](https://github.com/joyhpc/opendatasheet/actions/workflows/ci.yml)
 [![Schema](https://img.shields.io/badge/schema-sch--review--device%2F1.1-2f81f7)](schemas/sch-review-device.schema.json)
-[![Exports](https://img.shields.io/badge/exports-250%20files-8250df)](data/sch_review_export/)
+[![Exports](https://img.shields.io/badge/exports-255%20files-8250df)](data/sch_review_export/)
 [![Docs](https://img.shields.io/badge/docs-index-238636)](docs/index.md)
 
 AI-powered electronic component datasheet parameter extraction pipeline.
@@ -24,6 +24,9 @@ PDF datasheets → structured JSON for schematic review DRC engines.
 - **Hardware Engineer Hub**: `docs/hardware-engineer-index.md`
 - **Doctor**: `python3 scripts/doctor.py --dev`
 - **Checks**: `./scripts/run_checks.sh`
+- **Export Refresh**: `python3 scripts/export_for_sch_review.py`
+- **Agilex 5 Interfaces**: `python3 scripts/export_debugtool_interface.py --check`
+- **BOM Review Loop**: `python3 scripts/bom_key_materials.py <bom> --output <report.json>`
 - **CI**: `.github/workflows/ci.yml`
 - **Contributing**: `CONTRIBUTING.md`
 - **Support**: `SUPPORT.md`
@@ -51,7 +54,7 @@ PDF datasheets → structured JSON for schematic review DRC engines.
 - [Extraction Methodology](docs/extraction-methodology.md) — How the Vision + Text hybrid pipeline works
 - [Schematic Review Integration](docs/sch-review-integration.md) — Data structures, examples, and Python code for consumers
 - [Schema](schemas/sch-review-device.schema.json) — `sch-review-device/1.1` JSON Schema (生成输出已收敛到 `device-knowledge/2.0`)
-- [Exported Data](data/sch_review_export/) — 250 checked-in device files ready for consumption
+- [Exported Data](data/sch_review_export/) — 255 checked-in device files ready for consumption
 
 ## Pipeline
 
@@ -69,13 +72,20 @@ Gemini-backed extractors attach non-serialized `model_trace` metadata beside eac
 
 Each trace records `prompt_id`, `prompt_version`, `prompt_sha256`, input image hashes, model/config, attempts, latency, token usage when available, and response hashes. This gives prompt/version comparison and replay inputs without changing existing extraction contracts.
 
+## Generated Interfaces and Sidecars
+
+- `pipeline_v2.py` writes managed model-audit sidecars under `_audit/*.model_trace.json` and extraction progress ledgers under `_state/*.domain_ledger.json` beside extracted outputs.
+- `scripts/prompt_registry.py` checks prompt IDs, semantic versions, and prompt hashes; it is included in `./scripts/run_checks.sh`.
+- `scripts/export_debugtool_interface.py` regenerates the Intel Agilex 5 DebugTool interface at `data/debugtool_interface/intel_agilex5.json` and the reusable knowledge pool under `data/knowledge_pool/fpga/intel_agilex5/`.
+- BOM evidence helpers live in `scripts/bom_key_materials.py`, `scripts/bom_evidence_fetch.py`, and `scripts/bom_doc_coverage.py` for key-material extraction, evidence capture, and coverage reporting.
+
 ## Coverage
 
 | Type | Count | Examples |
 |------|-------|---------|
-| Normal IC | 167 | LDO, Buck, OpAmp, Switch, ADC/DAC, Interface, SerDes |
+| Normal IC | 172 | LDO, Buck, OpAmp, Switch, ADC/DAC, Interface, SerDes |
 | FPGA | 83 | AMD UltraScale+, Gowin GW5AT/GW5AR/GW5AS, Lattice ECP5/CrossLink-NX, Intel Agilex 5 |
-| **Total** | **250** | Batch processing 346 PDFs (in progress) |
+| **Total** | **255** | Batch processing 346 PDFs (in progress) |
 
 ## Stack
 

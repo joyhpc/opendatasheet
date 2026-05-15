@@ -24,6 +24,7 @@ from pathlib import Path
 from design_info_utils import APPLICATION_PATTERNS, detect_design_page_kind, extract_design_context
 
 from extractors import EXTRACTOR_REGISTRY
+from runtime.extraction_ledger import write_extraction_ledger_sidecar
 from runtime._locking import try_exclusive_lock
 
 
@@ -197,6 +198,7 @@ GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
 GEMINI_MODEL = "gemini-3-flash-preview"
 DATA_DIR = Path(__file__).parent / "data" / "raw" / "datasheet_PDF"
 OUTPUT_DIR = Path(__file__).parent / "data" / "extracted_v2"
+MODEL_AUDIT_SCHEMA = "opendatasheet-model-audit/1.0"
 DPI = 200  # 渲染分辨率
 
 _httpx_client = httpx.Client(
@@ -388,6 +390,59 @@ def _build_domain_trace_record(
         "is_fpga": is_fpga,
     })
     return trace_record
+
+
+def model_audit_sidecar_path(output_path: str | Path) -> Path:
+    """Return the managed audit sidecar path for an extracted JSON output."""
+    output_path = Path(output_path)
+    return output_path.parent / "_audit" / f"{output_path.stem}.model_trace.json"
+
+
+def build_model_audit_record(result: dict) -> dict | None:
+    """Build the sidecar audit payload for model traces, if traces are present."""
+    domain_traces = result.get("domain_traces")
+    if not isinstance(domain_traces, dict) or not domain_traces:
+        return None
+
+    validation = result.get("validation", [])
+    physics_validation = result.get("physics_validation", [])
+    pin_validation = result.get("pin_validation", [])
+
+    return {
+        "_schema": MODEL_AUDIT_SCHEMA,
+        "pdf_name": result.get("pdf_name"),
+        "model": result.get("model"),
+        "mode": result.get("mode"),
+        "is_fpga": result.get("is_fpga"),
+        "checksum": result.get("checksum"),
+        "total_pages": result.get("total_pages"),
+        "vision_pages": result.get("vision_pages", []),
+        "domain_timings": result.get("domain_timings", {}),
+        "validation_summary": {
+            "l2_failures": len([item for item in validation if not item.get("passed", True)])
+            if isinstance(validation, list) else None,
+            "l5_failures": len([item for item in physics_validation if not item.get("passed", True)])
+            if isinstance(physics_validation, list) else None,
+            "pin_issues": len(pin_validation) if isinstance(pin_validation, list) else None,
+            "cross_validation": result.get("cross_validation", {}),
+        },
+        "domain_traces": domain_traces,
+    }
+
+
+def write_model_audit_sidecar(result: dict, output_path: str | Path) -> Path | None:
+    """Write a model audit sidecar next to an extracted JSON file."""
+    audit_record = build_model_audit_record(result)
+    if audit_record is None:
+        return None
+
+    sidecar_path = model_audit_sidecar_path(output_path)
+    sidecar_path.parent.mkdir(parents=True, exist_ok=True)
+    sidecar_path.write_text(
+        json.dumps(audit_record, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    return sidecar_path
 
 
 # ============================================
@@ -1221,6 +1276,8 @@ def run_batch(limit: int = 5):
 
         with open(out_path, 'w', encoding='utf-8') as f:
             json.dump(result, f, ensure_ascii=False, indent=2)
+        write_model_audit_sidecar(result, out_path)
+        write_extraction_ledger_sidecar(result, out_path)
 
         time.sleep(5)
 
@@ -1287,6 +1344,12 @@ def main():
                 out_path.parent.mkdir(parents=True, exist_ok=True)
                 out_path.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
                 print(f"saved {out_path}")
+                audit_path = write_model_audit_sidecar(result, out_path)
+                if audit_path:
+                    print(f"saved audit {audit_path}")
+                ledger_path = write_extraction_ledger_sidecar(result, out_path)
+                if ledger_path:
+                    print(f"saved ledger {ledger_path}")
             print(json.dumps(result, ensure_ascii=False, indent=2))
             return
         try:

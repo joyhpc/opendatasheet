@@ -15,7 +15,8 @@
           "value": { "type": ["string", "null"] },
           "purpose": { "type": ["string", "null"] },
           "conditions": { "type": ["string", "null"] },
-          "source": { "type": ["string", "null"] }
+          "source": { "type": ["string", "null"] },
+          "origin": { "$ref": "#/$defs/origin_metadata" }
         },
         "additionalProperties": true
       }
@@ -31,7 +32,8 @@
             "items": { "type": "string" }
           },
           "source_page": { "type": ["integer", "null"] },
-          "snippet": { "type": ["string", "null"] }
+          "snippet": { "type": ["string", "null"] },
+          "origin": { "$ref": "#/$defs/origin_metadata" }
         },
         "additionalProperties": true
       }
@@ -47,7 +49,8 @@
           "max": { "type": ["number", "null"] },
           "unit": { "type": ["string", "null"] },
           "source_page": { "type": ["integer", "null"] },
-          "snippet": { "type": ["string", "null"] }
+          "snippet": { "type": ["string", "null"] },
+          "origin": { "$ref": "#/$defs/origin_metadata" }
         },
         "additionalProperties": true
       }
@@ -62,7 +65,8 @@
           "equation": { "type": "string" },
           "variables": { "type": "object", "additionalProperties": true },
           "description": { "type": ["string", "null"] },
-          "source": { "type": ["string", "null"] }
+          "source": { "type": ["string", "null"] },
+          "origin": { "$ref": "#/$defs/origin_metadata" }
         },
         "additionalProperties": true
       }
@@ -163,7 +167,8 @@
           "hint": { "type": "string" },
           "severity": { "enum": ["ERROR", "WARNING", "INFO"] },
           "applies_to": { "type": ["string", "null"] },
-          "source": { "type": ["string", "null"] }
+          "source": { "type": ["string", "null"] },
+          "origin": { "$ref": "#/$defs/origin_metadata" }
         },
         "additionalProperties": true
       }
@@ -178,7 +183,8 @@
           "voltage": { "$ref": "#/$defs/param_value" },
           "current": { "$ref": "#/$defs/param_value" },
           "notes": { "type": ["string", "null"] },
-          "source": { "type": ["string", "null"] }
+          "source": { "type": ["string", "null"] },
+          "origin": { "$ref": "#/$defs/origin_metadata" }
         },
         "additionalProperties": true
       }
@@ -192,7 +198,8 @@
           "topology": { "type": "string" },
           "description": { "type": ["string", "null"] },
           "conditions": { "type": ["string", "null"] },
-          "source": { "type": ["string", "null"] }
+          "source": { "type": ["string", "null"] },
+          "origin": { "$ref": "#/$defs/origin_metadata" }
         },
         "additionalProperties": true
       }
@@ -208,7 +215,8 @@
             "properties": {
               "page": { "type": "integer" },
               "title": { "type": ["string", "null"] },
-              "content_type": { "type": ["string", "null"] }
+              "content_type": { "type": ["string", "null"] },
+              "origin": { "$ref": "#/$defs/origin_metadata" }
             },
             "additionalProperties": true
           }
@@ -220,6 +228,27 @@
   },
   "additionalProperties": false,
   "$defs": {
+    "origin_metadata": {
+      "description": "Evidence boundary for a design-context item: source fact, deterministic inference, model inference, manual override, or source recommendation.",
+      "type": "object",
+      "required": ["kind"],
+      "properties": {
+        "kind": {
+          "enum": [
+            "source_fact",
+            "deterministic_inference",
+            "model_inference",
+            "manual_override",
+            "source_recommendation"
+          ]
+        },
+        "method": { "type": ["string", "null"] },
+        "source_page": { "type": ["integer", "null"] },
+        "source_field": { "type": ["string", "null"] },
+        "confidence": { "type": ["number", "null"], "minimum": 0, "maximum": 1 }
+      },
+      "additionalProperties": true
+    },
     "param_value": {
       "description": "A numeric parameter with optional min/typ/max/unit/conditions",
       "type": "object",

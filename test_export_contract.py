@@ -21,7 +21,7 @@ from validate_design_extraction import has_full_pdf_corpus
 
 
 def _load_pinout(name: str) -> dict:
-    return json.loads((PINOUT_DIR / name).read_text())
+    return json.loads((PINOUT_DIR / name).read_text(encoding="utf-8"))
 
 
 def test_export_normal_ic_emits_v2_with_canonical_domains_and_flat_compat():
@@ -386,7 +386,7 @@ def test_export_normal_ic_auto_extracts_buck_design_context_from_local_pdf():
     if not has_full_pdf_corpus(PDF_DIR):
         pytest.skip("full datasheet PDF corpus is not available")
 
-    extracted = json.loads((REPO_ROOT / "data" / "extracted_v2" / "0130-01-00003_TPS62040DRC.json").read_text())
+    extracted = json.loads((REPO_ROOT / "data" / "extracted_v2" / "0130-01-00003_TPS62040DRC.json").read_text(encoding="utf-8"))
 
     exported = export_normal_ic(extracted)
     design_context = exported["domains"]["design_context"]
@@ -400,7 +400,7 @@ def test_export_normal_ic_auto_extracts_chinese_buck_design_context_from_local_p
     if not has_full_pdf_corpus(PDF_DIR):
         pytest.skip("full datasheet PDF corpus is not available")
 
-    extracted = json.loads((REPO_ROOT / "data" / "extracted_v2" / "0130-01-00059_TPS564247DRLR.json").read_text())
+    extracted = json.loads((REPO_ROOT / "data" / "extracted_v2" / "0130-01-00059_TPS564247DRLR.json").read_text(encoding="utf-8"))
 
     exported = export_normal_ic(extracted)
     design_context = exported["domains"]["design_context"]
@@ -420,7 +420,7 @@ def test_auto_extract_design_context_supports_protection_controller_descriptions
 
 
 def test_export_normal_ic_exposes_structured_lm5060_design_assets():
-    extracted = json.loads((REPO_ROOT / "data" / "extracted_v2" / "lm5060_ds.json").read_text())
+    extracted = json.loads((REPO_ROOT / "data" / "extracted_v2" / "lm5060_ds.json").read_text(encoding="utf-8"))
 
     exported = export_normal_ic(extracted)
     design_context = exported["domains"]["design_context"]

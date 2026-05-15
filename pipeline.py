@@ -13,12 +13,15 @@ import os
 import sys
 import time
 import hashlib
-import fcntl
 from pathlib import Path
 from dataclasses import dataclass, field, asdict
 from typing import Optional
 
 from google import genai
+
+from runtime._locking import try_exclusive_lock
+
+# Legacy pipeline entrypoint. New extraction work should use pipeline_v2.py.
 
 # ============================================
 # Config
@@ -390,17 +393,13 @@ def run_batch(limit: int = 5):
 
     # 进程锁：防止多实例同时运行
     lock_path = OUTPUT_DIR / ".pipeline.lock"
-    lock_fd = open(lock_path, 'w')
-    try:
-        fcntl.flock(lock_fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
-    except BlockingIOError:
+    lock_metadata = f"pid={os.getpid()} started={time.strftime('%Y-%m-%d %H:%M:%S UTC', time.gmtime())}\n"
+    _batch_lock = try_exclusive_lock(lock_path, metadata=lock_metadata)
+    if _batch_lock is None:
         print("ERROR: Another pipeline instance is already running!")
         print(f"Lock file: {lock_path}")
         print("If stale, delete the lock file and retry.")
         sys.exit(1)
-
-    lock_fd.write(f"pid={os.getpid()} started={time.strftime('%Y-%m-%d %H:%M:%S UTC', time.gmtime())}\n")
-    lock_fd.flush()
 
     pdf_files = sorted([f for f in DATA_DIR.iterdir() if f.suffix.lower() == '.pdf'])
     if limit:

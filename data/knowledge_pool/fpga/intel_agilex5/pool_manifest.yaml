@@ -1,0 +1,30 @@
+schema: opendatasheet-knowledge-pool/1.0
+pool_id: fpga.intel_agilex5
+vendor: Intel/Altera
+family: Agilex 5
+source_exports:
+  glob: data/sch_review_export/A5E*.json
+  device_count: 10
+naming:
+  artifact_dir: data/knowledge_pool/fpga/intel_agilex5
+  rule: "<domain>/<vendor_family>/<artifact_kind>.json"
+  pool_id_rule: "fpga.<vendor_family>"
+artifacts:
+  device_profiles:
+    file: device_profiles.json
+    contains: device identity, selectors, source traceability, capability blocks
+  pin_signal_map:
+    file: pin_signal_map.json
+    contains: configuration pins, SDM boot pins, HPS mux groups, memory DQS groups
+  electrical_constraints:
+    file: electrical_constraints.json
+    contains: supply specs, absolute maximums, IO standards, constraint blocks, DRC rules
+  diagnostic_evidence_profiles:
+    file: diagnostic_evidence_profiles.json
+    contains: reusable bring-up/debug evidence requirements and application bindings
+  debug_readiness_matrix:
+    file: debug_readiness_matrix.json
+    contains: coverage matrix for DebugTool-style first-pass debug needs and external evidence boundaries
+  application_profiles:
+    file: application_profiles.yaml
+    contains: read-order policy for each downstream consumer

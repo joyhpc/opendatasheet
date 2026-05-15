@@ -6,7 +6,7 @@ REPO_ROOT = Path(__file__).resolve().parent
 
 
 def _load_json(path: Path) -> dict:
-    with path.open() as fp:
+    with path.open(encoding="utf-8") as fp:
         return json.load(fp)
 
 

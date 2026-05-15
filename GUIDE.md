@@ -26,7 +26,7 @@ Formal JSON Schema (`sch-review-device/1.1`). Two types: `normal_ic` (packages �
 
 ## Data
 
-### 4. [Exported Device Data](data/sch_review_export/) — 194 files (163 IC + 31 FPGA)
+### 4. [Exported Device Data](data/sch_review_export/) — 255 files (172 IC + 83 FPGA)
 Ready-to-consume JSON files conforming to the schema above. One file per device (IC) or device+package (FPGA).
 
 Example files to look at:
@@ -62,7 +62,7 @@ Original pipeline architecture and design decisions.
 
 ## Environment
 
-- Export `GEMINI_API_KEY` before running `pipeline.py` or `pipeline_v2.py`.
+- Export `GEMINI_API_KEY` before running `pipeline_v2.py`.
 - Example: `export GEMINI_API_KEY='<your-api-key>'`
 - Extraction scripts now fail fast with a clear error if the variable is missing.
 
@@ -99,4 +99,4 @@ Original pipeline architecture and design decisions.
 
 - **Batch processing**: 309 PDFs in progress (~34/309 done, ~6.5h remaining)
 - **Total PDF library**: 346 datasheets
-- **API**: Gemini 2.0 Flash (vision), well within rate limits
+- **API**: Gemini 3 Flash (`gemini-3-flash-preview`), well within rate limits

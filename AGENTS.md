@@ -29,6 +29,12 @@ When calling tools for a coding or validation task:
 - do not read broad documentation sets unless the task is explicitly documentation-oriented
 - do not open `docs/hardware-engineering/` recursively
 
+## Remote Sync Rule
+
+After completing a major optimization:
+- run the relevant local validation first
+- proactively sync the working branch to the remote unless the user explicitly asks to hold changes or credentials/permissions block the push
+
 ## Suggested Entry Points
 
 For repository workflow:

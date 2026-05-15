@@ -30,6 +30,10 @@ from design_guide_domain import load_gowin_design_guide_bundle, resolve_gowin_de
 from normal_ic_design_context_loader import load_design_context_for_export_record, should_auto_extract_design_context
 from normal_ic_design_overrides import get_normal_ic_design_context_override, merge_design_context
 from normal_ic_contract import build_normal_ic_record, normal_ic_record_to_export
+from normalize_automotive_video_serdes import (
+    DEFAULT_PROFILE_PATH as AUTOMOTIVE_VIDEO_SERDES_PROFILE_PATH,
+    normalize_export as normalize_automotive_video_serdes_export,
+)
 
 SCHEMA_VERSION = "sch-review-device/1.1"
 SCHEMA_VERSION_V2 = "device-knowledge/2.0"
@@ -37,6 +41,22 @@ SCHEMA_VERSION_V2 = "device-knowledge/2.0"
 DEFAULT_EXTRACTED_DIR = Path(__file__).parent.parent / "data/extracted_v2"
 DEFAULT_FPGA_PINOUT_DIR = Path(__file__).parent.parent / "data/extracted_v2/fpga/pinout"
 DEFAULT_OUTPUT_DIR = Path(__file__).parent.parent / "data/sch_review_export"
+
+
+def _load_automotive_video_serdes_profiles(profile_path: Path = AUTOMOTIVE_VIDEO_SERDES_PROFILE_PATH) -> dict:
+    if not profile_path.exists():
+        return {}
+    with open(profile_path, encoding="utf-8") as fp:
+        payload = json.load(fp)
+    profiles = payload.get("devices", {})
+    return profiles if isinstance(profiles, dict) else {}
+
+
+def _apply_normal_ic_export_profiles(result: dict, profiles: dict) -> dict:
+    profile = profiles.get(result.get("mpn"))
+    if not isinstance(profile, dict) or profile.get("status", "active") != "active":
+        return result
+    return normalize_automotive_video_serdes_export(result, profile)
 
 
 def _remove_stale_managed_exports(output_dir: Path, expected_files: set[str]) -> list[str]:
@@ -102,7 +122,13 @@ def get_extraction(data: dict) -> dict:
     """Get electrical extraction from either format."""
     fmt = detect_input_format(data)
     if fmt == "domains":
-        return data["domains"].get("electrical", {})
+        electrical = data["domains"].get("electrical", {})
+        if isinstance(electrical, dict) and electrical.get("component"):
+            return electrical
+        legacy = data.get("extraction", {})
+        if isinstance(legacy, dict) and legacy.get("component"):
+            return legacy
+        return electrical if isinstance(electrical, dict) else {}
     return data.get("extraction", {})
 
 
@@ -1102,6 +1128,18 @@ INTEL_AGILEX5_PART_DECODER_SOURCE = {
     "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk",
 }
 
+INTEL_AGILEX5_DATASHEET_SOURCE = {
+    "source": "agilex5_device_datasheet_813918_2024_08_05",
+    "source_document_id": "813918",
+    "source_url": "https://cdrdv2.intel.com/v1/dl/getContent/813918",
+    "source_version": "2024-08-05",
+}
+
+INTEL_AGILEX5_PIN_CONNECTION_GUIDE_REFERENCE = {
+    "source": "agilex5_pin_connection_guidelines_reference",
+    "source_note": "The official Agilex 5 pinout workbooks reference the Pin Connection Guidelines for pin definition and connection guidance; this repository has not yet parsed that guide into structured rules.",
+}
+
 INTEL_AGILEX5_DEVICE_PROFILES = {
     "A5E013B": {
         "device_group": "B",
@@ -1177,6 +1215,280 @@ def _intel_agilex5_variant(device: str) -> dict:
     if not match:
         return {}
     return {"variant_code": match.group(1), **INTEL_AGILEX5_VARIANTS.get(match.group(1), {})}
+
+
+def _intel_agilex5_param(
+    parameter: str,
+    symbol: str,
+    *,
+    min_value=None,
+    typ_value=None,
+    max_value=None,
+    value=None,
+    unit: str = "V",
+    conditions: str | None = None,
+    source_page: int | None = None,
+) -> dict:
+    entry = {
+        "parameter": parameter,
+        "symbol": symbol,
+        "min": min_value,
+        "typ": typ_value,
+        "max": max_value,
+        "value": value,
+        "unit": unit,
+        "conditions": conditions,
+        **INTEL_AGILEX5_DATASHEET_SOURCE,
+    }
+    if source_page is not None:
+        entry["source_page"] = source_page
+    return {key: item for key, item in entry.items() if item is not None}
+
+
+def _intel_agilex5_supply_specs(variant: dict) -> dict:
+    specs = {
+        "VCC_fixed_4S": _intel_agilex5_param("Core voltage supply", "VCC", min_value=0.776, typ_value=0.8, max_value=0.824, conditions="E-Series fixed voltage speed grade -4S", source_page=24),
+        "VCC_fixed_5S": _intel_agilex5_param("Core voltage supply", "VCC", min_value=0.756, typ_value=0.78, max_value=0.803, conditions="E-Series fixed voltage speed grade -5S", source_page=24),
+        "VCC_fixed_6S_6X": _intel_agilex5_param("Core voltage supply", "VCC", min_value=0.7275, typ_value=0.75, max_value=0.7725, conditions="E-Series fixed voltage speed grades -6S/-6X", source_page=24),
+        "VCC_smartvid": _intel_agilex5_param("Core voltage supply", "VCC", value="SmartVID programmed value 0.70-0.90 V, +/-3%", conditions="E-Series SmartVID speed grades -1V/-2V/-2E/-3V", source_page=24),
+        "VCCP_fixed_4S": _intel_agilex5_param("Periphery supply voltage for I/O banks", "VCCP", min_value=0.776, typ_value=0.8, max_value=0.824, conditions="E-Series fixed voltage speed grade -4S", source_page=24),
+        "VCCP_fixed_5S": _intel_agilex5_param("Periphery supply voltage for I/O banks", "VCCP", min_value=0.756, typ_value=0.78, max_value=0.803, conditions="E-Series fixed voltage speed grade -5S", source_page=24),
+        "VCCP_fixed_6S_6X": _intel_agilex5_param("Periphery supply voltage for I/O banks", "VCCP", min_value=0.7275, typ_value=0.75, max_value=0.7725, conditions="E-Series fixed voltage speed grades -6S/-6X", source_page=24),
+        "VCCP_smartvid": _intel_agilex5_param("Periphery supply voltage for I/O banks", "VCCP", value="SmartVID programmed value 0.70-0.90 V, +/-3%", conditions="E-Series SmartVID speed grades -1V/-2V/-2E/-3V", source_page=24),
+        "VCCH_SDM_with_transceiver": _intel_agilex5_param("SDM block AIB I/O supply voltage sense", "VCCH_SDM", min_value=0.975, typ_value=1.0, max_value=1.025, conditions="E-Series with transceiver", source_page=25),
+        "VCCPT": _intel_agilex5_param("Power supply for I/O, DTS, SDM, and system PLL", "VCCPT", min_value=1.746, typ_value=1.8, max_value=1.854, source_page=25),
+        "VCCRCORE": _intel_agilex5_param("Power supply for programmable power technology", "VCCRCORE", min_value=1.14, typ_value=1.2, max_value=1.26, source_page=25),
+        "VCCBAT": _intel_agilex5_param("Battery backup power supply for design security volatile key register", "VCCBAT", min_value=1.0, value="1.0-1.8", max_value=1.8, source_page=25),
+        "VCCIO_PIO_SDM_1V2": _intel_agilex5_param("SDM block I/O supply voltage sense of bank 3A", "VCCIO_PIO_SDM", min_value=1.164, typ_value=1.2, max_value=1.236, conditions="1.2 V; required for Avalon Streaming x16 configuration schemes", source_page=25),
+        "VCCIO_SDM": _intel_agilex5_param("SDM block configuration pins power supply", "VCCIO_SDM", min_value=1.71, typ_value=1.8, max_value=1.89, source_page=26),
+        "VCCPLL_SDM": _intel_agilex5_param("SDM block PLL analog power supply", "VCCPLL_SDM", min_value=1.71, typ_value=1.8, max_value=1.89, source_page=26),
+        "VCCFUSEWR_SDM": _intel_agilex5_param("Fuse block writing power supply", "VCCFUSEWR_SDM", min_value=1.71, typ_value=1.8, max_value=1.89, source_page=26),
+        "VCCADC": _intel_agilex5_param("ADC voltage sensor power supply", "VCCADC", min_value=1.71, typ_value=1.8, max_value=1.89, source_page=27),
+        "VCCIO_PIO_1V0": _intel_agilex5_param("HSIO bank power supply", "VCCIO_PIO", min_value=0.95, typ_value=1.0, max_value=1.05, conditions="1.0 V HSIO", source_page=27),
+        "VCCIO_PIO_1V05": _intel_agilex5_param("HSIO bank power supply", "VCCIO_PIO", min_value=1.0185, typ_value=1.05, max_value=1.0815, conditions="1.05 V HSIO", source_page=27),
+        "VCCIO_PIO_1V1": _intel_agilex5_param("HSIO bank power supply", "VCCIO_PIO", min_value=1.067, typ_value=1.1, max_value=1.133, conditions="1.1 V HSIO", source_page=27),
+        "VCCIO_PIO_1V2": _intel_agilex5_param("HSIO bank power supply", "VCCIO_PIO", min_value=1.164, typ_value=1.2, max_value=1.236, conditions="1.2 V HSIO", source_page=27),
+        "VCCIO_PIO_1V3": _intel_agilex5_param("HSIO bank power supply", "VCCIO_PIO", min_value=1.261, typ_value=1.3, max_value=1.339, conditions="1.3 V HSIO", source_page=27),
+        "VCCIO_HVIO_3V3": _intel_agilex5_param("HVIO bank power supply", "VCCIO_HVIO", min_value=3.201, typ_value=3.3, max_value=3.399, conditions="3.3 V HVIO", source_page=27),
+        "VCCIO_HVIO_2V5": _intel_agilex5_param("HVIO bank power supply", "VCCIO_HVIO", min_value=2.425, typ_value=2.5, max_value=2.575, conditions="2.5 V HVIO", source_page=27),
+        "VCCIO_HVIO_1V8": _intel_agilex5_param("HVIO bank power supply", "VCCIO_HVIO", min_value=1.746, typ_value=1.8, max_value=1.854, conditions="1.8 V HVIO", source_page=27),
+        "VCCPT_HVIO": _intel_agilex5_param("Supply voltage for 1.8 V I/O", "VCCPT_HVIO", min_value=1.746, typ_value=1.8, max_value=1.854, source_page=27),
+    }
+    if variant.get("transceiver"):
+        specs.update({
+            "VCC_HSSI_6S_6X": _intel_agilex5_param("Transceiver, system PLL, and hard IP digital power supply", "VCC_HSSI_[L1,R4]", typ_value=0.75, conditions="E-Series GTS transceiver, speed grades -6S/-6X", source_page=30),
+            "VCC_HSSI_5S": _intel_agilex5_param("Transceiver, system PLL, and hard IP digital power supply", "VCC_HSSI_[L1,R4]", typ_value=0.78, conditions="E-Series GTS transceiver, speed grade -5S", source_page=30),
+            "VCC_HSSI_1V_2V_2E_3V_4S": _intel_agilex5_param("Transceiver, system PLL, and hard IP digital power supply", "VCC_HSSI_[L1,R4]", typ_value=0.8, conditions="E-Series GTS transceiver, speed grades -1V/-2V/-2E/-3V/-4S", source_page=30),
+            "VCCEHT_GTS": _intel_agilex5_param("Transceiver PMA, PLL, and reference clock high-voltage analog power supply", "VCCEHT_GTS[L1,R4][A,B,C]", typ_value=1.8, conditions="E-Series GTS transceiver", source_page=30),
+            "VCCERT_GTS": _intel_agilex5_param("Transceiver PMA and reference clock low-voltage analog power supply", "VCCERT_GTS[L1,R4][A,B,C]", typ_value=1.0, conditions="E-Series GTS transceiver", source_page=30),
+        })
+    if variant.get("hps") and variant.get("hps") != "none":
+        specs.update({
+            "VCCL_HPS_fixed_4S": _intel_agilex5_param("HPS DSU voltage and periphery circuitry power supply", "VCCL_HPS", typ_value=0.8, conditions="E-Series HPS fixed voltage speed grade -4S, +/-3%", source_page=32),
+            "VCCL_HPS_fixed_5S": _intel_agilex5_param("HPS DSU voltage and periphery circuitry power supply", "VCCL_HPS", typ_value=0.78, conditions="E-Series HPS fixed voltage speed grade -5S, +/-3%", source_page=32),
+            "VCCL_HPS_fixed_6S_6X": _intel_agilex5_param("HPS DSU voltage and periphery circuitry power supply", "VCCL_HPS", typ_value=0.75, conditions="E-Series HPS fixed voltage speed grades -6S/-6X, +/-3%", source_page=32),
+            "VCCL_HPS_smartvid": _intel_agilex5_param("HPS DSU voltage and periphery circuitry power supply", "VCCL_HPS", value="SmartVID programmed value 0.70-0.90 V, +/-3%", conditions="E-Series HPS SmartVID speed grades -1V/-2V/-2E/-3V", source_page=32),
+            "VCCPLL1_HPS": _intel_agilex5_param("HPS PLL1 analog power supply", "VCCPLL1_HPS", min_value=1.71, typ_value=1.8, max_value=1.89, source_page=31),
+            "VCCPLL2_HPS": _intel_agilex5_param("HPS PLL2 analog power supply", "VCCPLL2_HPS", min_value=1.71, typ_value=1.8, max_value=1.89, source_page=31),
+            "VCCIO_HPS": _intel_agilex5_param("HPS I/O buffers power supply", "VCCIO_HPS", min_value=1.71, typ_value=1.8, max_value=1.89, source_page=31),
+        })
+    return specs
+
+
+def _intel_agilex5_absolute_maximum_ratings(variant: dict) -> dict:
+    specs = {
+        "abs_VCC_smartvid": _intel_agilex5_param("Core voltage supply", "VCC", min_value=-0.5, max_value=1.21, conditions="E-Series SmartVID speed grades -1V/-2V/-2E/-3V", source_page=9),
+        "abs_VCC_fixed_4S": _intel_agilex5_param("Core voltage supply", "VCC", min_value=-0.5, max_value=1.07, conditions="E-Series fixed voltage speed grade -4S", source_page=9),
+        "abs_VCC_fixed_5S": _intel_agilex5_param("Core voltage supply", "VCC", min_value=-0.5, max_value=1.043, conditions="E-Series fixed voltage speed grade -5S", source_page=9),
+        "abs_VCC_fixed_6S_6X": _intel_agilex5_param("Core voltage supply", "VCC", min_value=-0.5, max_value=1.004, conditions="E-Series fixed voltage speed grades -6S/-6X", source_page=9),
+        "abs_VCCPT": _intel_agilex5_param("Power supply for I/O, DTS, SDM, and system PLL", "VCCPT", min_value=-0.5, max_value=2.08, source_page=9),
+        "abs_VCCRCORE": _intel_agilex5_param("Power supply for programmable power technology", "VCCRCORE", min_value=-0.5, max_value=1.64, source_page=9),
+        "abs_VCCBAT": _intel_agilex5_param("Battery backup power supply for design security volatile key register", "VCCBAT", min_value=-0.5, max_value=2.08, source_page=9),
+        "abs_VCCIO_SDM": _intel_agilex5_param("SDM block configuration pins power supply", "VCCIO_SDM", min_value=-0.5, max_value=2.08, source_page=10),
+        "abs_VCCIO_PIO_1V0": _intel_agilex5_param("HSIO bank power supply", "VCCIO_PIO", min_value=-0.5, max_value=1.365, conditions="VCCIO_PIO = 1.0 V", source_page=12),
+        "abs_VCCIO_PIO_1V05": _intel_agilex5_param("HSIO bank power supply", "VCCIO_PIO", min_value=-0.5, max_value=1.43, conditions="VCCIO_PIO = 1.05 V", source_page=12),
+        "abs_VCCIO_PIO_1V1": _intel_agilex5_param("HSIO bank power supply", "VCCIO_PIO", min_value=-0.5, max_value=1.5, conditions="VCCIO_PIO = 1.1 V", source_page=12),
+        "abs_VCCIO_PIO_1V2": _intel_agilex5_param("HSIO bank power supply", "VCCIO_PIO", min_value=-0.5, max_value=1.64, conditions="VCCIO_PIO = 1.2 V", source_page=12),
+        "abs_VCCIO_PIO_1V3": _intel_agilex5_param("HSIO bank power supply", "VCCIO_PIO", min_value=-0.5, max_value=1.74, conditions="VCCIO_PIO = 1.3 V", source_page=12),
+        "abs_VCCIO_HVIO_3V3": _intel_agilex5_param("HVIO bank power supply", "VCCIO_HVIO", min_value=-0.5, max_value=3.74, conditions="VCCIO_HVIO = 3.3 V", source_page=13),
+        "abs_VCCIO_HVIO_2V5": _intel_agilex5_param("HVIO bank power supply", "VCCIO_HVIO", min_value=-0.5, max_value=2.83, conditions="VCCIO_HVIO = 2.5 V", source_page=13),
+        "abs_VCCIO_HVIO_1V8": _intel_agilex5_param("HVIO bank power supply", "VCCIO_HVIO", min_value=-0.5, max_value=2.04, conditions="VCCIO_HVIO = 1.8 V", source_page=13),
+        "abs_TJ": _intel_agilex5_param("Absolute junction temperature", "TJ", min_value=-40, max_value=125, unit="degC", source_page=14),
+        "abs_TSTG": _intel_agilex5_param("Storage temperature", "TSTG", min_value=-55, max_value=150, unit="degC", source_page=14),
+    }
+    if variant.get("transceiver"):
+        specs.update({
+            "abs_VCC_HSSI": _intel_agilex5_param("Transceiver, system PLL, and hard IP digital power supply", "VCC_HSSI_[L1,R4]", min_value=-0.5, max_value=1.07, conditions="E-Series GTS transceiver high-speed rail, speed grade dependent max applies", source_page=10),
+            "abs_VCCEHT_GTS": _intel_agilex5_param("Transceiver high-voltage analog power supply", "VCCEHT_GTS[L1,R4][A,B,C]", min_value=-0.5, max_value=2.08, source_page=12),
+            "abs_VCCERT_GTS": _intel_agilex5_param("Transceiver low-voltage analog power supply", "VCCERT_GTS[L1,R4][A,B,C]", min_value=-0.5, max_value=1.34, source_page=12),
+        })
+    if variant.get("hps") and variant.get("hps") != "none":
+        specs.update({
+            "abs_VCCL_HPS": _intel_agilex5_param("HPS DSU voltage and periphery circuitry power supply", "VCCL_HPS", min_value=-0.5, max_value=1.21, conditions="E-Series HPS SmartVID speed grades; fixed speed-grade max is lower", source_page=11),
+            "abs_VCCPLL1_HPS": _intel_agilex5_param("HPS PLL1 analog power supply", "VCCPLL1_HPS", min_value=-0.5, max_value=2.08, source_page=12),
+            "abs_VCCPLL2_HPS": _intel_agilex5_param("HPS PLL2 analog power supply", "VCCPLL2_HPS", min_value=-0.5, max_value=2.08, source_page=12),
+            "abs_VCCIO_HPS": _intel_agilex5_param("HPS I/O buffers power supply", "VCCIO_HPS", min_value=-0.5, max_value=2.08, source_page=12),
+        })
+    return specs
+
+
+def _intel_agilex5_io_standard_specs() -> dict:
+    source = {**INTEL_AGILEX5_DATASHEET_SOURCE}
+    return {
+        "hsio_lvcmos_1v0": {"standard": "1.0 V LVCMOS", "bank_family": "HSIO", "vccio_symbol": "VCCIO_PIO", "vccio_min": 0.95, "vccio_typ": 1.0, "vccio_max": 1.05, "vil_max": "-0.3 to 0.35*VCCIO_PIO", "vih_min": "0.65*VCCIO_PIO", "source_page": 42, **source},
+        "hsio_lvcmos_1v05": {"standard": "1.05 V LVCMOS", "bank_family": "HSIO", "vccio_symbol": "VCCIO_PIO", "vccio_min": 0.9975, "vccio_typ": 1.05, "vccio_max": 1.1025, "vil_max": "-0.3 to 0.35*VCCIO_PIO", "vih_min": "0.65*VCCIO_PIO", "source_page": 42, **source},
+        "hsio_lvcmos_1v1": {"standard": "1.1 V LVCMOS", "bank_family": "HSIO", "vccio_symbol": "VCCIO_PIO", "vccio_min": 1.045, "vccio_typ": 1.1, "vccio_max": 1.155, "vil_max": "-0.3 to 0.35*VCCIO_PIO", "vih_min": "0.65*VCCIO_PIO", "source_page": 42, **source},
+        "hsio_lvcmos_1v2": {"standard": "1.2 V LVCMOS", "bank_family": "HSIO", "vccio_symbol": "VCCIO_PIO", "vccio_min": 1.14, "vccio_typ": 1.2, "vccio_max": 1.26, "vil_max": "-0.3 to 0.35*VCCIO_PIO", "vih_min": "0.65*VCCIO_PIO", "source_page": 42, **source},
+        "hsio_lvcmos_1v3": {"standard": "1.3 V LVCMOS", "bank_family": "HSIO", "vccio_symbol": "VCCIO_PIO", "vccio_min": 1.261, "vccio_typ": 1.3, "vccio_max": 1.339, "vil_max": "-0.3 to 0.35*VCCIO_PIO", "vih_min": "0.65*VCCIO_PIO", "source_page": 42, **source},
+        "hsio_sstl_12": {"standard": "SSTL-12", "bank_family": "HSIO", "vccio_symbol": "VCCIO_PIO", "vccio_min": 1.14, "vccio_typ": 1.2, "vccio_max": 1.26, "vref_typ": "0.5*VCCIO_PIO", "vtt_typ": "0.5*VCCIO_PIO", "source_page": 42, **source},
+        "hsio_hstl_12": {"standard": "HSTL-12", "bank_family": "HSIO", "vccio_symbol": "VCCIO_PIO", "vccio_min": 1.14, "vccio_typ": 1.2, "vccio_max": 1.26, "vref_typ": "0.5*VCCIO_PIO", "vtt_typ": "0.5*VCCIO_PIO", "source_page": 42, **source},
+        "hsio_true_differential_1v3": {"standard": "True Differential Signaling - 1.3 V", "bank_family": "HSIO", "vccio_symbol": "VCCIO_PIO", "vccio_min": 1.261, "vccio_typ": 1.3, "vccio_max": 1.339, "vid_min_mv": 100, "vid_max_mv": 454, "source_page": 47, **source},
+        "hsio_slvs400": {"standard": "SLVS400", "bank_family": "HSIO", "vccio_symbol": "VCCIO_PIO", "vccio_min": 1.164, "vccio_typ": 1.2, "vccio_max": 1.236, "vid_min_mv": 70, "vod_typ_mv": 200, "source_page": 48, **source},
+        "hvio_lvcmos_lvttl_1v8": {"standard": "1.8 V LVCMOS/LVTTL", "bank_family": "HVIO", "vccio_symbol": "VCCIO_HVIO", "vccio_min": 1.746, "vccio_typ": 1.8, "vccio_max": 1.854, "source_page": 55, **source},
+        "hvio_lvcmos_lvttl_2v5": {"standard": "2.5 V LVCMOS/LVTTL", "bank_family": "HVIO", "vccio_symbol": "VCCIO_HVIO", "vccio_min": 2.425, "vccio_typ": 2.5, "vccio_max": 2.575, "source_page": 55, **source},
+        "hvio_lvcmos_lvttl_3v3": {"standard": "3.3 V LVCMOS/LVTTL", "bank_family": "HVIO", "vccio_symbol": "VCCIO_HVIO", "vccio_min": 3.201, "vccio_typ": 3.3, "vccio_max": 3.399, "source_page": 55, **source},
+        "hps_sdm_lvcmos_1v8": {"standard": "1.8 V LVCMOS", "bank_family": "HPS/SDM", "vccio_symbols": ["VCCIO_HPS", "VCCIO_SDM"], "vccio_min": 1.71, "vccio_typ": 1.8, "vccio_max": 1.89, "iol_ma": 8, "ioh_ma": -8, "source_page": 56, **source},
+    }
+
+
+def _intel_agilex5_constraint_blocks(variant: dict) -> dict:
+    blocks = {
+        "power_integrity": {
+            "class": "power_integrity",
+            "review_required": True,
+            **INTEL_AGILEX5_DATASHEET_SOURCE,
+            "source_pages": [24, 25, 26, 27, 28, 29, 30, 31, 32],
+            "ramp_requirements": {
+                "strictly_monotonic": True,
+                "no_plateaus": True,
+                "standard_por_ramp_time_us": {"min": 200, "max": 100000},
+                "as_fast_mode_all_supplies_fully_ramped_max_ms": 10,
+            },
+            "smartvid": {
+                "pmbus_regulator_required": True,
+                "speed_grades": ["-1V", "-2V", "-2E", "-3V"],
+                "review_note": "SmartVID rails require a PMBus voltage regulator connected to the device; static export does not replace Quartus/PTC power planning.",
+            },
+            "rail_groups": {
+                "core_periphery": ["VCC", "VCCP", "VCCPT", "VCCRCORE"],
+                "sdm": ["VCCH_SDM", "VCCIO_SDM", "VCC_IO_SDM", "VCCL_SDM", "VCCPLLDIG_SDM", "VCCPLL_SDM", "VCCFUSEWR_SDM", "VCCADC"],
+                "hvio": ["VCCIO_HVIO", "VCCPT_HVIO"],
+            },
+        },
+        "io_bank_voltage_selection": {
+            "class": "io_signaling",
+            "review_required": True,
+            **INTEL_AGILEX5_DATASHEET_SOURCE,
+            "source_pages": [27, 42, 43, 44, 45, 46, 47, 48, 55, 56],
+            "bank_voltage_options": {
+                "HSIO": {"rail": "VCCIO_PIO", "supported_v": [1.0, 1.05, 1.1, 1.2, 1.3]},
+                "HVIO": {"rail": "VCCIO_HVIO", "supported_v": [1.8, 2.5, 3.3]},
+                "HPS": {"rail": "VCCIO_HPS", "supported_v": [1.8]},
+                "SDM": {"rail": "VCCIO_SDM", "supported_v": [1.8]},
+            },
+            "sub_bank_rule": "Each HSIO sub-bank can support only a single VCCIO_PIO voltage tolerance; verify the selected I/O standards per sub-bank before schematic sign-off.",
+        },
+        "configuration_boot": {
+            "class": "boot_configuration",
+            "review_required": True,
+            **INTEL_AGILEX5_DATASHEET_SOURCE,
+            "source_pages": [159, 160],
+            "supported_configuration_interfaces": ["JTAG", "AS normal mode", "AS fast mode", "AVST x8", "AVST x16"],
+            "external_configuration_clock": {
+                "pin": "OSC_CLK_1",
+                "powered_by": "VCCIO_SDM",
+                "allowed_frequencies_mhz": [25, 100, 125],
+                "period_jitter_tolerance_pct_max": 2,
+                "duty_cycle_pct": {"min": 45, "typ": 50, "max": 55},
+                "quartus_assignment_must_match": True,
+            },
+            "por_delay_ms": {
+                "AS normal mode/AVST x8/AVST x16": {"min": 11.5, "max": 20.2},
+                "AS fast mode": {"min": 1.5, "max": 7.6},
+            },
+            "jtag_timing": {
+                "tck_period_ns_min": 30,
+                "tck_high_ns_min": 14,
+                "tck_low_ns_min": 14,
+            },
+        },
+        "pin_connection_guidelines_review": {
+            "class": "pin_connection_guidelines",
+            "review_required": True,
+            **INTEL_AGILEX5_PIN_CONNECTION_GUIDE_REFERENCE,
+            "checklist_topics": [
+                "Clock and PLL pin connection rules",
+                "Dedicated configuration and JTAG pull-up/pull-down rules",
+                "NC and DNU handling",
+                "Core, SDM, GTS, and HPS power pin connection rules",
+                "Power supply sharing guidelines",
+            ],
+        },
+    }
+    if variant.get("transceiver"):
+        blocks["power_integrity"]["rail_groups"]["gts_transceiver"] = ["VCC_HSSI_[L1,R4]", "VCCEHT_GTS[L1,R4][A,B,C]", "VCCERT_GTS[L1,R4][A,B,C]"]
+        blocks["gts_transceiver_power_integrity"] = {
+            "class": "power_integrity",
+            "review_required": True,
+            **INTEL_AGILEX5_DATASHEET_SOURCE,
+            "source_page": 30,
+            "rails": {
+                "VCC_HSSI_[L1,R4]": {"vr_accuracy_pct": 0.5, "vr_ripple_pct": 2.5, "ac_transient_pct": 3.0},
+                "VCCEHT_GTS[L1,R4][A,B,C]": {"vr_accuracy_pct": 0.5, "vr_ripple_pct": 2.0, "ac_transient_pct": 2.5, "hf_noise_limit_mVpp_above_1MHz": 30},
+                "VCCERT_GTS[L1,R4][A,B,C]": {"vr_accuracy_pct": 0.5, "vr_ripple_pct": 2.0, "ac_transient_pct": 2.5},
+            },
+            "measurement_note": "Use a 20 MHz bandwidth for scope measurement and place the ground pin as close to the power rail pin as possible.",
+        }
+    if variant.get("hps") and variant.get("hps") != "none":
+        blocks["power_integrity"]["rail_groups"]["hps"] = ["VCCL_HPS", "VCCL_HPS_CORE0_CORE1", "VCCL_HPS_CORE2", "VCCL_HPS_CORE3", "VCCPLL1_HPS", "VCCPLL2_HPS", "VCCIO_HPS"]
+        blocks["hps_power_integrity"] = {
+            "class": "power_integrity",
+            "review_required": True,
+            **INTEL_AGILEX5_DATASHEET_SOURCE,
+            "source_pages": [31, 32],
+            "core_rails": ["VCCL_HPS", "VCCL_HPS_CORE0_CORE1", "VCCL_HPS_CORE2", "VCCL_HPS_CORE3"],
+            "pll_rails": ["VCCPLL1_HPS", "VCCPLL2_HPS", "VCCPLLDIG1_HPS", "VCCPLLDIG2_HPS"],
+            "io_rails": ["VCCIO_HPS"],
+        }
+    return blocks
+
+
+def _intel_agilex5_drc_rules(variant: dict) -> dict:
+    rules = {
+        "agilex5_power_monotonic_ramp": {
+            "severity": "ERROR",
+            "desc": "All Agilex 5 power supply ramps must be strictly monotonic without plateaus; AS fast mode requires all supplies fully ramped within 10 ms.",
+            "check": "review_power_ramp",
+        },
+        "agilex5_io_bank_voltage_selection": {
+            "severity": "ERROR",
+            "desc": "Each HSIO/HVIO/HPS/SDM bank voltage must match every assigned I/O standard in that bank or sub-bank.",
+            "check": "review_io_bank_voltage",
+        },
+        "agilex5_configuration_clock": {
+            "severity": "ERROR",
+            "desc": "OSC_CLK_1 must use one of the supported external configuration clock frequencies and match the Quartus configuration clock source assignment.",
+            "check": "review_configuration_clock",
+        },
+        "agilex5_pin_connection_guidelines": {
+            "severity": "WARNING",
+            "desc": "Run the official Agilex 5 Pin Connection Guidelines checklist for dedicated pins, NC/DNU handling, and rail sharing before schematic sign-off.",
+            "check": "manual_pin_connection_guidelines_review",
+        },
+    }
+    if variant.get("transceiver"):
+        rules["agilex5_gts_transceiver_power_noise"] = {
+            "severity": "WARNING",
+            "desc": "GTS transceiver analog and digital rails have VR accuracy, ripple, transient, and HF-noise requirements that must be checked against the PDN design.",
+            "check": "review_gts_power_integrity",
+        }
+    if variant.get("hps") and variant.get("hps") != "none":
+        rules["agilex5_hps_power_rails"] = {
+            "severity": "ERROR",
+            "desc": "HPS SoC variants require HPS core, PLL, and I/O rail review even when some HPS peripherals are unused.",
+            "check": "review_hps_power_tree",
+        }
+    return rules
 
 
 def _gowin_family_series(device: str) -> tuple[str | None, str | None]:
@@ -1412,6 +1724,14 @@ def _intel_agilex5_public_device_overlay(pinout_data: dict, manufacturer: str | 
                     **INTEL_AGILEX5_PART_DECODER_SOURCE,
                     "scope": "ordering-code role/features",
                 },
+                "device_datasheet": {
+                    **INTEL_AGILEX5_DATASHEET_SOURCE,
+                    "scope": "electrical, I/O, power, and configuration constraints",
+                },
+                "pin_connection_guidelines": {
+                    **INTEL_AGILEX5_PIN_CONNECTION_GUIDE_REFERENCE,
+                    "scope": "manual schematic checklist until structured parsing is added",
+                },
             },
         ),
         "ordering_variant": {
@@ -1465,6 +1785,11 @@ def _intel_agilex5_public_device_overlay(pinout_data: dict, manufacturer: str | 
                 **INTEL_AGILEX5_OVERVIEW_SOURCE,
             },
         },
+        "supply_specs": _intel_agilex5_supply_specs(variant),
+        "absolute_maximum_ratings": _intel_agilex5_absolute_maximum_ratings(variant),
+        "io_standard_specs": _intel_agilex5_io_standard_specs(),
+        "constraint_blocks": _intel_agilex5_constraint_blocks(variant),
+        "drc_rules": _intel_agilex5_drc_rules(variant),
     }
 
     if variant.get("transceiver"):
@@ -3154,6 +3479,7 @@ def main():
     exported = 0
     errors = 0
     written_files: set[str] = set()
+    normal_ic_profiles = _load_automotive_video_serdes_profiles()
 
     # --- Export normal ICs ---
     print("=== Normal ICs ===")
@@ -3164,6 +3490,7 @@ def main():
             result = export_normal_ic(data)
             if result is None:
                 continue
+            result = _apply_normal_ic_export_profiles(result, normal_ic_profiles)
             mpn = result["mpn"]
             safe_name = re.sub(r"[^a-zA-Z0-9_-]", "_", mpn)
             out_path = output_dir / f"{safe_name}.json"

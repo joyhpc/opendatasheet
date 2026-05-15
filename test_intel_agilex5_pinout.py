@@ -1,8 +1,10 @@
+import json
 from pathlib import Path
 import sys
 
 REPO_ROOT = Path(__file__).resolve().parent
 RAW_DIR = REPO_ROOT / "data" / "raw" / "fpga" / "intel_agilex5"
+EXPORT_DIR = REPO_ROOT / "data" / "sch_review_export"
 sys.path.insert(0, str(REPO_ROOT / "scripts"))
 
 from build_raw_source_manifest import build_manifest
@@ -66,6 +68,33 @@ def test_export_fpga_merges_intel_agilex5_overlay():
     assert exported["capability_blocks"]["high_speed_serial"]["max_rate_gbps"] == 17.16
     assert exported["capability_blocks"]["high_speed_serial"]["pcie4_x4_instance_count"] == 1
     assert exported["capability_blocks"]["hard_processor"]["mode"] == "quad"
+    assert exported["supply_specs"]["VCCIO_SDM"]["typ"] == 1.8
+    assert exported["supply_specs"]["VCC_HSSI_5S"]["typ"] == 0.78
+    assert exported["absolute_maximum_ratings"]["abs_VCCIO_HVIO_3V3"]["max"] == 3.74
+    assert exported["io_standard_specs"]["hsio_lvcmos_1v2"]["vccio_typ"] == 1.2
+
+    constraints = exported["constraint_blocks"]
+    assert set(constraints["configuration_boot"]["jtag_signals"]) == {"TCK", "TDI", "TDO", "TMS"}
+    assert constraints["configuration_boot"]["external_configuration_clock"]["allowed_frequencies_mhz"] == [25, 100, 125]
+    assert constraints["power_integrity"]["ramp_requirements"]["strictly_monotonic"] is True
+    assert constraints["power_integrity"]["smartvid"]["pmbus_regulator_required"] is True
+    assert constraints["io_bank_voltage_selection"]["bank_voltage_options"]["HSIO"]["supported_v"] == [1.0, 1.05, 1.1, 1.2, 1.3]
+    assert constraints["gts_transceiver_power_integrity"]["rails"]["VCCEHT_GTS[L1,R4][A,B,C]"]["hf_noise_limit_mVpp_above_1MHz"] == 30
+    assert constraints["hps_power_integrity"]["io_rails"] == ["VCCIO_HPS"]
+    assert "refclk_requirements" in constraints
+    assert "agilex5_configuration_clock" in exported["drc_rules"]
+    assert exported["source_traceability"]["device_datasheet"]["source_document_id"] == "813918"
+
+
+def test_checked_in_intel_agilex5_export_exposes_datasheet_backed_review_blocks():
+    with open(EXPORT_DIR / "A5ED013B_B23A.json", encoding="utf-8") as fp:
+        exported = json.load(fp)
+
+    assert exported["supply_specs"]["VCCPT"]["typ"] == 1.8
+    assert exported["absolute_maximum_ratings"]["abs_TJ"]["max"] == 125
+    assert exported["io_standard_specs"]["hvio_lvcmos_lvttl_3v3"]["vccio_max"] == 3.399
+    assert exported["constraint_blocks"]["configuration_boot"]["por_delay_ms"]["AS fast mode"]["max"] == 7.6
+    assert exported["constraint_blocks"]["pin_connection_guidelines_review"]["review_required"] is True
 
 
 def test_build_raw_source_manifest_detects_agilex5_family(tmp_path):

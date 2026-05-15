@@ -194,6 +194,7 @@
   "absolute_maximum_ratings": {
     "VIN": {
       "parameter": "Input voltage",
+      "symbol": "VIN",
       "min": -0.3,
       "max": 19,
       "unit": "V",
@@ -201,6 +202,7 @@
     },
     "BOOT": {
       "parameter": "Bootstrap voltage (10 ns transient)",
+      "symbol": "BOOT",
       "min": -0.3,
       "max": 30,
       "unit": "V",
@@ -208,6 +210,7 @@
     },
     "BOOT-SW": {
       "parameter": "Bootstrap voltage relative to SW",
+      "symbol": "BOOT-SW",
       "min": -0.3,
       "max": 7,
       "unit": "V",
@@ -215,6 +218,7 @@
     },
     "SW": {
       "parameter": "Switch node voltage (10 ns transient)",
+      "symbol": "SW",
       "min": -3,
       "max": 23,
       "unit": "V",
@@ -222,6 +226,7 @@
     },
     "TJ": {
       "parameter": "Operating junction temperature",
+      "symbol": "TJ",
       "min": -40,
       "max": 150,
       "unit": "°C",
@@ -229,6 +234,7 @@
     },
     "TSTG": {
       "parameter": "Storage temperature",
+      "symbol": "TSTG",
       "min": -55,
       "max": 150,
       "unit": "°C",
@@ -238,6 +244,7 @@
   "electrical_parameters": {
     "VFB": {
       "parameter": "Regulated FB voltage",
+      "symbol": "VFB",
       "min": 596,
       "typ": 600,
       "max": 604,
@@ -246,6 +253,7 @@
     },
     "VFB_TJ____40_C_to_150_C": {
       "parameter": "Regulated FB voltage",
+      "symbol": "VFB",
       "min": 595,
       "typ": 600,
       "max": 605,
@@ -254,6 +262,7 @@
     },
     "VIH": {
       "parameter": "Logic high input voltage",
+      "symbol": "VIH",
       "min": 2,
       "typ": null,
       "max": null,
@@ -262,6 +271,7 @@
     },
     "VIL": {
       "parameter": "Logic low input voltage",
+      "symbol": "VIL",
       "min": null,
       "typ": null,
       "max": 0.8,
@@ -270,6 +280,7 @@
     },
     "TTRIP": {
       "parameter": "Thermal protection trip point",
+      "symbol": "TTRIP",
       "min": null,
       "typ": 170,
       "max": null,
@@ -278,6 +289,7 @@
     },
     "THYST": {
       "parameter": "Thermal protection hysteresis",
+      "symbol": "THYST",
       "min": null,
       "typ": 15,
       "max": null,
@@ -502,6 +514,7 @@
       "absolute_maximum_ratings": {
         "VIN": {
           "parameter": "Input voltage",
+          "symbol": "VIN",
           "min": -0.3,
           "max": 19,
           "unit": "V",
@@ -509,6 +522,7 @@
         },
         "BOOT": {
           "parameter": "Bootstrap voltage (10 ns transient)",
+          "symbol": "BOOT",
           "min": -0.3,
           "max": 30,
           "unit": "V",
@@ -516,6 +530,7 @@
         },
         "BOOT-SW": {
           "parameter": "Bootstrap voltage relative to SW",
+          "symbol": "BOOT-SW",
           "min": -0.3,
           "max": 7,
           "unit": "V",
@@ -523,6 +538,7 @@
         },
         "SW": {
           "parameter": "Switch node voltage (10 ns transient)",
+          "symbol": "SW",
           "min": -3,
           "max": 23,
           "unit": "V",
@@ -530,6 +546,7 @@
         },
         "TJ": {
           "parameter": "Operating junction temperature",
+          "symbol": "TJ",
           "min": -40,
           "max": 150,
           "unit": "°C",
@@ -537,6 +554,7 @@
         },
         "TSTG": {
           "parameter": "Storage temperature",
+          "symbol": "TSTG",
           "min": -55,
           "max": 150,
           "unit": "°C",
@@ -546,6 +564,7 @@
       "electrical_parameters": {
         "VFB": {
           "parameter": "Regulated FB voltage",
+          "symbol": "VFB",
           "min": 596,
           "typ": 600,
           "max": 604,
@@ -554,6 +573,7 @@
         },
         "VFB_TJ____40_C_to_150_C": {
           "parameter": "Regulated FB voltage",
+          "symbol": "VFB",
           "min": 595,
           "typ": 600,
           "max": 605,
@@ -562,6 +582,7 @@
         },
         "VIH": {
           "parameter": "Logic high input voltage",
+          "symbol": "VIH",
           "min": 2,
           "typ": null,
           "max": null,
@@ -570,6 +591,7 @@
         },
         "VIL": {
           "parameter": "Logic low input voltage",
+          "symbol": "VIL",
           "min": null,
           "typ": null,
           "max": 0.8,
@@ -578,6 +600,7 @@
         },
         "TTRIP": {
           "parameter": "Thermal protection trip point",
+          "symbol": "TTRIP",
           "min": null,
           "typ": 170,
           "max": null,
@@ -586,6 +609,7 @@
         },
         "THYST": {
           "parameter": "Thermal protection hysteresis",
+          "symbol": "THYST",
           "min": null,
           "typ": 15,
           "max": null,
@@ -622,327 +646,45 @@
       }
     },
     "design_context": {
-      "recommended_external_components": [
-        {
-          "role": "bootstrap_capacitor",
-          "source_page": 20,
-          "value_hint": "0.1 μF",
-          "value_hints": [
-            "0.1 μF"
-          ],
-          "snippet": "TPS54A24"
-        },
-        {
-          "role": "bootstrap_capacitor",
-          "source_page": 20,
-          "value_hint": "0.1 μF",
-          "value_hints": [
-            "0.1 μF"
-          ],
-          "snippet": "www.ti.com.cn ZHCSJP6 –MAY 2019"
-        },
-        {
-          "role": "inductor",
-          "source_page": 20,
-          "value_hint": null,
-          "value_hints": [],
-          "snippet": "decreases the BOOT to SW capacitor is not recharged as often so the BOOT to SW voltage will start to"
-        },
-        {
-          "role": "inductor",
-          "source_page": 20,
-          "value_hint": null,
-          "value_hints": [],
-          "snippet": "decrease. If the voltage from BOOT to SW drops below 2.2 V, the high-side MOSFET is turned off due to BOOT"
-        },
-        {
-          "role": "output_capacitor",
-          "source_page": 22,
-          "value_hint": null,
-          "value_hints": [],
-          "snippet": "注"
-        },
-        {
-          "role": "output_capacitor",
-          "source_page": 22,
-          "value_hint": null,
-          "value_hints": [],
-          "snippet": "Information in the following applications sections is not part of the TI component"
-        },
-        {
-          "role": "input_capacitor",
-          "source_page": 26,
-          "value_hint": "14 μF",
-          "value_hints": [
-            "14 µF",
-            "14 μF"
-          ],
-          "snippet": "maximum input voltage. Two 10-µF, 1210, X7R, 25-V and two 0.1-μF, 0603, X7R 25-V capacitors in parallel has"
-        },
-        {
-          "role": "input_capacitor",
-          "source_page": 26,
-          "value_hint": "14 μF",
-          "value_hints": [
-            "14 µF",
-            "14 μF"
-          ],
-          "snippet": "been selected to be placed on both sides of the TPS54A24 near both VIN pins to PGND pins. Based on the"
-        },
-        {
-          "role": "soft_start_capacitor",
-          "source_page": 26,
-          "value_hint": null,
-          "value_hints": [
-            "6.04kΩ",
-            "12.08kΩ",
-            "12.1kΩ"
-          ],
-          "snippet": "8.2.2.6 Output Voltage Resistors Selection"
-        },
-        {
-          "role": "soft_start_capacitor",
-          "source_page": 26,
-          "value_hint": null,
-          "value_hints": [
-            "6.04kΩ",
-            "12.08kΩ",
-            "12.1kΩ"
-          ],
-          "snippet": "The output voltage is set with a resistor divider created by R8 (RFBT) and R6 (RFBB) from the output node to the"
-        },
-        {
-          "role": "uvlo_divider",
-          "source_page": 26,
-          "value_hint": null,
-          "value_hints": [
-            "100 μF"
-          ],
-          "snippet": "capacitor value of 3 × 100 μF does not require much current to charge to 1.8 V. The example circuit has the soft-"
-        },
-        {
-          "role": "uvlo_divider",
-          "source_page": 26,
-          "value_hint": null,
-          "value_hints": [
-            "100 μF"
-          ],
-          "snippet": "start time set to an arbitrary value of 1.2 ms, which requires a 0.01-µF capacitor. With this soft-start time the"
-        }
-      ],
-      "component_value_hints": [
-        {
-          "values": [
-            "0.1 μF"
-          ],
-          "source_page": 20,
-          "snippet": "TPS54A24 www.ti.com.cn ZHCSJP6 –MAY 2019 Feature Description (接下页) 7.3.13 Bootstrap Voltage and 100% Duty Cycle Operation (BOOT) The device provides an integrated bootstrap-voltage regulator. A small capacitor between th"
-        },
-        {
-          "values": [
-            "14 µF"
-          ],
-          "source_page": 26,
-          "snippet": "TPS54A24 www.ti.com.cn ZHCSJP6 –MAY 2019 For this example design, a ceramic capacitor with at least a 25-V voltage rating is required to support the maximum input voltage. Two 10-µF, 1210, X7R, 25-V and two 0.1-μF, 0603,"
-        },
-        {
-          "values": [
-            "14 μF",
-            "14 µF"
-          ],
-          "source_page": 26,
-          "snippet": "TPS54A24 www.ti.com.cn ZHCSJP6 –MAY 2019 For this example design, a ceramic capacitor with at least a 25-V voltage rating is required to support the maximum input voltage. Two 10-µF, 1210, X7R, 25-V and two 0.1-μF, 0603,"
-        },
-        {
-          "values": [
-            "14 μF"
-          ],
-          "source_page": 26,
-          "snippet": "voltage of 12 V. A 100-µF bulk capacitance is also used in this circuit to bypass long leads when connected a lab bench top power supply. The input capacitance value determines the input ripple voltage of the regulator. "
-        },
-        {
-          "values": [
-            "6.04kΩ"
-          ],
-          "source_page": 26,
-          "snippet": "the 12 V nominal input is 150 mV and the RMS input ripple current with the 4.5 V minimum input is 4.9 A. Vout (Vinmin - Vout ) Icirms = Iout ´ ´ Vinmin Vinmin (23) vertical spacer § Vout · Vout Ioutmaxu ¨ 1 ¸ u © Vin ¹ V"
-        },
-        {
-          "values": [
-            "6.04kΩ",
-            "12.08kΩ",
-            "12.1kΩ"
-          ],
-          "source_page": 26,
-          "snippet": "Vout (Vinmin - Vout ) Icirms = Iout ´ ´ Vinmin Vinmin (23) vertical spacer § Vout · Vout Ioutmaxu ¨ 1 ¸ u © Vin ¹ Vin 'Vin Cin u fSW (24) 8.2.2.6 Output Voltage Resistors Selection The output voltage is set with a resist"
-        },
-        {
-          "values": [
-            "12.08kΩ",
-            "12.1kΩ"
-          ],
-          "source_page": 26,
-          "snippet": "selected for R8. Using 公式25, R6 is calculated as 12.08 kΩ. The nearest standard 1% resistor is 12.1 kΩ. § · VOUT ¨ ¸ 1 RFBT RFBB u © VREF ¹ (25) 8.2.2.7 Soft-Start Capacitor Selection The soft-start capacitor (CSS = C16)"
-        },
-        {
-          "values": [
-            "100 μF"
-          ],
-          "source_page": 26,
-          "snippet": "§ · VOUT ¨ ¸ 1 RFBT RFBB u © VREF ¹ (25) 8.2.2.7 Soft-Start Capacitor Selection The soft-start capacitor (CSS = C16) determines the amount of time it takes for the output voltage to reach its nominal programmed value dur"
-        }
-      ],
-      "design_equation_hints": [
-        {
-          "equation": "soft-start capacitor (CSS = C16) determines the amount of time it takes for the output voltage to reach its",
-          "source_page": 26
-        },
-        {
-          "equation": "VOUT = 1.8 V",
-          "source_page": 27
-        }
-      ],
       "layout_hints": [
         {
-          "hint": "been selected to be placed on both sides of the TPS54A24 near both VIN pins to PGND pins. Based on the",
-          "source_page": 26
-        },
-        {
-          "hint": "• VIN and PGND traces must be as wide as possible to reduce trace impedance and improve heat dissipation.",
-          "source_page": 33
-        },
-        {
-          "hint": "possible to the IC. The input capacitors must connect directly to the adjacent PGND pins.",
-          "source_page": 33
-        },
-        {
-          "hint": "• Connect the PGND pins on both sides of the IC to the thermal pad with a trace as wide as possible to reduce",
-          "source_page": 33
-        },
-        {
-          "hint": "• The PGND trace between the output capacitor and the PGND pin must be as wide as possible to minimize its",
-          "source_page": 33
-        },
-        {
-          "hint": "• Keep the SW trace as physically short and wide as practical to minimize radiated emissions.",
-          "source_page": 33
-        },
-        {
-          "hint": "• Place components connected to the RT/CLK, FB, COMP and SS/TRK pins as close to the IC as possible and",
-          "source_page": 33
-        },
-        {
-          "hint": "• AGND must be connected to PGND on the PCB. Connect AGND to PGND in a region away from switching",
-          "source_page": 33
-        },
-        {
-          "hint": "• The top layer has all components and the main traces for VIN, SW, VOUT and PGND. Both VIN pins are",
-          "source_page": 33
-        },
-        {
-          "hint": "bypassed with two input capacitors placed as close as possible to the IC and are connected directly to the",
-          "source_page": 33
+          "hint": "35 TPS54A24 www.ti.com.cn ZHCSJP6 –MAY 2019 版权© 2019, Texas Instruments Incorporated Layout Example (接下页) 图56. TPS54A24 Layout Top 图57. TPS54A24 Layout Midlayer 1 图58. TPS54A24 Layout Midlayer 2 图59.",
+          "source_page": 34
         }
       ],
       "supply_recommendations": [
         {
-          "hint": "9 Power Supply Recommendations...................... 34 6 Specifications......................................................... 4",
-          "source_page": 1
-        },
-        {
-          "hint": "used to estimate the input voltage the switching frequency begins to decrease. When the switching frequency",
-          "source_page": 20
-        },
-        {
-          "hint": "UVLO and the low-side MOSFET pulls SW low to recharge the BOOT capacitor. When operating at 100% duty",
-          "source_page": 20
-        },
-        {
-          "hint": "Input voltage range (VIN) 4.5 to 17 V, 12 V nominal",
-          "source_page": 22
-        },
-        {
-          "hint": "maximum input voltage. Two 10-µF, 1210, X7R, 25-V and two 0.1-μF, 0603, X7R 25-V capacitors in parallel has",
-          "source_page": 26
-        },
-        {
-          "hint": "bench top power supply.",
-          "source_page": 26
-        },
-        {
-          "hint": "The input capacitance value determines the input ripple voltage of the regulator. The input voltage ripple can be",
-          "source_page": 26
-        },
-        {
-          "hint": "nominal design example values of Ioutmax = 10 A, CIN = 14 μF, and fSW = 500 kHz, the input voltage ripple with",
-          "source_page": 26
+          "hint": "34 TPS54A24 ZHCSJP6 –MAY 2019 www.ti.com.cn 版权© 2019, Texas Instruments Incorporated 9 Power Supply Recommendations The TPS54A24 is designed to be powered by a well-regulated DC voltage between 4.5 an",
+          "source_page": 33
         }
       ],
       "topology_hints": [
         {
-          "hint": "3 说明.......................................................................... 1 8 Application and Implementation ........................ 23",
-          "source_page": 1
-        },
-        {
-          "hint": "4 修订历史记录........................................................... 2 8.1 Application Information............................................ 23",
-          "source_page": 1
-        },
-        {
-          "hint": "8.2 Typical Application ................................................. 23 5 Pin Configuration and Functions......................... 3",
-          "source_page": 1
-        },
-        {
-          "hint": "8 Application and Implementation",
+          "hint": "23 TPS54A24 www.ti.com.cn ZHCSJP6 –MAY 2019 版权© 2019, Texas Instruments Incorporated 8 Application and Implementation 注 Information in the following applications sections is not part of the TI compone",
           "source_page": 22
-        },
+        }
+      ],
+      "typical_application": {
+        "page": 22
+      },
+      "application_notes": [
         {
-          "hint": "Information in the following applications sections is not part of the TI component",
-          "source_page": 22
-        },
-        {
-          "hint": "8.1 Application Information",
-          "source_page": 22
-        },
-        {
-          "hint": "The TPS54A24 is a synchronous buck converter designed for 4.5 V to 17 V input and 10-A load. This procedure",
-          "source_page": 22
-        },
-        {
-          "hint": "8.2 Typical Application",
-          "source_page": 22
+          "id": "AN-001",
+          "category": "pcb_layout",
+          "title": "Layout Guidance",
+          "content": "35 TPS54A24 www.ti.com.cn ZHCSJP6 –MAY 2019 版权© 2019, Texas Instruments Incorporated Layout Example (接下页) 图56. TPS54A24 Layout Top 图57. TPS54A24 Layout Midlayer 1 图58. TPS54A24 Layout Midlayer 2 图59.",
+          "source": {
+            "page": 34
+          },
+          "severity": "recommendation"
         }
       ],
       "design_pages": {
         "pages": [
           {
-            "page": 1,
-            "title": null,
-            "content_type": "application"
-          },
-          {
-            "page": 20,
-            "title": null,
-            "content_type": "application"
-          },
-          {
             "page": 22,
             "title": null,
             "content_type": "application"
-          },
-          {
-            "page": 26,
-            "title": null,
-            "content_type": "application"
-          },
-          {
-            "page": 27,
-            "title": null,
-            "content_type": "application"
-          },
-          {
-            "page": 28,
-            "title": null,
-            "content_type": "layout"
           },
           {
             "page": 33,
@@ -955,7 +697,7 @@
             "content_type": "layout"
           }
         ],
-        "total_pages": 8
+        "total_pages": 3
       }
     }
   }

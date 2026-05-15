@@ -62,7 +62,6 @@ If validation fails:
 ## 3. When to re-export data
 
 Re-export `data/sch_review_export/` when changes affect any of the following:
-- `pipeline.py`
 - `pipeline_v2.py`
 - `scripts/export_for_sch_review.py`
 - `schemas/sch-review-device.schema.json`

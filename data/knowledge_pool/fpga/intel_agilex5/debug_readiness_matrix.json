@@ -1,0 +1,201 @@
+{
+  "_schema": "opendatasheet-knowledge-pool/1.0/debug-readiness-matrix",
+  "pool_id": "fpga.intel_agilex5",
+  "purpose": "State exactly which DebugTool-style debug needs are satisfied by parsed OpenDatasheet facts and which still require project/bench evidence.",
+  "readiness_summary": {
+    "satisfies": [
+      "first_pass_debug_triage",
+      "evidence_request_generation",
+      "schematic_preflight_for_debug_observability",
+      "datasheet_backed_prior_for_probability_ranking"
+    ],
+    "does_not_satisfy_without_external_evidence": [
+      "final_root_cause_closure",
+      "board_instance_net_name_resolution",
+      "Quartus_project_IP_instance_binding",
+      "live_waveform_or_register_log_interpretation"
+    ],
+    "decision": "sufficient_for_debugtool_first_pass_and_evidence_planning"
+  },
+  "coverage_levels": {
+    "covered": "Parsed facts directly provide the needed device/package knowledge.",
+    "covered_for_first_pass": "Parsed facts are enough to rank hypotheses and request the right first evidence batch.",
+    "partial_project_binding_required": "Parsed facts provide capability/pin/constraint priors, but the selected project instance must bind nets, IP parameters, or measured state.",
+    "external_required": "Not a datasheet/package fact; must come from project files, lab measurements, or tool logs."
+  },
+  "requirements": [
+    {
+      "id": "fpga_jtag_configuration",
+      "debugtool_assets": [
+        "LM-FPGA-JTAG-CONFIG",
+        "SIG-QUARTUS-CABLE-SEEN-SCAN-CHAIN-FAIL",
+        "SIG-JTAG-CABLE-SEEN-NO-TARGET-WAVEFORM"
+      ],
+      "coverage_level": "covered_for_first_pass",
+      "parsed_facts": [
+        "TCK/TMS/TDI/TDO package balls",
+        "nCONFIG/nSTATUS package balls",
+        "MSEL pins via SDM_IO optional functions",
+        "AS/AVST boot pins via SDM_IO optional functions",
+        "OSC_CLK_1 package ball",
+        "SDM/config/core rail names and nominal voltage specs",
+        "Agilex 5 package/device identity for tool mismatch checks"
+      ],
+      "external_required": [
+        "jtagconfig -n / Quartus Programmer Auto Detect output",
+        "FPGA-end TCK/TMS/TDI/TDO waveforms",
+        "connector VREF, cable power sense, ground, ribbon/adapter continuity",
+        "actual JTAG chain order and bypass-device state",
+        "programming file and Quartus device support version"
+      ],
+      "known_translation": "Generic CONF_DONE/INIT_DONE checks in FPGA debug recipes must be translated to Agilex 5 nCONFIG/nSTATUS, SDM_IO boot pins, and Quartus status evidence.",
+      "meets_debug_need": true
+    },
+    {
+      "id": "configuration_boot",
+      "debugtool_assets": [
+        "LM-FPGA-JTAG-CONFIG"
+      ],
+      "coverage_level": "covered_for_first_pass",
+      "parsed_facts": [
+        "MSEL0/MSEL1/MSEL2 package balls",
+        "AS_CLK/AS_DATA/AS_nCSO/AS_nRST SDM_IO mappings",
+        "AVSTx8 data/ready/valid/clock SDM_IO mappings",
+        "PWRMGT_SCL/PWRMGT_SDA/PWRMGT_ALERT mappings",
+        "POR delay and configuration clock constraints"
+      ],
+      "external_required": [
+        "selected boot mode from schematic/Quartus settings",
+        "flash or host interface schematic nets",
+        "boot bus activity waveform at FPGA end",
+        "actual pull-up/pull-down and unused SDM_IO policy from schematic"
+      ],
+      "meets_debug_need": true
+    },
+    {
+      "id": "power_rail_integrity",
+      "debugtool_assets": [
+        "LM-POWER-CHAIN"
+      ],
+      "coverage_level": "covered_for_first_pass",
+      "parsed_facts": [
+        "supply_specs",
+        "power_rails",
+        "absolute maximum ratings",
+        "SmartVID/PMBus-related constraints",
+        "monotonic ramp rule and core/SDM/HPS/GTS rail groupings"
+      ],
+      "external_required": [
+        "actual regulator topology",
+        "enable/PG dependency graph",
+        "same-window ramp waveforms",
+        "rail noise and brownout measurements",
+        "board net aliases matching rail names"
+      ],
+      "meets_debug_need": true
+    },
+    {
+      "id": "gts_transceiver_link",
+      "debugtool_assets": [
+        "LM-PCIE-LINK",
+        "SIG-PCIE-REFCLK-MISSING"
+      ],
+      "coverage_level": "covered_for_first_pass",
+      "parsed_facts": [
+        "GTS transceiver channel count and supported protocols",
+        "PCIe 4.0 lane-width capability",
+        "refclk pair package balls and lane group mappings",
+        "common 100 MHz / 156.25 MHz review candidates",
+        "GTS/HSSI rail noise constraints"
+      ],
+      "external_required": [
+        "selected protocol/IP instance",
+        "actual lane polarity/order and connector mapping",
+        "refclk source schematic and jitter measurement",
+        "PERST#/reset sideband implementation where protocol requires it",
+        "Transceiver Toolkit / PCIe HIP / protocol status logs"
+      ],
+      "meets_debug_need": true
+    },
+    {
+      "id": "mipi_dphy_debug",
+      "debugtool_assets": [
+        "LM-MIPI-DSI-CSI-DPHY",
+        "SIG-MIPI-CSI-NO-FRAME-PACKET-COUNTERS-FIRST",
+        "SIG-MIPI-DSI-BRIDGE-NO-VIDEO-LP11-HSCLK"
+      ],
+      "coverage_level": "partial_project_binding_required",
+      "parsed_facts": [
+        "package/family MIPI D-PHY interface count",
+        "IO resource capability source traceability"
+      ],
+      "external_required": [
+        "selected MIPI IP lane count/order/polarity",
+        "project lane-to-ball assignment",
+        "LP11/stopstate/HS clock/data state",
+        "packet counters, VC/data type/ECC/CRC",
+        "source/sink timing and register initialization evidence"
+      ],
+      "meets_debug_need": true,
+      "boundary": "Enough to trigger the right DebugTool path and request the right evidence, not enough to close a MIPI no-frame/no-video root cause alone."
+    },
+    {
+      "id": "external_memory_interface",
+      "debugtool_assets": [
+        "LM-DDR-BRINGUP"
+      ],
+      "coverage_level": "partial_project_binding_required",
+      "parsed_facts": [
+        "supported DDR4/LPDDR4/LPDDR5 standards",
+        "x32 interface count",
+        "DQS/DQ package group hints by bank",
+        "IO voltage constraints"
+      ],
+      "external_required": [
+        "selected EMIF IP parameters",
+        "memory topology and schematic byte-lane binding",
+        "calibration report/toolkit state",
+        "memory clock/reset/reference voltage measurements"
+      ],
+      "meets_debug_need": true,
+      "boundary": "Enough for review and first evidence request; EMIF calibration closure still needs Quartus/project and lab evidence."
+    },
+    {
+      "id": "nios_soft_core_debug",
+      "debugtool_assets": [
+        "SIG-NIOS-ELF-AFTER-SOF-HARDWARE-MAP"
+      ],
+      "coverage_level": "partial_project_binding_required",
+      "parsed_facts": [
+        "configuration JTAG pins",
+        "device identity/package",
+        "fabric capability prior"
+      ],
+      "external_required": [
+        "SOF success and jtagconfig -n node list",
+        "sopcinfo/System ID/debug module/JTAG UART",
+        "reset vector, exception vector, memory map, and regenerated hardware image"
+      ],
+      "meets_debug_need": true,
+      "boundary": "OpenDatasheet can anchor JTAG/device facts; Nios failure analysis is necessarily project-file dependent."
+    },
+    {
+      "id": "hps_hard_processor_debug",
+      "debugtool_assets": [],
+      "coverage_level": "partial_project_binding_required",
+      "parsed_facts": [
+        "A5ED HPS presence and core profile",
+        "HPS rail group",
+        "HPS optional functions for JTAG/UART/SDMMC/EMAC/USB/NAND/TRACE/SPI/I2C/I3C"
+      ],
+      "external_required": [
+        "selected HPS boot source and pinmux",
+        "HPS reset/clock/rail waveforms",
+        "UART console, boot ROM/error code, debugger/JTAG state",
+        "boot image and secure-boot configuration"
+      ],
+      "meets_debug_need": true,
+      "boundary": "The knowledge pool has enough package facts for HPS debug evidence planning, but DebugTool should add a dedicated HPS boot link model."
+    }
+  ]
+}

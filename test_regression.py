@@ -732,6 +732,27 @@ def t4_13():
     assert_true("ethernet_link" in lifcl_pair.get("use_case_tags", []), "LIFCL SD_REFCLK missing ethernet_link use case")
 
 
+@case("T4.14 Intel Agilex 5 exports expose datasheet-backed electrical review constraints")
+def t4_14():
+    agilex = json.load(open(EXPORT_DIR / "A5ED013B_B23A.json"))
+    supply_specs = agilex.get("supply_specs", {})
+    assert_gt(len(supply_specs), 20, "A5ED013B_B23A supply_specs count")
+    assert_eq(supply_specs.get("VCCIO_SDM", {}).get("typ"), 1.8, "A5ED013B_B23A VCCIO_SDM typ")
+    assert_eq(supply_specs.get("VCC_HSSI_5S", {}).get("typ"), 0.78, "A5ED013B_B23A VCC_HSSI_5S typ")
+
+    abs_max = agilex.get("absolute_maximum_ratings", {})
+    assert_eq(abs_max.get("abs_VCCIO_HVIO_3V3", {}).get("max"), 3.74, "A5ED013B_B23A abs VCCIO_HVIO 3V3")
+    io_specs = agilex.get("io_standard_specs", {})
+    assert_eq(io_specs.get("hsio_lvcmos_1v2", {}).get("vccio_typ"), 1.2, "A5ED013B_B23A HSIO 1V2")
+
+    constraints = agilex.get("constraint_blocks", {})
+    cfg = constraints.get("configuration_boot", {})
+    assert_eq(cfg.get("external_configuration_clock", {}).get("allowed_frequencies_mhz"), [25, 100, 125], "A5ED013B_B23A config clock frequencies")
+    assert_true("refclk_requirements" in constraints, "A5ED013B_B23A refclk constraints preserved")
+    assert_true(constraints.get("power_integrity", {}).get("ramp_requirements", {}).get("strictly_monotonic") is True, "A5ED013B_B23A monotonic ramp")
+    assert_true(constraints.get("pin_connection_guidelines_review", {}).get("review_required") is True, "A5ED013B_B23A pin connection checklist")
+
+
 @case("T6.3 Gowin GW5AT exports expose package-specific ip_blocks")
 def t6_3():
     ug225 = json.load(open(EXPORT_DIR / "GW5AT-60_UG225.json"))

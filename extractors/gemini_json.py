@@ -6,12 +6,38 @@ import json
 import hashlib
 import time
 from collections.abc import Iterable, Mapping
+from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
 
 from google.genai import types
 
 
 TRACE_SCHEMA_VERSION = "model-call-trace/1.0"
+
+
+@dataclass(frozen=True)
+class ModelCallPolicy:
+    """Explicit policy for model-call cost, retry, and failure boundaries."""
+
+    max_retries: int = 2
+    temperature: float = 0.1
+    max_images: int | None = None
+    timeout_s: float | None = None
+    failure_mode: str = "error"
+
+    def trace_metadata(self) -> dict:
+        return {key: value for key, value in asdict(self).items() if value is not None}
+
+
+def resolve_model_call_policy(
+    *,
+    max_retries: int = 2,
+    temperature: float = 0.1,
+    policy: ModelCallPolicy | None = None,
+) -> ModelCallPolicy:
+    if policy is not None:
+        return policy
+    return ModelCallPolicy(max_retries=max_retries, temperature=temperature)
 
 
 class TraceableDict(dict):
@@ -59,8 +85,7 @@ def _build_base_trace(
     prompt: str,
     prompt_id: str,
     prompt_version: str,
-    temperature: float,
-    max_retries: int,
+    policy: ModelCallPolicy,
 ) -> dict:
     return {
         "_schema": TRACE_SCHEMA_VERSION,
@@ -69,8 +94,9 @@ def _build_base_trace(
         "prompt_sha256": _sha256_text(prompt),
         "prompt_length": len(prompt),
         "model": model,
-        "temperature": temperature,
-        "max_retries": max_retries,
+        "temperature": policy.temperature,
+        "max_retries": policy.max_retries,
+        "policy": policy.trace_metadata(),
         "input_images": [
             {
                 "index": index,
@@ -172,8 +198,17 @@ def call_gemini_json_response(
     temperature: float = 0.1,
     prompt_id: str = "inline",
     prompt_version: str = "unversioned",
+    policy: ModelCallPolicy | None = None,
 ) -> dict:
     """Call Gemini Vision and normalize the response into a JSON object."""
+    policy = resolve_model_call_policy(
+        max_retries=max_retries,
+        temperature=temperature,
+        policy=policy,
+    )
+    max_retries = policy.max_retries
+    temperature = policy.temperature
+
     contents = [prompt]
     for image in images:
         contents.append(types.Part.from_bytes(data=image, mime_type="image/png"))
@@ -184,10 +219,27 @@ def call_gemini_json_response(
         prompt=prompt,
         prompt_id=prompt_id,
         prompt_version=prompt_version,
-        temperature=temperature,
-        max_retries=max_retries,
+        policy=policy,
     )
     started_at = time.time()
+    if policy.max_images is not None and len(images) > policy.max_images:
+        error = {
+            "error": f"Model call image budget exceeded: {len(images)} > {policy.max_images}",
+            "error_type": "ModelBudgetExceeded",
+        }
+        return TraceableDict(
+            error,
+            model_trace=_finish_trace(
+                trace,
+                started_at=started_at,
+                attempts=0,
+                status="error",
+                result=error,
+                error_type="ModelBudgetExceeded",
+                error_message=error["error"],
+            ),
+        )
+
     raw = ""
     for attempt in range(max_retries + 1):
         attempts = attempt + 1

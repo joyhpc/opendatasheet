@@ -1,7 +1,17 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-PYTHON="${PYTHON:-python3}"
+if [[ -n "${PYTHON:-}" ]]; then
+  :
+elif command -v python3 >/dev/null 2>&1; then
+  PYTHON=python3
+elif command -v python >/dev/null 2>&1; then
+  PYTHON=python
+else
+  echo "ERROR: neither python3 nor python was found on PATH" >&2
+  exit 1
+fi
+
 COMPILE_ONLY=false
 
 case "${1:-}" in
@@ -25,6 +35,13 @@ fi
 echo "=== Python Syntax Check ==="
 if command -v git >/dev/null 2>&1 && git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
   mapfile -t python_files < <(git ls-files '*.py')
+  existing_python_files=()
+  for path in "${python_files[@]}"; do
+    if [[ -f "$path" ]]; then
+      existing_python_files+=("$path")
+    fi
+  done
+  python_files=("${existing_python_files[@]}")
 else
   mapfile -t python_files < <(
     find . -name '*.py' \
@@ -51,6 +68,9 @@ fi
 
 echo "=== Extractor Registry Check ==="
 "$PYTHON" -c "from extractors import EXTRACTOR_REGISTRY; assert len(EXTRACTOR_REGISTRY) >= 10, 'Expected at least 10 extractors'; print(f'  {len(EXTRACTOR_REGISTRY)} extractors registered')"
+
+echo "=== Prompt Registry Check ==="
+"$PYTHON" scripts/prompt_registry.py
 
 if ! "$PYTHON" scripts/build_raw_source_manifest.py --check; then
   echo "raw-source manifest is missing or stale; run: $PYTHON scripts/build_raw_source_manifest.py" >&2

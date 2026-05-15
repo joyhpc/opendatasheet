@@ -186,6 +186,16 @@ DESIGN_RANGE_RE = re.compile(
 EQUATION_RE = re.compile(r"([A-Za-zΔ][A-Za-z0-9_(),\-/ ]{0,24})\s*=\s*([^\n]{4,120})")
 VARIABLE_TOKEN_RE = re.compile(r"\b[A-Za-zΔ][A-Za-z0-9_]*\b")
 
+def _origin(kind: str, method: str, source_page: int | None = None) -> dict:
+    origin = {
+        "kind": kind,
+        "method": method,
+    }
+    if source_page is not None:
+        origin["source_page"] = source_page
+    return origin
+
+
 def dedupe_preserve_order(items: list[dict | str]) -> list[dict | str]:
     seen = set()
     result = []
@@ -581,6 +591,11 @@ def _extract_component_hints(text_pages: list[dict], limit: int = 12) -> list[di
                         "value_hint": value_hint,
                         "value_hints": value_hints,
                         "snippet": line[:220],
+                        "origin": _origin(
+                            "deterministic_inference",
+                            "design_info_utils.component_rules",
+                            page.get("page_num"),
+                        ),
                     }
                 )
                 if len(results) >= limit:
@@ -656,6 +671,11 @@ def _extract_equation_hints(text_pages: list[dict], limit: int = 10) -> list[dic
                 {
                     "equation": f"{lhs} = {rhs}",
                     "source_page": page.get("page_num"),
+                    "origin": _origin(
+                        "source_fact",
+                        "design_info_utils.equation_regex",
+                        page.get("page_num"),
+                    ),
                 }
             )
             if len(results) >= limit:
@@ -676,6 +696,11 @@ def _extract_layout_hints(text_pages: list[dict], limit: int = 10) -> list[dict]
                 {
                     "hint": line[:220],
                     "source_page": page.get("page_num"),
+                    "origin": _origin(
+                        "source_recommendation",
+                        "design_info_utils.layout_keywords",
+                        page.get("page_num"),
+                    ),
                 }
             )
             if len(results) >= limit:
@@ -696,6 +721,11 @@ def _extract_supply_hints(text_pages: list[dict], limit: int = 8) -> list[dict]:
                 {
                     "hint": line[:220],
                     "source_page": page.get("page_num"),
+                    "origin": _origin(
+                        "source_recommendation",
+                        "design_info_utils.supply_keywords",
+                        page.get("page_num"),
+                    ),
                 }
             )
             if len(results) >= limit:
@@ -714,6 +744,11 @@ def _extract_topology_hints(text_pages: list[dict], limit: int = 8) -> list[dict
                 {
                     "hint": line[:220],
                     "source_page": page.get("page_num"),
+                    "origin": _origin(
+                        "deterministic_inference",
+                        "design_info_utils.topology_keywords",
+                        page.get("page_num"),
+                    ),
                 }
             )
             if len(results) >= limit:
@@ -760,6 +795,11 @@ def _extract_component_value_hints(text_pages: list[dict], limit: int = 8) -> li
                     "values": values[:6],
                     "source_page": page.get("page_num"),
                     "snippet": context_text[:220],
+                    "origin": _origin(
+                        "source_fact",
+                        "design_info_utils.passive_value_regex",
+                        page.get("page_num"),
+                    ),
                 }
             )
             if len(results) >= limit:
@@ -787,6 +827,11 @@ def _extract_design_range_hints(text_pages: list[dict], limit: int = 8) -> list[
                         "unit": unit,
                         "source_page": page.get("page_num"),
                         "snippet": line[:220],
+                        "origin": _origin(
+                            "source_fact",
+                            "design_info_utils.design_range_regex",
+                            page.get("page_num"),
+                        ),
                     }
                 )
                 if len(results) >= limit:
@@ -826,7 +871,15 @@ def extract_design_context(text_pages: list[dict]) -> dict:
     if not layout_hints:
         layout_pages = [page for page in normalized_pages if page["kind"] == "layout"]
         layout_hints = [
-            {"hint": page["preview"], "source_page": page["page_num"]}
+            {
+                "hint": page["preview"],
+                "source_page": page["page_num"],
+                "origin": _origin(
+                    "source_recommendation",
+                    "design_info_utils.layout_page_fallback",
+                    page["page_num"],
+                ),
+            }
             for page in layout_pages[:3]
         ]
 
@@ -836,6 +889,11 @@ def extract_design_context(text_pages: list[dict]) -> dict:
                 "page_num": page["page_num"],
                 "kind": page["kind"],
                 "preview": page["preview"],
+                "origin": _origin(
+                    "source_fact",
+                    "design_info_utils.page_kind_detection",
+                    page["page_num"],
+                ),
             }
             for page in normalized_pages
         ],

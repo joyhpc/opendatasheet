@@ -20,5 +20,5 @@ All notable changes to this repository are documented here.
 - Refined test entrypoints so `pytest` only collects the standardized regression entrypoint.
 
 ### Fixed
-- Restored schema validation for all checked-in exports (`194/194` valid locally).
+- Restored schema validation for all checked-in exports (`255/255` valid locally).
 - Restored regression health (`52/52` passing locally).

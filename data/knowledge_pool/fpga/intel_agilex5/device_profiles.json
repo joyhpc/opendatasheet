@@ -1,0 +1,2643 @@
+{
+  "_schema": "opendatasheet-knowledge-pool/1.0/device-profiles",
+  "pool_id": "fpga.intel_agilex5",
+  "devices": [
+    {
+      "profile_id": "fpga.intel_agilex5.A5EC013B_B23A",
+      "mpn": "A5EC013B",
+      "package": "B23A",
+      "source_export": "data/sch_review_export/A5EC013B_B23A.json",
+      "source_export_sha256": "b62ffa24c790ec70579aa6c87228f925b465138e104380c60626c2a633835abb",
+      "device_role": "FPGA",
+      "selectors": {
+        "vendor_aliases": [
+          "Intel",
+          "Altera",
+          "Intel/Altera"
+        ],
+        "family_aliases": [
+          "Agilex 5",
+          "Agilex5",
+          "A5E"
+        ],
+        "base_device": "A5E013B",
+        "variant_code": "C",
+        "has_hps": false,
+        "has_gts_transceiver": true,
+        "has_mipi_dphy": true,
+        "has_external_memory_interface": true
+      },
+      "source_traceability": {
+        "package_pinout": {
+          "source_file": "a5ec013b.xlsx",
+          "source_document_id": "819287",
+          "source_url": "https://cdrdv2.intel.com/v1/dl/getContent/819287",
+          "source_index_url": "https://www.altera.com/design/devices/resources/pinouts",
+          "source_version": "2025-06-13",
+          "source_status": "Final",
+          "source_revision_note": "Updated soft CDR support column:\n-Added CDR support on pin index 0, 1, 12, 13, 24, 25, 36, and 37.\n-Removed CDR support on pin index 10, 11, 22, 23, 34, 35, 46, and 47."
+        },
+        "device_capability": {
+          "source": "agilex5_device_overview_762191_2024_09_06",
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk",
+          "scope": "device-level capability boundary"
+        },
+        "device_datasheet": {
+          "source": "agilex5_device_datasheet_813918_2024_08_05",
+          "source_document_id": "813918",
+          "source_url": "https://cdrdv2.intel.com/v1/dl/getContent/813918",
+          "source_version": "2024-08-05",
+          "scope": "electrical, I/O, power, and configuration constraints"
+        },
+        "pin_connection_guidelines": {
+          "source": "agilex5_pin_connection_guidelines_reference",
+          "source_note": "The official Agilex 5 pinout workbooks reference the Pin Connection Guidelines for pin definition and connection guidance; this repository has not yet parsed that guide into structured rules.",
+          "scope": "manual schematic checklist until structured parsing is added"
+        }
+      },
+      "capability_blocks": {
+        "configuration": {
+          "class": "boot_configuration",
+          "interfaces": [
+            "JTAG"
+          ],
+          "mode_signals": [],
+          "status_signals": [],
+          "jtag_signals": [
+            "TCK",
+            "TDI",
+            "TDO",
+            "TMS"
+          ],
+          "source": "pinout_inference"
+        },
+        "high_speed_serial": {
+          "class": "high_speed_serial",
+          "rx_lane_pairs": 4,
+          "tx_lane_pairs": 4,
+          "refclk_pair_count": 2,
+          "quad_count": 1,
+          "source": "agilex5_device_overview_762191_2024_09_06",
+          "supported_protocols": [
+            "PCIe 4.0",
+            "10G Ethernet",
+            "custom"
+          ],
+          "protocol_matrix": {
+            "PCIe 4.0": {
+              "lane_widths": [
+                1,
+                2,
+                4
+              ],
+              "hardcore": true
+            },
+            "custom": {
+              "lane_widths": [
+                1,
+                2,
+                4
+              ],
+              "hardcore": false
+            },
+            "10G Ethernet": {
+              "lane_widths": [
+                1
+              ],
+              "hardcore": false
+            }
+          },
+          "max_rate_gbps": 17.16,
+          "pcie4_x4_instance_count": 1,
+          "gigabit_ethernet_mac_pcs_count": 1,
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk",
+          "review_note": "Agilex 5 transceiver protocol/IP enablement still depends on the selected ordering code, package migration limits, and design-specific quad usage.",
+          "transceiver_channel_count": 4
+        },
+        "device_role": {
+          "class": "device_role",
+          "device_role": "FPGA",
+          "source": "agilex5_part_number_decoder_762191_2024_09_06",
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk"
+        },
+        "fabric_resources": {
+          "class": "fpga_fabric",
+          "logic_elements": 138060,
+          "adaptive_logic_modules": 46800,
+          "m20k_count": 358,
+          "m20k_mbit": 6.99,
+          "mlab_count": 2340,
+          "mlab_mbit": 1.43,
+          "dsp_count": 376,
+          "int8_tops": 4.93,
+          "source": "agilex5_device_overview_762191_2024_09_06",
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk"
+        },
+        "io_resources": {
+          "class": "io_resources",
+          "hvio_count": 200,
+          "hsio_count": 192,
+          "hps_io_count": 48,
+          "io_pll_count": 4,
+          "fabric_feeding_io_pll_count": 8,
+          "lvds_pairs_1v3_1p6gbps": 96,
+          "mipi_dphy_interface_count": 14,
+          "source": "agilex5_device_overview_762191_2024_09_06",
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk"
+        },
+        "memory_interface": {
+          "class": "memory_interface",
+          "supported_standards": [
+            "DDR4",
+            "LPDDR4",
+            "LPDDR5"
+          ],
+          "x32_interface_count": 2,
+          "source": "agilex5_device_overview_762191_2024_09_06",
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk"
+        }
+      },
+      "facts": [
+        {
+          "id": "pin.TCK",
+          "state": "documented",
+          "source": "sch_review_export.pins",
+          "confidence": "high",
+          "claim": "Configuration JTAG TCK is on package ball BJ58.",
+          "machine": {
+            "signal": "TCK",
+            "ball": "BJ58",
+            "raw_name": "TCK",
+            "bank": "SDM",
+            "function": "CONFIG"
+          }
+        },
+        {
+          "id": "pin.TDI",
+          "state": "documented",
+          "source": "sch_review_export.pins",
+          "confidence": "high",
+          "claim": "Configuration JTAG TDI is on package ball BJ53.",
+          "machine": {
+            "signal": "TDI",
+            "ball": "BJ53",
+            "raw_name": "TDI",
+            "bank": "SDM",
+            "function": "CONFIG"
+          }
+        },
+        {
+          "id": "pin.TDO",
+          "state": "documented",
+          "source": "sch_review_export.pins",
+          "confidence": "high",
+          "claim": "Configuration JTAG TDO is on package ball BN55.",
+          "machine": {
+            "signal": "TDO",
+            "ball": "BN55",
+            "raw_name": "TDO",
+            "bank": "SDM",
+            "function": "CONFIG"
+          }
+        },
+        {
+          "id": "pin.TMS",
+          "state": "documented",
+          "source": "sch_review_export.pins",
+          "confidence": "high",
+          "claim": "Configuration JTAG TMS is on package ball BJ56.",
+          "machine": {
+            "signal": "TMS",
+            "ball": "BJ56",
+            "raw_name": "TMS",
+            "bank": "SDM",
+            "function": "CONFIG"
+          }
+        },
+        {
+          "id": "pin.nCONFIG",
+          "state": "documented",
+          "source": "sch_review_export.pins",
+          "confidence": "high",
+          "claim": "Configuration status/control signal nCONFIG is on package ball BU32.",
+          "machine": {
+            "signal": "nCONFIG",
+            "ball": "BU32",
+            "raw_name": "nCONFIG",
+            "bank": "SDM",
+            "function": "CONFIG"
+          }
+        },
+        {
+          "id": "pin.nSTATUS",
+          "state": "documented",
+          "source": "sch_review_export.pins",
+          "confidence": "high",
+          "claim": "Configuration status/control signal nSTATUS is on package ball BV32.",
+          "machine": {
+            "signal": "nSTATUS",
+            "ball": "BV32",
+            "raw_name": "nSTATUS",
+            "bank": "SDM",
+            "function": "CONFIG"
+          }
+        },
+        {
+          "id": "resources.logic_elements",
+          "state": "documented",
+          "source": "sch_review_export.capability_blocks.fabric_resources",
+          "confidence": "high",
+          "claim": "Device exposes 138060 logic elements in the parsed capability profile.",
+          "machine": {
+            "logic_elements": 138060
+          }
+        }
+      ]
+    },
+    {
+      "profile_id": "fpga.intel_agilex5.A5EC013B_B32A",
+      "mpn": "A5EC013B",
+      "package": "B32A",
+      "source_export": "data/sch_review_export/A5EC013B_B32A.json",
+      "source_export_sha256": "aca26939083d03bd7fe66b7063bed3e5538801d666062fdf74d27b4c334400ea",
+      "device_role": "FPGA",
+      "selectors": {
+        "vendor_aliases": [
+          "Intel",
+          "Altera",
+          "Intel/Altera"
+        ],
+        "family_aliases": [
+          "Agilex 5",
+          "Agilex5",
+          "A5E"
+        ],
+        "base_device": "A5E013B",
+        "variant_code": "C",
+        "has_hps": false,
+        "has_gts_transceiver": true,
+        "has_mipi_dphy": true,
+        "has_external_memory_interface": true
+      },
+      "source_traceability": {
+        "package_pinout": {
+          "source_file": "a5ec013b.xlsx",
+          "source_document_id": "819287",
+          "source_url": "https://cdrdv2.intel.com/v1/dl/getContent/819287",
+          "source_index_url": "https://www.altera.com/design/devices/resources/pinouts",
+          "source_version": "2025-06-13",
+          "source_status": "Final",
+          "source_revision_note": "Updated soft CDR support column:\n-Added CDR support on pin index 0, 1, 12, 13, 24, 25, 36, and 37.\n-Removed CDR support on pin index 10, 11, 22, 23, 34, 35, 46, and 47."
+        },
+        "device_capability": {
+          "source": "agilex5_device_overview_762191_2024_09_06",
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk",
+          "scope": "device-level capability boundary"
+        },
+        "device_datasheet": {
+          "source": "agilex5_device_datasheet_813918_2024_08_05",
+          "source_document_id": "813918",
+          "source_url": "https://cdrdv2.intel.com/v1/dl/getContent/813918",
+          "source_version": "2024-08-05",
+          "scope": "electrical, I/O, power, and configuration constraints"
+        },
+        "pin_connection_guidelines": {
+          "source": "agilex5_pin_connection_guidelines_reference",
+          "source_note": "The official Agilex 5 pinout workbooks reference the Pin Connection Guidelines for pin definition and connection guidance; this repository has not yet parsed that guide into structured rules.",
+          "scope": "manual schematic checklist until structured parsing is added"
+        }
+      },
+      "capability_blocks": {
+        "configuration": {
+          "class": "boot_configuration",
+          "interfaces": [
+            "JTAG"
+          ],
+          "mode_signals": [],
+          "status_signals": [],
+          "jtag_signals": [
+            "TCK",
+            "TDI",
+            "TDO",
+            "TMS"
+          ],
+          "source": "pinout_inference"
+        },
+        "high_speed_serial": {
+          "class": "high_speed_serial",
+          "rx_lane_pairs": 4,
+          "tx_lane_pairs": 4,
+          "refclk_pair_count": 2,
+          "quad_count": 1,
+          "source": "agilex5_device_overview_762191_2024_09_06",
+          "supported_protocols": [
+            "PCIe 4.0",
+            "10G Ethernet",
+            "custom"
+          ],
+          "protocol_matrix": {
+            "PCIe 4.0": {
+              "lane_widths": [
+                1,
+                2,
+                4
+              ],
+              "hardcore": true
+            },
+            "custom": {
+              "lane_widths": [
+                1,
+                2,
+                4
+              ],
+              "hardcore": false
+            },
+            "10G Ethernet": {
+              "lane_widths": [
+                1
+              ],
+              "hardcore": false
+            }
+          },
+          "max_rate_gbps": 17.16,
+          "pcie4_x4_instance_count": 1,
+          "gigabit_ethernet_mac_pcs_count": 1,
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk",
+          "review_note": "Agilex 5 transceiver protocol/IP enablement still depends on the selected ordering code, package migration limits, and design-specific quad usage.",
+          "transceiver_channel_count": 4
+        },
+        "device_role": {
+          "class": "device_role",
+          "device_role": "FPGA",
+          "source": "agilex5_part_number_decoder_762191_2024_09_06",
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk"
+        },
+        "fabric_resources": {
+          "class": "fpga_fabric",
+          "logic_elements": 138060,
+          "adaptive_logic_modules": 46800,
+          "m20k_count": 358,
+          "m20k_mbit": 6.99,
+          "mlab_count": 2340,
+          "mlab_mbit": 1.43,
+          "dsp_count": 376,
+          "int8_tops": 4.93,
+          "source": "agilex5_device_overview_762191_2024_09_06",
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk"
+        },
+        "io_resources": {
+          "class": "io_resources",
+          "hvio_count": 200,
+          "hsio_count": 192,
+          "hps_io_count": 48,
+          "io_pll_count": 4,
+          "fabric_feeding_io_pll_count": 8,
+          "lvds_pairs_1v3_1p6gbps": 96,
+          "mipi_dphy_interface_count": 14,
+          "source": "agilex5_device_overview_762191_2024_09_06",
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk"
+        },
+        "memory_interface": {
+          "class": "memory_interface",
+          "supported_standards": [
+            "DDR4",
+            "LPDDR4",
+            "LPDDR5"
+          ],
+          "x32_interface_count": 2,
+          "source": "agilex5_device_overview_762191_2024_09_06",
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk"
+        }
+      },
+      "facts": [
+        {
+          "id": "pin.TCK",
+          "state": "documented",
+          "source": "sch_review_export.pins",
+          "confidence": "high",
+          "claim": "Configuration JTAG TCK is on package ball CA109.",
+          "machine": {
+            "signal": "TCK",
+            "ball": "CA109",
+            "raw_name": "TCK",
+            "bank": "SDM",
+            "function": "CONFIG"
+          }
+        },
+        {
+          "id": "pin.TDI",
+          "state": "documented",
+          "source": "sch_review_export.pins",
+          "confidence": "high",
+          "claim": "Configuration JTAG TDI is on package ball BW112.",
+          "machine": {
+            "signal": "TDI",
+            "ball": "BW112",
+            "raw_name": "TDI",
+            "bank": "SDM",
+            "function": "CONFIG"
+          }
+        },
+        {
+          "id": "pin.TDO",
+          "state": "documented",
+          "source": "sch_review_export.pins",
+          "confidence": "high",
+          "claim": "Configuration JTAG TDO is on package ball BW109.",
+          "machine": {
+            "signal": "TDO",
+            "ball": "BW109",
+            "raw_name": "TDO",
+            "bank": "SDM",
+            "function": "CONFIG"
+          }
+        },
+        {
+          "id": "pin.TMS",
+          "state": "documented",
+          "source": "sch_review_export.pins",
+          "confidence": "high",
+          "claim": "Configuration JTAG TMS is on package ball CA112.",
+          "machine": {
+            "signal": "TMS",
+            "ball": "CA112",
+            "raw_name": "TMS",
+            "bank": "SDM",
+            "function": "CONFIG"
+          }
+        },
+        {
+          "id": "pin.nCONFIG",
+          "state": "documented",
+          "source": "sch_review_export.pins",
+          "confidence": "high",
+          "claim": "Configuration status/control signal nCONFIG is on package ball BU99.",
+          "machine": {
+            "signal": "nCONFIG",
+            "ball": "BU99",
+            "raw_name": "nCONFIG",
+            "bank": "SDM",
+            "function": "CONFIG"
+          }
+        },
+        {
+          "id": "pin.nSTATUS",
+          "state": "documented",
+          "source": "sch_review_export.pins",
+          "confidence": "high",
+          "claim": "Configuration status/control signal nSTATUS is on package ball BW99.",
+          "machine": {
+            "signal": "nSTATUS",
+            "ball": "BW99",
+            "raw_name": "nSTATUS",
+            "bank": "SDM",
+            "function": "CONFIG"
+          }
+        },
+        {
+          "id": "resources.logic_elements",
+          "state": "documented",
+          "source": "sch_review_export.capability_blocks.fabric_resources",
+          "confidence": "high",
+          "claim": "Device exposes 138060 logic elements in the parsed capability profile.",
+          "machine": {
+            "logic_elements": 138060
+          }
+        }
+      ]
+    },
+    {
+      "profile_id": "fpga.intel_agilex5.A5EC013B_M16A",
+      "mpn": "A5EC013B",
+      "package": "M16A",
+      "source_export": "data/sch_review_export/A5EC013B_M16A.json",
+      "source_export_sha256": "d352512a18309adfc4645f38a633d0da88dc366597336457ecb5f1ab2b59b4d5",
+      "device_role": "FPGA",
+      "selectors": {
+        "vendor_aliases": [
+          "Intel",
+          "Altera",
+          "Intel/Altera"
+        ],
+        "family_aliases": [
+          "Agilex 5",
+          "Agilex5",
+          "A5E"
+        ],
+        "base_device": "A5E013B",
+        "variant_code": "C",
+        "has_hps": false,
+        "has_gts_transceiver": true,
+        "has_mipi_dphy": true,
+        "has_external_memory_interface": true
+      },
+      "source_traceability": {
+        "package_pinout": {
+          "source_file": "a5ec013b.xlsx",
+          "source_document_id": "819287",
+          "source_url": "https://cdrdv2.intel.com/v1/dl/getContent/819287",
+          "source_index_url": "https://www.altera.com/design/devices/resources/pinouts",
+          "source_version": "2025-06-13",
+          "source_status": "Final",
+          "source_revision_note": "Updated soft CDR support column:\n-Added CDR support on pin index 0, 1, 12, 13, 24, 25, 36, and 37.\n-Removed CDR support on pin index 10, 11, 22, 23, 34, 35, 46, and 47."
+        },
+        "device_capability": {
+          "source": "agilex5_device_overview_762191_2024_09_06",
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk",
+          "scope": "device-level capability boundary"
+        },
+        "device_datasheet": {
+          "source": "agilex5_device_datasheet_813918_2024_08_05",
+          "source_document_id": "813918",
+          "source_url": "https://cdrdv2.intel.com/v1/dl/getContent/813918",
+          "source_version": "2024-08-05",
+          "scope": "electrical, I/O, power, and configuration constraints"
+        },
+        "pin_connection_guidelines": {
+          "source": "agilex5_pin_connection_guidelines_reference",
+          "source_note": "The official Agilex 5 pinout workbooks reference the Pin Connection Guidelines for pin definition and connection guidance; this repository has not yet parsed that guide into structured rules.",
+          "scope": "manual schematic checklist until structured parsing is added"
+        }
+      },
+      "capability_blocks": {
+        "configuration": {
+          "class": "boot_configuration",
+          "interfaces": [
+            "JTAG"
+          ],
+          "mode_signals": [],
+          "status_signals": [],
+          "jtag_signals": [
+            "TCK",
+            "TDI",
+            "TDO",
+            "TMS"
+          ],
+          "source": "pinout_inference"
+        },
+        "high_speed_serial": {
+          "class": "high_speed_serial",
+          "rx_lane_pairs": 4,
+          "tx_lane_pairs": 4,
+          "refclk_pair_count": 2,
+          "quad_count": 1,
+          "source": "agilex5_device_overview_762191_2024_09_06",
+          "supported_protocols": [
+            "PCIe 4.0",
+            "10G Ethernet",
+            "custom"
+          ],
+          "protocol_matrix": {
+            "PCIe 4.0": {
+              "lane_widths": [
+                1,
+                2,
+                4
+              ],
+              "hardcore": true
+            },
+            "custom": {
+              "lane_widths": [
+                1,
+                2,
+                4
+              ],
+              "hardcore": false
+            },
+            "10G Ethernet": {
+              "lane_widths": [
+                1
+              ],
+              "hardcore": false
+            }
+          },
+          "max_rate_gbps": 17.16,
+          "pcie4_x4_instance_count": 1,
+          "gigabit_ethernet_mac_pcs_count": 1,
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk",
+          "review_note": "Agilex 5 transceiver protocol/IP enablement still depends on the selected ordering code, package migration limits, and design-specific quad usage.",
+          "transceiver_channel_count": 4
+        },
+        "device_role": {
+          "class": "device_role",
+          "device_role": "FPGA",
+          "source": "agilex5_part_number_decoder_762191_2024_09_06",
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk"
+        },
+        "fabric_resources": {
+          "class": "fpga_fabric",
+          "logic_elements": 138060,
+          "adaptive_logic_modules": 46800,
+          "m20k_count": 358,
+          "m20k_mbit": 6.99,
+          "mlab_count": 2340,
+          "mlab_mbit": 1.43,
+          "dsp_count": 376,
+          "int8_tops": 4.93,
+          "source": "agilex5_device_overview_762191_2024_09_06",
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk"
+        },
+        "io_resources": {
+          "class": "io_resources",
+          "hvio_count": 200,
+          "hsio_count": 192,
+          "hps_io_count": 48,
+          "io_pll_count": 4,
+          "fabric_feeding_io_pll_count": 8,
+          "lvds_pairs_1v3_1p6gbps": 96,
+          "mipi_dphy_interface_count": 14,
+          "source": "agilex5_device_overview_762191_2024_09_06",
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk"
+        },
+        "memory_interface": {
+          "class": "memory_interface",
+          "supported_standards": [
+            "DDR4",
+            "LPDDR4",
+            "LPDDR5"
+          ],
+          "x32_interface_count": 2,
+          "source": "agilex5_device_overview_762191_2024_09_06",
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk"
+        }
+      },
+      "facts": [
+        {
+          "id": "pin.TCK",
+          "state": "documented",
+          "source": "sch_review_export.pins",
+          "confidence": "high",
+          "claim": "Configuration JTAG TCK is on package ball AF16.",
+          "machine": {
+            "signal": "TCK",
+            "ball": "AF16",
+            "raw_name": "TCK",
+            "bank": "SDM",
+            "function": "CONFIG"
+          }
+        },
+        {
+          "id": "pin.TDI",
+          "state": "documented",
+          "source": "sch_review_export.pins",
+          "confidence": "high",
+          "claim": "Configuration JTAG TDI is on package ball AE17.",
+          "machine": {
+            "signal": "TDI",
+            "ball": "AE17",
+            "raw_name": "TDI",
+            "bank": "SDM",
+            "function": "CONFIG"
+          }
+        },
+        {
+          "id": "pin.TDO",
+          "state": "documented",
+          "source": "sch_review_export.pins",
+          "confidence": "high",
+          "claim": "Configuration JTAG TDO is on package ball AE16.",
+          "machine": {
+            "signal": "TDO",
+            "ball": "AE16",
+            "raw_name": "TDO",
+            "bank": "SDM",
+            "function": "CONFIG"
+          }
+        },
+        {
+          "id": "pin.TMS",
+          "state": "documented",
+          "source": "sch_review_export.pins",
+          "confidence": "high",
+          "claim": "Configuration JTAG TMS is on package ball AF17.",
+          "machine": {
+            "signal": "TMS",
+            "ball": "AF17",
+            "raw_name": "TMS",
+            "bank": "SDM",
+            "function": "CONFIG"
+          }
+        },
+        {
+          "id": "pin.nCONFIG",
+          "state": "documented",
+          "source": "sch_review_export.pins",
+          "confidence": "high",
+          "claim": "Configuration status/control signal nCONFIG is on package ball AG15.",
+          "machine": {
+            "signal": "nCONFIG",
+            "ball": "AG15",
+            "raw_name": "nCONFIG",
+            "bank": "SDM",
+            "function": "CONFIG"
+          }
+        },
+        {
+          "id": "pin.nSTATUS",
+          "state": "documented",
+          "source": "sch_review_export.pins",
+          "confidence": "high",
+          "claim": "Configuration status/control signal nSTATUS is on package ball AG16.",
+          "machine": {
+            "signal": "nSTATUS",
+            "ball": "AG16",
+            "raw_name": "nSTATUS",
+            "bank": "SDM",
+            "function": "CONFIG"
+          }
+        },
+        {
+          "id": "resources.logic_elements",
+          "state": "documented",
+          "source": "sch_review_export.capability_blocks.fabric_resources",
+          "confidence": "high",
+          "claim": "Device exposes 138060 logic elements in the parsed capability profile.",
+          "machine": {
+            "logic_elements": 138060
+          }
+        }
+      ]
+    },
+    {
+      "profile_id": "fpga.intel_agilex5.A5EC052A_B23A",
+      "mpn": "A5EC052A",
+      "package": "B23A",
+      "source_export": "data/sch_review_export/A5EC052A_B23A.json",
+      "source_export_sha256": "7e14fb02c9d1e5d2e71bfa58c34777bce7ccfe925344094ff6ee8e50427b96d1",
+      "device_role": "FPGA",
+      "selectors": {
+        "vendor_aliases": [
+          "Intel",
+          "Altera",
+          "Intel/Altera"
+        ],
+        "family_aliases": [
+          "Agilex 5",
+          "Agilex5",
+          "A5E"
+        ],
+        "base_device": "A5E052A",
+        "variant_code": "C",
+        "has_hps": false,
+        "has_gts_transceiver": true,
+        "has_mipi_dphy": true,
+        "has_external_memory_interface": true
+      },
+      "source_traceability": {
+        "package_pinout": {
+          "source_file": "a5ec052a.xlsx",
+          "source_document_id": "830445",
+          "source_url": "https://cdrdv2.intel.com/v1/dl/getContent/830445",
+          "source_index_url": "https://www.altera.com/design/devices/resources/pinouts",
+          "source_version": "2025-06-06",
+          "source_status": "Final",
+          "source_revision_note": "Updated soft CDR support column:\n-Added CDR support on pin index 0, 1, 12, 13, 24, 25, 36, and 37.\n-Removed CDR support on pin index 10, 11, 22, 23, 34, 35, 46, and 47."
+        },
+        "device_capability": {
+          "source": "agilex5_device_overview_762191_2024_09_06",
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk",
+          "scope": "device-level capability boundary"
+        },
+        "device_datasheet": {
+          "source": "agilex5_device_datasheet_813918_2024_08_05",
+          "source_document_id": "813918",
+          "source_url": "https://cdrdv2.intel.com/v1/dl/getContent/813918",
+          "source_version": "2024-08-05",
+          "scope": "electrical, I/O, power, and configuration constraints"
+        },
+        "pin_connection_guidelines": {
+          "source": "agilex5_pin_connection_guidelines_reference",
+          "source_note": "The official Agilex 5 pinout workbooks reference the Pin Connection Guidelines for pin definition and connection guidance; this repository has not yet parsed that guide into structured rules.",
+          "scope": "manual schematic checklist until structured parsing is added"
+        }
+      },
+      "capability_blocks": {
+        "configuration": {
+          "class": "boot_configuration",
+          "interfaces": [
+            "JTAG"
+          ],
+          "mode_signals": [],
+          "status_signals": [],
+          "jtag_signals": [
+            "TCK",
+            "TDI",
+            "TDO",
+            "TMS"
+          ],
+          "source": "pinout_inference"
+        },
+        "high_speed_serial": {
+          "class": "high_speed_serial",
+          "rx_lane_pairs": 12,
+          "tx_lane_pairs": 12,
+          "refclk_pair_count": 6,
+          "quad_count": 3,
+          "source": "agilex5_device_overview_762191_2024_09_06",
+          "supported_protocols": [
+            "PCIe 4.0",
+            "10G Ethernet",
+            "25G Ethernet",
+            "custom"
+          ],
+          "protocol_matrix": {
+            "PCIe 4.0": {
+              "lane_widths": [
+                1,
+                2,
+                4
+              ],
+              "hardcore": true
+            },
+            "custom": {
+              "lane_widths": [
+                1,
+                2,
+                4
+              ],
+              "hardcore": false
+            },
+            "10G Ethernet": {
+              "lane_widths": [
+                1
+              ],
+              "hardcore": false
+            },
+            "25G Ethernet": {
+              "lane_widths": [
+                1
+              ],
+              "hardcore": false
+            }
+          },
+          "max_rate_gbps": 28.1,
+          "pcie4_x4_instance_count": 6,
+          "gigabit_ethernet_mac_pcs_count": 4,
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk",
+          "review_note": "Agilex 5 transceiver protocol/IP enablement still depends on the selected ordering code, package migration limits, and design-specific quad usage.",
+          "transceiver_channel_count": 24
+        },
+        "device_role": {
+          "class": "device_role",
+          "device_role": "FPGA",
+          "source": "agilex5_part_number_decoder_762191_2024_09_06",
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk"
+        },
+        "fabric_resources": {
+          "class": "fpga_fabric",
+          "logic_elements": 523920,
+          "adaptive_logic_modules": 177600,
+          "m20k_count": 1288,
+          "m20k_mbit": 25.16,
+          "mlab_count": 8440,
+          "mlab_mbit": 5.15,
+          "dsp_count": 1352,
+          "int8_tops": 20.78,
+          "source": "agilex5_device_overview_762191_2024_09_06",
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk"
+        },
+        "io_resources": {
+          "class": "io_resources",
+          "hvio_count": 120,
+          "hsio_count": 384,
+          "hps_io_count": 48,
+          "io_pll_count": 8,
+          "fabric_feeding_io_pll_count": 13,
+          "lvds_pairs_1v3_1p6gbps": 192,
+          "mipi_dphy_interface_count": 28,
+          "source": "agilex5_device_overview_762191_2024_09_06",
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk"
+        },
+        "memory_interface": {
+          "class": "memory_interface",
+          "supported_standards": [
+            "DDR4",
+            "DDR5",
+            "LPDDR4",
+            "LPDDR5"
+          ],
+          "x32_interface_count": 4,
+          "source": "agilex5_device_overview_762191_2024_09_06",
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk"
+        }
+      },
+      "facts": [
+        {
+          "id": "pin.TCK",
+          "state": "documented",
+          "source": "sch_review_export.pins",
+          "confidence": "high",
+          "claim": "Configuration JTAG TCK is on package ball BJ58.",
+          "machine": {
+            "signal": "TCK",
+            "ball": "BJ58",
+            "raw_name": "TCK",
+            "bank": "SDM",
+            "function": "CONFIG"
+          }
+        },
+        {
+          "id": "pin.TDI",
+          "state": "documented",
+          "source": "sch_review_export.pins",
+          "confidence": "high",
+          "claim": "Configuration JTAG TDI is on package ball BJ53.",
+          "machine": {
+            "signal": "TDI",
+            "ball": "BJ53",
+            "raw_name": "TDI",
+            "bank": "SDM",
+            "function": "CONFIG"
+          }
+        },
+        {
+          "id": "pin.TDO",
+          "state": "documented",
+          "source": "sch_review_export.pins",
+          "confidence": "high",
+          "claim": "Configuration JTAG TDO is on package ball BN55.",
+          "machine": {
+            "signal": "TDO",
+            "ball": "BN55",
+            "raw_name": "TDO",
+            "bank": "SDM",
+            "function": "CONFIG"
+          }
+        },
+        {
+          "id": "pin.TMS",
+          "state": "documented",
+          "source": "sch_review_export.pins",
+          "confidence": "high",
+          "claim": "Configuration JTAG TMS is on package ball BJ56.",
+          "machine": {
+            "signal": "TMS",
+            "ball": "BJ56",
+            "raw_name": "TMS",
+            "bank": "SDM",
+            "function": "CONFIG"
+          }
+        },
+        {
+          "id": "pin.nCONFIG",
+          "state": "documented",
+          "source": "sch_review_export.pins",
+          "confidence": "high",
+          "claim": "Configuration status/control signal nCONFIG is on package ball BU32.",
+          "machine": {
+            "signal": "nCONFIG",
+            "ball": "BU32",
+            "raw_name": "nCONFIG",
+            "bank": "SDM",
+            "function": "CONFIG"
+          }
+        },
+        {
+          "id": "pin.nSTATUS",
+          "state": "documented",
+          "source": "sch_review_export.pins",
+          "confidence": "high",
+          "claim": "Configuration status/control signal nSTATUS is on package ball BV32.",
+          "machine": {
+            "signal": "nSTATUS",
+            "ball": "BV32",
+            "raw_name": "nSTATUS",
+            "bank": "SDM",
+            "function": "CONFIG"
+          }
+        },
+        {
+          "id": "resources.logic_elements",
+          "state": "documented",
+          "source": "sch_review_export.capability_blocks.fabric_resources",
+          "confidence": "high",
+          "claim": "Device exposes 523920 logic elements in the parsed capability profile.",
+          "machine": {
+            "logic_elements": 523920
+          }
+        }
+      ]
+    },
+    {
+      "profile_id": "fpga.intel_agilex5.A5EC052A_B32A",
+      "mpn": "A5EC052A",
+      "package": "B32A",
+      "source_export": "data/sch_review_export/A5EC052A_B32A.json",
+      "source_export_sha256": "efd9d2c01cdf5bb5e52ffe26d7351493826fc74dfebeb5dd14d2e6ec88556250",
+      "device_role": "FPGA",
+      "selectors": {
+        "vendor_aliases": [
+          "Intel",
+          "Altera",
+          "Intel/Altera"
+        ],
+        "family_aliases": [
+          "Agilex 5",
+          "Agilex5",
+          "A5E"
+        ],
+        "base_device": "A5E052A",
+        "variant_code": "C",
+        "has_hps": false,
+        "has_gts_transceiver": true,
+        "has_mipi_dphy": true,
+        "has_external_memory_interface": true
+      },
+      "source_traceability": {
+        "package_pinout": {
+          "source_file": "a5ec052a.xlsx",
+          "source_document_id": "830445",
+          "source_url": "https://cdrdv2.intel.com/v1/dl/getContent/830445",
+          "source_index_url": "https://www.altera.com/design/devices/resources/pinouts",
+          "source_version": "2025-06-06",
+          "source_status": "Final",
+          "source_revision_note": "Updated soft CDR support column:\n-Added CDR support on pin index 0, 1, 12, 13, 24, 25, 36, and 37.\n-Removed CDR support on pin index 10, 11, 22, 23, 34, 35, 46, and 47."
+        },
+        "device_capability": {
+          "source": "agilex5_device_overview_762191_2024_09_06",
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk",
+          "scope": "device-level capability boundary"
+        },
+        "device_datasheet": {
+          "source": "agilex5_device_datasheet_813918_2024_08_05",
+          "source_document_id": "813918",
+          "source_url": "https://cdrdv2.intel.com/v1/dl/getContent/813918",
+          "source_version": "2024-08-05",
+          "scope": "electrical, I/O, power, and configuration constraints"
+        },
+        "pin_connection_guidelines": {
+          "source": "agilex5_pin_connection_guidelines_reference",
+          "source_note": "The official Agilex 5 pinout workbooks reference the Pin Connection Guidelines for pin definition and connection guidance; this repository has not yet parsed that guide into structured rules.",
+          "scope": "manual schematic checklist until structured parsing is added"
+        }
+      },
+      "capability_blocks": {
+        "configuration": {
+          "class": "boot_configuration",
+          "interfaces": [
+            "JTAG"
+          ],
+          "mode_signals": [],
+          "status_signals": [],
+          "jtag_signals": [
+            "TCK",
+            "TDI",
+            "TDO",
+            "TMS"
+          ],
+          "source": "pinout_inference"
+        },
+        "high_speed_serial": {
+          "class": "high_speed_serial",
+          "rx_lane_pairs": 24,
+          "tx_lane_pairs": 24,
+          "refclk_pair_count": 12,
+          "quad_count": 6,
+          "source": "agilex5_device_overview_762191_2024_09_06",
+          "supported_protocols": [
+            "PCIe 4.0",
+            "10G Ethernet",
+            "25G Ethernet",
+            "custom"
+          ],
+          "protocol_matrix": {
+            "PCIe 4.0": {
+              "lane_widths": [
+                1,
+                2,
+                4
+              ],
+              "hardcore": true
+            },
+            "custom": {
+              "lane_widths": [
+                1,
+                2,
+                4
+              ],
+              "hardcore": false
+            },
+            "10G Ethernet": {
+              "lane_widths": [
+                1
+              ],
+              "hardcore": false
+            },
+            "25G Ethernet": {
+              "lane_widths": [
+                1
+              ],
+              "hardcore": false
+            }
+          },
+          "max_rate_gbps": 28.1,
+          "pcie4_x4_instance_count": 6,
+          "gigabit_ethernet_mac_pcs_count": 4,
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk",
+          "review_note": "Agilex 5 transceiver protocol/IP enablement still depends on the selected ordering code, package migration limits, and design-specific quad usage.",
+          "transceiver_channel_count": 24
+        },
+        "device_role": {
+          "class": "device_role",
+          "device_role": "FPGA",
+          "source": "agilex5_part_number_decoder_762191_2024_09_06",
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk"
+        },
+        "fabric_resources": {
+          "class": "fpga_fabric",
+          "logic_elements": 523920,
+          "adaptive_logic_modules": 177600,
+          "m20k_count": 1288,
+          "m20k_mbit": 25.16,
+          "mlab_count": 8440,
+          "mlab_mbit": 5.15,
+          "dsp_count": 1352,
+          "int8_tops": 20.78,
+          "source": "agilex5_device_overview_762191_2024_09_06",
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk"
+        },
+        "io_resources": {
+          "class": "io_resources",
+          "hvio_count": 120,
+          "hsio_count": 384,
+          "hps_io_count": 48,
+          "io_pll_count": 8,
+          "fabric_feeding_io_pll_count": 13,
+          "lvds_pairs_1v3_1p6gbps": 192,
+          "mipi_dphy_interface_count": 28,
+          "source": "agilex5_device_overview_762191_2024_09_06",
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk"
+        },
+        "memory_interface": {
+          "class": "memory_interface",
+          "supported_standards": [
+            "DDR4",
+            "DDR5",
+            "LPDDR4",
+            "LPDDR5"
+          ],
+          "x32_interface_count": 4,
+          "source": "agilex5_device_overview_762191_2024_09_06",
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk"
+        }
+      },
+      "facts": [
+        {
+          "id": "pin.TCK",
+          "state": "documented",
+          "source": "sch_review_export.pins",
+          "confidence": "high",
+          "claim": "Configuration JTAG TCK is on package ball CA109.",
+          "machine": {
+            "signal": "TCK",
+            "ball": "CA109",
+            "raw_name": "TCK",
+            "bank": "SDM",
+            "function": "CONFIG"
+          }
+        },
+        {
+          "id": "pin.TDI",
+          "state": "documented",
+          "source": "sch_review_export.pins",
+          "confidence": "high",
+          "claim": "Configuration JTAG TDI is on package ball BW112.",
+          "machine": {
+            "signal": "TDI",
+            "ball": "BW112",
+            "raw_name": "TDI",
+            "bank": "SDM",
+            "function": "CONFIG"
+          }
+        },
+        {
+          "id": "pin.TDO",
+          "state": "documented",
+          "source": "sch_review_export.pins",
+          "confidence": "high",
+          "claim": "Configuration JTAG TDO is on package ball BW109.",
+          "machine": {
+            "signal": "TDO",
+            "ball": "BW109",
+            "raw_name": "TDO",
+            "bank": "SDM",
+            "function": "CONFIG"
+          }
+        },
+        {
+          "id": "pin.TMS",
+          "state": "documented",
+          "source": "sch_review_export.pins",
+          "confidence": "high",
+          "claim": "Configuration JTAG TMS is on package ball CA112.",
+          "machine": {
+            "signal": "TMS",
+            "ball": "CA112",
+            "raw_name": "TMS",
+            "bank": "SDM",
+            "function": "CONFIG"
+          }
+        },
+        {
+          "id": "pin.nCONFIG",
+          "state": "documented",
+          "source": "sch_review_export.pins",
+          "confidence": "high",
+          "claim": "Configuration status/control signal nCONFIG is on package ball BU99.",
+          "machine": {
+            "signal": "nCONFIG",
+            "ball": "BU99",
+            "raw_name": "nCONFIG",
+            "bank": "SDM",
+            "function": "CONFIG"
+          }
+        },
+        {
+          "id": "pin.nSTATUS",
+          "state": "documented",
+          "source": "sch_review_export.pins",
+          "confidence": "high",
+          "claim": "Configuration status/control signal nSTATUS is on package ball BW99.",
+          "machine": {
+            "signal": "nSTATUS",
+            "ball": "BW99",
+            "raw_name": "nSTATUS",
+            "bank": "SDM",
+            "function": "CONFIG"
+          }
+        },
+        {
+          "id": "resources.logic_elements",
+          "state": "documented",
+          "source": "sch_review_export.capability_blocks.fabric_resources",
+          "confidence": "high",
+          "claim": "Device exposes 523920 logic elements in the parsed capability profile.",
+          "machine": {
+            "logic_elements": 523920
+          }
+        }
+      ]
+    },
+    {
+      "profile_id": "fpga.intel_agilex5.A5ED013B_B23A",
+      "mpn": "A5ED013B",
+      "package": "B23A",
+      "source_export": "data/sch_review_export/A5ED013B_B23A.json",
+      "source_export_sha256": "d53aa270b2e321dc28893d97bea01eb8cfe0d04c5ad7bcc5120a34ab7891fedc",
+      "device_role": "FPGA SoC",
+      "selectors": {
+        "vendor_aliases": [
+          "Intel",
+          "Altera",
+          "Intel/Altera"
+        ],
+        "family_aliases": [
+          "Agilex 5",
+          "Agilex5",
+          "A5E"
+        ],
+        "base_device": "A5E013B",
+        "variant_code": "D",
+        "has_hps": true,
+        "has_gts_transceiver": true,
+        "has_mipi_dphy": true,
+        "has_external_memory_interface": true
+      },
+      "source_traceability": {
+        "package_pinout": {
+          "source_file": "a5ed013b.xlsx",
+          "source_document_id": "819288",
+          "source_url": "https://cdrdv2.intel.com/v1/dl/getContent/819288",
+          "source_index_url": "https://www.altera.com/design/devices/resources/pinouts",
+          "source_version": "2025-06-13",
+          "source_status": "Final",
+          "source_revision_note": "Updated soft CDR support column:\n-Added CDR support on pin index 0, 1, 12, 13, 24, 25, 36, and 37.\n-Removed CDR support on pin index 10, 11, 22, 23, 34, 35, 46, and 47."
+        },
+        "device_capability": {
+          "source": "agilex5_device_overview_762191_2024_09_06",
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk",
+          "scope": "device-level capability boundary"
+        },
+        "device_datasheet": {
+          "source": "agilex5_device_datasheet_813918_2024_08_05",
+          "source_document_id": "813918",
+          "source_url": "https://cdrdv2.intel.com/v1/dl/getContent/813918",
+          "source_version": "2024-08-05",
+          "scope": "electrical, I/O, power, and configuration constraints"
+        },
+        "pin_connection_guidelines": {
+          "source": "agilex5_pin_connection_guidelines_reference",
+          "source_note": "The official Agilex 5 pinout workbooks reference the Pin Connection Guidelines for pin definition and connection guidance; this repository has not yet parsed that guide into structured rules.",
+          "scope": "manual schematic checklist until structured parsing is added"
+        }
+      },
+      "capability_blocks": {
+        "configuration": {
+          "class": "boot_configuration",
+          "interfaces": [
+            "JTAG"
+          ],
+          "mode_signals": [],
+          "status_signals": [],
+          "jtag_signals": [
+            "TCK",
+            "TDI",
+            "TDO",
+            "TMS"
+          ],
+          "source": "pinout_inference"
+        },
+        "high_speed_serial": {
+          "class": "high_speed_serial",
+          "rx_lane_pairs": 4,
+          "tx_lane_pairs": 4,
+          "refclk_pair_count": 2,
+          "quad_count": 1,
+          "source": "agilex5_device_overview_762191_2024_09_06",
+          "supported_protocols": [
+            "PCIe 4.0",
+            "10G Ethernet",
+            "custom"
+          ],
+          "protocol_matrix": {
+            "PCIe 4.0": {
+              "lane_widths": [
+                1,
+                2,
+                4
+              ],
+              "hardcore": true
+            },
+            "custom": {
+              "lane_widths": [
+                1,
+                2,
+                4
+              ],
+              "hardcore": false
+            },
+            "10G Ethernet": {
+              "lane_widths": [
+                1
+              ],
+              "hardcore": false
+            }
+          },
+          "max_rate_gbps": 17.16,
+          "pcie4_x4_instance_count": 1,
+          "gigabit_ethernet_mac_pcs_count": 1,
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk",
+          "review_note": "Agilex 5 transceiver protocol/IP enablement still depends on the selected ordering code, package migration limits, and design-specific quad usage.",
+          "transceiver_channel_count": 4
+        },
+        "device_role": {
+          "class": "device_role",
+          "device_role": "FPGA SoC",
+          "source": "agilex5_part_number_decoder_762191_2024_09_06",
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk"
+        },
+        "fabric_resources": {
+          "class": "fpga_fabric",
+          "logic_elements": 138060,
+          "adaptive_logic_modules": 46800,
+          "m20k_count": 358,
+          "m20k_mbit": 6.99,
+          "mlab_count": 2340,
+          "mlab_mbit": 1.43,
+          "dsp_count": 376,
+          "int8_tops": 4.93,
+          "source": "agilex5_device_overview_762191_2024_09_06",
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk"
+        },
+        "io_resources": {
+          "class": "io_resources",
+          "hvio_count": 200,
+          "hsio_count": 192,
+          "hps_io_count": 48,
+          "io_pll_count": 4,
+          "fabric_feeding_io_pll_count": 8,
+          "lvds_pairs_1v3_1p6gbps": 96,
+          "mipi_dphy_interface_count": 14,
+          "source": "agilex5_device_overview_762191_2024_09_06",
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk"
+        },
+        "memory_interface": {
+          "class": "memory_interface",
+          "supported_standards": [
+            "DDR4",
+            "LPDDR4",
+            "LPDDR5"
+          ],
+          "x32_interface_count": 2,
+          "source": "agilex5_device_overview_762191_2024_09_06",
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk"
+        },
+        "hard_processor": {
+          "class": "hard_processor",
+          "mode": "quad",
+          "cores": [
+            "Arm Cortex-A76",
+            "Arm Cortex-A55"
+          ],
+          "cache": {
+            "l3_mb": 2,
+            "cortex_a76_l1_kb": 64,
+            "cortex_a76_l2_kb": 256,
+            "cortex_a55_l1_kb": 32,
+            "cortex_a55_l2_kb": 128
+          },
+          "source": "agilex5_device_overview_762191_2024_09_06",
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk"
+        }
+      },
+      "facts": [
+        {
+          "id": "pin.TCK",
+          "state": "documented",
+          "source": "sch_review_export.pins",
+          "confidence": "high",
+          "claim": "Configuration JTAG TCK is on package ball BJ58.",
+          "machine": {
+            "signal": "TCK",
+            "ball": "BJ58",
+            "raw_name": "TCK",
+            "bank": "SDM",
+            "function": "CONFIG"
+          }
+        },
+        {
+          "id": "pin.TDI",
+          "state": "documented",
+          "source": "sch_review_export.pins",
+          "confidence": "high",
+          "claim": "Configuration JTAG TDI is on package ball BJ53.",
+          "machine": {
+            "signal": "TDI",
+            "ball": "BJ53",
+            "raw_name": "TDI",
+            "bank": "SDM",
+            "function": "CONFIG"
+          }
+        },
+        {
+          "id": "pin.TDO",
+          "state": "documented",
+          "source": "sch_review_export.pins",
+          "confidence": "high",
+          "claim": "Configuration JTAG TDO is on package ball BN55.",
+          "machine": {
+            "signal": "TDO",
+            "ball": "BN55",
+            "raw_name": "TDO",
+            "bank": "SDM",
+            "function": "CONFIG"
+          }
+        },
+        {
+          "id": "pin.TMS",
+          "state": "documented",
+          "source": "sch_review_export.pins",
+          "confidence": "high",
+          "claim": "Configuration JTAG TMS is on package ball BJ56.",
+          "machine": {
+            "signal": "TMS",
+            "ball": "BJ56",
+            "raw_name": "TMS",
+            "bank": "SDM",
+            "function": "CONFIG"
+          }
+        },
+        {
+          "id": "pin.nCONFIG",
+          "state": "documented",
+          "source": "sch_review_export.pins",
+          "confidence": "high",
+          "claim": "Configuration status/control signal nCONFIG is on package ball BU32.",
+          "machine": {
+            "signal": "nCONFIG",
+            "ball": "BU32",
+            "raw_name": "nCONFIG",
+            "bank": "SDM",
+            "function": "CONFIG"
+          }
+        },
+        {
+          "id": "pin.nSTATUS",
+          "state": "documented",
+          "source": "sch_review_export.pins",
+          "confidence": "high",
+          "claim": "Configuration status/control signal nSTATUS is on package ball BV32.",
+          "machine": {
+            "signal": "nSTATUS",
+            "ball": "BV32",
+            "raw_name": "nSTATUS",
+            "bank": "SDM",
+            "function": "CONFIG"
+          }
+        },
+        {
+          "id": "resources.logic_elements",
+          "state": "documented",
+          "source": "sch_review_export.capability_blocks.fabric_resources",
+          "confidence": "high",
+          "claim": "Device exposes 138060 logic elements in the parsed capability profile.",
+          "machine": {
+            "logic_elements": 138060
+          }
+        }
+      ]
+    },
+    {
+      "profile_id": "fpga.intel_agilex5.A5ED013B_B32A",
+      "mpn": "A5ED013B",
+      "package": "B32A",
+      "source_export": "data/sch_review_export/A5ED013B_B32A.json",
+      "source_export_sha256": "9ab6051607811b1cb45e73795aa4fea3cf6df6508f972c1587baef14f7a1689f",
+      "device_role": "FPGA SoC",
+      "selectors": {
+        "vendor_aliases": [
+          "Intel",
+          "Altera",
+          "Intel/Altera"
+        ],
+        "family_aliases": [
+          "Agilex 5",
+          "Agilex5",
+          "A5E"
+        ],
+        "base_device": "A5E013B",
+        "variant_code": "D",
+        "has_hps": true,
+        "has_gts_transceiver": true,
+        "has_mipi_dphy": true,
+        "has_external_memory_interface": true
+      },
+      "source_traceability": {
+        "package_pinout": {
+          "source_file": "a5ed013b.xlsx",
+          "source_document_id": "819288",
+          "source_url": "https://cdrdv2.intel.com/v1/dl/getContent/819288",
+          "source_index_url": "https://www.altera.com/design/devices/resources/pinouts",
+          "source_version": "2025-06-13",
+          "source_status": "Final",
+          "source_revision_note": "Updated soft CDR support column:\n-Added CDR support on pin index 0, 1, 12, 13, 24, 25, 36, and 37.\n-Removed CDR support on pin index 10, 11, 22, 23, 34, 35, 46, and 47."
+        },
+        "device_capability": {
+          "source": "agilex5_device_overview_762191_2024_09_06",
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk",
+          "scope": "device-level capability boundary"
+        },
+        "device_datasheet": {
+          "source": "agilex5_device_datasheet_813918_2024_08_05",
+          "source_document_id": "813918",
+          "source_url": "https://cdrdv2.intel.com/v1/dl/getContent/813918",
+          "source_version": "2024-08-05",
+          "scope": "electrical, I/O, power, and configuration constraints"
+        },
+        "pin_connection_guidelines": {
+          "source": "agilex5_pin_connection_guidelines_reference",
+          "source_note": "The official Agilex 5 pinout workbooks reference the Pin Connection Guidelines for pin definition and connection guidance; this repository has not yet parsed that guide into structured rules.",
+          "scope": "manual schematic checklist until structured parsing is added"
+        }
+      },
+      "capability_blocks": {
+        "configuration": {
+          "class": "boot_configuration",
+          "interfaces": [
+            "JTAG"
+          ],
+          "mode_signals": [],
+          "status_signals": [],
+          "jtag_signals": [
+            "TCK",
+            "TDI",
+            "TDO",
+            "TMS"
+          ],
+          "source": "pinout_inference"
+        },
+        "high_speed_serial": {
+          "class": "high_speed_serial",
+          "rx_lane_pairs": 4,
+          "tx_lane_pairs": 4,
+          "refclk_pair_count": 2,
+          "quad_count": 1,
+          "source": "agilex5_device_overview_762191_2024_09_06",
+          "supported_protocols": [
+            "PCIe 4.0",
+            "10G Ethernet",
+            "custom"
+          ],
+          "protocol_matrix": {
+            "PCIe 4.0": {
+              "lane_widths": [
+                1,
+                2,
+                4
+              ],
+              "hardcore": true
+            },
+            "custom": {
+              "lane_widths": [
+                1,
+                2,
+                4
+              ],
+              "hardcore": false
+            },
+            "10G Ethernet": {
+              "lane_widths": [
+                1
+              ],
+              "hardcore": false
+            }
+          },
+          "max_rate_gbps": 17.16,
+          "pcie4_x4_instance_count": 1,
+          "gigabit_ethernet_mac_pcs_count": 1,
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk",
+          "review_note": "Agilex 5 transceiver protocol/IP enablement still depends on the selected ordering code, package migration limits, and design-specific quad usage.",
+          "transceiver_channel_count": 4
+        },
+        "device_role": {
+          "class": "device_role",
+          "device_role": "FPGA SoC",
+          "source": "agilex5_part_number_decoder_762191_2024_09_06",
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk"
+        },
+        "fabric_resources": {
+          "class": "fpga_fabric",
+          "logic_elements": 138060,
+          "adaptive_logic_modules": 46800,
+          "m20k_count": 358,
+          "m20k_mbit": 6.99,
+          "mlab_count": 2340,
+          "mlab_mbit": 1.43,
+          "dsp_count": 376,
+          "int8_tops": 4.93,
+          "source": "agilex5_device_overview_762191_2024_09_06",
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk"
+        },
+        "io_resources": {
+          "class": "io_resources",
+          "hvio_count": 200,
+          "hsio_count": 192,
+          "hps_io_count": 48,
+          "io_pll_count": 4,
+          "fabric_feeding_io_pll_count": 8,
+          "lvds_pairs_1v3_1p6gbps": 96,
+          "mipi_dphy_interface_count": 14,
+          "source": "agilex5_device_overview_762191_2024_09_06",
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk"
+        },
+        "memory_interface": {
+          "class": "memory_interface",
+          "supported_standards": [
+            "DDR4",
+            "LPDDR4",
+            "LPDDR5"
+          ],
+          "x32_interface_count": 2,
+          "source": "agilex5_device_overview_762191_2024_09_06",
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk"
+        },
+        "hard_processor": {
+          "class": "hard_processor",
+          "mode": "quad",
+          "cores": [
+            "Arm Cortex-A76",
+            "Arm Cortex-A55"
+          ],
+          "cache": {
+            "l3_mb": 2,
+            "cortex_a76_l1_kb": 64,
+            "cortex_a76_l2_kb": 256,
+            "cortex_a55_l1_kb": 32,
+            "cortex_a55_l2_kb": 128
+          },
+          "source": "agilex5_device_overview_762191_2024_09_06",
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk"
+        }
+      },
+      "facts": [
+        {
+          "id": "pin.TCK",
+          "state": "documented",
+          "source": "sch_review_export.pins",
+          "confidence": "high",
+          "claim": "Configuration JTAG TCK is on package ball CA109.",
+          "machine": {
+            "signal": "TCK",
+            "ball": "CA109",
+            "raw_name": "TCK",
+            "bank": "SDM",
+            "function": "CONFIG"
+          }
+        },
+        {
+          "id": "pin.TDI",
+          "state": "documented",
+          "source": "sch_review_export.pins",
+          "confidence": "high",
+          "claim": "Configuration JTAG TDI is on package ball BW112.",
+          "machine": {
+            "signal": "TDI",
+            "ball": "BW112",
+            "raw_name": "TDI",
+            "bank": "SDM",
+            "function": "CONFIG"
+          }
+        },
+        {
+          "id": "pin.TDO",
+          "state": "documented",
+          "source": "sch_review_export.pins",
+          "confidence": "high",
+          "claim": "Configuration JTAG TDO is on package ball BW109.",
+          "machine": {
+            "signal": "TDO",
+            "ball": "BW109",
+            "raw_name": "TDO",
+            "bank": "SDM",
+            "function": "CONFIG"
+          }
+        },
+        {
+          "id": "pin.TMS",
+          "state": "documented",
+          "source": "sch_review_export.pins",
+          "confidence": "high",
+          "claim": "Configuration JTAG TMS is on package ball CA112.",
+          "machine": {
+            "signal": "TMS",
+            "ball": "CA112",
+            "raw_name": "TMS",
+            "bank": "SDM",
+            "function": "CONFIG"
+          }
+        },
+        {
+          "id": "pin.nCONFIG",
+          "state": "documented",
+          "source": "sch_review_export.pins",
+          "confidence": "high",
+          "claim": "Configuration status/control signal nCONFIG is on package ball BU99.",
+          "machine": {
+            "signal": "nCONFIG",
+            "ball": "BU99",
+            "raw_name": "nCONFIG",
+            "bank": "SDM",
+            "function": "CONFIG"
+          }
+        },
+        {
+          "id": "pin.nSTATUS",
+          "state": "documented",
+          "source": "sch_review_export.pins",
+          "confidence": "high",
+          "claim": "Configuration status/control signal nSTATUS is on package ball BW99.",
+          "machine": {
+            "signal": "nSTATUS",
+            "ball": "BW99",
+            "raw_name": "nSTATUS",
+            "bank": "SDM",
+            "function": "CONFIG"
+          }
+        },
+        {
+          "id": "resources.logic_elements",
+          "state": "documented",
+          "source": "sch_review_export.capability_blocks.fabric_resources",
+          "confidence": "high",
+          "claim": "Device exposes 138060 logic elements in the parsed capability profile.",
+          "machine": {
+            "logic_elements": 138060
+          }
+        }
+      ]
+    },
+    {
+      "profile_id": "fpga.intel_agilex5.A5ED013B_M16A",
+      "mpn": "A5ED013B",
+      "package": "M16A",
+      "source_export": "data/sch_review_export/A5ED013B_M16A.json",
+      "source_export_sha256": "2c99d4e1a1356b86348c6b39770f5ae33f20e9b0d7fe958dba8c018e1dd2e210",
+      "device_role": "FPGA SoC",
+      "selectors": {
+        "vendor_aliases": [
+          "Intel",
+          "Altera",
+          "Intel/Altera"
+        ],
+        "family_aliases": [
+          "Agilex 5",
+          "Agilex5",
+          "A5E"
+        ],
+        "base_device": "A5E013B",
+        "variant_code": "D",
+        "has_hps": true,
+        "has_gts_transceiver": true,
+        "has_mipi_dphy": true,
+        "has_external_memory_interface": true
+      },
+      "source_traceability": {
+        "package_pinout": {
+          "source_file": "a5ed013b.xlsx",
+          "source_document_id": "819288",
+          "source_url": "https://cdrdv2.intel.com/v1/dl/getContent/819288",
+          "source_index_url": "https://www.altera.com/design/devices/resources/pinouts",
+          "source_version": "2025-06-13",
+          "source_status": "Final",
+          "source_revision_note": "Updated soft CDR support column:\n-Added CDR support on pin index 0, 1, 12, 13, 24, 25, 36, and 37.\n-Removed CDR support on pin index 10, 11, 22, 23, 34, 35, 46, and 47."
+        },
+        "device_capability": {
+          "source": "agilex5_device_overview_762191_2024_09_06",
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk",
+          "scope": "device-level capability boundary"
+        },
+        "device_datasheet": {
+          "source": "agilex5_device_datasheet_813918_2024_08_05",
+          "source_document_id": "813918",
+          "source_url": "https://cdrdv2.intel.com/v1/dl/getContent/813918",
+          "source_version": "2024-08-05",
+          "scope": "electrical, I/O, power, and configuration constraints"
+        },
+        "pin_connection_guidelines": {
+          "source": "agilex5_pin_connection_guidelines_reference",
+          "source_note": "The official Agilex 5 pinout workbooks reference the Pin Connection Guidelines for pin definition and connection guidance; this repository has not yet parsed that guide into structured rules.",
+          "scope": "manual schematic checklist until structured parsing is added"
+        }
+      },
+      "capability_blocks": {
+        "configuration": {
+          "class": "boot_configuration",
+          "interfaces": [
+            "JTAG"
+          ],
+          "mode_signals": [],
+          "status_signals": [],
+          "jtag_signals": [
+            "TCK",
+            "TDI",
+            "TDO",
+            "TMS"
+          ],
+          "source": "pinout_inference"
+        },
+        "high_speed_serial": {
+          "class": "high_speed_serial",
+          "rx_lane_pairs": 4,
+          "tx_lane_pairs": 4,
+          "refclk_pair_count": 2,
+          "quad_count": 1,
+          "source": "agilex5_device_overview_762191_2024_09_06",
+          "supported_protocols": [
+            "PCIe 4.0",
+            "10G Ethernet",
+            "custom"
+          ],
+          "protocol_matrix": {
+            "PCIe 4.0": {
+              "lane_widths": [
+                1,
+                2,
+                4
+              ],
+              "hardcore": true
+            },
+            "custom": {
+              "lane_widths": [
+                1,
+                2,
+                4
+              ],
+              "hardcore": false
+            },
+            "10G Ethernet": {
+              "lane_widths": [
+                1
+              ],
+              "hardcore": false
+            }
+          },
+          "max_rate_gbps": 17.16,
+          "pcie4_x4_instance_count": 1,
+          "gigabit_ethernet_mac_pcs_count": 1,
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk",
+          "review_note": "Agilex 5 transceiver protocol/IP enablement still depends on the selected ordering code, package migration limits, and design-specific quad usage.",
+          "transceiver_channel_count": 4
+        },
+        "device_role": {
+          "class": "device_role",
+          "device_role": "FPGA SoC",
+          "source": "agilex5_part_number_decoder_762191_2024_09_06",
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk"
+        },
+        "fabric_resources": {
+          "class": "fpga_fabric",
+          "logic_elements": 138060,
+          "adaptive_logic_modules": 46800,
+          "m20k_count": 358,
+          "m20k_mbit": 6.99,
+          "mlab_count": 2340,
+          "mlab_mbit": 1.43,
+          "dsp_count": 376,
+          "int8_tops": 4.93,
+          "source": "agilex5_device_overview_762191_2024_09_06",
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk"
+        },
+        "io_resources": {
+          "class": "io_resources",
+          "hvio_count": 200,
+          "hsio_count": 192,
+          "hps_io_count": 48,
+          "io_pll_count": 4,
+          "fabric_feeding_io_pll_count": 8,
+          "lvds_pairs_1v3_1p6gbps": 96,
+          "mipi_dphy_interface_count": 14,
+          "source": "agilex5_device_overview_762191_2024_09_06",
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk"
+        },
+        "memory_interface": {
+          "class": "memory_interface",
+          "supported_standards": [
+            "DDR4",
+            "LPDDR4",
+            "LPDDR5"
+          ],
+          "x32_interface_count": 2,
+          "source": "agilex5_device_overview_762191_2024_09_06",
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk"
+        },
+        "hard_processor": {
+          "class": "hard_processor",
+          "mode": "quad",
+          "cores": [
+            "Arm Cortex-A76",
+            "Arm Cortex-A55"
+          ],
+          "cache": {
+            "l3_mb": 2,
+            "cortex_a76_l1_kb": 64,
+            "cortex_a76_l2_kb": 256,
+            "cortex_a55_l1_kb": 32,
+            "cortex_a55_l2_kb": 128
+          },
+          "source": "agilex5_device_overview_762191_2024_09_06",
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk"
+        }
+      },
+      "facts": [
+        {
+          "id": "pin.TCK",
+          "state": "documented",
+          "source": "sch_review_export.pins",
+          "confidence": "high",
+          "claim": "Configuration JTAG TCK is on package ball AF16.",
+          "machine": {
+            "signal": "TCK",
+            "ball": "AF16",
+            "raw_name": "TCK",
+            "bank": "SDM",
+            "function": "CONFIG"
+          }
+        },
+        {
+          "id": "pin.TDI",
+          "state": "documented",
+          "source": "sch_review_export.pins",
+          "confidence": "high",
+          "claim": "Configuration JTAG TDI is on package ball AE17.",
+          "machine": {
+            "signal": "TDI",
+            "ball": "AE17",
+            "raw_name": "TDI",
+            "bank": "SDM",
+            "function": "CONFIG"
+          }
+        },
+        {
+          "id": "pin.TDO",
+          "state": "documented",
+          "source": "sch_review_export.pins",
+          "confidence": "high",
+          "claim": "Configuration JTAG TDO is on package ball AE16.",
+          "machine": {
+            "signal": "TDO",
+            "ball": "AE16",
+            "raw_name": "TDO",
+            "bank": "SDM",
+            "function": "CONFIG"
+          }
+        },
+        {
+          "id": "pin.TMS",
+          "state": "documented",
+          "source": "sch_review_export.pins",
+          "confidence": "high",
+          "claim": "Configuration JTAG TMS is on package ball AF17.",
+          "machine": {
+            "signal": "TMS",
+            "ball": "AF17",
+            "raw_name": "TMS",
+            "bank": "SDM",
+            "function": "CONFIG"
+          }
+        },
+        {
+          "id": "pin.nCONFIG",
+          "state": "documented",
+          "source": "sch_review_export.pins",
+          "confidence": "high",
+          "claim": "Configuration status/control signal nCONFIG is on package ball AG15.",
+          "machine": {
+            "signal": "nCONFIG",
+            "ball": "AG15",
+            "raw_name": "nCONFIG",
+            "bank": "SDM",
+            "function": "CONFIG"
+          }
+        },
+        {
+          "id": "pin.nSTATUS",
+          "state": "documented",
+          "source": "sch_review_export.pins",
+          "confidence": "high",
+          "claim": "Configuration status/control signal nSTATUS is on package ball AG16.",
+          "machine": {
+            "signal": "nSTATUS",
+            "ball": "AG16",
+            "raw_name": "nSTATUS",
+            "bank": "SDM",
+            "function": "CONFIG"
+          }
+        },
+        {
+          "id": "resources.logic_elements",
+          "state": "documented",
+          "source": "sch_review_export.capability_blocks.fabric_resources",
+          "confidence": "high",
+          "claim": "Device exposes 138060 logic elements in the parsed capability profile.",
+          "machine": {
+            "logic_elements": 138060
+          }
+        }
+      ]
+    },
+    {
+      "profile_id": "fpga.intel_agilex5.A5ED052A_B23A",
+      "mpn": "A5ED052A",
+      "package": "B23A",
+      "source_export": "data/sch_review_export/A5ED052A_B23A.json",
+      "source_export_sha256": "2557801cebcc153efbfff79c988c88f648e79882570f75105f699f2e1c73c1ba",
+      "device_role": "FPGA SoC",
+      "selectors": {
+        "vendor_aliases": [
+          "Intel",
+          "Altera",
+          "Intel/Altera"
+        ],
+        "family_aliases": [
+          "Agilex 5",
+          "Agilex5",
+          "A5E"
+        ],
+        "base_device": "A5E052A",
+        "variant_code": "D",
+        "has_hps": true,
+        "has_gts_transceiver": true,
+        "has_mipi_dphy": true,
+        "has_external_memory_interface": true
+      },
+      "source_traceability": {
+        "package_pinout": {
+          "source_file": "a5ed052a.xlsx",
+          "source_document_id": "830449",
+          "source_url": "https://cdrdv2.intel.com/v1/dl/getContent/830449",
+          "source_index_url": "https://www.altera.com/design/devices/resources/pinouts",
+          "source_version": "2025-06-06",
+          "source_status": "Final",
+          "source_revision_note": "Updated soft CDR support column:\n-Added CDR support on pin index 0, 1, 12, 13, 24, 25, 36, and 37.\n-Removed CDR support on pin index 10, 11, 22, 23, 34, 35, 46, and 47."
+        },
+        "device_capability": {
+          "source": "agilex5_device_overview_762191_2024_09_06",
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk",
+          "scope": "device-level capability boundary"
+        },
+        "device_datasheet": {
+          "source": "agilex5_device_datasheet_813918_2024_08_05",
+          "source_document_id": "813918",
+          "source_url": "https://cdrdv2.intel.com/v1/dl/getContent/813918",
+          "source_version": "2024-08-05",
+          "scope": "electrical, I/O, power, and configuration constraints"
+        },
+        "pin_connection_guidelines": {
+          "source": "agilex5_pin_connection_guidelines_reference",
+          "source_note": "The official Agilex 5 pinout workbooks reference the Pin Connection Guidelines for pin definition and connection guidance; this repository has not yet parsed that guide into structured rules.",
+          "scope": "manual schematic checklist until structured parsing is added"
+        }
+      },
+      "capability_blocks": {
+        "configuration": {
+          "class": "boot_configuration",
+          "interfaces": [
+            "JTAG"
+          ],
+          "mode_signals": [],
+          "status_signals": [],
+          "jtag_signals": [
+            "TCK",
+            "TDI",
+            "TDO",
+            "TMS"
+          ],
+          "source": "pinout_inference"
+        },
+        "high_speed_serial": {
+          "class": "high_speed_serial",
+          "rx_lane_pairs": 12,
+          "tx_lane_pairs": 12,
+          "refclk_pair_count": 6,
+          "quad_count": 3,
+          "source": "agilex5_device_overview_762191_2024_09_06",
+          "supported_protocols": [
+            "PCIe 4.0",
+            "10G Ethernet",
+            "25G Ethernet",
+            "custom"
+          ],
+          "protocol_matrix": {
+            "PCIe 4.0": {
+              "lane_widths": [
+                1,
+                2,
+                4
+              ],
+              "hardcore": true
+            },
+            "custom": {
+              "lane_widths": [
+                1,
+                2,
+                4
+              ],
+              "hardcore": false
+            },
+            "10G Ethernet": {
+              "lane_widths": [
+                1
+              ],
+              "hardcore": false
+            },
+            "25G Ethernet": {
+              "lane_widths": [
+                1
+              ],
+              "hardcore": false
+            }
+          },
+          "max_rate_gbps": 28.1,
+          "pcie4_x4_instance_count": 6,
+          "gigabit_ethernet_mac_pcs_count": 4,
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk",
+          "review_note": "Agilex 5 transceiver protocol/IP enablement still depends on the selected ordering code, package migration limits, and design-specific quad usage.",
+          "transceiver_channel_count": 24
+        },
+        "device_role": {
+          "class": "device_role",
+          "device_role": "FPGA SoC",
+          "source": "agilex5_part_number_decoder_762191_2024_09_06",
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk"
+        },
+        "fabric_resources": {
+          "class": "fpga_fabric",
+          "logic_elements": 523920,
+          "adaptive_logic_modules": 177600,
+          "m20k_count": 1288,
+          "m20k_mbit": 25.16,
+          "mlab_count": 8440,
+          "mlab_mbit": 5.15,
+          "dsp_count": 1352,
+          "int8_tops": 20.78,
+          "source": "agilex5_device_overview_762191_2024_09_06",
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk"
+        },
+        "io_resources": {
+          "class": "io_resources",
+          "hvio_count": 120,
+          "hsio_count": 384,
+          "hps_io_count": 48,
+          "io_pll_count": 8,
+          "fabric_feeding_io_pll_count": 13,
+          "lvds_pairs_1v3_1p6gbps": 192,
+          "mipi_dphy_interface_count": 28,
+          "source": "agilex5_device_overview_762191_2024_09_06",
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk"
+        },
+        "memory_interface": {
+          "class": "memory_interface",
+          "supported_standards": [
+            "DDR4",
+            "DDR5",
+            "LPDDR4",
+            "LPDDR5"
+          ],
+          "x32_interface_count": 4,
+          "source": "agilex5_device_overview_762191_2024_09_06",
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk"
+        },
+        "hard_processor": {
+          "class": "hard_processor",
+          "mode": "quad",
+          "cores": [
+            "Arm Cortex-A76",
+            "Arm Cortex-A55"
+          ],
+          "cache": {
+            "l3_mb": 2,
+            "cortex_a76_l1_kb": 64,
+            "cortex_a76_l2_kb": 256,
+            "cortex_a55_l1_kb": 32,
+            "cortex_a55_l2_kb": 128
+          },
+          "source": "agilex5_device_overview_762191_2024_09_06",
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk"
+        }
+      },
+      "facts": [
+        {
+          "id": "pin.TCK",
+          "state": "documented",
+          "source": "sch_review_export.pins",
+          "confidence": "high",
+          "claim": "Configuration JTAG TCK is on package ball BJ58.",
+          "machine": {
+            "signal": "TCK",
+            "ball": "BJ58",
+            "raw_name": "TCK",
+            "bank": "SDM",
+            "function": "CONFIG"
+          }
+        },
+        {
+          "id": "pin.TDI",
+          "state": "documented",
+          "source": "sch_review_export.pins",
+          "confidence": "high",
+          "claim": "Configuration JTAG TDI is on package ball BJ53.",
+          "machine": {
+            "signal": "TDI",
+            "ball": "BJ53",
+            "raw_name": "TDI",
+            "bank": "SDM",
+            "function": "CONFIG"
+          }
+        },
+        {
+          "id": "pin.TDO",
+          "state": "documented",
+          "source": "sch_review_export.pins",
+          "confidence": "high",
+          "claim": "Configuration JTAG TDO is on package ball BN55.",
+          "machine": {
+            "signal": "TDO",
+            "ball": "BN55",
+            "raw_name": "TDO",
+            "bank": "SDM",
+            "function": "CONFIG"
+          }
+        },
+        {
+          "id": "pin.TMS",
+          "state": "documented",
+          "source": "sch_review_export.pins",
+          "confidence": "high",
+          "claim": "Configuration JTAG TMS is on package ball BJ56.",
+          "machine": {
+            "signal": "TMS",
+            "ball": "BJ56",
+            "raw_name": "TMS",
+            "bank": "SDM",
+            "function": "CONFIG"
+          }
+        },
+        {
+          "id": "pin.nCONFIG",
+          "state": "documented",
+          "source": "sch_review_export.pins",
+          "confidence": "high",
+          "claim": "Configuration status/control signal nCONFIG is on package ball BU32.",
+          "machine": {
+            "signal": "nCONFIG",
+            "ball": "BU32",
+            "raw_name": "nCONFIG",
+            "bank": "SDM",
+            "function": "CONFIG"
+          }
+        },
+        {
+          "id": "pin.nSTATUS",
+          "state": "documented",
+          "source": "sch_review_export.pins",
+          "confidence": "high",
+          "claim": "Configuration status/control signal nSTATUS is on package ball BV32.",
+          "machine": {
+            "signal": "nSTATUS",
+            "ball": "BV32",
+            "raw_name": "nSTATUS",
+            "bank": "SDM",
+            "function": "CONFIG"
+          }
+        },
+        {
+          "id": "resources.logic_elements",
+          "state": "documented",
+          "source": "sch_review_export.capability_blocks.fabric_resources",
+          "confidence": "high",
+          "claim": "Device exposes 523920 logic elements in the parsed capability profile.",
+          "machine": {
+            "logic_elements": 523920
+          }
+        }
+      ]
+    },
+    {
+      "profile_id": "fpga.intel_agilex5.A5ED052A_B32A",
+      "mpn": "A5ED052A",
+      "package": "B32A",
+      "source_export": "data/sch_review_export/A5ED052A_B32A.json",
+      "source_export_sha256": "5e201f43d6fc0a1c7f342d93b07239ce9c8d3b4b373ed88832ee0c9c8c1ecf00",
+      "device_role": "FPGA SoC",
+      "selectors": {
+        "vendor_aliases": [
+          "Intel",
+          "Altera",
+          "Intel/Altera"
+        ],
+        "family_aliases": [
+          "Agilex 5",
+          "Agilex5",
+          "A5E"
+        ],
+        "base_device": "A5E052A",
+        "variant_code": "D",
+        "has_hps": true,
+        "has_gts_transceiver": true,
+        "has_mipi_dphy": true,
+        "has_external_memory_interface": true
+      },
+      "source_traceability": {
+        "package_pinout": {
+          "source_file": "a5ed052a.xlsx",
+          "source_document_id": "830449",
+          "source_url": "https://cdrdv2.intel.com/v1/dl/getContent/830449",
+          "source_index_url": "https://www.altera.com/design/devices/resources/pinouts",
+          "source_version": "2025-06-06",
+          "source_status": "Final",
+          "source_revision_note": "Updated soft CDR support column:\n-Added CDR support on pin index 0, 1, 12, 13, 24, 25, 36, and 37.\n-Removed CDR support on pin index 10, 11, 22, 23, 34, 35, 46, and 47."
+        },
+        "device_capability": {
+          "source": "agilex5_device_overview_762191_2024_09_06",
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk",
+          "scope": "device-level capability boundary"
+        },
+        "device_datasheet": {
+          "source": "agilex5_device_datasheet_813918_2024_08_05",
+          "source_document_id": "813918",
+          "source_url": "https://cdrdv2.intel.com/v1/dl/getContent/813918",
+          "source_version": "2024-08-05",
+          "scope": "electrical, I/O, power, and configuration constraints"
+        },
+        "pin_connection_guidelines": {
+          "source": "agilex5_pin_connection_guidelines_reference",
+          "source_note": "The official Agilex 5 pinout workbooks reference the Pin Connection Guidelines for pin definition and connection guidance; this repository has not yet parsed that guide into structured rules.",
+          "scope": "manual schematic checklist until structured parsing is added"
+        }
+      },
+      "capability_blocks": {
+        "configuration": {
+          "class": "boot_configuration",
+          "interfaces": [
+            "JTAG"
+          ],
+          "mode_signals": [],
+          "status_signals": [],
+          "jtag_signals": [
+            "TCK",
+            "TDI",
+            "TDO",
+            "TMS"
+          ],
+          "source": "pinout_inference"
+        },
+        "high_speed_serial": {
+          "class": "high_speed_serial",
+          "rx_lane_pairs": 24,
+          "tx_lane_pairs": 24,
+          "refclk_pair_count": 12,
+          "quad_count": 6,
+          "source": "agilex5_device_overview_762191_2024_09_06",
+          "supported_protocols": [
+            "PCIe 4.0",
+            "10G Ethernet",
+            "25G Ethernet",
+            "custom"
+          ],
+          "protocol_matrix": {
+            "PCIe 4.0": {
+              "lane_widths": [
+                1,
+                2,
+                4
+              ],
+              "hardcore": true
+            },
+            "custom": {
+              "lane_widths": [
+                1,
+                2,
+                4
+              ],
+              "hardcore": false
+            },
+            "10G Ethernet": {
+              "lane_widths": [
+                1
+              ],
+              "hardcore": false
+            },
+            "25G Ethernet": {
+              "lane_widths": [
+                1
+              ],
+              "hardcore": false
+            }
+          },
+          "max_rate_gbps": 28.1,
+          "pcie4_x4_instance_count": 6,
+          "gigabit_ethernet_mac_pcs_count": 4,
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk",
+          "review_note": "Agilex 5 transceiver protocol/IP enablement still depends on the selected ordering code, package migration limits, and design-specific quad usage.",
+          "transceiver_channel_count": 24
+        },
+        "device_role": {
+          "class": "device_role",
+          "device_role": "FPGA SoC",
+          "source": "agilex5_part_number_decoder_762191_2024_09_06",
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk"
+        },
+        "fabric_resources": {
+          "class": "fpga_fabric",
+          "logic_elements": 523920,
+          "adaptive_logic_modules": 177600,
+          "m20k_count": 1288,
+          "m20k_mbit": 25.16,
+          "mlab_count": 8440,
+          "mlab_mbit": 5.15,
+          "dsp_count": 1352,
+          "int8_tops": 20.78,
+          "source": "agilex5_device_overview_762191_2024_09_06",
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk"
+        },
+        "io_resources": {
+          "class": "io_resources",
+          "hvio_count": 120,
+          "hsio_count": 384,
+          "hps_io_count": 48,
+          "io_pll_count": 8,
+          "fabric_feeding_io_pll_count": 13,
+          "lvds_pairs_1v3_1p6gbps": 192,
+          "mipi_dphy_interface_count": 28,
+          "source": "agilex5_device_overview_762191_2024_09_06",
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk"
+        },
+        "memory_interface": {
+          "class": "memory_interface",
+          "supported_standards": [
+            "DDR4",
+            "DDR5",
+            "LPDDR4",
+            "LPDDR5"
+          ],
+          "x32_interface_count": 4,
+          "source": "agilex5_device_overview_762191_2024_09_06",
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk"
+        },
+        "hard_processor": {
+          "class": "hard_processor",
+          "mode": "quad",
+          "cores": [
+            "Arm Cortex-A76",
+            "Arm Cortex-A55"
+          ],
+          "cache": {
+            "l3_mb": 2,
+            "cortex_a76_l1_kb": 64,
+            "cortex_a76_l2_kb": 256,
+            "cortex_a55_l1_kb": 32,
+            "cortex_a55_l2_kb": 128
+          },
+          "source": "agilex5_device_overview_762191_2024_09_06",
+          "source_url": "https://drive.google.com/file/d/1c1UnPU9rQ8xAidwLzByDD5NbjErAE8Sa/view?usp=drivesdk"
+        }
+      },
+      "facts": [
+        {
+          "id": "pin.TCK",
+          "state": "documented",
+          "source": "sch_review_export.pins",
+          "confidence": "high",
+          "claim": "Configuration JTAG TCK is on package ball CA109.",
+          "machine": {
+            "signal": "TCK",
+            "ball": "CA109",
+            "raw_name": "TCK",
+            "bank": "SDM",
+            "function": "CONFIG"
+          }
+        },
+        {
+          "id": "pin.TDI",
+          "state": "documented",
+          "source": "sch_review_export.pins",
+          "confidence": "high",
+          "claim": "Configuration JTAG TDI is on package ball BW112.",
+          "machine": {
+            "signal": "TDI",
+            "ball": "BW112",
+            "raw_name": "TDI",
+            "bank": "SDM",
+            "function": "CONFIG"
+          }
+        },
+        {
+          "id": "pin.TDO",
+          "state": "documented",
+          "source": "sch_review_export.pins",
+          "confidence": "high",
+          "claim": "Configuration JTAG TDO is on package ball BW109.",
+          "machine": {
+            "signal": "TDO",
+            "ball": "BW109",
+            "raw_name": "TDO",
+            "bank": "SDM",
+            "function": "CONFIG"
+          }
+        },
+        {
+          "id": "pin.TMS",
+          "state": "documented",
+          "source": "sch_review_export.pins",
+          "confidence": "high",
+          "claim": "Configuration JTAG TMS is on package ball CA112.",
+          "machine": {
+            "signal": "TMS",
+            "ball": "CA112",
+            "raw_name": "TMS",
+            "bank": "SDM",
+            "function": "CONFIG"
+          }
+        },
+        {
+          "id": "pin.nCONFIG",
+          "state": "documented",
+          "source": "sch_review_export.pins",
+          "confidence": "high",
+          "claim": "Configuration status/control signal nCONFIG is on package ball BU99.",
+          "machine": {
+            "signal": "nCONFIG",
+            "ball": "BU99",
+            "raw_name": "nCONFIG",
+            "bank": "SDM",
+            "function": "CONFIG"
+          }
+        },
+        {
+          "id": "pin.nSTATUS",
+          "state": "documented",
+          "source": "sch_review_export.pins",
+          "confidence": "high",
+          "claim": "Configuration status/control signal nSTATUS is on package ball BW99.",
+          "machine": {
+            "signal": "nSTATUS",
+            "ball": "BW99",
+            "raw_name": "nSTATUS",
+            "bank": "SDM",
+            "function": "CONFIG"
+          }
+        },
+        {
+          "id": "resources.logic_elements",
+          "state": "documented",
+          "source": "sch_review_export.capability_blocks.fabric_resources",
+          "confidence": "high",
+          "claim": "Device exposes 523920 logic elements in the parsed capability profile.",
+          "machine": {
+            "logic_elements": 523920
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -319,7 +319,7 @@ class TestSchemaValidation:
             os.path.dirname(__file__),
             "schemas", "domains", "design_guide.schema.json"
         )
-        with open(schema_path) as f:
+        with open(schema_path, encoding="utf-8") as f:
             schema = json.load(f)
         assert schema["$id"] == "https://opendatasheet.dev/schemas/domains/design_guide/1.0"
         assert "power_domain_map" in schema["properties"]
@@ -338,7 +338,7 @@ class TestSchemaValidation:
             os.path.dirname(__file__),
             "schemas", "domains", "design_guide.schema.json"
         )
-        with open(schema_path) as f:
+        with open(schema_path, encoding="utf-8") as f:
             schema = json.load(f)
 
         sample = {
@@ -398,7 +398,7 @@ class TestExistingGuideDataCoverage:
         if not os.path.exists(guide_path):
             pytest.skip("gowin_gw5at_schematic_guide.md not found")
 
-        with open(guide_path) as f:
+        with open(guide_path, encoding="utf-8") as f:
             content = f.read()
 
         # Verify key sections exist in the manually-created guide

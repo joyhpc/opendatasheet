@@ -1,0 +1,56 @@
+schema: opendatasheet-application-profile/1.0
+pool_id: fpga.intel_agilex5
+applications:
+  schematic_review:
+    intent: board-level schematic review and sign-off
+    read_order:
+      - electrical_constraints.json
+      - pin_signal_map.json
+      - device_profiles.json
+      - ../../../sch_review_export/A5E*.json
+    required_keys:
+      - supply_specs
+      - constraint_blocks
+      - drc_rules
+      - pin_groups.configuration
+      - pin_groups.memory_dqs
+  debugtool:
+    intent: staged fault isolation and evidence planning
+    read_order:
+      - debug_readiness_matrix.json
+      - diagnostic_evidence_profiles.json
+      - pin_signal_map.json
+      - electrical_constraints.json
+      - device_profiles.json
+    application_bindings:
+      link_models:
+        - LM-FPGA-JTAG-CONFIG
+        - LM-POWER-CHAIN
+        - LM-PCIE-LINK
+        - LM-MIPI-DSI-CSI-DPHY
+        - LM-DDR-BRINGUP
+      signatures:
+        - SIG-QUARTUS-CABLE-SEEN-SCAN-CHAIN-FAIL
+        - SIG-JTAG-CABLE-SEEN-NO-TARGET-WAVEFORM
+        - SIG-PCIE-REFCLK-MISSING
+        - SIG-MIPI-CSI-NO-FRAME-PACKET-COUNTERS-FIRST
+        - SIG-MIPI-DSI-BRIDGE-NO-VIDEO-LP11-HSCLK
+        - SIG-NIOS-ELF-AFTER-SOF-HARDWARE-MAP
+  eda_drc:
+    intent: machine DRC/netlist checks
+    read_order:
+      - electrical_constraints.json
+      - pin_signal_map.json
+      - device_profiles.json
+    required_keys:
+      - drc_rules
+      - supply_specs
+      - io_standard_specs
+      - pin_groups.configuration
+  bringup_playbook:
+    intent: first article board bring-up checklist
+    read_order:
+      - debug_readiness_matrix.json
+      - diagnostic_evidence_profiles.json
+      - electrical_constraints.json
+      - pin_signal_map.json

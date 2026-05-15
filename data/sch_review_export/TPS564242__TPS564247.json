@@ -62,6 +62,7 @@
   "electrical_parameters": {
     "VIN": {
       "parameter": "Input voltage range",
+      "symbol": "VIN",
       "min": 3,
       "typ": null,
       "max": 16,
@@ -70,6 +71,7 @@
     },
     "VOUT": {
       "parameter": "Output voltage range",
+      "symbol": "VOUT",
       "min": 0.6,
       "typ": null,
       "max": 7,
@@ -78,6 +80,7 @@
     },
     "VREF": {
       "parameter": "Reference voltage",
+      "symbol": "VREF",
       "min": null,
       "typ": 0.6,
       "max": null,
@@ -86,6 +89,7 @@
     },
     "VREF_ACC": {
       "parameter": "Reference accuracy",
+      "symbol": "VREF_ACC",
       "min": -1.5,
       "typ": null,
       "max": 1.5,
@@ -94,6 +98,7 @@
     },
     "RDS(ON)H": {
       "parameter": "High-side FET on-resistance",
+      "symbol": "RDS(ON)H",
       "min": null,
       "typ": 28.8,
       "max": null,
@@ -102,6 +107,7 @@
     },
     "RDS(ON)L": {
       "parameter": "Low-side FET on-resistance",
+      "symbol": "RDS(ON)L",
       "min": null,
       "typ": 15.4,
       "max": null,
@@ -110,6 +116,7 @@
     },
     "IQ": {
       "parameter": "Quiescent current",
+      "symbol": "IQ",
       "min": null,
       "typ": 120,
       "max": null,
@@ -118,6 +125,7 @@
     },
     "fSW": {
       "parameter": "Switching frequency",
+      "symbol": "fSW",
       "min": null,
       "typ": 1.2,
       "max": null,
@@ -126,6 +134,7 @@
     },
     "DMAX": {
       "parameter": "Maximum duty cycle",
+      "symbol": "DMAX",
       "min": null,
       "typ": null,
       "max": 95,
@@ -134,6 +143,7 @@
     },
     "tSS": {
       "parameter": "Fixed soft-start time",
+      "symbol": "tSS",
       "min": null,
       "typ": 1.39,
       "max": null,
@@ -142,6 +152,7 @@
     },
     "IOUT": {
       "parameter": "Continuous output current",
+      "symbol": "IOUT",
       "min": null,
       "typ": null,
       "max": 4,
@@ -239,6 +250,7 @@
       "electrical_parameters": {
         "VIN": {
           "parameter": "Input voltage range",
+          "symbol": "VIN",
           "min": 3,
           "typ": null,
           "max": 16,
@@ -247,6 +259,7 @@
         },
         "VOUT": {
           "parameter": "Output voltage range",
+          "symbol": "VOUT",
           "min": 0.6,
           "typ": null,
           "max": 7,
@@ -255,6 +268,7 @@
         },
         "VREF": {
           "parameter": "Reference voltage",
+          "symbol": "VREF",
           "min": null,
           "typ": 0.6,
           "max": null,
@@ -263,6 +277,7 @@
         },
         "VREF_ACC": {
           "parameter": "Reference accuracy",
+          "symbol": "VREF_ACC",
           "min": -1.5,
           "typ": null,
           "max": 1.5,
@@ -271,6 +286,7 @@
         },
         "RDS(ON)H": {
           "parameter": "High-side FET on-resistance",
+          "symbol": "RDS(ON)H",
           "min": null,
           "typ": 28.8,
           "max": null,
@@ -279,6 +295,7 @@
         },
         "RDS(ON)L": {
           "parameter": "Low-side FET on-resistance",
+          "symbol": "RDS(ON)L",
           "min": null,
           "typ": 15.4,
           "max": null,
@@ -287,6 +304,7 @@
         },
         "IQ": {
           "parameter": "Quiescent current",
+          "symbol": "IQ",
           "min": null,
           "typ": 120,
           "max": null,
@@ -295,6 +313,7 @@
         },
         "fSW": {
           "parameter": "Switching frequency",
+          "symbol": "fSW",
           "min": null,
           "typ": 1.2,
           "max": null,
@@ -303,6 +322,7 @@
         },
         "DMAX": {
           "parameter": "Maximum duty cycle",
+          "symbol": "DMAX",
           "min": null,
           "typ": null,
           "max": 95,
@@ -311,6 +331,7 @@
         },
         "tSS": {
           "parameter": "Fixed soft-start time",
+          "symbol": "tSS",
           "min": null,
           "typ": 1.39,
           "max": null,
@@ -319,6 +340,7 @@
         },
         "IOUT": {
           "parameter": "Continuous output current",
+          "symbol": "IOUT",
           "min": null,
           "typ": null,
           "max": 4,
@@ -362,60 +384,18 @@
     "design_context": {
       "recommended_external_components": [
         {
-          "role": "input_capacitor",
-          "source_page": 0,
+          "role": "inductor",
+          "source_page": 14,
           "value_hint": null,
           "value_hints": [],
-          "snippet": "• WLAN/Wi-Fi 接入点、调制解调器（电缆/DSL/"
-        },
-        {
-          "role": "output_capacitor",
-          "source_page": 0,
-          "value_hint": null,
-          "value_hints": [],
-          "snippet": "• WLAN/Wi-Fi 接入点、调制解调器（电缆/DSL/"
-        },
-        {
-          "role": "input_capacitor",
-          "source_page": 0,
-          "value_hint": null,
-          "value_hints": [],
-          "snippet": "GFAST）、固态硬盘"
-        },
-        {
-          "role": "output_capacitor",
-          "source_page": 0,
-          "value_hint": null,
-          "value_hints": [],
-          "snippet": "GFAST）、固态硬盘"
+          "snippet": "降低至 –20dB，并导致 90 度相位提升。内部纹波注入高频零点大约为 100kHz。建议为输出滤波器选择的电感 器和电容器应使双极位于 30kHz 左右，以便由该高频零点提供的相位提升可提供足够的相位裕度来满足稳定性要 求。整个系统的交叉频率通常应低于开关频率 (FSW) 的三分之一。 表 8-2. 建议的元件值 输出电压 (V) R1 (kΩ) R2 (kΩ) 最小 L1 (μH) 典型"
         },
         {
           "role": "feedback_divider",
-          "source_page": 12,
+          "source_page": 14,
           "value_hint": null,
           "value_hints": [],
-          "snippet": "设计过程。"
-        },
-        {
-          "role": "feedback_divider",
-          "source_page": 12,
-          "value_hint": null,
-          "value_hints": [],
-          "snippet": "图 8-1 显示了 TPS56424x 12V 输入、1.05V 输出转换器原理图。"
-        },
-        {
-          "role": "inductor",
-          "source_page": 12,
-          "value_hint": null,
-          "value_hints": [],
-          "snippet": "2 5"
-        },
-        {
-          "role": "inductor",
-          "source_page": 12,
-          "value_hint": null,
-          "value_hints": [],
-          "snippet": "SW EN R2"
+          "snippet": "降低至 –20dB，并导致 90 度相位提升。内部纹波注入高频零点大约为 100kHz。建议为输出滤波器选择的电感 器和电容器应使双极位于 30kHz 左右，以便由该高频零点提供的相位提升可提供足够的相位裕度来满足稳定性要 求。整个系统的交叉频率通常应低于开关频率 (FSW) 的三分之一。 表 8-2. 建议的元件值 输出电压 (V) R1 (kΩ) R2 (kΩ) 最小 L1 (μH) 典型"
         }
       ],
       "component_value_hints": [
@@ -425,152 +405,48 @@
             "15.4mΩ"
           ],
           "source_page": 0,
-          "snippet": "TPS564242, TPS564247 ZHCSOJ2 – APRIL 2022 TPS56424x 采用 SOT-563 封装、具有 3V 至 16V 输入电压的 4A 同步降压转换器 1 特性 3 说明 • 广泛地为各种应用配置 TPS56424x 是一款简单易用、高效同步降压转换器， – 3V 至 16V 输入电压范围 具有高功率密度。该器件采用 SOT-563 封装，并支持 – 0.6V 至 7V 输出电压范围 3V 至 16"
-        },
-        {
-          "values": [
-            "28.8 mΩ",
-            "30.5 mΩ"
-          ],
-          "source_page": 4,
-          "snippet": "开关，FCCM 版本 IINSDN VIN 关断电流 无负载，VEN = 0V 2 µA UVLO UVLO VIN 欠压锁定 唤醒 VIN 电压 2.75 2.92 3 V UVLO VIN 欠压锁定 关断 VIN 电压 2.6 2.72 2.9 V UVLO VIN 欠压锁定 迟滞 VIN 电压 200 mV 反馈电压 VREF FB 电压 TJ = 25°C 594 600 606 mV VREF FB 电压 TJ = –40°C"
-        },
-        {
-          "values": [
-            "28.8 mΩ",
-            "30.5 mΩ",
-            "15.4 mΩ"
-          ],
-          "source_page": 4,
-          "snippet": "IINSDN VIN 关断电流 无负载，VEN = 0V 2 µA UVLO UVLO VIN 欠压锁定 唤醒 VIN 电压 2.75 2.92 3 V UVLO VIN 欠压锁定 关断 VIN 电压 2.6 2.72 2.9 V UVLO VIN 欠压锁定 迟滞 VIN 电压 200 mV 反馈电压 VREF FB 电压 TJ = 25°C 594 600 606 mV VREF FB 电压 TJ = –40°C 至 125°C 59"
-        },
-        {
-          "values": [
-            "28.8 mΩ",
-            "30.5 mΩ",
-            "15.4 mΩ",
-            "16.3 mΩ"
-          ],
-          "source_page": 4,
-          "snippet": "UVLO UVLO VIN 欠压锁定 唤醒 VIN 电压 2.75 2.92 3 V UVLO VIN 欠压锁定 关断 VIN 电压 2.6 2.72 2.9 V UVLO VIN 欠压锁定 迟滞 VIN 电压 200 mV 反馈电压 VREF FB 电压 TJ = 25°C 594 600 606 mV VREF FB 电压 TJ = –40°C 至 125°C 591 600 609 mV MOSFET 高侧 MOSFET RDS("
-        },
-        {
-          "values": [
-            "30.5 mΩ",
-            "15.4 mΩ",
-            "16.3 mΩ"
-          ],
-          "source_page": 4,
-          "snippet": "高侧 MOSFET RDS(ON) TJ = 25°C，VVIN = 3V 30.5 mΩ RDS (ON)LO 低侧 MOSFET RDS(ON) TJ = 25°C，VVIN ≥ 5V 15.4 mΩ RDS (ON)LO 低侧 MOSFET RDS(ON) TJ = 25°C，VVIN = 3V 16.3 mΩ IOCL_LS 过流阈值 谷值电流设定点 4.5 6 7.5 A INOCL 负过流阈值 1.5 2.5 3.5 A 占"
-        },
-        {
-          "values": [
-            "15.4 mΩ",
-            "16.3 mΩ"
-          ],
-          "source_page": 4,
-          "snippet": "RDS (ON)LO 低侧 MOSFET RDS(ON) TJ = 25°C，VVIN ≥ 5V 15.4 mΩ RDS (ON)LO 低侧 MOSFET RDS(ON) TJ = 25°C，VVIN = 3V 16.3 mΩ IOCL_LS 过流阈值 谷值电流设定点 4.5 6 7.5 A INOCL 负过流阈值 1.5 2.5 3.5 A 占空比和频率控制 FSW 开关频率 TJ = 25°C，VVOUT = 3.3V 1200 k"
-        },
-        {
-          "values": [
-            "16.3 mΩ",
-            "2 MΩ"
-          ],
-          "source_page": 4,
-          "snippet": "RDS (ON)LO 低侧 MOSFET RDS(ON) TJ = 25°C，VVIN = 3V 16.3 mΩ IOCL_LS 过流阈值 谷值电流设定点 4.5 6 7.5 A INOCL 负过流阈值 1.5 2.5 3.5 A 占空比和频率控制 FSW 开关频率 TJ = 25°C，VVOUT = 3.3V 1200 kHz TON(MIN) (1) 最短导通时间 TJ = 25°C 50 ns TOFF(MIN) (1) 最短关断"
-        },
-        {
-          "values": [
-            "10kΩ"
-          ],
-          "source_page": 13,
-          "snippet": "WEBENCH Power Designer 提供了定制原理图，并罗列了实时价格和元件供货情况的物料清单。 在多数情况下，可执行以下操作： • 运行电气仿真，观察重要波形以及电路性能 • 运行热性能仿真，了解电路板热性能 • 将定制原理图和布局方案以常用 CAD 格式导出 • 打印 PDF 格式的设计报告并与同事共享 有关 WEBENCH 工具的详细信息，请访问 www.ti.com/WEBENCH。 8.2.2.2 输出电压电阻器选型"
-        }
-      ],
-      "design_range_hints": [
-        {
-          "name": "VIN",
-          "min": 3.0,
-          "max": 16.0,
-          "unit": "V",
-          "source_page": 12,
-          "snippet": "VIN = 3 V to 16 V"
+          "snippet": "TPS56424x 采用 SOT-563 封装、具有 3V 至 16V 输入电压的 4A 同步降压转换器 1 特性 • 广泛地为各种应用配置 – 3V 至 16V 输入电压范围 – 0.6V 至 7V 输出电压范围 – 0.6V 基准电压 – 25°C 时，基准精度为 ±1% – 在 -40°C 至 125°C 温度范围内，基准精度为 ±1.5% – 集成式 28.8mΩ 和 15.4mΩ RD"
         }
       ],
       "design_equation_hints": [
         {
-          "equation": "Vout = 1.05V",
-          "source_page": 0
-        },
-        {
-          "equation": "Vout = 3.3V",
-          "source_page": 0
-        },
-        {
-          "equation": "TJ = 25°C 594 600 606 mV",
-          "source_page": 4
-        },
-        {
-          "equation": "TJ = –40°C 至 125°C 591 600 609 mV",
-          "source_page": 4
-        },
-        {
-          "equation": "MOSFET RDS(ON) TJ = 25°C，VVIN ≥ 5V 28.8 mΩ (1) RDS (ON)HI",
-          "source_page": 4
-        },
-        {
-          "equation": "MOSFET RDS(ON) TJ = 25°C，VVIN ≥ 5V 15.4 mΩ",
-          "source_page": 4
-        },
-        {
-          "equation": "VOUT = 1.05 V L1 R3 20 k",
-          "source_page": 12
+          "equation": "ΔVout = ±5% 输出纹波电压 20mV 输出电流额定值 4A 运行频率 1200kHz 8.2.2 详细设计过程 8.2.2.1 使用 WEBENCH® 工具创建定制设计方案 点击此处，使用 TPS564242",
+          "source_page": 13
         }
       ],
-      "layout_hints": [
+      "design_formulas": [
         {
-          "hint": "±1.5% GND 和 AGND 两个接地端，将其连接在一起可获得最",
-          "source_page": 0
-        },
-        {
-          "hint": "– 集成式 28.8mΩ 和 15.4mΩ RDSON FET 优热性能。AGND 还提供良好的负载和线路调节。该",
-          "source_page": 0
-        },
-        {
-          "hint": "EN 5 EN AGND 4 60%",
-          "source_page": 0
-        },
-        {
-          "hint": "GND AGND Not Installed",
-          "source_page": 12
-        },
-        {
-          "hint": "GND AGND",
-          "source_page": 18
+          "name": "formula",
+          "formula": "ΔVout = ±5% 输出纹波电压 20mV 输出电流额定值 4A 运行频率 1200kHz 8.2.2 详细设计过程 8.2.2.1 使用 WEBENCH® 工具创建定制设计方案 点击此处，使用 TPS564242",
+          "variables": {
+            "WEBENCH": {
+              "is_input": true
+            },
+            "TPS564242": {
+              "is_input": true
+            }
+          },
+          "source": {
+            "page": 13
+          },
+          "category": "derived_hint"
         }
       ],
-      "supply_recommendations": [
-        {
-          "hint": "• 解决方案尺寸小巧且易于使用 该器件通过 OVP、OCP、UVLO、OTP 和 UVP（断续",
-          "source_page": 0
-        },
-        {
-          "hint": "– 非锁存 OV/OT/UVLO 保护 SOT-563 (6) 1.60mm × 1.60mm",
-          "source_page": 0
-        },
-        {
-          "hint": "UVLO VIN 欠压锁定 唤醒 VIN 电压 2.75 2.92 3 V",
-          "source_page": 4
-        },
-        {
-          "hint": "UVLO VIN 欠压锁定 关断 VIN 电压 2.6 2.72 2.9 V",
-          "source_page": 4
-        },
-        {
-          "hint": "UVLO VIN 欠压锁定 迟滞 VIN 电压 200 mV",
-          "source_page": 4
-        }
-      ],
+      "typical_application": {
+        "page": 12,
+        "components": [
+          {
+            "designator": "R1",
+            "type": "inductor",
+            "purpose": "降低至 –20dB，并导致 90 度相位提升。内部纹波注入高频零点大约为 100kHz。建议为输出滤波器选择的电感 器和电容器应使双极位于 30kHz 左右，以便由该高频零点提供的相位提升可提供足够的相位裕度来满足稳定性要 求。整个系统的交叉频率通常应低于开关频率 (FSW) 的三分之一。 表 8-2. 建议的元件值 输出电压 (V) R1 (kΩ) R2 (kΩ) 最小 L1 (μH) 典型"
+          },
+          {
+            "designator": "R1",
+            "type": "resistor_network",
+            "purpose": "降低至 –20dB，并导致 90 度相位提升。内部纹波注入高频零点大约为 100kHz。建议为输出滤波器选择的电感 器和电容器应使双极位于 30kHz 左右，以便由该高频零点提供的相位提升可提供足够的相位裕度来满足稳定性要 求。整个系统的交叉频率通常应低于开关频率 (FSW) 的三分之一。 表 8-2. 建议的元件值 输出电压 (V) R1 (kΩ) R2 (kΩ) 最小 L1 (μH) 典型"
+          }
+        ]
+      },
       "design_pages": {
         "pages": [
           {
@@ -579,17 +455,7 @@
             "content_type": "power_supply"
           },
           {
-            "page": 1,
-            "title": null,
-            "content_type": "application"
-          },
-          {
             "page": 4,
-            "title": null,
-            "content_type": "power_supply"
-          },
-          {
-            "page": 10,
             "title": null,
             "content_type": "power_supply"
           },
@@ -607,19 +473,9 @@
             "page": 14,
             "title": null,
             "content_type": "application"
-          },
-          {
-            "page": 17,
-            "title": null,
-            "content_type": "power_supply"
-          },
-          {
-            "page": 18,
-            "title": null,
-            "content_type": "layout"
           }
         ],
-        "total_pages": 9
+        "total_pages": 5
       }
     }
   }

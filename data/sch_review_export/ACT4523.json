@@ -236,218 +236,19 @@
       }
     },
     "design_context": {
-      "recommended_external_components": [
-        {
-          "role": "inductor",
-          "source_page": 5,
-          "value_hint": null,
-          "value_hints": [
-            "10kΩ"
-          ],
-          "snippet": "Output Voltage Setting compensate line change and keep output high CC"
-        },
-        {
-          "role": "inductor",
-          "source_page": 5,
-          "value_hint": null,
-          "value_hints": [
-            "10kΩ"
-          ],
-          "snippet": "accuracy, as shown in Figure 3"
-        },
-        {
-          "role": "gain_resistor",
-          "source_page": 5,
-          "value_hint": null,
-          "value_hints": [],
-          "snippet": "ACT4523 constant current value is set by a resistor the reduction in current handling capability. In general,"
-        },
-        {
-          "role": "gain_resistor",
-          "source_page": 5,
-          "value_hint": null,
-          "value_hints": [],
-          "snippet": "connected between the ISET pin and GND. The CC select an inductance value L based on ripple current"
-        },
-        {
-          "role": "output_capacitor",
-          "source_page": 6,
-          "value_hint": null,
-          "value_hints": [],
-          "snippet": "ACT4523"
-        },
-        {
-          "role": "output_capacitor",
-          "source_page": 6,
-          "value_hint": null,
-          "value_hints": [],
-          "snippet": "Wide Input Sensorless CC/CV"
-        },
-        {
-          "role": "input_capacitor",
-          "source_page": 6,
-          "value_hint": "22 µF",
-          "value_hints": [
-            "22 µF",
-            "50mΩ"
-          ],
-          "snippet": "Rectifier Diode"
-        },
-        {
-          "role": "input_capacitor",
-          "source_page": 6,
-          "value_hint": "22 µF",
-          "value_hints": [
-            "22 µF",
-            "50mΩ"
-          ],
-          "snippet": "Use a Schottky diode as the rectifier to conduct"
-        },
-        {
-          "role": "feedback_divider",
-          "source_page": 8,
-          "value_hint": null,
-          "value_hints": [],
-          "snippet": "To compensate for resistive voltage drop across the"
-        },
-        {
-          "role": "feedback_divider",
-          "source_page": 8,
-          "value_hint": null,
-          "value_hints": [],
-          "snippet": "schottky diode."
-        }
-      ],
-      "component_value_hints": [
-        {
-          "values": [
-            "10kΩ"
-          ],
-          "source_page": 5,
-          "snippet": "APPLICATIONS INFORMATION CC Current Line Compensation Output Voltage Setting When operating at constant current mode, the current limit increase slightly with input voltage. For wide input Figure 1: voltage applications,"
-        },
-        {
-          "values": [
-            "22 µF"
-          ],
-          "source_page": 6,
-          "snippet": "the ripple factor, RESR is the ESR of the output capacitor,It is recommended that an external High Voltage Bias fSW is the switching frequency, L is the inductor value,diode be added when the system has a 5V fixed input "
-        },
-        {
-          "values": [
-            "22 µF",
-            "50mΩ"
-          ],
-          "source_page": 6,
-          "snippet": "fSW is the switching frequency, L is the inductor value,diode be added when the system has a 5V fixed input and COUT is the output capacitance. In the case ofor the power supply generates a 5V output. This helps ceramic "
-        },
-        {
-          "values": [
-            "50mΩ"
-          ],
-          "source_page": 6,
-          "snippet": "capacitors, choose a capacitor with less than 50mΩ ESR. Rectifier Diode Use a Schottky diode as the rectifier to conduct current when the High-Side Power Switch is off. The Schottky diode must have current rating higher "
-        },
-        {
-          "values": [
-            "10 µF"
-          ],
-          "source_page": 6,
-          "snippet": "current when the High-Side Power Switch is off. The Schottky diode must have current rating higher than the maximum output current and a reverse voltage ratingThis diode is also recommended for high duty cycle higher tha"
-        },
-        {
-          "values": [
-            "10 µF",
-            "0.1 µF"
-          ],
-          "source_page": 6,
-          "snippet": "maintain sufficiently low ripple at the supply input of the converter. A low ESR capacitor is highly recommended. Since large current flows in and out of this capacitor during switching, its ESR also affects efficiency. "
-        },
-        {
-          "values": [
-            "0.1 µF"
-          ],
-          "source_page": 6,
-          "snippet": "The best choice is the ceramic type, however, low ESR tantalum or electrolytic types may also be used provided that the RMS ripple current rating is higher than 50% of the output current. The input capacitor should be pl"
-        },
-        {
-          "values": [
-            "47 µF"
-          ],
-          "source_page": 9,
-          "snippet": "ACT4523 Wide Input Sensorless CC/CV Step-Down DC/DC Converter Figure 9: Typical Application Circuit for 5V/2.1A Car Charger Table 2: BOM List for 5V/2.1A Car Charger ITEM REFERENCE DESCRIPTION MANUFACTURER QTY 1 U1 IC, A"
-        }
-      ],
-      "layout_hints": [
-        {
-          "hint": "close to the IN and G pins of the IC, with the shortest",
-          "source_page": 6
-        },
-        {
-          "hint": "GND with vias or short and wide path.the curve in Figure 6 to choose the proper feedback",
-          "source_page": 8
-        },
-        {
-          "hint": "to power ground copper area with copper and vias.",
-          "source_page": 8
-        }
-      ],
-      "supply_recommendations": [
-        {
-          "hint": "limit increase slightly with input voltage. For wide input",
-          "source_page": 5
-        },
-        {
-          "hint": "below. where VIN is the input voltage, VOUT is the output voltage,",
-          "source_page": 5
-        },
-        {
-          "hint": "and COUT is the output capacitance. In the case ofor the power supply generates a 5V output. This helps",
-          "source_page": 6
-        },
-        {
-          "hint": "higher than the maximum input voltage.operation and high duty cycle operation and high output",
-          "source_page": 6
-        },
-        {
-          "hint": "maintain sufficiently low ripple at the supply input of the",
-          "source_page": 6
-        }
-      ],
       "topology_hints": [
         {
-          "hint": "Step-Down DC/DC Converter",
+          "hint": "ACT4523 Wide Input Sensorless CC/CV Step-Down DC/DC Converter Data Sheet Rev. 8.0, January 19, 2020 | Subject to change without notice 6 of 16 www.qorvo.com APPLICATIONS INFORMATION",
           "source_page": 5
         },
         {
-          "hint": "APPLICATIONS INFORMATION CC Current Line Compensation",
-          "source_page": 5
-        },
-        {
-          "hint": "Figure 1: voltage applications, a resistor RC is added to",
-          "source_page": 5
-        },
-        {
-          "hint": "Step-Down DC/DC Converter",
+          "hint": "ACT4523 Wide Input Sensorless CC/CV Step-Down DC/DC Converter Data Sheet Rev. 8.0, January 19, 2020 | Subject to change without notice 7 of 16 www.qorvo.com APPLICATIONS INFORMATION",
           "source_page": 6
-        },
-        {
-          "hint": "APPLICATIONS INFORMATION CONT’D",
-          "source_page": 6
-        },
-        {
-          "hint": "voltage applications.",
-          "source_page": 6
-        },
-        {
-          "hint": "Step-Down DC/DC Converter",
-          "source_page": 8
-        },
-        {
-          "hint": "Figure 9 gives one typical car charger application",
-          "source_page": 8
         }
       ],
+      "typical_application": {
+        "page": 5
+      },
       "design_pages": {
         "pages": [
           {
@@ -459,24 +260,9 @@
             "page": 6,
             "title": null,
             "content_type": "application"
-          },
-          {
-            "page": 8,
-            "title": null,
-            "content_type": "layout"
-          },
-          {
-            "page": 9,
-            "title": null,
-            "content_type": "application"
-          },
-          {
-            "page": 15,
-            "title": null,
-            "content_type": "application"
           }
         ],
-        "total_pages": 5
+        "total_pages": 2
       }
     }
   }

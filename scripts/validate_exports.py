@@ -21,7 +21,7 @@ try:
     from jsonschema import Draft202012Validator
     from referencing import Registry, Resource
 except ImportError:
-    print("ERROR: pip install jsonschema  (requires jsonschema>=4.18)")
+    print("ERROR: pip install jsonschema referencing  (requires jsonschema>=4.18, referencing>=0.35)")
     sys.exit(1)
 
 SCHEMA_DIR = Path(__file__).parent.parent / "schemas"

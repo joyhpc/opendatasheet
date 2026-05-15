@@ -7,15 +7,36 @@
   "mpn": "DS90UB9702-Q1",
   "manufacturer": "Texas Instruments",
   "category": "Automotive Video SerDes",
-  "description": "Automotive FPD-Link IV Deserializer Hub With D-PHY CSI-2 Output",
-  "packages": {
-    "VQFNP-88": {
-      "pin_count": 88,
-      "pins": {}
-    }
-  },
+  "description": "Automotive FPD-Link IV deserializer hub with D-PHY CSI-2 output",
+  "packages": {},
+  "absolute_maximum_ratings": {},
+  "electrical_parameters": {},
+  "drc_hints": {},
   "thermal": {},
   "capability_blocks": {
+    "mipi_phy": {
+      "class": "mipi_phy",
+      "present": true,
+      "phy_types": [
+        "D-PHY"
+      ],
+      "directions": [
+        "TX"
+      ],
+      "source": "protocol_domain",
+      "dphy": {
+        "port_count": 3
+      },
+      "transport": "CSI-2",
+      "source_pages": [
+        1,
+        2,
+        3
+      ],
+      "notes": [
+        "Description states up to 2 MIPI CSI-2 output ports and 1 replication port, D-PHY v2.1 compatible."
+      ]
+    },
     "serial_video_bridge": {
       "class": "serial_video_bridge",
       "present": true,
@@ -82,40 +103,26 @@
         ]
       },
       "source_basis": "primary_pdf_manual_profile"
-    },
+    }
+  },
+  "constraint_blocks": {
     "mipi_phy": {
-      "class": "mipi_phy",
-      "present": true,
-      "phy_types": [
-        "D-PHY"
-      ],
+      "class": "clocking",
+      "review_required": true,
       "directions": [
         "TX"
       ],
-      "transport": "MIPI CSI-2",
-      "source": "primary_pdf_manual_profile",
-      "dphy": {
-        "data_lanes_per_port": 4,
-        "clock_lanes_per_port": 2,
-        "rate_gbps_per_lane": {
-          "max": 2.5
-        },
-        "phy_version": "2.1",
-        "source_pages": [
-          1,
-          2,
-          3
-        ],
-        "port_count": 3
-      },
+      "phy_types": [
+        "D-PHY"
+      ],
+      "source": "protocol_domain",
+      "selection_note": "Freeze D-PHY vs C-PHY mode, lane or trio ownership, and downstream receiver compatibility before schematic sign-off.",
       "source_pages": [
         1,
         2,
         3
       ]
-    }
-  },
-  "constraint_blocks": {
+    },
     "serial_video_bridge": {
       "class": "interface",
       "review_required": true,
@@ -136,17 +143,6 @@
         "Freeze coax vs STP assumptions, connector ownership, and PoC policy for the selected serial link.",
         "Freeze D-PHY vs C-PHY mode and lane/trio allocation against the downstream SoC or bridge.",
         "Verify sensor-control tunneling, lock observability, frame-sync ownership, and sideband GPIO usage."
-      ],
-      "source": "primary_pdf_manual_profile"
-    },
-    "mipi_phy": {
-      "class": "clocking",
-      "review_required": true,
-      "directions": [
-        "TX"
-      ],
-      "phy_types": [
-        "D-PHY"
       ],
       "source": "primary_pdf_manual_profile"
     }

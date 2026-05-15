@@ -7,15 +7,45 @@
   "mpn": "MAX96712",
   "manufacturer": "Maxim Integrated",
   "category": "Automotive Video SerDes",
-  "description": "Quad GMSL2 to CSI-2 Deserializer with GMSL1 Compatibility",
-  "packages": {
-    "TQFN-64": {
-      "pin_count": 64,
-      "pins": {}
-    }
-  },
+  "description": "Quad GMSL2 to CSI-2 deserializer with aggregation and replication support",
+  "packages": {},
+  "absolute_maximum_ratings": {},
+  "electrical_parameters": {},
+  "drc_hints": {},
   "thermal": {},
   "capability_blocks": {
+    "mipi_phy": {
+      "class": "mipi_phy",
+      "present": true,
+      "phy_types": [
+        "C-PHY",
+        "D-PHY"
+      ],
+      "directions": [
+        "TX"
+      ],
+      "source": "protocol_domain",
+      "dphy": {
+        "port_count": 4
+      },
+      "cphy": {
+        "port_count": 4
+      },
+      "transport": "CSI-2",
+      "source_pages": [
+        1,
+        2,
+        42,
+        44,
+        46,
+        48,
+        49
+      ],
+      "notes": [
+        "General description states CSI-2 output supports both 2x4-lane and 4x2-lane configurations using either D-PHY or C-PHY.",
+        "General description states CSI-2 output supports either D-PHY or C-PHY."
+      ]
+    },
     "serial_video_bridge": {
       "class": "serial_video_bridge",
       "present": true,
@@ -108,64 +138,31 @@
         ]
       },
       "source_basis": "primary_pdf_manual_profile"
-    },
-    "mipi_phy": {
-      "class": "mipi_phy",
-      "present": true,
-      "phy_types": [
-        "D-PHY",
-        "C-PHY"
-      ],
-      "directions": [
-        "TX"
-      ],
-      "transport": "MIPI CSI-2",
-      "source": "primary_pdf_manual_profile",
-      "dphy": {
-        "supported_lanes_per_port": [
-          2,
-          4
-        ],
-        "rate_gbps_per_lane": {
-          "min": 0.08,
-          "max": 2.5
-        },
-        "phy_version": "1.2",
-        "source_pages": [
-          1,
-          42,
-          46,
-          48,
-          49
-        ],
-        "port_count": 4
-      },
-      "cphy": {
-        "symbol_rate_gsps": {
-          "min": 0.182,
-          "max": 5.7
-        },
-        "phy_version": "1.0",
-        "source_pages": [
-          1,
-          44,
-          46,
-          48,
-          49
-        ],
-        "port_count": 4
-      },
-      "source_pages": [
-        1,
-        42,
-        46,
-        48,
-        49,
-        44
-      ]
     }
   },
   "constraint_blocks": {
+    "mipi_phy": {
+      "class": "clocking",
+      "review_required": true,
+      "directions": [
+        "TX"
+      ],
+      "phy_types": [
+        "C-PHY",
+        "D-PHY"
+      ],
+      "source": "protocol_domain",
+      "selection_note": "Freeze D-PHY vs C-PHY mode, lane or trio ownership, and downstream receiver compatibility before schematic sign-off.",
+      "source_pages": [
+        1,
+        2,
+        42,
+        44,
+        46,
+        48,
+        49
+      ]
+    },
     "serial_video_bridge": {
       "class": "interface",
       "review_required": true,
@@ -188,18 +185,6 @@
         "Freeze coax vs STP assumptions, connector ownership, and PoC policy for the selected serial link.",
         "Freeze D-PHY vs C-PHY mode and lane/trio allocation against the downstream SoC or bridge.",
         "Verify sensor-control tunneling, lock observability, frame-sync ownership, and sideband GPIO usage."
-      ],
-      "source": "primary_pdf_manual_profile"
-    },
-    "mipi_phy": {
-      "class": "clocking",
-      "review_required": true,
-      "directions": [
-        "TX"
-      ],
-      "phy_types": [
-        "D-PHY",
-        "C-PHY"
       ],
       "source": "primary_pdf_manual_profile"
     }

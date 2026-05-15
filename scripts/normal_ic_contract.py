@@ -376,13 +376,14 @@ def _normalize_design_context_domain(design_context: dict, elec_params: dict) ->
         page_num = item.get("page_num")
         if page_num is None:
             continue
-        pages.append(
-            {
-                "page": page_num,
-                "title": item.get("heading"),
-                "content_type": item.get("kind"),
-            }
-        )
+        page_entry = {
+            "page": page_num,
+            "title": item.get("heading"),
+            "content_type": item.get("kind"),
+        }
+        if isinstance(item.get("origin"), dict):
+            page_entry["origin"] = copy.deepcopy(item["origin"])
+        pages.append(page_entry)
 
     design_formulas = _derive_design_formulas(design_context, elec_params)
     typical_application = _derive_typical_application(design_context, design_formulas)

@@ -75,5 +75,5 @@ AMS1117.json
 ### AMD FPGA (4 files)
 - XCKU3P: FFVA676, FFVB676, FFVD900, SFVB784
 
-### 普通 IC (26 files)
+### 普通 IC (172 files)
 LDO, Buck, OpAmp, DAC, Switch, Logic, LED Driver, Interface

@@ -7,15 +7,41 @@
   "mpn": "NS6012",
   "manufacturer": "Norel Systems",
   "category": "Automotive Video SerDes",
-  "description": "Automotive HSMT Serializer",
-  "packages": {
-    "QFN-32": {
-      "pin_count": 32,
-      "pins": {}
-    }
-  },
+  "description": "Automotive HSMT serializer",
+  "packages": {},
+  "absolute_maximum_ratings": {},
+  "electrical_parameters": {},
+  "drc_hints": {},
   "thermal": {},
   "capability_blocks": {
+    "mipi_phy": {
+      "class": "mipi_phy",
+      "present": true,
+      "phy_types": [
+        "D-PHY"
+      ],
+      "directions": [
+        "RX"
+      ],
+      "source": "protocol_domain",
+      "dphy": {
+        "port_count": 1,
+        "max_data_lanes": 4,
+        "max_clock_lanes": 1,
+        "phy_version": "1.2"
+      },
+      "transport": "CSI-2",
+      "source_pages": [
+        6,
+        8,
+        15,
+        18,
+        19
+      ],
+      "notes": [
+        "Introduction and features confirm one four-lane MIPI CSI-2 D-PHY camera-side input."
+      ]
+    },
     "serial_video_bridge": {
       "class": "serial_video_bridge",
       "present": true,
@@ -85,31 +111,20 @@
         ]
       },
       "source_basis": "primary_pdf_manual_profile"
-    },
+    }
+  },
+  "constraint_blocks": {
     "mipi_phy": {
-      "class": "mipi_phy",
-      "present": true,
-      "phy_types": [
-        "D-PHY"
-      ],
+      "class": "clocking",
+      "review_required": true,
       "directions": [
         "RX"
       ],
-      "transport": "MIPI CSI-2",
-      "source": "primary_pdf_manual_profile",
-      "dphy": {
-        "data_lanes_per_port": 4,
-        "clock_lanes_per_port": 1,
-        "phy_version": "1.2",
-        "source_pages": [
-          6,
-          8,
-          15,
-          18,
-          19
-        ],
-        "port_count": 1
-      },
+      "phy_types": [
+        "D-PHY"
+      ],
+      "source": "protocol_domain",
+      "selection_note": "Freeze D-PHY vs C-PHY mode, lane or trio ownership, and downstream receiver compatibility before schematic sign-off.",
       "source_pages": [
         6,
         8,
@@ -117,9 +132,7 @@
         18,
         19
       ]
-    }
-  },
-  "constraint_blocks": {
+    },
     "serial_video_bridge": {
       "class": "interface",
       "review_required": true,
@@ -140,17 +153,6 @@
         "Freeze sensor-side CSI-2 lane mapping, reference-clock ownership, and frame-sync strategy before schematic sign-off.",
         "Freeze coax vs STP assumptions, connector ownership, and PoC policy for the selected HSMT link.",
         "Verify remote deserializer compatibility, control-channel tunneling, and sideband GPIO usage."
-      ],
-      "source": "primary_pdf_manual_profile"
-    },
-    "mipi_phy": {
-      "class": "clocking",
-      "review_required": true,
-      "directions": [
-        "RX"
-      ],
-      "phy_types": [
-        "D-PHY"
       ],
       "source": "primary_pdf_manual_profile"
     }
