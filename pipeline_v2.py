@@ -782,14 +782,125 @@ def validate_physics(data: dict) -> list[ValidationResult]:
 # L3: 自动化交叉验证
 # ============================================
 
-def cross_validate(pdf_path: str, extraction: dict, pages: list[PageInfo]) -> dict:
+def _normalize_pin_text(value) -> str:
+    """Normalize PDF/extracted pin text for fuzzy token matching."""
+    return re.sub(r'[^A-Z0-9]+', '', str(value if value is not None else '').upper())
+
+
+def _pin_name_matches(text: str, pin_name) -> bool:
+    raw = str(pin_name or '').strip()
+    if not raw:
+        return False
+
+    text_upper = text.upper()
+    raw_upper = raw.upper()
+    if re.search(rf'(?<![A-Z0-9]){re.escape(raw_upper)}(?![A-Z0-9])', text_upper):
+        return True
+
+    normalized = _normalize_pin_text(raw)
+    if len(normalized) < 3:
+        return False
+    normalized_text = _normalize_pin_text(text_upper)
+    return normalized in normalized_text
+
+
+def _pin_number_matches(text: str, pin_number) -> bool:
+    raw = str(pin_number if pin_number is not None else '').strip()
+    if not raw:
+        return False
+
+    text_upper = text.upper()
+    if raw.isdigit():
+        return re.search(rf'(?<![0-9]){re.escape(raw)}(?![0-9])', text_upper) is not None
+    return re.search(rf'(?<![A-Z0-9]){re.escape(raw.upper())}(?![A-Z0-9])', text_upper) is not None
+
+
+def _pin_mapping_found_in_lines(pin_lines: list[str], pin_name, pin_number, *, window: int = 2) -> bool:
+    """Return true when a pin name and physical pin number co-occur nearby."""
+    if not pin_lines:
+        return False
+
+    for idx in range(len(pin_lines)):
+        start = max(0, idx - window)
+        end = min(len(pin_lines), idx + window + 1)
+        nearby = " ".join(pin_lines[start:end])
+        if _pin_name_matches(nearby, pin_name) and _pin_number_matches(nearby, pin_number):
+            return True
+    return False
+
+
+def _cross_validate_pins(pin_extraction: dict, pin_lines: list[str], *, is_fpga: bool = False) -> dict:
+    """Cross-check extracted normal-IC pin mappings against PDF pin-page text."""
+    result = {
+        "pin_total_mappings": 0,
+        "pin_mappings_verified": 0,
+        "pin_mappings_suspicious": 0,
+        "pin_mapping_coverage_pct": 0.0,
+        "suspicious_pins": [],
+    }
+
+    if is_fpga:
+        result["pin_validation_skipped"] = "fpga_pin_numbers_live_in_separate_pinout_sources"
+        return result
+    if not isinstance(pin_extraction, dict) or pin_extraction.get("error"):
+        result["pin_validation_skipped"] = "pin_extraction_unavailable"
+        return result
+
+    logical_pins = pin_extraction.get("logical_pins", [])
+    if not isinstance(logical_pins, list) or not logical_pins:
+        result["pin_validation_skipped"] = "no_logical_pins"
+        return result
+    if not pin_lines:
+        result["pin_validation_skipped"] = "no_pin_text"
+        return result
+
+    for pin in logical_pins:
+        if not isinstance(pin, dict):
+            continue
+        name = pin.get("name")
+        packages = pin.get("packages", {})
+        if not name or not isinstance(packages, dict):
+            continue
+        for package_name, pin_numbers in packages.items():
+            if not isinstance(pin_numbers, list):
+                continue
+            for pin_number in pin_numbers:
+                result["pin_total_mappings"] += 1
+                if _pin_mapping_found_in_lines(pin_lines, name, pin_number):
+                    result["pin_mappings_verified"] += 1
+                else:
+                    result["pin_mappings_suspicious"] += 1
+                    result["suspicious_pins"].append({
+                        "name": name,
+                        "package": package_name,
+                        "pin_number": pin_number,
+                    })
+
+    total = result["pin_total_mappings"]
+    if total:
+        result["pin_mapping_coverage_pct"] = round(result["pin_mappings_verified"] / total * 100, 1)
+    else:
+        result["pin_validation_skipped"] = "no_package_pin_mappings"
+    return result
+
+
+def cross_validate(
+    pdf_path: str,
+    extraction: dict,
+    pages: list[PageInfo],
+    pin_extraction: dict | None = None,
+    *,
+    is_fpga: bool = False,
+) -> dict:
     """用 PDF 原始文本交叉验证提取结果 (Q2: 使用 DatasheetValueValidator)"""
     doc = fitz.open(pdf_path)
     validator = DatasheetValueValidator()
 
     # 收集电气特性页面的原始文本和数值池
     target_cats = {"electrical", "pin", "cover"}
+    pin_target_cats = {"pin", "cover"}
     pdf_lines = []
+    pin_lines = []
     all_raw_text = ""
     for p in pages:
         if p.category in target_cats:
@@ -799,6 +910,8 @@ def cross_validate(pdf_path: str, extraction: dict, pages: list[PageInfo]) -> di
                 line = line.strip()
                 if line:
                     pdf_lines.append(line)
+                    if p.category in pin_target_cats:
+                        pin_lines.append(line)
     doc.close()
 
     # Q2: 用 DatasheetValueValidator 构建全量数值池（处理负号变体）
@@ -878,7 +991,7 @@ def cross_validate(pdf_path: str, extraction: dict, pages: list[PageInfo]) -> di
                     "values": vals,
                 })
 
-    return {
+    result = {
         "total_extracted_values": len(extracted_numbers),
         "values_found_in_pdf": len(values_in_pdf),
         "values_not_in_pdf": sorted(list(values_not_in_pdf)),
@@ -888,6 +1001,8 @@ def cross_validate(pdf_path: str, extraction: dict, pages: list[PageInfo]) -> di
         "params_suspicious": params_suspicious,
         "suspicious_params": suspicious_params,
     }
+    result.update(_cross_validate_pins(pin_extraction or {}, pin_lines, is_fpga=is_fpga))
+    return result
 
 
 def extract_design_pages_from_pdf(pdf_path: str, pages: list[PageInfo]) -> dict:
@@ -1164,7 +1279,13 @@ def process_single_pdf(pdf_path: str, verbose: bool = True) -> dict:
     # L3: 交叉验证 (cross-domain, stays in pipeline)
     cross_val = {}
     if "error" not in extraction:
-        cross_val = cross_validate(pdf_path, extraction, pages)
+        cross_val = cross_validate(
+            pdf_path,
+            extraction,
+            pages,
+            pin_extraction=pin_extraction,
+            is_fpga=is_fpga,
+        )
         if verbose:
             print(f"\nL3 Cross-Validation:")
             print(f"  Value coverage: {cross_val['values_found_in_pdf']}/{cross_val['total_extracted_values']} ({cross_val['value_coverage_pct']}%)")
@@ -1173,6 +1294,11 @@ def process_single_pdf(pdf_path: str, verbose: bool = True) -> dict:
                 print(f"  ⚠️ Suspicious: {cross_val['params_suspicious']}")
                 for sp in cross_val['suspicious_params'][:5]:
                     print(f"    - {sp['parameter']} ({sp['device']}): {sp['values']}")
+
+            if cross_val.get("pin_total_mappings"):
+                print(f"  Pin mapping: {cross_val['pin_mappings_verified']}/{cross_val['pin_total_mappings']} verified")
+                if cross_val.get("pin_mappings_suspicious", 0) > 0:
+                    print(f"  Pin suspicious: {cross_val['pin_mappings_suspicious']}")
 
     # L4: Design extraction result
     design_extraction = domains.get("design_context", {})
