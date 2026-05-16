@@ -917,6 +917,37 @@ def extract_design_pages_from_pdf(pdf_path: str, pages: list[PageInfo]) -> dict:
 # Main Pipeline
 # ============================================
 
+def _extract_one_domain(extractor, pdf_path: str, domains: dict) -> tuple:
+    """Run select_pages/extract/validate for a single domain extractor.
+
+    A crash in one extractor must not abort the remaining domains, so any
+    exception is captured and returned as an error result instead of
+    propagating. Returns (result, validation, selected_pages).
+    """
+    domain_name = extractor.DOMAIN_NAME
+    try:
+        selected_pages = extractor.select_pages()
+        if domain_name == "thermal":
+            # ThermalExtractor post-processes electrical extraction
+            result = extractor.extract(domains.get("electrical", {}))
+        elif domain_name == "design_context":
+            # DesignContextExtractor reads PDF text directly, no images needed
+            result = extractor.extract({})
+        elif selected_pages:
+            images = render_pages_to_images(pdf_path, selected_pages)
+            result = extractor.extract(images)
+        else:
+            return {}, {}, []
+        validation = extractor.validate(result)
+        return result, validation, selected_pages
+    except Exception as exc:
+        return (
+            {"error": f"{type(exc).__name__}: {exc}", "error_type": "ExtractorCrash"},
+            {},
+            [],
+        )
+
+
 def process_single_pdf(pdf_path: str, verbose: bool = True) -> dict:
     pdf_name = os.path.basename(pdf_path)
     if verbose:
@@ -976,25 +1007,9 @@ def process_single_pdf(pdf_path: str, verbose: bool = True) -> dict:
         domain_name = extractor.DOMAIN_NAME
 
         t_domain = time.time()
-        selected_pages = extractor.select_pages()
-
-        if domain_name == "thermal":
-            # ThermalExtractor post-processes electrical extraction
-            electrical_result = domains.get("electrical", {})
-            result = extractor.extract(electrical_result)
-            validation = extractor.validate(result)
-        elif domain_name == "design_context":
-            # DesignContextExtractor reads PDF text directly, no images needed
-            result = extractor.extract({})
-            validation = extractor.validate(result)
-        elif selected_pages:
-            images = render_pages_to_images(pdf_path, selected_pages)
-            result = extractor.extract(images)
-            validation = extractor.validate(result)
-        else:
-            result = {}
-            validation = {}
-
+        result, validation, selected_pages = _extract_one_domain(
+            extractor, pdf_path, domains
+        )
         domain_timings[domain_name] = round(time.time() - t_domain, 3)
         model_trace = getattr(result, "model_trace", None)
         if model_trace:
@@ -1244,6 +1259,7 @@ def run_batch(limit: int = 5):
     print(f"PDFs to process: {len(pdf_files)}")
 
     all_results = []
+    failures = []
     total_params = 0
     total_failures = 0
     total_suspicious = 0
@@ -1251,41 +1267,59 @@ def run_batch(limit: int = 5):
     for pdf_path in pdf_files:
         out_name = pdf_path.stem + ".json"
         out_path = OUTPUT_DIR / out_name
-        if out_path.exists() and out_path.stat().st_size > 100:
-            print(f"\n⏭ Skipping (already done): {pdf_path.name}")
-            with open(out_path, 'r') as f:
-                result = json.load(f)
+        # A failure on one PDF must not abort the whole batch.
+        try:
+            if out_path.exists() and out_path.stat().st_size > 100:
+                print(f"\n⏭ Skipping (already done): {pdf_path.name}")
+                with open(out_path, 'r', encoding='utf-8') as f:
+                    result = json.load(f)
+                all_results.append(result)
+                ext = result.get("extraction", {})
+                if isinstance(ext, dict) and "error" not in ext:
+                    total_params += len(ext.get("absolute_maximum_ratings", []))
+                    total_params += len(ext.get("electrical_characteristics", []))
+                total_failures += len([v for v in result.get("validation", []) if not v.get("passed", True)])
+                total_suspicious += result.get("cross_validation", {}).get("params_suspicious", 0)
+                continue
+
+            result = process_single_pdf(str(pdf_path))
             all_results.append(result)
+
             ext = result.get("extraction", {})
             if isinstance(ext, dict) and "error" not in ext:
                 total_params += len(ext.get("absolute_maximum_ratings", []))
                 total_params += len(ext.get("electrical_characteristics", []))
             total_failures += len([v for v in result.get("validation", []) if not v.get("passed", True)])
             total_suspicious += result.get("cross_validation", {}).get("params_suspicious", 0)
+
+            with open(out_path, 'w', encoding='utf-8') as f:
+                json.dump(result, f, ensure_ascii=False, indent=2)
+            write_model_audit_sidecar(result, out_path)
+            write_extraction_ledger_sidecar(result, out_path)
+
+            time.sleep(5)
+        except Exception as exc:
+            print(f"❌ FAILED: {pdf_path.name}: {type(exc).__name__}: {exc}")
+            failures.append({
+                "pdf": pdf_path.name,
+                "error_type": type(exc).__name__,
+                "error": str(exc),
+            })
             continue
 
-        result = process_single_pdf(str(pdf_path))
-        all_results.append(result)
-
-        ext = result.get("extraction", {})
-        if isinstance(ext, dict) and "error" not in ext:
-            total_params += len(ext.get("absolute_maximum_ratings", []))
-            total_params += len(ext.get("electrical_characteristics", []))
-        total_failures += len([v for v in result.get("validation", []) if not v.get("passed", True)])
-        total_suspicious += result.get("cross_validation", {}).get("params_suspicious", 0)
-
-        with open(out_path, 'w', encoding='utf-8') as f:
-            json.dump(result, f, ensure_ascii=False, indent=2)
-        write_model_audit_sidecar(result, out_path)
-        write_extraction_ledger_sidecar(result, out_path)
-
-        time.sleep(5)
+    # Record PDFs that failed so the batch result is auditable.
+    if failures:
+        failures_path = OUTPUT_DIR / "_failures.json"
+        with open(failures_path, 'w', encoding='utf-8') as f:
+            json.dump({"count": len(failures), "failed": failures}, f,
+                      ensure_ascii=False, indent=2)
 
     # Summary
     print(f"\n{'='*60}")
     print(f"BATCH SUMMARY (v0.2 Vision)")
     print(f"{'='*60}")
     print(f"PDFs processed: {len(all_results)}")
+    print(f"PDFs failed: {len(failures)}")
     print(f"Total parameters extracted: {total_params}")
     print(f"Validation failures: {total_failures}")
     print(f"Cross-validation suspicious: {total_suspicious}")

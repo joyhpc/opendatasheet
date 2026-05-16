@@ -11,6 +11,7 @@ Usage:
     python scripts/export_for_sch_review.py  # uses default paths
 """
 
+import argparse
 import copy
 import json
 import re
@@ -59,17 +60,24 @@ def _apply_normal_ic_export_profiles(result: dict, profiles: dict) -> dict:
     return normalize_automotive_video_serdes_export(result, profile)
 
 
-def _remove_stale_managed_exports(output_dir: Path, expected_files: set[str]) -> list[str]:
-    """Delete checked-in device JSONs no longer produced by the current inputs."""
-    removed = []
+def _remove_stale_managed_exports(output_dir: Path, expected_files: set[str],
+                                  *, dry_run: bool = False) -> list[str]:
+    """Find checked-in device JSONs no longer produced by the current inputs.
+
+    Returns the stale file names. When dry_run is True the files are only
+    reported, not deleted — deletion is a destructive default we never take
+    implicitly (it must be opted into via the exporter's --prune flag).
+    """
+    stale = []
     for path in sorted(output_dir.glob("*.json")):
         if path.name.startswith("_"):
             continue
         if path.name in expected_files:
             continue
-        path.unlink()
-        removed.append(path.name)
-    return removed
+        if not dry_run:
+            path.unlink()
+        stale.append(path.name)
+    return stale
 
 
 def _canonical_schema_version(domains: dict) -> str:
@@ -287,18 +295,14 @@ def export_normal_ic(data: dict) -> dict | None:
         }
 
     # --- Absolute maximum ratings ---
+    # Symbol-less rows are kept (keyed off the parameter name) and duplicate
+    # keys get a unique suffix, so no extracted parameter is silently lost.
     abs_max = {}
     for item in ext.get("absolute_maximum_ratings", []):
-        sym = item.get("symbol", "")
-        if not sym:
-            continue
-        key = sym
-        # Handle duplicates by appending condition
-        if key in abs_max and item.get("conditions"):
-            key = f"{sym}_{_sanitize(item['conditions'])}"
+        key = _unique_param_key(item, abs_max)
         abs_max[key] = {
-            "parameter": item["parameter"],
-            "symbol": sym,
+            "parameter": item.get("parameter"),
+            "symbol": item.get("symbol") or None,
             "min": item.get("min"),
             "max": item.get("max"),
             "unit": item.get("unit"),
@@ -308,21 +312,15 @@ def export_normal_ic(data: dict) -> dict | None:
     # --- Key electrical parameters ---
     elec_params = {}
     for item in ext.get("electrical_characteristics", []):
-        sym = item.get("symbol", "")
-        if not sym:
-            continue
-        key = sym
-        cond = item.get("conditions", "")
-        if key in elec_params and cond:
-            key = f"{sym}_{_sanitize(cond)}"
+        key = _unique_param_key(item, elec_params)
         elec_params[key] = {
-            "parameter": item["parameter"],
-            "symbol": sym,
+            "parameter": item.get("parameter"),
+            "symbol": item.get("symbol") or None,
             "min": item.get("min"),
             "typ": item.get("typ"),
             "max": item.get("max"),
             "unit": item.get("unit"),
-            "conditions": cond or None,
+            "conditions": item.get("conditions") or None,
         }
 
     # --- Extract DRC-critical values ---
@@ -456,6 +454,22 @@ def _extract_thermal(raw_elec: list = None, raw_abs: list = None) -> dict:
     return thermal
 
 
+# Symbols like "VIN - VOUT" are difference expressions (dropout voltage),
+# not base symbols. They must not be matched as "VIN"/"VOUT" by hint extraction.
+_EXPRESSION_SYMBOL_RE = re.compile(r'[A-Za-z][\w()]*\s*[-+]\s*[A-Za-z][\w()]*')
+_DROPOUT_DESC_RE = r'drop[\s-]?out'
+
+
+def _is_expression_symbol(symbol: str) -> bool:
+    """True when a symbol is an arithmetic expression of two operands.
+
+    Datasheets use symbols like "VIN - VOUT" for dropout voltage. Such a
+    symbol must not be treated as the base "VIN"/"VOUT" symbol by DRC-hint
+    extraction, otherwise the dropout value leaks into e.g. vin_operating.
+    """
+    return bool(symbol and _EXPRESSION_SYMBOL_RE.search(symbol))
+
+
 def _extract_drc_hints(category: str, abs_max: dict, elec_params: dict,
                        raw_elec: list = None, raw_abs: list = None) -> dict:
     """Extract DRC-critical values using semantic fuzzy matching.
@@ -468,14 +482,18 @@ def _extract_drc_hints(category: str, abs_max: dict, elec_params: dict,
     abs_list = raw_abs or []
 
     def _find(source_list, sym_pats=None, desc_pats=None, exclude_pats=None):
-        """Fuzzy match on symbol or parameter description."""
+        """Fuzzy match on symbol or parameter description.
+
+        Expression-style symbols (e.g. "VIN - VOUT") are skipped for symbol
+        matching so a dropout/difference row is never read as a base symbol.
+        """
         for p in source_list:
             sym = p.get('symbol') or ''
             desc = p.get('parameter') or ''
             haystack = f"{sym} {desc}"
             if exclude_pats and any(re.search(pat, haystack, re.IGNORECASE) for pat in exclude_pats):
                 continue
-            if sym_pats:
+            if sym_pats and not _is_expression_symbol(sym):
                 for pat in sym_pats:
                     if re.match(pat, sym, re.IGNORECASE):
                         return p
@@ -496,9 +514,12 @@ def _extract_drc_hints(category: str, abs_max: dict, elec_params: dict,
         hints['vin_abs_max'] = {'value': p['max'], 'unit': p.get('unit', 'V')}
 
     # --- vin_operating ---
+    # exclude_pats guards against dropout-voltage rows ("VIN - VOUT" /
+    # "Dropout Voltage") being misread as the input operating range.
     p = _find(elec_list,
               sym_pats=[r'^V[_\(]?IN', r'^VCC', r'^VDD'],
-              desc_pats=[r'input.*volt.*range', r'input.*operat', r'supply.*volt.*range'])
+              desc_pats=[r'input.*volt.*range', r'input.*operat', r'supply.*volt.*range'],
+              exclude_pats=[_DROPOUT_DESC_RE])
     if p and (p.get('min') is not None or p.get('max') is not None):
         hints['vin_operating'] = _hint(p)
 
@@ -585,6 +606,29 @@ def _extract_drc_hints(category: str, abs_max: dict, elec_params: dict,
 def _sanitize(s: str) -> str:
     """Sanitize a string for use as a dict key."""
     return re.sub(r"[^a-zA-Z0-9]", "_", s)[:30].strip("_")
+
+
+def _unique_param_key(item: dict, existing: dict) -> str:
+    """Build a stable, collision-free dict key for a parameter entry.
+
+    Falls back to the parameter description when no symbol is present, so
+    symbol-less rows are kept instead of silently dropped. On collision a
+    condition suffix (then a numeric suffix) is appended so an earlier row
+    is never overwritten.
+    """
+    base = (item.get("symbol") or "").strip()
+    if not base:
+        base = _sanitize(item.get("parameter") or "") or "param"
+    key = base
+    cond = item.get("conditions") or ""
+    if key in existing and cond:
+        key = f"{base}_{_sanitize(cond)}"
+    if key in existing:
+        suffix = 2
+        while f"{key}__{suffix}" in existing:
+            suffix += 1
+        key = f"{key}__{suffix}"
+    return key
 
 
 def _safe_upper(value: str | None) -> str:
@@ -3471,9 +3515,21 @@ def export_fpga(dc_data: dict, pinout_data: dict, gowin_dc: dict = None, lattice
 
 
 def main():
-    extracted_dir = Path(sys.argv[1]) if len(sys.argv) > 1 else DEFAULT_EXTRACTED_DIR
-    fpga_pinout_dir = Path(sys.argv[2]) if len(sys.argv) > 2 else DEFAULT_FPGA_PINOUT_DIR
-    output_dir = Path(sys.argv[3]) if len(sys.argv) > 3 else DEFAULT_OUTPUT_DIR
+    parser = argparse.ArgumentParser(
+        description="Export OpenDatasheet extracted data to sch-review format."
+    )
+    parser.add_argument("extracted_dir", nargs="?", default=str(DEFAULT_EXTRACTED_DIR))
+    parser.add_argument("fpga_pinout_dir", nargs="?", default=str(DEFAULT_FPGA_PINOUT_DIR))
+    parser.add_argument("output_dir", nargs="?", default=str(DEFAULT_OUTPUT_DIR))
+    parser.add_argument(
+        "--prune",
+        action="store_true",
+        help="Delete checked-in device exports no longer produced by current inputs.",
+    )
+    args = parser.parse_args()
+    extracted_dir = Path(args.extracted_dir)
+    fpga_pinout_dir = Path(args.fpga_pinout_dir)
+    output_dir = Path(args.output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
 
     exported = 0
@@ -3607,12 +3663,22 @@ def main():
             print(f"  ERROR {pinout_file.name}: {e}")
             errors += 1
 
-    removed_files = _remove_stale_managed_exports(output_dir, written_files)
+    stale_files = _remove_stale_managed_exports(
+        output_dir, written_files, dry_run=not args.prune
+    )
 
     print(f"\n{'='*60}")
     print(f"Exported: {exported}, Errors: {errors}")
-    if removed_files:
-        print(f"Removed stale device exports: {len(removed_files)}")
+    if stale_files:
+        if args.prune:
+            print(f"Removed stale device exports: {len(stale_files)}")
+        else:
+            preview = ", ".join(stale_files[:10])
+            more = "" if len(stale_files) <= 10 else f" (+{len(stale_files) - 10} more)"
+            print(
+                f"WARNING: {len(stale_files)} stale export(s) not produced by current "
+                f"inputs; rerun with --prune to delete: {preview}{more}"
+            )
     print(f"Output: {output_dir}")
 
     # Generate manifest
@@ -3638,6 +3704,10 @@ def main():
     fpga_catalog_path = output_dir / "_fpga_catalog.json"
     fpga_catalog_path.write_text(json.dumps(fpga_catalog, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print(f"FPGA catalog: {fpga_catalog_path} ({fpga_catalog['summary']['device_count']} devices, {fpga_catalog['summary']['package_count']} packages)")
+
+    if errors:
+        print(f"ERROR: {errors} device(s) failed to export; see messages above.")
+        sys.exit(1)
 
 
 if __name__ == "__main__":

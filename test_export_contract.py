@@ -552,7 +552,8 @@ def test_design_bundle_helpers_can_use_domains_backfilled_normal_ic_view():
     assert constraints["vin_abs_max"]["max"] == 42.0
 
 
-def test_export_for_sch_review_main_removes_stale_device_exports(tmp_path):
+def _setup_export_main_dirs(tmp_path):
+    """Create input/output dirs with one device input and one stale export."""
     extracted_dir = tmp_path / "extracted_v2"
     fpga_pinout_dir = extracted_dir / "fpga" / "pinout"
     output_dir = tmp_path / "sch_review_export"
@@ -576,6 +577,33 @@ def test_export_for_sch_review_main_removes_stale_device_exports(tmp_path):
     (extracted_dir / "test123.json").write_text(json.dumps(input_payload), encoding="utf-8")
     stale_path = output_dir / "STALE_DEVICE.json"
     stale_path.write_text('{"_schema":"sch-review-device/1.1"}\n', encoding="utf-8")
+    return extracted_dir, fpga_pinout_dir, output_dir, stale_path
+
+
+def test_export_for_sch_review_main_removes_stale_device_exports(tmp_path):
+    """With --prune, stale device exports are deleted."""
+    extracted_dir, fpga_pinout_dir, output_dir, stale_path = _setup_export_main_dirs(tmp_path)
+
+    old_argv = sys.argv[:]
+    try:
+        sys.argv = [
+            "export_for_sch_review.py",
+            str(extracted_dir),
+            str(fpga_pinout_dir),
+            str(output_dir),
+            "--prune",
+        ]
+        export_for_sch_review_main()
+    finally:
+        sys.argv = old_argv
+
+    assert not stale_path.exists()
+    assert (output_dir / "TEST123.json").exists()
+
+
+def test_export_for_sch_review_main_keeps_stale_without_prune(tmp_path):
+    """R4: the default run must NOT delete checked-in exports it did not produce."""
+    extracted_dir, fpga_pinout_dir, output_dir, stale_path = _setup_export_main_dirs(tmp_path)
 
     old_argv = sys.argv[:]
     try:
@@ -589,7 +617,7 @@ def test_export_for_sch_review_main_removes_stale_device_exports(tmp_path):
     finally:
         sys.argv = old_argv
 
-    assert not stale_path.exists()
+    assert stale_path.exists(), "stale export was deleted without --prune"
     assert (output_dir / "TEST123.json").exists()
 
 
