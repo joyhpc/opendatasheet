@@ -113,6 +113,22 @@
     }
   },
   "absolute_maximum_ratings": {
+    "Voltage_range_on_IN__OUT__EN_o": {
+      "parameter": "Voltage range on IN, OUT, EN or EN, ILIM, FAULT",
+      "symbol": null,
+      "min": -0.3,
+      "max": 7,
+      "unit": "V",
+      "conditions": null
+    },
+    "Voltage_range_from_IN_to_OUT": {
+      "parameter": "Voltage range from IN to OUT",
+      "symbol": null,
+      "min": -7,
+      "max": 7,
+      "unit": "V",
+      "conditions": null
+    },
     "IO": {
       "parameter": "Continuous output current",
       "symbol": "IO",
@@ -120,6 +136,22 @@
       "max": null,
       "unit": "A",
       "conditions": "Internally Limited"
+    },
+    "Continuous_FAULT_sink_current": {
+      "parameter": "Continuous FAULT sink current",
+      "symbol": null,
+      "min": 0,
+      "max": 25,
+      "unit": "mA",
+      "conditions": null
+    },
+    "ILIM_source_current": {
+      "parameter": "ILIM source current",
+      "symbol": null,
+      "min": 0,
+      "max": 1,
+      "unit": "mA",
+      "conditions": null
     },
     "TJ": {
       "parameter": "Maximum junction temperature",
@@ -138,12 +170,12 @@
       "conditions": null
     },
     "V(ESD)": {
-      "parameter": "Electrostatic discharge (IEC 61000-4-2 air-gap)",
+      "parameter": "Electrostatic discharge (HBM)",
       "symbol": "V(ESD)",
-      "min": -15000,
-      "max": 15000,
+      "min": -2000,
+      "max": 2000,
       "unit": "V",
-      "conditions": null
+      "conditions": "per ANSI/ESDA/JEDEC JS-001"
     },
     "V(ESD)_per_JEDEC_specification_JESD22": {
       "parameter": "Electrostatic discharge (CDM)",
@@ -152,6 +184,22 @@
       "max": 500,
       "unit": "V",
       "conditions": "per JEDEC specification JESD22-C101"
+    },
+    "V(ESD)__2": {
+      "parameter": "Electrostatic discharge (IEC 61000-4-2 contact)",
+      "symbol": "V(ESD)",
+      "min": -8000,
+      "max": 8000,
+      "unit": "V",
+      "conditions": null
+    },
+    "V(ESD)__3": {
+      "parameter": "Electrostatic discharge (IEC 61000-4-2 air-gap)",
+      "symbol": "V(ESD)",
+      "min": -15000,
+      "max": 15000,
+      "unit": "V",
+      "conditions": null
     }
   },
   "electrical_parameters": {
@@ -165,6 +213,15 @@
       "conditions": null
     },
     "VEN": {
+      "parameter": "Enable voltage",
+      "symbol": "VEN",
+      "min": 0,
+      "typ": null,
+      "max": 6.5,
+      "unit": "V",
+      "conditions": null
+    },
+    "VEN__2": {
       "parameter": "Enable voltage",
       "symbol": "VEN",
       "min": 0,
@@ -225,6 +282,15 @@
       "typ": null,
       "max": 10,
       "unit": "mA",
+      "conditions": null
+    },
+    "Input_de_coupling_capacitance": {
+      "parameter": "Input de-coupling capacitance",
+      "symbol": null,
+      "min": 0.1,
+      "typ": null,
+      "max": null,
+      "unit": "µF",
       "conditions": null
     },
     "TJ": {
@@ -326,6 +392,15 @@
       "unit": "ms",
       "conditions": "VIN = 2.5 V, CL = 1 µF, RL = 100 Ω"
     },
+    "Enable_pin_turn_on_off_thresho": {
+      "parameter": "Enable pin turn on/off threshold",
+      "symbol": null,
+      "min": 0.66,
+      "typ": 1.1,
+      "max": null,
+      "unit": "V",
+      "conditions": null
+    },
     "IEN": {
       "parameter": "Input current",
       "symbol": "IEN",
@@ -425,6 +500,24 @@
       "unit": "µs",
       "conditions": "VIN = 5 V"
     },
+    "Reverse_voltage_comparator_tri": {
+      "parameter": "Reverse-voltage comparator trip point",
+      "symbol": null,
+      "min": 95,
+      "typ": 135,
+      "max": 190,
+      "unit": "mV",
+      "conditions": null
+    },
+    "Time_from_reverse_voltage_cond": {
+      "parameter": "Time from reverse-voltage condition to MOSFET turn off",
+      "symbol": null,
+      "min": 3,
+      "typ": 5,
+      "max": 7,
+      "unit": "ms",
+      "conditions": "VIN = 5 V"
+    },
     "IIN_off": {
       "parameter": "Supply current, low-level output",
       "symbol": "IIN_off",
@@ -470,6 +563,15 @@
       "unit": "V",
       "conditions": "VIN rising"
     },
+    "UVLO_Hysteresis__IN": {
+      "parameter": "UVLO Hysteresis, IN",
+      "symbol": null,
+      "min": null,
+      "typ": 25,
+      "max": null,
+      "unit": "mV",
+      "conditions": "TJ = 25 °C"
+    },
     "VOL": {
       "parameter": "Output low voltage, FAULT",
       "symbol": "VOL",
@@ -478,6 +580,60 @@
       "max": 180,
       "unit": "mV",
       "conditions": "I/FAULT = 1 mA"
+    },
+    "Off_state_leakage": {
+      "parameter": "Off-state leakage",
+      "symbol": null,
+      "min": null,
+      "typ": null,
+      "max": 1,
+      "unit": "µA",
+      "conditions": "V/FAULT = 6.5 V"
+    },
+    "FAULT_deglitch__overcurrent": {
+      "parameter": "FAULT deglitch (overcurrent)",
+      "symbol": null,
+      "min": 5,
+      "typ": 7.5,
+      "max": 10,
+      "unit": "ms",
+      "conditions": "FAULT assertion or de-assertion due to overcurrent condition"
+    },
+    "FAULT_deglitch__reverse_voltag": {
+      "parameter": "FAULT deglitch (reverse-voltage)",
+      "symbol": null,
+      "min": 2,
+      "typ": 4,
+      "max": 6,
+      "unit": "ms",
+      "conditions": "FAULT assertion or de-assertion due to reverse-voltage condition"
+    },
+    "Thermal_shutdown_threshold": {
+      "parameter": "Thermal shutdown threshold",
+      "symbol": null,
+      "min": null,
+      "typ": 155,
+      "max": null,
+      "unit": "°C",
+      "conditions": null
+    },
+    "Thermal_shutdown_threshold_in": {
+      "parameter": "Thermal shutdown threshold in current-limit",
+      "symbol": null,
+      "min": null,
+      "typ": 135,
+      "max": null,
+      "unit": "°C",
+      "conditions": null
+    },
+    "Thermal_shutdown_hysteresis": {
+      "parameter": "Thermal shutdown hysteresis",
+      "symbol": null,
+      "min": null,
+      "typ": 10,
+      "max": null,
+      "unit": "°C",
+      "conditions": null
     }
   },
   "drc_hints": {
@@ -610,6 +766,22 @@
     },
     "electrical": {
       "absolute_maximum_ratings": {
+        "Voltage_range_on_IN__OUT__EN_o": {
+          "parameter": "Voltage range on IN, OUT, EN or EN, ILIM, FAULT",
+          "symbol": null,
+          "min": -0.3,
+          "max": 7,
+          "unit": "V",
+          "conditions": null
+        },
+        "Voltage_range_from_IN_to_OUT": {
+          "parameter": "Voltage range from IN to OUT",
+          "symbol": null,
+          "min": -7,
+          "max": 7,
+          "unit": "V",
+          "conditions": null
+        },
         "IO": {
           "parameter": "Continuous output current",
           "symbol": "IO",
@@ -617,6 +789,22 @@
           "max": null,
           "unit": "A",
           "conditions": "Internally Limited"
+        },
+        "Continuous_FAULT_sink_current": {
+          "parameter": "Continuous FAULT sink current",
+          "symbol": null,
+          "min": 0,
+          "max": 25,
+          "unit": "mA",
+          "conditions": null
+        },
+        "ILIM_source_current": {
+          "parameter": "ILIM source current",
+          "symbol": null,
+          "min": 0,
+          "max": 1,
+          "unit": "mA",
+          "conditions": null
         },
         "TJ": {
           "parameter": "Maximum junction temperature",
@@ -635,12 +823,12 @@
           "conditions": null
         },
         "V(ESD)": {
-          "parameter": "Electrostatic discharge (IEC 61000-4-2 air-gap)",
+          "parameter": "Electrostatic discharge (HBM)",
           "symbol": "V(ESD)",
-          "min": -15000,
-          "max": 15000,
+          "min": -2000,
+          "max": 2000,
           "unit": "V",
-          "conditions": null
+          "conditions": "per ANSI/ESDA/JEDEC JS-001"
         },
         "V(ESD)_per_JEDEC_specification_JESD22": {
           "parameter": "Electrostatic discharge (CDM)",
@@ -649,6 +837,22 @@
           "max": 500,
           "unit": "V",
           "conditions": "per JEDEC specification JESD22-C101"
+        },
+        "V(ESD)__2": {
+          "parameter": "Electrostatic discharge (IEC 61000-4-2 contact)",
+          "symbol": "V(ESD)",
+          "min": -8000,
+          "max": 8000,
+          "unit": "V",
+          "conditions": null
+        },
+        "V(ESD)__3": {
+          "parameter": "Electrostatic discharge (IEC 61000-4-2 air-gap)",
+          "symbol": "V(ESD)",
+          "min": -15000,
+          "max": 15000,
+          "unit": "V",
+          "conditions": null
         }
       },
       "electrical_parameters": {
@@ -662,6 +866,15 @@
           "conditions": null
         },
         "VEN": {
+          "parameter": "Enable voltage",
+          "symbol": "VEN",
+          "min": 0,
+          "typ": null,
+          "max": 6.5,
+          "unit": "V",
+          "conditions": null
+        },
+        "VEN__2": {
           "parameter": "Enable voltage",
           "symbol": "VEN",
           "min": 0,
@@ -722,6 +935,15 @@
           "typ": null,
           "max": 10,
           "unit": "mA",
+          "conditions": null
+        },
+        "Input_de_coupling_capacitance": {
+          "parameter": "Input de-coupling capacitance",
+          "symbol": null,
+          "min": 0.1,
+          "typ": null,
+          "max": null,
+          "unit": "µF",
           "conditions": null
         },
         "TJ": {
@@ -823,6 +1045,15 @@
           "unit": "ms",
           "conditions": "VIN = 2.5 V, CL = 1 µF, RL = 100 Ω"
         },
+        "Enable_pin_turn_on_off_thresho": {
+          "parameter": "Enable pin turn on/off threshold",
+          "symbol": null,
+          "min": 0.66,
+          "typ": 1.1,
+          "max": null,
+          "unit": "V",
+          "conditions": null
+        },
         "IEN": {
           "parameter": "Input current",
           "symbol": "IEN",
@@ -922,6 +1153,24 @@
           "unit": "µs",
           "conditions": "VIN = 5 V"
         },
+        "Reverse_voltage_comparator_tri": {
+          "parameter": "Reverse-voltage comparator trip point",
+          "symbol": null,
+          "min": 95,
+          "typ": 135,
+          "max": 190,
+          "unit": "mV",
+          "conditions": null
+        },
+        "Time_from_reverse_voltage_cond": {
+          "parameter": "Time from reverse-voltage condition to MOSFET turn off",
+          "symbol": null,
+          "min": 3,
+          "typ": 5,
+          "max": 7,
+          "unit": "ms",
+          "conditions": "VIN = 5 V"
+        },
         "IIN_off": {
           "parameter": "Supply current, low-level output",
           "symbol": "IIN_off",
@@ -967,6 +1216,15 @@
           "unit": "V",
           "conditions": "VIN rising"
         },
+        "UVLO_Hysteresis__IN": {
+          "parameter": "UVLO Hysteresis, IN",
+          "symbol": null,
+          "min": null,
+          "typ": 25,
+          "max": null,
+          "unit": "mV",
+          "conditions": "TJ = 25 °C"
+        },
         "VOL": {
           "parameter": "Output low voltage, FAULT",
           "symbol": "VOL",
@@ -975,6 +1233,60 @@
           "max": 180,
           "unit": "mV",
           "conditions": "I/FAULT = 1 mA"
+        },
+        "Off_state_leakage": {
+          "parameter": "Off-state leakage",
+          "symbol": null,
+          "min": null,
+          "typ": null,
+          "max": 1,
+          "unit": "µA",
+          "conditions": "V/FAULT = 6.5 V"
+        },
+        "FAULT_deglitch__overcurrent": {
+          "parameter": "FAULT deglitch (overcurrent)",
+          "symbol": null,
+          "min": 5,
+          "typ": 7.5,
+          "max": 10,
+          "unit": "ms",
+          "conditions": "FAULT assertion or de-assertion due to overcurrent condition"
+        },
+        "FAULT_deglitch__reverse_voltag": {
+          "parameter": "FAULT deglitch (reverse-voltage)",
+          "symbol": null,
+          "min": 2,
+          "typ": 4,
+          "max": 6,
+          "unit": "ms",
+          "conditions": "FAULT assertion or de-assertion due to reverse-voltage condition"
+        },
+        "Thermal_shutdown_threshold": {
+          "parameter": "Thermal shutdown threshold",
+          "symbol": null,
+          "min": null,
+          "typ": 155,
+          "max": null,
+          "unit": "°C",
+          "conditions": null
+        },
+        "Thermal_shutdown_threshold_in": {
+          "parameter": "Thermal shutdown threshold in current-limit",
+          "symbol": null,
+          "min": null,
+          "typ": 135,
+          "max": null,
+          "unit": "°C",
+          "conditions": null
+        },
+        "Thermal_shutdown_hysteresis": {
+          "parameter": "Thermal shutdown hysteresis",
+          "symbol": null,
+          "min": null,
+          "typ": 10,
+          "max": null,
+          "unit": "°C",
+          "conditions": null
         }
       },
       "drc_hints": {

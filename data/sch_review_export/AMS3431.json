@@ -96,6 +96,22 @@
       "unit": "°C",
       "conditions": null
     },
+    "Storage_Temperature": {
+      "parameter": "Storage Temperature",
+      "symbol": null,
+      "min": -65,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    },
+    "Lead_Temperature": {
+      "parameter": "Lead Temperature",
+      "symbol": null,
+      "min": null,
+      "max": 265,
+      "unit": "°C",
+      "conditions": "Soldering, 25sec."
+    },
     "PD": {
       "parameter": "Internal Power Dissipation",
       "symbol": "PD",
@@ -142,11 +158,128 @@
     "VREF_IZ_10_mA__TA____25_C": {
       "parameter": "Reference Voltage",
       "symbol": "VREF",
+      "min": 2.483,
+      "typ": 2.495,
+      "max": 2.507,
+      "unit": "V",
+      "conditions": "IZ=10 mA, TA = +25°C"
+    },
+    "VREF_IZ_10_mA__TA____25_C__2": {
+      "parameter": "Reference Voltage",
+      "symbol": "VREF",
       "min": 2.47,
       "typ": 2.495,
       "max": 2.52,
       "unit": "V",
       "conditions": "IZ=10 mA, TA = +25°C"
+    },
+    "Deviation_of_Reference_Input_V": {
+      "parameter": "Deviation of Reference Input Voltage over Temperature",
+      "symbol": null,
+      "min": null,
+      "typ": 8.0,
+      "max": 15,
+      "unit": "mV",
+      "conditions": "VZ = VREF (circuit 1), TA = +25°C to +85°C"
+    },
+    "Deviation_of_Reference_Input_V_VZ___VREF__circuit_1___TA____4": {
+      "parameter": "Deviation of Reference Input Voltage over Temperature",
+      "symbol": null,
+      "min": null,
+      "typ": 8.0,
+      "max": 15,
+      "unit": "mV",
+      "conditions": "VZ = VREF (circuit 1), TA = -40°C to +25°C"
+    },
+    "Deviation_of_Reference_Input_V_VZ___VREF__circuit_1___TA____2": {
+      "parameter": "Deviation of Reference Input Voltage over Temperature",
+      "symbol": null,
+      "min": null,
+      "typ": 8.0,
+      "max": 15,
+      "unit": "mV",
+      "conditions": "VZ = VREF (circuit 1), TA = +25°C to +85°C"
+    },
+    "Deviation_of_Reference_Input_V_VZ___VREF__circuit_1___TA____4__2": {
+      "parameter": "Deviation of Reference Input Voltage over Temperature",
+      "symbol": null,
+      "min": null,
+      "typ": 8.0,
+      "max": 15,
+      "unit": "mV",
+      "conditions": "VZ = VREF (circuit 1), TA = -40°C to +25°C"
+    },
+    "Deviation_of_Reference_Input_V_VZ___VREF__circuit_1___TA____2__2": {
+      "parameter": "Deviation of Reference Input Voltage over Temperature",
+      "symbol": null,
+      "min": null,
+      "typ": 8.0,
+      "max": 15,
+      "unit": "mV",
+      "conditions": "VZ = VREF (circuit 1), TA = +25°C to +85°C"
+    },
+    "Deviation_of_Reference_Input_V_VZ___VREF__circuit_1___TA____4__3": {
+      "parameter": "Deviation of Reference Input Voltage over Temperature",
+      "symbol": null,
+      "min": null,
+      "typ": 8.0,
+      "max": 15,
+      "unit": "mV",
+      "conditions": "VZ = VREF (circuit 1), TA = -40°C to +25°C"
+    },
+    "Ratio_of_Change_in_Reference_V": {
+      "parameter": "Ratio of Change in Reference Voltage to Cathode Voltage",
+      "symbol": null,
+      "min": null,
+      "typ": -0.5,
+      "max": -2.7,
+      "unit": "mV/V",
+      "conditions": "VZ from VREF to 10V"
+    },
+    "Ratio_of_Change_in_Reference_V_VZ_from_VREF_to_36V": {
+      "parameter": "Ratio of Change in Reference Voltage to Cathode Voltage",
+      "symbol": null,
+      "min": null,
+      "typ": -1.0,
+      "max": -2.0,
+      "unit": "mV/V",
+      "conditions": "VZ from VREF to 36V"
+    },
+    "Ratio_of_Change_in_Reference_V_VZ_from_VREF_to_10V": {
+      "parameter": "Ratio of Change in Reference Voltage to Cathode Voltage",
+      "symbol": null,
+      "min": null,
+      "typ": -0.5,
+      "max": -2.7,
+      "unit": "mV/V",
+      "conditions": "VZ from VREF to 10V"
+    },
+    "Ratio_of_Change_in_Reference_V_VZ_from_VREF_to_36V__2": {
+      "parameter": "Ratio of Change in Reference Voltage to Cathode Voltage",
+      "symbol": null,
+      "min": null,
+      "typ": -1.0,
+      "max": -2.0,
+      "unit": "mV/V",
+      "conditions": "VZ from VREF to 36V"
+    },
+    "Ratio_of_Change_in_Reference_V_VZ_from_VREF_to_10V__2": {
+      "parameter": "Ratio of Change in Reference Voltage to Cathode Voltage",
+      "symbol": null,
+      "min": null,
+      "typ": -0.5,
+      "max": -2.7,
+      "unit": "mV/V",
+      "conditions": "VZ from VREF to 10V"
+    },
+    "Ratio_of_Change_in_Reference_V_VZ_from_VREF_to_36V__3": {
+      "parameter": "Ratio of Change in Reference Voltage to Cathode Voltage",
+      "symbol": null,
+      "min": null,
+      "typ": -1.0,
+      "max": -2.0,
+      "unit": "mV/V",
+      "conditions": "VZ from VREF to 36V"
     },
     "IREF": {
       "parameter": "Reference Input Current",
@@ -166,6 +299,42 @@
       "unit": "µA",
       "conditions": "R1 = 10kΩ, R2 = ∞ (test circuit 2)"
     },
+    "IREF_R1___10k___R2______test_circui__2": {
+      "parameter": "Reference Input Current",
+      "symbol": "IREF",
+      "min": null,
+      "typ": 0.5,
+      "max": 4.0,
+      "unit": "µA",
+      "conditions": "R1 = 10kΩ, R2 = ∞ (test circuit 2)"
+    },
+    "Reference_Input_Current_Deviat": {
+      "parameter": "Reference Input Current Deviation over Temperature",
+      "symbol": null,
+      "min": null,
+      "typ": 0.4,
+      "max": 1.2,
+      "unit": "µA",
+      "conditions": "R1 = 10kΩ, R2 = ∞, TA = Full Range (test circuit 2)"
+    },
+    "Reference_Input_Current_Deviat_R1___10k___R2______TA___Full_R": {
+      "parameter": "Reference Input Current Deviation over Temperature",
+      "symbol": null,
+      "min": null,
+      "typ": 0.4,
+      "max": 1.2,
+      "unit": "µA",
+      "conditions": "R1 = 10kΩ, R2 = ∞, TA = Full Range (test circuit 2)"
+    },
+    "Reference_Input_Current_Deviat_R1___10k___R2______TA___Full_R__2": {
+      "parameter": "Reference Input Current Deviation over Temperature",
+      "symbol": null,
+      "min": null,
+      "typ": 0.4,
+      "max": 1.2,
+      "unit": "µA",
+      "conditions": "R1 = 10kΩ, R2 = ∞, TA = Full Range (test circuit 2)"
+    },
     "IZ(off)": {
       "parameter": "Off State Cathode Current",
       "symbol": "IZ(off)",
@@ -176,6 +345,15 @@
       "conditions": "VZ = 36V, VREF = 0V (test circuit 3)"
     },
     "IZ(off)_VZ___36V__VREF___0V__test_circ": {
+      "parameter": "Off State Cathode Current",
+      "symbol": "IZ(off)",
+      "min": null,
+      "typ": 0.04,
+      "max": 0.5,
+      "unit": "µA",
+      "conditions": "VZ = 36V, VREF = 0V (test circuit 3)"
+    },
+    "IZ(off)_VZ___36V__VREF___0V__test_circ__2": {
       "parameter": "Off State Cathode Current",
       "symbol": "IZ(off)",
       "min": null,
@@ -202,6 +380,15 @@
       "unit": "Ω",
       "conditions": "f < 1KHz, VZ = VREF, IZ = 100µA to 100mA (test circuit 1)"
     },
+    "|ZKA|_f___1KHz__VZ___VREF__IZ___100__2": {
+      "parameter": "Dynamic Output Impedance",
+      "symbol": "|ZKA|",
+      "min": null,
+      "typ": 0.25,
+      "max": 0.5,
+      "unit": "Ω",
+      "conditions": "f < 1KHz, VZ = VREF, IZ = 100µA to 100mA (test circuit 1)"
+    },
     "IZ(min)": {
       "parameter": "Minimum Operating Current",
       "symbol": "IZ(min)",
@@ -212,6 +399,15 @@
       "conditions": "VZ = VREF (test circuit 1)"
     },
     "IZ(min)_VZ___VREF__test_circuit_1": {
+      "parameter": "Minimum Operating Current",
+      "symbol": "IZ(min)",
+      "min": null,
+      "typ": 100,
+      "max": 250,
+      "unit": "µA",
+      "conditions": "VZ = VREF (test circuit 1)"
+    },
+    "IZ(min)_VZ___VREF__test_circuit_1__2": {
       "parameter": "Minimum Operating Current",
       "symbol": "IZ(min)",
       "min": null,
@@ -366,6 +562,22 @@
           "unit": "°C",
           "conditions": null
         },
+        "Storage_Temperature": {
+          "parameter": "Storage Temperature",
+          "symbol": null,
+          "min": -65,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        },
+        "Lead_Temperature": {
+          "parameter": "Lead Temperature",
+          "symbol": null,
+          "min": null,
+          "max": 265,
+          "unit": "°C",
+          "conditions": "Soldering, 25sec."
+        },
         "PD": {
           "parameter": "Internal Power Dissipation",
           "symbol": "PD",
@@ -412,11 +624,128 @@
         "VREF_IZ_10_mA__TA____25_C": {
           "parameter": "Reference Voltage",
           "symbol": "VREF",
+          "min": 2.483,
+          "typ": 2.495,
+          "max": 2.507,
+          "unit": "V",
+          "conditions": "IZ=10 mA, TA = +25°C"
+        },
+        "VREF_IZ_10_mA__TA____25_C__2": {
+          "parameter": "Reference Voltage",
+          "symbol": "VREF",
           "min": 2.47,
           "typ": 2.495,
           "max": 2.52,
           "unit": "V",
           "conditions": "IZ=10 mA, TA = +25°C"
+        },
+        "Deviation_of_Reference_Input_V": {
+          "parameter": "Deviation of Reference Input Voltage over Temperature",
+          "symbol": null,
+          "min": null,
+          "typ": 8.0,
+          "max": 15,
+          "unit": "mV",
+          "conditions": "VZ = VREF (circuit 1), TA = +25°C to +85°C"
+        },
+        "Deviation_of_Reference_Input_V_VZ___VREF__circuit_1___TA____4": {
+          "parameter": "Deviation of Reference Input Voltage over Temperature",
+          "symbol": null,
+          "min": null,
+          "typ": 8.0,
+          "max": 15,
+          "unit": "mV",
+          "conditions": "VZ = VREF (circuit 1), TA = -40°C to +25°C"
+        },
+        "Deviation_of_Reference_Input_V_VZ___VREF__circuit_1___TA____2": {
+          "parameter": "Deviation of Reference Input Voltage over Temperature",
+          "symbol": null,
+          "min": null,
+          "typ": 8.0,
+          "max": 15,
+          "unit": "mV",
+          "conditions": "VZ = VREF (circuit 1), TA = +25°C to +85°C"
+        },
+        "Deviation_of_Reference_Input_V_VZ___VREF__circuit_1___TA____4__2": {
+          "parameter": "Deviation of Reference Input Voltage over Temperature",
+          "symbol": null,
+          "min": null,
+          "typ": 8.0,
+          "max": 15,
+          "unit": "mV",
+          "conditions": "VZ = VREF (circuit 1), TA = -40°C to +25°C"
+        },
+        "Deviation_of_Reference_Input_V_VZ___VREF__circuit_1___TA____2__2": {
+          "parameter": "Deviation of Reference Input Voltage over Temperature",
+          "symbol": null,
+          "min": null,
+          "typ": 8.0,
+          "max": 15,
+          "unit": "mV",
+          "conditions": "VZ = VREF (circuit 1), TA = +25°C to +85°C"
+        },
+        "Deviation_of_Reference_Input_V_VZ___VREF__circuit_1___TA____4__3": {
+          "parameter": "Deviation of Reference Input Voltage over Temperature",
+          "symbol": null,
+          "min": null,
+          "typ": 8.0,
+          "max": 15,
+          "unit": "mV",
+          "conditions": "VZ = VREF (circuit 1), TA = -40°C to +25°C"
+        },
+        "Ratio_of_Change_in_Reference_V": {
+          "parameter": "Ratio of Change in Reference Voltage to Cathode Voltage",
+          "symbol": null,
+          "min": null,
+          "typ": -0.5,
+          "max": -2.7,
+          "unit": "mV/V",
+          "conditions": "VZ from VREF to 10V"
+        },
+        "Ratio_of_Change_in_Reference_V_VZ_from_VREF_to_36V": {
+          "parameter": "Ratio of Change in Reference Voltage to Cathode Voltage",
+          "symbol": null,
+          "min": null,
+          "typ": -1.0,
+          "max": -2.0,
+          "unit": "mV/V",
+          "conditions": "VZ from VREF to 36V"
+        },
+        "Ratio_of_Change_in_Reference_V_VZ_from_VREF_to_10V": {
+          "parameter": "Ratio of Change in Reference Voltage to Cathode Voltage",
+          "symbol": null,
+          "min": null,
+          "typ": -0.5,
+          "max": -2.7,
+          "unit": "mV/V",
+          "conditions": "VZ from VREF to 10V"
+        },
+        "Ratio_of_Change_in_Reference_V_VZ_from_VREF_to_36V__2": {
+          "parameter": "Ratio of Change in Reference Voltage to Cathode Voltage",
+          "symbol": null,
+          "min": null,
+          "typ": -1.0,
+          "max": -2.0,
+          "unit": "mV/V",
+          "conditions": "VZ from VREF to 36V"
+        },
+        "Ratio_of_Change_in_Reference_V_VZ_from_VREF_to_10V__2": {
+          "parameter": "Ratio of Change in Reference Voltage to Cathode Voltage",
+          "symbol": null,
+          "min": null,
+          "typ": -0.5,
+          "max": -2.7,
+          "unit": "mV/V",
+          "conditions": "VZ from VREF to 10V"
+        },
+        "Ratio_of_Change_in_Reference_V_VZ_from_VREF_to_36V__3": {
+          "parameter": "Ratio of Change in Reference Voltage to Cathode Voltage",
+          "symbol": null,
+          "min": null,
+          "typ": -1.0,
+          "max": -2.0,
+          "unit": "mV/V",
+          "conditions": "VZ from VREF to 36V"
         },
         "IREF": {
           "parameter": "Reference Input Current",
@@ -436,6 +765,42 @@
           "unit": "µA",
           "conditions": "R1 = 10kΩ, R2 = ∞ (test circuit 2)"
         },
+        "IREF_R1___10k___R2______test_circui__2": {
+          "parameter": "Reference Input Current",
+          "symbol": "IREF",
+          "min": null,
+          "typ": 0.5,
+          "max": 4.0,
+          "unit": "µA",
+          "conditions": "R1 = 10kΩ, R2 = ∞ (test circuit 2)"
+        },
+        "Reference_Input_Current_Deviat": {
+          "parameter": "Reference Input Current Deviation over Temperature",
+          "symbol": null,
+          "min": null,
+          "typ": 0.4,
+          "max": 1.2,
+          "unit": "µA",
+          "conditions": "R1 = 10kΩ, R2 = ∞, TA = Full Range (test circuit 2)"
+        },
+        "Reference_Input_Current_Deviat_R1___10k___R2______TA___Full_R": {
+          "parameter": "Reference Input Current Deviation over Temperature",
+          "symbol": null,
+          "min": null,
+          "typ": 0.4,
+          "max": 1.2,
+          "unit": "µA",
+          "conditions": "R1 = 10kΩ, R2 = ∞, TA = Full Range (test circuit 2)"
+        },
+        "Reference_Input_Current_Deviat_R1___10k___R2______TA___Full_R__2": {
+          "parameter": "Reference Input Current Deviation over Temperature",
+          "symbol": null,
+          "min": null,
+          "typ": 0.4,
+          "max": 1.2,
+          "unit": "µA",
+          "conditions": "R1 = 10kΩ, R2 = ∞, TA = Full Range (test circuit 2)"
+        },
         "IZ(off)": {
           "parameter": "Off State Cathode Current",
           "symbol": "IZ(off)",
@@ -446,6 +811,15 @@
           "conditions": "VZ = 36V, VREF = 0V (test circuit 3)"
         },
         "IZ(off)_VZ___36V__VREF___0V__test_circ": {
+          "parameter": "Off State Cathode Current",
+          "symbol": "IZ(off)",
+          "min": null,
+          "typ": 0.04,
+          "max": 0.5,
+          "unit": "µA",
+          "conditions": "VZ = 36V, VREF = 0V (test circuit 3)"
+        },
+        "IZ(off)_VZ___36V__VREF___0V__test_circ__2": {
           "parameter": "Off State Cathode Current",
           "symbol": "IZ(off)",
           "min": null,
@@ -472,6 +846,15 @@
           "unit": "Ω",
           "conditions": "f < 1KHz, VZ = VREF, IZ = 100µA to 100mA (test circuit 1)"
         },
+        "|ZKA|_f___1KHz__VZ___VREF__IZ___100__2": {
+          "parameter": "Dynamic Output Impedance",
+          "symbol": "|ZKA|",
+          "min": null,
+          "typ": 0.25,
+          "max": 0.5,
+          "unit": "Ω",
+          "conditions": "f < 1KHz, VZ = VREF, IZ = 100µA to 100mA (test circuit 1)"
+        },
         "IZ(min)": {
           "parameter": "Minimum Operating Current",
           "symbol": "IZ(min)",
@@ -482,6 +865,15 @@
           "conditions": "VZ = VREF (test circuit 1)"
         },
         "IZ(min)_VZ___VREF__test_circuit_1": {
+          "parameter": "Minimum Operating Current",
+          "symbol": "IZ(min)",
+          "min": null,
+          "typ": 100,
+          "max": 250,
+          "unit": "µA",
+          "conditions": "VZ = VREF (test circuit 1)"
+        },
+        "IZ(min)_VZ___VREF__test_circuit_1__2": {
           "parameter": "Minimum Operating Current",
           "symbol": "IZ(min)",
           "min": null,

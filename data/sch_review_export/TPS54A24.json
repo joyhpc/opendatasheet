@@ -201,6 +201,14 @@
       "conditions": null
     },
     "BOOT": {
+      "parameter": "Bootstrap voltage",
+      "symbol": "BOOT",
+      "min": -0.3,
+      "max": 27,
+      "unit": "V",
+      "conditions": null
+    },
+    "BOOT__2": {
       "parameter": "Bootstrap voltage (10 ns transient)",
       "symbol": "BOOT",
       "min": -0.3,
@@ -217,10 +225,26 @@
       "conditions": null
     },
     "SW": {
+      "parameter": "Switch node voltage",
+      "symbol": "SW",
+      "min": -1,
+      "max": 20,
+      "unit": "V",
+      "conditions": null
+    },
+    "SW__2": {
       "parameter": "Switch node voltage (10 ns transient)",
       "symbol": "SW",
       "min": -3,
       "max": 23,
+      "unit": "V",
+      "conditions": null
+    },
+    "Control_pin_voltage": {
+      "parameter": "Control pin voltage",
+      "symbol": null,
+      "min": -0.3,
+      "max": 6.5,
       "unit": "V",
       "conditions": null
     },
@@ -242,6 +266,105 @@
     }
   },
   "electrical_parameters": {
+    "VIN_undervoltage_lockout_risin": {
+      "parameter": "VIN undervoltage lockout rising",
+      "symbol": null,
+      "min": null,
+      "typ": 4.1,
+      "max": 4.3,
+      "unit": "V",
+      "conditions": "V(VIN) rising"
+    },
+    "VIN_undervoltage_lockout_falli": {
+      "parameter": "VIN undervoltage lockout falling",
+      "symbol": null,
+      "min": 3.7,
+      "typ": 3.9,
+      "max": null,
+      "unit": "V",
+      "conditions": "V(VIN) falling"
+    },
+    "VIN_undervoltage_lockout_hyste": {
+      "parameter": "VIN undervoltage lockout hysteresis",
+      "symbol": null,
+      "min": null,
+      "typ": 0.2,
+      "max": null,
+      "unit": "V",
+      "conditions": "Hysteresis VIN voltage"
+    },
+    "Operating_non_switching_supply": {
+      "parameter": "Operating non-switching supply current",
+      "symbol": null,
+      "min": null,
+      "typ": 580,
+      "max": 800,
+      "unit": "µA",
+      "conditions": "V(EN) = 5 V, V(FB) = 1.5 V"
+    },
+    "Shutdown_supply_current": {
+      "parameter": "Shutdown supply current",
+      "symbol": null,
+      "min": null,
+      "typ": 3,
+      "max": 11,
+      "unit": "µA",
+      "conditions": "V(EN) = 0 V"
+    },
+    "EN_threshold_rising": {
+      "parameter": "EN threshold rising",
+      "symbol": null,
+      "min": null,
+      "typ": 1.2,
+      "max": 1.26,
+      "unit": "V",
+      "conditions": "V(EN) rising"
+    },
+    "EN_threshold_falling": {
+      "parameter": "EN threshold falling",
+      "symbol": null,
+      "min": 1.1,
+      "typ": 1.15,
+      "max": null,
+      "unit": "V",
+      "conditions": "V(EN) falling"
+    },
+    "EN_pin_threshold_voltage_hyste": {
+      "parameter": "EN pin threshold voltage hysteresis",
+      "symbol": null,
+      "min": null,
+      "typ": 50,
+      "max": null,
+      "unit": "mV",
+      "conditions": null
+    },
+    "EN_pin_sourcing_current": {
+      "parameter": "EN pin sourcing current",
+      "symbol": null,
+      "min": null,
+      "typ": 1.2,
+      "max": null,
+      "unit": "µA",
+      "conditions": "V(EN) = 1.1 V"
+    },
+    "EN_pin_sourcing_current_V_EN____1_3_V": {
+      "parameter": "EN pin sourcing current",
+      "symbol": null,
+      "min": null,
+      "typ": 4.8,
+      "max": null,
+      "unit": "µA",
+      "conditions": "V(EN) = 1.3 V"
+    },
+    "EN_pin_hysteresis_current": {
+      "parameter": "EN pin hysteresis current",
+      "symbol": null,
+      "min": null,
+      "typ": 3.6,
+      "max": null,
+      "unit": "µA",
+      "conditions": null
+    },
     "VFB": {
       "parameter": "Regulated FB voltage",
       "symbol": "VFB",
@@ -260,6 +383,141 @@
       "unit": "mV",
       "conditions": "TJ = -40°C to 150°C"
     },
+    "Error_amplifier_transconductan": {
+      "parameter": "Error amplifier transconductance",
+      "symbol": null,
+      "min": null,
+      "typ": 1100,
+      "max": null,
+      "unit": "µA/V",
+      "conditions": "-2 µA < I(COMP) < 2 µA, V(COMP) = 1 V"
+    },
+    "Error_amplifier_DC_gain": {
+      "parameter": "Error amplifier DC gain",
+      "symbol": null,
+      "min": null,
+      "typ": 80,
+      "max": null,
+      "unit": "dB",
+      "conditions": null
+    },
+    "Error_amplifier_source_current": {
+      "parameter": "Error amplifier source current",
+      "symbol": null,
+      "min": null,
+      "typ": 100,
+      "max": null,
+      "unit": "µA",
+      "conditions": "V(FB) = 0 V"
+    },
+    "Error_amplifier_sink_current": {
+      "parameter": "Error amplifier sink current",
+      "symbol": null,
+      "min": null,
+      "typ": -100,
+      "max": null,
+      "unit": "µA",
+      "conditions": "V(FB) = 2 V"
+    },
+    "Power_stage_transconductance": {
+      "parameter": "Power stage transconductance",
+      "symbol": null,
+      "min": null,
+      "typ": 17,
+      "max": null,
+      "unit": "A/V",
+      "conditions": null
+    },
+    "Soft_start_current": {
+      "parameter": "Soft start current",
+      "symbol": null,
+      "min": null,
+      "typ": 5,
+      "max": null,
+      "unit": "µA",
+      "conditions": null
+    },
+    "SS_TRK_to_FB_matching": {
+      "parameter": "SS/TRK to FB matching",
+      "symbol": null,
+      "min": null,
+      "typ": 30,
+      "max": null,
+      "unit": "mV",
+      "conditions": "V(SS/TRK) = 0.4 V"
+    },
+    "High_side_switch_resistance": {
+      "parameter": "High-side switch resistance",
+      "symbol": null,
+      "min": null,
+      "typ": 21,
+      "max": null,
+      "unit": "mΩ",
+      "conditions": "TA = 25°C, V(VIN) = 12 V"
+    },
+    "High_side_switch_resistance_TA___25_C__V_VIN____4_5_V__V_B": {
+      "parameter": "High-side switch resistance",
+      "symbol": null,
+      "min": null,
+      "typ": 23,
+      "max": null,
+      "unit": "mΩ",
+      "conditions": "TA = 25°C, V(VIN) = 4.5 V, V(BOOT-SW) = 4.5 V"
+    },
+    "Low_side_switch_resistance": {
+      "parameter": "Low-side switch resistance",
+      "symbol": null,
+      "min": null,
+      "typ": 8,
+      "max": null,
+      "unit": "mΩ",
+      "conditions": "TA = 25°C, V(VIN) = 12 V"
+    },
+    "Low_side_switch_resistance_TA___25_C__V_VIN____4_5_V": {
+      "parameter": "Low-side switch resistance",
+      "symbol": null,
+      "min": null,
+      "typ": 9,
+      "max": null,
+      "unit": "mΩ",
+      "conditions": "TA = 25°C, V(VIN) = 4.5 V"
+    },
+    "BOOT_UVLO_Falling": {
+      "parameter": "BOOT UVLO Falling",
+      "symbol": null,
+      "min": null,
+      "typ": 2.2,
+      "max": 2.6,
+      "unit": "V",
+      "conditions": null
+    },
+    "High_side_peak_current_limit": {
+      "parameter": "High-side peak current limit",
+      "symbol": null,
+      "min": 13.4,
+      "typ": 14.6,
+      "max": 15.8,
+      "unit": "A",
+      "conditions": "V(VIN) = 12 V, TJ = 25°C"
+    },
+    "Low_side_sinking_current_limit": {
+      "parameter": "Low-side sinking current limit",
+      "symbol": null,
+      "min": null,
+      "typ": -3.4,
+      "max": null,
+      "unit": "A",
+      "conditions": "V(VIN) = 12 V"
+    },
+    "Low_side_sourcing_current_limi": {
+      "parameter": "Low-side sourcing current limit",
+      "symbol": null,
+      "min": 10,
+      "typ": 12.9,
+      "max": 14.6,
+      "unit": "A",
+      "conditions": "V(VIN) = 12 V"
+    },
     "VIH": {
       "parameter": "Logic high input voltage",
       "symbol": "VIH",
@@ -277,6 +535,69 @@
       "max": 0.8,
       "unit": "V",
       "conditions": "RT/CLK pin"
+    },
+    "Power_good_threshold_rising_fa": {
+      "parameter": "Power good threshold rising fault",
+      "symbol": null,
+      "min": 104,
+      "typ": 108,
+      "max": null,
+      "unit": "%",
+      "conditions": "V(FB) rising (fault)"
+    },
+    "Power_good_threshold_falling_g": {
+      "parameter": "Power good threshold falling good",
+      "symbol": null,
+      "min": null,
+      "typ": 106,
+      "max": null,
+      "unit": "%",
+      "conditions": "V(FB) falling (good)"
+    },
+    "Power_good_threshold_rising_go": {
+      "parameter": "Power good threshold rising good",
+      "symbol": null,
+      "min": null,
+      "typ": 91,
+      "max": null,
+      "unit": "%",
+      "conditions": "V(FB) rising (good)"
+    },
+    "Power_good_threshold_falling_f": {
+      "parameter": "Power good threshold falling fault",
+      "symbol": null,
+      "min": null,
+      "typ": 89,
+      "max": 95,
+      "unit": "%",
+      "conditions": "V(FB) falling (fault)"
+    },
+    "Leakage_current_into_PGOOD_pin": {
+      "parameter": "Leakage current into PGOOD pin",
+      "symbol": null,
+      "min": null,
+      "typ": 5,
+      "max": null,
+      "unit": "nA",
+      "conditions": "V(PGOOD) = 5 V"
+    },
+    "PGOOD_voltage_when_pulled_low": {
+      "parameter": "PGOOD voltage when pulled low",
+      "symbol": null,
+      "min": null,
+      "typ": 0.18,
+      "max": 0.22,
+      "unit": "V",
+      "conditions": "I(PGOOD) = 2 mA"
+    },
+    "Minimum_VIN_for_valid_PGOOD_ou": {
+      "parameter": "Minimum VIN for valid PGOOD output",
+      "symbol": null,
+      "min": null,
+      "typ": 0.9,
+      "max": 1,
+      "unit": "V",
+      "conditions": "V(PGOOD) < 0.5 V, I(PGOOD) = 2.5 mA"
     },
     "TTRIP": {
       "parameter": "Thermal protection trip point",
@@ -521,6 +842,14 @@
           "conditions": null
         },
         "BOOT": {
+          "parameter": "Bootstrap voltage",
+          "symbol": "BOOT",
+          "min": -0.3,
+          "max": 27,
+          "unit": "V",
+          "conditions": null
+        },
+        "BOOT__2": {
           "parameter": "Bootstrap voltage (10 ns transient)",
           "symbol": "BOOT",
           "min": -0.3,
@@ -537,10 +866,26 @@
           "conditions": null
         },
         "SW": {
+          "parameter": "Switch node voltage",
+          "symbol": "SW",
+          "min": -1,
+          "max": 20,
+          "unit": "V",
+          "conditions": null
+        },
+        "SW__2": {
           "parameter": "Switch node voltage (10 ns transient)",
           "symbol": "SW",
           "min": -3,
           "max": 23,
+          "unit": "V",
+          "conditions": null
+        },
+        "Control_pin_voltage": {
+          "parameter": "Control pin voltage",
+          "symbol": null,
+          "min": -0.3,
+          "max": 6.5,
           "unit": "V",
           "conditions": null
         },
@@ -562,6 +907,105 @@
         }
       },
       "electrical_parameters": {
+        "VIN_undervoltage_lockout_risin": {
+          "parameter": "VIN undervoltage lockout rising",
+          "symbol": null,
+          "min": null,
+          "typ": 4.1,
+          "max": 4.3,
+          "unit": "V",
+          "conditions": "V(VIN) rising"
+        },
+        "VIN_undervoltage_lockout_falli": {
+          "parameter": "VIN undervoltage lockout falling",
+          "symbol": null,
+          "min": 3.7,
+          "typ": 3.9,
+          "max": null,
+          "unit": "V",
+          "conditions": "V(VIN) falling"
+        },
+        "VIN_undervoltage_lockout_hyste": {
+          "parameter": "VIN undervoltage lockout hysteresis",
+          "symbol": null,
+          "min": null,
+          "typ": 0.2,
+          "max": null,
+          "unit": "V",
+          "conditions": "Hysteresis VIN voltage"
+        },
+        "Operating_non_switching_supply": {
+          "parameter": "Operating non-switching supply current",
+          "symbol": null,
+          "min": null,
+          "typ": 580,
+          "max": 800,
+          "unit": "µA",
+          "conditions": "V(EN) = 5 V, V(FB) = 1.5 V"
+        },
+        "Shutdown_supply_current": {
+          "parameter": "Shutdown supply current",
+          "symbol": null,
+          "min": null,
+          "typ": 3,
+          "max": 11,
+          "unit": "µA",
+          "conditions": "V(EN) = 0 V"
+        },
+        "EN_threshold_rising": {
+          "parameter": "EN threshold rising",
+          "symbol": null,
+          "min": null,
+          "typ": 1.2,
+          "max": 1.26,
+          "unit": "V",
+          "conditions": "V(EN) rising"
+        },
+        "EN_threshold_falling": {
+          "parameter": "EN threshold falling",
+          "symbol": null,
+          "min": 1.1,
+          "typ": 1.15,
+          "max": null,
+          "unit": "V",
+          "conditions": "V(EN) falling"
+        },
+        "EN_pin_threshold_voltage_hyste": {
+          "parameter": "EN pin threshold voltage hysteresis",
+          "symbol": null,
+          "min": null,
+          "typ": 50,
+          "max": null,
+          "unit": "mV",
+          "conditions": null
+        },
+        "EN_pin_sourcing_current": {
+          "parameter": "EN pin sourcing current",
+          "symbol": null,
+          "min": null,
+          "typ": 1.2,
+          "max": null,
+          "unit": "µA",
+          "conditions": "V(EN) = 1.1 V"
+        },
+        "EN_pin_sourcing_current_V_EN____1_3_V": {
+          "parameter": "EN pin sourcing current",
+          "symbol": null,
+          "min": null,
+          "typ": 4.8,
+          "max": null,
+          "unit": "µA",
+          "conditions": "V(EN) = 1.3 V"
+        },
+        "EN_pin_hysteresis_current": {
+          "parameter": "EN pin hysteresis current",
+          "symbol": null,
+          "min": null,
+          "typ": 3.6,
+          "max": null,
+          "unit": "µA",
+          "conditions": null
+        },
         "VFB": {
           "parameter": "Regulated FB voltage",
           "symbol": "VFB",
@@ -580,6 +1024,141 @@
           "unit": "mV",
           "conditions": "TJ = -40°C to 150°C"
         },
+        "Error_amplifier_transconductan": {
+          "parameter": "Error amplifier transconductance",
+          "symbol": null,
+          "min": null,
+          "typ": 1100,
+          "max": null,
+          "unit": "µA/V",
+          "conditions": "-2 µA < I(COMP) < 2 µA, V(COMP) = 1 V"
+        },
+        "Error_amplifier_DC_gain": {
+          "parameter": "Error amplifier DC gain",
+          "symbol": null,
+          "min": null,
+          "typ": 80,
+          "max": null,
+          "unit": "dB",
+          "conditions": null
+        },
+        "Error_amplifier_source_current": {
+          "parameter": "Error amplifier source current",
+          "symbol": null,
+          "min": null,
+          "typ": 100,
+          "max": null,
+          "unit": "µA",
+          "conditions": "V(FB) = 0 V"
+        },
+        "Error_amplifier_sink_current": {
+          "parameter": "Error amplifier sink current",
+          "symbol": null,
+          "min": null,
+          "typ": -100,
+          "max": null,
+          "unit": "µA",
+          "conditions": "V(FB) = 2 V"
+        },
+        "Power_stage_transconductance": {
+          "parameter": "Power stage transconductance",
+          "symbol": null,
+          "min": null,
+          "typ": 17,
+          "max": null,
+          "unit": "A/V",
+          "conditions": null
+        },
+        "Soft_start_current": {
+          "parameter": "Soft start current",
+          "symbol": null,
+          "min": null,
+          "typ": 5,
+          "max": null,
+          "unit": "µA",
+          "conditions": null
+        },
+        "SS_TRK_to_FB_matching": {
+          "parameter": "SS/TRK to FB matching",
+          "symbol": null,
+          "min": null,
+          "typ": 30,
+          "max": null,
+          "unit": "mV",
+          "conditions": "V(SS/TRK) = 0.4 V"
+        },
+        "High_side_switch_resistance": {
+          "parameter": "High-side switch resistance",
+          "symbol": null,
+          "min": null,
+          "typ": 21,
+          "max": null,
+          "unit": "mΩ",
+          "conditions": "TA = 25°C, V(VIN) = 12 V"
+        },
+        "High_side_switch_resistance_TA___25_C__V_VIN____4_5_V__V_B": {
+          "parameter": "High-side switch resistance",
+          "symbol": null,
+          "min": null,
+          "typ": 23,
+          "max": null,
+          "unit": "mΩ",
+          "conditions": "TA = 25°C, V(VIN) = 4.5 V, V(BOOT-SW) = 4.5 V"
+        },
+        "Low_side_switch_resistance": {
+          "parameter": "Low-side switch resistance",
+          "symbol": null,
+          "min": null,
+          "typ": 8,
+          "max": null,
+          "unit": "mΩ",
+          "conditions": "TA = 25°C, V(VIN) = 12 V"
+        },
+        "Low_side_switch_resistance_TA___25_C__V_VIN____4_5_V": {
+          "parameter": "Low-side switch resistance",
+          "symbol": null,
+          "min": null,
+          "typ": 9,
+          "max": null,
+          "unit": "mΩ",
+          "conditions": "TA = 25°C, V(VIN) = 4.5 V"
+        },
+        "BOOT_UVLO_Falling": {
+          "parameter": "BOOT UVLO Falling",
+          "symbol": null,
+          "min": null,
+          "typ": 2.2,
+          "max": 2.6,
+          "unit": "V",
+          "conditions": null
+        },
+        "High_side_peak_current_limit": {
+          "parameter": "High-side peak current limit",
+          "symbol": null,
+          "min": 13.4,
+          "typ": 14.6,
+          "max": 15.8,
+          "unit": "A",
+          "conditions": "V(VIN) = 12 V, TJ = 25°C"
+        },
+        "Low_side_sinking_current_limit": {
+          "parameter": "Low-side sinking current limit",
+          "symbol": null,
+          "min": null,
+          "typ": -3.4,
+          "max": null,
+          "unit": "A",
+          "conditions": "V(VIN) = 12 V"
+        },
+        "Low_side_sourcing_current_limi": {
+          "parameter": "Low-side sourcing current limit",
+          "symbol": null,
+          "min": 10,
+          "typ": 12.9,
+          "max": 14.6,
+          "unit": "A",
+          "conditions": "V(VIN) = 12 V"
+        },
         "VIH": {
           "parameter": "Logic high input voltage",
           "symbol": "VIH",
@@ -597,6 +1176,69 @@
           "max": 0.8,
           "unit": "V",
           "conditions": "RT/CLK pin"
+        },
+        "Power_good_threshold_rising_fa": {
+          "parameter": "Power good threshold rising fault",
+          "symbol": null,
+          "min": 104,
+          "typ": 108,
+          "max": null,
+          "unit": "%",
+          "conditions": "V(FB) rising (fault)"
+        },
+        "Power_good_threshold_falling_g": {
+          "parameter": "Power good threshold falling good",
+          "symbol": null,
+          "min": null,
+          "typ": 106,
+          "max": null,
+          "unit": "%",
+          "conditions": "V(FB) falling (good)"
+        },
+        "Power_good_threshold_rising_go": {
+          "parameter": "Power good threshold rising good",
+          "symbol": null,
+          "min": null,
+          "typ": 91,
+          "max": null,
+          "unit": "%",
+          "conditions": "V(FB) rising (good)"
+        },
+        "Power_good_threshold_falling_f": {
+          "parameter": "Power good threshold falling fault",
+          "symbol": null,
+          "min": null,
+          "typ": 89,
+          "max": 95,
+          "unit": "%",
+          "conditions": "V(FB) falling (fault)"
+        },
+        "Leakage_current_into_PGOOD_pin": {
+          "parameter": "Leakage current into PGOOD pin",
+          "symbol": null,
+          "min": null,
+          "typ": 5,
+          "max": null,
+          "unit": "nA",
+          "conditions": "V(PGOOD) = 5 V"
+        },
+        "PGOOD_voltage_when_pulled_low": {
+          "parameter": "PGOOD voltage when pulled low",
+          "symbol": null,
+          "min": null,
+          "typ": 0.18,
+          "max": 0.22,
+          "unit": "V",
+          "conditions": "I(PGOOD) = 2 mA"
+        },
+        "Minimum_VIN_for_valid_PGOOD_ou": {
+          "parameter": "Minimum VIN for valid PGOOD output",
+          "symbol": null,
+          "min": null,
+          "typ": 0.9,
+          "max": 1,
+          "unit": "V",
+          "conditions": "V(PGOOD) < 0.5 V, I(PGOOD) = 2.5 mA"
         },
         "TTRIP": {
           "parameter": "Thermal protection trip point",
@@ -649,19 +1291,34 @@
       "layout_hints": [
         {
           "hint": "35 TPS54A24 www.ti.com.cn ZHCSJP6 –MAY 2019 版权© 2019, Texas Instruments Incorporated Layout Example (接下页) 图56. TPS54A24 Layout Top 图57. TPS54A24 Layout Midlayer 1 图58. TPS54A24 Layout Midlayer 2 图59.",
-          "source_page": 34
+          "source_page": 34,
+          "origin": {
+            "kind": "source_recommendation",
+            "method": "design_info_utils.layout_page_fallback",
+            "source_page": 34
+          }
         }
       ],
       "supply_recommendations": [
         {
           "hint": "34 TPS54A24 ZHCSJP6 –MAY 2019 www.ti.com.cn 版权© 2019, Texas Instruments Incorporated 9 Power Supply Recommendations The TPS54A24 is designed to be powered by a well-regulated DC voltage between 4.5 an",
-          "source_page": 33
+          "source_page": 33,
+          "origin": {
+            "kind": "source_recommendation",
+            "method": "design_info_utils.supply_keywords",
+            "source_page": 33
+          }
         }
       ],
       "topology_hints": [
         {
           "hint": "23 TPS54A24 www.ti.com.cn ZHCSJP6 –MAY 2019 版权© 2019, Texas Instruments Incorporated 8 Application and Implementation 注 Information in the following applications sections is not part of the TI compone",
-          "source_page": 22
+          "source_page": 22,
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.topology_keywords",
+            "source_page": 22
+          }
         }
       ],
       "typical_application": {
@@ -684,17 +1341,32 @@
           {
             "page": 22,
             "title": null,
-            "content_type": "application"
+            "content_type": "application",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 22
+            }
           },
           {
             "page": 33,
             "title": null,
-            "content_type": "application"
+            "content_type": "application",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 33
+            }
           },
           {
             "page": 34,
             "title": null,
-            "content_type": "layout"
+            "content_type": "layout",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 34
+            }
           }
         ],
         "total_pages": 3

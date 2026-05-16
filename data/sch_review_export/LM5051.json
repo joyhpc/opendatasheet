@@ -72,7 +72,72 @@
       }
     }
   },
-  "absolute_maximum_ratings": {},
+  "absolute_maximum_ratings": {
+    "LINE_Pin_to_INP_VSS": {
+      "parameter": "LINE Pin to INP/VSS",
+      "symbol": null,
+      "min": -0.3,
+      "max": 103,
+      "unit": "V",
+      "conditions": null
+    },
+    "INN_Pin_to_INP_VSS": {
+      "parameter": "INN Pin to INP/VSS",
+      "symbol": null,
+      "min": -2,
+      "max": 103,
+      "unit": "V",
+      "conditions": null
+    },
+    "OFF_Pin_to_INP_VSS": {
+      "parameter": "OFF Pin to INP/VSS",
+      "symbol": null,
+      "min": -0.3,
+      "max": 7,
+      "unit": "V",
+      "conditions": null
+    },
+    "VCC_Pin_Sink_to_INP_VSS": {
+      "parameter": "VCC Pin Sink to INP/VSS",
+      "symbol": null,
+      "min": -0.1,
+      "max": 20,
+      "unit": "mA",
+      "conditions": null
+    },
+    "nFGD_Pin_to_INP_VSS__Off": {
+      "parameter": "nFGD Pin to INP/VSS (Off)",
+      "symbol": null,
+      "min": -0.3,
+      "max": 7,
+      "unit": "V",
+      "conditions": null
+    },
+    "Storage_Temperature_Range": {
+      "parameter": "Storage Temperature Range",
+      "symbol": null,
+      "min": -65,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    },
+    "ESD__HBM": {
+      "parameter": "ESD (HBM)",
+      "symbol": null,
+      "min": -2000,
+      "max": 2000,
+      "unit": "V",
+      "conditions": null
+    },
+    "Peak_Reflow_Temperature": {
+      "parameter": "Peak Reflow Temperature",
+      "symbol": null,
+      "min": null,
+      "max": 260,
+      "unit": "°C",
+      "conditions": "30sec"
+    }
+  },
   "electrical_parameters": {
     "ILINE": {
       "parameter": "LINE Pin current",
@@ -122,6 +187,15 @@
     "VZ_IVCC___10_mA": {
       "parameter": "VCC Shunt Zener Voltage",
       "symbol": "VZ",
+      "min": null,
+      "typ": 13.5,
+      "max": null,
+      "unit": "V",
+      "conditions": "IVCC = 10 mA"
+    },
+    "VZ_IVCC___10_mA__2": {
+      "parameter": "VCC Shunt Zener Voltage",
+      "symbol": "VZ",
       "min": 12.5,
       "typ": null,
       "max": 14.5,
@@ -165,6 +239,15 @@
       "conditions": "VVCC = VZ - 100mV"
     },
     "IVCC_VVCC___5_0V": {
+      "parameter": "Supply Current",
+      "symbol": "IVCC",
+      "min": null,
+      "typ": 0.4,
+      "max": null,
+      "unit": "mA",
+      "conditions": "VVCC = 5.0V"
+    },
+    "IVCC_VVCC___5_0V__2": {
       "parameter": "Supply Current",
       "symbol": "IVCC",
       "min": null,
@@ -212,6 +295,15 @@
     "IGATE_VGATE___5_5V__VINN____150_mV_t": {
       "parameter": "GATE Discharge Current",
       "symbol": "IGATE",
+      "min": null,
+      "typ": 3.5,
+      "max": null,
+      "unit": "A",
+      "conditions": "VGATE = 5.5V, VINN = -150 mV to +300 mV, t <= 10 ms"
+    },
+    "IGATE_VGATE___5_5V__VINN____150_mV_t__2": {
+      "parameter": "GATE Discharge Current",
+      "symbol": "IGATE",
       "min": 2.4,
       "typ": null,
       "max": null,
@@ -230,6 +322,15 @@
     "VGATE_VVCC___10_25V__LINE___Open": {
       "parameter": "GATE Pin High Voltage",
       "symbol": "VGATE",
+      "min": null,
+      "typ": 10.2,
+      "max": null,
+      "unit": "V",
+      "conditions": "VVCC = 10.25V, LINE = Open"
+    },
+    "VGATE_VVCC___10_25V__LINE___Open__2": {
+      "parameter": "GATE Pin High Voltage",
+      "symbol": "VGATE",
       "min": 9.98,
       "typ": null,
       "max": null,
@@ -237,6 +338,15 @@
       "conditions": "VVCC = 10.25V, LINE = Open"
     },
     "VGATE_VVCC___5_0V__LINE___Open": {
+      "parameter": "GATE Pin High Voltage",
+      "symbol": "VGATE",
+      "min": null,
+      "typ": 4.95,
+      "max": null,
+      "unit": "V",
+      "conditions": "VVCC = 5.0V, LINE = Open"
+    },
+    "VGATE_VVCC___5_0V__LINE___Open__2": {
       "parameter": "GATE Pin High Voltage",
       "symbol": "VGATE",
       "min": 4.7,
@@ -275,6 +385,15 @@
     "VSD(REG)": {
       "parameter": "Regulated VINP/VSS to VINN Threshold",
       "symbol": "VSD(REG)",
+      "min": null,
+      "typ": 12,
+      "max": null,
+      "unit": "mV",
+      "conditions": null
+    },
+    "VSD(REG)__2": {
+      "parameter": "Regulated VINP/VSS to VINN Threshold",
+      "symbol": "VSD(REG)",
       "min": -10.8,
       "typ": null,
       "max": 30.8,
@@ -309,6 +428,15 @@
       "conditions": "CGATE = 10 nF"
     },
     "tGATE(REV)_CGATE___47_nF": {
+      "parameter": "Gate Capacitance Discharge Time at Forward to Reverse Transition",
+      "symbol": "tGATE(REV)",
+      "min": null,
+      "typ": 90,
+      "max": null,
+      "unit": "ns",
+      "conditions": "CGATE = 47 nF"
+    },
+    "tGATE(REV)_CGATE___47_nF__2": {
       "parameter": "Gate Capacitance Discharge Time at Forward to Reverse Transition",
       "symbol": "tGATE(REV)",
       "min": null,
@@ -527,7 +655,72 @@
       }
     },
     "electrical": {
-      "absolute_maximum_ratings": {},
+      "absolute_maximum_ratings": {
+        "LINE_Pin_to_INP_VSS": {
+          "parameter": "LINE Pin to INP/VSS",
+          "symbol": null,
+          "min": -0.3,
+          "max": 103,
+          "unit": "V",
+          "conditions": null
+        },
+        "INN_Pin_to_INP_VSS": {
+          "parameter": "INN Pin to INP/VSS",
+          "symbol": null,
+          "min": -2,
+          "max": 103,
+          "unit": "V",
+          "conditions": null
+        },
+        "OFF_Pin_to_INP_VSS": {
+          "parameter": "OFF Pin to INP/VSS",
+          "symbol": null,
+          "min": -0.3,
+          "max": 7,
+          "unit": "V",
+          "conditions": null
+        },
+        "VCC_Pin_Sink_to_INP_VSS": {
+          "parameter": "VCC Pin Sink to INP/VSS",
+          "symbol": null,
+          "min": -0.1,
+          "max": 20,
+          "unit": "mA",
+          "conditions": null
+        },
+        "nFGD_Pin_to_INP_VSS__Off": {
+          "parameter": "nFGD Pin to INP/VSS (Off)",
+          "symbol": null,
+          "min": -0.3,
+          "max": 7,
+          "unit": "V",
+          "conditions": null
+        },
+        "Storage_Temperature_Range": {
+          "parameter": "Storage Temperature Range",
+          "symbol": null,
+          "min": -65,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        },
+        "ESD__HBM": {
+          "parameter": "ESD (HBM)",
+          "symbol": null,
+          "min": -2000,
+          "max": 2000,
+          "unit": "V",
+          "conditions": null
+        },
+        "Peak_Reflow_Temperature": {
+          "parameter": "Peak Reflow Temperature",
+          "symbol": null,
+          "min": null,
+          "max": 260,
+          "unit": "°C",
+          "conditions": "30sec"
+        }
+      },
       "electrical_parameters": {
         "ILINE": {
           "parameter": "LINE Pin current",
@@ -577,6 +770,15 @@
         "VZ_IVCC___10_mA": {
           "parameter": "VCC Shunt Zener Voltage",
           "symbol": "VZ",
+          "min": null,
+          "typ": 13.5,
+          "max": null,
+          "unit": "V",
+          "conditions": "IVCC = 10 mA"
+        },
+        "VZ_IVCC___10_mA__2": {
+          "parameter": "VCC Shunt Zener Voltage",
+          "symbol": "VZ",
           "min": 12.5,
           "typ": null,
           "max": 14.5,
@@ -620,6 +822,15 @@
           "conditions": "VVCC = VZ - 100mV"
         },
         "IVCC_VVCC___5_0V": {
+          "parameter": "Supply Current",
+          "symbol": "IVCC",
+          "min": null,
+          "typ": 0.4,
+          "max": null,
+          "unit": "mA",
+          "conditions": "VVCC = 5.0V"
+        },
+        "IVCC_VVCC___5_0V__2": {
           "parameter": "Supply Current",
           "symbol": "IVCC",
           "min": null,
@@ -667,6 +878,15 @@
         "IGATE_VGATE___5_5V__VINN____150_mV_t": {
           "parameter": "GATE Discharge Current",
           "symbol": "IGATE",
+          "min": null,
+          "typ": 3.5,
+          "max": null,
+          "unit": "A",
+          "conditions": "VGATE = 5.5V, VINN = -150 mV to +300 mV, t <= 10 ms"
+        },
+        "IGATE_VGATE___5_5V__VINN____150_mV_t__2": {
+          "parameter": "GATE Discharge Current",
+          "symbol": "IGATE",
           "min": 2.4,
           "typ": null,
           "max": null,
@@ -685,6 +905,15 @@
         "VGATE_VVCC___10_25V__LINE___Open": {
           "parameter": "GATE Pin High Voltage",
           "symbol": "VGATE",
+          "min": null,
+          "typ": 10.2,
+          "max": null,
+          "unit": "V",
+          "conditions": "VVCC = 10.25V, LINE = Open"
+        },
+        "VGATE_VVCC___10_25V__LINE___Open__2": {
+          "parameter": "GATE Pin High Voltage",
+          "symbol": "VGATE",
           "min": 9.98,
           "typ": null,
           "max": null,
@@ -692,6 +921,15 @@
           "conditions": "VVCC = 10.25V, LINE = Open"
         },
         "VGATE_VVCC___5_0V__LINE___Open": {
+          "parameter": "GATE Pin High Voltage",
+          "symbol": "VGATE",
+          "min": null,
+          "typ": 4.95,
+          "max": null,
+          "unit": "V",
+          "conditions": "VVCC = 5.0V, LINE = Open"
+        },
+        "VGATE_VVCC___5_0V__LINE___Open__2": {
           "parameter": "GATE Pin High Voltage",
           "symbol": "VGATE",
           "min": 4.7,
@@ -730,6 +968,15 @@
         "VSD(REG)": {
           "parameter": "Regulated VINP/VSS to VINN Threshold",
           "symbol": "VSD(REG)",
+          "min": null,
+          "typ": 12,
+          "max": null,
+          "unit": "mV",
+          "conditions": null
+        },
+        "VSD(REG)__2": {
+          "parameter": "Regulated VINP/VSS to VINN Threshold",
+          "symbol": "VSD(REG)",
           "min": -10.8,
           "typ": null,
           "max": 30.8,
@@ -764,6 +1011,15 @@
           "conditions": "CGATE = 10 nF"
         },
         "tGATE(REV)_CGATE___47_nF": {
+          "parameter": "Gate Capacitance Discharge Time at Forward to Reverse Transition",
+          "symbol": "tGATE(REV)",
+          "min": null,
+          "typ": 90,
+          "max": null,
+          "unit": "ns",
+          "conditions": "CGATE = 47 nF"
+        },
+        "tGATE(REV)_CGATE___47_nF__2": {
           "parameter": "Gate Capacitance Discharge Time at Forward to Reverse Transition",
           "symbol": "tGATE(REV)",
           "min": null,

@@ -137,6 +137,22 @@
       "unit": "V",
       "conditions": null
     },
+    "Digital_Input_Voltage": {
+      "parameter": "Digital Input Voltage",
+      "symbol": null,
+      "min": -0.3,
+      "max": null,
+      "unit": "V",
+      "conditions": "Max is VDD + 0.3 V"
+    },
+    "Reference_Input_Voltage": {
+      "parameter": "Reference Input Voltage",
+      "symbol": null,
+      "min": -0.3,
+      "max": null,
+      "unit": "V",
+      "conditions": "Max is VDD + 0.3 V"
+    },
     "VOUT": {
       "parameter": "Output Voltage",
       "symbol": "VOUT",
@@ -179,6 +195,51 @@
     }
   },
   "electrical_parameters": {
+    "Short_Circuit_Current": {
+      "parameter": "Short Circuit Current",
+      "symbol": null,
+      "min": null,
+      "typ": 25.0,
+      "max": null,
+      "unit": "mA",
+      "conditions": "VDD = 5 V"
+    },
+    "Short_Circuit_Current_VDD___3_V": {
+      "parameter": "Short Circuit Current",
+      "symbol": null,
+      "min": null,
+      "typ": 16.0,
+      "max": null,
+      "unit": "mA",
+      "conditions": "VDD = 3 V"
+    },
+    "Power_Up_Time": {
+      "parameter": "Power-Up Time",
+      "symbol": null,
+      "min": null,
+      "typ": 2.5,
+      "max": null,
+      "unit": "µs",
+      "conditions": "Coming out of power-down mode, VDD = 5 V"
+    },
+    "Power_Up_Time_Coming_out_of_power_down_mode": {
+      "parameter": "Power-Up Time",
+      "symbol": null,
+      "min": null,
+      "typ": 5.0,
+      "max": null,
+      "unit": "µs",
+      "conditions": "Coming out of power-down mode, VDD = 3 V"
+    },
+    "Input_Current": {
+      "parameter": "Input Current",
+      "symbol": null,
+      "min": -1.0,
+      "typ": null,
+      "max": 1.0,
+      "unit": "µA",
+      "conditions": null
+    },
     "VIL": {
       "parameter": "Input Low Voltage",
       "symbol": "VIL",
@@ -215,6 +276,15 @@
       "unit": "V",
       "conditions": "VDD = 2.5 V to 5.5 V, TTL and CMOS compatible"
     },
+    "Pin_Capacitance": {
+      "parameter": "Pin Capacitance",
+      "symbol": null,
+      "min": null,
+      "typ": 3.0,
+      "max": null,
+      "unit": "pF",
+      "conditions": null
+    },
     "VDD": {
       "parameter": "Supply Voltage",
       "symbol": "VDD",
@@ -234,13 +304,13 @@
       "conditions": "VDD = 4.5 V to 5.5 V, VIH = VDD and VIL = GND, All DACs in unbuffered mode"
     },
     "IDD_VDD___2_5_V_to_3_6_V__VIH___VD": {
-      "parameter": "Supply Current (Power-Down Mode)",
+      "parameter": "Supply Current (Normal Mode)",
       "symbol": "IDD",
       "min": null,
-      "typ": 0.12,
-      "max": 1.0,
-      "unit": "µA",
-      "conditions": "VDD = 2.5 V to 3.6 V, VIH = VDD and VIL = GND"
+      "typ": 0.7,
+      "max": 1.5,
+      "unit": "mA",
+      "conditions": "VDD = 2.5 V to 3.6 V, VIH = VDD and VIL = GND, All DACs in unbuffered mode"
     },
     "IDD_VDD___4_5_V_to_5_5_V__VIH___VD": {
       "parameter": "Supply Current (Power-Down Mode)",
@@ -250,6 +320,105 @@
       "max": 1.0,
       "unit": "µA",
       "conditions": "VDD = 4.5 V to 5.5 V, VIH = VDD and VIL = GND"
+    },
+    "IDD_VDD___2_5_V_to_3_6_V__VIH___VD__2": {
+      "parameter": "Supply Current (Power-Down Mode)",
+      "symbol": "IDD",
+      "min": null,
+      "typ": 0.12,
+      "max": 1.0,
+      "unit": "µA",
+      "conditions": "VDD = 2.5 V to 3.6 V, VIH = VDD and VIL = GND"
+    },
+    "Output_Voltage_Settling_Time": {
+      "parameter": "Output Voltage Settling Time",
+      "symbol": null,
+      "min": null,
+      "typ": 6.0,
+      "max": 8.0,
+      "unit": "µs",
+      "conditions": "VREF = VDD = 5 V, 1/4 scale to 3/4 scale change (0x40 to 0xC0)"
+    },
+    "Output_Voltage_Settling_Time_VREF___VDD___5_V__1_4_scale_to": {
+      "parameter": "Output Voltage Settling Time",
+      "symbol": null,
+      "min": null,
+      "typ": 7.0,
+      "max": 9.0,
+      "unit": "µs",
+      "conditions": "VREF = VDD = 5 V, 1/4 scale to 3/4 scale change (0x100 to 0x300)"
+    },
+    "Output_Voltage_Settling_Time_VREF___VDD___5_V__1_4_scale_to__2": {
+      "parameter": "Output Voltage Settling Time",
+      "symbol": null,
+      "min": null,
+      "typ": 8.0,
+      "max": 10.0,
+      "unit": "µs",
+      "conditions": "VREF = VDD = 5 V, 1/4 scale to 3/4 scale change (0x400 to 0xC00)"
+    },
+    "Slew_Rate": {
+      "parameter": "Slew Rate",
+      "symbol": null,
+      "min": null,
+      "typ": 0.7,
+      "max": null,
+      "unit": "V/µs",
+      "conditions": null
+    },
+    "Major_Code_Change_Glitch_Energ": {
+      "parameter": "Major-Code Change Glitch Energy",
+      "symbol": null,
+      "min": null,
+      "typ": 12.0,
+      "max": null,
+      "unit": "nV-sec",
+      "conditions": "1 LSB change around major carry"
+    },
+    "Digital_Feedthrough": {
+      "parameter": "Digital Feedthrough",
+      "symbol": null,
+      "min": null,
+      "typ": 0.5,
+      "max": null,
+      "unit": "nV-sec",
+      "conditions": null
+    },
+    "Digital_Crosstalk": {
+      "parameter": "Digital Crosstalk",
+      "symbol": null,
+      "min": null,
+      "typ": 0.5,
+      "max": null,
+      "unit": "nV-sec",
+      "conditions": null
+    },
+    "Analog_Crosstalk": {
+      "parameter": "Analog Crosstalk",
+      "symbol": null,
+      "min": null,
+      "typ": 1.0,
+      "max": null,
+      "unit": "nV-sec",
+      "conditions": null
+    },
+    "DAC_to_DAC_Crosstalk": {
+      "parameter": "DAC-to-DAC Crosstalk",
+      "symbol": null,
+      "min": null,
+      "typ": 3.0,
+      "max": null,
+      "unit": "nV-sec",
+      "conditions": null
+    },
+    "Multiplying_Bandwidth": {
+      "parameter": "Multiplying Bandwidth",
+      "symbol": null,
+      "min": null,
+      "typ": 200.0,
+      "max": null,
+      "unit": "kHz",
+      "conditions": "VREF = 2 V ± 0.1 V p-p, unbuffered mode"
     },
     "THD": {
       "parameter": "Total Harmonic Distortion",
@@ -421,6 +590,22 @@
           "unit": "V",
           "conditions": null
         },
+        "Digital_Input_Voltage": {
+          "parameter": "Digital Input Voltage",
+          "symbol": null,
+          "min": -0.3,
+          "max": null,
+          "unit": "V",
+          "conditions": "Max is VDD + 0.3 V"
+        },
+        "Reference_Input_Voltage": {
+          "parameter": "Reference Input Voltage",
+          "symbol": null,
+          "min": -0.3,
+          "max": null,
+          "unit": "V",
+          "conditions": "Max is VDD + 0.3 V"
+        },
         "VOUT": {
           "parameter": "Output Voltage",
           "symbol": "VOUT",
@@ -463,6 +648,51 @@
         }
       },
       "electrical_parameters": {
+        "Short_Circuit_Current": {
+          "parameter": "Short Circuit Current",
+          "symbol": null,
+          "min": null,
+          "typ": 25.0,
+          "max": null,
+          "unit": "mA",
+          "conditions": "VDD = 5 V"
+        },
+        "Short_Circuit_Current_VDD___3_V": {
+          "parameter": "Short Circuit Current",
+          "symbol": null,
+          "min": null,
+          "typ": 16.0,
+          "max": null,
+          "unit": "mA",
+          "conditions": "VDD = 3 V"
+        },
+        "Power_Up_Time": {
+          "parameter": "Power-Up Time",
+          "symbol": null,
+          "min": null,
+          "typ": 2.5,
+          "max": null,
+          "unit": "µs",
+          "conditions": "Coming out of power-down mode, VDD = 5 V"
+        },
+        "Power_Up_Time_Coming_out_of_power_down_mode": {
+          "parameter": "Power-Up Time",
+          "symbol": null,
+          "min": null,
+          "typ": 5.0,
+          "max": null,
+          "unit": "µs",
+          "conditions": "Coming out of power-down mode, VDD = 3 V"
+        },
+        "Input_Current": {
+          "parameter": "Input Current",
+          "symbol": null,
+          "min": -1.0,
+          "typ": null,
+          "max": 1.0,
+          "unit": "µA",
+          "conditions": null
+        },
         "VIL": {
           "parameter": "Input Low Voltage",
           "symbol": "VIL",
@@ -499,6 +729,15 @@
           "unit": "V",
           "conditions": "VDD = 2.5 V to 5.5 V, TTL and CMOS compatible"
         },
+        "Pin_Capacitance": {
+          "parameter": "Pin Capacitance",
+          "symbol": null,
+          "min": null,
+          "typ": 3.0,
+          "max": null,
+          "unit": "pF",
+          "conditions": null
+        },
         "VDD": {
           "parameter": "Supply Voltage",
           "symbol": "VDD",
@@ -518,13 +757,13 @@
           "conditions": "VDD = 4.5 V to 5.5 V, VIH = VDD and VIL = GND, All DACs in unbuffered mode"
         },
         "IDD_VDD___2_5_V_to_3_6_V__VIH___VD": {
-          "parameter": "Supply Current (Power-Down Mode)",
+          "parameter": "Supply Current (Normal Mode)",
           "symbol": "IDD",
           "min": null,
-          "typ": 0.12,
-          "max": 1.0,
-          "unit": "µA",
-          "conditions": "VDD = 2.5 V to 3.6 V, VIH = VDD and VIL = GND"
+          "typ": 0.7,
+          "max": 1.5,
+          "unit": "mA",
+          "conditions": "VDD = 2.5 V to 3.6 V, VIH = VDD and VIL = GND, All DACs in unbuffered mode"
         },
         "IDD_VDD___4_5_V_to_5_5_V__VIH___VD": {
           "parameter": "Supply Current (Power-Down Mode)",
@@ -534,6 +773,105 @@
           "max": 1.0,
           "unit": "µA",
           "conditions": "VDD = 4.5 V to 5.5 V, VIH = VDD and VIL = GND"
+        },
+        "IDD_VDD___2_5_V_to_3_6_V__VIH___VD__2": {
+          "parameter": "Supply Current (Power-Down Mode)",
+          "symbol": "IDD",
+          "min": null,
+          "typ": 0.12,
+          "max": 1.0,
+          "unit": "µA",
+          "conditions": "VDD = 2.5 V to 3.6 V, VIH = VDD and VIL = GND"
+        },
+        "Output_Voltage_Settling_Time": {
+          "parameter": "Output Voltage Settling Time",
+          "symbol": null,
+          "min": null,
+          "typ": 6.0,
+          "max": 8.0,
+          "unit": "µs",
+          "conditions": "VREF = VDD = 5 V, 1/4 scale to 3/4 scale change (0x40 to 0xC0)"
+        },
+        "Output_Voltage_Settling_Time_VREF___VDD___5_V__1_4_scale_to": {
+          "parameter": "Output Voltage Settling Time",
+          "symbol": null,
+          "min": null,
+          "typ": 7.0,
+          "max": 9.0,
+          "unit": "µs",
+          "conditions": "VREF = VDD = 5 V, 1/4 scale to 3/4 scale change (0x100 to 0x300)"
+        },
+        "Output_Voltage_Settling_Time_VREF___VDD___5_V__1_4_scale_to__2": {
+          "parameter": "Output Voltage Settling Time",
+          "symbol": null,
+          "min": null,
+          "typ": 8.0,
+          "max": 10.0,
+          "unit": "µs",
+          "conditions": "VREF = VDD = 5 V, 1/4 scale to 3/4 scale change (0x400 to 0xC00)"
+        },
+        "Slew_Rate": {
+          "parameter": "Slew Rate",
+          "symbol": null,
+          "min": null,
+          "typ": 0.7,
+          "max": null,
+          "unit": "V/µs",
+          "conditions": null
+        },
+        "Major_Code_Change_Glitch_Energ": {
+          "parameter": "Major-Code Change Glitch Energy",
+          "symbol": null,
+          "min": null,
+          "typ": 12.0,
+          "max": null,
+          "unit": "nV-sec",
+          "conditions": "1 LSB change around major carry"
+        },
+        "Digital_Feedthrough": {
+          "parameter": "Digital Feedthrough",
+          "symbol": null,
+          "min": null,
+          "typ": 0.5,
+          "max": null,
+          "unit": "nV-sec",
+          "conditions": null
+        },
+        "Digital_Crosstalk": {
+          "parameter": "Digital Crosstalk",
+          "symbol": null,
+          "min": null,
+          "typ": 0.5,
+          "max": null,
+          "unit": "nV-sec",
+          "conditions": null
+        },
+        "Analog_Crosstalk": {
+          "parameter": "Analog Crosstalk",
+          "symbol": null,
+          "min": null,
+          "typ": 1.0,
+          "max": null,
+          "unit": "nV-sec",
+          "conditions": null
+        },
+        "DAC_to_DAC_Crosstalk": {
+          "parameter": "DAC-to-DAC Crosstalk",
+          "symbol": null,
+          "min": null,
+          "typ": 3.0,
+          "max": null,
+          "unit": "nV-sec",
+          "conditions": null
+        },
+        "Multiplying_Bandwidth": {
+          "parameter": "Multiplying Bandwidth",
+          "symbol": null,
+          "min": null,
+          "typ": 200.0,
+          "max": null,
+          "unit": "kHz",
+          "conditions": "VREF = 2 V ± 0.1 V p-p, unbuffered mode"
         },
         "THD": {
           "parameter": "Total Harmonic Distortion",

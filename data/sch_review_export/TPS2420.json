@@ -145,6 +145,14 @@
       "conditions": null
     },
     "FLT, PG": {
+      "parameter": "Voltage range",
+      "symbol": "FLT, PG",
+      "min": -0.3,
+      "max": 20,
+      "unit": "V",
+      "conditions": null
+    },
+    "FLT, PG__2": {
       "parameter": "Output sink current",
       "symbol": "FLT, PG",
       "min": null,
@@ -473,13 +481,13 @@
       "conditions": "V_PG = 18 V"
     },
     "null": {
-      "parameter": "Thermal shutdown hysteresis",
+      "parameter": "Ratio ILOAD/IIMON",
       "symbol": "null",
-      "min": null,
-      "typ": 10,
-      "max": null,
-      "unit": "°C",
-      "conditions": null
+      "min": 30,
+      "typ": 56,
+      "max": 80,
+      "unit": "A/mA",
+      "conditions": "IOUT = 500 mA"
     },
     "null_IOUT___2_A": {
       "parameter": "Ratio ILOAD/IIMON",
@@ -507,6 +515,15 @@
       "max": 0,
       "unit": "µA",
       "conditions": "IVIN = 0 A"
+    },
+    "null__2": {
+      "parameter": "Clamp voltage",
+      "symbol": "null",
+      "min": 2.6,
+      "typ": 2.75,
+      "max": 2.9,
+      "unit": "V",
+      "conditions": null
     },
     "null_Auto_retry_mode": {
       "parameter": "Low threshold voltage",
@@ -552,6 +569,15 @@
       "max": null,
       "unit": "°C",
       "conditions": "Junction temperature increasing"
+    },
+    "null__3": {
+      "parameter": "Thermal shutdown hysteresis",
+      "symbol": "null",
+      "min": null,
+      "typ": 10,
+      "max": null,
+      "unit": "°C",
+      "conditions": null
     }
   },
   "drc_hints": {
@@ -717,6 +743,14 @@
           "conditions": null
         },
         "FLT, PG": {
+          "parameter": "Voltage range",
+          "symbol": "FLT, PG",
+          "min": -0.3,
+          "max": 20,
+          "unit": "V",
+          "conditions": null
+        },
+        "FLT, PG__2": {
           "parameter": "Output sink current",
           "symbol": "FLT, PG",
           "min": null,
@@ -1045,13 +1079,13 @@
           "conditions": "V_PG = 18 V"
         },
         "null": {
-          "parameter": "Thermal shutdown hysteresis",
+          "parameter": "Ratio ILOAD/IIMON",
           "symbol": "null",
-          "min": null,
-          "typ": 10,
-          "max": null,
-          "unit": "°C",
-          "conditions": null
+          "min": 30,
+          "typ": 56,
+          "max": 80,
+          "unit": "A/mA",
+          "conditions": "IOUT = 500 mA"
         },
         "null_IOUT___2_A": {
           "parameter": "Ratio ILOAD/IIMON",
@@ -1079,6 +1113,15 @@
           "max": 0,
           "unit": "µA",
           "conditions": "IVIN = 0 A"
+        },
+        "null__2": {
+          "parameter": "Clamp voltage",
+          "symbol": "null",
+          "min": 2.6,
+          "typ": 2.75,
+          "max": 2.9,
+          "unit": "V",
+          "conditions": null
         },
         "null_Auto_retry_mode": {
           "parameter": "Low threshold voltage",
@@ -1124,6 +1167,15 @@
           "max": null,
           "unit": "°C",
           "conditions": "Junction temperature increasing"
+        },
+        "null__3": {
+          "parameter": "Thermal shutdown hysteresis",
+          "symbol": "null",
+          "min": null,
+          "typ": 10,
+          "max": null,
+          "unit": "°C",
+          "conditions": null
         }
       },
       "drc_hints": {
@@ -1153,7 +1205,12 @@
       "topology_hints": [
         {
           "hint": "TPS2420 www.ti.com SLUS903F –JANUARY 2009–REVISED JANUARY 2014 APPLICATION INFORMATION Operation When load current exceeds the user programmed fault limit (IFAULT) during normal operation the fault ti",
-          "source_page": 14
+          "source_page": 14,
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.topology_keywords",
+            "source_page": 14
+          }
         }
       ],
       "typical_application": {
@@ -1164,7 +1221,12 @@
           {
             "page": 14,
             "title": null,
-            "content_type": "application"
+            "content_type": "application",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 14
+            }
           }
         ],
         "total_pages": 1

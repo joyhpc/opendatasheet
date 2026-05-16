@@ -180,12 +180,28 @@
       "unit": "V",
       "conditions": null
     },
+    "Input_voltage_range": {
+      "parameter": "Input voltage range",
+      "symbol": null,
+      "min": -0.3,
+      "max": 3.6,
+      "unit": "V",
+      "conditions": null
+    },
     "V_IMON": {
       "parameter": "Input voltage range",
       "symbol": "V_IMON",
       "min": -0.3,
       "max": 7,
       "unit": "V",
+      "conditions": null
+    },
+    "Sink_current": {
+      "parameter": "Sink current",
+      "symbol": null,
+      "min": null,
+      "max": 10,
+      "unit": "mA",
       "conditions": null
     },
     "TJ": {
@@ -567,6 +583,15 @@
       "conditions": "1 A <= I(OUT) <= 5 A, TJ = 25°C"
     },
     "RON_1_A____I_OUT_____5_A___40_C": {
+      "parameter": "IN to OUT - ON Resistance (85°C)",
+      "symbol": "RON",
+      "min": 26,
+      "typ": 42,
+      "max": 58,
+      "unit": "mΩ",
+      "conditions": "1 A <= I(OUT) <= 5 A, -40°C <= TJ <= 85°C"
+    },
+    "RON_1_A____I_OUT_____5_A___40_C__2": {
       "parameter": "IN to OUT - ON Resistance (125°C)",
       "symbol": "RON",
       "min": 26,
@@ -905,12 +930,28 @@
           "unit": "V",
           "conditions": null
         },
+        "Input_voltage_range": {
+          "parameter": "Input voltage range",
+          "symbol": null,
+          "min": -0.3,
+          "max": 3.6,
+          "unit": "V",
+          "conditions": null
+        },
         "V_IMON": {
           "parameter": "Input voltage range",
           "symbol": "V_IMON",
           "min": -0.3,
           "max": 7,
           "unit": "V",
+          "conditions": null
+        },
+        "Sink_current": {
+          "parameter": "Sink current",
+          "symbol": null,
+          "min": null,
+          "max": 10,
+          "unit": "mA",
           "conditions": null
         },
         "TJ": {
@@ -1292,6 +1333,15 @@
           "conditions": "1 A <= I(OUT) <= 5 A, TJ = 25°C"
         },
         "RON_1_A____I_OUT_____5_A___40_C": {
+          "parameter": "IN to OUT - ON Resistance (85°C)",
+          "symbol": "RON",
+          "min": 26,
+          "typ": 42,
+          "max": 58,
+          "unit": "mΩ",
+          "conditions": "1 A <= I(OUT) <= 5 A, -40°C <= TJ <= 85°C"
+        },
+        "RON_1_A____I_OUT_____5_A___40_C__2": {
           "parameter": "IN to OUT - ON Resistance (125°C)",
           "symbol": "RON",
           "min": 26,
@@ -1459,13 +1509,23 @@
       "layout_hints": [
         {
           "hint": "TPS25940A, TPS25940L www.ti.com SLVSCF3A –JUNE 2014–REVISED MARCH 2015 12 Layout 12.1 Layout Guidelines • For all applications, a 0.1-uF or greater ceramic decoupling capacitor is recommended between",
-          "source_page": 36
+          "source_page": 36,
+          "origin": {
+            "kind": "source_recommendation",
+            "method": "design_info_utils.layout_page_fallback",
+            "source_page": 36
+          }
         }
       ],
       "topology_hints": [
         {
           "hint": "TPS25940A, TPS25940L www.ti.com SLVSCF3A –JUNE 2014–REVISED MARCH 2015 12 Layout 12.1 Layout Guidelines • For all applications, a 0.1-uF or greater ceramic decoupling capacitor is recommended between",
-          "source_page": 36
+          "source_page": 36,
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.topology_keywords",
+            "source_page": 36
+          }
         }
       ],
       "application_notes": [
@@ -1485,7 +1545,12 @@
           {
             "page": 36,
             "title": null,
-            "content_type": "layout"
+            "content_type": "layout",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 36
+            }
           }
         ],
         "total_pages": 1

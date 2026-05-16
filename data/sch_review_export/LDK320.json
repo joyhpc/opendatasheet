@@ -203,11 +203,11 @@
       "conditions": "TJ = 25 °C"
     },
     "VOUT_40__C___TJ___125__C": {
-      "parameter": "VOUT accuracy, LDK320A",
+      "parameter": "VOUT accuracy",
       "symbol": "VOUT",
-      "min": -1.5,
+      "min": -3,
       "typ": null,
-      "max": 1.5,
+      "max": 3,
       "unit": "%",
       "conditions": "-40 °C < TJ < 125 °C"
     },
@@ -220,6 +220,15 @@
       "unit": "%",
       "conditions": "TJ = 25 °C"
     },
+    "VOUT_40__C___TJ___125__C__2": {
+      "parameter": "VOUT accuracy, LDK320A",
+      "symbol": "VOUT",
+      "min": -1.5,
+      "typ": null,
+      "max": 1.5,
+      "unit": "%",
+      "conditions": "-40 °C < TJ < 125 °C"
+    },
     "ΔVOUT": {
       "parameter": "Static line regulation",
       "symbol": "ΔVOUT",
@@ -230,6 +239,15 @@
       "conditions": "VOUT +1 V ≤ VIN ≤ 18 V"
     },
     "ΔVOUT_IOUT___1_mA_to_200_mA__VOUT": {
+      "parameter": "Static load regulation",
+      "symbol": "ΔVOUT",
+      "min": null,
+      "typ": 10,
+      "max": 15,
+      "unit": "mV",
+      "conditions": "IOUT = 1 mA to 200 mA, VOUT ≤ 2 V"
+    },
+    "ΔVOUT_IOUT___1_mA_to_200_mA__VOUT__2": {
       "parameter": "Static load regulation",
       "symbol": "ΔVOUT",
       "min": null,
@@ -278,19 +296,19 @@
       "parameter": "Supply voltage rejection",
       "symbol": "SVR",
       "min": null,
-      "typ": 73,
+      "typ": 65,
       "max": null,
       "unit": "dB",
-      "conditions": "f = 1 kHz, IOUT = 10 mA, VOUT = VADJ"
+      "conditions": "f = 1 kHz, IOUT = 10 mA, VOUT = 3.3 V"
     },
     "SVR_f___10_kHz__IOUT___10_mA__VOUT": {
       "parameter": "Supply voltage rejection",
       "symbol": "SVR",
       "min": null,
-      "typ": 58,
+      "typ": 48,
       "max": null,
       "unit": "dB",
-      "conditions": "f = 10 kHz, IOUT = 10 mA, VOUT = VADJ"
+      "conditions": "f = 10 kHz, IOUT = 10 mA, VOUT = 3.3 V"
     },
     "IQ": {
       "parameter": "Quiescent current",
@@ -365,6 +383,15 @@
       "conditions": "VEN = VIN"
     },
     "TSHDN": {
+      "parameter": "Thermal shutdown",
+      "symbol": "TSHDN",
+      "min": null,
+      "typ": 160,
+      "max": null,
+      "unit": "°C",
+      "conditions": null
+    },
+    "TSHDN__2": {
       "parameter": "Thermal shutdown hysteresis",
       "symbol": "TSHDN",
       "min": null,
@@ -382,6 +409,15 @@
       "unit": "µF",
       "conditions": "Capacitance"
     },
+    "VIN__2": {
+      "parameter": "Operating input voltage",
+      "symbol": "VIN",
+      "min": 2.5,
+      "typ": null,
+      "max": 18,
+      "unit": "V",
+      "conditions": null
+    },
     "VADJ": {
       "parameter": "Adjustable voltage",
       "symbol": "VADJ",
@@ -392,6 +428,33 @@
       "conditions": "TJ = 25 °C"
     },
     "VADJ_TJ___25__C": {
+      "parameter": "Adjustable voltage accuracy",
+      "symbol": "VADJ",
+      "min": -2,
+      "typ": null,
+      "max": 2,
+      "unit": "%",
+      "conditions": "TJ = 25 °C"
+    },
+    "VADJ_40__C___TJ___125__C": {
+      "parameter": "Adjustable voltage accuracy",
+      "symbol": "VADJ",
+      "min": -3,
+      "typ": null,
+      "max": 3,
+      "unit": "%",
+      "conditions": "40 °C < TJ < 125 °C"
+    },
+    "VADJ_TJ___25__C__2": {
+      "parameter": "Adjustable voltage, LDK320A",
+      "symbol": "VADJ",
+      "min": null,
+      "typ": 1.2,
+      "max": null,
+      "unit": "V",
+      "conditions": "TJ = 25 °C"
+    },
+    "VADJ_TJ___25__C__3": {
       "parameter": "Adjustable voltage accuracy, LDK320A",
       "symbol": "VADJ",
       "min": -0.5,
@@ -400,7 +463,7 @@
       "unit": "%",
       "conditions": "TJ = 25 °C"
     },
-    "VADJ_40__C___TJ___125__C": {
+    "VADJ_40__C___TJ___125__C__2": {
       "parameter": "Adjustable voltage accuracy, LDK320A",
       "symbol": "VADJ",
       "min": -1.5,
@@ -472,6 +535,24 @@
       "unit": "dB",
       "conditions": "f = 120 Hz, IOUT = 10 mA, VOUT = VADJ"
     },
+    "SVR_f___1_kHz__IOUT___10_mA__VOUT__2": {
+      "parameter": "Supply voltage rejection",
+      "symbol": "SVR",
+      "min": null,
+      "typ": 73,
+      "max": null,
+      "unit": "dB",
+      "conditions": "f = 1 kHz, IOUT = 10 mA, VOUT = VADJ"
+    },
+    "SVR_f___10_kHz__IOUT___10_mA__VOUT__2": {
+      "parameter": "Supply voltage rejection",
+      "symbol": "SVR",
+      "min": null,
+      "typ": 58,
+      "max": null,
+      "unit": "dB",
+      "conditions": "f = 10 kHz, IOUT = 10 mA, VOUT = VADJ"
+    },
     "IQ_VOUT__1_V___VIN___18_V__IOUT": {
       "parameter": "Quiescent current",
       "symbol": "IQ",
@@ -490,6 +571,15 @@
       "unit": "µA",
       "conditions": "VIN = VOUT + 1 V, IOUT = 200 mA, -40 °C < TJ < 125 °C"
     },
+    "IQ_VEN___GND__TJ___25__C__2": {
+      "parameter": "Quiescent current (OFF mode)",
+      "symbol": "IQ",
+      "min": null,
+      "typ": 0.2,
+      "max": 1,
+      "unit": "µA",
+      "conditions": "VEN = GND, TJ = 25 °C"
+    },
     "ISC_RL___0": {
       "parameter": "Short-circuit current",
       "symbol": "ISC",
@@ -499,6 +589,33 @@
       "unit": "mA",
       "conditions": "RL = 0"
     },
+    "ISC_RL___0__VIN___16_V__2": {
+      "parameter": "Short-circuit current",
+      "symbol": "ISC",
+      "min": null,
+      "typ": 200,
+      "max": null,
+      "unit": "mA",
+      "conditions": "RL = 0, VIN = 16 V"
+    },
+    "VEN_VIN___2_5_V_to_18_V___40__C__2": {
+      "parameter": "Enable input logic low",
+      "symbol": "VEN",
+      "min": null,
+      "typ": null,
+      "max": 0.4,
+      "unit": "V",
+      "conditions": "VIN = 2.5 V to 18 V, -40 °C < TJ < 125 °C"
+    },
+    "VEN_VIN___2_5_V_to_18_V___40__C__3": {
+      "parameter": "Enable input logic high",
+      "symbol": "VEN",
+      "min": 1.2,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": "VIN = 2.5 V to 18 V, -40 °C < TJ < 125 °C"
+    },
     "IEN_VEN___VIN": {
       "parameter": "Enable pin input current",
       "symbol": "IEN",
@@ -507,6 +624,24 @@
       "max": 100,
       "unit": "nA",
       "conditions": "VEN = VIN"
+    },
+    "TSHDN__3": {
+      "parameter": "Thermal shutdown",
+      "symbol": "TSHDN",
+      "min": null,
+      "typ": 160,
+      "max": null,
+      "unit": "°C",
+      "conditions": null
+    },
+    "TSHDN__4": {
+      "parameter": "Thermal shutdown hysteresis",
+      "symbol": "TSHDN",
+      "min": null,
+      "typ": 20,
+      "max": null,
+      "unit": "°C",
+      "conditions": null
     },
     "COUT_Capacitance": {
       "parameter": "Output capacitor",
@@ -761,11 +896,11 @@
           "conditions": "TJ = 25 °C"
         },
         "VOUT_40__C___TJ___125__C": {
-          "parameter": "VOUT accuracy, LDK320A",
+          "parameter": "VOUT accuracy",
           "symbol": "VOUT",
-          "min": -1.5,
+          "min": -3,
           "typ": null,
-          "max": 1.5,
+          "max": 3,
           "unit": "%",
           "conditions": "-40 °C < TJ < 125 °C"
         },
@@ -778,6 +913,15 @@
           "unit": "%",
           "conditions": "TJ = 25 °C"
         },
+        "VOUT_40__C___TJ___125__C__2": {
+          "parameter": "VOUT accuracy, LDK320A",
+          "symbol": "VOUT",
+          "min": -1.5,
+          "typ": null,
+          "max": 1.5,
+          "unit": "%",
+          "conditions": "-40 °C < TJ < 125 °C"
+        },
         "ΔVOUT": {
           "parameter": "Static line regulation",
           "symbol": "ΔVOUT",
@@ -788,6 +932,15 @@
           "conditions": "VOUT +1 V ≤ VIN ≤ 18 V"
         },
         "ΔVOUT_IOUT___1_mA_to_200_mA__VOUT": {
+          "parameter": "Static load regulation",
+          "symbol": "ΔVOUT",
+          "min": null,
+          "typ": 10,
+          "max": 15,
+          "unit": "mV",
+          "conditions": "IOUT = 1 mA to 200 mA, VOUT ≤ 2 V"
+        },
+        "ΔVOUT_IOUT___1_mA_to_200_mA__VOUT__2": {
           "parameter": "Static load regulation",
           "symbol": "ΔVOUT",
           "min": null,
@@ -836,19 +989,19 @@
           "parameter": "Supply voltage rejection",
           "symbol": "SVR",
           "min": null,
-          "typ": 73,
+          "typ": 65,
           "max": null,
           "unit": "dB",
-          "conditions": "f = 1 kHz, IOUT = 10 mA, VOUT = VADJ"
+          "conditions": "f = 1 kHz, IOUT = 10 mA, VOUT = 3.3 V"
         },
         "SVR_f___10_kHz__IOUT___10_mA__VOUT": {
           "parameter": "Supply voltage rejection",
           "symbol": "SVR",
           "min": null,
-          "typ": 58,
+          "typ": 48,
           "max": null,
           "unit": "dB",
-          "conditions": "f = 10 kHz, IOUT = 10 mA, VOUT = VADJ"
+          "conditions": "f = 10 kHz, IOUT = 10 mA, VOUT = 3.3 V"
         },
         "IQ": {
           "parameter": "Quiescent current",
@@ -923,6 +1076,15 @@
           "conditions": "VEN = VIN"
         },
         "TSHDN": {
+          "parameter": "Thermal shutdown",
+          "symbol": "TSHDN",
+          "min": null,
+          "typ": 160,
+          "max": null,
+          "unit": "°C",
+          "conditions": null
+        },
+        "TSHDN__2": {
           "parameter": "Thermal shutdown hysteresis",
           "symbol": "TSHDN",
           "min": null,
@@ -940,6 +1102,15 @@
           "unit": "µF",
           "conditions": "Capacitance"
         },
+        "VIN__2": {
+          "parameter": "Operating input voltage",
+          "symbol": "VIN",
+          "min": 2.5,
+          "typ": null,
+          "max": 18,
+          "unit": "V",
+          "conditions": null
+        },
         "VADJ": {
           "parameter": "Adjustable voltage",
           "symbol": "VADJ",
@@ -950,6 +1121,33 @@
           "conditions": "TJ = 25 °C"
         },
         "VADJ_TJ___25__C": {
+          "parameter": "Adjustable voltage accuracy",
+          "symbol": "VADJ",
+          "min": -2,
+          "typ": null,
+          "max": 2,
+          "unit": "%",
+          "conditions": "TJ = 25 °C"
+        },
+        "VADJ_40__C___TJ___125__C": {
+          "parameter": "Adjustable voltage accuracy",
+          "symbol": "VADJ",
+          "min": -3,
+          "typ": null,
+          "max": 3,
+          "unit": "%",
+          "conditions": "40 °C < TJ < 125 °C"
+        },
+        "VADJ_TJ___25__C__2": {
+          "parameter": "Adjustable voltage, LDK320A",
+          "symbol": "VADJ",
+          "min": null,
+          "typ": 1.2,
+          "max": null,
+          "unit": "V",
+          "conditions": "TJ = 25 °C"
+        },
+        "VADJ_TJ___25__C__3": {
           "parameter": "Adjustable voltage accuracy, LDK320A",
           "symbol": "VADJ",
           "min": -0.5,
@@ -958,7 +1156,7 @@
           "unit": "%",
           "conditions": "TJ = 25 °C"
         },
-        "VADJ_40__C___TJ___125__C": {
+        "VADJ_40__C___TJ___125__C__2": {
           "parameter": "Adjustable voltage accuracy, LDK320A",
           "symbol": "VADJ",
           "min": -1.5,
@@ -1030,6 +1228,24 @@
           "unit": "dB",
           "conditions": "f = 120 Hz, IOUT = 10 mA, VOUT = VADJ"
         },
+        "SVR_f___1_kHz__IOUT___10_mA__VOUT__2": {
+          "parameter": "Supply voltage rejection",
+          "symbol": "SVR",
+          "min": null,
+          "typ": 73,
+          "max": null,
+          "unit": "dB",
+          "conditions": "f = 1 kHz, IOUT = 10 mA, VOUT = VADJ"
+        },
+        "SVR_f___10_kHz__IOUT___10_mA__VOUT__2": {
+          "parameter": "Supply voltage rejection",
+          "symbol": "SVR",
+          "min": null,
+          "typ": 58,
+          "max": null,
+          "unit": "dB",
+          "conditions": "f = 10 kHz, IOUT = 10 mA, VOUT = VADJ"
+        },
         "IQ_VOUT__1_V___VIN___18_V__IOUT": {
           "parameter": "Quiescent current",
           "symbol": "IQ",
@@ -1048,6 +1264,15 @@
           "unit": "µA",
           "conditions": "VIN = VOUT + 1 V, IOUT = 200 mA, -40 °C < TJ < 125 °C"
         },
+        "IQ_VEN___GND__TJ___25__C__2": {
+          "parameter": "Quiescent current (OFF mode)",
+          "symbol": "IQ",
+          "min": null,
+          "typ": 0.2,
+          "max": 1,
+          "unit": "µA",
+          "conditions": "VEN = GND, TJ = 25 °C"
+        },
         "ISC_RL___0": {
           "parameter": "Short-circuit current",
           "symbol": "ISC",
@@ -1057,6 +1282,33 @@
           "unit": "mA",
           "conditions": "RL = 0"
         },
+        "ISC_RL___0__VIN___16_V__2": {
+          "parameter": "Short-circuit current",
+          "symbol": "ISC",
+          "min": null,
+          "typ": 200,
+          "max": null,
+          "unit": "mA",
+          "conditions": "RL = 0, VIN = 16 V"
+        },
+        "VEN_VIN___2_5_V_to_18_V___40__C__2": {
+          "parameter": "Enable input logic low",
+          "symbol": "VEN",
+          "min": null,
+          "typ": null,
+          "max": 0.4,
+          "unit": "V",
+          "conditions": "VIN = 2.5 V to 18 V, -40 °C < TJ < 125 °C"
+        },
+        "VEN_VIN___2_5_V_to_18_V___40__C__3": {
+          "parameter": "Enable input logic high",
+          "symbol": "VEN",
+          "min": 1.2,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": "VIN = 2.5 V to 18 V, -40 °C < TJ < 125 °C"
+        },
         "IEN_VEN___VIN": {
           "parameter": "Enable pin input current",
           "symbol": "IEN",
@@ -1065,6 +1317,24 @@
           "max": 100,
           "unit": "nA",
           "conditions": "VEN = VIN"
+        },
+        "TSHDN__3": {
+          "parameter": "Thermal shutdown",
+          "symbol": "TSHDN",
+          "min": null,
+          "typ": 160,
+          "max": null,
+          "unit": "°C",
+          "conditions": null
+        },
+        "TSHDN__4": {
+          "parameter": "Thermal shutdown hysteresis",
+          "symbol": "TSHDN",
+          "min": null,
+          "typ": 20,
+          "max": null,
+          "unit": "°C",
+          "conditions": null
         },
         "COUT_Capacitance": {
           "parameter": "Output capacitor",

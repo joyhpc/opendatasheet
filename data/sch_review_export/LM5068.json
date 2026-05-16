@@ -105,6 +105,14 @@
       "unit": "V",
       "conditions": null
     },
+    "Other_Inputs_Voltage": {
+      "parameter": "Other Inputs Voltage",
+      "symbol": null,
+      "min": null,
+      "max": 16,
+      "unit": "V",
+      "conditions": null
+    },
     "TJ": {
       "parameter": "Junction Temperature",
       "symbol": "TJ",
@@ -119,6 +127,14 @@
       "min": -55,
       "max": 150,
       "unit": "°C",
+      "conditions": null
+    },
+    "ESD_Rating": {
+      "parameter": "ESD Rating",
+      "symbol": null,
+      "min": null,
+      "max": 2000,
+      "unit": "V",
       "conditions": null
     }
   },
@@ -180,6 +196,15 @@
     "VUV": {
       "parameter": "Under-voltage Comparator Threshold",
       "symbol": "VUV",
+      "min": null,
+      "typ": 2.5,
+      "max": null,
+      "unit": "V",
+      "conditions": null
+    },
+    "VUV__2": {
+      "parameter": "Under-voltage Comparator Threshold",
+      "symbol": "VUV",
       "min": 2.45,
       "typ": null,
       "max": 2.55,
@@ -187,6 +212,15 @@
       "conditions": null
     },
     "IUVHCS": {
+      "parameter": "Under-voltage Hysteresis Current Source",
+      "symbol": "IUVHCS",
+      "min": null,
+      "typ": 20,
+      "max": null,
+      "unit": "µA",
+      "conditions": null
+    },
+    "IUVHCS__2": {
       "parameter": "Under-voltage Hysteresis Current Source",
       "symbol": "IUVHCS",
       "min": 18,
@@ -198,6 +232,15 @@
     "VOV": {
       "parameter": "Over-voltage Comparator Threshold",
       "symbol": "VOV",
+      "min": null,
+      "typ": 2.5,
+      "max": null,
+      "unit": "V",
+      "conditions": null
+    },
+    "VOV__2": {
+      "parameter": "Over-voltage Comparator Threshold",
+      "symbol": "VOV",
       "min": 2.45,
       "typ": null,
       "max": 2.55,
@@ -205,6 +248,15 @@
       "conditions": null
     },
     "IOVHCS": {
+      "parameter": "Over-voltage Hysteresis Current Sink",
+      "symbol": "IOVHCS",
+      "min": null,
+      "typ": 20,
+      "max": null,
+      "unit": "µA",
+      "conditions": null
+    },
+    "IOVHCS__2": {
       "parameter": "Over-voltage Hysteresis Current Sink",
       "symbol": "IOVHCS",
       "min": 18,
@@ -234,6 +286,15 @@
     "VCB": {
       "parameter": "Circuit Breaker Current Limit Voltage",
       "symbol": "VCB",
+      "min": null,
+      "typ": 50,
+      "max": null,
+      "unit": "mV",
+      "conditions": null
+    },
+    "VCB__2": {
+      "parameter": "Circuit Breaker Current Limit Voltage",
+      "symbol": "VCB",
       "min": 40,
       "typ": null,
       "max": 60,
@@ -241,6 +302,15 @@
       "conditions": null
     },
     "VAC": {
+      "parameter": "Analog Current Limit Voltage",
+      "symbol": "VAC",
+      "min": null,
+      "typ": 100,
+      "max": null,
+      "unit": "mV",
+      "conditions": null
+    },
+    "VAC__2": {
       "parameter": "Analog Current Limit Voltage",
       "symbol": "VAC",
       "min": 80,
@@ -313,6 +383,51 @@
       "conditions": "VTIMER = 2V"
     },
     "ITIMER_VTIMER___2V": {
+      "parameter": "Timer On (Initial Cycle, Sourcing)",
+      "symbol": "ITIMER",
+      "min": 4,
+      "typ": null,
+      "max": 8,
+      "unit": "µA",
+      "conditions": "VTIMER = 2V"
+    },
+    "ITIMER_VTIMER___2V__2": {
+      "parameter": "Timer Off (Initial Cycle, Sinking)",
+      "symbol": "ITIMER",
+      "min": null,
+      "typ": 27,
+      "max": null,
+      "unit": "µA",
+      "conditions": "VTIMER = 2V"
+    },
+    "ITIMER_VTIMER___2V__3": {
+      "parameter": "Timer On (Circuit Breaker, Sourcing)",
+      "symbol": "ITIMER",
+      "min": null,
+      "typ": 240,
+      "max": null,
+      "unit": "µA",
+      "conditions": "VTIMER = 2V"
+    },
+    "ITIMER_VTIMER___2V__4": {
+      "parameter": "Timer On (Circuit Breaker, Sourcing)",
+      "symbol": "ITIMER",
+      "min": 200,
+      "typ": null,
+      "max": 280,
+      "unit": "µA",
+      "conditions": "VTIMER = 2V"
+    },
+    "ITIMER_VTIMER___2V__5": {
+      "parameter": "Timer Off (Cooling Cycle, Sinking)",
+      "symbol": "ITIMER",
+      "min": null,
+      "typ": 6,
+      "max": null,
+      "unit": "µA",
+      "conditions": "VTIMER = 2V"
+    },
+    "ITIMER_VTIMER___2V__6": {
       "parameter": "Timer Off (Cooling Cycle, Sinking)",
       "symbol": "ITIMER",
       "min": 4,
@@ -435,11 +550,6 @@
       "value": 100,
       "unit": "V"
     },
-    "vin_operating": {
-      "min": 10,
-      "max": 90,
-      "unit": "V"
-    },
     "iout_max": {
       "typ": 50,
       "unit": "mV"
@@ -546,6 +656,14 @@
           "unit": "V",
           "conditions": null
         },
+        "Other_Inputs_Voltage": {
+          "parameter": "Other Inputs Voltage",
+          "symbol": null,
+          "min": null,
+          "max": 16,
+          "unit": "V",
+          "conditions": null
+        },
         "TJ": {
           "parameter": "Junction Temperature",
           "symbol": "TJ",
@@ -560,6 +678,14 @@
           "min": -55,
           "max": 150,
           "unit": "°C",
+          "conditions": null
+        },
+        "ESD_Rating": {
+          "parameter": "ESD Rating",
+          "symbol": null,
+          "min": null,
+          "max": 2000,
+          "unit": "V",
           "conditions": null
         }
       },
@@ -621,6 +747,15 @@
         "VUV": {
           "parameter": "Under-voltage Comparator Threshold",
           "symbol": "VUV",
+          "min": null,
+          "typ": 2.5,
+          "max": null,
+          "unit": "V",
+          "conditions": null
+        },
+        "VUV__2": {
+          "parameter": "Under-voltage Comparator Threshold",
+          "symbol": "VUV",
           "min": 2.45,
           "typ": null,
           "max": 2.55,
@@ -628,6 +763,15 @@
           "conditions": null
         },
         "IUVHCS": {
+          "parameter": "Under-voltage Hysteresis Current Source",
+          "symbol": "IUVHCS",
+          "min": null,
+          "typ": 20,
+          "max": null,
+          "unit": "µA",
+          "conditions": null
+        },
+        "IUVHCS__2": {
           "parameter": "Under-voltage Hysteresis Current Source",
           "symbol": "IUVHCS",
           "min": 18,
@@ -639,6 +783,15 @@
         "VOV": {
           "parameter": "Over-voltage Comparator Threshold",
           "symbol": "VOV",
+          "min": null,
+          "typ": 2.5,
+          "max": null,
+          "unit": "V",
+          "conditions": null
+        },
+        "VOV__2": {
+          "parameter": "Over-voltage Comparator Threshold",
+          "symbol": "VOV",
           "min": 2.45,
           "typ": null,
           "max": 2.55,
@@ -646,6 +799,15 @@
           "conditions": null
         },
         "IOVHCS": {
+          "parameter": "Over-voltage Hysteresis Current Sink",
+          "symbol": "IOVHCS",
+          "min": null,
+          "typ": 20,
+          "max": null,
+          "unit": "µA",
+          "conditions": null
+        },
+        "IOVHCS__2": {
           "parameter": "Over-voltage Hysteresis Current Sink",
           "symbol": "IOVHCS",
           "min": 18,
@@ -675,6 +837,15 @@
         "VCB": {
           "parameter": "Circuit Breaker Current Limit Voltage",
           "symbol": "VCB",
+          "min": null,
+          "typ": 50,
+          "max": null,
+          "unit": "mV",
+          "conditions": null
+        },
+        "VCB__2": {
+          "parameter": "Circuit Breaker Current Limit Voltage",
+          "symbol": "VCB",
           "min": 40,
           "typ": null,
           "max": 60,
@@ -682,6 +853,15 @@
           "conditions": null
         },
         "VAC": {
+          "parameter": "Analog Current Limit Voltage",
+          "symbol": "VAC",
+          "min": null,
+          "typ": 100,
+          "max": null,
+          "unit": "mV",
+          "conditions": null
+        },
+        "VAC__2": {
           "parameter": "Analog Current Limit Voltage",
           "symbol": "VAC",
           "min": 80,
@@ -754,6 +934,51 @@
           "conditions": "VTIMER = 2V"
         },
         "ITIMER_VTIMER___2V": {
+          "parameter": "Timer On (Initial Cycle, Sourcing)",
+          "symbol": "ITIMER",
+          "min": 4,
+          "typ": null,
+          "max": 8,
+          "unit": "µA",
+          "conditions": "VTIMER = 2V"
+        },
+        "ITIMER_VTIMER___2V__2": {
+          "parameter": "Timer Off (Initial Cycle, Sinking)",
+          "symbol": "ITIMER",
+          "min": null,
+          "typ": 27,
+          "max": null,
+          "unit": "µA",
+          "conditions": "VTIMER = 2V"
+        },
+        "ITIMER_VTIMER___2V__3": {
+          "parameter": "Timer On (Circuit Breaker, Sourcing)",
+          "symbol": "ITIMER",
+          "min": null,
+          "typ": 240,
+          "max": null,
+          "unit": "µA",
+          "conditions": "VTIMER = 2V"
+        },
+        "ITIMER_VTIMER___2V__4": {
+          "parameter": "Timer On (Circuit Breaker, Sourcing)",
+          "symbol": "ITIMER",
+          "min": 200,
+          "typ": null,
+          "max": 280,
+          "unit": "µA",
+          "conditions": "VTIMER = 2V"
+        },
+        "ITIMER_VTIMER___2V__5": {
+          "parameter": "Timer Off (Cooling Cycle, Sinking)",
+          "symbol": "ITIMER",
+          "min": null,
+          "typ": 6,
+          "max": null,
+          "unit": "µA",
+          "conditions": "VTIMER = 2V"
+        },
+        "ITIMER_VTIMER___2V__6": {
           "parameter": "Timer Off (Cooling Cycle, Sinking)",
           "symbol": "ITIMER",
           "min": 4,
@@ -874,11 +1099,6 @@
       "drc_hints": {
         "vin_abs_max": {
           "value": 100,
-          "unit": "V"
-        },
-        "vin_operating": {
-          "min": 10,
-          "max": 90,
           "unit": "V"
         },
         "iout_max": {

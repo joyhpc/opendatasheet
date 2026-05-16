@@ -146,6 +146,38 @@
     }
   },
   "absolute_maximum_ratings": {
+    "Voltage__VIN__EN__PG": {
+      "parameter": "Voltage (VIN, EN, PG)",
+      "symbol": null,
+      "min": -0.3,
+      "max": 6,
+      "unit": "V",
+      "conditions": null
+    },
+    "Voltage__SW_DC": {
+      "parameter": "Voltage (SW DC)",
+      "symbol": null,
+      "min": -0.3,
+      "max": null,
+      "unit": "V",
+      "conditions": "max is VIN + 0.3"
+    },
+    "Voltage__SW_AC": {
+      "parameter": "Voltage (SW AC)",
+      "symbol": null,
+      "min": -3.0,
+      "max": 9,
+      "unit": "V",
+      "conditions": "less than 10 ns"
+    },
+    "Voltage__FB": {
+      "parameter": "Voltage (FB)",
+      "symbol": null,
+      "min": -0.3,
+      "max": 5.5,
+      "unit": "V",
+      "conditions": null
+    },
     "TJ": {
       "parameter": "Operating junction temperature",
       "symbol": "TJ",
@@ -243,6 +275,15 @@
       "unit": "V",
       "conditions": "VIN falling"
     },
+    "Under_voltage_lock_out_hystere": {
+      "parameter": "Under voltage lock out hysteresis",
+      "symbol": null,
+      "min": null,
+      "typ": 100,
+      "max": null,
+      "unit": "mV",
+      "conditions": null
+    },
     "TJSD": {
       "parameter": "Thermal shutdown threshold (rising)",
       "symbol": "TJSD",
@@ -280,6 +321,15 @@
       "conditions": "2.5 V ≤ VIN ≤ 5.5 V"
     },
     "tSS": {
+      "parameter": "Soft startup time (DBV)",
+      "symbol": "tSS",
+      "min": null,
+      "typ": 700,
+      "max": null,
+      "unit": "µs",
+      "conditions": null
+    },
+    "tSS__2": {
       "parameter": "Soft startup time (DRL/PDDC)",
       "symbol": "tSS",
       "min": null,
@@ -343,6 +393,15 @@
       "conditions": null
     },
     "RDS(on)": {
+      "parameter": "High-side FET on resistance",
+      "symbol": "RDS(on)",
+      "min": null,
+      "typ": 150,
+      "max": null,
+      "unit": "mΩ",
+      "conditions": null
+    },
+    "RDS(on)__2": {
       "parameter": "Low-side FET on resistance",
       "symbol": "RDS(on)",
       "min": null,
@@ -559,6 +618,38 @@
     },
     "electrical": {
       "absolute_maximum_ratings": {
+        "Voltage__VIN__EN__PG": {
+          "parameter": "Voltage (VIN, EN, PG)",
+          "symbol": null,
+          "min": -0.3,
+          "max": 6,
+          "unit": "V",
+          "conditions": null
+        },
+        "Voltage__SW_DC": {
+          "parameter": "Voltage (SW DC)",
+          "symbol": null,
+          "min": -0.3,
+          "max": null,
+          "unit": "V",
+          "conditions": "max is VIN + 0.3"
+        },
+        "Voltage__SW_AC": {
+          "parameter": "Voltage (SW AC)",
+          "symbol": null,
+          "min": -3.0,
+          "max": 9,
+          "unit": "V",
+          "conditions": "less than 10 ns"
+        },
+        "Voltage__FB": {
+          "parameter": "Voltage (FB)",
+          "symbol": null,
+          "min": -0.3,
+          "max": 5.5,
+          "unit": "V",
+          "conditions": null
+        },
         "TJ": {
           "parameter": "Operating junction temperature",
           "symbol": "TJ",
@@ -656,6 +747,15 @@
           "unit": "V",
           "conditions": "VIN falling"
         },
+        "Under_voltage_lock_out_hystere": {
+          "parameter": "Under voltage lock out hysteresis",
+          "symbol": null,
+          "min": null,
+          "typ": 100,
+          "max": null,
+          "unit": "mV",
+          "conditions": null
+        },
         "TJSD": {
           "parameter": "Thermal shutdown threshold (rising)",
           "symbol": "TJSD",
@@ -693,6 +793,15 @@
           "conditions": "2.5 V ≤ VIN ≤ 5.5 V"
         },
         "tSS": {
+          "parameter": "Soft startup time (DBV)",
+          "symbol": "tSS",
+          "min": null,
+          "typ": 700,
+          "max": null,
+          "unit": "µs",
+          "conditions": null
+        },
+        "tSS__2": {
           "parameter": "Soft startup time (DRL/PDDC)",
           "symbol": "tSS",
           "min": null,
@@ -756,6 +865,15 @@
           "conditions": null
         },
         "RDS(on)": {
+          "parameter": "High-side FET on resistance",
+          "symbol": "RDS(on)",
+          "min": null,
+          "typ": 150,
+          "max": null,
+          "unit": "mΩ",
+          "conditions": null
+        },
+        "RDS(on)__2": {
           "parameter": "Low-side FET on resistance",
           "symbol": "RDS(on)",
           "min": null,

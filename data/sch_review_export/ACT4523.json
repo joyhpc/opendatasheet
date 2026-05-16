@@ -2,7 +2,8 @@
   "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
-    "L0_skeleton"
+    "L0_skeleton",
+    "L1_electrical"
   ],
   "mpn": "ACT4523",
   "manufacturer": "Qorvo",
@@ -78,8 +79,326 @@
       }
     }
   },
-  "absolute_maximum_ratings": {},
-  "electrical_parameters": {},
+  "absolute_maximum_ratings": {
+    "IN_to_GND": {
+      "parameter": "IN to GND",
+      "symbol": null,
+      "min": -0.3,
+      "max": 40,
+      "unit": "V",
+      "conditions": null
+    },
+    "SW_to_GND": {
+      "parameter": "SW to GND",
+      "symbol": null,
+      "min": -1,
+      "max": null,
+      "unit": "V",
+      "conditions": "max is VIN + 1"
+    },
+    "HSB_to_GND": {
+      "parameter": "HSB to GND",
+      "symbol": null,
+      "min": null,
+      "max": null,
+      "unit": "V",
+      "conditions": "VSW - 0.3 to VSW + 7"
+    },
+    "FB__EN__ISET__COMP_to_GND": {
+      "parameter": "FB, EN, ISET, COMP to GND",
+      "symbol": null,
+      "min": -0.3,
+      "max": 6,
+      "unit": "V",
+      "conditions": null
+    },
+    "Junction_to_Ambient_Thermal_Re": {
+      "parameter": "Junction to Ambient Thermal Resistance",
+      "symbol": null,
+      "min": null,
+      "max": 46,
+      "unit": "°C/W",
+      "conditions": null
+    },
+    "Operating_Junction_Temperature": {
+      "parameter": "Operating Junction Temperature",
+      "symbol": null,
+      "min": -40,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    },
+    "Storage_Junction_Temperature": {
+      "parameter": "Storage Junction Temperature",
+      "symbol": null,
+      "min": -55,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    },
+    "Lead_Temperature__Soldering_10": {
+      "parameter": "Lead Temperature (Soldering 10 sec.)",
+      "symbol": null,
+      "min": null,
+      "max": 300,
+      "unit": "°C",
+      "conditions": null
+    }
+  },
+  "electrical_parameters": {
+    "Input_Voltage": {
+      "parameter": "Input Voltage",
+      "symbol": null,
+      "min": 10,
+      "typ": null,
+      "max": 38,
+      "unit": "V",
+      "conditions": null
+    },
+    "Input_Voltage_Surge": {
+      "parameter": "Input Voltage Surge",
+      "symbol": null,
+      "min": null,
+      "typ": null,
+      "max": 40,
+      "unit": "V",
+      "conditions": null
+    },
+    "VIN_UVLO_Turn_On_Voltage": {
+      "parameter": "VIN UVLO Turn-On Voltage",
+      "symbol": null,
+      "min": 9.0,
+      "typ": 9.4,
+      "max": 9.7,
+      "unit": "V",
+      "conditions": "Input Voltage Rising"
+    },
+    "VIN_UVLO_Hysteresis": {
+      "parameter": "VIN UVLO Hysteresis",
+      "symbol": null,
+      "min": null,
+      "typ": 1.1,
+      "max": null,
+      "unit": "V",
+      "conditions": "Input Voltage Falling"
+    },
+    "Standby_Supply_Current": {
+      "parameter": "Standby Supply Current",
+      "symbol": null,
+      "min": null,
+      "typ": 0.9,
+      "max": 1.4,
+      "unit": "mA",
+      "conditions": "VEN = 3V, VFB = 1V"
+    },
+    "Standby_Supply_Current_VEN___3V__VOUT___5V__No_load": {
+      "parameter": "Standby Supply Current",
+      "symbol": null,
+      "min": null,
+      "typ": 3.0,
+      "max": null,
+      "unit": "mA",
+      "conditions": "VEN = 3V, VOUT = 5V, No load"
+    },
+    "Shutdown_Supply_Current": {
+      "parameter": "Shutdown Supply Current",
+      "symbol": null,
+      "min": null,
+      "typ": 75,
+      "max": 115,
+      "unit": "µA",
+      "conditions": "VEN = 0V"
+    },
+    "Feedback_Voltage": {
+      "parameter": "Feedback Voltage",
+      "symbol": null,
+      "min": 792,
+      "typ": 808,
+      "max": 824,
+      "unit": "mV",
+      "conditions": null
+    },
+    "Internal_Soft_Start_Time": {
+      "parameter": "Internal Soft-Start Time",
+      "symbol": null,
+      "min": null,
+      "typ": 400,
+      "max": null,
+      "unit": "µs",
+      "conditions": null
+    },
+    "Error_Amplifier_Transconductan": {
+      "parameter": "Error Amplifier Transconductance",
+      "symbol": null,
+      "min": null,
+      "typ": 650,
+      "max": null,
+      "unit": "µA/V",
+      "conditions": "VFB = VCOMP = 0.8V, ΔICOMP = ± 10µA"
+    },
+    "Error_Amplifier_DC_Gain": {
+      "parameter": "Error Amplifier DC Gain",
+      "symbol": null,
+      "min": null,
+      "typ": 4000,
+      "max": null,
+      "unit": "V/V",
+      "conditions": null
+    },
+    "Switching_Frequency": {
+      "parameter": "Switching Frequency",
+      "symbol": null,
+      "min": 200,
+      "typ": 225,
+      "max": 250,
+      "unit": "kHz",
+      "conditions": "VFB = 0.808V"
+    },
+    "Foldback_Switching_Frequency": {
+      "parameter": "Foldback Switching Frequency",
+      "symbol": null,
+      "min": null,
+      "typ": 30,
+      "max": null,
+      "unit": "kHz",
+      "conditions": "VFB = 0V"
+    },
+    "Maximum_Duty_Cycle": {
+      "parameter": "Maximum Duty Cycle",
+      "symbol": null,
+      "min": 85,
+      "typ": 88,
+      "max": 91,
+      "unit": "%",
+      "conditions": null
+    },
+    "Minimum_On_Time": {
+      "parameter": "Minimum On-Time",
+      "symbol": null,
+      "min": null,
+      "typ": 200,
+      "max": null,
+      "unit": "ns",
+      "conditions": null
+    },
+    "COMP_to_Current_Limit_Transcon": {
+      "parameter": "COMP to Current Limit Transconductance",
+      "symbol": null,
+      "min": null,
+      "typ": 5.25,
+      "max": null,
+      "unit": "A/V",
+      "conditions": "VCOMP = 1.2V"
+    },
+    "Secondary_Cycle_by_Cycle_Curre": {
+      "parameter": "Secondary Cycle-by-Cycle Current Limit",
+      "symbol": null,
+      "min": null,
+      "typ": 4.5,
+      "max": null,
+      "unit": "A",
+      "conditions": "Duty Cycle = 0%"
+    },
+    "Slope_Compensation": {
+      "parameter": "Slope Compensation",
+      "symbol": null,
+      "min": null,
+      "typ": 1.2,
+      "max": null,
+      "unit": "A",
+      "conditions": "Duty = DMAX"
+    },
+    "ISET_Voltage": {
+      "parameter": "ISET Voltage",
+      "symbol": null,
+      "min": null,
+      "typ": 1,
+      "max": null,
+      "unit": "V",
+      "conditions": null
+    },
+    "ISET_to_IOUT_DC_Room_Temp_Curr": {
+      "parameter": "ISET to IOUT DC Room Temp Current Gain",
+      "symbol": null,
+      "min": null,
+      "typ": 25000,
+      "max": null,
+      "unit": "A/A",
+      "conditions": "IOUT / ISET, RISET = 19.6kΩ"
+    },
+    "CC_Controller_DC_Accuracy": {
+      "parameter": "CC Controller DC Accuracy",
+      "symbol": null,
+      "min": 1175,
+      "typ": 1190,
+      "max": 1205,
+      "unit": "mA",
+      "conditions": "RISET = 19.6kΩ, VOUT = 3.5V Open-Loop DC Test"
+    },
+    "EN_Threshold_Voltage": {
+      "parameter": "EN Threshold Voltage",
+      "symbol": null,
+      "min": 1.47,
+      "typ": 1.6,
+      "max": 1.73,
+      "unit": "V",
+      "conditions": "EN Pin Rising"
+    },
+    "EN_Hysteresis": {
+      "parameter": "EN Hysteresis",
+      "symbol": null,
+      "min": null,
+      "typ": 125,
+      "max": null,
+      "unit": "mV",
+      "conditions": "EN Pin Falling"
+    },
+    "EN_Internal_Pull_up_Current": {
+      "parameter": "EN Internal Pull-up Current",
+      "symbol": null,
+      "min": null,
+      "typ": 4,
+      "max": null,
+      "unit": "µA",
+      "conditions": null
+    },
+    "High_Side_Switch_ON_Resistance": {
+      "parameter": "High-Side Switch ON-Resistance",
+      "symbol": null,
+      "min": null,
+      "typ": 0.16,
+      "max": null,
+      "unit": "Ω",
+      "conditions": null
+    },
+    "SW_Off_Leakage_Current": {
+      "parameter": "SW Off Leakage Current",
+      "symbol": null,
+      "min": null,
+      "typ": 1,
+      "max": 10,
+      "unit": "µA",
+      "conditions": "VEN = VSW = 0V"
+    },
+    "Thermal_Shutdown_Temperature": {
+      "parameter": "Thermal Shutdown Temperature",
+      "symbol": null,
+      "min": null,
+      "typ": 150,
+      "max": null,
+      "unit": "°C",
+      "conditions": "Temperature Rising"
+    },
+    "Thermal_Shutdown_Temperature_H": {
+      "parameter": "Thermal Shutdown Temperature Hysteresis",
+      "symbol": null,
+      "min": null,
+      "typ": 20,
+      "max": null,
+      "unit": "°C",
+      "conditions": "Temperature Falling"
+    }
+  },
   "drc_hints": {
     "vref": {
       "min": 792,
@@ -193,8 +512,326 @@
       }
     },
     "electrical": {
-      "absolute_maximum_ratings": {},
-      "electrical_parameters": {},
+      "absolute_maximum_ratings": {
+        "IN_to_GND": {
+          "parameter": "IN to GND",
+          "symbol": null,
+          "min": -0.3,
+          "max": 40,
+          "unit": "V",
+          "conditions": null
+        },
+        "SW_to_GND": {
+          "parameter": "SW to GND",
+          "symbol": null,
+          "min": -1,
+          "max": null,
+          "unit": "V",
+          "conditions": "max is VIN + 1"
+        },
+        "HSB_to_GND": {
+          "parameter": "HSB to GND",
+          "symbol": null,
+          "min": null,
+          "max": null,
+          "unit": "V",
+          "conditions": "VSW - 0.3 to VSW + 7"
+        },
+        "FB__EN__ISET__COMP_to_GND": {
+          "parameter": "FB, EN, ISET, COMP to GND",
+          "symbol": null,
+          "min": -0.3,
+          "max": 6,
+          "unit": "V",
+          "conditions": null
+        },
+        "Junction_to_Ambient_Thermal_Re": {
+          "parameter": "Junction to Ambient Thermal Resistance",
+          "symbol": null,
+          "min": null,
+          "max": 46,
+          "unit": "°C/W",
+          "conditions": null
+        },
+        "Operating_Junction_Temperature": {
+          "parameter": "Operating Junction Temperature",
+          "symbol": null,
+          "min": -40,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        },
+        "Storage_Junction_Temperature": {
+          "parameter": "Storage Junction Temperature",
+          "symbol": null,
+          "min": -55,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        },
+        "Lead_Temperature__Soldering_10": {
+          "parameter": "Lead Temperature (Soldering 10 sec.)",
+          "symbol": null,
+          "min": null,
+          "max": 300,
+          "unit": "°C",
+          "conditions": null
+        }
+      },
+      "electrical_parameters": {
+        "Input_Voltage": {
+          "parameter": "Input Voltage",
+          "symbol": null,
+          "min": 10,
+          "typ": null,
+          "max": 38,
+          "unit": "V",
+          "conditions": null
+        },
+        "Input_Voltage_Surge": {
+          "parameter": "Input Voltage Surge",
+          "symbol": null,
+          "min": null,
+          "typ": null,
+          "max": 40,
+          "unit": "V",
+          "conditions": null
+        },
+        "VIN_UVLO_Turn_On_Voltage": {
+          "parameter": "VIN UVLO Turn-On Voltage",
+          "symbol": null,
+          "min": 9.0,
+          "typ": 9.4,
+          "max": 9.7,
+          "unit": "V",
+          "conditions": "Input Voltage Rising"
+        },
+        "VIN_UVLO_Hysteresis": {
+          "parameter": "VIN UVLO Hysteresis",
+          "symbol": null,
+          "min": null,
+          "typ": 1.1,
+          "max": null,
+          "unit": "V",
+          "conditions": "Input Voltage Falling"
+        },
+        "Standby_Supply_Current": {
+          "parameter": "Standby Supply Current",
+          "symbol": null,
+          "min": null,
+          "typ": 0.9,
+          "max": 1.4,
+          "unit": "mA",
+          "conditions": "VEN = 3V, VFB = 1V"
+        },
+        "Standby_Supply_Current_VEN___3V__VOUT___5V__No_load": {
+          "parameter": "Standby Supply Current",
+          "symbol": null,
+          "min": null,
+          "typ": 3.0,
+          "max": null,
+          "unit": "mA",
+          "conditions": "VEN = 3V, VOUT = 5V, No load"
+        },
+        "Shutdown_Supply_Current": {
+          "parameter": "Shutdown Supply Current",
+          "symbol": null,
+          "min": null,
+          "typ": 75,
+          "max": 115,
+          "unit": "µA",
+          "conditions": "VEN = 0V"
+        },
+        "Feedback_Voltage": {
+          "parameter": "Feedback Voltage",
+          "symbol": null,
+          "min": 792,
+          "typ": 808,
+          "max": 824,
+          "unit": "mV",
+          "conditions": null
+        },
+        "Internal_Soft_Start_Time": {
+          "parameter": "Internal Soft-Start Time",
+          "symbol": null,
+          "min": null,
+          "typ": 400,
+          "max": null,
+          "unit": "µs",
+          "conditions": null
+        },
+        "Error_Amplifier_Transconductan": {
+          "parameter": "Error Amplifier Transconductance",
+          "symbol": null,
+          "min": null,
+          "typ": 650,
+          "max": null,
+          "unit": "µA/V",
+          "conditions": "VFB = VCOMP = 0.8V, ΔICOMP = ± 10µA"
+        },
+        "Error_Amplifier_DC_Gain": {
+          "parameter": "Error Amplifier DC Gain",
+          "symbol": null,
+          "min": null,
+          "typ": 4000,
+          "max": null,
+          "unit": "V/V",
+          "conditions": null
+        },
+        "Switching_Frequency": {
+          "parameter": "Switching Frequency",
+          "symbol": null,
+          "min": 200,
+          "typ": 225,
+          "max": 250,
+          "unit": "kHz",
+          "conditions": "VFB = 0.808V"
+        },
+        "Foldback_Switching_Frequency": {
+          "parameter": "Foldback Switching Frequency",
+          "symbol": null,
+          "min": null,
+          "typ": 30,
+          "max": null,
+          "unit": "kHz",
+          "conditions": "VFB = 0V"
+        },
+        "Maximum_Duty_Cycle": {
+          "parameter": "Maximum Duty Cycle",
+          "symbol": null,
+          "min": 85,
+          "typ": 88,
+          "max": 91,
+          "unit": "%",
+          "conditions": null
+        },
+        "Minimum_On_Time": {
+          "parameter": "Minimum On-Time",
+          "symbol": null,
+          "min": null,
+          "typ": 200,
+          "max": null,
+          "unit": "ns",
+          "conditions": null
+        },
+        "COMP_to_Current_Limit_Transcon": {
+          "parameter": "COMP to Current Limit Transconductance",
+          "symbol": null,
+          "min": null,
+          "typ": 5.25,
+          "max": null,
+          "unit": "A/V",
+          "conditions": "VCOMP = 1.2V"
+        },
+        "Secondary_Cycle_by_Cycle_Curre": {
+          "parameter": "Secondary Cycle-by-Cycle Current Limit",
+          "symbol": null,
+          "min": null,
+          "typ": 4.5,
+          "max": null,
+          "unit": "A",
+          "conditions": "Duty Cycle = 0%"
+        },
+        "Slope_Compensation": {
+          "parameter": "Slope Compensation",
+          "symbol": null,
+          "min": null,
+          "typ": 1.2,
+          "max": null,
+          "unit": "A",
+          "conditions": "Duty = DMAX"
+        },
+        "ISET_Voltage": {
+          "parameter": "ISET Voltage",
+          "symbol": null,
+          "min": null,
+          "typ": 1,
+          "max": null,
+          "unit": "V",
+          "conditions": null
+        },
+        "ISET_to_IOUT_DC_Room_Temp_Curr": {
+          "parameter": "ISET to IOUT DC Room Temp Current Gain",
+          "symbol": null,
+          "min": null,
+          "typ": 25000,
+          "max": null,
+          "unit": "A/A",
+          "conditions": "IOUT / ISET, RISET = 19.6kΩ"
+        },
+        "CC_Controller_DC_Accuracy": {
+          "parameter": "CC Controller DC Accuracy",
+          "symbol": null,
+          "min": 1175,
+          "typ": 1190,
+          "max": 1205,
+          "unit": "mA",
+          "conditions": "RISET = 19.6kΩ, VOUT = 3.5V Open-Loop DC Test"
+        },
+        "EN_Threshold_Voltage": {
+          "parameter": "EN Threshold Voltage",
+          "symbol": null,
+          "min": 1.47,
+          "typ": 1.6,
+          "max": 1.73,
+          "unit": "V",
+          "conditions": "EN Pin Rising"
+        },
+        "EN_Hysteresis": {
+          "parameter": "EN Hysteresis",
+          "symbol": null,
+          "min": null,
+          "typ": 125,
+          "max": null,
+          "unit": "mV",
+          "conditions": "EN Pin Falling"
+        },
+        "EN_Internal_Pull_up_Current": {
+          "parameter": "EN Internal Pull-up Current",
+          "symbol": null,
+          "min": null,
+          "typ": 4,
+          "max": null,
+          "unit": "µA",
+          "conditions": null
+        },
+        "High_Side_Switch_ON_Resistance": {
+          "parameter": "High-Side Switch ON-Resistance",
+          "symbol": null,
+          "min": null,
+          "typ": 0.16,
+          "max": null,
+          "unit": "Ω",
+          "conditions": null
+        },
+        "SW_Off_Leakage_Current": {
+          "parameter": "SW Off Leakage Current",
+          "symbol": null,
+          "min": null,
+          "typ": 1,
+          "max": 10,
+          "unit": "µA",
+          "conditions": "VEN = VSW = 0V"
+        },
+        "Thermal_Shutdown_Temperature": {
+          "parameter": "Thermal Shutdown Temperature",
+          "symbol": null,
+          "min": null,
+          "typ": 150,
+          "max": null,
+          "unit": "°C",
+          "conditions": "Temperature Rising"
+        },
+        "Thermal_Shutdown_Temperature_H": {
+          "parameter": "Thermal Shutdown Temperature Hysteresis",
+          "symbol": null,
+          "min": null,
+          "typ": 20,
+          "max": null,
+          "unit": "°C",
+          "conditions": "Temperature Falling"
+        }
+      },
       "drc_hints": {
         "vref": {
           "min": 792,
@@ -239,11 +876,21 @@
       "topology_hints": [
         {
           "hint": "ACT4523 Wide Input Sensorless CC/CV Step-Down DC/DC Converter Data Sheet Rev. 8.0, January 19, 2020 | Subject to change without notice 6 of 16 www.qorvo.com APPLICATIONS INFORMATION",
-          "source_page": 5
+          "source_page": 5,
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.topology_keywords",
+            "source_page": 5
+          }
         },
         {
           "hint": "ACT4523 Wide Input Sensorless CC/CV Step-Down DC/DC Converter Data Sheet Rev. 8.0, January 19, 2020 | Subject to change without notice 7 of 16 www.qorvo.com APPLICATIONS INFORMATION",
-          "source_page": 6
+          "source_page": 6,
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.topology_keywords",
+            "source_page": 6
+          }
         }
       ],
       "typical_application": {
@@ -254,12 +901,22 @@
           {
             "page": 5,
             "title": null,
-            "content_type": "application"
+            "content_type": "application",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 5
+            }
           },
           {
             "page": 6,
             "title": null,
-            "content_type": "application"
+            "content_type": "application",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 6
+            }
           }
         ],
         "total_pages": 2

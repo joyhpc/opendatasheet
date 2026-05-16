@@ -99,10 +99,27 @@
       "max": 150,
       "unit": "°C",
       "conditions": null
+    },
+    "Lead_Temperature__Soldering__1": {
+      "parameter": "Lead Temperature (Soldering, 10 sec)",
+      "symbol": null,
+      "min": null,
+      "max": 300,
+      "unit": "°C",
+      "conditions": null
     }
   },
   "electrical_parameters": {
     "VIN(min)": {
+      "parameter": "Minimum Operating Voltage",
+      "symbol": "VIN(min)",
+      "min": null,
+      "typ": 1.0,
+      "max": 1.2,
+      "unit": "V",
+      "conditions": null
+    },
+    "VIN(min)__2": {
       "parameter": "Minimum Operating Voltage",
       "symbol": "VIN(min)",
       "min": null,
@@ -120,7 +137,25 @@
       "unit": "V",
       "conditions": null
     },
+    "VIN(max)__2": {
+      "parameter": "Maximum Operating Voltage",
+      "symbol": "VIN(max)",
+      "min": null,
+      "typ": null,
+      "max": 15,
+      "unit": "V",
+      "conditions": null
+    },
     "VFB": {
+      "parameter": "Feedback Voltage",
+      "symbol": "VFB",
+      "min": 1.205,
+      "typ": 1.23,
+      "max": 1.255,
+      "unit": "V",
+      "conditions": null
+    },
+    "VFB__2": {
       "parameter": "Feedback Voltage",
       "symbol": "VFB",
       "min": 1.18,
@@ -169,10 +204,37 @@
       "parameter": "Quiescent Current in Shutdown",
       "symbol": "IQ",
       "min": null,
+      "typ": 0.1,
+      "max": 1.0,
+      "unit": "µA",
+      "conditions": "VSHDN = 0V, VIN = 2V"
+    },
+    "IQ_VSHDN___0V__VIN___2V__2": {
+      "parameter": "Quiescent Current in Shutdown",
+      "symbol": "IQ",
+      "min": null,
       "typ": null,
       "max": 1.0,
       "unit": "µA",
       "conditions": "VSHDN = 0V, VIN = 2V"
+    },
+    "Reference_Line_Regulation": {
+      "parameter": "Reference Line Regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 0.01,
+      "max": 0.05,
+      "unit": "%/V",
+      "conditions": "1.2V < VIN < 15V"
+    },
+    "Reference_Line_Regulation_1_2V___VIN___15V": {
+      "parameter": "Reference Line Regulation",
+      "symbol": null,
+      "min": null,
+      "typ": null,
+      "max": 0.1,
+      "unit": "%/V",
+      "conditions": "1.2V < VIN < 15V"
     },
     "tOFF": {
       "parameter": "Switch Off Time",
@@ -204,6 +266,33 @@
     "ILIM": {
       "parameter": "Switch Current Limit",
       "symbol": "ILIM",
+      "min": 300,
+      "typ": 350,
+      "max": 400,
+      "unit": "mA",
+      "conditions": null
+    },
+    "ILIM__2": {
+      "parameter": "Switch Current Limit",
+      "symbol": "ILIM",
+      "min": 250,
+      "typ": 350,
+      "max": 450,
+      "unit": "mA",
+      "conditions": null
+    },
+    "ILIM__3": {
+      "parameter": "Switch Current Limit",
+      "symbol": "ILIM",
+      "min": 75,
+      "typ": 100,
+      "max": 125,
+      "unit": "mA",
+      "conditions": null
+    },
+    "ILIM__4": {
+      "parameter": "Switch Current Limit",
+      "symbol": "ILIM",
       "min": 70,
       "typ": 100,
       "max": 150,
@@ -232,10 +321,37 @@
       "parameter": "Switch VCESAT",
       "symbol": "VCESAT",
       "min": null,
+      "typ": 150,
+      "max": 220,
+      "unit": "mV",
+      "conditions": "ISW = 100mA"
+    },
+    "VCESAT_ISW___100mA__2": {
+      "parameter": "Switch VCESAT",
+      "symbol": "VCESAT",
+      "min": null,
       "typ": null,
       "max": 250,
       "unit": "mV",
       "conditions": "ISW = 100mA"
+    },
+    "Switch_Leakage_Current": {
+      "parameter": "Switch Leakage Current",
+      "symbol": null,
+      "min": null,
+      "typ": 0.01,
+      "max": 1,
+      "unit": "µA",
+      "conditions": "VSW = 5V"
+    },
+    "Switch_Leakage_Current_VSW___5V": {
+      "parameter": "Switch Leakage Current",
+      "symbol": null,
+      "min": null,
+      "typ": null,
+      "max": 1,
+      "unit": "µA",
+      "conditions": "VSW = 5V"
     },
     "ISHDN": {
       "parameter": "SHDN Pin Current",
@@ -264,7 +380,25 @@
       "unit": "V",
       "conditions": null
     },
+    "VIH__2": {
+      "parameter": "SHDN Input Voltage High",
+      "symbol": "VIH",
+      "min": 0.9,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": null
+    },
     "VIL": {
+      "parameter": "SHDN Input Voltage Low",
+      "symbol": "VIL",
+      "min": null,
+      "typ": null,
+      "max": 0.25,
+      "unit": "V",
+      "conditions": null
+    },
+    "VIL__2": {
       "parameter": "SHDN Input Voltage Low",
       "symbol": "VIL",
       "min": null,
@@ -401,10 +535,27 @@
           "max": 150,
           "unit": "°C",
           "conditions": null
+        },
+        "Lead_Temperature__Soldering__1": {
+          "parameter": "Lead Temperature (Soldering, 10 sec)",
+          "symbol": null,
+          "min": null,
+          "max": 300,
+          "unit": "°C",
+          "conditions": null
         }
       },
       "electrical_parameters": {
         "VIN(min)": {
+          "parameter": "Minimum Operating Voltage",
+          "symbol": "VIN(min)",
+          "min": null,
+          "typ": 1.0,
+          "max": 1.2,
+          "unit": "V",
+          "conditions": null
+        },
+        "VIN(min)__2": {
           "parameter": "Minimum Operating Voltage",
           "symbol": "VIN(min)",
           "min": null,
@@ -422,7 +573,25 @@
           "unit": "V",
           "conditions": null
         },
+        "VIN(max)__2": {
+          "parameter": "Maximum Operating Voltage",
+          "symbol": "VIN(max)",
+          "min": null,
+          "typ": null,
+          "max": 15,
+          "unit": "V",
+          "conditions": null
+        },
         "VFB": {
+          "parameter": "Feedback Voltage",
+          "symbol": "VFB",
+          "min": 1.205,
+          "typ": 1.23,
+          "max": 1.255,
+          "unit": "V",
+          "conditions": null
+        },
+        "VFB__2": {
           "parameter": "Feedback Voltage",
           "symbol": "VFB",
           "min": 1.18,
@@ -471,10 +640,37 @@
           "parameter": "Quiescent Current in Shutdown",
           "symbol": "IQ",
           "min": null,
+          "typ": 0.1,
+          "max": 1.0,
+          "unit": "µA",
+          "conditions": "VSHDN = 0V, VIN = 2V"
+        },
+        "IQ_VSHDN___0V__VIN___2V__2": {
+          "parameter": "Quiescent Current in Shutdown",
+          "symbol": "IQ",
+          "min": null,
           "typ": null,
           "max": 1.0,
           "unit": "µA",
           "conditions": "VSHDN = 0V, VIN = 2V"
+        },
+        "Reference_Line_Regulation": {
+          "parameter": "Reference Line Regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 0.01,
+          "max": 0.05,
+          "unit": "%/V",
+          "conditions": "1.2V < VIN < 15V"
+        },
+        "Reference_Line_Regulation_1_2V___VIN___15V": {
+          "parameter": "Reference Line Regulation",
+          "symbol": null,
+          "min": null,
+          "typ": null,
+          "max": 0.1,
+          "unit": "%/V",
+          "conditions": "1.2V < VIN < 15V"
         },
         "tOFF": {
           "parameter": "Switch Off Time",
@@ -506,6 +702,33 @@
         "ILIM": {
           "parameter": "Switch Current Limit",
           "symbol": "ILIM",
+          "min": 300,
+          "typ": 350,
+          "max": 400,
+          "unit": "mA",
+          "conditions": null
+        },
+        "ILIM__2": {
+          "parameter": "Switch Current Limit",
+          "symbol": "ILIM",
+          "min": 250,
+          "typ": 350,
+          "max": 450,
+          "unit": "mA",
+          "conditions": null
+        },
+        "ILIM__3": {
+          "parameter": "Switch Current Limit",
+          "symbol": "ILIM",
+          "min": 75,
+          "typ": 100,
+          "max": 125,
+          "unit": "mA",
+          "conditions": null
+        },
+        "ILIM__4": {
+          "parameter": "Switch Current Limit",
+          "symbol": "ILIM",
           "min": 70,
           "typ": 100,
           "max": 150,
@@ -534,10 +757,37 @@
           "parameter": "Switch VCESAT",
           "symbol": "VCESAT",
           "min": null,
+          "typ": 150,
+          "max": 220,
+          "unit": "mV",
+          "conditions": "ISW = 100mA"
+        },
+        "VCESAT_ISW___100mA__2": {
+          "parameter": "Switch VCESAT",
+          "symbol": "VCESAT",
+          "min": null,
           "typ": null,
           "max": 250,
           "unit": "mV",
           "conditions": "ISW = 100mA"
+        },
+        "Switch_Leakage_Current": {
+          "parameter": "Switch Leakage Current",
+          "symbol": null,
+          "min": null,
+          "typ": 0.01,
+          "max": 1,
+          "unit": "µA",
+          "conditions": "VSW = 5V"
+        },
+        "Switch_Leakage_Current_VSW___5V": {
+          "parameter": "Switch Leakage Current",
+          "symbol": null,
+          "min": null,
+          "typ": null,
+          "max": 1,
+          "unit": "µA",
+          "conditions": "VSW = 5V"
         },
         "ISHDN": {
           "parameter": "SHDN Pin Current",
@@ -566,7 +816,25 @@
           "unit": "V",
           "conditions": null
         },
+        "VIH__2": {
+          "parameter": "SHDN Input Voltage High",
+          "symbol": "VIH",
+          "min": 0.9,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": null
+        },
         "VIL": {
+          "parameter": "SHDN Input Voltage Low",
+          "symbol": "VIL",
+          "min": null,
+          "typ": null,
+          "max": 0.25,
+          "unit": "V",
+          "conditions": null
+        },
+        "VIL__2": {
           "parameter": "SHDN Input Voltage Low",
           "symbol": "VIL",
           "min": null,

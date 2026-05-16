@@ -218,6 +218,102 @@
     }
   },
   "absolute_maximum_ratings": {
+    "A__C__FLTR__VDD__STAT_voltage": {
+      "parameter": "A, C, FLTR, VDD, STAT voltage",
+      "symbol": null,
+      "min": -0.3,
+      "max": 18,
+      "unit": "V",
+      "conditions": "Voltages are referenced to GND"
+    },
+    "A_above_C_voltage": {
+      "parameter": "A above C voltage",
+      "symbol": null,
+      "min": null,
+      "max": 7.5,
+      "unit": "V",
+      "conditions": null
+    },
+    "C_above_A_voltage": {
+      "parameter": "C above A voltage",
+      "symbol": null,
+      "min": null,
+      "max": 18,
+      "unit": "V",
+      "conditions": null
+    },
+    "GATE__BYP_voltage": {
+      "parameter": "GATE, BYP voltage",
+      "symbol": null,
+      "min": -0.3,
+      "max": 30,
+      "unit": "V",
+      "conditions": null
+    },
+    "BYP_to_A_voltage": {
+      "parameter": "BYP to A voltage",
+      "symbol": null,
+      "min": -0.3,
+      "max": 13,
+      "unit": "V",
+      "conditions": null
+    },
+    "GATE_above_BYP_voltage": {
+      "parameter": "GATE above BYP voltage",
+      "symbol": null,
+      "min": null,
+      "max": 0.3,
+      "unit": "V",
+      "conditions": null
+    },
+    "FLTR_to_C_voltage": {
+      "parameter": "FLTR to C voltage",
+      "symbol": null,
+      "min": -0.3,
+      "max": 0.3,
+      "unit": "V",
+      "conditions": null
+    },
+    "OV__UV_voltage": {
+      "parameter": "OV, UV voltage",
+      "symbol": null,
+      "min": -0.3,
+      "max": 5.5,
+      "unit": "V",
+      "conditions": null
+    },
+    "RSET_voltage": {
+      "parameter": "RSET voltage",
+      "symbol": null,
+      "min": -0.3,
+      "max": 7,
+      "unit": "V",
+      "conditions": null
+    },
+    "FLTB__PG_voltage": {
+      "parameter": "FLTB, PG voltage",
+      "symbol": null,
+      "min": -0.3,
+      "max": 18,
+      "unit": "V",
+      "conditions": null
+    },
+    "STAT__PG__FLTB_sink_current": {
+      "parameter": "STAT, PG, FLTB sink current",
+      "symbol": null,
+      "min": null,
+      "max": 40,
+      "unit": "mA",
+      "conditions": null
+    },
+    "GATE_short_to_A_or_C_or_GND": {
+      "parameter": "GATE short to A or C or GND",
+      "symbol": null,
+      "min": null,
+      "max": null,
+      "unit": null,
+      "conditions": "Indefinite"
+    },
     "TJ": {
       "parameter": "Maximum junction temperature",
       "symbol": "TJ",
@@ -236,6 +332,24 @@
     }
   },
   "electrical_parameters": {
+    "VDD_UVLO": {
+      "parameter": "VDD UVLO",
+      "symbol": null,
+      "min": 2.25,
+      "typ": null,
+      "max": 2.5,
+      "unit": "V",
+      "conditions": "VDD rising"
+    },
+    "VDD_UVLO_Hysteresis": {
+      "parameter": "VDD UVLO Hysteresis",
+      "symbol": null,
+      "min": null,
+      "typ": 0.25,
+      "max": null,
+      "unit": "V",
+      "conditions": null
+    },
     "|I(A)|": {
       "parameter": "A current",
       "symbol": "|I(A)|",
@@ -263,6 +377,258 @@
       "unit": "µA",
       "conditions": "VAC <= 0.1 V"
     },
+    "VDD_current": {
+      "parameter": "VDD current",
+      "symbol": null,
+      "min": null,
+      "typ": 4.25,
+      "max": 6,
+      "unit": "mA",
+      "conditions": "Worst case, gate in active range"
+    },
+    "VDD_current_Gate_saturated_high": {
+      "parameter": "VDD current",
+      "symbol": null,
+      "min": null,
+      "typ": 1.2,
+      "max": null,
+      "unit": "mA",
+      "conditions": "Gate saturated high"
+    },
+    "UV_threshold_voltage": {
+      "parameter": "UV threshold voltage",
+      "symbol": null,
+      "min": 0.583,
+      "typ": 0.6,
+      "max": 0.615,
+      "unit": "V",
+      "conditions": "V(UV) rising, V(OV) = 0 V, PG goes high"
+    },
+    "OV_threshold_voltage": {
+      "parameter": "OV threshold voltage",
+      "symbol": null,
+      "min": 0.583,
+      "typ": 0.6,
+      "max": 0.615,
+      "unit": "V",
+      "conditions": "V(OV) rising, V(UV) = 1 V, PG goes low"
+    },
+    "Response_time": {
+      "parameter": "Response time",
+      "symbol": null,
+      "min": null,
+      "typ": 0.3,
+      "max": 0.6,
+      "unit": "µs",
+      "conditions": "50-mV overdrive"
+    },
+    "Hysteresis": {
+      "parameter": "Hysteresis",
+      "symbol": null,
+      "min": null,
+      "typ": 7,
+      "max": null,
+      "unit": "mV",
+      "conditions": "V(UV) and V(OV)"
+    },
+    "PG_sink_current": {
+      "parameter": "PG sink current",
+      "symbol": null,
+      "min": 4,
+      "typ": null,
+      "max": null,
+      "unit": "mA",
+      "conditions": "V(UV) = 0 V, V(OV) = 0 V, V(PG) = 0.4 V"
+    },
+    "UV___OV_leakage_current": {
+      "parameter": "UV / OV leakage current",
+      "symbol": null,
+      "min": null,
+      "typ": null,
+      "max": 1,
+      "unit": "µA",
+      "conditions": null
+    },
+    "PG_leakage_current": {
+      "parameter": "PG leakage current",
+      "symbol": null,
+      "min": null,
+      "typ": null,
+      "max": 1,
+      "unit": "µA",
+      "conditions": "V(UV) = 1 V, V(OV) = 0 V, 0 <= V(PG) <= 5 V"
+    },
+    "FLTB_Sink_current": {
+      "parameter": "FLTB Sink current",
+      "symbol": null,
+      "min": 4,
+      "typ": null,
+      "max": null,
+      "unit": "mA",
+      "conditions": "V(FLTB) = 0.4 V, V(GATE)-A = 0 V, V(A-C) = 0.1 V"
+    },
+    "V_GATE_A__fault_threshold": {
+      "parameter": "V(GATE-A) fault threshold",
+      "symbol": null,
+      "min": 0.5,
+      "typ": 0.78,
+      "max": 1,
+      "unit": "V",
+      "conditions": "V(A) = V(C) + 20 mV, V(GATE-A) falling until FLTB switches low"
+    },
+    "V_A_C__fault_threshold": {
+      "parameter": "V(A-C) fault threshold",
+      "symbol": null,
+      "min": 0.325,
+      "typ": 0.425,
+      "max": 0.525,
+      "unit": "V",
+      "conditions": "V(A-C) = 0.1 V, increase V(A-C) until FLTB switches low"
+    },
+    "Deglitch_on_assertion": {
+      "parameter": "Deglitch on assertion",
+      "symbol": null,
+      "min": null,
+      "typ": 3.4,
+      "max": null,
+      "unit": "ms",
+      "conditions": null
+    },
+    "FLTB_Leakage_current": {
+      "parameter": "FLTB Leakage current",
+      "symbol": null,
+      "min": null,
+      "typ": null,
+      "max": 1,
+      "unit": "µA",
+      "conditions": null
+    },
+    "STAT_Sink_current": {
+      "parameter": "STAT Sink current",
+      "symbol": null,
+      "min": 4,
+      "typ": null,
+      "max": null,
+      "unit": "mA",
+      "conditions": "V(STAT) = 0.4 V, V(A) = V(C) + 0.1 V"
+    },
+    "STAT_Input_threshold": {
+      "parameter": "STAT Input threshold",
+      "symbol": null,
+      "min": null,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": "VDD >= 3 V, typ VDD/2"
+    },
+    "STAT_Response_time": {
+      "parameter": "STAT Response time",
+      "symbol": null,
+      "min": null,
+      "typ": null,
+      "max": 50,
+      "unit": "ns",
+      "conditions": "From fast turn-off initiation"
+    },
+    "Source_pull_up_resistance": {
+      "parameter": "Source pull-up resistance",
+      "symbol": null,
+      "min": 30,
+      "typ": 46,
+      "max": 60,
+      "unit": "kΩ",
+      "conditions": null
+    },
+    "Filter_resistance": {
+      "parameter": "Filter resistance",
+      "symbol": null,
+      "min": null,
+      "typ": 520,
+      "max": null,
+      "unit": "Ω",
+      "conditions": "R(FLTR-C)"
+    },
+    "TPS2410_forward_turn_on_and_re": {
+      "parameter": "TPS2410 forward turn-on and regulation voltage",
+      "symbol": null,
+      "min": 7,
+      "typ": 10,
+      "max": 13,
+      "unit": "mV",
+      "conditions": null
+    },
+    "TPS2410_forward_turn_on___turn": {
+      "parameter": "TPS2410 forward turn-on / turn-off difference",
+      "symbol": null,
+      "min": null,
+      "typ": 7,
+      "max": null,
+      "unit": "mV",
+      "conditions": "R(RSET) = open"
+    },
+    "TPS2411_forward_turn_on_voltag": {
+      "parameter": "TPS2411 forward turn-on voltage",
+      "symbol": null,
+      "min": 7,
+      "typ": 10,
+      "max": 13,
+      "unit": "mV",
+      "conditions": null
+    },
+    "Fast_turn_off_threshold_voltag": {
+      "parameter": "Fast turn-off threshold voltage",
+      "symbol": null,
+      "min": 1,
+      "typ": 3,
+      "max": 5,
+      "unit": "mV",
+      "conditions": "GATE sinks > 10 mA at V(GATE-A) = 2 V, V(A-C) falling, R(RSET) = open"
+    },
+    "Fast_turn_off_threshold_voltag_GATE_sinks___10_mA_at_V_GATE_A": {
+      "parameter": "Fast turn-off threshold voltage",
+      "symbol": null,
+      "min": -17,
+      "typ": -13.25,
+      "max": -10,
+      "unit": "mV",
+      "conditions": "GATE sinks > 10 mA at V(GATE-A) = 2 V, V(A-C) falling, R(RSET) = 28.7 kΩ"
+    },
+    "Fast_turn_off_threshold_voltag_GATE_sinks___10_mA_at_V_GATE_A__2": {
+      "parameter": "Fast turn-off threshold voltage",
+      "symbol": null,
+      "min": -170,
+      "typ": -142,
+      "max": -114,
+      "unit": "mV",
+      "conditions": "GATE sinks > 10 mA at V(GATE-A) = 2 V, V(A-C) falling, R(RSET) = 3.24 kΩ"
+    },
+    "Additional_threshold_shift_wit": {
+      "parameter": "Additional threshold shift with STAT held low",
+      "symbol": null,
+      "min": null,
+      "typ": -157,
+      "max": null,
+      "unit": "mV",
+      "conditions": null
+    },
+    "Turn_off_delay": {
+      "parameter": "Turn-off delay",
+      "symbol": null,
+      "min": null,
+      "typ": 70,
+      "max": null,
+      "unit": "ns",
+      "conditions": "V(A) = 12 V, V(A-C): 20 mV -> -20 mV, V(GATE-A) begins to decrease"
+    },
+    "Turn_off_time": {
+      "parameter": "Turn-off time",
+      "symbol": null,
+      "min": null,
+      "typ": 130,
+      "max": null,
+      "unit": "ns",
+      "conditions": "V(A) = 12 V, C(GATE-GND) = 0.01 µF, V(A-C): 20 mV -> -20 mV, measure the period to V(GATE) = V(A)"
+    },
     "V(GATE-A)": {
       "parameter": "Gate positive drive voltage",
       "symbol": "V(GATE-A)",
@@ -280,6 +646,24 @@
       "max": 12.5,
       "unit": "V",
       "conditions": "5 V <= VDD <= 18 V, V(A-C) = 20 mV"
+    },
+    "Gate_source_current": {
+      "parameter": "Gate source current",
+      "symbol": null,
+      "min": 250,
+      "typ": 290,
+      "max": 350,
+      "unit": "µA",
+      "conditions": "V(A-C) = 50 mV, V(GATE-A) = 4 V"
+    },
+    "Soft_turn_off_sink_current": {
+      "parameter": "Soft turn-off sink current",
+      "symbol": null,
+      "min": 2,
+      "typ": 5,
+      "max": null,
+      "unit": "mA",
+      "conditions": "V(A-C) = 4 mV, V(GATE-A) = 2 V"
     },
     "I(GATE)": {
       "parameter": "Fast turn-off pulsed current",
@@ -299,6 +683,15 @@
       "unit": "A",
       "conditions": "V(A-C) = -0.1 V, V(GATE) = 5 V"
     },
+    "Fast_turn_off_pulsed_current_p": {
+      "parameter": "Fast turn-off pulsed current period",
+      "symbol": null,
+      "min": null,
+      "typ": 7.5,
+      "max": 12.5,
+      "unit": "µs",
+      "conditions": null
+    },
     "I(GATE)_V_A_C_____0_1_V__V_C____VDD__3": {
       "parameter": "Sustain turn-off current",
       "symbol": "I(GATE)",
@@ -307,6 +700,24 @@
       "max": null,
       "unit": "mA",
       "conditions": "V(A-C) = -0.1 V, V(C) = VDD, 3 <= VDD <= 18 V, 2 V <= V(GATE) <= 18 V"
+    },
+    "Thermal_shutdown_temperature": {
+      "parameter": "Thermal shutdown temperature",
+      "symbol": null,
+      "min": null,
+      "typ": 135,
+      "max": null,
+      "unit": "°C",
+      "conditions": "Temperature rising, TJ"
+    },
+    "Thermal_hysteresis": {
+      "parameter": "Thermal hysteresis",
+      "symbol": null,
+      "min": null,
+      "typ": 10,
+      "max": null,
+      "unit": "°C",
+      "conditions": null
     }
   },
   "drc_hints": {
@@ -529,6 +940,102 @@
     },
     "electrical": {
       "absolute_maximum_ratings": {
+        "A__C__FLTR__VDD__STAT_voltage": {
+          "parameter": "A, C, FLTR, VDD, STAT voltage",
+          "symbol": null,
+          "min": -0.3,
+          "max": 18,
+          "unit": "V",
+          "conditions": "Voltages are referenced to GND"
+        },
+        "A_above_C_voltage": {
+          "parameter": "A above C voltage",
+          "symbol": null,
+          "min": null,
+          "max": 7.5,
+          "unit": "V",
+          "conditions": null
+        },
+        "C_above_A_voltage": {
+          "parameter": "C above A voltage",
+          "symbol": null,
+          "min": null,
+          "max": 18,
+          "unit": "V",
+          "conditions": null
+        },
+        "GATE__BYP_voltage": {
+          "parameter": "GATE, BYP voltage",
+          "symbol": null,
+          "min": -0.3,
+          "max": 30,
+          "unit": "V",
+          "conditions": null
+        },
+        "BYP_to_A_voltage": {
+          "parameter": "BYP to A voltage",
+          "symbol": null,
+          "min": -0.3,
+          "max": 13,
+          "unit": "V",
+          "conditions": null
+        },
+        "GATE_above_BYP_voltage": {
+          "parameter": "GATE above BYP voltage",
+          "symbol": null,
+          "min": null,
+          "max": 0.3,
+          "unit": "V",
+          "conditions": null
+        },
+        "FLTR_to_C_voltage": {
+          "parameter": "FLTR to C voltage",
+          "symbol": null,
+          "min": -0.3,
+          "max": 0.3,
+          "unit": "V",
+          "conditions": null
+        },
+        "OV__UV_voltage": {
+          "parameter": "OV, UV voltage",
+          "symbol": null,
+          "min": -0.3,
+          "max": 5.5,
+          "unit": "V",
+          "conditions": null
+        },
+        "RSET_voltage": {
+          "parameter": "RSET voltage",
+          "symbol": null,
+          "min": -0.3,
+          "max": 7,
+          "unit": "V",
+          "conditions": null
+        },
+        "FLTB__PG_voltage": {
+          "parameter": "FLTB, PG voltage",
+          "symbol": null,
+          "min": -0.3,
+          "max": 18,
+          "unit": "V",
+          "conditions": null
+        },
+        "STAT__PG__FLTB_sink_current": {
+          "parameter": "STAT, PG, FLTB sink current",
+          "symbol": null,
+          "min": null,
+          "max": 40,
+          "unit": "mA",
+          "conditions": null
+        },
+        "GATE_short_to_A_or_C_or_GND": {
+          "parameter": "GATE short to A or C or GND",
+          "symbol": null,
+          "min": null,
+          "max": null,
+          "unit": null,
+          "conditions": "Indefinite"
+        },
         "TJ": {
           "parameter": "Maximum junction temperature",
           "symbol": "TJ",
@@ -547,6 +1054,24 @@
         }
       },
       "electrical_parameters": {
+        "VDD_UVLO": {
+          "parameter": "VDD UVLO",
+          "symbol": null,
+          "min": 2.25,
+          "typ": null,
+          "max": 2.5,
+          "unit": "V",
+          "conditions": "VDD rising"
+        },
+        "VDD_UVLO_Hysteresis": {
+          "parameter": "VDD UVLO Hysteresis",
+          "symbol": null,
+          "min": null,
+          "typ": 0.25,
+          "max": null,
+          "unit": "V",
+          "conditions": null
+        },
         "|I(A)|": {
           "parameter": "A current",
           "symbol": "|I(A)|",
@@ -574,6 +1099,258 @@
           "unit": "µA",
           "conditions": "VAC <= 0.1 V"
         },
+        "VDD_current": {
+          "parameter": "VDD current",
+          "symbol": null,
+          "min": null,
+          "typ": 4.25,
+          "max": 6,
+          "unit": "mA",
+          "conditions": "Worst case, gate in active range"
+        },
+        "VDD_current_Gate_saturated_high": {
+          "parameter": "VDD current",
+          "symbol": null,
+          "min": null,
+          "typ": 1.2,
+          "max": null,
+          "unit": "mA",
+          "conditions": "Gate saturated high"
+        },
+        "UV_threshold_voltage": {
+          "parameter": "UV threshold voltage",
+          "symbol": null,
+          "min": 0.583,
+          "typ": 0.6,
+          "max": 0.615,
+          "unit": "V",
+          "conditions": "V(UV) rising, V(OV) = 0 V, PG goes high"
+        },
+        "OV_threshold_voltage": {
+          "parameter": "OV threshold voltage",
+          "symbol": null,
+          "min": 0.583,
+          "typ": 0.6,
+          "max": 0.615,
+          "unit": "V",
+          "conditions": "V(OV) rising, V(UV) = 1 V, PG goes low"
+        },
+        "Response_time": {
+          "parameter": "Response time",
+          "symbol": null,
+          "min": null,
+          "typ": 0.3,
+          "max": 0.6,
+          "unit": "µs",
+          "conditions": "50-mV overdrive"
+        },
+        "Hysteresis": {
+          "parameter": "Hysteresis",
+          "symbol": null,
+          "min": null,
+          "typ": 7,
+          "max": null,
+          "unit": "mV",
+          "conditions": "V(UV) and V(OV)"
+        },
+        "PG_sink_current": {
+          "parameter": "PG sink current",
+          "symbol": null,
+          "min": 4,
+          "typ": null,
+          "max": null,
+          "unit": "mA",
+          "conditions": "V(UV) = 0 V, V(OV) = 0 V, V(PG) = 0.4 V"
+        },
+        "UV___OV_leakage_current": {
+          "parameter": "UV / OV leakage current",
+          "symbol": null,
+          "min": null,
+          "typ": null,
+          "max": 1,
+          "unit": "µA",
+          "conditions": null
+        },
+        "PG_leakage_current": {
+          "parameter": "PG leakage current",
+          "symbol": null,
+          "min": null,
+          "typ": null,
+          "max": 1,
+          "unit": "µA",
+          "conditions": "V(UV) = 1 V, V(OV) = 0 V, 0 <= V(PG) <= 5 V"
+        },
+        "FLTB_Sink_current": {
+          "parameter": "FLTB Sink current",
+          "symbol": null,
+          "min": 4,
+          "typ": null,
+          "max": null,
+          "unit": "mA",
+          "conditions": "V(FLTB) = 0.4 V, V(GATE)-A = 0 V, V(A-C) = 0.1 V"
+        },
+        "V_GATE_A__fault_threshold": {
+          "parameter": "V(GATE-A) fault threshold",
+          "symbol": null,
+          "min": 0.5,
+          "typ": 0.78,
+          "max": 1,
+          "unit": "V",
+          "conditions": "V(A) = V(C) + 20 mV, V(GATE-A) falling until FLTB switches low"
+        },
+        "V_A_C__fault_threshold": {
+          "parameter": "V(A-C) fault threshold",
+          "symbol": null,
+          "min": 0.325,
+          "typ": 0.425,
+          "max": 0.525,
+          "unit": "V",
+          "conditions": "V(A-C) = 0.1 V, increase V(A-C) until FLTB switches low"
+        },
+        "Deglitch_on_assertion": {
+          "parameter": "Deglitch on assertion",
+          "symbol": null,
+          "min": null,
+          "typ": 3.4,
+          "max": null,
+          "unit": "ms",
+          "conditions": null
+        },
+        "FLTB_Leakage_current": {
+          "parameter": "FLTB Leakage current",
+          "symbol": null,
+          "min": null,
+          "typ": null,
+          "max": 1,
+          "unit": "µA",
+          "conditions": null
+        },
+        "STAT_Sink_current": {
+          "parameter": "STAT Sink current",
+          "symbol": null,
+          "min": 4,
+          "typ": null,
+          "max": null,
+          "unit": "mA",
+          "conditions": "V(STAT) = 0.4 V, V(A) = V(C) + 0.1 V"
+        },
+        "STAT_Input_threshold": {
+          "parameter": "STAT Input threshold",
+          "symbol": null,
+          "min": null,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": "VDD >= 3 V, typ VDD/2"
+        },
+        "STAT_Response_time": {
+          "parameter": "STAT Response time",
+          "symbol": null,
+          "min": null,
+          "typ": null,
+          "max": 50,
+          "unit": "ns",
+          "conditions": "From fast turn-off initiation"
+        },
+        "Source_pull_up_resistance": {
+          "parameter": "Source pull-up resistance",
+          "symbol": null,
+          "min": 30,
+          "typ": 46,
+          "max": 60,
+          "unit": "kΩ",
+          "conditions": null
+        },
+        "Filter_resistance": {
+          "parameter": "Filter resistance",
+          "symbol": null,
+          "min": null,
+          "typ": 520,
+          "max": null,
+          "unit": "Ω",
+          "conditions": "R(FLTR-C)"
+        },
+        "TPS2410_forward_turn_on_and_re": {
+          "parameter": "TPS2410 forward turn-on and regulation voltage",
+          "symbol": null,
+          "min": 7,
+          "typ": 10,
+          "max": 13,
+          "unit": "mV",
+          "conditions": null
+        },
+        "TPS2410_forward_turn_on___turn": {
+          "parameter": "TPS2410 forward turn-on / turn-off difference",
+          "symbol": null,
+          "min": null,
+          "typ": 7,
+          "max": null,
+          "unit": "mV",
+          "conditions": "R(RSET) = open"
+        },
+        "TPS2411_forward_turn_on_voltag": {
+          "parameter": "TPS2411 forward turn-on voltage",
+          "symbol": null,
+          "min": 7,
+          "typ": 10,
+          "max": 13,
+          "unit": "mV",
+          "conditions": null
+        },
+        "Fast_turn_off_threshold_voltag": {
+          "parameter": "Fast turn-off threshold voltage",
+          "symbol": null,
+          "min": 1,
+          "typ": 3,
+          "max": 5,
+          "unit": "mV",
+          "conditions": "GATE sinks > 10 mA at V(GATE-A) = 2 V, V(A-C) falling, R(RSET) = open"
+        },
+        "Fast_turn_off_threshold_voltag_GATE_sinks___10_mA_at_V_GATE_A": {
+          "parameter": "Fast turn-off threshold voltage",
+          "symbol": null,
+          "min": -17,
+          "typ": -13.25,
+          "max": -10,
+          "unit": "mV",
+          "conditions": "GATE sinks > 10 mA at V(GATE-A) = 2 V, V(A-C) falling, R(RSET) = 28.7 kΩ"
+        },
+        "Fast_turn_off_threshold_voltag_GATE_sinks___10_mA_at_V_GATE_A__2": {
+          "parameter": "Fast turn-off threshold voltage",
+          "symbol": null,
+          "min": -170,
+          "typ": -142,
+          "max": -114,
+          "unit": "mV",
+          "conditions": "GATE sinks > 10 mA at V(GATE-A) = 2 V, V(A-C) falling, R(RSET) = 3.24 kΩ"
+        },
+        "Additional_threshold_shift_wit": {
+          "parameter": "Additional threshold shift with STAT held low",
+          "symbol": null,
+          "min": null,
+          "typ": -157,
+          "max": null,
+          "unit": "mV",
+          "conditions": null
+        },
+        "Turn_off_delay": {
+          "parameter": "Turn-off delay",
+          "symbol": null,
+          "min": null,
+          "typ": 70,
+          "max": null,
+          "unit": "ns",
+          "conditions": "V(A) = 12 V, V(A-C): 20 mV -> -20 mV, V(GATE-A) begins to decrease"
+        },
+        "Turn_off_time": {
+          "parameter": "Turn-off time",
+          "symbol": null,
+          "min": null,
+          "typ": 130,
+          "max": null,
+          "unit": "ns",
+          "conditions": "V(A) = 12 V, C(GATE-GND) = 0.01 µF, V(A-C): 20 mV -> -20 mV, measure the period to V(GATE) = V(A)"
+        },
         "V(GATE-A)": {
           "parameter": "Gate positive drive voltage",
           "symbol": "V(GATE-A)",
@@ -591,6 +1368,24 @@
           "max": 12.5,
           "unit": "V",
           "conditions": "5 V <= VDD <= 18 V, V(A-C) = 20 mV"
+        },
+        "Gate_source_current": {
+          "parameter": "Gate source current",
+          "symbol": null,
+          "min": 250,
+          "typ": 290,
+          "max": 350,
+          "unit": "µA",
+          "conditions": "V(A-C) = 50 mV, V(GATE-A) = 4 V"
+        },
+        "Soft_turn_off_sink_current": {
+          "parameter": "Soft turn-off sink current",
+          "symbol": null,
+          "min": 2,
+          "typ": 5,
+          "max": null,
+          "unit": "mA",
+          "conditions": "V(A-C) = 4 mV, V(GATE-A) = 2 V"
         },
         "I(GATE)": {
           "parameter": "Fast turn-off pulsed current",
@@ -610,6 +1405,15 @@
           "unit": "A",
           "conditions": "V(A-C) = -0.1 V, V(GATE) = 5 V"
         },
+        "Fast_turn_off_pulsed_current_p": {
+          "parameter": "Fast turn-off pulsed current period",
+          "symbol": null,
+          "min": null,
+          "typ": 7.5,
+          "max": 12.5,
+          "unit": "µs",
+          "conditions": null
+        },
         "I(GATE)_V_A_C_____0_1_V__V_C____VDD__3": {
           "parameter": "Sustain turn-off current",
           "symbol": "I(GATE)",
@@ -618,6 +1422,24 @@
           "max": null,
           "unit": "mA",
           "conditions": "V(A-C) = -0.1 V, V(C) = VDD, 3 <= VDD <= 18 V, 2 V <= V(GATE) <= 18 V"
+        },
+        "Thermal_shutdown_temperature": {
+          "parameter": "Thermal shutdown temperature",
+          "symbol": null,
+          "min": null,
+          "typ": 135,
+          "max": null,
+          "unit": "°C",
+          "conditions": "Temperature rising, TJ"
+        },
+        "Thermal_hysteresis": {
+          "parameter": "Thermal hysteresis",
+          "symbol": null,
+          "min": null,
+          "typ": 10,
+          "max": null,
+          "unit": "°C",
+          "conditions": null
         }
       },
       "drc_hints": {

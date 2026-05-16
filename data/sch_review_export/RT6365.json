@@ -210,6 +210,22 @@
       "unit": "V",
       "conditions": null
     },
+    "All_Other_Pins_Voltage": {
+      "parameter": "All Other Pins Voltage",
+      "symbol": null,
+      "min": -0.3,
+      "max": 6,
+      "unit": "V",
+      "conditions": null
+    },
+    "Lead_Temperature": {
+      "parameter": "Lead Temperature",
+      "symbol": null,
+      "min": null,
+      "max": 260,
+      "unit": "°C",
+      "conditions": "Soldering, 10 sec."
+    },
     "TJ": {
       "parameter": "Junction Temperature",
       "symbol": "TJ",
@@ -225,6 +241,14 @@
       "max": 150,
       "unit": "°C",
       "conditions": null
+    },
+    "ESD_Susceptibility__HBM": {
+      "parameter": "ESD Susceptibility (HBM)",
+      "symbol": null,
+      "min": null,
+      "max": 2,
+      "unit": "kV",
+      "conditions": "ESD Susceptibility"
     }
   },
   "electrical_parameters": {
@@ -282,6 +306,15 @@
       "unit": "V",
       "conditions": null
     },
+    "Enable_to_COMP_Active": {
+      "parameter": "Enable to COMP Active",
+      "symbol": null,
+      "min": null,
+      "typ": 540,
+      "max": null,
+      "unit": "µs",
+      "conditions": "VIN = 12V, TA = 25°C"
+    },
     "IEN": {
       "parameter": "Pull-Up Current (High)",
       "symbol": "IEN",
@@ -327,6 +360,15 @@
       "unit": "mΩ",
       "conditions": "VIN = 12V, VBOOT - VSW = 5V"
     },
+    "Error_Amplifier_Input_Current": {
+      "parameter": "Error Amplifier Input Current",
+      "symbol": null,
+      "min": null,
+      "typ": 50,
+      "max": null,
+      "unit": "nA",
+      "conditions": null
+    },
     "gm": {
       "parameter": "Error Amplifier Trans-Conductance (Normal)",
       "symbol": "gm",
@@ -344,6 +386,33 @@
       "max": null,
       "unit": "µA/V",
       "conditions": "During SS, -2µA < ICOMP < 2µA, VCOMP = 1V, VFB = 0.4V"
+    },
+    "Error_Amplifier_DC_Gain": {
+      "parameter": "Error Amplifier DC Gain",
+      "symbol": null,
+      "min": null,
+      "typ": 10000,
+      "max": null,
+      "unit": "V/V",
+      "conditions": "VFB = 0.8V"
+    },
+    "Error_Amplifier_Bandwidth": {
+      "parameter": "Error Amplifier Bandwidth",
+      "symbol": null,
+      "min": null,
+      "typ": 2500,
+      "max": null,
+      "unit": "kHz",
+      "conditions": null
+    },
+    "Source_Sink_Current": {
+      "parameter": "Source/Sink Current",
+      "symbol": null,
+      "min": null,
+      "typ": 30,
+      "max": null,
+      "unit": "µA",
+      "conditions": "VCOMP = 1V, 100mV overdrive, ±30µA"
     },
     "gm_cs": {
       "parameter": "COMP to Current Sense Trans-Conductance",
@@ -686,6 +755,22 @@
           "unit": "V",
           "conditions": null
         },
+        "All_Other_Pins_Voltage": {
+          "parameter": "All Other Pins Voltage",
+          "symbol": null,
+          "min": -0.3,
+          "max": 6,
+          "unit": "V",
+          "conditions": null
+        },
+        "Lead_Temperature": {
+          "parameter": "Lead Temperature",
+          "symbol": null,
+          "min": null,
+          "max": 260,
+          "unit": "°C",
+          "conditions": "Soldering, 10 sec."
+        },
         "TJ": {
           "parameter": "Junction Temperature",
           "symbol": "TJ",
@@ -701,6 +786,14 @@
           "max": 150,
           "unit": "°C",
           "conditions": null
+        },
+        "ESD_Susceptibility__HBM": {
+          "parameter": "ESD Susceptibility (HBM)",
+          "symbol": null,
+          "min": null,
+          "max": 2,
+          "unit": "kV",
+          "conditions": "ESD Susceptibility"
         }
       },
       "electrical_parameters": {
@@ -758,6 +851,15 @@
           "unit": "V",
           "conditions": null
         },
+        "Enable_to_COMP_Active": {
+          "parameter": "Enable to COMP Active",
+          "symbol": null,
+          "min": null,
+          "typ": 540,
+          "max": null,
+          "unit": "µs",
+          "conditions": "VIN = 12V, TA = 25°C"
+        },
         "IEN": {
           "parameter": "Pull-Up Current (High)",
           "symbol": "IEN",
@@ -803,6 +905,15 @@
           "unit": "mΩ",
           "conditions": "VIN = 12V, VBOOT - VSW = 5V"
         },
+        "Error_Amplifier_Input_Current": {
+          "parameter": "Error Amplifier Input Current",
+          "symbol": null,
+          "min": null,
+          "typ": 50,
+          "max": null,
+          "unit": "nA",
+          "conditions": null
+        },
         "gm": {
           "parameter": "Error Amplifier Trans-Conductance (Normal)",
           "symbol": "gm",
@@ -820,6 +931,33 @@
           "max": null,
           "unit": "µA/V",
           "conditions": "During SS, -2µA < ICOMP < 2µA, VCOMP = 1V, VFB = 0.4V"
+        },
+        "Error_Amplifier_DC_Gain": {
+          "parameter": "Error Amplifier DC Gain",
+          "symbol": null,
+          "min": null,
+          "typ": 10000,
+          "max": null,
+          "unit": "V/V",
+          "conditions": "VFB = 0.8V"
+        },
+        "Error_Amplifier_Bandwidth": {
+          "parameter": "Error Amplifier Bandwidth",
+          "symbol": null,
+          "min": null,
+          "typ": 2500,
+          "max": null,
+          "unit": "kHz",
+          "conditions": null
+        },
+        "Source_Sink_Current": {
+          "parameter": "Source/Sink Current",
+          "symbol": null,
+          "min": null,
+          "typ": 30,
+          "max": null,
+          "unit": "µA",
+          "conditions": "VCOMP = 1V, 100mV overdrive, ±30µA"
         },
         "gm_cs": {
           "parameter": "COMP to Current Sense Trans-Conductance",

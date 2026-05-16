@@ -234,6 +234,94 @@
     }
   },
   "absolute_maximum_ratings": {
+    "PVIN_to_PGND": {
+      "parameter": "PVIN to PGND",
+      "symbol": null,
+      "min": -0.3,
+      "max": 42,
+      "unit": "V",
+      "conditions": null
+    },
+    "EN_to_AGND": {
+      "parameter": "EN to AGND",
+      "symbol": null,
+      "min": -0.3,
+      "max": null,
+      "unit": "V",
+      "conditions": "Max is VIN + 0.3"
+    },
+    "FB__RT__SS_TRK_to_AGND": {
+      "parameter": "FB, RT, SS/TRK to AGND",
+      "symbol": null,
+      "min": -0.3,
+      "max": 5,
+      "unit": "V",
+      "conditions": null
+    },
+    "PGOOD_to_AGND": {
+      "parameter": "PGOOD to AGND",
+      "symbol": null,
+      "min": -0.1,
+      "max": 20,
+      "unit": "V",
+      "conditions": null
+    },
+    "SYNC_to_AGND": {
+      "parameter": "SYNC to AGND",
+      "symbol": null,
+      "min": -0.3,
+      "max": 5.5,
+      "unit": "V",
+      "conditions": null
+    },
+    "BIAS_to_AGND": {
+      "parameter": "BIAS to AGND",
+      "symbol": null,
+      "min": -0.3,
+      "max": null,
+      "unit": "V",
+      "conditions": "Max is Lower of (VIN + 0.3) or 20"
+    },
+    "AGND_to_PGND": {
+      "parameter": "AGND to PGND",
+      "symbol": null,
+      "min": -0.3,
+      "max": 0.3,
+      "unit": "V",
+      "conditions": null
+    },
+    "SW_to_PGND": {
+      "parameter": "SW to PGND",
+      "symbol": null,
+      "min": -0.3,
+      "max": null,
+      "unit": "V",
+      "conditions": "Max is VIN + 0.3"
+    },
+    "SW_to_PGND_less_than_10_ns_tra": {
+      "parameter": "SW to PGND less than 10-ns transients",
+      "symbol": null,
+      "min": -3.5,
+      "max": 42,
+      "unit": "V",
+      "conditions": null
+    },
+    "CBOOT_to_SW": {
+      "parameter": "CBOOT to SW",
+      "symbol": null,
+      "min": -0.3,
+      "max": 5,
+      "unit": "V",
+      "conditions": null
+    },
+    "VCC_to_AGND": {
+      "parameter": "VCC to AGND",
+      "symbol": null,
+      "min": -0.3,
+      "max": 5,
+      "unit": "V",
+      "conditions": null
+    },
     "TJ": {
       "parameter": "Junction temperature",
       "symbol": "TJ",
@@ -664,6 +752,94 @@
     },
     "electrical": {
       "absolute_maximum_ratings": {
+        "PVIN_to_PGND": {
+          "parameter": "PVIN to PGND",
+          "symbol": null,
+          "min": -0.3,
+          "max": 42,
+          "unit": "V",
+          "conditions": null
+        },
+        "EN_to_AGND": {
+          "parameter": "EN to AGND",
+          "symbol": null,
+          "min": -0.3,
+          "max": null,
+          "unit": "V",
+          "conditions": "Max is VIN + 0.3"
+        },
+        "FB__RT__SS_TRK_to_AGND": {
+          "parameter": "FB, RT, SS/TRK to AGND",
+          "symbol": null,
+          "min": -0.3,
+          "max": 5,
+          "unit": "V",
+          "conditions": null
+        },
+        "PGOOD_to_AGND": {
+          "parameter": "PGOOD to AGND",
+          "symbol": null,
+          "min": -0.1,
+          "max": 20,
+          "unit": "V",
+          "conditions": null
+        },
+        "SYNC_to_AGND": {
+          "parameter": "SYNC to AGND",
+          "symbol": null,
+          "min": -0.3,
+          "max": 5.5,
+          "unit": "V",
+          "conditions": null
+        },
+        "BIAS_to_AGND": {
+          "parameter": "BIAS to AGND",
+          "symbol": null,
+          "min": -0.3,
+          "max": null,
+          "unit": "V",
+          "conditions": "Max is Lower of (VIN + 0.3) or 20"
+        },
+        "AGND_to_PGND": {
+          "parameter": "AGND to PGND",
+          "symbol": null,
+          "min": -0.3,
+          "max": 0.3,
+          "unit": "V",
+          "conditions": null
+        },
+        "SW_to_PGND": {
+          "parameter": "SW to PGND",
+          "symbol": null,
+          "min": -0.3,
+          "max": null,
+          "unit": "V",
+          "conditions": "Max is VIN + 0.3"
+        },
+        "SW_to_PGND_less_than_10_ns_tra": {
+          "parameter": "SW to PGND less than 10-ns transients",
+          "symbol": null,
+          "min": -3.5,
+          "max": 42,
+          "unit": "V",
+          "conditions": null
+        },
+        "CBOOT_to_SW": {
+          "parameter": "CBOOT to SW",
+          "symbol": null,
+          "min": -0.3,
+          "max": 5,
+          "unit": "V",
+          "conditions": null
+        },
+        "VCC_to_AGND": {
+          "parameter": "VCC to AGND",
+          "symbol": null,
+          "min": -0.3,
+          "max": 5,
+          "unit": "V",
+          "conditions": null
+        },
         "TJ": {
           "parameter": "Junction temperature",
           "symbol": "TJ",
@@ -869,19 +1045,34 @@
       "layout_hints": [
         {
           "hint": "9.1.1 Layout For EMI Reduction To optimize EMI performance, place the components in the high di/dt current path, as shown in 图 9-1, as close as possible to each other. When the components are close t",
-          "source_page": 48
+          "source_page": 48,
+          "origin": {
+            "kind": "source_recommendation",
+            "method": "design_info_utils.layout_keywords",
+            "source_page": 48
+          }
         }
       ],
       "supply_recommendations": [
         {
           "hint": "Power Supply Recommendations The LM73605-Q1/6-Q1 designed to operate from an input voltage supply range from 3.5 V to 36 V. This input supply must be able to withstand the maximum input current and m",
-          "source_page": 46
+          "source_page": 46,
+          "origin": {
+            "kind": "source_recommendation",
+            "method": "design_info_utils.supply_keywords",
+            "source_page": 46
+          }
         }
       ],
       "topology_hints": [
         {
           "hint": "Application and Implementation Note Information in the following applications sections is not part of the TI component specification, and TI does not warrant its accuracy or completeness. TI’s custom",
-          "source_page": 28
+          "source_page": 28,
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.topology_keywords",
+            "source_page": 28
+          }
         }
       ],
       "typical_application": {
@@ -904,27 +1095,52 @@
           {
             "page": 28,
             "title": null,
-            "content_type": "application"
+            "content_type": "application",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 28
+            }
           },
           {
             "page": 46,
             "title": null,
-            "content_type": "application"
+            "content_type": "application",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 46
+            }
           },
           {
             "page": 47,
             "title": null,
-            "content_type": "layout"
+            "content_type": "layout",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 47
+            }
           },
           {
             "page": 48,
             "title": null,
-            "content_type": "layout"
+            "content_type": "layout",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 48
+            }
           },
           {
             "page": 50,
             "title": null,
-            "content_type": "layout"
+            "content_type": "layout",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 50
+            }
           }
         ],
         "total_pages": 5

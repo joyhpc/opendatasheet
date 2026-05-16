@@ -43,6 +43,14 @@
       "unit": "V",
       "conditions": null
     },
+    "SW_to_ground_current": {
+      "parameter": "SW to ground current",
+      "symbol": null,
+      "min": null,
+      "max": null,
+      "unit": "A",
+      "conditions": "Internally limited"
+    },
     "TA": {
       "parameter": "Operating Temperature Range",
       "symbol": "TA",
@@ -77,6 +85,15 @@
     }
   },
   "electrical_parameters": {
+    "Input_Standoff_Voltage": {
+      "parameter": "Input Standoff Voltage",
+      "symbol": null,
+      "min": 42,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": "VIN = 12V, TA = 25°C"
+    },
     "VIN": {
       "parameter": "Input Voltage Range",
       "symbol": "VIN",
@@ -85,6 +102,24 @@
       "max": 38,
       "unit": "V",
       "conditions": "VIN = 12V, TA = 25°C"
+    },
+    "Input_UVLO": {
+      "parameter": "Input UVLO",
+      "symbol": null,
+      "min": null,
+      "typ": 3.8,
+      "max": null,
+      "unit": "V",
+      "conditions": "Rising, Hysteresis=140mV, VIN = 12V, TA = 25°C"
+    },
+    "Input_OVP": {
+      "parameter": "Input OVP",
+      "symbol": null,
+      "min": null,
+      "typ": 38,
+      "max": null,
+      "unit": "V",
+      "conditions": "Rising, Hysteresis=1.3V, VIN = 12V, TA = 25°C"
     },
     "IIN": {
       "parameter": "Input Supply Current",
@@ -139,6 +174,15 @@
       "max": null,
       "unit": "%",
       "conditions": "VIN = 12V, TA = 25°C"
+    },
+    "FoldBack_Frequency": {
+      "parameter": "FoldBack Frequency",
+      "symbol": null,
+      "min": null,
+      "typ": 60,
+      "max": null,
+      "unit": "KHz",
+      "conditions": "VFB = 0V, VIN = 12V, TA = 25°C"
     },
     "RDS(ON)": {
       "parameter": "High side Switch On Resistance",
@@ -287,6 +331,14 @@
           "unit": "V",
           "conditions": null
         },
+        "SW_to_ground_current": {
+          "parameter": "SW to ground current",
+          "symbol": null,
+          "min": null,
+          "max": null,
+          "unit": "A",
+          "conditions": "Internally limited"
+        },
         "TA": {
           "parameter": "Operating Temperature Range",
           "symbol": "TA",
@@ -321,6 +373,15 @@
         }
       },
       "electrical_parameters": {
+        "Input_Standoff_Voltage": {
+          "parameter": "Input Standoff Voltage",
+          "symbol": null,
+          "min": 42,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": "VIN = 12V, TA = 25°C"
+        },
         "VIN": {
           "parameter": "Input Voltage Range",
           "symbol": "VIN",
@@ -329,6 +390,24 @@
           "max": 38,
           "unit": "V",
           "conditions": "VIN = 12V, TA = 25°C"
+        },
+        "Input_UVLO": {
+          "parameter": "Input UVLO",
+          "symbol": null,
+          "min": null,
+          "typ": 3.8,
+          "max": null,
+          "unit": "V",
+          "conditions": "Rising, Hysteresis=140mV, VIN = 12V, TA = 25°C"
+        },
+        "Input_OVP": {
+          "parameter": "Input OVP",
+          "symbol": null,
+          "min": null,
+          "typ": 38,
+          "max": null,
+          "unit": "V",
+          "conditions": "Rising, Hysteresis=1.3V, VIN = 12V, TA = 25°C"
         },
         "IIN": {
           "parameter": "Input Supply Current",
@@ -383,6 +462,15 @@
           "max": null,
           "unit": "%",
           "conditions": "VIN = 12V, TA = 25°C"
+        },
+        "FoldBack_Frequency": {
+          "parameter": "FoldBack Frequency",
+          "symbol": null,
+          "min": null,
+          "typ": 60,
+          "max": null,
+          "unit": "KHz",
+          "conditions": "VFB = 0V, VIN = 12V, TA = 25°C"
         },
         "RDS(ON)": {
           "parameter": "High side Switch On Resistance",
@@ -504,19 +592,34 @@
           "source_page": 5,
           "value_hint": null,
           "value_hints": [],
-          "snippet": "APPLICATION INFORMATION Setting Output Voltages Output voltages are set by external resistors. The FB threshold is 0.8V. RTOP = RBOTTOM x [(VOUT / 0.8) - 1] Inductor Selection The peak-to-p"
+          "snippet": "APPLICATION INFORMATION Setting Output Voltages Output voltages are set by external resistors. The FB threshold is 0.8V. RTOP = RBOTTOM x [(VOUT / 0.8) - 1] Inductor Selection The peak-to-p",
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.component_rules",
+            "source_page": 5
+          }
         }
       ],
       "design_equation_hints": [
         {
           "equation": "RTOP = RBOTTOM x [(VOUT / 0.8) - 1] Inductor Selection The peak-to-p",
-          "source_page": 5
+          "source_page": 5,
+          "origin": {
+            "kind": "source_fact",
+            "method": "design_info_utils.equation_regex",
+            "source_page": 5
+          }
         }
       ],
       "topology_hints": [
         {
           "hint": "APPLICATION INFORMATION Setting Output Voltages Output voltages are set by external resistors. The FB threshold is 0.8V. RTOP = RBOTTOM x [(VOUT / 0.8) - 1] Inductor Selection The peak-to-p",
-          "source_page": 5
+          "source_page": 5,
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.topology_keywords",
+            "source_page": 5
+          }
         }
       ],
       "design_formulas": [
@@ -569,7 +672,12 @@
           {
             "page": 5,
             "title": null,
-            "content_type": "application"
+            "content_type": "application",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 5
+            }
           }
         ],
         "total_pages": 1

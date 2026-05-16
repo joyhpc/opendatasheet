@@ -219,7 +219,72 @@
       }
     }
   },
-  "absolute_maximum_ratings": {},
+  "absolute_maximum_ratings": {
+    "VCC__UVLO_EN__OUT__VAUXH__PGD": {
+      "parameter": "VCC, UVLO/EN, OUT, VAUXH, PGD to VEE",
+      "symbol": null,
+      "min": -0.3,
+      "max": 100,
+      "unit": "V",
+      "conditions": null
+    },
+    "GATE_to_VEE": {
+      "parameter": "GATE to VEE",
+      "symbol": null,
+      "min": -0.3,
+      "max": 16,
+      "unit": "V",
+      "conditions": null
+    },
+    "OVLO__TIMER__PWR_to_VEE": {
+      "parameter": "OVLO, TIMER, PWR to VEE",
+      "symbol": null,
+      "min": -0.3,
+      "max": 7,
+      "unit": "V",
+      "conditions": null
+    },
+    "SENSE_K__SENSE__VEE_K_to_VEE": {
+      "parameter": "SENSE_K, SENSE, VEE_K to VEE",
+      "symbol": null,
+      "min": -0.3,
+      "max": 0.3,
+      "unit": "V",
+      "conditions": null
+    },
+    "Logic_Pins_to_VEE": {
+      "parameter": "Logic Pins to VEE",
+      "symbol": null,
+      "min": -0.3,
+      "max": 6,
+      "unit": "V",
+      "conditions": null
+    },
+    "ESD_Rating__Human_Body_Model": {
+      "parameter": "ESD Rating (Human Body Model)",
+      "symbol": null,
+      "min": null,
+      "max": 2,
+      "unit": "kV",
+      "conditions": null
+    },
+    "Storage_Temperature": {
+      "parameter": "Storage Temperature",
+      "symbol": null,
+      "min": -65,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    },
+    "Junction_Temperature": {
+      "parameter": "Junction Temperature",
+      "symbol": null,
+      "min": null,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    }
+  },
   "electrical_parameters": {
     "I_IN-EN": {
       "parameter": "Input current, enabled",
@@ -564,11 +629,11 @@
       "conditions": "Restart cycles"
     },
     "I_TIMER": {
-      "parameter": "Fault sink current",
+      "parameter": "Insertion time current",
       "symbol": "I_TIMER",
-      "min": 1.7,
-      "typ": 2.4,
-      "max": 3.2,
+      "min": -5.9,
+      "typ": -4.8,
+      "max": -3.3,
       "unit": "µA",
       "conditions": null
     },
@@ -589,6 +654,15 @@
       "max": -50,
       "unit": "µA",
       "conditions": "SENSE-VEE=VCL"
+    },
+    "I_TIMER__2": {
+      "parameter": "Fault sink current",
+      "symbol": "I_TIMER",
+      "min": 1.7,
+      "typ": 2.4,
+      "max": 3.2,
+      "unit": "µA",
+      "conditions": null
     },
     "PGD_TH": {
       "parameter": "PGD Threshold measured at OUT - SENSE (Decreasing)",
@@ -625,6 +699,15 @@
       "max": 5,
       "unit": "µA",
       "conditions": "VPGD = 80V"
+    },
+    "ADC_Resolution": {
+      "parameter": "ADC Resolution",
+      "symbol": null,
+      "min": null,
+      "typ": 12,
+      "max": null,
+      "unit": "Bits",
+      "conditions": null
     },
     "INL": {
       "parameter": "ADC Integral non-linearity",
@@ -704,8 +787,10 @@
       "unit": "V"
     },
     "iout_max": {
-      "typ": -100,
-      "unit": "nA"
+      "min": 23,
+      "typ": 26,
+      "max": 30,
+      "unit": "mV"
     }
   },
   "thermal": {},
@@ -923,7 +1008,72 @@
       }
     },
     "electrical": {
-      "absolute_maximum_ratings": {},
+      "absolute_maximum_ratings": {
+        "VCC__UVLO_EN__OUT__VAUXH__PGD": {
+          "parameter": "VCC, UVLO/EN, OUT, VAUXH, PGD to VEE",
+          "symbol": null,
+          "min": -0.3,
+          "max": 100,
+          "unit": "V",
+          "conditions": null
+        },
+        "GATE_to_VEE": {
+          "parameter": "GATE to VEE",
+          "symbol": null,
+          "min": -0.3,
+          "max": 16,
+          "unit": "V",
+          "conditions": null
+        },
+        "OVLO__TIMER__PWR_to_VEE": {
+          "parameter": "OVLO, TIMER, PWR to VEE",
+          "symbol": null,
+          "min": -0.3,
+          "max": 7,
+          "unit": "V",
+          "conditions": null
+        },
+        "SENSE_K__SENSE__VEE_K_to_VEE": {
+          "parameter": "SENSE_K, SENSE, VEE_K to VEE",
+          "symbol": null,
+          "min": -0.3,
+          "max": 0.3,
+          "unit": "V",
+          "conditions": null
+        },
+        "Logic_Pins_to_VEE": {
+          "parameter": "Logic Pins to VEE",
+          "symbol": null,
+          "min": -0.3,
+          "max": 6,
+          "unit": "V",
+          "conditions": null
+        },
+        "ESD_Rating__Human_Body_Model": {
+          "parameter": "ESD Rating (Human Body Model)",
+          "symbol": null,
+          "min": null,
+          "max": 2,
+          "unit": "kV",
+          "conditions": null
+        },
+        "Storage_Temperature": {
+          "parameter": "Storage Temperature",
+          "symbol": null,
+          "min": -65,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        },
+        "Junction_Temperature": {
+          "parameter": "Junction Temperature",
+          "symbol": null,
+          "min": null,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        }
+      },
       "electrical_parameters": {
         "I_IN-EN": {
           "parameter": "Input current, enabled",
@@ -1268,11 +1418,11 @@
           "conditions": "Restart cycles"
         },
         "I_TIMER": {
-          "parameter": "Fault sink current",
+          "parameter": "Insertion time current",
           "symbol": "I_TIMER",
-          "min": 1.7,
-          "typ": 2.4,
-          "max": 3.2,
+          "min": -5.9,
+          "typ": -4.8,
+          "max": -3.3,
           "unit": "µA",
           "conditions": null
         },
@@ -1293,6 +1443,15 @@
           "max": -50,
           "unit": "µA",
           "conditions": "SENSE-VEE=VCL"
+        },
+        "I_TIMER__2": {
+          "parameter": "Fault sink current",
+          "symbol": "I_TIMER",
+          "min": 1.7,
+          "typ": 2.4,
+          "max": 3.2,
+          "unit": "µA",
+          "conditions": null
         },
         "PGD_TH": {
           "parameter": "PGD Threshold measured at OUT - SENSE (Decreasing)",
@@ -1329,6 +1488,15 @@
           "max": 5,
           "unit": "µA",
           "conditions": "VPGD = 80V"
+        },
+        "ADC_Resolution": {
+          "parameter": "ADC Resolution",
+          "symbol": null,
+          "min": null,
+          "typ": 12,
+          "max": null,
+          "unit": "Bits",
+          "conditions": null
         },
         "INL": {
           "parameter": "ADC Integral non-linearity",
@@ -1408,8 +1576,10 @@
           "unit": "V"
         },
         "iout_max": {
-          "typ": -100,
-          "unit": "nA"
+          "min": 23,
+          "typ": 26,
+          "max": 30,
+          "unit": "mV"
         }
       }
     }

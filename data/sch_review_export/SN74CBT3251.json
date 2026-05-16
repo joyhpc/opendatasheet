@@ -496,6 +496,14 @@
       "unit": "V",
       "conditions": null
     },
+    "Continuous_channel_current": {
+      "parameter": "Continuous channel current",
+      "symbol": null,
+      "min": null,
+      "max": 128,
+      "unit": "mA",
+      "conditions": null
+    },
     "IK": {
       "parameter": "Input clamp current",
       "symbol": "IK",
@@ -631,11 +639,11 @@
       "conditions": "VCC = 4 V"
     },
     "tpd_VCC___5_V___0_5_V": {
-      "parameter": "Propagation delay (S to A)",
+      "parameter": "Propagation delay (A or B to B or A)",
       "symbol": "tpd",
-      "min": 2,
+      "min": null,
       "typ": null,
-      "max": 5.5,
+      "max": 0.24,
       "unit": "ns",
       "conditions": "VCC = 5 V ± 0.5 V"
     },
@@ -648,6 +656,15 @@
       "unit": "ns",
       "conditions": "VCC = 4 V"
     },
+    "tpd_VCC___5_V___0_5_V__2": {
+      "parameter": "Propagation delay (S to A)",
+      "symbol": "tpd",
+      "min": 2,
+      "typ": null,
+      "max": 5.5,
+      "unit": "ns",
+      "conditions": "VCC = 5 V ± 0.5 V"
+    },
     "ten": {
       "parameter": "Enable time (S to B)",
       "symbol": "ten",
@@ -658,11 +675,11 @@
       "conditions": "VCC = 4 V"
     },
     "ten_VCC___5_V___0_5_V": {
-      "parameter": "Enable time (/OE to A or B)",
+      "parameter": "Enable time (S to B)",
       "symbol": "ten",
-      "min": 1.6,
+      "min": 1.5,
       "typ": null,
-      "max": 5.8,
+      "max": 5.6,
       "unit": "ns",
       "conditions": "VCC = 5 V ± 0.5 V"
     },
@@ -675,6 +692,15 @@
       "unit": "ns",
       "conditions": "VCC = 4 V"
     },
+    "ten_VCC___5_V___0_5_V__2": {
+      "parameter": "Enable time (/OE to A or B)",
+      "symbol": "ten",
+      "min": 1.6,
+      "typ": null,
+      "max": 5.8,
+      "unit": "ns",
+      "conditions": "VCC = 5 V ± 0.5 V"
+    },
     "tdis": {
       "parameter": "Disable time (S to B)",
       "symbol": "tdis",
@@ -685,11 +711,11 @@
       "conditions": "VCC = 4 V"
     },
     "tdis_VCC___5_V___0_5_V": {
-      "parameter": "Disable time (/OE to A or B)",
+      "parameter": "Disable time (S to B)",
       "symbol": "tdis",
-      "min": 2.3,
+      "min": 1.9,
       "typ": null,
-      "max": 6.2,
+      "max": 6.4,
       "unit": "ns",
       "conditions": "VCC = 5 V ± 0.5 V"
     },
@@ -701,6 +727,15 @@
       "max": 6,
       "unit": "ns",
       "conditions": "VCC = 4 V"
+    },
+    "tdis_VCC___5_V___0_5_V__2": {
+      "parameter": "Disable time (/OE to A or B)",
+      "symbol": "tdis",
+      "min": 2.3,
+      "typ": null,
+      "max": 6.2,
+      "unit": "ns",
+      "conditions": "VCC = 5 V ± 0.5 V"
     }
   },
   "drc_hints": {
@@ -1201,6 +1236,14 @@
           "unit": "V",
           "conditions": null
         },
+        "Continuous_channel_current": {
+          "parameter": "Continuous channel current",
+          "symbol": null,
+          "min": null,
+          "max": 128,
+          "unit": "mA",
+          "conditions": null
+        },
         "IK": {
           "parameter": "Input clamp current",
           "symbol": "IK",
@@ -1336,11 +1379,11 @@
           "conditions": "VCC = 4 V"
         },
         "tpd_VCC___5_V___0_5_V": {
-          "parameter": "Propagation delay (S to A)",
+          "parameter": "Propagation delay (A or B to B or A)",
           "symbol": "tpd",
-          "min": 2,
+          "min": null,
           "typ": null,
-          "max": 5.5,
+          "max": 0.24,
           "unit": "ns",
           "conditions": "VCC = 5 V ± 0.5 V"
         },
@@ -1353,6 +1396,15 @@
           "unit": "ns",
           "conditions": "VCC = 4 V"
         },
+        "tpd_VCC___5_V___0_5_V__2": {
+          "parameter": "Propagation delay (S to A)",
+          "symbol": "tpd",
+          "min": 2,
+          "typ": null,
+          "max": 5.5,
+          "unit": "ns",
+          "conditions": "VCC = 5 V ± 0.5 V"
+        },
         "ten": {
           "parameter": "Enable time (S to B)",
           "symbol": "ten",
@@ -1363,11 +1415,11 @@
           "conditions": "VCC = 4 V"
         },
         "ten_VCC___5_V___0_5_V": {
-          "parameter": "Enable time (/OE to A or B)",
+          "parameter": "Enable time (S to B)",
           "symbol": "ten",
-          "min": 1.6,
+          "min": 1.5,
           "typ": null,
-          "max": 5.8,
+          "max": 5.6,
           "unit": "ns",
           "conditions": "VCC = 5 V ± 0.5 V"
         },
@@ -1380,6 +1432,15 @@
           "unit": "ns",
           "conditions": "VCC = 4 V"
         },
+        "ten_VCC___5_V___0_5_V__2": {
+          "parameter": "Enable time (/OE to A or B)",
+          "symbol": "ten",
+          "min": 1.6,
+          "typ": null,
+          "max": 5.8,
+          "unit": "ns",
+          "conditions": "VCC = 5 V ± 0.5 V"
+        },
         "tdis": {
           "parameter": "Disable time (S to B)",
           "symbol": "tdis",
@@ -1390,11 +1451,11 @@
           "conditions": "VCC = 4 V"
         },
         "tdis_VCC___5_V___0_5_V": {
-          "parameter": "Disable time (/OE to A or B)",
+          "parameter": "Disable time (S to B)",
           "symbol": "tdis",
-          "min": 2.3,
+          "min": 1.9,
           "typ": null,
-          "max": 6.2,
+          "max": 6.4,
           "unit": "ns",
           "conditions": "VCC = 5 V ± 0.5 V"
         },
@@ -1406,6 +1467,15 @@
           "max": 6,
           "unit": "ns",
           "conditions": "VCC = 4 V"
+        },
+        "tdis_VCC___5_V___0_5_V__2": {
+          "parameter": "Disable time (/OE to A or B)",
+          "symbol": "tdis",
+          "min": 2.3,
+          "typ": null,
+          "max": 6.2,
+          "unit": "ns",
+          "conditions": "VCC = 5 V ± 0.5 V"
         }
       },
       "drc_hints": {

@@ -144,6 +144,38 @@
       "conditions": "VSS-0.3 to 7.0V"
     },
     "Pd": {
+      "parameter": "Power Dissipation (USP-3)",
+      "symbol": "Pd",
+      "min": null,
+      "max": 120,
+      "unit": "mW",
+      "conditions": null
+    },
+    "Pd_40mm_x_40mm_Standard_board": {
+      "parameter": "Power Dissipation (USP-3, Standard board)",
+      "symbol": "Pd",
+      "min": null,
+      "max": 1000,
+      "unit": "mW",
+      "conditions": "40mm x 40mm Standard board"
+    },
+    "Pd__2": {
+      "parameter": "Power Dissipation (SSOT-24)",
+      "symbol": "Pd",
+      "min": null,
+      "max": 150,
+      "unit": "mW",
+      "conditions": null
+    },
+    "Pd_40mm_x_40mm_Standard_board__2": {
+      "parameter": "Power Dissipation (SSOT-24, Standard board)",
+      "symbol": "Pd",
+      "min": null,
+      "max": 500,
+      "unit": "mW",
+      "conditions": "40mm x 40mm Standard board"
+    },
+    "Pd__3": {
       "parameter": "Power Dissipation (SOT-25)",
       "symbol": "Pd",
       "min": null,
@@ -151,7 +183,7 @@
       "unit": "mW",
       "conditions": null
     },
-    "Pd_40mm_x_40mm_Standard_board": {
+    "Pd_40mm_x_40mm_Standard_board__3": {
       "parameter": "Power Dissipation (SOT-25, Standard board)",
       "symbol": "Pd",
       "min": null,
@@ -313,11 +345,11 @@
       "conditions": "VIN=0.7V->6.0V, VIN=VDR to VOUT=VDR"
     },
     "VDF": {
-      "parameter": "Detect Voltage (5.0V Variant)",
+      "parameter": "Detect Voltage (1.0V Variant)",
       "symbol": "VDF",
-      "min": 4.9,
+      "min": 0.97,
       "typ": null,
-      "max": 5.1,
+      "max": 1.03,
       "unit": "V",
       "conditions": null
     },
@@ -339,7 +371,43 @@
       "unit": "uA",
       "conditions": "VIN=VDF(T)x0.9"
     },
+    "VDF__2": {
+      "parameter": "Detect Voltage (2.0V Variant)",
+      "symbol": "VDF",
+      "min": 1.96,
+      "typ": null,
+      "max": 2.04,
+      "unit": "V",
+      "conditions": null
+    },
     "ISS1_VIN_VDF_T_x1_1": {
+      "parameter": "Supply Current 1 (2.0V-3.7V Variants)",
+      "symbol": "ISS1",
+      "min": null,
+      "typ": 0.6,
+      "max": 1.7,
+      "unit": "uA",
+      "conditions": "VIN=VDF(T)x1.1"
+    },
+    "ISS2_VIN_VDF_T_x0_9": {
+      "parameter": "Supply Current 2 (2.0V-3.7V Variants)",
+      "symbol": "ISS2",
+      "min": null,
+      "typ": 0.5,
+      "max": 1.6,
+      "unit": "uA",
+      "conditions": "VIN=VDF(T)x0.9"
+    },
+    "VDF__3": {
+      "parameter": "Detect Voltage (3.8V Variant)",
+      "symbol": "VDF",
+      "min": 3.724,
+      "typ": null,
+      "max": 3.876,
+      "unit": "V",
+      "conditions": null
+    },
+    "ISS1_VIN_VDF_T_x1_1__2": {
       "parameter": "Supply Current 1 (3.8V-5.0V Variants)",
       "symbol": "ISS1",
       "min": null,
@@ -348,7 +416,7 @@
       "unit": "uA",
       "conditions": "VIN=VDF(T)x1.1"
     },
-    "ISS2_VIN_VDF_T_x0_9": {
+    "ISS2_VIN_VDF_T_x0_9__2": {
       "parameter": "Supply Current 2 (3.8V-5.0V Variants)",
       "symbol": "ISS2",
       "min": null,
@@ -356,6 +424,15 @@
       "max": 1.8,
       "unit": "uA",
       "conditions": "VIN=VDF(T)x0.9"
+    },
+    "VDF__4": {
+      "parameter": "Detect Voltage (5.0V Variant)",
+      "symbol": "VDF",
+      "min": 4.9,
+      "typ": null,
+      "max": 5.1,
+      "unit": "V",
+      "conditions": null
     }
   },
   "drc_hints": {
@@ -586,6 +663,38 @@
           "conditions": "VSS-0.3 to 7.0V"
         },
         "Pd": {
+          "parameter": "Power Dissipation (USP-3)",
+          "symbol": "Pd",
+          "min": null,
+          "max": 120,
+          "unit": "mW",
+          "conditions": null
+        },
+        "Pd_40mm_x_40mm_Standard_board": {
+          "parameter": "Power Dissipation (USP-3, Standard board)",
+          "symbol": "Pd",
+          "min": null,
+          "max": 1000,
+          "unit": "mW",
+          "conditions": "40mm x 40mm Standard board"
+        },
+        "Pd__2": {
+          "parameter": "Power Dissipation (SSOT-24)",
+          "symbol": "Pd",
+          "min": null,
+          "max": 150,
+          "unit": "mW",
+          "conditions": null
+        },
+        "Pd_40mm_x_40mm_Standard_board__2": {
+          "parameter": "Power Dissipation (SSOT-24, Standard board)",
+          "symbol": "Pd",
+          "min": null,
+          "max": 500,
+          "unit": "mW",
+          "conditions": "40mm x 40mm Standard board"
+        },
+        "Pd__3": {
           "parameter": "Power Dissipation (SOT-25)",
           "symbol": "Pd",
           "min": null,
@@ -593,7 +702,7 @@
           "unit": "mW",
           "conditions": null
         },
-        "Pd_40mm_x_40mm_Standard_board": {
+        "Pd_40mm_x_40mm_Standard_board__3": {
           "parameter": "Power Dissipation (SOT-25, Standard board)",
           "symbol": "Pd",
           "min": null,
@@ -755,11 +864,11 @@
           "conditions": "VIN=0.7V->6.0V, VIN=VDR to VOUT=VDR"
         },
         "VDF": {
-          "parameter": "Detect Voltage (5.0V Variant)",
+          "parameter": "Detect Voltage (1.0V Variant)",
           "symbol": "VDF",
-          "min": 4.9,
+          "min": 0.97,
           "typ": null,
-          "max": 5.1,
+          "max": 1.03,
           "unit": "V",
           "conditions": null
         },
@@ -781,7 +890,43 @@
           "unit": "uA",
           "conditions": "VIN=VDF(T)x0.9"
         },
+        "VDF__2": {
+          "parameter": "Detect Voltage (2.0V Variant)",
+          "symbol": "VDF",
+          "min": 1.96,
+          "typ": null,
+          "max": 2.04,
+          "unit": "V",
+          "conditions": null
+        },
         "ISS1_VIN_VDF_T_x1_1": {
+          "parameter": "Supply Current 1 (2.0V-3.7V Variants)",
+          "symbol": "ISS1",
+          "min": null,
+          "typ": 0.6,
+          "max": 1.7,
+          "unit": "uA",
+          "conditions": "VIN=VDF(T)x1.1"
+        },
+        "ISS2_VIN_VDF_T_x0_9": {
+          "parameter": "Supply Current 2 (2.0V-3.7V Variants)",
+          "symbol": "ISS2",
+          "min": null,
+          "typ": 0.5,
+          "max": 1.6,
+          "unit": "uA",
+          "conditions": "VIN=VDF(T)x0.9"
+        },
+        "VDF__3": {
+          "parameter": "Detect Voltage (3.8V Variant)",
+          "symbol": "VDF",
+          "min": 3.724,
+          "typ": null,
+          "max": 3.876,
+          "unit": "V",
+          "conditions": null
+        },
+        "ISS1_VIN_VDF_T_x1_1__2": {
           "parameter": "Supply Current 1 (3.8V-5.0V Variants)",
           "symbol": "ISS1",
           "min": null,
@@ -790,7 +935,7 @@
           "unit": "uA",
           "conditions": "VIN=VDF(T)x1.1"
         },
-        "ISS2_VIN_VDF_T_x0_9": {
+        "ISS2_VIN_VDF_T_x0_9__2": {
           "parameter": "Supply Current 2 (3.8V-5.0V Variants)",
           "symbol": "ISS2",
           "min": null,
@@ -798,6 +943,15 @@
           "max": 1.8,
           "unit": "uA",
           "conditions": "VIN=VDF(T)x0.9"
+        },
+        "VDF__4": {
+          "parameter": "Detect Voltage (5.0V Variant)",
+          "symbol": "VDF",
+          "min": 4.9,
+          "typ": null,
+          "max": 5.1,
+          "unit": "V",
+          "conditions": null
         }
       },
       "drc_hints": {

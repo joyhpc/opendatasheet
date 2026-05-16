@@ -74,6 +74,78 @@
       "max": 0.3,
       "unit": "V",
       "conditions": null
+    },
+    "CFLY__Voltage": {
+      "parameter": "CFLY- Voltage",
+      "symbol": null,
+      "min": 0.3,
+      "max": null,
+      "unit": "V",
+      "conditions": "to VOUT - 0.3V"
+    },
+    "CFLY__Voltage_to_VIN___0_3V": {
+      "parameter": "CFLY+ Voltage",
+      "symbol": null,
+      "min": -0.3,
+      "max": null,
+      "unit": "V",
+      "conditions": "to VIN + 0.3V"
+    },
+    "Continuous_Output_Current": {
+      "parameter": "Continuous Output Current",
+      "symbol": null,
+      "min": null,
+      "max": 250.0,
+      "unit": "mA",
+      "conditions": null
+    },
+    "Operating_Temperature_Range": {
+      "parameter": "Operating Temperature Range",
+      "symbol": null,
+      "min": -40.0,
+      "max": 85.0,
+      "unit": "°C",
+      "conditions": null
+    },
+    "Junction_Temperature": {
+      "parameter": "Junction Temperature",
+      "symbol": null,
+      "min": null,
+      "max": 150.0,
+      "unit": "°C",
+      "conditions": null
+    },
+    "Storage_Temperature_Range": {
+      "parameter": "Storage Temperature Range",
+      "symbol": null,
+      "min": -65.0,
+      "max": 150.0,
+      "unit": "°C",
+      "conditions": null
+    },
+    "Lead_Temperature__Soldering__1": {
+      "parameter": "Lead Temperature (Soldering, 10s)",
+      "symbol": null,
+      "min": null,
+      "max": 260.0,
+      "unit": "°C",
+      "conditions": null
+    },
+    "ESD_Susceptibility_HBM": {
+      "parameter": "ESD Susceptibility HBM",
+      "symbol": null,
+      "min": null,
+      "max": 7000.0,
+      "unit": "V",
+      "conditions": null
+    },
+    "ESD_Susceptibility_MM": {
+      "parameter": "ESD Susceptibility MM",
+      "symbol": null,
+      "min": null,
+      "max": 400.0,
+      "unit": "V",
+      "conditions": null
     }
   },
   "electrical_parameters": {
@@ -135,6 +207,15 @@
       "parameter": "Quiescent Current (Shutdown)",
       "symbol": "IQ",
       "min": null,
+      "typ": 0.7,
+      "max": 1.0,
+      "unit": "µA",
+      "conditions": "Shutdown mode"
+    },
+    "IQ_Shutdown_mode__2": {
+      "parameter": "Quiescent Current (Shutdown)",
+      "symbol": "IQ",
+      "min": null,
       "typ": null,
       "max": 3.0,
       "unit": "µA",
@@ -143,11 +224,38 @@
     "fOSC": {
       "parameter": "Internal Switching Frequency",
       "symbol": "fOSC",
+      "min": 800.0,
+      "typ": 950.0,
+      "max": 1100.0,
+      "unit": "kHz",
+      "conditions": null
+    },
+    "fOSC__2": {
+      "parameter": "Internal Switching Frequency",
+      "symbol": "fOSC",
       "min": 750.0,
       "typ": null,
       "max": 1150.0,
       "unit": "kHz",
       "conditions": null
+    },
+    "Impedance": {
+      "parameter": "Impedance",
+      "symbol": null,
+      "min": null,
+      "typ": 4.2,
+      "max": 5.3,
+      "unit": "Ω",
+      "conditions": "IOUT = 100mA"
+    },
+    "Impedance_IOUT___100mA": {
+      "parameter": "Impedance",
+      "symbol": null,
+      "min": null,
+      "typ": null,
+      "max": 6.2,
+      "unit": "Ω",
+      "conditions": "IOUT = 100mA"
     },
     "VINH": {
       "parameter": "Input High Voltage",
@@ -267,6 +375,78 @@
           "max": 0.3,
           "unit": "V",
           "conditions": null
+        },
+        "CFLY__Voltage": {
+          "parameter": "CFLY- Voltage",
+          "symbol": null,
+          "min": 0.3,
+          "max": null,
+          "unit": "V",
+          "conditions": "to VOUT - 0.3V"
+        },
+        "CFLY__Voltage_to_VIN___0_3V": {
+          "parameter": "CFLY+ Voltage",
+          "symbol": null,
+          "min": -0.3,
+          "max": null,
+          "unit": "V",
+          "conditions": "to VIN + 0.3V"
+        },
+        "Continuous_Output_Current": {
+          "parameter": "Continuous Output Current",
+          "symbol": null,
+          "min": null,
+          "max": 250.0,
+          "unit": "mA",
+          "conditions": null
+        },
+        "Operating_Temperature_Range": {
+          "parameter": "Operating Temperature Range",
+          "symbol": null,
+          "min": -40.0,
+          "max": 85.0,
+          "unit": "°C",
+          "conditions": null
+        },
+        "Junction_Temperature": {
+          "parameter": "Junction Temperature",
+          "symbol": null,
+          "min": null,
+          "max": 150.0,
+          "unit": "°C",
+          "conditions": null
+        },
+        "Storage_Temperature_Range": {
+          "parameter": "Storage Temperature Range",
+          "symbol": null,
+          "min": -65.0,
+          "max": 150.0,
+          "unit": "°C",
+          "conditions": null
+        },
+        "Lead_Temperature__Soldering__1": {
+          "parameter": "Lead Temperature (Soldering, 10s)",
+          "symbol": null,
+          "min": null,
+          "max": 260.0,
+          "unit": "°C",
+          "conditions": null
+        },
+        "ESD_Susceptibility_HBM": {
+          "parameter": "ESD Susceptibility HBM",
+          "symbol": null,
+          "min": null,
+          "max": 7000.0,
+          "unit": "V",
+          "conditions": null
+        },
+        "ESD_Susceptibility_MM": {
+          "parameter": "ESD Susceptibility MM",
+          "symbol": null,
+          "min": null,
+          "max": 400.0,
+          "unit": "V",
+          "conditions": null
         }
       },
       "electrical_parameters": {
@@ -328,6 +508,15 @@
           "parameter": "Quiescent Current (Shutdown)",
           "symbol": "IQ",
           "min": null,
+          "typ": 0.7,
+          "max": 1.0,
+          "unit": "µA",
+          "conditions": "Shutdown mode"
+        },
+        "IQ_Shutdown_mode__2": {
+          "parameter": "Quiescent Current (Shutdown)",
+          "symbol": "IQ",
+          "min": null,
           "typ": null,
           "max": 3.0,
           "unit": "µA",
@@ -336,11 +525,38 @@
         "fOSC": {
           "parameter": "Internal Switching Frequency",
           "symbol": "fOSC",
+          "min": 800.0,
+          "typ": 950.0,
+          "max": 1100.0,
+          "unit": "kHz",
+          "conditions": null
+        },
+        "fOSC__2": {
+          "parameter": "Internal Switching Frequency",
+          "symbol": "fOSC",
           "min": 750.0,
           "typ": null,
           "max": 1150.0,
           "unit": "kHz",
           "conditions": null
+        },
+        "Impedance": {
+          "parameter": "Impedance",
+          "symbol": null,
+          "min": null,
+          "typ": 4.2,
+          "max": 5.3,
+          "unit": "Ω",
+          "conditions": "IOUT = 100mA"
+        },
+        "Impedance_IOUT___100mA": {
+          "parameter": "Impedance",
+          "symbol": null,
+          "min": null,
+          "typ": null,
+          "max": 6.2,
+          "unit": "Ω",
+          "conditions": "IOUT = 100mA"
         },
         "VINH": {
           "parameter": "Input High Voltage",

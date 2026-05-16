@@ -193,6 +193,14 @@
       "parameter": "Electrostatic discharge",
       "symbol": "ESD",
       "min": null,
+      "max": 2,
+      "unit": "kV",
+      "conditions": null
+    },
+    "ESD__2": {
+      "parameter": "Electrostatic discharge",
+      "symbol": "ESD",
+      "min": null,
       "max": 500,
       "unit": "V",
       "conditions": null
@@ -212,8 +220,8 @@
       "parameter": "Drain-source on-state resistance",
       "symbol": "rDS(on)",
       "min": null,
-      "typ": null,
-      "max": 150,
+      "typ": 120,
+      "max": 140,
       "unit": "mΩ",
       "conditions": "VI(IN1) = VI(IN2) = 3.3 V, IL = 500 mA"
     },
@@ -221,8 +229,8 @@
       "parameter": "Drain-source on-state resistance",
       "symbol": "rDS(on)",
       "min": null,
-      "typ": null,
-      "max": 150,
+      "typ": 120,
+      "max": 140,
       "unit": "mΩ",
       "conditions": "VI(IN1) = VI(IN2) = 2.8 V, IL = 500 mA"
     },
@@ -231,9 +239,81 @@
       "symbol": "rDS(on)",
       "min": null,
       "typ": null,
+      "max": 220,
+      "unit": "mΩ",
+      "conditions": "VI(IN1) = VI(IN2) = 5.0 V, IL = 500 mA"
+    },
+    "rDS(on)_VI_IN1____VI_IN2____3_3_V__IL__2": {
+      "parameter": "Drain-source on-state resistance",
+      "symbol": "rDS(on)",
+      "min": null,
+      "typ": null,
+      "max": 220,
+      "unit": "mΩ",
+      "conditions": "VI(IN1) = VI(IN2) = 3.3 V, IL = 500 mA"
+    },
+    "rDS(on)_VI_IN1____VI_IN2____2_8_V__IL__2": {
+      "parameter": "Drain-source on-state resistance",
+      "symbol": "rDS(on)",
+      "min": null,
+      "typ": null,
+      "max": 220,
+      "unit": "mΩ",
+      "conditions": "VI(IN1) = VI(IN2) = 2.8 V, IL = 500 mA"
+    },
+    "rDS(on)_VI_IN1____VI_IN2____5_0_V__IL__2": {
+      "parameter": "Drain-source on-state resistance",
+      "symbol": "rDS(on)",
+      "min": null,
+      "typ": 84,
+      "max": 110,
+      "unit": "mΩ",
+      "conditions": "VI(IN1) = VI(IN2) = 5.0 V, IL = 500 mA"
+    },
+    "rDS(on)_VI_IN1____VI_IN2____3_3_V__IL__3": {
+      "parameter": "Drain-source on-state resistance",
+      "symbol": "rDS(on)",
+      "min": null,
+      "typ": 84,
+      "max": 110,
+      "unit": "mΩ",
+      "conditions": "VI(IN1) = VI(IN2) = 3.3 V, IL = 500 mA"
+    },
+    "rDS(on)_VI_IN1____VI_IN2____2_8_V__IL__3": {
+      "parameter": "Drain-source on-state resistance",
+      "symbol": "rDS(on)",
+      "min": null,
+      "typ": 84,
+      "max": 110,
+      "unit": "mΩ",
+      "conditions": "VI(IN1) = VI(IN2) = 2.8 V, IL = 500 mA"
+    },
+    "rDS(on)_VI_IN1____VI_IN2____5_0_V__IL__3": {
+      "parameter": "Drain-source on-state resistance",
+      "symbol": "rDS(on)",
+      "min": null,
+      "typ": null,
       "max": 150,
       "unit": "mΩ",
       "conditions": "VI(IN1) = VI(IN2) = 5.0 V, IL = 500 mA"
+    },
+    "rDS(on)_VI_IN1____VI_IN2____3_3_V__IL__4": {
+      "parameter": "Drain-source on-state resistance",
+      "symbol": "rDS(on)",
+      "min": null,
+      "typ": null,
+      "max": 150,
+      "unit": "mΩ",
+      "conditions": "VI(IN1) = VI(IN2) = 3.3 V, IL = 500 mA"
+    },
+    "rDS(on)_VI_IN1____VI_IN2____2_8_V__IL__4": {
+      "parameter": "Drain-source on-state resistance",
+      "symbol": "rDS(on)",
+      "min": null,
+      "typ": null,
+      "max": 150,
+      "unit": "mΩ",
+      "conditions": "VI(IN1) = VI(IN2) = 2.8 V, IL = 500 mA"
     },
     "VIH": {
       "parameter": "High-level input voltage",
@@ -252,6 +332,87 @@
       "max": 0.7,
       "unit": "V",
       "conditions": null
+    },
+    "Input_current": {
+      "parameter": "Input current",
+      "symbol": null,
+      "min": null,
+      "typ": null,
+      "max": 1,
+      "unit": "μA",
+      "conditions": "EN = High, sink current"
+    },
+    "Input_current_EN___Low__source_current": {
+      "parameter": "Input current",
+      "symbol": null,
+      "min": 0.5,
+      "typ": 1.4,
+      "max": 5,
+      "unit": "μA",
+      "conditions": "EN = Low, source current"
+    },
+    "Supply_current_from_IN1__opera": {
+      "parameter": "Supply current from IN1 (operating)",
+      "symbol": null,
+      "min": null,
+      "typ": 55,
+      "max": 90,
+      "unit": "μA",
+      "conditions": "VI(VSNS) = 1.5 V, EN = Low (IN1 active), VI(IN1) = 5.5 V, VI(IN2) = 3.3 V"
+    },
+    "Supply_current_from_IN1__opera_VI_VSNS____1_5_V__EN___Low__IN": {
+      "parameter": "Supply current from IN1 (operating)",
+      "symbol": null,
+      "min": null,
+      "typ": 1,
+      "max": 12,
+      "unit": "μA",
+      "conditions": "VI(VSNS) = 1.5 V, EN = Low (IN1 active), VI(IN1) = 3.3 V, VI(IN2) = 5.5 V"
+    },
+    "Quiescent_current_from_IN1__st": {
+      "parameter": "Quiescent current from IN1 (standby)",
+      "symbol": null,
+      "min": null,
+      "typ": 0.5,
+      "max": 2,
+      "unit": "μA",
+      "conditions": "EN = High (inactive), VI(IN1) = 5.5 V, VI(IN2) = 3.3 V"
+    },
+    "Current_limit_accuracy": {
+      "parameter": "Current limit accuracy",
+      "symbol": null,
+      "min": 0.51,
+      "typ": 0.63,
+      "max": 0.8,
+      "unit": "A",
+      "conditions": "RILIM = 400 Ω"
+    },
+    "Current_limit_accuracy_RILIM___400": {
+      "parameter": "Current limit accuracy",
+      "symbol": null,
+      "min": 0.95,
+      "typ": 1.25,
+      "max": 1.56,
+      "unit": "A",
+      "conditions": "RILIM = 400 Ω"
+    },
+    "VSNS_threshold_voltage": {
+      "parameter": "VSNS threshold voltage",
+      "symbol": null,
+      "min": 0.78,
+      "typ": 0.8,
+      "max": 0.82,
+      "unit": "V",
+      "conditions": "VI(VSNS) rising"
+    },
+    "VSNS_threshold_voltage_VI_VSNS__falling": {
+      "parameter": "VSNS threshold voltage",
+      "symbol": null,
+      "min": 0.735,
+      "typ": 0.755,
+      "max": 0.775,
+      "unit": "V",
+      "conditions": "VI(VSNS) falling"
     }
   },
   "drc_hints": {
@@ -464,6 +625,14 @@
           "parameter": "Electrostatic discharge",
           "symbol": "ESD",
           "min": null,
+          "max": 2,
+          "unit": "kV",
+          "conditions": null
+        },
+        "ESD__2": {
+          "parameter": "Electrostatic discharge",
+          "symbol": "ESD",
+          "min": null,
           "max": 500,
           "unit": "V",
           "conditions": null
@@ -483,8 +652,8 @@
           "parameter": "Drain-source on-state resistance",
           "symbol": "rDS(on)",
           "min": null,
-          "typ": null,
-          "max": 150,
+          "typ": 120,
+          "max": 140,
           "unit": "mΩ",
           "conditions": "VI(IN1) = VI(IN2) = 3.3 V, IL = 500 mA"
         },
@@ -492,8 +661,8 @@
           "parameter": "Drain-source on-state resistance",
           "symbol": "rDS(on)",
           "min": null,
-          "typ": null,
-          "max": 150,
+          "typ": 120,
+          "max": 140,
           "unit": "mΩ",
           "conditions": "VI(IN1) = VI(IN2) = 2.8 V, IL = 500 mA"
         },
@@ -502,9 +671,81 @@
           "symbol": "rDS(on)",
           "min": null,
           "typ": null,
+          "max": 220,
+          "unit": "mΩ",
+          "conditions": "VI(IN1) = VI(IN2) = 5.0 V, IL = 500 mA"
+        },
+        "rDS(on)_VI_IN1____VI_IN2____3_3_V__IL__2": {
+          "parameter": "Drain-source on-state resistance",
+          "symbol": "rDS(on)",
+          "min": null,
+          "typ": null,
+          "max": 220,
+          "unit": "mΩ",
+          "conditions": "VI(IN1) = VI(IN2) = 3.3 V, IL = 500 mA"
+        },
+        "rDS(on)_VI_IN1____VI_IN2____2_8_V__IL__2": {
+          "parameter": "Drain-source on-state resistance",
+          "symbol": "rDS(on)",
+          "min": null,
+          "typ": null,
+          "max": 220,
+          "unit": "mΩ",
+          "conditions": "VI(IN1) = VI(IN2) = 2.8 V, IL = 500 mA"
+        },
+        "rDS(on)_VI_IN1____VI_IN2____5_0_V__IL__2": {
+          "parameter": "Drain-source on-state resistance",
+          "symbol": "rDS(on)",
+          "min": null,
+          "typ": 84,
+          "max": 110,
+          "unit": "mΩ",
+          "conditions": "VI(IN1) = VI(IN2) = 5.0 V, IL = 500 mA"
+        },
+        "rDS(on)_VI_IN1____VI_IN2____3_3_V__IL__3": {
+          "parameter": "Drain-source on-state resistance",
+          "symbol": "rDS(on)",
+          "min": null,
+          "typ": 84,
+          "max": 110,
+          "unit": "mΩ",
+          "conditions": "VI(IN1) = VI(IN2) = 3.3 V, IL = 500 mA"
+        },
+        "rDS(on)_VI_IN1____VI_IN2____2_8_V__IL__3": {
+          "parameter": "Drain-source on-state resistance",
+          "symbol": "rDS(on)",
+          "min": null,
+          "typ": 84,
+          "max": 110,
+          "unit": "mΩ",
+          "conditions": "VI(IN1) = VI(IN2) = 2.8 V, IL = 500 mA"
+        },
+        "rDS(on)_VI_IN1____VI_IN2____5_0_V__IL__3": {
+          "parameter": "Drain-source on-state resistance",
+          "symbol": "rDS(on)",
+          "min": null,
+          "typ": null,
           "max": 150,
           "unit": "mΩ",
           "conditions": "VI(IN1) = VI(IN2) = 5.0 V, IL = 500 mA"
+        },
+        "rDS(on)_VI_IN1____VI_IN2____3_3_V__IL__4": {
+          "parameter": "Drain-source on-state resistance",
+          "symbol": "rDS(on)",
+          "min": null,
+          "typ": null,
+          "max": 150,
+          "unit": "mΩ",
+          "conditions": "VI(IN1) = VI(IN2) = 3.3 V, IL = 500 mA"
+        },
+        "rDS(on)_VI_IN1____VI_IN2____2_8_V__IL__4": {
+          "parameter": "Drain-source on-state resistance",
+          "symbol": "rDS(on)",
+          "min": null,
+          "typ": null,
+          "max": 150,
+          "unit": "mΩ",
+          "conditions": "VI(IN1) = VI(IN2) = 2.8 V, IL = 500 mA"
         },
         "VIH": {
           "parameter": "High-level input voltage",
@@ -523,6 +764,87 @@
           "max": 0.7,
           "unit": "V",
           "conditions": null
+        },
+        "Input_current": {
+          "parameter": "Input current",
+          "symbol": null,
+          "min": null,
+          "typ": null,
+          "max": 1,
+          "unit": "μA",
+          "conditions": "EN = High, sink current"
+        },
+        "Input_current_EN___Low__source_current": {
+          "parameter": "Input current",
+          "symbol": null,
+          "min": 0.5,
+          "typ": 1.4,
+          "max": 5,
+          "unit": "μA",
+          "conditions": "EN = Low, source current"
+        },
+        "Supply_current_from_IN1__opera": {
+          "parameter": "Supply current from IN1 (operating)",
+          "symbol": null,
+          "min": null,
+          "typ": 55,
+          "max": 90,
+          "unit": "μA",
+          "conditions": "VI(VSNS) = 1.5 V, EN = Low (IN1 active), VI(IN1) = 5.5 V, VI(IN2) = 3.3 V"
+        },
+        "Supply_current_from_IN1__opera_VI_VSNS____1_5_V__EN___Low__IN": {
+          "parameter": "Supply current from IN1 (operating)",
+          "symbol": null,
+          "min": null,
+          "typ": 1,
+          "max": 12,
+          "unit": "μA",
+          "conditions": "VI(VSNS) = 1.5 V, EN = Low (IN1 active), VI(IN1) = 3.3 V, VI(IN2) = 5.5 V"
+        },
+        "Quiescent_current_from_IN1__st": {
+          "parameter": "Quiescent current from IN1 (standby)",
+          "symbol": null,
+          "min": null,
+          "typ": 0.5,
+          "max": 2,
+          "unit": "μA",
+          "conditions": "EN = High (inactive), VI(IN1) = 5.5 V, VI(IN2) = 3.3 V"
+        },
+        "Current_limit_accuracy": {
+          "parameter": "Current limit accuracy",
+          "symbol": null,
+          "min": 0.51,
+          "typ": 0.63,
+          "max": 0.8,
+          "unit": "A",
+          "conditions": "RILIM = 400 Ω"
+        },
+        "Current_limit_accuracy_RILIM___400": {
+          "parameter": "Current limit accuracy",
+          "symbol": null,
+          "min": 0.95,
+          "typ": 1.25,
+          "max": 1.56,
+          "unit": "A",
+          "conditions": "RILIM = 400 Ω"
+        },
+        "VSNS_threshold_voltage": {
+          "parameter": "VSNS threshold voltage",
+          "symbol": null,
+          "min": 0.78,
+          "typ": 0.8,
+          "max": 0.82,
+          "unit": "V",
+          "conditions": "VI(VSNS) rising"
+        },
+        "VSNS_threshold_voltage_VI_VSNS__falling": {
+          "parameter": "VSNS threshold voltage",
+          "symbol": null,
+          "min": 0.735,
+          "typ": 0.755,
+          "max": 0.775,
+          "unit": "V",
+          "conditions": "VI(VSNS) falling"
         }
       },
       "drc_hints": {

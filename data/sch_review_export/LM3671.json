@@ -147,11 +147,27 @@
       "unit": "V",
       "conditions": null
     },
+    "Pin_Voltage": {
+      "parameter": "Pin Voltage",
+      "symbol": null,
+      "min": null,
+      "max": null,
+      "unit": "V",
+      "conditions": "GND - 0.2 to VIN + 0.2"
+    },
     "TJ-MAX": {
       "parameter": "Junction temperature",
       "symbol": "TJ-MAX",
       "min": null,
       "max": 125,
+      "unit": "°C",
+      "conditions": null
+    },
+    "Maximum_lead_temperature": {
+      "parameter": "Maximum lead temperature",
+      "symbol": null,
+      "min": null,
+      "max": 260,
       "unit": "°C",
       "conditions": null
     },
@@ -200,6 +216,33 @@
       "conditions": "PWM mode"
     },
     "VFB_PWM_mode": {
+      "parameter": "Feedback voltage (fixed) TL",
+      "symbol": "VFB",
+      "min": -2.5,
+      "typ": null,
+      "max": 2.5,
+      "unit": "%",
+      "conditions": "PWM mode"
+    },
+    "VFB_PWM_mode__2": {
+      "parameter": "Feedback voltage (fixed) LC",
+      "symbol": "VFB",
+      "min": -4,
+      "typ": null,
+      "max": 4,
+      "unit": "%",
+      "conditions": "PWM mode"
+    },
+    "VFB_PWM_mode__3": {
+      "parameter": "Feedback voltage (ADJ) MF",
+      "symbol": "VFB",
+      "min": -4,
+      "typ": null,
+      "max": 4,
+      "unit": "%",
+      "conditions": "PWM mode"
+    },
+    "VFB_PWM_mode__4": {
       "parameter": "Feedback voltage (ADJ) TL",
       "symbol": "VFB",
       "min": -2.5,
@@ -207,6 +250,24 @@
       "max": 2.5,
       "unit": "%",
       "conditions": "PWM mode"
+    },
+    "Line_regulation": {
+      "parameter": "Line regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 0.031,
+      "max": null,
+      "unit": "%/V",
+      "conditions": "2.7 V ≤ VIN ≤ 5.5 V, IO = 10 mA"
+    },
+    "Load_regulation": {
+      "parameter": "Load regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 0.0013,
+      "max": null,
+      "unit": "%/mA",
+      "conditions": "100 mA ≤ IO ≤ 600 mA, VIN = 3.6 V"
     },
     "VREF": {
       "parameter": "Internal reference voltage",
@@ -308,6 +369,15 @@
       "conditions": null
     },
     "IEN": {
+      "parameter": "Enable (EN) input current",
+      "symbol": "IEN",
+      "min": null,
+      "typ": 0.01,
+      "max": null,
+      "unit": "µA",
+      "conditions": null
+    },
+    "IEN__2": {
       "parameter": "Enable (EN) input current",
       "symbol": "IEN",
       "min": null,
@@ -510,11 +580,27 @@
           "unit": "V",
           "conditions": null
         },
+        "Pin_Voltage": {
+          "parameter": "Pin Voltage",
+          "symbol": null,
+          "min": null,
+          "max": null,
+          "unit": "V",
+          "conditions": "GND - 0.2 to VIN + 0.2"
+        },
         "TJ-MAX": {
           "parameter": "Junction temperature",
           "symbol": "TJ-MAX",
           "min": null,
           "max": 125,
+          "unit": "°C",
+          "conditions": null
+        },
+        "Maximum_lead_temperature": {
+          "parameter": "Maximum lead temperature",
+          "symbol": null,
+          "min": null,
+          "max": 260,
           "unit": "°C",
           "conditions": null
         },
@@ -563,6 +649,33 @@
           "conditions": "PWM mode"
         },
         "VFB_PWM_mode": {
+          "parameter": "Feedback voltage (fixed) TL",
+          "symbol": "VFB",
+          "min": -2.5,
+          "typ": null,
+          "max": 2.5,
+          "unit": "%",
+          "conditions": "PWM mode"
+        },
+        "VFB_PWM_mode__2": {
+          "parameter": "Feedback voltage (fixed) LC",
+          "symbol": "VFB",
+          "min": -4,
+          "typ": null,
+          "max": 4,
+          "unit": "%",
+          "conditions": "PWM mode"
+        },
+        "VFB_PWM_mode__3": {
+          "parameter": "Feedback voltage (ADJ) MF",
+          "symbol": "VFB",
+          "min": -4,
+          "typ": null,
+          "max": 4,
+          "unit": "%",
+          "conditions": "PWM mode"
+        },
+        "VFB_PWM_mode__4": {
           "parameter": "Feedback voltage (ADJ) TL",
           "symbol": "VFB",
           "min": -2.5,
@@ -570,6 +683,24 @@
           "max": 2.5,
           "unit": "%",
           "conditions": "PWM mode"
+        },
+        "Line_regulation": {
+          "parameter": "Line regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 0.031,
+          "max": null,
+          "unit": "%/V",
+          "conditions": "2.7 V ≤ VIN ≤ 5.5 V, IO = 10 mA"
+        },
+        "Load_regulation": {
+          "parameter": "Load regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 0.0013,
+          "max": null,
+          "unit": "%/mA",
+          "conditions": "100 mA ≤ IO ≤ 600 mA, VIN = 3.6 V"
         },
         "VREF": {
           "parameter": "Internal reference voltage",
@@ -674,6 +805,15 @@
           "parameter": "Enable (EN) input current",
           "symbol": "IEN",
           "min": null,
+          "typ": 0.01,
+          "max": null,
+          "unit": "µA",
+          "conditions": null
+        },
+        "IEN__2": {
+          "parameter": "Enable (EN) input current",
+          "symbol": "IEN",
+          "min": null,
           "typ": null,
           "max": 1,
           "unit": "µA",
@@ -735,11 +875,21 @@
       "layout_hints": [
         {
           "hint": "21 LM3671, LM3671-Q1 www.ti.com.cn ZHCSF16S –NOVEMBER 2004–REVISED MAY 2016 Copyright © 2004–2016, Texas Instruments Incorporated 10 Layout 10.1 Layout Guidelines PC board layout is an important part",
-          "source_page": 20
+          "source_page": 20,
+          "origin": {
+            "kind": "source_recommendation",
+            "method": "design_info_utils.layout_page_fallback",
+            "source_page": 20
+          }
         },
         {
           "hint": "22 LM3671, LM3671-Q1 ZHCSF16S –NOVEMBER 2004–REVISED MAY 2016 www.ti.com.cn 版权© 2004–2016, Texas Instruments Incorporated 10.2 Layout Example Figure 38. Top Layer Board Layout for SOT-23 10.3 DSBGA Pa",
-          "source_page": 21
+          "source_page": 21,
+          "origin": {
+            "kind": "source_recommendation",
+            "method": "design_info_utils.layout_page_fallback",
+            "source_page": 21
+          }
         }
       ],
       "application_notes": [
@@ -769,12 +919,22 @@
           {
             "page": 20,
             "title": null,
-            "content_type": "layout"
+            "content_type": "layout",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 20
+            }
           },
           {
             "page": 21,
             "title": null,
-            "content_type": "layout"
+            "content_type": "layout",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 21
+            }
           }
         ],
         "total_pages": 2

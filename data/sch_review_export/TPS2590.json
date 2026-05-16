@@ -129,6 +129,70 @@
     }
   },
   "absolute_maximum_ratings": {
+    "Input_voltage_range_IN__OUT": {
+      "parameter": "Input voltage range IN, OUT",
+      "symbol": null,
+      "min": -0.3,
+      "max": 25,
+      "unit": "V",
+      "conditions": null
+    },
+    "Voltage_range__FLT": {
+      "parameter": "Voltage range /FLT",
+      "symbol": null,
+      "min": -0.3,
+      "max": 20,
+      "unit": "V",
+      "conditions": null
+    },
+    "Output_sink_current__FLT": {
+      "parameter": "Output sink current /FLT",
+      "symbol": null,
+      "min": null,
+      "max": 10,
+      "unit": "mA",
+      "conditions": null
+    },
+    "Input_voltage_range___EN": {
+      "parameter": "Input voltage range, /EN",
+      "symbol": null,
+      "min": -0.3,
+      "max": 6,
+      "unit": "V",
+      "conditions": null
+    },
+    "Input_current__RTRY": {
+      "parameter": "Input current, RTRY",
+      "symbol": null,
+      "min": null,
+      "max": 35,
+      "unit": "uA",
+      "conditions": "RTRY internally clamped to 3 V, /RTRY = 0 V"
+    },
+    "Voltage_range_CT__IFLT__ILIM": {
+      "parameter": "Voltage range CT, IFLT, ILIM, /RTRY",
+      "symbol": null,
+      "min": -0.3,
+      "max": 3,
+      "unit": "V",
+      "conditions": null
+    },
+    "ESD_rating__HBM": {
+      "parameter": "ESD rating (HBM)",
+      "symbol": null,
+      "min": null,
+      "max": 2.5,
+      "unit": "kV",
+      "conditions": null
+    },
+    "ESD_rating__CDM": {
+      "parameter": "ESD rating (CDM)",
+      "symbol": null,
+      "min": null,
+      "max": 400,
+      "unit": "V",
+      "conditions": null
+    },
     "Tj": {
       "parameter": "Operating junction temperature range",
       "symbol": "Tj",
@@ -147,6 +211,69 @@
     }
   },
   "electrical_parameters": {
+    "Undervoltage_Lockout": {
+      "parameter": "Undervoltage Lockout",
+      "symbol": null,
+      "min": 2.6,
+      "typ": 2.85,
+      "max": 2.9,
+      "unit": "V",
+      "conditions": "VIN rising"
+    },
+    "UVLO_Hysteresis": {
+      "parameter": "UVLO Hysteresis",
+      "symbol": null,
+      "min": null,
+      "typ": 150,
+      "max": null,
+      "unit": "mV",
+      "conditions": null
+    },
+    "Bias_current": {
+      "parameter": "Bias current",
+      "symbol": null,
+      "min": null,
+      "typ": 25,
+      "max": 100,
+      "unit": "uA",
+      "conditions": "/EN = 2.4 V"
+    },
+    "Bias_current_EN___0_V": {
+      "parameter": "Bias current",
+      "symbol": null,
+      "min": null,
+      "typ": 3.9,
+      "max": 5,
+      "unit": "mA",
+      "conditions": "/EN = 0 V"
+    },
+    "ON_Resistance": {
+      "parameter": "ON Resistance",
+      "symbol": null,
+      "min": null,
+      "typ": 29.5,
+      "max": 42,
+      "unit": "mOhm",
+      "conditions": "RIN-OUT, IOUT < ILIM, 1 A <= IOUT <= 4.5 A"
+    },
+    "ON_Resistance__Startup": {
+      "parameter": "ON Resistance (Startup)",
+      "symbol": null,
+      "min": 3,
+      "typ": 5,
+      "max": 7.5,
+      "unit": "W",
+      "conditions": "IOUT VIN: 12 V, CLOAD = 1000 uF, /EN: 3 V -> 0 V"
+    },
+    "Reverse_diode_voltage": {
+      "parameter": "Reverse diode voltage",
+      "symbol": null,
+      "min": null,
+      "typ": 0.77,
+      "max": 1,
+      "unit": "V",
+      "conditions": "VOUT > VIN, /EN = 5 V, IIN = -1 A"
+    },
     "IFAULT": {
       "parameter": "Fault current threshold",
       "symbol": "IFAULT",
@@ -157,6 +284,15 @@
       "conditions": "IOUT rising, ICT: sinking -> sourcing, pulsed test (RRFLT = 200 kOhm)"
     },
     "IFAULT_IOUT_rising__ICT__sinking____s": {
+      "parameter": "Fault current threshold",
+      "symbol": "IFAULT",
+      "min": 1.8,
+      "typ": 2,
+      "max": 2.2,
+      "unit": "A",
+      "conditions": "IOUT rising, ICT: sinking -> sourcing, pulsed test (RRFLT = 100 kOhm)"
+    },
+    "IFAULT_IOUT_rising__ICT__sinking____s__2": {
       "parameter": "Fault current threshold",
       "symbol": "IFAULT",
       "min": 3.6,
@@ -192,6 +328,159 @@
       "unit": "A",
       "conditions": "RRLIM = 40.2 kOhm, IOUT falling, VVIN-VOUT = 0.3 V, pulsed test"
     },
+    "Charge_current": {
+      "parameter": "Charge current",
+      "symbol": null,
+      "min": 29,
+      "typ": 35,
+      "max": 41,
+      "unit": "uA",
+      "conditions": "ICT sourcing, VCT = 1 V"
+    },
+    "Discharge_current": {
+      "parameter": "Discharge current",
+      "symbol": null,
+      "min": 1,
+      "typ": 1.4,
+      "max": 1.8,
+      "unit": "uA",
+      "conditions": "ICT sinking, VCT = 1 V, /RTRY = 0 V"
+    },
+    "CT_Threshold_voltage__rising": {
+      "parameter": "CT Threshold voltage (rising)",
+      "symbol": null,
+      "min": 1.3,
+      "typ": 1.4,
+      "max": 1.5,
+      "unit": "V",
+      "conditions": "VCT rising"
+    },
+    "CT_Threshold_voltage__falling": {
+      "parameter": "CT Threshold voltage (falling)",
+      "symbol": null,
+      "min": 0.1,
+      "typ": 0.16,
+      "max": 0.3,
+      "unit": "V",
+      "conditions": "VCT falling"
+    },
+    "ON_OFF_fault_duty_cycle": {
+      "parameter": "ON/OFF fault duty cycle",
+      "symbol": null,
+      "min": 2.8,
+      "typ": 3.7,
+      "max": 4.6,
+      "unit": "%",
+      "conditions": "VVOUT = 0 V"
+    },
+    "EN_Threshold_voltage": {
+      "parameter": "EN Threshold voltage",
+      "symbol": null,
+      "min": 0.8,
+      "typ": 1,
+      "max": 1.5,
+      "unit": "V",
+      "conditions": "VEN falling"
+    },
+    "EN_Hysteresis": {
+      "parameter": "EN Hysteresis",
+      "symbol": null,
+      "min": 50,
+      "typ": 150,
+      "max": 250,
+      "unit": "mV",
+      "conditions": null
+    },
+    "EN_Input_bias_current__sinking": {
+      "parameter": "EN Input bias current (sinking)",
+      "symbol": null,
+      "min": -1.5,
+      "typ": 0,
+      "max": 0.5,
+      "unit": "uA",
+      "conditions": "VEN = 2.4 V (sinking)"
+    },
+    "EN_Input_bias_current__sourcin": {
+      "parameter": "EN Input bias current (sourcing)",
+      "symbol": null,
+      "min": 2,
+      "typ": 1,
+      "max": 0.5,
+      "unit": "uA",
+      "conditions": "VEN = 0.2 V (sourcing)"
+    },
+    "Turn_on_propagation_delay": {
+      "parameter": "Turn on propagation delay",
+      "symbol": null,
+      "min": null,
+      "typ": 350,
+      "max": 500,
+      "unit": "us",
+      "conditions": "VIN = 3.3 V, ILOAD = 1 A, VEN: 2.4 V -> 0.2 V, VOUT: rising 90% x VIN"
+    },
+    "Turn_off_propagation_delay": {
+      "parameter": "Turn off propagation delay",
+      "symbol": null,
+      "min": null,
+      "typ": 10,
+      "max": 20,
+      "unit": "us",
+      "conditions": "VIN = 3.3 V, ILOAD = 1 A, VEN: 0.2 V -> 2.4 V, VOUT: falling 10% x VIN"
+    },
+    "FLT_VOUT_LOW": {
+      "parameter": "FLT VOUT LOW",
+      "symbol": null,
+      "min": null,
+      "typ": 0.2,
+      "max": 0.4,
+      "unit": "V",
+      "conditions": "VCT = 1.8 V, I/FLT = 1 mA"
+    },
+    "FLT_Leakage_current": {
+      "parameter": "FLT Leakage current",
+      "symbol": null,
+      "min": null,
+      "typ": null,
+      "max": 1,
+      "unit": "uA",
+      "conditions": "V/FLT = 18 V"
+    },
+    "RTRY_Low_threshold_voltage": {
+      "parameter": "RTRY Low threshold voltage",
+      "symbol": null,
+      "min": null,
+      "typ": null,
+      "max": 0.8,
+      "unit": "V",
+      "conditions": "Auto Retry Mode"
+    },
+    "RTRY_High_threshold_voltage": {
+      "parameter": "RTRY High threshold voltage",
+      "symbol": null,
+      "min": 2.0,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": "Latch mode"
+    },
+    "RTRY_Input_bias_current": {
+      "parameter": "RTRY Input bias current",
+      "symbol": null,
+      "min": -1,
+      "typ": 0.2,
+      "max": 1,
+      "unit": "mA",
+      "conditions": "V/RTRY = 3 V"
+    },
+    "RTRY_Input_bias_current_V_RTRY___0_2_V": {
+      "parameter": "RTRY Input bias current",
+      "symbol": null,
+      "min": 50,
+      "typ": 25,
+      "max": 0,
+      "unit": "mA",
+      "conditions": "V/RTRY = 0.2 V"
+    },
     "TJ": {
       "parameter": "Thermal shutdown",
       "symbol": "TJ",
@@ -200,6 +489,105 @@
       "max": null,
       "unit": "°C",
       "conditions": null
+    },
+    "Thermal_shutdown_hysteresis": {
+      "parameter": "Thermal shutdown hysteresis",
+      "symbol": null,
+      "min": null,
+      "typ": 10,
+      "max": null,
+      "unit": "°C",
+      "conditions": null
+    },
+    "Input_voltage_range_IN__OUT": {
+      "parameter": "Input voltage range IN, OUT",
+      "symbol": null,
+      "min": 3,
+      "typ": null,
+      "max": 20,
+      "unit": "V",
+      "conditions": "Recommended Operating Conditions"
+    },
+    "Voltage_range__EN": {
+      "parameter": "Voltage range /EN",
+      "symbol": null,
+      "min": 0,
+      "typ": null,
+      "max": 5,
+      "unit": "V",
+      "conditions": "Recommended Operating Conditions"
+    },
+    "Voltage_range__FLT": {
+      "parameter": "Voltage range /FLT",
+      "symbol": null,
+      "min": 0,
+      "typ": null,
+      "max": 20,
+      "unit": "V",
+      "conditions": "Recommended Operating Conditions"
+    },
+    "Output_sink_current__FLT": {
+      "parameter": "Output sink current /FLT",
+      "symbol": null,
+      "min": 0,
+      "typ": null,
+      "max": 1,
+      "unit": "mA",
+      "conditions": "Recommended Operating Conditions"
+    },
+    "Voltage_range__RTRY": {
+      "parameter": "Voltage range /RTRY",
+      "symbol": null,
+      "min": 0,
+      "typ": null,
+      "max": 3,
+      "unit": "V",
+      "conditions": "Recommended Operating Conditions"
+    },
+    "CCT": {
+      "parameter": "CCT",
+      "symbol": null,
+      "min": 0.1,
+      "typ": null,
+      "max": null,
+      "unit": "nF",
+      "conditions": "Recommended Operating Conditions"
+    },
+    "Output_current__IOUT": {
+      "parameter": "Output current, IOUT",
+      "symbol": null,
+      "min": 0,
+      "typ": null,
+      "max": 5.5,
+      "unit": "A",
+      "conditions": "Recommended Operating Conditions"
+    },
+    "RRFLT": {
+      "parameter": "RRFLT",
+      "symbol": null,
+      "min": 49.9,
+      "typ": null,
+      "max": 200,
+      "unit": "kOhm",
+      "conditions": "Recommended Operating Conditions"
+    },
+    "RRLIM": {
+      "parameter": "RRLIM",
+      "symbol": null,
+      "min": 40.2,
+      "typ": null,
+      "max": 100,
+      "unit": "kOhm",
+      "conditions": "Recommended Operating Conditions"
+    },
+    "Junction_temperature": {
+      "parameter": "Junction temperature",
+      "symbol": null,
+      "min": -40,
+      "typ": null,
+      "max": 125,
+      "unit": "°C",
+      "conditions": "Recommended Operating Conditions"
     }
   },
   "drc_hints": {
@@ -354,6 +742,70 @@
     },
     "electrical": {
       "absolute_maximum_ratings": {
+        "Input_voltage_range_IN__OUT": {
+          "parameter": "Input voltage range IN, OUT",
+          "symbol": null,
+          "min": -0.3,
+          "max": 25,
+          "unit": "V",
+          "conditions": null
+        },
+        "Voltage_range__FLT": {
+          "parameter": "Voltage range /FLT",
+          "symbol": null,
+          "min": -0.3,
+          "max": 20,
+          "unit": "V",
+          "conditions": null
+        },
+        "Output_sink_current__FLT": {
+          "parameter": "Output sink current /FLT",
+          "symbol": null,
+          "min": null,
+          "max": 10,
+          "unit": "mA",
+          "conditions": null
+        },
+        "Input_voltage_range___EN": {
+          "parameter": "Input voltage range, /EN",
+          "symbol": null,
+          "min": -0.3,
+          "max": 6,
+          "unit": "V",
+          "conditions": null
+        },
+        "Input_current__RTRY": {
+          "parameter": "Input current, RTRY",
+          "symbol": null,
+          "min": null,
+          "max": 35,
+          "unit": "uA",
+          "conditions": "RTRY internally clamped to 3 V, /RTRY = 0 V"
+        },
+        "Voltage_range_CT__IFLT__ILIM": {
+          "parameter": "Voltage range CT, IFLT, ILIM, /RTRY",
+          "symbol": null,
+          "min": -0.3,
+          "max": 3,
+          "unit": "V",
+          "conditions": null
+        },
+        "ESD_rating__HBM": {
+          "parameter": "ESD rating (HBM)",
+          "symbol": null,
+          "min": null,
+          "max": 2.5,
+          "unit": "kV",
+          "conditions": null
+        },
+        "ESD_rating__CDM": {
+          "parameter": "ESD rating (CDM)",
+          "symbol": null,
+          "min": null,
+          "max": 400,
+          "unit": "V",
+          "conditions": null
+        },
         "Tj": {
           "parameter": "Operating junction temperature range",
           "symbol": "Tj",
@@ -372,6 +824,69 @@
         }
       },
       "electrical_parameters": {
+        "Undervoltage_Lockout": {
+          "parameter": "Undervoltage Lockout",
+          "symbol": null,
+          "min": 2.6,
+          "typ": 2.85,
+          "max": 2.9,
+          "unit": "V",
+          "conditions": "VIN rising"
+        },
+        "UVLO_Hysteresis": {
+          "parameter": "UVLO Hysteresis",
+          "symbol": null,
+          "min": null,
+          "typ": 150,
+          "max": null,
+          "unit": "mV",
+          "conditions": null
+        },
+        "Bias_current": {
+          "parameter": "Bias current",
+          "symbol": null,
+          "min": null,
+          "typ": 25,
+          "max": 100,
+          "unit": "uA",
+          "conditions": "/EN = 2.4 V"
+        },
+        "Bias_current_EN___0_V": {
+          "parameter": "Bias current",
+          "symbol": null,
+          "min": null,
+          "typ": 3.9,
+          "max": 5,
+          "unit": "mA",
+          "conditions": "/EN = 0 V"
+        },
+        "ON_Resistance": {
+          "parameter": "ON Resistance",
+          "symbol": null,
+          "min": null,
+          "typ": 29.5,
+          "max": 42,
+          "unit": "mOhm",
+          "conditions": "RIN-OUT, IOUT < ILIM, 1 A <= IOUT <= 4.5 A"
+        },
+        "ON_Resistance__Startup": {
+          "parameter": "ON Resistance (Startup)",
+          "symbol": null,
+          "min": 3,
+          "typ": 5,
+          "max": 7.5,
+          "unit": "W",
+          "conditions": "IOUT VIN: 12 V, CLOAD = 1000 uF, /EN: 3 V -> 0 V"
+        },
+        "Reverse_diode_voltage": {
+          "parameter": "Reverse diode voltage",
+          "symbol": null,
+          "min": null,
+          "typ": 0.77,
+          "max": 1,
+          "unit": "V",
+          "conditions": "VOUT > VIN, /EN = 5 V, IIN = -1 A"
+        },
         "IFAULT": {
           "parameter": "Fault current threshold",
           "symbol": "IFAULT",
@@ -382,6 +897,15 @@
           "conditions": "IOUT rising, ICT: sinking -> sourcing, pulsed test (RRFLT = 200 kOhm)"
         },
         "IFAULT_IOUT_rising__ICT__sinking____s": {
+          "parameter": "Fault current threshold",
+          "symbol": "IFAULT",
+          "min": 1.8,
+          "typ": 2,
+          "max": 2.2,
+          "unit": "A",
+          "conditions": "IOUT rising, ICT: sinking -> sourcing, pulsed test (RRFLT = 100 kOhm)"
+        },
+        "IFAULT_IOUT_rising__ICT__sinking____s__2": {
           "parameter": "Fault current threshold",
           "symbol": "IFAULT",
           "min": 3.6,
@@ -417,6 +941,159 @@
           "unit": "A",
           "conditions": "RRLIM = 40.2 kOhm, IOUT falling, VVIN-VOUT = 0.3 V, pulsed test"
         },
+        "Charge_current": {
+          "parameter": "Charge current",
+          "symbol": null,
+          "min": 29,
+          "typ": 35,
+          "max": 41,
+          "unit": "uA",
+          "conditions": "ICT sourcing, VCT = 1 V"
+        },
+        "Discharge_current": {
+          "parameter": "Discharge current",
+          "symbol": null,
+          "min": 1,
+          "typ": 1.4,
+          "max": 1.8,
+          "unit": "uA",
+          "conditions": "ICT sinking, VCT = 1 V, /RTRY = 0 V"
+        },
+        "CT_Threshold_voltage__rising": {
+          "parameter": "CT Threshold voltage (rising)",
+          "symbol": null,
+          "min": 1.3,
+          "typ": 1.4,
+          "max": 1.5,
+          "unit": "V",
+          "conditions": "VCT rising"
+        },
+        "CT_Threshold_voltage__falling": {
+          "parameter": "CT Threshold voltage (falling)",
+          "symbol": null,
+          "min": 0.1,
+          "typ": 0.16,
+          "max": 0.3,
+          "unit": "V",
+          "conditions": "VCT falling"
+        },
+        "ON_OFF_fault_duty_cycle": {
+          "parameter": "ON/OFF fault duty cycle",
+          "symbol": null,
+          "min": 2.8,
+          "typ": 3.7,
+          "max": 4.6,
+          "unit": "%",
+          "conditions": "VVOUT = 0 V"
+        },
+        "EN_Threshold_voltage": {
+          "parameter": "EN Threshold voltage",
+          "symbol": null,
+          "min": 0.8,
+          "typ": 1,
+          "max": 1.5,
+          "unit": "V",
+          "conditions": "VEN falling"
+        },
+        "EN_Hysteresis": {
+          "parameter": "EN Hysteresis",
+          "symbol": null,
+          "min": 50,
+          "typ": 150,
+          "max": 250,
+          "unit": "mV",
+          "conditions": null
+        },
+        "EN_Input_bias_current__sinking": {
+          "parameter": "EN Input bias current (sinking)",
+          "symbol": null,
+          "min": -1.5,
+          "typ": 0,
+          "max": 0.5,
+          "unit": "uA",
+          "conditions": "VEN = 2.4 V (sinking)"
+        },
+        "EN_Input_bias_current__sourcin": {
+          "parameter": "EN Input bias current (sourcing)",
+          "symbol": null,
+          "min": 2,
+          "typ": 1,
+          "max": 0.5,
+          "unit": "uA",
+          "conditions": "VEN = 0.2 V (sourcing)"
+        },
+        "Turn_on_propagation_delay": {
+          "parameter": "Turn on propagation delay",
+          "symbol": null,
+          "min": null,
+          "typ": 350,
+          "max": 500,
+          "unit": "us",
+          "conditions": "VIN = 3.3 V, ILOAD = 1 A, VEN: 2.4 V -> 0.2 V, VOUT: rising 90% x VIN"
+        },
+        "Turn_off_propagation_delay": {
+          "parameter": "Turn off propagation delay",
+          "symbol": null,
+          "min": null,
+          "typ": 10,
+          "max": 20,
+          "unit": "us",
+          "conditions": "VIN = 3.3 V, ILOAD = 1 A, VEN: 0.2 V -> 2.4 V, VOUT: falling 10% x VIN"
+        },
+        "FLT_VOUT_LOW": {
+          "parameter": "FLT VOUT LOW",
+          "symbol": null,
+          "min": null,
+          "typ": 0.2,
+          "max": 0.4,
+          "unit": "V",
+          "conditions": "VCT = 1.8 V, I/FLT = 1 mA"
+        },
+        "FLT_Leakage_current": {
+          "parameter": "FLT Leakage current",
+          "symbol": null,
+          "min": null,
+          "typ": null,
+          "max": 1,
+          "unit": "uA",
+          "conditions": "V/FLT = 18 V"
+        },
+        "RTRY_Low_threshold_voltage": {
+          "parameter": "RTRY Low threshold voltage",
+          "symbol": null,
+          "min": null,
+          "typ": null,
+          "max": 0.8,
+          "unit": "V",
+          "conditions": "Auto Retry Mode"
+        },
+        "RTRY_High_threshold_voltage": {
+          "parameter": "RTRY High threshold voltage",
+          "symbol": null,
+          "min": 2.0,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": "Latch mode"
+        },
+        "RTRY_Input_bias_current": {
+          "parameter": "RTRY Input bias current",
+          "symbol": null,
+          "min": -1,
+          "typ": 0.2,
+          "max": 1,
+          "unit": "mA",
+          "conditions": "V/RTRY = 3 V"
+        },
+        "RTRY_Input_bias_current_V_RTRY___0_2_V": {
+          "parameter": "RTRY Input bias current",
+          "symbol": null,
+          "min": 50,
+          "typ": 25,
+          "max": 0,
+          "unit": "mA",
+          "conditions": "V/RTRY = 0.2 V"
+        },
         "TJ": {
           "parameter": "Thermal shutdown",
           "symbol": "TJ",
@@ -425,6 +1102,105 @@
           "max": null,
           "unit": "°C",
           "conditions": null
+        },
+        "Thermal_shutdown_hysteresis": {
+          "parameter": "Thermal shutdown hysteresis",
+          "symbol": null,
+          "min": null,
+          "typ": 10,
+          "max": null,
+          "unit": "°C",
+          "conditions": null
+        },
+        "Input_voltage_range_IN__OUT": {
+          "parameter": "Input voltage range IN, OUT",
+          "symbol": null,
+          "min": 3,
+          "typ": null,
+          "max": 20,
+          "unit": "V",
+          "conditions": "Recommended Operating Conditions"
+        },
+        "Voltage_range__EN": {
+          "parameter": "Voltage range /EN",
+          "symbol": null,
+          "min": 0,
+          "typ": null,
+          "max": 5,
+          "unit": "V",
+          "conditions": "Recommended Operating Conditions"
+        },
+        "Voltage_range__FLT": {
+          "parameter": "Voltage range /FLT",
+          "symbol": null,
+          "min": 0,
+          "typ": null,
+          "max": 20,
+          "unit": "V",
+          "conditions": "Recommended Operating Conditions"
+        },
+        "Output_sink_current__FLT": {
+          "parameter": "Output sink current /FLT",
+          "symbol": null,
+          "min": 0,
+          "typ": null,
+          "max": 1,
+          "unit": "mA",
+          "conditions": "Recommended Operating Conditions"
+        },
+        "Voltage_range__RTRY": {
+          "parameter": "Voltage range /RTRY",
+          "symbol": null,
+          "min": 0,
+          "typ": null,
+          "max": 3,
+          "unit": "V",
+          "conditions": "Recommended Operating Conditions"
+        },
+        "CCT": {
+          "parameter": "CCT",
+          "symbol": null,
+          "min": 0.1,
+          "typ": null,
+          "max": null,
+          "unit": "nF",
+          "conditions": "Recommended Operating Conditions"
+        },
+        "Output_current__IOUT": {
+          "parameter": "Output current, IOUT",
+          "symbol": null,
+          "min": 0,
+          "typ": null,
+          "max": 5.5,
+          "unit": "A",
+          "conditions": "Recommended Operating Conditions"
+        },
+        "RRFLT": {
+          "parameter": "RRFLT",
+          "symbol": null,
+          "min": 49.9,
+          "typ": null,
+          "max": 200,
+          "unit": "kOhm",
+          "conditions": "Recommended Operating Conditions"
+        },
+        "RRLIM": {
+          "parameter": "RRLIM",
+          "symbol": null,
+          "min": 40.2,
+          "typ": null,
+          "max": 100,
+          "unit": "kOhm",
+          "conditions": "Recommended Operating Conditions"
+        },
+        "Junction_temperature": {
+          "parameter": "Junction temperature",
+          "symbol": null,
+          "min": -40,
+          "typ": null,
+          "max": 125,
+          "unit": "°C",
+          "conditions": "Recommended Operating Conditions"
         }
       },
       "drc_hints": {

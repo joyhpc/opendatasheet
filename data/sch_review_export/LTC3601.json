@@ -261,6 +261,14 @@
   },
   "absolute_maximum_ratings": {
     "VIN": {
+      "parameter": "Input Supply Voltage",
+      "symbol": "VIN",
+      "min": -0.3,
+      "max": 16,
+      "unit": "V",
+      "conditions": null
+    },
+    "VIN__2": {
       "parameter": "Input Transient Voltage",
       "symbol": "VIN",
       "min": null,
@@ -332,6 +340,22 @@
       "unit": "V",
       "conditions": "VIN + 0.3V"
     },
+    "SW_Source_Current__DC": {
+      "parameter": "SW Source Current (DC)",
+      "symbol": null,
+      "min": null,
+      "max": 2,
+      "unit": "A",
+      "conditions": null
+    },
+    "Peak_SW_Source_Current": {
+      "parameter": "Peak SW Source Current",
+      "symbol": null,
+      "min": null,
+      "max": 3.5,
+      "unit": "A",
+      "conditions": null
+    },
     "TJ": {
       "parameter": "Operating Junction Temperature Range",
       "symbol": "TJ",
@@ -345,6 +369,14 @@
       "symbol": "TSTG",
       "min": -65,
       "max": 125,
+      "unit": "°C",
+      "conditions": null
+    },
+    "Lead_Temperature__Soldering__1": {
+      "parameter": "Lead Temperature (Soldering, 10 sec)",
+      "symbol": null,
+      "min": null,
+      "max": 300,
       "unit": "°C",
       "conditions": null
     }
@@ -450,6 +482,15 @@
       "conditions": "VIN = 6V"
     },
     "ILIM": {
+      "parameter": "Valley Switch Current Limit",
+      "symbol": "ILIM",
+      "min": 1.7,
+      "typ": 2.2,
+      "max": 2.8,
+      "unit": "A",
+      "conditions": null
+    },
+    "ILIM__2": {
       "parameter": "Negative Valley Switch Current Limit",
       "symbol": "ILIM",
       "min": null,
@@ -486,6 +527,15 @@
       "conditions": "RRT = 80k"
     },
     "RDS(ON)": {
+      "parameter": "Top Switch On-Resistance",
+      "symbol": "RDS(ON)",
+      "min": null,
+      "typ": 130,
+      "max": null,
+      "unit": "mΩ",
+      "conditions": null
+    },
+    "RDS(ON)__2": {
       "parameter": "Bottom Switch On-Resistance",
       "symbol": "RDS(ON)",
       "min": null,
@@ -495,6 +545,15 @@
       "conditions": null
     },
     "VVIN-OV": {
+      "parameter": "VIN Overvoltage Lockout Threshold Rising",
+      "symbol": "VVIN-OV",
+      "min": 16.8,
+      "typ": 17.5,
+      "max": 18,
+      "unit": "V",
+      "conditions": null
+    },
+    "VVIN-OV__2": {
       "parameter": "VIN Overvoltage Lockout Threshold Falling",
       "symbol": "VVIN-OV",
       "min": 15.8,
@@ -540,6 +599,15 @@
       "conditions": "VIN = INTVCC"
     },
     "VRUN": {
+      "parameter": "RUN Threshold Rising",
+      "symbol": "VRUN",
+      "min": 1.21,
+      "typ": 1.25,
+      "max": 1.29,
+      "unit": "V",
+      "conditions": null
+    },
+    "VRUN__2": {
       "parameter": "RUN Threshold Falling",
       "symbol": "VRUN",
       "min": 0.97,
@@ -558,6 +626,15 @@
       "conditions": "VVIN = 15V"
     },
     "VFB_GB": {
+      "parameter": "PGOOD Good-to-Bad Threshold Rising",
+      "symbol": "VFB_GB",
+      "min": null,
+      "typ": 8,
+      "max": 10,
+      "unit": "%",
+      "conditions": null
+    },
+    "VFB_GB__2": {
       "parameter": "PGOOD Good-to-Bad Threshold Falling",
       "symbol": "VFB_GB",
       "min": null,
@@ -567,6 +644,15 @@
       "conditions": null
     },
     "VFB_BG": {
+      "parameter": "PGOOD Bad-to-Good Threshold Rising",
+      "symbol": "VFB_BG",
+      "min": -3,
+      "typ": -5,
+      "max": null,
+      "unit": "%",
+      "conditions": null
+    },
+    "VFB_BG__2": {
       "parameter": "PGOOD Bad-to-Good Threshold Falling",
       "symbol": "VFB_BG",
       "min": 3,
@@ -630,6 +716,24 @@
       "conditions": null
     },
     "VMODE/SYNC": {
+      "parameter": "MODE Threshold Voltage VIH",
+      "symbol": "VMODE/SYNC",
+      "min": 1.0,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": null
+    },
+    "VMODE/SYNC__2": {
+      "parameter": "MODE Threshold Voltage VIL",
+      "symbol": "VMODE/SYNC",
+      "min": null,
+      "typ": null,
+      "max": 0.4,
+      "unit": "V",
+      "conditions": null
+    },
+    "VMODE/SYNC__3": {
       "parameter": "SYNC Threshold Voltage VIH",
       "symbol": "VMODE/SYNC",
       "min": 0.95,
@@ -959,6 +1063,14 @@
     "electrical": {
       "absolute_maximum_ratings": {
         "VIN": {
+          "parameter": "Input Supply Voltage",
+          "symbol": "VIN",
+          "min": -0.3,
+          "max": 16,
+          "unit": "V",
+          "conditions": null
+        },
+        "VIN__2": {
           "parameter": "Input Transient Voltage",
           "symbol": "VIN",
           "min": null,
@@ -1030,6 +1142,22 @@
           "unit": "V",
           "conditions": "VIN + 0.3V"
         },
+        "SW_Source_Current__DC": {
+          "parameter": "SW Source Current (DC)",
+          "symbol": null,
+          "min": null,
+          "max": 2,
+          "unit": "A",
+          "conditions": null
+        },
+        "Peak_SW_Source_Current": {
+          "parameter": "Peak SW Source Current",
+          "symbol": null,
+          "min": null,
+          "max": 3.5,
+          "unit": "A",
+          "conditions": null
+        },
         "TJ": {
           "parameter": "Operating Junction Temperature Range",
           "symbol": "TJ",
@@ -1043,6 +1171,14 @@
           "symbol": "TSTG",
           "min": -65,
           "max": 125,
+          "unit": "°C",
+          "conditions": null
+        },
+        "Lead_Temperature__Soldering__1": {
+          "parameter": "Lead Temperature (Soldering, 10 sec)",
+          "symbol": null,
+          "min": null,
+          "max": 300,
           "unit": "°C",
           "conditions": null
         }
@@ -1148,6 +1284,15 @@
           "conditions": "VIN = 6V"
         },
         "ILIM": {
+          "parameter": "Valley Switch Current Limit",
+          "symbol": "ILIM",
+          "min": 1.7,
+          "typ": 2.2,
+          "max": 2.8,
+          "unit": "A",
+          "conditions": null
+        },
+        "ILIM__2": {
           "parameter": "Negative Valley Switch Current Limit",
           "symbol": "ILIM",
           "min": null,
@@ -1184,6 +1329,15 @@
           "conditions": "RRT = 80k"
         },
         "RDS(ON)": {
+          "parameter": "Top Switch On-Resistance",
+          "symbol": "RDS(ON)",
+          "min": null,
+          "typ": 130,
+          "max": null,
+          "unit": "mΩ",
+          "conditions": null
+        },
+        "RDS(ON)__2": {
           "parameter": "Bottom Switch On-Resistance",
           "symbol": "RDS(ON)",
           "min": null,
@@ -1193,6 +1347,15 @@
           "conditions": null
         },
         "VVIN-OV": {
+          "parameter": "VIN Overvoltage Lockout Threshold Rising",
+          "symbol": "VVIN-OV",
+          "min": 16.8,
+          "typ": 17.5,
+          "max": 18,
+          "unit": "V",
+          "conditions": null
+        },
+        "VVIN-OV__2": {
           "parameter": "VIN Overvoltage Lockout Threshold Falling",
           "symbol": "VVIN-OV",
           "min": 15.8,
@@ -1238,6 +1401,15 @@
           "conditions": "VIN = INTVCC"
         },
         "VRUN": {
+          "parameter": "RUN Threshold Rising",
+          "symbol": "VRUN",
+          "min": 1.21,
+          "typ": 1.25,
+          "max": 1.29,
+          "unit": "V",
+          "conditions": null
+        },
+        "VRUN__2": {
           "parameter": "RUN Threshold Falling",
           "symbol": "VRUN",
           "min": 0.97,
@@ -1256,6 +1428,15 @@
           "conditions": "VVIN = 15V"
         },
         "VFB_GB": {
+          "parameter": "PGOOD Good-to-Bad Threshold Rising",
+          "symbol": "VFB_GB",
+          "min": null,
+          "typ": 8,
+          "max": 10,
+          "unit": "%",
+          "conditions": null
+        },
+        "VFB_GB__2": {
           "parameter": "PGOOD Good-to-Bad Threshold Falling",
           "symbol": "VFB_GB",
           "min": null,
@@ -1265,6 +1446,15 @@
           "conditions": null
         },
         "VFB_BG": {
+          "parameter": "PGOOD Bad-to-Good Threshold Rising",
+          "symbol": "VFB_BG",
+          "min": -3,
+          "typ": -5,
+          "max": null,
+          "unit": "%",
+          "conditions": null
+        },
+        "VFB_BG__2": {
           "parameter": "PGOOD Bad-to-Good Threshold Falling",
           "symbol": "VFB_BG",
           "min": 3,
@@ -1328,6 +1518,24 @@
           "conditions": null
         },
         "VMODE/SYNC": {
+          "parameter": "MODE Threshold Voltage VIH",
+          "symbol": "VMODE/SYNC",
+          "min": 1.0,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": null
+        },
+        "VMODE/SYNC__2": {
+          "parameter": "MODE Threshold Voltage VIL",
+          "symbol": "VMODE/SYNC",
+          "min": null,
+          "typ": null,
+          "max": 0.4,
+          "unit": "V",
+          "conditions": null
+        },
+        "VMODE/SYNC__3": {
           "parameter": "SYNC Threshold Voltage VIH",
           "symbol": "VMODE/SYNC",
           "min": 0.95,
@@ -1408,113 +1616,213 @@
           "source_page": 10,
           "value_hint": null,
           "value_hints": [],
-          "snippet": "LTC3601 11 3601fc For more information www.linear.com/LTC3601 APPLICATIONS INFORMATION Once the value for L is known the type of inductor must be selected. Actual core loss is independent of core siz"
+          "snippet": "LTC3601 11 3601fc For more information www.linear.com/LTC3601 APPLICATIONS INFORMATION Once the value for L is known the type of inductor must be selected. Actual core loss is independent of core siz",
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.component_rules",
+            "source_page": 10
+          }
         },
         {
           "role": "soft_start_capacitor",
           "source_page": 14,
           "value_hint": null,
           "value_hints": [],
-          "snippet": "LTC3601 15 3601fc For more information www.linear.com/LTC3601 APPLICATIONS INFORMATION a soft-start function by connecting a capacitor from the TRACK pin to ground. The relationship between output r"
+          "snippet": "LTC3601 15 3601fc For more information www.linear.com/LTC3601 APPLICATIONS INFORMATION a soft-start function by connecting a capacitor from the TRACK pin to ground. The relationship between output r",
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.component_rules",
+            "source_page": 14
+          }
         },
         {
           "role": "input_capacitor",
           "source_page": 17,
           "value_hint": null,
           "value_hints": [],
-          "snippet": "LTC3601 18 3601fc For more information www.linear.com/LTC3601 APPLICATIONS INFORMATION 16 15 14 13 5 6 7 8 17 9 10 11 12 4 3 2 1 R2 VIA TO VOUT VIA TO PGND R1 CFWD VIAS TO INTVCC VIAS TO PGND CIN COUT"
+          "snippet": "LTC3601 18 3601fc For more information www.linear.com/LTC3601 APPLICATIONS INFORMATION 16 15 14 13 5 6 7 8 17 9 10 11 12 4 3 2 1 R2 VIA TO VOUT VIA TO PGND R1 CFWD VIAS TO INTVCC VIAS TO PGND CIN COUT",
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.component_rules",
+            "source_page": 17
+          }
         },
         {
           "role": "output_capacitor",
           "source_page": 17,
           "value_hint": null,
           "value_hints": [],
-          "snippet": "LTC3601 18 3601fc For more information www.linear.com/LTC3601 APPLICATIONS INFORMATION 16 15 14 13 5 6 7 8 17 9 10 11 12 4 3 2 1 R2 VIA TO VOUT VIA TO PGND R1 CFWD VIAS TO INTVCC VIAS TO PGND CIN COUT"
+          "snippet": "LTC3601 18 3601fc For more information www.linear.com/LTC3601 APPLICATIONS INFORMATION 16 15 14 13 5 6 7 8 17 9 10 11 12 4 3 2 1 R2 VIA TO VOUT VIA TO PGND R1 CFWD VIAS TO INTVCC VIAS TO PGND CIN COUT",
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.component_rules",
+            "source_page": 17
+          }
         },
         {
           "role": "input_capacitor",
           "source_page": 18,
           "value_hint": null,
           "value_hints": [],
-          "snippet": "LTC3601 19 3601fc For more information www.linear.com/LTC3601 SW L1 CBOOST COUT VOUT PGND VIN CIN R1 3601 F06 R2 CFWD VIA TO INTVCC VIA TO VOUT CINTVCC PIN 1 17 VIA TO INTVCC VIA TO VOUT Figure 6. MSE"
+          "snippet": "LTC3601 19 3601fc For more information www.linear.com/LTC3601 SW L1 CBOOST COUT VOUT PGND VIN CIN R1 3601 F06 R2 CFWD VIA TO INTVCC VIA TO VOUT CINTVCC PIN 1 17 VIA TO INTVCC VIA TO VOUT Figure 6. MSE",
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.component_rules",
+            "source_page": 18
+          }
         },
         {
           "role": "output_capacitor",
           "source_page": 18,
           "value_hint": null,
           "value_hints": [],
-          "snippet": "LTC3601 19 3601fc For more information www.linear.com/LTC3601 SW L1 CBOOST COUT VOUT PGND VIN CIN R1 3601 F06 R2 CFWD VIA TO INTVCC VIA TO VOUT CINTVCC PIN 1 17 VIA TO INTVCC VIA TO VOUT Figure 6. MSE"
+          "snippet": "LTC3601 19 3601fc For more information www.linear.com/LTC3601 SW L1 CBOOST COUT VOUT PGND VIN CIN R1 3601 F06 R2 CFWD VIA TO INTVCC VIA TO VOUT CINTVCC PIN 1 17 VIA TO INTVCC VIA TO VOUT Figure 6. MSE",
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.component_rules",
+            "source_page": 18
+          }
         },
         {
           "role": "inductor",
           "source_page": 18,
           "value_hint": null,
           "value_hints": [],
-          "snippet": "LTC3601 19 3601fc For more information www.linear.com/LTC3601 SW L1 CBOOST COUT VOUT PGND VIN CIN R1 3601 F06 R2 CFWD VIA TO INTVCC VIA TO VOUT CINTVCC PIN 1 17 VIA TO INTVCC VIA TO VOUT Figure 6. MSE"
+          "snippet": "LTC3601 19 3601fc For more information www.linear.com/LTC3601 SW L1 CBOOST COUT VOUT PGND VIN CIN R1 3601 F06 R2 CFWD VIA TO INTVCC VIA TO VOUT CINTVCC PIN 1 17 VIA TO INTVCC VIA TO VOUT Figure 6. MSE",
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.component_rules",
+            "source_page": 18
+          }
         },
         {
           "role": "feedback_divider",
           "source_page": 18,
           "value_hint": null,
           "value_hints": [],
-          "snippet": "LTC3601 19 3601fc For more information www.linear.com/LTC3601 SW L1 CBOOST COUT VOUT PGND VIN CIN R1 3601 F06 R2 CFWD VIA TO INTVCC VIA TO VOUT CINTVCC PIN 1 17 VIA TO INTVCC VIA TO VOUT Figure 6. MSE"
+          "snippet": "LTC3601 19 3601fc For more information www.linear.com/LTC3601 SW L1 CBOOST COUT VOUT PGND VIN CIN R1 3601 F06 R2 CFWD VIA TO INTVCC VIA TO VOUT CINTVCC PIN 1 17 VIA TO INTVCC VIA TO VOUT Figure 6. MSE",
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.component_rules",
+            "source_page": 18
+          }
         },
         {
           "role": "soft_start_capacitor",
           "source_page": 20,
           "value_hint": null,
           "value_hints": [],
-          "snippet": "LTC3601 21 3601fc For more information www.linear.com/LTC3601 TYPICAL APPLICATIONS 12V Input to 1.8V Output at 4MHz Synchronized Frequency with 6V UVLO and 4.3ms Soft-Start Efficiency vs Load Current"
+          "snippet": "LTC3601 21 3601fc For more information www.linear.com/LTC3601 TYPICAL APPLICATIONS 12V Input to 1.8V Output at 4MHz Synchronized Frequency with 6V UVLO and 4.3ms Soft-Start Efficiency vs Load Current",
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.component_rules",
+            "source_page": 20
+          }
         }
       ],
       "layout_hints": [
         {
           "hint": "LTC3601 18 3601fc For more information www.linear.com/LTC3601 APPLICATIONS INFORMATION 16 15 14 13 5 6 7 8 17 9 10 11 12 4 3 2 1 R2 VIA TO VOUT VIA TO PGND R1 CFWD VIAS TO INTVCC VIAS TO PGND CIN COUT",
-          "source_page": 17
+          "source_page": 17,
+          "origin": {
+            "kind": "source_recommendation",
+            "method": "design_info_utils.layout_keywords",
+            "source_page": 17
+          }
         },
         {
           "hint": "LTC3601 19 3601fc For more information www.linear.com/LTC3601 SW L1 CBOOST COUT VOUT PGND VIN CIN R1 3601 F06 R2 CFWD VIA TO INTVCC VIA TO VOUT CINTVCC PIN 1 17 VIA TO INTVCC VIA TO VOUT Figure 6. MSE",
-          "source_page": 18
+          "source_page": 18,
+          "origin": {
+            "kind": "source_recommendation",
+            "method": "design_info_utils.layout_keywords",
+            "source_page": 18
+          }
         }
       ],
       "supply_recommendations": [
         {
           "hint": "LTC3601 21 3601fc For more information www.linear.com/LTC3601 TYPICAL APPLICATIONS 12V Input to 1.8V Output at 4MHz Synchronized Frequency with 6V UVLO and 4.3ms Soft-Start Efficiency vs Load Current",
-          "source_page": 20
+          "source_page": 20,
+          "origin": {
+            "kind": "source_recommendation",
+            "method": "design_info_utils.supply_keywords",
+            "source_page": 20
+          }
         }
       ],
       "topology_hints": [
         {
           "hint": "LTC3601 1 3601fc For more information www.linear.com/LTC3601 TYPICAL APPLICATION FEATURES APPLICATIONS DESCRIPTION 1.5A, 15V Monolithic Synchronous Step-Down Regulator n n Distributed Power Systems",
-          "source_page": 0
+          "source_page": 0,
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.topology_keywords",
+            "source_page": 0
+          }
         },
         {
           "hint": "LTC3601 10 3601fc For more information www.linear.com/LTC3601 APPLICATIONS INFORMATION A general LTC3601 application circuit is shown on the first page of this data sheet. External component selectio",
-          "source_page": 9
+          "source_page": 9,
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.topology_keywords",
+            "source_page": 9
+          }
         },
         {
           "hint": "LTC3601 11 3601fc For more information www.linear.com/LTC3601 APPLICATIONS INFORMATION Once the value for L is known the type of inductor must be selected. Actual core loss is independent of core siz",
-          "source_page": 10
+          "source_page": 10,
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.topology_keywords",
+            "source_page": 10
+          }
         },
         {
           "hint": "LTC3601 12 3601fc For more information www.linear.com/LTC3601 APPLICATIONS INFORMATION voltage ripple and load step transients. The output ripple, ∆VOUT, is determined by: ΔVOUT < ΔIL ESR+ 1 8 •",
-          "source_page": 11
+          "source_page": 11,
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.topology_keywords",
+            "source_page": 11
+          }
         },
         {
           "hint": "LTC3601 13 3601fc For more information www.linear.com/LTC3601 APPLICATIONS INFORMATION To improve the frequency response of the main control loop a feedforward capacitor, CF , may be used as shown i",
-          "source_page": 12
+          "source_page": 12,
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.topology_keywords",
+            "source_page": 12
+          }
         },
         {
           "hint": "LTC3601 15 3601fc For more information www.linear.com/LTC3601 APPLICATIONS INFORMATION a soft-start function by connecting a capacitor from the TRACK pin to ground. The relationship between output r",
-          "source_page": 14
+          "source_page": 14,
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.topology_keywords",
+            "source_page": 14
+          }
         },
         {
           "hint": "LTC3601 18 3601fc For more information www.linear.com/LTC3601 APPLICATIONS INFORMATION 16 15 14 13 5 6 7 8 17 9 10 11 12 4 3 2 1 R2 VIA TO VOUT VIA TO PGND R1 CFWD VIAS TO INTVCC VIAS TO PGND CIN COUT",
-          "source_page": 17
+          "source_page": 17,
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.topology_keywords",
+            "source_page": 17
+          }
         },
         {
           "hint": "LTC3601 19 3601fc For more information www.linear.com/LTC3601 SW L1 CBOOST COUT VOUT PGND VIN CIN R1 3601 F06 R2 CFWD VIA TO INTVCC VIA TO VOUT CINTVCC PIN 1 17 VIA TO INTVCC VIA TO VOUT Figure 6. MSE",
-          "source_page": 18
+          "source_page": 18,
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.topology_keywords",
+            "source_page": 18
+          }
         }
       ],
       "typical_application": {
@@ -1591,47 +1899,92 @@
           {
             "page": 0,
             "title": null,
-            "content_type": "application"
+            "content_type": "application",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 0
+            }
           },
           {
             "page": 9,
             "title": null,
-            "content_type": "application"
+            "content_type": "application",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 9
+            }
           },
           {
             "page": 10,
             "title": null,
-            "content_type": "application"
+            "content_type": "application",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 10
+            }
           },
           {
             "page": 11,
             "title": null,
-            "content_type": "application"
+            "content_type": "application",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 11
+            }
           },
           {
             "page": 12,
             "title": null,
-            "content_type": "application"
+            "content_type": "application",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 12
+            }
           },
           {
             "page": 14,
             "title": null,
-            "content_type": "application"
+            "content_type": "application",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 14
+            }
           },
           {
             "page": 17,
             "title": null,
-            "content_type": "application"
+            "content_type": "application",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 17
+            }
           },
           {
             "page": 18,
             "title": null,
-            "content_type": "application"
+            "content_type": "application",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 18
+            }
           },
           {
             "page": 20,
             "title": null,
-            "content_type": "application"
+            "content_type": "application",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 20
+            }
           }
         ],
         "total_pages": 9

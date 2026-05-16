@@ -163,9 +163,166 @@
       }
     }
   },
-  "absolute_maximum_ratings": {},
+  "absolute_maximum_ratings": {
+    "Voltage": {
+      "parameter": "Voltage",
+      "symbol": null,
+      "min": -100,
+      "max": 100,
+      "unit": "V",
+      "conditions": null
+    },
+    "Voltage__2": {
+      "parameter": "Voltage",
+      "symbol": null,
+      "min": -100,
+      "max": 100,
+      "unit": "V",
+      "conditions": null
+    },
+    "Voltage__3": {
+      "parameter": "Voltage",
+      "symbol": null,
+      "min": -0.7,
+      "max": 100,
+      "unit": "V",
+      "conditions": null
+    },
+    "Voltage__4": {
+      "parameter": "Voltage",
+      "symbol": null,
+      "min": -0.7,
+      "max": 100,
+      "unit": "V",
+      "conditions": null
+    },
+    "Voltage__5": {
+      "parameter": "Voltage",
+      "symbol": null,
+      "min": -0.7,
+      "max": 100,
+      "unit": "V",
+      "conditions": null
+    },
+    "Voltage__6": {
+      "parameter": "Voltage",
+      "symbol": null,
+      "min": -0.3,
+      "max": 0.3,
+      "unit": "V",
+      "conditions": null
+    },
+    "Voltage__7": {
+      "parameter": "Voltage",
+      "symbol": null,
+      "min": -0.7,
+      "max": 100,
+      "unit": "V",
+      "conditions": null
+    },
+    "Voltage__8": {
+      "parameter": "Voltage",
+      "symbol": null,
+      "min": -100,
+      "max": 0.7,
+      "unit": "V",
+      "conditions": null
+    },
+    "Voltage__9": {
+      "parameter": "Voltage",
+      "symbol": null,
+      "min": -0.7,
+      "max": 100,
+      "unit": "V",
+      "conditions": null
+    },
+    "Voltage__10": {
+      "parameter": "Voltage",
+      "symbol": null,
+      "min": -0.3,
+      "max": 5.5,
+      "unit": "V",
+      "conditions": null
+    },
+    "Peak_Current": {
+      "parameter": "Peak Current",
+      "symbol": null,
+      "min": -5,
+      "max": 5,
+      "unit": "A",
+      "conditions": null
+    },
+    "Peak_Current__2": {
+      "parameter": "Peak Current",
+      "symbol": null,
+      "min": -5,
+      "max": 5,
+      "unit": "A",
+      "conditions": null
+    },
+    "DC_Current": {
+      "parameter": "DC Current",
+      "symbol": null,
+      "min": -0.2,
+      "max": 0.2,
+      "unit": "A",
+      "conditions": null
+    },
+    "Ambient_Temperature": {
+      "parameter": "Ambient Temperature",
+      "symbol": null,
+      "min": -65,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    },
+    "Ambient_Temperature__2": {
+      "parameter": "Ambient Temperature",
+      "symbol": null,
+      "min": -40,
+      "max": 85,
+      "unit": "°C",
+      "conditions": null
+    }
+  },
   "electrical_parameters": {
     "VPORT": {
+      "parameter": "VPORT Detection",
+      "symbol": "VPORT",
+      "min": 2.7,
+      "typ": null,
+      "max": 11,
+      "unit": "V",
+      "conditions": null
+    },
+    "VPORT__2": {
+      "parameter": "VPORT Classification",
+      "symbol": "VPORT",
+      "min": 14,
+      "typ": null,
+      "max": 22,
+      "unit": "V",
+      "conditions": null
+    },
+    "VPORT__3": {
+      "parameter": "VPORT UVLO turn-off",
+      "symbol": "VPORT",
+      "min": null,
+      "typ": 37,
+      "max": 42,
+      "unit": "V",
+      "conditions": null
+    },
+    "VPORT__4": {
+      "parameter": "VPORT UVLO turn-on",
+      "symbol": "VPORT",
+      "min": 30,
+      "typ": 32,
+      "max": 36,
+      "unit": "V",
+      "conditions": null
+    },
+    "VPORT__5": {
       "parameter": "Integrated Transient Surge Clamp Voltage",
       "symbol": "VPORT",
       "min": null,
@@ -174,7 +331,52 @@
       "unit": "V",
       "conditions": null
     },
+    "Input_Offset_Current": {
+      "parameter": "Input Offset Current",
+      "symbol": null,
+      "min": null,
+      "typ": null,
+      "max": 10,
+      "unit": "µA",
+      "conditions": "VPORT < 10 V"
+    },
+    "Diode_Bridge_Leakage": {
+      "parameter": "Diode Bridge Leakage",
+      "symbol": null,
+      "min": null,
+      "typ": null,
+      "max": 25,
+      "unit": "µA",
+      "conditions": "VPORT = 57 V"
+    },
     "IPORT": {
+      "parameter": "IPORT Classification Class 0",
+      "symbol": "IPORT",
+      "min": 0,
+      "typ": null,
+      "max": 4,
+      "unit": "mA",
+      "conditions": null
+    },
+    "IPORT__2": {
+      "parameter": "IPORT Classification Class 1",
+      "symbol": "IPORT",
+      "min": 9,
+      "typ": null,
+      "max": 12,
+      "unit": "mA",
+      "conditions": null
+    },
+    "IPORT__3": {
+      "parameter": "IPORT Classification Class 2",
+      "symbol": "IPORT",
+      "min": 17,
+      "typ": null,
+      "max": 20,
+      "unit": "mA",
+      "conditions": null
+    },
+    "IPORT__4": {
       "parameter": "IPORT Classification Class 3",
       "symbol": "IPORT",
       "min": 26,
@@ -191,6 +393,141 @@
       "max": 3.1,
       "unit": "mA",
       "conditions": "37 V ≤ VPORT ≤ 57 V"
+    },
+    "Current_Limit_Inrush": {
+      "parameter": "Current Limit Inrush",
+      "symbol": null,
+      "min": null,
+      "typ": 140,
+      "max": null,
+      "unit": "mA",
+      "conditions": null
+    },
+    "Current_Limit_Operating": {
+      "parameter": "Current Limit Operating",
+      "symbol": null,
+      "min": 470,
+      "typ": null,
+      "max": 680,
+      "unit": "mA",
+      "conditions": null
+    },
+    "Hotswap_FET_On_Resistance": {
+      "parameter": "Hotswap FET On-Resistance",
+      "symbol": null,
+      "min": 1,
+      "typ": null,
+      "max": 3,
+      "unit": "Ω",
+      "conditions": "37 V ≤ VPORT ≤ 57 V"
+    },
+    "Power_Loss__PLOSS__VPORT_Thres": {
+      "parameter": "Power Loss (PLOSS) VPORT Threshold",
+      "symbol": null,
+      "min": 1,
+      "typ": 1.5,
+      "max": 2,
+      "unit": "V",
+      "conditions": "VPOS - (Greater of CT1 or CT2), or VPOS - (Greater of SP1 or SP2)"
+    },
+    "Switcher_Frequency": {
+      "parameter": "Switcher Frequency",
+      "symbol": null,
+      "min": null,
+      "typ": 350,
+      "max": null,
+      "unit": "kHz",
+      "conditions": null
+    },
+    "Maximum_Switcher_Duty_Cycle": {
+      "parameter": "Maximum Switcher Duty Cycle",
+      "symbol": null,
+      "min": null,
+      "typ": 50,
+      "max": 75,
+      "unit": "%",
+      "conditions": null
+    },
+    "Switcher_Output_Transient_Volt": {
+      "parameter": "Switcher Output Transient Voltage",
+      "symbol": null,
+      "min": null,
+      "typ": null,
+      "max": 100,
+      "unit": "V",
+      "conditions": null
+    },
+    "Switching_FET_On_Resistance": {
+      "parameter": "Switching FET On-Resistance",
+      "symbol": null,
+      "min": 0.3,
+      "typ": 0.5,
+      "max": 1.3,
+      "unit": "Ω",
+      "conditions": null
+    },
+    "Switching_FET_Peak_Current": {
+      "parameter": "Switching FET Peak Current",
+      "symbol": null,
+      "min": null,
+      "typ": null,
+      "max": 2.4,
+      "unit": "A",
+      "conditions": null
+    },
+    "Regulated_Feedback___Pin_FB": {
+      "parameter": "Regulated Feedback @ Pin FB",
+      "symbol": null,
+      "min": 1.3,
+      "typ": 1.35,
+      "max": 1.4,
+      "unit": "V",
+      "conditions": "DC Avg."
+    },
+    "VDD_Accuracy": {
+      "parameter": "VDD Accuracy",
+      "symbol": null,
+      "min": 4.5,
+      "typ": null,
+      "max": 5.5,
+      "unit": "V",
+      "conditions": "0-5 mA and UVLO OFF (Switching regulator ON)"
+    },
+    "Thermal_Shutdown": {
+      "parameter": "Thermal Shutdown",
+      "symbol": null,
+      "min": null,
+      "typ": 160,
+      "max": null,
+      "unit": "°C",
+      "conditions": "Junction temperature"
+    },
+    "Thermal_Shutdown_Hysteresis": {
+      "parameter": "Thermal Shutdown Hysteresis",
+      "symbol": null,
+      "min": null,
+      "typ": 25,
+      "max": null,
+      "unit": "°C",
+      "conditions": null
+    },
+    "Power_Dissipation": {
+      "parameter": "Power Dissipation",
+      "symbol": null,
+      "min": null,
+      "typ": 1.2,
+      "max": null,
+      "unit": "W",
+      "conditions": "VPORT = 50 V, VOUT = 5 V, 2 A"
+    },
+    "Power_Dissipation__Bypassed": {
+      "parameter": "Power Dissipation (Bypassed)",
+      "symbol": null,
+      "min": null,
+      "typ": 0.7,
+      "max": null,
+      "unit": "W",
+      "conditions": "VPORT = 50 V, VOUT = 5 V, 2 A w/ diode bridges bypassed"
     },
     "θJA": {
       "parameter": "Thermal Resistance",
@@ -413,9 +750,166 @@
       }
     },
     "electrical": {
-      "absolute_maximum_ratings": {},
+      "absolute_maximum_ratings": {
+        "Voltage": {
+          "parameter": "Voltage",
+          "symbol": null,
+          "min": -100,
+          "max": 100,
+          "unit": "V",
+          "conditions": null
+        },
+        "Voltage__2": {
+          "parameter": "Voltage",
+          "symbol": null,
+          "min": -100,
+          "max": 100,
+          "unit": "V",
+          "conditions": null
+        },
+        "Voltage__3": {
+          "parameter": "Voltage",
+          "symbol": null,
+          "min": -0.7,
+          "max": 100,
+          "unit": "V",
+          "conditions": null
+        },
+        "Voltage__4": {
+          "parameter": "Voltage",
+          "symbol": null,
+          "min": -0.7,
+          "max": 100,
+          "unit": "V",
+          "conditions": null
+        },
+        "Voltage__5": {
+          "parameter": "Voltage",
+          "symbol": null,
+          "min": -0.7,
+          "max": 100,
+          "unit": "V",
+          "conditions": null
+        },
+        "Voltage__6": {
+          "parameter": "Voltage",
+          "symbol": null,
+          "min": -0.3,
+          "max": 0.3,
+          "unit": "V",
+          "conditions": null
+        },
+        "Voltage__7": {
+          "parameter": "Voltage",
+          "symbol": null,
+          "min": -0.7,
+          "max": 100,
+          "unit": "V",
+          "conditions": null
+        },
+        "Voltage__8": {
+          "parameter": "Voltage",
+          "symbol": null,
+          "min": -100,
+          "max": 0.7,
+          "unit": "V",
+          "conditions": null
+        },
+        "Voltage__9": {
+          "parameter": "Voltage",
+          "symbol": null,
+          "min": -0.7,
+          "max": 100,
+          "unit": "V",
+          "conditions": null
+        },
+        "Voltage__10": {
+          "parameter": "Voltage",
+          "symbol": null,
+          "min": -0.3,
+          "max": 5.5,
+          "unit": "V",
+          "conditions": null
+        },
+        "Peak_Current": {
+          "parameter": "Peak Current",
+          "symbol": null,
+          "min": -5,
+          "max": 5,
+          "unit": "A",
+          "conditions": null
+        },
+        "Peak_Current__2": {
+          "parameter": "Peak Current",
+          "symbol": null,
+          "min": -5,
+          "max": 5,
+          "unit": "A",
+          "conditions": null
+        },
+        "DC_Current": {
+          "parameter": "DC Current",
+          "symbol": null,
+          "min": -0.2,
+          "max": 0.2,
+          "unit": "A",
+          "conditions": null
+        },
+        "Ambient_Temperature": {
+          "parameter": "Ambient Temperature",
+          "symbol": null,
+          "min": -65,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        },
+        "Ambient_Temperature__2": {
+          "parameter": "Ambient Temperature",
+          "symbol": null,
+          "min": -40,
+          "max": 85,
+          "unit": "°C",
+          "conditions": null
+        }
+      },
       "electrical_parameters": {
         "VPORT": {
+          "parameter": "VPORT Detection",
+          "symbol": "VPORT",
+          "min": 2.7,
+          "typ": null,
+          "max": 11,
+          "unit": "V",
+          "conditions": null
+        },
+        "VPORT__2": {
+          "parameter": "VPORT Classification",
+          "symbol": "VPORT",
+          "min": 14,
+          "typ": null,
+          "max": 22,
+          "unit": "V",
+          "conditions": null
+        },
+        "VPORT__3": {
+          "parameter": "VPORT UVLO turn-off",
+          "symbol": "VPORT",
+          "min": null,
+          "typ": 37,
+          "max": 42,
+          "unit": "V",
+          "conditions": null
+        },
+        "VPORT__4": {
+          "parameter": "VPORT UVLO turn-on",
+          "symbol": "VPORT",
+          "min": 30,
+          "typ": 32,
+          "max": 36,
+          "unit": "V",
+          "conditions": null
+        },
+        "VPORT__5": {
           "parameter": "Integrated Transient Surge Clamp Voltage",
           "symbol": "VPORT",
           "min": null,
@@ -424,7 +918,52 @@
           "unit": "V",
           "conditions": null
         },
+        "Input_Offset_Current": {
+          "parameter": "Input Offset Current",
+          "symbol": null,
+          "min": null,
+          "typ": null,
+          "max": 10,
+          "unit": "µA",
+          "conditions": "VPORT < 10 V"
+        },
+        "Diode_Bridge_Leakage": {
+          "parameter": "Diode Bridge Leakage",
+          "symbol": null,
+          "min": null,
+          "typ": null,
+          "max": 25,
+          "unit": "µA",
+          "conditions": "VPORT = 57 V"
+        },
         "IPORT": {
+          "parameter": "IPORT Classification Class 0",
+          "symbol": "IPORT",
+          "min": 0,
+          "typ": null,
+          "max": 4,
+          "unit": "mA",
+          "conditions": null
+        },
+        "IPORT__2": {
+          "parameter": "IPORT Classification Class 1",
+          "symbol": "IPORT",
+          "min": 9,
+          "typ": null,
+          "max": 12,
+          "unit": "mA",
+          "conditions": null
+        },
+        "IPORT__3": {
+          "parameter": "IPORT Classification Class 2",
+          "symbol": "IPORT",
+          "min": 17,
+          "typ": null,
+          "max": 20,
+          "unit": "mA",
+          "conditions": null
+        },
+        "IPORT__4": {
           "parameter": "IPORT Classification Class 3",
           "symbol": "IPORT",
           "min": 26,
@@ -441,6 +980,141 @@
           "max": 3.1,
           "unit": "mA",
           "conditions": "37 V ≤ VPORT ≤ 57 V"
+        },
+        "Current_Limit_Inrush": {
+          "parameter": "Current Limit Inrush",
+          "symbol": null,
+          "min": null,
+          "typ": 140,
+          "max": null,
+          "unit": "mA",
+          "conditions": null
+        },
+        "Current_Limit_Operating": {
+          "parameter": "Current Limit Operating",
+          "symbol": null,
+          "min": 470,
+          "typ": null,
+          "max": 680,
+          "unit": "mA",
+          "conditions": null
+        },
+        "Hotswap_FET_On_Resistance": {
+          "parameter": "Hotswap FET On-Resistance",
+          "symbol": null,
+          "min": 1,
+          "typ": null,
+          "max": 3,
+          "unit": "Ω",
+          "conditions": "37 V ≤ VPORT ≤ 57 V"
+        },
+        "Power_Loss__PLOSS__VPORT_Thres": {
+          "parameter": "Power Loss (PLOSS) VPORT Threshold",
+          "symbol": null,
+          "min": 1,
+          "typ": 1.5,
+          "max": 2,
+          "unit": "V",
+          "conditions": "VPOS - (Greater of CT1 or CT2), or VPOS - (Greater of SP1 or SP2)"
+        },
+        "Switcher_Frequency": {
+          "parameter": "Switcher Frequency",
+          "symbol": null,
+          "min": null,
+          "typ": 350,
+          "max": null,
+          "unit": "kHz",
+          "conditions": null
+        },
+        "Maximum_Switcher_Duty_Cycle": {
+          "parameter": "Maximum Switcher Duty Cycle",
+          "symbol": null,
+          "min": null,
+          "typ": 50,
+          "max": 75,
+          "unit": "%",
+          "conditions": null
+        },
+        "Switcher_Output_Transient_Volt": {
+          "parameter": "Switcher Output Transient Voltage",
+          "symbol": null,
+          "min": null,
+          "typ": null,
+          "max": 100,
+          "unit": "V",
+          "conditions": null
+        },
+        "Switching_FET_On_Resistance": {
+          "parameter": "Switching FET On-Resistance",
+          "symbol": null,
+          "min": 0.3,
+          "typ": 0.5,
+          "max": 1.3,
+          "unit": "Ω",
+          "conditions": null
+        },
+        "Switching_FET_Peak_Current": {
+          "parameter": "Switching FET Peak Current",
+          "symbol": null,
+          "min": null,
+          "typ": null,
+          "max": 2.4,
+          "unit": "A",
+          "conditions": null
+        },
+        "Regulated_Feedback___Pin_FB": {
+          "parameter": "Regulated Feedback @ Pin FB",
+          "symbol": null,
+          "min": 1.3,
+          "typ": 1.35,
+          "max": 1.4,
+          "unit": "V",
+          "conditions": "DC Avg."
+        },
+        "VDD_Accuracy": {
+          "parameter": "VDD Accuracy",
+          "symbol": null,
+          "min": 4.5,
+          "typ": null,
+          "max": 5.5,
+          "unit": "V",
+          "conditions": "0-5 mA and UVLO OFF (Switching regulator ON)"
+        },
+        "Thermal_Shutdown": {
+          "parameter": "Thermal Shutdown",
+          "symbol": null,
+          "min": null,
+          "typ": 160,
+          "max": null,
+          "unit": "°C",
+          "conditions": "Junction temperature"
+        },
+        "Thermal_Shutdown_Hysteresis": {
+          "parameter": "Thermal Shutdown Hysteresis",
+          "symbol": null,
+          "min": null,
+          "typ": 25,
+          "max": null,
+          "unit": "°C",
+          "conditions": null
+        },
+        "Power_Dissipation": {
+          "parameter": "Power Dissipation",
+          "symbol": null,
+          "min": null,
+          "typ": 1.2,
+          "max": null,
+          "unit": "W",
+          "conditions": "VPORT = 50 V, VOUT = 5 V, 2 A"
+        },
+        "Power_Dissipation__Bypassed": {
+          "parameter": "Power Dissipation (Bypassed)",
+          "symbol": null,
+          "min": null,
+          "typ": 0.7,
+          "max": null,
+          "unit": "W",
+          "conditions": "VPORT = 50 V, VOUT = 5 V, 2 A w/ diode bridges bypassed"
         },
         "θJA": {
           "parameter": "Thermal Resistance",

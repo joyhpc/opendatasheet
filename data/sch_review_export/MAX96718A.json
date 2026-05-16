@@ -415,6 +415,46 @@
       "max": 1.1,
       "unit": "V",
       "conditions": "Note a"
+    },
+    "D_PHY__C_PHY_Pins_Voltage": {
+      "parameter": "D-PHY, C-PHY Pins Voltage",
+      "symbol": null,
+      "min": -0.3,
+      "max": null,
+      "unit": "V",
+      "conditions": "to (VTERM + 0.1V), Note b"
+    },
+    "XRES__X2_Pins_Voltage": {
+      "parameter": "XRES, X2 Pins Voltage",
+      "symbol": null,
+      "min": -0.3,
+      "max": null,
+      "unit": "V",
+      "conditions": "to (VDD18 + 0.3V)"
+    },
+    "All_Other_Pins_Voltage": {
+      "parameter": "All Other Pins Voltage",
+      "symbol": null,
+      "min": -0.3,
+      "max": null,
+      "unit": "V",
+      "conditions": "to (VDDIO + 0.3V), Note c"
+    },
+    "Continuous_Power_Dissipation": {
+      "parameter": "Continuous Power Dissipation",
+      "symbol": null,
+      "min": null,
+      "max": 2200,
+      "unit": "mW",
+      "conditions": "Multilayer Board, TA = +70°C, derate 40mW/°C above +70°C"
+    },
+    "Storage_Temperature_Range": {
+      "parameter": "Storage Temperature Range",
+      "symbol": null,
+      "min": -40,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
     }
   },
   "electrical_parameters": {
@@ -639,7 +679,7 @@
       "symbol": "ZOS",
       "min": 40,
       "typ": 50,
-      "max": 60,
+      "max": 62.5,
       "unit": "Ω",
       "conditions": null
     },
@@ -648,7 +688,7 @@
       "symbol": "ΔZOS",
       "min": null,
       "typ": null,
-      "max": 10,
+      "max": 15,
       "unit": "%",
       "conditions": null
     },
@@ -706,10 +746,28 @@
       "unit": "mV",
       "conditions": "See Figure 7, (Note 4)"
     },
+    "ZOS__2": {
+      "parameter": "Single-Ended Output Impedance",
+      "symbol": "ZOS",
+      "min": 40,
+      "typ": 50,
+      "max": 60,
+      "unit": "Ω",
+      "conditions": null
+    },
+    "ΔZOS__2": {
+      "parameter": "Single-Ended Output Impedance Mismatch",
+      "symbol": "ΔZOS",
+      "min": null,
+      "typ": null,
+      "max": 10,
+      "unit": "%",
+      "conditions": null
+    },
     "VIH": {
       "parameter": "High-Level Input Voltage",
       "symbol": "VIH",
-      "min": 0.9,
+      "min": null,
       "typ": null,
       "max": null,
       "unit": "V",
@@ -720,7 +778,7 @@
       "symbol": "VIL",
       "min": null,
       "typ": null,
-      "max": 0.4,
+      "max": null,
       "unit": "V",
       "conditions": null
     },
@@ -755,19 +813,19 @@
       "parameter": "Input Capacitance",
       "symbol": "CIN",
       "min": null,
-      "typ": 3,
+      "typ": 5,
       "max": null,
       "unit": "pF",
       "conditions": null
     },
     "RIN": {
-      "parameter": "Input Resistance",
+      "parameter": "Input Pullup/Pulldown Resistance",
       "symbol": "RIN",
       "min": null,
-      "typ": 10,
+      "typ": 40,
       "max": null,
       "unit": "kΩ",
-      "conditions": null
+      "conditions": "40kΩ enabled"
     },
     "RIN_1M__enabled": {
       "parameter": "Input Pullup/Pulldown Resistance",
@@ -778,6 +836,33 @@
       "unit": "MΩ",
       "conditions": "1MΩ enabled"
     },
+    "VIH__2": {
+      "parameter": "High-Level Input Voltage",
+      "symbol": "VIH",
+      "min": null,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": null
+    },
+    "VIL__2": {
+      "parameter": "Low-Level Input Voltage",
+      "symbol": "VIL",
+      "min": null,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": null
+    },
+    "VOL_IOL___4mA__2": {
+      "parameter": "Low-Level Open-Drain Output Voltage",
+      "symbol": "VOL",
+      "min": null,
+      "typ": null,
+      "max": 0.4,
+      "unit": "V",
+      "conditions": "IOL = 4mA"
+    },
     "IIN_VIN___0_to_VDDIO__All_pullup_p": {
       "parameter": "Input Current",
       "symbol": "IIN",
@@ -786,6 +871,15 @@
       "max": 1,
       "unit": "μA",
       "conditions": "VIN = 0 to VDDIO. All pullup/pulldown devices disabled."
+    },
+    "CIN__2": {
+      "parameter": "Input Capacitance",
+      "symbol": "CIN",
+      "min": null,
+      "typ": 3,
+      "max": null,
+      "unit": "pF",
+      "conditions": null
     },
     "RPU": {
       "parameter": "Internal Pullup Resistor",
@@ -805,6 +899,24 @@
       "unit": "MΩ",
       "conditions": "1MΩ enabled"
     },
+    "VIH__3": {
+      "parameter": "High-Level Input Voltage",
+      "symbol": "VIH",
+      "min": null,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": null
+    },
+    "VIL__3": {
+      "parameter": "Low-Level Input Voltage",
+      "symbol": "VIL",
+      "min": null,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": null
+    },
     "IIN_VIN___0_to_VDDIO": {
       "parameter": "Input Current",
       "symbol": "IIN",
@@ -822,6 +934,33 @@
       "max": null,
       "unit": "MΩ",
       "conditions": null
+    },
+    "CIN__3": {
+      "parameter": "Input Capacitance",
+      "symbol": "CIN",
+      "min": null,
+      "typ": 3,
+      "max": null,
+      "unit": "pF",
+      "conditions": null
+    },
+    "VOH_IOH____4mA__2": {
+      "parameter": "High-Level Output Voltage",
+      "symbol": "VOH",
+      "min": null,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": "IOH = -4mA"
+    },
+    "VOL_IOL___4mA__3": {
+      "parameter": "Low-Level Output Voltage",
+      "symbol": "VOL",
+      "min": null,
+      "typ": null,
+      "max": 0.4,
+      "unit": "V",
+      "conditions": "IOL = 4mA"
     },
     "VO0": {
       "parameter": "Open Pin Voltage",
@@ -886,6 +1025,42 @@
       "unit": "mA/V",
       "conditions": null
     },
+    "VIH__4": {
+      "parameter": "High-Level Input Voltage",
+      "symbol": "VIH",
+      "min": 0.9,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": null
+    },
+    "VIL__4": {
+      "parameter": "Low-Level Input Voltage",
+      "symbol": "VIL",
+      "min": null,
+      "typ": null,
+      "max": 0.4,
+      "unit": "V",
+      "conditions": null
+    },
+    "CIN_X1__2": {
+      "parameter": "X1 Input Capacitance",
+      "symbol": "CIN_X1",
+      "min": null,
+      "typ": 3,
+      "max": null,
+      "unit": "pF",
+      "conditions": null
+    },
+    "RIN__2": {
+      "parameter": "Input Resistance",
+      "symbol": "RIN",
+      "min": null,
+      "typ": 10,
+      "max": null,
+      "unit": "kΩ",
+      "conditions": null
+    },
     "IDD": {
       "parameter": "Supply Current",
       "symbol": "IDD",
@@ -896,6 +1071,24 @@
       "conditions": "2x 6Gbps input, 2x 4-lane output, 1.1Gbps/lane. VDD (internal LDO not used)"
     },
     "IDD_2x_6Gbps_input__2x_4_lane_outp": {
+      "parameter": "Supply Current",
+      "symbol": "IDD",
+      "min": null,
+      "typ": 197,
+      "max": 460,
+      "unit": "mA",
+      "conditions": "2x 6Gbps input, 2x 4-lane output, 1.1Gbps/lane. VDD (internal LDO used)"
+    },
+    "IDD_2x_6Gbps_input__2x_4_lane_outp__2": {
+      "parameter": "Supply Current",
+      "symbol": "IDD",
+      "min": null,
+      "typ": 196,
+      "max": 245,
+      "unit": "mA",
+      "conditions": "2x 6Gbps input, 2x 4-lane output, 1.1Gbps/lane. VDD18"
+    },
+    "IDD_2x_6Gbps_input__2x_4_lane_outp__3": {
       "parameter": "Supply Current",
       "symbol": "IDD",
       "min": null,
@@ -968,16 +1161,34 @@
       "conditions": "VDDIO = 3.6V"
     },
     "IDD_VDDIO_at_3_6V": {
-      "parameter": "Maximum Sleep Current",
+      "parameter": "Maximum Power-Down Current",
       "symbol": "IDD",
       "min": null,
-      "typ": 9,
+      "typ": 6,
+      "max": null,
+      "unit": "μA",
+      "conditions": "VDDIO at 3.6V"
+    },
+    "IDD_VDDIO_at_3_6V__2": {
+      "parameter": "Maximum Power-Down Current",
+      "symbol": "IDD",
+      "min": null,
+      "typ": 7,
       "max": null,
       "unit": "μA",
       "conditions": "VDDIO at 3.6V"
     },
     "IDD_VTERM_at_1_26V": {
-      "parameter": "Maximum Sleep Current",
+      "parameter": "Maximum Power-Down Current",
+      "symbol": "IDD",
+      "min": null,
+      "typ": null,
+      "max": 1,
+      "unit": "μA",
+      "conditions": "VTERM at 1.26V"
+    },
+    "IDD_VTERM_at_1_26V__2": {
+      "parameter": "Maximum Power-Down Current",
       "symbol": "IDD",
       "min": null,
       "typ": null,
@@ -986,6 +1197,87 @@
       "conditions": "VTERM at 1.26V"
     },
     "IDD_VDD18_at_1_9V": {
+      "parameter": "Maximum Power-Down Current",
+      "symbol": "IDD",
+      "min": null,
+      "typ": null,
+      "max": 1,
+      "unit": "μA",
+      "conditions": "VDD18 at 1.9V"
+    },
+    "IDD_VDD18_at_1_9V__2": {
+      "parameter": "Maximum Power-Down Current",
+      "symbol": "IDD",
+      "min": null,
+      "typ": 28,
+      "max": null,
+      "unit": "μA",
+      "conditions": "VDD18 at 1.9V"
+    },
+    "IDD_VDD_at_1_26V": {
+      "parameter": "Maximum Power-Down Current",
+      "symbol": "IDD",
+      "min": null,
+      "typ": 6,
+      "max": null,
+      "unit": "μA",
+      "conditions": "VDD at 1.26V"
+    },
+    "IDD_VDD_at_1_26V__2": {
+      "parameter": "Maximum Power-Down Current",
+      "symbol": "IDD",
+      "min": null,
+      "typ": 6,
+      "max": null,
+      "unit": "μA",
+      "conditions": "VDD at 1.26V"
+    },
+    "IDD_VDDIO_at_3_6V__3": {
+      "parameter": "Maximum Sleep Current",
+      "symbol": "IDD",
+      "min": null,
+      "typ": 9,
+      "max": null,
+      "unit": "μA",
+      "conditions": "VDDIO at 3.6V"
+    },
+    "IDD_VDDIO_at_3_6V__4": {
+      "parameter": "Maximum Sleep Current",
+      "symbol": "IDD",
+      "min": null,
+      "typ": 9,
+      "max": null,
+      "unit": "μA",
+      "conditions": "VDDIO at 3.6V"
+    },
+    "IDD_VTERM_at_1_26V__3": {
+      "parameter": "Maximum Sleep Current",
+      "symbol": "IDD",
+      "min": null,
+      "typ": null,
+      "max": 1,
+      "unit": "μA",
+      "conditions": "VTERM at 1.26V"
+    },
+    "IDD_VTERM_at_1_26V__4": {
+      "parameter": "Maximum Sleep Current",
+      "symbol": "IDD",
+      "min": null,
+      "typ": null,
+      "max": 1,
+      "unit": "μA",
+      "conditions": "VTERM at 1.26V"
+    },
+    "IDD_VDD18_at_1_9V__3": {
+      "parameter": "Maximum Sleep Current",
+      "symbol": "IDD",
+      "min": null,
+      "typ": 17,
+      "max": null,
+      "unit": "μA",
+      "conditions": "VDD18 at 1.9V"
+    },
+    "IDD_VDD18_at_1_9V__4": {
       "parameter": "Maximum Sleep Current",
       "symbol": "IDD",
       "min": null,
@@ -994,7 +1286,16 @@
       "unit": "μA",
       "conditions": "VDD18 at 1.9V"
     },
-    "IDD_VDD_at_1_26V": {
+    "IDD_VDD_at_1_26V__3": {
+      "parameter": "Maximum Sleep Current",
+      "symbol": "IDD",
+      "min": null,
+      "typ": 7,
+      "max": null,
+      "unit": "μA",
+      "conditions": "VDD at 1.26V"
+    },
+    "IDD_VDD_at_1_26V__4": {
       "parameter": "Maximum Sleep Current",
       "symbol": "IDD",
       "min": null,
@@ -1619,6 +1920,46 @@
           "max": 1.1,
           "unit": "V",
           "conditions": "Note a"
+        },
+        "D_PHY__C_PHY_Pins_Voltage": {
+          "parameter": "D-PHY, C-PHY Pins Voltage",
+          "symbol": null,
+          "min": -0.3,
+          "max": null,
+          "unit": "V",
+          "conditions": "to (VTERM + 0.1V), Note b"
+        },
+        "XRES__X2_Pins_Voltage": {
+          "parameter": "XRES, X2 Pins Voltage",
+          "symbol": null,
+          "min": -0.3,
+          "max": null,
+          "unit": "V",
+          "conditions": "to (VDD18 + 0.3V)"
+        },
+        "All_Other_Pins_Voltage": {
+          "parameter": "All Other Pins Voltage",
+          "symbol": null,
+          "min": -0.3,
+          "max": null,
+          "unit": "V",
+          "conditions": "to (VDDIO + 0.3V), Note c"
+        },
+        "Continuous_Power_Dissipation": {
+          "parameter": "Continuous Power Dissipation",
+          "symbol": null,
+          "min": null,
+          "max": 2200,
+          "unit": "mW",
+          "conditions": "Multilayer Board, TA = +70°C, derate 40mW/°C above +70°C"
+        },
+        "Storage_Temperature_Range": {
+          "parameter": "Storage Temperature Range",
+          "symbol": null,
+          "min": -40,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
         }
       },
       "electrical_parameters": {
@@ -1843,7 +2184,7 @@
           "symbol": "ZOS",
           "min": 40,
           "typ": 50,
-          "max": 60,
+          "max": 62.5,
           "unit": "Ω",
           "conditions": null
         },
@@ -1852,7 +2193,7 @@
           "symbol": "ΔZOS",
           "min": null,
           "typ": null,
-          "max": 10,
+          "max": 15,
           "unit": "%",
           "conditions": null
         },
@@ -1910,10 +2251,28 @@
           "unit": "mV",
           "conditions": "See Figure 7, (Note 4)"
         },
+        "ZOS__2": {
+          "parameter": "Single-Ended Output Impedance",
+          "symbol": "ZOS",
+          "min": 40,
+          "typ": 50,
+          "max": 60,
+          "unit": "Ω",
+          "conditions": null
+        },
+        "ΔZOS__2": {
+          "parameter": "Single-Ended Output Impedance Mismatch",
+          "symbol": "ΔZOS",
+          "min": null,
+          "typ": null,
+          "max": 10,
+          "unit": "%",
+          "conditions": null
+        },
         "VIH": {
           "parameter": "High-Level Input Voltage",
           "symbol": "VIH",
-          "min": 0.9,
+          "min": null,
           "typ": null,
           "max": null,
           "unit": "V",
@@ -1924,7 +2283,7 @@
           "symbol": "VIL",
           "min": null,
           "typ": null,
-          "max": 0.4,
+          "max": null,
           "unit": "V",
           "conditions": null
         },
@@ -1959,19 +2318,19 @@
           "parameter": "Input Capacitance",
           "symbol": "CIN",
           "min": null,
-          "typ": 3,
+          "typ": 5,
           "max": null,
           "unit": "pF",
           "conditions": null
         },
         "RIN": {
-          "parameter": "Input Resistance",
+          "parameter": "Input Pullup/Pulldown Resistance",
           "symbol": "RIN",
           "min": null,
-          "typ": 10,
+          "typ": 40,
           "max": null,
           "unit": "kΩ",
-          "conditions": null
+          "conditions": "40kΩ enabled"
         },
         "RIN_1M__enabled": {
           "parameter": "Input Pullup/Pulldown Resistance",
@@ -1982,6 +2341,33 @@
           "unit": "MΩ",
           "conditions": "1MΩ enabled"
         },
+        "VIH__2": {
+          "parameter": "High-Level Input Voltage",
+          "symbol": "VIH",
+          "min": null,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": null
+        },
+        "VIL__2": {
+          "parameter": "Low-Level Input Voltage",
+          "symbol": "VIL",
+          "min": null,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": null
+        },
+        "VOL_IOL___4mA__2": {
+          "parameter": "Low-Level Open-Drain Output Voltage",
+          "symbol": "VOL",
+          "min": null,
+          "typ": null,
+          "max": 0.4,
+          "unit": "V",
+          "conditions": "IOL = 4mA"
+        },
         "IIN_VIN___0_to_VDDIO__All_pullup_p": {
           "parameter": "Input Current",
           "symbol": "IIN",
@@ -1990,6 +2376,15 @@
           "max": 1,
           "unit": "μA",
           "conditions": "VIN = 0 to VDDIO. All pullup/pulldown devices disabled."
+        },
+        "CIN__2": {
+          "parameter": "Input Capacitance",
+          "symbol": "CIN",
+          "min": null,
+          "typ": 3,
+          "max": null,
+          "unit": "pF",
+          "conditions": null
         },
         "RPU": {
           "parameter": "Internal Pullup Resistor",
@@ -2009,6 +2404,24 @@
           "unit": "MΩ",
           "conditions": "1MΩ enabled"
         },
+        "VIH__3": {
+          "parameter": "High-Level Input Voltage",
+          "symbol": "VIH",
+          "min": null,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": null
+        },
+        "VIL__3": {
+          "parameter": "Low-Level Input Voltage",
+          "symbol": "VIL",
+          "min": null,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": null
+        },
         "IIN_VIN___0_to_VDDIO": {
           "parameter": "Input Current",
           "symbol": "IIN",
@@ -2026,6 +2439,33 @@
           "max": null,
           "unit": "MΩ",
           "conditions": null
+        },
+        "CIN__3": {
+          "parameter": "Input Capacitance",
+          "symbol": "CIN",
+          "min": null,
+          "typ": 3,
+          "max": null,
+          "unit": "pF",
+          "conditions": null
+        },
+        "VOH_IOH____4mA__2": {
+          "parameter": "High-Level Output Voltage",
+          "symbol": "VOH",
+          "min": null,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": "IOH = -4mA"
+        },
+        "VOL_IOL___4mA__3": {
+          "parameter": "Low-Level Output Voltage",
+          "symbol": "VOL",
+          "min": null,
+          "typ": null,
+          "max": 0.4,
+          "unit": "V",
+          "conditions": "IOL = 4mA"
         },
         "VO0": {
           "parameter": "Open Pin Voltage",
@@ -2090,6 +2530,42 @@
           "unit": "mA/V",
           "conditions": null
         },
+        "VIH__4": {
+          "parameter": "High-Level Input Voltage",
+          "symbol": "VIH",
+          "min": 0.9,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": null
+        },
+        "VIL__4": {
+          "parameter": "Low-Level Input Voltage",
+          "symbol": "VIL",
+          "min": null,
+          "typ": null,
+          "max": 0.4,
+          "unit": "V",
+          "conditions": null
+        },
+        "CIN_X1__2": {
+          "parameter": "X1 Input Capacitance",
+          "symbol": "CIN_X1",
+          "min": null,
+          "typ": 3,
+          "max": null,
+          "unit": "pF",
+          "conditions": null
+        },
+        "RIN__2": {
+          "parameter": "Input Resistance",
+          "symbol": "RIN",
+          "min": null,
+          "typ": 10,
+          "max": null,
+          "unit": "kΩ",
+          "conditions": null
+        },
         "IDD": {
           "parameter": "Supply Current",
           "symbol": "IDD",
@@ -2100,6 +2576,24 @@
           "conditions": "2x 6Gbps input, 2x 4-lane output, 1.1Gbps/lane. VDD (internal LDO not used)"
         },
         "IDD_2x_6Gbps_input__2x_4_lane_outp": {
+          "parameter": "Supply Current",
+          "symbol": "IDD",
+          "min": null,
+          "typ": 197,
+          "max": 460,
+          "unit": "mA",
+          "conditions": "2x 6Gbps input, 2x 4-lane output, 1.1Gbps/lane. VDD (internal LDO used)"
+        },
+        "IDD_2x_6Gbps_input__2x_4_lane_outp__2": {
+          "parameter": "Supply Current",
+          "symbol": "IDD",
+          "min": null,
+          "typ": 196,
+          "max": 245,
+          "unit": "mA",
+          "conditions": "2x 6Gbps input, 2x 4-lane output, 1.1Gbps/lane. VDD18"
+        },
+        "IDD_2x_6Gbps_input__2x_4_lane_outp__3": {
           "parameter": "Supply Current",
           "symbol": "IDD",
           "min": null,
@@ -2172,16 +2666,34 @@
           "conditions": "VDDIO = 3.6V"
         },
         "IDD_VDDIO_at_3_6V": {
-          "parameter": "Maximum Sleep Current",
+          "parameter": "Maximum Power-Down Current",
           "symbol": "IDD",
           "min": null,
-          "typ": 9,
+          "typ": 6,
+          "max": null,
+          "unit": "μA",
+          "conditions": "VDDIO at 3.6V"
+        },
+        "IDD_VDDIO_at_3_6V__2": {
+          "parameter": "Maximum Power-Down Current",
+          "symbol": "IDD",
+          "min": null,
+          "typ": 7,
           "max": null,
           "unit": "μA",
           "conditions": "VDDIO at 3.6V"
         },
         "IDD_VTERM_at_1_26V": {
-          "parameter": "Maximum Sleep Current",
+          "parameter": "Maximum Power-Down Current",
+          "symbol": "IDD",
+          "min": null,
+          "typ": null,
+          "max": 1,
+          "unit": "μA",
+          "conditions": "VTERM at 1.26V"
+        },
+        "IDD_VTERM_at_1_26V__2": {
+          "parameter": "Maximum Power-Down Current",
           "symbol": "IDD",
           "min": null,
           "typ": null,
@@ -2190,6 +2702,87 @@
           "conditions": "VTERM at 1.26V"
         },
         "IDD_VDD18_at_1_9V": {
+          "parameter": "Maximum Power-Down Current",
+          "symbol": "IDD",
+          "min": null,
+          "typ": null,
+          "max": 1,
+          "unit": "μA",
+          "conditions": "VDD18 at 1.9V"
+        },
+        "IDD_VDD18_at_1_9V__2": {
+          "parameter": "Maximum Power-Down Current",
+          "symbol": "IDD",
+          "min": null,
+          "typ": 28,
+          "max": null,
+          "unit": "μA",
+          "conditions": "VDD18 at 1.9V"
+        },
+        "IDD_VDD_at_1_26V": {
+          "parameter": "Maximum Power-Down Current",
+          "symbol": "IDD",
+          "min": null,
+          "typ": 6,
+          "max": null,
+          "unit": "μA",
+          "conditions": "VDD at 1.26V"
+        },
+        "IDD_VDD_at_1_26V__2": {
+          "parameter": "Maximum Power-Down Current",
+          "symbol": "IDD",
+          "min": null,
+          "typ": 6,
+          "max": null,
+          "unit": "μA",
+          "conditions": "VDD at 1.26V"
+        },
+        "IDD_VDDIO_at_3_6V__3": {
+          "parameter": "Maximum Sleep Current",
+          "symbol": "IDD",
+          "min": null,
+          "typ": 9,
+          "max": null,
+          "unit": "μA",
+          "conditions": "VDDIO at 3.6V"
+        },
+        "IDD_VDDIO_at_3_6V__4": {
+          "parameter": "Maximum Sleep Current",
+          "symbol": "IDD",
+          "min": null,
+          "typ": 9,
+          "max": null,
+          "unit": "μA",
+          "conditions": "VDDIO at 3.6V"
+        },
+        "IDD_VTERM_at_1_26V__3": {
+          "parameter": "Maximum Sleep Current",
+          "symbol": "IDD",
+          "min": null,
+          "typ": null,
+          "max": 1,
+          "unit": "μA",
+          "conditions": "VTERM at 1.26V"
+        },
+        "IDD_VTERM_at_1_26V__4": {
+          "parameter": "Maximum Sleep Current",
+          "symbol": "IDD",
+          "min": null,
+          "typ": null,
+          "max": 1,
+          "unit": "μA",
+          "conditions": "VTERM at 1.26V"
+        },
+        "IDD_VDD18_at_1_9V__3": {
+          "parameter": "Maximum Sleep Current",
+          "symbol": "IDD",
+          "min": null,
+          "typ": 17,
+          "max": null,
+          "unit": "μA",
+          "conditions": "VDD18 at 1.9V"
+        },
+        "IDD_VDD18_at_1_9V__4": {
           "parameter": "Maximum Sleep Current",
           "symbol": "IDD",
           "min": null,
@@ -2198,7 +2791,16 @@
           "unit": "μA",
           "conditions": "VDD18 at 1.9V"
         },
-        "IDD_VDD_at_1_26V": {
+        "IDD_VDD_at_1_26V__3": {
+          "parameter": "Maximum Sleep Current",
+          "symbol": "IDD",
+          "min": null,
+          "typ": 7,
+          "max": null,
+          "unit": "μA",
+          "conditions": "VDD at 1.26V"
+        },
+        "IDD_VDD_at_1_26V__4": {
           "parameter": "Maximum Sleep Current",
           "symbol": "IDD",
           "min": null,

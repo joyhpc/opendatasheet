@@ -2,7 +2,8 @@
   "_schema": "device-knowledge/2.0",
   "_type": "normal_ic",
   "_layers": [
-    "L0_skeleton"
+    "L0_skeleton",
+    "L1_electrical"
   ],
   "mpn": "Si3404",
   "manufacturer": "Silicon Labs",
@@ -162,8 +163,27 @@
       }
     }
   },
-  "absolute_maximum_ratings": {},
-  "electrical_parameters": {},
+  "absolute_maximum_ratings": {
+    "Maximum_Voltage": {
+      "parameter": "Maximum Voltage",
+      "symbol": null,
+      "min": null,
+      "max": 120,
+      "unit": "V",
+      "conditions": null
+    }
+  },
+  "electrical_parameters": {
+    "Operating_Temperature_Range": {
+      "parameter": "Operating Temperature Range",
+      "symbol": null,
+      "min": -40,
+      "typ": null,
+      "max": 85,
+      "unit": "°C",
+      "conditions": null
+    }
+  },
   "drc_hints": {},
   "thermal": {},
   "domains": {
@@ -322,6 +342,30 @@
           }
         }
       }
+    },
+    "electrical": {
+      "absolute_maximum_ratings": {
+        "Maximum_Voltage": {
+          "parameter": "Maximum Voltage",
+          "symbol": null,
+          "min": null,
+          "max": 120,
+          "unit": "V",
+          "conditions": null
+        }
+      },
+      "electrical_parameters": {
+        "Operating_Temperature_Range": {
+          "parameter": "Operating Temperature Range",
+          "symbol": null,
+          "min": -40,
+          "typ": null,
+          "max": 85,
+          "unit": "°C",
+          "conditions": null
+        }
+      },
+      "drc_hints": {}
     }
   }
 }

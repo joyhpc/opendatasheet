@@ -111,7 +111,31 @@
       "unit": "V",
       "conditions": null
     },
+    "Input_voltage": {
+      "parameter": "Input voltage",
+      "symbol": null,
+      "min": -0.3,
+      "max": 6.0,
+      "unit": "V",
+      "conditions": null
+    },
+    "Input_voltage__2": {
+      "parameter": "Input voltage",
+      "symbol": null,
+      "min": -0.3,
+      "max": 0.3,
+      "unit": "V",
+      "conditions": null
+    },
     "SW": {
+      "parameter": "Output voltage",
+      "symbol": "SW",
+      "min": -0.3,
+      "max": 32,
+      "unit": "V",
+      "conditions": null
+    },
+    "SW__2": {
       "parameter": "Output voltage",
       "symbol": "SW",
       "min": -4,
@@ -173,6 +197,15 @@
       "conditions": "VIN Under-Voltage Lockout"
     },
     "UVLO_VIN_Under_Voltage_Lockout": {
+      "parameter": "Shut down VIN voltage",
+      "symbol": "UVLO",
+      "min": 3.6,
+      "typ": 3.7,
+      "max": 3.8,
+      "unit": "V",
+      "conditions": "VIN Under-Voltage Lockout"
+    },
+    "UVLO_VIN_Under_Voltage_Lockout__2": {
       "parameter": "Hysteresis VIN voltage",
       "symbol": "UVLO",
       "min": null,
@@ -281,6 +314,24 @@
       "conditions": "% of VFB"
     },
     "VPGTH_of_VFB": {
+      "parameter": "PG lower threshold - rising",
+      "symbol": "VPGTH",
+      "min": null,
+      "typ": 90,
+      "max": null,
+      "unit": "%",
+      "conditions": "% of VFB"
+    },
+    "VPGTH_of_VFB__2": {
+      "parameter": "PG upper threshold - falling",
+      "symbol": "VPGTH",
+      "min": null,
+      "typ": 110,
+      "max": null,
+      "unit": "%",
+      "conditions": "% of VFB"
+    },
+    "VPGTH_of_VFB__3": {
       "parameter": "PG upper threshold - rising",
       "symbol": "VPGTH",
       "min": null,
@@ -526,7 +577,31 @@
           "unit": "V",
           "conditions": null
         },
+        "Input_voltage": {
+          "parameter": "Input voltage",
+          "symbol": null,
+          "min": -0.3,
+          "max": 6.0,
+          "unit": "V",
+          "conditions": null
+        },
+        "Input_voltage__2": {
+          "parameter": "Input voltage",
+          "symbol": null,
+          "min": -0.3,
+          "max": 0.3,
+          "unit": "V",
+          "conditions": null
+        },
         "SW": {
+          "parameter": "Output voltage",
+          "symbol": "SW",
+          "min": -0.3,
+          "max": 32,
+          "unit": "V",
+          "conditions": null
+        },
+        "SW__2": {
           "parameter": "Output voltage",
           "symbol": "SW",
           "min": -4,
@@ -588,6 +663,15 @@
           "conditions": "VIN Under-Voltage Lockout"
         },
         "UVLO_VIN_Under_Voltage_Lockout": {
+          "parameter": "Shut down VIN voltage",
+          "symbol": "UVLO",
+          "min": 3.6,
+          "typ": 3.7,
+          "max": 3.8,
+          "unit": "V",
+          "conditions": "VIN Under-Voltage Lockout"
+        },
+        "UVLO_VIN_Under_Voltage_Lockout__2": {
           "parameter": "Hysteresis VIN voltage",
           "symbol": "UVLO",
           "min": null,
@@ -696,6 +780,24 @@
           "conditions": "% of VFB"
         },
         "VPGTH_of_VFB": {
+          "parameter": "PG lower threshold - rising",
+          "symbol": "VPGTH",
+          "min": null,
+          "typ": 90,
+          "max": null,
+          "unit": "%",
+          "conditions": "% of VFB"
+        },
+        "VPGTH_of_VFB__2": {
+          "parameter": "PG upper threshold - falling",
+          "symbol": "VPGTH",
+          "min": null,
+          "typ": 110,
+          "max": null,
+          "unit": "%",
+          "conditions": "% of VFB"
+        },
+        "VPGTH_of_VFB__3": {
           "parameter": "PG upper threshold - rising",
           "symbol": "VPGTH",
           "min": null,
@@ -839,7 +941,12 @@
       "supply_recommendations": [
         {
           "hint": "24 TPS56637 ZHCSIH1A –JULY 2018–REVISED SEPTEMBER 2019 www.ti.com.cn 版权© 2018–2019, Texas Instruments Incorporated 9 Power Supply Recommendations The TPS56637 is designed to operate from input supply",
-          "source_page": 23
+          "source_page": 23,
+          "origin": {
+            "kind": "source_recommendation",
+            "method": "design_info_utils.supply_keywords",
+            "source_page": 23
+          }
         }
       ],
       "typical_application": {
@@ -850,7 +957,12 @@
           {
             "page": 23,
             "title": null,
-            "content_type": "application"
+            "content_type": "application",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 23
+            }
           }
         ],
         "total_pages": 1

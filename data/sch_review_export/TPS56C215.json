@@ -152,6 +152,14 @@
       "conditions": null
     },
     "SW": {
+      "parameter": "Switch Node Voltage",
+      "symbol": "SW",
+      "min": -2,
+      "max": 19,
+      "unit": "V",
+      "conditions": null
+    },
+    "SW__2": {
       "parameter": "Switch Node Voltage (10-ns transient)",
       "symbol": "SW",
       "min": -5,
@@ -160,6 +168,14 @@
       "conditions": null
     },
     "VIN-SW": {
+      "parameter": "VIN to SW Voltage",
+      "symbol": "VIN-SW",
+      "min": null,
+      "max": 22,
+      "unit": "V",
+      "conditions": null
+    },
+    "VIN-SW__2": {
       "parameter": "VIN to SW Voltage (10-ns transient)",
       "symbol": "VIN-SW",
       "min": null,
@@ -176,6 +192,14 @@
       "conditions": null
     },
     "BOOT - SW": {
+      "parameter": "BOOT to SW Voltage",
+      "symbol": "BOOT - SW",
+      "min": -0.3,
+      "max": 6.5,
+      "unit": "V",
+      "conditions": null
+    },
+    "BOOT - SW__2": {
       "parameter": "BOOT to SW Voltage (10 ns transient)",
       "symbol": "BOOT - SW",
       "min": -0.3,
@@ -402,6 +426,15 @@
       "max": 15.87,
       "unit": "A",
       "conditions": "ILIM option, Valley Current"
+    },
+    "Current_Limit__Low_side_negati": {
+      "parameter": "Current Limit (Low side negative)",
+      "symbol": null,
+      "min": null,
+      "typ": 4,
+      "max": null,
+      "unit": "A",
+      "conditions": "Valley Current"
     },
     "VPGOODTH": {
       "parameter": "PGOOD threshold",
@@ -802,6 +835,14 @@
           "conditions": null
         },
         "SW": {
+          "parameter": "Switch Node Voltage",
+          "symbol": "SW",
+          "min": -2,
+          "max": 19,
+          "unit": "V",
+          "conditions": null
+        },
+        "SW__2": {
           "parameter": "Switch Node Voltage (10-ns transient)",
           "symbol": "SW",
           "min": -5,
@@ -810,6 +851,14 @@
           "conditions": null
         },
         "VIN-SW": {
+          "parameter": "VIN to SW Voltage",
+          "symbol": "VIN-SW",
+          "min": null,
+          "max": 22,
+          "unit": "V",
+          "conditions": null
+        },
+        "VIN-SW__2": {
           "parameter": "VIN to SW Voltage (10-ns transient)",
           "symbol": "VIN-SW",
           "min": null,
@@ -826,6 +875,14 @@
           "conditions": null
         },
         "BOOT - SW": {
+          "parameter": "BOOT to SW Voltage",
+          "symbol": "BOOT - SW",
+          "min": -0.3,
+          "max": 6.5,
+          "unit": "V",
+          "conditions": null
+        },
+        "BOOT - SW__2": {
           "parameter": "BOOT to SW Voltage (10 ns transient)",
           "symbol": "BOOT - SW",
           "min": -0.3,
@@ -1052,6 +1109,15 @@
           "max": 15.87,
           "unit": "A",
           "conditions": "ILIM option, Valley Current"
+        },
+        "Current_Limit__Low_side_negati": {
+          "parameter": "Current Limit (Low side negative)",
+          "symbol": null,
+          "min": null,
+          "typ": 4,
+          "max": null,
+          "unit": "A",
+          "conditions": "Valley Current"
         },
         "VPGOODTH": {
           "parameter": "PGOOD threshold",
@@ -1313,7 +1379,12 @@
           "source_page": 21,
           "value_hint": null,
           "value_hints": [],
-          "snippet": "8.2.2.1.5 Input Capacitor Selection The minimum input capacitance required is given in 方程式 9. OUT OUT IN(min) INripple IN SW I ×V C = V ×V ×F (9) TI recommends using a high quality X5R or X7R input de"
+          "snippet": "8.2.2.1.5 Input Capacitor Selection The minimum input capacitance required is given in 方程式 9. OUT OUT IN(min) INripple IN SW I ×V C = V ×V ×F (9) TI recommends using a high quality X5R or X7R input de",
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.component_rules",
+            "source_page": 21
+          }
         },
         {
           "role": "feedback_divider",
@@ -1382,13 +1453,23 @@
       "layout_hints": [
         {
           "hint": "10 Layout 10.1 Layout Guidelines • Recommend a four-layer or six-layer PCB for good thermal performance and with maximum ground plane. 3\" x 3\", four-layer PCB with 2-oz. copper used as example. • Rec",
-          "source_page": 25
+          "source_page": 25,
+          "origin": {
+            "kind": "source_recommendation",
+            "method": "design_info_utils.layout_keywords",
+            "source_page": 25
+          }
         }
       ],
       "topology_hints": [
         {
           "hint": "8 Application and Implementation Note Information in the following applications sections is not part of the TI component specification, and TI does not warrant its accuracy or completeness. TI’s cust",
-          "source_page": 19
+          "source_page": 19,
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.topology_keywords",
+            "source_page": 19
+          }
         }
       ],
       "configuration_mappings": [
@@ -1994,17 +2075,32 @@
           {
             "page": 19,
             "title": null,
-            "content_type": "application"
+            "content_type": "application",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 19
+            }
           },
           {
             "page": 21,
             "title": null,
-            "content_type": "application"
+            "content_type": "application",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 21
+            }
           },
           {
             "page": 25,
             "title": null,
-            "content_type": "layout"
+            "content_type": "layout",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 25
+            }
           },
           {
             "page": 17,

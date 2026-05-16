@@ -141,6 +141,14 @@
       "conditions": null
     },
     "TJ": {
+      "parameter": "Operating Junction Temperature (Control Section)",
+      "symbol": "TJ",
+      "min": -40,
+      "max": 125,
+      "unit": "°C",
+      "conditions": null
+    },
+    "TJ__2": {
       "parameter": "Operating Junction Temperature (Power Transistor)",
       "symbol": "TJ",
       "min": -40,
@@ -156,7 +164,31 @@
       "unit": "°C",
       "conditions": null
     },
+    "Lead_Temperature": {
+      "parameter": "Lead Temperature",
+      "symbol": null,
+      "min": null,
+      "max": 265,
+      "unit": "°C",
+      "conditions": "25 sec"
+    },
     "φJA": {
+      "parameter": "Thermal Resistance SO-8 package",
+      "symbol": "φJA",
+      "min": null,
+      "max": null,
+      "unit": "°C/W",
+      "conditions": null
+    },
+    "φJA__2": {
+      "parameter": "Thermal Resistance TO-252 package",
+      "symbol": "φJA",
+      "min": null,
+      "max": null,
+      "unit": "°C/W",
+      "conditions": null
+    },
+    "φJA__3": {
       "parameter": "Thermal Resistance SOT-223 package",
       "symbol": "φJA",
       "min": null,
@@ -205,6 +237,15 @@
     "VOUT_VIN___3_3V": {
       "parameter": "Output Voltage",
       "symbol": "VOUT",
+      "min": 1.773,
+      "typ": 1.8,
+      "max": 1.827,
+      "unit": "V",
+      "conditions": "VIN = 3.3V"
+    },
+    "VOUT_VIN___3_3V__2": {
+      "parameter": "Output Voltage",
+      "symbol": "VOUT",
       "min": 1.746,
       "typ": 1.8,
       "max": 1.854,
@@ -212,6 +253,15 @@
       "conditions": "VIN = 3.3V"
     },
     "VOUT_VIN___4V": {
+      "parameter": "Output Voltage",
+      "symbol": "VOUT",
+      "min": 2.463,
+      "typ": 2.5,
+      "max": 2.537,
+      "unit": "V",
+      "conditions": "VIN = 4V"
+    },
+    "VOUT_VIN___4V__2": {
       "parameter": "Output Voltage",
       "symbol": "VOUT",
       "min": 2.425,
@@ -223,6 +273,15 @@
     "VOUT_VIN___4_35V": {
       "parameter": "Output Voltage",
       "symbol": "VOUT",
+      "min": 2.808,
+      "typ": 2.85,
+      "max": 2.892,
+      "unit": "V",
+      "conditions": "VIN = 4.35V"
+    },
+    "VOUT_VIN___4_35V__2": {
+      "parameter": "Output Voltage",
+      "symbol": "VOUT",
       "min": 2.7645,
       "typ": 2.85,
       "max": 2.9355,
@@ -230,6 +289,15 @@
       "conditions": "VIN = 4.35V"
     },
     "VOUT_VIN___4_8V": {
+      "parameter": "Output Voltage",
+      "symbol": "VOUT",
+      "min": 3.251,
+      "typ": 3.3,
+      "max": 3.349,
+      "unit": "V",
+      "conditions": "VIN = 4.8V"
+    },
+    "VOUT_VIN___4_8V__2": {
       "parameter": "Output Voltage",
       "symbol": "VOUT",
       "min": 3.201,
@@ -241,11 +309,272 @@
     "VOUT_VIN___6_5V": {
       "parameter": "Output Voltage",
       "symbol": "VOUT",
+      "min": 4.925,
+      "typ": 5.0,
+      "max": 5.075,
+      "unit": "V",
+      "conditions": "VIN = 6.5V"
+    },
+    "VOUT_VIN___6_5V__2": {
+      "parameter": "Output Voltage",
+      "symbol": "VOUT",
       "min": 4.85,
       "typ": 5.0,
       "max": 5.15,
       "unit": "V",
       "conditions": "VIN = 6.5V"
+    },
+    "Line_Regulation": {
+      "parameter": "Line Regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 0.015,
+      "max": 0.2,
+      "unit": "%",
+      "conditions": "1.5V ≤ (VIN - VOUT) ≤ 12V"
+    },
+    "Line_Regulation_1_5V____VIN___VOUT____12V": {
+      "parameter": "Line Regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 0.035,
+      "max": 0.2,
+      "unit": "%",
+      "conditions": "1.5V ≤ (VIN - VOUT) ≤ 12V"
+    },
+    "Line_Regulation_1_5V____VIN___VOUT____12V__2": {
+      "parameter": "Line Regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 0.3,
+      "max": 5,
+      "unit": "mV",
+      "conditions": "1.5V ≤ (VIN - VOUT) ≤ 12V"
+    },
+    "Line_Regulation_1_5V____VIN___VOUT____12V__3": {
+      "parameter": "Line Regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 0.6,
+      "max": 6,
+      "unit": "mV",
+      "conditions": "1.5V ≤ (VIN - VOUT) ≤ 12V"
+    },
+    "Line_Regulation_1_5V____VIN___VOUT____12V__4": {
+      "parameter": "Line Regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 0.3,
+      "max": 5,
+      "unit": "mV",
+      "conditions": "1.5V ≤ (VIN - VOUT) ≤ 12V"
+    },
+    "Line_Regulation_1_5V____VIN___VOUT____12V__5": {
+      "parameter": "Line Regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 0.6,
+      "max": 6,
+      "unit": "mV",
+      "conditions": "1.5V ≤ (VIN - VOUT) ≤ 12V"
+    },
+    "Line_Regulation_1_5V____VIN___VOUT____12V__6": {
+      "parameter": "Line Regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 0.3,
+      "max": 6,
+      "unit": "mV",
+      "conditions": "1.5V ≤ (VIN - VOUT) ≤ 12V"
+    },
+    "Line_Regulation_1_5V____VIN___VOUT____12V__7": {
+      "parameter": "Line Regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 0.6,
+      "max": 6,
+      "unit": "mV",
+      "conditions": "1.5V ≤ (VIN - VOUT) ≤ 12V"
+    },
+    "Line_Regulation_1_5V____VIN___VOUT____12V__8": {
+      "parameter": "Line Regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 0.3,
+      "max": 6,
+      "unit": "mV",
+      "conditions": "1.5V ≤ (VIN - VOUT) ≤ 12V"
+    },
+    "Line_Regulation_1_5V____VIN___VOUT____12V__9": {
+      "parameter": "Line Regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 0.6,
+      "max": 6,
+      "unit": "mV",
+      "conditions": "1.5V ≤ (VIN - VOUT) ≤ 12V"
+    },
+    "Line_Regulation_1_5V____VIN___VOUT____12V__10": {
+      "parameter": "Line Regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 0.5,
+      "max": 10,
+      "unit": "mV",
+      "conditions": "1.5V ≤ (VIN - VOUT) ≤ 12V"
+    },
+    "Line_Regulation_1_5V____VIN___VOUT____12V__11": {
+      "parameter": "Line Regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 1.0,
+      "max": 10,
+      "unit": "mV",
+      "conditions": "1.5V ≤ (VIN - VOUT) ≤ 12V"
+    },
+    "Line_Regulation_1_5V____VIN___VOUT____12V__12": {
+      "parameter": "Line Regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 0.5,
+      "max": 10,
+      "unit": "mV",
+      "conditions": "1.5V ≤ (VIN - VOUT) ≤ 12V"
+    },
+    "Line_Regulation_1_5V____VIN___VOUT____12V__13": {
+      "parameter": "Line Regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 1.0,
+      "max": 10,
+      "unit": "mV",
+      "conditions": "1.5V ≤ (VIN - VOUT) ≤ 12V"
+    },
+    "Load_Regulation": {
+      "parameter": "Load Regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 0.1,
+      "max": 0.3,
+      "unit": "%",
+      "conditions": "(VIN - VOUT) = 1.5V, 10mA ≤ IOUT ≤ 0.8A"
+    },
+    "Load_Regulation_VIN___VOUT____1_5V__10mA___IO": {
+      "parameter": "Load Regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 0.2,
+      "max": 0.4,
+      "unit": "%",
+      "conditions": "(VIN - VOUT) = 1.5V, 10mA ≤ IOUT ≤ 0.8A"
+    },
+    "Load_Regulation_VIN___3V__0___IOUT___0_8A": {
+      "parameter": "Load Regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 3,
+      "max": 10,
+      "unit": "mV",
+      "conditions": "VIN = 3V, 0 ≤ IOUT ≤ 0.8A"
+    },
+    "Load_Regulation_VIN___3V__0___IOUT___0_8A__2": {
+      "parameter": "Load Regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 6,
+      "max": 20,
+      "unit": "mV",
+      "conditions": "VIN = 3V, 0 ≤ IOUT ≤ 0.8A"
+    },
+    "Load_Regulation_VIN___3_3V__0___IOUT___0_8A": {
+      "parameter": "Load Regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 3,
+      "max": 10,
+      "unit": "mV",
+      "conditions": "VIN = 3.3V, 0 ≤ IOUT ≤ 0.8A"
+    },
+    "Load_Regulation_VIN___3_3V__0___IOUT___0_8A__2": {
+      "parameter": "Load Regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 6,
+      "max": 20,
+      "unit": "mV",
+      "conditions": "VIN = 3.3V, 0 ≤ IOUT ≤ 0.8A"
+    },
+    "Load_Regulation_VIN___5V__0___IOUT___0_8A": {
+      "parameter": "Load Regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 3,
+      "max": 12,
+      "unit": "mV",
+      "conditions": "VIN = 5V, 0 ≤ IOUT ≤ 0.8A"
+    },
+    "Load_Regulation_VIN___5V__0___IOUT___0_8A__2": {
+      "parameter": "Load Regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 6,
+      "max": 20,
+      "unit": "mV",
+      "conditions": "VIN = 5V, 0 ≤ IOUT ≤ 0.8A"
+    },
+    "Load_Regulation_VIN___4_35V__0___IOUT___0_8A": {
+      "parameter": "Load Regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 3,
+      "max": 12,
+      "unit": "mV",
+      "conditions": "VIN = 4.35V, 0 ≤ IOUT ≤ 0.8A"
+    },
+    "Load_Regulation_VIN___4_35V__0___IOUT___0_8A__2": {
+      "parameter": "Load Regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 6,
+      "max": 20,
+      "unit": "mV",
+      "conditions": "VIN = 4.35V, 0 ≤ IOUT ≤ 0.8A"
+    },
+    "Load_Regulation_VIN___4_75V__0___IOUT___0_8A": {
+      "parameter": "Load Regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 3,
+      "max": 15,
+      "unit": "mV",
+      "conditions": "VIN = 4.75V, 0 ≤ IOUT ≤ 0.8A"
+    },
+    "Load_Regulation_VIN___4_75V__0___IOUT___0_8A__2": {
+      "parameter": "Load Regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 7,
+      "max": 25,
+      "unit": "mV",
+      "conditions": "VIN = 4.75V, 0 ≤ IOUT ≤ 0.8A"
+    },
+    "Load_Regulation_VIN___6_5V__0___IOUT___0_8A": {
+      "parameter": "Load Regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 5,
+      "max": 20,
+      "unit": "mV",
+      "conditions": "VIN = 6.5V, 0 ≤ IOUT ≤ 0.8A"
+    },
+    "Load_Regulation_VIN___6_5V__0___IOUT___0_8A__2": {
+      "parameter": "Load Regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 10,
+      "max": 35,
+      "unit": "mV",
+      "conditions": "VIN = 6.5V, 0 ≤ IOUT ≤ 0.8A"
     },
     "VIN - VOUT": {
       "parameter": "Dropout Voltage",
@@ -255,6 +584,78 @@
       "max": 1.3,
       "unit": "V",
       "conditions": "ΔVOUT, ΔVREF = 1%, IOUT = 0.8A"
+    },
+    "Current_Limit": {
+      "parameter": "Current Limit",
+      "symbol": null,
+      "min": 900,
+      "typ": 1100,
+      "max": 1500,
+      "unit": "mA",
+      "conditions": "(VIN - VOUT) = 1.5V"
+    },
+    "Minimum_Load_Current": {
+      "parameter": "Minimum Load Current",
+      "symbol": null,
+      "min": null,
+      "typ": 5,
+      "max": 10,
+      "unit": "mA",
+      "conditions": "(VIN - VOUT) = 1.5V"
+    },
+    "Quiescent_Current": {
+      "parameter": "Quiescent Current",
+      "symbol": null,
+      "min": null,
+      "typ": 5,
+      "max": 11,
+      "unit": "mA",
+      "conditions": "(VIN - VOUT) = 1.5V"
+    },
+    "Ripple_Rejection": {
+      "parameter": "Ripple Rejection",
+      "symbol": null,
+      "min": 60,
+      "typ": 75,
+      "max": null,
+      "unit": "dB",
+      "conditions": "f=120Hz, COUT = 22μF Tantalum, IOUT = 1A, (VIN-VOUT) = 3V, CADJ =10μF"
+    },
+    "Ripple_Rejection_f_120Hz__COUT___22_F_Tantalum": {
+      "parameter": "Ripple Rejection",
+      "symbol": null,
+      "min": 60,
+      "typ": 72,
+      "max": null,
+      "unit": "dB",
+      "conditions": "f=120Hz, COUT = 22μF Tantalum, IOUT = 1A, VIN = 4.35V"
+    },
+    "Ripple_Rejection_f_120Hz__COUT___22_F_Tantalum__2": {
+      "parameter": "Ripple Rejection",
+      "symbol": null,
+      "min": 60,
+      "typ": 72,
+      "max": null,
+      "unit": "dB",
+      "conditions": "f=120Hz, COUT = 22μF Tantalum, IOUT = 1A, VIN = 4.75V"
+    },
+    "Ripple_Rejection_f_120Hz__COUT___22_F_Tantalum__3": {
+      "parameter": "Ripple Rejection",
+      "symbol": null,
+      "min": 60,
+      "typ": 68,
+      "max": null,
+      "unit": "dB",
+      "conditions": "f=120Hz, COUT = 22μF Tantalum, IOUT = 1A, VIN = 6.5V"
+    },
+    "Thermal_Regulation": {
+      "parameter": "Thermal Regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 0.008,
+      "max": 0.04,
+      "unit": "%/W",
+      "conditions": "TA = 25°C, 30ms pulse"
     },
     "IADJ": {
       "parameter": "Adjust Pin Current",
@@ -282,16 +683,47 @@
       "max": 5,
       "unit": "μA",
       "conditions": "IOUT =10mA, 1.5V≤ (VIN - VOUT) ≤ 12V"
+    },
+    "Temperature_Stability": {
+      "parameter": "Temperature Stability",
+      "symbol": null,
+      "min": null,
+      "typ": 0.5,
+      "max": null,
+      "unit": "%",
+      "conditions": null
+    },
+    "Long_Term_Stability": {
+      "parameter": "Long Term Stability",
+      "symbol": null,
+      "min": null,
+      "typ": 0.3,
+      "max": 1,
+      "unit": "%",
+      "conditions": "TA =125°C, 1000Hrs"
+    },
+    "RMS_Output_Noise": {
+      "parameter": "RMS Output Noise",
+      "symbol": null,
+      "min": null,
+      "typ": 0.003,
+      "max": null,
+      "unit": "%",
+      "conditions": "TA = 25°C , 10Hz ≤ f ≤ 10kHz"
+    },
+    "Thermal_Resistance_Junction_to": {
+      "parameter": "Thermal Resistance Junction-to-Case",
+      "symbol": null,
+      "min": null,
+      "typ": null,
+      "max": 15,
+      "unit": "°C/W",
+      "conditions": "All packages"
     }
   },
   "drc_hints": {
     "vin_abs_max": {
       "value": 15,
-      "unit": "V"
-    },
-    "vin_operating": {
-      "typ": 1.1,
-      "max": 1.3,
       "unit": "V"
     },
     "vref": {
@@ -504,6 +936,14 @@
           "conditions": null
         },
         "TJ": {
+          "parameter": "Operating Junction Temperature (Control Section)",
+          "symbol": "TJ",
+          "min": -40,
+          "max": 125,
+          "unit": "°C",
+          "conditions": null
+        },
+        "TJ__2": {
           "parameter": "Operating Junction Temperature (Power Transistor)",
           "symbol": "TJ",
           "min": -40,
@@ -519,7 +959,31 @@
           "unit": "°C",
           "conditions": null
         },
+        "Lead_Temperature": {
+          "parameter": "Lead Temperature",
+          "symbol": null,
+          "min": null,
+          "max": 265,
+          "unit": "°C",
+          "conditions": "25 sec"
+        },
         "φJA": {
+          "parameter": "Thermal Resistance SO-8 package",
+          "symbol": "φJA",
+          "min": null,
+          "max": null,
+          "unit": "°C/W",
+          "conditions": null
+        },
+        "φJA__2": {
+          "parameter": "Thermal Resistance TO-252 package",
+          "symbol": "φJA",
+          "min": null,
+          "max": null,
+          "unit": "°C/W",
+          "conditions": null
+        },
+        "φJA__3": {
           "parameter": "Thermal Resistance SOT-223 package",
           "symbol": "φJA",
           "min": null,
@@ -568,6 +1032,15 @@
         "VOUT_VIN___3_3V": {
           "parameter": "Output Voltage",
           "symbol": "VOUT",
+          "min": 1.773,
+          "typ": 1.8,
+          "max": 1.827,
+          "unit": "V",
+          "conditions": "VIN = 3.3V"
+        },
+        "VOUT_VIN___3_3V__2": {
+          "parameter": "Output Voltage",
+          "symbol": "VOUT",
           "min": 1.746,
           "typ": 1.8,
           "max": 1.854,
@@ -575,6 +1048,15 @@
           "conditions": "VIN = 3.3V"
         },
         "VOUT_VIN___4V": {
+          "parameter": "Output Voltage",
+          "symbol": "VOUT",
+          "min": 2.463,
+          "typ": 2.5,
+          "max": 2.537,
+          "unit": "V",
+          "conditions": "VIN = 4V"
+        },
+        "VOUT_VIN___4V__2": {
           "parameter": "Output Voltage",
           "symbol": "VOUT",
           "min": 2.425,
@@ -586,6 +1068,15 @@
         "VOUT_VIN___4_35V": {
           "parameter": "Output Voltage",
           "symbol": "VOUT",
+          "min": 2.808,
+          "typ": 2.85,
+          "max": 2.892,
+          "unit": "V",
+          "conditions": "VIN = 4.35V"
+        },
+        "VOUT_VIN___4_35V__2": {
+          "parameter": "Output Voltage",
+          "symbol": "VOUT",
           "min": 2.7645,
           "typ": 2.85,
           "max": 2.9355,
@@ -593,6 +1084,15 @@
           "conditions": "VIN = 4.35V"
         },
         "VOUT_VIN___4_8V": {
+          "parameter": "Output Voltage",
+          "symbol": "VOUT",
+          "min": 3.251,
+          "typ": 3.3,
+          "max": 3.349,
+          "unit": "V",
+          "conditions": "VIN = 4.8V"
+        },
+        "VOUT_VIN___4_8V__2": {
           "parameter": "Output Voltage",
           "symbol": "VOUT",
           "min": 3.201,
@@ -604,11 +1104,272 @@
         "VOUT_VIN___6_5V": {
           "parameter": "Output Voltage",
           "symbol": "VOUT",
+          "min": 4.925,
+          "typ": 5.0,
+          "max": 5.075,
+          "unit": "V",
+          "conditions": "VIN = 6.5V"
+        },
+        "VOUT_VIN___6_5V__2": {
+          "parameter": "Output Voltage",
+          "symbol": "VOUT",
           "min": 4.85,
           "typ": 5.0,
           "max": 5.15,
           "unit": "V",
           "conditions": "VIN = 6.5V"
+        },
+        "Line_Regulation": {
+          "parameter": "Line Regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 0.015,
+          "max": 0.2,
+          "unit": "%",
+          "conditions": "1.5V ≤ (VIN - VOUT) ≤ 12V"
+        },
+        "Line_Regulation_1_5V____VIN___VOUT____12V": {
+          "parameter": "Line Regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 0.035,
+          "max": 0.2,
+          "unit": "%",
+          "conditions": "1.5V ≤ (VIN - VOUT) ≤ 12V"
+        },
+        "Line_Regulation_1_5V____VIN___VOUT____12V__2": {
+          "parameter": "Line Regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 0.3,
+          "max": 5,
+          "unit": "mV",
+          "conditions": "1.5V ≤ (VIN - VOUT) ≤ 12V"
+        },
+        "Line_Regulation_1_5V____VIN___VOUT____12V__3": {
+          "parameter": "Line Regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 0.6,
+          "max": 6,
+          "unit": "mV",
+          "conditions": "1.5V ≤ (VIN - VOUT) ≤ 12V"
+        },
+        "Line_Regulation_1_5V____VIN___VOUT____12V__4": {
+          "parameter": "Line Regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 0.3,
+          "max": 5,
+          "unit": "mV",
+          "conditions": "1.5V ≤ (VIN - VOUT) ≤ 12V"
+        },
+        "Line_Regulation_1_5V____VIN___VOUT____12V__5": {
+          "parameter": "Line Regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 0.6,
+          "max": 6,
+          "unit": "mV",
+          "conditions": "1.5V ≤ (VIN - VOUT) ≤ 12V"
+        },
+        "Line_Regulation_1_5V____VIN___VOUT____12V__6": {
+          "parameter": "Line Regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 0.3,
+          "max": 6,
+          "unit": "mV",
+          "conditions": "1.5V ≤ (VIN - VOUT) ≤ 12V"
+        },
+        "Line_Regulation_1_5V____VIN___VOUT____12V__7": {
+          "parameter": "Line Regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 0.6,
+          "max": 6,
+          "unit": "mV",
+          "conditions": "1.5V ≤ (VIN - VOUT) ≤ 12V"
+        },
+        "Line_Regulation_1_5V____VIN___VOUT____12V__8": {
+          "parameter": "Line Regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 0.3,
+          "max": 6,
+          "unit": "mV",
+          "conditions": "1.5V ≤ (VIN - VOUT) ≤ 12V"
+        },
+        "Line_Regulation_1_5V____VIN___VOUT____12V__9": {
+          "parameter": "Line Regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 0.6,
+          "max": 6,
+          "unit": "mV",
+          "conditions": "1.5V ≤ (VIN - VOUT) ≤ 12V"
+        },
+        "Line_Regulation_1_5V____VIN___VOUT____12V__10": {
+          "parameter": "Line Regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 0.5,
+          "max": 10,
+          "unit": "mV",
+          "conditions": "1.5V ≤ (VIN - VOUT) ≤ 12V"
+        },
+        "Line_Regulation_1_5V____VIN___VOUT____12V__11": {
+          "parameter": "Line Regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 1.0,
+          "max": 10,
+          "unit": "mV",
+          "conditions": "1.5V ≤ (VIN - VOUT) ≤ 12V"
+        },
+        "Line_Regulation_1_5V____VIN___VOUT____12V__12": {
+          "parameter": "Line Regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 0.5,
+          "max": 10,
+          "unit": "mV",
+          "conditions": "1.5V ≤ (VIN - VOUT) ≤ 12V"
+        },
+        "Line_Regulation_1_5V____VIN___VOUT____12V__13": {
+          "parameter": "Line Regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 1.0,
+          "max": 10,
+          "unit": "mV",
+          "conditions": "1.5V ≤ (VIN - VOUT) ≤ 12V"
+        },
+        "Load_Regulation": {
+          "parameter": "Load Regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 0.1,
+          "max": 0.3,
+          "unit": "%",
+          "conditions": "(VIN - VOUT) = 1.5V, 10mA ≤ IOUT ≤ 0.8A"
+        },
+        "Load_Regulation_VIN___VOUT____1_5V__10mA___IO": {
+          "parameter": "Load Regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 0.2,
+          "max": 0.4,
+          "unit": "%",
+          "conditions": "(VIN - VOUT) = 1.5V, 10mA ≤ IOUT ≤ 0.8A"
+        },
+        "Load_Regulation_VIN___3V__0___IOUT___0_8A": {
+          "parameter": "Load Regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 3,
+          "max": 10,
+          "unit": "mV",
+          "conditions": "VIN = 3V, 0 ≤ IOUT ≤ 0.8A"
+        },
+        "Load_Regulation_VIN___3V__0___IOUT___0_8A__2": {
+          "parameter": "Load Regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 6,
+          "max": 20,
+          "unit": "mV",
+          "conditions": "VIN = 3V, 0 ≤ IOUT ≤ 0.8A"
+        },
+        "Load_Regulation_VIN___3_3V__0___IOUT___0_8A": {
+          "parameter": "Load Regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 3,
+          "max": 10,
+          "unit": "mV",
+          "conditions": "VIN = 3.3V, 0 ≤ IOUT ≤ 0.8A"
+        },
+        "Load_Regulation_VIN___3_3V__0___IOUT___0_8A__2": {
+          "parameter": "Load Regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 6,
+          "max": 20,
+          "unit": "mV",
+          "conditions": "VIN = 3.3V, 0 ≤ IOUT ≤ 0.8A"
+        },
+        "Load_Regulation_VIN___5V__0___IOUT___0_8A": {
+          "parameter": "Load Regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 3,
+          "max": 12,
+          "unit": "mV",
+          "conditions": "VIN = 5V, 0 ≤ IOUT ≤ 0.8A"
+        },
+        "Load_Regulation_VIN___5V__0___IOUT___0_8A__2": {
+          "parameter": "Load Regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 6,
+          "max": 20,
+          "unit": "mV",
+          "conditions": "VIN = 5V, 0 ≤ IOUT ≤ 0.8A"
+        },
+        "Load_Regulation_VIN___4_35V__0___IOUT___0_8A": {
+          "parameter": "Load Regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 3,
+          "max": 12,
+          "unit": "mV",
+          "conditions": "VIN = 4.35V, 0 ≤ IOUT ≤ 0.8A"
+        },
+        "Load_Regulation_VIN___4_35V__0___IOUT___0_8A__2": {
+          "parameter": "Load Regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 6,
+          "max": 20,
+          "unit": "mV",
+          "conditions": "VIN = 4.35V, 0 ≤ IOUT ≤ 0.8A"
+        },
+        "Load_Regulation_VIN___4_75V__0___IOUT___0_8A": {
+          "parameter": "Load Regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 3,
+          "max": 15,
+          "unit": "mV",
+          "conditions": "VIN = 4.75V, 0 ≤ IOUT ≤ 0.8A"
+        },
+        "Load_Regulation_VIN___4_75V__0___IOUT___0_8A__2": {
+          "parameter": "Load Regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 7,
+          "max": 25,
+          "unit": "mV",
+          "conditions": "VIN = 4.75V, 0 ≤ IOUT ≤ 0.8A"
+        },
+        "Load_Regulation_VIN___6_5V__0___IOUT___0_8A": {
+          "parameter": "Load Regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 5,
+          "max": 20,
+          "unit": "mV",
+          "conditions": "VIN = 6.5V, 0 ≤ IOUT ≤ 0.8A"
+        },
+        "Load_Regulation_VIN___6_5V__0___IOUT___0_8A__2": {
+          "parameter": "Load Regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 10,
+          "max": 35,
+          "unit": "mV",
+          "conditions": "VIN = 6.5V, 0 ≤ IOUT ≤ 0.8A"
         },
         "VIN - VOUT": {
           "parameter": "Dropout Voltage",
@@ -618,6 +1379,78 @@
           "max": 1.3,
           "unit": "V",
           "conditions": "ΔVOUT, ΔVREF = 1%, IOUT = 0.8A"
+        },
+        "Current_Limit": {
+          "parameter": "Current Limit",
+          "symbol": null,
+          "min": 900,
+          "typ": 1100,
+          "max": 1500,
+          "unit": "mA",
+          "conditions": "(VIN - VOUT) = 1.5V"
+        },
+        "Minimum_Load_Current": {
+          "parameter": "Minimum Load Current",
+          "symbol": null,
+          "min": null,
+          "typ": 5,
+          "max": 10,
+          "unit": "mA",
+          "conditions": "(VIN - VOUT) = 1.5V"
+        },
+        "Quiescent_Current": {
+          "parameter": "Quiescent Current",
+          "symbol": null,
+          "min": null,
+          "typ": 5,
+          "max": 11,
+          "unit": "mA",
+          "conditions": "(VIN - VOUT) = 1.5V"
+        },
+        "Ripple_Rejection": {
+          "parameter": "Ripple Rejection",
+          "symbol": null,
+          "min": 60,
+          "typ": 75,
+          "max": null,
+          "unit": "dB",
+          "conditions": "f=120Hz, COUT = 22μF Tantalum, IOUT = 1A, (VIN-VOUT) = 3V, CADJ =10μF"
+        },
+        "Ripple_Rejection_f_120Hz__COUT___22_F_Tantalum": {
+          "parameter": "Ripple Rejection",
+          "symbol": null,
+          "min": 60,
+          "typ": 72,
+          "max": null,
+          "unit": "dB",
+          "conditions": "f=120Hz, COUT = 22μF Tantalum, IOUT = 1A, VIN = 4.35V"
+        },
+        "Ripple_Rejection_f_120Hz__COUT___22_F_Tantalum__2": {
+          "parameter": "Ripple Rejection",
+          "symbol": null,
+          "min": 60,
+          "typ": 72,
+          "max": null,
+          "unit": "dB",
+          "conditions": "f=120Hz, COUT = 22μF Tantalum, IOUT = 1A, VIN = 4.75V"
+        },
+        "Ripple_Rejection_f_120Hz__COUT___22_F_Tantalum__3": {
+          "parameter": "Ripple Rejection",
+          "symbol": null,
+          "min": 60,
+          "typ": 68,
+          "max": null,
+          "unit": "dB",
+          "conditions": "f=120Hz, COUT = 22μF Tantalum, IOUT = 1A, VIN = 6.5V"
+        },
+        "Thermal_Regulation": {
+          "parameter": "Thermal Regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 0.008,
+          "max": 0.04,
+          "unit": "%/W",
+          "conditions": "TA = 25°C, 30ms pulse"
         },
         "IADJ": {
           "parameter": "Adjust Pin Current",
@@ -645,16 +1478,47 @@
           "max": 5,
           "unit": "μA",
           "conditions": "IOUT =10mA, 1.5V≤ (VIN - VOUT) ≤ 12V"
+        },
+        "Temperature_Stability": {
+          "parameter": "Temperature Stability",
+          "symbol": null,
+          "min": null,
+          "typ": 0.5,
+          "max": null,
+          "unit": "%",
+          "conditions": null
+        },
+        "Long_Term_Stability": {
+          "parameter": "Long Term Stability",
+          "symbol": null,
+          "min": null,
+          "typ": 0.3,
+          "max": 1,
+          "unit": "%",
+          "conditions": "TA =125°C, 1000Hrs"
+        },
+        "RMS_Output_Noise": {
+          "parameter": "RMS Output Noise",
+          "symbol": null,
+          "min": null,
+          "typ": 0.003,
+          "max": null,
+          "unit": "%",
+          "conditions": "TA = 25°C , 10Hz ≤ f ≤ 10kHz"
+        },
+        "Thermal_Resistance_Junction_to": {
+          "parameter": "Thermal Resistance Junction-to-Case",
+          "symbol": null,
+          "min": null,
+          "typ": null,
+          "max": 15,
+          "unit": "°C/W",
+          "conditions": "All packages"
         }
       },
       "drc_hints": {
         "vin_abs_max": {
           "value": 15,
-          "unit": "V"
-        },
-        "vin_operating": {
-          "typ": 1.1,
-          "max": 1.3,
           "unit": "V"
         },
         "vref": {

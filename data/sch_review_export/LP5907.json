@@ -149,6 +149,14 @@
       "unit": "V",
       "conditions": null
     },
+    "Continuous_power_dissipation": {
+      "parameter": "Continuous power dissipation",
+      "symbol": null,
+      "min": null,
+      "max": null,
+      "unit": "W",
+      "conditions": "Internally Limited"
+    },
     "TJMAX": {
       "parameter": "Junction temperature",
       "symbol": "TJMAX",
@@ -209,6 +217,24 @@
       "max": 3,
       "unit": "%VOUT",
       "conditions": "VIN = (VOUT(NOM) + 1 V) to 5.5 V, IOUT = 1 mA to 250 mA, (VOUT < 1.8 V, SOT-23, X2SON packages)"
+    },
+    "Line_regulation": {
+      "parameter": "Line regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 0.02,
+      "max": null,
+      "unit": "%/V",
+      "conditions": "VIN = (VOUT(NOM) + 1 V) to 5.5 V, IOUT = 1 mA"
+    },
+    "Load_regulation": {
+      "parameter": "Load regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 0.001,
+      "max": null,
+      "unit": "%/mA",
+      "conditions": "IOUT = 1 mA to 250 mA"
     },
     "ILOAD": {
       "parameter": "Load current",
@@ -425,6 +451,24 @@
       "max": 40,
       "unit": "mV",
       "conditions": "IOUT = 1 mA to 250 mA in 10 μs or 250 mA to 1 mA in 10 μs"
+    },
+    "Overshoot_on_start_up": {
+      "parameter": "Overshoot on start-up",
+      "symbol": null,
+      "min": null,
+      "typ": 5,
+      "max": null,
+      "unit": "%",
+      "conditions": "Stated as a percentage of VOUT(NOM)"
+    },
+    "Overshoot_on_start_up_with_EN": {
+      "parameter": "Overshoot on start-up with EN",
+      "symbol": null,
+      "min": null,
+      "typ": 1,
+      "max": null,
+      "unit": "%",
+      "conditions": "Stated as a percentage of VOUT(NOM), VIN = VOUT + 1 V to 5.5 V, 0.7 μF < COUT < 10 μF, 0 mA < IOUT < 250 mA, EN rising until the output is enabled"
     },
     "tON": {
       "parameter": "Turnon time",
@@ -649,6 +693,14 @@
           "unit": "V",
           "conditions": null
         },
+        "Continuous_power_dissipation": {
+          "parameter": "Continuous power dissipation",
+          "symbol": null,
+          "min": null,
+          "max": null,
+          "unit": "W",
+          "conditions": "Internally Limited"
+        },
         "TJMAX": {
           "parameter": "Junction temperature",
           "symbol": "TJMAX",
@@ -709,6 +761,24 @@
           "max": 3,
           "unit": "%VOUT",
           "conditions": "VIN = (VOUT(NOM) + 1 V) to 5.5 V, IOUT = 1 mA to 250 mA, (VOUT < 1.8 V, SOT-23, X2SON packages)"
+        },
+        "Line_regulation": {
+          "parameter": "Line regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 0.02,
+          "max": null,
+          "unit": "%/V",
+          "conditions": "VIN = (VOUT(NOM) + 1 V) to 5.5 V, IOUT = 1 mA"
+        },
+        "Load_regulation": {
+          "parameter": "Load regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 0.001,
+          "max": null,
+          "unit": "%/mA",
+          "conditions": "IOUT = 1 mA to 250 mA"
         },
         "ILOAD": {
           "parameter": "Load current",
@@ -925,6 +995,24 @@
           "max": 40,
           "unit": "mV",
           "conditions": "IOUT = 1 mA to 250 mA in 10 μs or 250 mA to 1 mA in 10 μs"
+        },
+        "Overshoot_on_start_up": {
+          "parameter": "Overshoot on start-up",
+          "symbol": null,
+          "min": null,
+          "typ": 5,
+          "max": null,
+          "unit": "%",
+          "conditions": "Stated as a percentage of VOUT(NOM)"
+        },
+        "Overshoot_on_start_up_with_EN": {
+          "parameter": "Overshoot on start-up with EN",
+          "symbol": null,
+          "min": null,
+          "typ": 1,
+          "max": null,
+          "unit": "%",
+          "conditions": "Stated as a percentage of VOUT(NOM), VIN = VOUT + 1 V to 5.5 V, 0.7 μF < COUT < 10 μF, 0 mA < IOUT < 250 mA, EN rising until the output is enabled"
         },
         "tON": {
           "parameter": "Turnon time",

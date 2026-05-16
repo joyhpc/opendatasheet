@@ -180,6 +180,14 @@
       "unit": "V",
       "conditions": "VVINx+0.3V"
     },
+    "All_Other_Pins_Voltage": {
+      "parameter": "All Other Pins Voltage",
+      "symbol": null,
+      "min": -0.3,
+      "max": 6.5,
+      "unit": "V",
+      "conditions": null
+    },
     "TA": {
       "parameter": "Ambient Temperature operating Range",
       "symbol": "TA",
@@ -193,6 +201,14 @@
       "symbol": "TJmax",
       "min": null,
       "max": 150,
+      "unit": "°C",
+      "conditions": null
+    },
+    "Lead_Temperature": {
+      "parameter": "Lead Temperature",
+      "symbol": null,
+      "min": null,
+      "max": 260,
       "unit": "°C",
       "conditions": null
     },
@@ -437,7 +453,7 @@
       "unit": "V"
     },
     "enable_threshold": {
-      "max": 0.4,
+      "min": 2,
       "unit": "V"
     },
     "iout_max": {
@@ -677,6 +693,14 @@
           "unit": "V",
           "conditions": "VVINx+0.3V"
         },
+        "All_Other_Pins_Voltage": {
+          "parameter": "All Other Pins Voltage",
+          "symbol": null,
+          "min": -0.3,
+          "max": 6.5,
+          "unit": "V",
+          "conditions": null
+        },
         "TA": {
           "parameter": "Ambient Temperature operating Range",
           "symbol": "TA",
@@ -690,6 +714,14 @@
           "symbol": "TJmax",
           "min": null,
           "max": 150,
+          "unit": "°C",
+          "conditions": null
+        },
+        "Lead_Temperature": {
+          "parameter": "Lead Temperature",
+          "symbol": null,
+          "min": null,
+          "max": 260,
           "unit": "°C",
           "conditions": null
         },
@@ -934,7 +966,7 @@
           "unit": "V"
         },
         "enable_threshold": {
-          "max": 0.4,
+          "min": 2,
           "unit": "V"
         },
         "iout_max": {
@@ -1010,14 +1042,24 @@
             "10 uF",
             "1.5 uH"
           ],
-          "snippet": "Ver. 1.3 6 Datasheet 3CH Power Management IC C1 10uF C2 10uF C3 10uF Application Circuit Diagram L1 1.5uH VIN1 VIN VOUT1 LX1 5V 1.2V R1"
+          "snippet": "Ver. 1.3 6 Datasheet 3CH Power Management IC C1 10uF C2 10uF C3 10uF Application Circuit Diagram L1 1.5uH VIN1 VIN VOUT1 LX1 5V 1.2V R1",
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.component_rules",
+            "source_page": 5
+          }
         },
         {
           "role": "feedback_divider",
           "source_page": 10,
           "value_hint": null,
           "value_hints": [],
-          "snippet": "3CH Power Management IC Datasheet 11 Ver. 1.3 Application Information Output Voltage Setting Each of the regulators output voltage can be set via a resistor divider (ex. R1, R2). The out"
+          "snippet": "3CH Power Management IC Datasheet 11 Ver. 1.3 Application Information Output Voltage Setting Each of the regulators output voltage can be set via a resistor divider (ex. R1, R2). The out",
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.component_rules",
+            "source_page": 10
+          }
         }
       ],
       "component_value_hints": [
@@ -1027,17 +1069,32 @@
             "10 uF"
           ],
           "source_page": 5,
-          "snippet": "Ver. 1.3 6 Datasheet 3CH Power Management IC C1 10uF C2 10uF C3 10uF Application Circuit Diagram L1 1.5uH VIN1 VIN VOUT1 LX1 5V 1.2V R1"
+          "snippet": "Ver. 1.3 6 Datasheet 3CH Power Management IC C1 10uF C2 10uF C3 10uF Application Circuit Diagram L1 1.5uH VIN1 VIN VOUT1 LX1 5V 1.2V R1",
+          "origin": {
+            "kind": "source_fact",
+            "method": "design_info_utils.passive_value_regex",
+            "source_page": 5
+          }
         }
       ],
       "topology_hints": [
         {
           "hint": "Ver. 1.3 6 Datasheet 3CH Power Management IC C1 10uF C2 10uF C3 10uF Application Circuit Diagram L1 1.5uH VIN1 VIN VOUT1 LX1 5V 1.2V R1",
-          "source_page": 5
+          "source_page": 5,
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.topology_keywords",
+            "source_page": 5
+          }
         },
         {
           "hint": "3CH Power Management IC Datasheet 11 Ver. 1.3 Application Information Output Voltage Setting Each of the regulators output voltage can be set via a resistor divider (ex. R1, R2). The out",
-          "source_page": 10
+          "source_page": 10,
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.topology_keywords",
+            "source_page": 10
+          }
         }
       ],
       "typical_application": {
@@ -1061,12 +1118,22 @@
           {
             "page": 5,
             "title": null,
-            "content_type": "application"
+            "content_type": "application",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 5
+            }
           },
           {
             "page": 10,
             "title": null,
-            "content_type": "application"
+            "content_type": "application",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 10
+            }
           }
         ],
         "total_pages": 2

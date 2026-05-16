@@ -352,7 +352,96 @@
       }
     }
   },
-  "absolute_maximum_ratings": {},
+  "absolute_maximum_ratings": {
+    "Analog_Supply_Voltage": {
+      "parameter": "Analog Supply Voltage",
+      "symbol": null,
+      "min": -0.3,
+      "max": 3.9,
+      "unit": "V",
+      "conditions": "With Respect To AVSS"
+    },
+    "Digital_Supply_Voltage": {
+      "parameter": "Digital Supply Voltage",
+      "symbol": null,
+      "min": -0.3,
+      "max": 3.9,
+      "unit": "V",
+      "conditions": "With Respect To DVSS"
+    },
+    "Digital_Output_Driver_Supply_V": {
+      "parameter": "Digital Output Driver Supply Voltage",
+      "symbol": null,
+      "min": -0.3,
+      "max": 3.9,
+      "unit": "V",
+      "conditions": "With Respect To DRVSS"
+    },
+    "Digital_Output_Voltage": {
+      "parameter": "Digital Output Voltage",
+      "symbol": null,
+      "min": -0.3,
+      "max": null,
+      "unit": "V",
+      "conditions": "With Respect To DRVSS, max is DRVDD + 0.3"
+    },
+    "Clock_Input_Voltage": {
+      "parameter": "Clock Input Voltage",
+      "symbol": null,
+      "min": -0.3,
+      "max": null,
+      "unit": "V",
+      "conditions": "With Respect To DVSS, max is DVDD + 0.3"
+    },
+    "Control_Input_Voltage": {
+      "parameter": "Control Input Voltage",
+      "symbol": null,
+      "min": -0.3,
+      "max": null,
+      "unit": "V",
+      "conditions": "With Respect To DVSS, max is DVDD + 0.3"
+    },
+    "Serial_Interface_Input_Voltage": {
+      "parameter": "Serial Interface Input Voltage",
+      "symbol": null,
+      "min": -0.3,
+      "max": null,
+      "unit": "V",
+      "conditions": "With Respect To DVSS, max is DVDD + 0.3"
+    },
+    "Reference_Voltage": {
+      "parameter": "Reference Voltage",
+      "symbol": null,
+      "min": -0.3,
+      "max": null,
+      "unit": "V",
+      "conditions": "With Respect To AVSS, max is AVDD + 0.3"
+    },
+    "Analog_Input_Voltage": {
+      "parameter": "Analog Input Voltage",
+      "symbol": null,
+      "min": -0.3,
+      "max": null,
+      "unit": "V",
+      "conditions": "With Respect To AVSS, max is AVDD + 0.3"
+    },
+    "Junction_Temperature": {
+      "parameter": "Junction Temperature",
+      "symbol": null,
+      "min": null,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    },
+    "Lead_Temperature": {
+      "parameter": "Lead Temperature",
+      "symbol": null,
+      "min": null,
+      "max": 300,
+      "unit": "°C",
+      "conditions": null
+    }
+  },
   "electrical_parameters": {
     "tCP": {
       "parameter": "Clock Period",
@@ -462,6 +551,15 @@
       "unit": "ns",
       "conditions": "CL = 20 pF, fSAMP = 30 MHz"
     },
+    "Pipeline_Delay": {
+      "parameter": "Pipeline Delay",
+      "symbol": null,
+      "min": null,
+      "typ": 9,
+      "max": null,
+      "unit": "Cycles",
+      "conditions": "CL = 20 pF, fSAMP = 30 MHz"
+    },
     "fSCLK": {
       "parameter": "Maximum SCK Frequency",
       "symbol": "fSCLK",
@@ -524,6 +622,15 @@
       "max": null,
       "unit": "°C/W",
       "conditions": "Measured using a 4-layer PCB"
+    },
+    "Power_Dissipation": {
+      "parameter": "Power Dissipation",
+      "symbol": null,
+      "min": null,
+      "typ": 153,
+      "max": null,
+      "unit": "mW",
+      "conditions": "@ 3 V Supply"
     }
   },
   "drc_hints": {
@@ -907,7 +1014,96 @@
       }
     },
     "electrical": {
-      "absolute_maximum_ratings": {},
+      "absolute_maximum_ratings": {
+        "Analog_Supply_Voltage": {
+          "parameter": "Analog Supply Voltage",
+          "symbol": null,
+          "min": -0.3,
+          "max": 3.9,
+          "unit": "V",
+          "conditions": "With Respect To AVSS"
+        },
+        "Digital_Supply_Voltage": {
+          "parameter": "Digital Supply Voltage",
+          "symbol": null,
+          "min": -0.3,
+          "max": 3.9,
+          "unit": "V",
+          "conditions": "With Respect To DVSS"
+        },
+        "Digital_Output_Driver_Supply_V": {
+          "parameter": "Digital Output Driver Supply Voltage",
+          "symbol": null,
+          "min": -0.3,
+          "max": 3.9,
+          "unit": "V",
+          "conditions": "With Respect To DRVSS"
+        },
+        "Digital_Output_Voltage": {
+          "parameter": "Digital Output Voltage",
+          "symbol": null,
+          "min": -0.3,
+          "max": null,
+          "unit": "V",
+          "conditions": "With Respect To DRVSS, max is DRVDD + 0.3"
+        },
+        "Clock_Input_Voltage": {
+          "parameter": "Clock Input Voltage",
+          "symbol": null,
+          "min": -0.3,
+          "max": null,
+          "unit": "V",
+          "conditions": "With Respect To DVSS, max is DVDD + 0.3"
+        },
+        "Control_Input_Voltage": {
+          "parameter": "Control Input Voltage",
+          "symbol": null,
+          "min": -0.3,
+          "max": null,
+          "unit": "V",
+          "conditions": "With Respect To DVSS, max is DVDD + 0.3"
+        },
+        "Serial_Interface_Input_Voltage": {
+          "parameter": "Serial Interface Input Voltage",
+          "symbol": null,
+          "min": -0.3,
+          "max": null,
+          "unit": "V",
+          "conditions": "With Respect To DVSS, max is DVDD + 0.3"
+        },
+        "Reference_Voltage": {
+          "parameter": "Reference Voltage",
+          "symbol": null,
+          "min": -0.3,
+          "max": null,
+          "unit": "V",
+          "conditions": "With Respect To AVSS, max is AVDD + 0.3"
+        },
+        "Analog_Input_Voltage": {
+          "parameter": "Analog Input Voltage",
+          "symbol": null,
+          "min": -0.3,
+          "max": null,
+          "unit": "V",
+          "conditions": "With Respect To AVSS, max is AVDD + 0.3"
+        },
+        "Junction_Temperature": {
+          "parameter": "Junction Temperature",
+          "symbol": null,
+          "min": null,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        },
+        "Lead_Temperature": {
+          "parameter": "Lead Temperature",
+          "symbol": null,
+          "min": null,
+          "max": 300,
+          "unit": "°C",
+          "conditions": null
+        }
+      },
       "electrical_parameters": {
         "tCP": {
           "parameter": "Clock Period",
@@ -1017,6 +1213,15 @@
           "unit": "ns",
           "conditions": "CL = 20 pF, fSAMP = 30 MHz"
         },
+        "Pipeline_Delay": {
+          "parameter": "Pipeline Delay",
+          "symbol": null,
+          "min": null,
+          "typ": 9,
+          "max": null,
+          "unit": "Cycles",
+          "conditions": "CL = 20 pF, fSAMP = 30 MHz"
+        },
         "fSCLK": {
           "parameter": "Maximum SCK Frequency",
           "symbol": "fSCLK",
@@ -1079,6 +1284,15 @@
           "max": null,
           "unit": "°C/W",
           "conditions": "Measured using a 4-layer PCB"
+        },
+        "Power_Dissipation": {
+          "parameter": "Power Dissipation",
+          "symbol": null,
+          "min": null,
+          "typ": 153,
+          "max": null,
+          "unit": "mW",
+          "conditions": "@ 3 V Supply"
         }
       },
       "drc_hints": {

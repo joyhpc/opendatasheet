@@ -175,11 +175,27 @@
       "unit": "V",
       "conditions": null
     },
+    "ESD_Rating": {
+      "parameter": "ESD Rating",
+      "symbol": null,
+      "min": null,
+      "max": 2,
+      "unit": "kV",
+      "conditions": null
+    },
     "Tstg": {
       "parameter": "Storage Temperature Range",
       "symbol": "Tstg",
       "min": -65,
       "max": 150,
+      "unit": "°C",
+      "conditions": null
+    },
+    "Lead_Temperature__Soldering__1": {
+      "parameter": "Lead Temperature (Soldering, 10 sec.)",
+      "symbol": null,
+      "min": null,
+      "max": 260,
       "unit": "°C",
       "conditions": null
     },
@@ -288,6 +304,15 @@
       "parameter": "Load Regulation (Sinking)",
       "symbol": "ΔVLOAD",
       "min": null,
+      "typ": 0.8,
+      "max": 2,
+      "unit": "%",
+      "conditions": "IL : 0A -> -1.5A"
+    },
+    "ΔVLOAD_IL___0A_____1_5A__2": {
+      "parameter": "Load Regulation (Sinking)",
+      "symbol": "ΔVLOAD",
+      "min": null,
       "typ": 1.2,
       "max": 3,
       "unit": "%",
@@ -355,6 +380,15 @@
       "max": null,
       "unit": "°C",
       "conditions": "3.3V <= VCNTL <= 5V"
+    },
+    "Thermal_Shutdown_Hysteresis": {
+      "parameter": "Thermal Shutdown Hysteresis",
+      "symbol": null,
+      "min": null,
+      "typ": 50,
+      "max": null,
+      "unit": "°C",
+      "conditions": "Guaranteed by design"
     },
     "VTRIGGER": {
       "parameter": "Shutdown Threshold Trigger (High)",
@@ -666,11 +700,27 @@
           "unit": "V",
           "conditions": null
         },
+        "ESD_Rating": {
+          "parameter": "ESD Rating",
+          "symbol": null,
+          "min": null,
+          "max": 2,
+          "unit": "kV",
+          "conditions": null
+        },
         "Tstg": {
           "parameter": "Storage Temperature Range",
           "symbol": "Tstg",
           "min": -65,
           "max": 150,
+          "unit": "°C",
+          "conditions": null
+        },
+        "Lead_Temperature__Soldering__1": {
+          "parameter": "Lead Temperature (Soldering, 10 sec.)",
+          "symbol": null,
+          "min": null,
+          "max": 260,
           "unit": "°C",
           "conditions": null
         },
@@ -779,6 +829,15 @@
           "parameter": "Load Regulation (Sinking)",
           "symbol": "ΔVLOAD",
           "min": null,
+          "typ": 0.8,
+          "max": 2,
+          "unit": "%",
+          "conditions": "IL : 0A -> -1.5A"
+        },
+        "ΔVLOAD_IL___0A_____1_5A__2": {
+          "parameter": "Load Regulation (Sinking)",
+          "symbol": "ΔVLOAD",
+          "min": null,
           "typ": 1.2,
           "max": 3,
           "unit": "%",
@@ -846,6 +905,15 @@
           "max": null,
           "unit": "°C",
           "conditions": "3.3V <= VCNTL <= 5V"
+        },
+        "Thermal_Shutdown_Hysteresis": {
+          "parameter": "Thermal Shutdown Hysteresis",
+          "symbol": null,
+          "min": null,
+          "typ": 50,
+          "max": null,
+          "unit": "°C",
+          "conditions": "Guaranteed by design"
         },
         "VTRIGGER": {
           "parameter": "Shutdown Threshold Trigger (High)",

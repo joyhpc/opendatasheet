@@ -486,6 +486,22 @@
       "unit": "V",
       "conditions": "Limited to ±5.0 V or the supply voltage, whichever is less"
     },
+    "ESD__Human_Body_Model": {
+      "parameter": "ESD (Human Body Model)",
+      "symbol": null,
+      "min": null,
+      "max": 2000,
+      "unit": "V",
+      "conditions": null
+    },
+    "Output_Short_Circuit_Duration": {
+      "parameter": "Output Short-Circuit Duration to GND",
+      "symbol": null,
+      "min": null,
+      "max": null,
+      "unit": "Indefinite",
+      "conditions": null
+    },
     "Tstg": {
       "parameter": "Storage Temperature Range",
       "symbol": "Tstg",
@@ -551,6 +567,24 @@
       "parameter": "Input Bias Current",
       "symbol": "Ib",
       "min": null,
+      "typ": 1.0,
+      "max": 1.5,
+      "unit": "nA",
+      "conditions": "Vs = 5 V, Vcm = 2.5 V, Vo = 2.5 V, -40°C ≤ Ta ≤ +125°C"
+    },
+    "Ib_Vs___5_V__Vcm___2_5_V__Vo___2__2": {
+      "parameter": "Input Bias Current",
+      "symbol": "Ib",
+      "min": null,
+      "typ": 160,
+      "max": 300,
+      "unit": "pA",
+      "conditions": "Vs = 5 V, Vcm = 2.5 V, Vo = 2.5 V, -40°C ≤ Ta ≤ +85°C"
+    },
+    "Ib_Vs___5_V__Vcm___2_5_V__Vo___2__3": {
+      "parameter": "Input Bias Current",
+      "symbol": "Ib",
+      "min": null,
       "typ": 2.5,
       "max": 4,
       "unit": "nA",
@@ -570,9 +604,36 @@
       "symbol": "Ios",
       "min": null,
       "typ": 150,
+      "max": 200,
+      "unit": "pA",
+      "conditions": "Vs = 5 V, Vcm = 2.5 V, Vo = 2.5 V, -40°C ≤ Ta ≤ +125°C"
+    },
+    "Ios_Vs___5_V__Vcm___2_5_V__Vo___2__2": {
+      "parameter": "Input Offset Current",
+      "symbol": "Ios",
+      "min": null,
+      "typ": 30,
+      "max": 150,
+      "unit": "pA",
+      "conditions": "Vs = 5 V, Vcm = 2.5 V, Vo = 2.5 V, -40°C ≤ Ta ≤ +85°C"
+    },
+    "Ios_Vs___5_V__Vcm___2_5_V__Vo___2__3": {
+      "parameter": "Input Offset Current",
+      "symbol": "Ios",
+      "min": null,
+      "typ": 150,
       "max": 400,
       "unit": "pA",
       "conditions": "Vs = 5 V, Vcm = 2.5 V, Vo = 2.5 V, -40°C ≤ Ta ≤ +125°C"
+    },
+    "Input_Voltage_Range": {
+      "parameter": "Input Voltage Range",
+      "symbol": null,
+      "min": 0,
+      "typ": null,
+      "max": 5,
+      "unit": "V",
+      "conditions": "Vs = 5 V"
     },
     "CMRR": {
       "parameter": "Common-Mode Rejection Ratio",
@@ -701,6 +762,15 @@
       "conditions": "Vs = 5 V"
     },
     "Vos_Vs___2_7_V__Vcm___1_35_V__Vo": {
+      "parameter": "Offset Voltage (2.7V)",
+      "symbol": "Vos",
+      "min": null,
+      "typ": 1,
+      "max": 5,
+      "unit": "µV",
+      "conditions": "Vs = 2.7 V, Vcm = 1.35 V, Vo = 1.35 V"
+    },
+    "Vos_Vs___2_7_V__Vcm___1_35_V__Vo__2": {
       "parameter": "Offset Voltage (2.7V)",
       "symbol": "Vos",
       "min": null,
@@ -1212,6 +1282,22 @@
           "unit": "V",
           "conditions": "Limited to ±5.0 V or the supply voltage, whichever is less"
         },
+        "ESD__Human_Body_Model": {
+          "parameter": "ESD (Human Body Model)",
+          "symbol": null,
+          "min": null,
+          "max": 2000,
+          "unit": "V",
+          "conditions": null
+        },
+        "Output_Short_Circuit_Duration": {
+          "parameter": "Output Short-Circuit Duration to GND",
+          "symbol": null,
+          "min": null,
+          "max": null,
+          "unit": "Indefinite",
+          "conditions": null
+        },
         "Tstg": {
           "parameter": "Storage Temperature Range",
           "symbol": "Tstg",
@@ -1277,6 +1363,24 @@
           "parameter": "Input Bias Current",
           "symbol": "Ib",
           "min": null,
+          "typ": 1.0,
+          "max": 1.5,
+          "unit": "nA",
+          "conditions": "Vs = 5 V, Vcm = 2.5 V, Vo = 2.5 V, -40°C ≤ Ta ≤ +125°C"
+        },
+        "Ib_Vs___5_V__Vcm___2_5_V__Vo___2__2": {
+          "parameter": "Input Bias Current",
+          "symbol": "Ib",
+          "min": null,
+          "typ": 160,
+          "max": 300,
+          "unit": "pA",
+          "conditions": "Vs = 5 V, Vcm = 2.5 V, Vo = 2.5 V, -40°C ≤ Ta ≤ +85°C"
+        },
+        "Ib_Vs___5_V__Vcm___2_5_V__Vo___2__3": {
+          "parameter": "Input Bias Current",
+          "symbol": "Ib",
+          "min": null,
           "typ": 2.5,
           "max": 4,
           "unit": "nA",
@@ -1296,9 +1400,36 @@
           "symbol": "Ios",
           "min": null,
           "typ": 150,
+          "max": 200,
+          "unit": "pA",
+          "conditions": "Vs = 5 V, Vcm = 2.5 V, Vo = 2.5 V, -40°C ≤ Ta ≤ +125°C"
+        },
+        "Ios_Vs___5_V__Vcm___2_5_V__Vo___2__2": {
+          "parameter": "Input Offset Current",
+          "symbol": "Ios",
+          "min": null,
+          "typ": 30,
+          "max": 150,
+          "unit": "pA",
+          "conditions": "Vs = 5 V, Vcm = 2.5 V, Vo = 2.5 V, -40°C ≤ Ta ≤ +85°C"
+        },
+        "Ios_Vs___5_V__Vcm___2_5_V__Vo___2__3": {
+          "parameter": "Input Offset Current",
+          "symbol": "Ios",
+          "min": null,
+          "typ": 150,
           "max": 400,
           "unit": "pA",
           "conditions": "Vs = 5 V, Vcm = 2.5 V, Vo = 2.5 V, -40°C ≤ Ta ≤ +125°C"
+        },
+        "Input_Voltage_Range": {
+          "parameter": "Input Voltage Range",
+          "symbol": null,
+          "min": 0,
+          "typ": null,
+          "max": 5,
+          "unit": "V",
+          "conditions": "Vs = 5 V"
         },
         "CMRR": {
           "parameter": "Common-Mode Rejection Ratio",
@@ -1427,6 +1558,15 @@
           "conditions": "Vs = 5 V"
         },
         "Vos_Vs___2_7_V__Vcm___1_35_V__Vo": {
+          "parameter": "Offset Voltage (2.7V)",
+          "symbol": "Vos",
+          "min": null,
+          "typ": 1,
+          "max": 5,
+          "unit": "µV",
+          "conditions": "Vs = 2.7 V, Vcm = 1.35 V, Vo = 1.35 V"
+        },
+        "Vos_Vs___2_7_V__Vcm___1_35_V__Vo__2": {
           "parameter": "Offset Voltage (2.7V)",
           "symbol": "Vos",
           "min": null,

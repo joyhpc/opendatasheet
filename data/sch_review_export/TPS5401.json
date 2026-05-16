@@ -158,12 +158,108 @@
       "unit": "V",
       "conditions": null
     },
+    "Output_voltage_BOOT___PH": {
+      "parameter": "Output voltage BOOT – PH",
+      "symbol": null,
+      "min": null,
+      "max": 8,
+      "unit": "V",
+      "conditions": null
+    },
     "PH": {
       "parameter": "Output voltage PH",
       "symbol": "PH",
       "min": -0.6,
       "max": 47,
       "unit": "V",
+      "conditions": null
+    },
+    "Output_voltage_PH__10_ns_trans": {
+      "parameter": "Output voltage PH, 10-ns transient",
+      "symbol": null,
+      "min": -2,
+      "max": 47,
+      "unit": "V",
+      "conditions": null
+    },
+    "Voltage_difference_Thermal_pad": {
+      "parameter": "Voltage difference Thermal pad to GND",
+      "symbol": null,
+      "min": -200,
+      "max": 200,
+      "unit": "mV",
+      "conditions": null
+    },
+    "Source_current_EN": {
+      "parameter": "Source current EN",
+      "symbol": null,
+      "min": null,
+      "max": 100,
+      "unit": "µA",
+      "conditions": null
+    },
+    "Source_current_BOOT": {
+      "parameter": "Source current BOOT",
+      "symbol": null,
+      "min": null,
+      "max": 100,
+      "unit": "mA",
+      "conditions": null
+    },
+    "Source_current_VSENSE": {
+      "parameter": "Source current VSENSE",
+      "symbol": null,
+      "min": null,
+      "max": 10,
+      "unit": "µA",
+      "conditions": null
+    },
+    "Source_current_PH": {
+      "parameter": "Source current PH",
+      "symbol": null,
+      "min": null,
+      "max": null,
+      "unit": "A",
+      "conditions": "Current limit"
+    },
+    "Source_current_RT_CLK": {
+      "parameter": "Source current RT/CLK",
+      "symbol": null,
+      "min": null,
+      "max": 100,
+      "unit": "µA",
+      "conditions": null
+    },
+    "Sink_current_VIN": {
+      "parameter": "Sink current VIN",
+      "symbol": null,
+      "min": null,
+      "max": null,
+      "unit": "A",
+      "conditions": "Current limit"
+    },
+    "Sink_current_COMP": {
+      "parameter": "Sink current COMP",
+      "symbol": null,
+      "min": null,
+      "max": 100,
+      "unit": "µA",
+      "conditions": null
+    },
+    "Sink_current_PWRGD": {
+      "parameter": "Sink current PWRGD",
+      "symbol": null,
+      "min": null,
+      "max": 10,
+      "unit": "mA",
+      "conditions": null
+    },
+    "Sink_current_SS_TR": {
+      "parameter": "Sink current SS/TR",
+      "symbol": null,
+      "min": null,
+      "max": 200,
+      "unit": "µA",
       "conditions": null
     },
     "Tstg": {
@@ -201,6 +297,69 @@
       "unit": "V",
       "conditions": null
     },
+    "Internal_undervoltage_lockout": {
+      "parameter": "Internal undervoltage lockout threshold",
+      "symbol": null,
+      "min": null,
+      "typ": 2.5,
+      "max": null,
+      "unit": "V",
+      "conditions": "No voltage hysteresis, rising and falling"
+    },
+    "Shutdown_supply_current": {
+      "parameter": "Shutdown supply current",
+      "symbol": null,
+      "min": null,
+      "typ": 1.3,
+      "max": 4,
+      "unit": "µA",
+      "conditions": "VEN = 0 V"
+    },
+    "Operating__nonswitching_supply": {
+      "parameter": "Operating: nonswitching supply current",
+      "symbol": null,
+      "min": null,
+      "typ": 116,
+      "max": 136,
+      "unit": "µA",
+      "conditions": "VVSENSE = 0.83 V, VIN = 12 V"
+    },
+    "Enable_threshold_voltage": {
+      "parameter": "Enable threshold voltage",
+      "symbol": null,
+      "min": 0.9,
+      "typ": 1.25,
+      "max": 1.55,
+      "unit": "V",
+      "conditions": "No voltage hysteresis, rising and falling"
+    },
+    "Input_current": {
+      "parameter": "Input current",
+      "symbol": null,
+      "min": null,
+      "typ": -3.8,
+      "max": null,
+      "unit": "µA",
+      "conditions": "Enable threshold 50 mV"
+    },
+    "Input_current_Enable_threshold__50_mV": {
+      "parameter": "Input current",
+      "symbol": null,
+      "min": null,
+      "typ": -0.9,
+      "max": null,
+      "unit": "µA",
+      "conditions": "Enable threshold -50 mV"
+    },
+    "Hysteresis_current": {
+      "parameter": "Hysteresis current",
+      "symbol": null,
+      "min": null,
+      "typ": -2.9,
+      "max": null,
+      "unit": "µA",
+      "conditions": null
+    },
     "Vref": {
       "parameter": "Voltage reference",
       "symbol": "Vref",
@@ -208,6 +367,33 @@
       "typ": 0.8,
       "max": 0.828,
       "unit": "V",
+      "conditions": null
+    },
+    "On_resistance": {
+      "parameter": "On-resistance",
+      "symbol": null,
+      "min": null,
+      "typ": 300,
+      "max": null,
+      "unit": "mΩ",
+      "conditions": "VIN = 3.5 V, VBOOT – VPH = 3 V"
+    },
+    "On_resistance_VIN___12_V__VBOOT___VPH___6_V": {
+      "parameter": "On-resistance",
+      "symbol": null,
+      "min": null,
+      "typ": 200,
+      "max": 410,
+      "unit": "mΩ",
+      "conditions": "VIN = 12 V, VBOOT – VPH = 6 V"
+    },
+    "Input_current__2": {
+      "parameter": "Input current",
+      "symbol": null,
+      "min": null,
+      "typ": 50,
+      "max": null,
+      "unit": "nA",
       "conditions": null
     },
     "gmEA": {
@@ -228,6 +414,33 @@
       "unit": "µMhos",
       "conditions": "-2 µA < ICOMP < 2 µA, VCOMP = 1 V, VVSENSE = 0.4 V"
     },
+    "Error_amplifier_dc_gain": {
+      "parameter": "Error amplifier dc gain",
+      "symbol": null,
+      "min": null,
+      "typ": 10000,
+      "max": null,
+      "unit": "V/V",
+      "conditions": "VVSENSE = 0.8 V"
+    },
+    "Error_amplifier_bandwidth": {
+      "parameter": "Error amplifier bandwidth",
+      "symbol": null,
+      "min": null,
+      "typ": 2700,
+      "max": null,
+      "unit": "kHz",
+      "conditions": null
+    },
+    "Error_amplifier_source_sink": {
+      "parameter": "Error amplifier source/sink",
+      "symbol": null,
+      "min": null,
+      "typ": 7,
+      "max": null,
+      "unit": "µA",
+      "conditions": "VCOMP = 1 V, 100 mV overdrive"
+    },
     "gmPS": {
       "parameter": "COMP to switch current transconductance",
       "symbol": "gmPS",
@@ -235,6 +448,33 @@
       "typ": 1.9,
       "max": null,
       "unit": "A/V",
+      "conditions": null
+    },
+    "Current_limit_threshold": {
+      "parameter": "Current limit threshold",
+      "symbol": null,
+      "min": 0.6,
+      "typ": 0.94,
+      "max": null,
+      "unit": "A",
+      "conditions": "VIN = 12 V"
+    },
+    "Thermal_shutdown": {
+      "parameter": "Thermal shutdown",
+      "symbol": null,
+      "min": null,
+      "typ": 182,
+      "max": null,
+      "unit": "°C",
+      "conditions": null
+    },
+    "Switching_frequency_range_usin": {
+      "parameter": "Switching-frequency range using RT mode",
+      "symbol": null,
+      "min": 100,
+      "typ": null,
+      "max": 2500,
+      "unit": "kHz",
       "conditions": null
     },
     "fSW": {
@@ -245,6 +485,177 @@
       "max": 720,
       "unit": "kHz",
       "conditions": "RT = 200 kΩ"
+    },
+    "Switching_frequency_range_usin__2": {
+      "parameter": "Switching-frequency range using CLK mode",
+      "symbol": null,
+      "min": 300,
+      "typ": null,
+      "max": 2200,
+      "unit": "kHz",
+      "conditions": null
+    },
+    "Minimum_CLK_input_pulse_width": {
+      "parameter": "Minimum CLK input pulse width",
+      "symbol": null,
+      "min": null,
+      "typ": 40,
+      "max": null,
+      "unit": "ns",
+      "conditions": null
+    },
+    "RT_CLK_high_threshold": {
+      "parameter": "RT/CLK high threshold",
+      "symbol": null,
+      "min": null,
+      "typ": 1.9,
+      "max": 2.2,
+      "unit": "V",
+      "conditions": null
+    },
+    "RT_CLK_low_threshold": {
+      "parameter": "RT/CLK low threshold",
+      "symbol": null,
+      "min": 0.5,
+      "typ": 0.7,
+      "max": null,
+      "unit": "V",
+      "conditions": null
+    },
+    "RT_CLK_falling_edge_to_PH_risi": {
+      "parameter": "RT/CLK falling edge to PH rising edge delay",
+      "symbol": null,
+      "min": null,
+      "typ": 60,
+      "max": null,
+      "unit": "ns",
+      "conditions": "Measured at 500 kHz with RT resistor in series"
+    },
+    "PLL_lock_in_time": {
+      "parameter": "PLL lock-in time",
+      "symbol": null,
+      "min": null,
+      "typ": 100,
+      "max": null,
+      "unit": "µs",
+      "conditions": "Measured at 500 kHz"
+    },
+    "Charge_current": {
+      "parameter": "Charge current",
+      "symbol": null,
+      "min": null,
+      "typ": 2,
+      "max": null,
+      "unit": "µA",
+      "conditions": "VSS/TR = 0.4 V"
+    },
+    "SS_TR_to_VSENSE_matching": {
+      "parameter": "SS/TR-to-VSENSE matching",
+      "symbol": null,
+      "min": null,
+      "typ": 45,
+      "max": null,
+      "unit": "mV",
+      "conditions": "VSS/TR = 0.4 V"
+    },
+    "SS_TR_to_reference_crossover": {
+      "parameter": "SS/TR-to-reference crossover",
+      "symbol": null,
+      "min": null,
+      "typ": 1,
+      "max": null,
+      "unit": "V",
+      "conditions": "98% nominal"
+    },
+    "SS_TR_discharge_current__overl": {
+      "parameter": "SS/TR discharge current (overload)",
+      "symbol": null,
+      "min": null,
+      "typ": 112,
+      "max": null,
+      "unit": "µA",
+      "conditions": "VSENSE = 0 V, VSS/TR = 0.4 V"
+    },
+    "SS_TR_discharge_voltage": {
+      "parameter": "SS/TR discharge voltage",
+      "symbol": null,
+      "min": null,
+      "typ": 54,
+      "max": null,
+      "unit": "mV",
+      "conditions": "VVSENSE = 0 V"
+    },
+    "VSENSE_low_threshold__falling": {
+      "parameter": "VSENSE low threshold (falling)",
+      "symbol": null,
+      "min": null,
+      "typ": 92,
+      "max": null,
+      "unit": "%Vref",
+      "conditions": "VVSENSE falling"
+    },
+    "VSENSE_low_threshold__rising": {
+      "parameter": "VSENSE low threshold (rising)",
+      "symbol": null,
+      "min": null,
+      "typ": 94,
+      "max": null,
+      "unit": "%Vref",
+      "conditions": "VVSENSE rising"
+    },
+    "VSENSE_high_threshold__rising": {
+      "parameter": "VSENSE high threshold (rising)",
+      "symbol": null,
+      "min": null,
+      "typ": 109,
+      "max": null,
+      "unit": "%Vref",
+      "conditions": "VVSENSE rising"
+    },
+    "VSENSE_high_threshold__falling": {
+      "parameter": "VSENSE high threshold (falling)",
+      "symbol": null,
+      "min": null,
+      "typ": 107,
+      "max": null,
+      "unit": "%Vref",
+      "conditions": "VVSENSE falling"
+    },
+    "Hysteresis": {
+      "parameter": "Hysteresis",
+      "symbol": null,
+      "min": null,
+      "typ": 2,
+      "max": null,
+      "unit": "%Vref",
+      "conditions": "VVSENSE falling"
+    },
+    "Output_high_leakage": {
+      "parameter": "Output-high leakage",
+      "symbol": null,
+      "min": null,
+      "typ": 10,
+      "max": null,
+      "unit": "nA",
+      "conditions": "VVSENSE = Vref, VPWRGD = 5.5 V"
+    },
+    "On_resistance_IPWRGD___3_mA__VVSENSE___0_77": {
+      "parameter": "On-resistance",
+      "symbol": null,
+      "min": null,
+      "typ": 50,
+      "max": null,
+      "unit": "Ω",
+      "conditions": "IPWRGD = 3 mA, VVSENSE < 0.77 V"
+    },
+    "Minimum_VIN_for_defined_output": {
+      "parameter": "Minimum VIN for defined output",
+      "symbol": null,
+      "min": null,
+      "typ": 0.95,
+      "max": 1.5,
+      "unit": "V",
+      "conditions": "VPWRGD < 0.5 V, IPWRGD = 100 µA"
     }
   },
   "drc_hints": {
@@ -442,12 +853,108 @@
           "unit": "V",
           "conditions": null
         },
+        "Output_voltage_BOOT___PH": {
+          "parameter": "Output voltage BOOT – PH",
+          "symbol": null,
+          "min": null,
+          "max": 8,
+          "unit": "V",
+          "conditions": null
+        },
         "PH": {
           "parameter": "Output voltage PH",
           "symbol": "PH",
           "min": -0.6,
           "max": 47,
           "unit": "V",
+          "conditions": null
+        },
+        "Output_voltage_PH__10_ns_trans": {
+          "parameter": "Output voltage PH, 10-ns transient",
+          "symbol": null,
+          "min": -2,
+          "max": 47,
+          "unit": "V",
+          "conditions": null
+        },
+        "Voltage_difference_Thermal_pad": {
+          "parameter": "Voltage difference Thermal pad to GND",
+          "symbol": null,
+          "min": -200,
+          "max": 200,
+          "unit": "mV",
+          "conditions": null
+        },
+        "Source_current_EN": {
+          "parameter": "Source current EN",
+          "symbol": null,
+          "min": null,
+          "max": 100,
+          "unit": "µA",
+          "conditions": null
+        },
+        "Source_current_BOOT": {
+          "parameter": "Source current BOOT",
+          "symbol": null,
+          "min": null,
+          "max": 100,
+          "unit": "mA",
+          "conditions": null
+        },
+        "Source_current_VSENSE": {
+          "parameter": "Source current VSENSE",
+          "symbol": null,
+          "min": null,
+          "max": 10,
+          "unit": "µA",
+          "conditions": null
+        },
+        "Source_current_PH": {
+          "parameter": "Source current PH",
+          "symbol": null,
+          "min": null,
+          "max": null,
+          "unit": "A",
+          "conditions": "Current limit"
+        },
+        "Source_current_RT_CLK": {
+          "parameter": "Source current RT/CLK",
+          "symbol": null,
+          "min": null,
+          "max": 100,
+          "unit": "µA",
+          "conditions": null
+        },
+        "Sink_current_VIN": {
+          "parameter": "Sink current VIN",
+          "symbol": null,
+          "min": null,
+          "max": null,
+          "unit": "A",
+          "conditions": "Current limit"
+        },
+        "Sink_current_COMP": {
+          "parameter": "Sink current COMP",
+          "symbol": null,
+          "min": null,
+          "max": 100,
+          "unit": "µA",
+          "conditions": null
+        },
+        "Sink_current_PWRGD": {
+          "parameter": "Sink current PWRGD",
+          "symbol": null,
+          "min": null,
+          "max": 10,
+          "unit": "mA",
+          "conditions": null
+        },
+        "Sink_current_SS_TR": {
+          "parameter": "Sink current SS/TR",
+          "symbol": null,
+          "min": null,
+          "max": 200,
+          "unit": "µA",
           "conditions": null
         },
         "Tstg": {
@@ -485,6 +992,69 @@
           "unit": "V",
           "conditions": null
         },
+        "Internal_undervoltage_lockout": {
+          "parameter": "Internal undervoltage lockout threshold",
+          "symbol": null,
+          "min": null,
+          "typ": 2.5,
+          "max": null,
+          "unit": "V",
+          "conditions": "No voltage hysteresis, rising and falling"
+        },
+        "Shutdown_supply_current": {
+          "parameter": "Shutdown supply current",
+          "symbol": null,
+          "min": null,
+          "typ": 1.3,
+          "max": 4,
+          "unit": "µA",
+          "conditions": "VEN = 0 V"
+        },
+        "Operating__nonswitching_supply": {
+          "parameter": "Operating: nonswitching supply current",
+          "symbol": null,
+          "min": null,
+          "typ": 116,
+          "max": 136,
+          "unit": "µA",
+          "conditions": "VVSENSE = 0.83 V, VIN = 12 V"
+        },
+        "Enable_threshold_voltage": {
+          "parameter": "Enable threshold voltage",
+          "symbol": null,
+          "min": 0.9,
+          "typ": 1.25,
+          "max": 1.55,
+          "unit": "V",
+          "conditions": "No voltage hysteresis, rising and falling"
+        },
+        "Input_current": {
+          "parameter": "Input current",
+          "symbol": null,
+          "min": null,
+          "typ": -3.8,
+          "max": null,
+          "unit": "µA",
+          "conditions": "Enable threshold 50 mV"
+        },
+        "Input_current_Enable_threshold__50_mV": {
+          "parameter": "Input current",
+          "symbol": null,
+          "min": null,
+          "typ": -0.9,
+          "max": null,
+          "unit": "µA",
+          "conditions": "Enable threshold -50 mV"
+        },
+        "Hysteresis_current": {
+          "parameter": "Hysteresis current",
+          "symbol": null,
+          "min": null,
+          "typ": -2.9,
+          "max": null,
+          "unit": "µA",
+          "conditions": null
+        },
         "Vref": {
           "parameter": "Voltage reference",
           "symbol": "Vref",
@@ -492,6 +1062,33 @@
           "typ": 0.8,
           "max": 0.828,
           "unit": "V",
+          "conditions": null
+        },
+        "On_resistance": {
+          "parameter": "On-resistance",
+          "symbol": null,
+          "min": null,
+          "typ": 300,
+          "max": null,
+          "unit": "mΩ",
+          "conditions": "VIN = 3.5 V, VBOOT – VPH = 3 V"
+        },
+        "On_resistance_VIN___12_V__VBOOT___VPH___6_V": {
+          "parameter": "On-resistance",
+          "symbol": null,
+          "min": null,
+          "typ": 200,
+          "max": 410,
+          "unit": "mΩ",
+          "conditions": "VIN = 12 V, VBOOT – VPH = 6 V"
+        },
+        "Input_current__2": {
+          "parameter": "Input current",
+          "symbol": null,
+          "min": null,
+          "typ": 50,
+          "max": null,
+          "unit": "nA",
           "conditions": null
         },
         "gmEA": {
@@ -512,6 +1109,33 @@
           "unit": "µMhos",
           "conditions": "-2 µA < ICOMP < 2 µA, VCOMP = 1 V, VVSENSE = 0.4 V"
         },
+        "Error_amplifier_dc_gain": {
+          "parameter": "Error amplifier dc gain",
+          "symbol": null,
+          "min": null,
+          "typ": 10000,
+          "max": null,
+          "unit": "V/V",
+          "conditions": "VVSENSE = 0.8 V"
+        },
+        "Error_amplifier_bandwidth": {
+          "parameter": "Error amplifier bandwidth",
+          "symbol": null,
+          "min": null,
+          "typ": 2700,
+          "max": null,
+          "unit": "kHz",
+          "conditions": null
+        },
+        "Error_amplifier_source_sink": {
+          "parameter": "Error amplifier source/sink",
+          "symbol": null,
+          "min": null,
+          "typ": 7,
+          "max": null,
+          "unit": "µA",
+          "conditions": "VCOMP = 1 V, 100 mV overdrive"
+        },
         "gmPS": {
           "parameter": "COMP to switch current transconductance",
           "symbol": "gmPS",
@@ -519,6 +1143,33 @@
           "typ": 1.9,
           "max": null,
           "unit": "A/V",
+          "conditions": null
+        },
+        "Current_limit_threshold": {
+          "parameter": "Current limit threshold",
+          "symbol": null,
+          "min": 0.6,
+          "typ": 0.94,
+          "max": null,
+          "unit": "A",
+          "conditions": "VIN = 12 V"
+        },
+        "Thermal_shutdown": {
+          "parameter": "Thermal shutdown",
+          "symbol": null,
+          "min": null,
+          "typ": 182,
+          "max": null,
+          "unit": "°C",
+          "conditions": null
+        },
+        "Switching_frequency_range_usin": {
+          "parameter": "Switching-frequency range using RT mode",
+          "symbol": null,
+          "min": 100,
+          "typ": null,
+          "max": 2500,
+          "unit": "kHz",
           "conditions": null
         },
         "fSW": {
@@ -529,6 +1180,177 @@
           "max": 720,
           "unit": "kHz",
           "conditions": "RT = 200 kΩ"
+        },
+        "Switching_frequency_range_usin__2": {
+          "parameter": "Switching-frequency range using CLK mode",
+          "symbol": null,
+          "min": 300,
+          "typ": null,
+          "max": 2200,
+          "unit": "kHz",
+          "conditions": null
+        },
+        "Minimum_CLK_input_pulse_width": {
+          "parameter": "Minimum CLK input pulse width",
+          "symbol": null,
+          "min": null,
+          "typ": 40,
+          "max": null,
+          "unit": "ns",
+          "conditions": null
+        },
+        "RT_CLK_high_threshold": {
+          "parameter": "RT/CLK high threshold",
+          "symbol": null,
+          "min": null,
+          "typ": 1.9,
+          "max": 2.2,
+          "unit": "V",
+          "conditions": null
+        },
+        "RT_CLK_low_threshold": {
+          "parameter": "RT/CLK low threshold",
+          "symbol": null,
+          "min": 0.5,
+          "typ": 0.7,
+          "max": null,
+          "unit": "V",
+          "conditions": null
+        },
+        "RT_CLK_falling_edge_to_PH_risi": {
+          "parameter": "RT/CLK falling edge to PH rising edge delay",
+          "symbol": null,
+          "min": null,
+          "typ": 60,
+          "max": null,
+          "unit": "ns",
+          "conditions": "Measured at 500 kHz with RT resistor in series"
+        },
+        "PLL_lock_in_time": {
+          "parameter": "PLL lock-in time",
+          "symbol": null,
+          "min": null,
+          "typ": 100,
+          "max": null,
+          "unit": "µs",
+          "conditions": "Measured at 500 kHz"
+        },
+        "Charge_current": {
+          "parameter": "Charge current",
+          "symbol": null,
+          "min": null,
+          "typ": 2,
+          "max": null,
+          "unit": "µA",
+          "conditions": "VSS/TR = 0.4 V"
+        },
+        "SS_TR_to_VSENSE_matching": {
+          "parameter": "SS/TR-to-VSENSE matching",
+          "symbol": null,
+          "min": null,
+          "typ": 45,
+          "max": null,
+          "unit": "mV",
+          "conditions": "VSS/TR = 0.4 V"
+        },
+        "SS_TR_to_reference_crossover": {
+          "parameter": "SS/TR-to-reference crossover",
+          "symbol": null,
+          "min": null,
+          "typ": 1,
+          "max": null,
+          "unit": "V",
+          "conditions": "98% nominal"
+        },
+        "SS_TR_discharge_current__overl": {
+          "parameter": "SS/TR discharge current (overload)",
+          "symbol": null,
+          "min": null,
+          "typ": 112,
+          "max": null,
+          "unit": "µA",
+          "conditions": "VSENSE = 0 V, VSS/TR = 0.4 V"
+        },
+        "SS_TR_discharge_voltage": {
+          "parameter": "SS/TR discharge voltage",
+          "symbol": null,
+          "min": null,
+          "typ": 54,
+          "max": null,
+          "unit": "mV",
+          "conditions": "VVSENSE = 0 V"
+        },
+        "VSENSE_low_threshold__falling": {
+          "parameter": "VSENSE low threshold (falling)",
+          "symbol": null,
+          "min": null,
+          "typ": 92,
+          "max": null,
+          "unit": "%Vref",
+          "conditions": "VVSENSE falling"
+        },
+        "VSENSE_low_threshold__rising": {
+          "parameter": "VSENSE low threshold (rising)",
+          "symbol": null,
+          "min": null,
+          "typ": 94,
+          "max": null,
+          "unit": "%Vref",
+          "conditions": "VVSENSE rising"
+        },
+        "VSENSE_high_threshold__rising": {
+          "parameter": "VSENSE high threshold (rising)",
+          "symbol": null,
+          "min": null,
+          "typ": 109,
+          "max": null,
+          "unit": "%Vref",
+          "conditions": "VVSENSE rising"
+        },
+        "VSENSE_high_threshold__falling": {
+          "parameter": "VSENSE high threshold (falling)",
+          "symbol": null,
+          "min": null,
+          "typ": 107,
+          "max": null,
+          "unit": "%Vref",
+          "conditions": "VVSENSE falling"
+        },
+        "Hysteresis": {
+          "parameter": "Hysteresis",
+          "symbol": null,
+          "min": null,
+          "typ": 2,
+          "max": null,
+          "unit": "%Vref",
+          "conditions": "VVSENSE falling"
+        },
+        "Output_high_leakage": {
+          "parameter": "Output-high leakage",
+          "symbol": null,
+          "min": null,
+          "typ": 10,
+          "max": null,
+          "unit": "nA",
+          "conditions": "VVSENSE = Vref, VPWRGD = 5.5 V"
+        },
+        "On_resistance_IPWRGD___3_mA__VVSENSE___0_77": {
+          "parameter": "On-resistance",
+          "symbol": null,
+          "min": null,
+          "typ": 50,
+          "max": null,
+          "unit": "Ω",
+          "conditions": "IPWRGD = 3 mA, VVSENSE < 0.77 V"
+        },
+        "Minimum_VIN_for_defined_output": {
+          "parameter": "Minimum VIN for defined output",
+          "symbol": null,
+          "min": null,
+          "typ": 0.95,
+          "max": 1.5,
+          "unit": "V",
+          "conditions": "VPWRGD < 0.5 V, IPWRGD = 100 µA"
         }
       },
       "drc_hints": {

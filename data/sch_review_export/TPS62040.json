@@ -184,6 +184,14 @@
       "unit": "V",
       "conditions": null
     },
+    "Voltages_on_EN__MODE__FB__SW": {
+      "parameter": "Voltages on EN, MODE, FB, SW",
+      "symbol": null,
+      "min": -0.3,
+      "max": null,
+      "unit": "V",
+      "conditions": "max is VCC + 0.3 V"
+    },
     "TJ": {
       "parameter": "Operating junction temperature range",
       "symbol": "TJ",
@@ -197,6 +205,14 @@
       "symbol": "Tstg",
       "min": -65,
       "max": 150,
+      "unit": "°C",
+      "conditions": null
+    },
+    "Lead_temperature__soldering__1": {
+      "parameter": "Lead temperature (soldering, 10 sec)",
+      "symbol": null,
+      "min": null,
+      "max": 260,
       "unit": "°C",
       "conditions": null
     }
@@ -239,6 +255,15 @@
       "conditions": null
     },
     "VEN": {
+      "parameter": "EN high level input voltage",
+      "symbol": "VEN",
+      "min": 1.4,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": null
+    },
+    "VEN__2": {
       "parameter": "EN low level input voltage",
       "symbol": "VEN",
       "min": null,
@@ -257,6 +282,15 @@
       "conditions": "EN = GND or VIN"
     },
     "V(MODE)": {
+      "parameter": "MODE high level input voltage",
+      "symbol": "V(MODE)",
+      "min": 1.4,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": null
+    },
+    "V(MODE)__2": {
       "parameter": "MODE low level input voltage",
       "symbol": "V(MODE)",
       "min": null,
@@ -284,11 +318,11 @@
       "conditions": "VI = VGS = 3.6 V"
     },
     "rDS(ON)_VI___VGS___2_5_V": {
-      "parameter": "N-channel MOSFET on-resistance",
+      "parameter": "P-channel MOSFET on-resistance",
       "symbol": "rDS(ON)",
       "min": null,
-      "typ": 115,
-      "max": 280,
+      "typ": 145,
+      "max": 270,
       "unit": "mΩ",
       "conditions": "VI = VGS = 2.5 V"
     },
@@ -310,6 +344,15 @@
       "unit": "mΩ",
       "conditions": "VI = VGS = 3.6 V"
     },
+    "rDS(ON)_VI___VGS___2_5_V__2": {
+      "parameter": "N-channel MOSFET on-resistance",
+      "symbol": "rDS(ON)",
+      "min": null,
+      "typ": 115,
+      "max": 280,
+      "unit": "mΩ",
+      "conditions": "VI = VGS = 2.5 V"
+    },
     "Ilkg(N)": {
       "parameter": "N-channel leakage current",
       "symbol": "Ilkg(N)",
@@ -327,6 +370,15 @@
       "max": 2.2,
       "unit": "A",
       "conditions": "2.5 V < VI < 6.0 V"
+    },
+    "Thermal_shutdown": {
+      "parameter": "Thermal shutdown",
+      "symbol": null,
+      "min": null,
+      "typ": 150,
+      "max": null,
+      "unit": "°C",
+      "conditions": null
     },
     "fs": {
       "parameter": "Oscillator frequency",
@@ -400,6 +452,42 @@
       "unit": "%",
       "conditions": "VI = 2.5 V to 6.0 V; 0 mA <= IO <= 1.2 A"
     },
+    "VO_VI___2_5_V_to_6_0_V__IO___0_mA__2": {
+      "parameter": "Fixed output voltage accuracy",
+      "symbol": "VO",
+      "min": 0,
+      "typ": null,
+      "max": 3,
+      "unit": "%",
+      "conditions": "VI = 2.5 V to 6.0 V; IO = 0 mA"
+    },
+    "VO_VI___2_5_V_to_6_0_V__0_mA____I__2": {
+      "parameter": "Fixed output voltage accuracy",
+      "symbol": "VO",
+      "min": -3,
+      "typ": null,
+      "max": 3,
+      "unit": "%",
+      "conditions": "VI = 2.5 V to 6.0 V; 0 mA <= IO <= 1.2 A"
+    },
+    "VO_VI___2_5_V_to_6_0_V__IO___0_mA__3": {
+      "parameter": "Fixed output voltage accuracy",
+      "symbol": "VO",
+      "min": 0,
+      "typ": null,
+      "max": 3,
+      "unit": "%",
+      "conditions": "VI = 2.5 V to 6.0 V; IO = 0 mA"
+    },
+    "VO_VI___2_5_V_to_6_0_V__0_mA____I__3": {
+      "parameter": "Fixed output voltage accuracy",
+      "symbol": "VO",
+      "min": -3,
+      "typ": null,
+      "max": 3,
+      "unit": "%",
+      "conditions": "VI = 2.5 V to 6.0 V; 0 mA <= IO <= 1.2 A"
+    },
     "VO_VI___3_6_V_to_6_0_V__IO___0_mA": {
       "parameter": "Fixed output voltage accuracy",
       "symbol": "VO",
@@ -417,6 +505,24 @@
       "max": 3,
       "unit": "%",
       "conditions": "VI = 3.6 V to 6.0 V; 0 mA <= IO <= 1.2 A"
+    },
+    "Line_regulation": {
+      "parameter": "Line regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 0,
+      "max": null,
+      "unit": "%/V",
+      "conditions": "VI = VO + 0.5 V (min. 2.5 V) to 6.0 V, IO = 10 mA"
+    },
+    "Load_regulation": {
+      "parameter": "Load regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 0,
+      "max": null,
+      "unit": "%/mA",
+      "conditions": "IO = 10 mA to 1200 mA"
     },
     "Ilkg(SW)": {
       "parameter": "Leakage current into SW pin",
@@ -671,6 +777,14 @@
           "unit": "V",
           "conditions": null
         },
+        "Voltages_on_EN__MODE__FB__SW": {
+          "parameter": "Voltages on EN, MODE, FB, SW",
+          "symbol": null,
+          "min": -0.3,
+          "max": null,
+          "unit": "V",
+          "conditions": "max is VCC + 0.3 V"
+        },
         "TJ": {
           "parameter": "Operating junction temperature range",
           "symbol": "TJ",
@@ -684,6 +798,14 @@
           "symbol": "Tstg",
           "min": -65,
           "max": 150,
+          "unit": "°C",
+          "conditions": null
+        },
+        "Lead_temperature__soldering__1": {
+          "parameter": "Lead temperature (soldering, 10 sec)",
+          "symbol": null,
+          "min": null,
+          "max": 260,
           "unit": "°C",
           "conditions": null
         }
@@ -726,6 +848,15 @@
           "conditions": null
         },
         "VEN": {
+          "parameter": "EN high level input voltage",
+          "symbol": "VEN",
+          "min": 1.4,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": null
+        },
+        "VEN__2": {
           "parameter": "EN low level input voltage",
           "symbol": "VEN",
           "min": null,
@@ -744,6 +875,15 @@
           "conditions": "EN = GND or VIN"
         },
         "V(MODE)": {
+          "parameter": "MODE high level input voltage",
+          "symbol": "V(MODE)",
+          "min": 1.4,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": null
+        },
+        "V(MODE)__2": {
           "parameter": "MODE low level input voltage",
           "symbol": "V(MODE)",
           "min": null,
@@ -771,11 +911,11 @@
           "conditions": "VI = VGS = 3.6 V"
         },
         "rDS(ON)_VI___VGS___2_5_V": {
-          "parameter": "N-channel MOSFET on-resistance",
+          "parameter": "P-channel MOSFET on-resistance",
           "symbol": "rDS(ON)",
           "min": null,
-          "typ": 115,
-          "max": 280,
+          "typ": 145,
+          "max": 270,
           "unit": "mΩ",
           "conditions": "VI = VGS = 2.5 V"
         },
@@ -797,6 +937,15 @@
           "unit": "mΩ",
           "conditions": "VI = VGS = 3.6 V"
         },
+        "rDS(ON)_VI___VGS___2_5_V__2": {
+          "parameter": "N-channel MOSFET on-resistance",
+          "symbol": "rDS(ON)",
+          "min": null,
+          "typ": 115,
+          "max": 280,
+          "unit": "mΩ",
+          "conditions": "VI = VGS = 2.5 V"
+        },
         "Ilkg(N)": {
           "parameter": "N-channel leakage current",
           "symbol": "Ilkg(N)",
@@ -814,6 +963,15 @@
           "max": 2.2,
           "unit": "A",
           "conditions": "2.5 V < VI < 6.0 V"
+        },
+        "Thermal_shutdown": {
+          "parameter": "Thermal shutdown",
+          "symbol": null,
+          "min": null,
+          "typ": 150,
+          "max": null,
+          "unit": "°C",
+          "conditions": null
         },
         "fs": {
           "parameter": "Oscillator frequency",
@@ -887,6 +1045,42 @@
           "unit": "%",
           "conditions": "VI = 2.5 V to 6.0 V; 0 mA <= IO <= 1.2 A"
         },
+        "VO_VI___2_5_V_to_6_0_V__IO___0_mA__2": {
+          "parameter": "Fixed output voltage accuracy",
+          "symbol": "VO",
+          "min": 0,
+          "typ": null,
+          "max": 3,
+          "unit": "%",
+          "conditions": "VI = 2.5 V to 6.0 V; IO = 0 mA"
+        },
+        "VO_VI___2_5_V_to_6_0_V__0_mA____I__2": {
+          "parameter": "Fixed output voltage accuracy",
+          "symbol": "VO",
+          "min": -3,
+          "typ": null,
+          "max": 3,
+          "unit": "%",
+          "conditions": "VI = 2.5 V to 6.0 V; 0 mA <= IO <= 1.2 A"
+        },
+        "VO_VI___2_5_V_to_6_0_V__IO___0_mA__3": {
+          "parameter": "Fixed output voltage accuracy",
+          "symbol": "VO",
+          "min": 0,
+          "typ": null,
+          "max": 3,
+          "unit": "%",
+          "conditions": "VI = 2.5 V to 6.0 V; IO = 0 mA"
+        },
+        "VO_VI___2_5_V_to_6_0_V__0_mA____I__3": {
+          "parameter": "Fixed output voltage accuracy",
+          "symbol": "VO",
+          "min": -3,
+          "typ": null,
+          "max": 3,
+          "unit": "%",
+          "conditions": "VI = 2.5 V to 6.0 V; 0 mA <= IO <= 1.2 A"
+        },
         "VO_VI___3_6_V_to_6_0_V__IO___0_mA": {
           "parameter": "Fixed output voltage accuracy",
           "symbol": "VO",
@@ -904,6 +1098,24 @@
           "max": 3,
           "unit": "%",
           "conditions": "VI = 3.6 V to 6.0 V; 0 mA <= IO <= 1.2 A"
+        },
+        "Line_regulation": {
+          "parameter": "Line regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 0,
+          "max": null,
+          "unit": "%/V",
+          "conditions": "VI = VO + 0.5 V (min. 2.5 V) to 6.0 V, IO = 10 mA"
+        },
+        "Load_regulation": {
+          "parameter": "Load regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 0,
+          "max": null,
+          "unit": "%/mA",
+          "conditions": "IO = 10 mA to 1200 mA"
         },
         "Ilkg(SW)": {
           "parameter": "Leakage current into SW pin",
@@ -986,30 +1198,55 @@
           "source_page": 13,
           "value_hint": null,
           "value_hints": [],
-          "snippet": "TPS62040 TPS62042, TPS62043 TPS62044, TPS62046 SLVS463B − JUNE 2003 − REVISED OCTOBER 2005 www.ti.com 14 Inductor Selection The TPS6204x typically uses a 6.2-µH output inductor. Larger or smaller indu"
+          "snippet": "TPS62040 TPS62042, TPS62043 TPS62044, TPS62046 SLVS463B − JUNE 2003 − REVISED OCTOBER 2005 www.ti.com 14 Inductor Selection The TPS6204x typically uses a 6.2-µH output inductor. Larger or smaller indu",
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.component_rules",
+            "source_page": 13
+          }
         },
         {
           "role": "output_capacitor",
           "source_page": 14,
           "value_hint": null,
           "value_hints": [],
-          "snippet": "TPS62040 TPS62042, TPS62043 TPS62044, TPS62046 SLVS463B − JUNE 2003 − REVISED OCTOBER 2005 www.ti.com 15 Output Capacitor Selection The advanced fast response voltage mode control scheme of the TPS620"
+          "snippet": "TPS62040 TPS62042, TPS62043 TPS62044, TPS62046 SLVS463B − JUNE 2003 − REVISED OCTOBER 2005 www.ti.com 15 Output Capacitor Selection The advanced fast response voltage mode control scheme of the TPS620",
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.component_rules",
+            "source_page": 14
+          }
         }
       ],
       "layout_hints": [
         {
           "hint": "TPS62040 TPS62042, TPS62043 TPS62044, TPS62046 SLVS463B − JUNE 2003 − REVISED OCTOBER 2005 www.ti.com 17 TYPICAL APPLICATIONS 7 VIN VIN EN MODE SW FB PGND PGND SW GND 2 3 1 4 9 10 5 8 6 TPS62046 VI Li",
-          "source_page": 16
+          "source_page": 16,
+          "origin": {
+            "kind": "source_recommendation",
+            "method": "design_info_utils.layout_keywords",
+            "source_page": 16
+          }
         }
       ],
       "topology_hints": [
         {
           "hint": "TPS62040 TPS62042, TPS62043 TPS62044, TPS62046 SLVS463B − JUNE 2003 − REVISED OCTOBER 2005 www.ti.com 13 APPLICATION INFORMATION ADJUSTABLE OUTPUT VOLTAGE VERSION When the adjustable output voltage ve",
-          "source_page": 12
+          "source_page": 12,
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.topology_keywords",
+            "source_page": 12
+          }
         },
         {
           "hint": "TPS62040 TPS62042, TPS62043 TPS62044, TPS62046 SLVS463B − JUNE 2003 − REVISED OCTOBER 2005 www.ti.com 17 TYPICAL APPLICATIONS 7 VIN VIN EN MODE SW FB PGND PGND SW GND 2 3 1 4 9 10 5 8 6 TPS62046 VI Li",
-          "source_page": 16
+          "source_page": 16,
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.topology_keywords",
+            "source_page": 16
+          }
         }
       ],
       "typical_application": {
@@ -1042,27 +1279,52 @@
           {
             "page": 12,
             "title": null,
-            "content_type": "application"
+            "content_type": "application",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 12
+            }
           },
           {
             "page": 13,
             "title": null,
-            "content_type": "application"
+            "content_type": "application",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 13
+            }
           },
           {
             "page": 14,
             "title": null,
-            "content_type": "application"
+            "content_type": "application",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 14
+            }
           },
           {
             "page": 15,
             "title": null,
-            "content_type": "layout"
+            "content_type": "layout",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 15
+            }
           },
           {
             "page": 16,
             "title": null,
-            "content_type": "application"
+            "content_type": "application",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 16
+            }
           }
         ],
         "total_pages": 5

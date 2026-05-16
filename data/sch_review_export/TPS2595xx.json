@@ -219,9 +219,9 @@
     "VUVP_VIN_Falling": {
       "parameter": "IN Undervoltage Protection Threshold (Falling)",
       "symbol": "VUVP",
-      "min": 2.33,
-      "typ": 2.43,
-      "max": 2.53,
+      "min": 2.58,
+      "typ": 2.68,
+      "max": 2.78,
       "unit": "V",
       "conditions": "VIN Falling"
     },
@@ -234,6 +234,15 @@
       "unit": "V",
       "conditions": "VIN Rising"
     },
+    "VUVP_VIN_Falling__2": {
+      "parameter": "IN Undervoltage Protection Threshold (Falling)",
+      "symbol": "VUVP",
+      "min": 2.33,
+      "typ": 2.43,
+      "max": 2.53,
+      "unit": "V",
+      "conditions": "VIN Falling"
+    },
     "VOVC": {
       "parameter": "Overvoltage clamp threshold",
       "symbol": "VOVC",
@@ -244,6 +253,15 @@
       "conditions": "VIN Rising, ROUT = 10 kΩ"
     },
     "VOVC_VIN_Rising__ROUT___10_k": {
+      "parameter": "Overvoltage clamp threshold",
+      "symbol": "VOVC",
+      "min": 5.5,
+      "typ": 5.7,
+      "max": 5.9,
+      "unit": "V",
+      "conditions": "VIN Rising, ROUT = 10 kΩ"
+    },
+    "VOVC_VIN_Rising__ROUT___10_k__2": {
       "parameter": "Overvoltage clamp threshold",
       "symbol": "VOVC",
       "min": 13.3,
@@ -262,6 +280,15 @@
       "conditions": "VIN ≥ VOVC, IOUT = 10 mA"
     },
     "VCLAMP_VIN___VOVC__IOUT___10_mA": {
+      "parameter": "Output voltage while clamping",
+      "symbol": "VCLAMP",
+      "min": 5.2,
+      "typ": 5.45,
+      "max": 5.7,
+      "unit": "V",
+      "conditions": "VIN ≥ VOVC, IOUT = 10 mA"
+    },
+    "VCLAMP_VIN___VOVC__IOUT___10_mA__2": {
       "parameter": "Output voltage while clamping",
       "symbol": "VCLAMP",
       "min": 13,
@@ -657,9 +684,9 @@
         "VUVP_VIN_Falling": {
           "parameter": "IN Undervoltage Protection Threshold (Falling)",
           "symbol": "VUVP",
-          "min": 2.33,
-          "typ": 2.43,
-          "max": 2.53,
+          "min": 2.58,
+          "typ": 2.68,
+          "max": 2.78,
           "unit": "V",
           "conditions": "VIN Falling"
         },
@@ -672,6 +699,15 @@
           "unit": "V",
           "conditions": "VIN Rising"
         },
+        "VUVP_VIN_Falling__2": {
+          "parameter": "IN Undervoltage Protection Threshold (Falling)",
+          "symbol": "VUVP",
+          "min": 2.33,
+          "typ": 2.43,
+          "max": 2.53,
+          "unit": "V",
+          "conditions": "VIN Falling"
+        },
         "VOVC": {
           "parameter": "Overvoltage clamp threshold",
           "symbol": "VOVC",
@@ -682,6 +718,15 @@
           "conditions": "VIN Rising, ROUT = 10 kΩ"
         },
         "VOVC_VIN_Rising__ROUT___10_k": {
+          "parameter": "Overvoltage clamp threshold",
+          "symbol": "VOVC",
+          "min": 5.5,
+          "typ": 5.7,
+          "max": 5.9,
+          "unit": "V",
+          "conditions": "VIN Rising, ROUT = 10 kΩ"
+        },
+        "VOVC_VIN_Rising__ROUT___10_k__2": {
           "parameter": "Overvoltage clamp threshold",
           "symbol": "VOVC",
           "min": 13.3,
@@ -700,6 +745,15 @@
           "conditions": "VIN ≥ VOVC, IOUT = 10 mA"
         },
         "VCLAMP_VIN___VOVC__IOUT___10_mA": {
+          "parameter": "Output voltage while clamping",
+          "symbol": "VCLAMP",
+          "min": 5.2,
+          "typ": 5.45,
+          "max": 5.7,
+          "unit": "V",
+          "conditions": "VIN ≥ VOVC, IOUT = 10 mA"
+        },
+        "VCLAMP_VIN___VOVC__IOUT___10_mA__2": {
           "parameter": "Output voltage while clamping",
           "symbol": "VCLAMP",
           "min": 13,
@@ -885,13 +939,23 @@
       "layout_hints": [
         {
           "hint": "8 7 6 5 1 2 3 4 GND GND ILM OUT dVdt EN/UVLO IN IN VIN Power Ground Top Layer Bottom Layer Ground Plane Via to Bottom Ground Plane Power Ground VOUT Bottom Ground Layer High Frequency Bypass Cap",
-          "source_page": 34
+          "source_page": 34,
+          "origin": {
+            "kind": "source_recommendation",
+            "method": "design_info_utils.layout_keywords",
+            "source_page": 34
+          }
         }
       ],
       "supply_recommendations": [
         {
           "hint": "8 7 6 5 1 2 3 4 GND GND ILM OUT dVdt EN/UVLO IN IN VIN Power Ground Top Layer Bottom Layer Ground Plane Via to Bottom Ground Plane Power Ground VOUT Bottom Ground Layer High Frequency Bypass Cap",
-          "source_page": 34
+          "source_page": 34,
+          "origin": {
+            "kind": "source_recommendation",
+            "method": "design_info_utils.supply_keywords",
+            "source_page": 34
+          }
         }
       ],
       "application_notes": [
@@ -911,7 +975,12 @@
           {
             "page": 34,
             "title": null,
-            "content_type": "layout"
+            "content_type": "layout",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 34
+            }
           }
         ],
         "total_pages": 1

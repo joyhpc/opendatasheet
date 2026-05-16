@@ -127,6 +127,14 @@
       "unit": "°C",
       "conditions": null
     },
+    "Lead_temperature": {
+      "parameter": "Lead temperature",
+      "symbol": null,
+      "min": null,
+      "max": 260,
+      "unit": "°C",
+      "conditions": "1.6 mm (1/16 in) from case for 10 s"
+    },
     "Tstg": {
       "parameter": "Storage temperature range",
       "symbol": "Tstg",
@@ -152,7 +160,368 @@
       "conditions": "Charged device model (CDM), per JEDEC specification JESD22-C101, all pins"
     }
   },
-  "electrical_parameters": {},
+  "electrical_parameters": {
+    "Input_regulation": {
+      "parameter": "Input regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 0.01,
+      "max": 0.02,
+      "unit": "%/V",
+      "conditions": "VI – VO = –3 V to –40 V"
+    },
+    "Input_regulation_VI___VO____3_V_to__40_V": {
+      "parameter": "Input regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 0.02,
+      "max": 0.05,
+      "unit": "%/V",
+      "conditions": "VI – VO = –3 V to –40 V"
+    },
+    "Input_regulation_VI___VO____3_V_to__40_V__2": {
+      "parameter": "Input regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 0.01,
+      "max": 0.04,
+      "unit": "%/V",
+      "conditions": "VI – VO = –3 V to –40 V"
+    },
+    "Input_regulation_VI___VO____3_V_to__40_V__3": {
+      "parameter": "Input regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 0.02,
+      "max": 0.07,
+      "unit": "%/V",
+      "conditions": "VI – VO = –3 V to –40 V"
+    },
+    "Ripple_rejection": {
+      "parameter": "Ripple rejection",
+      "symbol": null,
+      "min": null,
+      "typ": 60,
+      "max": null,
+      "unit": "dB",
+      "conditions": "VO = –10 V, f = 120 Hz"
+    },
+    "Ripple_rejection_VO____10_V__f___120_Hz__CADJ": {
+      "parameter": "Ripple rejection",
+      "symbol": null,
+      "min": 66,
+      "typ": 77,
+      "max": null,
+      "unit": "dB",
+      "conditions": "VO = –10 V, f = 120 Hz, CADJ = 10 μF"
+    },
+    "Ripple_rejection_VO____10_V__f___120_Hz": {
+      "parameter": "Ripple rejection",
+      "symbol": null,
+      "min": null,
+      "typ": 60,
+      "max": null,
+      "unit": "dB",
+      "conditions": "VO = –10 V, f = 120 Hz"
+    },
+    "Ripple_rejection_VO____10_V__f___120_Hz__CADJ__2": {
+      "parameter": "Ripple rejection",
+      "symbol": null,
+      "min": 66,
+      "typ": 77,
+      "max": null,
+      "unit": "dB",
+      "conditions": "VO = –10 V, f = 120 Hz, CADJ = 10 μF"
+    },
+    "Output_regulation": {
+      "parameter": "Output regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 25,
+      "max": null,
+      "unit": "mV",
+      "conditions": "IO = 10 mA to 1.5 A, |VO| ≤ 5 V"
+    },
+    "Output_regulation_IO___10_mA_to_1_5_A___VO____5": {
+      "parameter": "Output regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 0.3,
+      "max": 0.5,
+      "unit": "%",
+      "conditions": "IO = 10 mA to 1.5 A, |VO| ≥ 5 V"
+    },
+    "Output_regulation_IO___10_mA_to_1_5_A___VO____5__2": {
+      "parameter": "Output regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 50,
+      "max": null,
+      "unit": "mV",
+      "conditions": "IO = 10 mA to 1.5 A, |VO| ≤ 5 V"
+    },
+    "Output_regulation_IO___10_mA_to_1_5_A___VO____5__3": {
+      "parameter": "Output regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 1,
+      "max": null,
+      "unit": "%",
+      "conditions": "IO = 10 mA to 1.5 A, |VO| ≥ 5 V"
+    },
+    "Output_regulation_IO___10_mA_to_1_5_A___VO____5__4": {
+      "parameter": "Output regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 50,
+      "max": null,
+      "unit": "mV",
+      "conditions": "IO = 10 mA to 1.5 A, |VO| ≤ 5 V"
+    },
+    "Output_regulation_IO___10_mA_to_1_5_A___VO____5__5": {
+      "parameter": "Output regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 0.3,
+      "max": 1,
+      "unit": "%",
+      "conditions": "IO = 10 mA to 1.5 A, |VO| ≥ 5 V"
+    },
+    "Output_regulation_IO___10_mA_to_1_5_A___VO____5__6": {
+      "parameter": "Output regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 70,
+      "max": null,
+      "unit": "mV",
+      "conditions": "IO = 10 mA to 1.5 A, |VO| ≤ 5 V"
+    },
+    "Output_regulation_IO___10_mA_to_1_5_A___VO____5__7": {
+      "parameter": "Output regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 1.5,
+      "max": null,
+      "unit": "%",
+      "conditions": "IO = 10 mA to 1.5 A, |VO| ≥ 5 V"
+    },
+    "Output_voltage_change_with_tem": {
+      "parameter": "Output-voltage change with temperature",
+      "symbol": null,
+      "min": null,
+      "typ": 0.6,
+      "max": null,
+      "unit": "%",
+      "conditions": "TJ = MIN to MAX"
+    },
+    "Output_voltage_change_with_tem_TJ___MIN_to_MAX": {
+      "parameter": "Output-voltage change with temperature",
+      "symbol": null,
+      "min": null,
+      "typ": 0.6,
+      "max": null,
+      "unit": "%",
+      "conditions": "TJ = MIN to MAX"
+    },
+    "Output_voltage_long_term_drift": {
+      "parameter": "Output-voltage long-term drift",
+      "symbol": null,
+      "min": null,
+      "typ": 0.3,
+      "max": 1,
+      "unit": "%",
+      "conditions": "After 1000 h at TJ = MAX and VI – VO = –40 V"
+    },
+    "Output_voltage_long_term_drift_After_1000_h_at_TJ___MAX_and_V": {
+      "parameter": "Output-voltage long-term drift",
+      "symbol": null,
+      "min": null,
+      "typ": 0.3,
+      "max": 1,
+      "unit": "%",
+      "conditions": "After 1000 h at TJ = MAX and VI – VO = –40 V"
+    },
+    "Output_noise_voltage": {
+      "parameter": "Output noise voltage",
+      "symbol": null,
+      "min": null,
+      "typ": 0.003,
+      "max": null,
+      "unit": "%",
+      "conditions": "f = 10 Hz to 10 kHz, TJ = 25°C"
+    },
+    "Output_noise_voltage_f___10_Hz_to_10_kHz__TJ___25_C": {
+      "parameter": "Output noise voltage",
+      "symbol": null,
+      "min": null,
+      "typ": 0.003,
+      "max": null,
+      "unit": "%",
+      "conditions": "f = 10 Hz to 10 kHz, TJ = 25°C"
+    },
+    "Minimum_output_current_to_main": {
+      "parameter": "Minimum output current to maintain regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 2.5,
+      "max": 10,
+      "unit": "mA",
+      "conditions": "|VI – VO| ≤ 40 V"
+    },
+    "Minimum_output_current_to_main_VI___VO____10_V": {
+      "parameter": "Minimum output current to maintain regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 1.2,
+      "max": 3,
+      "unit": "mA",
+      "conditions": "|VI – VO| ≤ 10 V"
+    },
+    "Minimum_output_current_to_main_VI___VO____40_V": {
+      "parameter": "Minimum output current to maintain regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 2.5,
+      "max": 10,
+      "unit": "mA",
+      "conditions": "|VI – VO| ≤ 40 V"
+    },
+    "Minimum_output_current_to_main_VI___VO____10_V__2": {
+      "parameter": "Minimum output current to maintain regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 1.5,
+      "max": 6,
+      "unit": "mA",
+      "conditions": "|VI – VO| ≤ 10 V"
+    },
+    "Peak_output_current": {
+      "parameter": "Peak output current",
+      "symbol": null,
+      "min": 1.5,
+      "typ": 2.2,
+      "max": null,
+      "unit": "A",
+      "conditions": "|VI – VO| ≤ 15 V"
+    },
+    "Peak_output_current_VI___VO____40_V__TJ___25_C": {
+      "parameter": "Peak output current",
+      "symbol": null,
+      "min": 0.24,
+      "typ": 0.4,
+      "max": null,
+      "unit": "A",
+      "conditions": "|VI – VO| ≤ 40 V, TJ = 25°C"
+    },
+    "Peak_output_current_VI___VO____15_V": {
+      "parameter": "Peak output current",
+      "symbol": null,
+      "min": 1.5,
+      "typ": 2.2,
+      "max": null,
+      "unit": "A",
+      "conditions": "|VI – VO| ≤ 15 V"
+    },
+    "Peak_output_current_VI___VO____40_V__TJ___25_C__2": {
+      "parameter": "Peak output current",
+      "symbol": null,
+      "min": 0.15,
+      "typ": 0.4,
+      "max": null,
+      "unit": "A",
+      "conditions": "|VI – VO| ≤ 40 V, TJ = 25°C"
+    },
+    "ADJUSTMENT_current": {
+      "parameter": "ADJUSTMENT current",
+      "symbol": null,
+      "min": null,
+      "typ": 65,
+      "max": 100,
+      "unit": "μA",
+      "conditions": null
+    },
+    "ADJUSTMENT_current__2": {
+      "parameter": "ADJUSTMENT current",
+      "symbol": null,
+      "min": null,
+      "typ": 65,
+      "max": 100,
+      "unit": "μA",
+      "conditions": null
+    },
+    "Change_in_ADJUSTMENT_current": {
+      "parameter": "Change in ADJUSTMENT current",
+      "symbol": null,
+      "min": null,
+      "typ": 2,
+      "max": 5,
+      "unit": "μA",
+      "conditions": "VI – VO = –2.5 V to –40 V, IO = 10 mA to MAX, TJ = 25°C"
+    },
+    "Change_in_ADJUSTMENT_current_VI___VO____2_5_V_to__40_V__IO": {
+      "parameter": "Change in ADJUSTMENT current",
+      "symbol": null,
+      "min": null,
+      "typ": 2,
+      "max": 5,
+      "unit": "μA",
+      "conditions": "VI – VO = –2.5 V to –40 V, IO = 10 mA to MAX, TJ = 25°C"
+    },
+    "Reference_voltage__OUTPUT_to_A": {
+      "parameter": "Reference voltage (OUTPUT to ADJUSTMENT)",
+      "symbol": null,
+      "min": -1.225,
+      "typ": -1.25,
+      "max": -1.275,
+      "unit": "V",
+      "conditions": "VI – VO = –3 V to –40 V, IO = 10 mA to 1.5 A, P ≤ rated dissipation"
+    },
+    "Reference_voltage__OUTPUT_to_A_VI___VO____3_V_to__40_V__IO": {
+      "parameter": "Reference voltage (OUTPUT to ADJUSTMENT)",
+      "symbol": null,
+      "min": -1.2,
+      "typ": -1.25,
+      "max": -1.3,
+      "unit": "V",
+      "conditions": "VI – VO = –3 V to –40 V, IO = 10 mA to 1.5 A, P ≤ rated dissipation"
+    },
+    "Reference_voltage__OUTPUT_to_A_VI___VO____3_V_to__40_V__IO__2": {
+      "parameter": "Reference voltage (OUTPUT to ADJUSTMENT)",
+      "symbol": null,
+      "min": -1.213,
+      "typ": -1.25,
+      "max": -1.287,
+      "unit": "V",
+      "conditions": "VI – VO = –3 V to –40 V, IO = 10 mA to 1.5 A, P ≤ rated dissipation"
+    },
+    "Reference_voltage__OUTPUT_to_A_VI___VO____3_V_to__40_V__IO__3": {
+      "parameter": "Reference voltage (OUTPUT to ADJUSTMENT)",
+      "symbol": null,
+      "min": -1.2,
+      "typ": -1.25,
+      "max": -1.3,
+      "unit": "V",
+      "conditions": "VI – VO = –3 V to –40 V, IO = 10 mA to 1.5 A, P ≤ rated dissipation"
+    },
+    "Thermal_regulation": {
+      "parameter": "Thermal regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 0.002,
+      "max": 0.02,
+      "unit": "%/W",
+      "conditions": "Initial TJ = 25°C, 10-ms pulse"
+    },
+    "Thermal_regulation_Initial_TJ___25_C__10_ms_pulse": {
+      "parameter": "Thermal regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 0.003,
+      "max": 0.04,
+      "unit": "%/W",
+      "conditions": "Initial TJ = 25°C, 10-ms pulse"
+    }
+  },
   "drc_hints": {
     "vin_abs_max": {
       "value": -40,
@@ -293,6 +662,14 @@
           "unit": "°C",
           "conditions": null
         },
+        "Lead_temperature": {
+          "parameter": "Lead temperature",
+          "symbol": null,
+          "min": null,
+          "max": 260,
+          "unit": "°C",
+          "conditions": "1.6 mm (1/16 in) from case for 10 s"
+        },
         "Tstg": {
           "parameter": "Storage temperature range",
           "symbol": "Tstg",
@@ -318,7 +695,368 @@
           "conditions": "Charged device model (CDM), per JEDEC specification JESD22-C101, all pins"
         }
       },
-      "electrical_parameters": {},
+      "electrical_parameters": {
+        "Input_regulation": {
+          "parameter": "Input regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 0.01,
+          "max": 0.02,
+          "unit": "%/V",
+          "conditions": "VI – VO = –3 V to –40 V"
+        },
+        "Input_regulation_VI___VO____3_V_to__40_V": {
+          "parameter": "Input regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 0.02,
+          "max": 0.05,
+          "unit": "%/V",
+          "conditions": "VI – VO = –3 V to –40 V"
+        },
+        "Input_regulation_VI___VO____3_V_to__40_V__2": {
+          "parameter": "Input regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 0.01,
+          "max": 0.04,
+          "unit": "%/V",
+          "conditions": "VI – VO = –3 V to –40 V"
+        },
+        "Input_regulation_VI___VO____3_V_to__40_V__3": {
+          "parameter": "Input regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 0.02,
+          "max": 0.07,
+          "unit": "%/V",
+          "conditions": "VI – VO = –3 V to –40 V"
+        },
+        "Ripple_rejection": {
+          "parameter": "Ripple rejection",
+          "symbol": null,
+          "min": null,
+          "typ": 60,
+          "max": null,
+          "unit": "dB",
+          "conditions": "VO = –10 V, f = 120 Hz"
+        },
+        "Ripple_rejection_VO____10_V__f___120_Hz__CADJ": {
+          "parameter": "Ripple rejection",
+          "symbol": null,
+          "min": 66,
+          "typ": 77,
+          "max": null,
+          "unit": "dB",
+          "conditions": "VO = –10 V, f = 120 Hz, CADJ = 10 μF"
+        },
+        "Ripple_rejection_VO____10_V__f___120_Hz": {
+          "parameter": "Ripple rejection",
+          "symbol": null,
+          "min": null,
+          "typ": 60,
+          "max": null,
+          "unit": "dB",
+          "conditions": "VO = –10 V, f = 120 Hz"
+        },
+        "Ripple_rejection_VO____10_V__f___120_Hz__CADJ__2": {
+          "parameter": "Ripple rejection",
+          "symbol": null,
+          "min": 66,
+          "typ": 77,
+          "max": null,
+          "unit": "dB",
+          "conditions": "VO = –10 V, f = 120 Hz, CADJ = 10 μF"
+        },
+        "Output_regulation": {
+          "parameter": "Output regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 25,
+          "max": null,
+          "unit": "mV",
+          "conditions": "IO = 10 mA to 1.5 A, |VO| ≤ 5 V"
+        },
+        "Output_regulation_IO___10_mA_to_1_5_A___VO____5": {
+          "parameter": "Output regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 0.3,
+          "max": 0.5,
+          "unit": "%",
+          "conditions": "IO = 10 mA to 1.5 A, |VO| ≥ 5 V"
+        },
+        "Output_regulation_IO___10_mA_to_1_5_A___VO____5__2": {
+          "parameter": "Output regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 50,
+          "max": null,
+          "unit": "mV",
+          "conditions": "IO = 10 mA to 1.5 A, |VO| ≤ 5 V"
+        },
+        "Output_regulation_IO___10_mA_to_1_5_A___VO____5__3": {
+          "parameter": "Output regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 1,
+          "max": null,
+          "unit": "%",
+          "conditions": "IO = 10 mA to 1.5 A, |VO| ≥ 5 V"
+        },
+        "Output_regulation_IO___10_mA_to_1_5_A___VO____5__4": {
+          "parameter": "Output regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 50,
+          "max": null,
+          "unit": "mV",
+          "conditions": "IO = 10 mA to 1.5 A, |VO| ≤ 5 V"
+        },
+        "Output_regulation_IO___10_mA_to_1_5_A___VO____5__5": {
+          "parameter": "Output regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 0.3,
+          "max": 1,
+          "unit": "%",
+          "conditions": "IO = 10 mA to 1.5 A, |VO| ≥ 5 V"
+        },
+        "Output_regulation_IO___10_mA_to_1_5_A___VO____5__6": {
+          "parameter": "Output regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 70,
+          "max": null,
+          "unit": "mV",
+          "conditions": "IO = 10 mA to 1.5 A, |VO| ≤ 5 V"
+        },
+        "Output_regulation_IO___10_mA_to_1_5_A___VO____5__7": {
+          "parameter": "Output regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 1.5,
+          "max": null,
+          "unit": "%",
+          "conditions": "IO = 10 mA to 1.5 A, |VO| ≥ 5 V"
+        },
+        "Output_voltage_change_with_tem": {
+          "parameter": "Output-voltage change with temperature",
+          "symbol": null,
+          "min": null,
+          "typ": 0.6,
+          "max": null,
+          "unit": "%",
+          "conditions": "TJ = MIN to MAX"
+        },
+        "Output_voltage_change_with_tem_TJ___MIN_to_MAX": {
+          "parameter": "Output-voltage change with temperature",
+          "symbol": null,
+          "min": null,
+          "typ": 0.6,
+          "max": null,
+          "unit": "%",
+          "conditions": "TJ = MIN to MAX"
+        },
+        "Output_voltage_long_term_drift": {
+          "parameter": "Output-voltage long-term drift",
+          "symbol": null,
+          "min": null,
+          "typ": 0.3,
+          "max": 1,
+          "unit": "%",
+          "conditions": "After 1000 h at TJ = MAX and VI – VO = –40 V"
+        },
+        "Output_voltage_long_term_drift_After_1000_h_at_TJ___MAX_and_V": {
+          "parameter": "Output-voltage long-term drift",
+          "symbol": null,
+          "min": null,
+          "typ": 0.3,
+          "max": 1,
+          "unit": "%",
+          "conditions": "After 1000 h at TJ = MAX and VI – VO = –40 V"
+        },
+        "Output_noise_voltage": {
+          "parameter": "Output noise voltage",
+          "symbol": null,
+          "min": null,
+          "typ": 0.003,
+          "max": null,
+          "unit": "%",
+          "conditions": "f = 10 Hz to 10 kHz, TJ = 25°C"
+        },
+        "Output_noise_voltage_f___10_Hz_to_10_kHz__TJ___25_C": {
+          "parameter": "Output noise voltage",
+          "symbol": null,
+          "min": null,
+          "typ": 0.003,
+          "max": null,
+          "unit": "%",
+          "conditions": "f = 10 Hz to 10 kHz, TJ = 25°C"
+        },
+        "Minimum_output_current_to_main": {
+          "parameter": "Minimum output current to maintain regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 2.5,
+          "max": 10,
+          "unit": "mA",
+          "conditions": "|VI – VO| ≤ 40 V"
+        },
+        "Minimum_output_current_to_main_VI___VO____10_V": {
+          "parameter": "Minimum output current to maintain regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 1.2,
+          "max": 3,
+          "unit": "mA",
+          "conditions": "|VI – VO| ≤ 10 V"
+        },
+        "Minimum_output_current_to_main_VI___VO____40_V": {
+          "parameter": "Minimum output current to maintain regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 2.5,
+          "max": 10,
+          "unit": "mA",
+          "conditions": "|VI – VO| ≤ 40 V"
+        },
+        "Minimum_output_current_to_main_VI___VO____10_V__2": {
+          "parameter": "Minimum output current to maintain regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 1.5,
+          "max": 6,
+          "unit": "mA",
+          "conditions": "|VI – VO| ≤ 10 V"
+        },
+        "Peak_output_current": {
+          "parameter": "Peak output current",
+          "symbol": null,
+          "min": 1.5,
+          "typ": 2.2,
+          "max": null,
+          "unit": "A",
+          "conditions": "|VI – VO| ≤ 15 V"
+        },
+        "Peak_output_current_VI___VO____40_V__TJ___25_C": {
+          "parameter": "Peak output current",
+          "symbol": null,
+          "min": 0.24,
+          "typ": 0.4,
+          "max": null,
+          "unit": "A",
+          "conditions": "|VI – VO| ≤ 40 V, TJ = 25°C"
+        },
+        "Peak_output_current_VI___VO____15_V": {
+          "parameter": "Peak output current",
+          "symbol": null,
+          "min": 1.5,
+          "typ": 2.2,
+          "max": null,
+          "unit": "A",
+          "conditions": "|VI – VO| ≤ 15 V"
+        },
+        "Peak_output_current_VI___VO____40_V__TJ___25_C__2": {
+          "parameter": "Peak output current",
+          "symbol": null,
+          "min": 0.15,
+          "typ": 0.4,
+          "max": null,
+          "unit": "A",
+          "conditions": "|VI – VO| ≤ 40 V, TJ = 25°C"
+        },
+        "ADJUSTMENT_current": {
+          "parameter": "ADJUSTMENT current",
+          "symbol": null,
+          "min": null,
+          "typ": 65,
+          "max": 100,
+          "unit": "μA",
+          "conditions": null
+        },
+        "ADJUSTMENT_current__2": {
+          "parameter": "ADJUSTMENT current",
+          "symbol": null,
+          "min": null,
+          "typ": 65,
+          "max": 100,
+          "unit": "μA",
+          "conditions": null
+        },
+        "Change_in_ADJUSTMENT_current": {
+          "parameter": "Change in ADJUSTMENT current",
+          "symbol": null,
+          "min": null,
+          "typ": 2,
+          "max": 5,
+          "unit": "μA",
+          "conditions": "VI – VO = –2.5 V to –40 V, IO = 10 mA to MAX, TJ = 25°C"
+        },
+        "Change_in_ADJUSTMENT_current_VI___VO____2_5_V_to__40_V__IO": {
+          "parameter": "Change in ADJUSTMENT current",
+          "symbol": null,
+          "min": null,
+          "typ": 2,
+          "max": 5,
+          "unit": "μA",
+          "conditions": "VI – VO = –2.5 V to –40 V, IO = 10 mA to MAX, TJ = 25°C"
+        },
+        "Reference_voltage__OUTPUT_to_A": {
+          "parameter": "Reference voltage (OUTPUT to ADJUSTMENT)",
+          "symbol": null,
+          "min": -1.225,
+          "typ": -1.25,
+          "max": -1.275,
+          "unit": "V",
+          "conditions": "VI – VO = –3 V to –40 V, IO = 10 mA to 1.5 A, P ≤ rated dissipation"
+        },
+        "Reference_voltage__OUTPUT_to_A_VI___VO____3_V_to__40_V__IO": {
+          "parameter": "Reference voltage (OUTPUT to ADJUSTMENT)",
+          "symbol": null,
+          "min": -1.2,
+          "typ": -1.25,
+          "max": -1.3,
+          "unit": "V",
+          "conditions": "VI – VO = –3 V to –40 V, IO = 10 mA to 1.5 A, P ≤ rated dissipation"
+        },
+        "Reference_voltage__OUTPUT_to_A_VI___VO____3_V_to__40_V__IO__2": {
+          "parameter": "Reference voltage (OUTPUT to ADJUSTMENT)",
+          "symbol": null,
+          "min": -1.213,
+          "typ": -1.25,
+          "max": -1.287,
+          "unit": "V",
+          "conditions": "VI – VO = –3 V to –40 V, IO = 10 mA to 1.5 A, P ≤ rated dissipation"
+        },
+        "Reference_voltage__OUTPUT_to_A_VI___VO____3_V_to__40_V__IO__3": {
+          "parameter": "Reference voltage (OUTPUT to ADJUSTMENT)",
+          "symbol": null,
+          "min": -1.2,
+          "typ": -1.25,
+          "max": -1.3,
+          "unit": "V",
+          "conditions": "VI – VO = –3 V to –40 V, IO = 10 mA to 1.5 A, P ≤ rated dissipation"
+        },
+        "Thermal_regulation": {
+          "parameter": "Thermal regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 0.002,
+          "max": 0.02,
+          "unit": "%/W",
+          "conditions": "Initial TJ = 25°C, 10-ms pulse"
+        },
+        "Thermal_regulation_Initial_TJ___25_C__10_ms_pulse": {
+          "parameter": "Thermal regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 0.003,
+          "max": 0.04,
+          "unit": "%/W",
+          "conditions": "Initial TJ = 25°C, 10-ms pulse"
+        }
+      },
       "drc_hints": {
         "vin_abs_max": {
           "value": -40,

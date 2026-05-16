@@ -80,6 +80,30 @@
     }
   },
   "absolute_maximum_ratings": {
+    "Input_Output_Voltage_to_GND": {
+      "parameter": "Input/Output Voltage to GND",
+      "symbol": null,
+      "min": -0.3,
+      "max": 8,
+      "unit": "V",
+      "conditions": null
+    },
+    "Feedback_Noise_Reduction_Volta": {
+      "parameter": "Feedback/Noise-Reduction Voltage to GND",
+      "symbol": null,
+      "min": -0.3,
+      "max": 3.6,
+      "unit": "V",
+      "conditions": null
+    },
+    "Enable_Voltage_to_GND": {
+      "parameter": "Enable Voltage to GND",
+      "symbol": null,
+      "min": -0.3,
+      "max": 7,
+      "unit": "V",
+      "conditions": null
+    },
     "θJA": {
       "parameter": "Package Thermal Resistance",
       "symbol": "θJA",
@@ -102,6 +126,30 @@
       "min": -65,
       "max": 150,
       "unit": "°C",
+      "conditions": null
+    },
+    "Lead_Temperature__Soldering__1": {
+      "parameter": "Lead Temperature (Soldering, 10s)",
+      "symbol": null,
+      "min": null,
+      "max": 260,
+      "unit": "°C",
+      "conditions": null
+    },
+    "ESD_HBM": {
+      "parameter": "ESD HBM",
+      "symbol": null,
+      "min": null,
+      "max": 6000,
+      "unit": "V",
+      "conditions": null
+    },
+    "ESD_CDM": {
+      "parameter": "ESD CDM",
+      "symbol": null,
+      "min": null,
+      "max": 1000,
+      "unit": "V",
       "conditions": null
     }
   },
@@ -151,7 +199,25 @@
       "unit": "V",
       "conditions": "VIN rising, RL = 1kΩ"
     },
+    "UVLO_Hysteresis": {
+      "parameter": "UVLO Hysteresis",
+      "symbol": null,
+      "min": null,
+      "typ": 150,
+      "max": null,
+      "unit": "mV",
+      "conditions": null
+    },
     "VOUT_VIN____VOUT_NOM____0_5V__to_7V": {
+      "parameter": "Output Voltage Accuracy",
+      "symbol": "VOUT",
+      "min": -1,
+      "typ": null,
+      "max": 1,
+      "unit": "%",
+      "conditions": "VIN = (VOUT(NOM) + 0.5V) to 7V, VIN ≥ 2.2V, IOUT = 1mA to 1A"
+    },
+    "VOUT_VIN____VOUT_NOM____0_5V__to_7V__2": {
       "parameter": "Output Voltage Accuracy",
       "symbol": "VOUT",
       "min": -2,
@@ -206,6 +272,15 @@
       "conditions": "VFB = GND or VSNS = GND, VIN ≥ 2.2V, IOUT = 500mA"
     },
     "VDROP_VFB___GND_or_VSNS___GND__VIN": {
+      "parameter": "Dropout Voltage",
+      "symbol": "VDROP",
+      "min": null,
+      "typ": 115,
+      "max": 200,
+      "unit": "mV",
+      "conditions": "VFB = GND or VSNS = GND, VIN ≥ 2.5V, IOUT = 750mA"
+    },
+    "VDROP_VFB___GND_or_VSNS___GND__VIN__2": {
       "parameter": "Dropout Voltage",
       "symbol": "VDROP",
       "min": null,
@@ -335,6 +410,33 @@
       "parameter": "Power Supply Rejection Ratio",
       "symbol": "PSRR",
       "min": null,
+      "typ": 75,
+      "max": null,
+      "unit": "dB",
+      "conditions": "VIN = 4.3V, VOUT(NOM) = 3.3V, IOUT = 750mA, CNR = 10nF, f = 1kHz"
+    },
+    "PSRR_VIN___4_3V__VOUT_NOM____3_3V__2": {
+      "parameter": "Power Supply Rejection Ratio",
+      "symbol": "PSRR",
+      "min": null,
+      "typ": 75,
+      "max": null,
+      "unit": "dB",
+      "conditions": "VIN = 4.3V, VOUT(NOM) = 3.3V, IOUT = 750mA, CNR = 10nF, f = 10kHz"
+    },
+    "PSRR_VIN___4_3V__VOUT_NOM____3_3V__3": {
+      "parameter": "Power Supply Rejection Ratio",
+      "symbol": "PSRR",
+      "min": null,
+      "typ": 65,
+      "max": null,
+      "unit": "dB",
+      "conditions": "VIN = 4.3V, VOUT(NOM) = 3.3V, IOUT = 750mA, CNR = 10nF, f = 100kHz"
+    },
+    "PSRR_VIN___4_3V__VOUT_NOM____3_3V__4": {
+      "parameter": "Power Supply Rejection Ratio",
+      "symbol": "PSRR",
+      "min": null,
       "typ": 55,
       "max": null,
       "unit": "dB",
@@ -350,6 +452,15 @@
       "conditions": "VIN = 4.3V, VOUT(NOM) = 3.3V, IOUT = 100mA, f = 10Hz to 100kHz, CNR = 1nF"
     },
     "en_VIN___4_3V__VOUT_NOM____3_3V": {
+      "parameter": "Output Voltage Noise",
+      "symbol": "en",
+      "min": null,
+      "typ": 36,
+      "max": null,
+      "unit": "µVRMS",
+      "conditions": "VIN = 4.3V, VOUT(NOM) = 3.3V, IOUT = 100mA, f = 10Hz to 100kHz, CNR = 10nF"
+    },
+    "en_VIN___4_3V__VOUT_NOM____3_3V__2": {
       "parameter": "Output Voltage Noise",
       "symbol": "en",
       "min": null,
@@ -516,6 +627,30 @@
     },
     "electrical": {
       "absolute_maximum_ratings": {
+        "Input_Output_Voltage_to_GND": {
+          "parameter": "Input/Output Voltage to GND",
+          "symbol": null,
+          "min": -0.3,
+          "max": 8,
+          "unit": "V",
+          "conditions": null
+        },
+        "Feedback_Noise_Reduction_Volta": {
+          "parameter": "Feedback/Noise-Reduction Voltage to GND",
+          "symbol": null,
+          "min": -0.3,
+          "max": 3.6,
+          "unit": "V",
+          "conditions": null
+        },
+        "Enable_Voltage_to_GND": {
+          "parameter": "Enable Voltage to GND",
+          "symbol": null,
+          "min": -0.3,
+          "max": 7,
+          "unit": "V",
+          "conditions": null
+        },
         "θJA": {
           "parameter": "Package Thermal Resistance",
           "symbol": "θJA",
@@ -538,6 +673,30 @@
           "min": -65,
           "max": 150,
           "unit": "°C",
+          "conditions": null
+        },
+        "Lead_Temperature__Soldering__1": {
+          "parameter": "Lead Temperature (Soldering, 10s)",
+          "symbol": null,
+          "min": null,
+          "max": 260,
+          "unit": "°C",
+          "conditions": null
+        },
+        "ESD_HBM": {
+          "parameter": "ESD HBM",
+          "symbol": null,
+          "min": null,
+          "max": 6000,
+          "unit": "V",
+          "conditions": null
+        },
+        "ESD_CDM": {
+          "parameter": "ESD CDM",
+          "symbol": null,
+          "min": null,
+          "max": 1000,
+          "unit": "V",
           "conditions": null
         }
       },
@@ -587,7 +746,25 @@
           "unit": "V",
           "conditions": "VIN rising, RL = 1kΩ"
         },
+        "UVLO_Hysteresis": {
+          "parameter": "UVLO Hysteresis",
+          "symbol": null,
+          "min": null,
+          "typ": 150,
+          "max": null,
+          "unit": "mV",
+          "conditions": null
+        },
         "VOUT_VIN____VOUT_NOM____0_5V__to_7V": {
+          "parameter": "Output Voltage Accuracy",
+          "symbol": "VOUT",
+          "min": -1,
+          "typ": null,
+          "max": 1,
+          "unit": "%",
+          "conditions": "VIN = (VOUT(NOM) + 0.5V) to 7V, VIN ≥ 2.2V, IOUT = 1mA to 1A"
+        },
+        "VOUT_VIN____VOUT_NOM____0_5V__to_7V__2": {
           "parameter": "Output Voltage Accuracy",
           "symbol": "VOUT",
           "min": -2,
@@ -642,6 +819,15 @@
           "conditions": "VFB = GND or VSNS = GND, VIN ≥ 2.2V, IOUT = 500mA"
         },
         "VDROP_VFB___GND_or_VSNS___GND__VIN": {
+          "parameter": "Dropout Voltage",
+          "symbol": "VDROP",
+          "min": null,
+          "typ": 115,
+          "max": 200,
+          "unit": "mV",
+          "conditions": "VFB = GND or VSNS = GND, VIN ≥ 2.5V, IOUT = 750mA"
+        },
+        "VDROP_VFB___GND_or_VSNS___GND__VIN__2": {
           "parameter": "Dropout Voltage",
           "symbol": "VDROP",
           "min": null,
@@ -771,6 +957,33 @@
           "parameter": "Power Supply Rejection Ratio",
           "symbol": "PSRR",
           "min": null,
+          "typ": 75,
+          "max": null,
+          "unit": "dB",
+          "conditions": "VIN = 4.3V, VOUT(NOM) = 3.3V, IOUT = 750mA, CNR = 10nF, f = 1kHz"
+        },
+        "PSRR_VIN___4_3V__VOUT_NOM____3_3V__2": {
+          "parameter": "Power Supply Rejection Ratio",
+          "symbol": "PSRR",
+          "min": null,
+          "typ": 75,
+          "max": null,
+          "unit": "dB",
+          "conditions": "VIN = 4.3V, VOUT(NOM) = 3.3V, IOUT = 750mA, CNR = 10nF, f = 10kHz"
+        },
+        "PSRR_VIN___4_3V__VOUT_NOM____3_3V__3": {
+          "parameter": "Power Supply Rejection Ratio",
+          "symbol": "PSRR",
+          "min": null,
+          "typ": 65,
+          "max": null,
+          "unit": "dB",
+          "conditions": "VIN = 4.3V, VOUT(NOM) = 3.3V, IOUT = 750mA, CNR = 10nF, f = 100kHz"
+        },
+        "PSRR_VIN___4_3V__VOUT_NOM____3_3V__4": {
+          "parameter": "Power Supply Rejection Ratio",
+          "symbol": "PSRR",
+          "min": null,
           "typ": 55,
           "max": null,
           "unit": "dB",
@@ -786,6 +999,15 @@
           "conditions": "VIN = 4.3V, VOUT(NOM) = 3.3V, IOUT = 100mA, f = 10Hz to 100kHz, CNR = 1nF"
         },
         "en_VIN___4_3V__VOUT_NOM____3_3V": {
+          "parameter": "Output Voltage Noise",
+          "symbol": "en",
+          "min": null,
+          "typ": 36,
+          "max": null,
+          "unit": "µVRMS",
+          "conditions": "VIN = 4.3V, VOUT(NOM) = 3.3V, IOUT = 100mA, f = 10Hz to 100kHz, CNR = 10nF"
+        },
+        "en_VIN___4_3V__VOUT_NOM____3_3V__2": {
           "parameter": "Output Voltage Noise",
           "symbol": "en",
           "min": null,

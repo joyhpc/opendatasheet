@@ -90,6 +90,15 @@
     "VREF_ACC": {
       "parameter": "Reference accuracy",
       "symbol": "VREF_ACC",
+      "min": -1,
+      "typ": null,
+      "max": 1,
+      "unit": "%",
+      "conditions": null
+    },
+    "VREF_ACC__2": {
+      "parameter": "Reference accuracy",
+      "symbol": "VREF_ACC",
       "min": -1.5,
       "typ": null,
       "max": 1.5,
@@ -278,6 +287,15 @@
         "VREF_ACC": {
           "parameter": "Reference accuracy",
           "symbol": "VREF_ACC",
+          "min": -1,
+          "typ": null,
+          "max": 1,
+          "unit": "%",
+          "conditions": null
+        },
+        "VREF_ACC__2": {
+          "parameter": "Reference accuracy",
+          "symbol": "VREF_ACC",
           "min": -1.5,
           "typ": null,
           "max": 1.5,
@@ -388,14 +406,24 @@
           "source_page": 14,
           "value_hint": null,
           "value_hints": [],
-          "snippet": "降低至 –20dB，并导致 90 度相位提升。内部纹波注入高频零点大约为 100kHz。建议为输出滤波器选择的电感 器和电容器应使双极位于 30kHz 左右，以便由该高频零点提供的相位提升可提供足够的相位裕度来满足稳定性要 求。整个系统的交叉频率通常应低于开关频率 (FSW) 的三分之一。 表 8-2. 建议的元件值 输出电压 (V) R1 (kΩ) R2 (kΩ) 最小 L1 (μH) 典型"
+          "snippet": "降低至 –20dB，并导致 90 度相位提升。内部纹波注入高频零点大约为 100kHz。建议为输出滤波器选择的电感 器和电容器应使双极位于 30kHz 左右，以便由该高频零点提供的相位提升可提供足够的相位裕度来满足稳定性要 求。整个系统的交叉频率通常应低于开关频率 (FSW) 的三分之一。 表 8-2. 建议的元件值 输出电压 (V) R1 (kΩ) R2 (kΩ) 最小 L1 (μH) 典型",
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.component_rules",
+            "source_page": 14
+          }
         },
         {
           "role": "feedback_divider",
           "source_page": 14,
           "value_hint": null,
           "value_hints": [],
-          "snippet": "降低至 –20dB，并导致 90 度相位提升。内部纹波注入高频零点大约为 100kHz。建议为输出滤波器选择的电感 器和电容器应使双极位于 30kHz 左右，以便由该高频零点提供的相位提升可提供足够的相位裕度来满足稳定性要 求。整个系统的交叉频率通常应低于开关频率 (FSW) 的三分之一。 表 8-2. 建议的元件值 输出电压 (V) R1 (kΩ) R2 (kΩ) 最小 L1 (μH) 典型"
+          "snippet": "降低至 –20dB，并导致 90 度相位提升。内部纹波注入高频零点大约为 100kHz。建议为输出滤波器选择的电感 器和电容器应使双极位于 30kHz 左右，以便由该高频零点提供的相位提升可提供足够的相位裕度来满足稳定性要 求。整个系统的交叉频率通常应低于开关频率 (FSW) 的三分之一。 表 8-2. 建议的元件值 输出电压 (V) R1 (kΩ) R2 (kΩ) 最小 L1 (μH) 典型",
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.component_rules",
+            "source_page": 14
+          }
         }
       ],
       "component_value_hints": [
@@ -405,13 +433,23 @@
             "15.4mΩ"
           ],
           "source_page": 0,
-          "snippet": "TPS56424x 采用 SOT-563 封装、具有 3V 至 16V 输入电压的 4A 同步降压转换器 1 特性 • 广泛地为各种应用配置 – 3V 至 16V 输入电压范围 – 0.6V 至 7V 输出电压范围 – 0.6V 基准电压 – 25°C 时，基准精度为 ±1% – 在 -40°C 至 125°C 温度范围内，基准精度为 ±1.5% – 集成式 28.8mΩ 和 15.4mΩ RD"
+          "snippet": "TPS56424x 采用 SOT-563 封装、具有 3V 至 16V 输入电压的 4A 同步降压转换器 1 特性 • 广泛地为各种应用配置 – 3V 至 16V 输入电压范围 – 0.6V 至 7V 输出电压范围 – 0.6V 基准电压 – 25°C 时，基准精度为 ±1% – 在 -40°C 至 125°C 温度范围内，基准精度为 ±1.5% – 集成式 28.8mΩ 和 15.4mΩ RD",
+          "origin": {
+            "kind": "source_fact",
+            "method": "design_info_utils.passive_value_regex",
+            "source_page": 0
+          }
         }
       ],
       "design_equation_hints": [
         {
           "equation": "ΔVout = ±5% 输出纹波电压 20mV 输出电流额定值 4A 运行频率 1200kHz 8.2.2 详细设计过程 8.2.2.1 使用 WEBENCH® 工具创建定制设计方案 点击此处，使用 TPS564242",
-          "source_page": 13
+          "source_page": 13,
+          "origin": {
+            "kind": "source_fact",
+            "method": "design_info_utils.equation_regex",
+            "source_page": 13
+          }
         }
       ],
       "design_formulas": [
@@ -452,27 +490,52 @@
           {
             "page": 0,
             "title": null,
-            "content_type": "power_supply"
+            "content_type": "power_supply",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 0
+            }
           },
           {
             "page": 4,
             "title": null,
-            "content_type": "power_supply"
+            "content_type": "power_supply",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 4
+            }
           },
           {
             "page": 12,
             "title": null,
-            "content_type": "application"
+            "content_type": "application",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 12
+            }
           },
           {
             "page": 13,
             "title": null,
-            "content_type": "application"
+            "content_type": "application",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 13
+            }
           },
           {
             "page": 14,
             "title": null,
-            "content_type": "application"
+            "content_type": "application",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 14
+            }
           }
         ],
         "total_pages": 5

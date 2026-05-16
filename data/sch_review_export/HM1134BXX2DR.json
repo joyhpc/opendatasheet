@@ -60,6 +60,22 @@
       "unit": "V",
       "conditions": null
     },
+    "Other_Pin_Voltage": {
+      "parameter": "Other Pin Voltage",
+      "symbol": null,
+      "min": -0.3,
+      "max": null,
+      "unit": "V",
+      "conditions": "Max is VIN+0.3"
+    },
+    "Maximum_Load_Current": {
+      "parameter": "Maximum Load Current",
+      "symbol": null,
+      "min": null,
+      "max": 500,
+      "unit": "mA",
+      "conditions": null
+    },
     "TJ": {
       "parameter": "Operating Junction Temperature",
       "symbol": "TJ",
@@ -75,6 +91,14 @@
       "max": 150,
       "unit": "°C",
       "conditions": null
+    },
+    "Lead_Temperature": {
+      "parameter": "Lead Temperature",
+      "symbol": null,
+      "min": null,
+      "max": 300,
+      "unit": "°C",
+      "conditions": "10 sec"
     }
   },
   "electrical_parameters": {
@@ -86,6 +110,15 @@
       "max": 6.0,
       "unit": "V",
       "conditions": null
+    },
+    "Dropout_Voltage": {
+      "parameter": "Dropout Voltage",
+      "symbol": null,
+      "min": null,
+      "typ": 230,
+      "max": null,
+      "unit": "mV",
+      "conditions": "VOUT >= 2.8V, IOUT = 300mA"
     },
     "IQ_ON": {
       "parameter": "DC Supply Quiescent Current",
@@ -113,6 +146,42 @@
       "max": 2,
       "unit": "%",
       "conditions": "IOUT=1mA, -40°C<=TA<=85°C"
+    },
+    "Output_Voltage_Line_Regulation": {
+      "parameter": "Output Voltage Line Regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 0.03,
+      "max": 0.2,
+      "unit": "%",
+      "conditions": "VIN = VOUT + 1V to 5.5V, IOUT = 10mA"
+    },
+    "Output_Voltage_Load_Regulation": {
+      "parameter": "Output Voltage Load Regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 0.2,
+      "max": 0.7,
+      "unit": "%",
+      "conditions": "IOUT from 0mA to 300mA"
+    },
+    "Soft_start_Time": {
+      "parameter": "Soft-start Time",
+      "symbol": null,
+      "min": null,
+      "typ": 25,
+      "max": null,
+      "unit": "µs",
+      "conditions": "From Enable to Power On"
+    },
+    "Current_Limit": {
+      "parameter": "Current Limit",
+      "symbol": null,
+      "min": 300,
+      "typ": null,
+      "max": null,
+      "unit": "mA",
+      "conditions": null
     },
     "VIN<4.4V": {
       "parameter": "Maximum Output Current",
@@ -168,6 +237,42 @@
       "unit": "dB",
       "conditions": "f=10kHz, COUT=1µF, IOUT=30mA"
     },
+    "Output_Noise": {
+      "parameter": "Output Noise",
+      "symbol": null,
+      "min": null,
+      "typ": 70,
+      "max": null,
+      "unit": "µVRMS",
+      "conditions": "10Hz to 100kHz, IOUT=200mA, VOUT=2.8V, COUT=1µF"
+    },
+    "Output_Noise_10Hz_to_100kHz__IOUT_200mA__VO": {
+      "parameter": "Output Noise",
+      "symbol": null,
+      "min": null,
+      "typ": 45,
+      "max": null,
+      "unit": "µVRMS",
+      "conditions": "10Hz to 100kHz, IOUT=200mA, VOUT=1.2V, COUT=1µF"
+    },
+    "EN_Low_Threshold": {
+      "parameter": "EN Low Threshold",
+      "symbol": null,
+      "min": null,
+      "typ": null,
+      "max": 0.3,
+      "unit": "V",
+      "conditions": null
+    },
+    "EN_High_Threshold": {
+      "parameter": "EN High Threshold",
+      "symbol": null,
+      "min": 1.5,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": null
+    },
     "IEN": {
       "parameter": "EN Pin Input Current",
       "symbol": "IEN",
@@ -175,6 +280,24 @@
       "typ": 0,
       "max": 0.1,
       "unit": "µA",
+      "conditions": null
+    },
+    "Over_temperature_Shutdown_Thre": {
+      "parameter": "Over-temperature Shutdown Threshold",
+      "symbol": null,
+      "min": null,
+      "typ": 155,
+      "max": null,
+      "unit": "°C",
+      "conditions": null
+    },
+    "Over_temperature_Shutdown_Hyst": {
+      "parameter": "Over-temperature Shutdown Hysteresis",
+      "symbol": null,
+      "min": null,
+      "typ": 20,
+      "max": null,
+      "unit": "°C",
       "conditions": null
     }
   },
@@ -263,6 +386,22 @@
           "unit": "V",
           "conditions": null
         },
+        "Other_Pin_Voltage": {
+          "parameter": "Other Pin Voltage",
+          "symbol": null,
+          "min": -0.3,
+          "max": null,
+          "unit": "V",
+          "conditions": "Max is VIN+0.3"
+        },
+        "Maximum_Load_Current": {
+          "parameter": "Maximum Load Current",
+          "symbol": null,
+          "min": null,
+          "max": 500,
+          "unit": "mA",
+          "conditions": null
+        },
         "TJ": {
           "parameter": "Operating Junction Temperature",
           "symbol": "TJ",
@@ -278,6 +417,14 @@
           "max": 150,
           "unit": "°C",
           "conditions": null
+        },
+        "Lead_Temperature": {
+          "parameter": "Lead Temperature",
+          "symbol": null,
+          "min": null,
+          "max": 300,
+          "unit": "°C",
+          "conditions": "10 sec"
         }
       },
       "electrical_parameters": {
@@ -289,6 +436,15 @@
           "max": 6.0,
           "unit": "V",
           "conditions": null
+        },
+        "Dropout_Voltage": {
+          "parameter": "Dropout Voltage",
+          "symbol": null,
+          "min": null,
+          "typ": 230,
+          "max": null,
+          "unit": "mV",
+          "conditions": "VOUT >= 2.8V, IOUT = 300mA"
         },
         "IQ_ON": {
           "parameter": "DC Supply Quiescent Current",
@@ -316,6 +472,42 @@
           "max": 2,
           "unit": "%",
           "conditions": "IOUT=1mA, -40°C<=TA<=85°C"
+        },
+        "Output_Voltage_Line_Regulation": {
+          "parameter": "Output Voltage Line Regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 0.03,
+          "max": 0.2,
+          "unit": "%",
+          "conditions": "VIN = VOUT + 1V to 5.5V, IOUT = 10mA"
+        },
+        "Output_Voltage_Load_Regulation": {
+          "parameter": "Output Voltage Load Regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 0.2,
+          "max": 0.7,
+          "unit": "%",
+          "conditions": "IOUT from 0mA to 300mA"
+        },
+        "Soft_start_Time": {
+          "parameter": "Soft-start Time",
+          "symbol": null,
+          "min": null,
+          "typ": 25,
+          "max": null,
+          "unit": "µs",
+          "conditions": "From Enable to Power On"
+        },
+        "Current_Limit": {
+          "parameter": "Current Limit",
+          "symbol": null,
+          "min": 300,
+          "typ": null,
+          "max": null,
+          "unit": "mA",
+          "conditions": null
         },
         "VIN<4.4V": {
           "parameter": "Maximum Output Current",
@@ -371,6 +563,42 @@
           "unit": "dB",
           "conditions": "f=10kHz, COUT=1µF, IOUT=30mA"
         },
+        "Output_Noise": {
+          "parameter": "Output Noise",
+          "symbol": null,
+          "min": null,
+          "typ": 70,
+          "max": null,
+          "unit": "µVRMS",
+          "conditions": "10Hz to 100kHz, IOUT=200mA, VOUT=2.8V, COUT=1µF"
+        },
+        "Output_Noise_10Hz_to_100kHz__IOUT_200mA__VO": {
+          "parameter": "Output Noise",
+          "symbol": null,
+          "min": null,
+          "typ": 45,
+          "max": null,
+          "unit": "µVRMS",
+          "conditions": "10Hz to 100kHz, IOUT=200mA, VOUT=1.2V, COUT=1µF"
+        },
+        "EN_Low_Threshold": {
+          "parameter": "EN Low Threshold",
+          "symbol": null,
+          "min": null,
+          "typ": null,
+          "max": 0.3,
+          "unit": "V",
+          "conditions": null
+        },
+        "EN_High_Threshold": {
+          "parameter": "EN High Threshold",
+          "symbol": null,
+          "min": 1.5,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": null
+        },
         "IEN": {
           "parameter": "EN Pin Input Current",
           "symbol": "IEN",
@@ -378,6 +606,24 @@
           "typ": 0,
           "max": 0.1,
           "unit": "µA",
+          "conditions": null
+        },
+        "Over_temperature_Shutdown_Thre": {
+          "parameter": "Over-temperature Shutdown Threshold",
+          "symbol": null,
+          "min": null,
+          "typ": 155,
+          "max": null,
+          "unit": "°C",
+          "conditions": null
+        },
+        "Over_temperature_Shutdown_Hyst": {
+          "parameter": "Over-temperature Shutdown Hysteresis",
+          "symbol": null,
+          "min": null,
+          "typ": 20,
+          "max": null,
+          "unit": "°C",
           "conditions": null
         }
       },

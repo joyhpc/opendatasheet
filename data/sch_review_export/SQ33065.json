@@ -164,6 +164,70 @@
     }
   },
   "absolute_maximum_ratings": {
+    "VIN__EN_UVLO__PGOOD_Voltage": {
+      "parameter": "VIN, EN/UVLO, PGOOD Voltage",
+      "symbol": null,
+      "min": -0.3,
+      "max": 95.0,
+      "unit": "V",
+      "conditions": null
+    },
+    "LX_Voltage": {
+      "parameter": "LX Voltage",
+      "symbol": null,
+      "min": -1.0,
+      "max": 95.0,
+      "unit": "V",
+      "conditions": null
+    },
+    "ILIM_Voltage": {
+      "parameter": "ILIM Voltage",
+      "symbol": null,
+      "min": -0.3,
+      "max": 95.0,
+      "unit": "V",
+      "conditions": null
+    },
+    "VCC__SYNCIN_Voltage": {
+      "parameter": "VCC, SYNCIN Voltage",
+      "symbol": null,
+      "min": -0.3,
+      "max": 14.0,
+      "unit": "V",
+      "conditions": null
+    },
+    "BST_to_LX_Voltage": {
+      "parameter": "BST to LX Voltage",
+      "symbol": null,
+      "min": -0.3,
+      "max": 14.0,
+      "unit": "V",
+      "conditions": null
+    },
+    "FB__COMP__SS_TRK__RT_Voltage": {
+      "parameter": "FB, COMP, SS/TRK, RT Voltage",
+      "symbol": null,
+      "min": -0.3,
+      "max": 6.0,
+      "unit": "V",
+      "conditions": null
+    },
+    "BST_Voltage": {
+      "parameter": "BST Voltage",
+      "symbol": null,
+      "min": -0.3,
+      "max": 105.0,
+      "unit": "V",
+      "conditions": null
+    },
+    "Power_Dissipation_max": {
+      "parameter": "Power Dissipation max",
+      "symbol": null,
+      "min": null,
+      "max": 3.3,
+      "unit": "W",
+      "conditions": "TA=25°C"
+    },
     "ΘJA": {
       "parameter": "Thermal Resistance Junction-to-Ambient",
       "symbol": "ΘJA",
@@ -178,6 +242,30 @@
       "min": null,
       "max": null,
       "unit": "°C/W",
+      "conditions": null
+    },
+    "Junction_Temperature_Range": {
+      "parameter": "Junction Temperature Range",
+      "symbol": null,
+      "min": null,
+      "max": 150.0,
+      "unit": "°C",
+      "conditions": null
+    },
+    "Lead_Temperature__Soldering__1": {
+      "parameter": "Lead Temperature (Soldering, 10 sec.)",
+      "symbol": null,
+      "min": null,
+      "max": 260.0,
+      "unit": "°C",
+      "conditions": null
+    },
+    "Storage_Temperature_Range": {
+      "parameter": "Storage Temperature Range",
+      "symbol": null,
+      "min": -65.0,
+      "max": 150.0,
+      "unit": "°C",
       "conditions": null
     }
   },
@@ -415,6 +503,33 @@
       "max": null,
       "unit": "ns",
       "conditions": "VBST – VLX = 7 V, HO off to LO on, 50% to 50%"
+    },
+    "Recommended_VIN_Voltage_Range": {
+      "parameter": "Recommended VIN Voltage Range",
+      "symbol": null,
+      "min": 6.0,
+      "typ": null,
+      "max": 75.0,
+      "unit": "V",
+      "conditions": "Recommended Operating Conditions"
+    },
+    "Recommended_VCC_Voltage_Range": {
+      "parameter": "Recommended VCC Voltage Range",
+      "symbol": null,
+      "min": 8.0,
+      "typ": null,
+      "max": 13.0,
+      "unit": "V",
+      "conditions": "Recommended Operating Conditions"
+    },
+    "Recommended_Junction_Temperatu": {
+      "parameter": "Recommended Junction Temperature Range",
+      "symbol": null,
+      "min": -40.0,
+      "typ": null,
+      "max": 125.0,
+      "unit": "°C",
+      "conditions": "Recommended Operating Conditions"
     }
   },
   "drc_hints": {
@@ -422,10 +537,6 @@
       "min": 6.0,
       "max": 75.0,
       "unit": "V"
-    },
-    "iq": {
-      "typ": 1.0,
-      "unit": "mA"
     },
     "thermal_shutdown": {
       "typ": 160.0,
@@ -630,6 +741,70 @@
     },
     "electrical": {
       "absolute_maximum_ratings": {
+        "VIN__EN_UVLO__PGOOD_Voltage": {
+          "parameter": "VIN, EN/UVLO, PGOOD Voltage",
+          "symbol": null,
+          "min": -0.3,
+          "max": 95.0,
+          "unit": "V",
+          "conditions": null
+        },
+        "LX_Voltage": {
+          "parameter": "LX Voltage",
+          "symbol": null,
+          "min": -1.0,
+          "max": 95.0,
+          "unit": "V",
+          "conditions": null
+        },
+        "ILIM_Voltage": {
+          "parameter": "ILIM Voltage",
+          "symbol": null,
+          "min": -0.3,
+          "max": 95.0,
+          "unit": "V",
+          "conditions": null
+        },
+        "VCC__SYNCIN_Voltage": {
+          "parameter": "VCC, SYNCIN Voltage",
+          "symbol": null,
+          "min": -0.3,
+          "max": 14.0,
+          "unit": "V",
+          "conditions": null
+        },
+        "BST_to_LX_Voltage": {
+          "parameter": "BST to LX Voltage",
+          "symbol": null,
+          "min": -0.3,
+          "max": 14.0,
+          "unit": "V",
+          "conditions": null
+        },
+        "FB__COMP__SS_TRK__RT_Voltage": {
+          "parameter": "FB, COMP, SS/TRK, RT Voltage",
+          "symbol": null,
+          "min": -0.3,
+          "max": 6.0,
+          "unit": "V",
+          "conditions": null
+        },
+        "BST_Voltage": {
+          "parameter": "BST Voltage",
+          "symbol": null,
+          "min": -0.3,
+          "max": 105.0,
+          "unit": "V",
+          "conditions": null
+        },
+        "Power_Dissipation_max": {
+          "parameter": "Power Dissipation max",
+          "symbol": null,
+          "min": null,
+          "max": 3.3,
+          "unit": "W",
+          "conditions": "TA=25°C"
+        },
         "ΘJA": {
           "parameter": "Thermal Resistance Junction-to-Ambient",
           "symbol": "ΘJA",
@@ -644,6 +819,30 @@
           "min": null,
           "max": null,
           "unit": "°C/W",
+          "conditions": null
+        },
+        "Junction_Temperature_Range": {
+          "parameter": "Junction Temperature Range",
+          "symbol": null,
+          "min": null,
+          "max": 150.0,
+          "unit": "°C",
+          "conditions": null
+        },
+        "Lead_Temperature__Soldering__1": {
+          "parameter": "Lead Temperature (Soldering, 10 sec.)",
+          "symbol": null,
+          "min": null,
+          "max": 260.0,
+          "unit": "°C",
+          "conditions": null
+        },
+        "Storage_Temperature_Range": {
+          "parameter": "Storage Temperature Range",
+          "symbol": null,
+          "min": -65.0,
+          "max": 150.0,
+          "unit": "°C",
           "conditions": null
         }
       },
@@ -881,6 +1080,33 @@
           "max": null,
           "unit": "ns",
           "conditions": "VBST – VLX = 7 V, HO off to LO on, 50% to 50%"
+        },
+        "Recommended_VIN_Voltage_Range": {
+          "parameter": "Recommended VIN Voltage Range",
+          "symbol": null,
+          "min": 6.0,
+          "typ": null,
+          "max": 75.0,
+          "unit": "V",
+          "conditions": "Recommended Operating Conditions"
+        },
+        "Recommended_VCC_Voltage_Range": {
+          "parameter": "Recommended VCC Voltage Range",
+          "symbol": null,
+          "min": 8.0,
+          "typ": null,
+          "max": 13.0,
+          "unit": "V",
+          "conditions": "Recommended Operating Conditions"
+        },
+        "Recommended_Junction_Temperatu": {
+          "parameter": "Recommended Junction Temperature Range",
+          "symbol": null,
+          "min": -40.0,
+          "typ": null,
+          "max": 125.0,
+          "unit": "°C",
+          "conditions": "Recommended Operating Conditions"
         }
       },
       "drc_hints": {
@@ -888,10 +1114,6 @@
           "min": 6.0,
           "max": 75.0,
           "unit": "V"
-        },
-        "iq": {
-          "typ": 1.0,
-          "unit": "mA"
         },
         "thermal_shutdown": {
           "typ": 160.0,
@@ -942,7 +1164,12 @@
       "topology_hints": [
         {
           "hint": "Application Note: SQ33065 6V to 75V Synchronous Buck Controller With Wide Duty Cycle Range",
-          "source_page": 0
+          "source_page": 0,
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.topology_keywords",
+            "source_page": 0
+          }
         }
       ],
       "typical_application": {
@@ -953,7 +1180,12 @@
           {
             "page": 0,
             "title": null,
-            "content_type": "application"
+            "content_type": "application",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 0
+            }
           }
         ],
         "total_pages": 1

@@ -102,6 +102,14 @@
       "unit": "V",
       "conditions": null
     },
+    "Pin_voltage_range": {
+      "parameter": "Pin voltage range",
+      "symbol": null,
+      "min": -0.3,
+      "max": null,
+      "unit": "V",
+      "conditions": "max is VIN+0.3"
+    },
     "SW": {
       "parameter": "Pin voltage range",
       "symbol": "SW",
@@ -109,6 +117,14 @@
       "max": 25.5,
       "unit": "V",
       "conditions": "While switching"
+    },
+    "Pin_voltage_range_max_is_VIN_0_3": {
+      "parameter": "Pin voltage range",
+      "symbol": null,
+      "min": -0.3,
+      "max": null,
+      "unit": "V",
+      "conditions": "max is VIN+0.3"
     },
     "TJ": {
       "parameter": "Operating junction temperature",
@@ -216,6 +232,15 @@
       "unit": "°C",
       "conditions": "Rising Junction Temperature"
     },
+    "Thermal_Shutdown_Hysteresis": {
+      "parameter": "Thermal Shutdown Hysteresis",
+      "symbol": null,
+      "min": null,
+      "typ": 20,
+      "max": null,
+      "unit": "°C",
+      "conditions": null
+    },
     "VIH": {
       "parameter": "High Level Input Voltage",
       "symbol": "VIH",
@@ -305,6 +330,24 @@
       "max": null,
       "unit": "µA",
       "conditions": null
+    },
+    "ISS_TR_tolerance": {
+      "parameter": "ISS/TR tolerance",
+      "symbol": null,
+      "min": -0.2,
+      "typ": null,
+      "max": 0.2,
+      "unit": "µA",
+      "conditions": "TJ = -40 °C to +125 °C"
+    },
+    "Tracking_gain": {
+      "parameter": "Tracking gain",
+      "symbol": null,
+      "min": null,
+      "typ": 1,
+      "max": null,
+      "unit": null,
+      "conditions": "VFB / VSS/TR"
     }
   },
   "drc_hints": {
@@ -443,6 +486,14 @@
           "unit": "V",
           "conditions": null
         },
+        "Pin_voltage_range": {
+          "parameter": "Pin voltage range",
+          "symbol": null,
+          "min": -0.3,
+          "max": null,
+          "unit": "V",
+          "conditions": "max is VIN+0.3"
+        },
         "SW": {
           "parameter": "Pin voltage range",
           "symbol": "SW",
@@ -450,6 +501,14 @@
           "max": 25.5,
           "unit": "V",
           "conditions": "While switching"
+        },
+        "Pin_voltage_range_max_is_VIN_0_3": {
+          "parameter": "Pin voltage range",
+          "symbol": null,
+          "min": -0.3,
+          "max": null,
+          "unit": "V",
+          "conditions": "max is VIN+0.3"
         },
         "TJ": {
           "parameter": "Operating junction temperature",
@@ -557,6 +616,15 @@
           "unit": "°C",
           "conditions": "Rising Junction Temperature"
         },
+        "Thermal_Shutdown_Hysteresis": {
+          "parameter": "Thermal Shutdown Hysteresis",
+          "symbol": null,
+          "min": null,
+          "typ": 20,
+          "max": null,
+          "unit": "°C",
+          "conditions": null
+        },
         "VIH": {
           "parameter": "High Level Input Voltage",
           "symbol": "VIH",
@@ -646,6 +714,24 @@
           "max": null,
           "unit": "µA",
           "conditions": null
+        },
+        "ISS_TR_tolerance": {
+          "parameter": "ISS/TR tolerance",
+          "symbol": null,
+          "min": -0.2,
+          "typ": null,
+          "max": 0.2,
+          "unit": "µA",
+          "conditions": "TJ = -40 °C to +125 °C"
+        },
+        "Tracking_gain": {
+          "parameter": "Tracking gain",
+          "symbol": null,
+          "min": null,
+          "typ": 1,
+          "max": null,
+          "unit": null,
+          "conditions": "VFB / VSS/TR"
         }
       },
       "drc_hints": {
@@ -699,7 +785,12 @@
             "10 uF",
             "100kΩ"
           ],
-          "snippet": "10.2.2 Typical Application using VSEL and FB2 TPS62135 SW FB VIN FB2 MODE PG VOS 1 uH EN GND SS/TR 22uF 10uF VBAT = 3.0V to 17V VOUT = Vo1 / Vo2 100kΩ R 4 VSEL R 1 R 2 R 3 CFF Copyright © 2016, Texas"
+          "snippet": "10.2.2 Typical Application using VSEL and FB2 TPS62135 SW FB VIN FB2 MODE PG VOS 1 uH EN GND SS/TR 22uF 10uF VBAT = 3.0V to 17V VOUT = Vo1 / Vo2 100kΩ R 4 VSEL R 1 R 2 R 3 CFF Copyright © 2016, Texas",
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.component_rules",
+            "source_page": 31
+          }
         }
       ],
       "component_value_hints": [
@@ -711,33 +802,63 @@
             "100kΩ"
           ],
           "source_page": 31,
-          "snippet": "10.2.2 Typical Application using VSEL and FB2 TPS62135 SW FB VIN FB2 MODE PG VOS 1 uH EN GND SS/TR 22uF 10uF VBAT = 3.0V to 17V VOUT = Vo1 / Vo2 100kΩ R 4 VSEL R 1 R 2 R 3 CFF Copyright © 2016, Texas"
+          "snippet": "10.2.2 Typical Application using VSEL and FB2 TPS62135 SW FB VIN FB2 MODE PG VOS 1 uH EN GND SS/TR 22uF 10uF VBAT = 3.0V to 17V VOUT = Vo1 / Vo2 100kΩ R 4 VSEL R 1 R 2 R 3 CFF Copyright © 2016, Texas",
+          "origin": {
+            "kind": "source_fact",
+            "method": "design_info_utils.passive_value_regex",
+            "source_page": 31
+          }
         }
       ],
       "layout_hints": [
         {
           "hint": "• Improving the power dissipation capability of the PCB design, for example, increasing copper thickness, thermal vias, number of layers • Introducing airflow in the system For more details on how to",
-          "source_page": 38
+          "source_page": 38,
+          "origin": {
+            "kind": "source_recommendation",
+            "method": "design_info_utils.layout_keywords",
+            "source_page": 38
+          }
         }
       ],
       "supply_recommendations": [
         {
           "hint": "11 Power Supply Recommendations The power supply to the TPS62135x needs to have a current rating according to the supply voltage, output voltage, and output current of the TPS62135x. www.ti.com.cn TP",
-          "source_page": 36
+          "source_page": 36,
+          "origin": {
+            "kind": "source_recommendation",
+            "method": "design_info_utils.supply_keywords",
+            "source_page": 36
+          }
         },
         {
           "hint": "12 Layout 12.1 Layout Guidelines A proper layout is critical for the operation of a switched mode power supply, even more at high switching frequencies. Therefore the PCB layout of the TPS62135x dema",
-          "source_page": 37
+          "source_page": 37,
+          "origin": {
+            "kind": "source_recommendation",
+            "method": "design_info_utils.supply_keywords",
+            "source_page": 37
+          }
         }
       ],
       "topology_hints": [
         {
           "hint": "10 Application and Implementation 备注 以下应用部分中的信息不属于TI 器件规格的范围，TI 不担保其准确性和完整性。TI 的客 户应负责确定 器件是否适用于其应用。客户应验证并测试其设计，以确保系统功能。 10.1 Application Information 10.1.1 Programming the Output Voltage The output v",
-          "source_page": 13
+          "source_page": 13,
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.topology_keywords",
+            "source_page": 13
+          }
         },
         {
           "hint": "10.2.2 Typical Application using VSEL and FB2 TPS62135 SW FB VIN FB2 MODE PG VOS 1 uH EN GND SS/TR 22uF 10uF VBAT = 3.0V to 17V VOUT = Vo1 / Vo2 100kΩ R 4 VSEL R 1 R 2 R 3 CFF Copyright © 2016, Texas",
-          "source_page": 31
+          "source_page": 31,
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.topology_keywords",
+            "source_page": 31
+          }
         }
       ],
       "typical_application": {
@@ -767,37 +888,72 @@
           {
             "page": 0,
             "title": null,
-            "content_type": "power_supply"
+            "content_type": "power_supply",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 0
+            }
           },
           {
             "page": 13,
             "title": null,
-            "content_type": "application"
+            "content_type": "application",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 13
+            }
           },
           {
             "page": 15,
             "title": null,
-            "content_type": "application"
+            "content_type": "application",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 15
+            }
           },
           {
             "page": 31,
             "title": null,
-            "content_type": "application"
+            "content_type": "application",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 31
+            }
           },
           {
             "page": 36,
             "title": null,
-            "content_type": "application"
+            "content_type": "application",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 36
+            }
           },
           {
             "page": 37,
             "title": null,
-            "content_type": "layout"
+            "content_type": "layout",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 37
+            }
           },
           {
             "page": 38,
             "title": null,
-            "content_type": "layout"
+            "content_type": "layout",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 38
+            }
           }
         ],
         "total_pages": 7

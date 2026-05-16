@@ -223,7 +223,34 @@
       "unit": "°C",
       "conditions": "Rising Junction Temperature"
     },
+    "Thermal_Shutdown_Hysteresis": {
+      "parameter": "Thermal Shutdown Hysteresis",
+      "symbol": null,
+      "min": null,
+      "typ": 20,
+      "max": null,
+      "unit": "°C",
+      "conditions": null
+    },
     "VIH": {
+      "parameter": "High Level Input Voltage (VSEL, MODE)",
+      "symbol": "VIH",
+      "min": 0.9,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": null
+    },
+    "VIL": {
+      "parameter": "Low Level Input Voltage (VSEL, MODE)",
+      "symbol": "VIL",
+      "min": null,
+      "typ": null,
+      "max": 0.3,
+      "unit": "V",
+      "conditions": null
+    },
+    "VIH__2": {
       "parameter": "Input Threshold Voltage (EN, Rising)",
       "symbol": "VIH",
       "min": 0.77,
@@ -232,7 +259,7 @@
       "unit": "V",
       "conditions": null
     },
-    "VIL": {
+    "VIL__2": {
       "parameter": "Input Threshold Voltage (EN, Falling)",
       "symbol": "VIL",
       "min": 0.67,
@@ -294,6 +321,33 @@
       "max": null,
       "unit": "µA",
       "conditions": null
+    },
+    "SS_TR_tolerance": {
+      "parameter": "SS/TR tolerance",
+      "symbol": null,
+      "min": null,
+      "typ": null,
+      "max": 0.2,
+      "unit": "µA",
+      "conditions": "TJ= -40 °C to +125 °C"
+    },
+    "Tracking_gain": {
+      "parameter": "Tracking gain",
+      "symbol": null,
+      "min": null,
+      "typ": 1,
+      "max": null,
+      "unit": null,
+      "conditions": "VFB / VSS/TR"
+    },
+    "Tracking_offset": {
+      "parameter": "Tracking offset",
+      "symbol": null,
+      "min": null,
+      "typ": 11,
+      "max": null,
+      "unit": "mV",
+      "conditions": "feedback voltage with VSS/TR = 0 V"
     },
     "RDS(ON)": {
       "parameter": "High-Side MOSFET ON-Resistance",
@@ -429,6 +483,33 @@
       "max": 70,
       "unit": "nA",
       "conditions": "VSEL = low"
+    },
+    "Load_Regulation": {
+      "parameter": "Load Regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 0.05,
+      "max": null,
+      "unit": "%/A",
+      "conditions": "PWM mode operation"
+    },
+    "Line_Regulation": {
+      "parameter": "Line Regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 0.02,
+      "max": null,
+      "unit": "%/V",
+      "conditions": "PWM mode operation, IOUT= 1 A, VIN ≥ VOUT + 1 V or VIN ≥ 3.5 V whichever is larger"
+    },
+    "Output_Discharge_Resistance": {
+      "parameter": "Output Discharge Resistance",
+      "symbol": null,
+      "min": null,
+      "typ": 100,
+      "max": null,
+      "unit": "Ω",
+      "conditions": "TPS62136 only"
     },
     "tdelay": {
       "parameter": "Start-up Delay time",
@@ -710,7 +791,34 @@
           "unit": "°C",
           "conditions": "Rising Junction Temperature"
         },
+        "Thermal_Shutdown_Hysteresis": {
+          "parameter": "Thermal Shutdown Hysteresis",
+          "symbol": null,
+          "min": null,
+          "typ": 20,
+          "max": null,
+          "unit": "°C",
+          "conditions": null
+        },
         "VIH": {
+          "parameter": "High Level Input Voltage (VSEL, MODE)",
+          "symbol": "VIH",
+          "min": 0.9,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": null
+        },
+        "VIL": {
+          "parameter": "Low Level Input Voltage (VSEL, MODE)",
+          "symbol": "VIL",
+          "min": null,
+          "typ": null,
+          "max": 0.3,
+          "unit": "V",
+          "conditions": null
+        },
+        "VIH__2": {
           "parameter": "Input Threshold Voltage (EN, Rising)",
           "symbol": "VIH",
           "min": 0.77,
@@ -719,7 +827,7 @@
           "unit": "V",
           "conditions": null
         },
-        "VIL": {
+        "VIL__2": {
           "parameter": "Input Threshold Voltage (EN, Falling)",
           "symbol": "VIL",
           "min": 0.67,
@@ -781,6 +889,33 @@
           "max": null,
           "unit": "µA",
           "conditions": null
+        },
+        "SS_TR_tolerance": {
+          "parameter": "SS/TR tolerance",
+          "symbol": null,
+          "min": null,
+          "typ": null,
+          "max": 0.2,
+          "unit": "µA",
+          "conditions": "TJ= -40 °C to +125 °C"
+        },
+        "Tracking_gain": {
+          "parameter": "Tracking gain",
+          "symbol": null,
+          "min": null,
+          "typ": 1,
+          "max": null,
+          "unit": null,
+          "conditions": "VFB / VSS/TR"
+        },
+        "Tracking_offset": {
+          "parameter": "Tracking offset",
+          "symbol": null,
+          "min": null,
+          "typ": 11,
+          "max": null,
+          "unit": "mV",
+          "conditions": "feedback voltage with VSS/TR = 0 V"
         },
         "RDS(ON)": {
           "parameter": "High-Side MOSFET ON-Resistance",
@@ -916,6 +1051,33 @@
           "max": 70,
           "unit": "nA",
           "conditions": "VSEL = low"
+        },
+        "Load_Regulation": {
+          "parameter": "Load Regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 0.05,
+          "max": null,
+          "unit": "%/A",
+          "conditions": "PWM mode operation"
+        },
+        "Line_Regulation": {
+          "parameter": "Line Regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 0.02,
+          "max": null,
+          "unit": "%/V",
+          "conditions": "PWM mode operation, IOUT= 1 A, VIN ≥ VOUT + 1 V or VIN ≥ 3.5 V whichever is larger"
+        },
+        "Output_Discharge_Resistance": {
+          "parameter": "Output Discharge Resistance",
+          "symbol": null,
+          "min": null,
+          "typ": 100,
+          "max": null,
+          "unit": "Ω",
+          "conditions": "TPS62136 only"
         },
         "tdelay": {
           "parameter": "Start-up Delay time",

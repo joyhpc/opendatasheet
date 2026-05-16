@@ -73,6 +73,14 @@
     }
   },
   "absolute_maximum_ratings": {
+    "Voltage_at_Pins__VIN__FB__VOS": {
+      "parameter": "Voltage at Pins (VIN, FB, VOS, EN, PG)",
+      "symbol": null,
+      "min": -0.3,
+      "max": 7,
+      "unit": "V",
+      "conditions": "All voltage values are with respect to network ground terminal"
+    },
     "SW": {
       "parameter": "Voltage at Pins (SW DC)",
       "symbol": "SW",
@@ -143,6 +151,15 @@
       "unit": "V",
       "conditions": "VIN falling"
     },
+    "Undervoltage_lockout_hysteresi": {
+      "parameter": "Undervoltage lockout hysteresis",
+      "symbol": null,
+      "min": null,
+      "typ": 200,
+      "max": null,
+      "unit": "mV",
+      "conditions": "VIN rising"
+    },
     "TJSD": {
       "parameter": "Thermal shutdown threshold",
       "symbol": "TJSD",
@@ -151,6 +168,15 @@
       "max": null,
       "unit": "°C",
       "conditions": "TJ rising"
+    },
+    "Thermal_shutdown_hysteresis": {
+      "parameter": "Thermal shutdown hysteresis",
+      "symbol": null,
+      "min": null,
+      "typ": 20,
+      "max": null,
+      "unit": "°C",
+      "conditions": "TJ falling"
     },
     "VIH": {
       "parameter": "High-level input voltage",
@@ -304,6 +330,24 @@
       "max": null,
       "unit": "Ω",
       "conditions": "EN = LOW, VOUT = 1.8 V"
+    },
+    "Line_regulation": {
+      "parameter": "Line regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 0.02,
+      "max": null,
+      "unit": "%/V",
+      "conditions": "IOUT = 1 A, VIN = 2.5 V to 6.0 V"
+    },
+    "Load_regulation": {
+      "parameter": "Load regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 0.16,
+      "max": null,
+      "unit": "%/A",
+      "conditions": "IOUT = 0.5 A to 3 A"
     },
     "RDS(on)": {
       "parameter": "High-side FET ON-resistance",
@@ -465,6 +509,14 @@
     },
     "electrical": {
       "absolute_maximum_ratings": {
+        "Voltage_at_Pins__VIN__FB__VOS": {
+          "parameter": "Voltage at Pins (VIN, FB, VOS, EN, PG)",
+          "symbol": null,
+          "min": -0.3,
+          "max": 7,
+          "unit": "V",
+          "conditions": "All voltage values are with respect to network ground terminal"
+        },
         "SW": {
           "parameter": "Voltage at Pins (SW DC)",
           "symbol": "SW",
@@ -535,6 +587,15 @@
           "unit": "V",
           "conditions": "VIN falling"
         },
+        "Undervoltage_lockout_hysteresi": {
+          "parameter": "Undervoltage lockout hysteresis",
+          "symbol": null,
+          "min": null,
+          "typ": 200,
+          "max": null,
+          "unit": "mV",
+          "conditions": "VIN rising"
+        },
         "TJSD": {
           "parameter": "Thermal shutdown threshold",
           "symbol": "TJSD",
@@ -543,6 +604,15 @@
           "max": null,
           "unit": "°C",
           "conditions": "TJ rising"
+        },
+        "Thermal_shutdown_hysteresis": {
+          "parameter": "Thermal shutdown hysteresis",
+          "symbol": null,
+          "min": null,
+          "typ": 20,
+          "max": null,
+          "unit": "°C",
+          "conditions": "TJ falling"
         },
         "VIH": {
           "parameter": "High-level input voltage",
@@ -697,6 +767,24 @@
           "unit": "Ω",
           "conditions": "EN = LOW, VOUT = 1.8 V"
         },
+        "Line_regulation": {
+          "parameter": "Line regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 0.02,
+          "max": null,
+          "unit": "%/V",
+          "conditions": "IOUT = 1 A, VIN = 2.5 V to 6.0 V"
+        },
+        "Load_regulation": {
+          "parameter": "Load regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 0.16,
+          "max": null,
+          "unit": "%/A",
+          "conditions": "IOUT = 0.5 A to 3 A"
+        },
         "RDS(on)": {
           "parameter": "High-side FET ON-resistance",
           "symbol": "RDS(on)",
@@ -793,17 +881,32 @@
       "supply_recommendations": [
         {
           "hint": "10 Power Supply Recommendations The device is designed to operate from an input voltage supply range from 2.5 V to 6 V. Ensure that the input power supply has a sufficient current rating for the appl",
-          "source_page": 15
+          "source_page": 15,
+          "origin": {
+            "kind": "source_recommendation",
+            "method": "design_info_utils.supply_keywords",
+            "source_page": 15
+          }
         }
       ],
       "topology_hints": [
         {
           "hint": "switching frequency over the whole load current range is also shown in Switching Frequency for a typical application. = ´ ´ = - ´ ´ OUT ON IN OUT PSM IN IN OUT 2 ON OUT V t 420 ns V 2 I f V V V t V L",
-          "source_page": 7
+          "source_page": 7,
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.topology_keywords",
+            "source_page": 7
+          }
         },
         {
           "hint": "9 Application and Implementation Note Information in the following applications sections is not part of the TI component specification, and TI does not warrant its accuracy or completeness. TI’s cust",
-          "source_page": 9
+          "source_page": 9,
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.topology_keywords",
+            "source_page": 9
+          }
         }
       ],
       "typical_application": {
@@ -814,22 +917,42 @@
           {
             "page": 0,
             "title": null,
-            "content_type": "power_supply"
+            "content_type": "power_supply",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 0
+            }
           },
           {
             "page": 7,
             "title": null,
-            "content_type": "application"
+            "content_type": "application",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 7
+            }
           },
           {
             "page": 9,
             "title": null,
-            "content_type": "application"
+            "content_type": "application",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 9
+            }
           },
           {
             "page": 15,
             "title": null,
-            "content_type": "application"
+            "content_type": "application",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 15
+            }
           }
         ],
         "total_pages": 4

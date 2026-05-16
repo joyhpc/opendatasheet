@@ -114,6 +114,30 @@
       "unit": "V",
       "conditions": null
     },
+    "Voltage_at_EN__MODE": {
+      "parameter": "Voltage at EN, MODE",
+      "symbol": null,
+      "min": -0.3,
+      "max": 7.0,
+      "unit": "V",
+      "conditions": "max is min of 7V or VIN + 0.3V"
+    },
+    "Voltage_on_SW": {
+      "parameter": "Voltage on SW",
+      "symbol": null,
+      "min": -0.3,
+      "max": 7.0,
+      "unit": "V",
+      "conditions": null
+    },
+    "Peak_output_current": {
+      "parameter": "Peak output current",
+      "symbol": null,
+      "min": null,
+      "max": null,
+      "unit": "A",
+      "conditions": "Internally limited"
+    },
     "TJ": {
       "parameter": "Maximum operating junction temperature",
       "symbol": "TJ",
@@ -292,6 +316,15 @@
       "unit": "°C",
       "conditions": "Increasing junction temperature"
     },
+    "Thermal_shutdown_hysteresis": {
+      "parameter": "Thermal shutdown hysteresis",
+      "symbol": null,
+      "min": null,
+      "typ": 20.0,
+      "max": null,
+      "unit": "°C",
+      "conditions": "Decreasing junction temperature"
+    },
     "fSW": {
       "parameter": "Oscillator frequency",
       "symbol": "fSW",
@@ -336,6 +369,15 @@
       "max": null,
       "unit": "%",
       "conditions": "MODE = GND, device in PFM mode"
+    },
+    "Load_regulation": {
+      "parameter": "Load regulation",
+      "symbol": null,
+      "min": null,
+      "typ": -0.5,
+      "max": null,
+      "unit": "%/A",
+      "conditions": "PWM mode"
     },
     "tStart Up": {
       "parameter": "Start-up Time",
@@ -520,6 +562,30 @@
           "unit": "V",
           "conditions": null
         },
+        "Voltage_at_EN__MODE": {
+          "parameter": "Voltage at EN, MODE",
+          "symbol": null,
+          "min": -0.3,
+          "max": 7.0,
+          "unit": "V",
+          "conditions": "max is min of 7V or VIN + 0.3V"
+        },
+        "Voltage_on_SW": {
+          "parameter": "Voltage on SW",
+          "symbol": null,
+          "min": -0.3,
+          "max": 7.0,
+          "unit": "V",
+          "conditions": null
+        },
+        "Peak_output_current": {
+          "parameter": "Peak output current",
+          "symbol": null,
+          "min": null,
+          "max": null,
+          "unit": "A",
+          "conditions": "Internally limited"
+        },
         "TJ": {
           "parameter": "Maximum operating junction temperature",
           "symbol": "TJ",
@@ -698,6 +764,15 @@
           "unit": "°C",
           "conditions": "Increasing junction temperature"
         },
+        "Thermal_shutdown_hysteresis": {
+          "parameter": "Thermal shutdown hysteresis",
+          "symbol": null,
+          "min": null,
+          "typ": 20.0,
+          "max": null,
+          "unit": "°C",
+          "conditions": "Decreasing junction temperature"
+        },
         "fSW": {
           "parameter": "Oscillator frequency",
           "symbol": "fSW",
@@ -742,6 +817,15 @@
           "max": null,
           "unit": "%",
           "conditions": "MODE = GND, device in PFM mode"
+        },
+        "Load_regulation": {
+          "parameter": "Load regulation",
+          "symbol": null,
+          "min": null,
+          "typ": -0.5,
+          "max": null,
+          "unit": "%/A",
+          "conditions": "PWM mode"
         },
         "tStart Up": {
           "parameter": "Start-up Time",
@@ -824,27 +908,47 @@
           "source_page": 17,
           "value_hint": null,
           "value_hints": [],
-          "snippet": "GND COUT CIN VOUT VIN U L GND R1 R2 C1 TPS62240, TPS62242, TPS62243 SLVS762C –JUNE 2007–REVISED JULY 2015 www.ti.com 11 Layout 11.1 Layout Guidelines As for all switching power supplies, the layout is"
+          "snippet": "GND COUT CIN VOUT VIN U L GND R1 R2 C1 TPS62240, TPS62242, TPS62243 SLVS762C –JUNE 2007–REVISED JULY 2015 www.ti.com 11 Layout 11.1 Layout Guidelines As for all switching power supplies, the layout is",
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.component_rules",
+            "source_page": 17
+          }
         },
         {
           "role": "output_capacitor",
           "source_page": 17,
           "value_hint": null,
           "value_hints": [],
-          "snippet": "GND COUT CIN VOUT VIN U L GND R1 R2 C1 TPS62240, TPS62242, TPS62243 SLVS762C –JUNE 2007–REVISED JULY 2015 www.ti.com 11 Layout 11.1 Layout Guidelines As for all switching power supplies, the layout is"
+          "snippet": "GND COUT CIN VOUT VIN U L GND R1 R2 C1 TPS62240, TPS62242, TPS62243 SLVS762C –JUNE 2007–REVISED JULY 2015 www.ti.com 11 Layout 11.1 Layout Guidelines As for all switching power supplies, the layout is",
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.component_rules",
+            "source_page": 17
+          }
         },
         {
           "role": "feedback_divider",
           "source_page": 17,
           "value_hint": null,
           "value_hints": [],
-          "snippet": "GND COUT CIN VOUT VIN U L GND R1 R2 C1 TPS62240, TPS62242, TPS62243 SLVS762C –JUNE 2007–REVISED JULY 2015 www.ti.com 11 Layout 11.1 Layout Guidelines As for all switching power supplies, the layout is"
+          "snippet": "GND COUT CIN VOUT VIN U L GND R1 R2 C1 TPS62240, TPS62242, TPS62243 SLVS762C –JUNE 2007–REVISED JULY 2015 www.ti.com 11 Layout 11.1 Layout Guidelines As for all switching power supplies, the layout is",
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.component_rules",
+            "source_page": 17
+          }
         }
       ],
       "layout_hints": [
         {
           "hint": "GND COUT CIN VOUT VIN U L GND R1 R2 C1 TPS62240, TPS62242, TPS62243 SLVS762C –JUNE 2007–REVISED JULY 2015 www.ti.com 11 Layout 11.1 Layout Guidelines As for all switching power supplies, the layout is",
-          "source_page": 17
+          "source_page": 17,
+          "origin": {
+            "kind": "source_recommendation",
+            "method": "design_info_utils.layout_page_fallback",
+            "source_page": 17
+          }
         }
       ],
       "typical_application": {
@@ -883,7 +987,12 @@
           {
             "page": 17,
             "title": null,
-            "content_type": "layout"
+            "content_type": "layout",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 17
+            }
           }
         ],
         "total_pages": 1

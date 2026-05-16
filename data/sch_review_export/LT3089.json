@@ -132,6 +132,62 @@
     }
   },
   "absolute_maximum_ratings": {
+    "IN_Pin_to_OUT_Pin_Differential": {
+      "parameter": "IN Pin to OUT Pin Differential Voltage",
+      "symbol": null,
+      "min": -40,
+      "max": 40,
+      "unit": "V",
+      "conditions": null
+    },
+    "SET_Pin_Current": {
+      "parameter": "SET Pin Current",
+      "symbol": null,
+      "min": -25,
+      "max": 25,
+      "unit": "mA",
+      "conditions": null
+    },
+    "SET_Pin_Voltage__Relative_to_O": {
+      "parameter": "SET Pin Voltage (Relative to OUT)",
+      "symbol": null,
+      "min": -10,
+      "max": 10,
+      "unit": "V",
+      "conditions": null
+    },
+    "TEMP_Pin_Voltage__Relative_to": {
+      "parameter": "TEMP Pin Voltage (Relative to OUT)",
+      "symbol": null,
+      "min": -40,
+      "max": 1,
+      "unit": "V",
+      "conditions": null
+    },
+    "ILIM_Pin_Voltage__Relative_to": {
+      "parameter": "ILIM Pin Voltage (Relative to OUT)",
+      "symbol": null,
+      "min": -0.2,
+      "max": 0.2,
+      "unit": "V",
+      "conditions": null
+    },
+    "IMON_Pin_Voltage__Relative_to": {
+      "parameter": "IMON Pin Voltage (Relative to OUT)",
+      "symbol": null,
+      "min": -40,
+      "max": 1,
+      "unit": "V",
+      "conditions": null
+    },
+    "Output_Short_Circuit_Duration": {
+      "parameter": "Output Short-Circuit Duration",
+      "symbol": null,
+      "min": null,
+      "max": null,
+      "unit": null,
+      "conditions": "Indefinite"
+    },
     "TJ": {
       "parameter": "Operating Junction Temperature Range",
       "symbol": "TJ",
@@ -139,6 +195,22 @@
       "max": 125,
       "unit": "°C",
       "conditions": "E-, I-Grades"
+    },
+    "Storage_Temperature_Range": {
+      "parameter": "Storage Temperature Range",
+      "symbol": null,
+      "min": -65,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    },
+    "Lead_Temperature__Soldering__1": {
+      "parameter": "Lead Temperature (Soldering, 10 sec)",
+      "symbol": null,
+      "min": null,
+      "max": 300,
+      "unit": "°C",
+      "conditions": "FE, R Packages Only"
     }
   },
   "electrical_parameters": {
@@ -178,6 +250,33 @@
       "unit": "mV",
       "conditions": "VIN = 2V, ILOAD = 3mA"
     },
+    "ISET_Load_Regulation": {
+      "parameter": "ISET Load Regulation",
+      "symbol": null,
+      "min": null,
+      "typ": -0.1,
+      "max": null,
+      "unit": "nA",
+      "conditions": "ΔILOAD = 3mA to 800mA"
+    },
+    "VOS_Load_Regulation": {
+      "parameter": "VOS Load Regulation",
+      "symbol": null,
+      "min": -0.5,
+      "typ": null,
+      "max": -3,
+      "unit": "mV",
+      "conditions": "ΔILOAD = 3mA to 800mA"
+    },
+    "VOS_Load_Regulation_ILOAD___3mA_to_800mA": {
+      "parameter": "VOS Load Regulation",
+      "symbol": null,
+      "min": -1.5,
+      "typ": null,
+      "max": -4,
+      "unit": "mV",
+      "conditions": "ΔILOAD = 3mA to 800mA"
+    },
     "ΔISET": {
       "parameter": "Line Regulation (ISET)",
       "symbol": "ΔISET",
@@ -195,6 +294,168 @@
       "max": null,
       "unit": "mV/V",
       "conditions": "ΔVIN = 2V to 36V, ILOAD = 3mA"
+    },
+    "Minimum_Load_Current": {
+      "parameter": "Minimum Load Current",
+      "symbol": null,
+      "min": null,
+      "typ": 1.1,
+      "max": 3,
+      "unit": "mA",
+      "conditions": "2V ≤ VIN ≤ 36V"
+    },
+    "Dropout_Voltage": {
+      "parameter": "Dropout Voltage",
+      "symbol": null,
+      "min": null,
+      "typ": 1.21,
+      "max": null,
+      "unit": "V",
+      "conditions": "ILOAD = 100mA"
+    },
+    "Dropout_Voltage_ILOAD___800mA": {
+      "parameter": "Dropout Voltage",
+      "symbol": null,
+      "min": null,
+      "typ": 1.47,
+      "max": 1.65,
+      "unit": "V",
+      "conditions": "ILOAD = 800mA"
+    },
+    "Internal_Current_Limit": {
+      "parameter": "Internal Current Limit",
+      "symbol": null,
+      "min": 0.8,
+      "typ": 1,
+      "max": null,
+      "unit": "A",
+      "conditions": "VIN = 5V, VSET = 0V, VOUT = -0.1V"
+    },
+    "ILIM_Programming_Ratio": {
+      "parameter": "ILIM Programming Ratio",
+      "symbol": null,
+      "min": 155,
+      "typ": 175,
+      "max": 210,
+      "unit": "mA/kΩ",
+      "conditions": null
+    },
+    "ILIM_Minimum_Output_Current_Re": {
+      "parameter": "ILIM Minimum Output Current Resistance",
+      "symbol": null,
+      "min": null,
+      "typ": 300,
+      "max": null,
+      "unit": "Ω",
+      "conditions": null
+    },
+    "IMON_Full_Scale_Output_Current": {
+      "parameter": "IMON Full-Scale Output Current",
+      "symbol": null,
+      "min": 130,
+      "typ": 160,
+      "max": 190,
+      "unit": "µA",
+      "conditions": "ILOAD = 800mA"
+    },
+    "IMON_Scale_Factor": {
+      "parameter": "IMON Scale Factor",
+      "symbol": null,
+      "min": null,
+      "typ": 200,
+      "max": null,
+      "unit": "µA/A",
+      "conditions": "100mA ≤ ILOAD ≤ 800mA"
+    },
+    "IMON_Operating_Range": {
+      "parameter": "IMON Operating Range",
+      "symbol": null,
+      "min": null,
+      "typ": null,
+      "max": null,
+      "unit": "V",
+      "conditions": "VOUT - 40V to VOUT + 0.4V"
+    },
+    "TEMP_Output_Current": {
+      "parameter": "TEMP Output Current",
+      "symbol": null,
+      "min": null,
+      "typ": 1,
+      "max": null,
+      "unit": "µA/°C",
+      "conditions": "TJ > 5°C"
+    },
+    "TEMP_Output_Current_Absolute_E": {
+      "parameter": "TEMP Output Current Absolute Error",
+      "symbol": null,
+      "min": -10,
+      "typ": null,
+      "max": 10,
+      "unit": "µA",
+      "conditions": "0°C < TJ ≤ 125°C"
+    },
+    "TEMP_Output_Current_Absolute_E_125_C___TJ___150_C": {
+      "parameter": "TEMP Output Current Absolute Error",
+      "symbol": null,
+      "min": -15,
+      "typ": null,
+      "max": 15,
+      "unit": "µA",
+      "conditions": "125°C < TJ ≤ 150°C"
+    },
+    "Reference_Current_RMS_Output_N": {
+      "parameter": "Reference Current RMS Output Noise",
+      "symbol": null,
+      "min": null,
+      "typ": 5.7,
+      "max": null,
+      "unit": "nARMS",
+      "conditions": "10Hz ≤ f ≤ 100kHz"
+    },
+    "Error_Amplifier_RMS_Output_Noi": {
+      "parameter": "Error Amplifier RMS Output Noise",
+      "symbol": null,
+      "min": null,
+      "typ": 27,
+      "max": null,
+      "unit": "µVRMS",
+      "conditions": "ILOAD = 800mA, 10Hz ≤ f ≤ 100kHz, COUT = 10µF, CSET = 0.1µF"
+    },
+    "Ripple_Rejection__120Hz": {
+      "parameter": "Ripple Rejection (120Hz)",
+      "symbol": null,
+      "min": 75,
+      "typ": 90,
+      "max": null,
+      "unit": "dB",
+      "conditions": "f = 120Hz, VRIPPLE = 0.5VP-P, ILOAD = 0.1A, CSET = 0.1µF, COUT = 10µF, VIN = VOUT(NOMINAL) + 3V"
+    },
+    "Ripple_Rejection__10kHz": {
+      "parameter": "Ripple Rejection (10kHz)",
+      "symbol": null,
+      "min": null,
+      "typ": 75,
+      "max": null,
+      "unit": "dB",
+      "conditions": "f = 10kHz"
+    },
+    "Ripple_Rejection__1MHz": {
+      "parameter": "Ripple Rejection (1MHz)",
+      "symbol": null,
+      "min": null,
+      "typ": 20,
+      "max": null,
+      "unit": "dB",
+      "conditions": "f = 1MHz"
+    },
+    "Thermal_Regulation__ISET": {
+      "parameter": "Thermal Regulation, ISET",
+      "symbol": null,
+      "min": null,
+      "typ": 0.003,
+      "max": null,
+      "unit": "%/W",
+      "conditions": "10ms Pulse"
     }
   },
   "drc_hints": {
@@ -332,6 +593,62 @@
     },
     "electrical": {
       "absolute_maximum_ratings": {
+        "IN_Pin_to_OUT_Pin_Differential": {
+          "parameter": "IN Pin to OUT Pin Differential Voltage",
+          "symbol": null,
+          "min": -40,
+          "max": 40,
+          "unit": "V",
+          "conditions": null
+        },
+        "SET_Pin_Current": {
+          "parameter": "SET Pin Current",
+          "symbol": null,
+          "min": -25,
+          "max": 25,
+          "unit": "mA",
+          "conditions": null
+        },
+        "SET_Pin_Voltage__Relative_to_O": {
+          "parameter": "SET Pin Voltage (Relative to OUT)",
+          "symbol": null,
+          "min": -10,
+          "max": 10,
+          "unit": "V",
+          "conditions": null
+        },
+        "TEMP_Pin_Voltage__Relative_to": {
+          "parameter": "TEMP Pin Voltage (Relative to OUT)",
+          "symbol": null,
+          "min": -40,
+          "max": 1,
+          "unit": "V",
+          "conditions": null
+        },
+        "ILIM_Pin_Voltage__Relative_to": {
+          "parameter": "ILIM Pin Voltage (Relative to OUT)",
+          "symbol": null,
+          "min": -0.2,
+          "max": 0.2,
+          "unit": "V",
+          "conditions": null
+        },
+        "IMON_Pin_Voltage__Relative_to": {
+          "parameter": "IMON Pin Voltage (Relative to OUT)",
+          "symbol": null,
+          "min": -40,
+          "max": 1,
+          "unit": "V",
+          "conditions": null
+        },
+        "Output_Short_Circuit_Duration": {
+          "parameter": "Output Short-Circuit Duration",
+          "symbol": null,
+          "min": null,
+          "max": null,
+          "unit": null,
+          "conditions": "Indefinite"
+        },
         "TJ": {
           "parameter": "Operating Junction Temperature Range",
           "symbol": "TJ",
@@ -339,6 +656,22 @@
           "max": 125,
           "unit": "°C",
           "conditions": "E-, I-Grades"
+        },
+        "Storage_Temperature_Range": {
+          "parameter": "Storage Temperature Range",
+          "symbol": null,
+          "min": -65,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        },
+        "Lead_Temperature__Soldering__1": {
+          "parameter": "Lead Temperature (Soldering, 10 sec)",
+          "symbol": null,
+          "min": null,
+          "max": 300,
+          "unit": "°C",
+          "conditions": "FE, R Packages Only"
         }
       },
       "electrical_parameters": {
@@ -378,6 +711,33 @@
           "unit": "mV",
           "conditions": "VIN = 2V, ILOAD = 3mA"
         },
+        "ISET_Load_Regulation": {
+          "parameter": "ISET Load Regulation",
+          "symbol": null,
+          "min": null,
+          "typ": -0.1,
+          "max": null,
+          "unit": "nA",
+          "conditions": "ΔILOAD = 3mA to 800mA"
+        },
+        "VOS_Load_Regulation": {
+          "parameter": "VOS Load Regulation",
+          "symbol": null,
+          "min": -0.5,
+          "typ": null,
+          "max": -3,
+          "unit": "mV",
+          "conditions": "ΔILOAD = 3mA to 800mA"
+        },
+        "VOS_Load_Regulation_ILOAD___3mA_to_800mA": {
+          "parameter": "VOS Load Regulation",
+          "symbol": null,
+          "min": -1.5,
+          "typ": null,
+          "max": -4,
+          "unit": "mV",
+          "conditions": "ΔILOAD = 3mA to 800mA"
+        },
         "ΔISET": {
           "parameter": "Line Regulation (ISET)",
           "symbol": "ΔISET",
@@ -395,6 +755,168 @@
           "max": null,
           "unit": "mV/V",
           "conditions": "ΔVIN = 2V to 36V, ILOAD = 3mA"
+        },
+        "Minimum_Load_Current": {
+          "parameter": "Minimum Load Current",
+          "symbol": null,
+          "min": null,
+          "typ": 1.1,
+          "max": 3,
+          "unit": "mA",
+          "conditions": "2V ≤ VIN ≤ 36V"
+        },
+        "Dropout_Voltage": {
+          "parameter": "Dropout Voltage",
+          "symbol": null,
+          "min": null,
+          "typ": 1.21,
+          "max": null,
+          "unit": "V",
+          "conditions": "ILOAD = 100mA"
+        },
+        "Dropout_Voltage_ILOAD___800mA": {
+          "parameter": "Dropout Voltage",
+          "symbol": null,
+          "min": null,
+          "typ": 1.47,
+          "max": 1.65,
+          "unit": "V",
+          "conditions": "ILOAD = 800mA"
+        },
+        "Internal_Current_Limit": {
+          "parameter": "Internal Current Limit",
+          "symbol": null,
+          "min": 0.8,
+          "typ": 1,
+          "max": null,
+          "unit": "A",
+          "conditions": "VIN = 5V, VSET = 0V, VOUT = -0.1V"
+        },
+        "ILIM_Programming_Ratio": {
+          "parameter": "ILIM Programming Ratio",
+          "symbol": null,
+          "min": 155,
+          "typ": 175,
+          "max": 210,
+          "unit": "mA/kΩ",
+          "conditions": null
+        },
+        "ILIM_Minimum_Output_Current_Re": {
+          "parameter": "ILIM Minimum Output Current Resistance",
+          "symbol": null,
+          "min": null,
+          "typ": 300,
+          "max": null,
+          "unit": "Ω",
+          "conditions": null
+        },
+        "IMON_Full_Scale_Output_Current": {
+          "parameter": "IMON Full-Scale Output Current",
+          "symbol": null,
+          "min": 130,
+          "typ": 160,
+          "max": 190,
+          "unit": "µA",
+          "conditions": "ILOAD = 800mA"
+        },
+        "IMON_Scale_Factor": {
+          "parameter": "IMON Scale Factor",
+          "symbol": null,
+          "min": null,
+          "typ": 200,
+          "max": null,
+          "unit": "µA/A",
+          "conditions": "100mA ≤ ILOAD ≤ 800mA"
+        },
+        "IMON_Operating_Range": {
+          "parameter": "IMON Operating Range",
+          "symbol": null,
+          "min": null,
+          "typ": null,
+          "max": null,
+          "unit": "V",
+          "conditions": "VOUT - 40V to VOUT + 0.4V"
+        },
+        "TEMP_Output_Current": {
+          "parameter": "TEMP Output Current",
+          "symbol": null,
+          "min": null,
+          "typ": 1,
+          "max": null,
+          "unit": "µA/°C",
+          "conditions": "TJ > 5°C"
+        },
+        "TEMP_Output_Current_Absolute_E": {
+          "parameter": "TEMP Output Current Absolute Error",
+          "symbol": null,
+          "min": -10,
+          "typ": null,
+          "max": 10,
+          "unit": "µA",
+          "conditions": "0°C < TJ ≤ 125°C"
+        },
+        "TEMP_Output_Current_Absolute_E_125_C___TJ___150_C": {
+          "parameter": "TEMP Output Current Absolute Error",
+          "symbol": null,
+          "min": -15,
+          "typ": null,
+          "max": 15,
+          "unit": "µA",
+          "conditions": "125°C < TJ ≤ 150°C"
+        },
+        "Reference_Current_RMS_Output_N": {
+          "parameter": "Reference Current RMS Output Noise",
+          "symbol": null,
+          "min": null,
+          "typ": 5.7,
+          "max": null,
+          "unit": "nARMS",
+          "conditions": "10Hz ≤ f ≤ 100kHz"
+        },
+        "Error_Amplifier_RMS_Output_Noi": {
+          "parameter": "Error Amplifier RMS Output Noise",
+          "symbol": null,
+          "min": null,
+          "typ": 27,
+          "max": null,
+          "unit": "µVRMS",
+          "conditions": "ILOAD = 800mA, 10Hz ≤ f ≤ 100kHz, COUT = 10µF, CSET = 0.1µF"
+        },
+        "Ripple_Rejection__120Hz": {
+          "parameter": "Ripple Rejection (120Hz)",
+          "symbol": null,
+          "min": 75,
+          "typ": 90,
+          "max": null,
+          "unit": "dB",
+          "conditions": "f = 120Hz, VRIPPLE = 0.5VP-P, ILOAD = 0.1A, CSET = 0.1µF, COUT = 10µF, VIN = VOUT(NOMINAL) + 3V"
+        },
+        "Ripple_Rejection__10kHz": {
+          "parameter": "Ripple Rejection (10kHz)",
+          "symbol": null,
+          "min": null,
+          "typ": 75,
+          "max": null,
+          "unit": "dB",
+          "conditions": "f = 10kHz"
+        },
+        "Ripple_Rejection__1MHz": {
+          "parameter": "Ripple Rejection (1MHz)",
+          "symbol": null,
+          "min": null,
+          "typ": 20,
+          "max": null,
+          "unit": "dB",
+          "conditions": "f = 1MHz"
+        },
+        "Thermal_Regulation__ISET": {
+          "parameter": "Thermal Regulation, ISET",
+          "symbol": null,
+          "min": null,
+          "typ": 0.003,
+          "max": null,
+          "unit": "%/W",
+          "conditions": "10ms Pulse"
         }
       },
       "drc_hints": {

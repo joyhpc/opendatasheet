@@ -114,6 +114,30 @@
       "unit": "V",
       "conditions": null
     },
+    "Voltage_at_EN__MODE": {
+      "parameter": "Voltage at EN, MODE",
+      "symbol": null,
+      "min": -0.3,
+      "max": 7.0,
+      "unit": "V",
+      "conditions": "VIN + 0.3 ≤ 7"
+    },
+    "Voltage_on_SW": {
+      "parameter": "Voltage on SW",
+      "symbol": null,
+      "min": -0.3,
+      "max": 7.0,
+      "unit": "V",
+      "conditions": null
+    },
+    "Peak_output_current": {
+      "parameter": "Peak output current",
+      "symbol": null,
+      "min": null,
+      "max": null,
+      "unit": "A",
+      "conditions": "Internally limited"
+    },
     "TJ": {
       "parameter": "Maximum operating junction temperature",
       "symbol": "TJ",
@@ -355,6 +379,15 @@
       "unit": "%",
       "conditions": "MODE = GND, device in PFM mode, voltage positioning active"
     },
+    "Load_regulation": {
+      "parameter": "Load regulation",
+      "symbol": null,
+      "min": null,
+      "typ": -0.5,
+      "max": null,
+      "unit": "%/A",
+      "conditions": "PWM mode"
+    },
     "tStart Up": {
       "parameter": "Start-up time",
       "symbol": "tStart Up",
@@ -537,6 +570,30 @@
           "max": 7.0,
           "unit": "V",
           "conditions": null
+        },
+        "Voltage_at_EN__MODE": {
+          "parameter": "Voltage at EN, MODE",
+          "symbol": null,
+          "min": -0.3,
+          "max": 7.0,
+          "unit": "V",
+          "conditions": "VIN + 0.3 ≤ 7"
+        },
+        "Voltage_on_SW": {
+          "parameter": "Voltage on SW",
+          "symbol": null,
+          "min": -0.3,
+          "max": 7.0,
+          "unit": "V",
+          "conditions": null
+        },
+        "Peak_output_current": {
+          "parameter": "Peak output current",
+          "symbol": null,
+          "min": null,
+          "max": null,
+          "unit": "A",
+          "conditions": "Internally limited"
         },
         "TJ": {
           "parameter": "Maximum operating junction temperature",
@@ -779,6 +836,15 @@
           "unit": "%",
           "conditions": "MODE = GND, device in PFM mode, voltage positioning active"
         },
+        "Load_regulation": {
+          "parameter": "Load regulation",
+          "symbol": null,
+          "min": null,
+          "typ": -0.5,
+          "max": null,
+          "unit": "%/A",
+          "conditions": "PWM mode"
+        },
         "tStart Up": {
           "parameter": "Start-up time",
           "symbol": "tStart Up",
@@ -860,33 +926,58 @@
           "source_page": 20,
           "value_hint": null,
           "value_hints": [],
-          "snippet": "GND COUT CIN VOUT VIN U L GND R1 R2 C1 TPS62260, TPS62261, TPS62262, TPS62263 www.ti.com SLVS763E –JUNE 2007–REVISED JULY 2015 Layout Examples (continued) Figure 39. Suggested Layout for Adjustable Ou"
+          "snippet": "GND COUT CIN VOUT VIN U L GND R1 R2 C1 TPS62260, TPS62261, TPS62262, TPS62263 www.ti.com SLVS763E –JUNE 2007–REVISED JULY 2015 Layout Examples (continued) Figure 39. Suggested Layout for Adjustable Ou",
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.component_rules",
+            "source_page": 20
+          }
         },
         {
           "role": "output_capacitor",
           "source_page": 20,
           "value_hint": null,
           "value_hints": [],
-          "snippet": "GND COUT CIN VOUT VIN U L GND R1 R2 C1 TPS62260, TPS62261, TPS62262, TPS62263 www.ti.com SLVS763E –JUNE 2007–REVISED JULY 2015 Layout Examples (continued) Figure 39. Suggested Layout for Adjustable Ou"
+          "snippet": "GND COUT CIN VOUT VIN U L GND R1 R2 C1 TPS62260, TPS62261, TPS62262, TPS62263 www.ti.com SLVS763E –JUNE 2007–REVISED JULY 2015 Layout Examples (continued) Figure 39. Suggested Layout for Adjustable Ou",
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.component_rules",
+            "source_page": 20
+          }
         },
         {
           "role": "feedback_divider",
           "source_page": 20,
           "value_hint": null,
           "value_hints": [],
-          "snippet": "GND COUT CIN VOUT VIN U L GND R1 R2 C1 TPS62260, TPS62261, TPS62262, TPS62263 www.ti.com SLVS763E –JUNE 2007–REVISED JULY 2015 Layout Examples (continued) Figure 39. Suggested Layout for Adjustable Ou"
+          "snippet": "GND COUT CIN VOUT VIN U L GND R1 R2 C1 TPS62260, TPS62261, TPS62262, TPS62263 www.ti.com SLVS763E –JUNE 2007–REVISED JULY 2015 Layout Examples (continued) Figure 39. Suggested Layout for Adjustable Ou",
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.component_rules",
+            "source_page": 20
+          }
         }
       ],
       "layout_hints": [
         {
           "hint": "GND COUT CIN VOUT VIN U L GND R1 R2 C1 TPS62260, TPS62261, TPS62262, TPS62263 www.ti.com SLVS763E –JUNE 2007–REVISED JULY 2015 Layout Examples (continued) Figure 39. Suggested Layout for Adjustable Ou",
-          "source_page": 20
+          "source_page": 20,
+          "origin": {
+            "kind": "source_recommendation",
+            "method": "design_info_utils.layout_page_fallback",
+            "source_page": 20
+          }
         }
       ],
       "supply_recommendations": [
         {
           "hint": "TPS62260, TPS62261, TPS62262, TPS62263 SLVS763E –JUNE 2007–REVISED JULY 2015 www.ti.com 10 Power Supply Recommendations The TPS6226x device has no special requirements for its input power supply. The",
-          "source_page": 19
+          "source_page": 19,
+          "origin": {
+            "kind": "source_recommendation",
+            "method": "design_info_utils.supply_keywords",
+            "source_page": 19
+          }
         }
       ],
       "typical_application": {
@@ -926,12 +1017,22 @@
           {
             "page": 19,
             "title": null,
-            "content_type": "application"
+            "content_type": "application",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 19
+            }
           },
           {
             "page": 20,
             "title": null,
-            "content_type": "layout"
+            "content_type": "layout",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 20
+            }
           }
         ],
         "total_pages": 2

@@ -46,12 +46,60 @@
       "unit": "V",
       "conditions": null
     },
+    "Output_Short_Circuit_Current": {
+      "parameter": "Output Short-Circuit Current",
+      "symbol": null,
+      "min": null,
+      "max": null,
+      "unit": "Continuous",
+      "conditions": null
+    },
     "θJA": {
       "parameter": "Package Thermal Resistance",
       "symbol": "θJA",
       "min": null,
       "max": 254,
       "unit": "°C/W",
+      "conditions": null
+    },
+    "Junction_Temperature": {
+      "parameter": "Junction Temperature",
+      "symbol": null,
+      "min": null,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    },
+    "Storage_Temperature_Range": {
+      "parameter": "Storage Temperature Range",
+      "symbol": null,
+      "min": -65,
+      "max": 150,
+      "unit": "°C",
+      "conditions": null
+    },
+    "Lead_Temperature__Soldering__1": {
+      "parameter": "Lead Temperature (Soldering, 10s)",
+      "symbol": null,
+      "min": null,
+      "max": 260,
+      "unit": "°C",
+      "conditions": null
+    },
+    "ESD_Susceptibility_HBM": {
+      "parameter": "ESD Susceptibility HBM",
+      "symbol": null,
+      "min": null,
+      "max": 8000,
+      "unit": "V",
+      "conditions": null
+    },
+    "ESD_Susceptibility_CDM": {
+      "parameter": "ESD Susceptibility CDM",
+      "symbol": null,
+      "min": null,
+      "max": 1000,
+      "unit": "V",
       "conditions": null
     }
   },
@@ -60,10 +108,316 @@
       "parameter": "Output Voltage",
       "symbol": "VOUT",
       "min": null,
+      "typ": 2.048,
+      "max": null,
+      "unit": "V",
+      "conditions": null
+    },
+    "Initial_Accuracy": {
+      "parameter": "Initial Accuracy",
+      "symbol": null,
+      "min": -0.1,
+      "typ": null,
+      "max": 0.1,
+      "unit": "%",
+      "conditions": null
+    },
+    "Solder_Heat_Resistance_Shift": {
+      "parameter": "Solder Heat Resistance Shift",
+      "symbol": null,
+      "min": null,
+      "typ": 0.03,
+      "max": null,
+      "unit": "%",
+      "conditions": null
+    },
+    "Output_Voltage_Noise": {
+      "parameter": "Output Voltage Noise",
+      "symbol": null,
+      "min": null,
+      "typ": 8.9,
+      "max": null,
+      "unit": "μVPP/V",
+      "conditions": "f = 0.1Hz to 10Hz"
+    },
+    "Output_Voltage_Noise_f___10Hz_to_10kHz": {
+      "parameter": "Output Voltage Noise",
+      "symbol": null,
+      "min": null,
+      "typ": 24.3,
+      "max": null,
+      "unit": "μVRMS",
+      "conditions": "f = 10Hz to 10kHz"
+    },
+    "Output_Voltage_Noise_Density": {
+      "parameter": "Output Voltage Noise Density",
+      "symbol": null,
+      "min": null,
+      "typ": 223,
+      "max": null,
+      "unit": "nV/√Hz",
+      "conditions": "f = 1kHz"
+    },
+    "Line_Regulation": {
+      "parameter": "Line Regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 4.5,
+      "max": null,
+      "unit": "ppm/V",
+      "conditions": "3.0V ≤ VIN ≤ 5.5V"
+    },
+    "VOUT__2": {
+      "parameter": "Output Voltage",
+      "symbol": "VOUT",
+      "min": null,
+      "typ": 2.5,
+      "max": null,
+      "unit": "V",
+      "conditions": null
+    },
+    "Initial_Accuracy__2": {
+      "parameter": "Initial Accuracy",
+      "symbol": null,
+      "min": -0.1,
+      "typ": null,
+      "max": 0.1,
+      "unit": "%",
+      "conditions": null
+    },
+    "Solder_Heat_Resistance_Shift__2": {
+      "parameter": "Solder Heat Resistance Shift",
+      "symbol": null,
+      "min": null,
+      "typ": 0.03,
+      "max": null,
+      "unit": "%",
+      "conditions": null
+    },
+    "Output_Voltage_Noise_f___0_1Hz_to_10Hz": {
+      "parameter": "Output Voltage Noise",
+      "symbol": null,
+      "min": null,
+      "typ": 8.9,
+      "max": null,
+      "unit": "μVPP/V",
+      "conditions": "f = 0.1Hz to 10Hz"
+    },
+    "Output_Voltage_Noise_f___10Hz_to_10kHz__2": {
+      "parameter": "Output Voltage Noise",
+      "symbol": null,
+      "min": null,
+      "typ": 29.8,
+      "max": null,
+      "unit": "μVRMS",
+      "conditions": "f = 10Hz to 10kHz"
+    },
+    "Output_Voltage_Noise_Density_f___1kHz": {
+      "parameter": "Output Voltage Noise Density",
+      "symbol": null,
+      "min": null,
+      "typ": 273,
+      "max": null,
+      "unit": "nV/√Hz",
+      "conditions": "f = 1kHz"
+    },
+    "Line_Regulation_VREF___0_5V___VIN___5_5V": {
+      "parameter": "Line Regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 4.0,
+      "max": null,
+      "unit": "ppm/V",
+      "conditions": "VREF + 0.5V ≤ VIN ≤ 5.5V"
+    },
+    "VOUT__3": {
+      "parameter": "Output Voltage",
+      "symbol": "VOUT",
+      "min": null,
+      "typ": 3.0,
+      "max": null,
+      "unit": "V",
+      "conditions": null
+    },
+    "Initial_Accuracy__3": {
+      "parameter": "Initial Accuracy",
+      "symbol": null,
+      "min": -0.1,
+      "typ": null,
+      "max": 0.1,
+      "unit": "%",
+      "conditions": null
+    },
+    "Solder_Heat_Resistance_Shift__3": {
+      "parameter": "Solder Heat Resistance Shift",
+      "symbol": null,
+      "min": null,
+      "typ": 0.03,
+      "max": null,
+      "unit": "%",
+      "conditions": null
+    },
+    "Output_Voltage_Noise_f___0_1Hz_to_10Hz__2": {
+      "parameter": "Output Voltage Noise",
+      "symbol": null,
+      "min": null,
+      "typ": 8.9,
+      "max": null,
+      "unit": "μVPP/V",
+      "conditions": "f = 0.1Hz to 10Hz"
+    },
+    "Output_Voltage_Noise_f___10Hz_to_10kHz__3": {
+      "parameter": "Output Voltage Noise",
+      "symbol": null,
+      "min": null,
+      "typ": 35.5,
+      "max": null,
+      "unit": "μVRMS",
+      "conditions": "f = 10Hz to 10kHz"
+    },
+    "Output_Voltage_Noise_Density_f___1kHz__2": {
+      "parameter": "Output Voltage Noise Density",
+      "symbol": null,
+      "min": null,
+      "typ": 327,
+      "max": null,
+      "unit": "nV/√Hz",
+      "conditions": "f = 1kHz"
+    },
+    "Line_Regulation_VREF___0_5V___VIN___5_5V__2": {
+      "parameter": "Line Regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 7.0,
+      "max": null,
+      "unit": "ppm/V",
+      "conditions": "VREF + 0.5V ≤ VIN ≤ 5.5V"
+    },
+    "VOUT__4": {
+      "parameter": "Output Voltage",
+      "symbol": "VOUT",
+      "min": null,
+      "typ": 3.3,
+      "max": null,
+      "unit": "V",
+      "conditions": null
+    },
+    "Initial_Accuracy__4": {
+      "parameter": "Initial Accuracy",
+      "symbol": null,
+      "min": -0.1,
+      "typ": null,
+      "max": 0.1,
+      "unit": "%",
+      "conditions": null
+    },
+    "Solder_Heat_Resistance_Shift__4": {
+      "parameter": "Solder Heat Resistance Shift",
+      "symbol": null,
+      "min": null,
+      "typ": 0.03,
+      "max": null,
+      "unit": "%",
+      "conditions": null
+    },
+    "Output_Voltage_Noise_f___0_1Hz_to_10Hz__3": {
+      "parameter": "Output Voltage Noise",
+      "symbol": null,
+      "min": null,
+      "typ": 8.9,
+      "max": null,
+      "unit": "μVPP/V",
+      "conditions": "f = 0.1Hz to 10Hz"
+    },
+    "Output_Voltage_Noise_f___10Hz_to_10kHz__4": {
+      "parameter": "Output Voltage Noise",
+      "symbol": null,
+      "min": null,
+      "typ": 39.1,
+      "max": null,
+      "unit": "μVRMS",
+      "conditions": "f = 10Hz to 10kHz"
+    },
+    "Output_Voltage_Noise_Density_f___1kHz__3": {
+      "parameter": "Output Voltage Noise Density",
+      "symbol": null,
+      "min": null,
+      "typ": 360,
+      "max": null,
+      "unit": "nV/√Hz",
+      "conditions": "f = 1kHz"
+    },
+    "Line_Regulation_VREF___0_5V___VIN___5_5V__3": {
+      "parameter": "Line Regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 7.0,
+      "max": null,
+      "unit": "ppm/V",
+      "conditions": "VREF + 0.5V ≤ VIN ≤ 5.5V"
+    },
+    "VOUT__5": {
+      "parameter": "Output Voltage",
+      "symbol": "VOUT",
+      "min": null,
       "typ": 4.096,
       "max": null,
       "unit": "V",
       "conditions": null
+    },
+    "Initial_Accuracy__5": {
+      "parameter": "Initial Accuracy",
+      "symbol": null,
+      "min": -0.1,
+      "typ": null,
+      "max": 0.1,
+      "unit": "%",
+      "conditions": null
+    },
+    "Solder_Heat_Resistance_Shift__5": {
+      "parameter": "Solder Heat Resistance Shift",
+      "symbol": null,
+      "min": null,
+      "typ": 0.03,
+      "max": null,
+      "unit": "%",
+      "conditions": null
+    },
+    "Output_Voltage_Noise_f___0_1Hz_to_10Hz__4": {
+      "parameter": "Output Voltage Noise",
+      "symbol": null,
+      "min": null,
+      "typ": 8.9,
+      "max": null,
+      "unit": "μVPP/V",
+      "conditions": "f = 0.1Hz to 10Hz"
+    },
+    "Output_Voltage_Noise_f___10Hz_to_10kHz__5": {
+      "parameter": "Output Voltage Noise",
+      "symbol": null,
+      "min": null,
+      "typ": 48.5,
+      "max": null,
+      "unit": "μVRMS",
+      "conditions": "f = 10Hz to 10kHz"
+    },
+    "Output_Voltage_Noise_Density_f___1kHz__4": {
+      "parameter": "Output Voltage Noise Density",
+      "symbol": null,
+      "min": null,
+      "typ": 447,
+      "max": null,
+      "unit": "nV/√Hz",
+      "conditions": "f = 1kHz"
+    },
+    "Line_Regulation_VREF___0_5V___VIN___5_5V__4": {
+      "parameter": "Line Regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 15.0,
+      "max": null,
+      "unit": "ppm/V",
+      "conditions": "VREF + 0.5V ≤ VIN ≤ 5.5V"
     },
     "dVOUT/dT": {
       "parameter": "Output Voltage Temperature Drift",
@@ -73,6 +427,24 @@
       "max": 35,
       "unit": "ppm/°C",
       "conditions": "-40°C ≤ TA ≤ +125°C"
+    },
+    "Long_Term_Stability": {
+      "parameter": "Long-Term Stability",
+      "symbol": null,
+      "min": null,
+      "typ": 120,
+      "max": null,
+      "unit": "ppm",
+      "conditions": "0h to 1000h, IOUT = 0mA"
+    },
+    "Long_Term_Stability_1000h_to_2000h__IOUT___0mA": {
+      "parameter": "Long-Term Stability",
+      "symbol": null,
+      "min": null,
+      "typ": 20,
+      "max": null,
+      "unit": "ppm",
+      "conditions": "1000h to 2000h, IOUT = 0mA"
     },
     "ΔVO(ΔIL)": {
       "parameter": "Load Regulation",
@@ -110,6 +482,15 @@
       "unit": "mA",
       "conditions": null
     },
+    "Turn_On_Settling_Time": {
+      "parameter": "Turn-On Settling Time",
+      "symbol": null,
+      "min": null,
+      "typ": 800,
+      "max": null,
+      "unit": "μs",
+      "conditions": "To 0.1% with CLOAD = 2.2μF"
+    },
     "IQ": {
       "parameter": "Quiescent Current",
       "symbol": "IQ",
@@ -144,9 +525,9 @@
       "unit": "V"
     },
     "vin_operating": {
-      "typ": 5,
-      "max": 200,
-      "unit": "mV"
+      "min": 3,
+      "max": 5.5,
+      "unit": "V"
     },
     "vout": {
       "typ": 2.048,
@@ -212,12 +593,60 @@
           "unit": "V",
           "conditions": null
         },
+        "Output_Short_Circuit_Current": {
+          "parameter": "Output Short-Circuit Current",
+          "symbol": null,
+          "min": null,
+          "max": null,
+          "unit": "Continuous",
+          "conditions": null
+        },
         "θJA": {
           "parameter": "Package Thermal Resistance",
           "symbol": "θJA",
           "min": null,
           "max": 254,
           "unit": "°C/W",
+          "conditions": null
+        },
+        "Junction_Temperature": {
+          "parameter": "Junction Temperature",
+          "symbol": null,
+          "min": null,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        },
+        "Storage_Temperature_Range": {
+          "parameter": "Storage Temperature Range",
+          "symbol": null,
+          "min": -65,
+          "max": 150,
+          "unit": "°C",
+          "conditions": null
+        },
+        "Lead_Temperature__Soldering__1": {
+          "parameter": "Lead Temperature (Soldering, 10s)",
+          "symbol": null,
+          "min": null,
+          "max": 260,
+          "unit": "°C",
+          "conditions": null
+        },
+        "ESD_Susceptibility_HBM": {
+          "parameter": "ESD Susceptibility HBM",
+          "symbol": null,
+          "min": null,
+          "max": 8000,
+          "unit": "V",
+          "conditions": null
+        },
+        "ESD_Susceptibility_CDM": {
+          "parameter": "ESD Susceptibility CDM",
+          "symbol": null,
+          "min": null,
+          "max": 1000,
+          "unit": "V",
           "conditions": null
         }
       },
@@ -226,10 +655,316 @@
           "parameter": "Output Voltage",
           "symbol": "VOUT",
           "min": null,
+          "typ": 2.048,
+          "max": null,
+          "unit": "V",
+          "conditions": null
+        },
+        "Initial_Accuracy": {
+          "parameter": "Initial Accuracy",
+          "symbol": null,
+          "min": -0.1,
+          "typ": null,
+          "max": 0.1,
+          "unit": "%",
+          "conditions": null
+        },
+        "Solder_Heat_Resistance_Shift": {
+          "parameter": "Solder Heat Resistance Shift",
+          "symbol": null,
+          "min": null,
+          "typ": 0.03,
+          "max": null,
+          "unit": "%",
+          "conditions": null
+        },
+        "Output_Voltage_Noise": {
+          "parameter": "Output Voltage Noise",
+          "symbol": null,
+          "min": null,
+          "typ": 8.9,
+          "max": null,
+          "unit": "μVPP/V",
+          "conditions": "f = 0.1Hz to 10Hz"
+        },
+        "Output_Voltage_Noise_f___10Hz_to_10kHz": {
+          "parameter": "Output Voltage Noise",
+          "symbol": null,
+          "min": null,
+          "typ": 24.3,
+          "max": null,
+          "unit": "μVRMS",
+          "conditions": "f = 10Hz to 10kHz"
+        },
+        "Output_Voltage_Noise_Density": {
+          "parameter": "Output Voltage Noise Density",
+          "symbol": null,
+          "min": null,
+          "typ": 223,
+          "max": null,
+          "unit": "nV/√Hz",
+          "conditions": "f = 1kHz"
+        },
+        "Line_Regulation": {
+          "parameter": "Line Regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 4.5,
+          "max": null,
+          "unit": "ppm/V",
+          "conditions": "3.0V ≤ VIN ≤ 5.5V"
+        },
+        "VOUT__2": {
+          "parameter": "Output Voltage",
+          "symbol": "VOUT",
+          "min": null,
+          "typ": 2.5,
+          "max": null,
+          "unit": "V",
+          "conditions": null
+        },
+        "Initial_Accuracy__2": {
+          "parameter": "Initial Accuracy",
+          "symbol": null,
+          "min": -0.1,
+          "typ": null,
+          "max": 0.1,
+          "unit": "%",
+          "conditions": null
+        },
+        "Solder_Heat_Resistance_Shift__2": {
+          "parameter": "Solder Heat Resistance Shift",
+          "symbol": null,
+          "min": null,
+          "typ": 0.03,
+          "max": null,
+          "unit": "%",
+          "conditions": null
+        },
+        "Output_Voltage_Noise_f___0_1Hz_to_10Hz": {
+          "parameter": "Output Voltage Noise",
+          "symbol": null,
+          "min": null,
+          "typ": 8.9,
+          "max": null,
+          "unit": "μVPP/V",
+          "conditions": "f = 0.1Hz to 10Hz"
+        },
+        "Output_Voltage_Noise_f___10Hz_to_10kHz__2": {
+          "parameter": "Output Voltage Noise",
+          "symbol": null,
+          "min": null,
+          "typ": 29.8,
+          "max": null,
+          "unit": "μVRMS",
+          "conditions": "f = 10Hz to 10kHz"
+        },
+        "Output_Voltage_Noise_Density_f___1kHz": {
+          "parameter": "Output Voltage Noise Density",
+          "symbol": null,
+          "min": null,
+          "typ": 273,
+          "max": null,
+          "unit": "nV/√Hz",
+          "conditions": "f = 1kHz"
+        },
+        "Line_Regulation_VREF___0_5V___VIN___5_5V": {
+          "parameter": "Line Regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 4.0,
+          "max": null,
+          "unit": "ppm/V",
+          "conditions": "VREF + 0.5V ≤ VIN ≤ 5.5V"
+        },
+        "VOUT__3": {
+          "parameter": "Output Voltage",
+          "symbol": "VOUT",
+          "min": null,
+          "typ": 3.0,
+          "max": null,
+          "unit": "V",
+          "conditions": null
+        },
+        "Initial_Accuracy__3": {
+          "parameter": "Initial Accuracy",
+          "symbol": null,
+          "min": -0.1,
+          "typ": null,
+          "max": 0.1,
+          "unit": "%",
+          "conditions": null
+        },
+        "Solder_Heat_Resistance_Shift__3": {
+          "parameter": "Solder Heat Resistance Shift",
+          "symbol": null,
+          "min": null,
+          "typ": 0.03,
+          "max": null,
+          "unit": "%",
+          "conditions": null
+        },
+        "Output_Voltage_Noise_f___0_1Hz_to_10Hz__2": {
+          "parameter": "Output Voltage Noise",
+          "symbol": null,
+          "min": null,
+          "typ": 8.9,
+          "max": null,
+          "unit": "μVPP/V",
+          "conditions": "f = 0.1Hz to 10Hz"
+        },
+        "Output_Voltage_Noise_f___10Hz_to_10kHz__3": {
+          "parameter": "Output Voltage Noise",
+          "symbol": null,
+          "min": null,
+          "typ": 35.5,
+          "max": null,
+          "unit": "μVRMS",
+          "conditions": "f = 10Hz to 10kHz"
+        },
+        "Output_Voltage_Noise_Density_f___1kHz__2": {
+          "parameter": "Output Voltage Noise Density",
+          "symbol": null,
+          "min": null,
+          "typ": 327,
+          "max": null,
+          "unit": "nV/√Hz",
+          "conditions": "f = 1kHz"
+        },
+        "Line_Regulation_VREF___0_5V___VIN___5_5V__2": {
+          "parameter": "Line Regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 7.0,
+          "max": null,
+          "unit": "ppm/V",
+          "conditions": "VREF + 0.5V ≤ VIN ≤ 5.5V"
+        },
+        "VOUT__4": {
+          "parameter": "Output Voltage",
+          "symbol": "VOUT",
+          "min": null,
+          "typ": 3.3,
+          "max": null,
+          "unit": "V",
+          "conditions": null
+        },
+        "Initial_Accuracy__4": {
+          "parameter": "Initial Accuracy",
+          "symbol": null,
+          "min": -0.1,
+          "typ": null,
+          "max": 0.1,
+          "unit": "%",
+          "conditions": null
+        },
+        "Solder_Heat_Resistance_Shift__4": {
+          "parameter": "Solder Heat Resistance Shift",
+          "symbol": null,
+          "min": null,
+          "typ": 0.03,
+          "max": null,
+          "unit": "%",
+          "conditions": null
+        },
+        "Output_Voltage_Noise_f___0_1Hz_to_10Hz__3": {
+          "parameter": "Output Voltage Noise",
+          "symbol": null,
+          "min": null,
+          "typ": 8.9,
+          "max": null,
+          "unit": "μVPP/V",
+          "conditions": "f = 0.1Hz to 10Hz"
+        },
+        "Output_Voltage_Noise_f___10Hz_to_10kHz__4": {
+          "parameter": "Output Voltage Noise",
+          "symbol": null,
+          "min": null,
+          "typ": 39.1,
+          "max": null,
+          "unit": "μVRMS",
+          "conditions": "f = 10Hz to 10kHz"
+        },
+        "Output_Voltage_Noise_Density_f___1kHz__3": {
+          "parameter": "Output Voltage Noise Density",
+          "symbol": null,
+          "min": null,
+          "typ": 360,
+          "max": null,
+          "unit": "nV/√Hz",
+          "conditions": "f = 1kHz"
+        },
+        "Line_Regulation_VREF___0_5V___VIN___5_5V__3": {
+          "parameter": "Line Regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 7.0,
+          "max": null,
+          "unit": "ppm/V",
+          "conditions": "VREF + 0.5V ≤ VIN ≤ 5.5V"
+        },
+        "VOUT__5": {
+          "parameter": "Output Voltage",
+          "symbol": "VOUT",
+          "min": null,
           "typ": 4.096,
           "max": null,
           "unit": "V",
           "conditions": null
+        },
+        "Initial_Accuracy__5": {
+          "parameter": "Initial Accuracy",
+          "symbol": null,
+          "min": -0.1,
+          "typ": null,
+          "max": 0.1,
+          "unit": "%",
+          "conditions": null
+        },
+        "Solder_Heat_Resistance_Shift__5": {
+          "parameter": "Solder Heat Resistance Shift",
+          "symbol": null,
+          "min": null,
+          "typ": 0.03,
+          "max": null,
+          "unit": "%",
+          "conditions": null
+        },
+        "Output_Voltage_Noise_f___0_1Hz_to_10Hz__4": {
+          "parameter": "Output Voltage Noise",
+          "symbol": null,
+          "min": null,
+          "typ": 8.9,
+          "max": null,
+          "unit": "μVPP/V",
+          "conditions": "f = 0.1Hz to 10Hz"
+        },
+        "Output_Voltage_Noise_f___10Hz_to_10kHz__5": {
+          "parameter": "Output Voltage Noise",
+          "symbol": null,
+          "min": null,
+          "typ": 48.5,
+          "max": null,
+          "unit": "μVRMS",
+          "conditions": "f = 10Hz to 10kHz"
+        },
+        "Output_Voltage_Noise_Density_f___1kHz__4": {
+          "parameter": "Output Voltage Noise Density",
+          "symbol": null,
+          "min": null,
+          "typ": 447,
+          "max": null,
+          "unit": "nV/√Hz",
+          "conditions": "f = 1kHz"
+        },
+        "Line_Regulation_VREF___0_5V___VIN___5_5V__4": {
+          "parameter": "Line Regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 15.0,
+          "max": null,
+          "unit": "ppm/V",
+          "conditions": "VREF + 0.5V ≤ VIN ≤ 5.5V"
         },
         "dVOUT/dT": {
           "parameter": "Output Voltage Temperature Drift",
@@ -239,6 +974,24 @@
           "max": 35,
           "unit": "ppm/°C",
           "conditions": "-40°C ≤ TA ≤ +125°C"
+        },
+        "Long_Term_Stability": {
+          "parameter": "Long-Term Stability",
+          "symbol": null,
+          "min": null,
+          "typ": 120,
+          "max": null,
+          "unit": "ppm",
+          "conditions": "0h to 1000h, IOUT = 0mA"
+        },
+        "Long_Term_Stability_1000h_to_2000h__IOUT___0mA": {
+          "parameter": "Long-Term Stability",
+          "symbol": null,
+          "min": null,
+          "typ": 20,
+          "max": null,
+          "unit": "ppm",
+          "conditions": "1000h to 2000h, IOUT = 0mA"
         },
         "ΔVO(ΔIL)": {
           "parameter": "Load Regulation",
@@ -276,6 +1029,15 @@
           "unit": "mA",
           "conditions": null
         },
+        "Turn_On_Settling_Time": {
+          "parameter": "Turn-On Settling Time",
+          "symbol": null,
+          "min": null,
+          "typ": 800,
+          "max": null,
+          "unit": "μs",
+          "conditions": "To 0.1% with CLOAD = 2.2μF"
+        },
         "IQ": {
           "parameter": "Quiescent Current",
           "symbol": "IQ",
@@ -310,9 +1072,9 @@
           "unit": "V"
         },
         "vin_operating": {
-          "typ": 5,
-          "max": 200,
-          "unit": "mV"
+          "min": 3,
+          "max": 5.5,
+          "unit": "V"
         },
         "vout": {
           "typ": 2.048,

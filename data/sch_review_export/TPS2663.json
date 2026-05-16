@@ -360,6 +360,22 @@
       "unit": "V",
       "conditions": "10ms transient, TA = 25 °C"
     },
+    "Input_Voltage": {
+      "parameter": "Input Voltage",
+      "symbol": null,
+      "min": -0.3,
+      "max": 67,
+      "unit": "V",
+      "conditions": null
+    },
+    "Input_Voltage_10ms_transient__with_a_Blockin": {
+      "parameter": "Input Voltage",
+      "symbol": null,
+      "min": -85,
+      "max": null,
+      "unit": "V",
+      "conditions": "10ms transient, with a Blocking FET"
+    },
     "IN": {
       "parameter": "Input Voltage",
       "symbol": "IN",
@@ -376,11 +392,35 @@
       "unit": "V",
       "conditions": null
     },
+    "Input_Voltage__2": {
+      "parameter": "Input Voltage",
+      "symbol": null,
+      "min": -0.3,
+      "max": 14,
+      "unit": "V",
+      "conditions": null
+    },
     "DRV": {
       "parameter": "Input Voltage",
       "symbol": "DRV",
       "min": -60,
       "max": 72,
+      "unit": "V",
+      "conditions": null
+    },
+    "Input_Voltage__3": {
+      "parameter": "Input Voltage",
+      "symbol": null,
+      "min": -0.3,
+      "max": 20,
+      "unit": "V",
+      "conditions": null
+    },
+    "Input_Voltage__4": {
+      "parameter": "Input Voltage",
+      "symbol": null,
+      "min": -0.3,
+      "max": 5.5,
       "unit": "V",
       "conditions": null
     },
@@ -967,6 +1007,22 @@
           "unit": "V",
           "conditions": "10ms transient, TA = 25 °C"
         },
+        "Input_Voltage": {
+          "parameter": "Input Voltage",
+          "symbol": null,
+          "min": -0.3,
+          "max": 67,
+          "unit": "V",
+          "conditions": null
+        },
+        "Input_Voltage_10ms_transient__with_a_Blockin": {
+          "parameter": "Input Voltage",
+          "symbol": null,
+          "min": -85,
+          "max": null,
+          "unit": "V",
+          "conditions": "10ms transient, with a Blocking FET"
+        },
         "IN": {
           "parameter": "Input Voltage",
           "symbol": "IN",
@@ -983,11 +1039,35 @@
           "unit": "V",
           "conditions": null
         },
+        "Input_Voltage__2": {
+          "parameter": "Input Voltage",
+          "symbol": null,
+          "min": -0.3,
+          "max": 14,
+          "unit": "V",
+          "conditions": null
+        },
         "DRV": {
           "parameter": "Input Voltage",
           "symbol": "DRV",
           "min": -60,
           "max": 72,
+          "unit": "V",
+          "conditions": null
+        },
+        "Input_Voltage__3": {
+          "parameter": "Input Voltage",
+          "symbol": null,
+          "min": -0.3,
+          "max": 20,
+          "unit": "V",
+          "conditions": null
+        },
+        "Input_Voltage__4": {
+          "parameter": "Input Voltage",
+          "symbol": null,
+          "min": -0.3,
+          "max": 5.5,
           "unit": "V",
           "conditions": null
         },
@@ -1229,7 +1309,12 @@
             "100 nF",
             "1000 µF"
           ],
-          "snippet": "tdVdT = 20.8 × 103 × V(IN) × C(dVdT) (2) Figure 8-1 illustrates inrush current control performance of the device during hot plug-In. VIN_SYS VOUT IIN PGOOD CdVdT = 100 nF COUT = 1000 µF RILIM = 4.02 k"
+          "snippet": "tdVdT = 20.8 × 103 × V(IN) × C(dVdT) (2) Figure 8-1 illustrates inrush current control performance of the device during hot plug-In. VIN_SYS VOUT IIN PGOOD CdVdT = 100 nF COUT = 1000 µF RILIM = 4.02 k",
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.component_rules",
+            "source_page": 17
+          }
         },
         {
           "role": "current_limit_resistor",
@@ -1239,7 +1324,12 @@
             "100 nF",
             "1000 µF"
           ],
-          "snippet": "tdVdT = 20.8 × 103 × V(IN) × C(dVdT) (2) Figure 8-1 illustrates inrush current control performance of the device during hot plug-In. VIN_SYS VOUT IIN PGOOD CdVdT = 100 nF COUT = 1000 µF RILIM = 4.02 k"
+          "snippet": "tdVdT = 20.8 × 103 × V(IN) × C(dVdT) (2) Figure 8-1 illustrates inrush current control performance of the device during hot plug-In. VIN_SYS VOUT IIN PGOOD CdVdT = 100 nF COUT = 1000 µF RILIM = 4.02 k",
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.component_rules",
+            "source_page": 17
+          }
         },
         {
           "role": "dvdt_capacitor",
@@ -1249,7 +1339,12 @@
             "100 nF",
             "1000 µF"
           ],
-          "snippet": "tdVdT = 20.8 × 103 × V(IN) × C(dVdT) (2) Figure 8-1 illustrates inrush current control performance of the device during hot plug-In. VIN_SYS VOUT IIN PGOOD CdVdT = 100 nF COUT = 1000 µF RILIM = 4.02 k"
+          "snippet": "tdVdT = 20.8 × 103 × V(IN) × C(dVdT) (2) Figure 8-1 illustrates inrush current control performance of the device during hot plug-In. VIN_SYS VOUT IIN PGOOD CdVdT = 100 nF COUT = 1000 µF RILIM = 4.02 k",
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.component_rules",
+            "source_page": 17
+          }
         },
         {
           "role": "output_capacitor",
@@ -1259,7 +1354,12 @@
             "30 mF",
             "4.02kΩ"
           ],
-          "snippet": "VIN_SYS VOUT IIN PGOOD CdVdT = Open COUT = 30 mF RILIM = 4.02 kΩ Figure 8-4. Thermal Regulation Loop Response During Power Up with Large Capacitive Load 8.3.2 PGOOD and PGTH The devices feature an ope"
+          "snippet": "VIN_SYS VOUT IIN PGOOD CdVdT = Open COUT = 30 mF RILIM = 4.02 kΩ Figure 8-4. Thermal Regulation Loop Response During Power Up with Large Capacitive Load 8.3.2 PGOOD and PGTH The devices feature an ope",
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.component_rules",
+            "source_page": 18
+          }
         },
         {
           "role": "current_limit_resistor",
@@ -1269,7 +1369,12 @@
             "30 mF",
             "4.02kΩ"
           ],
-          "snippet": "VIN_SYS VOUT IIN PGOOD CdVdT = Open COUT = 30 mF RILIM = 4.02 kΩ Figure 8-4. Thermal Regulation Loop Response During Power Up with Large Capacitive Load 8.3.2 PGOOD and PGTH The devices feature an ope"
+          "snippet": "VIN_SYS VOUT IIN PGOOD CdVdT = Open COUT = 30 mF RILIM = 4.02 kΩ Figure 8-4. Thermal Regulation Loop Response During Power Up with Large Capacitive Load 8.3.2 PGOOD and PGTH The devices feature an ope",
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.component_rules",
+            "source_page": 18
+          }
         },
         {
           "role": "dvdt_capacitor",
@@ -1279,7 +1384,12 @@
             "30 mF",
             "4.02kΩ"
           ],
-          "snippet": "VIN_SYS VOUT IIN PGOOD CdVdT = Open COUT = 30 mF RILIM = 4.02 kΩ Figure 8-4. Thermal Regulation Loop Response During Power Up with Large Capacitive Load 8.3.2 PGOOD and PGTH The devices feature an ope"
+          "snippet": "VIN_SYS VOUT IIN PGOOD CdVdT = Open COUT = 30 mF RILIM = 4.02 kΩ Figure 8-4. Thermal Regulation Loop Response During Power Up with Large Capacitive Load 8.3.2 PGOOD and PGTH The devices feature an ope",
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.component_rules",
+            "source_page": 18
+          }
         }
       ],
       "component_value_hints": [
@@ -1289,7 +1399,12 @@
             "100 nF"
           ],
           "source_page": 17,
-          "snippet": "tdVdT = 20.8 × 103 × V(IN) × C(dVdT) (2) Figure 8-1 illustrates inrush current control performance of the device during hot plug-In. VIN_SYS VOUT IIN PGOOD CdVdT = 100 nF COUT = 1000 µF RILIM = 4.02 k"
+          "snippet": "tdVdT = 20.8 × 103 × V(IN) × C(dVdT) (2) Figure 8-1 illustrates inrush current control performance of the device during hot plug-In. VIN_SYS VOUT IIN PGOOD CdVdT = 100 nF COUT = 1000 µF RILIM = 4.02 k",
+          "origin": {
+            "kind": "source_fact",
+            "method": "design_info_utils.passive_value_regex",
+            "source_page": 17
+          }
         },
         {
           "values": [
@@ -1297,19 +1412,34 @@
             "4.02kΩ"
           ],
           "source_page": 18,
-          "snippet": "VIN_SYS VOUT IIN PGOOD CdVdT = Open COUT = 30 mF RILIM = 4.02 kΩ Figure 8-4. Thermal Regulation Loop Response During Power Up with Large Capacitive Load 8.3.2 PGOOD and PGTH The devices feature an ope"
+          "snippet": "VIN_SYS VOUT IIN PGOOD CdVdT = Open COUT = 30 mF RILIM = 4.02 kΩ Figure 8-4. Thermal Regulation Loop Response During Power Up with Large Capacitive Load 8.3.2 PGOOD and PGTH The devices feature an ope",
+          "origin": {
+            "kind": "source_fact",
+            "method": "design_info_utils.passive_value_regex",
+            "source_page": 18
+          }
         }
       ],
       "design_equation_hints": [
         {
           "equation": "tdVdT = 20.8 × 103 × V(IN) × C(dVdT) (2) Figure 8-1 illustrates inrush current control performance of the device during hot plug",
-          "source_page": 17
+          "source_page": 17,
+          "origin": {
+            "kind": "source_fact",
+            "method": "design_info_utils.equation_regex",
+            "source_page": 17
+          }
         }
       ],
       "topology_hints": [
         {
           "hint": "9 Application and Implementation Note Information in the following applications sections is not part of the TI component specification, and TI does not warrant its accuracy or completeness. TI’s cust",
-          "source_page": 28
+          "source_page": 28,
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.topology_keywords",
+            "source_page": 28
+          }
         }
       ],
       "design_formulas": [
@@ -1416,17 +1546,32 @@
           {
             "page": 17,
             "title": null,
-            "content_type": "application"
+            "content_type": "application",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 17
+            }
           },
           {
             "page": 18,
             "title": null,
-            "content_type": "application"
+            "content_type": "application",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 18
+            }
           },
           {
             "page": 28,
             "title": null,
-            "content_type": "application"
+            "content_type": "application",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 28
+            }
           }
         ],
         "total_pages": 3

@@ -180,6 +180,14 @@
       "unit": "V",
       "conditions": "VVINX + 0.3V"
     },
+    "All_Other_Pins_Voltage": {
+      "parameter": "All Other Pins Voltage",
+      "symbol": null,
+      "min": -0.3,
+      "max": 6.5,
+      "unit": "V",
+      "conditions": null
+    },
     "TA": {
       "parameter": "Ambient Temperature operating Range",
       "symbol": "TA",
@@ -195,6 +203,14 @@
       "max": 150,
       "unit": "°C",
       "conditions": null
+    },
+    "Lead_Temperature": {
+      "parameter": "Lead Temperature",
+      "symbol": null,
+      "min": null,
+      "max": 260,
+      "unit": "°C",
+      "conditions": "10 sec"
     },
     "TS": {
       "parameter": "Storage Temperature Range",
@@ -386,7 +402,7 @@
       "unit": "V"
     },
     "enable_threshold": {
-      "max": 0.4,
+      "min": 2,
       "unit": "V"
     },
     "iout_max": {
@@ -592,6 +608,14 @@
           "unit": "V",
           "conditions": "VVINX + 0.3V"
         },
+        "All_Other_Pins_Voltage": {
+          "parameter": "All Other Pins Voltage",
+          "symbol": null,
+          "min": -0.3,
+          "max": 6.5,
+          "unit": "V",
+          "conditions": null
+        },
         "TA": {
           "parameter": "Ambient Temperature operating Range",
           "symbol": "TA",
@@ -607,6 +631,14 @@
           "max": 150,
           "unit": "°C",
           "conditions": null
+        },
+        "Lead_Temperature": {
+          "parameter": "Lead Temperature",
+          "symbol": null,
+          "min": null,
+          "max": 260,
+          "unit": "°C",
+          "conditions": "10 sec"
         },
         "TS": {
           "parameter": "Storage Temperature Range",
@@ -798,7 +830,7 @@
           "unit": "V"
         },
         "enable_threshold": {
-          "max": 0.4,
+          "min": 2,
           "unit": "V"
         },
         "iout_max": {
@@ -833,7 +865,12 @@
       "topology_hints": [
         {
           "hint": "www.aerosemi.com Aerosemi Proprietary Information.Unauthorized Photocopy and Duplication Prohibited. All Rights Reserved. A4003C Rev1.1 5 A4003C 3CH DC/DC AEROSEMI APPLICATION CIRCUIT DIA",
-          "source_page": 4
+          "source_page": 4,
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.topology_keywords",
+            "source_page": 4
+          }
         }
       ],
       "typical_application": {
@@ -844,7 +881,12 @@
           {
             "page": 4,
             "title": null,
-            "content_type": "application"
+            "content_type": "application",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 4
+            }
           }
         ],
         "total_pages": 1

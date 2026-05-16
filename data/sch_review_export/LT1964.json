@@ -136,6 +136,14 @@
       "unit": "V",
       "conditions": "Note 11"
     },
+    "OUT_to_IN_Differential_Voltage": {
+      "parameter": "OUT to IN Differential Voltage",
+      "symbol": null,
+      "min": -0.5,
+      "max": 20,
+      "unit": "V",
+      "conditions": "Note 11"
+    },
     "VADJ": {
       "parameter": "ADJ Pin Voltage (with Respect to IN Pin)",
       "symbol": "VADJ",
@@ -153,11 +161,27 @@
       "conditions": null
     },
     "VSHDN": {
+      "parameter": "SHDN Pin Voltage (with Respect to IN Pin)",
+      "symbol": "VSHDN",
+      "min": -0.5,
+      "max": 35,
+      "unit": "V",
+      "conditions": "Note 11"
+    },
+    "VSHDN__2": {
       "parameter": "SHDN Pin Voltage (with Respect to GND Pin)",
       "symbol": "VSHDN",
       "min": -20,
       "max": 15,
       "unit": "V",
+      "conditions": null
+    },
+    "Output_Short_Circuit_Duration": {
+      "parameter": "Output Short-Circuit Duration",
+      "symbol": null,
+      "min": null,
+      "max": null,
+      "unit": "Indefinite",
       "conditions": null
     },
     "TJ": {
@@ -173,6 +197,14 @@
       "symbol": "TSTG",
       "min": -65,
       "max": 150,
+      "unit": "°C",
+      "conditions": null
+    },
+    "Lead_Temperature__Soldering__1": {
+      "parameter": "Lead Temperature (Soldering, 10 sec)",
+      "symbol": null,
+      "min": null,
+      "max": 300,
       "unit": "°C",
       "conditions": null
     }
@@ -254,6 +286,15 @@
       "parameter": "Load Regulation",
       "symbol": "ΔVOUT/ΔILOAD",
       "min": null,
+      "typ": 2,
+      "max": 7,
+      "unit": "mV",
+      "conditions": "VIN = -2.8V, ΔILOAD = -1mA to -200mA"
+    },
+    "ΔVOUT/ΔILOAD_VIN____2_8V___ILOAD____1mA_to__2": {
+      "parameter": "Load Regulation",
+      "symbol": "ΔVOUT/ΔILOAD",
+      "min": null,
       "typ": null,
       "max": 15,
       "unit": "mV",
@@ -281,6 +322,15 @@
       "parameter": "Dropout Voltage",
       "symbol": "VDROPOUT",
       "min": null,
+      "typ": 0.15,
+      "max": 0.2,
+      "unit": "V",
+      "conditions": "ILOAD = -10mA"
+    },
+    "VDROPOUT_ILOAD____10mA__2": {
+      "parameter": "Dropout Voltage",
+      "symbol": "VDROPOUT",
+      "min": null,
       "typ": null,
       "max": 0.25,
       "unit": "V",
@@ -290,12 +340,30 @@
       "parameter": "Dropout Voltage",
       "symbol": "VDROPOUT",
       "min": null,
+      "typ": 0.26,
+      "max": 0.33,
+      "unit": "V",
+      "conditions": "ILOAD = -100mA"
+    },
+    "VDROPOUT_ILOAD____100mA__2": {
+      "parameter": "Dropout Voltage",
+      "symbol": "VDROPOUT",
+      "min": null,
       "typ": null,
       "max": 0.39,
       "unit": "V",
       "conditions": "ILOAD = -100mA"
     },
     "VDROPOUT_ILOAD____200mA": {
+      "parameter": "Dropout Voltage",
+      "symbol": "VDROPOUT",
+      "min": null,
+      "typ": 0.34,
+      "max": 0.42,
+      "unit": "V",
+      "conditions": "ILOAD = -200mA"
+    },
+    "VDROPOUT_ILOAD____200mA__2": {
       "parameter": "Dropout Voltage",
       "symbol": "VDROPOUT",
       "min": null,
@@ -385,6 +453,42 @@
       "unit": "V",
       "conditions": "ILOAD = -200mA"
     },
+    "Shutdown_Threshold": {
+      "parameter": "Shutdown Threshold",
+      "symbol": null,
+      "min": null,
+      "typ": 1.6,
+      "max": 2.1,
+      "unit": "V",
+      "conditions": "VOUT = Off to On (Positive)"
+    },
+    "Shutdown_Threshold_VOUT___Off_to_On__Negative": {
+      "parameter": "Shutdown Threshold",
+      "symbol": null,
+      "min": null,
+      "typ": -1.9,
+      "max": -2.8,
+      "unit": "V",
+      "conditions": "VOUT = Off to On (Negative)"
+    },
+    "Shutdown_Threshold_VOUT___On_to_Off__Positive": {
+      "parameter": "Shutdown Threshold",
+      "symbol": null,
+      "min": 0.25,
+      "typ": 0.8,
+      "max": null,
+      "unit": "V",
+      "conditions": "VOUT = On to Off (Positive)"
+    },
+    "Shutdown_Threshold_VOUT___On_to_Off__Negative": {
+      "parameter": "Shutdown Threshold",
+      "symbol": null,
+      "min": -0.25,
+      "typ": -0.8,
+      "max": null,
+      "unit": "V",
+      "conditions": "VOUT = On to Off (Negative)"
+    },
     "ISHDN": {
       "parameter": "SHDN Pin Current",
       "symbol": "ISHDN",
@@ -447,6 +551,15 @@
       "max": null,
       "unit": "mA",
       "conditions": "VIN = VOUT(NOMINAL) - 1.5V, ΔVOUT = 0.1V"
+    },
+    "Input_Reverse_Leakage_Current": {
+      "parameter": "Input Reverse Leakage Current",
+      "symbol": null,
+      "min": null,
+      "typ": null,
+      "max": 1,
+      "unit": "mA",
+      "conditions": "VIN = 20V, VOUT, VADJ, VSHDN = Open Circuit"
     }
   },
   "drc_hints": {
@@ -607,6 +720,14 @@
           "unit": "V",
           "conditions": "Note 11"
         },
+        "OUT_to_IN_Differential_Voltage": {
+          "parameter": "OUT to IN Differential Voltage",
+          "symbol": null,
+          "min": -0.5,
+          "max": 20,
+          "unit": "V",
+          "conditions": "Note 11"
+        },
         "VADJ": {
           "parameter": "ADJ Pin Voltage (with Respect to IN Pin)",
           "symbol": "VADJ",
@@ -624,11 +745,27 @@
           "conditions": null
         },
         "VSHDN": {
+          "parameter": "SHDN Pin Voltage (with Respect to IN Pin)",
+          "symbol": "VSHDN",
+          "min": -0.5,
+          "max": 35,
+          "unit": "V",
+          "conditions": "Note 11"
+        },
+        "VSHDN__2": {
           "parameter": "SHDN Pin Voltage (with Respect to GND Pin)",
           "symbol": "VSHDN",
           "min": -20,
           "max": 15,
           "unit": "V",
+          "conditions": null
+        },
+        "Output_Short_Circuit_Duration": {
+          "parameter": "Output Short-Circuit Duration",
+          "symbol": null,
+          "min": null,
+          "max": null,
+          "unit": "Indefinite",
           "conditions": null
         },
         "TJ": {
@@ -644,6 +781,14 @@
           "symbol": "TSTG",
           "min": -65,
           "max": 150,
+          "unit": "°C",
+          "conditions": null
+        },
+        "Lead_Temperature__Soldering__1": {
+          "parameter": "Lead Temperature (Soldering, 10 sec)",
+          "symbol": null,
+          "min": null,
+          "max": 300,
           "unit": "°C",
           "conditions": null
         }
@@ -725,6 +870,15 @@
           "parameter": "Load Regulation",
           "symbol": "ΔVOUT/ΔILOAD",
           "min": null,
+          "typ": 2,
+          "max": 7,
+          "unit": "mV",
+          "conditions": "VIN = -2.8V, ΔILOAD = -1mA to -200mA"
+        },
+        "ΔVOUT/ΔILOAD_VIN____2_8V___ILOAD____1mA_to__2": {
+          "parameter": "Load Regulation",
+          "symbol": "ΔVOUT/ΔILOAD",
+          "min": null,
           "typ": null,
           "max": 15,
           "unit": "mV",
@@ -752,6 +906,15 @@
           "parameter": "Dropout Voltage",
           "symbol": "VDROPOUT",
           "min": null,
+          "typ": 0.15,
+          "max": 0.2,
+          "unit": "V",
+          "conditions": "ILOAD = -10mA"
+        },
+        "VDROPOUT_ILOAD____10mA__2": {
+          "parameter": "Dropout Voltage",
+          "symbol": "VDROPOUT",
+          "min": null,
           "typ": null,
           "max": 0.25,
           "unit": "V",
@@ -761,12 +924,30 @@
           "parameter": "Dropout Voltage",
           "symbol": "VDROPOUT",
           "min": null,
+          "typ": 0.26,
+          "max": 0.33,
+          "unit": "V",
+          "conditions": "ILOAD = -100mA"
+        },
+        "VDROPOUT_ILOAD____100mA__2": {
+          "parameter": "Dropout Voltage",
+          "symbol": "VDROPOUT",
+          "min": null,
           "typ": null,
           "max": 0.39,
           "unit": "V",
           "conditions": "ILOAD = -100mA"
         },
         "VDROPOUT_ILOAD____200mA": {
+          "parameter": "Dropout Voltage",
+          "symbol": "VDROPOUT",
+          "min": null,
+          "typ": 0.34,
+          "max": 0.42,
+          "unit": "V",
+          "conditions": "ILOAD = -200mA"
+        },
+        "VDROPOUT_ILOAD____200mA__2": {
           "parameter": "Dropout Voltage",
           "symbol": "VDROPOUT",
           "min": null,
@@ -856,6 +1037,42 @@
           "unit": "V",
           "conditions": "ILOAD = -200mA"
         },
+        "Shutdown_Threshold": {
+          "parameter": "Shutdown Threshold",
+          "symbol": null,
+          "min": null,
+          "typ": 1.6,
+          "max": 2.1,
+          "unit": "V",
+          "conditions": "VOUT = Off to On (Positive)"
+        },
+        "Shutdown_Threshold_VOUT___Off_to_On__Negative": {
+          "parameter": "Shutdown Threshold",
+          "symbol": null,
+          "min": null,
+          "typ": -1.9,
+          "max": -2.8,
+          "unit": "V",
+          "conditions": "VOUT = Off to On (Negative)"
+        },
+        "Shutdown_Threshold_VOUT___On_to_Off__Positive": {
+          "parameter": "Shutdown Threshold",
+          "symbol": null,
+          "min": 0.25,
+          "typ": 0.8,
+          "max": null,
+          "unit": "V",
+          "conditions": "VOUT = On to Off (Positive)"
+        },
+        "Shutdown_Threshold_VOUT___On_to_Off__Negative": {
+          "parameter": "Shutdown Threshold",
+          "symbol": null,
+          "min": -0.25,
+          "typ": -0.8,
+          "max": null,
+          "unit": "V",
+          "conditions": "VOUT = On to Off (Negative)"
+        },
         "ISHDN": {
           "parameter": "SHDN Pin Current",
           "symbol": "ISHDN",
@@ -918,6 +1135,15 @@
           "max": null,
           "unit": "mA",
           "conditions": "VIN = VOUT(NOMINAL) - 1.5V, ΔVOUT = 0.1V"
+        },
+        "Input_Reverse_Leakage_Current": {
+          "parameter": "Input Reverse Leakage Current",
+          "symbol": null,
+          "min": null,
+          "typ": null,
+          "max": 1,
+          "unit": "mA",
+          "conditions": "VIN = 20V, VOUT, VADJ, VSHDN = Open Circuit"
         }
       },
       "drc_hints": {

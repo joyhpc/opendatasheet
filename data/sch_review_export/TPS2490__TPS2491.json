@@ -104,11 +104,11 @@
       "conditions": null
     },
     "PROG": {
-      "parameter": "Sink current",
+      "parameter": "Input voltage",
       "symbol": "PROG",
-      "min": null,
-      "max": 2.0,
-      "unit": "mA",
+      "min": -0.3,
+      "max": 6.0,
+      "unit": "V",
       "conditions": null
     },
     "GATE, PG": {
@@ -132,6 +132,14 @@
       "symbol": "PG",
       "min": null,
       "max": 10.0,
+      "unit": "mA",
+      "conditions": null
+    },
+    "PROG__2": {
+      "parameter": "Sink current",
+      "symbol": "PROG",
+      "min": null,
+      "max": 2.0,
       "unit": "mA",
       "conditions": null
     },
@@ -249,6 +257,60 @@
       "unit": "mV",
       "conditions": "VPROG = 4 V, VSENSE = VOUT"
     },
+    "Charge_current__sourcing": {
+      "parameter": "Charge current (sourcing)",
+      "symbol": null,
+      "min": 15.0,
+      "typ": 25.0,
+      "max": 34.0,
+      "unit": "µA",
+      "conditions": "VTIMER = 0 V"
+    },
+    "Charge_current__sourcing_VTIMER___0_V__TJ___25_C": {
+      "parameter": "Charge current (sourcing)",
+      "symbol": null,
+      "min": 20.0,
+      "typ": 25.0,
+      "max": 30.0,
+      "unit": "µA",
+      "conditions": "VTIMER = 0 V, TJ = 25°C"
+    },
+    "Discharge_current__sinking": {
+      "parameter": "Discharge current (sinking)",
+      "symbol": null,
+      "min": 1.5,
+      "typ": 2.5,
+      "max": 3.7,
+      "unit": "µA",
+      "conditions": "VTIMER = 5 V"
+    },
+    "Discharge_current__sinking_VTIMER___5_V__TJ___25_C": {
+      "parameter": "Discharge current (sinking)",
+      "symbol": null,
+      "min": 2.1,
+      "typ": 2.5,
+      "max": 3.1,
+      "unit": "µA",
+      "conditions": "VTIMER = 5 V, TJ = 25°C"
+    },
+    "TIMER_upper_threshold_voltage": {
+      "parameter": "TIMER upper threshold voltage",
+      "symbol": null,
+      "min": 3.9,
+      "typ": 4.0,
+      "max": 4.1,
+      "unit": "V",
+      "conditions": null
+    },
+    "TIMER_lower_reset_threshold_vo": {
+      "parameter": "TIMER lower reset threshold voltage",
+      "symbol": null,
+      "min": 0.96,
+      "typ": 1.0,
+      "max": 1.04,
+      "unit": "V",
+      "conditions": null
+    },
     "DRETRY": {
       "parameter": "Fault retry duty cycle",
       "symbol": "DRETRY",
@@ -266,6 +328,24 @@
       "max": 35.0,
       "unit": "µA",
       "conditions": "VSENSE = VVCC, V(GATE-OUT) = 7 V, VEN = Hi"
+    },
+    "GATE_sinking_current": {
+      "parameter": "GATE sinking current",
+      "symbol": null,
+      "min": 1.8,
+      "typ": 2.4,
+      "max": 2.8,
+      "unit": "mA",
+      "conditions": "VEN = Lo, VGATE = VVCC"
+    },
+    "GATE_sinking_current_VEN___Hi__VGATE___VVCC__V_VCC": {
+      "parameter": "GATE sinking current",
+      "symbol": null,
+      "min": 75.0,
+      "typ": 125.0,
+      "max": 250.0,
+      "unit": "mA",
+      "conditions": "VEN = Hi, VGATE = VVCC, V(VCC-SENSE) >= 200 mV"
     },
     "V(GATE-OUT)": {
       "parameter": "GATE output voltage",
@@ -321,6 +401,15 @@
       "unit": "V",
       "conditions": "VSENSE = VVCC"
     },
+    "Leakage_current__PG_false__ope": {
+      "parameter": "Leakage current, PG false, open drain",
+      "symbol": null,
+      "min": null,
+      "typ": null,
+      "max": 10.0,
+      "unit": "µA",
+      "conditions": null
+    },
     "IOUT": {
       "parameter": "Bias current",
       "symbol": "IOUT",
@@ -355,6 +444,51 @@
       "typ": 1.25,
       "max": 1.28,
       "unit": "V",
+      "conditions": null
+    },
+    "VEN_hysteresis": {
+      "parameter": "VEN hysteresis",
+      "symbol": null,
+      "min": null,
+      "typ": 100.0,
+      "max": null,
+      "unit": "mV",
+      "conditions": null
+    },
+    "Leakage_current": {
+      "parameter": "Leakage current",
+      "symbol": null,
+      "min": null,
+      "typ": null,
+      "max": 1.0,
+      "unit": "µA",
+      "conditions": "VEN = 48 V"
+    },
+    "VVCC_turn_on": {
+      "parameter": "VVCC turn on",
+      "symbol": null,
+      "min": null,
+      "typ": 8.4,
+      "max": 8.8,
+      "unit": "V",
+      "conditions": "Rising"
+    },
+    "VVCC_turn_off": {
+      "parameter": "VVCC turn off",
+      "symbol": null,
+      "min": 7.5,
+      "typ": 8.3,
+      "max": null,
+      "unit": "V",
+      "conditions": "Falling"
+    },
+    "Hysteresis": {
+      "parameter": "Hysteresis",
+      "symbol": null,
+      "min": null,
+      "typ": 75.0,
+      "max": null,
+      "unit": "mV",
       "conditions": null
     }
   },
@@ -481,11 +615,11 @@
           "conditions": null
         },
         "PROG": {
-          "parameter": "Sink current",
+          "parameter": "Input voltage",
           "symbol": "PROG",
-          "min": null,
-          "max": 2.0,
-          "unit": "mA",
+          "min": -0.3,
+          "max": 6.0,
+          "unit": "V",
           "conditions": null
         },
         "GATE, PG": {
@@ -509,6 +643,14 @@
           "symbol": "PG",
           "min": null,
           "max": 10.0,
+          "unit": "mA",
+          "conditions": null
+        },
+        "PROG__2": {
+          "parameter": "Sink current",
+          "symbol": "PROG",
+          "min": null,
+          "max": 2.0,
           "unit": "mA",
           "conditions": null
         },
@@ -626,6 +768,60 @@
           "unit": "mV",
           "conditions": "VPROG = 4 V, VSENSE = VOUT"
         },
+        "Charge_current__sourcing": {
+          "parameter": "Charge current (sourcing)",
+          "symbol": null,
+          "min": 15.0,
+          "typ": 25.0,
+          "max": 34.0,
+          "unit": "µA",
+          "conditions": "VTIMER = 0 V"
+        },
+        "Charge_current__sourcing_VTIMER___0_V__TJ___25_C": {
+          "parameter": "Charge current (sourcing)",
+          "symbol": null,
+          "min": 20.0,
+          "typ": 25.0,
+          "max": 30.0,
+          "unit": "µA",
+          "conditions": "VTIMER = 0 V, TJ = 25°C"
+        },
+        "Discharge_current__sinking": {
+          "parameter": "Discharge current (sinking)",
+          "symbol": null,
+          "min": 1.5,
+          "typ": 2.5,
+          "max": 3.7,
+          "unit": "µA",
+          "conditions": "VTIMER = 5 V"
+        },
+        "Discharge_current__sinking_VTIMER___5_V__TJ___25_C": {
+          "parameter": "Discharge current (sinking)",
+          "symbol": null,
+          "min": 2.1,
+          "typ": 2.5,
+          "max": 3.1,
+          "unit": "µA",
+          "conditions": "VTIMER = 5 V, TJ = 25°C"
+        },
+        "TIMER_upper_threshold_voltage": {
+          "parameter": "TIMER upper threshold voltage",
+          "symbol": null,
+          "min": 3.9,
+          "typ": 4.0,
+          "max": 4.1,
+          "unit": "V",
+          "conditions": null
+        },
+        "TIMER_lower_reset_threshold_vo": {
+          "parameter": "TIMER lower reset threshold voltage",
+          "symbol": null,
+          "min": 0.96,
+          "typ": 1.0,
+          "max": 1.04,
+          "unit": "V",
+          "conditions": null
+        },
         "DRETRY": {
           "parameter": "Fault retry duty cycle",
           "symbol": "DRETRY",
@@ -643,6 +839,24 @@
           "max": 35.0,
           "unit": "µA",
           "conditions": "VSENSE = VVCC, V(GATE-OUT) = 7 V, VEN = Hi"
+        },
+        "GATE_sinking_current": {
+          "parameter": "GATE sinking current",
+          "symbol": null,
+          "min": 1.8,
+          "typ": 2.4,
+          "max": 2.8,
+          "unit": "mA",
+          "conditions": "VEN = Lo, VGATE = VVCC"
+        },
+        "GATE_sinking_current_VEN___Hi__VGATE___VVCC__V_VCC": {
+          "parameter": "GATE sinking current",
+          "symbol": null,
+          "min": 75.0,
+          "typ": 125.0,
+          "max": 250.0,
+          "unit": "mA",
+          "conditions": "VEN = Hi, VGATE = VVCC, V(VCC-SENSE) >= 200 mV"
         },
         "V(GATE-OUT)": {
           "parameter": "GATE output voltage",
@@ -698,6 +912,15 @@
           "unit": "V",
           "conditions": "VSENSE = VVCC"
         },
+        "Leakage_current__PG_false__ope": {
+          "parameter": "Leakage current, PG false, open drain",
+          "symbol": null,
+          "min": null,
+          "typ": null,
+          "max": 10.0,
+          "unit": "µA",
+          "conditions": null
+        },
         "IOUT": {
           "parameter": "Bias current",
           "symbol": "IOUT",
@@ -732,6 +955,51 @@
           "typ": 1.25,
           "max": 1.28,
           "unit": "V",
+          "conditions": null
+        },
+        "VEN_hysteresis": {
+          "parameter": "VEN hysteresis",
+          "symbol": null,
+          "min": null,
+          "typ": 100.0,
+          "max": null,
+          "unit": "mV",
+          "conditions": null
+        },
+        "Leakage_current": {
+          "parameter": "Leakage current",
+          "symbol": null,
+          "min": null,
+          "typ": null,
+          "max": 1.0,
+          "unit": "µA",
+          "conditions": "VEN = 48 V"
+        },
+        "VVCC_turn_on": {
+          "parameter": "VVCC turn on",
+          "symbol": null,
+          "min": null,
+          "typ": 8.4,
+          "max": 8.8,
+          "unit": "V",
+          "conditions": "Rising"
+        },
+        "VVCC_turn_off": {
+          "parameter": "VVCC turn off",
+          "symbol": null,
+          "min": 7.5,
+          "typ": 8.3,
+          "max": null,
+          "unit": "V",
+          "conditions": "Falling"
+        },
+        "Hysteresis": {
+          "parameter": "Hysteresis",
+          "symbol": null,
+          "min": null,
+          "typ": 75.0,
+          "max": null,
+          "unit": "mV",
           "conditions": null
         }
       },

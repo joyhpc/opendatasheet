@@ -139,12 +139,36 @@
       "unit": "°C",
       "conditions": null
     },
+    "Lead_Temperature__Soldering__1": {
+      "parameter": "Lead Temperature (Soldering, 10s)",
+      "symbol": null,
+      "min": null,
+      "max": 300,
+      "unit": "°C",
+      "conditions": null
+    },
     "TSTG": {
       "parameter": "Storage Temperature Range",
       "symbol": "TSTG",
       "min": -65,
       "max": 150,
       "unit": "°C",
+      "conditions": null
+    },
+    "ESD_HBM": {
+      "parameter": "ESD HBM",
+      "symbol": null,
+      "min": null,
+      "max": null,
+      "unit": "kV",
+      "conditions": null
+    },
+    "ESD_MM": {
+      "parameter": "ESD MM",
+      "symbol": null,
+      "min": null,
+      "max": null,
+      "unit": "V",
       "conditions": null
     }
   },
@@ -494,12 +518,36 @@
           "unit": "°C",
           "conditions": null
         },
+        "Lead_Temperature__Soldering__1": {
+          "parameter": "Lead Temperature (Soldering, 10s)",
+          "symbol": null,
+          "min": null,
+          "max": 300,
+          "unit": "°C",
+          "conditions": null
+        },
         "TSTG": {
           "parameter": "Storage Temperature Range",
           "symbol": "TSTG",
           "min": -65,
           "max": 150,
           "unit": "°C",
+          "conditions": null
+        },
+        "ESD_HBM": {
+          "parameter": "ESD HBM",
+          "symbol": null,
+          "min": null,
+          "max": null,
+          "unit": "kV",
+          "conditions": null
+        },
+        "ESD_MM": {
+          "parameter": "ESD MM",
+          "symbol": null,
+          "min": null,
+          "max": null,
+          "unit": "V",
           "conditions": null
         }
       },
@@ -720,7 +768,12 @@
       "topology_hints": [
         {
           "hint": "MT2492 Rev1.0 7 APPLICATIONS INFORMATION Setting the Output Voltage The external resistor divider is used to set the output voltage . The feedback resistor R1 also sets the feed",
-          "source_page": 6
+          "source_page": 6,
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.topology_keywords",
+            "source_page": 6
+          }
         }
       ],
       "typical_application": {
@@ -731,7 +784,12 @@
           {
             "page": 6,
             "title": null,
-            "content_type": "application"
+            "content_type": "application",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 6
+            }
           }
         ],
         "total_pages": 1

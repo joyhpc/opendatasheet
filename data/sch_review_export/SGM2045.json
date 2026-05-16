@@ -110,6 +110,30 @@
       "conditions": "VIN + 0.3V"
     },
     "θJA": {
+      "parameter": "Package Thermal Resistance (XTDFN-1x1-4L)",
+      "symbol": "θJA",
+      "min": null,
+      "max": 242,
+      "unit": "°C/W",
+      "conditions": null
+    },
+    "θJB": {
+      "parameter": "Package Thermal Resistance (XTDFN-1x1-4L)",
+      "symbol": "θJB",
+      "min": null,
+      "max": 107,
+      "unit": "°C/W",
+      "conditions": null
+    },
+    "θJC": {
+      "parameter": "Package Thermal Resistance (XTDFN-1x1-4L)",
+      "symbol": "θJC",
+      "min": null,
+      "max": 238,
+      "unit": "°C/W",
+      "conditions": null
+    },
+    "θJA__2": {
       "parameter": "Package Thermal Resistance (WLCSP-0.64×0.64-4B-A)",
       "symbol": "θJA",
       "min": null,
@@ -117,7 +141,7 @@
       "unit": "°C/W",
       "conditions": null
     },
-    "θJB": {
+    "θJB__2": {
       "parameter": "Package Thermal Resistance (WLCSP-0.64×0.64-4B-A)",
       "symbol": "θJB",
       "min": null,
@@ -125,7 +149,7 @@
       "unit": "°C/W",
       "conditions": null
     },
-    "θJC": {
+    "θJC__2": {
       "parameter": "Package Thermal Resistance (WLCSP-0.64×0.64-4B-A)",
       "symbol": "θJC",
       "min": null,
@@ -147,6 +171,30 @@
       "min": -65,
       "max": 150,
       "unit": "°C",
+      "conditions": null
+    },
+    "Lead_Temperature__Soldering__1": {
+      "parameter": "Lead Temperature (Soldering, 10s)",
+      "symbol": null,
+      "min": null,
+      "max": 260,
+      "unit": "°C",
+      "conditions": null
+    },
+    "ESD_Susceptibility_HBM": {
+      "parameter": "ESD Susceptibility HBM",
+      "symbol": null,
+      "min": null,
+      "max": 8000,
+      "unit": "V",
+      "conditions": null
+    },
+    "ESD_Susceptibility_CDM": {
+      "parameter": "ESD Susceptibility CDM",
+      "symbol": null,
+      "min": null,
+      "max": 1000,
+      "unit": "V",
       "conditions": null
     }
   },
@@ -199,11 +247,11 @@
     "VOUT_IOUT___0_1mA_to_300mA__VIN": {
       "parameter": "Output Voltage Accuracy",
       "symbol": "VOUT",
-      "min": -2.5,
+      "min": -30,
       "typ": null,
-      "max": 2.5,
-      "unit": "%",
-      "conditions": "IOUT = 0.1mA to 300mA, VIN = (VOUT(NOM) + 0.3V) to 5.5V, VOUT(NOM) >= 1.2V"
+      "max": 30,
+      "unit": "mV",
+      "conditions": "IOUT = 0.1mA to 300mA, VIN = (VOUT(NOM) + 0.3V) to 5.5V, VOUT(NOM) < 1.2V"
     },
     "VOUT_IOUT___0_1mA__VOUT_NOM_____1_2": {
       "parameter": "Output Voltage Accuracy",
@@ -213,6 +261,15 @@
       "max": 1,
       "unit": "%",
       "conditions": "IOUT = 0.1mA, VOUT(NOM) >= 1.2V"
+    },
+    "VOUT_IOUT___0_1mA_to_300mA__VIN__2": {
+      "parameter": "Output Voltage Accuracy",
+      "symbol": "VOUT",
+      "min": -2.5,
+      "typ": null,
+      "max": 2.5,
+      "unit": "%",
+      "conditions": "IOUT = 0.1mA to 300mA, VIN = (VOUT(NOM) + 0.3V) to 5.5V, VOUT(NOM) >= 1.2V"
     },
     "ΔVLNR": {
       "parameter": "Line Regulation",
@@ -326,6 +383,15 @@
       "parameter": "Dropout Voltage",
       "symbol": "VDROP",
       "min": null,
+      "typ": 80,
+      "max": 130,
+      "unit": "mV",
+      "conditions": "IOUT = 300mA, WLCSP-0.64×0.64-4B-A, 1.8V ≤ VOUT(NOM) < 2.8V"
+    },
+    "VDROP_IOUT___300mA__WLCSP_0_64_0_64__2": {
+      "parameter": "Dropout Voltage",
+      "symbol": "VDROP",
+      "min": null,
       "typ": 50,
       "max": 120,
       "unit": "mV",
@@ -431,6 +497,24 @@
       "conditions": "IOUT = 20mA, VOUT(NOM) = 1.8V, VIN = 2.8V, f = 100Hz"
     },
     "PSRR_IOUT___20mA__VOUT_NOM____1_8V": {
+      "parameter": "Power Supply Rejection Ratio",
+      "symbol": "PSRR",
+      "min": null,
+      "typ": 92,
+      "max": null,
+      "unit": "dB",
+      "conditions": "IOUT = 20mA, VOUT(NOM) = 1.8V, VIN = 2.8V, f = 1kHz"
+    },
+    "PSRR_IOUT___20mA__VOUT_NOM____1_8V__2": {
+      "parameter": "Power Supply Rejection Ratio",
+      "symbol": "PSRR",
+      "min": null,
+      "typ": 80,
+      "max": null,
+      "unit": "dB",
+      "conditions": "IOUT = 20mA, VOUT(NOM) = 1.8V, VIN = 2.8V, f = 10kHz"
+    },
+    "PSRR_IOUT___20mA__VOUT_NOM____1_8V__3": {
       "parameter": "Power Supply Rejection Ratio",
       "symbol": "PSRR",
       "min": null,
@@ -674,6 +758,30 @@
           "conditions": "VIN + 0.3V"
         },
         "θJA": {
+          "parameter": "Package Thermal Resistance (XTDFN-1x1-4L)",
+          "symbol": "θJA",
+          "min": null,
+          "max": 242,
+          "unit": "°C/W",
+          "conditions": null
+        },
+        "θJB": {
+          "parameter": "Package Thermal Resistance (XTDFN-1x1-4L)",
+          "symbol": "θJB",
+          "min": null,
+          "max": 107,
+          "unit": "°C/W",
+          "conditions": null
+        },
+        "θJC": {
+          "parameter": "Package Thermal Resistance (XTDFN-1x1-4L)",
+          "symbol": "θJC",
+          "min": null,
+          "max": 238,
+          "unit": "°C/W",
+          "conditions": null
+        },
+        "θJA__2": {
           "parameter": "Package Thermal Resistance (WLCSP-0.64×0.64-4B-A)",
           "symbol": "θJA",
           "min": null,
@@ -681,7 +789,7 @@
           "unit": "°C/W",
           "conditions": null
         },
-        "θJB": {
+        "θJB__2": {
           "parameter": "Package Thermal Resistance (WLCSP-0.64×0.64-4B-A)",
           "symbol": "θJB",
           "min": null,
@@ -689,7 +797,7 @@
           "unit": "°C/W",
           "conditions": null
         },
-        "θJC": {
+        "θJC__2": {
           "parameter": "Package Thermal Resistance (WLCSP-0.64×0.64-4B-A)",
           "symbol": "θJC",
           "min": null,
@@ -711,6 +819,30 @@
           "min": -65,
           "max": 150,
           "unit": "°C",
+          "conditions": null
+        },
+        "Lead_Temperature__Soldering__1": {
+          "parameter": "Lead Temperature (Soldering, 10s)",
+          "symbol": null,
+          "min": null,
+          "max": 260,
+          "unit": "°C",
+          "conditions": null
+        },
+        "ESD_Susceptibility_HBM": {
+          "parameter": "ESD Susceptibility HBM",
+          "symbol": null,
+          "min": null,
+          "max": 8000,
+          "unit": "V",
+          "conditions": null
+        },
+        "ESD_Susceptibility_CDM": {
+          "parameter": "ESD Susceptibility CDM",
+          "symbol": null,
+          "min": null,
+          "max": 1000,
+          "unit": "V",
           "conditions": null
         }
       },
@@ -763,11 +895,11 @@
         "VOUT_IOUT___0_1mA_to_300mA__VIN": {
           "parameter": "Output Voltage Accuracy",
           "symbol": "VOUT",
-          "min": -2.5,
+          "min": -30,
           "typ": null,
-          "max": 2.5,
-          "unit": "%",
-          "conditions": "IOUT = 0.1mA to 300mA, VIN = (VOUT(NOM) + 0.3V) to 5.5V, VOUT(NOM) >= 1.2V"
+          "max": 30,
+          "unit": "mV",
+          "conditions": "IOUT = 0.1mA to 300mA, VIN = (VOUT(NOM) + 0.3V) to 5.5V, VOUT(NOM) < 1.2V"
         },
         "VOUT_IOUT___0_1mA__VOUT_NOM_____1_2": {
           "parameter": "Output Voltage Accuracy",
@@ -777,6 +909,15 @@
           "max": 1,
           "unit": "%",
           "conditions": "IOUT = 0.1mA, VOUT(NOM) >= 1.2V"
+        },
+        "VOUT_IOUT___0_1mA_to_300mA__VIN__2": {
+          "parameter": "Output Voltage Accuracy",
+          "symbol": "VOUT",
+          "min": -2.5,
+          "typ": null,
+          "max": 2.5,
+          "unit": "%",
+          "conditions": "IOUT = 0.1mA to 300mA, VIN = (VOUT(NOM) + 0.3V) to 5.5V, VOUT(NOM) >= 1.2V"
         },
         "ΔVLNR": {
           "parameter": "Line Regulation",
@@ -890,6 +1031,15 @@
           "parameter": "Dropout Voltage",
           "symbol": "VDROP",
           "min": null,
+          "typ": 80,
+          "max": 130,
+          "unit": "mV",
+          "conditions": "IOUT = 300mA, WLCSP-0.64×0.64-4B-A, 1.8V ≤ VOUT(NOM) < 2.8V"
+        },
+        "VDROP_IOUT___300mA__WLCSP_0_64_0_64__2": {
+          "parameter": "Dropout Voltage",
+          "symbol": "VDROP",
+          "min": null,
           "typ": 50,
           "max": 120,
           "unit": "mV",
@@ -995,6 +1145,24 @@
           "conditions": "IOUT = 20mA, VOUT(NOM) = 1.8V, VIN = 2.8V, f = 100Hz"
         },
         "PSRR_IOUT___20mA__VOUT_NOM____1_8V": {
+          "parameter": "Power Supply Rejection Ratio",
+          "symbol": "PSRR",
+          "min": null,
+          "typ": 92,
+          "max": null,
+          "unit": "dB",
+          "conditions": "IOUT = 20mA, VOUT(NOM) = 1.8V, VIN = 2.8V, f = 1kHz"
+        },
+        "PSRR_IOUT___20mA__VOUT_NOM____1_8V__2": {
+          "parameter": "Power Supply Rejection Ratio",
+          "symbol": "PSRR",
+          "min": null,
+          "typ": 80,
+          "max": null,
+          "unit": "dB",
+          "conditions": "IOUT = 20mA, VOUT(NOM) = 1.8V, VIN = 2.8V, f = 10kHz"
+        },
+        "PSRR_IOUT___20mA__VOUT_NOM____1_8V__3": {
           "parameter": "Power Supply Rejection Ratio",
           "symbol": "PSRR",
           "min": null,

@@ -234,6 +234,94 @@
     }
   },
   "absolute_maximum_ratings": {
+    "PVIN_to_PGND": {
+      "parameter": "PVIN to PGND",
+      "symbol": null,
+      "min": -0.3,
+      "max": 42,
+      "unit": "V",
+      "conditions": null
+    },
+    "EN_to_AGND": {
+      "parameter": "EN to AGND",
+      "symbol": null,
+      "min": -0.3,
+      "max": null,
+      "unit": "V",
+      "conditions": "max is VIN + 0.3"
+    },
+    "FB__RT__SS_TRK_to_AGND": {
+      "parameter": "FB, RT, SS/TRK to AGND",
+      "symbol": null,
+      "min": -0.3,
+      "max": 5,
+      "unit": "V",
+      "conditions": null
+    },
+    "PGOOD_to_AGND": {
+      "parameter": "PGOOD to AGND",
+      "symbol": null,
+      "min": -0.1,
+      "max": 20,
+      "unit": "V",
+      "conditions": null
+    },
+    "SYNC_to_AGND": {
+      "parameter": "SYNC to AGND",
+      "symbol": null,
+      "min": -0.3,
+      "max": 5.5,
+      "unit": "V",
+      "conditions": null
+    },
+    "BIAS_to_AGND": {
+      "parameter": "BIAS to AGND",
+      "symbol": null,
+      "min": -0.3,
+      "max": null,
+      "unit": "V",
+      "conditions": "max is Lower of (VIN + 0.3) or 20"
+    },
+    "AGND_to_PGND": {
+      "parameter": "AGND to PGND",
+      "symbol": null,
+      "min": -0.3,
+      "max": 0.3,
+      "unit": "V",
+      "conditions": null
+    },
+    "SW_to_PGND": {
+      "parameter": "SW to PGND",
+      "symbol": null,
+      "min": -0.3,
+      "max": null,
+      "unit": "V",
+      "conditions": "max is VIN + 0.3"
+    },
+    "SW_to_PGND_less_than_10_ns_tra": {
+      "parameter": "SW to PGND less than 10-ns transients",
+      "symbol": null,
+      "min": -3.5,
+      "max": 42,
+      "unit": "V",
+      "conditions": null
+    },
+    "CBOOT_to_SW": {
+      "parameter": "CBOOT to SW",
+      "symbol": null,
+      "min": -0.3,
+      "max": 5,
+      "unit": "V",
+      "conditions": null
+    },
+    "VCC_to_AGND": {
+      "parameter": "VCC to AGND",
+      "symbol": null,
+      "min": -0.3,
+      "max": 5,
+      "unit": "V",
+      "conditions": null
+    },
     "TJ": {
       "parameter": "Operating junction temperature",
       "symbol": "TJ",
@@ -417,6 +505,15 @@
     "IHS_LIMIT": {
       "parameter": "Short-circuit, high-side current limit",
       "symbol": "IHS_LIMIT",
+      "min": 6,
+      "typ": 7.3,
+      "max": 8.35,
+      "unit": "A",
+      "conditions": null
+    },
+    "IHS_LIMIT__2": {
+      "parameter": "Short-circuit, high-side current limit",
+      "symbol": "IHS_LIMIT",
       "min": 7.4,
       "typ": 8.7,
       "max": 9.85,
@@ -426,6 +523,15 @@
     "ILS_LIMIT": {
       "parameter": "Low-side current limit",
       "symbol": "ILS_LIMIT",
+      "min": 4.79,
+      "typ": 5.5,
+      "max": 6.1,
+      "unit": "A",
+      "conditions": null
+    },
+    "ILS_LIMIT__2": {
+      "parameter": "Low-side current limit",
+      "symbol": "ILS_LIMIT",
       "min": 5.8,
       "typ": 6.6,
       "max": 7.25,
@@ -433,6 +539,15 @@
       "conditions": null
     },
     "INEG_LIMIT": {
+      "parameter": "Negative current limit",
+      "symbol": "INEG_LIMIT",
+      "min": null,
+      "typ": -5,
+      "max": null,
+      "unit": "A",
+      "conditions": null
+    },
+    "INEG_LIMIT__2": {
       "parameter": "Negative current limit",
       "symbol": "INEG_LIMIT",
       "min": null,
@@ -860,6 +975,94 @@
     },
     "electrical": {
       "absolute_maximum_ratings": {
+        "PVIN_to_PGND": {
+          "parameter": "PVIN to PGND",
+          "symbol": null,
+          "min": -0.3,
+          "max": 42,
+          "unit": "V",
+          "conditions": null
+        },
+        "EN_to_AGND": {
+          "parameter": "EN to AGND",
+          "symbol": null,
+          "min": -0.3,
+          "max": null,
+          "unit": "V",
+          "conditions": "max is VIN + 0.3"
+        },
+        "FB__RT__SS_TRK_to_AGND": {
+          "parameter": "FB, RT, SS/TRK to AGND",
+          "symbol": null,
+          "min": -0.3,
+          "max": 5,
+          "unit": "V",
+          "conditions": null
+        },
+        "PGOOD_to_AGND": {
+          "parameter": "PGOOD to AGND",
+          "symbol": null,
+          "min": -0.1,
+          "max": 20,
+          "unit": "V",
+          "conditions": null
+        },
+        "SYNC_to_AGND": {
+          "parameter": "SYNC to AGND",
+          "symbol": null,
+          "min": -0.3,
+          "max": 5.5,
+          "unit": "V",
+          "conditions": null
+        },
+        "BIAS_to_AGND": {
+          "parameter": "BIAS to AGND",
+          "symbol": null,
+          "min": -0.3,
+          "max": null,
+          "unit": "V",
+          "conditions": "max is Lower of (VIN + 0.3) or 20"
+        },
+        "AGND_to_PGND": {
+          "parameter": "AGND to PGND",
+          "symbol": null,
+          "min": -0.3,
+          "max": 0.3,
+          "unit": "V",
+          "conditions": null
+        },
+        "SW_to_PGND": {
+          "parameter": "SW to PGND",
+          "symbol": null,
+          "min": -0.3,
+          "max": null,
+          "unit": "V",
+          "conditions": "max is VIN + 0.3"
+        },
+        "SW_to_PGND_less_than_10_ns_tra": {
+          "parameter": "SW to PGND less than 10-ns transients",
+          "symbol": null,
+          "min": -3.5,
+          "max": 42,
+          "unit": "V",
+          "conditions": null
+        },
+        "CBOOT_to_SW": {
+          "parameter": "CBOOT to SW",
+          "symbol": null,
+          "min": -0.3,
+          "max": 5,
+          "unit": "V",
+          "conditions": null
+        },
+        "VCC_to_AGND": {
+          "parameter": "VCC to AGND",
+          "symbol": null,
+          "min": -0.3,
+          "max": 5,
+          "unit": "V",
+          "conditions": null
+        },
         "TJ": {
           "parameter": "Operating junction temperature",
           "symbol": "TJ",
@@ -1043,6 +1246,15 @@
         "IHS_LIMIT": {
           "parameter": "Short-circuit, high-side current limit",
           "symbol": "IHS_LIMIT",
+          "min": 6,
+          "typ": 7.3,
+          "max": 8.35,
+          "unit": "A",
+          "conditions": null
+        },
+        "IHS_LIMIT__2": {
+          "parameter": "Short-circuit, high-side current limit",
+          "symbol": "IHS_LIMIT",
           "min": 7.4,
           "typ": 8.7,
           "max": 9.85,
@@ -1052,6 +1264,15 @@
         "ILS_LIMIT": {
           "parameter": "Low-side current limit",
           "symbol": "ILS_LIMIT",
+          "min": 4.79,
+          "typ": 5.5,
+          "max": 6.1,
+          "unit": "A",
+          "conditions": null
+        },
+        "ILS_LIMIT__2": {
+          "parameter": "Low-side current limit",
+          "symbol": "ILS_LIMIT",
           "min": 5.8,
           "typ": 6.6,
           "max": 7.25,
@@ -1059,6 +1280,15 @@
           "conditions": null
         },
         "INEG_LIMIT": {
+          "parameter": "Negative current limit",
+          "symbol": "INEG_LIMIT",
+          "min": null,
+          "typ": -5,
+          "max": null,
+          "unit": "A",
+          "conditions": null
+        },
+        "INEG_LIMIT__2": {
           "parameter": "Negative current limit",
           "symbol": "INEG_LIMIT",
           "min": null,
@@ -1264,32 +1494,57 @@
           "source_page": 40,
           "value_hint": null,
           "value_hints": [],
-          "snippet": "SW VIN PGND PGND CIN VIN COUT VOUT L High di/dt current BUCK CONVERTER 41 LM73605, LM73606 www.ti.com.cn ZHCSH36 –SEPTEMBER 2017 版权© 2017, Texas Instruments Incorporated Layout Guidelines (接下页) 10.1."
+          "snippet": "SW VIN PGND PGND CIN VIN COUT VOUT L High di/dt current BUCK CONVERTER 41 LM73605, LM73606 www.ti.com.cn ZHCSH36 –SEPTEMBER 2017 版权© 2017, Texas Instruments Incorporated Layout Guidelines (接下页) 10.1.",
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.component_rules",
+            "source_page": 40
+          }
         },
         {
           "role": "output_capacitor",
           "source_page": 40,
           "value_hint": null,
           "value_hints": [],
-          "snippet": "SW VIN PGND PGND CIN VIN COUT VOUT L High di/dt current BUCK CONVERTER 41 LM73605, LM73606 www.ti.com.cn ZHCSH36 –SEPTEMBER 2017 版权© 2017, Texas Instruments Incorporated Layout Guidelines (接下页) 10.1."
+          "snippet": "SW VIN PGND PGND CIN VIN COUT VOUT L High di/dt current BUCK CONVERTER 41 LM73605, LM73606 www.ti.com.cn ZHCSH36 –SEPTEMBER 2017 版权© 2017, Texas Instruments Incorporated Layout Guidelines (接下页) 10.1.",
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.component_rules",
+            "source_page": 40
+          }
         }
       ],
       "layout_hints": [
         {
           "hint": "SW VIN PGND PGND CIN VIN COUT VOUT L High di/dt current BUCK CONVERTER 41 LM73605, LM73606 www.ti.com.cn ZHCSH36 –SEPTEMBER 2017 版权© 2017, Texas Instruments Incorporated Layout Guidelines (接下页) 10.1.",
-          "source_page": 40
+          "source_page": 40,
+          "origin": {
+            "kind": "source_recommendation",
+            "method": "design_info_utils.layout_keywords",
+            "source_page": 40
+          }
         }
       ],
       "supply_recommendations": [
         {
           "hint": "40 LM73605, LM73606 ZHCSH36 –SEPTEMBER 2017 www.ti.com.cn 版权© 2017, Texas Instruments Incorporated 9 Power Supply Recommendations The LM73605/6 is designed to operate from an input voltage supply rang",
-          "source_page": 39
+          "source_page": 39,
+          "origin": {
+            "kind": "source_recommendation",
+            "method": "design_info_utils.supply_keywords",
+            "source_page": 39
+          }
         }
       ],
       "topology_hints": [
         {
           "hint": "SW VIN PGND PGND CIN VIN COUT VOUT L High di/dt current BUCK CONVERTER 41 LM73605, LM73606 www.ti.com.cn ZHCSH36 –SEPTEMBER 2017 版权© 2017, Texas Instruments Incorporated Layout Guidelines (接下页) 10.1.",
-          "source_page": 40
+          "source_page": 40,
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.topology_keywords",
+            "source_page": 40
+          }
         }
       ],
       "typical_application": {
@@ -1324,17 +1579,32 @@
           {
             "page": 39,
             "title": null,
-            "content_type": "application"
+            "content_type": "application",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 39
+            }
           },
           {
             "page": 40,
             "title": null,
-            "content_type": "layout"
+            "content_type": "layout",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 40
+            }
           },
           {
             "page": 42,
             "title": null,
-            "content_type": "layout"
+            "content_type": "layout",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 42
+            }
           }
         ],
         "total_pages": 3

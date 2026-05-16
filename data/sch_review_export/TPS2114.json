@@ -128,17 +128,25 @@
       "max": 150,
       "unit": "°C",
       "conditions": null
+    },
+    "Lead_temperature_soldering": {
+      "parameter": "Lead temperature soldering",
+      "symbol": null,
+      "min": null,
+      "max": 260,
+      "unit": "°C",
+      "conditions": "1,6 mm (1/16 inch) from case for 10 seconds"
     }
   },
   "electrical_parameters": {
     "VI": {
-      "parameter": "Input voltage at D0, D1",
+      "parameter": "Input voltage at IN1",
       "symbol": "VI",
-      "min": 0,
+      "min": 1.5,
       "typ": null,
       "max": 5.5,
       "unit": "V",
-      "conditions": null
+      "conditions": "VI(IN2) >= 2.8 V"
     },
     "VI_VI_IN2____2_8_V": {
       "parameter": "Input voltage at IN1",
@@ -167,7 +175,25 @@
       "unit": "V",
       "conditions": "VI(IN1) < 2.8 V"
     },
+    "VI__2": {
+      "parameter": "Input voltage at D0, D1",
+      "symbol": "VI",
+      "min": 0,
+      "typ": null,
+      "max": 5.5,
+      "unit": "V",
+      "conditions": null
+    },
     "IO(OUT)": {
+      "parameter": "Current limit adjustment range",
+      "symbol": "IO(OUT)",
+      "min": 0.31,
+      "typ": null,
+      "max": 0.75,
+      "unit": "A",
+      "conditions": null
+    },
+    "IO(OUT)__2": {
       "parameter": "Current limit adjustment range",
       "symbol": "IO(OUT)",
       "min": 0.63,
@@ -189,7 +215,7 @@
       "parameter": "Drain-source on-state resistance (INx-OUT)",
       "symbol": "rDS(on)",
       "min": null,
-      "typ": 150,
+      "typ": 220,
       "max": null,
       "unit": "mΩ",
       "conditions": "TJ = 125°C, IL = 500 mA, VI(IN1) = VI(IN2) = 5.0 V / 3.3 V / 2.8 V"
@@ -202,6 +228,15 @@
       "max": 110,
       "unit": "mΩ",
       "conditions": "TJ = 25°C, IL = 500 mA, VI(IN1) = VI(IN2) = 5.0 V / 3.3 V / 2.8 V"
+    },
+    "rDS(on)_TJ___125_C__IL___500_mA__VI_IN__2": {
+      "parameter": "Drain-source on-state resistance (INx-OUT)",
+      "symbol": "rDS(on)",
+      "min": null,
+      "typ": 150,
+      "max": null,
+      "unit": "mΩ",
+      "conditions": "TJ = 125°C, IL = 500 mA, VI(IN1) = VI(IN2) = 5.0 V / 3.3 V / 2.8 V"
     },
     "VIH": {
       "parameter": "High-level input voltage",
@@ -221,6 +256,96 @@
       "unit": "V",
       "conditions": "D0 and D1"
     },
+    "Input_current_at_D0_or_D1": {
+      "parameter": "Input current at D0 or D1",
+      "symbol": null,
+      "min": null,
+      "typ": null,
+      "max": 1,
+      "unit": "µA",
+      "conditions": "D0 or D1 = High, sink current"
+    },
+    "Input_current_at_D0_or_D1_D0_or_D1___Low__source_current": {
+      "parameter": "Input current at D0 or D1",
+      "symbol": null,
+      "min": 0.5,
+      "typ": 1.4,
+      "max": 5,
+      "unit": "µA",
+      "conditions": "D0 or D1 = Low, source current"
+    },
+    "Supply_current_from_IN1__opera": {
+      "parameter": "Supply current from IN1 (operating)",
+      "symbol": null,
+      "min": null,
+      "typ": 55,
+      "max": 90,
+      "unit": "µA",
+      "conditions": "D1 = High, D0 = Low (IN1 active), VI(IN1) = 5.5 V, VI(IN2) = 3.3 V, IO(OUT) = 0 A"
+    },
+    "Supply_current_from_IN2__opera": {
+      "parameter": "Supply current from IN2 (operating)",
+      "symbol": null,
+      "min": null,
+      "typ": 55,
+      "max": 90,
+      "unit": "µA",
+      "conditions": "D1 = Low, D0 = Low (IN2 active), VI(IN1) = 3.3 V, VI(IN2) = 5.5 V, IO(OUT) = 0 A"
+    },
+    "Quiescent_current_from_IN1__ST": {
+      "parameter": "Quiescent current from IN1 (STANDBY)",
+      "symbol": null,
+      "min": null,
+      "typ": 0.5,
+      "max": 2,
+      "unit": "µA",
+      "conditions": "D0 = D1 = High (inactive), VI(IN1) = 5.5 V, VI(IN2) = 3.3 V, IO(OUT) = 0 A"
+    },
+    "Quiescent_current_from_IN2__ST": {
+      "parameter": "Quiescent current from IN2 (STANDBY)",
+      "symbol": null,
+      "min": null,
+      "typ": 0.5,
+      "max": 2,
+      "unit": "µA",
+      "conditions": "D0 = D1 = High (inactive), VI(IN1) = 3.3 V, VI(IN2) = 5.5 V, IO(OUT) = 0 A"
+    },
+    "Current_limit_accuracy": {
+      "parameter": "Current limit accuracy",
+      "symbol": null,
+      "min": 0.51,
+      "typ": 0.63,
+      "max": 0.8,
+      "unit": "A",
+      "conditions": "R(ILIM) = 400 Ω"
+    },
+    "Current_limit_accuracy_R_ILIM____700": {
+      "parameter": "Current limit accuracy",
+      "symbol": null,
+      "min": 0.3,
+      "typ": 0.36,
+      "max": 0.5,
+      "unit": "A",
+      "conditions": "R(ILIM) = 700 Ω"
+    },
+    "Current_limit_accuracy_R_ILIM____400": {
+      "parameter": "Current limit accuracy",
+      "symbol": null,
+      "min": 0.95,
+      "typ": 1.25,
+      "max": 1.56,
+      "unit": "A",
+      "conditions": "R(ILIM) = 400 Ω"
+    },
+    "Current_limit_accuracy_R_ILIM____700__2": {
+      "parameter": "Current limit accuracy",
+      "symbol": null,
+      "min": 0.47,
+      "typ": 0.71,
+      "max": 0.99,
+      "unit": "A",
+      "conditions": "R(ILIM) = 700 Ω"
+    },
     "td": {
       "parameter": "Current limit settling time",
       "symbol": "td",
@@ -230,6 +355,51 @@
       "unit": "ms",
       "conditions": "Time for short-circuit output current to settle within 10% of its steady state value"
     },
+    "Input_current_at_ILIM": {
+      "parameter": "Input current at ILIM",
+      "symbol": null,
+      "min": -15,
+      "typ": null,
+      "max": 0,
+      "unit": "µA",
+      "conditions": "VI(ILIM) = 0 V, IO(OUT) = 0 A"
+    },
+    "IN1_and_IN2_UVLO__Falling_edge": {
+      "parameter": "IN1 and IN2 UVLO (Falling edge)",
+      "symbol": null,
+      "min": 1.15,
+      "typ": 1.25,
+      "max": null,
+      "unit": "V",
+      "conditions": "Falling edge"
+    },
+    "IN1_and_IN2_UVLO__Rising_edge": {
+      "parameter": "IN1 and IN2 UVLO (Rising edge)",
+      "symbol": null,
+      "min": null,
+      "typ": 1.3,
+      "max": 1.35,
+      "unit": "V",
+      "conditions": "Rising edge"
+    },
+    "Internal_VDD_UVLO__Falling_edg": {
+      "parameter": "Internal VDD UVLO (Falling edge)",
+      "symbol": null,
+      "min": 2.4,
+      "typ": 2.53,
+      "max": null,
+      "unit": "V",
+      "conditions": "Falling edge"
+    },
+    "Internal_VDD_UVLO__Rising_edge": {
+      "parameter": "Internal VDD UVLO (Rising edge)",
+      "symbol": null,
+      "min": null,
+      "typ": 2.58,
+      "max": 2.8,
+      "unit": "V",
+      "conditions": "Rising edge"
+    },
     "ΔVO(I_block)": {
       "parameter": "Minimum output-to-input voltage difference to block switching",
       "symbol": "ΔVO(I_block)",
@@ -238,6 +408,33 @@
       "max": 120,
       "unit": "mV",
       "conditions": "D0 = D1 = high, VI(INx) = 3.3 V. Connect OUT to a 5 V supply through a series 1-kΩ resistor."
+    },
+    "Thermal_shutdown_threshold": {
+      "parameter": "Thermal shutdown threshold",
+      "symbol": null,
+      "min": null,
+      "typ": 135,
+      "max": null,
+      "unit": "°C",
+      "conditions": "TPS211x is in current limit"
+    },
+    "Recovery_from_thermal_shutdown": {
+      "parameter": "Recovery from thermal shutdown",
+      "symbol": null,
+      "min": null,
+      "typ": 125,
+      "max": null,
+      "unit": "°C",
+      "conditions": "TPS211x is in current limit"
+    },
+    "Saturation_voltage": {
+      "parameter": "Saturation voltage",
+      "symbol": null,
+      "min": null,
+      "typ": 0.13,
+      "max": 0.4,
+      "unit": "V",
+      "conditions": "II(STAT) = 2 mA, IN1 switch is on"
     }
   },
   "drc_hints": {
@@ -388,17 +585,25 @@
           "max": 150,
           "unit": "°C",
           "conditions": null
+        },
+        "Lead_temperature_soldering": {
+          "parameter": "Lead temperature soldering",
+          "symbol": null,
+          "min": null,
+          "max": 260,
+          "unit": "°C",
+          "conditions": "1,6 mm (1/16 inch) from case for 10 seconds"
         }
       },
       "electrical_parameters": {
         "VI": {
-          "parameter": "Input voltage at D0, D1",
+          "parameter": "Input voltage at IN1",
           "symbol": "VI",
-          "min": 0,
+          "min": 1.5,
           "typ": null,
           "max": 5.5,
           "unit": "V",
-          "conditions": null
+          "conditions": "VI(IN2) >= 2.8 V"
         },
         "VI_VI_IN2____2_8_V": {
           "parameter": "Input voltage at IN1",
@@ -427,7 +632,25 @@
           "unit": "V",
           "conditions": "VI(IN1) < 2.8 V"
         },
+        "VI__2": {
+          "parameter": "Input voltage at D0, D1",
+          "symbol": "VI",
+          "min": 0,
+          "typ": null,
+          "max": 5.5,
+          "unit": "V",
+          "conditions": null
+        },
         "IO(OUT)": {
+          "parameter": "Current limit adjustment range",
+          "symbol": "IO(OUT)",
+          "min": 0.31,
+          "typ": null,
+          "max": 0.75,
+          "unit": "A",
+          "conditions": null
+        },
+        "IO(OUT)__2": {
           "parameter": "Current limit adjustment range",
           "symbol": "IO(OUT)",
           "min": 0.63,
@@ -449,7 +672,7 @@
           "parameter": "Drain-source on-state resistance (INx-OUT)",
           "symbol": "rDS(on)",
           "min": null,
-          "typ": 150,
+          "typ": 220,
           "max": null,
           "unit": "mΩ",
           "conditions": "TJ = 125°C, IL = 500 mA, VI(IN1) = VI(IN2) = 5.0 V / 3.3 V / 2.8 V"
@@ -462,6 +685,15 @@
           "max": 110,
           "unit": "mΩ",
           "conditions": "TJ = 25°C, IL = 500 mA, VI(IN1) = VI(IN2) = 5.0 V / 3.3 V / 2.8 V"
+        },
+        "rDS(on)_TJ___125_C__IL___500_mA__VI_IN__2": {
+          "parameter": "Drain-source on-state resistance (INx-OUT)",
+          "symbol": "rDS(on)",
+          "min": null,
+          "typ": 150,
+          "max": null,
+          "unit": "mΩ",
+          "conditions": "TJ = 125°C, IL = 500 mA, VI(IN1) = VI(IN2) = 5.0 V / 3.3 V / 2.8 V"
         },
         "VIH": {
           "parameter": "High-level input voltage",
@@ -481,6 +713,96 @@
           "unit": "V",
           "conditions": "D0 and D1"
         },
+        "Input_current_at_D0_or_D1": {
+          "parameter": "Input current at D0 or D1",
+          "symbol": null,
+          "min": null,
+          "typ": null,
+          "max": 1,
+          "unit": "µA",
+          "conditions": "D0 or D1 = High, sink current"
+        },
+        "Input_current_at_D0_or_D1_D0_or_D1___Low__source_current": {
+          "parameter": "Input current at D0 or D1",
+          "symbol": null,
+          "min": 0.5,
+          "typ": 1.4,
+          "max": 5,
+          "unit": "µA",
+          "conditions": "D0 or D1 = Low, source current"
+        },
+        "Supply_current_from_IN1__opera": {
+          "parameter": "Supply current from IN1 (operating)",
+          "symbol": null,
+          "min": null,
+          "typ": 55,
+          "max": 90,
+          "unit": "µA",
+          "conditions": "D1 = High, D0 = Low (IN1 active), VI(IN1) = 5.5 V, VI(IN2) = 3.3 V, IO(OUT) = 0 A"
+        },
+        "Supply_current_from_IN2__opera": {
+          "parameter": "Supply current from IN2 (operating)",
+          "symbol": null,
+          "min": null,
+          "typ": 55,
+          "max": 90,
+          "unit": "µA",
+          "conditions": "D1 = Low, D0 = Low (IN2 active), VI(IN1) = 3.3 V, VI(IN2) = 5.5 V, IO(OUT) = 0 A"
+        },
+        "Quiescent_current_from_IN1__ST": {
+          "parameter": "Quiescent current from IN1 (STANDBY)",
+          "symbol": null,
+          "min": null,
+          "typ": 0.5,
+          "max": 2,
+          "unit": "µA",
+          "conditions": "D0 = D1 = High (inactive), VI(IN1) = 5.5 V, VI(IN2) = 3.3 V, IO(OUT) = 0 A"
+        },
+        "Quiescent_current_from_IN2__ST": {
+          "parameter": "Quiescent current from IN2 (STANDBY)",
+          "symbol": null,
+          "min": null,
+          "typ": 0.5,
+          "max": 2,
+          "unit": "µA",
+          "conditions": "D0 = D1 = High (inactive), VI(IN1) = 3.3 V, VI(IN2) = 5.5 V, IO(OUT) = 0 A"
+        },
+        "Current_limit_accuracy": {
+          "parameter": "Current limit accuracy",
+          "symbol": null,
+          "min": 0.51,
+          "typ": 0.63,
+          "max": 0.8,
+          "unit": "A",
+          "conditions": "R(ILIM) = 400 Ω"
+        },
+        "Current_limit_accuracy_R_ILIM____700": {
+          "parameter": "Current limit accuracy",
+          "symbol": null,
+          "min": 0.3,
+          "typ": 0.36,
+          "max": 0.5,
+          "unit": "A",
+          "conditions": "R(ILIM) = 700 Ω"
+        },
+        "Current_limit_accuracy_R_ILIM____400": {
+          "parameter": "Current limit accuracy",
+          "symbol": null,
+          "min": 0.95,
+          "typ": 1.25,
+          "max": 1.56,
+          "unit": "A",
+          "conditions": "R(ILIM) = 400 Ω"
+        },
+        "Current_limit_accuracy_R_ILIM____700__2": {
+          "parameter": "Current limit accuracy",
+          "symbol": null,
+          "min": 0.47,
+          "typ": 0.71,
+          "max": 0.99,
+          "unit": "A",
+          "conditions": "R(ILIM) = 700 Ω"
+        },
         "td": {
           "parameter": "Current limit settling time",
           "symbol": "td",
@@ -490,6 +812,51 @@
           "unit": "ms",
           "conditions": "Time for short-circuit output current to settle within 10% of its steady state value"
         },
+        "Input_current_at_ILIM": {
+          "parameter": "Input current at ILIM",
+          "symbol": null,
+          "min": -15,
+          "typ": null,
+          "max": 0,
+          "unit": "µA",
+          "conditions": "VI(ILIM) = 0 V, IO(OUT) = 0 A"
+        },
+        "IN1_and_IN2_UVLO__Falling_edge": {
+          "parameter": "IN1 and IN2 UVLO (Falling edge)",
+          "symbol": null,
+          "min": 1.15,
+          "typ": 1.25,
+          "max": null,
+          "unit": "V",
+          "conditions": "Falling edge"
+        },
+        "IN1_and_IN2_UVLO__Rising_edge": {
+          "parameter": "IN1 and IN2 UVLO (Rising edge)",
+          "symbol": null,
+          "min": null,
+          "typ": 1.3,
+          "max": 1.35,
+          "unit": "V",
+          "conditions": "Rising edge"
+        },
+        "Internal_VDD_UVLO__Falling_edg": {
+          "parameter": "Internal VDD UVLO (Falling edge)",
+          "symbol": null,
+          "min": 2.4,
+          "typ": 2.53,
+          "max": null,
+          "unit": "V",
+          "conditions": "Falling edge"
+        },
+        "Internal_VDD_UVLO__Rising_edge": {
+          "parameter": "Internal VDD UVLO (Rising edge)",
+          "symbol": null,
+          "min": null,
+          "typ": 2.58,
+          "max": 2.8,
+          "unit": "V",
+          "conditions": "Rising edge"
+        },
         "ΔVO(I_block)": {
           "parameter": "Minimum output-to-input voltage difference to block switching",
           "symbol": "ΔVO(I_block)",
@@ -498,6 +865,33 @@
           "max": 120,
           "unit": "mV",
           "conditions": "D0 = D1 = high, VI(INx) = 3.3 V. Connect OUT to a 5 V supply through a series 1-kΩ resistor."
+        },
+        "Thermal_shutdown_threshold": {
+          "parameter": "Thermal shutdown threshold",
+          "symbol": null,
+          "min": null,
+          "typ": 135,
+          "max": null,
+          "unit": "°C",
+          "conditions": "TPS211x is in current limit"
+        },
+        "Recovery_from_thermal_shutdown": {
+          "parameter": "Recovery from thermal shutdown",
+          "symbol": null,
+          "min": null,
+          "typ": 125,
+          "max": null,
+          "unit": "°C",
+          "conditions": "TPS211x is in current limit"
+        },
+        "Saturation_voltage": {
+          "parameter": "Saturation voltage",
+          "symbol": null,
+          "min": null,
+          "typ": 0.13,
+          "max": 0.4,
+          "unit": "V",
+          "conditions": "II(STAT) = 2 mA, IN1 switch is on"
         }
       },
       "drc_hints": {

@@ -147,12 +147,12 @@
       "conditions": null
     },
     "Vesd": {
-      "parameter": "ESD Machine Model",
+      "parameter": "ESD Withstand Voltage (IEC 61000-4-2) Air",
       "symbol": "Vesd",
       "min": null,
       "max": null,
-      "unit": "V",
-      "conditions": null
+      "unit": "kV",
+      "conditions": "Air"
     },
     "Vesd_Contact": {
       "parameter": "ESD Withstand Voltage (IEC 61000-4-2) Contact",
@@ -161,6 +161,22 @@
       "max": null,
       "unit": "kV",
       "conditions": "Contact"
+    },
+    "Vesd__2": {
+      "parameter": "ESD Human Body Model",
+      "symbol": "Vesd",
+      "min": null,
+      "max": null,
+      "unit": "V",
+      "conditions": null
+    },
+    "Vesd__3": {
+      "parameter": "ESD Machine Model",
+      "symbol": "Vesd",
+      "min": null,
+      "max": null,
+      "unit": "V",
+      "conditions": null
     }
   },
   "electrical_parameters": {
@@ -212,6 +228,33 @@
     "OVLO_Vin_rises_above_OVLO_threshold": {
       "parameter": "Overvoltage Lockout Threshold",
       "symbol": "OVLO",
+      "min": 5.7,
+      "typ": 6.02,
+      "max": 6.4,
+      "unit": "V",
+      "conditions": "Vin rises above OVLO threshold"
+    },
+    "OVLO_Vin_rises_above_OVLO_threshold__2": {
+      "parameter": "Overvoltage Lockout Threshold",
+      "symbol": "OVLO",
+      "min": 6.0,
+      "typ": 6.4,
+      "max": 6.8,
+      "unit": "V",
+      "conditions": "Vin rises above OVLO threshold"
+    },
+    "OVLO_Vin_rises_above_OVLO_threshold__3": {
+      "parameter": "Overvoltage Lockout Threshold",
+      "symbol": "OVLO",
+      "min": 6.67,
+      "typ": 6.85,
+      "max": 7.05,
+      "unit": "V",
+      "conditions": "Vin rises above OVLO threshold"
+    },
+    "OVLO_Vin_rises_above_OVLO_threshold__4": {
+      "parameter": "Overvoltage Lockout Threshold",
+      "symbol": "OVLO",
       "min": 6.8,
       "typ": 7.2,
       "max": 7.6,
@@ -228,6 +271,15 @@
       "conditions": "Vin falls below OVLO + OVLOhyst"
     },
     "OVLOhyst_Vin_falls_below_OVLO___OVLOhys": {
+      "parameter": "Overvoltage Lockout Hysteresis",
+      "symbol": "OVLOhyst",
+      "min": 50,
+      "typ": 100,
+      "max": 150,
+      "unit": "mV",
+      "conditions": "Vin falls below OVLO + OVLOhyst"
+    },
+    "OVLOhyst_Vin_falls_below_OVLO___OVLOhys__2": {
       "parameter": "Overvoltage Lockout Hysteresis",
       "symbol": "OVLOhyst",
       "min": 50,
@@ -338,6 +390,15 @@
     "ton_From_Vin___UVLO_to_Vout___0_3": {
       "parameter": "Startup Delay",
       "symbol": "ton",
+      "min": 6.0,
+      "typ": 10,
+      "max": 14,
+      "unit": "ms",
+      "conditions": "From Vin > UVLO to Vout = 0.3 V"
+    },
+    "ton_From_Vin___UVLO_to_Vout___0_3__2": {
+      "parameter": "Startup Delay",
+      "symbol": "ton",
       "min": 30,
       "typ": 55,
       "max": 70,
@@ -354,6 +415,15 @@
       "conditions": "From Vout = 0.3 V to FLAG = 1.2 V"
     },
     "tstart_From_Vout___0_3_V_to_FLAG___1": {
+      "parameter": "FLAG Going Up Delay",
+      "symbol": "tstart",
+      "min": 6.0,
+      "typ": 10,
+      "max": 14,
+      "unit": "ms",
+      "conditions": "From Vout = 0.3 V to FLAG = 1.2 V"
+    },
+    "tstart_From_Vout___0_3_V_to_FLAG___1__2": {
       "parameter": "FLAG Going Up Delay",
       "symbol": "tstart",
       "min": 30,
@@ -567,12 +637,12 @@
           "conditions": null
         },
         "Vesd": {
-          "parameter": "ESD Machine Model",
+          "parameter": "ESD Withstand Voltage (IEC 61000-4-2) Air",
           "symbol": "Vesd",
           "min": null,
           "max": null,
-          "unit": "V",
-          "conditions": null
+          "unit": "kV",
+          "conditions": "Air"
         },
         "Vesd_Contact": {
           "parameter": "ESD Withstand Voltage (IEC 61000-4-2) Contact",
@@ -581,6 +651,22 @@
           "max": null,
           "unit": "kV",
           "conditions": "Contact"
+        },
+        "Vesd__2": {
+          "parameter": "ESD Human Body Model",
+          "symbol": "Vesd",
+          "min": null,
+          "max": null,
+          "unit": "V",
+          "conditions": null
+        },
+        "Vesd__3": {
+          "parameter": "ESD Machine Model",
+          "symbol": "Vesd",
+          "min": null,
+          "max": null,
+          "unit": "V",
+          "conditions": null
         }
       },
       "electrical_parameters": {
@@ -632,6 +718,33 @@
         "OVLO_Vin_rises_above_OVLO_threshold": {
           "parameter": "Overvoltage Lockout Threshold",
           "symbol": "OVLO",
+          "min": 5.7,
+          "typ": 6.02,
+          "max": 6.4,
+          "unit": "V",
+          "conditions": "Vin rises above OVLO threshold"
+        },
+        "OVLO_Vin_rises_above_OVLO_threshold__2": {
+          "parameter": "Overvoltage Lockout Threshold",
+          "symbol": "OVLO",
+          "min": 6.0,
+          "typ": 6.4,
+          "max": 6.8,
+          "unit": "V",
+          "conditions": "Vin rises above OVLO threshold"
+        },
+        "OVLO_Vin_rises_above_OVLO_threshold__3": {
+          "parameter": "Overvoltage Lockout Threshold",
+          "symbol": "OVLO",
+          "min": 6.67,
+          "typ": 6.85,
+          "max": 7.05,
+          "unit": "V",
+          "conditions": "Vin rises above OVLO threshold"
+        },
+        "OVLO_Vin_rises_above_OVLO_threshold__4": {
+          "parameter": "Overvoltage Lockout Threshold",
+          "symbol": "OVLO",
           "min": 6.8,
           "typ": 7.2,
           "max": 7.6,
@@ -648,6 +761,15 @@
           "conditions": "Vin falls below OVLO + OVLOhyst"
         },
         "OVLOhyst_Vin_falls_below_OVLO___OVLOhys": {
+          "parameter": "Overvoltage Lockout Hysteresis",
+          "symbol": "OVLOhyst",
+          "min": 50,
+          "typ": 100,
+          "max": 150,
+          "unit": "mV",
+          "conditions": "Vin falls below OVLO + OVLOhyst"
+        },
+        "OVLOhyst_Vin_falls_below_OVLO___OVLOhys__2": {
           "parameter": "Overvoltage Lockout Hysteresis",
           "symbol": "OVLOhyst",
           "min": 50,
@@ -758,6 +880,15 @@
         "ton_From_Vin___UVLO_to_Vout___0_3": {
           "parameter": "Startup Delay",
           "symbol": "ton",
+          "min": 6.0,
+          "typ": 10,
+          "max": 14,
+          "unit": "ms",
+          "conditions": "From Vin > UVLO to Vout = 0.3 V"
+        },
+        "ton_From_Vin___UVLO_to_Vout___0_3__2": {
+          "parameter": "Startup Delay",
+          "symbol": "ton",
           "min": 30,
           "typ": 55,
           "max": 70,
@@ -774,6 +905,15 @@
           "conditions": "From Vout = 0.3 V to FLAG = 1.2 V"
         },
         "tstart_From_Vout___0_3_V_to_FLAG___1": {
+          "parameter": "FLAG Going Up Delay",
+          "symbol": "tstart",
+          "min": 6.0,
+          "typ": 10,
+          "max": 14,
+          "unit": "ms",
+          "conditions": "From Vout = 0.3 V to FLAG = 1.2 V"
+        },
+        "tstart_From_Vout___0_3_V_to_FLAG___1__2": {
           "parameter": "FLAG Going Up Delay",
           "symbol": "tstart",
           "min": 30,
@@ -850,7 +990,12 @@
       "topology_hints": [
         {
           "hint": "NCP349 http://onsemi.com 2 Figure 1. Typical Application Circuit IN 7 OUT 5 GND 2 6 3 IN 1 OUT 4 NCP349 0 1 \u0003F 10 k Wall Adapter − AC/DC − USB BATTERY 0 CC/CV Charger or System VBat ENABLE/ Microproce",
-          "source_page": 1
+          "source_page": 1,
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.topology_keywords",
+            "source_page": 1
+          }
         }
       ],
       "typical_application": {
@@ -861,7 +1006,12 @@
           {
             "page": 1,
             "title": null,
-            "content_type": "application"
+            "content_type": "application",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 1
+            }
           }
         ],
         "total_pages": 1

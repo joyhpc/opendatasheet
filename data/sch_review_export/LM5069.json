@@ -95,6 +95,14 @@
       "unit": "V",
       "conditions": null
     },
+    "SENSE__OUT__and_PGD_to_GND": {
+      "parameter": "SENSE, OUT, and PGD to GND",
+      "symbol": null,
+      "min": -0.3,
+      "max": 100,
+      "unit": "V",
+      "conditions": null
+    },
     "GATE": {
       "parameter": "GATE to GND",
       "symbol": "GATE",
@@ -124,6 +132,14 @@
       "symbol": "OVLO",
       "min": -0.3,
       "max": 7,
+      "unit": "V",
+      "conditions": null
+    },
+    "VIN_to_SENSE": {
+      "parameter": "VIN to SENSE",
+      "symbol": null,
+      "min": -0.3,
+      "max": 0.3,
       "unit": "V",
       "conditions": null
     },
@@ -468,11 +484,11 @@
       "conditions": "Re-enable Threshold"
     },
     "ITIMER": {
-      "parameter": "Fault sink current",
+      "parameter": "Insertion time current",
       "symbol": "ITIMER",
-      "min": 1.25,
-      "typ": 2.5,
-      "max": 3.75,
+      "min": 3,
+      "typ": 5.5,
+      "max": 8,
       "unit": "µA",
       "conditions": null
     },
@@ -484,6 +500,24 @@
       "max": 2,
       "unit": "mA",
       "conditions": "TIMER pin = 2 V"
+    },
+    "ITIMER__2": {
+      "parameter": "Fault detection current",
+      "symbol": "ITIMER",
+      "min": 51,
+      "typ": 85,
+      "max": 120,
+      "unit": "µA",
+      "conditions": null
+    },
+    "ITIMER__3": {
+      "parameter": "Fault sink current",
+      "symbol": "ITIMER",
+      "min": 1.25,
+      "typ": 2.5,
+      "max": 3.75,
+      "unit": "µA",
+      "conditions": null
     },
     "DCFAULT": {
       "parameter": "Fault restart duty cycle",
@@ -550,8 +584,10 @@
       "unit": "V"
     },
     "iout_max": {
-      "typ": 11,
-      "unit": "µA"
+      "min": 48.5,
+      "typ": 55,
+      "max": 61.5,
+      "unit": "mV"
     }
   },
   "thermal": {},
@@ -645,6 +681,14 @@
           "unit": "V",
           "conditions": null
         },
+        "SENSE__OUT__and_PGD_to_GND": {
+          "parameter": "SENSE, OUT, and PGD to GND",
+          "symbol": null,
+          "min": -0.3,
+          "max": 100,
+          "unit": "V",
+          "conditions": null
+        },
         "GATE": {
           "parameter": "GATE to GND",
           "symbol": "GATE",
@@ -674,6 +718,14 @@
           "symbol": "OVLO",
           "min": -0.3,
           "max": 7,
+          "unit": "V",
+          "conditions": null
+        },
+        "VIN_to_SENSE": {
+          "parameter": "VIN to SENSE",
+          "symbol": null,
+          "min": -0.3,
+          "max": 0.3,
           "unit": "V",
           "conditions": null
         },
@@ -1018,11 +1070,11 @@
           "conditions": "Re-enable Threshold"
         },
         "ITIMER": {
-          "parameter": "Fault sink current",
+          "parameter": "Insertion time current",
           "symbol": "ITIMER",
-          "min": 1.25,
-          "typ": 2.5,
-          "max": 3.75,
+          "min": 3,
+          "typ": 5.5,
+          "max": 8,
           "unit": "µA",
           "conditions": null
         },
@@ -1034,6 +1086,24 @@
           "max": 2,
           "unit": "mA",
           "conditions": "TIMER pin = 2 V"
+        },
+        "ITIMER__2": {
+          "parameter": "Fault detection current",
+          "symbol": "ITIMER",
+          "min": 51,
+          "typ": 85,
+          "max": 120,
+          "unit": "µA",
+          "conditions": null
+        },
+        "ITIMER__3": {
+          "parameter": "Fault sink current",
+          "symbol": "ITIMER",
+          "min": 1.25,
+          "typ": 2.5,
+          "max": 3.75,
+          "unit": "µA",
+          "conditions": null
         },
         "DCFAULT": {
           "parameter": "Fault restart duty cycle",
@@ -1100,8 +1170,10 @@
           "unit": "V"
         },
         "iout_max": {
-          "typ": 11,
-          "unit": "µA"
+          "min": 48.5,
+          "typ": 55,
+          "max": 61.5,
+          "unit": "mV"
         }
       }
     }

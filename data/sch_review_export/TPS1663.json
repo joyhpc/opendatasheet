@@ -344,6 +344,46 @@
     }
   },
   "absolute_maximum_ratings": {
+    "Input_Voltage": {
+      "parameter": "Input Voltage",
+      "symbol": null,
+      "min": -0.3,
+      "max": 67,
+      "unit": "V",
+      "conditions": null
+    },
+    "Input_Voltage__10_ms_transient": {
+      "parameter": "Input Voltage (10-ms transient)",
+      "symbol": null,
+      "min": -0.3,
+      "max": 75,
+      "unit": "V",
+      "conditions": "TA = 25°C"
+    },
+    "Input_Voltage__2": {
+      "parameter": "Input Voltage",
+      "symbol": null,
+      "min": -0.3,
+      "max": 5.5,
+      "unit": "V",
+      "conditions": null
+    },
+    "Sink_current": {
+      "parameter": "Sink current",
+      "symbol": null,
+      "min": null,
+      "max": 10,
+      "unit": "mA",
+      "conditions": null
+    },
+    "Source_current": {
+      "parameter": "Source current",
+      "symbol": null,
+      "min": null,
+      "max": null,
+      "unit": "string",
+      "conditions": "Internally limited"
+    },
     "TJ": {
       "parameter": "Operating Junction temperature",
       "symbol": "TJ",
@@ -1103,6 +1143,46 @@
     },
     "electrical": {
       "absolute_maximum_ratings": {
+        "Input_Voltage": {
+          "parameter": "Input Voltage",
+          "symbol": null,
+          "min": -0.3,
+          "max": 67,
+          "unit": "V",
+          "conditions": null
+        },
+        "Input_Voltage__10_ms_transient": {
+          "parameter": "Input Voltage (10-ms transient)",
+          "symbol": null,
+          "min": -0.3,
+          "max": 75,
+          "unit": "V",
+          "conditions": "TA = 25°C"
+        },
+        "Input_Voltage__2": {
+          "parameter": "Input Voltage",
+          "symbol": null,
+          "min": -0.3,
+          "max": 5.5,
+          "unit": "V",
+          "conditions": null
+        },
+        "Sink_current": {
+          "parameter": "Sink current",
+          "symbol": null,
+          "min": null,
+          "max": 10,
+          "unit": "mA",
+          "conditions": null
+        },
+        "Source_current": {
+          "parameter": "Source current",
+          "symbol": null,
+          "min": null,
+          "max": null,
+          "unit": "string",
+          "conditions": "Internally limited"
+        },
         "TJ": {
           "parameter": "Operating Junction temperature",
           "symbol": "TJ",
@@ -1534,7 +1614,12 @@
             "1000 µF",
             "4.02kΩ"
           ],
-          "snippet": "VIN VOUT PGOOD IIN CdVdT = 100 nF COUT = 1000 µF RILIM = 4.02 kΩ Figure 9-1. Hot Plug In and In-Rush Current Control at 24-V Input 9.3.1.1 Thermal Regulation Loop The average power dissipation within"
+          "snippet": "VIN VOUT PGOOD IIN CdVdT = 100 nF COUT = 1000 µF RILIM = 4.02 kΩ Figure 9-1. Hot Plug In and In-Rush Current Control at 24-V Input 9.3.1.1 Thermal Regulation Loop The average power dissipation within",
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.component_rules",
+            "source_page": 16
+          }
         },
         {
           "role": "current_limit_resistor",
@@ -1545,7 +1630,12 @@
             "1000 µF",
             "4.02kΩ"
           ],
-          "snippet": "VIN VOUT PGOOD IIN CdVdT = 100 nF COUT = 1000 µF RILIM = 4.02 kΩ Figure 9-1. Hot Plug In and In-Rush Current Control at 24-V Input 9.3.1.1 Thermal Regulation Loop The average power dissipation within"
+          "snippet": "VIN VOUT PGOOD IIN CdVdT = 100 nF COUT = 1000 µF RILIM = 4.02 kΩ Figure 9-1. Hot Plug In and In-Rush Current Control at 24-V Input 9.3.1.1 Thermal Regulation Loop The average power dissipation within",
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.component_rules",
+            "source_page": 16
+          }
         },
         {
           "role": "dvdt_capacitor",
@@ -1556,7 +1646,12 @@
             "1000 µF",
             "4.02kΩ"
           ],
-          "snippet": "VIN VOUT PGOOD IIN CdVdT = 100 nF COUT = 1000 µF RILIM = 4.02 kΩ Figure 9-1. Hot Plug In and In-Rush Current Control at 24-V Input 9.3.1.1 Thermal Regulation Loop The average power dissipation within"
+          "snippet": "VIN VOUT PGOOD IIN CdVdT = 100 nF COUT = 1000 µF RILIM = 4.02 kΩ Figure 9-1. Hot Plug In and In-Rush Current Control at 24-V Input 9.3.1.1 Thermal Regulation Loop The average power dissipation within",
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.component_rules",
+            "source_page": 16
+          }
         },
         {
           "role": "output_capacitor",
@@ -1566,7 +1661,12 @@
             "15 mF",
             "4.02kΩ"
           ],
-          "snippet": "VIN VOUT PGOOD IIN CdVdT = Open COUT = 15 mF RILIM = 4.02 kΩ Figure 9-2. Thermal Regulation Loop Response During Power Up With Large Capacitive Load 9.3.2 Undervoltage Lockout (UVLO) The TPS1663x devi"
+          "snippet": "VIN VOUT PGOOD IIN CdVdT = Open COUT = 15 mF RILIM = 4.02 kΩ Figure 9-2. Thermal Regulation Loop Response During Power Up With Large Capacitive Load 9.3.2 Undervoltage Lockout (UVLO) The TPS1663x devi",
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.component_rules",
+            "source_page": 17
+          }
         },
         {
           "role": "current_limit_resistor",
@@ -1576,7 +1676,12 @@
             "15 mF",
             "4.02kΩ"
           ],
-          "snippet": "VIN VOUT PGOOD IIN CdVdT = Open COUT = 15 mF RILIM = 4.02 kΩ Figure 9-2. Thermal Regulation Loop Response During Power Up With Large Capacitive Load 9.3.2 Undervoltage Lockout (UVLO) The TPS1663x devi"
+          "snippet": "VIN VOUT PGOOD IIN CdVdT = Open COUT = 15 mF RILIM = 4.02 kΩ Figure 9-2. Thermal Regulation Loop Response During Power Up With Large Capacitive Load 9.3.2 Undervoltage Lockout (UVLO) The TPS1663x devi",
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.component_rules",
+            "source_page": 17
+          }
         },
         {
           "role": "dvdt_capacitor",
@@ -1586,7 +1691,12 @@
             "15 mF",
             "4.02kΩ"
           ],
-          "snippet": "VIN VOUT PGOOD IIN CdVdT = Open COUT = 15 mF RILIM = 4.02 kΩ Figure 9-2. Thermal Regulation Loop Response During Power Up With Large Capacitive Load 9.3.2 Undervoltage Lockout (UVLO) The TPS1663x devi"
+          "snippet": "VIN VOUT PGOOD IIN CdVdT = Open COUT = 15 mF RILIM = 4.02 kΩ Figure 9-2. Thermal Regulation Loop Response During Power Up With Large Capacitive Load 9.3.2 Undervoltage Lockout (UVLO) The TPS1663x devi",
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.component_rules",
+            "source_page": 17
+          }
         }
       ],
       "component_value_hints": [
@@ -1597,7 +1707,12 @@
             "100 nF"
           ],
           "source_page": 16,
-          "snippet": "VIN VOUT PGOOD IIN CdVdT = 100 nF COUT = 1000 µF RILIM = 4.02 kΩ Figure 9-1. Hot Plug In and In-Rush Current Control at 24-V Input 9.3.1.1 Thermal Regulation Loop The average power dissipation within"
+          "snippet": "VIN VOUT PGOOD IIN CdVdT = 100 nF COUT = 1000 µF RILIM = 4.02 kΩ Figure 9-1. Hot Plug In and In-Rush Current Control at 24-V Input 9.3.1.1 Thermal Regulation Loop The average power dissipation within",
+          "origin": {
+            "kind": "source_fact",
+            "method": "design_info_utils.passive_value_regex",
+            "source_page": 16
+          }
         },
         {
           "values": [
@@ -1605,29 +1720,54 @@
             "4.02kΩ"
           ],
           "source_page": 17,
-          "snippet": "VIN VOUT PGOOD IIN CdVdT = Open COUT = 15 mF RILIM = 4.02 kΩ Figure 9-2. Thermal Regulation Loop Response During Power Up With Large Capacitive Load 9.3.2 Undervoltage Lockout (UVLO) The TPS1663x devi"
+          "snippet": "VIN VOUT PGOOD IIN CdVdT = Open COUT = 15 mF RILIM = 4.02 kΩ Figure 9-2. Thermal Regulation Loop Response During Power Up With Large Capacitive Load 9.3.2 Undervoltage Lockout (UVLO) The TPS1663x devi",
+          "origin": {
+            "kind": "source_fact",
+            "method": "design_info_utils.passive_value_regex",
+            "source_page": 17
+          }
         }
       ],
       "layout_hints": [
         {
           "hint": "10.5.2 Layout Example VIN PLANE TOP Layer GND Plane BOTTOM Layer GND Plane BOTTOM Layer GND Plane Via to Bottom Layer Top Layer Top Layer GND Plane Bottom layer GND plane IN IN P_IN N.C N.C UVLO OVP G",
-          "source_page": 30
+          "source_page": 30,
+          "origin": {
+            "kind": "source_recommendation",
+            "method": "design_info_utils.layout_page_fallback",
+            "source_page": 30
+          }
         }
       ],
       "supply_recommendations": [
         {
           "hint": "VIN VOUT PGOOD IIN CdVdT = Open COUT = 15 mF RILIM = 4.02 kΩ Figure 9-2. Thermal Regulation Loop Response During Power Up With Large Capacitive Load 9.3.2 Undervoltage Lockout (UVLO) The TPS1663x devi",
-          "source_page": 17
+          "source_page": 17,
+          "origin": {
+            "kind": "source_recommendation",
+            "method": "design_info_utils.supply_keywords",
+            "source_page": 17
+          }
         },
         {
           "hint": "10.5.2 Layout Example VIN PLANE TOP Layer GND Plane BOTTOM Layer GND Plane BOTTOM Layer GND Plane Via to Bottom Layer Top Layer Top Layer GND Plane Bottom layer GND plane IN IN P_IN N.C N.C UVLO OVP G",
-          "source_page": 30
+          "source_page": 30,
+          "origin": {
+            "kind": "source_recommendation",
+            "method": "design_info_utils.supply_keywords",
+            "source_page": 30
+          }
         }
       ],
       "topology_hints": [
         {
           "hint": "10 Application and Implementation Note Information in the following applications sections is not part of the TI component specification, and TI does not warrant its accuracy or completeness. TI’s cus",
-          "source_page": 24
+          "source_page": 24,
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.topology_keywords",
+            "source_page": 24
+          }
         }
       ],
       "typical_application": {
@@ -1688,22 +1828,42 @@
           {
             "page": 16,
             "title": null,
-            "content_type": "application"
+            "content_type": "application",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 16
+            }
           },
           {
             "page": 17,
             "title": null,
-            "content_type": "application"
+            "content_type": "application",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 17
+            }
           },
           {
             "page": 24,
             "title": null,
-            "content_type": "application"
+            "content_type": "application",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 24
+            }
           },
           {
             "page": 30,
             "title": null,
-            "content_type": "layout"
+            "content_type": "layout",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 30
+            }
           }
         ],
         "total_pages": 4

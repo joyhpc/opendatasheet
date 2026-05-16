@@ -68,6 +68,22 @@
       "conditions": null
     },
     "SW": {
+      "parameter": "Switching Node Voltage",
+      "symbol": "SW",
+      "min": -0.3,
+      "max": null,
+      "unit": "V",
+      "conditions": "Max = VIN + 0.3"
+    },
+    "SW__2": {
+      "parameter": "Switching Node Voltage (50 ns)",
+      "symbol": "SW",
+      "min": -3,
+      "max": 42,
+      "unit": "V",
+      "conditions": null
+    },
+    "SW__3": {
       "parameter": "Switching Node Voltage (20 ns)",
       "symbol": "SW",
       "min": -5,
@@ -240,6 +256,15 @@
       "conditions": "ISW = 1 A"
     },
     "fSW": {
+      "parameter": "Switching Frequency",
+      "symbol": "fSW",
+      "min": 390,
+      "typ": 500,
+      "max": 590,
+      "unit": "kHz",
+      "conditions": null
+    },
+    "fSW__2": {
       "parameter": "Switching Frequency",
       "symbol": "fSW",
       "min": null,
@@ -581,6 +606,22 @@
           "conditions": null
         },
         "SW": {
+          "parameter": "Switching Node Voltage",
+          "symbol": "SW",
+          "min": -0.3,
+          "max": null,
+          "unit": "V",
+          "conditions": "Max = VIN + 0.3"
+        },
+        "SW__2": {
+          "parameter": "Switching Node Voltage (50 ns)",
+          "symbol": "SW",
+          "min": -3,
+          "max": 42,
+          "unit": "V",
+          "conditions": null
+        },
+        "SW__3": {
           "parameter": "Switching Node Voltage (20 ns)",
           "symbol": "SW",
           "min": -5,
@@ -753,6 +794,15 @@
           "conditions": "ISW = 1 A"
         },
         "fSW": {
+          "parameter": "Switching Frequency",
+          "symbol": "fSW",
+          "min": 390,
+          "typ": 500,
+          "max": 590,
+          "unit": "kHz",
+          "conditions": null
+        },
+        "fSW__2": {
           "parameter": "Switching Frequency",
           "symbol": "fSW",
           "min": null,
@@ -1039,26 +1089,46 @@
           "source_page": 15,
           "value_hint": null,
           "value_hints": [],
-          "snippet": "Layout Layout Guideline • Both input capacitors and output capacitors must be placed to the device pins as close as possible. • It is recommended to bypass the input pin to ground with a 0.1-μF bypass"
+          "snippet": "Layout Layout Guideline • Both input capacitors and output capacitors must be placed to the device pins as close as possible. • It is recommended to bypass the input pin to ground with a 0.1-μF bypass",
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.component_rules",
+            "source_page": 15
+          }
         },
         {
           "role": "output_capacitor",
           "source_page": 15,
           "value_hint": null,
           "value_hints": [],
-          "snippet": "Layout Layout Guideline • Both input capacitors and output capacitors must be placed to the device pins as close as possible. • It is recommended to bypass the input pin to ground with a 0.1-μF bypass"
+          "snippet": "Layout Layout Guideline • Both input capacitors and output capacitors must be placed to the device pins as close as possible. • It is recommended to bypass the input pin to ground with a 0.1-μF bypass",
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.component_rules",
+            "source_page": 15
+          }
         }
       ],
       "layout_hints": [
         {
           "hint": "Layout Layout Guideline • Both input capacitors and output capacitors must be placed to the device pins as close as possible. • It is recommended to bypass the input pin to ground with a 0.1-μF bypass",
-          "source_page": 15
+          "source_page": 15,
+          "origin": {
+            "kind": "source_recommendation",
+            "method": "design_info_utils.layout_keywords",
+            "source_page": 15
+          }
         }
       ],
       "topology_hints": [
         {
           "hint": "Application and Implementation Note Information in the following application sections is not part of the 3PEAK’s component specification and 3PEAK does not warrant its accuracy or completeness. 3PEAK’",
-          "source_page": 13
+          "source_page": 13,
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.topology_keywords",
+            "source_page": 13
+          }
         }
       ],
       "typical_application": {
@@ -1091,12 +1161,22 @@
           {
             "page": 13,
             "title": null,
-            "content_type": "application"
+            "content_type": "application",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 13
+            }
           },
           {
             "page": 15,
             "title": null,
-            "content_type": "layout"
+            "content_type": "layout",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 15
+            }
           }
         ],
         "total_pages": 2

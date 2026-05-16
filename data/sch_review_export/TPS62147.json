@@ -102,6 +102,30 @@
       "unit": "V",
       "conditions": null
     },
+    "Switch_and_output_sense_voltag": {
+      "parameter": "Switch and output sense voltage range",
+      "symbol": null,
+      "min": -0.3,
+      "max": null,
+      "unit": "V",
+      "conditions": "max is VIN+0.3V"
+    },
+    "Switch_transient_voltage_range": {
+      "parameter": "Switch transient voltage range",
+      "symbol": null,
+      "min": -2,
+      "max": 25.5,
+      "unit": "V",
+      "conditions": "While switching"
+    },
+    "Control_pin_voltage_range": {
+      "parameter": "Control pin voltage range",
+      "symbol": null,
+      "min": -0.3,
+      "max": null,
+      "unit": "V",
+      "conditions": "max is VIN+0.3V"
+    },
     "TJ": {
       "parameter": "Operating junction temperature",
       "symbol": "TJ",
@@ -166,6 +190,15 @@
       "conditions": "Falling Input Voltage"
     },
     "TSD": {
+      "parameter": "Thermal Shutdown Temperature",
+      "symbol": "TSD",
+      "min": null,
+      "typ": 160,
+      "max": null,
+      "unit": "°C",
+      "conditions": "Rising Junction Temperature"
+    },
+    "TSD__2": {
       "parameter": "Thermal Shutdown Hysteresis",
       "symbol": "TSD",
       "min": null,
@@ -263,6 +296,33 @@
       "max": null,
       "unit": "µA",
       "conditions": null
+    },
+    "SS_TR_tolerance": {
+      "parameter": "SS/TR tolerance",
+      "symbol": null,
+      "min": -0.2,
+      "typ": null,
+      "max": 0.2,
+      "unit": "µA",
+      "conditions": "TJ= -40 °C to +125 °C"
+    },
+    "Tracking_gain": {
+      "parameter": "Tracking gain",
+      "symbol": null,
+      "min": null,
+      "typ": 1,
+      "max": null,
+      "unit": null,
+      "conditions": "VFB / VSS/TR"
+    },
+    "Tracking_offset": {
+      "parameter": "Tracking offset",
+      "symbol": null,
+      "min": null,
+      "typ": 11,
+      "max": null,
+      "unit": "mV",
+      "conditions": "feedback voltage with VSS/TR = 0 V"
     },
     "RDS(ON)": {
       "parameter": "High-Side MOSFET ON-Resistance",
@@ -371,6 +431,33 @@
       "max": 7.5,
       "unit": "%",
       "conditions": "VIN ≥ VOUT + 1 V; VSS/TR = 0.35 V; PWM mode"
+    },
+    "Load_Regulation": {
+      "parameter": "Load Regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 0.05,
+      "max": null,
+      "unit": "%/A",
+      "conditions": "PWM mode operation"
+    },
+    "Line_Regulation": {
+      "parameter": "Line Regulation",
+      "symbol": null,
+      "min": null,
+      "typ": 0.02,
+      "max": null,
+      "unit": "%/V",
+      "conditions": "PWM mode operation, IOUT= 1 A, VIN ≥ VOUT + 1 V or VIN ≥ 3.5 V whichever is larger"
+    },
+    "Output_Discharge_Resistance": {
+      "parameter": "Output Discharge Resistance",
+      "symbol": null,
+      "min": null,
+      "typ": 100,
+      "max": null,
+      "unit": "Ω",
+      "conditions": null
     },
     "tdelay": {
       "parameter": "Start-up Delay time",
@@ -527,6 +614,30 @@
           "unit": "V",
           "conditions": null
         },
+        "Switch_and_output_sense_voltag": {
+          "parameter": "Switch and output sense voltage range",
+          "symbol": null,
+          "min": -0.3,
+          "max": null,
+          "unit": "V",
+          "conditions": "max is VIN+0.3V"
+        },
+        "Switch_transient_voltage_range": {
+          "parameter": "Switch transient voltage range",
+          "symbol": null,
+          "min": -2,
+          "max": 25.5,
+          "unit": "V",
+          "conditions": "While switching"
+        },
+        "Control_pin_voltage_range": {
+          "parameter": "Control pin voltage range",
+          "symbol": null,
+          "min": -0.3,
+          "max": null,
+          "unit": "V",
+          "conditions": "max is VIN+0.3V"
+        },
         "TJ": {
           "parameter": "Operating junction temperature",
           "symbol": "TJ",
@@ -591,6 +702,15 @@
           "conditions": "Falling Input Voltage"
         },
         "TSD": {
+          "parameter": "Thermal Shutdown Temperature",
+          "symbol": "TSD",
+          "min": null,
+          "typ": 160,
+          "max": null,
+          "unit": "°C",
+          "conditions": "Rising Junction Temperature"
+        },
+        "TSD__2": {
           "parameter": "Thermal Shutdown Hysteresis",
           "symbol": "TSD",
           "min": null,
@@ -688,6 +808,33 @@
           "max": null,
           "unit": "µA",
           "conditions": null
+        },
+        "SS_TR_tolerance": {
+          "parameter": "SS/TR tolerance",
+          "symbol": null,
+          "min": -0.2,
+          "typ": null,
+          "max": 0.2,
+          "unit": "µA",
+          "conditions": "TJ= -40 °C to +125 °C"
+        },
+        "Tracking_gain": {
+          "parameter": "Tracking gain",
+          "symbol": null,
+          "min": null,
+          "typ": 1,
+          "max": null,
+          "unit": null,
+          "conditions": "VFB / VSS/TR"
+        },
+        "Tracking_offset": {
+          "parameter": "Tracking offset",
+          "symbol": null,
+          "min": null,
+          "typ": 11,
+          "max": null,
+          "unit": "mV",
+          "conditions": "feedback voltage with VSS/TR = 0 V"
         },
         "RDS(ON)": {
           "parameter": "High-Side MOSFET ON-Resistance",
@@ -797,6 +944,33 @@
           "unit": "%",
           "conditions": "VIN ≥ VOUT + 1 V; VSS/TR = 0.35 V; PWM mode"
         },
+        "Load_Regulation": {
+          "parameter": "Load Regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 0.05,
+          "max": null,
+          "unit": "%/A",
+          "conditions": "PWM mode operation"
+        },
+        "Line_Regulation": {
+          "parameter": "Line Regulation",
+          "symbol": null,
+          "min": null,
+          "typ": 0.02,
+          "max": null,
+          "unit": "%/V",
+          "conditions": "PWM mode operation, IOUT= 1 A, VIN ≥ VOUT + 1 V or VIN ≥ 3.5 V whichever is larger"
+        },
+        "Output_Discharge_Resistance": {
+          "parameter": "Output Discharge Resistance",
+          "symbol": null,
+          "min": null,
+          "typ": 100,
+          "max": null,
+          "unit": "Ω",
+          "conditions": null
+        },
         "tdelay": {
           "parameter": "Start-up Delay time",
           "symbol": "tdelay",
@@ -862,26 +1036,46 @@
           "source_page": 35,
           "value_hint": null,
           "value_hints": [],
-          "snippet": "GND VOUT VIN VOS SS/TR PG FB AGND EN MODE FSEL VIN SW GND GND C1 C2 L1 C3 R2 R1 36 TPS62148, TPS62147 ZHCSHZ8 –APRIL 2018 www.ti.com.cn 版权© 2018, Texas Instruments Incorporated 11 Power Supply Recomme"
+          "snippet": "GND VOUT VIN VOS SS/TR PG FB AGND EN MODE FSEL VIN SW GND GND C1 C2 L1 C3 R2 R1 36 TPS62148, TPS62147 ZHCSHZ8 –APRIL 2018 www.ti.com.cn 版权© 2018, Texas Instruments Incorporated 11 Power Supply Recomme",
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.component_rules",
+            "source_page": 35
+          }
         },
         {
           "role": "soft_start_capacitor",
           "source_page": 35,
           "value_hint": null,
           "value_hints": [],
-          "snippet": "GND VOUT VIN VOS SS/TR PG FB AGND EN MODE FSEL VIN SW GND GND C1 C2 L1 C3 R2 R1 36 TPS62148, TPS62147 ZHCSHZ8 –APRIL 2018 www.ti.com.cn 版权© 2018, Texas Instruments Incorporated 11 Power Supply Recomme"
+          "snippet": "GND VOUT VIN VOS SS/TR PG FB AGND EN MODE FSEL VIN SW GND GND C1 C2 L1 C3 R2 R1 36 TPS62148, TPS62147 ZHCSHZ8 –APRIL 2018 www.ti.com.cn 版权© 2018, Texas Instruments Incorporated 11 Power Supply Recomme",
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.component_rules",
+            "source_page": 35
+          }
         }
       ],
       "layout_hints": [
         {
           "hint": "GND VOUT VIN VOS SS/TR PG FB AGND EN MODE FSEL VIN SW GND GND C1 C2 L1 C3 R2 R1 36 TPS62148, TPS62147 ZHCSHZ8 –APRIL 2018 www.ti.com.cn 版权© 2018, Texas Instruments Incorporated 11 Power Supply Recomme",
-          "source_page": 35
+          "source_page": 35,
+          "origin": {
+            "kind": "source_recommendation",
+            "method": "design_info_utils.layout_keywords",
+            "source_page": 35
+          }
         }
       ],
       "supply_recommendations": [
         {
           "hint": "GND VOUT VIN VOS SS/TR PG FB AGND EN MODE FSEL VIN SW GND GND C1 C2 L1 C3 R2 R1 36 TPS62148, TPS62147 ZHCSHZ8 –APRIL 2018 www.ti.com.cn 版权© 2018, Texas Instruments Incorporated 11 Power Supply Recomme",
-          "source_page": 35
+          "source_page": 35,
+          "origin": {
+            "kind": "source_recommendation",
+            "method": "design_info_utils.supply_keywords",
+            "source_page": 35
+          }
         }
       ],
       "typical_application": {
@@ -916,12 +1110,22 @@
           {
             "page": 15,
             "title": null,
-            "content_type": "application"
+            "content_type": "application",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 15
+            }
           },
           {
             "page": 35,
             "title": null,
-            "content_type": "application"
+            "content_type": "application",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 35
+            }
           }
         ],
         "total_pages": 2

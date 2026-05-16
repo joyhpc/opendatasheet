@@ -300,6 +300,15 @@
       "unit": "V",
       "conditions": "Rising VIN"
     },
+    "Internal_UVLO_hysteresis": {
+      "parameter": "Internal UVLO hysteresis",
+      "symbol": null,
+      "min": null,
+      "typ": 0.2,
+      "max": null,
+      "unit": "V",
+      "conditions": null
+    },
     "ISD": {
       "parameter": "Shutdown supply current",
       "symbol": "ISD",
@@ -783,6 +792,15 @@
           "unit": "V",
           "conditions": "Rising VIN"
         },
+        "Internal_UVLO_hysteresis": {
+          "parameter": "Internal UVLO hysteresis",
+          "symbol": null,
+          "min": null,
+          "typ": 0.2,
+          "max": null,
+          "unit": "V",
+          "conditions": null
+        },
         "ISD": {
           "parameter": "Shutdown supply current",
           "symbol": "ISD",
@@ -978,50 +996,90 @@
           "source_page": 21,
           "value_hint": null,
           "value_hints": [],
-          "snippet": "8.2.3.2 Output Inductor Selection The inductor selected works for the entire TPS54719 input voltage range. To calculate the value of the output inductor, use 方程式 21. KIND is a coefficient that repres"
+          "snippet": "8.2.3.2 Output Inductor Selection The inductor selected works for the entire TPS54719 input voltage range. To calculate the value of the output inductor, use 方程式 21. KIND is a coefficient that repres",
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.component_rules",
+            "source_page": 21
+          }
         },
         {
           "role": "inductor",
           "source_page": 30,
           "value_hint": null,
           "value_hints": [],
-          "snippet": "10.2 Layout Example VIN VIN VIN GND EN GND VSENSE SS/TR PH PH PH PWRGD BOOT RT COMP AGND PH BOOT CAPACITOR VOUT OUTPUT INDUCTOR OUTPUT FILTER CAPACITOR SLOW START CAPACITOR COMPENSATION NETWORK TOPSID"
+          "snippet": "10.2 Layout Example VIN VIN VIN GND EN GND VSENSE SS/TR PH PH PH PWRGD BOOT RT COMP AGND PH BOOT CAPACITOR VOUT OUTPUT INDUCTOR OUTPUT FILTER CAPACITOR SLOW START CAPACITOR COMPENSATION NETWORK TOPSID",
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.component_rules",
+            "source_page": 30
+          }
         },
         {
           "role": "bootstrap_capacitor",
           "source_page": 30,
           "value_hint": null,
           "value_hints": [],
-          "snippet": "10.2 Layout Example VIN VIN VIN GND EN GND VSENSE SS/TR PH PH PH PWRGD BOOT RT COMP AGND PH BOOT CAPACITOR VOUT OUTPUT INDUCTOR OUTPUT FILTER CAPACITOR SLOW START CAPACITOR COMPENSATION NETWORK TOPSID"
+          "snippet": "10.2 Layout Example VIN VIN VIN GND EN GND VSENSE SS/TR PH PH PH PWRGD BOOT RT COMP AGND PH BOOT CAPACITOR VOUT OUTPUT INDUCTOR OUTPUT FILTER CAPACITOR SLOW START CAPACITOR COMPENSATION NETWORK TOPSID",
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.component_rules",
+            "source_page": 30
+          }
         },
         {
           "role": "soft_start_capacitor",
           "source_page": 30,
           "value_hint": null,
           "value_hints": [],
-          "snippet": "10.2 Layout Example VIN VIN VIN GND EN GND VSENSE SS/TR PH PH PH PWRGD BOOT RT COMP AGND PH BOOT CAPACITOR VOUT OUTPUT INDUCTOR OUTPUT FILTER CAPACITOR SLOW START CAPACITOR COMPENSATION NETWORK TOPSID"
+          "snippet": "10.2 Layout Example VIN VIN VIN GND EN GND VSENSE SS/TR PH PH PH PWRGD BOOT RT COMP AGND PH BOOT CAPACITOR VOUT OUTPUT INDUCTOR OUTPUT FILTER CAPACITOR SLOW START CAPACITOR COMPENSATION NETWORK TOPSID",
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.component_rules",
+            "source_page": 30
+          }
         }
       ],
       "layout_hints": [
         {
           "hint": "10.2 Layout Example VIN VIN VIN GND EN GND VSENSE SS/TR PH PH PH PWRGD BOOT RT COMP AGND PH BOOT CAPACITOR VOUT OUTPUT INDUCTOR OUTPUT FILTER CAPACITOR SLOW START CAPACITOR COMPENSATION NETWORK TOPSID",
-          "source_page": 30
+          "source_page": 30,
+          "origin": {
+            "kind": "source_recommendation",
+            "method": "design_info_utils.layout_keywords",
+            "source_page": 30
+          }
         }
       ],
       "supply_recommendations": [
         {
           "hint": "8.2.3.2 Output Inductor Selection The inductor selected works for the entire TPS54719 input voltage range. To calculate the value of the output inductor, use 方程式 21. KIND is a coefficient that repres",
-          "source_page": 21
+          "source_page": 21,
+          "origin": {
+            "kind": "source_recommendation",
+            "method": "design_info_utils.supply_keywords",
+            "source_page": 21
+          }
         },
         {
           "hint": "9 Power Supply Recommendations The input voltage for VIN pin should be well controlled to avoid exceeding the maximum voltage rating of 7 V; otherwise, the device can have risk of damage. 10 Layout 1",
-          "source_page": 29
+          "source_page": 29,
+          "origin": {
+            "kind": "source_recommendation",
+            "method": "design_info_utils.supply_keywords",
+            "source_page": 29
+          }
         }
       ],
       "topology_hints": [
         {
           "hint": "8 Application and Implementation Note 以下应用部分中的信息不属于TI 器件规格的范围，TI 不担保其准确性和完整性。TI 的客 户应负责确定 器件是否适用于其应用。客户应验证并测试其设计，以确保系统功能。 8.1 Application Information This example details the design of a high frequenc",
-          "source_page": 20
+          "source_page": 20,
+          "origin": {
+            "kind": "deterministic_inference",
+            "method": "design_info_utils.topology_keywords",
+            "source_page": 20
+          }
         }
       ],
       "typical_application": {
@@ -1062,22 +1120,42 @@
           {
             "page": 20,
             "title": null,
-            "content_type": "application"
+            "content_type": "application",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 20
+            }
           },
           {
             "page": 21,
             "title": null,
-            "content_type": "application"
+            "content_type": "application",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 21
+            }
           },
           {
             "page": 29,
             "title": null,
-            "content_type": "application"
+            "content_type": "application",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 29
+            }
           },
           {
             "page": 30,
             "title": null,
-            "content_type": "layout"
+            "content_type": "layout",
+            "origin": {
+              "kind": "source_fact",
+              "method": "design_info_utils.page_kind_detection",
+              "source_page": 30
+            }
           }
         ],
         "total_pages": 4
