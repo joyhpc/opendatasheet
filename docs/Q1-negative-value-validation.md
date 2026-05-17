@@ -1,5 +1,7 @@
 # Q1: 负压/负电流器件的 min/max 单调性验证
 
+> Historical technical deep dive. This page preserves reasoning about one validation problem, but it is not the current repository architecture or coverage reference. For current facts, read [`current-state.md`](current-state.md), [`architecture.md`](architecture.md), and the relevant schema/export code first.
+
 ## 问题
 
 我在开发一个电子元器件 datasheet 自动提取和验证系统。系统从 PDF datasheet 中提取电气参数的 min/typ/max 值，然后用规则引擎验证数据质量。

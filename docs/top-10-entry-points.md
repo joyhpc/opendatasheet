@@ -1,103 +1,80 @@
 # Top 10 Entry Points
 
 > High-value navigation for people who do not want to browse the whole documentation tree.
+> For repository architecture and extraction behavior, start with the current-state and architecture docs before reading historical notes.
 
-## 1. Hardware Engineer Hub
+## 1. Current Repository State
+
+- [`current-state.md`](current-state.md)
+
+Use this first when you need the audited facts:
+- current checked-in export count
+- schema target and validation status
+- which extraction paths are actually present
+- known gaps and caveats
+
+## 2. Repository Architecture
+
+- [`architecture.md`](architecture.md)
+
+Use this for:
+- data flow across raw inputs, extracted data, normalized exports, and validation
+- module responsibilities
+- extractor registry behavior
+- schema and export boundaries
+
+## 3. Schematic Review Integration
+
+- [`sch-review-integration.md`](sch-review-integration.md)
+
+Use this when consuming `data/sch_review_export/` from a schematic review or DRC tool.
+
+## 4. Schema V2 Domains Guide
+
+- [`schema-v2-domains-guide.md`](schema-v2-domains-guide.md)
+
+Use this when you need the public export shape, domain meanings, compatibility rules, and coverage expectations.
+
+## 5. Extractor Domain Map
+
+- [`extractor-domain-map.md`](extractor-domain-map.md)
+
+Use this when you need to know which extractor owns each domain, which domains are model-backed, and which domains are derived or currently sparse.
+
+## 6. Extraction Methodology
+
+- [`extraction-methodology.md`](extraction-methodology.md)
+
+Use this to avoid the common mistake of describing the repo as a pure Gemini Vision pipeline. The current corpus combines model-backed extraction, deterministic FPGA parsing, manual/curated profiles, and derived domains.
+
+## 7. FPGA Pinout Parser Overview
+
+- [`fpga-pinout-parser-overview.md`](fpga-pinout-parser-overview.md)
+
+Use this for FPGA package data, vendor parser behavior, bank/differential-pair structure, and FPGA export review.
+
+## 8. Export Validation Playbook
+
+- [`export-validation-playbook.md`](export-validation-playbook.md)
+
+Use this before trusting a refreshed export set or changing the schema/export path.
+
+## 9. Hardware Engineer Hub
 
 - [`hardware-engineer-index.md`](hardware-engineer-index.md)
 
-Use this first if your question is about:
-- schematic review
-- power
-- clocks
-- reset
-- FPGA board planning
-- bring-up
+Use this for hardware review tasks such as schematic review, power, clocks, reset, FPGA board planning, and bring-up.
 
-## 2. Official Best-Practice Baseline
+## 10. Troubleshooting And Commands
 
-- [`hardware-best-practice-source-basis.md`](hardware-best-practice-source-basis.md)
+- [`troubleshooting.md`](troubleshooting.md)
+- [`commands.md`](commands.md)
 
-Use this when you want:
-- official-source grounding
-- TI / ADI / AMD / Intel / NXP reference pointers
-- a sanity check before turning rules into review checklists
-
-## 3. Schematic Freeze Checklist
-
-- [`schematic-freeze-checklist.md`](schematic-freeze-checklist.md)
-
-Use this before:
-- schematic release
-- layout handoff
-- architecture signoff
-
-## 4. Bring-Up Closure Checklist
-
-- [`bring-up-closure-checklist.md`](bring-up-closure-checklist.md)
-
-Use this when asking:
-- can first article boards be debugged
-- do we have enough observability
-- are clocks, resets, rails, and straps actually testable
-
-## 5. FPGA Export Review Checklist
-
-- [`fpga-export-review-checklist.md`](fpga-export-review-checklist.md)
-
-Use this if the task is:
-- FPGA package validation
-- bank / diff-pair / refclk review
-- parser or export sanity checking
-
-## 6. Clock And Refclk Ownership
-
-- [`clock-source-and-refclk-ownership.md`](clock-source-and-refclk-ownership.md)
-
-Use this for:
-- SerDes
-- PCIe
-- display
-- any board where “who owns the reference clock” is more important than raw frequency
-
-## 7. Power Tree Review
-
-- [`power-tree-review-checklist.md`](power-tree-review-checklist.md)
-
-Use this for:
-- rail architecture
-- regulator topology review
-- sequencing and measurement planning
-
-## 8. SerDes Link Budget Review
-
-- [`serdes-link-budget-review.md`](serdes-link-budget-review.md)
-
-Use this for:
-- high-speed channel loss review
-- connector / mux / retimer / refclk path review
-- “Gbps looks fine on paper but board risk is unclear” situations
-
-## 9. DDR Buffering And Margin Budget
-
-- [`ddr-buffering-and-margin-budget.md`](ddr-buffering-and-margin-budget.md)
-
-Use this for:
-- video ingest / egress systems
-- local buffering strategy
-- bad-frame capture and replay budget
-
-## 10. Repository Master Index
-
-- [`index.md`](index.md)
-
-Use this only when:
-- the task does not fit the nine routes above
-- you need a complete map of architecture, data contracts, workflows, FPGA docs, and hardware docs
+Use these when you need the exact local commands or an explanation for common local failures.
 
 ## If You Only Open Three Docs
 
 Open these:
-- [`hardware-engineer-index.md`](hardware-engineer-index.md)
-- [`hardware-best-practice-source-basis.md`](hardware-best-practice-source-basis.md)
-- one task-specific checklist from the hub
+- [`current-state.md`](current-state.md)
+- [`architecture.md`](architecture.md)
+- [`sch-review-integration.md`](sch-review-integration.md)

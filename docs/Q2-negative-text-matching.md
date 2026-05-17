@@ -1,5 +1,7 @@
 # Q2: PDF 交叉验证中负数值的文本匹配
 
+> Historical technical deep dive. This page preserves reasoning about one validation problem, but it is not the current repository architecture or coverage reference. For current facts, read [`current-state.md`](current-state.md), [`architecture.md`](architecture.md), and the relevant schema/export code first.
+
 ## 问题
 
 我在开发一个 datasheet 提取验证系统。其中一个验证步骤是"交叉验证"：将 AI 提取的数值与 PDF 原始文本进行匹配，确认提取值确实存在于原文中。

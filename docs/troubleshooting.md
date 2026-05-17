@@ -1,209 +1,166 @@
 # OpenDatasheet Troubleshooting
 
-> Lightweight troubleshooting guide for the most common repository failure modes.
+Use this page for common local failures. For current architecture and counts,
+read [Current State](current-state.md).
 
-## 1. 环境依赖缺失
+## Environment Dependencies
 
-### 典型现象
+Typical symptoms:
+
 - `ModuleNotFoundError`
 - `ImportError`
-- `No module named ...`
-- `python3 scripts/doctor.py --dev` 显示某个依赖是 `missing`
+- `python scripts/doctor.py --dev` reports a missing package
 
-### 优先处理方式
-先跑环境自检：
+First checks:
 
 ```bash
-python3 scripts/doctor.py --dev
-```
-
-如果缺依赖，按当前仓库入口补齐：
-
-```bash
-./scripts/bootstrap.sh
-```
-
-或者手动安装：
-
-```bash
+python scripts/doctor.py --dev
 pip install -r requirements.txt
 pip install -r requirements-dev.txt
 ```
 
-### 常见原因
-- 没安装 dev 依赖，导致 `pytest` / `jsonschema` 不可用
-- 本地 Python 环境切换后没有重新安装依赖
-- 只装了 runtime 依赖，但在跑测试或校验命令
+If the failure appears only in tests, make sure dev dependencies are installed.
 
----
+## Missing `GEMINI_API_KEY`
 
-## 2. `GEMINI_API_KEY` 未设置
+Typical symptoms:
 
-### 典型现象
-- `pipeline.py` 或 `pipeline_v2.py` 报 `Missing GEMINI_API_KEY environment variable`
-- `python3 scripts/doctor.py --dev --strict-env` 失败
+- `pipeline.py` or `pipeline_v2.py` reports `Missing GEMINI_API_KEY environment variable`
+- `python scripts/doctor.py --dev --strict-env` fails
 
-### 处理方式
-先导出环境变量：
+Fix:
 
 ```bash
 export GEMINI_API_KEY='<your-api-key>'
 ```
 
-然后再执行需要 Gemini 的流程，例如：
+Then run only flows that actually need Gemini, for example:
 
 ```bash
-python3 pipeline_v2.py <pdf-path>
+python pipeline_v2.py <pdf-path>
 ```
 
-### 说明
-- 普通校验流程（例如 `./scripts/run_checks.sh`）通常不要求真的调用 Gemini
-- 只有实际跑提取流程时，`GEMINI_API_KEY` 才是硬要求
+You do not need `GEMINI_API_KEY` for:
 
----
+- `python scripts/validate_exports.py --summary`
+- `python scripts/export_for_sch_review.py`
+- FPGA pinout parsing
+- raw-source manifest checks
+- reading public exports
 
-## 3. Schema 校验失败
+## Export Validation Failure
 
-### 典型现象
-- `python3 scripts/validate_exports.py --summary` 显示 `Failed > 0`
-- 回归测试里的 `T2.2 All exports pass schema validation` 失败
+Typical symptoms:
 
-### 优先排查顺序
-先单独运行：
+- `python scripts/validate_exports.py --summary` reports `Failed > 0`
+- regression tests fail around export schema validation
+
+Start with:
 
 ```bash
-python3 scripts/validate_exports.py --summary
+python scripts/validate_exports.py --summary
 ```
 
-如果失败：
-1. 先确认是单个已提交产物异常，还是生成逻辑整体有问题
-2. 优先修生成逻辑，不要先手改大量导出 JSON
-3. 修完后重新跑：
+Then determine whether the failure is:
+
+- one stale generated export
+- a schema change without exporter updates
+- an exporter change without regenerated outputs
+- a semantic validation failure in an FPGA capability/constraint block
+
+Do not hand-edit many generated export JSON files as a lasting fix. Fix the
+source/intermediate data or exporter, regenerate, and validate again.
+
+Current expected schema state:
+
+- validator accepts `sch-review-device/1.0`, `sch-review-device/1.1`, and
+  `device-knowledge/2.0`
+- current checked-in public exports are `device-knowledge/2.0`
+
+## Pytest Collection Or Plugin Failure
+
+Typical symptoms:
+
+- pytest fails before collecting repository tests
+- stack trace mentions an unrelated plugin such as `pytest_cov`
+- on Windows, stack trace mentions `_sqlite3` DLL load failure
+
+Focused workaround:
+
+```powershell
+$env:PYTEST_DISABLE_PLUGIN_AUTOLOAD='1'
+python -m pytest -q
+```
+
+This disables external pytest plugin autoload. It is useful when the local
+Python environment is broken before repository tests can run.
+
+## Raw Source Manifest Failure
+
+Typical symptoms:
+
+- `scripts/build_raw_source_manifest.py --check` reports stale entries
+- `./scripts/run_checks.sh` stops at raw-source manifest validation
+
+Fix after adding, moving, or deleting canonical raw sources:
 
 ```bash
-python3 scripts/validate_exports.py --summary
-python3 test_regression.py
-python3 -m pytest -q
+python scripts/build_raw_source_manifest.py
+python scripts/build_raw_source_manifest.py --check
 ```
 
-### 当前仓库的预期状态
-- validator 同时接受 `sch-review-device/1.0` 和 `sch-review-device/1.1`
-- 新导出目标应为 `1.1`
-- 历史 `1.0` 产物在迁移期内仍可能保留
+Only canonical raw files under `data/raw/` should be represented in the manifest.
 
-### 什么时候要升级成更大讨论
-如果失败是因为：
-- 想移除 `1.0` 兼容
-- schema 语义要变
-- 下游消费者契约要变
+## Unsure Whether To Re-Export
 
-这已经不是普通故障排查，应该转去看：
-- `docs/maintenance.md`
-- `RELEASE.md`
-- `MAINTAINERS.md`
+Usually re-export after changes to:
 
----
-
-## 4. `pytest` 收集或执行异常
-
-### 典型现象
-- `pytest` 没有收集到预期入口
-- `pytest` 收集了不该收集的脚本 helper
-- `pytest` 报奇怪的 fixture / collection 错误
-
-### 当前仓库的预期
-当前仓库已经把 `pytest` 入口收敛为标准入口，正常情况下执行：
-
-```bash
-python3 -m pytest -q
-```
-
-应当通过。
-
-如需查看收集情况：
-
-```bash
-python3 -m pytest --collect-only
-```
-
-### 排查方向
-- 确认 `pyproject.toml` 里的 pytest 配置没有被破坏
-- 确认脚本型测试文件没有重新出现“导入即执行”的副作用
-- 确认 helper 函数命名没有被误写成 pytest 可收集入口
-
-如果只是想跑仓库标准检查，优先用：
-
-```bash
-./scripts/run_checks.sh
-```
-
----
-
-## 5. 不确定当前改动是否需要重导出
-
-### 需要重导出的常见场景
-如果改动影响：
-- `pipeline.py`
-- `pipeline_v2.py`
 - `scripts/export_for_sch_review.py`
-- `schemas/sch-review-device.schema.json`
-- `data/extracted_v2/` 中作为输入的数据
-- 导出字段整形、归一化、消费者语义
+- `scripts/normal_ic_contract.py`
+- export normalization helpers
+- schema semantics
+- checked-in extracted inputs
+- FPGA pinout parser outputs
 
-通常需要：
-
-```bash
-python3 scripts/export_for_sch_review.py
-python3 scripts/validate_exports.py --summary
-python3 test_regression.py
-```
-
-### 通常不需要重导出的场景
-如果只是改了：
-- 文档
-- CI / 模板 / issue 分流
-- README / GUIDE / SUPPORT / SECURITY / FAQ
-- 仓库卫生脚本或导航文档
-
-通常**不需要**重导出。
-
-### 快速判断规则
-- 如果导出数据“含义”变了，通常要重导出
-- 如果只是“协作方式”或“文档入口”变了，通常不用重导出
-
----
-
-## 6. 推荐的最小恢复路径
-
-如果你不确定从哪里开始，按下面顺序恢复：
+Commands:
 
 ```bash
-python3 scripts/doctor.py --dev
-./scripts/run_checks.sh
+python scripts/export_for_sch_review.py
+python scripts/validate_exports.py --summary
 ```
 
-如果问题只和导出有关，再补：
+Usually do not re-export for:
 
-```bash
-python3 scripts/validate_exports.py --summary
-python3 test_regression.py
-```
+- docs-only changes
+- CI-only changes
+- support or issue-template changes
+- navigation and contributor guidance
 
-如果问题和导出语义、schema 迁移、发布边界有关，继续看：
-- `docs/maintenance.md`
-- `docs/faq.md`
-- `RELEASE.md`
-- `MAINTAINERS.md`
+## Gemini Call Hangs
 
----
+A long Gemini call is not proof that Gemini is required for that device class.
 
-## 7. 什么时候不要自己继续修
+Check:
 
-应停止“轻量修复”并升级讨论的情况：
-- 需要改 schema 语义，不只是改文案
-- 想移除 `1.0` 兼容
-- 需要下游消费者一起改
-- 需要大规模语义性重导出
-- 需要调整 `normal_ic` / `fpga` 的概念模型
+- which extractor was active
+- how many pages were selected
+- whether the domain is relevant to the component class
+- whether a deterministic parser or derived domain would be better
 
-这时不应把问题继续当作普通排障处理。
+Read [Gemini API Operations](gemini-api-operations.md) for more detail.
+
+## When To Escalate
+
+Stop treating the issue as a quick fix if you need to:
+
+- change schema semantics
+- remove old schema compatibility
+- alter the meaning of `normal_ic` or `fpga`
+- force downstream consumer code changes
+- perform a large semantic regeneration
+
+Read:
+
+- [Architecture](architecture.md)
+- [Maintenance](maintenance.md)
+- [Release Regeneration Matrix](release-regeneration-matrix.md)

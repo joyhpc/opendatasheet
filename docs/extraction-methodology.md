@@ -1,106 +1,167 @@
-# Extraction Methodology — Vision + Text Hybrid Pipeline
+# Extraction Methodology
 
-## Problem: Non-Standard Tables in PDF Datasheets
+Last audited from code and checked-in data: 2026-05-17.
 
-Electronic component datasheets are notoriously inconsistent:
-- **Merged cells** spanning multiple rows/columns
-- **Dual-row formats** (25°C specs + full temp range on separate rows)
-- **Multi-variant tables** (multiple device models in one table)
-- **Non-standard layouts** (Chinese/Japanese datasheets, small vendors)
-- **PyMuPDF text extraction** produces garbled column alignment for complex tables
+This document describes implemented extraction paths. It does not claim that all
+current checked-in data was produced by one path.
 
-Pure text-based parsing fails on ~30-40% of real-world datasheets due to column misalignment.
+## Current Reality
 
-## Solution: Vision-First Extraction
+OpenDatasheet has multiple ingestion paths:
 
-Instead of parsing extracted text, we **render PDF pages as images** and send them to a multimodal LLM (Gemini Vision) that "sees" the table layout visually.
+1. model-backed PDF extraction implemented by `pipeline_v2.py`
+2. text/derived extractors that do not call a model
+3. manual or curated profile JSON
+4. deterministic FPGA pinout parsers
 
-### Pipeline Architecture
+The public export corpus is generated from checked-in intermediate data and FPGA
+pinout JSON. It should not be summarized as a pure Gemini Vision corpus.
 
+## Model-Backed PDF Path
+
+`pipeline_v2.py` implements this flow:
+
+```text
+PDF
+  -> L0 page classification with PyMuPDF text and regex
+  -> registered extractor page selection
+  -> selected pages rendered to PNG
+  -> model-backed extractor calls through extractors/gemini_json.py
+  -> validation and cross-validation
+  -> data/extracted_v2/*.json
 ```
-PDF ──→ L0: Page Classification (PyMuPDF text + regex)
-          │
-          ├─ electrical pages ──→ L1a: Vision Extraction (Gemini Vision)
-          ├─ pin/cover pages  ──→ L1b: Pin Extraction (Gemini Vision)
-          └─ other pages      ──→ skipped
-          │
-          ├──→ L2: Physics Validation (Pydantic rules)
-          └──→ L3: Cross-Validation (extracted values vs PDF raw text)
+
+This path requires `GEMINI_API_KEY`.
+
+### L0 Page Classification
+
+`classify_pages()` reads PDF page text and assigns categories such as:
+
+- `cover`
+- `electrical`
+- `pin`
+- `ordering`
+- `application`
+- `fpga_supply`
+- `image_only`
+- `other`
+
+The point of L0 is routing and cost control: extractors should only render and
+send relevant pages when they actually have pages to inspect.
+
+### Model-Backed Domains
+
+These extractors call the shared Gemini JSON helper when selected pages exist:
+
+- `electrical`
+- `pin`
+- `register`
+- `timing`
+- `power_sequence`
+- `protocol`
+- `package`
+- `design_guide` for its vision portion
+
+The shared helper is `call_gemini_json_response()` in
+`extractors/gemini_json.py`. It builds a prompt plus PNG image parts, calls
+`client.models.generate_content(...)`, parses JSON, normalizes key aliases, and
+attaches non-serialized model trace metadata to the returned `TraceableDict`.
+
+### Text And Derived Domains
+
+Not every extractor should start a new image/model pass.
+
+- `design_context` reads PDF text directly and uses `design_info_utils.py`.
+- `thermal` post-processes the electrical extraction result.
+- `parametric` is intended to post-process electrical extraction into
+  comparison-oriented specs, but the current orchestrator does not pass the
+  electrical result into it.
+
+### Validation
+
+The model-backed normal-IC path includes:
+
+- range/unit/monotonicity-style checks inside domain validators
+- PDF-text numeric cross-validation through `cross_validate()`
+- physics checks for selected electrical relationships
+- pin validation for enum values and package mappings
+
+These validations are useful, but they do not replace human review for new
+device families or ambiguous datasheets.
+
+## Checked-In Intermediate Data
+
+Current top-level `data/extracted_v2/*.json` files are mostly legacy flat
+extraction outputs:
+
+- 179 files excluding `_summary.json`
+- 175 have `model=gemini-3-flash-preview` and `mode=vision`
+- 4 have `model=manual_profile` and `mode=manual`
+- 6 have a top-level `domains` block
+- 0 have non-empty `domain_traces`
+- no current `_audit/*.model_trace.json` sidecar directory is present
+
+That means older files may contain model labels, but they are not uniformly
+audit-traceable with current sidecar machinery.
+
+## Manual And Curated Profiles
+
+Some inputs are intentionally curated profiles. Current examples include
+automotive video SerDes-related files marked `manual_profile`.
+
+Manual profiles are valid inputs when they are explicit. They should not be
+described as Gemini output, and future manual additions should record source
+basis clearly in the JSON or adjacent documentation.
+
+## FPGA Pinout Path
+
+FPGA package data is a separate structural parsing problem. It does not follow
+the normal-IC vision table path.
+
+```text
+vendor pinout source
+  -> scripts/parse_pinout.py or vendor-specific parser
+  -> data/extracted_v2/fpga/pinout/*.json
+  -> scripts/export_for_sch_review.py
+  -> data/sch_review_export/*_{package}.json
 ```
 
-### L0: Page Classification
+The parser output is expected to contain:
 
-PyMuPDF extracts raw text from each page. Regex patterns classify pages into categories:
+- physical pins
+- banks
+- differential pairs
+- lookup maps
+- power/config/ground/special classification
+- package and source traceability where available
 
-| Category | Patterns | Action |
-|----------|----------|--------|
-| `electrical` | `absolute maximum`, `electrical characteristics`, `dc characteristics` | → Vision extraction |
-| `pin` | `pin description`, `pin configuration`, `pin-out` | → Pin extraction |
-| `cover` | First page, product summary | → Vision extraction (component info) |
-| `ordering` | `ordering information`, `package marking` | → Vision extraction (package info) |
-| `other` | Everything else (application notes, register maps, etc.) | → Skipped |
+## Current Domain Coverage
 
-This pre-filtering reduces Vision API calls by ~70% (only 5-15 pages out of 30-400+ are sent to Vision).
+Do not infer coverage from extractor existence. Current public exports have
+non-empty data for some domains and none for others.
 
-### L1a: Vision Extraction (Electrical Parameters)
+See [Current State](current-state.md) for the current coverage table.
 
-1. **Render** classified pages to PNG at 150 DPI using PyMuPDF
-2. **Send** all page images in a single Gemini Vision call with a structured prompt
-3. **Parse** the JSON response into `absolute_maximum_ratings` + `electrical_characteristics`
+## When To Use This Path
 
-The prompt explicitly instructs the model to handle:
-- Dual-row format (25°C + full temp range as separate entries)
-- Multi-variant tables (extract per-device parameters)
-- Merged cells and non-standard layouts
-- Null values for unspecified min/typ/max
+Use model-backed extraction when:
 
-### L1b: Pin Extraction
+- a normal IC datasheet has useful tables that are not already represented
+- visual table layout is important
+- the source PDF is present and valid
+- model credentials are available
+- provenance can be preserved
 
-Same Vision approach, but with a specialized prompt for pin definitions:
-- Logical pin name, direction (`INPUT`/`OUTPUT`/`BIDIRECTIONAL`/`POWER_IN`/etc.)
-- Signal type (`POWER`/`DIGITAL`/`ANALOG`)
-- Per-package physical pin mapping
-- Unused pin treatment (`PULL_UP`/`PULL_DOWN`/`GND`/`FLOAT`/`NC`)
+Use deterministic parsing or manual curation when:
 
-### L2: Physics Validation
+- the source format is structured, such as FPGA pinout workbooks
+- vendor format rules are stable enough to encode
+- a profile needs human interpretation and should be labeled as manual
 
-Automated sanity checks on extracted values:
-- **Dual-rail inference**: Detects ALGEBRAIC vs MAGNITUDE notation for negative values
-- **Unit validation**: Flags suspicious units (e.g., `μVPP/V`)
-- **Range checks**: min ≤ typ ≤ max (accounting for negative/magnitude conventions)
-- **Cross-parameter consistency**: e.g., operating voltage must be within absolute maximum
+## Known Issues
 
-### L3: Cross-Validation
-
-Extracts ALL numeric values from the PDF raw text, then checks if each extracted parameter value exists in the original PDF:
-- Handles Unicode minus variants (`−`, `–`, `—`, `‐`)
-- Handles scientific notation with spaces
-- Reports `value_coverage_pct` (typically 95-100%)
-
-## Model Choice
-
-**`gemini-3-flash-preview`** via Google GenAI SDK (multimodal)
-
-Why Flash over Pro:
-- **Cost**: ~10x cheaper ($0.10/1M input vs $1.25/1M)
-- **Speed**: ~2x faster per call
-- **Accuracy**: Sufficient for structured table extraction (95-100% cross-validation)
-- **Rate limits**: 15 RPM free tier handles our ~2 calls/min batch rate
-
-## Performance
-
-| Metric | Value |
-|--------|-------|
-| Processing speed | ~1.5 min/file (including rendering + API + validation) |
-| Cross-validation coverage | 95-100% typical |
-| Vision extraction success rate | ~85% first attempt, ~95% with retry |
-| API calls per file | 2-3 (L1a + L1b + occasional retry) |
-
-## Limitations
-
-1. **Register maps**: Pages are classified but not extracted (future work)
-2. **Timing parameters**: Setup/hold/propagation delay not separately categorized
-3. **Application circuits**: Not structurally extracted
-4. **Thermal resistance**: θJA/θJC not separately classified
-5. **Memory**: Large PDFs (400+ pages) consume significant RAM during rendering
-6. **Occasional unit errors**: Non-standard units may be misread (caught by L2 validation)
+- `parametric` is registered but not wired correctly into `pipeline_v2.py`.
+- Current raw sources are partial relative to checked-in exports.
+- Historical model-backed outputs lack current audit sidecars.
+- Some old docs overstate Vision coverage. Prefer this document and
+  [Current State](current-state.md).

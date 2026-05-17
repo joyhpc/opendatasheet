@@ -1,5 +1,7 @@
 # Q3: 原理图审核知识库的 Pin 定义 Schema 设计
 
+> Historical schema design note. This page may discuss ideas that differ from the checked-in `device-knowledge/2.0` export contract. For current facts, read [`current-state.md`](current-state.md), [`schema-v2-domains-guide.md`](schema-v2-domains-guide.md), and the relevant schema/export code first.
+
 ## 问题
 
 我在构建一个"原理图自动审核工具"的知识库。需要从电子元器件 datasheet 中提取 pin 定义信息，存储为结构化 JSON，供审核引擎使用。

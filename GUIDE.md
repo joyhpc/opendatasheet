@@ -1,102 +1,122 @@
-# OpenDatasheet — Reading Guide
+# OpenDatasheet Reading Guide
 
-> AI-powered extraction pipeline: PDF datasheets → structured JSON for schematic review DRC
+Use this guide as the first routing page. It points to the docs that are meant
+to describe the current repository, not older planning notes.
 
-## Start Here
+## Reliable First Reads
 
-- [Repository Checklist](README.md#quick-start) — Setup, validation, CI, and contribution entry points
-- [First 30 Minutes](docs/first-30-minutes.md) — Fast orientation path for a fresh checkout
-- [Local Setup Playbook](docs/local-setup-playbook.md) — Practical environment bring-up steps
-- [Hardware Engineer Index](docs/hardware-engineer-index.md) — Curated board-review and bring-up docs
-- [Maintenance Notes](docs/maintenance.md) — Regeneration, validation, and repository upkeep workflow
-- [Documentation Index](docs/index.md) — Topic-oriented map of repository docs
-- [Command Cheat Sheet](docs/commands.md) — Copy/paste-friendly setup, validation, export, and release commands
-- [FAQ](docs/faq.md) — Short answers to common workflow and repository questions
-- [Troubleshooting](docs/troubleshooting.md) — Common failure modes and recovery steps
-- [Release Checklist](RELEASE.md) — Lightweight pre-release and regeneration checklist
+1. [Current State](docs/current-state.md):
+   The audited snapshot: counts, provenance, ingestion paths, coverage, known
+   gaps, and validation commands.
 
-### 1. [Extraction Methodology](docs/extraction-methodology.md)
-How the pipeline works: Vision + Text hybrid approach, why we render pages as images instead of parsing text, and how cross-validation catches errors.
+2. [Architecture](docs/architecture.md):
+   Code-verified module boundaries and data flow. Start here before changing
+   extraction, export, schema, validation, or parser behavior.
 
-### 2. [Schematic Review Integration](docs/sch-review-integration.md)
-**The most important file for downstream consumers.** Complete data structure reference, JSON examples for both normal IC and FPGA, Python code snippets for every use case (pin lookup, Vout calculation, voltage limit check, FPGA bank/diff-pair/config DRC).
+3. [Schematic Review Integration](docs/sch-review-integration.md):
+   The public `data/sch_review_export/` contract for downstream DRC and tooling.
 
-### 3. [Schema Definition](schemas/sch-review-device.schema.json)
-Formal JSON Schema (`sch-review-device/1.1`). Two types: `normal_ic` (packages → pins + electrical params) and `fpga` (pins + banks + diff pairs + DRC rules + power rails). Validator remains compatible with checked-in `1.0` artifacts during migration.
+4. [Schema](schemas/sch-review-device.schema.json):
+   The formal `device-knowledge/2.0` schema. This outranks prose docs.
 
-## Data
+5. [Documentation Index](docs/index.md):
+   A routed map of the rest of the docs, including which docs are historical or
+   topic-specific reference material.
 
-### 4. [Exported Device Data](data/sch_review_export/) — 255 files (172 IC + 83 FPGA)
-Ready-to-consume JSON files conforming to the schema above. One file per device (IC) or device+package (FPGA).
+## What This Repository Currently Is
 
-Example files to look at:
-- [`LM5060.json`](data/sch_review_export/LM5060.json) — TI hot-swap controller, 10-pin, full electrical params + DRC hints
-- [`TP2860.json`](data/sch_review_export/TP2860.json) — Techpoint video decoder, 40-pin QFN
-- [`XCKU3P_FFVB676.json`](data/sch_review_export/XCKU3P_FFVB676.json) — Xilinx UltraScale+ FPGA, 676 pins, banks, diff pairs, DRC rules
-- [`GW5AT-60_PG484A.json`](data/sch_review_export/GW5AT-60_PG484A.json) — Gowin FPGA with DC characteristics
+OpenDatasheet is a mixed device-knowledge repository:
 
-### 5. [Raw Extraction Data](data/extracted_v2/) — 84+ files (growing)
-Full pipeline output including page classification, cross-validation scores, timing, and physics validation. More detailed than sch_review_export but not schema-normalized.
+- public exports are generated into `data/sch_review_export/`
+- normal-IC inputs mostly come from checked-in `data/extracted_v2/*.json`
+- some profiles are manually curated and explicitly marked `manual_profile`
+- FPGA package truth comes from deterministic vendor pinout parsers
+- `pipeline_v2.py` still provides a Gemini-backed image extraction path, but
+  the checked-in corpus is not uniformly audit-traceable model output
 
-## Design Docs
+Do not summarize the project as "Gemini Vision extracts everything." That is an
+implementation path, not the whole current workflow.
 
-### 6. [Design Document](docs/design-document.md)
-Original pipeline architecture and design decisions.
+## Current Data
 
-### 7. Technical Deep-Dives
-- [Q1: Negative Value Validation](docs/Q1-negative-value-validation.md) — Dual-rail inference for ALGEBRAIC vs MAGNITUDE notation
-- [Q2: Negative Text Matching](docs/Q2-negative-text-matching.md) — Unicode minus variant handling in cross-validation
-- [Q3: Pin Schema Design](docs/Q3-pin-schema-design.md) — Logical pin model with multi-package mapping
-- [Q4: FPGA DRC Data Loading Strategy](docs/Q4-fpga-drc-data-loading-strategy.md) — Code-graph base + LLM expert system architecture
+| Data set | Current count |
+|----------|---------------|
+| Public exports | 255 |
+| Normal IC exports | 172 |
+| FPGA exports | 83 |
+| Export schema | `device-knowledge/2.0` for all current public exports |
+| Top-level extracted JSON | 179, excluding `_summary.json` |
+| FPGA pinout JSON | 83 |
+| Canonical raw manifest entries | 37 |
 
-## Code
+## Main Code Entry Points
 
-| File | Purpose |
-|------|---------|
-| [`pipeline_v2.py`](pipeline_v2.py) | Core extraction pipeline (L0→L1a→L1b→L2→L3) |
-| [`batch_all.py`](batch_all.py) | Batch processor for full IC library |
-| [`scripts/export_for_sch_review.py`](scripts/export_for_sch_review.py) | Convert extracted_v2 → sch_review_export |
-| [`scripts/parse_fpga_pinout.py`](scripts/parse_fpga_pinout.py) | AMD/Xilinx FPGA pinout parser |
-| [`scripts/parse_gowin_pinout.py`](scripts/parse_gowin_pinout.py) | Gowin FPGA pinout parser |
-| [`scripts/parse_lattice_pinout.py`](scripts/parse_lattice_pinout.py) | Lattice FPGA pinout parser |
+| File | Role |
+|------|------|
+| `pipeline_v2.py` | Model-backed PDF extraction orchestrator and legacy flat-output compatibility |
+| `extractors/__init__.py` | Registered domain extractor order |
+| `scripts/export_for_sch_review.py` | Canonical writer for `data/sch_review_export/` |
+| `scripts/normal_ic_contract.py` | Normal-IC domain assembly and flat compatibility shaping |
+| `scripts/parse_pinout.py` | Unified FPGA pinout parser dispatcher |
+| `scripts/validate_exports.py` | Schema and semantic validation for public exports |
+| `scripts/device_export_view.py` | Compatibility reader for flat and `domains` payloads |
 
-## Environment
+## Common Workflows
 
-- Export `GEMINI_API_KEY` before running `pipeline_v2.py`.
-- Example: `export GEMINI_API_KEY='<your-api-key>'`
-- Extraction scripts now fail fast with a clear error if the variable is missing.
+Set up:
 
-## Local Engineering Workflow
+```bash
+pip install -r requirements.txt
+pip install -r requirements-dev.txt
+python scripts/doctor.py --dev
+```
 
-- Install runtime deps: `pip install -r requirements.txt`
-- Install dev deps: `pip install -r requirements-dev.txt`
-- Run environment doctor: `python3 scripts/doctor.py --dev`
-- Run full local gate: `./scripts/run_checks.sh`
-- Optional schema validation shortcut: `make validate`
-- Optional regression shortcut: `make regression`
-- Optional `pytest` shortcut: `make pytest`
+Validate exports:
 
-## What This Data Can Do (for Schematic Review)
+```bash
+python scripts/validate_exports.py --summary
+```
 
-✅ **Pin function verification** — Check if pin connections match datasheet definitions
-✅ **Voltage limit checking** — Compare net voltages against absolute maximum ratings
-✅ **FB divider Vout calculation** — Use Vref from drc_hints to back-calculate output voltage
-✅ **Unused pin treatment** — Verify floating/pull-up/pull-down per datasheet recommendation
-✅ **FPGA power integrity** — All power/ground pins must be connected
-✅ **FPGA config pin check** — Mandatory configuration pins must be wired correctly
-✅ **FPGA bank VCCO consistency** — IO standards in same bank must share compatible VCCO
-✅ **FPGA differential pair integrity** — Both P and N must be used together
+Regenerate public exports:
 
-## What's NOT Yet Extracted
+```bash
+python scripts/export_for_sch_review.py
+```
 
-❌ Register maps (pages identified but not parsed)
-❌ Timing parameters (setup/hold/propagation delay)
-❌ Application circuits / reference designs
-❌ Thermal resistance (θJA/θJC)
-❌ Recommended external component values (e.g., decoupling caps)
+Run the local gate:
 
-## Status
+```bash
+./scripts/run_checks.sh
+```
 
-- **Batch processing**: 309 PDFs in progress (~34/309 done, ~6.5h remaining)
-- **Total PDF library**: 346 datasheets
-- **API**: Gemini 3 Flash (`gemini-3-flash-preview`), well within rate limits
+Run a focused pytest loop on Windows if third-party pytest plugins break due to
+local Python DLL issues:
+
+```powershell
+$env:PYTEST_DISABLE_PLUGIN_AUTOLOAD='1'
+python -m pytest -q
+```
+
+## Topic Routes
+
+- Adding or refreshing a normal IC: [adding-normal-ic-datasheet.md](docs/adding-normal-ic-datasheet.md)
+- FPGA parser work: [fpga-pinout-parser-overview.md](docs/fpga-pinout-parser-overview.md)
+- Export validation: [export-validation-playbook.md](docs/export-validation-playbook.md)
+- Domain model direction: [schema-v2-domains-guide.md](docs/schema-v2-domains-guide.md)
+- Hardware review docs: [hardware-engineer-index.md](docs/hardware-engineer-index.md)
+- Raw-source policy: [raw-source-storage.md](docs/raw-source-storage.md)
+- Release/regeneration decisions: [release-regeneration-matrix.md](docs/release-regeneration-matrix.md)
+
+## Historical Docs
+
+Some documents are preserved as design history or incident notes. They may
+contain old counts, old schema names, or planned pipeline behavior. Read them
+after the current-state docs, and do not treat them as authoritative unless they
+match code, schema, and checked-in data.
+
+Important historical/planning examples:
+
+- [design-document.md](docs/design-document.md)
+- [roadmap-v2.md](docs/roadmap-v2.md)
+- [ams1117-vision-result.md](docs/ams1117-vision-result.md)
+- `docs/Q*.md`

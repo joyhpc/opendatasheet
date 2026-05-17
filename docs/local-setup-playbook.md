@@ -1,12 +1,13 @@
 # Local Setup Playbook
 
 > Practical setup steps for running validation, extraction, and export commands locally.
+> Read [`current-state.md`](current-state.md) first if you need audited counts, current schema target, or extraction provenance.
 
 ## Prerequisites
 
 - Python `>= 3.11`
 - `pip`
-- network access if you plan to run extraction against external APIs
+- network access if you plan to run model-backed extraction against external APIs
 
 ## Install runtime dependencies
 
@@ -39,7 +40,8 @@ export GEMINI_API_KEY='<your-api-key>'
 
 Notes:
 - `scripts/doctor.py --strict-env` will fail if the variable is missing.
-- Docs-only, schema-only, and many validation workflows do not need the key.
+- Docs-only, schema-only, export validation, deterministic FPGA parsing, and many inspection workflows do not need the key.
+- The current repository should not be summarized as a pure Gemini pipeline; see [`extraction-methodology.md`](extraction-methodology.md).
 
 ## Run the environment doctor
 
@@ -75,6 +77,7 @@ If you do not want the full gate:
 
 ```bash
 python3 scripts/validate_exports.py --summary
+python3 scripts/validate_design_extraction.py --strict
 python3 test_regression.py
 python3 -m pytest -q
 ```
@@ -100,8 +103,16 @@ That message comes from `scripts/parse_gowin_pinout.py`. Install runtime depende
 ### `GEMINI_API_KEY missing`
 
 Only blocking if:
-- you run extraction commands
+- you run Gemini-backed extraction commands
 - or you explicitly choose `--strict-env`
+
+### Pytest fails while importing `_sqlite3`
+
+This can come from local pytest plugins rather than repository code. Use:
+
+```bash
+PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 python3 -m pytest -q
+```
 
 ## Recommended first checks after setup
 

@@ -1,51 +1,77 @@
 # Thermal And Parametric Derivation
 
-## Purpose
+Last audited from code: 2026-05-17.
 
-Not every domain should start with a fresh Gemini image pass. `thermal` and parts of `parametric` are most useful when they are treated as low-cost normalization or derivation layers.
+Not every useful domain should start a fresh model/image pass. `thermal` and
+`parametric` are intended to be low-cost derivation layers over already extracted
+electrical facts.
 
-## Thermal Domain
+## Thermal
 
-In the current pipeline, `thermal` runs after `electrical` and post-processes that result.
+`extractors/thermal.py` is currently wired as a derived domain. In
+`pipeline_v2.py`, the orchestrator special-cases `thermal` and passes it the
+electrical extraction result.
 
-That design is intentional:
+It extracts thermal-style facts such as:
 
-- thermal values such as `θJA` and `θJC` often appear near electrical tables
-- many devices expose only a small thermal subset
-- re-reading the PDF just for thermal numbers often adds cost without adding new signal
+- `theta_ja`
+- `theta_jc`
+- `theta_jb`
+- `psi_jt`
+- `power_dissipation`
 
-## Parametric Domain
+The public exporter also derives a top-level `thermal` block from electrical and
+absolute-maximum entries.
 
-`parametric` is useful for building normalized key fields that downstream tools expect:
+## Parametric
 
-- voltage limits
+`extractors/parametric.py` is designed to derive selector-friendly summaries
+from electrical extraction:
+
+- voltage ranges
 - current limits
-- resistance or capacitance markers
-- part-family comparison handles
+- frequency limits
+- operating-condition summaries
+- category-specific key specs
 
-This domain should prefer reuse over rediscovery. It is a good place to convert domain-shaped extraction into stable lookup-friendly forms.
+Current caveat: as of this audit, `pipeline_v2.py` does not pass the electrical
+result into `ParametricExtractor`. Since `ParametricExtractor.select_pages()`
+returns an empty list, the orchestrator currently stores `{}` for that domain.
 
-## Design Principle
+That is why current public exports have no non-empty `parametric` domain.
 
-Ask this question before adding a new image-heavy flow:
+## Design Rule
 
-“Is the information genuinely missing from prior domains, or is it merely not normalized yet?”
+Before adding a new image/model-backed domain, ask:
 
-If the answer is normalization, do not add another expensive multimodal call.
+> Is the information genuinely missing, or is it already present in electrical
+> data and only needs normalization?
 
-## Why This Matters For Discrete Parts
+Prefer derivation when:
 
-Discrete parts usually need:
+- the source facts already exist in `electrical`
+- the target domain is a stable lookup or selector projection
+- a new model call would mostly duplicate existing extraction
 
-- core electrical values
-- simple pin mapping
-- thermal sanity
-- normalized selection/export hints
+Use a model-backed pass when:
 
-That is exactly why the fast path keeps `thermal` and `parametric` while skipping more speculative domains.
+- the needed facts are not in electrical tables
+- the information depends on visual layout, diagrams, or context
+- text extraction is demonstrably insufficient
 
-## Review Checklist
+## Validation
 
-- Does `thermal` derive cleanly from `electrical`?
-- Is `parametric` adding stable, reusable fields instead of duplicating raw values?
-- Could this work remain correct if Gemini is temporarily unavailable after `electrical` succeeds?
+For derivation changes, run:
+
+```bash
+python scripts/validate_exports.py --summary
+python -m pytest test_parametric_extraction.py -q
+```
+
+If local pytest plugin loading fails on Windows because of environment DLL
+issues, disable plugin autoload:
+
+```powershell
+$env:PYTEST_DISABLE_PLUGIN_AUTOLOAD='1'
+python -m pytest test_parametric_extraction.py -q
+```

@@ -1,5 +1,9 @@
 # OpenDatasheet 下一步计划
 
+> Historical planning note. The counts and priorities below are not current
+> repository facts. For the audited current state, read `docs/current-state.md`.
+> For implemented architecture, read `docs/architecture.md`.
+
 > Sirius 🌟 | 2026-02-25 | 基于 Axiom (sch-review) Issue #2 的需求分析
 
 ---

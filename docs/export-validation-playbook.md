@@ -1,98 +1,128 @@
 # Export Validation Playbook
 
-> How to validate `data/sch_review_export/` and interpret the failure modes.
+This page explains how to validate `data/sch_review_export/` and interpret
+common failure modes.
 
-## Main command
-
-```bash
-python3 scripts/validate_exports.py --summary
-```
-
-What it checks:
-- JSON Schema validity
-- semantic rules layered on top of schema checks
-
-## Validate one file
+## Main Command
 
 ```bash
-python3 scripts/validate_exports.py data/sch_review_export/AMS1117.json
-python3 scripts/validate_exports.py data/sch_review_export/XCKU3P_FFVB676.json
+python scripts/validate_exports.py --summary
 ```
 
-## Current schema realities
+Current expected result:
+
+```text
+Total: 255  |  Passed: 255  |  Failed: 0
+Schema versions: device-knowledge/2.0=255
+All files valid
+```
+
+## Validate One File
+
+```bash
+python scripts/validate_exports.py data/sch_review_export/AMS1117.json
+python scripts/validate_exports.py data/sch_review_export/XCKU3P_FFVB676.json
+```
+
+## Current Schema Reality
 
 The validator accepts:
+
 - `sch-review-device/1.0`
 - `sch-review-device/1.1`
 - `device-knowledge/2.0`
 
-Current export generation target is:
+Current public exports use:
+
 - `device-knowledge/2.0`
 
 Compatibility expectation:
-- new exports may still carry flat `sch-review-device/1.1`-style fields alongside `domains`
 
-## What semantic validation adds
+- v2 exports may still include flat compatibility fields alongside `domains`
+- consumers should prefer `domains` but keep fallback reads for flat fields
 
-Schema validity alone is not enough. The validator also checks repository-specific expectations, for example:
+## What Validation Checks
 
-- FPGA exports with high-speed interfaces should include `capability_blocks`
-- FPGA refclk-capable exports should include `constraint_blocks.refclk_requirements`
-- MCU-like devices with debug, boot, or clock pins should include matching capability and constraint blocks
+`validate_exports.py` checks:
 
-## Typical failure classes
+- JSON Schema validity
+- repository-specific semantic expectations
 
-### Flat schema mismatch
+Examples of semantic checks:
+
+- FPGA exports with high-speed interfaces should expose capability blocks
+- refclk-capable FPGA exports should expose refclk constraints
+- MCU-like devices with debug, boot, or clock pins should expose matching
+  capability or constraint blocks
+
+## Typical Failure Classes
+
+### Schema Mismatch
 
 Symptoms:
+
 - missing required field
 - wrong enum value
 - wrong type
+- unexpected domain key
 
 Likely cause:
-- export-shaping logic changed
-- checked-in output is stale
 
-### Semantic FPGA gap
+- schema changed without exporter update
+- exporter changed without regenerating outputs
+- hand-edited JSON drifted away from schema
+
+### Semantic FPGA Gap
 
 Symptoms:
-- missing `mipi_phy`
-- missing `high_speed_serial`
-- missing `refclk_requirements`
+
+- missing high-speed capability blocks
+- missing refclk constraints
+- missing package-derived bank/pair facts
 
 Likely cause:
-- pinout-derived capability extraction is incomplete
-- export shaper stopped filling a derived block
 
-### Semantic MCU-like gap
+- parser output is incomplete
+- export shaper stopped deriving a block
+- package identity no longer matches expected source data
+
+### Consumer Compatibility Gap
 
 Symptoms:
-- missing `debug_access`
-- missing `boot_configuration`
-- missing `clocking`
+
+- data validates, but downstream code cannot read it
 
 Likely cause:
-- capability inference logic regressed
 
-## Safe workflow after export changes
+- downstream code assumes only flat fields or only domain fields
+- compatibility accessor is missing
+
+Use `scripts/device_export_view.py` as the reader pattern.
+
+## Safe Workflow After Export Changes
 
 ```bash
-python3 scripts/export_for_sch_review.py
-python3 scripts/validate_exports.py --summary
-python3 test_regression.py
-python3 -m pytest -q
+python scripts/export_for_sch_review.py
+python scripts/validate_exports.py --summary
+python test_regression.py
+python -m pytest -q
 ```
 
-## Important caveat
+On Windows, if unrelated pytest plugins fail during collection:
 
-`validate_exports.py` does not parse `--help` with argparse. Treat extra arguments as file paths except for `--summary`.
+```powershell
+$env:PYTEST_DISABLE_PLUGIN_AUTOLOAD='1'
+python -m pytest -q
+```
 
-## When not to re-export
+## When Not To Re-Export
 
 Usually do not regenerate exports when the change is:
+
 - documentation only
 - CI only
 - workflow notes only
-- support or contributor guidance only
+- support/contributor guidance only
 
-Use `docs/release-regeneration-matrix.md` for the broader decision table.
+Use [Release Regeneration Matrix](release-regeneration-matrix.md) for broader
+decisions.

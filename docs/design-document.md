@@ -1,5 +1,10 @@
 # OpenDatasheet 设计文档
 
+> Historical design note. This file is preserved for background and may contain
+> stale counts, old pipeline assumptions, or encoding damage from earlier edits.
+> For current architecture and repository facts, read `docs/current-state.md`
+> and `docs/architecture.md` first.
+
 ## 1. 项目定位
 
 OpenDatasheet 是一个 **AI 驱动的电子元器件 Datasheet 参数提取引擎**，将 PDF datasheet 转化为机器可读的结构化数据，为下游的原理图审核（sch-review）、元器件选型、BOM 校验等工具提供数据基座。

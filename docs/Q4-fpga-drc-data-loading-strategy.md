@@ -1,5 +1,7 @@
 # Q4: FPGA 原理图 DRC — Datasheet 解析数据的最优加载策略
 
+> Historical design discussion. This page is useful for context on DRC loading strategy, but it is not the current repository architecture or coverage reference. For current facts, read [`current-state.md`](current-state.md), [`architecture.md`](architecture.md), and [`fpga-pinout-parser-overview.md`](fpga-pinout-parser-overview.md) first.
+
 ## 背景
 
 我们正在构建一个 **LLM 驱动的原理图审核系统**，核心流程：

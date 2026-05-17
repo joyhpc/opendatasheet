@@ -1,5 +1,9 @@
 # AMS1117 — Vision Extraction Result
 
+> Historical sample artifact. This page is useful as an example of an older
+> vision extraction report, but it is not a current architecture or coverage
+> reference. For current repository state, read `docs/current-state.md`.
+
 > Gemini 3 Flash Vision | Pipeline v0.2 | 2026-02-19
 
 ## Component Info
